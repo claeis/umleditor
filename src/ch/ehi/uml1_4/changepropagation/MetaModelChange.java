@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:37:16 $
-// $Revision: 1.1.1.1 $
+// $Date: 2003-12-30 10:30:16 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3C454DFD0284 package "MetaModelChange"
@@ -20,7 +20,7 @@ import java.util.EventObject;
 
 /** This class captures the change that appeared to the meta model
  *  @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:16 $
+ *  @version $Revision: 1.2 $ $Date: 2003-12-30 10:30:16 $
  */
 public class MetaModelChange extends EventObject
 {
@@ -65,8 +65,29 @@ public class MetaModelChange extends EventObject
 
   // declare/define something only in the code
   // please fill in/modify the following section
-  // -beg- preserve=no 3C454DFD0284 detail_end "MetaModelChange"
-
+  // -beg- preserve=yes 3C454DFD0284 detail_end "MetaModelChange"
+  public static final String OP_ATTACH="attach";
+  public static final String OP_DETACH="detach";
+  public static final String OP_ADD="add";
+  public static final String OP_REMOVE="remove";
+  public static final String OP_SET="set";
+  public static final String OP_CLEAR="clear";
+  public static final String OP_CHANGE="change";
+  public static final String OP_SWAP="swap";
+  public static final String OP__LINK="_link";
+  public static final String OP__UNLINK="_unlink";
+  public static final String[] OPS={
+    OP_ATTACH
+    ,OP_DETACH
+    ,OP_ADD
+    ,OP_REMOVE
+    ,OP_SET
+    ,OP_CLEAR
+    ,OP_CHANGE
+    ,OP_SWAP
+    ,OP__LINK
+    ,OP__UNLINK
+    };
   // -end- 3C454DFD0284 detail_end "MetaModelChange"
 
 }
