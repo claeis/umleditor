@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a RoleDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2003-12-25 09:57:09 $
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 13:52:58 $
  */
 public class RoleDefDialog extends BaseDialog {
 	// ModelElement
@@ -99,19 +99,10 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public RoleDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	setTitle(((RoleDef)element).getAssociation().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
-}
-/**
- * Constructor
- * @param owner Symbol
- * @param modal Symbol
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-public RoleDefDialog(java.awt.Frame owner, boolean modal) {
-	super(owner, modal);
-	initialize();
 }
 /**
  * Comment

@@ -28,7 +28,7 @@ import ch.ehi.uml1_4.implementation.*;
  * Notation: visibility name ( parameter-list ) : return-type-expression { property-string }
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-06-29 11:37:17 $
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 13:52:58 $
  */
 public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
@@ -118,6 +118,7 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.M
 public UmlOperationDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	setTitle(((UmlOperation)element).getOwner().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();

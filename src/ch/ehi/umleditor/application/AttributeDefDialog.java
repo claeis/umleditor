@@ -29,7 +29,7 @@ import ch.softenvironment.util.*;
  * User Interface for an AttributeDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-08-17 13:52:57 $
  */
 public class AttributeDefDialog extends BaseDialog {
 	// ModelElement
@@ -93,19 +93,10 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public AttributeDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	setTitle(((AttributeDef)element).getOwner().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
-}
-/**
- * Constructor
- * @param owner Symbol
- * @param modal Symbol
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-public AttributeDefDialog(java.awt.Frame owner, boolean modal) {
-	super(owner, modal);
-	initialize();
 }
 /**
  * Adapt the chosen INTERLIS type Panel and create a new default type Instance.
@@ -1163,7 +1154,7 @@ protected boolean save() {
  */
 private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	attributeDef = (AttributeDef)element;
-
+	
 	// general & page Description
 	getTxtName().setText(attributeDef.getDefLangName());
 	getPnlDescription().setObject(element);
