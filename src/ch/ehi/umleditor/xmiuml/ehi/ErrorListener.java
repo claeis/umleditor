@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 13:13:59 $
-// $Revision: 1.2 $
+// $Date: 2004-08-30 07:56:42 $
+// $Revision: 1.3 $
 //
 
 package ch.ehi.umleditor.xmiuml.ehi;
@@ -14,7 +14,6 @@ public class ErrorListener implements org.xml.sax.ErrorHandler
 public void error(SAXParseException err) throws SAXException
 {
   Tracer.getInstance().debug("Parsing Error - Line: "+err.getLineNumber()+", URI: "+err.getSystemId()+", Message: "+err.getMessage());
-	throw err;
 }
 
 public void fatalError(SAXParseException fatalErr) throws SAXException

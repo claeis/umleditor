@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 20:39:47 $
-// $Revision: 1.3 $
+// $Date: 2004-08-30 07:56:42 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3CEB5BA003CF package "XMLInterlisDecoder"
@@ -80,7 +80,7 @@ public class XMLInterlisDecoder
 
     //register to Error Handler
     parser.setErrorHandler(errorListener);
-
+	myHandler.setErrorHandler(errorListener);
 
 
 

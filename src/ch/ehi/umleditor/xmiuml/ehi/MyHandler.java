@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 20:39:47 $
-// $Revision: 1.3 $
+// $Date: 2004-08-30 07:56:42 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3CF1D26803CA package "MyHandler"
@@ -20,6 +20,7 @@ import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
 import ch.ehi.uml1_4.implementation.UmlModel;
+import ch.softenvironment.util.Tracer;
 // -end- 3CF1D26803CA import "MyHandler"
 
 public class MyHandler implements org.xml.sax.ContentHandler
@@ -34,6 +35,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
   // please fill in/modify the following section
   // -beg- preserve=yes 3CF1D26803CA detail_end "MyHandler"
 
+  private Locator currentLocation=null;
+  private ErrorHandler eh=null;
+  
   // map<String TID, Object obj>
   private java.util.Map objMap = new java.util.HashMap();
   private java.util.Set usedObjsTID = new java.util.HashSet();
@@ -62,6 +66,7 @@ public class MyHandler implements org.xml.sax.ContentHandler
 
   public void setDocumentLocator(Locator locator)
   {
+  	currentLocation=locator;
   }
 
   public void startDocument() throws SAXException
@@ -86,7 +91,10 @@ public class MyHandler implements org.xml.sax.ContentHandler
   public void processingInstruction(String target, String data) throws SAXException
   {
   }
-
+  public void setErrorHandler(ErrorHandler handler)
+  {
+  	eh=handler;
+  }
   public void startElement(String namespaceURI, String localName, String rawName, Attributes atts) 
   	throws SAXException
   {
@@ -135,14 +143,17 @@ public class MyHandler implements org.xml.sax.ContentHandler
       }catch(IllegalAccessException ex){
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
         throw new SAXException(ex);
       }catch(java.lang.InstantiationException ex){
 			ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
 			,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 		throw new SAXException(ex);
       }catch(ClassNotFoundException ex){
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 		throw new SAXException(ex);
       }
 
@@ -157,7 +168,7 @@ public class MyHandler implements org.xml.sax.ContentHandler
     }
     else if(atts.getLength()>1)
     {
-      throw new SAXException("You can't have more then 1 Attribute!");
+      eh.error(new SAXParseException("You can't have more then 1 Attribute!",currentLocation));
     }
 
   }
@@ -215,13 +226,19 @@ public class MyHandler implements org.xml.sax.ContentHandler
                 // invoke setXX() method on current object to set value
                 set.invoke(actualObject,new Object[]{valueObject});
               }else{
-                throw new SAXException("unexpected Element <"+currentElementTag+">");
+                eh.error(new SAXParseException("unexpected Element <"+currentElementTag+">",currentLocation));
               }
             }
+			catch(IllegalArgumentException ex){
+				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				throw new SAXException(ex);
+			}
             catch(IllegalAccessException ex){
+				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
             	throw new SAXException(ex);
             }
 			catch(InvocationTargetException ex){
+				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 				throw new SAXException(ex);
 			}
           }
