@@ -25,9 +25,9 @@ import ch.ehi.umleditor.application.*;
  * Figure for displaying a single Attribute within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:46 $
+ * @version $Revision: 1.2 $ $Date: 2004-03-05 17:26:42 $
  */
-public class AttributeFigure extends TextFigure {
+class AttributeFigure extends TextFigure {
 	private AttributeDef attributeDef = null;
 	private ClassDiagramView classDiagram = null;
 

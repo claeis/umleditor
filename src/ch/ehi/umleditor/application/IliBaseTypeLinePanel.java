@@ -29,10 +29,9 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:06 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-28 19:26:04 $
  */
-public class IliBaseTypeLinePanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeLinePanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeLinePanel");  //$NON-NLS-1$
+public class IliBaseTypeLinePanel extends BasePanel implements DataPanel {
 	//private LineType lineType = null;
         private java.lang.Class lineTypeClass = null;
 	private ModelElement parent = null;
@@ -279,9 +278,11 @@ private javax.swing.JCheckBox getChxArcs() {
 		try {
 			ivjChxArcs = new javax.swing.JCheckBox();
 			ivjChxArcs.setName("ChxArcs");
-			ivjChxArcs.setToolTipText(resIliBaseTypeLinePanel.getString("ChxArcs_toolTipText"));
-			ivjChxArcs.setText(resIliBaseTypeLinePanel.getString("ChxArcs_text"));
+			ivjChxArcs.setToolTipText("Kreisbogen");
+			ivjChxArcs.setText("Kreisbogen");
 			// user code begin {1}
+			ivjChxArcs.setToolTipText(getResourceString("ChxArcs_toolTipText"));
+			ivjChxArcs.setText(getResourceString("ChxArcs_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -304,8 +305,8 @@ private javax.swing.JCheckBox getChxDirected() {
 			ivjChxDirected.setToolTipText("Gerichtet");
 			ivjChxDirected.setText("Directed");
 			// user code begin {1}
-			ivjChxDirected.setToolTipText(resIliBaseTypeLinePanel.getString("ChxDirected_toolTipText"));
-			ivjChxDirected.setText(resIliBaseTypeLinePanel.getString("ChxDirected_text"));
+			ivjChxDirected.setToolTipText(getResourceString("ChxDirected_toolTipText"));
+			ivjChxDirected.setText(getResourceString("ChxDirected_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -325,9 +326,11 @@ private javax.swing.JCheckBox getChxStraights() {
 		try {
 			ivjChxStraights = new javax.swing.JCheckBox();
 			ivjChxStraights.setName("ChxStraights");
-			ivjChxStraights.setToolTipText(resIliBaseTypeLinePanel.getString("ChxStraights_toolTipText"));
-			ivjChxStraights.setText(resIliBaseTypeLinePanel.getString("ChxStraights_text"));
+			ivjChxStraights.setToolTipText("");
+			ivjChxStraights.setText("Gerade");
 			// user code begin {1}
+			ivjChxStraights.setToolTipText(getResourceString("ChxStraights_toolTipText"));
+			ivjChxStraights.setText(getResourceString("ChxStraights_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -370,7 +373,7 @@ private javax.swing.JLabel getLblControlPoints() {
 			ivjLblControlPoints.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjLblControlPoints.setText("Control Points:");
 			// user code begin {1}
-			ivjLblControlPoints.setText(resIliBaseTypeLinePanel.getString("LblControlPoints_text"));
+			ivjLblControlPoints.setText(getResourceString("LblControlPoints_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -393,7 +396,7 @@ private javax.swing.JLabel getLblIntersection() {
 			ivjLblIntersection.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjLblIntersection.setText("Intersection:");
 			// user code begin {1}
-			ivjLblIntersection.setText(resIliBaseTypeLinePanel.getString("LblIntersection_text"));
+			ivjLblIntersection.setText(getResourceString("LblIntersection_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -416,7 +419,7 @@ private javax.swing.JLabel getLblLineAttributes() {
 			ivjLblLineAttributes.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjLblLineAttributes.setText("Line Attributes:");
 			// user code begin {1}
-			ivjLblLineAttributes.setText(resIliBaseTypeLinePanel.getString("LblLineAttributes_text"));
+			ivjLblLineAttributes.setText(getResourceString("LblLineAttributes_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -439,7 +442,7 @@ private javax.swing.JMenuItem getMniNewLineFormTypeDef() {
 			ivjMniNewLineFormTypeDef.setText("Neu...");
 			ivjMniNewLineFormTypeDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniNewLineFormTypeDef.setText(MENU_FILE_NEW_WINDOW);
+			ivjMniNewLineFormTypeDef.setText(CommonUserAccess.getMniFileNewWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -462,7 +465,7 @@ private javax.swing.JMenuItem getMniOpenLineFormTypeDefSpecification() {
 			ivjMniOpenLineFormTypeDefSpecification.setText("Öffne Spezifikation...");
 			ivjMniOpenLineFormTypeDefSpecification.setEnabled(false);
 			// user code begin {1}
-			ivjMniOpenLineFormTypeDefSpecification.setText(MENU_EDIT_CHANGE_WINDOW);
+			ivjMniOpenLineFormTypeDefSpecification.setText(CommonUserAccess.getMniEditChangeWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -485,7 +488,7 @@ private javax.swing.JMenuItem getMniRemoveLineFormTypeDef() {
 			ivjMniRemoveLineFormTypeDef.setText("Löschen");
 			ivjMniRemoveLineFormTypeDef.setEnabled(false);
 			// user code begin {1}
-			ivjMniRemoveLineFormTypeDef.setText(MENU_EDIT_REMOVE);
+			ivjMniRemoveLineFormTypeDef.setText(CommonUserAccess.getMniEditRemoveText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -681,7 +684,7 @@ private javax.swing.table.TableColumn getTbcLineFormTypeDef() {
 			ivjTbcLineFormTypeDef = new javax.swing.table.TableColumn();
 			ivjTbcLineFormTypeDef.setHeaderValue("LineFormTypeDef");
 			// user code begin {1}
-			ivjTbcLineFormTypeDef.setHeaderValue(resIliBaseTypeLinePanel.getString("TbcLineFormTypeDef_header"));
+			ivjTbcLineFormTypeDef.setHeaderValue(getResourceString("TbcLineFormTypeDef_header"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -746,7 +749,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeTextPanel");
-		setToolTipText(resIliBaseTypeLinePanel.getString("IliBaseTypeTextPanel_toolTipText"));
+		setToolTipText("");
 		setLayout(new java.awt.GridBagLayout());
 		setSize(477, 282);
 
@@ -823,6 +826,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	getTblLineFormTypeDef().setModel(new EditorTableModel());
 	((EditorTableModel)getTblLineFormTypeDef().getModel()).setLineFormTypeDef(null);
 	// user code end
@@ -831,7 +835,7 @@ private void initialize() {
  * Comment
  */
 private void mniNewLineFormTypeDef() {
-	ModelElementSelectionDialog selectionDialog = new ModelElementSelectionDialog(dialog, resIliBaseTypeLinePanel.getString("CTDialog"), true, parent, LineFormTypeDef.class); //$NON-NLS-1$
+	ModelElementSelectionDialog selectionDialog = new ModelElementSelectionDialog(dialog, getResourceString("CTDialog"), true, parent, LineFormTypeDef.class); //$NON-NLS-1$
 
 	// update view
 	for (int i=0; i<selectionDialog.getSelectedItems().size(); i++) {

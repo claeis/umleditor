@@ -18,7 +18,6 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import javax.swing.JPanel;
-import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.softenvironment.view.*;
@@ -26,12 +25,11 @@ import ch.softenvironment.view.*;
  * User Interface for a LineFormTypeDef.
  *
  * @author: ce
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:25 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class LineFormTypeDefDialog extends BaseDialog {
 	// ModelElement
-        private static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(LineFormTypeDefDialog.class);
-	LineFormTypeDef modelElement = null;
+	private LineFormTypeDef modelElement = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JButton ivjBtnCancel = null;
@@ -282,8 +280,9 @@ private javax.swing.JLabel getLblName() {
 		try {
 			ivjLblName = new javax.swing.JLabel();
 			ivjLblName.setName("LblName");
-			ivjLblName.setText(rsrc.getString("LblName_text"));
+			ivjLblName.setText("Name:");
 			// user code begin {1}
+			ivjLblName.setText(getResourceString("LblName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -345,9 +344,10 @@ private javax.swing.JLabel getLblStructure() {
 		try {
 			ivjLblStructure = new javax.swing.JLabel();
 			ivjLblStructure.setName("LblStructure");
-			ivjLblStructure.setText(rsrc.getString("LblStructure_text"));
+			ivjLblStructure.setText("Struktur:");
 			//ivjLblStructure.setBounds(168, 89, 140, 14);
 			// user code begin {1}
+			ivjLblStructure.setText(getResourceString("LblStructure_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -402,7 +402,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral = new javax.swing.JTabbedPane();
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
-			ivjTbpGeneral.insertTab(rsrc.getString("TbpDetail_title"), null, getPnlDetail(), null, 1);
+			ivjTbpGeneral.insertTab(getResourceString("TbpDetail_title"), null, getPnlDetail(), null, 1);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -471,7 +471,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-		setTitle(rsrc.getString("Dialog_title"));
+	setTitle(getResourceString("Dialog_title"));
 	// user code end
 }
 /**

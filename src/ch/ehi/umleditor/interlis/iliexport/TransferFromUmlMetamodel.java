@@ -1,8 +1,20 @@
-// Copyright (c) 2002, Eisenhut Informatik
-// All rights reserved.
-// $Date: 2003-12-23 10:40:28 $
-// $Revision: 1.1.1.1 $
-//
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 // -beg- preserve=no 3CFE050F004D package "TransferFromUmlMetamodel"
 package ch.ehi.umleditor.interlis.iliexport;
@@ -202,6 +214,9 @@ public class TransferFromUmlMetamodel
       if(xsdFile!=null){
         config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.XMLSCHEMA );
         config.setOutputFile(xsdFile);
+      }else if(fmtFile!=null){
+		  config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.ILI1FMTDESC );
+		  config.setOutputFile(fmtFile);
       }else{
         // we need no output (except error messages)
         config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.NOOUTPUT );
@@ -293,39 +308,42 @@ public class TransferFromUmlMetamodel
         }
         currentFile=null;
       }
-      if(!createFileList){
-        // open
-        out = new BufferedWriter(new FileWriter(file));
-        lineNumber=1;
-        // write
-        defineLinkToModelElement(def);
-        out.write("INTERLIS 2.2;");newline();
-        visitINTERLIS2Def(def,language);
-      }
-      done.add(language);
-      java.util.Iterator otheri=languages.keySet().iterator();
-      // while other langugae with same name
-      while(otheri.hasNext()){
-        String otherLanguage=(String)otheri.next();
-        // language already done?
-        if(done.contains(otherLanguage)){
-          continue;
-        }
-        // another filename?
-        if(!filename.equals(languages.get(otherLanguage))){
-          continue;
-        }
-        // write otherLanguage to same file
-        if(!createFileList){
-          visitINTERLIS2Def(def,otherLanguage);
-        }
-        done.add(otherLanguage);
-      }
-      // close
-      if(!createFileList){
-        out.close();
-        out=null;
-      }
+		try{
+	      if(!createFileList){
+	        // open
+	        out = new BufferedWriter(new FileWriter(file));
+	        lineNumber=1;
+	        // write
+	        defineLinkToModelElement(def);
+	        out.write("INTERLIS 2.2;");newline();
+	        visitINTERLIS2Def(def,language);
+	      }
+	      done.add(language);
+	      java.util.Iterator otheri=languages.keySet().iterator();
+	      // while other langugae with same name
+	      while(otheri.hasNext()){
+	        String otherLanguage=(String)otheri.next();
+	        // language already done?
+	        if(done.contains(otherLanguage)){
+	          continue;
+	        }
+	        // another filename?
+	        if(!filename.equals(languages.get(otherLanguage))){
+	          continue;
+	        }
+	        // write otherLanguage to same file
+	        if(!createFileList){
+	          visitINTERLIS2Def(def,otherLanguage);
+	        }
+	        done.add(otherLanguage);
+	      }
+		}finally{
+			// close
+			if(!createFileList){
+			  out.close();
+			  out=null;
+			}
+		}
       if(!onlyChecking){
         if(!createFileList){
           ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc()
@@ -557,6 +575,10 @@ public class TransferFromUmlMetamodel
     out.write(" =");newline();
 
     inc_ind();
+
+    if(def.containsOiddomain()){
+      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));newline();
+    }
 
     int depc=0;
     String sep=getIndent()+"DEPENDS ON ";
@@ -1239,6 +1261,12 @@ public class TransferFromUmlMetamodel
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3D5D3A3D033B body3CFE050F004D "classRef"
+    if("ANYCLASS".equals(ref.getDefLangName())){
+    	return "ANYCLASS";
+    }
+	if("ANYSTRUCTURE".equals(ref.getDefLangName())){
+		return "ANYSTRUCTURE";
+	}
     return modelElementRef(source,ref,null);
     // -end- 3D5D3A3D033B body3CFE050F004D "classRef"
     }
@@ -1259,7 +1287,6 @@ public class TransferFromUmlMetamodel
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
     out.write(def.getName().getValue(language)+" ");
-
     int propc=0;
     if(def.isAbstract()){
       out.write((propc==0?"(":",")+"ABSTRACT");
@@ -1675,9 +1702,17 @@ public class TransferFromUmlMetamodel
     if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
       ch.ehi.interlis.domainsandconstants.basetypes.NumericType ntype=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)def;
       if(ntype.isRangeDefined()){
-        out.write(visitIliDim(ntype.getMinDec()));
+      	if(ntype.getMinDec()==null){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmindecRequired"));
+      	}else{
+			out.write(visitIliDim(ntype.getMinDec()));
+      	}
         out.write("..");
-        out.write(visitIliDim(ntype.getMaxDec()));
+		if(ntype.getMaxDec()==null){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxdecRequired"));
+		}else{
+	        out.write(visitIliDim(ntype.getMaxDec()));
+		}
       }else{
         out.write("NUMERIC");
       }
@@ -1797,6 +1832,10 @@ public class TransferFromUmlMetamodel
       out.write((propc==0?"(":",")+"EXTENDED");
       propc++;
     }
+	if(def.isPropExternal()){
+	  out.write((propc==0?"(":",")+"EXTERNAL");
+	  propc++;
+	}
     if(def.getOrdering()==OrderingKind.ORDERED){
       out.write((propc==0?"(":",")+"ORDERED");
       propc++;
@@ -2026,7 +2065,47 @@ public class TransferFromUmlMetamodel
 
     }
     if(ts.sort()){
-      return ts.getResult();
+      // sort result according to level, type, name
+      // build list of pairs (level,object)
+      java.util.List pairv=new java.util.ArrayList();
+      int[] levv=ts.getLevel();
+      java.util.List objv=ts.getResult();
+      Iterator obji=objv.iterator();
+      for(int i=0;obji.hasNext();i++){
+      	pairv.add(new Pair(levv[i],obji.next()));
+      }
+      // sort list of pairs
+      java.util.Collections.sort(pairv, new java.util.Comparator(){
+		public int compare(Object o_1, Object o_2)
+		{
+			Pair p1=(Pair)o_1;
+			Pair p2=(Pair)o_2;
+			// compare level
+			if(p1.level<p2.level){
+				return -1;
+			}else if(p2.level<p1.level){
+				return 1;
+			}
+			// ASSERT: same level
+			// compare type
+			int def=ch.ehi.interlis.tools.ModelElementUtility.compareDefinition(p1.object.getClass(),p2.object.getClass());
+			if(def!=0){
+			  return def;
+			}
+			// ASSERT: same type
+			// compare name
+		  String name1=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p1.object);if(name1==null)name1="";
+		  String name2=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p2.object);if(name2==null)name2="";
+		  int compareName =  name1.compareToIgnoreCase(name2);
+		  return compareName;
+		}
+      });
+      // copy objects from list of pairs back to result list
+	  objv=new java.util.ArrayList();
+	  for(Iterator pairi=pairv.iterator();pairi.hasNext();){
+	  		objv.add(((Pair)pairi.next()).object);
+	  }
+      return objv;
     }
     StringBuffer loopele=new StringBuffer();
     Iterator resi=ts.getResult().iterator();
@@ -2387,7 +2466,9 @@ public class TransferFromUmlMetamodel
     if(onlyChecking){
       if(xsdFile!=null){
         return "XSD export";
-      }
+      }else if(fmtFile!=null){
+		return "FMT export";
+	  }
       return rsrc.getString("CIcheckmodel");
     }
     return rsrc.getString("CIexportinterlis");
@@ -2395,6 +2476,10 @@ public class TransferFromUmlMetamodel
    private String xsdFile=null;
    public void setXsdFile(String path){
     xsdFile=path;
+   }
+   private String fmtFile=null;
+   public void setFmtFile(String path){
+	fmtFile=path;
    }
    private boolean createFileList=false;
    private java.util.List fileList=null;
@@ -2461,6 +2546,14 @@ public class TransferFromUmlMetamodel
     }
       String line=def.substring(last);
       out.write(nextIndent+line);
+    }
+    class Pair{
+    	public int level;
+    	public Object object;
+    	Pair(int level, Object object){
+    		this.level=level;
+    		this.object=object;
+    	}
     }
   // -end- 3CFE050F004D detail_end "TransferFromUmlMetamodel"
 

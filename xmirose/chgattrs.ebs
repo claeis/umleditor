@@ -1,0 +1,198 @@
+' this Rational Rose script changes, if necessary, the attributes of all classes in the selected package
+' according to there name or type.
+'
+' Copyright (c) 2000, Claude Eisenhut
+' All rights reserved.
+' THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+' ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+' LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+' FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+' REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+' SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+' LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+' DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+' THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+' (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+' USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+'
+'
+' Send comments and questions to ce@eisenhutinformatik.ch
+'
+Option Explicit
+
+
+''# @function writes a debug or trace message
+Sub PrintDbgMsg(theMsg As String)
+	RoseApp.WriteErrorLog theMsg
+End Sub
+
+''# @function writes an error message
+Sub PrintErrMsg(theMsg As String)
+	RoseApp.WriteErrorLog theMsg
+End Sub
+
+''# @function get qualified name of a class
+Function getQualifiedName(aclass As class) As String
+	Dim ret As String
+	Dim parent As category
+	ret=aclass.name
+	Set parent=aclass.parentcategory
+	While Not parent.toplevel()
+		ret=parent.name+"::"+ret
+		Set parent=parent.parentcategory
+	Wend
+	ret=parent.name+"::"+ret
+	getQualifiedName=ret
+End Function
+
+Sub chgAttr2Assoc(aclass As class,rolename As String,constraint As String,card As String,destClass As class)
+
+	Dim asso As association
+	Dim arole As role
+	Dim destrole As role
+
+	Set asso=aclass.AddAssociation(roleName,getQualifiedName(destclass))
+	If asso.role1.class Is destclass Then
+	   Set destrole=asso.role1
+	   Set arole=asso.role2
+	Else
+	   Set destrole=asso.role2
+	   Set arole=asso.role1
+	End If
+	destrole.cardinality=card
+	arole.aggregate=true
+	destrole.containment = rsByValue
+	destrole.constraints=constraint
+
+End Sub
+
+''# @function change attributes according to name suffix "[x..y]"
+Sub visitClass(aClass As class)
+	Dim i As Integer
+	Dim attrv As attributecollection
+	Dim attr As attribute
+	Dim ret As Boolean
+	Dim oldname As String
+	Dim newname As String
+	Dim destclassv As classcollection
+	Dim endname As Integer
+	Dim card As String
+	Dim endcard As Integer
+	Dim constraint As String
+
+	If (aClass.stereotype="CodeList")	Or (aClass.stereotype="enumeration") Then
+		Exit Sub
+	End If
+
+	Set attrv=aclass.attributes
+	For i=attrv.count To 1 Step -1
+		Set attr=attrv.getat(i)
+		Dim typeClass As class
+		Dim atypeName As String
+		atypeName=attr.type
+		If instr(atypeName,"<")>0 Then
+			atypeName=trim$(mid$(atypeName,instr(atypeName,"<")+1))
+			Dim endType As Integer
+			endType=instr(atypeName,">")
+			If endType>0 Then
+				atypeName=rtrim$(left$(atypeName,endType-1))
+			End If
+		End If
+
+		constraint=""
+		If instr(attr.Type,"<")>0 Then
+			Set destclassv=roseapp.currentmodel.findClasses(atypename)
+			If destclassv.count=1 Then
+				Set typeClass=destclassv.getat(1)
+				Dim collectionType As String
+				collectionType=trim$(left$(attr.type,instr(attr.type,"<")-1))
+				If collectionType="Sequence" Then
+					constraint="ordered"
+				End If
+				'attr.Type=aTypeName
+				' change attr to assoc
+				chgAttr2Assoc aclass,attr.name,constraint,"1..n",typeClass
+				ret=aclass.deleteAttribute(attr)
+			Else
+				Set typeClass=Nothing
+				oldname=trim$(attr.name)
+				If destclassv.count>1 Then
+					printerrmsg aclass.name+"."+oldname+": multiple classes <"+atypeName+"> found"
+				Else
+					printerrmsg aclass.name+"."+oldname+": no class <"+atypeName+"> found"
+				End If
+			End If
+		Else
+
+			oldname=trim$(attr.name)
+			If right$(oldname,6)="[0..1]" Then
+				newname=rtrim$(left$(oldname,Len(oldname)-6))
+			  	ret=attr.OverrideProperty("UML", "multiplicity","0..1") 
+				attr.name=newname
+			ElseIf instr(oldname,"[")>0 Then
+				endname=instr(oldname,"[")
+				newname=rtrim$(left$(oldname,endname-1))
+				card=trim$(mid$(oldname,endname+1))
+				endcard=instr(card,"]")
+				If endcard>0 Then
+					card=rtrim$(left$(card,endcard-1))
+				End If
+				' change attr to assoc
+				'chgAttr2Assoc aclass,newname,"",card,typeClass
+				'ret=aclass.deleteAttribute(attr)
+			  	ret=attr.OverrideProperty("UML", "multiplicity",card) 
+				attr.name=newname
+			Else
+				' change nothing
+			End If
+		End If
+
+	Next i
+End Sub
+
+''# @function iterate over all classes in this package and 
+''# recursively visit all sub packages
+Sub VisitCategory (aCategory As Category)
+	Dim theClass As Class
+	Dim create As Operation
+	Dim subcat As category
+	Dim subfactory As class
+	Dim clsid As Integer
+	Dim catid As Integer
+
+   	'printDbgMsg "package "+aCategory.name+"..."
+
+	' all classes
+	For ClsID = 1 To aCategory.Classes.Count
+		Set theClass = aCategory.Classes.GetAt (ClsID) 
+		visitClass theclass
+	Next ClsID 
+
+	' all sub packages
+	For CatID = 1 To aCategory.Categories.Count
+
+		' visit subpackage
+		Set subcat=aCategory.Categories.GetAt (CatID)
+		Call VisitCategory (subcat)
+	Next CatID
+
+
+End Sub
+
+Sub Main 
+	Dim selCats As CategoryCollection
+	Dim selCat As Category
+	Dim i As Integer
+
+	' all selected packages
+	Set selCats = RoseApp.CurrentModel.GetSelectedCategories() 
+	For i = 1 To selCats.Count 
+		Set selCat = selCats.GetAt(i) 
+					
+		' visit package
+		VisitCategory selCat
+
+	Next i
+
+
+End Sub

@@ -6,9 +6,14 @@ import ch.interlis.ili2c.generator.Interlis2Generator;
 import java.util.Iterator;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
+import ch.ehi.umleditor.interlis.Logging;
 
 public class TransferFromIli2cMetamodel
 {
+  private Logging log=null;
+  public TransferFromIli2cMetamodel(Logging callout){
+    log=callout;
+  }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
   private void addNamespace(ch.ehi.uml1_4.foundation.core.Namespace ns)
   {
@@ -195,6 +200,9 @@ public class TransferFromIli2cMetamodel
       topicextends.attachChild(topicdef);
     }
 
+    if(topic.getOid()!=null){
+      topicdef.attachOiddomain(findDomainDef(topic.getOid()));
+    }
 
     Iterator it = topic.getDependentOn();
     while(it.hasNext())
@@ -491,6 +499,7 @@ public class TransferFromIli2cMetamodel
     roledef.setOrdering(role.isOrdered()
       ? ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED
       : ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+    // TODO handle external
     switch(role.getKind()){
       case RoleDef.Kind.eASSOCIATE:
         roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.NONE);
@@ -511,19 +520,22 @@ public class TransferFromIli2cMetamodel
     ((ch.ehi.uml1_4.foundation.core.Association)getNamespace()).addConnection(roledef);
   }
 
-  private void updatePredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
-    // find mdef in umlmodel
+  private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
+    // does ModelDef "INTERLIS" exist in repository?
     if(!ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(
         root,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName())){
+        // no need to link ili2c modelelemts to corresponding elements in repository
         return;
     }
-    //    ch.ehi.interlis.modeltopicclass.ModelDef,
-    ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=(ch.ehi.interlis.modeltopicclass.INTERLIS2Def)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
-        root,ch.ehi.interlis.modeltopicclass.INTERLIS2Def.class,getPredefinedName());
-    fileMap.put(getPredefinedName(),ili2Def);
+    
+    // user may have moved ModelDef "INTERLIS" away from INTERLIS2Def "predefined",
+    // therefore do not try to find INTERLIS2Def "predefined"
+    // ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=(ch.ehi.interlis.modeltopicclass.INTERLIS2Def)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
+    //    root,ch.ehi.interlis.modeltopicclass.INTERLIS2Def.class,getPredefinedName());
+    // fileMap.put(getPredefinedName(),ili2Def);
 
     ch.ehi.interlis.modeltopicclass.ModelDef modelDef=(ch.ehi.interlis.modeltopicclass.ModelDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
-        ili2Def,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName());
+        root,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName());
     modelMap.put(ilibase,modelDef);
     Iterator it = ilibase.iterator();
     while (it.hasNext()) {
@@ -1049,9 +1061,8 @@ public class TransferFromIli2cMetamodel
     }
   }
 
-  private void visitMetaDataFiles(Configuration config)
+  private void visitMetaDataFiles(ch.ehi.uml1_4.modelmanagement.Model model,Configuration config)
   {
-    ch.ehi.uml1_4.modelmanagement.Model model=ch.ehi.umleditor.application.LauncherView.getInstance().getModel();
     Iterator it=config.iteratorFileEntry();
     while(it.hasNext()){
       ch.interlis.ili2c.config.FileEntry fileIli=(ch.interlis.ili2c.config.FileEntry)it.next();
@@ -1075,13 +1086,13 @@ public class TransferFromIli2cMetamodel
   private PredefinedModel ilibase;
   private ch.ehi.uml1_4.modelmanagement.Package ili2modelset;
   private static int uniqueName=1;
-  public void visitTransferDescription (
+  public void visitTransferDescription (ch.ehi.uml1_4.modelmanagement.Model umlModel,
     TransferDescription   td,String configFilename,Configuration config)
   {
     syntaxBuffer=new java.io.StringWriter();
     makeSyntax=Interlis2Generator.generateElements(syntaxBuffer,td);
     ilibase=td.INTERLIS;
-    updatePredefinedModel(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+    updateMappingToPredefinedModel(umlModel);
     ili2modelset=new ch.ehi.uml1_4.implementation.UmlPackage();
     if(configFilename!=null){
       ili2modelset.setName(new NlsString(getBasename(configFilename)));
@@ -1092,12 +1103,9 @@ public class TransferFromIli2cMetamodel
     // add model contents
     visitElements(td);
     // conversion done; add model to editor
-    ch.ehi.umleditor.application.LauncherView.getInstance().getModel().addOwnedElement(ili2modelset);
+    umlModel.addOwnedElement(ili2modelset);
     // add metadata files
-    visitMetaDataFiles(config);
-    // refresh view
-    ch.ehi.umleditor.application.LauncherView.getInstance().refreshModel();
-    ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(),rsrc.getString("CIdone"));
+    visitMetaDataFiles(umlModel,config);
   }
   public void loadPredefinedIli2cModel(ch.ehi.uml1_4.modelmanagement.Package root)
   {
@@ -1108,8 +1116,6 @@ public class TransferFromIli2cMetamodel
     ili2modelset=root;
     // add model contents
     visitElements(td);
-    // refresh view
-    ch.ehi.umleditor.application.LauncherView.getInstance().refreshModel();
   }
 
 
@@ -1124,6 +1130,6 @@ public class TransferFromIli2cMetamodel
   }
 
   private void logError(String msg){
-    ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(),msg);
+    log.log(getFuncDesc(),msg);
   }
 }

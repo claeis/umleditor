@@ -36,7 +36,7 @@ import ch.ehi.umleditor.umlpresentation.*;
  * A Note is attached only in Diagram and not in Model.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:01 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-02 19:26:25 $
  */
 public class NoteFigure extends NodeFigure {
 	// Composites
@@ -68,18 +68,26 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	return popupMenu;
 }
 /**
- * represent this Figure with an UML-Note Symbol
+ * Represent this Figure with an UML-Note Symbol.
  */
 public void draw(Graphics g) {
-	// keep the RectangleFigure transparent
-//	getPresentationFigure().setAttribute("FrameColor", Color.white);
 	g.setColor((java.awt.Color)getAttribute(JHotDrawConstants.FRAME_COLOR));
 
 	super.draw(g);
 
 	// cut top-right corner
 	Rectangle rectangle = displayBox();
-	g.drawLine(rectangle.x + rectangle.width - 10, rectangle.y, rectangle.x + rectangle.width - 1, rectangle.y + 9);
+	int cutOffWidth = 10;
+	int leftX = rectangle.x + rectangle.width - cutOffWidth;
+	int rightX = rectangle.x + rectangle.width - 1;
+	int topY = rectangle.y + cutOffWidth - 1;
+	int bottomY = rectangle.y + cutOffWidth-1;
+	g.drawLine(leftX, rectangle.y, rightX, bottomY);
+	g.drawLine(leftX, rectangle.y, leftX, bottomY);
+	g.drawLine(leftX, bottomY, rightX, bottomY);
+	g.setColor(java.awt.Color.WHITE);
+	g.drawLine(leftX, rectangle.y, rightX, rectangle.y);
+	g.drawLine(rightX, rectangle.y, rightX, bottomY);
 }
 /**
  * Return default handles on all four edges for this figure.

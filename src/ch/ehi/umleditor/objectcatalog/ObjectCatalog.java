@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:40 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-06-14 14:12:10 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3CD78E5B00EB package "ObjectCatalog"
@@ -19,6 +19,7 @@ import ch.ehi.umleditor.application.LauncherView;
 import java.io.*;
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.i18n.MessageFormat;
+import ch.ehi.basics.view.GenericFileFilter;
 // -end- 3CD78E5B00EB import "ObjectCatalog"
 
 public class ObjectCatalog
@@ -41,40 +42,7 @@ public class ObjectCatalog
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CDA6B9802C8 body3CD78E5B00EB "writeAllHtml"
-    ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
-            LauncherView.getInstance(),rsrc.getString("CTPackageSelector")
-            , true, LauncherView.getInstance().getModel());
-    if (packageDialog.isSaved()) {
-        ch.ehi.uml1_4.foundation.core.Namespace apackage=packageDialog.getSelectedPackage();
-        if(apackage==null){
-          apackage=LauncherView.getInstance().getModel();
-        }
-	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
-	saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
-	saveDialog.addChoosableFileFilter(LauncherView.createHtmlFilter());
-
-	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
-		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
-                String filename=saveDialog.getSelectedFile().getAbsolutePath();
-
-                BufferedWriter out=null;
-                    try{
-                       out = new BufferedWriter(new FileWriter(filename));
-                    }catch(IOException ex){
-                      LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),ex.getLocalizedMessage());
-                      return;
-                    }
-                    try{
-                       HtmlWriter writer=new HtmlWriter();
-                       writer.doObjectCatalog(apackage,out);
-                       out.close();
-                       LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),MessageFormat.format(rsrc,"CTobjcatDone",filename));
-                    }catch(IOException ex){
-                      LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),ex.getLocalizedMessage());
-                    }
-        }
-    }
-    return;
+    	writeAllHtml(true);
     // -end- 3CDA6B9802C8 body3CD78E5B00EB "writeAllHtml"
     }
 
@@ -99,7 +67,7 @@ public class ObjectCatalog
         }
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle(rsrc.getString("CTstructFileSelector"));
-	saveDialog.addChoosableFileFilter(LauncherView.createHtmlFilter());
+	saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
 
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
@@ -133,34 +101,93 @@ public class ObjectCatalog
 
   static public void writeDiagram(ch.ehi.umleditor.umldrawingtools.ClassDiagramView diag){
         String diagName=((ch.ehi.umleditor.umlpresentation.Diagram)diag.getDiagram()).getName().getValue();
-
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle(rsrc.getString("CTdiagFileSelector"));
-	saveDialog.addChoosableFileFilter(new ch.ehi.basics.view.GenericFileFilter("JPEG File Interchange Format (*.jpeg)","jpeg"));
+    GenericFileFilter jpegFilter=new GenericFileFilter("JPEG File Interchange Format (*.jpeg)","jpeg");
+    GenericFileFilter svgFilter=new GenericFileFilter("Scalable Vector Graphics (*.svg)","svg");
+	GenericFileFilter emfFilter=new GenericFileFilter("Windows Meta File Format (*.wmf)","wmf");
+	saveDialog.addChoosableFileFilter(jpegFilter);
+	saveDialog.addChoosableFileFilter(svgFilter);
+	saveDialog.addChoosableFileFilter(emfFilter);
         saveDialog.setSelectedFile(new File(diagName));
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
                 String filename=saveDialog.getSelectedFile().getAbsolutePath();
 
                     try{
-                      java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diag.getWidth(),diag.getHeight(),java.awt.image.BufferedImage.TYPE_INT_BGR);
-                      java.awt.Graphics2D g=img.createGraphics();
-                      diag.printAll(g);
-                      FileOutputStream os = new FileOutputStream(filename);
-                      com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
-                      com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
-                      // Lossless, please
-                      param.setQuality(1.0f, false);
-                      ie.setJPEGEncodeParam(param);
-                      ie.encode(img);
-                      os.close();
+
+						java.awt.Dimension diagDim = diag.getMinimumDimension();
+
+                      if(emfFilter.accept(saveDialog.getSelectedFile())){
+                        //Properties p = new Properties();
+                        //p.setProperty("PageSize","A5");
+                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.emf.EMFGraphics2D(new File(filename), diagDim);
+                        //g.setProperties(p);
+                        g.startExport();
+                        diag.printAll(g);
+                        g.endExport();
+                      }else if(svgFilter.accept(saveDialog.getSelectedFile())){
+                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.svg.SVGGraphics2D(new File(filename), diagDim);
+                        g.startExport();
+                        diag.printAll(g);
+                        g.endExport();
+                      }else if(jpegFilter.accept(saveDialog.getSelectedFile())){
+                        java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diagDim.width,diagDim.height,java.awt.image.BufferedImage.TYPE_INT_BGR);
+                        java.awt.Graphics2D g=img.createGraphics();
+                        diag.printAll(g);
+                        FileOutputStream os = new FileOutputStream(filename);
+                        com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
+                        com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
+                        // Lossless, please
+                        param.setQuality(1.0f, false);
+                        ie.setJPEGEncodeParam(param);
+                        ie.encode(img);
+                        os.close();
+                      }
                     }catch(IOException ex){
                       LauncherView.getInstance().log("objectcatalog",ex.getLocalizedMessage());
                     }
         }
     return;
     }
+	public static void writeAllHtml(boolean includeChapterNr)
+	{
+		ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
+				LauncherView.getInstance(),rsrc.getString("CTPackageSelector")
+				, true, LauncherView.getInstance().getModel());
+		if (packageDialog.isSaved()) {
+			ch.ehi.uml1_4.foundation.core.Namespace apackage=packageDialog.getSelectedPackage();
+			if(apackage==null){
+			  apackage=LauncherView.getInstance().getModel();
+			}
+		FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+		saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
+		saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
 
+		if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+			LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+					String filename=saveDialog.getSelectedFile().getAbsolutePath();
+
+					BufferedWriter out=null;
+						try{
+						   out = new BufferedWriter(new FileWriter(filename));
+						}catch(IOException ex){
+						  LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),ex.getLocalizedMessage());
+						  return;
+						}
+						try{
+						   HtmlWriter writer=new HtmlWriter();
+						   writer.setChapterNumbering(!includeChapterNr);
+						   writer.doObjectCatalog(apackage,out);
+						   out.close();
+						   LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),MessageFormat.format(rsrc,"CTobjcatDone",filename));
+						}catch(IOException ex){
+						  LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),ex.getLocalizedMessage());
+						}
+			}
+		}
+		return;
+	}
   // -end- 3CD78E5B00EB detail_end "ObjectCatalog"
 
 }

@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
 
 /**
  * Draws a PresentationAssocClass of an Association.
@@ -36,9 +37,9 @@ import ch.softenvironment.util.*;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:58 $
+ * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
  */
-public class LinkFigure extends NodeFigure {
+class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
 	public final static int SIZE_MIN = 4;
 	public final static int SIZE_MAX = 12;
@@ -162,9 +163,9 @@ private boolean isN_Ary() {
  * Remove AssociationAttributeFigure if any.
  */
 private void removeFeatures() {
+	((PresentationAssocClass)getNode()).setClassAngle(0.0);
+	((PresentationAssocClass)getNode()).setClassRadius(0.0);
 	if (attributeFigure != null) {
-		((PresentationAssocClass)getNode()).setClassAngle(0.0);
-		((PresentationAssocClass)getNode()).setClassRadius(0.0);
 		showAttributeFigure = false;
 		getClassDiagram().remove(attributeFigure);
 		attributeFigure = null;
@@ -236,7 +237,7 @@ public void removeVisually() {
 	} catch(ConcurrentModificationException cme) {
 		Tracer.getInstance().runtimeWarning(this, "removeVisually()", "Event-Mechanism caused redundant Ping-Pong-remove: " + cme.getLocalizedMessage());
 	} catch(Throwable e) {
-		handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**

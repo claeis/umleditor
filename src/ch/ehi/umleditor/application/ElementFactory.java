@@ -29,6 +29,10 @@ import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.implementation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind;
+import ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind;
+import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
+import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.umleditor.umldrawingtools.*;
 import ch.ehi.interlis.attributes.*;
 import ch.softenvironment.util.Tracer;
@@ -37,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:48 $
+ * @version $Revision: 1.4 $ $Date: 2004-03-09 12:25:31 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -100,6 +104,7 @@ public static AssociationDef createAssociationDef(GeneralizableElement participa
 }
 /**
  * Return a default AttributeDef Instance.
+ * AttributeDef are added as Feature to AbstractClassDef.
  * @see createObject(..)
  */
 public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -107,12 +112,13 @@ public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef)
 	AttributeDef attributeDef = (AttributeDef)createObject(AttributeDef.class);
 
 	// set defaults
-        ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-        r.setLower(0);
-        r.setUpper(1);
-        ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-        m.addRange(r);
-        attributeDef.setMultiplicity(m);
+    ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+    r.setLower(0);
+    r.setUpper(1);
+    ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+    m.addRange(r);
+    attributeDef.setMultiplicity(m);
+    
 	// define default datatype (TEXT*20)
 	ch.ehi.interlis.attributes.DomainAttribute attrtype = new ch.ehi.interlis.attributes.DomainAttribute();
 	ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
@@ -125,6 +131,58 @@ public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef)
 	abstractClassDef.addFeature(attributeDef);
 
 	return attributeDef;
+}
+/**
+ * Return a default UmlOperation Instance.
+ * Operations are added as Feature to AbstractClassDef.
+ * @see createObject(..)
+ */
+public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	// generic initialization
+	UmlOperation operation = (UmlOperation)createObject(UmlOperation.class);
+
+	// set defaults
+	operation.setAbstract(false);
+	operation.setLeaf(false);	// successors may overwrite this method
+	operation.setRoot(false);	// predecessor may have implemented this method
+	operation.setOwnerScope(ScopeKind.INSTANCE);
+	operation.setConcurrency(CallConcurrencyKind.SEQUENTIAL);
+	operation.setVisibility(VisibilityKind.PUBLIC);
+
+	//	Return Value
+/*	UmlParameter returnValue = new UmlParameter();
+	returnValue.setKind(ParameterDirectionKind.RETURN);
+	operation.addParameter(returnValue);
+*/	
+	// define default datatype (TEXT*20)
+/*	ch.ehi.interlis.attributes.DomainAttribute attrtype = new ch.ehi.interlis.attributes.DomainAttribute();
+	ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
+	text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
+	text.setMaxLength(20);
+	attrtype.attachDirect(text);
+	attributeDef.attachAttrType(attrtype);
+*/
+	// aggregations
+	abstractClassDef.addFeature(operation);
+
+	return operation;
+}
+/**
+ * Return a default UmlParameter Instance.
+ * Parameters are added as Parameter to Operations.
+ * @see createObject(..)
+ */
+public static UmlParameter createUmlParameter(UmlOperation operation) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	// generic initialization
+	UmlParameter parameter = (UmlParameter)createObject(UmlParameter.class);
+
+	// set defaults
+	parameter.setKind(ParameterDirectionKind.INOUT);
+	
+	// aggregations
+	operation.addParameter(parameter);
+
+	return parameter;
 }
 /**
  * Return a default NumericType Instance.
@@ -386,7 +444,7 @@ public static ModelElement createOwnedElement(java.lang.Class aClass, Element pa
  *  - Associations with Attributes
  * @see createObject(..)
  */
-public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentationRole(ClassDiagramView classDiagram, ch.ehi.umleditor.umlpresentation.Association associationComposite, ch.ehi.umleditor.umlpresentation.PresentationNode node, RoleDef roleDef)  {
+public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentationRole(ClassDiagramView classDiagram, ch.ehi.umleditor.umlpresentation.Association associationComposite, ch.ehi.umleditor.umlpresentation.PresentationNode node, AssociationEnd roleDef)  {
 	ch.ehi.umleditor.umlpresentation.PresentationRole edge = (ch.ehi.umleditor.umlpresentation.PresentationRole)createObject(ch.ehi.umleditor.umlpresentation.PresentationRole.class);
 	edge.addEndpoint(associationComposite.getLinkPresentation());	// first
 	edge.addEndpoint(node);	// second
@@ -514,9 +572,9 @@ public static void removeElement(Element element) {
    		ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)element;
 		generalization.detachChild();
 	    generalization.detachParent();
-	} else if (element instanceof AttributeDef) {
-		// remove aggregations
-		((AbstractClassDef)(((AttributeDef)element).getOwner())).removeFeature((AttributeDef)element);
+	} else if (element instanceof Feature) {
+		// remove AttributeDef or UmlOperation
+		((AbstractClassDef)(((Feature)element).getOwner())).removeFeature((Feature)element);
     } else if (element instanceof LineFormTypeDef) {
 		LineForm lineForm = ((LineFormTypeDef)element).getLineForm();
 		lineForm.removeLineFormTypeDef((LineFormTypeDef)element);
@@ -538,7 +596,7 @@ Tracer.getInstance().developerWarning(ElementFactory.class, "removeElement(Eleme
 		parent.removeTranslation((Translation)element);
 	} else if (element instanceof ConstraintDef) {
 		Iterator iterator = ((ConstraintDef)element).iteratorConstrainedElement();
-		ArrayList owners = new ArrayList();
+		List owners = new ArrayList();
 		while (iterator.hasNext()) {
 			owners.add(iterator.next());
 		}
@@ -546,6 +604,8 @@ Tracer.getInstance().developerWarning(ElementFactory.class, "removeElement(Eleme
 		while (iterator.hasNext()) {
 			((ModelElement)iterator.next()).removeConstraint((Constraint)element);
 		}
+	} else if (element instanceof UmlParameter) {
+		((UmlParameter)element).getBehavioralFeature().removeParameter((Parameter)element);
 	} else if (element instanceof ParameterDef) {
 		if (((ParameterDef)element).containsClassDef()) {
 			ClassDef owner = ((ParameterDef)element).getClassDef();

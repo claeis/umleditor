@@ -25,10 +25,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:02 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-23 13:31:10 $
  */
-public class IliBaseTypeEnumPanel extends DataPanel {
-	private static java.util.ResourceBundle resourceBundle = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeEnumPanel");  //$NON-NLS-1$
+public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
@@ -262,7 +261,11 @@ private Enumeration copyTree(Enumeration src) {
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
       if(subsrc.containsChild()){
-        subdest.attachChild(copyTree(subsrc.getChild()));
+      	Enumeration child=subsrc.getChild();
+      	// are there any child elements?
+      	if(child.sizeEnumElement()>0){
+			subdest.attachChild(copyTree(child));
+      	}
       }
     }
     return ret;
@@ -385,7 +388,7 @@ private javax.swing.JLabel getLblElementDescription() {
 			ivjLblElementDescription.setName("LblElementDescription");
 			ivjLblElementDescription.setText("Beschreibung:");
 			// user code begin {1}
-			ivjLblElementDescription.setText(resourceBundle.getString("LblElementDescription_text"));
+			ivjLblElementDescription.setText(getResourceString("LblElementDescription_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -407,7 +410,7 @@ private javax.swing.JLabel getLblElements() {
 			ivjLblElements.setName("LblElements");
 			ivjLblElements.setText("Elemente:");
 			// user code begin {1}
-			ivjLblElements.setText(resourceBundle.getString("LblElements_text"));
+			ivjLblElements.setText(getResourceString("LblElements_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -431,7 +434,7 @@ private javax.swing.JLabel getLblKind() {
 			ivjLblKind.setText("Art:");
 			ivjLblKind.setBounds(9, 7, 140, 14);
 			// user code begin {1}
-			ivjLblKind.setText(resourceBundle.getString("LblKind_text"));
+			ivjLblKind.setText(getResourceString("LblKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -453,7 +456,7 @@ private javax.swing.JMenuItem getMniNewDeep() {
 			ivjMniNewDeep.setName("MniNewDeep");
 			ivjMniNewDeep.setText("Neu (Unteraufzählung)");
 			// user code begin {1}
-			ivjMniNewDeep.setText(resourceBundle.getString("MniNewDeep_text"));
+			ivjMniNewDeep.setText(getResourceString("MniNewDeep_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -475,7 +478,7 @@ private javax.swing.JMenuItem getMniNewFlat() {
 			ivjMniNewFlat.setName("MniNewFlat");
 			ivjMniNewFlat.setText("Neu");
 			// user code begin {1}
-			ivjMniNewFlat.setText(MENU_FILE_NEW);
+			ivjMniNewFlat.setText(CommonUserAccess.getMniFileNewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -497,7 +500,7 @@ private javax.swing.JMenuItem getMniRemove() {
 			ivjMniRemove.setName("MniRemove");
 			ivjMniRemove.setText("Löschen");
 			// user code begin {1}
-			ivjMniRemove.setText(MENU_EDIT_REMOVE);
+			ivjMniRemove.setText(CommonUserAccess.getMniEditRemoveText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -519,7 +522,7 @@ private javax.swing.JMenuItem getMniRename() {
 			ivjMniRename.setName("MniRename");
 			ivjMniRename.setText("Umbenennen");
 			// user code begin {1}
-			ivjMniRename.setText(MENU_EDIT_RENAME);
+			ivjMniRename.setText(CommonUserAccess.getMniEditRenameText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -597,8 +600,8 @@ private javax.swing.JRadioButton getRbtOrdered() {
 			ivjRbtOrdered.setText("ORDERED");
 			ivjRbtOrdered.setBounds(159, 29, 140, 22);
 			// user code begin {1}
-			ivjRbtOrdered.setToolTipText(resourceBundle.getString("RbtOrdered_toolTipText"));
-			ivjRbtOrdered.setText(resourceBundle.getString("RbtOrdered_text"));
+			ivjRbtOrdered.setToolTipText(getResourceString("RbtOrdered_toolTipText"));
+			ivjRbtOrdered.setText(getResourceString("RbtOrdered_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -623,8 +626,8 @@ private javax.swing.JRadioButton getRbtOrderedCircular() {
 			ivjRbtOrderedCircular.setText("CIRCULAR");
 			ivjRbtOrderedCircular.setBounds(159, 53, 140, 22);
 			// user code begin {1}
-			ivjRbtOrderedCircular.setToolTipText(resourceBundle.getString("RbtOrderedCircular_toolTipText"));
-			ivjRbtOrderedCircular.setText(resourceBundle.getString("RbtOrderedCircular_text"));
+			ivjRbtOrderedCircular.setToolTipText(getResourceString("RbtOrderedCircular_toolTipText"));
+			ivjRbtOrderedCircular.setText(getResourceString("RbtOrderedCircular_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -648,7 +651,7 @@ private javax.swing.JRadioButton getRbtUndefined() {
 			ivjRbtUndefined.setText("Undefiniert");
 			ivjRbtUndefined.setBounds(159, 3, 140, 22);
 			// user code begin {1}
-			ivjRbtUndefined.setText(resourceBundle.getString("RbtUndefined_text"));
+			ivjRbtUndefined.setText(getResourceString("RbtUndefined_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -803,7 +806,7 @@ constraintsJPanel1.gridheight = 2;
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	setToolTipText(resourceBundle.getString("IliBaseTypeTextPanel_toolTipText"));
+	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtUndefined());
 	group.add(getRbtOrdered());
