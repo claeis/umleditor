@@ -13,7 +13,6 @@ Offene Fragen/Arbeiten
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
 - Bug: nach dem umhängen eine Assoziation kann man andere Diagramme die diese Assoziation enthalten nicht mehr öffnen
-- Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt
 - Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
 - neue Funktion: Liste der Diagramme auf dem ein ModelElement dargestellt wird
 - Bug: Farbe der Klasse lässt sich nicht ändern
@@ -26,6 +25,7 @@ Offene Fragen/Arbeiten
 
 UML-Editor 2.0.3 (2003-xx-xx)
 -----------------------------
+- API: TransferFromIli2cMetamodel kann neu ohne GUI benutzt werden
 - OID auf TopicDefDialog hinzufuegen
 - neuer Dialog fuer LineFomTypeDef
 - neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
@@ -33,6 +33,7 @@ UML-Editor 2.0.3 (2003-xx-xx)
 - neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
 - iliimp, iliexp: OIDType, ClassType hinzugefuegt
 - iliimp, iliexp: LineFormTypeDef hinzugefuegt
+- Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt
 - Bug iliexp: "fileXY written" NLS fehlt
 - Bug: Beim ClassDefDialog kann EXTENDED nicht gesetzt werden, wenn die Basis-Klasse in einem indirekten Basis-Topic ist
 - Bug: RoleDefDialog es koennen keine AssociationDef in Restricted Liste eingefuegt werden
