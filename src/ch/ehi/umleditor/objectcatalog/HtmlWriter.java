@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-12-02 08:08:32 $
-// $Revision: 1.5 $
+// $Date: 2005-01-17 09:54:52 $
+// $Revision: 1.6 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -51,6 +51,7 @@ public class HtmlWriter
   // used in STRUCTURE pass to suppress links to element definitions
   private boolean linkElements;  
 
+  private ch.interlis.ili2c.generator.IndentPrintWriter clsFile=null;
   private java.io.Writer out=null;
   //hashmap<object, string>
   // indexMap is setup in CONTENTS pass
@@ -122,7 +123,10 @@ public class HtmlWriter
     walkTree(apackage);
 
     pass=BODY;
+    //clsFile=new ch.interlis.ili2c.generator.IndentPrintWriter(new java.io.BufferedWriter(new java.io.FileWriter("c:/tmp/ce.txt")));
     walkTree(apackage);
+    //clsFile.close();
+    //clsFile=null;
 
     pass=INDEX;
     walkTree(apackage);
@@ -414,6 +418,7 @@ public class HtmlWriter
     if(pass==BODY)
     {
       out.write("<H2><a name=\""+aName+"\">"+value+"</a></H2>");newline();
+      if(clsFile!=null)clsFile.println(aclass.getDefLangName());
     }
 
     if(pass==CONTENTS)
@@ -540,12 +545,15 @@ public class HtmlWriter
       if(createSeperator){
         style=" STYLE=\"border-top: solid black; border-top-width: 2px\"";
       }
+      if(clsFile!=null){
+		clsFile.indent();
+		clsFile.println(attr.getDefLangName());
+      }
       out.write("<TR><TD "+style+">"+encodeString(attr.getDefLangName())
           +"</TD><TD "+style+">"+mapMultiplicity(attr.getMultiplicity())
           +"</TD><TD "+style+">"+encodeString(typeLabel)
           +"</TD><TD "+style+">"+encodeDescription(mapNlsString(attr.getDocumentation()))
           +"</TD></TR>");newline();
-          
 		ch.ehi.interlis.domainsandconstants.Type type=null;
 		ch.ehi.interlis.attributes.DomainAttribute attrType=(ch.ehi.interlis.attributes.DomainAttribute)((AttributeDef)attr).getAttrType();
 		if(attrType.containsDirect()){
@@ -554,19 +562,23 @@ public class HtmlWriter
 		if(type!=null && type instanceof Enumeration){
 			if(pass==BODY)
 			{
+				if(clsFile!=null)clsFile.indent();
 				Iterator elei=getEnumEleIterator((Enumeration)type);
 				while(elei.hasNext()){
 				  ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=(ch.ehi.interlis.domainsandconstants.basetypes.EnumElement)elei.next();
 					  String eleName=getEnumEleName(ele);
 
+					if(clsFile!=null)clsFile.println(eleName);
 					out.write("<TR><TD "+style+">"
 						+"</TD><TD "+style+">"
 						+"</TD><TD "+style+">"+encodeString(eleName)
 						+"</TD><TD "+style+">"+encodeDescription(mapNlsString(ele.getDocumentation()))
 						+"</TD></TR>");newline();
 				}
+				if(clsFile!=null)clsFile.unindent();
 			}
 		}
+		if(clsFile!=null)clsFile.unindent();
 
 
     }
@@ -598,6 +610,11 @@ public class HtmlWriter
           +"</TD><TD"+style+">"+encodeString(type)
           +"</TD><TD"+style+">"+encodeDescription(mapNlsString(role.getDocumentation()))
           +"</TD></TR>");newline();
+      if(clsFile!=null){
+		clsFile.indent();
+		clsFile.println(role.getDefLangName());
+		clsFile.unindent();
+      }
     }
     return;
     // -end- 3CEE8BA20395 body3CEE891B03C7 "visitRole"
@@ -1127,6 +1144,7 @@ public class HtmlWriter
     if(pass==CONTENTS)
     {
       out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+aName+"\">"+value+"</a></P>");newline();
+      if(clsFile!=null)clsFile.println(domdef.getDefLangName());
     }
 
     if(pass==STRUCTURE)
@@ -1154,6 +1172,7 @@ public class HtmlWriter
         out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"+rsrc.getString("CTtabDescription")+"</font></TD></TR>");newline();
         boolean createSeperator=true;
         Iterator elei=getEnumEleIterator(def);
+        if(clsFile!=null)clsFile.indent();
         while(elei.hasNext()){
           ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=(ch.ehi.interlis.domainsandconstants.basetypes.EnumElement)elei.next();
     if(pass==BODY)
@@ -1168,9 +1187,11 @@ public class HtmlWriter
       out.write("<TR><TD"+style+">"+encodeString(eleName)
           +"</TD><TD"+style+">"+encodeDescription(mapNlsString(ele.getDocumentation()))
           +"</TD></TR>");newline();
+      if(clsFile!=null)clsFile.println(eleName);
     }
 
         }
+        if(clsFile!=null)clsFile.unindent();
         out.write("</TABLE>");newline();
     }
     return;
