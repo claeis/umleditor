@@ -520,19 +520,22 @@ public class TransferFromIli2cMetamodel
     ((ch.ehi.uml1_4.foundation.core.Association)getNamespace()).addConnection(roledef);
   }
 
-  private void updatePredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
-    // find mdef in umlmodel
+  private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
+    // does ModelDef "INTERLIS" exist in repository?
     if(!ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(
         root,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName())){
+        // no need to link ili2c modelelemts to corresponding elements in repository
         return;
     }
-    //    ch.ehi.interlis.modeltopicclass.ModelDef,
-    ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=(ch.ehi.interlis.modeltopicclass.INTERLIS2Def)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
-        root,ch.ehi.interlis.modeltopicclass.INTERLIS2Def.class,getPredefinedName());
-    fileMap.put(getPredefinedName(),ili2Def);
+    
+    // user may have moved ModelDef "INTERLIS" away from INTERLIS2Def "predefined",
+    // therefore do not try to find INTERLIS2Def "predefined"
+    // ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=(ch.ehi.interlis.modeltopicclass.INTERLIS2Def)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
+    //    root,ch.ehi.interlis.modeltopicclass.INTERLIS2Def.class,getPredefinedName());
+    // fileMap.put(getPredefinedName(),ili2Def);
 
     ch.ehi.interlis.modeltopicclass.ModelDef modelDef=(ch.ehi.interlis.modeltopicclass.ModelDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
-        ili2Def,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName());
+        root,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName());
     modelMap.put(ilibase,modelDef);
     Iterator it = ilibase.iterator();
     while (it.hasNext()) {
@@ -1089,7 +1092,7 @@ public class TransferFromIli2cMetamodel
     syntaxBuffer=new java.io.StringWriter();
     makeSyntax=Interlis2Generator.generateElements(syntaxBuffer,td);
     ilibase=td.INTERLIS;
-    updatePredefinedModel(umlModel);
+    updateMappingToPredefinedModel(umlModel);
     ili2modelset=new ch.ehi.uml1_4.implementation.UmlPackage();
     if(configFilename!=null){
       ili2modelset.setName(new NlsString(getBasename(configFilename)));
