@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-08-30 09:09:09 $
-// $Revision: 1.2 $
+// $Date: 2005-01-17 09:56:00 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3E0DB0710357 package "TransferFromXmiRoseMetamodel"
@@ -98,7 +98,6 @@ public class TransferFromXmiRoseMetamodel
     // declare any checked exceptions
     // please fill in/modify the following section
     // -beg- preserve=no 3E0F4B74007C throws3E0DB0710357 "visitValue"
-
     // -end- 3E0F4B74007C throws3E0DB0710357 "visitValue"
     {
     // please fill in/modify the following section
@@ -108,6 +107,7 @@ public class TransferFromXmiRoseMetamodel
     }
     if(obj instanceof XMIObject){
       XMIObject oneobj=(XMIObject)obj;
+      try{
       if(oneobj.getXMIName().equals("UML:Class")){
         return visitAbstractClass(oneobj,arg);
       }else if(oneobj.getXMIName().equals("UML:Association")){
@@ -137,6 +137,11 @@ public class TransferFromXmiRoseMetamodel
       }else if(oneobj.getXMIName().equals("UML:DiagramElement")){
         return visitDiagramElement(oneobj,arg);
       }
+	  }catch (java.lang.RuntimeException ex){
+	  	System.err.println("Id "+oneobj.getXMIId()+" :"+ex.getCause());
+	  	//ex.printStackTrace();
+	  	throw ex;
+	  }
     }else if(obj instanceof Collection){
       //System.out.println(obj);
       Collection elev=(Collection)obj;
