@@ -499,6 +499,7 @@ public class TransferFromIli2cMetamodel
     roledef.setOrdering(role.isOrdered()
       ? ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED
       : ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+    // TODO handle external
     switch(role.getKind()){
       case RoleDef.Kind.eASSOCIATE:
         roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.NONE);
