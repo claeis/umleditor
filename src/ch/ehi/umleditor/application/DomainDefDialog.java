@@ -20,12 +20,13 @@ package ch.ehi.umleditor.application;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
+import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-12-03 16:36:27 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
@@ -1032,5 +1033,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			ch.softenvironment.util.Tracer.getInstance().nyi(this, "setElement(Element)", "Type not displayable <" + type.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 		}
 	}
+}
+/**
+ * Overwrites.
+ */
+public void dispose() {
+    domainDef = null; // try to avoid OutOfMemoryException in case dialog might not be garbaged
+    super.dispose();
 }
 }
