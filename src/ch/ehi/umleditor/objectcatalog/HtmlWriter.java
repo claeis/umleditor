@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:40 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-03-02 17:25:22 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -598,7 +598,11 @@ public class HtmlWriter
         ret=rsrc.getString("CTtypeTEXT");
       }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
         ch.ehi.interlis.domainsandconstants.basetypes.NumericType num=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)type;
-        ret=num.getMinDec().toString()+".."+num.getMaxDec().toString();
+        if(num.getMinDec()!=null && num.getMaxDec()!=null){
+			ret=num.getMinDec().toString()+".."+num.getMaxDec().toString();
+        }else{
+			ret=rsrc.getString("CTtypeNUMERIC");
+        }
         if(num.containsUnitDef()){
           ret=ret+"["+encodeString(num.getUnitDef().getDefLangName())+"]";
         }
