@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:41:31 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-01-28 07:33:39 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3CD8FE4D01CC package "XMLInterlisEncoder"
@@ -121,10 +121,10 @@ public class XMLInterlisEncoder
   //Hier werden die Werte geholt und geschrieben
 
   private void writeValues(Object obj)
-    throws Throwable
+    throws IOException, IllegalAccessException, InvocationTargetException
   {
 
-    if(obj.getClass()==Class.forName("java.lang.String")){
+    if(obj.getClass()==java.lang.String.class){
       return;
     }
     int thisobjid=objid++;
@@ -175,7 +175,7 @@ public class XMLInterlisEncoder
         method=getter.get;
         // kein PrimitivDatentyp?
         if(!method.getReturnType().isPrimitive()
-            && method.getReturnType()!=Class.forName("java.lang.String")
+            && method.getReturnType()!=java.lang.String.class
             && !isBuiltinClass(method.getReturnType())
             && !isReturnTypeCodeList(method))
         {
@@ -208,7 +208,7 @@ public class XMLInterlisEncoder
         value = (Object)thisit.next();
         //prüft ob die Klasse vom Typ primitiv sei
         if(isBuiltinClass(value.getClass())){
-        }else if(value.getClass()==Class.forName("java.lang.String")){
+        }else if(value.getClass()==java.lang.String.class){
         }else if(isCodeList(value.getClass())){
         }else{
           if(!writtenObjectsList.containsKey(value))
@@ -244,7 +244,7 @@ public class XMLInterlisEncoder
             if(isReturnTypeCodeList(method)){
               out.write("<"+getter.name+">"+getCodeListValue(value)+"</"+getter.name+">");newline();
             }else if(method.getReturnType().isPrimitive()
-                || method.getReturnType()==Class.forName("java.lang.String")
+                || method.getReturnType()==java.lang.String.class
                 || isBuiltinClass(method.getReturnType())
                 ){
               out.write("<"+getter.name+">"+encodeString(value.toString())+"</"+getter.name+">");newline();
@@ -273,7 +273,7 @@ public class XMLInterlisEncoder
         }
 
         //prüfen nach der Klasse vom Typ String
-        else if(value.getClass()==Class.forName("java.lang.String"))
+        else if(value.getClass()==java.lang.String.class)
         {
           out.write("<"+method.getName().substring(8)+">"+value+"</"+method.getName().substring(8)+">");newline();
         }
@@ -304,37 +304,30 @@ public class XMLInterlisEncoder
   }
 
   public void encode(Object obj, Writer out)
-    throws IOException
+  throws IOException
   {
     this.out = out;
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");newline();
       out.write("<ch.ehi.umleditor.1>");newline();
       try{
         writeValues(obj);
+		out.write("</ch.ehi.umleditor.1>");newline();
       }
-      catch(Throwable ex){
-        ex.printStackTrace();
+      catch(IllegalAccessException ex){
+    	throw new IOException(ex.getLocalizedMessage());
       }
-      out.write("</ch.ehi.umleditor.1>");newline();
+	catch(InvocationTargetException ex){
+	  	throw new IOException(ex.getTargetException().getLocalizedMessage());
+	}
   }
   //man braucht diese Methode zum "kodieren"
   public void encode(Object obj, String path)
+  throws IOException
   {
     Writer out;
-    try
-    {
       out = new BufferedWriter(new FileWriter(path));
       encode(obj,out);
       out.close();
-    }
-
-    catch(IOException exc)
-    {
-      exc.printStackTrace();
-    }
-
-
-
   }
 
 
@@ -369,7 +362,7 @@ public class XMLInterlisEncoder
 
     //holt den Wert aus dieser CodeListe
     private Object getCodeListValue(Object obj)
-      throws Throwable
+      throws InvocationTargetException,IllegalAccessException
     {
         Method method = (Method)codelists.get(obj.getClass());
         Object codeValue = method.invoke(obj, null);
@@ -383,7 +376,7 @@ public class XMLInterlisEncoder
      * @param method getXX()
     */
     private boolean executeContains(Object obj, Method containsMethod)
-      throws Throwable
+      throws IllegalAccessException,InvocationTargetException
     {
         // containsXX() ausfuehren
         Object containsValue = containsMethod.invoke(obj, null);
