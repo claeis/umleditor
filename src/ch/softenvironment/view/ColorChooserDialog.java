@@ -18,7 +18,7 @@ import java.awt.*;
  * @author: Peter Hirzel <i>soft</i>Environment
  */
 public class ColorChooserDialog extends BaseDialog {
-	private static java.util.ResourceBundle resColorChooserDialog = ch.ehi.basics.i18n.ResourceBundle.getBundle(ColorChooserDialog.class);
+	private static java.util.ResourceBundle resColorChooserDialog = java.util.ResourceBundle.getBundle("ch/softenvironment/nls/ColorChooserDialog");
 	private java.awt.Color chosenColor = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnOk = null;
