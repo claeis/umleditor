@@ -1,23 +1,5 @@
 package ch.ehi.umleditor.application;
 
-/* This file is part of the UML/INTERLIS-Editor.
- * For more information, please see <http://www.umleditor.org/>.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 
@@ -25,7 +7,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-04-28 19:09:24 $
+ * @version $Revision: 1.6 $ $Date: 2004-05-17 14:15:36 $
  */
 public class LogView extends BasePanel {
 	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
@@ -128,12 +110,12 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
  * Append a log-message without a specific theme.
  */
 public void appendText(String logText) {
-Tracer.getInstance().tune(this, "appendText(..)", "use an Outstream instead");//$NON-NLS-2$//$NON-NLS-1$
 	String text = getTime() + " " + logText;//$NON-NLS-1$
 
 	if (getTxaLog().getText().length() > 0) {
 		// append
-		getTxaLog().setText(getTxaLog().getText() + "\n" + text);//$NON-NLS-1$
+		getTxaLog().append("\n");
+		getTxaLog().append(text);
 	} else {
 		getTxaLog().setText(text);
 	}
