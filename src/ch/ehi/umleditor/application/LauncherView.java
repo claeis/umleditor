@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.16 $ $Date: 2004-12-03 16:30:06 $
+ * @version $Revision: 1.17 $ $Date: 2005-01-06 10:00:31 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -1259,8 +1259,7 @@ private void deActivateFrame(DrawingFrame frame) {
  */
 public void dispose() {
 	if (saveOnClosing()) {
-		super.dispose(); // tell windowing system to free resources
-		System.exit(0);
+	    disposeApplication();
 	}
 }
 /**
@@ -2972,11 +2971,12 @@ private void initConnections() throws java.lang.Exception {
 private void initialize() {
 	try {
 		// user code begin {1}
+	    instance = this;
 		initHelp();
 		initializeView();
 		// user code end
 		setName("Window");
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		setJMenuBar(getWindowJMenuBar());
 		setSize(783, 573);
 		setTitle("UML/INTERLIS-Editor");
@@ -2986,7 +2986,6 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	instance = this;
 getMniUndo().setEnabled(false);
 getMniRedo().setEnabled(false);
 
@@ -3029,6 +3028,12 @@ private void initHelp()
  * @see initialize()
  */
 protected void initializeView() {
+    addWindowListener(new java.awt.event.WindowAdapter() {
+		public void windowClosing(java.awt.event.WindowEvent e) {
+			dispose();
+		};
+	});
+    
 	// initialize LauncherMenu
 	createLookAndFeelMenu(getMnuLookAndFeel());
 
@@ -3131,15 +3136,6 @@ public static void main(java.lang.String[] args) {
 
 		instance = new LauncherView();
 		instance.setLookAndFeel(getSettings().getLookAndFeel());
-
-		/* Add a windowListener for the windowClosedEvent */
-/*		instance.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				instance.dispose();
-				//System.exit(0);
-			};
-		});
-	*/
 
 Tracer.getInstance().patch(LauncherView.class, "main()", "setModel(..)->openDiagram would be too early here");//$NON-NLS-2$//$NON-NLS-1$
 	instance.setCurrentFile(null);
