@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-03-05 17:19:09 $
+ * @version $Revision: 1.4 $ $Date: 2004-03-09 12:25:31 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -177,6 +177,7 @@ public static UmlParameter createUmlParameter(UmlOperation operation) throws Cla
 	UmlParameter parameter = (UmlParameter)createObject(UmlParameter.class);
 
 	// set defaults
+	parameter.setKind(ParameterDirectionKind.INOUT);
 	
 	// aggregations
 	operation.addParameter(parameter);
