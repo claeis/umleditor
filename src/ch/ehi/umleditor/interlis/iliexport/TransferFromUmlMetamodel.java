@@ -1597,7 +1597,7 @@ public class TransferFromUmlMetamodel
 	  ch.ehi.basics.tools.TopoSort ts=new ch.ehi.basics.tools.TopoSort();
 	  for(java.util.Iterator i=tempFiles.iterator();i.hasNext();){
 		FileListEntry f=(FileListEntry)i.next();
-		System.err.println("file "+f.file.getName());
+		//System.err.println("file "+f.file.getName());
 		ts.add(f);
 	  }
 	  for(java.util.Iterator i=filedep.iterator();i.hasNext();){
