@@ -12,7 +12,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2004-08-18 09:24:46 $
+ * @version $Revision: 1.9 $ $Date: 2005-02-23 16:40:04 $
  */
 public class LogView extends BasePanel implements HyperlinkListener {
 	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
@@ -633,7 +633,7 @@ private JEditorPane getTxaLog() {
  * @param exception java.lang.Throwable
  */
 protected void handleException(java.lang.Throwable exception) {
-	new ErrorDialog(this, null, exception.toString(), exception);//$NON-NLS-1$
+    ch.softenvironment.view.BaseDialog.showError((java.awt.Component)this, null, exception.toString(), exception);//$NON-NLS-1$
 }
 /**
  * Initializes connections

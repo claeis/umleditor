@@ -26,7 +26,7 @@ import ch.softenvironment.util.*;
  * Generic User Interface Panel to treat INTERLIS-EXTENDS.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-01-05 10:57:11 $
+ * @version $Revision: 1.4 $ $Date: 2005-02-23 16:40:03 $
  */
 public class ExtendedPanel extends javax.swing.JPanel {
 	private static java.util.ResourceBundle resExtendedPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ExtendedPanel");
@@ -133,7 +133,7 @@ private boolean checkNameExtension(String name) {
 
 
 		if (errorMessage != null) {
-			new ErrorDialog(this, resExtendedPanel.getString("CTInvalidExtension"), errorMessage + "\n" + resExtendedPanel.getString("CWResetExtension"), null); //$NON-NLS-3$//$NON-NLS-2$ //$NON-NLS-1$
+		    ch.softenvironment.view.BaseDialog.showError((java.awt.Component)this, resExtendedPanel.getString("CTInvalidExtension"), errorMessage + "\n" + resExtendedPanel.getString("CWResetExtension"), null); //$NON-NLS-3$//$NON-NLS-2$ //$NON-NLS-1$
 			getChxExtended().setSelected(false);
 			return false;
 		}
@@ -224,7 +224,7 @@ Tracer.getInstance().developerWarning(this, "getExtension()", "INTERLIS implemen
 		if (parent != null) {
 			String error = ElementUtils.checkInheritance(parent, generalizableElement);
 			if (error != null) {
-				new WarningDialog(this,
+				BaseDialog.showWarning((java.awt.Component)this,
 						resExtendedPanel.getString("CTNoGeneralization"), //$NON-NLS-1$
 						error);
 				return false;

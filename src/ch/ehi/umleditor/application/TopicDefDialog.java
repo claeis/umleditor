@@ -24,7 +24,7 @@ import ch.softenvironment.view.*;
  * User Interface for a TopicDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-08-17 12:16:03 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-23 16:40:04 $
  */
 public class TopicDefDialog extends BaseDialog {
 	// ModelElement
@@ -1072,7 +1072,7 @@ private void mniOpenTopicDefSpecification() {
 	try {
 		((EditorTableModel)getTblDepends().getModel()).showDependencySpecification(getTblDepends().getSelectedRows());
 	} catch(Throwable e) {
-		new ErrorDialog(this, "Model error", "There is something wrong with this element! You are best adviced by deleting and recreating it again.", e);
+		BaseDialog.showError((java.awt.Component)this, "Model error", "There is something wrong with this element! You are best adviced by deleting and recreating it again.", e);
 	}
 }
 /**

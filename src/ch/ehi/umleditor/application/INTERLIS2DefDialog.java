@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a INTERLIS2Def.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-06-29 11:35:39 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:03 $
  */
 public class INTERLIS2DefDialog extends BaseDialog {
 	// ModelElement
@@ -878,7 +878,7 @@ private javax.swing.JTable getTblFileName() {
 			ivjTblFileName = new javax.swing.JTable();
 			ivjTblFileName.setName("TblFileName");
 			getScpFilename().setColumnHeaderView(ivjTblFileName.getTableHeader());
-			getScpFilename().getViewport().setBackingStoreEnabled(true);
+//			getScpFilename().getViewport().setBackingStoreEnabled(true);
 			ivjTblFileName.setBounds(0, 0, 200, 200);
 			ivjTblFileName.setEnabled(true);
 			ivjTblFileName.addColumn(getTbcLanguage());
@@ -1049,7 +1049,7 @@ protected boolean save() {
  */
 private boolean saveFileName() {
 	if (!ElementUtils.trySetName(interlis2Def, getTxtFilename().getText(), getTxtLanguage().getText())) {
-		new WarningDialog(getDlgFilename(), resINTERLIS2DefDialog.getString("CTNameConflict"), resINTERLIS2DefDialog.getString("CENameExists")); //$NON-NLS-2$ //$NON-NLS-1$
+	    ch.softenvironment.view.BaseDialog.showWarning((java.awt.Component)getDlgFilename(), resINTERLIS2DefDialog.getString("CTNameConflict"), resINTERLIS2DefDialog.getString("CENameExists")); //$NON-NLS-2$ //$NON-NLS-1$
 		return false;
 	}
 	getDlgFilename().dispose();

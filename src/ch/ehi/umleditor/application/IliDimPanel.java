@@ -24,7 +24,7 @@ import javax.swing.*;
  * User interface for a IliDim type.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:03 $
  */
 public class IliDimPanel extends BasePanel implements DataPanel {
 	private JComboBox ivjCbxAccuracy = null;
@@ -134,7 +134,7 @@ private javax.swing.JTextField getTxtValue() {
  * @param exception java.lang.Throwable
  */
 protected void handleException(java.lang.Throwable exception) {
-	new ErrorDialog(this, getResourceString("CTError"), exception.toString(), exception); //$NON-NLS-1$
+    ch.softenvironment.view.BaseDialog.showError((java.awt.Component)this, getResourceString("CTError"), exception.toString(), exception); //$NON-NLS-1$
 }
 /**
  * Initializes connections

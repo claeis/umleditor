@@ -32,7 +32,7 @@ import ch.softenvironment.util.*;
  * Utility Class for dealing with Element's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-08-18 09:22:58 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:02 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -195,7 +195,7 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 		String warningTitle = resElementMapper.getString("CTNameConflict"); //$NON-NLS-1$
 		if (modelElement.containsNamespace()) {
 			if (modelElement.getNamespace().containsOwnedElement(newName)) {
-				new WarningDialog(LauncherView.getInstance(),
+				BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					warningTitle,
 					resElementMapper.getString("CEDuplicatedName")); //$NON-NLS-1$
 				return false;
@@ -203,7 +203,7 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 		} else {
 			if (modelElement instanceof AttributeDef) {
 				if (((AttributeDef)modelElement).getOwner().containsFeature(newName)) {
-					new WarningDialog(LauncherView.getInstance(),
+				    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 						warningTitle,
 						resElementMapper.getString("CEDuplicatedAttribute")); //$NON-NLS-1$
 					return false;

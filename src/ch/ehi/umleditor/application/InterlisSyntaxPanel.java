@@ -257,7 +257,7 @@ public ch.ehi.basics.types.NlsString getSyntax() {
  * @param exception java.lang.Throwable
  */
 protected void handleException(java.lang.Throwable exception) {
-	new ErrorDialog(this, getResourceString("CESyntax"), exception.toString(), exception); //$NON-NLS-1$
+    ch.softenvironment.view.BaseDialog.showError((java.awt.Component)this, getResourceString("CESyntax"), exception.toString(), exception); //$NON-NLS-1$
 }
 /**
  * Initialize the class.
