@@ -381,7 +381,7 @@ public class TransferFromIli2cMetamodel
 
     return m;
   }
-  private void visitAttribute(AttributeDef attrib)
+  private void visitAttribute(AttributeDef attrib,int attrIdx)
   {
     //System.out.println(attrib.getName());
     Type btype=attrib.getDomain();
@@ -397,12 +397,19 @@ public class TransferFromIli2cMetamodel
         destRole.attachParticipant(dest);
         destRole.setMultiplicity(visitCardinality(type.getCardinality()));
         destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+        destRole.setIliAttributeIdx(attrIdx);
         assoc.addConnection(destRole);
         ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
         srcRole.attachParticipant(thisclass);
         srcRole.setName(thisclass.getName());
         srcRole.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
         srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.STRUCTURE);
+		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+		r.setLower(0);
+		r.setUpper(1);
+		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+		m.addRange(r);
+		srcRole.setMultiplicity(m);
         assoc.addConnection(srcRole);
         java.util.Iterator rIt=type.iteratorRestrictedTo();
         while(rIt.hasNext()){
@@ -422,6 +429,13 @@ public class TransferFromIli2cMetamodel
         ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
         destRole.setName(new NlsString(attrib.getName()));
         destRole.attachParticipant(dest);
+		destRole.setIliAttributeIdx(attrIdx);
+		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+		r.setLower( btype.isMandatory() ? 1 : 0);
+		r.setUpper(1);
+		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+		m.addRange(r);
+		destRole.setMultiplicity(m);
         assoc.addConnection(destRole);
         ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
         srcRole.attachParticipant(thisclass);
@@ -1004,7 +1018,7 @@ public class TransferFromIli2cMetamodel
   {
     Class lastClass = null;
 
-
+	int attrIdx=0;
     Iterator it = container.iterator();
     while (it.hasNext()) {
       ch.interlis.ili2c.metamodel.Element elt = (ch.interlis.ili2c.metamodel.Element) it.next();
@@ -1069,7 +1083,8 @@ public class TransferFromIli2cMetamodel
 
       else if (elt instanceof AttributeDef)
       {
-        visitAttribute ((AttributeDef) elt);
+        visitAttribute ((AttributeDef) elt,attrIdx);
+        attrIdx++;
       }
       if (elt instanceof RoleDef)
       {
