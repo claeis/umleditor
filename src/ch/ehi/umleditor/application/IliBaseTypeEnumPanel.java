@@ -25,7 +25,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-23 13:31:10 $
+ * @version $Revision: 1.6 $ $Date: 2004-06-29 11:38:03 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
         private Enumeration root=new Enumeration();
@@ -88,12 +88,9 @@ public IliBaseTypeEnumPanel() {
 	initialize();
 }
 /**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return newly created popup menu
- * @see showSpecification()
+ * Overwrites.
  */
-protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	EnumElement node = getSelectedNode();
 
 	boolean isEnabled = (node != null) && (node != getTreEnumeration().getModel().getRoot());
@@ -101,8 +98,6 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
 //	getMniNewFlat().setEnabled(isEnabled);
 	getMniRemove().setEnabled(isEnabled);
 	getMniRename().setEnabled(node != null);
-
-	return popupMenu;
 }
 /**
  * connEtoC1:  (TreEnumeration.mouse.mouseReleased(java.awt.event.MouseEvent) --> IliBaseTypeEnumPanel.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)

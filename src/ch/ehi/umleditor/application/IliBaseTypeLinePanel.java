@@ -29,7 +29,7 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-04-28 19:26:04 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-29 11:38:03 $
  */
 public class IliBaseTypeLinePanel extends BasePanel implements DataPanel {
 	//private LineType lineType = null;
@@ -89,15 +89,12 @@ public IliBaseTypeLinePanel() {
 	initialize();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- * Overwrite this method.
+ * Overwrites.
  */
-protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	boolean isSelected = getTblLineFormTypeDef().getSelectedRow() >= 0;
 	getMniOpenLineFormTypeDefSpecification().setEnabled(isSelected);
 	getMniRemoveLineFormTypeDef().setEnabled(isSelected);
-
-	return popupMenu;
 }
 /**
  * connEtoC1:  (ScpLineFormTypeDef.mouse.mousePressed(java.awt.event.MouseEvent) --> IliBaseTypeLinePanel.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
