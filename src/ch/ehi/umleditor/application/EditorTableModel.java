@@ -33,7 +33,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.6 $ $Date: 2005-01-14 15:47:13 $
+ * @version $Revision: 1.7 $ $Date: 2005-01-17 11:21:59 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -41,7 +41,7 @@ public class EditorTableModel extends javax.swing.table.DefaultTableModel {
         // das bereits vorhandene dataVector?
 	private Vector elementVector = new Vector();
 	private static final int OTHER=1;
-	private static final int ATTRIBUTE=1;
+	private static final int ATTRIBUTE=2;
 	private int tableKind = OTHER;
 /**
  * EditorTableModel constructor comment.
