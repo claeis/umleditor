@@ -18,6 +18,7 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.basics.view.*;
+import ch.ehi.basics.logging.EhiLogger;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.20 $ $Date: 2005-02-21 13:49:17 $
+ * @version $Revision: 1.21 $ $Date: 2005-02-21 17:01:47 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3130,9 +3131,15 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
 
 		instance = new LauncherView();
+		
+		for(int i=0;i<args.length;i++){
+			if(args[i].equals("-trace") || args[i].equals("-debug")){
+				EhiLogger.getInstance().setTraceFiler(false); // default config is: filter trace messages
+			}
+		}
+		EhiLogger.getInstance().addListener(new LogListener(instance.getPnlLog()));
 		instance.setLookAndFeel(getSettings().getLookAndFeel());
-
-//TODO patch: setModel(..)->openDiagram would be too early here
+	//TODO patch: setModel(..)->openDiagram would be too early here
 	instance.setCurrentFile(null);
 	instance.setModel(null /*, null*/);
 
