@@ -46,7 +46,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.12 $ $Date: 2004-06-23 09:27:09 $
+ * @version $Revision: 1.13 $ $Date: 2004-06-26 11:50:04 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3093,13 +3093,21 @@ public void internalFrameOpened(javax.swing.event.InternalFrameEvent e) {
  * Forward a log-Message to the LogView.
  */
 public void log(String title, String logText) {
-	getPnlLog().appendText(title, logText);
+	try {
+		getPnlLog().appendText(title, logText);
+	} catch(Throwable e) {
+		Tracer.getInstance().developerError(this, "log(String, String)", e.getLocalizedMessage());
+	}
 }
 /**
  * Forward a log-Message to the LogView.
  */
 public void log(String id, String title, String logText) {
-	getPnlLog().appendText(id, title, logText);
+	try {
+		getPnlLog().appendText(id, title, logText);
+	} catch(Throwable e) {
+		Tracer.getInstance().developerError(this, "log(String, String, String)", e.getLocalizedMessage());
+	}
 }
 /**
  * main entrypoint - starts the part when it is run as an application
