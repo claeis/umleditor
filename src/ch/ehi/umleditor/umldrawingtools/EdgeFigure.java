@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2005-01-10 21:51:03 $
+ * @version $Revision: 1.10 $ $Date: 2005-02-03 14:32:44 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -337,7 +337,7 @@ protected abstract Element getEndElement();
 protected java.awt.Font getFont() {
 	String font = (String)getAttribute(JHotDrawConstants.FONT_NAME);
 	if (font == null) {
-		return java.awt.Font.decode(ch.ehi.umleditor.application.LauncherView.getSettings().getFont());
+		return ch.ehi.umleditor.application.LauncherView.getSettings().getFont();
 	} else {
 		return java.awt.Font.decode(font);
 	}

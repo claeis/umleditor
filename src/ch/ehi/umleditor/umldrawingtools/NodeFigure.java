@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2004-09-14 18:09:17 $
+ * @version $Revision: 1.10 $ $Date: 2005-02-03 14:32:44 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -224,7 +224,7 @@ protected java.awt.Color getFillColor() {
 protected java.awt.Font getFont() {
 	String font = (String)getAttribute(JHotDrawConstants.FONT_NAME);
 	if (font == null) {
-		return java.awt.Font.decode(ch.ehi.umleditor.application.LauncherView.getSettings().getFont());
+		return ch.ehi.umleditor.application.LauncherView.getSettings().getFont();
 	} else {
 		return java.awt.Font.decode(font);
 	}

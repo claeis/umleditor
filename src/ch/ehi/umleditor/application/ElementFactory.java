@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-03-09 12:25:31 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-03 14:31:36 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -456,7 +456,7 @@ public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentati
 	edge.setMultiplicityRadius(0.0);
 
 	edge.setForeground(ColorConverter.createColor(LauncherView.getSettings().getForegroundColor()));
-	edge.setFont(LauncherView.getSettings().getFont());
+	edge.setFont(LauncherView.getSettings().getFontString());
 
 	if (classDiagram != null) {
 		edge.setNameVisible(classDiagram.isShowAllRoles());

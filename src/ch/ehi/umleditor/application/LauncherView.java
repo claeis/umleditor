@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.18 $ $Date: 2005-01-07 14:57:33 $
+ * @version $Revision: 1.19 $ $Date: 2005-02-03 14:31:36 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -2677,7 +2677,7 @@ private javax.swing.JScrollPane getScpDrawArea() {
  */
 public static UserSettings getSettings() {
 	if (settings == null) {
-		settings = UserSettings.load();
+		settings = new UserSettings(System.getProperty("user.home") + java.io.File.separator + ".umleditor");
 	}
 	return settings;
 }
@@ -3123,12 +3123,12 @@ public static void main(java.lang.String[] args) {
 
 		// Locale influence
 		Tracer.getInstance().runtimeInfo("Locale is: " + java.util.Locale.getDefault().toString());
-		settings = UserSettings.load();
+
 		// ce2004-06-23 don't change default Locale!!! use (existing) system administration tool!
 		//Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
 		//Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
 		
-		ch.ehi.basics.types.NlsString.setDefaultLanguage(settings.getLanguage());
+ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
 
