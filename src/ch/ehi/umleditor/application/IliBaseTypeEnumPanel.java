@@ -25,9 +25,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeEnumPanel extends DataPanel {
+public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;

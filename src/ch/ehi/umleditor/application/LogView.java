@@ -25,9 +25,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-27 18:52:12 $
  */
-public class LogView extends DataPanel {
+public class LogView extends BasePanel implements DataPanel {
 	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
 	private javax.swing.JPanel ivjPnlLog = null;
 	private javax.swing.JScrollPane ivjScpLog = null;

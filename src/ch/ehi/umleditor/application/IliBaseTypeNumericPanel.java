@@ -26,10 +26,9 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>NumericalType</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:08 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeNumericPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeNumericPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeNumericPanel");  //$NON-NLS-1$
+public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
 	private JRadioButton ivjRbtUnspecified = null;
 	private ReferencableComboBox ivjCbxUnitDef = null;
 	private JCheckBox ivjChxCircular = null;
@@ -154,11 +153,13 @@ private javax.swing.JCheckBox getChxCircular() {
 		try {
 			ivjChxCircular = new javax.swing.JCheckBox();
 			ivjChxCircular.setName("ChxCircular");
-			ivjChxCircular.setToolTipText(resIliBaseTypeNumericPanel.getString("ChxCircular_toolTipText"));
+			ivjChxCircular.setToolTipText("Circular");
 			ivjChxCircular.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjChxCircular.setText(resIliBaseTypeNumericPanel.getString("ChxCircular_text"));
+			ivjChxCircular.setText("Circular");
 			ivjChxCircular.setBounds(4, 84, 153, 22);
 			// user code begin {1}
+			ivjChxCircular.setToolTipText(getResourceString("ChxCircular_toolTipText"));
+			ivjChxCircular.setText(getResourceString("ChxCircular_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -193,9 +194,10 @@ private javax.swing.JLabel getLblKind() {
 			ivjLblKind = new javax.swing.JLabel();
 			ivjLblKind.setName("LblKind");
 			ivjLblKind.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjLblKind.setText(resIliBaseTypeNumericPanel.getString("LblKind_text"));
+			ivjLblKind.setText("Art:");
 			ivjLblKind.setBounds(4, 109, 153, 14);
 			// user code begin {1}
+			ivjLblKind.setText(getResourceString("LblKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -215,10 +217,11 @@ private javax.swing.JLabel getLblMax() {
 		try {
 			ivjLblMax = new javax.swing.JLabel();
 			ivjLblMax.setName("LblMax");
-			ivjLblMax.setToolTipText(resIliBaseTypeNumericPanel.getString("LblMax_toolTipText"));
+			ivjLblMax.setToolTipText("Max");
 			ivjLblMax.setText("Max-Dec/Struct:");
 			ivjLblMax.setBounds(168, 34, 140, 14);
 			// user code begin {1}
+			ivjLblMax.setToolTipText(getResourceString("LblMax_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -238,10 +241,11 @@ private javax.swing.JLabel getLblMin() {
 		try {
 			ivjLblMin = new javax.swing.JLabel();
 			ivjLblMin.setName("LblMin");
-			ivjLblMin.setToolTipText(resIliBaseTypeNumericPanel.getString("LblMin_toolTipText"));
+			ivjLblMin.setToolTipText("Min.");
 			ivjLblMin.setText("Min-Dec/Struct:");
 			ivjLblMin.setBounds(168, 10, 140, 14);
 			// user code begin {1}
+			ivjLblMin.setToolTipText(getResourceString("LblMin_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -265,8 +269,8 @@ private javax.swing.JLabel getLblReferenceSystem() {
 			ivjLblReferenceSystem.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjLblReferenceSystem.setText("RefSys:");
 			// user code begin {1}
-			ivjLblReferenceSystem.setToolTipText(resIliBaseTypeNumericPanel.getString("LblReferenceSystem_toolTipText"));
-			ivjLblReferenceSystem.setText(resIliBaseTypeNumericPanel.getString("LblReferenceSystem_text"));
+			ivjLblReferenceSystem.setToolTipText(getResourceString("LblReferenceSystem_toolTipText"));
+			ivjLblReferenceSystem.setText(getResourceString("LblReferenceSystem_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -286,10 +290,12 @@ private javax.swing.JLabel getLblUnit() {
 		try {
 			ivjLblUnit = new javax.swing.JLabel();
 			ivjLblUnit.setName("LblUnit");
-			ivjLblUnit.setToolTipText(resIliBaseTypeNumericPanel.getString("LblUnit_toolTipText"));
-			ivjLblUnit.setText(resIliBaseTypeNumericPanel.getString("LblUnit_text"));
+			ivjLblUnit.setToolTipText("Unit");
+			ivjLblUnit.setText("Unit:");
 			ivjLblUnit.setBounds(168, 89, 140, 14);
 			// user code begin {1}
+			ivjLblUnit.setToolTipText(getResourceString("LblUnit_toolTipText"));
+			ivjLblUnit.setText(getResourceString("LblUnit_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -456,10 +462,12 @@ private javax.swing.JRadioButton getRbtClockwise() {
 		try {
 			ivjRbtClockwise = new javax.swing.JRadioButton();
 			ivjRbtClockwise.setName("RbtClockwise");
-			ivjRbtClockwise.setToolTipText(resIliBaseTypeNumericPanel.getString("RbtClockwise_toolTipText"));
-			ivjRbtClockwise.setText(resIliBaseTypeNumericPanel.getString("RbtClockwise_text"));
+			ivjRbtClockwise.setToolTipText("Clockwise");
+			ivjRbtClockwise.setText("Clockwise");
 			ivjRbtClockwise.setBounds(168, 133, 153, 22);
 			// user code begin {1}
+			ivjRbtClockwise.setToolTipText(getResourceString("RbtClockwise_toolTipText"));
+			ivjRbtClockwise.setText(getResourceString("RbtClockwise_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -479,11 +487,13 @@ private javax.swing.JRadioButton getRbtCounterClockwise() {
 		try {
 			ivjRbtCounterClockwise = new javax.swing.JRadioButton();
 			ivjRbtCounterClockwise.setName("RbtCounterClockwise");
-			ivjRbtCounterClockwise.setToolTipText(resIliBaseTypeNumericPanel.getString("RbtCounterClockwise_toolTipText"));
+			ivjRbtCounterClockwise.setToolTipText("Counter Clockwise");
 			ivjRbtCounterClockwise.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtCounterClockwise.setText(resIliBaseTypeNumericPanel.getString("RbtCounterClockwise_text"));
+			ivjRbtCounterClockwise.setText("Counter Clockwise");
 			ivjRbtCounterClockwise.setBounds(168, 158, 153, 22);
 			// user code begin {1}
+			ivjRbtCounterClockwise.setToolTipText(getResourceString("RbtCounterClockwise_toolTipText"));
+			ivjRbtCounterClockwise.setText(getResourceString("RbtCounterClockwise_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -504,9 +514,10 @@ private javax.swing.JRadioButton getRbtRangeDefined() {
 			ivjRbtRangeDefined = new javax.swing.JRadioButton();
 			ivjRbtRangeDefined.setName("RbtRangeDefined");
 			ivjRbtRangeDefined.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtRangeDefined.setText(resIliBaseTypeNumericPanel.getString("RbtRangeDefined_text"));
+			ivjRbtRangeDefined.setText("Bereich definiert");
 			ivjRbtRangeDefined.setBounds(4, 31, 153, 22);
 			// user code begin {1}
+			ivjRbtRangeDefined.setText(getResourceString("RbtRangeDefined_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -526,9 +537,10 @@ private javax.swing.JRadioButton getRbtRangeStructured() {
 		try {
 			ivjRbtRangeStructured = new javax.swing.JRadioButton();
 			ivjRbtRangeStructured.setName("RbtRangeStructured");
-			ivjRbtRangeStructured.setText(resIliBaseTypeNumericPanel.getString("RbtRangeStructured_text"));
+			ivjRbtRangeStructured.setText("Bereich strukturiert");
 			ivjRbtRangeStructured.setBounds(4, 56, 153, 22);
 			// user code begin {1}
+			ivjRbtRangeStructured.setText(getResourceString("RbtRangeStructured_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -548,9 +560,10 @@ private javax.swing.JRadioButton getRbtRangeUndefined() {
 		try {
 			ivjRbtRangeUndefined = new javax.swing.JRadioButton();
 			ivjRbtRangeUndefined.setName("RbtRangeUndefined");
-			ivjRbtRangeUndefined.setText(resIliBaseTypeNumericPanel.getString("RbtRangeUndefined_text"));
+			ivjRbtRangeUndefined.setText("Undefiniert");
 			ivjRbtRangeUndefined.setBounds(4, 5, 153, 22);
 			// user code begin {1}
+			ivjRbtRangeUndefined.setText(getResourceString("RbtRangeUndefined_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -570,11 +583,13 @@ private javax.swing.JRadioButton getRbtUnspecified() {
 		try {
 			ivjRbtUnspecified = new javax.swing.JRadioButton();
 			ivjRbtUnspecified.setName("RbtUnspecified");
-			ivjRbtUnspecified.setToolTipText(resIliBaseTypeNumericPanel.getString("RbtUnspecified_toolTipText"));
+			ivjRbtUnspecified.setToolTipText("");
 			ivjRbtUnspecified.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtUnspecified.setText(resIliBaseTypeNumericPanel.getString("RbtUnspecified_text"));
+			ivjRbtUnspecified.setText("Unspezifiziert");
 			ivjRbtUnspecified.setBounds(168, 109, 153, 22);
 			// user code begin {1}
+			ivjRbtUnspecified.setToolTipText(getResourceString("RbtUnspecified_toolTipText"));
+			ivjRbtUnspecified.setText(getResourceString("RbtUnspecified_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -654,7 +669,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeNumericPanel");
-		setToolTipText(resIliBaseTypeNumericPanel.getString("IliBaseTypeNumericPanel_toolTipText"));
+		setToolTipText("");
 		setLayout(new java.awt.GridBagLayout());
 		setSize(487, 259);
 
@@ -690,6 +705,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setToolTipText(getResourceString("IliBaseTypeNumericPanel_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtRangeUndefined());
 	group.add(getRbtRangeDefined());
@@ -711,18 +727,18 @@ private void initialize() {
 private void rangeChanged() {
 	if (getRbtRangeDefined().isSelected()) {
 		getLblMin().setVisible(true);
-		getLblMin().setText(resIliBaseTypeNumericPanel.getString("LblMinDec_text")); //$NON-NLS-1$
+		getLblMin().setText(getResourceString("LblMinDec_text")); //$NON-NLS-1$
 		getLblMax().setVisible(true);
-		getLblMax().setText(resIliBaseTypeNumericPanel.getString("LblMaxDec_text")); //$NON-NLS-1$
+		getLblMax().setText(getResourceString("LblMaxDec_text")); //$NON-NLS-1$
 		getPnlMin().setVisible(true);
 		getPnlMax().setVisible(true);
 		getTxtMinStruct().setVisible(false);
 		getTxtMaxStruct().setVisible(false);
 	} else if (getRbtRangeStructured().isSelected()) {
 		getLblMin().setVisible(true);
-		getLblMin().setText(resIliBaseTypeNumericPanel.getString("LblMinStruct_text")); //$NON-NLS-1$
+		getLblMin().setText(getResourceString("LblMinStruct_text")); //$NON-NLS-1$
 		getLblMax().setVisible(true);
-		getLblMax().setText(resIliBaseTypeNumericPanel.getString("LblMaxStruct_text")); //$NON-NLS-1$
+		getLblMax().setText(getResourceString("LblMaxStruct_text")); //$NON-NLS-1$
 		getPnlMin().setVisible(false);
 		getPnlMax().setVisible(false);
 		getTxtMinStruct().setVisible(true);

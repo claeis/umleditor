@@ -25,14 +25,13 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>CoordinatType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:59 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeCoordPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeCoordPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeCoordPanel");  //$NON-NLS-1$
+public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private int oldDim = 0;
 	private int newDim = 0;
 	private boolean secondEvent = false;
-	private final static String TAB_TITLE = resIliBaseTypeCoordPanel.getString("CINumeric"); //$NON-NLS-1$
+	private /*final*/ static String TAB_TITLE = getResourceString(IliBaseTypeCoordPanel.class, "CINumeric"); //$NON-NLS-1$
 	// generated code
 	private java.util.ArrayList numericDimensions = new java.util.ArrayList();
 	private javax.swing.JLabel ivjLblPiHalfAxis = null;
@@ -241,9 +240,12 @@ private javax.swing.JCheckBox getChxRotationDef() {
 		try {
 			ivjChxRotationDef = new javax.swing.JCheckBox();
 			ivjChxRotationDef.setName("ChxRotationDef");
-			ivjChxRotationDef.setToolTipText(resIliBaseTypeCoordPanel.getString("ChxRotationDef_toolTipText"));
-			ivjChxRotationDef.setText(resIliBaseTypeCoordPanel.getString("ChxRotationDef_text"));
+			ivjChxRotationDef.setToolTipText("RotationDef");
+			ivjChxRotationDef.setText("RotationDef");
 			// user code begin {1}
+			ivjChxRotationDef.setToolTipText(getResourceString("ChxRotationDef_toolTipText"));
+			ivjChxRotationDef.setText(getResourceString("ChxRotationDef_text"));
+			
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -263,8 +265,9 @@ private javax.swing.JLabel getLblDimensions() {
 		try {
 			ivjLblDimensions = new javax.swing.JLabel();
 			ivjLblDimensions.setName("LblDimensions");
-			ivjLblDimensions.setText(resIliBaseTypeCoordPanel.getString("LblDimensions_text"));
+			ivjLblDimensions.setText("Dimensions:");
 			// user code begin {1}
+			ivjLblDimensions.setText(getResourceString("LblDimensions_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -284,9 +287,11 @@ private javax.swing.JLabel getLblPiHalfAxis() {
 		try {
 			ivjLblPiHalfAxis = new javax.swing.JLabel();
 			ivjLblPiHalfAxis.setName("LblPiHalfAxis");
-			ivjLblPiHalfAxis.setToolTipText(resIliBaseTypeCoordPanel.getString("LblPiHalfAxis_toolTipText"));
-			ivjLblPiHalfAxis.setText(resIliBaseTypeCoordPanel.getString("LblPiHalfAxist_text"));
+			ivjLblPiHalfAxis.setToolTipText("Half Axis");
+			ivjLblPiHalfAxis.setText("Half Axis");
 			// user code begin {1}
+			ivjLblPiHalfAxis.setToolTipText(getResourceString("LblPiHalfAxis_toolTipText"));
+			ivjLblPiHalfAxis.setText(getResourceString("LblPiHalfAxist_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -306,9 +311,11 @@ private javax.swing.JLabel getLblZeroAxis() {
 		try {
 			ivjLblZeroAxis = new javax.swing.JLabel();
 			ivjLblZeroAxis.setName("LblZeroAxis");
-			ivjLblZeroAxis.setToolTipText(resIliBaseTypeCoordPanel.getString("LblZeroAxis_toolTipText"));
-			ivjLblZeroAxis.setText(resIliBaseTypeCoordPanel.getString("LblZeroAxis_text"));
+			ivjLblZeroAxis.setToolTipText("Zero Axis");
+			ivjLblZeroAxis.setText("Zero Axis");
 			// user code begin {1}
+			ivjLblZeroAxis.setToolTipText(getResourceString("LblZeroAxis_toolTipText"));
+			ivjLblZeroAxis.setText(getResourceString("LblZeroAxis_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -412,8 +419,9 @@ private javax.swing.JRadioButton getRbt1D() {
 		try {
 			ivjRbt1D = new javax.swing.JRadioButton();
 			ivjRbt1D.setName("Rbt1D");
-			ivjRbt1D.setText(resIliBaseTypeCoordPanel.getString("Rbt1D_text"));
+			ivjRbt1D.setText("1D");
 			// user code begin {1}
+			ivjRbt1D.setText(getResourceString("Rbt1D_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -433,8 +441,9 @@ private javax.swing.JRadioButton getRbt2D() {
 		try {
 			ivjRbt2D = new javax.swing.JRadioButton();
 			ivjRbt2D.setName("Rbt2D");
-			ivjRbt2D.setText(resIliBaseTypeCoordPanel.getString("Rbt2D_text"));
+			ivjRbt2D.setText("2D");
 			// user code begin {1}
+			ivjRbt2D.setText(getResourceString("Rbt2D_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -454,8 +463,9 @@ private javax.swing.JRadioButton getRbt3D() {
 		try {
 			ivjRbt3D = new javax.swing.JRadioButton();
 			ivjRbt3D.setName("Rbt3D");
-			ivjRbt3D.setText(resIliBaseTypeCoordPanel.getString("Rbt3D_text"));
+			ivjRbt3D.setText("3D");
 			// user code begin {1}
+			ivjRbt3D.setText(getResourceString("Rbt3D_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -476,9 +486,9 @@ private javax.swing.JTabbedPane getTbpNumericTypes() {
 			ivjTbpNumericTypes = new javax.swing.JTabbedPane();
 			ivjTbpNumericTypes.setName("TbpNumericTypes");
 			ivjTbpNumericTypes.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjTbpNumericTypes.insertTab(resIliBaseTypeCoordPanel.getString("Tbp1D_title"), null, getPnlNumeric1D(), null, 0);
-			ivjTbpNumericTypes.insertTab(resIliBaseTypeCoordPanel.getString("Tbp2D_title"), null, getPnlNumeric2D(), null, 1);
-			ivjTbpNumericTypes.insertTab(resIliBaseTypeCoordPanel.getString("Tbp3D_title"), null, getPnlNumeric3D(), null, 2);
+			ivjTbpNumericTypes.insertTab(getResourceString("Tbp1D_title"), null, getPnlNumeric1D(), null, 0);
+			ivjTbpNumericTypes.insertTab(getResourceString("Tbp2D_title"), null, getPnlNumeric2D(), null, 1);
+			ivjTbpNumericTypes.insertTab(getResourceString("Tbp3D_title"), null, getPnlNumeric3D(), null, 2);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -560,7 +570,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeTextPanel");
-		setToolTipText(resIliBaseTypeCoordPanel.getString("PnlBaseType_toolTipText"));
+		setToolTipText("");
 		setLayout(new java.awt.GridBagLayout());
 		setSize(526, 390);
 
@@ -643,6 +653,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setToolTipText(getResourceString("PnlBaseType_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbt1D());
 	group.add(getRbt2D());

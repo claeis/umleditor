@@ -26,10 +26,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>BasketType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:57 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeBasketPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeBasketPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeBasketPanel");
+public class IliBaseTypeBasketPanel extends BasePanel implements DataPanel {
 	private ReferencableComboBox ivjCbxTopicDef = null;
 	private javax.swing.JLabel ivjLblAccordingTo = null;
 	private javax.swing.JLabel ivjLblKind = null;
@@ -96,7 +95,7 @@ private javax.swing.JLabel getLblAccordingTo() {
 			ivjLblAccordingTo.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjLblAccordingTo.setText("Gemäss:");
 			// user code begin {1}
-			ivjLblAccordingTo.setText(resIliBaseTypeBasketPanel.getString("LblAccordingTo_text"));
+			ivjLblAccordingTo.setText(getResourceString("LblAccordingTo_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -120,7 +119,7 @@ private javax.swing.JLabel getLblKind() {
 			ivjLblKind.setText("Art:");
 			ivjLblKind.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 			// user code begin {1}
-			ivjLblKind.setText(resIliBaseTypeBasketPanel.getString("LblKind_text"));
+			ivjLblKind.setText(getResourceString("LblKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -178,10 +177,11 @@ private javax.swing.JRadioButton getRbtBase() {
 			ivjRbtBase = new javax.swing.JRadioButton();
 			ivjRbtBase.setName("RbtBase");
 			ivjRbtBase.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtBase.setText(resIliBaseTypeBasketPanel.getString("RbtBase_text"));
+			ivjRbtBase.setText("Basis");
 			ivjRbtBase.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtBase.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
+			ivjRbtBase.setText(getResourceString("RbtBase_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -202,10 +202,11 @@ private javax.swing.JRadioButton getRbtData() {
 			ivjRbtData = new javax.swing.JRadioButton();
 			ivjRbtData.setName("RbtData");
 			ivjRbtData.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtData.setText(resIliBaseTypeBasketPanel.getString("RbtData_text"));
+			ivjRbtData.setText("Data");
 			ivjRbtData.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtData.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
+			ivjRbtData.setText(getResourceString("RbtData_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -226,10 +227,11 @@ private javax.swing.JRadioButton getRbtGraphic() {
 			ivjRbtGraphic = new javax.swing.JRadioButton();
 			ivjRbtGraphic.setName("RbtGraphic");
 			ivjRbtGraphic.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtGraphic.setText(resIliBaseTypeBasketPanel.getString("RbtGraphic_text"));
+			ivjRbtGraphic.setText("Graphic");
 			ivjRbtGraphic.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtGraphic.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
+			ivjRbtGraphic.setText(getResourceString("RbtGraphic_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -250,10 +252,11 @@ private javax.swing.JRadioButton getRbtUndefined() {
 			ivjRbtUndefined = new javax.swing.JRadioButton();
 			ivjRbtUndefined.setName("RbtUndefined");
 			ivjRbtUndefined.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtUndefined.setText(resIliBaseTypeBasketPanel.getString("RbtUndefined_text"));
+			ivjRbtUndefined.setText("Undefiniert");
 			ivjRbtUndefined.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtUndefined.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
+			ivjRbtUndefined.setText(getResourceString("RbtUndefined_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -274,14 +277,15 @@ private javax.swing.JRadioButton getRbtView() {
 			ivjRbtView = new javax.swing.JRadioButton();
 			ivjRbtView.setName("RbtView");
 			ivjRbtView.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtView.setText(resIliBaseTypeBasketPanel.getString("RbtView_text"));
+			ivjRbtView.setText("View");
 			ivjRbtView.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtView.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
+			ivjRbtView.setText(getResourceString("RbtView_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
-			ivjRbtView.setText(resIliBaseTypeBasketPanel.getString("RbtView_text"));
+			ivjRbtView.setText(getResourceString("RbtView_text"));
 			// user code end
 			handleException(ivjExc);
 		}
@@ -373,7 +377,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	setToolTipText(resIliBaseTypeBasketPanel.getString("PnlBaseType_toolTipText"));
+	setToolTipText(getResourceString("PnlBaseType_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtUndefined());
 	group.add(getRbtBase());

@@ -25,9 +25,9 @@ import ch.softenvironment.view.CommonUserAccess;
  * Details of a DomainDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeDomainDefPanel extends ch.softenvironment.view.DataPanel {
+public class IliBaseTypeDomainDefPanel extends ch.softenvironment.view.BasePanel implements ch.softenvironment.view.DataPanel {
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
 	private javax.swing.JButton ivjBtnChangeDomainDef = null;
 	private java.awt.Dialog ownerDialog = null;

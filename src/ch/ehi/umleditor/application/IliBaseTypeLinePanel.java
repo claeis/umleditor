@@ -29,9 +29,9 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeLinePanel extends DataPanel {
+public class IliBaseTypeLinePanel extends BasePanel implements DataPanel {
 	//private LineType lineType = null;
         private java.lang.Class lineTypeClass = null;
 	private ModelElement parent = null;

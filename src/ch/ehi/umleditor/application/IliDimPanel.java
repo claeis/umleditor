@@ -24,10 +24,9 @@ import javax.swing.*;
  * User interface for a IliDim type.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:10 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliDimPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliDimPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliDimPanel");
+public class IliDimPanel extends BasePanel implements DataPanel {
 	private JComboBox ivjCbxAccuracy = null;
 	private JTextField ivjTxtValue = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
@@ -77,7 +76,7 @@ private javax.swing.JComboBox getCbxAccuracy() {
 			ivjCbxAccuracy.setToolTipText("");
 			ivjCbxAccuracy.setBounds(113, 0, 47, 23);
 			// user code begin {1}
-			ivjCbxAccuracy.setToolTipText(resIliDimPanel.getString("CbxAccuracy_toolTipText"));
+			ivjCbxAccuracy.setToolTipText(getResourceString("CbxAccuracy_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -120,7 +119,7 @@ private javax.swing.JTextField getTxtValue() {
 			ivjTxtValue.setEditable(true);
 			ivjTxtValue.setEnabled(true);
 			// user code begin {1}
-			ivjTxtValue.setToolTipText(resIliDimPanel.getString("TxtValue_toolTipText"));
+			ivjTxtValue.setToolTipText(getResourceString("TxtValue_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -135,7 +134,7 @@ private javax.swing.JTextField getTxtValue() {
  * @param exception java.lang.Throwable
  */
 protected void handleException(java.lang.Throwable exception) {
-	new ErrorDialog(this, resIliDimPanel.getString("CTError"), exception.toString(), exception); //$NON-NLS-1$
+	new ErrorDialog(this, getResourceString("CTError"), exception.toString(), exception); //$NON-NLS-1$
 }
 /**
  * Initializes connections

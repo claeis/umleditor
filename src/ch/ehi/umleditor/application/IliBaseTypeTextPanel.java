@@ -24,10 +24,10 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Text</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:09 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeTextPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel");  //$NON-NLS-1$
+public class IliBaseTypeTextPanel extends BasePanel implements DataPanel {
+private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel");  //$NON-NLS-1$
 	private javax.swing.JRadioButton ivjRbtLength = null;
 	private javax.swing.JRadioButton ivjRbtName = null;
 	private javax.swing.JRadioButton ivjRbtUnspecified = null;

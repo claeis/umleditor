@@ -21,6 +21,9 @@ package ch.ehi.umleditor.application;
 import java.awt.*;
 import javax.swing.*;
 import ch.softenvironment.util.DeveloperException;
+import ch.softenvironment.view.BasePanel;
+import ch.softenvironment.view.DataPanel;
+
 import java.awt.event.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidKind;
@@ -30,10 +33,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
  * panel to view/edit a INTERLIS OidType.
  *
  * @author: ce
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeOidPanel
-  extends ch.softenvironment.view.DataPanel {
+public class IliBaseTypeOidPanel extends BasePanel implements DataPanel {
   GridBagLayout gridBagLayout1 = new GridBagLayout();
   JRadioButton rbAny = new JRadioButton();
   JRadioButton rbText = new JRadioButton();

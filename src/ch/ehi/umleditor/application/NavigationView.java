@@ -9,9 +9,9 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-27 18:52:12 $
  */
-public class NavigationView extends ch.softenvironment.view.DataPanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
+public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ch.softenvironment.view.DataPanel {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;

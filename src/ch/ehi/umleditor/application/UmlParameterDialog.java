@@ -18,18 +18,15 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
-import ch.ehi.basics.i18n.ResourceBundle;
-import ch.ehi.uml1_4.foundation.datatypes.Expression;
 import ch.ehi.uml1_4.implementation.*;
 /**
  * A Parameter is an Argument of Operation.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1 $ $Date: 2004-03-09 12:28:39 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  * @see UmlOperation
  */
 public class UmlParameterDialog extends ch.softenvironment.view.BaseDialog {
-//	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
 	private ch.ehi.uml1_4.implementation.UmlParameter parameter = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnApply = null;
