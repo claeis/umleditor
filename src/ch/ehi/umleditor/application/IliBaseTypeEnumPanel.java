@@ -25,7 +25,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-06-29 11:38:03 $
+ * @version $Revision: 1.7 $ $Date: 2004-08-18 09:22:58 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
         private Enumeration root=new Enumeration();
@@ -808,7 +808,6 @@ constraintsJPanel1.gridheight = 2;
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
-Tracer.getInstance().developerWarning(this, "initialize()", "initialization causes a corrupt TabPanel in AttributeDefDialog->Visual Builder");
 	initializeTree();
 	// user code end
 }

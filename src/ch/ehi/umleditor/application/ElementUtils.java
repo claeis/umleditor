@@ -32,7 +32,7 @@ import ch.softenvironment.util.*;
  * Utility Class for dealing with Element's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:48 $
+ * @version $Revision: 1.2 $ $Date: 2004-08-18 09:22:58 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -150,7 +150,6 @@ public static java.lang.Class getElementDialog(Element element) {
 				return DependencyDialog.class;
 			}
 			String elementClass = StringUtils.getPureClassName(element);
-Tracer.getInstance().hack(ElementUtils.class, "getElementDialog(Element)", "Dialogs expected in same directory as this class");
 			dialogClass = java.lang.Class.forName(StringUtils.getPackageName(ElementUtils.class) + "." + elementClass + "Dialog");//$NON-NLS-2$//$NON-NLS-1$
 		} catch(ClassNotFoundException e) {
 			// no specific dialog for this modelElement -> try generic dialog
