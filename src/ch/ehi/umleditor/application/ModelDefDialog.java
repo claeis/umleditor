@@ -24,7 +24,7 @@ import ch.softenvironment.view.*;
  * User Interface for a ModelDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:36 $
+ * @version $Revision: 1.2 $ $Date: 2004-06-29 11:36:08 $
  */
 public class ModelDefDialog extends BaseDialog {
 	// ModelElement
@@ -149,9 +149,9 @@ public ModelDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Elemen
 	show();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * Overwrites.
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	boolean isSelected = getTblTranslation().getSelectedRow() >= 0;
 	getMniOpenTranslationSpecification().setEnabled(isSelected);
 	getMniRemoveTranslation().setEnabled(isSelected);

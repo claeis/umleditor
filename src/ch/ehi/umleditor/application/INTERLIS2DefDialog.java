@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a INTERLIS2Def.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:13 $
+ * @version $Revision: 1.2 $ $Date: 2004-06-29 11:35:39 $
  */
 public class INTERLIS2DefDialog extends BaseDialog {
 	// ModelElement
@@ -108,11 +108,9 @@ public INTERLIS2DefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.El
 	show();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- * Overwrite this method.
- * @see #genericPopupDisplay()
+ * Overwrites.
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	getMniChange().setEnabled(getTblFileName().getSelectedRow() >= 0);
 }
 /**

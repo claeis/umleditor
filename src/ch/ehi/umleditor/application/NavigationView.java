@@ -9,7 +9,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.6 $ $Date: 2004-05-03 13:38:26 $
+ * @version $Revision: 1.7 $ $Date: 2004-06-29 11:36:43 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
@@ -138,12 +138,9 @@ public NavigationView() {
 	initialize();
 }
 /**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return popup menu
- * @see showSpecification()
+ * Overwrites.
  */
-public javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	Element treeNode = getSelectedNode();
 	boolean selected = (treeNode != null);
 
@@ -221,7 +218,6 @@ getMnuSort().setFont(getMniOpen().getFont());
 		getMnuNew().setEnabled(getMnuNew().getItemCount() > 0);
 	}
         mniMoveElement.setEnabled(selected);
-	return popupMenu;
 }
 /**
  * Add ModelElement to UML-Model.

@@ -24,7 +24,7 @@ import ch.softenvironment.view.*;
  * User Interface for a TopicDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2003-12-23 17:13:54 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-29 11:37:17 $
  */
 public class TopicDefDialog extends BaseDialog {
 	// ModelElement
@@ -115,9 +115,9 @@ public TopicDefDialog(java.awt.Frame owner, boolean modal) {
 	initialize();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * Overwrites.
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	boolean isSelected = getTblDepends().getSelectedRow() >= 0;
 	getMniOpenTopicDefSpecification().setEnabled(isSelected);
 	getMniRemoveTopicDepends().setEnabled(isSelected);

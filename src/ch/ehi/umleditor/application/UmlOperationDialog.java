@@ -28,7 +28,7 @@ import ch.ehi.uml1_4.implementation.*;
  * Notation: visibility name ( parameter-list ) : return-type-expression { property-string }
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-03-09 12:26:34 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-29 11:37:17 $
  */
 public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
@@ -123,9 +123,9 @@ public UmlOperationDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.El
 	show();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * Overwrites.
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	boolean isSelected = getTblParameters().getSelectedRow() >= 0;
 	getMniOpenParameterSpecication().setEnabled(isSelected);
 	getMniRemoveParameter().setEnabled(isSelected);
