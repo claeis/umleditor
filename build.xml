@@ -111,8 +111,8 @@
   <target depends="init" name="srcdist">
     <property file="${src}/ch/ehi/umleditor/application/Version.properties" prefix="buildnr."/>
     <property name="buildnr" value="${buildnr.versionMajor}.${buildnr.versionMinor}.${buildnr.versionMicro}"/>
-    <delete file="${dist}/${ant.project.name}-src-${buildnr}.zip" quiet="true"/>
-    <zip zipfile="${dist}/${ant.project.name}-src-${buildnr}.zip">
+    <delete file="${dist}/${ant.project.name}-${buildnr}.src.zip" quiet="true"/>
+    <zip zipfile="${dist}/${ant.project.name}-${buildnr}.src.zip">
     	<zipfileset dir="." prefix="${ant.project.name}-${buildnr}">
 	    	<patternset includes="build.xml"/>
 	    	<patternset includes="lib/**"/>
