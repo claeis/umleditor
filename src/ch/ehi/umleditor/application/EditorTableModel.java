@@ -22,6 +22,8 @@ import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.attributes.*;
+import ch.ehi.interlis.tools.RoleDefUtility;
+import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.ehi.uml1_4.implementation.UmlParameter;
 import ch.ehi.umleditor.umldrawingtools.*;
@@ -31,13 +33,16 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2004-10-01 20:01:15 $
+ * @version $Revision: 1.6 $ $Date: 2005-01-14 15:47:13 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
         // ??? ce 2003-08-21 Warum ein eigenes Attribut elementVector und nicht
         // das bereits vorhandene dataVector?
 	private Vector elementVector = new Vector();
+	private static final int OTHER=1;
+	private static final int ATTRIBUTE=1;
+	private int tableKind = OTHER;
 /**
  * EditorTableModel constructor comment.
  */
@@ -105,6 +110,19 @@ public Vector addRowElement(Object object) {
  *
  */
 private Vector createRow(RoleDef roleDef) {
+	if(tableKind==ATTRIBUTE){
+		Vector row = new Vector(4);
+
+		row.add(roleDef.getDefLangName());
+		row.add(MultiplicityConverter.getRange(roleDef.getMultiplicity()));
+		if (roleDef.containsParticipant()) {
+			row.add(roleDef.getParticipant().getDefLangName());
+		} else {
+			row.add(null);
+		}
+		return row;
+	}
+
 	Vector row = new Vector(5);
 	row.add(roleDef.getDefLangName());
 	if (roleDef.getAggregation() == AggregationKind.AGGREGATE) {
@@ -120,7 +138,6 @@ private Vector createRow(RoleDef roleDef) {
 	} else {
 		row.add(null);
 	}
-
 	return row;
 }
 /**
@@ -129,9 +146,10 @@ private Vector createRow(RoleDef roleDef) {
  * @see #setAttributeRow()
  */
 private Vector createRow(AttributeDef attributeDef) {
-	Vector row = new Vector(3);
+	Vector row = new Vector(4);
 
 	row.add(attributeDef.getDefLangName());
+	row.add(MultiplicityConverter.getRange(attributeDef.getMultiplicity()));
 	row.add(IliBaseTypeKind.getTypeName(attributeDef,true));
 
 	return row;
@@ -264,22 +282,31 @@ public void removeRows(int selectedRows[]) {
 /**
  * @param iteratorFeature (for e.g. of a ClassDef)
  */
-public void setAttributeDef(java.util.Iterator iteratorFeature) {
+public void setAttributeDef(AbstractClassDef aclass) {
+	tableKind=ATTRIBUTE;
+	java.util.Iterator iteratorFeature=aclass.iteratorFeature();
 	// define visible columns
-	Vector columns = new Vector(2);
+	Vector columns = new Vector(3);
 	columns.add(resEditorTableModel.getString("TbcAttributeName_text")); //$NON-NLS-1$
+	columns.add("Cardinality"); //$NON-NLS-1$
 	columns.add(resEditorTableModel.getString("TbcAttributeType_text")); //$NON-NLS-1$
 
 	setDataVector(elementVector, columns);
-
-	// build data Rows
-	while ((iteratorFeature != null) && (iteratorFeature.hasNext())) {
-		Object feature = iteratorFeature.next();
-		if (feature instanceof AttributeDef) {
-			addRowElement((AttributeDef)feature);
-		}
+	List attrlist=AbstractClassDefUtility.getIliAttributes(aclass);
+	iteratorFeature=attrlist.iterator();
+	while(iteratorFeature.hasNext()){
+	   Object obj=iteratorFeature.next();
+	   if(obj instanceof RoleDef){
+		addRowElement((RoleDef)obj);
+	   }else if(obj instanceof AttributeDef){
+		addRowElement((AttributeDef)obj);
+	   }else{
+		// ignore others; should not have others
+	   }
 	}
+
 }
+
 /**
  * Set a ModelDef's ImportedElement.
  * @param iteratorClientDependency
@@ -287,6 +314,7 @@ public void setAttributeDef(java.util.Iterator iteratorFeature) {
  */
 public void setClientDependency(java.util.Iterator iteratorClientDependency, String columnName) {
 	// define visible columns
+	tableKind=OTHER;
 	Vector columns = new Vector(1);
 	columns.add(columnName);
 
@@ -302,6 +330,7 @@ public void setClientDependency(java.util.Iterator iteratorClientDependency, Str
  * @param iteratorContract
  */
 public void setContract(java.util.Iterator iteratorContract) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(1);
 	columns.add(resEditorTableModel.getString("TbcContractIssuer_text")); //$NON-NLS-1$
@@ -319,6 +348,7 @@ public void setContract(java.util.Iterator iteratorContract) {
  * @param iteratorLineFormTypeDef
  */
 public void setLineFormTypeDef(java.util.Iterator iteratorLineFormTypeDef) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(1);
 	columns.add(resEditorTableModel.getString("TbcLineFormTypeDef_text")); //$NON-NLS-1$
@@ -334,6 +364,7 @@ public void setLineFormTypeDef(java.util.Iterator iteratorLineFormTypeDef) {
  * @param iteratorRestrictedTo
  */
 public void setRestrictedClassDef(java.util.Iterator iteratorRestrictedTo) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(1);
 	columns.add(resEditorTableModel.getString("TbcRestrictedClassDef_text")); //$NON-NLS-1$
@@ -349,6 +380,7 @@ public void setRestrictedClassDef(java.util.Iterator iteratorRestrictedTo) {
  * @param iteratorConnection
  */
 public void setRoleDef(java.util.Iterator iteratorConnection) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(4);
 	columns.add(resEditorTableModel.getString("TbcRoleName_text")); //$NON-NLS-1$
@@ -377,28 +409,43 @@ public void moveRowDown(int current) {
   Element element = (Element)currentDataRow.get(currentDataRow.size() - 1);
   if(element instanceof AssociationEnd){
     Vector nextDataRow = (Vector)elementVector.get(current+1);
-    AssociationEnd nextElement = (AssociationEnd)nextDataRow.get(nextDataRow.size() - 1);
-    AssociationDef assoc=(AssociationDef)nextElement.getAssociation();
-    assoc.swapConnection((AssociationEnd)element,nextElement);
+    if(tableKind==ATTRIBUTE){
+    }else{
+		AssociationEnd nextElement = (AssociationEnd)nextDataRow.get(nextDataRow.size() - 1);
+		AssociationDef assoc=(AssociationDef)nextElement.getAssociation();
+		assoc.swapConnection((AssociationEnd)element,nextElement);
+    }
     elementVector.set(current+1,currentDataRow);
     elementVector.set(current,nextDataRow);
     // update visually
     fireTableRowsUpdated(current, current+1);
   }else if(element instanceof Attribute){
     Vector nextDataRow = (Vector)elementVector.get(current+1);
-    Attribute nextElement = (Attribute)nextDataRow.get(nextDataRow.size() - 1);
-    AbstractClassDef aclass=(AbstractClassDef)nextElement.getOwner();
-    aclass.swapFeature((Attribute)element,nextElement);
+    Object nextElement = nextDataRow.get(nextDataRow.size() - 1);
+    if(nextElement instanceof Attribute){
+		AbstractClassDef aclass=(AbstractClassDef)((Attribute)nextElement).getOwner();
+		aclass.swapFeature((Attribute)element,(Attribute)nextElement);
+    }
     elementVector.set(current+1,currentDataRow);
     elementVector.set(current,nextDataRow);
     // update visually
     fireTableRowsUpdated(current, current+1);
+  }
+  if(tableKind==ATTRIBUTE){
+  	for(int i=0;i<elementVector.size();i++){
+		Vector dataRow = (Vector)elementVector.get(i);
+		Object role = dataRow.get(dataRow.size() - 1);
+  		if(role instanceof RoleDef){
+  			((RoleDef)role).setIliAttributeIdx(i);
+  		}
+  	}
   }
 }
 /**
  * @param iteratorTranslation
  */
 public void setTranslation(java.util.Iterator iteratorTranslation) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(2);
 	columns.add(resEditorTableModel.getString("TbcTranslationLanguage_text")); //$NON-NLS-1$
@@ -416,6 +463,7 @@ public void setTranslation(java.util.Iterator iteratorTranslation) {
  * @param iteratorTranslation (of a Vector)
  */
 public void setTranslationFile(java.util.Iterator iteratorTranslation) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(2);
 	columns.add(resEditorTableModel.getString("TbcTranslationFileLanguage_text")); //$NON-NLS-1$
@@ -527,6 +575,7 @@ private String getParameterTypeString(final int kind) {
  * @param iteratorParamater (for e.g. of an UmlOperation)
  */
 public UmlParameter setUmlParameter(java.util.Iterator iteratorParameter) {
+	tableKind=OTHER;
 	// define visible columns
 	Vector columns = new Vector(3);
 	columns.add(resEditorTableModel.getString("TbcAttributeName_text")); //$NON-NLS-1$

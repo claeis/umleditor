@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for an AssociationDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-06-29 11:34:41 $
+ * @version $Revision: 1.4 $ $Date: 2005-01-14 15:47:13 $
  */
 public class AssociationDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
@@ -1607,7 +1607,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
-	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(associationDef.iteratorFeature());
+	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(associationDef);
 
 	// page Roles
 	getTblRoles().setModel(new EditorTableModel());

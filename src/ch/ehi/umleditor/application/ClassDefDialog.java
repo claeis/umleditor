@@ -26,7 +26,7 @@ import ch.softenvironment.util.*;
  * User Interface for a ClassDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-06-29 11:35:03 $
+ * @version $Revision: 1.3 $ $Date: 2005-01-14 15:47:13 $
  */
 public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
@@ -1212,7 +1212,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
-	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(classDef.iteratorFeature());
+	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(classDef);
 
 	// page Constraints
 	getPnlConstraints().setConstraints(classDef);
