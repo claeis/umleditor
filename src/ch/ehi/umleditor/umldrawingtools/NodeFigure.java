@@ -32,9 +32,9 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-29 21:05:02 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-30 22:11:05 $
  */
-public abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
+abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
 	protected ch.ehi.umleditor.umlpresentation.PresentationNode node;
 	private ClassDiagramView classDiagram = null;

@@ -35,7 +35,7 @@ import ch.softenvironment.view.*;
  * by ClassFigures).
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:56 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:07:11 $
  */
 public class GeneralizationLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resGeneralizationLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/GeneralizationLineConnection");  //$NON-NLS-1$
@@ -109,20 +109,20 @@ public boolean canConnect(Figure start, Figure end) {
 		child = getGeneralizableElement(start);
 		parent = getGeneralizableElement(end);
 	} catch(ClassCastException e) {
-		shouldWarn(this, typeError);
+		shouldWarn(typeError);
 		return false;
 	}
 
 	if (!(((child instanceof AbstractClassDef) && (parent instanceof AbstractClassDef)) ||
 			((child instanceof TopicDef) && (parent instanceof TopicDef)))) {
-		shouldWarn(this, typeError);
+		shouldWarn(typeError);
 		return false;
 	}
 
 	if (getEdge() == null) {
 		String error = ElementUtils.checkInheritance(parent, child);
 		if (error != null) {
-			shouldWarn(this, error);
+			shouldWarn(error);
 			return false;
 		}
 	} // else given Generalization was dragged
