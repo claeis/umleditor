@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2004-03-08 17:05:02 $
+ * @version $Revision: 1.10 $ $Date: 2004-03-09 15:39:10 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -989,7 +989,7 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 	    }
 
 	    // show Associations
-	    if (tryAssociations) {
+	    if ((modelElement instanceof Classifier) && tryAssociations) {
 	    	// BE AWARE:
 	    	// Associations are added to the Repository as ownedElement only 
 	    	// at ONE END of at least two possible Classifier's.
@@ -1002,6 +1002,7 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 	    			checkAssociation(modelElement, node, (ch.ehi.uml1_4.foundation.core.Association)ownedModelElement);
 	    		}
 	    	}
+	    	
 		    // 2) modelElement is NOT the Owner	but the opposite
 	    	elements = ((Classifier)modelElement).iteratorAssociation();
 	    	while (elements.hasNext()) {
