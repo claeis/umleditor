@@ -16,7 +16,6 @@ Offene Fragen/Arbeiten
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Bug: nach dem umhängen eine Assoziation kann man andere Diagramme die diese Assoziation enthalten nicht mehr öffnen
 - Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
-- Bug: Farbe der Klasse lässt sich nicht ändern
 - Bug: Farbedialog zu klein
 - Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
 
@@ -40,6 +39,8 @@ UML-Editor 2.0.3 (2003-xx-xx)
 - Bug iliexp: "fileXY written" NLS fehlt
 - Bug: Beim ClassDefDialog kann EXTENDED nicht gesetzt werden, wenn die Basis-Klasse in einem indirekten Basis-Topic ist
 - Bug: RoleDefDialog es koennen keine AssociationDef in Restricted Liste eingefuegt werden
+- Bug: Farbe der Klasse lässt sich nicht ändern
+- Bug: Einfügen von Parent-Klassen bei Vererbung in ein anderes Diagram erzeugt Exception
 
 
 UML-Editor 2.0.2 (2003-10-29)
