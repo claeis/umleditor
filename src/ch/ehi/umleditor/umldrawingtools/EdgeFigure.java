@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2004-06-29 11:42:44 $
+ * @version $Revision: 1.9 $ $Date: 2005-01-10 21:51:03 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -551,9 +551,6 @@ public void setAttribute(String name, Object value) {
  */
 private void setClassDiagram(ClassDiagramView classDiagram) {
 	this.classDiagram = classDiagram;
-if (classDiagram == null) {
-	int debug =0;
-}
 }
 /**
  * Set the Edge and its Coordinates.
