@@ -34,9 +34,9 @@ import java.awt.*;
  * or not.
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:45 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:04:29 $
  */
-public class AssociationAttributeFigure extends ClassFigure {
+class AssociationAttributeFigure extends ClassFigure {
 	private LinkFigure linkFigure = null;
 	private boolean linkNodeVisible = true;
 /**
@@ -60,7 +60,7 @@ public void draw(Graphics g) {
 	//	Draw Link-Shape
 	Rectangle rectangleAttributeFigure = displayBox();
 	if (!((rectangleAttributeFigure.x == (int)linkNode.getClassAngle()) && (rectangleAttributeFigure.y == (int)linkNode.getClassRadius()))) {
-Tracer.getInstance().debug("draw->moveBy: ClassAngle(x=)="+linkNode.getClassAngle() + " ClassRadius(y)="+linkNode.getClassRadius());
+//Tracer.getInstance().debug("draw->moveBy: ClassAngle(x=)="+linkNode.getClassAngle() + " ClassRadius(y)="+linkNode.getClassRadius());
 		moveBy((int)linkNode.getClassAngle() - rectangleAttributeFigure.x, (int)linkNode.getClassRadius() - rectangleAttributeFigure.y);
 		rectangleAttributeFigure = displayBox();
 	}
@@ -140,7 +140,7 @@ Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates inste
 	linkNode.setClassAngle(rectangle.getX());
     linkNode.setClassRadius(rectangle.getY());
 
-Tracer.getInstance().debug("UpdateCoordinates: ClassAngle(x="+rectangle.getX()+")="+linkNode.getClassAngle() + " ClassRadius(y"+rectangle.getY()+")="+linkNode.getClassRadius());
+//Tracer.getInstance().debug("UpdateCoordinates: ClassAngle(x="+rectangle.getX()+")="+linkNode.getClassAngle() + " ClassRadius(y"+rectangle.getY()+")="+linkNode.getClassRadius());
 	linkNode.setWidth((int)rectangle.getWidth());
 	linkNode.setHeight((int)rectangle.getHeight());
 }

@@ -1,0 +1,88 @@
+' this Rational Rose script changes the stereotype of classes
+'  - CodeList changes to enumeration
+'
+' Copyright (c) 2000, Claude Eisenhut
+' All rights reserved.
+' THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+' ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+' LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+' FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+' REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+' SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+' LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+' DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+' THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+' (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+' USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+'
+'
+' Send comments and questions to ce@eisenhutinformatik.ch
+'
+Option Explicit
+
+
+''# @function writes a debug or trace message
+Sub PrintDbgMsg(theMsg As String)
+	RoseApp.WriteErrorLog theMsg
+End Sub
+
+''# @function writes an error message
+Sub PrintErrMsg(theMsg As String)
+	RoseApp.WriteErrorLog theMsg
+End Sub
+
+
+''# @function change stereotype
+Sub visitClass(aClass As class)
+
+	If aClass.stereotype="CodeList" Then
+		aClass.stereotype="enumeration"
+	End If
+End Sub
+
+''# @function iterate over all classes in this package and 
+''# recursively visit all sub packages
+Sub VisitCategory (aCategory As Category)
+	Dim theClass As Class
+	Dim create As Operation
+	Dim subcat As category
+	Dim subfactory As class
+	Dim clsid As Integer
+	Dim catid As Integer
+
+   	'printDbgMsg "package "+aCategory.name+"..."
+
+	' all classes
+	For ClsID = 1 To aCategory.Classes.Count
+		Set theClass = aCategory.Classes.GetAt (ClsID) 
+		visitClass theclass
+	Next ClsID 
+
+	' all sub packages
+	For CatID = 1 To aCategory.Categories.Count
+
+		' visit subpackage
+		Set subcat=aCategory.Categories.GetAt (CatID)
+		Call VisitCategory (subcat)
+	Next CatID
+
+
+End Sub
+
+Sub Main 
+	Dim selCats As CategoryCollection
+	Dim selCat As Category
+	Dim i As Integer
+
+	' all selected packages
+	Set selCats = RoseApp.CurrentModel.GetSelectedCategories() 
+	For i = 1 To selCats.Count 
+		Set selCat = selCats.GetAt(i) 
+					
+		' visit package
+		VisitCategory selCat
+
+	Next i
+
+
+End Sub

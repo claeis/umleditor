@@ -36,9 +36,9 @@ import ch.softenvironment.util.*;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:58 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:10:30 $
  */
-public class LinkFigure extends NodeFigure {
+class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
 	public final static int SIZE_MIN = 4;
 	public final static int SIZE_MAX = 12;
@@ -162,9 +162,9 @@ private boolean isN_Ary() {
  * Remove AssociationAttributeFigure if any.
  */
 private void removeFeatures() {
+	((PresentationAssocClass)getNode()).setClassAngle(0.0);
+	((PresentationAssocClass)getNode()).setClassRadius(0.0);
 	if (attributeFigure != null) {
-		((PresentationAssocClass)getNode()).setClassAngle(0.0);
-		((PresentationAssocClass)getNode()).setClassRadius(0.0);
 		showAttributeFigure = false;
 		getClassDiagram().remove(attributeFigure);
 		attributeFigure = null;

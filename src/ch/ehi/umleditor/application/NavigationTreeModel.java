@@ -8,6 +8,7 @@ import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.umleditor.umlpresentation.Diagram;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -384,17 +385,9 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     if(ops==null || ops.length()==0){
       return false;
     }
-    if(ops.equals("attach"+attr))return true;
-    if(ops.equals("detach"+attr))return true;
-    if(ops.equals("set"+attr))return true;
-    if(ops.equals("add"+attr))return true;
-    if(ops.equals("remove"+attr))return true;
-    if(ops.equals("set"+attr))return true;
-    if(ops.equals("clear"+attr))return true;
-    if(ops.equals("change"+attr))return true;
-    if(ops.equals("swap"+attr))return true;
-    if(ops.equals("_link"+attr))return true;
-    if(ops.equals("_unlink"+attr))return true;
+    for(int i=0;i<MetaModelChange.OPS.length;i++){
+      if(ops.equals(MetaModelChange.OPS[i]+attr))return true;
+    }
     return false;
   }
   public String getOrdering(){
