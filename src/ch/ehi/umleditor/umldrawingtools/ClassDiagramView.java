@@ -22,9 +22,13 @@ import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
 import java.awt.event.*;
+
+import javax.swing.text.ChangedCharSetException;
+
 import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.umleditor.application.*;
@@ -34,7 +38,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-01-04 09:43:43 $
+ * @version $Revision: 1.5 $ $Date: 2004-01-06 10:12:19 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -272,7 +276,7 @@ protected ClassFigure findClassFigure(int x, int y) {
  * at given coordinates.
  */
 protected Figure findConnectableFigure(int x, int y, ConnectionFigure connection) {
-Tracer.getInstance().developerWarning(this, "findConnectableFigure(..)", "copied code from JHotDraw's ConnectionTool#findConnectableFigure(..)");//$NON-NLS-2$//$NON-NLS-1$
+	// copied code from JHotDraw's ConnectionTool#findConnectableFigure(..)
 	FigureEnumeration k = drawing().figuresReverse();
 	while (k.hasMoreElements()) {
 		Figure figure = k.nextFigure();
@@ -288,7 +292,7 @@ Tracer.getInstance().developerWarning(this, "findConnectableFigure(..)", "copied
  * @see ConnectionTool#findConnection(..) => copied Code
  */
 protected ConnectionFigure findConnection(int x, int y) {
-ch.softenvironment.util.Tracer.getInstance().developerWarning(this, "findConnection(..)", "copied Method from JHotDraw's ConnectionTool#findConnection(..)");//$NON-NLS-2$//$NON-NLS-1$
+	// copied Method from JHotDraw's ConnectionTool#findConnection(..)
 	java.util.Enumeration k = drawing().figuresReverse();
 	while (k.hasMoreElements()) {
 		Figure figure = (Figure) k.nextElement();
@@ -622,6 +626,135 @@ private NodeFigure loadNode(ch.ehi.umleditor.umlpresentation.PresentationNode no
 	return (NodeFigure)figure;
 }
 /**
+ * If necessary switch End-Node of Connection.
+ * @param edgeFigure
+ * @param edge
+ * @param targetNode
+ * @param index
+ * @param endpoint
+ * @return
+ */
+private boolean correctNode(EdgeFigure edgeFigure, PresentationEdge edge, Element targetNode, int index, PresentationNode endpoint) {
+	if (targetNode != null) {
+		// verify whether view and Model are the same		
+		Iterator presentationSubject = endpoint.iteratorSubject();
+		if (presentationSubject.hasNext()) {
+			ModelElement presentationNode = (ModelElement)presentationSubject.next();
+			if (targetNode.equals(presentationNode)) {
+				return true;
+			} else {
+				Figure targetFigure = findFigure(targetNode);
+				if (targetFigure != null) {
+					Tracer.getInstance().developerWarning(this, "correctNode(..)", "AUTO-CORRECTION: endpoint[" + index + "]=child->relocation:"); // + " <current Classifier>"/*presentationNode.getName().getValue()*/ + "=>" + targetClient.getName().getValue());
+					// change the presentation Connection
+					edge.setEndpoint(index, ((NodeFigure)targetFigure).getNode());
+					Connector connector = findNodeConnector(targetNode, 0, 0);
+					edgeFigure.willChange();
+					if (index == 0) {
+						edgeFigure.setStartConnector(connector);
+					} else {
+						edgeFigure.setEndConnector(connector);
+					}
+					edgeFigure.changed();
+					checkDamage();
+					return true;
+				}
+			}
+		}
+	}
+	return false;		
+}
+/**
+ * Client or Supplier might have been changed, therefore correct its Presentation.
+ * @param dependency
+ * @return true->Presentation-Dependency still exists; false->was removed as correction
+ */
+private boolean correctDependencyRelocation(DependencyLineConnection dependencyFigure) {
+	ch.ehi.umleditor.umlpresentation.Dependency dependency = (ch.ehi.umleditor.umlpresentation.Dependency)dependencyFigure.getEdge();
+	if ((dependency.sizeEndpoint() == 2)) {
+		Iterator endpoints = dependency.iteratorEndpoint();
+		if (correctNode((EdgeFigure)dependencyFigure, (PresentationEdge)dependency, dependencyFigure.getStartElement(), 0, (PresentationNode)endpoints.next())) {
+			if (correctNode((EdgeFigure)dependencyFigure, (PresentationEdge)dependency, dependencyFigure.getEndElement(), 1, (PresentationNode)endpoints.next())) {
+				return true;
+			}
+		}
+	}
+	Tracer.getInstance().developerWarning(this, "correctDependencyRelocation(..)", "AUTO-CORRECTION: Removing Dependency-Presentation from Diagram");
+	getDiagram().deletePresentationElement(dependency);	
+	return false;
+}
+/**
+ * Parent or Child might have been changed, therefore correct its Presentation.
+ * @param generalization
+ * @return true->role still exists; false->role was removed as correction
+ */
+private boolean correctGeneralizationRelocation(GeneralizationLineConnection generalizationFigure) {
+	ch.ehi.umleditor.umlpresentation.Generalization generalization = (ch.ehi.umleditor.umlpresentation.Generalization)generalizationFigure.getEdge();
+	if ((generalization.sizeEndpoint() == 2)) {
+		Iterator endpoints = generalization.iteratorEndpoint();
+		if (correctNode((EdgeFigure)generalizationFigure, (PresentationEdge)generalization, generalizationFigure.getStartElement(), 0, (PresentationNode)endpoints.next())) {
+			if (correctNode((EdgeFigure)generalizationFigure, (PresentationEdge)generalization, generalizationFigure.getEndElement(), 1, (PresentationNode)endpoints.next())) {
+				return true;
+			}
+		}
+	}
+
+	Tracer.getInstance().developerWarning(this, "correctGeneralizationRelocation(..)", "AUTO-CORRECTION: Removing Generalization-Presentation from Diagram");
+	getDiagram().deletePresentationElement(generalization);	
+	return false;
+}
+/**
+ * Participiant might have been changed, therefore correct its PresentationRole.
+ * @param role
+ * @return true->role still exists; false->role was removed as correction
+ */
+private boolean correctRoleRelocation(ch.ehi.umleditor.umlpresentation.PresentationRole role) {
+	Iterator subjects = role.iteratorSubject();
+	while (subjects.hasNext()) {
+		AssociationEnd subjectRoleDef = (AssociationEnd)subjects.next();
+		if (subjectRoleDef.containsParticipant()) {
+			Classifier targetClass = subjectRoleDef.getParticipant();
+//Tracer.getInstance().debug("PresentationRole->Subject:RoleDef=" + subjectRoleDef.getName().getValue() + ", ClassDef=" + targetClass.getName().getValue());
+			Iterator endpoints = role.iteratorEndpoint();
+			if(endpoints.hasNext()) {
+				endpoints.next(); // skip PresentationAssocClass (LinkNode)
+				if (endpoints.hasNext()) {
+					ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
+					if (!presentationClass.containsSubject(targetClass)) {
+						// role was probably moved to another Classifier in Model by another Diagram
+/*							Iterator classSubjects = presentationClass.iteratorSubject();
+							while (classSubjects.hasNext()) {
+								Classifier wrongClassDef = (Classifier)classSubjects.next();
+							}
+*/
+						Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
+						ClassFigure newClass = (ClassFigure)findFigure(targetClass);
+						if (newClass != null) {
+							// damage will be changed by LinkFigure#updateView()
+							role.setEndpoint(1, newClass.getNode());
+						}
+					}
+					return true;
+				}
+			}
+		}
+	}
+/*
+Iterator its = role.getAssociation().iteratorSubject();
+while(its.hasNext()) {
+	AssociationDef subj = (AssociationDef)its.next();
+	Iterator itsc = subj.iteratorConnection();
+	while (itsc.hasNext()) {
+		RoleDef ro = (RoleDef)itsc.next();
+		Tracer.getInstance().debug("RoleDef via Association=" + ro.getParticipant().getName().getValue());
+	}				
+}
+*/		
+	getDiagram().removePresentationElement(role);
+	Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
+	return false;
+}
+/**
  * Add a single PresentationRole to Diagram.
  */
 protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {	
@@ -655,53 +788,14 @@ LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
 		}
 		return null;
 	} else {
-		// add the given PresentationRole visually
-		Iterator subjects = role.iteratorSubject();
-		while (subjects.hasNext()) {
-			AssociationEnd subjectRoleDef = (AssociationEnd)subjects.next();
-			if (subjectRoleDef.containsParticipant()) {
-				Classifier targetClass = subjectRoleDef.getParticipant();
-Tracer.getInstance().debug("PresentationRole->Subject:RoleDef=" + subjectRoleDef.getName().getValue() + ", ClassDef=" + targetClass.getName().getValue());
-				Iterator endpoints = role.iteratorEndpoint();
-				if(endpoints.hasNext()) {
-					endpoints.next(); // skip PresentationAssocClass (LinkNode)
-					if (endpoints.hasNext()) {
-						ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
-						if (!presentationClass.containsSubject(targetClass)) {
-							// role was probably moved to another Classifier in Model by another Diagram
-/*							Iterator classSubjects = presentationClass.iteratorSubject();
-							while (classSubjects.hasNext()) {
-								Classifier wrongClassDef = (Classifier)classSubjects.next();
-							}
-*/
-							Tracer.getInstance().developerWarning(this, "loadPresentationRole(..)", "AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
-							ClassFigure newClass = (ClassFigure)findFigure(targetClass);
-							if (newClass != null) {
-								role.setEndpoint(1, newClass.getNode());
-							}
-						}
-						// show role visually
-						EdgeFigure figure = new PresentationRoleFigure(this, role);
-						loadSimpleEdge(figure);
-						return figure;
-					}
-				}
-			}
+		if (correctRoleRelocation(role)) {
+			// show role visually
+			EdgeFigure figure = new PresentationRoleFigure(this, role);
+			loadSimpleEdge(figure);
+			return figure;
+		} else {
+			return null;
 		}
-/*
-Iterator its = role.getAssociation().iteratorSubject();
-while(its.hasNext()) {
-	AssociationDef subj = (AssociationDef)its.next();
-	Iterator itsc = subj.iteratorConnection();
-	while (itsc.hasNext()) {
-		RoleDef ro = (RoleDef)itsc.next();
-		Tracer.getInstance().debug("RoleDef via Association=" + ro.getParticipant().getName().getValue());
-	}				
-}
-*/		
-		getDiagram().removePresentationElement(role);
-	  	Tracer.getInstance().developerWarning(this, "loadPresentationRole(..)", "AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
-		return null;
 	}
 }
 /**
@@ -1148,7 +1242,7 @@ private void trySaveAssociation(AssociationDef associationDef, PresentationNode 
  */
 public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 	Figure figure = null;
-//Tracer.getInstance().debug("Updating diagram=" +getDiagram().getName().getValue());
+
 	if (event.getSource() instanceof AttributeDef) {
 		// special case -> no direct child-Element of Diagram
 		if (((AttributeDef)event.getSource()).containsOwner()) {
@@ -1158,11 +1252,8 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 		figure = findFigure((RoleDef)event.getSource());
 /*	}
 	else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.WayPoint) {
-
 	} else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.Color)	{
-
 	} else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.Diagram) {
-
 	} else if (event.getSource() instanceof ch.ehi.uml1_4.foundation.datatypes.Multiplicity) {
 */
 	} else if (event.getSource() instanceof Element) {
@@ -1172,11 +1263,39 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 	if (figure != null) {
 		if (figure instanceof NodeFigure) {
 			((NodeFigure)figure).updateView();
-		} else {
-			// for AssociationDef's:
-			// 	@see LinkFigure.updateView()
-			//  @see PresentationRoleFigure.updateView()
-			((EdgeFigure)figure).updateView();
+		} else /* edgeFigure */ {
+			// for AssociationDef's: @see LinkFigure.updateView(), @see PresentationRoleFigure.updateView()
+			if (event.getOperation().startsWith(MetaModelChange.OP_CHANGE)) {
+Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +getDiagram().getName().getValue() + ", Event=" + event.toString() + ", type=" + event.getOperation());
+				if ((figure instanceof PresentationRoleFigure) && event.getOperation().equals("changeParticipant")) {
+					PresentationRoleFigure roleFigure = (PresentationRoleFigure)figure;
+					PresentationRole role = (PresentationRole)roleFigure.getEdge();
+					if (correctRoleRelocation(role)) {
+						// correctRoleRelocation(..) guarantees for given Iterator-Elements!
+						Iterator endpoints = role.iteratorEndpoint();
+						endpoints.next(); // skip PresentationAssocClass (LinkNode)
+						ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
+						Iterator subjects = presentationClass.iteratorSubject();
+						Connector end = findNodeConnector((Element)subjects.next(), 0, 0);
+						if (end == null) {
+							Tracer.getInstance().developerWarning(this, "update(..)", "AUTO-CORRECTION: Removing PresentationRole from Diagram");
+							getDiagram().deletePresentationElement(role);
+						} else {
+							roleFigure.setEndConnector(end);
+						}
+					}
+				} else if (figure instanceof DependencyLineConnection) {
+					if (correctDependencyRelocation((DependencyLineConnection)figure)) {
+						((EdgeFigure)figure).updateView();
+					}
+				} else if (figure instanceof GeneralizationLineConnection) {
+					if (correctGeneralizationRelocation((GeneralizationLineConnection)figure)) {
+						((EdgeFigure)figure).updateView();
+					} 
+				}
+			}
+			
+			
 		}
 	} // else no figure found to update
 }
