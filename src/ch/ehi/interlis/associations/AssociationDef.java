@@ -61,12 +61,12 @@ package ch.ehi.interlis.associations;
 
               // import declarations
               // please fill in/modify the following section
-              // -beg- preserve=no 3C178E4F0366 import "AssociationDef"
-
+              // -beg- preserve=yes 3C178E4F0366 import "AssociationDef"
+import ch.ehi.interlis.tools.RoleDefUtility;
               // -end- 3C178E4F0366 import "AssociationDef"
 
               /** @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:33:30 $
+               *  @version $Revision: 1.2 $ $Date: 2005-01-14 15:51:12 $
                */
 public class AssociationDef extends AbstractClassDef implements AssociationClass , java.io.Serializable
               {
@@ -195,9 +195,9 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
     java.util.Iterator rolei=iteratorConnection();
     while(rolei.hasNext()){
       RoleDef role=(RoleDef)rolei.next();
-      if(role.getIliAttributeKind()==AssociationAsIliAttrKind.STRUCTURE){
-        return true;
-      }
+	  if(RoleDefUtility.isIliStructAttr(role)){
+		return true;
+	  }
     }
     return false;
                   // -end- 3D6F993E0352 body3C178E4F0366 "isStructureAttribute"
@@ -219,7 +219,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
     java.util.Iterator rolei=iteratorConnection();
     while(rolei.hasNext()){
       RoleDef role=(RoleDef)rolei.next();
-      if(role.getIliAttributeKind()==AssociationAsIliAttrKind.REFERENCE){
+      if(RoleDefUtility.isIliRefAttr(role)){
         return true;
       }
     }

@@ -57,6 +57,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.RotationKind;
 import ch.ehi.interlis.associations.AssociationAsIliAttrKind;
 import ch.ehi.interlis.views.ViewableDef;
+import ch.ehi.interlis.tools.AbstractClassDefUtility;
+import ch.ehi.interlis.tools.RoleDefUtility;
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Package;
@@ -782,25 +784,17 @@ public class TransferFromUmlMetamodel
     inc_ind();
 
     // {AttributeDef}
-    java.util.Iterator childi=def.iteratorFeature();
-    while(childi.hasNext()){
-       Object obj=childi.next();
-       if(obj instanceof AttributeDef){
-        visitAttributeDef((AttributeDef)obj);
-       }else{
-        // ignore others; should not have others
-       }
-    }
-    // generate INTERLIS structure and reference attributes
-    childi=def.iteratorAssociation();
-    while(childi.hasNext()){
-       Object obj=childi.next();
-       if(obj instanceof RoleDef){
-        visitAttributeDef((RoleDef)obj);
-       }else{
-        // ignore others; should not have others
-       }
-    }
+    java.util.Iterator childi=AbstractClassDefUtility.getIliAttributes(def).iterator();
+	while(childi.hasNext()){
+	   Object obj=childi.next();
+	   if(obj instanceof AttributeDef){
+		visitAttributeDef((AttributeDef)obj);
+	   }else if(obj instanceof RoleDef){
+		 visitAttributeDef((RoleDef)obj);
+	   }else{
+		// ignore others; should not have others
+	   }
+	}
 
     // {ConstraintDef}
     childi=def.iteratorConstraint();
@@ -919,21 +913,14 @@ public class TransferFromUmlMetamodel
     }
 
     // {AttributeDef}
-    childi=def.iteratorFeature();
+	// generate INTERLIS structure and reference attributes
+    childi=AbstractClassDefUtility.getIliAttributes(def).iterator();
     while(childi.hasNext()){
        Object obj=childi.next();
        if(obj instanceof AttributeDef){
         visitAttributeDef((AttributeDef)obj);
-       }else{
-        // ignore others; should not have others
-       }
-    }
-    // generate INTERLIS structure and reference attributes
-    childi=def.iteratorAssociation();
-    while(childi.hasNext()){
-       Object obj=childi.next();
-       if(obj instanceof RoleDef){
-        visitAttributeDef((RoleDef)obj);
+       }else if(obj instanceof RoleDef){
+		 visitAttributeDef((RoleDef)obj);
        }else{
         // ignore others; should not have others
        }
@@ -1117,13 +1104,13 @@ public class TransferFromUmlMetamodel
     return modelElementRef(source,ref,null);
     }
 
-  public void visitAttributeDef(RoleDef def)
+  public void visitAttributeDef(RoleDef oppend)
       throws java.io.IOException
     {
-    if(def.getIliAttributeKind()==AssociationAsIliAttrKind.STRUCTURE){
+    RoleDef def=getOppEnd(oppend);
+    if(RoleDefUtility.isIliStructAttr(def)){
       // TODO check that exactly two roles
       // if(assoc.sizeConnection()!=2){ log error}
-      RoleDef oppend=getOppEnd(def);
 
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
@@ -1183,7 +1170,7 @@ public class TransferFromUmlMetamodel
         String sep="";
         while(restri.hasNext()){
           ClassDef restr=(ClassDef)restri.next();
-          out.write(sep+classRef(def,restr));
+          out.write(sep+classRef(def.getParticipant(),restr));
           sep=", ";
         }
       }
@@ -1191,10 +1178,9 @@ public class TransferFromUmlMetamodel
       // TODO [':=' Factor { ',' Factor } ]
 
       out.write(";");newline();
-    }else if(def.getIliAttributeKind()==AssociationAsIliAttrKind.REFERENCE){
+    }else{
       // TODO check that exactly two roles
       // if(assoc.sizeConnection()!=2){ log error}
-      RoleDef oppend=getOppEnd(def);
 
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
@@ -1238,7 +1224,7 @@ public class TransferFromUmlMetamodel
         String sep="";
         while(restri.hasNext()){
           ClassDef restr=(ClassDef)restri.next();
-          out.write(sep+classRef(def,restr));
+          out.write(sep+classRef(def.getParticipant(),restr));
           sep=", ";
         }
       }
@@ -1623,18 +1609,20 @@ public class TransferFromUmlMetamodel
       }
 
       // consider classrefs in reference/structure attributes
-      if(def instanceof ClassDef){
-        i=((ClassDef)def).iteratorAssociation();
+      if(def instanceof AbstractClassDef){
+        i=((AbstractClassDef)def).iteratorAssociation();
         while(i.hasNext()){
            Object obj=i.next();
            if(obj instanceof RoleDef){
             RoleDef role=(RoleDef)obj;
-            if(role.getIliAttributeKind()==AssociationAsIliAttrKind.STRUCTURE
-                || role.getIliAttributeKind()==AssociationAsIliAttrKind.REFERENCE){
+            if(role.getAssociation().sizeConnection()>2){
+            	continue;
+            }
+            if(RoleDefUtility.isIliAttr(role)){
               RoleDef oppend=getOppEnd(role);
               if(oppend.containsParticipant()){
                 ch.ehi.uml1_4.foundation.core.Classifier supplierc=oppend.getParticipant();
-                ClassDef supplier=(ClassDef)oppend.getParticipant();
+                AbstractClassDef supplier=(AbstractClassDef)oppend.getParticipant();
                 if(children.contains(supplier)){
                   ts.addcond(supplier,def);
                 }
@@ -1643,7 +1631,7 @@ public class TransferFromUmlMetamodel
               if(oppend.sizeRestriction()>0){
                 Iterator restri=oppend.iteratorRestriction();
                 while(restri.hasNext()){
-                  ClassDef supplier=(ClassDef)restri.next();
+                  AbstractClassDef supplier=(AbstractClassDef)restri.next();
                   if(children.contains(supplier)){
                     ts.addcond(supplier,def);
                   }
