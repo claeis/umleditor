@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:28 $
-// $Revision: 1.1.1.1 $
+// $Date: 2003-12-23 17:13:57 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3CFE050F004D package "TransferFromUmlMetamodel"
@@ -557,6 +557,10 @@ public class TransferFromUmlMetamodel
     out.write(" =");newline();
 
     inc_ind();
+
+    if(def.containsOiddomain()){
+      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));newline();
+    }
 
     int depc=0;
     String sep=getIndent()+"DEPENDS ON ";

@@ -22,11 +22,11 @@ Offene Fragen/Arbeiten
 - OTHERS, FINAL bei Enumeration
 - Diagrammexport in SVG (Scalable Vector Graphics)
 - Diagrammexport in WMF (Windows Meta File)
-- OID auf TopicDefDialog hinzufuegen
 
 
 UML-Editor 2.0.3 (2003-xx-xx)
 -----------------------------
+- OID auf TopicDefDialog hinzufuegen
 - neuer Dialog fuer LineFomTypeDef
 - neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
 - neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 

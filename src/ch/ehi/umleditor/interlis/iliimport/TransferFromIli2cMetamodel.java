@@ -195,6 +195,9 @@ public class TransferFromIli2cMetamodel
       topicextends.attachChild(topicdef);
     }
 
+    if(topic.getOid()!=null){
+      topicdef.attachOiddomain(findDomainDef(topic.getOid()));
+    }
 
     Iterator it = topic.getDependentOn();
     while(it.hasNext())
