@@ -1,22 +1,39 @@
 Offene Fragen/Arbeiten
 ----------------------------
-
 - Liste der Diagramme auf dem ein ModelElement dargestellt wird
+- selectTarget, selectOwner auf RoleDef-NavPopup 
 - Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
+- Nichts, gem. Diagramm, ILIPATH, ILIMODEL, ILITOPIC oder UMLPACKAGE bei Klasse darstellen
 - API: generic filters aus Launcher nach basics verschieben
 - FINAL bei Enumeration
 - INTERLIS ohne Kommentar exportieren
+- featurecatalog: special section that lists deprectated elements inl. links to replacements
 - Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
 - Bug: s.o. (JRE="SE 1.4.1_01" Grafikkarte="ATI Mobility M6" TreiberVersion="5.13.1.3207" Auflösung="1024x768, 32bit Farben" OS="Windows 2000 Service Pack 2" Rechner="Fujits Siemens LifeBook E-Series")
 - Bug: Für Ili-Kompositions- und Referenzattribute kann die Reihenfolge in der Klassendefinition nicht spezifiziert werden
 - Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
-- Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
-- Bug: Position der AssocKlasse wird nicht in DiagGroesse berücksichtigt
+- Bug: Popup-Item "Ganzes" im Diagramm wird nicht nach geführt, wenn über Dialog geändert
+- Bug: Fehler "java.io.IOException: unexpected Element" beim Oeffnen einer uml-Datei, die mit einer neueren Version des Uml-Editors erstellt wurde 
+- Bug iliexp: bei einem französischen Modell wird trotzdem de als Sprache exportiert
 
-UML-Editor 2.2.x (2004-03-xx)
+UML-Editor 2.3.0 (2004-06-14)
+-----------------------------
+- iliexp: Ausgabe der Modellelemente zusätzlich nach Typ und Name sortieren
+- in Diagramm angezeigte Rollen/Kardinalitäten neu anordnen
+- Datei-Menu enthält Liste der zuletzt geöffneten Dateien
+- Merkmalskatalog auch ohne Kapitelnummerierung (für einfachere Uebernahme ins Word)
+- Bug: "Loeschen im Modell" im Diagramm funktioniert nicht; loescht nur im Diagramm
+
+
+UML-Editor 2.2.1 (2004-04-20)
 -----------------------------
 - Support für Plugins
+- Abstrakte Klassen werden kursiv dargestellt
+- Bug: Position der AssociationClass wird nicht für Diagramm Groesse berücksichtigt
+- Bug: beim löschen von DomainDefs werden die Referenzen in AttributeDefs nicht richtig nachgeführt (tritt nur auf bei fehlerhafter uml-Datei)
+- Bug iliexp: ANYCLASS wurde als INTERLIS.ANYCLASS exportiert
+- Bug iliexp: EXTERNAL hat in RoleDef gefehlt 
 
 
 UML-Editor 2.1.3 (2004-03-02)
