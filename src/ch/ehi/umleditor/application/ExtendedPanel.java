@@ -26,7 +26,7 @@ import ch.softenvironment.util.*;
  * Generic User Interface Panel to treat INTERLIS-EXTENDS.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2003-12-23 17:13:54 $
+ * @version $Revision: 1.3 $ $Date: 2004-01-05 10:57:11 $
  */
 public class ExtendedPanel extends javax.swing.JPanel {
 	private static java.util.ResourceBundle resExtendedPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ExtendedPanel");
@@ -214,9 +214,11 @@ public boolean getClassifierExtension(String name) {
  */
 public boolean getExtension() {
 	if (getCbxExtends().hasElementChanged()) {
-Tracer.getInstance().developerWarning(this, "setElement()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
-		currentGeneralization = null;
-		generalizableElement.clearGeneralization();
+Tracer.getInstance().developerWarning(this, "getExtension()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+		if (currentGeneralization != null) {
+			generalizableElement.removeGeneralization(currentGeneralization);
+			currentGeneralization = null;
+		}		
 
 		GeneralizableElement parent = (GeneralizableElement)getCbxExtends().getElement();
 		if (parent != null) {
@@ -338,14 +340,13 @@ public void setClassifierExtension(GeneralizableElement generalizableElement) {
 	boolean extended = false;
 	if (((AbstractClassDef)generalizableElement).containsParentTopicDef()) {
 		TopicDef topicDefThis = ((AbstractClassDef)generalizableElement).getParentTopicDef();
-		if (topicDefThis.containsBaseTopicDef()) {
-                        // set extended only as selected if inside an extended topic
-			java.util.Iterator iterator = generalizableElement.iteratorGeneralization();
-			if (iterator.hasNext()) {
-				currentGeneralization = (Generalization)iterator.next();
-				if (currentGeneralization instanceof ClassExtends) {
-					extended = ((ClassExtends)currentGeneralization).isExtended();
-				}
+		java.util.Iterator iterator = generalizableElement.iteratorGeneralization();
+		if (iterator.hasNext()) {
+Tracer.getInstance().developerWarning(this, "setClassifierExtension()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+			currentGeneralization = (Generalization)iterator.next();
+			if ((currentGeneralization instanceof ClassExtends) && topicDefThis.containsBaseTopicDef()) {
+				// set extended only as selected if inside an extended topic
+				extended = ((ClassExtends)currentGeneralization).isExtended();
 			}
 		}
 	}
