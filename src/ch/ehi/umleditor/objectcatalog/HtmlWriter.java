@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-06-14 14:12:10 $
-// $Revision: 1.3 $
+// $Date: 2004-06-23 09:41:58 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -533,7 +533,7 @@ public class HtmlWriter
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CEE8B8A003D body3CEE891B03C7 "visitAttribute"
-    String type=getAttrType(attr);
+    String typeLabel=getAttrType(attr);
     if(pass==BODY)
     {
       String style="";
@@ -542,9 +542,33 @@ public class HtmlWriter
       }
       out.write("<TR><TD "+style+">"+encodeString(attr.getDefLangName())
           +"</TD><TD "+style+">"+mapMultiplicity(attr.getMultiplicity())
-          +"</TD><TD "+style+">"+encodeString(type)
+          +"</TD><TD "+style+">"+encodeString(typeLabel)
           +"</TD><TD "+style+">"+encodeDescription(mapNlsString(attr.getDocumentation()))
           +"</TD></TR>");newline();
+          
+		ch.ehi.interlis.domainsandconstants.Type type=null;
+		ch.ehi.interlis.attributes.DomainAttribute attrType=(ch.ehi.interlis.attributes.DomainAttribute)((AttributeDef)attr).getAttrType();
+		if(attrType.containsDirect()){
+		  type=attrType.getDirect();
+		}
+		if(type!=null && type instanceof Enumeration){
+			if(pass==BODY)
+			{
+				Iterator elei=getEnumEleIterator((Enumeration)type);
+				while(elei.hasNext()){
+				  ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=(ch.ehi.interlis.domainsandconstants.basetypes.EnumElement)elei.next();
+					  String eleName=getEnumEleName(ele);
+
+					out.write("<TR><TD "+style+">"
+						+"</TD><TD "+style+">"
+						+"</TD><TD "+style+">"+encodeString(eleName)
+						+"</TD><TD "+style+">"+encodeDescription(mapNlsString(ele.getDocumentation()))
+						+"</TD></TR>");newline();
+				}
+			}
+		}
+
+
     }
     return;
     // -end- 3CEE8B8A003D body3CEE891B03C7 "visitAttribute"
