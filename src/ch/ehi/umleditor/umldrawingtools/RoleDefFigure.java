@@ -17,7 +17,6 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.*;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.umleditor.application.*;
@@ -31,7 +30,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -205,7 +204,7 @@ public void removeVisually() {
 				break;
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**

@@ -33,7 +33,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -371,7 +371,7 @@ public void removeInModel() {
 			setModelElement(null);
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, null, this);
 	}
 }
 /**
@@ -413,7 +413,7 @@ public void removeVisually() {
 	try {
 		removeVisually((ch.ehi.uml1_4.foundation.core.Association)getStartElement());
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**

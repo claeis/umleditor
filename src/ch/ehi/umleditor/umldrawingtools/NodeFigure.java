@@ -25,6 +25,7 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
+import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.util.ResourceManager;
 import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
@@ -33,13 +34,14 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-05-03 12:41:57 $
+ * @version $Revision: 1.7 $ $Date: 2004-06-01 14:09:47 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
 	protected ch.ehi.umleditor.umlpresentation.PresentationNode node;
 	private ClassDiagramView classDiagram = null;
 	private boolean creating = true;
+	
 /**
  * UmlFigure constructor comment.
  * @param newPresentationFigure ch.ifa.draw.framework.Figure
@@ -268,7 +270,11 @@ protected void handleException(java.lang.Throwable exception) {
  * @param exception java.lang.Throwable
  */
 protected static void handleException(java.lang.Throwable exception, String title, String message, Object source) {
-	LauncherView.getInstance().handleException(exception, title, message + " [" + source.toString() + "]");
+	String text = message;
+	if (message == null) {
+		text = ResourceManager.getInstance().getResource(DeveloperException.class, "CTDevelopmentError");
+	}
+	LauncherView.getInstance().handleException(exception, title, text + " [" + source.toString() + "]");
 }
 /**
  * Initialize the node.
@@ -354,7 +360,7 @@ public void removeInModel() {
 			ElementFactory.removeElement(tmp);
 		}
 	} catch(Throwable e) {
-		handleException(e, REMOVE_IN_MODEL, ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, REMOVE_IN_MODEL, null, this);
 	}
 }
 /**
@@ -374,7 +380,7 @@ public void removeVisually() {
 			getClassDiagram().getDiagram().deletePresentationElement(node); //removePresentationElement(node);
 		}
 	} catch(Throwable e) {
-		handleException(e, CommonUserAccess.getMniEditRemoveText(), ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**

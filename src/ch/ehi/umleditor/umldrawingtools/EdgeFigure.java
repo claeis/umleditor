@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.7 $ $Date: 2004-06-01 14:09:47 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -471,7 +471,7 @@ public void removeInModel() {
 	 		setModelElement(null);
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, null, this);
 	}
 }
 /**
@@ -512,7 +512,7 @@ public void removeVisually() {
 			}
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**
