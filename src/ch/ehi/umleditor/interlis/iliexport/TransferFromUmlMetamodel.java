@@ -1560,6 +1560,24 @@ public class TransferFromUmlMetamodel
           || oid.getKind()==ch.ehi.interlis.domainsandconstants.basetypes.OidKind.TEXT){
         visitType(owner,oid.getOiddomain());
       }
+	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.BasketType){
+	  ch.ehi.interlis.domainsandconstants.basetypes.BasketType basketType=(ch.ehi.interlis.domainsandconstants.basetypes.BasketType)def;
+	  out.write("BASKET");
+	  int kind=basketType.getKind();
+	  // TODO: export BasketKind; requires change in metamodel, should be a set of values
+	  if(kind==ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.DATA){
+		out.write(" (DATA)");
+	  }else if(kind==ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.VIEW){
+		out.write(" (VIEW)");
+	  }else if(kind==ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.BASE){
+		out.write(" (BASE)");
+	  }else if(kind==ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.GRAPHIC){
+		out.write(" (GRAPHIC)");
+	  }
+	  if(basketType.containsBasketSchema()){
+		TopicDef schema=basketType.getBasketSchema();
+		out.write(" OF "+topicRef(owner,schema));
+	  }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.ClassType){
       ch.ehi.interlis.domainsandconstants.basetypes.ClassType classtype=(ch.ehi.interlis.domainsandconstants.basetypes.ClassType)def;
       if(classtype.getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS){
