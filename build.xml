@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="bindist" name="umleditor">
+
+  <!-- set global properties for this build -->
+  <property name="src" value="${basedir}/src"/>
+  <property name="build" value="${basedir}/build"/>
+  <property name="dist" value="${basedir}/dist"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <property name="projectjar" value="${build}/jar/${ant.project.name}.jar"/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build}/jar"/>
+    <mkdir dir="${dist}"/>
+  </target>
+  
+  <target depends="init" name="run">
+    <java jar="${projectjar}" fork="true">
+    	<arg value="-debug"/>
+    </java>
+  </target>
+
+  <target depends="init" name="compile">
+    <!-- Compile the java code from ${src} into ${build}/classes -->
+    <mkdir dir="${build}/classes"/>
+    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java">
+      <classpath>
+        <pathelement location="lib/hd53.jar"/>
+        <pathelement location="lib/ehibasics.jar"/>
+        <pathelement location="lib/ili2c.jar"/>
+        <pathelement location="lib/XMIFramework.jar"/>
+        <pathelement location="lib/jh.jar"/>
+      </classpath>
+    	<src path="${src}" />
+    	<!-- <src path="${build}/src"/> -->
+    </javac>
+  </target>
+
+
+  <target depends="init" name="javadocs">
+    <mkdir dir="${build}/javadoc/api"/>
+    <javadoc Public="true" Windowtitle="UML-Editor API" destdir="${build}/javadoc/api" packagenames="ch.ehi.interlis.*,ch.ehi.uml1_4.*,ch.ehi.umleditor.umlpresentation.*">
+    	<sourcepath path="${src}"/>
+    </javadoc>
+  </target>
+
+
+  <target depends="init,compile" name="jar">
+    <delete file="${projectjar}" quiet="true"/>
+    <propertyfile file="${src}/ch/ehi/umleditor/application/Version.properties">
+	<!-- <entry  key="versionMicro" type="int" value="1" operation="+"/> -->
+	<entry  key="versionDate" type="date" value="now" pattern="yyyyMMdd"/>
+    </propertyfile>
+
+    <jar jarfile="${projectjar}" manifest="other/manifest">
+	<fileset dir="${build}/classes" excludes="**/Test.class" includes="**/*.class"/>
+   	<fileset dir="${src}" includes="**/*.properties"/>
+    	<fileset dir="resources/de" includes="**/*.properties"/>
+    	<fileset dir="resources/fr" includes="**/*.properties"/>
+    	<fileset dir="resources/en" includes="**/*.properties"/>
+    	<fileset dir="${src}" includes="**/*.gif"/>
+    	<fileset dir="${src}" includes="**/*.jpg"/>
+    	<zipfileset src="lib/XMIFramework.jar"/>
+    	<zipfileset src="lib/hd53.jar"/>
+    	<fileset dir="help">
+    	  <patternset>
+	    <include name="**/*.hs"/>
+	    <include name="**/*.html"/>
+	    <include name="**/*.png"/>
+	    <include name="**/*.xml"/>
+	    <include name="**/*.jhm"/>
+	    <include name="**/*.png"/>
+	    <include name="**/JavaHelpSearch/*"/>
+	  </patternset>
+	</fileset>
+    	<!-- <fileset dir="lib" excludes="antlr-2.6.1/**/*"/> -->
+    </jar>
+  </target>
+  
+  <target depends="init" name="bindist">
+    <property file="${src}/ch/ehi/umleditor/application/Version.properties" prefix="buildnr."/>
+    <property name="buildnr" value="${buildnr.versionMajor}.${buildnr.versionMinor}.${buildnr.versionMicro}"/>
+    <delete file="${dist}/${ant.project.name}-${buildnr}.zip" quiet="true"/>
+    <zip zipfile="${dist}/${ant.project.name}-${buildnr}.zip">
+    	<zipfileset dir="." includes="build/jar/umleditor.jar" fullpath="${ant.project.name}-${buildnr}/${ant.project.name}.jar"/>
+    	<zipfileset dir="." includes="docs/bindist/CHANGELOG.txt" fullpath="${ant.project.name}-${buildnr}/CHANGELOG.txt"/>
+    	<zipfileset dir="." includes="docs/bindist/README.txt" fullpath="${ant.project.name}-${buildnr}/README.txt"/>
+    	<zipfileset dir="." includes="docs/bindist/README_de.txt" fullpath="${ant.project.name}-${buildnr}/README_de.txt"/>
+    	<zipfileset dir="." includes="xmirose/*.ebs" prefix="${ant.project.name}-${buildnr}"/>
+    	<zipfileset dir="." includes="lib/jh.jar" fullpath="${ant.project.name}-${buildnr}/jh.jar"/>
+    	<zipfileset dir="." includes="lib/ili2c.jar" fullpath="${ant.project.name}-${buildnr}/ili2c.jar"/>
+    	<zipfileset dir="." includes="other/LICENSE.lgpl" fullpath="${ant.project.name}-${buildnr}/LICENSE.lgpl"/>
+    	<zipfileset dir="." includes="other/LICENSE.apache" fullpath="${ant.project.name}-${buildnr}/LICENSE.apache"/>
+    </zip>
+  </target>
+<!--
+  <target depends="srcdist,bindist" name="dist"/>
+  <target depends="init" name="bindist">
+	<delete file="${dist}/${ant.project.name}-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/${ant.project.name}-${DSTAMP}.zip">
+    	<zipfileset dir="." includes="build/jar/ili2c.jar" fullpath="${ant.project.name}-${DSTAMP}/${ant.project.name}.jar"/>
+    	<zipfileset dir="." includes="doc/bindist/CHANGELOG.txt" fullpath="${ant.project.name}-${DSTAMP}/CHANGELOG.txt"/>
+    	<zipfileset dir="." includes="doc/bindist/README.txt" fullpath="${ant.project.name}-${DSTAMP}/README.txt"/>
+    </zip>
+  </target>
+-->
+  <target depends="init" name="srcdist">
+    <delete file="${dist}/${ant.project.name}-src-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/${ant.project.name}-src-${DSTAMP}.zip">
+    	<zipfileset dir="." prefix="${ant.project.name}-${DSTAMP}">
+	    	<patternset includes="build.xml"/>
+	    	<patternset includes="UMLEditor.jpr"/>
+	    	<patternset includes="lib/**"/>
+<!--	    	<patternset includes="model/**/*.sub"/>
+	    	<patternset includes="model/**/*.cat"/>
+	    	<patternset includes="model/**/*.mdl"/>
+-->
+	    	<patternset includes="other/manifest"/>
+<!--	    	<patternset includes="build/rosemodel/**"/>
+-->
+	    	<patternset includes="src/**" excludes="**/CVS/*;**/bak~/*"/>
+	    	<!-- <patternset includes="src-hd53/**/*.class"/> -->
+	    	<patternset includes="src-hd53/src/**" excludes="**/CVS/*;**/bak~/*"/>
+	    	<patternset includes="docs/bindist/*.txt"/>
+<!--
+	    	<patternset includes="doc/**"/>
+	    	<patternset includes="other/**"/>
+	    	<patternset includes="test/**"/>
+	    	<patternset includes="tools/**"/>
+-->
+    	</zipfileset>
+    </zip>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+    <delete>
+    	<fileset dir="${basedir}" defaultexcludes="no">
+		<include name="**/*.bak"/>
+		<include name="**/bak~/*"/>
+		<include name="**/*~"/>
+	</fileset>
+    </delete>
+  </target>
+
+  <target depends="init" name="cesrczip">
+	<delete file="${dist}/ce-src-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/ce-src-${DSTAMP}.zip">
+    	<zipfileset dir="src">
+	    	<patternset includes="ch/ehi/umleditor/umlpresentation/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/umlpresentation/**/*.properties"/>
+	    	<patternset includes="ch/ehi/umleditor/format/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/format/**/*.properties"/>
+	    	<patternset includes="ch/ehi/umleditor/objectcatalog/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/objectcatalog/**/*.properties"/>
+	    	<patternset includes="ch/ehi/umleditor/interlis/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/interlis/**/*.properties"/>
+	    	<patternset includes="ch/ehi/umleditor/rose/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/rose/**/*.properties"/>
+	    	<patternset includes="ch/ehi/umleditor/xmiuml/**/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/xmiuml/**/*.properties"/>
+	    	<patternset includes="ch/ehi/interlis/**/*.java"/>
+	    	<patternset includes="ch/ehi/interlis/**/*.properties"/>
+	    	<patternset includes="ch/ehi/uml1_4/**/*.java"/>
+	    	<patternset includes="ch/ehi/uml1_4/**/*.properties"/>
+	    	<patternset includes="ch/ehi/basics/tools/**/*.java"/>
+	    	<patternset includes="ch/ehi/basics/tools/**/*.properties"/>
+	    	<patternset includes="ch/ehi/basics/types/**/*.java"/>
+	    	<patternset includes="ch/ehi/basics/types/**/*.properties"/>
+	    	<patternset includes="ch/ehi/basics/view/**/*.java"/>
+	    	<patternset includes="ch/ehi/basics/view/**/*.properties"/>
+	    	<patternset includes="ch/ehi/basics/i18n/**/*.java"/>
+	    	<patternset includes="ch/ehi/basics/i18n/**/*.properties"/>
+
+      <!--
+        -->
+    	</zipfileset>
+    </zip>
+  </target>
+
+
+  <target depends="init" name="cemmzip">
+	<delete file="${dist}/ce-mm-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/ce-mm-${DSTAMP}.zip">
+    	<zipfileset dir="model">
+	    	<patternset includes="*.cat"/>
+	    	<patternset includes="*.sub"/>
+	    	<patternset includes="*.mdl"/>
+    	</zipfileset>
+    </zip>
+  </target>
+
+ <target depends="init" name="phsrczip">
+	<delete file="${dist}/ph-src-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/ph-src-${DSTAMP}.zip">
+    	<zipfileset dir="src">
+	    	<patternset includes="ch/ehi/umleditor/application/**/*.java" excludes="**/bak~/*.java"/>
+	    	<patternset includes="ch/ehi/umleditor/umldrawingtools/**/*.java" excludes="**/bak~/*.java"/>
+    	</zipfileset>
+    </zip>
+  </target>
+
+  <target depends="init" name="cesrcdiffzip">
+	<delete file="${dist}/ce-srcdiff-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/ce-srcdiff-${DSTAMP}.zip">
+    	<zipfileset dir="src">
+	    	<patternset includes="**/EdgeFigure.java"/>
+	    	<patternset includes="**/AssociationAttributeFigure.java"/>
+	    	<patternset includes="**/PresentationRoleFigure.java"/>
+	    	<patternset includes="**/LinkFigure.java"/>
+	    	<patternset includes="**/ClassFigure.java"/>
+	    	<patternset includes="**/ClassDiagramView.java"/>
+	    	<patternset includes="**/AssociationLineConnection.java"/>
+<!--	    	<patternset includes="**/TopicDepends.java"/>
+-->
+    	</zipfileset>
+    </zip>
+  </target>
+
+    <target depends="init" name="reszip">
+	<delete file="${dist}/resources-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/resources-${DSTAMP}.zip">
+    	<zipfileset dir="resources">
+	    	<!-- <patternset includes="**/comments.txt"/> -->
+	    	<patternset includes="**/*.properties"/>
+    	</zipfileset>
+    </zip>
+  </target>
+    <target depends="init" name="resdezip">
+	<delete file="${dist}/resources-de-${DSTAMP}.zip" quiet="true"/>
+    <zip zipfile="${dist}/resources-de-${DSTAMP}.zip">
+    	<zipfileset dir="resources">
+	    	<!-- <patternset includes="**/comments.txt"/> -->
+	    	<patternset includes="de/**/*.properties"/>
+    	</zipfileset>
+    </zip>
+  </target>
+
+  <target depends="init" name="copyres">
+
+    <copy toDir="${build}/classes">
+    	<fileset dir="${src}" includes="**/*.properties"/>
+    	<fileset dir="${src}" includes="**/*.gif"/>
+    	<fileset dir="${src}" includes="**/*.jpg"/>
+    </copy>
+  </target>
+
+  <target depends="init" name="renresen">
+
+    <move toDir="${basedir}/resources/en">
+    	<mapper type="glob" from="*_en.properties" to="*.properties"/>
+    	<fileset dir="${basedir}/resources/en" includes="**/*_en.properties"/>
+    </move>
+  </target>
+
+  <target depends="init" name="cleanres">
+
+    <delete>
+    	<fileset dir="${build}/classes" includes="**/*.properties"/>
+    	<fileset dir="${build}/classes" includes="**/*.gif"/>
+    	<fileset dir="${build}/classes" includes="**/*.jpg"/>
+    </delete>
+  </target>
+
+  <target depends="init" name="saveres">
+    <mkdir dir="res-${DSTAMP}"/>
+
+    <copy toDir="res-${DSTAMP}">
+    	<fileset dir="${src}" includes="**/*.properties"/>
+    	<fileset dir="${src}" includes="**/*.gif"/>
+    	<fileset dir="${src}" includes="**/*.jpg"/>
+    </copy>
+  </target>
+
+</project>
