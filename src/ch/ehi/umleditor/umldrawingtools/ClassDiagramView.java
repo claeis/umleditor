@@ -17,6 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
@@ -33,11 +34,11 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:50 $
+ * @version $Revision: 1.4 $ $Date: 2004-01-04 09:43:43 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
-	private static java.util.ResourceBundle resClassDiagramView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassDiagramView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resClassDiagramView = ResourceBundle.getBundle(ClassDiagramView.class);  //$NON-NLS-1$
 	private ch.ehi.umleditor.umlpresentation.Diagram diagram = null;
 	private Element parentElement = null;
 	// Menu Checkboxes
@@ -45,6 +46,7 @@ public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
 	private boolean showAttributes = true;
 	private boolean showLinkFigure = false;
 	private boolean showRoles = true;
+	private boolean showMultiplicity = false;
 	private boolean loading = false;
 	
 	/*
@@ -71,7 +73,7 @@ public ClassDiagramView(DrawingEditor editor, Diagram diagram) {
 	this.diagram = diagram;
 }
 /**
- * Adds a given Model to Diagram.
+ * Adds a given (Model)-Element to Diagram.
  * @return the added figure.
  * @see NavigationView#mniAddToDiagram()
  */
@@ -163,14 +165,14 @@ private Figure addClassifier(RoleDef roleDef) {
   	return figure;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsClasses(Element).
  */
 public boolean allowsClasses() {
 	return allowsClasses(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of non-Package-Type.
+ * @return whether allowed or not
  */
 public static boolean allowsClasses(Element element) {
 	String validOwnedElements[];
@@ -189,14 +191,14 @@ public static boolean allowsClasses(Element element) {
 	return false;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsPackages(Element)
  */
 public boolean allowsPackages() {
 	return allowsPackages(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of PackageType.
+ * @return whether allowed or not
  */
 public static boolean allowsPackages(Element element) {
 	String validOwnedElements[];
@@ -214,16 +216,6 @@ public static boolean allowsPackages(Element element) {
 		}
 	}
 	return false;
-}
-/**
- * Create a WayPoint
- */
-private WayPoint createWayPoint(java.awt.Point p) {
-	WayPoint wayPoint = new WayPoint();
-	wayPoint.setEast(p.x);
-	wayPoint.setSouth(p.y);
-
-	return wayPoint;
 }
 /**
  * Determine the valid default Package-Type to be created in this Diagram.
@@ -557,7 +549,7 @@ protected boolean isShowLinkFigure() {
  * 
  */
 public boolean isShowMultiplicities() {
-	return getDiagram().isShowAttributeMultiplicity();
+	return showMultiplicity;
 }
 /**
  * Handles key down events. Cursor keys are handled
@@ -632,9 +624,7 @@ private NodeFigure loadNode(ch.ehi.umleditor.umlpresentation.PresentationNode no
 /**
  * Add a single PresentationRole to Diagram.
  */
-protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
-	EdgeFigure figure = null;
-	
+protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {	
 	if (role == null) {
 		Figure linkFigure = findFigure(roleDef.getAssociation());
 		if (linkFigure == null) {
@@ -657,18 +647,62 @@ LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
 				PresentationRole edgeRole = ElementMapper.createPresentationRole(this, associationComposite, ((NodeFigure)nodeFigure).getNode(), roleDef);
 
 				// add visually
-				figure = new PresentationRoleFigure(this, edgeRole);
+				EdgeFigure figure = new PresentationRoleFigure(this, edgeRole);
 				loadSimpleEdge(figure);
+				retur figure;
 */
 			}
 		}
+		return null;
 	} else {
-		// only add GIVEN role visually
-		figure = new PresentationRoleFigure(this, role);
-	   	loadSimpleEdge(figure);
+		// add the given PresentationRole visually
+		Iterator subjects = role.iteratorSubject();
+		while (subjects.hasNext()) {
+			AssociationEnd subjectRoleDef = (AssociationEnd)subjects.next();
+			if (subjectRoleDef.containsParticipant()) {
+				Classifier targetClass = subjectRoleDef.getParticipant();
+Tracer.getInstance().debug("PresentationRole->Subject:RoleDef=" + subjectRoleDef.getName().getValue() + ", ClassDef=" + targetClass.getName().getValue());
+				Iterator endpoints = role.iteratorEndpoint();
+				if(endpoints.hasNext()) {
+					endpoints.next(); // skip PresentationAssocClass (LinkNode)
+					if (endpoints.hasNext()) {
+						ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
+						if (!presentationClass.containsSubject(targetClass)) {
+							// role was probably moved to another Classifier in Model by another Diagram
+/*							Iterator classSubjects = presentationClass.iteratorSubject();
+							while (classSubjects.hasNext()) {
+								Classifier wrongClassDef = (Classifier)classSubjects.next();
+							}
+*/
+							Tracer.getInstance().developerWarning(this, "loadPresentationRole(..)", "AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
+							ClassFigure newClass = (ClassFigure)findFigure(targetClass);
+							if (newClass != null) {
+								role.setEndpoint(1, newClass.getNode());
+							}
+						}
+						// show role visually
+						EdgeFigure figure = new PresentationRoleFigure(this, role);
+						loadSimpleEdge(figure);
+						return figure;
+					}
+				}
+			}
+		}
+/*
+Iterator its = role.getAssociation().iteratorSubject();
+while(its.hasNext()) {
+	AssociationDef subj = (AssociationDef)its.next();
+	Iterator itsc = subj.iteratorConnection();
+	while (itsc.hasNext()) {
+		RoleDef ro = (RoleDef)itsc.next();
+		Tracer.getInstance().debug("RoleDef via Association=" + ro.getParticipant().getName().getValue());
+	}				
+}
+*/		
+		getDiagram().removePresentationElement(role);
+	  	Tracer.getInstance().developerWarning(this, "loadPresentationRole(..)", "AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
+		return null;
 	}
-
-	return figure;
 }
 /**
  * Show a simple Edge by means plain EdgeFigure as Dependency or Generalization.
@@ -835,9 +869,10 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    while (generalizations.hasNext()) {
 				ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)generalizations.next();
 				GeneralizableElement generalizableElement = generalization.getParent();
-				Figure end = findFigure(generalization.getParent());
-				if (end != null) {
-					loadSimpleEdge(new GeneralizationLineConnection(this, figure, end, generalization));
+				Figure parent = findFigure(generalization.getParent());
+				Figure child = findFigure(generalization.getChild());
+				if ((parent != null) && (child != null)) {
+					loadSimpleEdge(new GeneralizationLineConnection(this, figure, parent, generalization));
 				}
 		    }
 		    generalizations = ((GeneralizableElement)modelElement).iteratorGeneralization();
@@ -1045,7 +1080,7 @@ protected void showAllLinkFigures(boolean visible) {
  * Show/hide all roles in Diagram.
  */
 protected void showAllMultiplicities(boolean visible) {
-	getDiagram().setShowAttributeMultiplicity(visible);
+	showMultiplicity = visible;
 	
 	FigureEnumeration enum = drawing().figures();
 	while (enum.hasMoreElements()) {
@@ -1113,7 +1148,7 @@ private void trySaveAssociation(AssociationDef associationDef, PresentationNode 
  */
 public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 	Figure figure = null;
-
+//Tracer.getInstance().debug("Updating diagram=" +getDiagram().getName().getValue());
 	if (event.getSource() instanceof AttributeDef) {
 		// special case -> no direct child-Element of Diagram
 		if (((AttributeDef)event.getSource()).containsOwner()) {

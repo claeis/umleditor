@@ -1,41 +1,49 @@
 Offene Fragen/Arbeiten
 ----------------------------
 
-- Verschieben von Modellelementen im Navigationsbaum
-- Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt
+- Liste der Diagramme auf dem ein ModelElement dargestellt wird
+- Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
+- API: generic filters aus Launcher nach basics verschieben
+- FINAL bei Enumeration
 - Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
 - Bug: s.o. (JRE="SE 1.4.1_01" Grafikkarte="ATI Mobility M6" TreiberVersion="5.13.1.3207" Auflösung="1024x768, 32bit Farben" OS="Windows 2000 Service Pack 2" Rechner="Fujits Siemens LifeBook E-Series")
 - Bug: Für Ili-Kompositions- und Referenzattribute kann die Reihenfolge in der Klassendefinition nicht spezifiziert werden
 - Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
-- Französische Uebersetzung des Benutzer-Handbuchs fehlt
-- Englische Uebersetzung der Handbuecher fehlt
-- generic filters aus Launcher nach basics verschieben
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
-- Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
-- Bug: nach dem umhängen eine Assoziation kann man andere Diagramme die diese Assoziation enthalten nicht mehr öffnen
-- Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt
-- Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
-- neue Funktion: Liste der Diagramme auf dem ein ModelElement dargestellt wird
-- Bug: Farbe der Klasse lässt sich nicht ändern
-- Bug: Farbedialog zu klein
-- Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
-- OTHERS, FINAL bei Enumeration
-- Diagrammexport in SVG (Scalable Vector Graphics)
-- Diagrammexport in WMF (Windows Meta File)
-- OID auf TopicDefDialog hinzufuegen
+- Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
 
-
-UML-Editor 2.0.3 (2003-xx-xx)
+UML-Editor 2.1.0 (2004-01-04)
 -----------------------------
-- neuer Dialog fuer LineFomTypeDef
-- neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
-- neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 
-- neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
+- INTERLIS-Compiler 2.1.11
+- Verschieben von Modellelementen im Navigationsbaum
+- Französische Uebersetzung des Benutzer-Handbuchs
+- Englische Uebersetzung der Handbuecher
+- Diagrammexport nach SVG (Scalable Vector Graphics)
+- Diagrammexport nach WMF (Windows Meta File)
+- NLS: Englische Texte an Programm angepasst
+- NLS: Französische Texte an Programm angepasst
+- NLS: Deutsche Texte an Programm angepasst
+- API: TransferFromIli2cMetamodel kann neu ohne GUI benutzt werden
+- GUI: OID auf TopicDefDialog hinzufuegen
+- GUI: neuer Dialog fuer LineFomTypeDef
+- GUI: neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
 - iliimp, iliexp: OIDType, ClassType hinzugefuegt
 - iliimp, iliexp: LineFormTypeDef hinzugefuegt
+- Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt
 - Bug iliexp: "fileXY written" NLS fehlt
 - Bug: Beim ClassDefDialog kann EXTENDED nicht gesetzt werden, wenn die Basis-Klasse in einem indirekten Basis-Topic ist
 - Bug: RoleDefDialog es koennen keine AssociationDef in Restricted Liste eingefuegt werden
+- Bug: Farbe der Klasse lässt sich nicht ändern
+- Bug: Einfügen von Parent-Klassen bei Vererbung in ein anderes Diagram erzeugt Exception
+- Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
+- Bug: Öffnen von Diagrammen mit Vererbungen ohne Parent-Klasse erzeugt eine Exception
+- Bug: "Löschen (im Modell)" einer Beziehung in einem Diagramm löscht nur die entsprechende Rolle statt die ganze Assoziation
+- Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt (KORREKT ab JRE 1.4.1_02)
+- Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
+- Bug: Popup-Schalter für Zeilenumbruch im Logbereich wird nicht richtig initialisiert
+- Bug: Farbedialog zu klein
 
 
 UML-Editor 2.0.2 (2003-10-29)

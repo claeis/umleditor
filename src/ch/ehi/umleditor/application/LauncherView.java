@@ -44,8 +44,8 @@ import ch.softenvironment.util.*;
  * - LogView
  * - DrawingArea
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:24 $
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.2 $ $Date: 2003-12-25 10:54:37 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -1287,7 +1287,7 @@ public void figureSelectionChanged(CH.ifa.draw.framework.DrawingView view) {}
 /**
  * Return the Application Name
  */
-public String getApplicationName() {
+public static String getApplicationName() {
 	return resLauncherView.getString("CIApplicationName"); //$NON-NLS-1$
 }
 /**
@@ -2864,7 +2864,7 @@ public CH.ifa.draw.util.UndoManager getUndoManager() {
  */
 public static String getVersion() {
 	// depends on softEnvironment Base Framework Version 2.2.2
-	
+
         if(version==null){
 	  java.util.ResourceBundle resVersion = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/Version");  //$NON-NLS-1$
           // Major version numbers identify significant functional changes.
@@ -3041,7 +3041,7 @@ protected void initializeView() {
 		mniSQLExport();
 	  }
 	});
-		
+
 	// initialize Drawing Area
 	mdiListeners = new Vector();
 	addInternalFrameListener(this);
@@ -3412,10 +3412,10 @@ private boolean mniSaveFile() {
  */
 private void mniSQLExport() {
 	tool().deactivate();
-	
+
 	ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog dialog = new ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog(this, true);
 	dialog.show();
-    
+
 	tool().activate();
 }
 /**
@@ -3763,7 +3763,8 @@ private void setModel(Model model, java.io.File file) throws Throwable {
 		// @see #openInitialDiagram()
 		initialDiagram = (Diagram)ElementFactory.createDiagram(topicDef);
                 try{
-                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel().loadPredefinedIli2cModel(this.model);
+                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel(
+                    new ch.ehi.umleditor.interlis.EditorLoggingAdapter(this)).loadPredefinedIli2cModel(this.model);
                 }catch(Exception ex){
                   handleException(ex);
                 }

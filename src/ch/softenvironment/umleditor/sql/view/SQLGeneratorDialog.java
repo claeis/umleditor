@@ -26,7 +26,7 @@ import ch.softenvironment.umleditor.sql.*;
 /**
  * Dialog to control SQL-Code to be generated.
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:36 $
+ * @version $Revision: 1.2 $ $Date: 2004-01-03 15:49:52 $
  */
 public class SQLGeneratorDialog extends ch.softenvironment.view.BaseDialog {
 	private ch.ehi.uml1_4.foundation.core.Namespace packageElement = null;
@@ -673,6 +673,7 @@ private javax.swing.JTextField getTxtCreateDate() {
 			ivjTxtCreateDate.setBounds(202, 251, 122, 20);
 			ivjTxtCreateDate.setEnabled(false);
 			// user code begin {1}
+			ivjTxtCreateDate.setText("T_CreateDate");
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -718,6 +719,7 @@ private javax.swing.JTextField getTxtLastChange() {
 			ivjTxtLastChange.setBounds(202, 280, 122, 20);
 			ivjTxtLastChange.setEnabled(false);
 			// user code begin {1}
+			ivjTxtLastChange.setText("T_LastChange");
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -742,6 +744,7 @@ private javax.swing.JTextField getTxtObjectID() {
 			ivjTxtObjectID.setBounds(202, 223, 122, 20);
 			ivjTxtObjectID.setEnabled(false);
 			// user code begin {1}
+			ivjTxtObjectID.setText("T_Id");
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -788,6 +791,7 @@ private javax.swing.JTextField getTxtUserID() {
 			ivjTxtUserID.setBounds(202, 307, 122, 20);
 			ivjTxtUserID.setEnabled(false);
 			// user code begin {1}
+			ivjTxtUserID.setText("T_User");
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}

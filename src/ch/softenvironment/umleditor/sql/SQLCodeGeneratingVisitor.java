@@ -17,9 +17,7 @@ package ch.softenvironment.umleditor.sql;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import java.io.*;
 import java.util.Iterator;
-
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.*;
@@ -33,20 +31,21 @@ import ch.softenvironment.util.StringUtils;
 
 
 /**
- * Visitor scanning a Namespace to generate appropriate SQL Code.
+ * Visitor scanning a Model-Namespace of UML-Editor's Repository
+ * to generate appropriate SQL-Schema-Code.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:34 $
+ * @version $Revision: 1.2 $ $Date: 2004-01-03 15:49:05 $
  */
 public class SQLCodeGeneratingVisitor {
 	private java.util.HashMap domains = new java.util.HashMap();
-	private java.util.ArrayList drops = new java.util.ArrayList();
-	private java.util.ArrayList tables = new java.util.ArrayList();
-	private java.util.ArrayList alters = new java.util.ArrayList();
-	private java.util.ArrayList relations = new java.util.ArrayList();
-	private java.util.ArrayList indexes = new java.util.ArrayList();
-	private java.util.ArrayList comments = new java.util.ArrayList();
-	private java.util.HashMap techFields = new java.util.HashMap();
+	private java.util.List drops = new java.util.ArrayList();
+	private java.util.List tables = new java.util.ArrayList();
+	private java.util.List alters = new java.util.ArrayList();
+	private java.util.List relations = new java.util.ArrayList();
+	private java.util.List indexes = new java.util.ArrayList();
+	private java.util.List comments = new java.util.ArrayList();
+	private java.util.Map techFields = new java.util.HashMap();
 	private boolean createDomains = false;
 	private boolean showComment = false;
 	
@@ -111,10 +110,10 @@ public void accept(Namespace element,
 	if (createDomains) {
 	    // writeDomains
 //NYI: check TechFields
-		domains.put(MY_OBJECT_ID, "CREATE DOMAIN " + MY_OBJECT_ID + " AS LONG NOT NULL" + SQL_SEPARATOR);
+		domains.put(MY_OBJECT_ID, "CREATE DOMAIN " + MY_OBJECT_ID + " AS NUMERIC(9) NOT NULL" + SQL_SEPARATOR);
 		domains.put(MY_TIMESTAMP, "CREATE DOMAIN " + MY_TIMESTAMP + " AS TIMESTAMP NOT NULL" + SQL_SEPARATOR);
 		domains.put(MY_DATETIME, "CREATE DOMAIN " + MY_DATETIME + " AS DATETIME" + SQL_SEPARATOR);
-		domains.put(MY_USER_ID, "CREATE DOMAIN " + MY_USER_ID + " AS VARCHAR(15) NOT NULL" + SQL_SEPARATOR);
+		domains.put(MY_USER_ID, "CREATE DOMAIN " + MY_USER_ID + " AS VARCHAR(40) NOT NULL" + SQL_SEPARATOR);
 	    out.println();
 	    iterator = domains.keySet().iterator();
 		while (iterator.hasNext()) {
@@ -186,12 +185,7 @@ public void accept(Namespace element,
 	  Classifier classDef = (Classifier)role.getParticipant();
       out.write(classRef(role.getAssociation(),classDef));
     
-		
-						
-
-
-
-						
+				
 		// 1) create index on Foreign Key
 		CREATE INDEX FKSEBUCOLEID ON SEBUCOntact
 		(
@@ -298,8 +292,8 @@ private void visitClassDef(ClassDef classDef) {
 //NYI dynamic TechFields acc. to Dialog
 
 	// 1) add Object-Identity
-    sql = sql + "\tID " + MY_OBJECT_ID + " NOT NULL,\n";
-	alters.add("ALTER TABLE " + classDef.getDefLangName() + "\n\tADD PRIMARY KEY (ID)" + SQL_SEPARATOR);
+    sql = sql + "\tT_Id " + MY_OBJECT_ID + " NOT NULL PRIMARY KEY,\n";
+//	alters.add("ALTER TABLE " + classDef.getDefLangName() + "\n\tADD PRIMARY KEY (T_Id)" + SQL_SEPARATOR);
 
     // 2) add additional attributes to be added as Foreign Keys
     //	  -> check Associations containing this class
@@ -333,9 +327,9 @@ private void visitClassDef(ClassDef classDef) {
             
 //NYI
     // 5) add technical fields
-	sql = sql + "\tCDAT " + MY_DATETIME + " NOT NULL,\n";
-    sql = sql + "\tLCHG " + MY_TIMESTAMP + " NOT NULL,\n";
-    sql = sql + "\tUSER " + MY_USER_ID + " NOT NULL\n)" + SQL_SEPARATOR;
+	sql = sql + "\tT_CreateDate " + MY_DATETIME + " NOT NULL,\n";
+    sql = sql + "\tT_LastChange " + MY_TIMESTAMP + " NOT NULL,\n";
+    sql = sql + "\tT_User " + MY_USER_ID + " NOT NULL\n)" + SQL_SEPARATOR;
            
     tables.add(sql);
 
@@ -376,6 +370,5 @@ private void visitConstraint(
         sql = sql + "\t" + attributes.trim() + " ASC\n)" + SQL_SEPARATOR;
         indexes.add(sql);
     }
-
 }
 }

@@ -18,6 +18,7 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.softenvironment.view.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.softenvironment.util.*;
@@ -25,7 +26,7 @@ import ch.softenvironment.util.*;
  * Generic User Interface Panel to treat INTERLIS-EXTENDS.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:51 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-23 17:13:54 $
  */
 public class ExtendedPanel extends javax.swing.JPanel {
 	private static java.util.ResourceBundle resExtendedPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ExtendedPanel");
@@ -314,7 +315,7 @@ private void initialize() {
 		constraintsCbxExtends.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsCbxExtends.weightx = 1.0;
 		constraintsCbxExtends.ipadx = 26;
-		constraintsCbxExtends.ipady = -3;
+		constraintsCbxExtends.ipady = 0;
 		constraintsCbxExtends.insets = new java.awt.Insets(1, 5, 3, 6);
 		add(getCbxExtends(), constraintsCbxExtends);
 		initConnections();
@@ -379,8 +380,13 @@ Tracer.getInstance().developerWarning(this, "setExtendables()", "INTERLIS implem
  * Show the parent of the given generalization in the dropDownList.
  * @see #setExtendables()
  */
-public void setExtension(GeneralizableElement generalizableElement) {
+public void setExtension(DomainDef generalizableElement) {
 	setExtendables(generalizableElement);
 	getChxExtended().setVisible(false);
+}
+public void setExtension(TopicDef generalizableElement) {
+	setExtendables(generalizableElement);
+	getChxExtended().setVisible(false);
+	getLblExtends().setVisible(false);
 }
 }
