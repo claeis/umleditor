@@ -31,7 +31,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-03-09 12:24:53 $
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 09:57:42 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -189,7 +189,13 @@ private Vector createRow(Translation translation) {
  */
 private Vector createRow(Dependency dependency) {
 	Vector row = new Vector(2);
-	row.add(((ModelElement)dependency.iteratorSupplier().next()).getDefLangName());
+	Iterator iterator = dependency.iteratorSupplier();
+	if (iterator.hasNext()) {
+		ModelElement element = (ModelElement)iterator.next();
+		row.add(element.getDefLangName());
+	} else {
+		Tracer.getInstance().developerError(this, "createRow()", "Bad modelled Dependency discovered!");
+	}
 
 	return row;
 }
