@@ -31,7 +31,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-03-05 17:18:52 $
+ * @version $Revision: 1.3 $ $Date: 2004-03-09 12:24:53 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -200,7 +200,7 @@ private Vector createRow(UmlParameter parameter) {
 	Vector row = new Vector(4);
 	row.add(parameter.getDefLangName());
 	row.add("NYI");//parameter.getType());
-	row.add("NYI");//parameter.getKind());
+row.add(new Integer(parameter.getKind()));
 
 	return row;
 }
@@ -489,6 +489,10 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 	} else if (object instanceof Translation) {
 		currentDataRow.set(0, ((Translation)object).getLanguage());
 		currentDataRow.set(1, ((Translation)object).getBaseLanguage());
+	} else if (object instanceof UmlParameter) {
+		currentDataRow.set(0, ((UmlParameter)object).getDefLangName());
+//		currentDataRow.set(1, ((UmlParameter)object).get());
+		currentDataRow.set(2, new Integer(((UmlParameter)object).getKind()));	
 	} else {
 		throw new DeveloperException(this, "updateRow()", "type <" + object.toString() + "> not updated");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
