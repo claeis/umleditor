@@ -2,6 +2,8 @@ package ch.ehi.umleditor.application;
 
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.modelmanagement.Model;
+
 import javax.swing.tree.*;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.CommonUserAccess;
@@ -9,7 +11,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.8 $ $Date: 2004-08-17 08:21:32 $
+ * @version $Revision: 1.9 $ $Date: 2004-09-27 21:31:43 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
@@ -182,6 +184,11 @@ getMnuSort().setFont(getMniOpen().getFont());
 		if (isInsideUmlModel(treeNode)) {
 			addMenuItem(getMniInterlis2Def());
 			addMenuItem(getMniMetaObjectFile());
+			if (!(treeNode instanceof Model)) {
+			    // allow in any UmlPackage if not in Ili-Structure
+				addMenuItem(getMniAssociationDef());
+				addMenuItem(getMniClassDef());
+			}
 /*			addMenuItem(getMniIli2ModelSet());
 		} else if (userObject.isIli2ModelSet()) {
 			addMenuItem(getMniInterlis2Def());
