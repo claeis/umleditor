@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2004-06-01 14:09:47 $
+ * @version $Revision: 1.8 $ $Date: 2004-06-29 11:42:44 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -51,11 +51,11 @@ public NodeFigure(Figure newPresentationFigure) {
 	setCreating(true);
 }
 /**
- * Factory method to create a default popup menu.
- *
- * @return newly created popup menu
+ * Configure a given PopupMenu.
+ * Overwrite this method for specific Menu's.
+ * @return JPopupMenu
  */
-public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addSpecificationMenu(popupMenu);
 
 	// overwrite this method in subclasses

@@ -37,7 +37,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-29 11:42:44 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
@@ -70,7 +70,7 @@ private LinkFigure(Figure newPresentationFigure) {
  * Overwrites.
  * No PopupMenu here.
  */
-public final JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected final JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	return null;
 }
 /**

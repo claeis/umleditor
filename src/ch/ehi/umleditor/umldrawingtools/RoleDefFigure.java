@@ -30,7 +30,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-29 11:42:44 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -72,7 +72,7 @@ public RoleDefFigure(PresentationRoleFigure edgeFigure, final int type) {
 /**
  * Overwrites.
  */
-public javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addSpecificationMenu(popupMenu);
 
 	return popupMenu;

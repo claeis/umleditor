@@ -36,7 +36,7 @@ import ch.ehi.umleditor.umlpresentation.*;
  * A Note is attached only in Diagram and not in Model.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-02 19:26:25 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-29 11:42:44 $
  */
 public class NoteFigure extends NodeFigure {
 	// Composites
@@ -56,11 +56,9 @@ private NoteFigure(Figure newPresentationFigure) {
 	super(newPresentationFigure);
 }
 /**
- * Factory method to create a default popup menu.
- *
- * @return newly created popup menu
+ * Overwrites.
  */
-public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addFormatMenu(popupMenu);
 	addEditMenu(popupMenu);
 

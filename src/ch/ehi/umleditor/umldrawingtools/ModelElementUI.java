@@ -23,20 +23,12 @@ import ch.softenvironment.util.ResourceManager;
  * Interface for presentation aspects of a ModelElement.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-29 11:42:44 $
  */
 public interface ModelElementUI {
 	static String REMOVE_IN_MODEL = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniRemoveInModel_text");
 	static String CREATION_ERROR = ResourceManager.getInstance().getResource(ModelElementUI.class, "CECreationError");
 	static String SELECT_IN_BROWSER = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniSelectInBrowser_text");
-/**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return newly created popup menu
- * @see showSpecification()
- * @see ModelElementUI
- */
-javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu);
 /**
  * Return the ModelElement represented by this Interface.
  * @return ModelElement
