@@ -15,12 +15,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-// -beg- preserve=no 3CFE050F004D package "TransferFromUmlMetamodel"
 package ch.ehi.umleditor.interlis.iliexport;
-// -end- 3CFE050F004D package "TransferFromUmlMetamodel"
 
-// -beg- preserve=no 3CFE050F004D autoimport "TransferFromUmlMetamodel"
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
@@ -47,11 +43,6 @@ import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
 import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 import ch.ehi.basics.types.NlsString;
-// -end- 3CFE050F004D autoimport "TransferFromUmlMetamodel"
-
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 3CFE050F004D import "TransferFromUmlMetamodel"
 import ch.ehi.interlis.modeltopicclass.ModelDefKind;
 import ch.ehi.interlis.modeltopicclass.Translation;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
@@ -76,14 +67,11 @@ import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import java.io.*;
 import java.util.Iterator;
 import ch.ehi.basics.tools.TopoSort;
-// -end- 3CFE050F004D import "TransferFromUmlMetamodel"
+import ch.interlis.ili2c.config.Configuration;
+import ch.interlis.ili2c.config.GenerateOutputKind;
 
 public class TransferFromUmlMetamodel
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=yes 3CFE050F004D detail_begin "TransferFromUmlMetamodel"
-
   static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(TransferFromUmlMetamodel.class);
 
   /** current output stream
@@ -99,7 +87,7 @@ public class TransferFromUmlMetamodel
   /** true, if this export is only used for model checking.
    * The difference is mainly, what/where files are created.
    */
-  transient private boolean onlyChecking=false;
+  transient private boolean runIli2c=false;
 
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
@@ -136,21 +124,10 @@ public class TransferFromUmlMetamodel
    */
   transient private ModelElement lastModelElement=null;
 
-  // -end- 3CFE050F004D detail_begin "TransferFromUmlMetamodel"
-
-  // -beg- preserve=no 3CFE054D00ED head3CFE050F004D "visitNamespace"
-  public void visitNamespace(Namespace ns)
-  // -end- 3CFE054D00ED head3CFE050F004D "visitNamespace"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE054D00ED throws3CFE050F004D "visitNamespace"
+  private void visitNamespace(Namespace ns,Configuration config)
     throws java.io.IOException
-
-    // -end- 3CFE054D00ED throws3CFE050F004D "visitNamespace"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE054D00ED body3CFE050F004D "visitNamespace"
-    if(onlyChecking){
+    if(runIli2c){
       tempFiles=new java.util.ArrayList();
     }
     // clear error counter
@@ -176,10 +153,11 @@ public class TransferFromUmlMetamodel
       // remove current from todo-list
       todo.remove(0);
     }
-    if(onlyChecking){
+    if(runIli2c){
       MyErrorListener el=new MyErrorListener();
       // build compiler config file
-      ch.interlis.ili2c.config.Configuration config=new ch.interlis.ili2c.config.Configuration();
+      	config.clearBoidEntry();
+      	config.clearFileEntry();
         // add metadata files
         for(java.util.Iterator i=ch.ehi.interlis.tools.ModelElementUtility.getChildElements(ns,ch.ehi.interlis.metaobjects.MetaObjectFile.class).iterator()
             ;i.hasNext();){
@@ -211,16 +189,6 @@ public class TransferFromUmlMetamodel
           ch.ehi.interlis.metaobjects.MetaDataUseDef mdUse=(ch.ehi.interlis.metaobjects.MetaDataUseDef)i.next();
           config.addBoidEntry(new ch.interlis.ili2c.config.BoidEntry(modelElementRef(null,mdUse,null),mdUse.getBasketOid()));
         }
-      if(xsdFile!=null){
-        config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.XMLSCHEMA );
-        config.setOutputFile(xsdFile);
-      }else if(fmtFile!=null){
-		  config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.ILI1FMTDESC );
-		  config.setOutputFile(fmtFile);
-      }else{
-        // we need no output (except error messages)
-        config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.NOOUTPUT );
-      }
 
                 //try{
                 //  ch.interlis.ili2c.config.PersistenceService.writeConfig("g:\\tmp\\metaobj\\ce.ilc",config);
@@ -242,37 +210,17 @@ public class TransferFromUmlMetamodel
       ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(),rsrc.getString("CIdone"));
     }
     return;
-    // -end- 3CFE054D00ED body3CFE050F004D "visitNamespace"
     }
 
-  // -beg- preserve=no 3CFE058601FD head3CFE050F004D "setup"
   public void setup(java.io.Writer out, String language)
-  // -end- 3CFE058601FD head3CFE050F004D "setup"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3CFE058601FD throws3CFE050F004D "setup"
-
-    // -end- 3CFE058601FD throws3CFE050F004D "setup"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE058601FD body3CFE050F004D "setup"
     this.out=out;
     this.language=language;
-    // -end- 3CFE058601FD body3CFE050F004D "setup"
     }
 
-  // -beg- preserve=no 3CFE08ED005B head3CFE050F004D "visitINTERLIS2Def"
   public void visitINTERLIS2Def(INTERLIS2Def def)
-  // -end- 3CFE08ED005B head3CFE050F004D "visitINTERLIS2Def"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE08ED005B throws3CFE050F004D "visitINTERLIS2Def"
         throws java.io.IOException
-
-    // -end- 3CFE08ED005B throws3CFE050F004D "visitINTERLIS2Def"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE08ED005B body3CFE050F004D "visitINTERLIS2Def"
     if(def.getDefLangName().startsWith("<")){
       return;
     }
@@ -288,7 +236,7 @@ public class TransferFromUmlMetamodel
       File file=null;
       String filename=(String)languages.get(language);
       // if checkmode
-      if(onlyChecking){
+      if(runIli2c){
         // create temporary file
         file=File.createTempFile("umleditor",".ili");
         currentFile=new FileListEntry(file);
@@ -344,7 +292,7 @@ public class TransferFromUmlMetamodel
 			  out=null;
 			}
 		}
-      if(!onlyChecking){
+      if(!runIli2c){
         if(!createFileList){
           ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc()
             ,ch.ehi.basics.i18n.MessageFormat.format(rsrc,"CIilifilewritten",file.getAbsolutePath()));
@@ -353,21 +301,10 @@ public class TransferFromUmlMetamodel
     }
 
     return;
-    // -end- 3CFE08ED005B body3CFE050F004D "visitINTERLIS2Def"
     }
-
-  // -beg- preserve=no 3CFE13AC0346 head3CFE050F004D "visitINTERLIS2Def"
   public void visitINTERLIS2Def(INTERLIS2Def def, String language)
-  // -end- 3CFE13AC0346 head3CFE050F004D "visitINTERLIS2Def"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE13AC0346 throws3CFE050F004D "visitINTERLIS2Def"
     throws java.io.IOException
-
-    // -end- 3CFE13AC0346 throws3CFE050F004D "visitINTERLIS2Def"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE13AC0346 body3CFE050F004D "visitINTERLIS2Def"
     this.language=language;
     // enumerate all ModelDef
     java.util.ArrayList todo=new java.util.ArrayList(); // collection of packages not yet visited
@@ -392,21 +329,10 @@ public class TransferFromUmlMetamodel
       todo.remove(0);
     }
     return;
-    // -end- 3CFE13AC0346 body3CFE050F004D "visitINTERLIS2Def"
     }
-
-  // -beg- preserve=no 3CFE196B00FC head3CFE050F004D "visitModelDef"
   public void visitModelDef(ModelDef def)
-  // -end- 3CFE196B00FC head3CFE050F004D "visitModelDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE196B00FC throws3CFE050F004D "visitModelDef"
     throws java.io.IOException
-
-    // -end- 3CFE196B00FC throws3CFE050F004D "visitModelDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE196B00FC body3CFE050F004D "visitModelDef"
     // check if ModelDef defines current language
     if(!def.getName().getAllValues().containsKey(language)){
       // current language is not defined by this ModelDef
@@ -520,21 +446,10 @@ public class TransferFromUmlMetamodel
     newline();
     out.write("END "+def.getName().getValue(language)+".");newline();
     return;
-    // -end- 3CFE196B00FC body3CFE050F004D "visitModelDef"
     }
-
-  // -beg- preserve=no 3D0615C20286 head3CFE050F004D "visitTopicDef"
   public void visitTopicDef(TopicDef def)
-  // -end- 3D0615C20286 head3CFE050F004D "visitTopicDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615C20286 throws3CFE050F004D "visitTopicDef"
     throws java.io.IOException
-
-    // -end- 3D0615C20286 throws3CFE050F004D "visitTopicDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615C20286 body3CFE050F004D "visitTopicDef"
 
     newline();
     defineLinkToModelElement(def);
@@ -644,41 +559,23 @@ public class TransferFromUmlMetamodel
     out.write(getIndent());
     out.write("END "+def.getName().getValue(language)+";");newline();
     return;
-    // -end- 3D0615C20286 body3CFE050F004D "visitTopicDef"
     }
 
-  // -beg- preserve=no 3D0615DA01B8 head3CFE050F004D "visitMetaDataUseDef"
   public void visitMetaDataUseDef(MetaDataUseDef def)
-  // -end- 3D0615DA01B8 head3CFE050F004D "visitMetaDataUseDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615DA01B8 throws3CFE050F004D "visitMetaDataUseDef"
         throws java.io.IOException
 
-    // -end- 3D0615DA01B8 throws3CFE050F004D "visitMetaDataUseDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615DA01B8 body3CFE050F004D "visitMetaDataUseDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D0615DA01B8 body3CFE050F004D "visitMetaDataUseDef"
     }
 
-  // -beg- preserve=no 3D0615E801B9 head3CFE050F004D "visitUnitDef"
   public void visitUnitDef(UnitDef def)
-  // -end- 3D0615E801B9 head3CFE050F004D "visitUnitDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615E801B9 throws3CFE050F004D "visitUnitDef"
         throws java.io.IOException
 
-    // -end- 3D0615E801B9 throws3CFE050F004D "visitUnitDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615E801B9 body3CFE050F004D "visitUnitDef"
     newline();
     if(!(lastModelElement instanceof UnitDef)){
       out.write(getIndent()+"UNIT");
@@ -693,41 +590,23 @@ public class TransferFromUmlMetamodel
     visitIliSyntax(def);
     dec_ind();
     return;
-    // -end- 3D0615E801B9 body3CFE050F004D "visitUnitDef"
     }
 
-  // -beg- preserve=no 3D0615F20086 head3CFE050F004D "visitFunctionDef"
   public void visitFunctionDef(FunctionDef def)
-  // -end- 3D0615F20086 head3CFE050F004D "visitFunctionDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615F20086 throws3CFE050F004D "visitFunctionDef"
         throws java.io.IOException
 
-    // -end- 3D0615F20086 throws3CFE050F004D "visitFunctionDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615F20086 body3CFE050F004D "visitFunctionDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D0615F20086 body3CFE050F004D "visitFunctionDef"
     }
 
-  // -beg- preserve=no 3D0615FC00D1 head3CFE050F004D "visitLineFormTypeDef"
   public void visitLineFormTypeDef(LineFormTypeDef def)
-  // -end- 3D0615FC00D1 head3CFE050F004D "visitLineFormTypeDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615FC00D1 throws3CFE050F004D "visitLineFormTypeDef"
         throws java.io.IOException
 
-    // -end- 3D0615FC00D1 throws3CFE050F004D "visitLineFormTypeDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0615FC00D1 body3CFE050F004D "visitLineFormTypeDef"
     newline();
     if(!(lastModelElement instanceof LineFormTypeDef)){
       out.write(getIndent()+"LINE FORM");
@@ -746,21 +625,11 @@ public class TransferFromUmlMetamodel
       out.write(";");newline();
     dec_ind();
     return;
-    // -end- 3D0615FC00D1 body3CFE050F004D "visitLineFormTypeDef"
     }
 
-  // -beg- preserve=no 3D06160B0281 head3CFE050F004D "visitDomainDef"
   public void visitDomainDef(DomainDef def)
-  // -end- 3D06160B0281 head3CFE050F004D "visitDomainDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D06160B0281 throws3CFE050F004D "visitDomainDef"
-        throws java.io.IOException
-
-    // -end- 3D06160B0281 throws3CFE050F004D "visitDomainDef"
+    throws java.io.IOException
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D06160B0281 body3CFE050F004D "visitDomainDef"
     newline();
     if(!(lastModelElement instanceof DomainDef)){
       out.write(getIndent()+"DOMAIN");
@@ -845,42 +714,21 @@ public class TransferFromUmlMetamodel
     }
     dec_ind();
     return;
-    // -end- 3D06160B0281 body3CFE050F004D "visitDomainDef"
     }
 
-  // -beg- preserve=no 3D06161602EB head3CFE050F004D "visitGraphicParameterDef"
   public void visitGraphicParameterDef(GraphicParameterDef def)
-  // -end- 3D06161602EB head3CFE050F004D "visitGraphicParameterDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D06161602EB throws3CFE050F004D "visitGraphicParameterDef"
         throws java.io.IOException
-
-    // -end- 3D06161602EB throws3CFE050F004D "visitGraphicParameterDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D06161602EB body3CFE050F004D "visitGraphicParameterDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D06161602EB body3CFE050F004D "visitGraphicParameterDef"
     }
 
-  // -beg- preserve=no 3D0616270029 head3CFE050F004D "visitClassDef"
   public void visitClassDef(ClassDef def)
-  // -end- 3D0616270029 head3CFE050F004D "visitClassDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0616270029 throws3CFE050F004D "visitClassDef"
         throws java.io.IOException
-
-    // -end- 3D0616270029 throws3CFE050F004D "visitClassDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0616270029 body3CFE050F004D "visitClassDef"
-
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
@@ -987,21 +835,11 @@ public class TransferFromUmlMetamodel
     out.write("END "+def.getName().getValue(language)+";");newline();
 
     return;
-    // -end- 3D0616270029 body3CFE050F004D "visitClassDef"
     }
 
-  // -beg- preserve=no 3D0619D10294 head3CFE050F004D "visitAssociationDef"
   public void visitAssociationDef(AssociationDef def)
-  // -end- 3D0619D10294 head3CFE050F004D "visitAssociationDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0619D10294 throws3CFE050F004D "visitAssociationDef"
         throws java.io.IOException
-
-    // -end- 3D0619D10294 throws3CFE050F004D "visitAssociationDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0619D10294 body3CFE050F004D "visitAssociationDef"
     if(def.isStructureAttribute() || def.isReferenceAttribute()){
       return;
     }
@@ -1117,99 +955,49 @@ public class TransferFromUmlMetamodel
     out.write("END "+def.getName().getValue(language)+";");newline();
 
     return;
-    // -end- 3D0619D10294 body3CFE050F004D "visitAssociationDef"
     }
 
-  // -beg- preserve=no 3D061A010289 head3CFE050F004D "visitConstraintDef"
   public void visitConstraintDef(ConstraintDef def)
-  // -end- 3D061A010289 head3CFE050F004D "visitConstraintDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A010289 throws3CFE050F004D "visitConstraintDef"
         throws java.io.IOException
-
-    // -end- 3D061A010289 throws3CFE050F004D "visitConstraintDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A010289 body3CFE050F004D "visitConstraintDef"
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)def.getBody());
     return;
-    // -end- 3D061A010289 body3CFE050F004D "visitConstraintDef"
     }
 
-  // -beg- preserve=no 3D061A11023C head3CFE050F004D "visitViewDef"
   public void visitViewDef(ViewDef def)
-  // -end- 3D061A11023C head3CFE050F004D "visitViewDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A11023C throws3CFE050F004D "visitViewDef"
         throws java.io.IOException
-
-    // -end- 3D061A11023C throws3CFE050F004D "visitViewDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A11023C body3CFE050F004D "visitViewDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D061A11023C body3CFE050F004D "visitViewDef"
     }
 
-  // -beg- preserve=no 3D061A1B0060 head3CFE050F004D "visitViewProjectionDef"
   public void visitViewProjectionDef(ViewProjectionDef def)
-  // -end- 3D061A1B0060 head3CFE050F004D "visitViewProjectionDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A1B0060 throws3CFE050F004D "visitViewProjectionDef"
         throws java.io.IOException
-
-    // -end- 3D061A1B0060 throws3CFE050F004D "visitViewProjectionDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A1B0060 body3CFE050F004D "visitViewProjectionDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D061A1B0060 body3CFE050F004D "visitViewProjectionDef"
     }
 
-  // -beg- preserve=no 3D061A2C03D6 head3CFE050F004D "visitGraphicDef"
   public void visitGraphicDef(GraphicDef def)
-  // -end- 3D061A2C03D6 head3CFE050F004D "visitGraphicDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A2C03D6 throws3CFE050F004D "visitGraphicDef"
         throws java.io.IOException
-
-    // -end- 3D061A2C03D6 throws3CFE050F004D "visitGraphicDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D061A2C03D6 body3CFE050F004D "visitGraphicDef"
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
-    // -end- 3D061A2C03D6 body3CFE050F004D "visitGraphicDef"
     }
 
-  // -beg- preserve=no 3D0622300213 head3CFE050F004D "topicRef"
   public String topicRef(ModelElement source, TopicDef ref)
-  // -end- 3D0622300213 head3CFE050F004D "topicRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D0622300213 throws3CFE050F004D "topicRef"
-
-    // -end- 3D0622300213 throws3CFE050F004D "topicRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D0622300213 body3CFE050F004D "topicRef"
     StringBuffer ret=new StringBuffer();
     Namespace parent=ref.getNamespace();
     while(!(parent instanceof ModelDef)){
@@ -1219,21 +1007,11 @@ public class TransferFromUmlMetamodel
     ret.append(".");
     ret.append(ref.getName().getValue(language));
     return ret.toString();
-    // -end- 3D0622300213 body3CFE050F004D "topicRef"
     }
 
-  // -beg- preserve=no 3D5CD3D4035C head3CFE050F004D "visitIliSyntax"
   public void visitIliSyntax(IliSyntax element)
-  // -end- 3D5CD3D4035C head3CFE050F004D "visitIliSyntax"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5CD3D4035C throws3CFE050F004D "visitIliSyntax"
         throws java.io.IOException
-
-    // -end- 3D5CD3D4035C throws3CFE050F004D "visitIliSyntax"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5CD3D4035C body3CFE050F004D "visitIliSyntax"
     NlsString defNls=element.getSyntax();
     String def = defNls!=null ? defNls.getValue(language) : "";
     // for each line
@@ -1247,20 +1025,10 @@ public class TransferFromUmlMetamodel
     }
       String line=def.substring(last);
       out.write(getIndent()+line);newline();
-    // -end- 3D5CD3D4035C body3CFE050F004D "visitIliSyntax"
     }
 
-  // -beg- preserve=no 3D5D3A3D033B head3CFE050F004D "classRef"
   public String classRef(ModelElement source, AbstractClassDef ref)
-  // -end- 3D5D3A3D033B head3CFE050F004D "classRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D5D3A3D033B throws3CFE050F004D "classRef"
-
-    // -end- 3D5D3A3D033B throws3CFE050F004D "classRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D3A3D033B body3CFE050F004D "classRef"
     if("ANYCLASS".equals(ref.getDefLangName())){
     	return "ANYCLASS";
     }
@@ -1268,21 +1036,11 @@ public class TransferFromUmlMetamodel
 		return "ANYSTRUCTURE";
 	}
     return modelElementRef(source,ref,null);
-    // -end- 3D5D3A3D033B body3CFE050F004D "classRef"
     }
 
-  // -beg- preserve=no 3D5D3E3D017B head3CFE050F004D "visitAttributeDef"
   public void visitAttributeDef(AttributeDef def)
-  // -end- 3D5D3E3D017B head3CFE050F004D "visitAttributeDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D3E3D017B throws3CFE050F004D "visitAttributeDef"
       throws java.io.IOException
-
-    // -end- 3D5D3E3D017B throws3CFE050F004D "visitAttributeDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D3E3D017B body3CFE050F004D "visitAttributeDef"
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
@@ -1352,36 +1110,16 @@ public class TransferFromUmlMetamodel
     out.write(";");newline();
 
     return;
-    // -end- 3D5D3E3D017B body3CFE050F004D "visitAttributeDef"
     }
 
-  // -beg- preserve=no 3D5D427D014D head3CFE050F004D "domainRef"
   public String domainRef(ModelElement source, DomainDef ref)
-  // -end- 3D5D427D014D head3CFE050F004D "domainRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D5D427D014D throws3CFE050F004D "domainRef"
-
-    // -end- 3D5D427D014D throws3CFE050F004D "domainRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D427D014D body3CFE050F004D "domainRef"
     return modelElementRef(source,ref,null);
-    // -end- 3D5D427D014D body3CFE050F004D "domainRef"
     }
 
-  // -beg- preserve=no 3D5D429A0380 head3CFE050F004D "visitAttributeDef"
   public void visitAttributeDef(RoleDef def)
-  // -end- 3D5D429A0380 head3CFE050F004D "visitAttributeDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D429A0380 throws3CFE050F004D "visitAttributeDef"
       throws java.io.IOException
-
-    // -end- 3D5D429A0380 throws3CFE050F004D "visitAttributeDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D429A0380 body3CFE050F004D "visitAttributeDef"
     if(def.getIliAttributeKind()==AssociationAsIliAttrKind.STRUCTURE){
       // TODO check that exactly two roles
       // if(assoc.sizeConnection()!=2){ log error}
@@ -1511,21 +1249,11 @@ public class TransferFromUmlMetamodel
     }
 
     return;
-    // -end- 3D5D429A0380 body3CFE050F004D "visitAttributeDef"
     }
 
-  // -beg- preserve=no 3D5D42AF011D head3CFE050F004D "visitType"
   public void visitType(ModelElement owner, Type def)
-  // -end- 3D5D42AF011D head3CFE050F004D "visitType"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D42AF011D throws3CFE050F004D "visitType"
       throws java.io.IOException
-
-    // -end- 3D5D42AF011D throws3CFE050F004D "visitType"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D5D42AF011D body3CFE050F004D "visitType"
     if(def instanceof Text){
       Text text=(Text)def;
       switch(text.getKind()){
@@ -1655,36 +1383,16 @@ public class TransferFromUmlMetamodel
       }
     }
     return;
-    // -end- 3D5D42AF011D body3CFE050F004D "visitType"
     }
 
-  // -beg- preserve=no 3D6C97FA0064 head3CFE050F004D "unitRef"
   public String unitRef(ModelElement source, UnitDef ref)
-  // -end- 3D6C97FA0064 head3CFE050F004D "unitRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D6C97FA0064 throws3CFE050F004D "unitRef"
-
-    // -end- 3D6C97FA0064 throws3CFE050F004D "unitRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C97FA0064 body3CFE050F004D "unitRef"
     return modelElementRef(source,ref,null);
-    // -end- 3D6C97FA0064 body3CFE050F004D "unitRef"
     }
 
-  // -beg- preserve=no 3D6C98220274 head3CFE050F004D "visitEnumeration"
   public void visitEnumeration(Enumeration def)
-  // -end- 3D6C98220274 head3CFE050F004D "visitEnumeration"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C98220274 throws3CFE050F004D "visitEnumeration"
       throws java.io.IOException
-
-    // -end- 3D6C98220274 throws3CFE050F004D "visitEnumeration"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C98220274 body3CFE050F004D "visitEnumeration"
     out.write("("); newline();
     String sep="";
     inc_ind();
@@ -1702,21 +1410,11 @@ public class TransferFromUmlMetamodel
     dec_ind();
     out.write(getIndent()+")");
     return;
-    // -end- 3D6C98220274 body3CFE050F004D "visitEnumeration"
     }
 
-  // -beg- preserve=no 3D6C985C01A5 head3CFE050F004D "visitNumericalType"
   public void visitNumericalType(ModelElement owner, NumericalType def)
-  // -end- 3D6C985C01A5 head3CFE050F004D "visitNumericalType"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C985C01A5 throws3CFE050F004D "visitNumericalType"
       throws java.io.IOException
-
-    // -end- 3D6C985C01A5 throws3CFE050F004D "visitNumericalType"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C985C01A5 body3CFE050F004D "visitNumericalType"
     if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
       ch.ehi.interlis.domainsandconstants.basetypes.NumericType ntype=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)def;
       if(ntype.isRangeDefined()){
@@ -1772,66 +1470,26 @@ public class TransferFromUmlMetamodel
       }
     }
     return;
-    // -end- 3D6C985C01A5 body3CFE050F004D "visitNumericalType"
     }
 
-  // -beg- preserve=no 3D6C98F201A1 head3CFE050F004D "visitIliDim"
   public String visitIliDim(IliDim def)
-  // -end- 3D6C98F201A1 head3CFE050F004D "visitIliDim"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D6C98F201A1 throws3CFE050F004D "visitIliDim"
-
-    // -end- 3D6C98F201A1 throws3CFE050F004D "visitIliDim"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C98F201A1 body3CFE050F004D "visitIliDim"
     return def.toString();
-    // -end- 3D6C98F201A1 body3CFE050F004D "visitIliDim"
     }
 
-  // -beg- preserve=no 3D6C9CC2010E head3CFE050F004D "visitStructDec"
   public String visitStructDec(StructDec def)
-  // -end- 3D6C9CC2010E head3CFE050F004D "visitStructDec"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D6C9CC2010E throws3CFE050F004D "visitStructDec"
-
-    // -end- 3D6C9CC2010E throws3CFE050F004D "visitStructDec"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6C9CC2010E body3CFE050F004D "visitStructDec"
     return def.toString();
-    // -end- 3D6C9CC2010E body3CFE050F004D "visitStructDec"
     }
 
-  // -beg- preserve=no 3D6F4ECE016B head3CFE050F004D "lineFormTypeRef"
   public String lineFormTypeRef(ModelElement source, LineFormTypeDef ref)
-  // -end- 3D6F4ECE016B head3CFE050F004D "lineFormTypeRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D6F4ECE016B throws3CFE050F004D "lineFormTypeRef"
-
-    // -end- 3D6F4ECE016B throws3CFE050F004D "lineFormTypeRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6F4ECE016B body3CFE050F004D "lineFormTypeRef"
     return modelElementRef(source,ref,null);
-    // -end- 3D6F4ECE016B body3CFE050F004D "lineFormTypeRef"
     }
 
-  // -beg- preserve=no 3D6F86550379 head3CFE050F004D "visitRoleDef"
   public void visitRoleDef(RoleDef def)
-  // -end- 3D6F86550379 head3CFE050F004D "visitRoleDef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6F86550379 throws3CFE050F004D "visitRoleDef"
         throws java.io.IOException
-
-    // -end- 3D6F86550379 throws3CFE050F004D "visitRoleDef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6F86550379 body3CFE050F004D "visitRoleDef"
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
@@ -1899,20 +1557,10 @@ public class TransferFromUmlMetamodel
 
     out.write(";");newline();
     return;
-    // -end- 3D6F86550379 body3CFE050F004D "visitRoleDef"
     }
 
-  // -beg- preserve=no 3D6F9C4B00D4 head3CFE050F004D "visitCardinality"
   public String visitCardinality(MultiplicityRange def)
-  // -end- 3D6F9C4B00D4 head3CFE050F004D "visitCardinality"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D6F9C4B00D4 throws3CFE050F004D "visitCardinality"
-
-    // -end- 3D6F9C4B00D4 throws3CFE050F004D "visitCardinality"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D6F9C4B00D4 body3CFE050F004D "visitCardinality"
     String ret;
       if(def.getUpper()==MultiplicityRange.UNBOUND){
         ret="{"+Long.toString(def.getLower())+"..*}";
@@ -1922,20 +1570,10 @@ public class TransferFromUmlMetamodel
         ret="{"+Long.toString(def.getLower())+".."+Long.toString(def.getUpper())+"}";
       }
     return ret;
-    // -end- 3D6F9C4B00D4 body3CFE050F004D "visitCardinality"
     }
 
-  // -beg- preserve=no 3D7862770006 head3CFE050F004D "sortIliDefs"
   private java.util.List sortIliDefs(java.util.Set children)
-  // -end- 3D7862770006 head3CFE050F004D "sortIliDefs"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D7862770006 throws3CFE050F004D "sortIliDefs"
-
-    // -end- 3D7862770006 throws3CFE050F004D "sortIliDefs"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D7862770006 body3CFE050F004D "sortIliDefs"
     ch.ehi.basics.tools.TopoSort ts=new ch.ehi.basics.tools.TopoSort();
     Iterator defi=children.iterator();
     while(defi.hasNext()){
@@ -2136,20 +1774,10 @@ public class TransferFromUmlMetamodel
     }
     logErrorMsg("loop in definitions: "+loopele.toString());
     return new java.util.LinkedList(children);
-    // -end- 3D7862770006 body3CFE050F004D "sortIliDefs"
     }
 
-  // -beg- preserve=no 3D7862CC038E head3CFE050F004D "addTypeCondition"
   private void addTypeCondition(java.util.Set children, TopoSort ts, ModelElement def, Type type)
-  // -end- 3D7862CC038E head3CFE050F004D "addTypeCondition"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D7862CC038E throws3CFE050F004D "addTypeCondition"
-
-    // -end- 3D7862CC038E throws3CFE050F004D "addTypeCondition"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D7862CC038E body3CFE050F004D "addTypeCondition"
     if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
         addNumericalTypeCondition(children,ts,def,(ch.ehi.interlis.domainsandconstants.basetypes.NumericalType)type);
     }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
@@ -2184,74 +1812,29 @@ public class TransferFromUmlMetamodel
       }
 
     }
-    // -end- 3D7862CC038E body3CFE050F004D "addTypeCondition"
     }
 
-  // -beg- preserve=no 3D7864380142 head3CFE050F004D "addNumericalTypeCondition"
   private void addNumericalTypeCondition(java.util.Set children, TopoSort ts, ModelElement def, NumericalType type)
-  // -end- 3D7864380142 head3CFE050F004D "addNumericalTypeCondition"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D7864380142 throws3CFE050F004D "addNumericalTypeCondition"
-
-    // -end- 3D7864380142 throws3CFE050F004D "addNumericalTypeCondition"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D7864380142 body3CFE050F004D "addNumericalTypeCondition"
       if(type.containsUnitDef()){
         UnitDef supplier=type.getUnitDef();
         if(children.contains(supplier)){
           ts.addcond(supplier,def);
         }
       }
-    // -end- 3D7864380142 body3CFE050F004D "addNumericalTypeCondition"
     }
 
-  // -beg- preserve=no 3D7864DB018D head3CFE050F004D "modelElementRef"
   public String modelElementRef(ModelElement source, ModelElement ref, String language)
-  // -end- 3D7864DB018D head3CFE050F004D "modelElementRef"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D7864DB018D throws3CFE050F004D "modelElementRef"
-
-    // -end- 3D7864DB018D throws3CFE050F004D "modelElementRef"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D7864DB018D body3CFE050F004D "modelElementRef"
     if(language==null){
       language=this.language;
     }
     return ch.ehi.interlis.tools.ModelElementUtility.getIliQualifiedName(source,ref,language);
-    // -end- 3D7864DB018D body3CFE050F004D "modelElementRef"
     }
 
-  // -beg- preserve=no 3D786522033D head3CFE050F004D "setCheckModel"
-  public void setCheckModel(boolean doCheck)
-  // -end- 3D786522033D head3CFE050F004D "setCheckModel"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3D786522033D throws3CFE050F004D "setCheckModel"
-
-    // -end- 3D786522033D throws3CFE050F004D "setCheckModel"
-    {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D786522033D body3CFE050F004D "setCheckModel"
-    onlyChecking=doCheck;
-    // -end- 3D786522033D body3CFE050F004D "setCheckModel"
-    }
-
-  // -beg- preserve=no 3D786553033E head3CFE050F004D "visitDocumentation"
   public void visitDocumentation(NlsString nlsdoc)
-  // -end- 3D786553033E head3CFE050F004D "visitDocumentation"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D786553033E throws3CFE050F004D "visitDocumentation"
     throws java.io.IOException
-
-    // -end- 3D786553033E throws3CFE050F004D "visitDocumentation"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D786553033E body3CFE050F004D "visitDocumentation"
     if(nlsdoc==null)return;
     String doc=nlsdoc.getValue(language).trim();
     if(doc.length()==0)return;
@@ -2269,21 +1852,11 @@ public class TransferFromUmlMetamodel
       String line=doc.substring(last);
       out.write(getIndent()+beg+line);newline();
       out.write(getIndent()+" */");newline();
-    // -end- 3D786553033E body3CFE050F004D "visitDocumentation"
     }
 
-  // -beg- preserve=no 3D9B17BD0368 head3CFE050F004D "visitExplanation"
   public void visitExplanation(NlsString nlsdoc)
-  // -end- 3D9B17BD0368 head3CFE050F004D "visitExplanation"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D9B17BD0368 throws3CFE050F004D "visitExplanation"
     throws java.io.IOException
-
-    // -end- 3D9B17BD0368 throws3CFE050F004D "visitExplanation"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3D9B17BD0368 body3CFE050F004D "visitExplanation"
     if(nlsdoc==null)return;
     String doc=nlsdoc.getValue(language).trim();
     if(doc.length()==0)return;
@@ -2318,12 +1891,7 @@ public class TransferFromUmlMetamodel
       if(multiline){
         dec_ind();
       }
-    // -end- 3D9B17BD0368 body3CFE050F004D "visitExplanation"
     }
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=yes 3CFE050F004D detail_end "TransferFromUmlMetamodel"
 
   /** current line seperator
    *
@@ -2481,35 +2049,35 @@ public class TransferFromUmlMetamodel
    */
    public String getFuncDesc()
    {
-    if(onlyChecking){
-      if(xsdFile!=null){
-        return "XSD export";
-      }else if(fmtFile!=null){
-		return "FMT export";
-	  }
+    if(runIli2c){
       return rsrc.getString("CIcheckmodel");
     }
     return rsrc.getString("CIexportinterlis");
    }
-   private String xsdFile=null;
-   public void setXsdFile(String path){
-    xsdFile=path;
-   }
-   private String fmtFile=null;
-   public void setFmtFile(String path){
-	fmtFile=path;
-   }
+   public void runCompiler(Namespace ns,Configuration config)
+	 throws java.io.IOException
+	 {
+	 	runIli2c=true;
+		visitNamespace(ns,config);
+	 }
+	public void writeIliFiles(Namespace ns)
+	  throws java.io.IOException
+	  {
+	  	visitNamespace(ns,null);
+	  }
    private boolean createFileList=false;
    private java.util.List fileList=null;
-   public void setCreateFileList(boolean create){
-    createFileList=create;
-    if(createFileList){
-      fileList=new java.util.ArrayList();
-    }else{
-      fileList=null;
-    }
-   }
-   public java.util.List getFileList(){
+   public java.util.List getFileList(Namespace ns)
+   throws java.io.IOException
+   {
+	try{
+		createFileList=true;
+		fileList=new java.util.ArrayList();
+		visitNamespace(ns,null);
+	}
+	finally{
+		createFileList=false;
+	}
     return fileList;
    }
 
@@ -2573,7 +2141,5 @@ public class TransferFromUmlMetamodel
     		this.object=object;
     	}
     }
-  // -end- 3CFE050F004D detail_end "TransferFromUmlMetamodel"
-
 }
 
