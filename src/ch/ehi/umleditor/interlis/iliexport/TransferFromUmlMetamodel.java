@@ -115,11 +115,25 @@ public class TransferFromUmlMetamodel
     public java.util.List modelElements;
   };
   /** list of files, that where generated.
-   * This is only defined, if we are in checking mode.
+   * This is only defined, if runIli2c==true.
    *  list<FileListEntry iliFile>
    */
   transient private java.util.List tempFiles=null;
   transient private FileListEntry currentFile=null;
+  /** map from a modelname to a FileListEntry in tempFiles.
+   * This is only defined, if runIli2c==true.
+   * map<String modelName,FileListEntry file>
+   */
+  transient private java.util.Map model2file=null;
+  transient private java.util.Set filedep=null;
+  private class IliFileCond {
+  	public String before;
+  	public String after;
+  	public IliFileCond(String before1,String after1){
+  		before=before1;
+  		after=after1;
+  	}
+  };
 
   /** last written ModelElement.
    * Used to supress superfluous DOMAIN keywords.
@@ -131,6 +145,8 @@ public class TransferFromUmlMetamodel
     {
     if(runIli2c){
       tempFiles=new java.util.ArrayList();
+      model2file=new java.util.HashMap();
+      filedep=new java.util.HashSet();
     }
     // clear error counter
     errc=0;
@@ -179,6 +195,7 @@ public class TransferFromUmlMetamodel
               xmlFile.getAbsolutePath(),ch.interlis.ili2c.config.FileEntryKind.METADATAFILE));
         }
         // add generated files
+        sortIliFiles();
         for(java.util.Iterator i=tempFiles.iterator();i.hasNext();){
           File f=((FileListEntry)i.next()).file;
           config.addFileEntry(new ch.interlis.ili2c.config.FileEntry(
@@ -354,7 +371,11 @@ public class TransferFromUmlMetamodel
         break;
       default:
     }
-    out.write("MODEL "+def.getName().getValue(language)+" ("+language+")");
+    String modelName=def.getName().getValue(language);
+    if(runIli2c){
+    	model2file.put(modelName,currentFile);
+    }
+    out.write("MODEL "+modelName+" ("+language+")");
     // if this is a modeldef in a translated language?
     if(def.getBaseLanguage()!=null && !def.getBaseLanguage().equals(language)){
       Iterator translationi=def.iteratorTranslation();
@@ -362,7 +383,11 @@ public class TransferFromUmlMetamodel
         Translation translation=(Translation)translationi.next();
         if(translation.getLanguage().equals(language)){
           newline();
-          out.write("TRANSLATION OF "+def.getName().getValue(translation.getBaseLanguage()));
+          String trslModelName=def.getName().getValue(translation.getBaseLanguage());
+          out.write("TRANSLATION OF "+trslModelName);
+          if(runIli2c){
+			filedep.add(new IliFileCond(trslModelName,modelName));
+          }
         }
       }
     }
@@ -391,7 +416,11 @@ public class TransferFromUmlMetamodel
         Iterator supplieri=iliimport.iteratorSupplier();
         if(supplieri.hasNext()){
           ModelDef supplier=(ModelDef)supplieri.next();
+          String impModelName=supplier.getName().getValue(iliimport.getLanguage());
           out.write(sep+modelElementRef(def,supplier,iliimport.getLanguage()));
+          if(runIli2c){
+			filedep.add(new IliFileCond(impModelName,modelName));
+          }
           sep=",";
           impc++;
         }
@@ -1564,6 +1593,43 @@ public class TransferFromUmlMetamodel
     return ret;
     }
 
+	private void sortIliFiles(){
+	  ch.ehi.basics.tools.TopoSort ts=new ch.ehi.basics.tools.TopoSort();
+	  for(java.util.Iterator i=tempFiles.iterator();i.hasNext();){
+		FileListEntry f=(FileListEntry)i.next();
+		System.err.println("file "+f.file.getName());
+		ts.add(f);
+	  }
+	  for(java.util.Iterator i=filedep.iterator();i.hasNext();){
+		IliFileCond cond=(IliFileCond)i.next();
+		FileListEntry before=(FileListEntry)model2file.get(cond.before);
+		FileListEntry after=(FileListEntry)model2file.get(cond.after);
+		if(before==after){
+			continue;
+		}
+		// nor file? (e.g. model INTERLIS)
+		if(before==null || after==null){
+			//System.err.println("cond "+cond.before+" < "+cond.after);
+			continue;
+		}
+		//System.err.println("cond "+cond.before+"("+before.file.getName()+") < "+cond.after+"("+after.file.getName()+")");
+		ts.addcond(before,after);
+	  }
+	  if(ts.sort()){
+	  	tempFiles=ts.getResult();
+	  	return;
+	  }
+	  StringBuffer loopele=new StringBuffer();
+	  Iterator resi=ts.getResult().iterator();
+	  String sep="";
+	  while(resi.hasNext()){
+		FileListEntry res=(FileListEntry)resi.next();
+		loopele.append(sep);
+		loopele.append(res.file.getName());
+		sep="->";
+	  }
+	  logErrorMsg("loop in ili-files: "+loopele.toString());
+	}
   private java.util.List sortIliDefs(java.util.Set children)
     {
     ch.ehi.basics.tools.TopoSort ts=new ch.ehi.basics.tools.TopoSort();
