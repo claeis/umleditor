@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.13 $ $Date: 2004-06-14 14:08:32 $
+ * @version $Revision: 1.14 $ $Date: 2004-10-10 16:55:45 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -1251,6 +1251,21 @@ protected void showAllLinkFigures(boolean visible) {
 		}
 	}
 	checkDamage();
+}
+/**
+ * Show/hide all Operations in Diagram.
+ * Settings are stored on each class separately.
+ */
+protected void showAllOperations(boolean visible) {
+	showAttributes = visible;
+	
+	FigureEnumeration enum = drawing().figures();
+	while (enum.hasMoreElements()) {
+		Figure figure = enum.nextFigure();
+		if (figure instanceof ClassFigure) {
+			((PresentationAbstractClass)((ClassFigure)figure).getNode()).setSuppressOperations(!visible);
+		}
+	}
 }
 /**
  * Show/hide all roles in Diagram.

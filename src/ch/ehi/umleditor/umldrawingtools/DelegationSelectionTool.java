@@ -36,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-14 14:08:32 $
+ * @version $Revision: 1.6 $ $Date: 2004-10-10 16:55:45 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -67,6 +67,7 @@ public class DelegationSelectionTool extends CustomSelectionTool implements java
 	private static String ATTRIBUTE_TYPES_ACTION_COMMAND = "DISPLAY_ATTRIBUTE_TYPES";//$NON-NLS-1$
 	private static String ATTRIBUTE_CARDINALITY_ACTION_COMMAND = "DISPLAY_ATTRIBUTE_CARDINALITY";//$NON-NLS-1$
 	private static String LINK_FIGURE_ACTION_COMMAND = "DISPLAY_LINK_FIGURE";//$NON-NLS-1$
+	private static String OPERATION_ACTION_COMMAND = "DISPLAY_OPERATIONS";//$NON-NLS-1$
 	private JCheckBoxMenuItem chxShowRole = null;
 	private JCheckBoxMenuItem chxShowMultiplicity = null;
 	private JCheckBoxMenuItem chxShowAssociationNames = null;
@@ -74,6 +75,7 @@ public class DelegationSelectionTool extends CustomSelectionTool implements java
 	private JCheckBoxMenuItem chxShowAttributeTypes = null;
 	private JCheckBoxMenuItem chxShowAttributeCardinality = null;
 	private JCheckBoxMenuItem chxShowLinkFigure = null;
+	private JCheckBoxMenuItem chxShowOperations = null;
 	private javax.swing.JMenu mnuFormat = null;
 	
 /**
@@ -119,6 +121,11 @@ public DelegationSelectionTool(DrawingEditor editor) {
     chxShowLinkFigure.addActionListener(this);
     chxShowLinkFigure.setSelected(((ClassDiagramView)view()).isShowLinkFigure());
 
+    chxShowOperations = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowOperations_text"));
+    chxShowOperations.setActionCommand(OPERATION_ACTION_COMMAND);
+    chxShowOperations.addActionListener(this);
+    chxShowOperations.setSelected(true); //((ClassDiagramView)view()).isShowLinkFigure());
+    
 	mnuFormat = new javax.swing.JMenu();
 	mnuFormat.setName("MnuFormat");
 	mnuFormat.setText("Format");
@@ -153,6 +160,8 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 			((ClassDiagramView)view()).showAllAttributeTypes(chxShowAttributeTypes.isSelected());
 		} else if (e.getActionCommand().equals(ATTRIBUTE_CARDINALITY_ACTION_COMMAND)) {
 			((ClassDiagramView)view()).showAllAttributeMultiplicity(chxShowAttributeCardinality.isSelected());
+		} else if (e.getActionCommand().equals(OPERATION_ACTION_COMMAND)) {
+			((ClassDiagramView)view()).showAllOperations(chxShowOperations.isSelected());
 		} else if (e.getActionCommand().equals(LINK_FIGURE_ACTION_COMMAND)) {
 			((ClassDiagramView)view()).showAllLinkFigures(chxShowLinkFigure.isSelected());
 		}
@@ -409,6 +418,7 @@ protected void handlePopupMenu(MouseEvent e, int x, int y) {
 		menu.add(chxShowAttributeTypes);
 		menu.add(chxShowAttributeCardinality);
 		menu.add(chxShowLinkFigure);
+		menu.add(chxShowOperations);
 
 		menu.add(new JSeparator());
 

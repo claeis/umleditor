@@ -40,7 +40,7 @@ import ch.softenvironment.util.*;
  * name, attributes and methods.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-02 18:22:40 $
+ * @version $Revision: 1.4 $ $Date: 2004-10-10 16:55:45 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	// TextFigure for editing the class name
@@ -58,8 +58,10 @@ public class ClassFigure extends NodeFigure implements ActionListener {
 
 	// PopupMenu
 	private static String SUPPRESS_ATTRIBUTES_ACTION_COMMAND = "SUPPRESS_ATTRIBUTES";//$NON-NLS-1$
+	private static String SUPPRESS_OPERATIONS_ACTION_COMMAND = "SUPPRESS_OPERATIONS";//$NON-NLS-1$
 	private static String SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND = "SHOW_INHERITED_ATTRIBUTES";//$NON-NLS-1$
 	private JCheckBoxMenuItem chxSuppressAttributes = null;
+	private JCheckBoxMenuItem chxSuppressOperations = null;
 	private JCheckBoxMenuItem chxShowInheritedAttributes = null;
 /**
  * Create a new instance of ClassFigure with a RectangleFigure as presentation figure
@@ -82,6 +84,8 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 	try {
 		if (e.getActionCommand().equals(SUPPRESS_ATTRIBUTES_ACTION_COMMAND)) {
 			((PresentationAbstractClass)getNode()).setSuppressAttributes(chxSuppressAttributes.isSelected());
+		} else if (e.getActionCommand().equals(SUPPRESS_OPERATIONS_ACTION_COMMAND)) {
+			((PresentationAbstractClass)getNode()).setSuppressOperations(chxSuppressOperations.isSelected());
 		} else if (e.getActionCommand().equals(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND)) {
 			((PresentationAbstractClass)getNode()).setShowInheritedAttributes(chxShowInheritedAttributes.isSelected());
 		}
@@ -144,16 +148,22 @@ protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {
  	chxShowInheritedAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniShowInheritedAttributes_text")); //$NON-NLS-1$
 	chxShowInheritedAttributes.setActionCommand(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND);
 	chxShowInheritedAttributes.addActionListener(this);  
+	chxSuppressOperations = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressOperations_text")); //$NON-NLS-1$
+	chxSuppressOperations.setActionCommand(SUPPRESS_OPERATIONS_ACTION_COMMAND);
+	chxSuppressOperations.addActionListener(this);
    	if (getNode() == null) {
 	   	chxSuppressAttributes.setSelected(false);
 		chxShowInheritedAttributes.setSelected(false);
+		chxSuppressOperations.setSelected(false);
     } else {
 	    chxSuppressAttributes.setSelected(((PresentationAbstractClass)getNode()).isSuppressAttributes());
 		chxShowInheritedAttributes.setSelected(((PresentationAbstractClass)getNode()).isShowInheritedAttributes());
+		chxSuppressOperations.setSelected(((PresentationAbstractClass)getNode()).isSuppressOperations());
  	}
 	chxShowInheritedAttributes.setEnabled(!chxSuppressAttributes.isSelected());
 	popupMenu.add(chxSuppressAttributes);
 	popupMenu.add(chxShowInheritedAttributes);
+	popupMenu.add(chxSuppressOperations);
 }
 /**
  * ClassFigure movement is different from AssociationAttributeFigure movement.
@@ -324,22 +334,11 @@ Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attrib
 private void updateOperationFigure() {
 Tracer.getInstance().tune(this, "updateOperationFigure()", "currently all operationFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
 	operationsFigure.removeAll();
+	operationSeparator.setLineVisible(false);	//automatic display acc. to existing methods
 	
-/*	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
-		classHeaderSeparator.setLineVisible(false);
-	} else {*/
-		Iterator iterator = null;
-/*		if (((PresentationAbstractClass)getNode()).isShowInheritedAttributes()) {
-			// show local + inherited attributes
-			java.util.List inheritedAttributes = ((ch.ehi.interlis.modeltopicclass.AbstractClassDef)getModelElement()).getConsolidatedAttributes();
-			iterator = inheritedAttributes.iterator();
-		} else {
-*/
-			// show local operations only
-			iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
-//		}
+	if (!((PresentationAbstractClass)getNode()).isSuppressOperations()) {
+		Iterator iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
 			
-		operationSeparator.setLineVisible(false); //automatic display acc. to existing methods
 		while (iterator.hasNext()) {
 			Object feature = iterator.next();
 			if (feature instanceof UmlOperation) {
@@ -347,7 +346,7 @@ Tracer.getInstance().tune(this, "updateOperationFigure()", "currently all operat
 				operationsFigure.add(createOperationFigure((UmlOperation)feature));
 			}
 		}
-//	}
+	}
 
 	operationsFigure.update();
 	update();
