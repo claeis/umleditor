@@ -26,7 +26,7 @@ import ch.softenvironment.util.Tracer;
  * Figure for displaying a single UmlOperation within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-02 18:23:50 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-21 11:41:02 $
  */
 class OperationFigure extends TextFigure {
 	private UmlOperation operation = null;
@@ -57,7 +57,7 @@ public String getPureOperationName(String name) {
 	String realName = name;
 	int index = name.indexOf(PARAMETER_BEGIN);
 	if (index > 0) {
-		realName = name.substring(0, index);
+		realName = name.substring(1 /*skip visibility*/, index);
 	} else {
 Tracer.getInstance().nyi(this, "getPureOperationName(..)", "skip <visibility return type>");
 		realName = name;
