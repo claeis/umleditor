@@ -7,7 +7,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-05-17 14:15:36 $
+ * @version $Revision: 1.7 $ $Date: 2004-06-29 11:38:47 $
  */
 public class LogView extends BasePanel {
 	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
@@ -72,11 +72,9 @@ public LogView() {
 	initialize();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- * Overwrite this method.
- * @see #genericPopupDisplay()
+ * Overwrites.
  */
-protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	// enable/disable menu
 	boolean isEmpty = (getTxaLog().getText() != null) && (getTxaLog().getText().length() > 0);
 	getMniClear().setEnabled(isEmpty);
@@ -89,7 +87,8 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
 	}
 
 	// popoup inside text area?
-    if(currentOffset>=0){
+    if((currentOffset>=0) &&
+    		(currentOffset < getTxaLog().getDocument().getLength() /*prevent BadRelocationException*/)){
         javax.swing.JTextArea t=LogView.this.getTxaLog();
         try{
            // get current line
@@ -103,8 +102,6 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
            handleException(ex);
          }
    }
-
-	return popupMenu;
 }
 /**
  * Append a log-message without a specific theme.
