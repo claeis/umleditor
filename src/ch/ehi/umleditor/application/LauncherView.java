@@ -21,6 +21,9 @@ import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.basics.view.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -45,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-02-04 13:14:24 $
+ * @version $Revision: 1.5 $ $Date: 2004-02-04 18:21:57 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -2064,6 +2067,7 @@ private javax.swing.JMenuItem getMniSave() {
 			ivjMniSave.setEnabled(true);
 			// user code begin {1}
 			ivjMniSave.setText(CommonUserAccess.MENU_FILE_SAVE);
+			ivjMniSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
