@@ -17,6 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
@@ -33,11 +34,11 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:50 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-29 21:03:49 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
-	private static java.util.ResourceBundle resClassDiagramView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassDiagramView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resClassDiagramView = ResourceBundle.getBundle(ClassDiagramView.class);  //$NON-NLS-1$
 	private ch.ehi.umleditor.umlpresentation.Diagram diagram = null;
 	private Element parentElement = null;
 	// Menu Checkboxes
@@ -71,7 +72,7 @@ public ClassDiagramView(DrawingEditor editor, Diagram diagram) {
 	this.diagram = diagram;
 }
 /**
- * Adds a given Model to Diagram.
+ * Adds a given (Model)-Element to Diagram.
  * @return the added figure.
  * @see NavigationView#mniAddToDiagram()
  */
@@ -163,14 +164,14 @@ private Figure addClassifier(RoleDef roleDef) {
   	return figure;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsClasses(Element).
  */
 public boolean allowsClasses() {
 	return allowsClasses(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of non-Package-Type.
+ * @return whether allowed or not
  */
 public static boolean allowsClasses(Element element) {
 	String validOwnedElements[];
@@ -189,14 +190,14 @@ public static boolean allowsClasses(Element element) {
 	return false;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsPackages(Element)
  */
 public boolean allowsPackages() {
 	return allowsPackages(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of PackageType.
+ * @return whether allowed or not
  */
 public static boolean allowsPackages(Element element) {
 	String validOwnedElements[];
@@ -214,16 +215,6 @@ public static boolean allowsPackages(Element element) {
 		}
 	}
 	return false;
-}
-/**
- * Create a WayPoint
- */
-private WayPoint createWayPoint(java.awt.Point p) {
-	WayPoint wayPoint = new WayPoint();
-	wayPoint.setEast(p.x);
-	wayPoint.setSouth(p.y);
-
-	return wayPoint;
 }
 /**
  * Determine the valid default Package-Type to be created in this Diagram.
@@ -835,9 +826,10 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    while (generalizations.hasNext()) {
 				ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)generalizations.next();
 				GeneralizableElement generalizableElement = generalization.getParent();
-				Figure end = findFigure(generalization.getParent());
-				if (end != null) {
-					loadSimpleEdge(new GeneralizationLineConnection(this, figure, end, generalization));
+				Figure parent = findFigure(generalization.getParent());
+				Figure child = findFigure(generalization.getChild());
+				if ((parent != null) && (child != null)) {
+					loadSimpleEdge(new GeneralizationLineConnection(this, figure, parent, generalization));
 				}
 		    }
 		    generalizations = ((GeneralizableElement)modelElement).iteratorGeneralization();
