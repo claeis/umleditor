@@ -2065,7 +2065,47 @@ public class TransferFromUmlMetamodel
 
     }
     if(ts.sort()){
-      return ts.getResult();
+      // sort result according to level, type, name
+      // build list of pairs (level,object)
+      java.util.List pairv=new java.util.ArrayList();
+      int[] levv=ts.getLevel();
+      java.util.List objv=ts.getResult();
+      Iterator obji=objv.iterator();
+      for(int i=0;obji.hasNext();i++){
+      	pairv.add(new Pair(levv[i],obji.next()));
+      }
+      // sort list of pairs
+      java.util.Collections.sort(pairv, new java.util.Comparator(){
+		public int compare(Object o_1, Object o_2)
+		{
+			Pair p1=(Pair)o_1;
+			Pair p2=(Pair)o_2;
+			// compare level
+			if(p1.level<p2.level){
+				return -1;
+			}else if(p2.level<p1.level){
+				return 1;
+			}
+			// ASSERT: same level
+			// compare type
+			int def=ch.ehi.interlis.tools.ModelElementUtility.compareDefinition(p1.object.getClass(),p2.object.getClass());
+			if(def!=0){
+			  return def;
+			}
+			// ASSERT: same type
+			// compare name
+		  String name1=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p1.object);if(name1==null)name1="";
+		  String name2=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p2.object);if(name2==null)name2="";
+		  int compareName =  name1.compareToIgnoreCase(name2);
+		  return compareName;
+		}
+      });
+      // copy objects from list of pairs back to result list
+	  objv=new java.util.ArrayList();
+	  for(Iterator pairi=pairv.iterator();pairi.hasNext();){
+	  		objv.add(((Pair)pairi.next()).object);
+	  }
+      return objv;
     }
     StringBuffer loopele=new StringBuffer();
     Iterator resi=ts.getResult().iterator();
@@ -2506,6 +2546,14 @@ public class TransferFromUmlMetamodel
     }
       String line=def.substring(last);
       out.write(nextIndent+line);
+    }
+    class Pair{
+    	public int level;
+    	public Object object;
+    	Pair(int level, Object object){
+    		this.level=level;
+    		this.object=object;
+    	}
     }
   // -end- 3CFE050F004D detail_end "TransferFromUmlMetamodel"
 
