@@ -14,8 +14,10 @@ Offene Fragen/Arbeiten
 - Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
 - Bug: Position der AssocKlasse wird nicht in DiagGroesse berücksichtigt
 
-UML-Editor 2.1.2 (2004-03-02)
+UML-Editor 2.1.3 (2004-03-02)
 -----------------------------
+- Bug fc: Exception bei NumericType mit undefiniertem Bereich
+- Bug iliexp: Exception bei NumericType mit definiertem Bereich ohne min/max
 - Bug: Klassenname lässt sich in Diagramm nicht editieren
 - Bug: Navigationsbaum wird bei der Funktion "Aus Modell entfernen" nicht richtig nachgeführt 
 
