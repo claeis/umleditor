@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.15 $ $Date: 2004-10-20 11:58:51 $
+ * @version $Revision: 1.16 $ $Date: 2004-12-03 16:30:06 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -2990,7 +2990,7 @@ private void initialize() {
 getMniUndo().setEnabled(false);
 getMniRedo().setEnabled(false);
 
-	mnuFileHistory = new FileHistoryMenu(this, 6, getSettings().getLastFiles());
+	mnuFileHistory = new FileHistoryMenu(this, 10, getSettings().getLastFiles());
 	getMnuFile().insert((javax.swing.JMenuItem)mnuFileHistory, 2 /* second */);
 	getMnuReports().add(new AbstractAction(getResourceString("MniObjectCataloWoSecNr_text")) { //$NON-NLS-1$
 		public void actionPerformed(ActionEvent event) {
