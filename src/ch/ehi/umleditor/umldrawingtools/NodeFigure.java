@@ -33,7 +33,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.6 $ $Date: 2004-05-03 12:41:57 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -344,12 +344,14 @@ protected void mniPaste() {
  */
 public void removeInModel() {
 	try {
+		ModelElement tmp = getModelElement();
+		
 		// 1) remove visible part
 		removeVisually();
 
 		// 2) remove in Model
-		if (getModelElement() != null) {
-			ElementFactory.removeElement(getModelElement());
+		if (tmp != null) {
+			ElementFactory.removeElement(tmp);
 		}
 	} catch(Throwable e) {
 		handleException(e, REMOVE_IN_MODEL, ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
