@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.14 $ $Date: 2004-09-14 18:05:15 $
+ * @version $Revision: 1.15 $ $Date: 2004-10-20 11:58:51 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3619,7 +3619,7 @@ private boolean saveCurrentChanges() {
 		toolDone();
 
 		if (hasModelChanged) {
-			QueryCancelDialog dialog = new QueryCancelDialog(this, CommonUserAccess.getTitleSaveChanges(), CommonUserAccess.getQuestionSaveChanges());
+			QueryDialog dialog = new QueryDialog(this, CommonUserAccess.getTitleSaveChanges(), CommonUserAccess.getQuestionSaveChanges(), true);
 			if (dialog.isYes()) {
 				return mniSaveFile();
 			} else {
