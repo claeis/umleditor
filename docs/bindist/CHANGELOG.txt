@@ -8,14 +8,12 @@ Offene Fragen/Arbeiten
 - Englische Uebersetzung der Handbuecher fehlt
 - API: generic filters aus Launcher nach basics verschieben
 - FINAL bei Enumeration
-- Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt
 - Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
 - Bug: s.o. (JRE="SE 1.4.1_01" Grafikkarte="ATI Mobility M6" TreiberVersion="5.13.1.3207" Auflösung="1024x768, 32bit Farben" OS="Windows 2000 Service Pack 2" Rechner="Fujits Siemens LifeBook E-Series")
 - Bug: Für Ili-Kompositions- und Referenzattribute kann die Reihenfolge in der Klassendefinition nicht spezifiziert werden
 - Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Bug: Farbedialog zu klein
-- Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
 - Bug: nach dem umhängen eine Assoziation ist in anderen Diagrammen, die diese Assoziation enthalten, der Linkknoten fälschlicherweise mit der Ursprungs-Klasse gekoppelt (Modell ist aber korrekt)
 
 UML-Editor 2.0.3 (2003-xx-xx)
@@ -42,6 +40,8 @@ UML-Editor 2.0.3 (2003-xx-xx)
 - Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
 - Bug: Öffnen von Diagrammen mit Vererbungen ohne Parent-Klasse erzeugt eine Exception
 - Bug: "Löschen (im Modell)" einer Beziehung in einem Diagramm löscht nur die entsprechende Rolle statt die ganze Assoziation
+- Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt (KORREKT ab JRE 1.4.1_02)
+- Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
 
 
 

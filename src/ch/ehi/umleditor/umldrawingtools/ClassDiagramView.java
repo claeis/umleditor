@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-29 21:03:49 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-31 10:12:11 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -46,6 +46,7 @@ public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
 	private boolean showAttributes = true;
 	private boolean showLinkFigure = false;
 	private boolean showRoles = true;
+	private boolean showMultiplicity = false;
 	private boolean loading = false;
 	
 	/*
@@ -548,7 +549,7 @@ protected boolean isShowLinkFigure() {
  * 
  */
 public boolean isShowMultiplicities() {
-	return getDiagram().isShowAttributeMultiplicity();
+	return showMultiplicity;
 }
 /**
  * Handles key down events. Cursor keys are handled
@@ -1037,7 +1038,7 @@ protected void showAllLinkFigures(boolean visible) {
  * Show/hide all roles in Diagram.
  */
 protected void showAllMultiplicities(boolean visible) {
-	getDiagram().setShowAttributeMultiplicity(visible);
+	showMultiplicity = visible;
 	
 	FigureEnumeration enum = drawing().figures();
 	while (enum.hasMoreElements()) {
