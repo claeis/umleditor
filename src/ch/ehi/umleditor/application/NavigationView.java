@@ -17,6 +17,7 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import javax.swing.tree.*;
@@ -25,14 +26,14 @@ import ch.softenvironment.util.*;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:47 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-29 20:49:45 $
  */
 public class NavigationView extends ch.softenvironment.view.DataPanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
 	// optimize speed
-	private static java.util.ResourceBundle resNavigationView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/NavigationView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resNavigationView = ResourceBundle.getBundle(NavigationView.class);
 	private DefaultMutableTreeNode latestNodeInTree = null;
 	private boolean singleClickTreated = false;
 	private boolean doubleClickTreated = false;
