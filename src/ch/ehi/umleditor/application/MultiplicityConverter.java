@@ -26,7 +26,7 @@ import ch.softenvironment.util.*;
  * Manage different Cardinality's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:39 $
+ * @version $Revision: 1.2 $ $Date: 2005-02-10 12:13:18 $
  */
 public abstract class MultiplicityConverter {
 	// acc. ti UML Specification V1.4
@@ -175,8 +175,13 @@ private static MultiplicityRange parseRange(String range) {
 	int separatorIndex = range.indexOf(RANGE_SEPARATOR);
 	if (separatorIndex < 0) {
 		// no range => lower == to
-		multiplicityRange.setLower(convertString(range));
-		multiplicityRange.setUpper(multiplicityRange.getLower());
+		if(range.equals(INFINITE_RANGE)){
+			multiplicityRange.setLower(0);
+			multiplicityRange.setUpper(Long.MAX_VALUE);
+		}else{
+			multiplicityRange.setLower(convertString(range));
+			multiplicityRange.setUpper(multiplicityRange.getLower());
+		}
 	} else {
 		// range lower..upper
 		long lower = convertString(range.substring(0, separatorIndex));
