@@ -37,7 +37,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-01-04 09:44:33 $
+ * @version $Revision: 1.5 $ $Date: 2004-01-06 10:00:22 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -273,7 +273,7 @@ protected final void connectNodes() {
 				updateConnection();
 				endFigure().addFigureChangeListener(this);
 			}
-		} else {
+		} else if (getEdge().sizeEndpoint() == 1) {
 			Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
 			//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
 			removeVisually();	
@@ -722,7 +722,7 @@ public void updateView() {
 		if ((getStartElement() == null) || (getEndElement() == null) ||
 				(getClassDiagram().findFigure(getStartElement()) == null) ||
 				(getClassDiagram().findFigure(getEndElement()) == null)) {
-			// both presentationNodes are both to be found in ClassDiagram
+			// both presentationNodes are to be found in ClassDiagram
 			removeVisually();
 		}
 	}
