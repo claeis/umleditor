@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2005-02-03 14:32:44 $
+ * @version $Revision: 1.11 $ $Date: 2005-02-21 13:51:32 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -175,7 +175,7 @@ public void basicDisplayBox(Point origin, Point corner) {
 	super.basicDisplayBox(origin, corner);
 	
 	if ((LauncherView.getInstance().tool() instanceof CreationTool) || (this instanceof LinkFigure)) {
-Tracer.getInstance().hack(this, "basicDisplayBox()", "anchorPoint set afterwards by CreationTool.mouseDown(..)");
+//TODO hack: anchorPoint set afterwards by CreationTool.mouseDown(..)
 		updateCoordinates();
 	}
 }

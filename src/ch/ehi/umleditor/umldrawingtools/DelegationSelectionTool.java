@@ -36,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-10-10 16:55:45 $
+ * @version $Revision: 1.7 $ $Date: 2005-02-21 13:51:32 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -227,7 +227,7 @@ protected Tool createDragTracker(Figure f) {
 	}
 
 //	return super.createDragTracker(f);
-ch.softenvironment.util.Tracer.getInstance().patch(this, "createDragTracker(Figure)", "using own DragTracker");
+//TODO Patch: using own DragTracker
 	return new UndoableTool(new JHotDrawDragTracker(editor(), f));
 }
 	/**

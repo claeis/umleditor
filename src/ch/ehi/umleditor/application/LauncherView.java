@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.19 $ $Date: 2005-02-03 14:31:36 $
+ * @version $Revision: 1.20 $ $Date: 2005-02-21 13:49:17 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -428,7 +428,7 @@ private void addInternalFrame(ClassDiagramView drawingView) {
 	}
 
 	// set the internalFrame's size
-Tracer.getInstance().patch(this, "addInternalFrame(..)", "call getMinumSize() in ClassDiagramView-Constructor -> Resize necessary because of JHotDraw (Bug?) here");//$NON-NLS-2$//$NON-NLS-1$
+//TODO Patch: call getMinumSize() in ClassDiagramView-Constructor -> Resize necessary because of JHotDraw (Bug?) here
 drawingView.setSize(drawingView.getDefaultDimension());
 	internalFrame.setSize(getDtpDrawArea().getWidth(), getDtpDrawArea().getHeight());
 	internalFrame.setVisible(true);
@@ -3121,9 +3121,6 @@ public static void main(java.lang.String[] args) {
 	try {
 		Tracer.start(args);
 
-		// Locale influence
-		Tracer.getInstance().runtimeInfo("Locale is: " + java.util.Locale.getDefault().toString());
-
 		// ce2004-06-23 don't change default Locale!!! use (existing) system administration tool!
 		//Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
 		//Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
@@ -3135,7 +3132,7 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 		instance = new LauncherView();
 		instance.setLookAndFeel(getSettings().getLookAndFeel());
 
-Tracer.getInstance().patch(LauncherView.class, "main()", "setModel(..)->openDiagram would be too early here");//$NON-NLS-2$//$NON-NLS-1$
+//TODO patch: setModel(..)->openDiagram would be too early here
 	instance.setCurrentFile(null);
 	instance.setModel(null /*, null*/);
 

@@ -35,7 +35,7 @@ import java.awt.event.*;
  * @see FloatingTextField
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:57 $
+ * @version $Revision: 1.2 $ $Date: 2005-02-21 13:51:32 $
  */
 public class JHotDrawTextTool extends CreationTool implements ActionListener {
 
@@ -161,7 +161,7 @@ public class JHotDrawTextTool extends CreationTool implements ActionListener {
  * @see #beginEdit(TextHolder)
  */
 public void actionPerformed(java.awt.event.ActionEvent e) {
-ch.softenvironment.util.Tracer.getInstance().patch(this, "actionPerformed()", "Extended by Peter Hirzel for KeyBoard-ENTER handling");
+//TODO Patch: Extended for KeyBoard-ENTER handling
 	endEdit();
 }
 	/**
@@ -176,7 +176,7 @@ ch.softenvironment.util.Tracer.getInstance().patch(this, "actionPerformed()", "E
 	protected void beginEdit(TextHolder figure) {
 		if (fTextField == null) {
 			fTextField = new FloatingTextField();
-ch.softenvironment.util.Tracer.getInstance().patch(this, "beginEdit()", "Extended by Peter Hirzel for KeyBoard-ENTER handling");		
+//TODO Patch: Extended by Peter Hirzel for KeyBoard-ENTER handling		
 fTextField.addActionListener(this);
 		}
 

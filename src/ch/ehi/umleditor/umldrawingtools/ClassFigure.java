@@ -40,7 +40,7 @@ import ch.softenvironment.util.*;
  * name, attributes and methods.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-10-10 16:55:45 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-21 13:51:31 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	// TextFigure for editing the class name
@@ -300,7 +300,7 @@ protected void initialize() {
  * the layout of contained figures.
  */
 protected void updateAttributeFigure() {
-Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+//TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
 	attributesFigure.removeAll();
 	
 	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
@@ -332,7 +332,7 @@ Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attrib
  * the layout of contained figures.
  */
 private void updateOperationFigure() {
-Tracer.getInstance().tune(this, "updateOperationFigure()", "currently all operationFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+//TODO Tune: currently all operationFigure's are removed and readded at modelChange
 	operationsFigure.removeAll();
 	operationSeparator.setLineVisible(false);	//automatic display acc. to existing methods
 	

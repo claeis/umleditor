@@ -11,7 +11,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.9 $ $Date: 2004-09-27 21:31:43 $
+ * @version $Revision: 1.10 $ $Date: 2005-02-21 13:49:32 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
@@ -159,7 +159,7 @@ protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopu
 	// build "New-Menu" dynamically
 	getMnuNew().setEnabled(false);
 	getMnuNew().removeAll();
-Tracer.getInstance().patch(this, "adaptPopupMenu()", "setFont of Submenu <Neu>");//$NON-NLS-2$//$NON-NLS-1$
+//TODO Patch: setFont of Submenu <Neu>
 getMnuNew().setFont(getMniOpen().getFont());
 getMnuSort().setFont(getMniOpen().getFont());
 	if (modelAdapter != null) {

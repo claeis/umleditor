@@ -32,7 +32,7 @@ import java.awt.event.MouseEvent;
  * @see SelectionTool
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:57 $
+ * @version $Revision: 1.2 $ $Date: 2005-02-21 13:51:32 $
  */
  public class JHotDrawDragTracker extends CH.ifa.draw.standard.AbstractTool {
 
@@ -139,13 +139,13 @@ import java.awt.event.MouseEvent;
 		fMoved = (Math.abs(x - fAnchorX) > 4) || (Math.abs(y - fAnchorY) > 4);
 
 		if (fMoved) {
-ch.softenvironment.util.Tracer.getInstance().patch(this, "mouseDrag(..)", "adaption of original CH.ifa.draw.standard.DragTracker");
+//TODO Patch: adaption of original CH.ifa.draw.standard.DragTracker
 			FigureEnumeration figures = getUndoActivity().getAffectedFigures();
 			while (figures.hasMoreElements()) {
 				Figure figure = figures.nextFigure();
 				if ((getUndoActivity().getAffectedFiguresCount() > 1) && (figure instanceof RoleDefFigure)) {
 					// suppress Role-moving twicely (once by model-calculation & once by Drag)
-ch.softenvironment.util.Tracer.getInstance().hack(this, "mouseDrag(..)", "meaningful multi-selection of Associations, Classes and Roles assumed");
+//TODO Hack: meaningful multi-selection of Associations, Classes and Roles assumed
 				} else {
 					figure.moveBy(x - fLastX, y - fLastY);
 				}

@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2005-02-03 14:32:44 $
+ * @version $Revision: 1.11 $ $Date: 2005-02-21 13:51:32 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -682,7 +682,7 @@ public void updateConnection() {
 		super.updateConnection();
 	} catch(Throwable e) {
 		// in case of dragging a NullPointerExcepion might be experienced
-		Tracer.getInstance().patch(this, "updateConnection()", "JHotDraw-Error ignored [" + e.toString() + "]");
+		Tracer.getInstance().debug(this, "updateConnection()", "JHotDraw-Error ignored [" + e.toString() + "]");
 	}
 }
 /**
