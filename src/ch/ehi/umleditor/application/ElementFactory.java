@@ -37,7 +37,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:48 $
+ * @version $Revision: 1.2 $ $Date: 2004-02-05 16:46:40 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -386,7 +386,7 @@ public static ModelElement createOwnedElement(java.lang.Class aClass, Element pa
  *  - Associations with Attributes
  * @see createObject(..)
  */
-public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentationRole(ClassDiagramView classDiagram, ch.ehi.umleditor.umlpresentation.Association associationComposite, ch.ehi.umleditor.umlpresentation.PresentationNode node, RoleDef roleDef)  {
+public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentationRole(ClassDiagramView classDiagram, ch.ehi.umleditor.umlpresentation.Association associationComposite, ch.ehi.umleditor.umlpresentation.PresentationNode node, AssociationEnd roleDef)  {
 	ch.ehi.umleditor.umlpresentation.PresentationRole edge = (ch.ehi.umleditor.umlpresentation.PresentationRole)createObject(ch.ehi.umleditor.umlpresentation.PresentationRole.class);
 	edge.addEndpoint(associationComposite.getLinkPresentation());	// first
 	edge.addEndpoint(node);	// second
