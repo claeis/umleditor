@@ -22,9 +22,6 @@ import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
 import java.awt.event.*;
-
-import javax.swing.text.ChangedCharSetException;
-
 import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import ch.ehi.umleditor.umlpresentation.*;
@@ -38,7 +35,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-01-06 10:12:19 $
+ * @version $Revision: 1.6 $ $Date: 2004-02-05 11:16:24 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -711,15 +708,25 @@ private boolean correctGeneralizationRelocation(GeneralizationLineConnection gen
 private boolean correctRoleRelocation(ch.ehi.umleditor.umlpresentation.PresentationRole role) {
 	Iterator subjects = role.iteratorSubject();
 	while (subjects.hasNext()) {
-		AssociationEnd subjectRoleDef = (AssociationEnd)subjects.next();
+		Object object = subjects.next();
+if (!(object instanceof AssociationEnd)) {
+	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "role subject is not an AssociationEnd");
+	continue;	
+}
+		AssociationEnd subjectRoleDef = (AssociationEnd)object;
 		if (subjectRoleDef.containsParticipant()) {
 			Classifier targetClass = subjectRoleDef.getParticipant();
 //Tracer.getInstance().debug("PresentationRole->Subject:RoleDef=" + subjectRoleDef.getName().getValue() + ", ClassDef=" + targetClass.getName().getValue());
 			Iterator endpoints = role.iteratorEndpoint();
-			if(endpoints.hasNext()) {
+			if (endpoints.hasNext()) {
 				endpoints.next(); // skip PresentationAssocClass (LinkNode)
 				if (endpoints.hasNext()) {
-					ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
+					object = endpoints.next();
+if (!(object instanceof ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)) {
+	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "endpoint is not an umlpresentation.PresentationAbstractClass");
+	continue;	
+}
+					ch.ehi.umleditor.umlpresentation.PresentationAbstractClass presentationClass = (ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)object;
 					if (!presentationClass.containsSubject(targetClass)) {
 						// role was probably moved to another Classifier in Model by another Diagram
 /*							Iterator classSubjects = presentationClass.iteratorSubject();
@@ -934,13 +941,14 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)dependencies.next();
 			Iterator suppliers = dependency.iteratorSupplier();
 			if (suppliers.hasNext()) {
-				GeneralizableElement generalizableElement = (GeneralizableElement)suppliers.next();
-				Figure end = findFigure(generalizableElement);
-				if (end != null) {
-					loadSimpleEdge(new DependencyLineConnection(this, figure, end, dependency));
+				Object supplier = suppliers.next();
+				if (supplier instanceof GeneralizableElement) {
+					Figure end = findFigure((GeneralizableElement)supplier);
+					if (end != null) {
+						loadSimpleEdge(new DependencyLineConnection(this, figure, end, dependency));
+					}
 				}
 			}
-			
 		}
 		dependencies = modelElement.iteratorSupplierDependency();
 		while (dependencies.hasNext()) {
@@ -948,13 +956,14 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)dependencies.next();
 			Iterator clients = dependency.iteratorClient();
 			if (clients.hasNext()) {
-				GeneralizableElement generalizableElement = (GeneralizableElement)clients.next();
-				Figure start = findFigure(generalizableElement);
-				if (start != null) {
-					loadSimpleEdge(new DependencyLineConnection(this, start, figure, dependency));
+				Object client = clients.next();
+				if (client instanceof GeneralizableElement) {
+					Figure start = findFigure((GeneralizableElement)client);
+					if (start != null) {
+						loadSimpleEdge(new DependencyLineConnection(this, start, figure, dependency));
+					}
 				}
 			}
-			
 		}
 		
 	    // show Generalizations
