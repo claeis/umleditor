@@ -119,7 +119,7 @@ private javax.swing.JLabel getLblUsage() {
 		try {
 			ivjLblUsage = new javax.swing.JLabel();
 			ivjLblUsage.setName("LblUsage");
-			ivjLblUsage.setText("Benutzung:");
+			ivjLblUsage.setText("Abhängig von:");
 			// user code begin {1}
 			ivjLblUsage.setText(getResourceString("LblUsage_text"));
 			// user code end
@@ -130,6 +130,9 @@ private javax.swing.JLabel getLblUsage() {
 		}
 	}
 	return ivjLblUsage;
+}
+public Object getObject(){
+  throw new UnsupportedOperationException();
 }
 /**
  * Return the changed object displayed.
@@ -335,6 +338,9 @@ public void setCurrentObject(java.lang.Object syntax) {
 		getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString)syntax)));
 	}
 }
+public void setObject(Object object){
+  throw new UnsupportedOperationException();
+}
 /**
  * Set the Object to be displayed by panel.
  * Only first entry in given Iterator argument is treated by this Panel.
@@ -392,11 +398,5 @@ public void setSyntax(IliSyntax iliSyntax) {
 public void setUsage(ModelElement modelElement) {
 	getPnlUsage().setVisible(true);
 	getCbxUsage().setEnabled(getCbxUsage().setUsage(modelElement));
-}
-public Object getObject(){
-  throw new UnsupportedOperationException();
-}
-public void setObject(Object object){
-  throw new UnsupportedOperationException();
 }
 }

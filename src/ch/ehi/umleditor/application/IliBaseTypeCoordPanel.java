@@ -25,7 +25,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>CoordinatType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
  */
 public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private int oldDim = 0;
@@ -240,8 +240,8 @@ private javax.swing.JCheckBox getChxRotationDef() {
 		try {
 			ivjChxRotationDef = new javax.swing.JCheckBox();
 			ivjChxRotationDef.setName("ChxRotationDef");
-			ivjChxRotationDef.setToolTipText("RotationDef");
-			ivjChxRotationDef.setText("RotationDef");
+			ivjChxRotationDef.setToolTipText("");
+			ivjChxRotationDef.setText("Rotation");
 			// user code begin {1}
 			ivjChxRotationDef.setToolTipText(getResourceString("ChxRotationDef_toolTipText"));
 			ivjChxRotationDef.setText(getResourceString("ChxRotationDef_text"));
@@ -265,7 +265,7 @@ private javax.swing.JLabel getLblDimensions() {
 		try {
 			ivjLblDimensions = new javax.swing.JLabel();
 			ivjLblDimensions.setName("LblDimensions");
-			ivjLblDimensions.setText("Dimensions:");
+			ivjLblDimensions.setText("Dimensionen:");
 			// user code begin {1}
 			ivjLblDimensions.setText(getResourceString("LblDimensions_text"));
 			// user code end
@@ -287,8 +287,8 @@ private javax.swing.JLabel getLblPiHalfAxis() {
 		try {
 			ivjLblPiHalfAxis = new javax.swing.JLabel();
 			ivjLblPiHalfAxis.setName("LblPiHalfAxis");
-			ivjLblPiHalfAxis.setToolTipText("Half Axis");
-			ivjLblPiHalfAxis.setText("Half Axis");
+			ivjLblPiHalfAxis.setToolTipText("PI-Halbachse");
+			ivjLblPiHalfAxis.setText("PiHalfAxis:");
 			// user code begin {1}
 			ivjLblPiHalfAxis.setToolTipText(getResourceString("LblPiHalfAxis_toolTipText"));
 			ivjLblPiHalfAxis.setText(getResourceString("LblPiHalfAxist_text"));
@@ -311,8 +311,8 @@ private javax.swing.JLabel getLblZeroAxis() {
 		try {
 			ivjLblZeroAxis = new javax.swing.JLabel();
 			ivjLblZeroAxis.setName("LblZeroAxis");
-			ivjLblZeroAxis.setToolTipText("Zero Axis");
-			ivjLblZeroAxis.setText("Zero Axis");
+			ivjLblZeroAxis.setToolTipText("0-Achse");
+			ivjLblZeroAxis.setText("NullAxis:");
 			// user code begin {1}
 			ivjLblZeroAxis.setToolTipText(getResourceString("LblZeroAxis_toolTipText"));
 			ivjLblZeroAxis.setText(getResourceString("LblZeroAxis_text"));
@@ -570,7 +570,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeTextPanel");
-		setToolTipText("");
+		setToolTipText("INTERLIS Basistyp <COORD>");
 		setLayout(new java.awt.GridBagLayout());
 		setSize(526, 390);
 

@@ -26,7 +26,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>BasketType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:23 $
  */
 public class IliBaseTypeBasketPanel extends BasePanel implements DataPanel {
 	private ReferencableComboBox ivjCbxTopicDef = null;
@@ -177,7 +177,7 @@ private javax.swing.JRadioButton getRbtBase() {
 			ivjRbtBase = new javax.swing.JRadioButton();
 			ivjRbtBase.setName("RbtBase");
 			ivjRbtBase.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtBase.setText("Basis");
+			ivjRbtBase.setText("Base");
 			ivjRbtBase.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtBase.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
@@ -226,10 +226,11 @@ private javax.swing.JRadioButton getRbtGraphic() {
 		try {
 			ivjRbtGraphic = new javax.swing.JRadioButton();
 			ivjRbtGraphic.setName("RbtGraphic");
+			ivjRbtGraphic.setToolTipText("");
 			ivjRbtGraphic.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjRbtGraphic.setText("Graphic");
-			ivjRbtGraphic.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtGraphic.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+			ivjRbtGraphic.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
 			ivjRbtGraphic.setText(getResourceString("RbtGraphic_text"));
 			// user code end
@@ -251,10 +252,11 @@ private javax.swing.JRadioButton getRbtUndefined() {
 		try {
 			ivjRbtUndefined = new javax.swing.JRadioButton();
 			ivjRbtUndefined.setName("RbtUndefined");
+			ivjRbtUndefined.setToolTipText("");
 			ivjRbtUndefined.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtUndefined.setText("Undefiniert");
-			ivjRbtUndefined.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
+			ivjRbtUndefined.setText("Undefined");
 			ivjRbtUndefined.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+			ivjRbtUndefined.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}
 			ivjRbtUndefined.setText(getResourceString("RbtUndefined_text"));
 			// user code end
@@ -277,7 +279,7 @@ private javax.swing.JRadioButton getRbtView() {
 			ivjRbtView = new javax.swing.JRadioButton();
 			ivjRbtView.setName("RbtView");
 			ivjRbtView.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtView.setText("View");
+			ivjRbtView.setText("VIEW");
 			ivjRbtView.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			ivjRbtView.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			// user code begin {1}

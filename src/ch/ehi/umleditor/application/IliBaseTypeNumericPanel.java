@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>NumericalType</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
  */
 public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
 	private JRadioButton ivjRbtUnspecified = null;
@@ -52,11 +52,11 @@ public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
 
 class IvjEventHandler implements java.awt.event.ItemListener {
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
-			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeDefined())
+			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeDefined()) 
 				connEtoC1(e);
-			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeUndefined())
+			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeUndefined()) 
 				connEtoC2(e);
-			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeStructured())
+			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeStructured()) 
 				connEtoC3(e);
 		};
 	};
@@ -153,9 +153,9 @@ private javax.swing.JCheckBox getChxCircular() {
 		try {
 			ivjChxCircular = new javax.swing.JCheckBox();
 			ivjChxCircular.setName("ChxCircular");
-			ivjChxCircular.setToolTipText("Circular");
+			ivjChxCircular.setToolTipText("");
 			ivjChxCircular.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjChxCircular.setText("Circular");
+			ivjChxCircular.setText("Zirkulär");
 			ivjChxCircular.setBounds(4, 84, 153, 22);
 			// user code begin {1}
 			ivjChxCircular.setToolTipText(getResourceString("ChxCircular_toolTipText"));
@@ -217,10 +217,11 @@ private javax.swing.JLabel getLblMax() {
 		try {
 			ivjLblMax = new javax.swing.JLabel();
 			ivjLblMax.setName("LblMax");
-			ivjLblMax.setToolTipText("Max");
+			ivjLblMax.setToolTipText("");
 			ivjLblMax.setText("Max-Dec/Struct:");
 			ivjLblMax.setBounds(168, 34, 140, 14);
 			// user code begin {1}
+			ivjLblMax.setText(getResourceString("LblMaxDec_text"));
 			ivjLblMax.setToolTipText(getResourceString("LblMax_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -245,6 +246,7 @@ private javax.swing.JLabel getLblMin() {
 			ivjLblMin.setText("Min-Dec/Struct:");
 			ivjLblMin.setBounds(168, 10, 140, 14);
 			// user code begin {1}
+			ivjLblMin.setText(getResourceString("LblMinStruct_text"));
 			ivjLblMin.setToolTipText(getResourceString("LblMin_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -290,8 +292,8 @@ private javax.swing.JLabel getLblUnit() {
 		try {
 			ivjLblUnit = new javax.swing.JLabel();
 			ivjLblUnit.setName("LblUnit");
-			ivjLblUnit.setToolTipText("Unit");
-			ivjLblUnit.setText("Unit:");
+			ivjLblUnit.setToolTipText("");
+			ivjLblUnit.setText("Einheit:");
 			ivjLblUnit.setBounds(168, 89, 140, 14);
 			// user code begin {1}
 			ivjLblUnit.setToolTipText(getResourceString("LblUnit_toolTipText"));
@@ -462,8 +464,8 @@ private javax.swing.JRadioButton getRbtClockwise() {
 		try {
 			ivjRbtClockwise = new javax.swing.JRadioButton();
 			ivjRbtClockwise.setName("RbtClockwise");
-			ivjRbtClockwise.setToolTipText("Clockwise");
-			ivjRbtClockwise.setText("Clockwise");
+			ivjRbtClockwise.setToolTipText("");
+			ivjRbtClockwise.setText("Uhrzeigersinn");
 			ivjRbtClockwise.setBounds(168, 133, 153, 22);
 			// user code begin {1}
 			ivjRbtClockwise.setToolTipText(getResourceString("RbtClockwise_toolTipText"));
@@ -487,9 +489,9 @@ private javax.swing.JRadioButton getRbtCounterClockwise() {
 		try {
 			ivjRbtCounterClockwise = new javax.swing.JRadioButton();
 			ivjRbtCounterClockwise.setName("RbtCounterClockwise");
-			ivjRbtCounterClockwise.setToolTipText("Counter Clockwise");
+			ivjRbtCounterClockwise.setToolTipText("");
 			ivjRbtCounterClockwise.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtCounterClockwise.setText("Counter Clockwise");
+			ivjRbtCounterClockwise.setText("Gegenuhrzeigersinn");
 			ivjRbtCounterClockwise.setBounds(168, 158, 153, 22);
 			// user code begin {1}
 			ivjRbtCounterClockwise.setToolTipText(getResourceString("RbtCounterClockwise_toolTipText"));
@@ -514,7 +516,7 @@ private javax.swing.JRadioButton getRbtRangeDefined() {
 			ivjRbtRangeDefined = new javax.swing.JRadioButton();
 			ivjRbtRangeDefined.setName("RbtRangeDefined");
 			ivjRbtRangeDefined.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtRangeDefined.setText("Bereich definiert");
+			ivjRbtRangeDefined.setText("Definierter Bereich");
 			ivjRbtRangeDefined.setBounds(4, 31, 153, 22);
 			// user code begin {1}
 			ivjRbtRangeDefined.setText(getResourceString("RbtRangeDefined_text"));
@@ -537,7 +539,7 @@ private javax.swing.JRadioButton getRbtRangeStructured() {
 		try {
 			ivjRbtRangeStructured = new javax.swing.JRadioButton();
 			ivjRbtRangeStructured.setName("RbtRangeStructured");
-			ivjRbtRangeStructured.setText("Bereich strukturiert");
+			ivjRbtRangeStructured.setText("Strukturierte Zahl");
 			ivjRbtRangeStructured.setBounds(4, 56, 153, 22);
 			// user code begin {1}
 			ivjRbtRangeStructured.setText(getResourceString("RbtRangeStructured_text"));
@@ -560,7 +562,8 @@ private javax.swing.JRadioButton getRbtRangeUndefined() {
 		try {
 			ivjRbtRangeUndefined = new javax.swing.JRadioButton();
 			ivjRbtRangeUndefined.setName("RbtRangeUndefined");
-			ivjRbtRangeUndefined.setText("Undefiniert");
+			ivjRbtRangeUndefined.setToolTipText("");
+			ivjRbtRangeUndefined.setText("Undefininierter Bereich");
 			ivjRbtRangeUndefined.setBounds(4, 5, 153, 22);
 			// user code begin {1}
 			ivjRbtRangeUndefined.setText(getResourceString("RbtRangeUndefined_text"));
@@ -585,7 +588,7 @@ private javax.swing.JRadioButton getRbtUnspecified() {
 			ivjRbtUnspecified.setName("RbtUnspecified");
 			ivjRbtUnspecified.setToolTipText("");
 			ivjRbtUnspecified.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjRbtUnspecified.setText("Unspezifiziert");
+			ivjRbtUnspecified.setText("Undefiniert");
 			ivjRbtUnspecified.setBounds(168, 109, 153, 22);
 			// user code begin {1}
 			ivjRbtUnspecified.setToolTipText(getResourceString("RbtUnspecified_toolTipText"));
@@ -668,8 +671,7 @@ private void initialize() {
 	try {
 		// user code begin {1}
 		// user code end
-		setName("IliBaseTypeNumericPanel");
-		setToolTipText("");
+		setName("IliBaseTypeTextPanel");
 		setLayout(new java.awt.GridBagLayout());
 		setSize(487, 259);
 

@@ -25,9 +25,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.5 $ $Date: 2004-04-28 19:09:24 $
  */
-public class LogView extends BasePanel implements DataPanel {
+public class LogView extends BasePanel {
 	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
 	private javax.swing.JPanel ivjPnlLog = null;
 	private javax.swing.JScrollPane ivjScpLog = null;
@@ -532,13 +532,6 @@ private javax.swing.JPopupMenu getMnpLogMenu() {
 	return ivjMnpLogMenu;
 }
 /**
- * Return the changed object displayed.
- */
-public final java.lang.Object getObject() {
-	// of no interest here
-	return null;
-}
-/**
  * Return the PnlLog property value.
  * @return javax.swing.JPanel
  */
@@ -702,12 +695,6 @@ private void mniSelectNodeInTree() {
     String id=sel.substring(start+4,end).trim();
     ModelElement modelElement=(ModelElement)LauncherView.getInstance().getModel().deepGetElementById(id);
     LauncherView.getInstance().showSpecification(modelElement);
-}
-/**
- * Set the Object to be displayed by panel.
- */
-public void setObject(java.lang.Object object) {
-	// of no interest here
 }
 /**
  * Hide or show the statusbar.

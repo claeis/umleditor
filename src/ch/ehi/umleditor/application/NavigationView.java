@@ -9,9 +9,9 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.5 $ $Date: 2004-04-28 19:09:24 $
  */
-public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ch.softenvironment.view.DataPanel {
+public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
@@ -1563,12 +1563,6 @@ public final ch.ehi.uml1_4.foundation.core.ModelElement getModelElement() {
 	throw new DeveloperException(this, "getModelElement()", "not of interest here");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
- * Return the changed object displayed.
- */
-public final java.lang.Object getObject() {
-	return null;
-}
-/**
  * Return the ScpNavigation property value.
  * @return javax.swing.JScrollPane
  */
@@ -2097,10 +2091,6 @@ public synchronized void setModel(Namespace namespace) {
 		handleException(e);
 	}
 }
-/**
- * Set the Object to be displayed by panel.
- */
-public final void setObject(java.lang.Object object) {}
 private void setOrdering(String ordering){
   if(!modelAdapter.getOrdering().equals(ordering)){
     modelAdapter.setOrdering(ordering);

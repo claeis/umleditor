@@ -24,7 +24,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Text</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
  */
 public class IliBaseTypeTextPanel extends BasePanel implements DataPanel {
 private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel");  //$NON-NLS-1$
@@ -139,10 +139,12 @@ private javax.swing.JLabel getLblMax() {
 		try {
 			ivjLblMax = new javax.swing.JLabel();
 			ivjLblMax.setName("LblMax");
-			ivjLblMax.setToolTipText(resIliBaseTypeTextPanel.getString("LblMax_toolTipText"));
-			ivjLblMax.setText(resIliBaseTypeTextPanel.getString("LblMax_text"));
+			ivjLblMax.setToolTipText("Max. Länge");
+			ivjLblMax.setText("Max. length:");
 			ivjLblMax.setBounds(308, 43, 140, 14);
 			// user code begin {1}
+			ivjLblMax.setToolTipText(getResourceString("LblMax_toolTipText"));
+			ivjLblMax.setText(getResourceString("LblMax_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -180,9 +182,10 @@ private javax.swing.JRadioButton getRbtLength() {
 		try {
 			ivjRbtLength = new javax.swing.JRadioButton();
 			ivjRbtLength.setName("RbtLength");
-			ivjRbtLength.setText(resIliBaseTypeTextPanel.getString("RbtLength_text"));
+			ivjRbtLength.setText("TEXT");
 			ivjRbtLength.setBounds(160, 40, 140, 22);
 			// user code begin {1}
+			ivjRbtLength.setText(getResourceString("RbtLength_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -202,9 +205,10 @@ private javax.swing.JRadioButton getRbtName() {
 		try {
 			ivjRbtName = new javax.swing.JRadioButton();
 			ivjRbtName.setName("RbtName");
-			ivjRbtName.setText(resIliBaseTypeTextPanel.getString("RbtName_text"));
+			ivjRbtName.setText("NAME");
 			ivjRbtName.setBounds(160, 65, 140, 22);
 			// user code begin {1}
+			ivjRbtName.setText(getResourceString("RbtName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -224,9 +228,10 @@ private javax.swing.JRadioButton getRbtUnspecified() {
 		try {
 			ivjRbtUnspecified = new javax.swing.JRadioButton();
 			ivjRbtUnspecified.setName("RbtUnspecified");
-			ivjRbtUnspecified.setText(resIliBaseTypeTextPanel.getString("RbtUnspecified_text"));
+			ivjRbtUnspecified.setText("Undefiniert");
 			ivjRbtUnspecified.setBounds(160, 15, 140, 22);
 			// user code begin {1}
+			ivjRbtUnspecified.setText(getResourceString("RbtUnspecified_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -246,9 +251,10 @@ private javax.swing.JRadioButton getRbtURI() {
 		try {
 			ivjRbtURI = new javax.swing.JRadioButton();
 			ivjRbtURI.setName("RbtURI");
-			ivjRbtURI.setText(resIliBaseTypeTextPanel.getString("RbtURI_text"));
+			ivjRbtURI.setText("URI");
 			ivjRbtURI.setBounds(160, 90, 266, 22);
 			// user code begin {1}
+			ivjRbtURI.setText(getResourceString("RbtURI_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -308,7 +314,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeTextPanel");
-		setToolTipText(resIliBaseTypeTextPanel.getString("IliBaseTypeTextPanel_toolTipText"));
+		setToolTipText("INTERLIS Basistyp <TEXT>");
 		setLayout(null);
 		setSize(572, 126);
 		add(getRbtUnspecified(), getRbtUnspecified().getName());
@@ -323,6 +329,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtUnspecified());
 	group.add(getRbtName());
