@@ -17,6 +17,7 @@ UML-Editor 2.?? (2004-???)
 - GUI: Ctrl-S zum Speichern als Keyboard-Accelerator
 - Bug: Einfügen von ClassDef in Diagramm mit bestehender Abhängigkeit zu nicht darstellbaren Objekten (z.B. ViewDef) erzeugt ClassCastException
 - Bug: Beziehungen auf Beziehungen lassen sich nicht öffnen
+- Bug: Beim Einfügen von bestehenden Klassen in ein Diagramm, werden nicht alle möglichen Beziehungen automatisch nachgeführt
 
 UML-Editor 2.1.0 (2004-01-04)
 -----------------------------
