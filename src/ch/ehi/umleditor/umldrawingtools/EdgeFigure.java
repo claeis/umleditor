@@ -37,9 +37,9 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-29 21:04:33 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-30 22:09:18 $
  */
-public abstract class EdgeFigure extends LineConnection implements ModelElementUI {
+abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
 	private static java.util.ResourceBundle resEdgeFigure = ResourceBundle.getBundle(EdgeFigure.class);  //$NON-NLS-1$
 	private ClassDiagramView classDiagram = null;
@@ -214,7 +214,7 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
  * Connect Handles of the two Nodes connected to this Edge.
  * @see #setEdge(..)
  */
-protected void connectNodes() {
+protected final void connectNodes() {
 	try {
 		java.util.Iterator iterator = getEdge().iteratorWayPoint();
 		Vector wayPoints = new Vector();
@@ -233,9 +233,9 @@ protected void connectNodes() {
 			start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
 		} 
 		if (start == null) {
-	Tracer.getInstance().developerError(this, "connectNodes()", "Missing StartNode: there must have been an improper deletion of nodes/edges before.");//$NON-NLS-2$//$NON-NLS-1$
-			shouldWarn(this, NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingStartNode"), getStartElement() == null ? "<???>" : getStartElement().toString())); //$NON-NLS-1$
-			this.removeVisually();
+Tracer.getInstance().developerError(this, "connectNodes()", "Missing StartNode: there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
+//			shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingStartNode"), getSourceName(getStartElement()))); //$NON-NLS-1$
+			removeVisually();
 		} else {
 			// end -> assume dummy value
 			x = 0;
@@ -256,9 +256,9 @@ protected void connectNodes() {
 				end = getClassDiagram().findNodeConnector(getEndElement(), x, y);
 			}
 			if (end == null) {
-	Tracer.getInstance().developerError(this, "connectNodes()", "Missing EndNode: there must have been an improper deletion of nodes/edges before");//$NON-NLS-2$//$NON-NLS-1$
-				shouldWarn(this, NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getEndElement() == null ? "<???>" : getEndElement().toString())); //$NON-NLS-1$
-				this.removeVisually();
+Tracer.getInstance().developerError(this, "connectNodes()", "Missing EndNode: there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
+				//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
+				removeVisually();
 			} else {
 				connectStart(start);
 				setEndConnector(end);
@@ -365,6 +365,16 @@ protected java.awt.Color getLineColor() {
  */
 public ch.ehi.uml1_4.foundation.core.ModelElement getModelElement() {
 	return modelElement;
+}
+private String getSourceName(Element element) {
+	String edgeName = StringUtils.getPureClassName(this.getClass()) + ":";
+	if (element == null) {
+		return edgeName + "<???>";
+	} else if (element instanceof ModelElement) {
+		return edgeName + ((ModelElement)element).getName().getValue();
+	} else {
+		return edgeName + element.toString();
+	}
 }
 /**
  * Return the starting Element of the Relationship.
@@ -540,6 +550,9 @@ public void setAttribute(String name, Object value) {
  */
 private void setClassDiagram(ClassDiagramView classDiagram) {
 	this.classDiagram = classDiagram;
+if (classDiagram == null) {
+	int debug =0;
+}
 }
 /**
  * Set the Edge and its Coordinates.
@@ -631,18 +644,20 @@ protected void setToolView() {
  * one Warning is desired.
  * @see canConnect(Figure, Figure)
  */
-protected void shouldWarn(EdgeFigure edge, String warning) {
-	if ((lastInvalidEdge == null) || (!(lastInvalidEdge.equals(edge)))) {
-		lastInvalidEdge = edge;
-		edge.showIllegalRelationship(warning);
+protected void shouldWarn(String warning) {
+	if ((lastInvalidEdge == null) || (!(lastInvalidEdge.equals(this)))) {
+		lastInvalidEdge = this;
+		this.showIllegalRelationship(warning);
 	}
 	// undraw illegal Relationship
 //	release();
 //	invalidate();
 //	changed();
-	setToolView();
-	getClassDiagram().remove(this);
-	LauncherView.getInstance().toolDone();
+
+	// this EdgeFigure is not any more desired in Diagram
+	if (getClassDiagram() != null) {
+		getClassDiagram().remove(this);
+	}
 }
 /**
  * Decorate the RelationShip-Ends.
