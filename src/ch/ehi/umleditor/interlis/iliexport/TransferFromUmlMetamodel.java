@@ -1691,9 +1691,17 @@ public class TransferFromUmlMetamodel
     if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
       ch.ehi.interlis.domainsandconstants.basetypes.NumericType ntype=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)def;
       if(ntype.isRangeDefined()){
-        out.write(visitIliDim(ntype.getMinDec()));
+      	if(ntype.getMinDec()==null){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmindecRequired"));
+      	}else{
+			out.write(visitIliDim(ntype.getMinDec()));
+      	}
         out.write("..");
-        out.write(visitIliDim(ntype.getMaxDec()));
+		if(ntype.getMaxDec()==null){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxdecRequired"));
+		}else{
+	        out.write(visitIliDim(ntype.getMaxDec()));
+		}
       }else{
         out.write("NUMERIC");
       }
