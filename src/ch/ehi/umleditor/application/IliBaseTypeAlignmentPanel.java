@@ -23,7 +23,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Horiz/VertAlignment</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-28 19:29:04 $
  */
 public class IliBaseTypeAlignmentPanel extends BasePanel implements DataPanel {
 	private javax.swing.JLabel ivjLblKind = null;

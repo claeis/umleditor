@@ -29,7 +29,7 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-28 19:26:04 $
  */
 public class IliBaseTypeLinePanel extends BasePanel implements DataPanel {
 	//private LineType lineType = null;
