@@ -25,7 +25,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:27 $
+ * @version $Revision: 1.2 $ $Date: 2004-01-04 16:48:19 $
  */
 public class LogView extends DataPanel {
 	private static java.util.ResourceBundle resLogView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/LogView");  //$NON-NLS-1$
@@ -673,14 +673,12 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	getMncWrapLines().setSelected(false);
+	wrapLines(false);
 	// user code end
 }
-/**
- * Show the lines wrapped or not.
- */
-private void mncWrapLines() {
-	if (getMncWrapLines().isSelected()) {
+private void wrapLines(boolean wrap)
+{
+	if (wrap) {
 		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getTxaLog().setAutoscrolls(false);
 		getTxaLog().setLineWrap(true);
@@ -689,6 +687,13 @@ private void mncWrapLines() {
 		getTxaLog().setAutoscrolls(true);
 		getTxaLog().setLineWrap(false);
 	}
+	
+}
+/**
+ * Show the lines wrapped or not.
+ */
+private void mncWrapLines() {
+	wrapLines(getMncWrapLines().isSelected());
 }
 /**
  * Comment

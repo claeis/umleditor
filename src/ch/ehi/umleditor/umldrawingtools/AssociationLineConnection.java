@@ -40,7 +40,7 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:05:47 $
  * @see handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -90,16 +90,16 @@ public boolean canConnect(Figure start, Figure end) {
 		if ((start instanceof LinkFigure) && (end instanceof LinkFigure)) {
 			/* (participantFrom instanceof ch.ehi.uml1_4.foundation.core.Association && (participantTo instanceof ch.ehi.uml1_4.foundation.core.Association)) */
 			// better connect by AttributeFigures
-			shouldWarn(this, resAssociationLineConnection.getString("CWInbetweenAssociations")); //$NON-NLS-1$
+			shouldWarn(resAssociationLineConnection.getString("CWInbetweenAssociations")); //$NON-NLS-1$
 			return false;
 		}
 		
 		if (!((participantFrom instanceof Classifier) && (participantTo instanceof Classifier))) {
-			shouldWarn(this, resAssociationLineConnection.getString("CWNoClassifier")); //$NON-NLS-1$
+			shouldWarn(resAssociationLineConnection.getString("CWNoClassifier")); //$NON-NLS-1$
 			return false;
 		}
 	} catch(ClassCastException e) {
-		shouldWarn(this, resAssociationLineConnection.getString("CWFigureNotGeneralizable")); //$NON-NLS-1$
+		shouldWarn(resAssociationLineConnection.getString("CWFigureNotGeneralizable")); //$NON-NLS-1$
 		return false;
 	}
 

@@ -17,10 +17,13 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.basics.view.*;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -44,12 +47,12 @@ import ch.softenvironment.util.*;
  * - LogView
  * - DrawingArea
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:24 $
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.7 $ $Date: 2004-03-01 20:34:52 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
-	private static java.util.ResourceBundle resLauncherView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/LauncherView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resLauncherView = ResourceBundle.getBundle(LauncherView.class);
         private static String version=null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/";//$NON-NLS-1$
 	public static final String UML_IMAGES = IMAGE_PATH + "UML/";//$NON-NLS-1$
@@ -1188,7 +1191,7 @@ public ClassDiagramView createClassDiagram(Element diagramElement) {
  * @deprecated
  */
 public static GenericFileFilter createHtmlFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIHtmlFilter"), "html");//$NON-NLS-2$ //$NON-NLS-1$
+	return GenericFileFilter.createHtmlFilter();
 }
 /**
  * @return specific File-Filter.
@@ -1204,14 +1207,7 @@ public static GenericFileFilter createInterlisCompilerFilter() {
 public static GenericFileFilter createInterlisModelFilter() {
 	return new GenericFileFilter(resLauncherView.getString("CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
 }
-/**
- * @return specific File-Filter.
- * @deprecated
- */
-public static GenericFileFilter createSQLFilter() {
-//	return new GenericFileFilter(resLauncherView.getString("CIHtmlFilter"), "html");//$NON-NLS-2$ //$NON-NLS-1$
-	return new GenericFileFilter("Structured Query Language (ASCII)", "sql");//$NON-NLS-2$ //$NON-NLS-1$
-}
+
 /**
  * Creates a tool button with the given image, tool, and text
  */
@@ -1236,14 +1232,14 @@ public static GenericFileFilter createUmlInterlisEditorFilter() {
  * @deprecated
  */
 public static GenericFileFilter createXmlFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIXmlFilter"), "xml");//$NON-NLS-2$ //$NON-NLS-1$
+	return GenericFileFilter.createXmlFilter();
 }
 /**
  * @return specific File-Filter.
  * @deprecated
  */
 public static GenericFileFilter createXmlSchemaFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIXsdFilter"), "xsd");
+	return GenericFileFilter.createXmlSchemaFilter();
 }
 /**
  * Deactivate the current internal frame and adapt corresponding tools.
@@ -1287,7 +1283,7 @@ public void figureSelectionChanged(CH.ifa.draw.framework.DrawingView view) {}
 /**
  * Return the Application Name
  */
-public String getApplicationName() {
+public static String getApplicationName() {
 	return resLauncherView.getString("CIApplicationName"); //$NON-NLS-1$
 }
 /**
@@ -2071,6 +2067,7 @@ private javax.swing.JMenuItem getMniSave() {
 			ivjMniSave.setEnabled(true);
 			// user code begin {1}
 			ivjMniSave.setText(CommonUserAccess.MENU_FILE_SAVE);
+			ivjMniSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2864,7 +2861,7 @@ public CH.ifa.draw.util.UndoManager getUndoManager() {
  */
 public static String getVersion() {
 	// depends on softEnvironment Base Framework Version 2.2.2
-	
+
         if(version==null){
 	  java.util.ResourceBundle resVersion = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/Version");  //$NON-NLS-1$
           // Major version numbers identify significant functional changes.
@@ -3027,21 +3024,6 @@ protected void initializeView() {
 	// initialize LauncherMenu
 	createLookAndFeelMenu(getMnuLookAndFeel());
 
-	// SQL-Menu's
-	JMenu mnuSQL = new JMenu();
-	JMenuItem mniExportSQL = new JMenuItem();
-	getMnuTools().add(mnuSQL);
-	mnuSQL.setText("SQL");
-	mnuSQL.add(mniExportSQL);
-	mniExportSQL.setText("SQL exportieren...");
-	mniExportSQL.addActionListener(new java.awt.event.ActionListener() {
-	  // callback Handler if Button was pressed
-	  public void actionPerformed(ActionEvent e) {
-		// !!! Function implementing any action at Pressing the button
-		mniSQLExport();
-	  }
-	});
-		
 	// initialize Drawing Area
 	mdiListeners = new Vector();
 	addInternalFrameListener(this);
@@ -3313,8 +3295,13 @@ private void mniOpenFile() {
 			try {
 				getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
 				PersistenceService service = new PersistenceService();
-				setModel(service.readFile(openDialog.getSelectedFile().getAbsolutePath()), openDialog.getSelectedFile());
+				boolean old=MetaModel.setChangePropagation(false);
+				Model newModel=service.readFile(openDialog.getSelectedFile().getAbsolutePath());
+				MetaModel.setChangePropagation(old);
+				setModel(newModel, openDialog.getSelectedFile());
 				log(resLauncherView.getString("CIModelLoaded"), resLauncherView.getString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+			} catch(java.io.IOException e) {
+				handleException(e,"fileopen",e.getMessage());
 	 		} catch(Throwable e) {
 				handleException(e);
 		 	}
@@ -3376,6 +3363,8 @@ private boolean mniSaveAs() {
 		try {
 			getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 			saveFile(saveDialog.getSelectedFile());
+		} catch(java.io.IOException e) {
+			handleException(e,"filesaveas",e.getMessage());
 		} catch(Throwable e) {
 			handleException(e);
 		}
@@ -3400,23 +3389,14 @@ private boolean mniSaveFile() {
 		try {
 			toolDone();
 			saveFile(currentFile);
+		} catch(java.io.IOException e) {
+			handleException(e,"filesave",e.getMessage());
 		} catch(Throwable e) {
 			handleException(e);
 		}
 		tool().activate();
 		return true;
 	}
-}
-/**
- * SQL-Export.
- */
-private void mniSQLExport() {
-	tool().deactivate();
-	
-	ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog dialog = new ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog(this, true);
-	dialog.show();
-    
-	tool().activate();
 }
 /**
  * Structure-Report.
@@ -3763,7 +3743,8 @@ private void setModel(Model model, java.io.File file) throws Throwable {
 		// @see #openInitialDiagram()
 		initialDiagram = (Diagram)ElementFactory.createDiagram(topicDef);
                 try{
-                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel().loadPredefinedIli2cModel(this.model);
+                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel(
+                    new ch.ehi.umleditor.interlis.EditorLoggingAdapter(this)).loadPredefinedIli2cModel(this.model);
                 }catch(Exception ex){
                   handleException(ex);
                 }

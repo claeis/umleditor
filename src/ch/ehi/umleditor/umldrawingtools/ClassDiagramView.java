@@ -17,6 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
@@ -24,6 +25,7 @@ import java.awt.event.*;
 import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.umleditor.application.*;
@@ -33,11 +35,11 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:50 $
+ * @version $Revision: 1.7 $ $Date: 2004-02-05 16:48:25 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
-	private static java.util.ResourceBundle resClassDiagramView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassDiagramView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resClassDiagramView = ResourceBundle.getBundle(ClassDiagramView.class);  //$NON-NLS-1$
 	private ch.ehi.umleditor.umlpresentation.Diagram diagram = null;
 	private Element parentElement = null;
 	// Menu Checkboxes
@@ -45,6 +47,7 @@ public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
 	private boolean showAttributes = true;
 	private boolean showLinkFigure = false;
 	private boolean showRoles = true;
+	private boolean showMultiplicity = false;
 	private boolean loading = false;
 	
 	/*
@@ -71,7 +74,7 @@ public ClassDiagramView(DrawingEditor editor, Diagram diagram) {
 	this.diagram = diagram;
 }
 /**
- * Adds a given Model to Diagram.
+ * Adds a given (Model)-Element to Diagram.
  * @return the added figure.
  * @see NavigationView#mniAddToDiagram()
  */
@@ -163,14 +166,14 @@ private Figure addClassifier(RoleDef roleDef) {
   	return figure;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsClasses(Element).
  */
 public boolean allowsClasses() {
 	return allowsClasses(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of non-Package-Type.
+ * @return whether allowed or not
  */
 public static boolean allowsClasses(Element element) {
 	String validOwnedElements[];
@@ -189,14 +192,14 @@ public static boolean allowsClasses(Element element) {
 	return false;
 }
 /**
- * Set the ParentNode of the NavigationTree.
- * This Diagram is a child of ParentNode.
+ * @see #allowsPackages(Element)
  */
 public boolean allowsPackages() {
 	return allowsPackages(getParentElement());
 }
 /**
  * Determine whether a ClassDiagram may contain given Element of PackageType.
+ * @return whether allowed or not
  */
 public static boolean allowsPackages(Element element) {
 	String validOwnedElements[];
@@ -214,16 +217,6 @@ public static boolean allowsPackages(Element element) {
 		}
 	}
 	return false;
-}
-/**
- * Create a WayPoint
- */
-private WayPoint createWayPoint(java.awt.Point p) {
-	WayPoint wayPoint = new WayPoint();
-	wayPoint.setEast(p.x);
-	wayPoint.setSouth(p.y);
-
-	return wayPoint;
 }
 /**
  * Determine the valid default Package-Type to be created in this Diagram.
@@ -280,7 +273,7 @@ protected ClassFigure findClassFigure(int x, int y) {
  * at given coordinates.
  */
 protected Figure findConnectableFigure(int x, int y, ConnectionFigure connection) {
-Tracer.getInstance().developerWarning(this, "findConnectableFigure(..)", "copied code from JHotDraw's ConnectionTool#findConnectableFigure(..)");//$NON-NLS-2$//$NON-NLS-1$
+	// copied code from JHotDraw's ConnectionTool#findConnectableFigure(..)
 	FigureEnumeration k = drawing().figuresReverse();
 	while (k.hasMoreElements()) {
 		Figure figure = k.nextFigure();
@@ -296,7 +289,7 @@ Tracer.getInstance().developerWarning(this, "findConnectableFigure(..)", "copied
  * @see ConnectionTool#findConnection(..) => copied Code
  */
 protected ConnectionFigure findConnection(int x, int y) {
-ch.softenvironment.util.Tracer.getInstance().developerWarning(this, "findConnection(..)", "copied Method from JHotDraw's ConnectionTool#findConnection(..)");//$NON-NLS-2$//$NON-NLS-1$
+	// copied Method from JHotDraw's ConnectionTool#findConnection(..)
 	java.util.Enumeration k = drawing().figuresReverse();
 	while (k.hasMoreElements()) {
 		Figure figure = (Figure) k.nextElement();
@@ -557,7 +550,7 @@ protected boolean isShowLinkFigure() {
  * 
  */
 public boolean isShowMultiplicities() {
-	return getDiagram().isShowAttributeMultiplicity();
+	return showMultiplicity;
 }
 /**
  * Handles key down events. Cursor keys are handled
@@ -630,11 +623,148 @@ private NodeFigure loadNode(ch.ehi.umleditor.umlpresentation.PresentationNode no
 	return (NodeFigure)figure;
 }
 /**
+ * If necessary switch End-Node of Connection.
+ * @param edgeFigure
+ * @param edge
+ * @param targetNode
+ * @param index
+ * @param endpoint
+ * @return
+ */
+private boolean correctNode(EdgeFigure edgeFigure, PresentationEdge edge, Element targetNode, int index, PresentationNode endpoint) {
+	if (targetNode != null) {
+		// verify whether view and Model are the same		
+		Iterator presentationSubject = endpoint.iteratorSubject();
+		if (presentationSubject.hasNext()) {
+			ModelElement presentationNode = (ModelElement)presentationSubject.next();
+			if (targetNode.equals(presentationNode)) {
+				return true;
+			} else {
+				Figure targetFigure = findFigure(targetNode);
+				if (targetFigure != null) {
+					Tracer.getInstance().developerWarning(this, "correctNode(..)", "AUTO-CORRECTION: endpoint[" + index + "]=child->relocation:"); // + " <current Classifier>"/*presentationNode.getName().getValue()*/ + "=>" + targetClient.getName().getValue());
+					// change the presentation Connection
+					edge.setEndpoint(index, ((NodeFigure)targetFigure).getNode());
+					Connector connector = findNodeConnector(targetNode, 0, 0);
+					edgeFigure.willChange();
+					if (index == 0) {
+						edgeFigure.setStartConnector(connector);
+					} else {
+						edgeFigure.setEndConnector(connector);
+					}
+					edgeFigure.changed();
+					checkDamage();
+					return true;
+				}
+			}
+		}
+	}
+	return false;		
+}
+/**
+ * Client or Supplier might have been changed, therefore correct its Presentation.
+ * @param dependency
+ * @return true->Presentation-Dependency still exists; false->was removed as correction
+ */
+private boolean correctDependencyRelocation(DependencyLineConnection dependencyFigure) {
+	ch.ehi.umleditor.umlpresentation.Dependency dependency = (ch.ehi.umleditor.umlpresentation.Dependency)dependencyFigure.getEdge();
+	if ((dependency.sizeEndpoint() == 2)) {
+		Iterator endpoints = dependency.iteratorEndpoint();
+		if (correctNode((EdgeFigure)dependencyFigure, (PresentationEdge)dependency, dependencyFigure.getStartElement(), 0, (PresentationNode)endpoints.next())) {
+			if (correctNode((EdgeFigure)dependencyFigure, (PresentationEdge)dependency, dependencyFigure.getEndElement(), 1, (PresentationNode)endpoints.next())) {
+				return true;
+			}
+		}
+	}
+	Tracer.getInstance().developerWarning(this, "correctDependencyRelocation(..)", "AUTO-CORRECTION: Removing Dependency-Presentation from Diagram");
+	getDiagram().deletePresentationElement(dependency);	
+	return false;
+}
+/**
+ * Parent or Child might have been changed, therefore correct its Presentation.
+ * @param generalization
+ * @return true->role still exists; false->role was removed as correction
+ */
+private boolean correctGeneralizationRelocation(GeneralizationLineConnection generalizationFigure) {
+	ch.ehi.umleditor.umlpresentation.Generalization generalization = (ch.ehi.umleditor.umlpresentation.Generalization)generalizationFigure.getEdge();
+	if ((generalization.sizeEndpoint() == 2)) {
+		Iterator endpoints = generalization.iteratorEndpoint();
+		if (correctNode((EdgeFigure)generalizationFigure, (PresentationEdge)generalization, generalizationFigure.getStartElement(), 0, (PresentationNode)endpoints.next())) {
+			if (correctNode((EdgeFigure)generalizationFigure, (PresentationEdge)generalization, generalizationFigure.getEndElement(), 1, (PresentationNode)endpoints.next())) {
+				return true;
+			}
+		}
+	}
+
+	Tracer.getInstance().developerWarning(this, "correctGeneralizationRelocation(..)", "AUTO-CORRECTION: Removing Generalization-Presentation from Diagram");
+	getDiagram().deletePresentationElement(generalization);	
+	return false;
+}
+/**
+ * Participiant might have been changed, therefore correct its PresentationRole.
+ * @param role
+ * @return true->role still exists; false->role was removed as correction
+ */
+private boolean correctRoleRelocation(ch.ehi.umleditor.umlpresentation.PresentationRole role) {
+	Iterator subjects = role.iteratorSubject();
+	while (subjects.hasNext()) {
+		Object object = subjects.next();
+if (!(object instanceof AssociationEnd)) {
+	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "role subject is not an AssociationEnd");
+	continue;	
+}
+		AssociationEnd subjectRoleDef = (AssociationEnd)object;
+		if (subjectRoleDef.containsParticipant()) {
+			Classifier targetClass = subjectRoleDef.getParticipant();
+//Tracer.getInstance().debug("PresentationRole->Subject:RoleDef=" + subjectRoleDef.getName().getValue() + ", ClassDef=" + targetClass.getName().getValue());
+			Iterator endpoints = role.iteratorEndpoint();
+			if (endpoints.hasNext()) {
+				endpoints.next(); // skip PresentationAssocClass (LinkNode)
+				if (endpoints.hasNext()) {
+					object = endpoints.next();
+if (!(object instanceof ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)) {
+	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "endpoint is not an umlpresentation.PresentationAbstractClass");
+	continue;	
+}
+					ch.ehi.umleditor.umlpresentation.PresentationAbstractClass presentationClass = (ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)object;
+					if (!presentationClass.containsSubject(targetClass)) {
+						// role was probably moved to another Classifier in Model by another Diagram
+/*							Iterator classSubjects = presentationClass.iteratorSubject();
+							while (classSubjects.hasNext()) {
+								Classifier wrongClassDef = (Classifier)classSubjects.next();
+							}
+*/
+						Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
+						ClassFigure newClass = (ClassFigure)findFigure(targetClass);
+						if (newClass != null) {
+							// damage will be changed by LinkFigure#updateView()
+							role.setEndpoint(1, newClass.getNode());
+						}
+					}
+					return true;
+				}
+			}
+		}
+	}
+/*
+Iterator its = role.getAssociation().iteratorSubject();
+while(its.hasNext()) {
+	AssociationDef subj = (AssociationDef)its.next();
+	Iterator itsc = subj.iteratorConnection();
+	while (itsc.hasNext()) {
+		RoleDef ro = (RoleDef)itsc.next();
+		Tracer.getInstance().debug("RoleDef via Association=" + ro.getParticipant().getName().getValue());
+	}				
+}
+*/		
+	getDiagram().removePresentationElement(role);
+	Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
+	return false;
+}
+/**
  * Add a single PresentationRole to Diagram.
  */
-protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
-	EdgeFigure figure = null;
-	
+protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {	
 	if (role == null) {
 		Figure linkFigure = findFigure(roleDef.getAssociation());
 		if (linkFigure == null) {
@@ -657,18 +787,23 @@ LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
 				PresentationRole edgeRole = ElementMapper.createPresentationRole(this, associationComposite, ((NodeFigure)nodeFigure).getNode(), roleDef);
 
 				// add visually
-				figure = new PresentationRoleFigure(this, edgeRole);
+				EdgeFigure figure = new PresentationRoleFigure(this, edgeRole);
 				loadSimpleEdge(figure);
+				retur figure;
 */
 			}
 		}
+		return null;
 	} else {
-		// only add GIVEN role visually
-		figure = new PresentationRoleFigure(this, role);
-	   	loadSimpleEdge(figure);
+		if (correctRoleRelocation(role)) {
+			// show role visually
+			EdgeFigure figure = new PresentationRoleFigure(this, role);
+			loadSimpleEdge(figure);
+			return figure;
+		} else {
+			return null;
+		}
 	}
-
-	return figure;
 }
 /**
  * Show a simple Edge by means plain EdgeFigure as Dependency or Generalization.
@@ -806,13 +941,14 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)dependencies.next();
 			Iterator suppliers = dependency.iteratorSupplier();
 			if (suppliers.hasNext()) {
-				GeneralizableElement generalizableElement = (GeneralizableElement)suppliers.next();
-				Figure end = findFigure(generalizableElement);
-				if (end != null) {
-					loadSimpleEdge(new DependencyLineConnection(this, figure, end, dependency));
+				Object supplier = suppliers.next();
+				if (supplier instanceof GeneralizableElement) {
+					Figure end = findFigure((GeneralizableElement)supplier);
+					if (end != null) {
+						loadSimpleEdge(new DependencyLineConnection(this, figure, end, dependency));
+					}
 				}
 			}
-			
 		}
 		dependencies = modelElement.iteratorSupplierDependency();
 		while (dependencies.hasNext()) {
@@ -820,13 +956,14 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)dependencies.next();
 			Iterator clients = dependency.iteratorClient();
 			if (clients.hasNext()) {
-				GeneralizableElement generalizableElement = (GeneralizableElement)clients.next();
-				Figure start = findFigure(generalizableElement);
-				if (start != null) {
-					loadSimpleEdge(new DependencyLineConnection(this, start, figure, dependency));
+				Object client = clients.next();
+				if (client instanceof GeneralizableElement) {
+					Figure start = findFigure((GeneralizableElement)client);
+					if (start != null) {
+						loadSimpleEdge(new DependencyLineConnection(this, start, figure, dependency));
+					}
 				}
 			}
-			
 		}
 		
 	    // show Generalizations
@@ -835,9 +972,10 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    while (generalizations.hasNext()) {
 				ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)generalizations.next();
 				GeneralizableElement generalizableElement = generalization.getParent();
-				Figure end = findFigure(generalization.getParent());
-				if (end != null) {
-					loadSimpleEdge(new GeneralizationLineConnection(this, figure, end, generalization));
+				Figure parent = findFigure(generalization.getParent());
+				Figure child = findFigure(generalization.getChild());
+				if ((parent != null) && (child != null)) {
+					loadSimpleEdge(new GeneralizationLineConnection(this, figure, parent, generalization));
 				}
 		    }
 		    generalizations = ((GeneralizableElement)modelElement).iteratorGeneralization();
@@ -851,24 +989,45 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    }
 	    }
 
+	    // show Associations
 	    if (tryAssociations) {
-		    // show Associations
-		    Iterator ownedElements = modelElement.getNamespace().iteratorOwnedElement();
-		    while (ownedElements.hasNext()) {
-				ch.ehi.uml1_4.implementation.AbstractModelElement ownedModelElement = (ch.ehi.uml1_4.implementation.AbstractModelElement)ownedElements.next();
-				if (ownedModelElement instanceof AssociationDef) {
-					// check whether AssociationDef really connects this node
-					Iterator roles = ((AssociationDef)ownedModelElement).iteratorConnection();
-					while (roles.hasNext()) {
-						RoleDef roleDef = (RoleDef)roles.next();
-						if (roleDef.containsParticipant() && roleDef.getParticipant().equals(modelElement)) {
-							trySaveAssociation((AssociationDef)ownedModelElement, node, roleDef);
-						}		
-					}
-				}
-		    }
+	    	// BE AWARE:
+	    	// Associations are added to the Repository as ownedElement only 
+	    	// at ONE END of at least two possible Classifier's.
+	    	
+		    // 1) modelElement IS Owner of Association
+	    	Iterator elements = modelElement.getNamespace().iteratorOwnedElement();
+	    	while (elements.hasNext()) {
+	    		Object ownedModelElement = /*(ch.ehi.uml1_4.implementation.AbstractModelElement)*/ elements.next();
+	    		if (ownedModelElement instanceof ch.ehi.uml1_4.foundation.core.Association) {
+	    			checkAssociation(modelElement, node, (ch.ehi.uml1_4.foundation.core.Association)ownedModelElement);
+	    		}
+	    	}
+		    // 2) modelElement is NOT the Owner	but the opposite
+	    	elements = ((Classifier)modelElement).iteratorAssociation();
+	    	while (elements.hasNext()) {
+	    		Object associationEnd = elements.next();
+	    		if (associationEnd instanceof AssociationEnd) {
+	    			checkAssociation(modelElement, node, ((AssociationEnd)associationEnd).getAssociation());
+	    		}
+	    	}
 	    }
     }
+}
+/**
+ * Check whether given association should have been drawn. 
+ * @param modelElement
+ * @param node
+ * @param associationDef
+ */
+private void checkAssociation(ch.ehi.uml1_4.implementation.AbstractModelElement modelElement, PresentationNode node, ch.ehi.uml1_4.foundation.core.Association associationDef) {
+	Iterator roles = associationDef.iteratorConnection();
+	while (roles.hasNext()) {
+		AssociationEnd roleDef = (AssociationEnd)roles.next();
+		if (roleDef.containsParticipant() && roleDef.getParticipant().equals(modelElement)) {
+			trySaveAssociation(associationDef, node, roleDef);
+		}		
+	}
 }
 /**
  * Draw figure and save Element into Diagram.
@@ -1045,7 +1204,7 @@ protected void showAllLinkFigures(boolean visible) {
  * Show/hide all roles in Diagram.
  */
 protected void showAllMultiplicities(boolean visible) {
-	getDiagram().setShowAttributeMultiplicity(visible);
+	showMultiplicity = visible;
 	
 	FigureEnumeration enum = drawing().figures();
 	while (enum.hasMoreElements()) {
@@ -1074,12 +1233,12 @@ protected void showAllRoles(boolean visible) {
  * @param associationDef Relationship to be drawn
  * @param node (the already given Node of the Relationship)
  */
-private void trySaveAssociation(AssociationDef associationDef, PresentationNode node, RoleDef roleDef)  {
+private void trySaveAssociation(ch.ehi.uml1_4.foundation.core.Association associationDef, PresentationNode node, AssociationEnd roleDef)  {
 	Figure linkFigure = findFigure(associationDef);
 	if (linkFigure == null) {
 		// no composite yet
-		ArrayList roles = AssociationLineConnection.getRoleClassifiers(associationDef);
-		HashMap nodes = new HashMap();
+		List roles = AssociationLineConnection.getRoleClassifiers(associationDef);
+		Map nodes = new HashMap();
 		for (int i=0; i<roles.size(); i++) {
 			// make sure Classifier's are to be found in Diagram as well
 			Figure figure = findFigure((Classifier)((RoleDef)roles.get(i)).getParticipant());
@@ -1101,10 +1260,12 @@ private void trySaveAssociation(AssociationDef associationDef, PresentationNode 
 		  	add(associationComposite);
 		}
 	} else {
-		// composite already given => only add given node with its given role
-		ch.ehi.umleditor.umlpresentation.Association associationComposite = ((PresentationAssocClass)((LinkFigure)linkFigure).getNode()).getAssociation();
-		PresentationRole edgeRole = ElementFactory.createPresentationRole(this, associationComposite, node, roleDef);
-		loadPresentationRole(null, edgeRole);
+		// composite already given => only add role to given Node
+		if (findFigure(roleDef) == null) {
+			ch.ehi.umleditor.umlpresentation.Association associationComposite = ((PresentationAssocClass)((LinkFigure)linkFigure).getNode()).getAssociation();
+			PresentationRole edgeRole = ElementFactory.createPresentationRole(this, associationComposite, node, roleDef);
+			loadPresentationRole(null, edgeRole);
+		}	
 	}
 }
 /**
@@ -1123,11 +1284,8 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 		figure = findFigure((RoleDef)event.getSource());
 /*	}
 	else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.WayPoint) {
-
 	} else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.Color)	{
-
 	} else if (event.getSource() instanceof ch.ehi.umleditor.umlpresentation.Diagram) {
-
 	} else if (event.getSource() instanceof ch.ehi.uml1_4.foundation.datatypes.Multiplicity) {
 */
 	} else if (event.getSource() instanceof Element) {
@@ -1137,11 +1295,39 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 	if (figure != null) {
 		if (figure instanceof NodeFigure) {
 			((NodeFigure)figure).updateView();
-		} else {
-			// for AssociationDef's:
-			// 	@see LinkFigure.updateView()
-			//  @see PresentationRoleFigure.updateView()
-			((EdgeFigure)figure).updateView();
+		} else /* edgeFigure */ {
+			// for AssociationDef's: @see LinkFigure.updateView(), @see PresentationRoleFigure.updateView()
+			if (event.getOperation().startsWith(MetaModelChange.OP_CHANGE)) {
+Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +getDiagram().getName().getValue() + ", Event=" + event.toString() + ", type=" + event.getOperation());
+				if ((figure instanceof PresentationRoleFigure) && event.getOperation().equals("changeParticipant")) {
+					PresentationRoleFigure roleFigure = (PresentationRoleFigure)figure;
+					PresentationRole role = (PresentationRole)roleFigure.getEdge();
+					if (correctRoleRelocation(role)) {
+						// correctRoleRelocation(..) guarantees for given Iterator-Elements!
+						Iterator endpoints = role.iteratorEndpoint();
+						endpoints.next(); // skip PresentationAssocClass (LinkNode)
+						ch.ehi.umleditor.umlpresentation.Class presentationClass = (ch.ehi.umleditor.umlpresentation.Class)endpoints.next();
+						Iterator subjects = presentationClass.iteratorSubject();
+						Connector end = findNodeConnector((Element)subjects.next(), 0, 0);
+						if (end == null) {
+							Tracer.getInstance().developerWarning(this, "update(..)", "AUTO-CORRECTION: Removing PresentationRole from Diagram");
+							getDiagram().deletePresentationElement(role);
+						} else {
+							roleFigure.setEndConnector(end);
+						}
+					}
+				} else if (figure instanceof DependencyLineConnection) {
+					if (correctDependencyRelocation((DependencyLineConnection)figure)) {
+						((EdgeFigure)figure).updateView();
+					}
+				} else if (figure instanceof GeneralizationLineConnection) {
+					if (correctGeneralizationRelocation((GeneralizationLineConnection)figure)) {
+						((EdgeFigure)figure).updateView();
+					} 
+				}
+			}
+			
+			
 		}
 	} // else no figure found to update
 }

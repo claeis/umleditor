@@ -22,11 +22,10 @@ package ch.ehi.umleditor.umlpresentation;
           // -end- 3C2C4C8D0362 package "Diagram"
 
           // -beg- preserve=no 3C2C4C8D0362 autoimport "Diagram"
-          import ch.ehi.uml1_4.foundation.core.Element;
+		import ch.ehi.uml1_4.foundation.core.Element;
           import ch.ehi.uml1_4.implementation.AbstractEditorElement;
           import ch.ehi.uml1_4.foundation.core.PresentationElement;
           import ch.ehi.uml1_4.foundation.core.Namespace;
-          import ch.ehi.umleditor.umlpresentation.AbstractFigure;
           import ch.ehi.basics.types.NlsString;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3C2C4C8D0362 autoimport "Diagram"
@@ -38,7 +37,7 @@ package ch.ehi.umleditor.umlpresentation;
           // -end- 3C2C4C8D0362 import "Diagram"
 
           /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:12 $
+           *  @version $Revision: 1.3 $ $Date: 2004-01-04 17:08:34 $
            */
 public class Diagram extends AbstractEditorElement implements Element , java.io.Serializable
           {
@@ -546,8 +545,18 @@ public class Diagram extends AbstractEditorElement implements Element , java.io.
 
             // declare/define something only in the code
             // please fill in/modify the following section
-            // -beg- preserve=no 3C2C4C8D0362 detail_end "Diagram"
-
+            // -beg- preserve=yes 3C2C4C8D0362 detail_end "Diagram"
+			/** deeply remove/delete a PresentationElement including its child-objects.
+			 * 
+			 */
+			public void deletePresentationElement(PresentationElement element)
+			{
+				//ch.ehi.uml1_4.changepropagation.MetaModel.setEventLogging(true);
+				ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+				remover.visit(element);
+				remover.unlinkThem();
+				//ch.ehi.uml1_4.changepropagation.MetaModel.setEventLogging(false);
+			}
             // -end- 3C2C4C8D0362 detail_end "Diagram"
 
           }
