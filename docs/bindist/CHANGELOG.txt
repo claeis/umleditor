@@ -8,8 +8,6 @@ Offene Fragen/Arbeiten
 - Englische Uebersetzung der Handbuecher fehlt
 - API: generic filters aus Launcher nach basics verschieben
 - FINAL bei Enumeration
-- Diagrammexport in SVG (Scalable Vector Graphics)
-- Diagrammexport in WMF (Windows Meta File)
 - Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt
 - Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
 - Bug: s.o. (JRE="SE 1.4.1_01" Grafikkarte="ATI Mobility M6" TreiberVersion="5.13.1.3207" Auflösung="1024x768, 32bit Farben" OS="Windows 2000 Service Pack 2" Rechner="Fujits Siemens LifeBook E-Series")
@@ -25,12 +23,17 @@ Offene Fragen/Arbeiten
 
 UML-Editor 2.0.3 (2003-xx-xx)
 -----------------------------
+- Diagrammexport nach SVG (Scalable Vector Graphics)
+- Diagrammexport nach WMF (Windows Meta File)
+- NLS: Englische Texte an Programm angepasst
+- NLS: Französische Texte an Programm angepasst
+- NLS: Deutsche Texte an Programm angepasst
 - API: TransferFromIli2cMetamodel kann neu ohne GUI benutzt werden
-- OID auf TopicDefDialog hinzufuegen
-- neuer Dialog fuer LineFomTypeDef
-- neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
-- neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 
-- neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
+- GUI: OID auf TopicDefDialog hinzufuegen
+- GUI: neuer Dialog fuer LineFomTypeDef
+- GUI: neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
 - iliimp, iliexp: OIDType, ClassType hinzugefuegt
 - iliimp, iliexp: LineFormTypeDef hinzugefuegt
 - Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt

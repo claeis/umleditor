@@ -32,6 +32,11 @@
         <pathelement location="lib/ili2c.jar"/>
         <pathelement location="lib/XMIFramework.jar"/>
         <pathelement location="lib/jh.jar"/>
+        <pathelement location="lib/freehep-base.jar"/>
+        <pathelement location="lib/freehep-graphics2d.jar"/>
+        <pathelement location="lib/freehep-graphicsio.jar"/>
+        <pathelement location="lib/freehep-graphicsio-emf.jar"/>
+        <pathelement location="lib/freehep-graphicsio-svg.jar"/>
       </classpath>
     	<src path="${src}" />
     	<!-- <src path="${build}/src"/> -->
@@ -64,6 +69,11 @@
     	<fileset dir="${src}" includes="**/*.jpg"/>
     	<zipfileset src="lib/XMIFramework.jar"/>
     	<zipfileset src="lib/hd53.jar"/>
+        <zipfileset src="lib/freehep-base.jar"/>
+        <zipfileset src="lib/freehep-graphics2d.jar"/>
+        <zipfileset src="lib/freehep-graphicsio.jar"/>
+        <zipfileset src="lib/freehep-graphicsio-emf.jar"/>
+        <zipfileset src="lib/freehep-graphicsio-svg.jar"/>
     	<fileset dir="help">
     	  <patternset>
 	    <include name="**/*.hs"/>
