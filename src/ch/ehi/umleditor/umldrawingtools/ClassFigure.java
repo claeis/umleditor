@@ -40,7 +40,7 @@ import ch.softenvironment.util.*;
  * name, attributes and methods.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-03-05 17:28:11 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-02 18:22:40 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	// TextFigure for editing the class name
@@ -363,6 +363,14 @@ public void updateView() {
 		} else {
 			// node might have changed
 			super.updateView();
+			// show abstract Classes in italics
+			Font font = classNameFigure.getFont();
+			if (((AbstractClassDef)getModelElement()).isAbstract()) {
+				font = new Font(font.getName(), Font.ITALIC, font.getSize());
+			} else {
+				font = new Font(font.getName(), Font.PLAIN, font.getSize());
+			}
+			classNameFigure.setFont(font);
 			classNameFigure.setText(getModelElement().getDefLangName());
 			updateAttributeFigure();
 			updateOperationFigure();
