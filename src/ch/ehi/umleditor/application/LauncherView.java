@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.7 $ $Date: 2004-03-01 20:34:52 $
+ * @version $Revision: 1.8 $ $Date: 2004-03-07 21:21:22 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -2995,6 +2995,7 @@ getMniRedo().setEnabled(false);
 	java.awt.Insets insets = instance.getInsets();
 	setLocation(getSettings().getWindowX().intValue(), getSettings().getWindowY().intValue());
 	setSize(getSettings().getWindowWidth().intValue() + insets.left + insets.right, getSettings().getWindowHeight().intValue() + insets.top + insets.bottom);
+	initPlugins();
 	// user code end
 }
 
@@ -3917,4 +3918,31 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 	}
 	return array;
 }
+	private ch.ehi.umleditor.plugin.loader.PluginLoader pluginLoader=new ch.ehi.umleditor.plugin.loader.PluginLoader();
+	private void initPlugins()
+	{
+		String umleditorHome;
+		String classpath = System.getProperty("java.class.path");
+		int index = classpath.toLowerCase().indexOf("umleditor.jar");
+		int start = classpath.lastIndexOf(java.io.File.pathSeparator,index) + 1;
+		if(index > start)
+		{
+			umleditorHome = classpath.substring(start,index - 1);
+		}else{
+			umleditorHome =System.getProperty("user.dir");
+		}
+		System.err.println(umleditorHome);
+		if(umleditorHome != null){
+			pluginLoader.loadPlugins(umleditorHome+"/plugins");
+		}
+		
+		pluginLoader.startAllPlugins();
+		
+		Iterator it=pluginLoader.getAllPlugins().iterator();
+		for(;it.hasNext();){
+			ch.ehi.umleditor.plugin.AbstractPlugin p=(ch.ehi.umleditor.plugin.AbstractPlugin)it.next();
+			p.addMenuItems(getWindowJMenuBar());
+		}
+	}
+
 }
