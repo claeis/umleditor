@@ -47,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.17 $ $Date: 2005-01-06 10:00:31 $
+ * @version $Revision: 1.18 $ $Date: 2005-01-07 14:57:33 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -1184,13 +1184,6 @@ public ClassDiagramView createClassDiagram(Element diagramElement) {
 		addInternalFrame(drawingView);
 		return drawingView;
 	}
-}
-/**
- * @return specific File-Filter.
- * @deprecated
- */
-public static GenericFileFilter createHtmlFilter() {
-	return GenericFileFilter.createHtmlFilter();
 }
 /**
  * @return specific File-Filter.
@@ -2996,6 +2989,11 @@ getMniRedo().setEnabled(false);
 			mniObjectCatalogWoChNr();
 		}
 	});
+	getMnuInterlisTools().add(new AbstractAction(getResourceString("MniGmlExport_text")) { //$NON-NLS-1$
+		public void actionPerformed(ActionEvent event) {
+			mniGmlExport();
+		}
+	});
 
 	// restore Window Coordinates
 	java.awt.Insets insets = instance.getInsets();
@@ -3301,6 +3299,11 @@ private void mniObjectCatalog() {
 private void mniObjectCatalogWoChNr() {
 	tool().deactivate();
 	ch.ehi.umleditor.objectcatalog.ObjectCatalog.writeAllHtml(false);
+	tool().activate();
+}
+private void mniGmlExport() {
+	tool().deactivate();
+	ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeGML();
 	tool().activate();
 }
 /**
