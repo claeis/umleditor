@@ -23,6 +23,7 @@ import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.uml1_4.foundation.datatypes.*;
+import ch.ehi.uml1_4.implementation.UmlParameter;
 import ch.ehi.umleditor.umldrawingtools.*;
 import java.util.*;
 import ch.softenvironment.util.*;
@@ -30,7 +31,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:46 $
+ * @version $Revision: 1.2 $ $Date: 2004-03-05 17:18:52 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -80,6 +81,8 @@ public Vector addRowElement(Object object) {
 		row = createRow((LineFormTypeDef)object);
 	} else if (object instanceof Translation) {
 		row = createRow((Translation)object);
+	} else if (object instanceof UmlParameter) {
+		row = createRow((UmlParameter)object);
 	} else if (object instanceof Vector) {
 		// @see INTERLIS2DefDialog#setElement()
 		row = createRow((Vector)object);
@@ -121,7 +124,8 @@ private Vector createRow(RoleDef roleDef) {
 	return row;
 }
 /**
- * Return a AttributeTableRow.
+ * Return row of given Object.
+ * @param attributeDef Object to display in a row
  * @see #setAttributeRow()
  */
 private Vector createRow(AttributeDef attributeDef) {
@@ -133,7 +137,9 @@ private Vector createRow(AttributeDef attributeDef) {
 	return row;
 }
 /**
- *
+ * Return row of given Object.
+ * @param lineFormTypeDef Object to display in a row
+ * @see #setLineFormTypeDefRow()
  */
 private Vector createRow(LineFormTypeDef lineFormTypeDef) {
 	Vector row = new Vector(2);
@@ -142,7 +148,9 @@ private Vector createRow(LineFormTypeDef lineFormTypeDef) {
 	return row;
 }
 /**
- * Return a ClassDefTableRow.
+ * Return row of given Object.
+ * @param classDef Object to display in a row
+ * @see #setRestrictedClassDefRow()
  */
 private Vector createRow(AbstractClassDef classDef) {
 	Vector row = new Vector(2);
@@ -152,6 +160,9 @@ private Vector createRow(AbstractClassDef classDef) {
 	return row;
 }
 /**
+ * Return row of given Object.
+ * @param contract Object to display in a row
+ * @see #setContract()
  * @see ModelDefDialog (table Contract)
  */
 private Vector createRow(Contract contract) {
@@ -179,6 +190,17 @@ private Vector createRow(Translation translation) {
 private Vector createRow(Dependency dependency) {
 	Vector row = new Vector(2);
 	row.add(((ModelElement)dependency.iteratorSupplier().next()).getDefLangName());
+
+	return row;
+}
+/**
+ * @see UmlOperationDialog (table Parameter)
+ */
+private Vector createRow(UmlParameter parameter) {
+	Vector row = new Vector(4);
+	row.add(parameter.getDefLangName());
+	row.add("NYI");//parameter.getType());
+	row.add("NYI");//parameter.getKind());
 
 	return row;
 }
@@ -234,7 +256,6 @@ public void removeRows(int selectedRows[]) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
  * @param iteratorFeature (for e.g. of a ClassDef)
  */
 public void setAttributeDef(java.util.Iterator iteratorFeature) {
@@ -247,7 +268,10 @@ public void setAttributeDef(java.util.Iterator iteratorFeature) {
 
 	// build data Rows
 	while ((iteratorFeature != null) && (iteratorFeature.hasNext())) {
-		addRowElement((AttributeDef)iteratorFeature.next());
+		Object feature = iteratorFeature.next();
+		if (feature instanceof AttributeDef) {
+			addRowElement((AttributeDef)feature);
+		}
 	}
 }
 /**
@@ -285,8 +309,8 @@ public void setContract(java.util.Iterator iteratorContract) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
- * @param iteratorFeature (for e.g. of a ClassDef)
+ * 
+ * @param iteratorLineFormTypeDef
  */
 public void setLineFormTypeDef(java.util.Iterator iteratorLineFormTypeDef) {
 	// define visible columns
@@ -301,8 +325,7 @@ public void setLineFormTypeDef(java.util.Iterator iteratorLineFormTypeDef) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
- * @param iteratorFeature (for e.g. of a ClassDef)
+ * @param iteratorRestrictedTo
  */
 public void setRestrictedClassDef(java.util.Iterator iteratorRestrictedTo) {
 	// define visible columns
@@ -317,8 +340,7 @@ public void setRestrictedClassDef(java.util.Iterator iteratorRestrictedTo) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
- * @param iteratorFeature (for e.g. of a ClassDef)
+ * @param iteratorConnection
  */
 public void setRoleDef(java.util.Iterator iteratorConnection) {
 	// define visible columns
@@ -335,6 +357,10 @@ public void setRoleDef(java.util.Iterator iteratorConnection) {
 		addRowElement((RoleDef)iteratorConnection.next());
 	}
 }
+/**
+ * Shuffle down the selected row (step => 1 row).
+ * @param current
+ */
 public void moveRowDown(int current) {
   // is current last element?
   if(current+1==elementVector.size()){
@@ -364,8 +390,7 @@ public void moveRowDown(int current) {
   }
 }
 /**
- * EditorTableModel constructor comment.
- * @param iteratorFeature (for e.g. of a ClassDef)
+ * @param iteratorTranslation
  */
 public void setTranslation(java.util.Iterator iteratorTranslation) {
 	// define visible columns
@@ -382,7 +407,7 @@ public void setTranslation(java.util.Iterator iteratorTranslation) {
 }
 /**
  * Special case.
- * @param iterator (of a Vector)
+ * @param iteratorTranslation (of a Vector)
  */
 public void setTranslationFile(java.util.Iterator iteratorTranslation) {
 	// define visible columns
@@ -398,8 +423,7 @@ public void setTranslationFile(java.util.Iterator iteratorTranslation) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
- * @param iteratorFeature (for e.g. of a ClassDef)
+ * @param selectedRows
  */
 protected void showDependencySpecification(int selectedRows[]) {
 	for (int i=0; i<selectedRows.length; i++) {
@@ -412,7 +436,8 @@ protected void showDependencySpecification(int selectedRows[]) {
 	}
 }
 /**
- * EditorTableModel constructor comment.
+ * Display a Specification Dialog for the
+ * currently selected rows.
  * @param iteratorFeature (for e.g. of a ClassDef)
  */
 protected void showSpecification(int selectedRows[]) {
@@ -469,5 +494,26 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 	}
 
 	fireTableRowsUpdated(rowIndex, rowIndex);
+}
+/**
+ * Define the column structure for a set of UmlParameter's.
+ * @param iteratorParamater (for e.g. of an UmlOperation)
+ */
+public void setUmlParameter(java.util.Iterator iteratorParameter) {
+	// define visible columns
+	Vector columns = new Vector(3);
+	columns.add(resEditorTableModel.getString("TbcAttributeName_text")); //$NON-NLS-1$
+	columns.add(resEditorTableModel.getString("TbcAttributeType_text")); //$NON-NLS-1$
+	columns.add(resEditorTableModel.getString("TbcRoleKind_text")); //$NON-NLS-1$
+
+	setDataVector(elementVector, columns);
+
+	// build data Rows
+	while ((iteratorParameter != null) && (iteratorParameter.hasNext())) {
+		Object feature = iteratorParameter.next();
+		if (feature instanceof UmlParameter) {
+			addRowElement((UmlParameter)feature);
+		}
+	}
 }
 }
