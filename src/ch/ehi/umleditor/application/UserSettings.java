@@ -23,7 +23,7 @@ import ch.softenvironment.util.*;
  * Manage the Application Settings for a single UserProfile.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-05-08 15:25:12 $
+ * @version $Revision: 1.4 $ $Date: 2004-06-23 09:27:09 $
  */
 public class UserSettings extends java.util.Properties implements ch.softenvironment.client.UserSettings {
 	// values for Key-Values
@@ -84,7 +84,9 @@ protected static UserSettings createDefault() {
 	userSettings.setFont("Monospaced-BOLD-9");
 	userSettings.setForegroundColor(java.awt.Color.black);
 	userSettings.setImportDirectory(System.getProperty(HOME_DIRECTORY));
+	// ce2004-06-23 should use system property as default
 	userSettings.setLanguage(java.util.Locale.GERMAN.getLanguage());
+	// ce2004-06-23 should use system property as default
 	userSettings.setCountry("CH");
 	userSettings.setShowLogView(new Boolean(true));
 	userSettings.setShowStatusBar(new Boolean(true));

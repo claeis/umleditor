@@ -46,7 +46,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.11 $ $Date: 2004-06-14 14:17:06 $
+ * @version $Revision: 1.12 $ $Date: 2004-06-23 09:27:09 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3112,8 +3112,9 @@ public static void main(java.lang.String[] args) {
 		// Locale influence
 		Tracer.getInstance().runtimeInfo("Locale is: " + java.util.Locale.getDefault().toString());
 		settings = UserSettings.load();
-		Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
-		Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
+		// ce2004-06-23 don't change default Locale!!! use (existing) system administration tool!
+		//Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
+		//Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
 		
 		ch.ehi.basics.types.NlsString.setDefaultLanguage(settings.getLanguage());
 
