@@ -17,62 +17,62 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.ehi.interlis.attributes.*;
 import CH.ifa.draw.figures.*;
-import ch.ehi.umleditor.application.*;
+import ch.ehi.uml1_4.implementation.UmlOperation;
+import ch.softenvironment.util.Tracer;
 
 /**
- * Figure for displaying a single Attribute within a ClassFigure or AssociationAttributeFigure compartment.
+ * Figure for displaying a single UmlOperation within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-03-05 17:26:42 $
+ * @version $Revision: 1.1 $ $Date: 2004-03-05 17:29:33 $
  */
-class AttributeFigure extends TextFigure {
-	private AttributeDef attributeDef = null;
+class OperationFigure extends TextFigure {
+	private UmlOperation operation = null;
 	private ClassDiagramView classDiagram = null;
 
 	// Formatting constants
-	protected final char BEGIN_MULTIPLICITY = '[';
-	protected final char END_MULTIPLICITY = ']';
-	protected final char TYPE_SEPARATOR = ':';
+	protected final char PARAMETER_SEPARATOR = ':';
+	protected final char PARAMETER_BEGIN = '(';
+	protected final char PARAMETER_END = ')';
 /**
- * AttributeFigure constructor comment.
+ * Constructor comment.
  */
-public AttributeFigure(AttributeDef attributeDef, ClassDiagramView classDiagram) {
+public OperationFigure(UmlOperation operation, ClassDiagramView classDiagram) {
 	super();
-	this.attributeDef = attributeDef;
+	this.operation = operation;
 	this.classDiagram = classDiagram;
 }
 /**
  * Format the Attribute Representation.
  * @see ClassDef#createAttributeFigure(AttributeDef)
  */
-public String getPureAttributeName(String name) {
+public String getPureOperationName(String name) {
 	String realName = name;
-	int index = name.indexOf(BEGIN_MULTIPLICITY);
+	int index = name.indexOf(PARAMETER_BEGIN);
 	if (index > 0) {
 		realName = name.substring(0, index);
 	} else {
-		index = name.indexOf(TYPE_SEPARATOR);
-		if (index > 0) {
-			realName = name.substring(0, index);
-		}
+Tracer.getInstance().nyi(this, "getPureOperationName(..)", "skip <visibility return type>");
+		realName = name;
 	}
 
 	return realName.trim();
 }
 /**
- * Format the Attribute Representation.
- * @see ClassDef#createAttributeFigure(AttributeDef)
+ * Format the Operation Representation.
+ * @see ClassDef#createOperationFigure(..)
  */
 public void updateModel() {
-	String text = attributeDef.getDefLangName();
-	if (classDiagram.isShowAttributeMultiplicity()) {
+	String text = operation.getDefLangName();
+/*	if (classDiagram.isShowAttributeMultiplicity()) {
 		text = text + BEGIN_MULTIPLICITY + MultiplicityConverter.getRange(attributeDef.getMultiplicity()) + END_MULTIPLICITY;
 	}
 	if (classDiagram.isShowAttributeTypes() && attributeDef.containsAttrType()) {
 		text = text + " " + TYPE_SEPARATOR + " " + IliBaseTypeKind.getTypeName(attributeDef,false);
 	}
+*/
+	text = text + PARAMETER_BEGIN + PARAMETER_END;
 	super.setText(text);
 }
 }

@@ -18,7 +18,6 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.basics.i18n.ResourceBundle;
-import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import java.util.*;
 import java.awt.event.*;
@@ -35,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2004-02-05 16:48:25 $
+ * @version $Revision: 1.8 $ $Date: 2004-03-05 17:27:45 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -1275,10 +1274,11 @@ private void trySaveAssociation(ch.ehi.uml1_4.foundation.core.Association associ
 public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 	Figure figure = null;
 
-	if (event.getSource() instanceof AttributeDef) {
+	if (event.getSource() instanceof Feature) {
 		// special case -> no direct child-Element of Diagram
-		if (((AttributeDef)event.getSource()).containsOwner()) {
-			figure = findFigure(((AttributeDef)event.getSource()).getOwner());
+		// => AttributeDef and UmlOperation
+		if (((Feature)event.getSource()).containsOwner()) {
+			figure = findFigure(((Feature)event.getSource()).getOwner());
 		}
 	} else if ((event.getSource() instanceof RoleDef) && ((RoleDef)event.getSource()).containsAssociation()) {
 		figure = findFigure((RoleDef)event.getSource());
