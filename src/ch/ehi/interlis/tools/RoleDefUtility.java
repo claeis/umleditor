@@ -31,6 +31,9 @@ public class RoleDefUtility {
 	 */
 	static public boolean isIliStructAttr(RoleDef role){
 		AssociationDef assoc=(AssociationDef)role.getAssociation();
+		if(assoc.sizeConnection()!=2){
+			return false;
+		}
 		RoleDef oppend=getOppEnd(role);
 		Classifier thisClass=role.getParticipant();
 		Classifier oppendClass=oppend.getParticipant();
@@ -46,6 +49,9 @@ public class RoleDefUtility {
 	static public boolean isIliRefAttr(RoleDef role)
 	{
 		AssociationDef assoc=(AssociationDef)role.getAssociation();
+		if(assoc.sizeConnection()!=2){
+			return false;
+		}
 		RoleDef oppend=getOppEnd(role);
 		Classifier thisClass=role.getParticipant();
 		Classifier oppendClass=oppend.getParticipant();
