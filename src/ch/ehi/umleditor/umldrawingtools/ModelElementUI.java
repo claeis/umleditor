@@ -1,7 +1,5 @@
 package ch.ehi.umleditor.umldrawingtools;
 
-import ch.softenvironment.util.ResourceManager;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -19,11 +17,12 @@ import ch.softenvironment.util.ResourceManager;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.softenvironment.client.ResourceManager;
 /**
  * Interface for presentation aspects of a ModelElement.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-06-29 11:42:44 $
+ * @version $Revision: 1.4 $ $Date: 2004-09-14 18:09:17 $
  */
 public interface ModelElementUI {
 	static String REMOVE_IN_MODEL = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniRemoveInModel_text");

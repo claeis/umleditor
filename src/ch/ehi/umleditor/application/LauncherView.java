@@ -35,6 +35,7 @@ import ch.ehi.umleditor.xmiuml.*;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.view.*;
+import ch.softenvironment.client.ResourceManager;
 import ch.softenvironment.util.*;
 
 /**
@@ -46,7 +47,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.13 $ $Date: 2004-06-26 11:50:04 $
+ * @version $Revision: 1.14 $ $Date: 2004-09-14 18:05:15 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants

@@ -26,7 +26,7 @@ import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.util.DeveloperException;
-import ch.softenvironment.util.ResourceManager;
+import ch.softenvironment.client.ResourceManager;
 import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 /**
@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2004-06-29 11:42:44 $
+ * @version $Revision: 1.9 $ $Date: 2004-09-14 18:09:17 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
