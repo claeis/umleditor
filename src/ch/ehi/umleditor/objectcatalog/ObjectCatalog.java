@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-26 18:55:28 $
-// $Revision: 1.2 $
+// $Date: 2004-03-01 21:10:26 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3CD78E5B00EB package "ObjectCatalog"
@@ -136,12 +136,12 @@ public class ObjectCatalog
         String diagName=((ch.ehi.umleditor.umlpresentation.Diagram)diag.getDiagram()).getName().getValue();
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle(rsrc.getString("CTdiagFileSelector"));
-        GenericFileFilter jpegFilter=new GenericFileFilter("JPEG File Interchange Format (*.jpeg)","jpeg");
-        GenericFileFilter emfFilter=new GenericFileFilter("Windows Meta File Format (*.wmf)","wmf");
-        GenericFileFilter svgFilter=new GenericFileFilter("Scalable Vector Graphics (*.svg)","svg");
+    GenericFileFilter jpegFilter=new GenericFileFilter("JPEG File Interchange Format (*.jpeg)","jpeg");
+    GenericFileFilter svgFilter=new GenericFileFilter("Scalable Vector Graphics (*.svg)","svg");
+	GenericFileFilter emfFilter=new GenericFileFilter("Windows Meta File Format (*.wmf)","wmf");
 	saveDialog.addChoosableFileFilter(jpegFilter);
-	saveDialog.addChoosableFileFilter(emfFilter);
 	saveDialog.addChoosableFileFilter(svgFilter);
+	saveDialog.addChoosableFileFilter(emfFilter);
         saveDialog.setSelectedFile(new File(diagName));
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
