@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-30 10:30:16 $
-// $Revision: 1.2 $
+// $Date: 2004-01-04 10:54:05 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3C454DFD0284 package "MetaModelChange"
@@ -20,7 +20,7 @@ import java.util.EventObject;
 
 /** This class captures the change that appeared to the meta model
  *  @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2003-12-30 10:30:16 $
+ *  @version $Revision: 1.3 $ $Date: 2004-01-04 10:54:05 $
  */
 public class MetaModelChange extends EventObject
 {
@@ -88,6 +88,10 @@ public class MetaModelChange extends EventObject
     ,OP__LINK
     ,OP__UNLINK
     };
+  public String toString()
+  {
+  	return "source="+getSource().toString()+", operation="+getOperation();
+  }
   // -end- 3C454DFD0284 detail_end "MetaModelChange"
 
 }
