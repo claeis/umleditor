@@ -28,11 +28,11 @@ import ch.ehi.umleditor.application.*;
 import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 /**
- * Fiure Specification for all Elements treated as Nodes in an UML-ClassDiagram.
+ * Fiure Specification for all Elements treated as Nodes in an UML-Class-Diagram.
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:00 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-29 21:05:02 $
  */
 public abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -73,7 +73,7 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	return popupMenu;
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a standard Edit-Submenu to a PopupMenu.
  *
  * @see EdgeFigure
  * @return newly created popup menu
@@ -111,7 +111,7 @@ protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
 	popupMenu.add(editMenu);
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a Format-Submenu to a PopupMenu.
  *
  * @see EdgeFigure
  * @return newly created popup menu
@@ -149,7 +149,7 @@ protected void addSpecialMenu(JPopupMenu popupMenu) {
 	// Overwrite for specific adaption
 }
 /**
- * Add an openSpecification Entry to a PopupMenu.
+ * Add an Specification Entry to a PopupMenu.
  *
  * @see EdgeFigure
  * @see createPopupMenu()
@@ -177,9 +177,7 @@ Tracer.getInstance().hack(this, "basicDisplayBox()", "anchorPoint set afterwards
 	}
 }
 /**
- * Standard presentation method which is delegated to the encapsulated presentation figure.
- * The presentation figure is moved as well as all contained figures.
- * @see #moveBy(int, int)
+ * Overwrites.
  */
 protected void basicMoveBy(int dx, int dy) {
     super.basicMoveBy(dx, dy);
@@ -205,8 +203,8 @@ protected ClassDiagramView getClassDiagram() {
 	return classDiagram;
 }
 /**
- * Return the name of the Font.
- * @see AttributeFigure.getFillColor()
+ * Return the nodes Fill-Color.
+ * @see AttributeFigure#getFillColor()
  * @see EdgeFigure
  */
 protected java.awt.Color getFillColor() {
@@ -304,29 +302,29 @@ protected void mniCut() {
 	LauncherView.getInstance().nyi(MENU_EDIT_COPY);
 }
 /**
- * Draw figure with new FillColor.
+ * Figure's FillColor Action.
  */
 private void mniFillColor() {
 	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.getChosenColor() != null) {
+	if (dialog.isSaved()) {
 		setFillColor(dialog.getChosenColor());
 //		getClassDiagram().repaint();
 	}
 }
 /**
- * Edit->Copy Action.
+ * Font-Action.
  * @see addEditMenu(..)
  */
 private void mniFont() {
 	LauncherView.getInstance().nyi(MENU_FORMAT_FONT);
 }
 /**
- * Edit->Copy Action.
+ * Line-Color Action.
  * @see addEditMenu(..)
  */
 private void mniLineColor() {
 	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.getChosenColor() != null) {
+	if (dialog.isSaved()) {
 		setLineColor(dialog.getChosenColor());
 //		getClassDiagram().repaint();
 	}

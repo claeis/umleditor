@@ -22,6 +22,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.uml1_4.foundation.core.*;
@@ -36,11 +37,11 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:55 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-29 21:04:33 $
  */
 public abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
-	private static java.util.ResourceBundle resEdgeFigure = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/EdgeFigure");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resEdgeFigure = ResourceBundle.getBundle(EdgeFigure.class);  //$NON-NLS-1$
 	private ClassDiagramView classDiagram = null;
 	protected PresentationEdge edge = null;
 	protected ModelElement modelElement = null;
@@ -74,7 +75,7 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	// overwrite this method in subclasses
 	addSpecialMenu(popupMenu);
 
-        addSelectInBrowserMenu(popupMenu);
+    addSelectInBrowserMenu(popupMenu);
 
 	popupMenu.add(new JSeparator());
 	addFormatMenu(popupMenu);
@@ -84,7 +85,7 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	return popupMenu;
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a Deletion Entry to a PopupMenu.
  *
  * @return newly created popup menu
  */
@@ -101,7 +102,7 @@ protected void addDeletionMenu(javax.swing.JPopupMenu popupMenu) {
 	});
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add an Edit-Submenu to a PopupMenu.
  *
  * @see NodeFigure
  * @return newly created popup menu
@@ -139,7 +140,7 @@ protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
 	popupMenu.add(editMenu);
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a Format Submenu to a PopupMenu.
  *
  * @see NodeFigure
  * @return newly created popup menu
@@ -197,7 +198,7 @@ protected void addSelectInBrowserMenu(javax.swing.JPopupMenu popupMenu) {
  */
 protected abstract void addSpecialMenu(JPopupMenu popupMenu);
 /**
- * Add an openSpecification Entry to a PopupMenu.
+ * Add a Specification Entry to a PopupMenu.
  *
  * @return newly created popup menu
  * @see NodeFigure
@@ -279,6 +280,7 @@ protected void connectNodes() {
 }
 /**
  * Create a WayPoint.
+ * @param p Coordinates of WayPoint
  */
 protected static WayPoint createWayPoint(Point p) {
 	WayPoint wayPoint = (WayPoint)ElementFactory.createObject(WayPoint.class);
@@ -410,27 +412,27 @@ private void mniCut() {
 	LauncherView.getInstance().nyi(MENU_EDIT_CUT);//$NON-NLS-1$
 }
 /**
- * Edit->Copy Action.
+ * FillColor Action.
  * @see addEditMenu(..)
  */
 private void mniFillColor() {
-Tracer.getInstance().nyi(this, "mniFillColor()", "makes no sense here");//$NON-NLS-2$//$NON-NLS-1$
+    // makes no sense here
 	mniLineColor();
 }
 /**
- * Edit->Copy Action.
+ * Font Action.
  * @see addEditMenu(..)
  */
 private void mniFont() {
 LauncherView.getInstance().nyi(MENU_FORMAT_FONT);
 }
 /**
- * Edit->Copy Action.
+ * LineColor Action.
  * @see addEditMenu(..)
  */
 private void mniLineColor() {
 	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.getChosenColor() != null) {
+	if (dialog.isSaved()) {
 		setLineColor(dialog.getChosenColor());
 	}
 }
@@ -473,7 +475,7 @@ public void removePointAt(int i) {
 	}
 }
 /**
- * Remove the Figure visually ONLY.
+ * Remove the Figure visually ONLY in its Diagram.
  * Still kept in real model.
  */
 public void removeVisually() {
@@ -596,7 +598,7 @@ protected void setModelElement(ModelElement modelElement) {
 }
 /**
  * Overwrites.
- * Set/reset a WaypPoint with the given index at location p.
+ * Set/reset a WayPoint with the given index at location p.
  * Save/update the WayPoint in PresentationModel as well.
  * @see ConnectionTool.mouseDrag(MouseEvent e, int x, int y)
  */
@@ -657,7 +659,6 @@ protected void showDecoration() {
 protected abstract void showIllegalRelationship(String warning);
 /**
  * Show the Specification Dialog of the PresentationElement.
- * @author Peter Hirzel
  */
 public abstract void showSpecification();
 /**
