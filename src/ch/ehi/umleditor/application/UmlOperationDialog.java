@@ -28,7 +28,7 @@ import ch.ehi.uml1_4.implementation.*;
  * Notation: visibility name ( parameter-list ) : return-type-expression { property-string }
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1 $ $Date: 2004-03-05 17:25:28 $
+ * @version $Revision: 1.2 $ $Date: 2004-03-09 12:26:34 $
  */
 public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
@@ -1239,7 +1239,6 @@ private javax.swing.JTable getTblParameters() {
 			getScpParameters().getViewport().setBackingStoreEnabled(true);
 			ivjTblParameters.setCellSelectionEnabled(false);
 			ivjTblParameters.setColumnModel(ivjLocalColumnModel);
-			ivjTblParameters.setAutoCreateColumnsFromModel(false);
 			ivjTblParameters.setBounds(0, 0, 200, 200);
 			ivjTblParameters.setRowSelectionAllowed(true);
 			ivjTblParameters.setEnabled(true);
@@ -1256,6 +1255,7 @@ private javax.swing.JTable getTblParameters() {
 	}
 	return ivjTblParameters;
 }
+
 /**
  * Return the TbpPane property value.
  * @return javax.swing.JTabbedPane
@@ -1371,7 +1371,7 @@ LauncherView.getInstance().nyi("Move down Parameter");
 	}*/
 }
 /**
- * Comment
+ * Add a new Parameter to Operation.
  */
 private void mniNewParameter() {
 	try {
@@ -1384,14 +1384,13 @@ private void mniNewParameter() {
 	}
 }
 /**
- * Comment
+ * Open UmlParameterDialog with selected Parameter.
  */
 private void mniOpenParameterSpecification() {
-	LauncherView.getInstance().nyi("open Parameter Specification");
-//	((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+	((EditorTableModel)getTblParameters().getModel()).showSpecification(getTblParameters().getSelectedRows());
 }
 /**
- * Comment
+ * Remove selected Parameters from Model.
  */
 private void mniRemoveParameter() {
 	((EditorTableModel)getTblParameters().getModel()).removeRows(getTblParameters().getSelectedRows());
