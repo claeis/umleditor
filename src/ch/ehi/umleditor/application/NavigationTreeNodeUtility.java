@@ -24,7 +24,7 @@ import javax.swing.Icon;
  * Utility Class for TreeNode's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:41 $
+ * @version $Revision: 1.2 $ $Date: 2004-08-18 09:20:28 $
  */
 public class NavigationTreeNodeUtility {
   private NavigationTreeNodeUtility(){
@@ -63,7 +63,11 @@ public class NavigationTreeNodeUtility {
   static public String getName(Object element) {
 	if (element instanceof ch.ehi.uml1_4.implementation.UmlModel) {
 		// show the fileName of UmlModel
-                java.io.File file=LauncherView.getInstance().getCurrentFile();
+        java.io.File file = null;
+        if (LauncherView.getInstance() != null) {
+        	// allow external tools to use this Utility
+        	file = LauncherView.getInstance().getCurrentFile();
+        }
 		return file!=null ? file.getName() : LauncherView.defaultFileName;
 	} else if (isModelElement(element)) {
 		return ((ModelElement)element).getDefLangName();
