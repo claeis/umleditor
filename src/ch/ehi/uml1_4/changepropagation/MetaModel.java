@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-02 17:32:13 $
-// $Revision: 1.4 $
+// $Date: 2005-02-21 15:55:35 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3C454ADA00E4 package "MetaModel"
@@ -15,13 +15,13 @@ import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
 // import declarations
 // please fill in/modify the following section
-// -beg- preserve=no 3C454ADA00E4 import "MetaModel"
-
+// -beg- preserve=yes 3C454ADA00E4 import "MetaModel"
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3C454ADA00E4 import "MetaModel"
 
 /** This class implements a singleton pattern and is the subject in an oberver pattern.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.4 $ $Date: 2004-03-02 17:32:13 $
+ *  @version $Revision: 1.5 $ $Date: 2005-02-21 15:55:35 $
  */
 public class MetaModel
 {
@@ -83,7 +83,7 @@ public class MetaModel
     }
     // log change?
     if(doEventLogging){
-      ch.softenvironment.util.Tracer.getInstance().debug(this, "notifyChange()", change.toString());
+      EhiLogger.traceState(change.toString());
     }
     // notify change
     java.util.Iterator it=iteratorMetaModelListener();

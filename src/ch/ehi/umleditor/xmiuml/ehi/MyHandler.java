@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-08-30 07:56:42 $
-// $Revision: 1.4 $
+// $Date: 2005-02-21 15:53:48 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3CF1D26803CA package "MyHandler"
@@ -21,6 +21,7 @@ import java.util.*;
 import java.io.*;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.softenvironment.util.Tracer;
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3CF1D26803CA import "MyHandler"
 
 public class MyHandler implements org.xml.sax.ContentHandler
@@ -143,17 +144,17 @@ public class MyHandler implements org.xml.sax.ContentHandler
       }catch(IllegalAccessException ex){
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
-		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
         throw new SAXException(ex);
       }catch(java.lang.InstantiationException ex){
 			ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
 			,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
-		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 		throw new SAXException(ex);
       }catch(ClassNotFoundException ex){
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
-		Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 		throw new SAXException(ex);
       }
 
@@ -230,15 +231,15 @@ public class MyHandler implements org.xml.sax.ContentHandler
               }
             }
 			catch(IllegalArgumentException ex){
-				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 				throw new SAXException(ex);
 			}
             catch(IllegalAccessException ex){
-				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
             	throw new SAXException(ex);
             }
 			catch(InvocationTargetException ex){
-				Tracer.getInstance().debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
 				throw new SAXException(ex);
 			}
           }

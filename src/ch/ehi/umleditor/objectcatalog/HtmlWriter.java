@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2005-01-17 09:54:52 $
-// $Revision: 1.6 $
+// $Date: 2005-02-21 15:53:06 $
+// $Revision: 1.7 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -1005,10 +1005,10 @@ public class HtmlWriter
     public int compare(Object o1, Object o2)
     {
       if(!(o1 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
       }
       if(!(o2 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
       }
       ModelElement e1=(ModelElement)o1;
       ModelElement e2=(ModelElement)o2;
@@ -1031,10 +1031,10 @@ public class HtmlWriter
     public int compare(Object o1, Object o2)
     {
       if(!(o1 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
       }
       if(!(o2 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
       }
       ModelElement e1=(ModelElement)o1;
       ModelElement e2=(ModelElement)o2;

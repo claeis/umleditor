@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:11 $
-// $Revision: 1.1.1.1 $
+// $Date: 2005-02-21 15:57:47 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3C7395A70208 package "SubDialog"
@@ -18,6 +18,7 @@ import javax.swing.JDialog;
 import java.awt.Frame;
 import java.awt.Dimension;
 import javax.swing.*;
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3C7395A70208 import "SubDialog"
 
 public class TestLayoutDialog extends JDialog
@@ -113,7 +114,7 @@ public class TestLayoutDialog extends JDialog
     // collect nodes and edges from current diagram
     ch.ehi.umleditor.umldrawingtools.ClassDiagramView diagView=ch.ehi.umleditor.application.LauncherView.getInstance().getCurrentClassDiagram();
     if(diagView!=null){
-      ch.softenvironment.util.Tracer.getInstance().debug("current ClassDiagramView found");
+		EhiLogger.traceState("current ClassDiagramView found");
       ch.ehi.umleditor.umlpresentation.Diagram diag=diagView.getDiagram();
       java.util.Iterator elei=diag.iteratorPresentationElement();
       while(elei.hasNext()){
