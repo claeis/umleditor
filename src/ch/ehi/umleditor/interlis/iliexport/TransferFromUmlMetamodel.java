@@ -1109,8 +1109,6 @@ public class TransferFromUmlMetamodel
     {
     RoleDef def=getOppEnd(oppend);
     if(RoleDefUtility.isIliStructAttr(def)){
-      // TODO check that exactly two roles
-      // if(assoc.sizeConnection()!=2){ log error}
 
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
@@ -1158,7 +1156,12 @@ public class TransferFromUmlMetamodel
             out.write("BAG OF ");
           }
       }
-
+	  if(def.getMultiplicity()!=null){
+		MultiplicityRange card=(MultiplicityRange)(def.getMultiplicity().iteratorRange().next());
+		if(card.getUpper()>1){
+			logErrorMsg(def,rsrc.getString("CEmaxCardGtOne"));
+		}
+	  }
       String external="";
       if(oppend.isPropExternal()){
         external="(EXTERNAL) ";
@@ -1211,6 +1214,9 @@ public class TransferFromUmlMetamodel
         if(card.getLower()==1 && card.getUpper()==1){
           out.write("MANDATORY ");
         }
+		if(card.getUpper()>1){
+			logErrorMsg(oppend,rsrc.getString("CEmaxCardGtOne"));
+		}
       }
 
       String external="";
