@@ -1,9 +1,6 @@
 package ch.softenvironment.view;
 
 /* 
- *This file is part of the UML/INTERLIS-Editor.
- * For more information, please see <http://www.umleditor.org/>.
- *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -21,7 +18,7 @@ import java.awt.*;
  * @author: Peter Hirzel <i>soft</i>Environment
  */
 public class ColorChooserDialog extends BaseDialog {
-	private static java.util.ResourceBundle resColorChooserDialog = java.util.ResourceBundle.getBundle("ch/softenvironment/nls/ColorChooserDialog");
+	private static java.util.ResourceBundle resColorChooserDialog = ch.ehi.basics.i18n.ResourceBundle.getBundle(ColorChooserDialog.class);
 	private java.awt.Color chosenColor = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnOk = null;
@@ -45,7 +42,6 @@ class IvjEventHandler implements java.awt.event.ActionListener {
 public ColorChooserDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
-	show();
 }
 /**
  * connEtoC1:  (BtnAbbrechen.action.actionPerformed(java.awt.event.ActionEvent) --> ColorChooser.cancelPressed()V)
@@ -104,13 +100,13 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
 			constraintsBtnOk.gridx = 1; constraintsBtnOk.gridy = 2;
 			constraintsBtnOk.ipadx = 59;
-			constraintsBtnOk.insets = new java.awt.Insets(6, 111, 28, 1);
+			constraintsBtnOk.insets = new java.awt.Insets(10, 111, 28, 1);
 			getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
 
 			java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
 			constraintsBtnCancel.gridx = 2; constraintsBtnCancel.gridy = 2;
 			constraintsBtnCancel.ipadx = 13;
-			constraintsBtnCancel.insets = new java.awt.Insets(6, 2, 28, 110);
+			constraintsBtnCancel.insets = new java.awt.Insets(10, 2, 28, 110);
 			getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
 			// user code begin {1}
 			// user code end
@@ -132,8 +128,9 @@ private javax.swing.JButton getBtnCancel() {
 		try {
 			ivjBtnCancel = new javax.swing.JButton();
 			ivjBtnCancel.setName("BtnCancel");
-			ivjBtnCancel.setText(resColorChooserDialog.getString("BtnCancel_text"));
+			ivjBtnCancel.setText("Abbrechen");
 			// user code begin {1}
+			ivjBtnCancel.setText(getCancelString());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -153,9 +150,10 @@ private javax.swing.JButton getBtnOk() {
 		try {
 			ivjBtnOk = new javax.swing.JButton();
 			ivjBtnOk.setName("BtnOk");
-			ivjBtnOk.setText(resColorChooserDialog.getString("BtnOk_text"));
+			ivjBtnOk.setText("OK");
 			ivjBtnOk.setEnabled(true);
 			// user code begin {1}
+			ivjBtnOk.setText(getOKString());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -224,14 +222,15 @@ private void initialize() {
 		// user code end
 		setName("ColorChooser");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(444, 410);
-		setTitle(resColorChooserDialog.getString("CTColorChooser"));
+		setSize(444, 429);
+		setTitle("Farbauswahl");
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setTitle(resColorChooserDialog.getString("CTColorChooser"));
 	javax.swing.event.ChangeListener changeListener =
 		new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent e) {
