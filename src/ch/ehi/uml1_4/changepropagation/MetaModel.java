@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-02 14:41:35 $
-// $Revision: 1.3 $
+// $Date: 2004-03-02 17:32:13 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3C454ADA00E4 package "MetaModel"
@@ -21,7 +21,7 @@ import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
 /** This class implements a singleton pattern and is the subject in an oberver pattern.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.3 $ $Date: 2004-03-02 14:41:35 $
+ *  @version $Revision: 1.4 $ $Date: 2004-03-02 17:32:13 $
  */
 public class MetaModel
 {
@@ -78,9 +78,9 @@ public class MetaModel
     // please fill in/modify the following section
     // -beg- preserve=yes 3C47EB26012C body3C454ADA00E4 "notifyChange"
     // no change propagation?
-    //if(!doChangePropagation){
-    //	return;
-    //}
+    if(!doChangePropagation){
+    	return;
+    }
     // log change?
     if(doEventLogging){
       ch.softenvironment.util.Tracer.getInstance().debug(this, "notifyChange()", change.toString());
