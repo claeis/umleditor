@@ -19,6 +19,7 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 import CH.ifa.draw.util.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.softenvironment.view.CommonUserAccess;
 
@@ -35,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.4 $ $Date: 2004-05-03 13:34:58 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -358,6 +359,12 @@ protected void handleMouseDown(MouseEvent e, int x, int y) {
 				// only spliting is possible, new Connections must be done by appropriate tools
 				dragCase = checkDragCase(editedConnection, splitX, splitY);
 ch.softenvironment.util.Tracer.getInstance().debug("DragCase = " + dragCase);
+			}
+			
+			// update DocumentationPanel in Launcher if Diagram was selected
+			Figure figure = drawing().findFigure(e.getX(), e.getY());
+			if ((figure == null) && (!e.isShiftDown())) {
+				LauncherView.getInstance().setDescription(((ClassDiagramView)view()).getDiagram());
 			}
 		}
 	} catch (Throwable exception) {
