@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.6 $ $Date: 2004-03-01 15:25:20 $
+ * @version $Revision: 1.7 $ $Date: 2004-03-01 20:34:52 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -3295,7 +3295,10 @@ private void mniOpenFile() {
 			try {
 				getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
 				PersistenceService service = new PersistenceService();
-				setModel(service.readFile(openDialog.getSelectedFile().getAbsolutePath()), openDialog.getSelectedFile());
+				boolean old=MetaModel.setChangePropagation(false);
+				Model newModel=service.readFile(openDialog.getSelectedFile().getAbsolutePath());
+				MetaModel.setChangePropagation(old);
+				setModel(newModel, openDialog.getSelectedFile());
 				log(resLauncherView.getString("CIModelLoaded"), resLauncherView.getString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
 			} catch(java.io.IOException e) {
 				handleException(e,"fileopen",e.getMessage());
