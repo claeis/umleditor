@@ -35,7 +35,7 @@ import ch.softenvironment.view.*;
  * by ClassFigures).
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:07:11 $
+ * @version $Revision: 1.3 $ $Date: 2004-01-05 11:04:41 $
  */
 public class GeneralizationLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resGeneralizationLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/GeneralizationLineConnection");  //$NON-NLS-1$
@@ -145,10 +145,10 @@ public final void draw(Graphics g) {
  * @return Element	superclass/parent/generalization(end)
  */
 protected Element getEndElement() {
-	if (getModelElement() == null) {
-		return null;
-	} else {
+	if ((getModelElement() != null) && ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).containsParent()) {
 		return ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).getParent();
+	} else {
+		return null;
 	}
 }
 /**
@@ -156,10 +156,10 @@ protected Element getEndElement() {
  * @return Element	subclass/child/specialization/(start)
  */
 protected Element getStartElement() {
-	if (getModelElement() == null) {
-		return null;
-	} else {
+	if ((getModelElement() != null) && ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).containsChild()) {
 		return ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).getChild();
+	} else {
+		return null;
 	}
 }
 /**
