@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 21:10:26 $
-// $Revision: 1.3 $
+// $Date: 2004-04-16 09:31:02 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3CD78E5B00EB package "ObjectCatalog"
@@ -149,22 +149,23 @@ public class ObjectCatalog
 
                     try{
 
+						java.awt.Dimension diagDim = diag.getMinimumDimension();
 
                       if(emfFilter.accept(saveDialog.getSelectedFile())){
                         //Properties p = new Properties();
                         //p.setProperty("PageSize","A5");
-                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.emf.EMFGraphics2D(new File(filename), new java.awt.Dimension(diag.getWidth(),diag.getHeight()));
+                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.emf.EMFGraphics2D(new File(filename), diagDim);
                         //g.setProperties(p);
                         g.startExport();
                         diag.printAll(g);
                         g.endExport();
                       }else if(svgFilter.accept(saveDialog.getSelectedFile())){
-                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.svg.SVGGraphics2D(new File(filename), new java.awt.Dimension(diag.getWidth(),diag.getHeight()));
+                        org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.svg.SVGGraphics2D(new File(filename), diagDim);
                         g.startExport();
                         diag.printAll(g);
                         g.endExport();
                       }else if(jpegFilter.accept(saveDialog.getSelectedFile())){
-                        java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diag.getWidth(),diag.getHeight(),java.awt.image.BufferedImage.TYPE_INT_BGR);
+                        java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diagDim.width,diagDim.height,java.awt.image.BufferedImage.TYPE_INT_BGR);
                         java.awt.Graphics2D g=img.createGraphics();
                         diag.printAll(g);
                         FileOutputStream os = new FileOutputStream(filename);

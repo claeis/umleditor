@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2004-03-09 15:39:10 $
+ * @version $Revision: 1.11 $ $Date: 2004-04-16 09:31:34 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -417,33 +417,86 @@ public Diagram getDiagram() {
  * Return the minimal Dimension to represent all Figures presented by this diagram.
  */
 public java.awt.Dimension getMinimumDimension() {
-    int maxw = 0;
-    int maxh = 0;
+	java.awt.Dimension max=new java.awt.Dimension(0,0);
     if (getDiagram() != null) {
         Iterator iterator = getDiagram().iteratorPresentationElement();
         while (iterator.hasNext()) {
             Object obj = iterator.next();
-            if (obj instanceof PresentationEdge) {
+			if (obj instanceof ch.ehi.umleditor.umlpresentation.Association) {
+				ch.ehi.umleditor.umlpresentation.Association assoc = (ch.ehi.umleditor.umlpresentation.Association) obj;
+				PresentationNode node=assoc.getLinkPresentation();
+				getMinDimHelper_processNode(node,max);
+				Iterator ri = assoc.iteratorRolePresentation();
+				while (ri.hasNext()) {
+					PresentationEdge role = (PresentationEdge) ri.next();
+					getMinDimHelper_processEdge(role,max);
+				}
+			}else if (obj instanceof PresentationEdge) {
                 PresentationEdge edge = (PresentationEdge) obj;
-                Iterator wpi = edge.iteratorWayPoint();
-                while (wpi.hasNext()) {
-                    WayPoint wp = (WayPoint) wpi.next();
-                    if (wp.getEast() > maxw)
-                        maxw = wp.getEast();
-                    if (wp.getSouth() > maxh)
-                        maxh = wp.getSouth();
-                }
+				getMinDimHelper_processEdge(edge,max);
             } else if (obj instanceof PresentationNode) {
 	           PresentationNode node = (PresentationNode) obj;
- 	           if (node.getEast() + node.getWidth() > maxw)
-                  maxw = node.getEast() + node.getWidth();
-               if (node.getSouth() + node.getHeight() > maxh)
-                  maxh = node.getSouth() + node.getHeight();
+			   getMinDimHelper_processNode(node,max);
 			}
         }
     }
-
-    return new java.awt.Dimension(maxw, maxh);
+	max.width++;
+	max.height++;
+    return max;
+}
+private void getMinDimHelper_processEdge(PresentationEdge edge,java.awt.Dimension max)
+{
+	Iterator wpi = edge.iteratorWayPoint();
+	while (wpi.hasNext()) {
+		WayPoint wp = (WayPoint) wpi.next();
+		if (wp.getEast() > max.width){
+			max.width = wp.getEast();
+		}
+		if (wp.getSouth() > max.height){
+			max.height = wp.getSouth();
+		}
+	}
+	
+}
+private void getMinDimHelper_processNode(PresentationNode node,java.awt.Dimension max)
+{
+	int east;
+	int south;
+	int width;
+	int height;
+	if(node instanceof ch.ehi.umleditor.umlpresentation.PresentationAssocClass){
+		ch.ehi.umleditor.umlpresentation.PresentationAssocClass assocClass=(ch.ehi.umleditor.umlpresentation.PresentationAssocClass)node;
+		if(!assocClass.isLinkWithoutClass()){
+			// consider AssociationClass figure
+			east=(int)assocClass.getClassAngle();
+			south=(int)assocClass.getClassRadius();
+			width=node.getWidth();
+			height=node.getHeight();
+			if (east + width > max.width){
+				max.width = east + width;
+			}
+			if (south + height > max.height){
+				max.height = south + height;
+			}
+		}
+		// consider node as a waypoint!
+		east=node.getEast();
+		south=node.getSouth();
+		width=0;
+		height=0;
+	}else{
+		// consider figure
+		east=node.getEast();
+		south=node.getSouth();
+		width=node.getWidth();
+		height=node.getHeight();
+	}
+	if (east + width > max.width){
+		max.width = east + width;
+	}
+	if (south + height > max.height){
+		max.height = south + height;
+	}
 }
 /**
  * Return the Element containing the Diagram itself and all Figure-ModelElements in it.
