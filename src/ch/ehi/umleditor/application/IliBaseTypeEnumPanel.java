@@ -25,7 +25,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-04-28 19:27:55 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-23 13:31:10 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
         private Enumeration root=new Enumeration();
@@ -261,7 +261,11 @@ private Enumeration copyTree(Enumeration src) {
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
       if(subsrc.containsChild()){
-        subdest.attachChild(copyTree(subsrc.getChild()));
+      	Enumeration child=subsrc.getChild();
+      	// are there any child elements?
+      	if(child.sizeEnumElement()>0){
+			subdest.attachChild(copyTree(child));
+      	}
       }
     }
     return ret;
