@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:41:30 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-03-01 15:24:29 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3CEB5BA003CF package "XMLInterlisDecoder"
@@ -20,6 +20,7 @@ import java.io.*;
 import org.xml.sax.helpers.DefaultHandler;
 import org.apache.xerces.parsers.SAXParser;
 import org.xml.sax.helpers.XMLReaderFactory;
+import ch.softenvironment.util.Tracer;
 // -end- 3CEB5BA003CF import "XMLInterlisDecoder"
 
 public class XMLInterlisDecoder
@@ -42,7 +43,7 @@ public class XMLInterlisDecoder
     // declare any checked exceptions
     // please fill in/modify the following section
     // -beg- preserve=yes 3CEB5BC000C8 throws3CEB5BA003CF "decode"
-
+	throws IOException
     // -end- 3CEB5BC000C8 throws3CEB5BA003CF "decode"
     {
     // please fill in/modify the following section
@@ -57,6 +58,7 @@ public class XMLInterlisDecoder
   // -beg- preserve=yes 3CEB5BA003CF detail_end "XMLInterlisDecoder"
 
  private Object parse(String path)
+ throws IOException
   {
 
     Object object = null;
@@ -69,7 +71,7 @@ public class XMLInterlisDecoder
 
     catch(SAXException saxExc)
     {
-      System.out.println("Enable to create the Parser!");
+      throw new IOException("Unable to create the XML-Reader");
     }
     MyHandler myHandler = new MyHandler();
     ErrorListener errorListener = new ErrorListener();
@@ -106,31 +108,22 @@ public class XMLInterlisDecoder
           ch.ehi.umleditor.application.LauncherView.getInstance().log("decoder","Object <"+tid+"> is never used");
         }
       }
-      System.out.println("Actual Object: "+object);
+      Tracer.getInstance().debug("Actual Object: "+object);
       inputStream.close();
     }
 
-    catch(SAXParseException parseExc)
+    catch(SAXParseException ex)
     {
-      System.out.println("Err - Message: "+parseExc.getMessage()); //message
-      System.out.println("System ID: "+parseExc.getSystemId()); //system ID
-      System.out.println("Err at line: "+parseExc.getLineNumber()); //line Number
-      return null;
+		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err - Message: "+ex.getMessage()); //message
+		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","System ID: "+ex.getSystemId()); //system ID
+		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err at line: "+ex.getLineNumber()); //line Number
+      	throw new IOException(ex.getMessage());
 
     }
-
-    catch(SAXException saxExc)
+    catch(SAXException ex)
     {
-      System.out.println("ErrorMessage :"+saxExc.getMessage()); //message
-      return null;
+	  throw new IOException(ex.getMessage());
     }
-
-    catch(IOException ioExc)
-    {
-      ioExc.printStackTrace();
-      return null;
-    }
-
     return object;
   }
   // -end- 3CEB5BA003CF detail_end "XMLInterlisDecoder"
