@@ -26,7 +26,7 @@ import ch.softenvironment.umleditor.sql.*;
 /**
  * Dialog to control SQL-Code to be generated.
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-01-03 15:49:52 $
+ * @version $Revision: 1.3 $ $Date: 2004-02-04 13:22:37 $
  */
 public class SQLGeneratorDialog extends ch.softenvironment.view.BaseDialog {
 	private ch.ehi.uml1_4.foundation.core.Namespace packageElement = null;
@@ -110,7 +110,7 @@ private void checkOK() {
 private void chooseFile() {
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 //		saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
-		saveDialog.addChoosableFileFilter(LauncherView.createSQLFilter());
+		saveDialog.addChoosableFileFilter(GenericFileFilter.createSqlFilter());
 
 		if (saveDialog.showSaveDialog(this) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
