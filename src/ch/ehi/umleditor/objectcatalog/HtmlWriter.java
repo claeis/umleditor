@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-06-23 09:41:58 $
-// $Revision: 1.4 $
+// $Date: 2004-12-02 08:08:32 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -1110,7 +1110,11 @@ public class HtmlWriter
       //für den Link innerhalb der HTML-Datei
       aName = numeration+"_"+domDefName;
       //concatedValue, dass geschrieben wird später
-      value = numeration+" "+domDefName;
+	  if(suppressChNr){
+		value = domDefName;
+	  }else{
+		value = numeration+" "+domDefName;
+	  }
     }else{
       value = domDefName;
     }
