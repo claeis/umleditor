@@ -46,9 +46,9 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.9 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.10 $ $Date: 2004-05-08 15:25:54 $
  */
-public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
+public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
         private static String version=null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/";//$NON-NLS-1$
@@ -71,6 +71,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	//	private JToolBar palette = null;
 	private ToolButton defaultToolButton = null;
 	private ToolButton selectedToolButton = null;
+	private FileHistoryMenu mnuFileHistory = null;
 	// Undo management
 	private UndoManager undoManager = null;
         private javax.help.HelpBroker mainHB=null;
@@ -2988,6 +2989,9 @@ private void initialize() {
 getMniUndo().setEnabled(false);
 getMniRedo().setEnabled(false);
 
+	mnuFileHistory = new FileHistoryMenu(this, 6, getSettings().getLastFiles());
+	getMnuFile().insert((javax.swing.JMenuItem)mnuFileHistory, 2 /* second */);
+	
 	// restore Window Coordinates
 	java.awt.Insets insets = instance.getInsets();
 	setLocation(getSettings().getWindowX().intValue(), getSettings().getWindowY().intValue());
@@ -3123,7 +3127,8 @@ public static void main(java.lang.String[] args) {
 	*/
 
 Tracer.getInstance().patch(LauncherView.class, "main()", "setModel(..)->openDiagram would be too early here");//$NON-NLS-2$//$NON-NLS-1$
-		instance.setModel(null, null);
+	instance.setCurrentFile(null);
+	instance.setModel(null /*, null*/);
 
 				// restore Coordinates of SubPanels
 		instance.getSppMain().setDividerLocation(getSettings().getWindowHeight().intValue() - getSettings().getLogHeight().intValue());
@@ -3264,7 +3269,8 @@ private void mniNewFile() {
 		if (saveCurrentChanges()) {
 			// create new empty project
 			ElementFactory.resetCounter();
-			setModel(null, null);
+			setCurrentFile(null);
+			setModel(null /*, null*/);
 			log(getResourceString("CIModelNew"), "");//$NON-NLS-2$ //$NON-NLS-1$
 			openInitialDiagram();
 		}
@@ -3292,19 +3298,8 @@ private void mniOpenFile() {
 		openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
 
 		if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			try {
-				getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
-				PersistenceService service = new PersistenceService();
-				boolean old=MetaModel.setChangePropagation(false);
-				Model newModel=service.readFile(openDialog.getSelectedFile().getAbsolutePath());
-				MetaModel.setChangePropagation(old);
-				setModel(newModel, openDialog.getSelectedFile());
-				log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
-			} catch(java.io.IOException e) {
-				handleException(e,"fileopen",e.getMessage());
-	 		} catch(Throwable e) {
-				handleException(e);
-		 	}
+			getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
+			openFile(openDialog.getSelectedFile().getAbsolutePath());
 		}
 	}
 	tool().activate();
@@ -3382,13 +3377,13 @@ private boolean mniSaveAs() {
 private boolean mniSaveFile() {
 	tool().deactivate();
 
-	if (currentFile == null) {
+	if (getCurrentFile() == null) {
 		tool().activate();
 		return mniSaveAs();
 	} else {
 		try {
 			toolDone();
-			saveFile(currentFile);
+			saveFile(getCurrentFile());
 		} catch(java.io.IOException e) {
 			handleException(e,"filesave",e.getMessage());
 		} catch(Throwable e) {
@@ -3634,9 +3629,10 @@ private void saveFile(java.io.File file) throws java.io.IOException {
 	PersistenceService service = new PersistenceService();
 	// do not save file name in UmlModel
 	service.writeFile(file.getAbsolutePath(), getModel());
-	setTitle(file); // set title before changed flag is cleared
+	setCurrentFile(file); // set title before changed flag is cleared
 	setModelChanged(false);
 	log(getResourceString("CIModelSaved"), getResourceString("CIInFile") + file.getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+	mnuFileHistory.addRecent(file.getAbsolutePath());
 }
 /**
  * Triggered on windowClosing-Event (Alt-F4, X-close-function).
@@ -3661,6 +3657,7 @@ private boolean saveOnClosing() {
 		getSettings().setLogHeight(new Integer(windowHeight - getSppMain().getDividerLocation()));
 		getSettings().setDescriptionHeight(new Integer(windowHeight - getSppControl().getDividerLocation()));
 		getSettings().setDescriptionWidth(new Integer(getSppDesignArea().getDividerLocation()));
+		getSettings().setLastFiles(mnuFileHistory.getHistory());
 		getSettings().save();
 
 		if (MetaModel.getInstance().containsMetaModelListener(this)) {
@@ -3717,7 +3714,7 @@ protected void setLookAndFeel(String style) {
  * @param model UmlModel
  * @param file File where UmlModel is saved in
  */
-private void setModel(Model model, java.io.File file) throws Throwable {
+private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 	// clear current model
 	if (ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().containsMetaModelListener(this)) {
 		// unregister Listener while building new model
@@ -3729,7 +3726,7 @@ private void setModel(Model model, java.io.File file) throws Throwable {
 	setDescription(null);
 	getPnlLog().clear();
 
-	setTitle(file);
+//	setTitle(file);
 
 	// register Listener
 	MetaModel.getInstance().addMetaModelListener(this);
@@ -3781,25 +3778,22 @@ private void setSelectedTool(ToolButton button) {
 		selectedToolButton.select();
 	}
 }
-public void setTitle(java.io.File file) {
+/**
+ * Set current working UML-File.
+ * @param file
+ */
+private void setCurrentFile(java.io.File file) {
 	currentFile = file;
 
 	if (file == null) {
-		super.setTitle(getApplicationName() + " - " + defaultFileName);//$NON-NLS-1$
+		setTitle(getApplicationName() + " - " + defaultFileName);//$NON-NLS-1$
 	} else {
-		super.setTitle(getApplicationName() + " - " + file.getName());//$NON-NLS-1$
+		setTitle(getApplicationName() + " - " + file.getName());//$NON-NLS-1$
 	}
         if(model!=null){
           ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(
               new ch.ehi.uml1_4.changepropagation.MetaModelChange(model,"setName"));
         }
-}
-/**
- * Overwrites.
- * @see setTitle(File)
- */
-public final void setTitle(String title) {
-	Tracer.getInstance().developerWarning(this, "setTitle(String)", "use setTitle(File) instead");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Show the Specification Dialog of the ModelElement.
@@ -3941,6 +3935,28 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 		for(;it.hasNext();){
 			ch.ehi.umleditor.plugin.AbstractPlugin p=(ch.ehi.umleditor.plugin.AbstractPlugin)it.next();
 			p.addMenuItems(getWindowJMenuBar());
+		}
+	}
+	/**
+	 * @see ch.softenvironment.view.FileHistoryListener#openFile(java.lang.String)
+	 */
+	public void openFile(String filename) {
+		try {
+			PersistenceService service = new PersistenceService();
+			boolean old=MetaModel.setChangePropagation(false);
+			Model newModel=service.readFile(filename);
+			MetaModel.setChangePropagation(old);
+			setCurrentFile(new java.io.File(filename));
+			setModel(newModel /*, openDialog.getSelectedFile()*/);
+			log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + filename); //$NON-NLS-2$ //$NON-NLS-1$
+			mnuFileHistory.addRecent(filename);
+		} catch(java.io.FileNotFoundException e) {
+			new WarningDialog(this, getResourceString(FileHistoryMenu.class, "CTFileMissing"), getResourceString(FileHistoryMenu.class, "CWFileMissing"));
+			mnuFileHistory.removeRecent(filename);
+		} catch(java.io.IOException e) {
+			handleException(e,"fileopen",e.getMessage());
+		} catch(Throwable e) {
+			handleException(e);
 		}
 	}
 
