@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 15:24:29 $
-// $Revision: 1.2 $
+// $Date: 2004-03-01 20:39:47 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3CF1D26803CA package "MyHandler"
@@ -19,6 +19,7 @@ import org.xml.sax.*;
 import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
+import ch.ehi.uml1_4.implementation.UmlModel;
 // -end- 3CF1D26803CA import "MyHandler"
 
 public class MyHandler implements org.xml.sax.ContentHandler
@@ -38,6 +39,7 @@ public class MyHandler implements org.xml.sax.ContentHandler
   private java.util.Set usedObjsTID = new java.util.HashSet();
   private java.util.Set missingObjsTID = new java.util.HashSet();
   private Object actualObject = null;
+  private UmlModel umlModel = null;
   private String currentElementTag=null;
   private boolean secondPass=false;
   private boolean inNlsString=false;
@@ -113,6 +115,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
           // Abbildung der TID auf Objekt in Tabelle eintragen
           objMap.put(atts.getValue(0), attsObj);
           actualObject = attsObj;
+          if(actualObject instanceof UmlModel){
+          	umlModel=(UmlModel)actualObject;
+          }
         }
         else
         {
@@ -243,9 +248,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
     return qualifiedClassName;
   }
 
-  public Object getActualObject()
+  public Object getUmlModel()
   {
-    return actualObject;
+    return umlModel;
   }
 
 

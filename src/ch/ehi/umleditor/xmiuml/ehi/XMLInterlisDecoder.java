@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-03-01 15:24:29 $
-// $Revision: 1.2 $
+// $Date: 2004-03-01 20:39:47 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3CEB5BA003CF package "XMLInterlisDecoder"
@@ -69,7 +69,7 @@ public class XMLInterlisDecoder
       //parser.setFeature("http://xml.org/sax/features/validation",true);
     }
 
-    catch(SAXException saxExc)
+    catch(SAXException exSax)
     {
       throw new IOException("Unable to create the XML-Reader");
     }
@@ -94,7 +94,7 @@ public class XMLInterlisDecoder
       //parser.parse("file:"+ new java.io.File(fileName).getAbsolutePath());
 
       parser.parse(inputSource);
-      object = myHandler.getActualObject();
+      object = myHandler.getUmlModel();
       inputStream.close();
       inputStream = new FileInputStream(new File(path));
       inputSource = new InputSource(inputStream);
@@ -112,16 +112,33 @@ public class XMLInterlisDecoder
       inputStream.close();
     }
 
-    catch(SAXParseException ex)
+    catch(SAXParseException exSax)
     {
+		Exception  ex = exSax;
+		if (exSax.getException() != null){
+			ex = exSax.getException();
+		}
 		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err - Message: "+ex.getMessage()); //message
-		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","System ID: "+ex.getSystemId()); //system ID
-		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err at line: "+ex.getLineNumber()); //line Number
+		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","System ID: "+exSax.getSystemId()); //system ID
+		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err at line: "+exSax.getLineNumber()); //line Number
+		Tracer.getInstance().runtimeError(this,"parse",ex.toString());
+		// TODO ex.printStackTrace();
       	throw new IOException(ex.getMessage());
 
     }
-    catch(SAXException ex)
+    catch(SAXException exSax)
     {
+		Throwable  ex = exSax;
+		if (exSax.getException() != null){
+			ex = exSax.getException();
+		}
+		if(ex instanceof java.lang.reflect.InvocationTargetException){
+			java.lang.reflect.InvocationTargetException iex=(java.lang.reflect.InvocationTargetException)ex;
+			ex=iex.getTargetException();
+		}
+    	Tracer.getInstance().runtimeError(this,"parse",ex.toString());
+    	// TODO ex.printStackTrace();
+		ex.printStackTrace();
 	  throw new IOException(ex.getMessage());
     }
     return object;
