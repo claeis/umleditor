@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4 Elments de modlisation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,3,next --> 
+<meta name="src" content="refman.tex"> 
+<meta name="date" content="2003-07-12 12:26:00"> 
+<link rel="stylesheet" type="text/css" href="refman.css"> 
+</head><body 
+>
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanse13.html" >next</a>] [<a 
+href="refmanse12.html" >prev</a>] [<a 
+href="refmanse12.html#tailrefmanse12.html" >prev-tail</a>] [<a 
+href="#tailrefmanch4.html">tail</a>] [<a 
+href="refman.html#refmanch4.html" >up</a>] </p></div>
+<h2 class="chapterHead"><span class="titlemark">Chapitre&nbsp;4</span><br><a 
+  id="x17-280004"></a>El&eacute;ments de mod&eacute;lisation</h2>
+<!--l. 3--><p class="noindent">Les &eacute;l&eacute;ments pouvant faire l&#8217;objet d&#8217;une mod&eacute;lisation par l&#8217;&eacute;diteur UML vont &ecirc;tre
+d&eacute;crits dans le pr&eacute;sent chapitre. Il existe tout un ensemble de sous-&eacute;l&eacute;ments
+s&#8217;appliquant &agrave; un &eacute;l&eacute;ment de mod&eacute;lisation donn&eacute; et automatiquement accept&eacute;s
+par l&#8217;&eacute;diteur UML, du fait de la d&eacute;finition du langage et des r&egrave;gles d&#8217;INTERLIS
+en r&eacute;sultant.
+<br class="newline">
+<!--l. 6--><p class="noindent">C&#8217;est en cela que r&eacute;side la force de l&#8217;&eacute;diteur UML puisqu&#8217;un utilisateur n&#8217;a pas
+&agrave; se pr&eacute;occuper de la validit&eacute; du mod&egrave;le qu&#8217;il d&eacute;veloppe. Et ce qui est
+possible avec cet &eacute;diteur s&#8217;appliquera &eacute;galement dans le cadre d&#8217;UML et
+d&#8217;INTERLIS. Les cas particuliers pourront quant &agrave; eux faire l&#8217;objet d&#8217;un
+contr&ocirc;le suppl&eacute;mentaire effectu&eacute; &agrave; l&#8217;aide du compilateur INTERLIS (cf. <span 
+class="tcrm-1200">§</span>
+<a 
+href="refmanse6.html#x10-170003.1.7">3.1.7<!--tex4ht:ref: MODELCHECK --></a>).
+<div class="sectionTOCS">
+<br>&nbsp;<span class="sectionToc">4.1 <a 
+href="refmanse13.html#x18-290004.1" id="QQ2-18-38">Diagramme de classe</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.1.1 <a 
+href="refmanse13.html#x18-300004.1.1" id="QQ2-18-41">Menu-fen&ecirc;tre du diagramme</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.1.2 <a 
+href="refmanse13.html#x18-310004.1.2" id="QQ2-18-42">Menu-fen&ecirc;tre de l&#8217;&eacute;l&eacute;ment de mod&eacute;lisation</a></span>
+<br>&nbsp;<span class="sectionToc">4.2 <a 
+href="refmanse14.html#x19-350004.2" id="QQ2-19-49">Dialogues</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.1 <a 
+href="refmanse14.html#x19-360004.2.1" id="QQ2-19-52">Conteneurs de syst&egrave;mes de r&eacute;f&eacute;rence / de signatures</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.2 <a 
+href="refmanse14.html#x19-370004.2.2" id="QQ2-19-54">Paquet UML</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.3 <a 
+href="refmanse14.html#x19-380004.2.3" id="QQ2-19-56">Fichier INTERLIS 2</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.4 <a 
+href="refmanse14.html#x19-390004.2.4" id="QQ2-19-58">Mod&egrave;le</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.5 <a 
+href="refmanse14.html#x19-400004.2.5" id="QQ2-19-62">Traduction du mod&egrave;le</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.6 <a 
+href="refmanse14.html#x19-410004.2.6" id="QQ2-19-64">Contrat</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.7 <a 
+href="refmanse14.html#x19-420004.2.7" id="QQ2-19-66">Th&egrave;me</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.8 <a 
+href="refmanse14.html#x19-430004.2.8" id="QQ2-19-69">Classe</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.9 <a 
+href="refmanse14.html#x19-440004.2.9" id="QQ2-19-74">Relation</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.10 <a 
+href="refmanse14.html#x19-490004.2.10" id="QQ2-19-87">Attribut</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.11 <a 
+href="refmanse14.html#x19-610004.2.11" id="QQ2-19-111">R&ocirc;le</a></span>
+                                                                          
+
+                                                                          
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.12 <a 
+href="refmanse14.html#x19-620004.2.12" id="QQ2-19-113">Domaine de valeurs</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.13 <a 
+href="refmanse14.html#x19-630004.2.13" id="QQ2-19-115">Conteneur de syst&egrave;mes de r&eacute;f&eacute;rence / de signatures - Accord</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.14 <a 
+href="refmanse14.html#x19-640004.2.14" id="QQ2-19-117">Unit&eacute;</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.15 <a 
+href="refmanse14.html#x19-650004.2.15" id="QQ2-19-119">Type de ligne</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.16 <a 
+href="refmanse14.html#x19-660004.2.16" id="QQ2-19-121">Param&egrave;tre graphique</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.17 <a 
+href="refmanse14.html#x19-670004.2.17" id="QQ2-19-123">Fonction</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.18 <a 
+href="refmanse14.html#x19-680004.2.18" id="QQ2-19-125">Vue</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">4.2.19 <a 
+href="refmanse14.html#x19-690004.2.19" id="QQ2-19-127">Graphique</a></span>
+</div>
+
+                                                                          
+
+                                                                          
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanse13.html" >next</a>] [<a 
+href="refmanse12.html" >prev</a>] [<a 
+href="refmanse12.html#tailrefmanse12.html" >prev-tail</a>] [<a 
+href="refmanch4.html" >front</a>] [<a 
+href="refman.html#refmanch4.html" >up</a>] </p></div>
+<!--l. 240--><p class="noindent"><a 
+  id="tailrefmanch4.html"></a>  
+</body></html> 

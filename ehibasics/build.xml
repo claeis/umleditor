@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="jar" name="ehibasics">
+
+  <!-- set global properties for this build -->
+  <property name="src" value="${basedir}/src"/>
+  <property name="build" value="${basedir}/build"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <property name="projectjar" value="${build}/jar/${ant.project.name}.jar"/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build}/jar"/>
+  </target>
+
+  <target depends="init" name="compile">
+    <!-- Compile the java code from ${src} into ${build}/classes -->
+    <mkdir dir="${build}/classes"/>
+    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java">
+      <!-- <classpath>
+        <pathelement location="lib/jh.jar"/>
+      </classpath>
+      -->
+    	<src path="${src}" />
+    	<!-- <src path="${build}/src"/> -->
+    </javac>
+  </target>
+
+
+  <target depends="init" name="javadocs">
+    <mkdir dir="${build}/javadoc/api"/>
+    <javadoc Public="true" Windowtitle="ehibasics" destdir="${build}/javadoc/api">
+    	<sourcepath path="${src}"/>
+    </javadoc>
+  </target>
+
+
+  <target depends="init,compile" name="jar">
+    <delete file="${projectjar}" quiet="true"/>
+
+    <jar jarfile="${projectjar}">
+	<fileset dir="${build}/classes" excludes="**/Test.class" includes="**/*.class"/>
+    	<fileset dir="${src}" includes="**/*.properties"/>
+    	<fileset dir="resources/de" includes="**/*.properties"/>
+    	<fileset dir="resources/fr" includes="**/*.properties"/>
+    	<fileset dir="resources/en" includes="**/*.properties"/>
+    	<fileset dir="${src}" includes="**/*.gif"/>
+    	<fileset dir="${src}" includes="**/*.jpg"/>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <target depends="init" name="copyres">
+
+    <copy toDir="${build}/classes">
+    	<fileset dir="${src}" includes="**/*.properties"/>
+    	<fileset dir="${src}" includes="**/*.gif"/>
+    	<fileset dir="${src}" includes="**/*.jpg"/>
+    </copy>
+  </target>
+
+  <target depends="init" name="cleanres">
+
+    <delete>
+    	<fileset dir="${build}/classes" includes="**/*.properties"/>
+    	<fileset dir="${build}/classes" includes="**/*.gif"/>
+    	<fileset dir="${build}/classes" includes="**/*.jpg"/>
+    </delete>
+  </target>
+
+</project>

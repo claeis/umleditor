@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+  <!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+  <toc version="1.0">
+
+
+  <tocitem target="tutorial.html" text="Einf&uuml;rung">
+  <tocitem target="tutorialch1.html#x2-10001" text="Einleitung">
+  </tocitem>
+  <tocitem target="tutorialch2.html#x3-20002" text="UML-Editor starten">
+  <tocitem target="tutorialse1.html#x4-30002.1" text="Windows"/>
+  <tocitem target="tutorialse2.html#x5-60002.2" text="Mac"/>
+  </tocitem>
+  <tocitem target="tutorialch3.html#x6-90003" text="Daten modellieren">
+  <tocitem target="tutorialse3.html#x7-100003.1" text="Modell und Klasse"/>
+  <tocitem target="tutorialse4.html#x8-110003.2" text="Umbenennen"/>
+  <tocitem target="tutorialse5.html#x9-120003.3" text="L&ouml;schen"/>
+  <tocitem target="tutorialse6.html#x10-130003.4" text="Attribut"/>
+  <tocitem target="tutorialse7.html#x11-140003.5" text="Beziehung"/>
+  <tocitem target="tutorialse8.html#x12-150003.6" text="Wertebereich, Einheit"/>
+  <tocitem target="tutorialse9.html#x13-160003.7" text="Reihenfolge der Klassen, Wertebereiche und Einheiten festlegen"/>
+  </tocitem>
+  <tocitem target="tutorialch4.html#x14-170004" text="Dokumentation erstellen">
+  </tocitem>
+  <tocitem target="tutorialch5.html#x15-180005" text="Modell pr&uuml;fen">
+  </tocitem>
+  <tocitem target="tutorialch6.html#x16-190006" text="Von UML nach INTERLIS">
+  </tocitem>
+  <tocitem target="tutorialch7.html#x17-200007" text="INTERLIS grafisch darstellen">
+  </tocitem>
+  <tocitem target="tutorialli1.html#x18-210007" text="Literaturverzeichnis">
+  </tocitem>
+  </tocitem>
+
+  
+  <tocitem target="refman.html" text="R&eacute;f&eacute;rence">
+  <tocitem target="refman.html#Q1-1-1" text="Pr&eacute;face">
+  </tocitem>
+  <tocitem target="refmanch1.html#x2-10001" text="A propos de ce document">
+  </tocitem>
+  <tocitem target="refmanch2.html#x3-20002" text="G&eacute;n&eacute;ralit&eacute;s">
+  <tocitem target="refmanse1.html#x4-30002.1" text="Installation"/>
+  <tocitem target="refmanse2.html#x5-40002.2" text="Dispositions en mati&egrave;re de licence"/>
+  <tocitem target="refmanse3.html#x6-50002.3" text="Mandant"/>
+  <tocitem target="refmanse4.html#x7-60002.4" text="D&eacute;veloppeur"/>
+  <tocitem target="refmanse5.html#x8-70002.5" text="Logiciels utilis&eacute;s"/>
+  </tocitem>
+  <tocitem target="refmanch3.html#x9-80003" text="Interface utilisateur">
+  <tocitem target="refmanse6.html#x10-90003.1" text="Barre de menu"/>
+  <tocitem target="refmanse7.html#x11-210003.2" text="Barre des symboles"/>
+  <tocitem target="refmanse8.html#x12-220003.3" text="Zone de navigation"/>
+  <tocitem target="refmanse9.html#x13-230003.4" text="Zone de mod&eacute;lisation"/>
+  <tocitem target="refmanse10.html#x14-250003.5" text="Zone de description"/>
+  <tocitem target="refmanse11.html#x15-260003.6" text="Zone du journal"/>
+  <tocitem target="refmanse12.html#x16-270003.7" text="Barre d&#8217;&eacute;tat"/>
+  </tocitem>
+  <tocitem target="refmanch4.html#x17-280004" text="El&eacute;ments de mod&eacute;lisation">
+  <tocitem target="refmanse13.html#x18-290004.1" text="Diagramme de classe"/>
+  <tocitem target="refmanse14.html#x19-350004.2" text="Dialogues"/>
+  </tocitem>
+  <tocitem target="refmanap1.html#x20-70000A" text="Fondements techniques">
+  <tocitem target="refmanap2.html#x21-71000B" text="UML"/>
+  <tocitem target="refmanse15.html#x22-72000B.1" text="Sp&eacute;cifications"/>
+  </tocitem>
+  <tocitem target="refmanap3.html#x23-74000C" text="INTERLIS">
+  <tocitem target="refmanse16.html#x24-75000C.1" text="Sp&eacute;cifications"/>
+  <tocitem target="refmanse17.html#x25-76000C.2" text="Compilateur INTERLIS"/>
+  </tocitem>
+  <tocitem target="refmanap4.html#x26-77000D" text="Formats">
+  <tocitem target="refmanse18.html#x27-78000D.1" text="Format de l&#8217;&eacute;diteur UML"/>
+  <tocitem target="refmanse19.html#x28-79000D.2" text="Sch&eacute;ma XML"/>
+  <tocitem target="refmanse20.html#x29-80000D.3" text="Configuration du compilateur INTERLIS"/>
+  <tocitem target="refmanse21.html#x30-81000D.4" text="Fichier de mod&egrave;le INTERLIS"/>
+  </tocitem>
+  <tocitem target="refmanap5.html#x31-82000E" text="Sp&eacute;cificit&eacute;s locales">
+  </tocitem>
+  <tocitem target="refmanli1.html#x32-83000E" text="Bibliographie">
+  </tocitem>
+  </tocitem>
+
+
+</toc>
+  

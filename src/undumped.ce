@@ -1,0 +1,447 @@
+// -beg- preserve=yes 3D47ACA5002D body3D47AB9C0040 ""
+    return getAssociation().isLinkMoveable();
+// -end- 3D47ACA5002D body3D47AB9C0040 ""
+// -beg- preserve=yes 32B6AEA8032B get_body358A5F6F01B7 ""
+    // TODO change StructureAttribute.multiplicity and AttrTypeDef.mandatory to derived
+    if(!containsAttrTypeDef()){
+      return null;
+    }
+
+    AttrTypeDef attrtype=getAttrTypeDef();
+
+    if(attrtype instanceof StructureAttribute){
+      return ((StructureAttribute)attrtype).getMultiplicity();
+    }
+
+    ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+    r.setLower( attrtype.isMandatory() ? 1 : 0);
+    r.setUpper(1);
+    ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+    m.addRange(r);
+    return m;
+// -end- 32B6AEA8032B get_body358A5F6F01B7 ""
+// -beg- preserve=yes 3C8F94DE03A6 body3C1DC6F70084 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body3C1DC6F70084 ""
+// -beg- preserve=yes 3C8F964B01C0 body3C1DC6F70084 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body3C1DC6F70084 ""
+// -beg- preserve=yes 3CC7B8D10067 body3C1DC6F70084 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body3C1DC6F70084 ""
+// -beg- preserve=yes 3CC7B8E5034B body3C1DC6F70084 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body3C1DC6F70084 ""
+// -beg- preserve=yes 3C8F94DE03A6 body358A5E62016A ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body358A5E62016A ""
+// -beg- preserve=yes 3C8F964B01C0 body358A5E62016A ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body358A5E62016A ""
+// -beg- preserve=yes 3CC7B8D10067 body358A5E62016A ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body358A5E62016A ""
+// -beg- preserve=yes 3CC7B8E5034B body358A5E62016A ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body358A5E62016A ""
+// -beg- preserve=yes 3C8F94DE03A6 body358A5E2403D8 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body358A5E2403D8 ""
+// -beg- preserve=yes 3C8F964B01C0 body358A5E2403D8 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body358A5E2403D8 ""
+// -beg- preserve=yes 3CC7B8D10067 body358A5E2403D8 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body358A5E2403D8 ""
+// -beg- preserve=yes 3CC7B8E5034B body358A5E2403D8 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body358A5E2403D8 ""
+// -beg- preserve=yes 3CB2C64E0374 body3C178E4F0366 ""
+    java.util.Iterator it=iteratorFeature();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3CB2C64E0374 body3C178E4F0366 ""
+// -beg- preserve=yes 3C47F49003BC body3C178E4F0366 ""
+    String ret[]={
+      "ch.ehi.interlis.attributes.AttributeDef"
+    };
+    return ret;
+// -end- 3C47F49003BC body3C178E4F0366 ""
+// -beg- preserve=yes 3C8F94DE03A6 body3C178E4F0366 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body3C178E4F0366 ""
+// -beg- preserve=yes 3C8F964B01C0 body3C178E4F0366 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body3C178E4F0366 ""
+// -beg- preserve=yes 3CC7B8D10067 body3C178E4F0366 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body3C178E4F0366 ""
+// -beg- preserve=yes 3CC7B8E5034B body3C178E4F0366 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body3C178E4F0366 ""
+// -beg- preserve=yes 3C47F49003BC body358A5E62016A ""
+    String ret[]={"ch.ehi.interlis.attributes.AttributeDef"};
+    return ret;
+// -end- 3C47F49003BC body358A5E62016A ""
+// -beg- preserve=yes 3C47F49003BC body358A5E3B0132 ""
+    String ret[]={
+      "ch.ehi.interlis.metaobjects.MetaDataUseDef"
+      ,"ch.ehi.interlis.units.UnitDef"
+      ,"ch.ehi.interlis.domainsandconstants.DomainDef"
+      ,"ch.ehi.interlis.modeltopicclass.ClassDef"
+      ,"ch.ehi.interlis.associations.AssociationDef"
+      ,"ch.ehi.interlis.views.ViewDef"
+      ,"ch.ehi.interlis.views.ViewProjectionDef"
+      ,"ch.ehi.interlis.graphicdescriptions.GraphicDef"
+      };
+    return ret;
+// -end- 3C47F49003BC body358A5E3B0132 ""
+// -beg- preserve=yes 3C8F94DE03A6 body358A5E3B0132 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body358A5E3B0132 ""
+// -beg- preserve=yes 3C8F964B01C0 body358A5E3B0132 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body358A5E3B0132 ""
+// -beg- preserve=yes 3CC7B8D10067 body358A5E3B0132 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body358A5E3B0132 ""
+// -beg- preserve=yes 3CC7B8E5034B body358A5E3B0132 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body358A5E3B0132 ""
+// -beg- preserve=yes 3C47F49003BC body358A5DB202C5 ""
+    String ret[]={
+      "ch.ehi.interlis.metaobjects.MetaDataUseDef"
+      ,"ch.ehi.interlis.units.UnitDef"
+      ,"ch.ehi.interlis.functions.FunctionDef"
+      ,"ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef"
+      ,"ch.ehi.interlis.domainsandconstants.DomainDef"
+      ,"ch.ehi.interlis.modeltopicclass.ClassDef"
+      ,"ch.ehi.interlis.graphicdescriptions.GraphicParameterDef"
+      ,"ch.ehi.interlis.modeltopicclass.PatternDef"
+      ,"ch.ehi.interlis.modeltopicclass.TopicDef"
+      };
+    return ret;
+// -end- 3C47F49003BC body358A5DB202C5 ""
+// -beg- preserve=yes 3C8F94DE03A6 body358A5DB202C5 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body358A5DB202C5 ""
+// -beg- preserve=yes 3C8F964B01C0 body358A5DB202C5 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body358A5DB202C5 ""
+// -beg- preserve=yes 3CC7B8D10067 body358A5DB202C5 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body358A5DB202C5 ""
+// -beg- preserve=yes 3CC7B8E5034B body358A5DB202C5 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body358A5DB202C5 ""
+// -beg- preserve=yes 3C47F49003BC body396AE42D020E ""
+    String ret[]={"ch.ehi.interlis.modeltopicclass.INTERLIS2Def"};
+    return ret;
+// -end- 3C47F49003BC body396AE42D020E ""
+// -beg- preserve=yes 3C8F94DE03A6 body396AE42D020E ""
+    // collect all children of element
+    ChildCollector collector=new ChildCollector();
+    collector.visit(element);
+    // unlink each child from rest of model
+    java.util.Set childv=collector.getChilds();
+    java.util.Iterator it=childv.iterator();
+    while(it.hasNext()){
+      ch.ehi.uml1_4.foundation.core.Element obj=(ch.ehi.uml1_4.foundation.core.Element)it.next();
+      obj.unlinkAll();
+    }
+    return;
+// -end- 3C8F94DE03A6 body396AE42D020E ""
+// -beg- preserve=yes 3C8F964B01C0 body396AE42D020E ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body396AE42D020E ""
+// -beg- preserve=yes 3CC7B8D10067 body396AE42D020E ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body396AE42D020E ""
+// -beg- preserve=yes 3CC7B8E5034B body396AE42D020E ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body396AE42D020E ""
+// -beg- preserve=yes 3C47F49003BC body358A5F0B0113 ""
+    String ret[]={
+      "ch.ehi.interlis.modeltopicclass.ModelDef"
+      ,"ch.ehi.interlis.domainsandconstants.DomainDef"
+      };
+    return ret;
+// -end- 3C47F49003BC body358A5F0B0113 ""
+// -beg- preserve=yes 3C8F94DE03A6 body358A5F0B0113 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body358A5F0B0113 ""
+// -beg- preserve=yes 3C8F964B01C0 body358A5F0B0113 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body358A5F0B0113 ""
+// -beg- preserve=yes 3CC7B8D10067 body358A5F0B0113 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body358A5F0B0113 ""
+// -beg- preserve=yes 3CC7B8E5034B body358A5F0B0113 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body358A5F0B0113 ""
+// -beg- preserve=yes 3C47F49003BC body3C68E11703C1 ""
+    return getNamespace().getValidOwnedElements();
+// -end- 3C47F49003BC body3C68E11703C1 ""
+// -beg- preserve=yes 3C8F94DE03A6 body3C68E11703C1 ""
+    ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
+    remover.visit(element);
+    remover.unlinkThem();
+    return;
+// -end- 3C8F94DE03A6 body3C68E11703C1 ""
+// -beg- preserve=yes 3C8F964B01C0 body3C68E11703C1 ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body3C68E11703C1 ""
+// -beg- preserve=yes 3CC7B8D10067 body3C68E11703C1 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body3C68E11703C1 ""
+// -beg- preserve=yes 3CC7B8E5034B body3C68E11703C1 ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body3C68E11703C1 ""
+// -beg- preserve=yes 3C47F49003BC body3C4FDE4A01DE ""
+    String ret[]={
+      "ch.ehi.interlis.modeltopicclass.Ili2ModelSet"
+      ,"ch.ehi.uml1_4.implementation.UmlPackage"
+      };
+    return ret;
+// -end- 3C47F49003BC body3C4FDE4A01DE ""
+// -beg- preserve=yes 3C8F94DE03A6 body3C4FDE4A01DE ""
+    // visit all ownedElements and collect them
+    // visit all ownedElemts again and remove links to objects outside
+    return;
+// -end- 3C8F94DE03A6 body3C4FDE4A01DE ""
+// -beg- preserve=yes 3C8F964B01C0 body3C4FDE4A01DE ""
+    java.util.Iterator it=iteratorOwnedElement();
+    while(it.hasNext()){
+      ModelElement ele=(ModelElement)it.next();
+      if(ele.getName().equals(name)){
+        return true;
+      }
+    }
+    return false;
+// -end- 3C8F964B01C0 body3C4FDE4A01DE ""
+// -beg- preserve=yes 3CC7B8D10067 body3C4FDE4A01DE ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(this,aclass,name);
+// -end- 3CC7B8D10067 body3C4FDE4A01DE ""
+// -beg- preserve=yes 3CC7B8E5034B body3C4FDE4A01DE ""
+    return ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(this,aclass,name);
+// -end- 3CC7B8E5034B body3C4FDE4A01DE ""
+// -beg- preserve=yes 3CB2F1BB01F2 body3C4FDE4A01DE ""
+    java.util.HashSet referencables = new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    // add this object to todo-list; so it is processed as a first element
+    todo.add(this);
+    // process todo-list
+    while(!todo.isEmpty()){
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator iterator = current.iteratorOwnedElement();
+      while (iterator.hasNext()) {
+	  Object obj = iterator.next();
+          if(aclass.isAssignableFrom(obj.getClass())){
+	    referencables.add(obj);
+	  }
+          if(obj instanceof Namespace){
+            // obj is itself a container
+            // add it to todo-list
+            todo.add(obj);
+          }
+      }
+      // remove current from todo-list
+      todo.remove(0);
+    }
+    return referencables;
+// -end- 3CB2F1BB01F2 body3C4FDE4A01DE ""
+// -beg- preserve=yes 3CB2F1BB01F2 body3C68E11703C1 ""
+    java.util.HashSet referencables = new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    // add this object to todo-list; so it is processed as a first element
+    todo.add(this);
+    // process todo-list
+    while(!todo.isEmpty()){
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator iterator = current.iteratorOwnedElement();
+      while (iterator.hasNext()) {
+	  Object obj = iterator.next();
+          if(aclass.isAssignableFrom(obj.getClass())){
+	    referencables.add(obj);
+	  }
+          if(obj instanceof Namespace){
+            // obj is itself a container
+            // add it to todo-list
+            todo.add(obj);
+          }
+      }
+      // remove current from todo-list
+      todo.remove(0);
+    }
+    return referencables;
+// -end- 3CB2F1BB01F2 body3C68E11703C1 ""
+// -beg- preserve=yes 3CB2F1BB01F2 body358A5DB202C5 ""
+    java.util.HashSet referencables = new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    // add this object to todo-list; so it is processed as a first element
+    todo.add(this);
+    // add imported models also to todo-list
+    java.util.Iterator impRelIt=iteratorClientDependency();
+    while(impRelIt.hasNext()){
+      Object obj=impRelIt.next();
+      if(obj instanceof IliImport){
+        IliImport impRel=(IliImport)obj;
+        java.util.Iterator supplierIt=impRel.iteratorSupplier();
+        while(supplierIt.hasNext()){
+          ModelDef supplier=(ModelDef)supplierIt.next();
+          todo.add(supplier);
+        }
+      }
+    }
+    // process todo-list
+    while(!todo.isEmpty()){
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator iterator = current.iteratorOwnedElement();
+      while (iterator.hasNext()) {
+	  Object obj = iterator.next();
+          if(aclass.isAssignableFrom(obj.getClass())){
+	    referencables.add(obj);
+	  }
+          if(obj instanceof Namespace){
+            // obj is itself a container
+            // add it to todo-list
+            todo.add(obj);
+          }
+      }
+      // remove current from todo-list
+      todo.remove(0);
+    }
+    return referencables;
+// -end- 3CB2F1BB01F2 body358A5DB202C5 ""
+// -beg- preserve=yes 3CB2F1BB01F2 body358A5E3B0132 ""
+        // find ModelDef
+        Namespace parent=this.getNamespace();
+        while(!(parent instanceof ModelDef)){
+          parent=parent.getNamespace();
+        }
+        // return referencables of found ModelDef
+	return ((ModelDef)parent).getReferencableElements(aclass);
+// -end- 3CB2F1BB01F2 body358A5E3B0132 ""
+// -beg- preserve=yes 3CB2F1BB01F2 body396AE42D020E ""
+    java.util.HashSet referencables = new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    // add this object to todo-list; so it is processed as a first element
+    todo.add(this);
+    // process todo-list
+    while(!todo.isEmpty()){
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator iterator = current.iteratorOwnedElement();
+      while (iterator.hasNext()) {
+	  Object obj = iterator.next();
+          if(aclass.isAssignableFrom(obj.getClass())){
+	    referencables.add(obj);
+	  }
+          if(obj instanceof Namespace){
+            // obj is itself a container
+            // add it to todo-list
+            todo.add(obj);
+          }
+      }
+      // remove current from todo-list
+      todo.remove(0);
+    }
+    return referencables;
+// -end- 3CB2F1BB01F2 body396AE42D020E ""
+// -beg- preserve=yes 3CB2F1BB01F2 body3C1DC6F70084 ""
+        // find ModelDef
+        Namespace parent=this.getNamespace();
+        while(!(parent instanceof ModelDef)){
+          parent=parent.getNamespace();
+        }
+        // return referencables of found ModelDef
+	return ((ModelDef)parent).getReferencableElements(aclass);
+// -end- 3CB2F1BB01F2 body3C1DC6F70084 ""

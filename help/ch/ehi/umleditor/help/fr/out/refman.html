@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Manuel de rfrence de l&#8217;diteur UML Modliser est tout un art. . .</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,3,next --> 
+<meta name="src" content="refman.tex"> 
+<meta name="date" content="2003-07-12 12:26:00"> 
+<link rel="stylesheet" type="text/css" href="refman.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                          
+
+                                                                          
+<h2 class="titleHead">Manuel de r&eacute;f&eacute;rence de l&#8217;&eacute;diteur UML<br>
+Mod&eacute;liser est tout un art. . .</h2>
+ <div class="author" ><span 
+class="cmr-12x-x-120">Peter Hirzel</span></div>
+<br>
+<div class="date" ><span 
+class="cmr-12x-x-120">V1.0.4 (12 juillet 2003)</span></div>
+                                                                          
+
+                                                                          
+</div>
+<!--l. 1--><p class="noindent">
+                                                                          
+
+                                                                          
+<a 
+  id="Q1-1-1"></a>
+<!--l. 3--><p class="noindent"><span 
+class="cmr-17x-x-143">Pr</span><span 
+class="cmr-17x-x-143">&eacute;face</span>
+<!--l. 6--><p class="noindent">La volont&eacute; de promouvoir le recours &agrave; une <span 
+class="cmti-12">m</span><span 
+class="cmti-12">&eacute;thode fond</span><span 
+class="cmti-12">&eacute;e sur un mod</span><span 
+class="cmti-12">&egrave;le </span>a
+constitu&eacute; la principale motivation du d&eacute;veloppement de l&#8217;&eacute;diteur UML.
+<!--l. 8--><p class="noindent">Cet &eacute;diteur est d&#8217;ailleurs unique en ce sens qu&#8217;il permet la mod&eacute;lisation en
+UML/INTERLIS, synth&eacute;tisant ainsi deux langages pr&eacute;pond&eacute;rants du domaine de
+la mod&eacute;lisation de donn&eacute;es.
+<!--l. 11--><p class="noindent">INTERLIS est une forme particuli&egrave;re d&#8217;UML permettant la d&eacute;duction
+automatique de diff&eacute;rents formats (par exemple des sch&eacute;mas XML).
+<!--l. 13--><p class="noindent">Cet outil intuitif et convivial est con&ccedil;u comme une tentative visant &agrave;
+faciliter l&#8217;utilisation et par suite la ma&icirc;trise de sujets aussi complexes
+qu&#8217;UML et INTERLIS afin de les rendre accessibles &agrave; un large &eacute;ventail
+d&#8217;utilisateurs.
+<!--l. 16--><p class="noindent">L&#8217;auteur souhaite enfin adresser ses remerciements les plus vifs &agrave; la COSIG,
+sans le soutien de laquelle l&#8217;&eacute;diteur UML/INTERLIS n&#8217;aurait pas pu &ecirc;tre
+d&eacute;velopp&eacute;.
+                                                                          
+
+                                                                          
+<div class="tableofcontents">
+<span class="chapterToc"> <a 
+href="#Q1-1-1">Pr&eacute;face</a></span>
+<br><span class="chapterToc">1 <a 
+href="refmanch1.html#x2-10001" id="QQ2-2-2">A propos de ce document</a></span>
+<br><span class="chapterToc">2 <a 
+href="refmanch2.html#x3-20002" id="QQ2-3-3">G&eacute;n&eacute;ralit&eacute;s</a></span>
+<br>&nbsp;<span class="sectionToc">2.1 <a 
+href="refmanse1.html#x4-30002.1" id="QQ2-4-4">Installation</a></span>
+<br>&nbsp;<span class="sectionToc">2.2 <a 
+href="refmanse2.html#x5-40002.2" id="QQ2-5-5">Dispositions en mati&egrave;re de licence</a></span>
+<br>&nbsp;<span class="sectionToc">2.3 <a 
+href="refmanse3.html#x6-50002.3" id="QQ2-6-6">Mandant</a></span>
+<br>&nbsp;<span class="sectionToc">2.4 <a 
+href="refmanse4.html#x7-60002.4" id="QQ2-7-7">D&eacute;veloppeur</a></span>
+<br>&nbsp;<span class="sectionToc">2.5 <a 
+href="refmanse5.html#x8-70002.5" id="QQ2-8-8">Logiciels utilis&eacute;s</a></span>
+<br><span class="chapterToc">3 <a 
+href="refmanch3.html#x9-80003" id="QQ2-9-9">Interface utilisateur</a></span>
+<br>&nbsp;<span class="sectionToc">3.1 <a 
+href="refmanse6.html#x10-90003.1" id="QQ2-10-11">Barre de menu</a></span>
+<br>&nbsp;<span class="sectionToc">3.2 <a 
+href="refmanse7.html#x11-210003.2" id="QQ2-11-29">Barre des symboles</a></span>
+<br>&nbsp;<span class="sectionToc">3.3 <a 
+href="refmanse8.html#x12-220003.3" id="QQ2-12-30">Zone de navigation</a></span>
+<br>&nbsp;<span class="sectionToc">3.4 <a 
+href="refmanse9.html#x13-230003.4" id="QQ2-13-31">Zone de mod&eacute;lisation</a></span>
+<br>&nbsp;<span class="sectionToc">3.5 <a 
+href="refmanse10.html#x14-250003.5" id="QQ2-14-33">Zone de description</a></span>
+<br>&nbsp;<span class="sectionToc">3.6 <a 
+href="refmanse11.html#x15-260003.6" id="QQ2-15-34">Zone du journal</a></span>
+<br>&nbsp;<span class="sectionToc">3.7 <a 
+href="refmanse12.html#x16-270003.7" id="QQ2-16-36">Barre d&#8217;&eacute;tat</a></span>
+<br><span class="chapterToc">4 <a 
+href="refmanch4.html#x17-280004" id="QQ2-17-37">El&eacute;ments de mod&eacute;lisation</a></span>
+<br>&nbsp;<span class="sectionToc">4.1 <a 
+href="refmanse13.html#x18-290004.1" id="QQ2-18-38">Diagramme de classe</a></span>
+<br>&nbsp;<span class="sectionToc">4.2 <a 
+href="refmanse14.html#x19-350004.2" id="QQ2-19-49">Dialogues</a></span>
+<br><span class="appendixToc">A <a 
+href="refmanap1.html#x20-70000A" id="QQ2-20-129">Fondements techniques</a></span>
+<br><span class="appendixToc">B <a 
+href="refmanap2.html#x21-71000B" id="QQ2-21-130">UML</a></span>
+<br>&nbsp;<span class="sectionToc">B.1 <a 
+href="refmanse15.html#x22-72000B.1" id="QQ2-22-131">Sp&eacute;cifications</a></span>
+<br><span class="appendixToc">C <a 
+href="refmanap3.html#x23-74000C" id="QQ2-23-133">INTERLIS</a></span>
+<br>&nbsp;<span class="sectionToc">C.1 <a 
+href="refmanse16.html#x24-75000C.1" id="QQ2-24-134">Sp&eacute;cifications</a></span>
+<br>&nbsp;<span class="sectionToc">C.2 <a 
+href="refmanse17.html#x25-76000C.2" id="QQ2-25-135">Compilateur INTERLIS</a></span>
+<br><span class="appendixToc">D <a 
+href="refmanap4.html#x26-77000D" id="QQ2-26-136">Formats</a></span>
+<br>&nbsp;<span class="sectionToc">D.1 <a 
+href="refmanse18.html#x27-78000D.1" id="QQ2-27-137">Format de l&#8217;&eacute;diteur UML</a></span>
+<br>&nbsp;<span class="sectionToc">D.2 <a 
+href="refmanse19.html#x28-79000D.2" id="QQ2-28-138">Sch&eacute;ma XML</a></span>
+                                                                          
+
+                                                                          
+<br>&nbsp;<span class="sectionToc">D.3 <a 
+href="refmanse20.html#x29-80000D.3" id="QQ2-29-139">Configuration du compilateur INTERLIS</a></span>
+<br>&nbsp;<span class="sectionToc">D.4 <a 
+href="refmanse21.html#x30-81000D.4" id="QQ2-30-140">Fichier de mod&egrave;le INTERLIS</a></span>
+<br><span class="appendixToc">E <a 
+href="refmanap5.html#x31-82000E" id="QQ2-31-141">Sp&eacute;cificit&eacute;s locales</a></span>
+<br><span class="likechapterToc"><a 
+href="refmanli1.html#x32-83000E" id="QQ2-32-142">Bibliographie</a></span>
+<br><span class="chapterToc"> <a 
+href="refmanli1.html#Q1-32-143">Bibliographie</a></span>
+</div>
+                                                                          
+
+                                                                          
+
+                                                                          
+
+                                                                          
+
+                                                                          
+
+                                                                          
+
+                                                                          
+
+                                                                          
+<a 
+  id="x1-69002r37"></a>
+                                                                          
+
+                                                                          
+<a 
+  id="x1-70002r37"></a>
+                                                                          
+
+                                                                          
+<a 
+  id="x1-73001r37"></a>
+                                                                          
+
+                                                                          
+<a 
+  id="x1-76002r37"></a>
+                                                                          
+
+                                                                          
+<a 
+  id="x1-81001r37"></a>
+                                                                          
+
+                                                                          
+
+<!--l. 261--><p class="noindent"><span class="next">[<a 
+href="refmanch1.html" id="tailrefman" >next</a>]</span> 
+</body></html> 
+
+                                                                          
+
+

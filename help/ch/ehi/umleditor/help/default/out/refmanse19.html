@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>D.2 XML-Schema</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,3,next --> 
+<meta name="src" content="refman.tex"> 
+<meta name="date" content="2003-07-12 12:56:00"> 
+<link rel="stylesheet" type="text/css" href="refman.css"> 
+</head><body 
+>
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanse20.html" >next</a>] [<a 
+href="refmanse18.html" >prev</a>] [<a 
+href="refmanse18.html#tailrefmanse18.html" >prev-tail</a>] [<a 
+href="#tailrefmanse19.html">tail</a>] [<a 
+href="refmanap4.html#refmanse19.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">D.2   </span> <a 
+  id="x28-79000D.2"></a>XML-Schema</h3>
+<a 
+  id="dx28-79001"></a>
+<!--l. 11--><p class="noindent">ASCII-Code nach <span 
+class="cmti-12">Exportieren als XML-Schema </span>(siehe Kap.  <a 
+href="refmanse6.html#x10-160003.1.7">3.1.7<!--tex4ht:ref: sec_TOOLS --></a>) in eine Datei mit Suffix
+<span 
+class="cmti-12">.XSD</span>.
+<br class="newline">
+                                                                                        
+
+                                                                                        
+<table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;xsd:schema&nbsp;xmlns:xsd=&#34;http://www.w3.org/2001/XMLSchema&#34;
+&nbsp;<br />xmlns=&#34;http://www.interlis.ch/INTERLIS2.2&#34;
+&nbsp;<br />targetNamespace=&#34;http://www.interlis.ch/INTERLIS2.2&#34;
+&nbsp;<br />elementFormDefault=&#34;qualified&#34;&nbsp;attributeFormDefault=&#34;unqualified&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;TRANSFER&#34;&nbsp;type=&#34;Transfer&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Transfer&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;HEADERSECTION&#34;&nbsp;type=&#34;HeaderSection&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;DATASECTION&#34;&nbsp;type=&#34;DataSection&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;HeaderSection&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;ALIAS&#34;&nbsp;type=&#34;Alias&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;COMMENT&#34;&nbsp;type=&#34;xsd:anyType&#34;&nbsp;minOccurs=&#34;0&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;VERSION&#34;&nbsp;type=&#34;xsd:decimal&#34;&nbsp;use=&#34;required&#34;&nbsp;fixed=&#34;2.2&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;SENDER&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Alias&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;ENTRIES&#34;&nbsp;type=&#34;Entries&#34;&nbsp;minOccurs=&#34;0&#34;&nbsp;maxOccurs=&#34;unbounded&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Entries&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:choice&nbsp;maxOccurs=&#34;unbounded&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;TAGENTRY&#34;&nbsp;type=&#34;Tagentry&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;VALENTRY&#34;&nbsp;type=&#34;Valentry&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;DELENTRY&#34;&nbsp;type=&#34;Delentry&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:choice&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;FOR&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Tagentry&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;FROM&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;TO&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Valentry&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;ATTR&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;FROM&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+                                                                                        
+
+                                                                                        
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;TO&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;Delentry&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;TAG&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;BasketValue&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;TOPIC&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;KIND&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;BID&#34;&nbsp;type=&#34;xsd:string&#34;&nbsp;use=&#34;required&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;CoordValue&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C1&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C2&#34;&nbsp;minOccurs=&#34;0&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C3&#34;&nbsp;minOccurs=&#34;0&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;ArcPoint&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C1&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C2&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;C3&#34;&nbsp;minOccurs=&#34;0&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+                                                                                        
+
+                                                                                        
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;A1&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;A2&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element&nbsp;name=&#34;R&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:restriction&nbsp;base=&#34;xsd:decimal&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:element&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;RoleType&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:simpleContent&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:extension&nbsp;base=&#34;xsd:string&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;REF&#34;&nbsp;type=&#34;xsd:string&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;EXTREF&#34;&nbsp;type=&#34;xsd:string&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;BID&#34;&nbsp;type=&#34;xsd:string&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:attribute&nbsp;name=&#34;NEXT_TID&#34;&nbsp;type=&#34;xsd:string&#34;/&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:extension&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:simpleContent&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:complexType&nbsp;name=&#34;DataSection&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:choice&nbsp;minOccurs=&#34;0&#34;&nbsp;maxOccurs=&#34;unbounded&#34;&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:choice&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;<br />&nbsp;&nbsp;&lt;/xsd:schema&gt;
+</div>
+</td></tr></table>
+<!--l. 136--><p class="nopar">
+                                                                                        
+
+                                                                                        
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanse20.html" >next</a>] [<a 
+href="refmanse18.html" >prev</a>] [<a 
+href="refmanse18.html#tailrefmanse18.html" >prev-tail</a>] [<a 
+href="refmanse19.html" >front</a>] [<a 
+href="refmanap4.html#refmanse19.html" >up</a>] </p></div>
+<!--l. 139--><p class="noindent"><a 
+  id="tailrefmanse19.html"></a>  
+</body></html> 
