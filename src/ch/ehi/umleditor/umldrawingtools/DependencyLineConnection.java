@@ -36,7 +36,7 @@ import ch.softenvironment.util.*;
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:53 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:06:46 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -89,14 +89,14 @@ public boolean canConnect(Figure start, Figure end) {
 		client = getGeneralizableElement(start);
 		supplier = getGeneralizableElement(end);
 	} catch(ClassCastException e) {
-		shouldWarn(this, resDependencyLineConnection.getString("CWWrongDependencyType")); //$NON-NLS-1$
+		shouldWarn(resDependencyLineConnection.getString("CWWrongDependencyType")); //$NON-NLS-1$
 		return false;
 	}
 
 	if (!(((client instanceof Classifier) && (supplier instanceof Classifier)) ||
 //			((client instanceof TopicDef) && (supplier instanceof TopicDef)) ||
 			((client instanceof ch.ehi.uml1_4.modelmanagement.Package) && (supplier instanceof ch.ehi.uml1_4.modelmanagement.Package)))) {
-		shouldWarn(this, resDependencyLineConnection.getString("CWNodesMustBeClassifier")); //$NON-NLS-1$
+		shouldWarn(resDependencyLineConnection.getString("CWNodesMustBeClassifier")); //$NON-NLS-1$
 		return false;
 	}
 

@@ -33,7 +33,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:53 $
+ * @version $Revision: 1.2 $ $Date: 2004-01-06 10:03:00 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener, ch.softenvironment.view.CommonUserAccess {
 	// TextTool which will be invoked at the top level container
@@ -207,64 +207,69 @@ ch.softenvironment.util.Tracer.getInstance().patch(this, "createDragTracker(Figu
 	}
 /**
  * Disconnect current node and connect new target.
+ * @see ClassDiagramView#correctRoleRelocation(..)
  */
 private void dragAssociation(Connector end, Figure targetFigure, int x, int y) {
 	// 1) Presentation
-	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
+//	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
 	// 2) Model
 	((ch.ehi.interlis.associations.RoleDef)((EdgeFigure)editedConnection).getModelElement()).changeParticipant((ch.ehi.uml1_4.foundation.core.Classifier)((NodeFigure)targetFigure).getModelElement());
 	// 3) show visual reconnect
-	if (endPointIndex == 0) {
+/*	if (endPointIndex == 0) {
 		((EdgeFigure)editedConnection).setStartConnector(end);
-	} else /* (endPointIndex == 1) */ {
+	} else {
+		// (endPointIndex == 1)
 		((EdgeFigure)editedConnection).setEndConnector(end);
 	}
-ch.softenvironment.util.Tracer.getInstance().nyi(this, "dragAssociation(..)", "Association Change not adapted in other open diagrams.");//$NON-NLS-2$//$NON-NLS-1$
+*/
 }
 /**
  * Disconnect current node and connect new target.
+ * @see ClassDiagramView#correctDependencyRelocation(..)
  */
 private void dragDependency(Connector end, Figure targetFigure, int x, int y) {
 	// 1) Presentation
-	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
+//	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
 
 	ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)((EdgeFigure)editedConnection).getModelElement();
 	if (endPointIndex == 0) {
 		// 2) Model
 		dependency.changeClient((ModelElement)dependency.iteratorClient().next(), (ch.ehi.uml1_4.foundation.core.GeneralizableElement)((NodeFigure)targetFigure).getModelElement());
 		// 3) show visual reconnect
-		((EdgeFigure)editedConnection).setStartConnector(end);
+//		((EdgeFigure)editedConnection).setStartConnector(end);
 	} else /* (endPointIndex == 1) */ {
 		// 2) Model
 		dependency.changeSupplier((ModelElement)dependency.iteratorSupplier().next(), (ch.ehi.uml1_4.foundation.core.GeneralizableElement)((NodeFigure)targetFigure).getModelElement());
 		// 3) show visual reconnect
-		((EdgeFigure)editedConnection).setEndConnector(end);
+//		((EdgeFigure)editedConnection).setEndConnector(end);
 	}
-ch.softenvironment.util.Tracer.getInstance().nyi(this, "dragDependency(..)", "Dependency Change not adapted in other open diagrams.");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Disconnect current node and connect new target.
+ * @see ClassDiagramView#correctGeneralizationRelocation(..)
  */
 private void dragGeneralization(Connector end, Figure targetFigure, int x, int y) {
 	// 1) Presentation
-	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
+//	((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
 
 	ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)((EdgeFigure)editedConnection).getModelElement();
 	if (endPointIndex == 0) {
 		// 2) Model
 		generalization.changeChild((ch.ehi.uml1_4.foundation.core.GeneralizableElement)((NodeFigure)targetFigure).getModelElement());
 		// 3) show visual reconnect
-		((EdgeFigure)editedConnection).setStartConnector(end);
+//		((EdgeFigure)editedConnection).setStartConnector(end);
 	} else /* (endPointIndex == 1) */ {
 		// 2) Model
 		generalization.changeParent((ch.ehi.uml1_4.foundation.core.GeneralizableElement)((NodeFigure)targetFigure).getModelElement());
 		// 3) show visual reconnect
-		((EdgeFigure)editedConnection).setEndConnector(end);
+//		((EdgeFigure)editedConnection).setEndConnector(end);
 	}
-ch.softenvironment.util.Tracer.getInstance().nyi(this, "dragGeneralization(..)", "Generalization Change not adapted in other open diagrams.");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Disconnect current node and connect new target.
+ * This kind of line is not duplicated on other Diagrams,
+ * therefore a visual relocation is provoqued here instead of
+ * doing it within a ClassDiagrammView.
  */
 private void dragNoteAnchor(Connector end, Figure targetFigure, int x, int y) {
 	if (endPointIndex == 0) {
@@ -274,7 +279,9 @@ private void dragNoteAnchor(Connector end, Figure targetFigure, int x, int y) {
 			((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
 			// 2) Model	-> no model mappings to change
 			// 3) show visual reconnect
+			((EdgeFigure)editedConnection).willChange();
 			((EdgeFigure)editedConnection).setStartConnector(end);
+			((EdgeFigure)editedConnection).changed();
 		} else {
 			new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), resources.getString("CTModellingError"), resources.getString("CENoteToNoteError"));
 		}
@@ -283,7 +290,9 @@ private void dragNoteAnchor(Connector end, Figure targetFigure, int x, int y) {
 		((EdgeFigure)editedConnection).getEdge().setEndpoint(endPointIndex, ((NodeFigure)targetFigure).getNode());
 		// 2) Model	-> no model mappings to change
 		// 3) show visual reconnect
+		((EdgeFigure)editedConnection).willChange();
 		((EdgeFigure)editedConnection).setEndConnector(end);
+		((EdgeFigure)editedConnection).changed();
 	}
 }
 /**

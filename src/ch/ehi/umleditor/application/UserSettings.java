@@ -21,9 +21,9 @@ import java.io.*;
 import ch.softenvironment.util.*;
 /**
  * Manage the Application Settings for a single UserProfile.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:05 $
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.2 $ $Date: 2003-12-25 10:54:37 $
  */
 public class UserSettings extends java.util.Properties implements ch.softenvironment.util.UserSettings {
 	// values for Key-Values
@@ -108,14 +108,14 @@ protected static UserSettings createDefault() {
 }
 /**
  * Return whether the User is allowed to use Application or not.
- * @return boolean 
+ * @return boolean
  */
 public boolean getActive() {
 	return true;
 }
 /**
  * Return whether the User is the Administrator himself.
- * @return boolean 
+ * @return boolean
  */
 public boolean getAdmin() {
 	return false;
@@ -381,7 +381,7 @@ public static UserSettings load() /*throws FileNotFoundException, IOException, C
 public void save() {
 	try {
 	    FileOutputStream outputStream = new FileOutputStream(SETTINGS_FILE);
-	    super.store(outputStream, LauncherView.getInstance().getApplicationName());
+	    super.store(outputStream, LauncherView.getApplicationName());
 	} catch(IOException e) {
 		LauncherView.getInstance().handleException(e);
 	}

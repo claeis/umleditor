@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:41:31 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-03-01 20:37:41 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3CD8FE4D01CC package "XMLInterlisEncoder"
@@ -48,7 +48,8 @@ public class XMLInterlisEncoder
 
   private int objid=0;
 
-    private Map writtenObjectsList = new HashMap(); // map<Object obj,int id>
+    private Map object2Id = new HashMap(); // map<Object obj,int id>
+    private Set pendingObjects=new HashSet(); // set<Object obj>
     private Writer out;
 
   //benötigte Methoden werden hier in eine List gespeichert
@@ -120,28 +121,13 @@ public class XMLInterlisEncoder
 
   //Hier werden die Werte geholt und geschrieben
 
-  private void writeValues(Object obj)
-    throws Throwable
+  private void visitObject(Object obj)
+    throws IOException, IllegalAccessException, InvocationTargetException
   {
 
-    if(obj.getClass()==Class.forName("java.lang.String")){
-      return;
-    }
-    int thisobjid=objid++;
-    writtenObjectsList.put(obj,new Integer(thisobjid));
+	int thisobjid=((Integer)object2Id.get(obj)).intValue();
 
     if(obj instanceof ch.ehi.basics.types.NlsString){
-      out.write("<"+obj.getClass().getName()+" TID="+'"'+ thisobjid +'"'+">");newline();
-      ch.ehi.basics.types.NlsString nlsString=(ch.ehi.basics.types.NlsString)obj;
-      Map allValues=nlsString.getAllValues();
-      Iterator it=allValues.keySet().iterator();
-      while(it.hasNext()){
-        String language=(String)it.next();
-        String value=(String)allValues.get(language);
-        out.write("<Entry TID=\""+ objid++ +"\" language=\""+encodeString(language)+"\" translation=\""+encodeString(value)+"\"/>");newline();
-
-      }
-      out.write("</"+obj.getClass().getName()+">");newline();
       return;
     }
     analyzeClass(obj.getClass());
@@ -175,7 +161,7 @@ public class XMLInterlisEncoder
         method=getter.get;
         // kein PrimitivDatentyp?
         if(!method.getReturnType().isPrimitive()
-            && method.getReturnType()!=Class.forName("java.lang.String")
+            && method.getReturnType()!=java.lang.String.class
             && !isBuiltinClass(method.getReturnType())
             && !isReturnTypeCodeList(method))
         {
@@ -188,9 +174,9 @@ public class XMLInterlisEncoder
             {
               // Wert bestimmen (getXX() ausfuehren)
               value = method.invoke(obj, null);
-              if(value!=null && !writtenObjectsList.containsKey(value))
+              if(value!=null && !object2Id.containsKey(value))
               {
-                writeValues(value);
+                addPendingObject(value);
               }
             }
 
@@ -208,18 +194,43 @@ public class XMLInterlisEncoder
         value = (Object)thisit.next();
         //prüft ob die Klasse vom Typ primitiv sei
         if(isBuiltinClass(value.getClass())){
-        }else if(value.getClass()==Class.forName("java.lang.String")){
+        }else if(value.getClass()==java.lang.String.class){
         }else if(isCodeList(value.getClass())){
         }else{
-          if(!writtenObjectsList.containsKey(value))
+          if(!object2Id.containsKey(value))
           {
-            writeValues(value);
+            addPendingObject(value);
           }
         }
 
       }
     }
+  }
+	private void writeObject(Object obj)
+	  throws IOException, IllegalAccessException, InvocationTargetException
+	{
 
+		int thisobjid=((Integer)object2Id.get(obj)).intValue();
+
+		if(obj instanceof ch.ehi.basics.types.NlsString){
+		  out.write("<"+obj.getClass().getName()+" TID="+'"'+ thisobjid +'"'+">");newline();
+		  ch.ehi.basics.types.NlsString nlsString=(ch.ehi.basics.types.NlsString)obj;
+		  Map allValues=nlsString.getAllValues();
+		  Iterator it=allValues.keySet().iterator();
+		  while(it.hasNext()){
+			String language=(String)it.next();
+			String value=(String)allValues.get(language);
+			out.write("<Entry TID=\""+ objid++ +"\" language=\""+encodeString(language)+"\" translation=\""+encodeString(value)+"\"/>");newline();
+
+		  }
+		  out.write("</"+obj.getClass().getName()+">");newline();
+		  return;
+		}
+		List getterList = (List)getters.get(obj.getClass());
+		List iteratorList = (List)iterators.get(obj.getClass());
+		Method method;
+		Object value = null;
+		Iterator it;
     /*
     ** 2. Objekt selbst schreiben
     */
@@ -244,13 +255,13 @@ public class XMLInterlisEncoder
             if(isReturnTypeCodeList(method)){
               out.write("<"+getter.name+">"+getCodeListValue(value)+"</"+getter.name+">");newline();
             }else if(method.getReturnType().isPrimitive()
-                || method.getReturnType()==Class.forName("java.lang.String")
+                || method.getReturnType()==java.lang.String.class
                 || isBuiltinClass(method.getReturnType())
                 ){
               out.write("<"+getter.name+">"+encodeString(value.toString())+"</"+getter.name+">");newline();
             }else{
               // Objekt vorhanden; Referenz schreiben
-              out.write("<"+getter.name+">"+writtenObjectsList.get(value)+"</"+getter.name+">");newline();
+              out.write("<"+getter.name+">"+object2Id.get(value)+"</"+getter.name+">");newline();
             }
           }
         }
@@ -273,7 +284,7 @@ public class XMLInterlisEncoder
         }
 
         //prüfen nach der Klasse vom Typ String
-        else if(value.getClass()==Class.forName("java.lang.String"))
+        else if(value.getClass()==java.lang.String.class)
         {
           out.write("<"+method.getName().substring(8)+">"+value+"</"+method.getName().substring(8)+">");newline();
         }
@@ -286,7 +297,7 @@ public class XMLInterlisEncoder
 
         else
         {
-          out.write("<"+method.getName().substring(8)+">"+writtenObjectsList.get(value)+"</"+method.getName().substring(8)+">");newline();
+          out.write("<"+method.getName().substring(8)+">"+object2Id.get(value)+"</"+method.getName().substring(8)+">");newline();
         }
       }
     }
@@ -303,38 +314,41 @@ public class XMLInterlisEncoder
     return className.toString();
   }
 
-  public void encode(Object obj, Writer out)
-    throws IOException
+  public void encode(Object rootObj, Writer out)
+  throws IOException
   {
     this.out = out;
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");newline();
       out.write("<ch.ehi.umleditor.1>");newline();
       try{
-        writeValues(obj);
+        addPendingObject(rootObj);
+        while(pendingObjects.size()>0){
+        	Object next=pendingObjects.iterator().next();
+        	visitObject(next);
+        	if(next!=rootObj){
+        		writeObject(next);
+        	}
+        	pendingObjects.remove(next);
+        }
+        // rootObj should be the last written object
+        writeObject(rootObj);
+		out.write("</ch.ehi.umleditor.1>");newline();
       }
-      catch(Throwable ex){
-        ex.printStackTrace();
+      catch(IllegalAccessException ex){
+    	throw new IOException(ex.getLocalizedMessage());
       }
-      out.write("</ch.ehi.umleditor.1>");newline();
+	catch(InvocationTargetException ex){
+	  	throw new IOException(ex.getTargetException().getLocalizedMessage());
+	}
   }
   //man braucht diese Methode zum "kodieren"
   public void encode(Object obj, String path)
+  throws IOException
   {
     Writer out;
-    try
-    {
       out = new BufferedWriter(new FileWriter(path));
       encode(obj,out);
       out.close();
-    }
-
-    catch(IOException exc)
-    {
-      exc.printStackTrace();
-    }
-
-
-
   }
 
 
@@ -367,9 +381,25 @@ public class XMLInterlisEncoder
       return codelists.containsKey(aclass);
     }
 
+	private void addPendingObject(Object obj)
+	{
+		// object already seen?
+		if(pendingObjects.contains(obj)){
+			return;
+		}
+		// object not yet seen
+		// give object an id
+		if(obj.getClass()==java.lang.String.class){
+		  return;
+		}
+		int thisobjid=objid++;
+		object2Id.put(obj,new Integer(thisobjid));
+		pendingObjects.add(obj);
+		
+	}
     //holt den Wert aus dieser CodeListe
     private Object getCodeListValue(Object obj)
-      throws Throwable
+      throws InvocationTargetException,IllegalAccessException
     {
         Method method = (Method)codelists.get(obj.getClass());
         Object codeValue = method.invoke(obj, null);
@@ -383,7 +413,7 @@ public class XMLInterlisEncoder
      * @param method getXX()
     */
     private boolean executeContains(Object obj, Method containsMethod)
-      throws Throwable
+      throws IllegalAccessException,InvocationTargetException
     {
         // containsXX() ausfuehren
         Object containsValue = containsMethod.invoke(obj, null);
