@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2004-03-05 17:27:45 $
+ * @version $Revision: 1.9 $ $Date: 2004-03-08 17:05:02 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -1297,7 +1297,11 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 			((NodeFigure)figure).updateView();
 		} else /* edgeFigure */ {
 			// for AssociationDef's: @see LinkFigure.updateView(), @see PresentationRoleFigure.updateView()
-			if (event.getOperation().startsWith(MetaModelChange.OP_CHANGE)) {
+			if (event.getOperation().startsWith(MetaModelChange.OP_SET)) {
+				if (figure instanceof PresentationRoleFigure) {
+					((PresentationRoleFigure)figure).updateView();
+				}
+			} else if (event.getOperation().startsWith(MetaModelChange.OP_CHANGE)) {
 Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +getDiagram().getName().getValue() + ", Event=" + event.toString() + ", type=" + event.getOperation());
 				if ((figure instanceof PresentationRoleFigure) && event.getOperation().equals("changeParticipant")) {
 					PresentationRoleFigure roleFigure = (PresentationRoleFigure)figure;
@@ -1326,8 +1330,6 @@ Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +
 					} 
 				}
 			}
-			
-			
 		}
 	} // else no figure found to update
 }
