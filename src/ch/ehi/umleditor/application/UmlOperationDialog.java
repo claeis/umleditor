@@ -18,6 +18,8 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
+import java.util.Iterator;
+
 import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind;
 import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
@@ -28,7 +30,7 @@ import ch.ehi.uml1_4.implementation.*;
  * Notation: visibility name ( parameter-list ) : return-type-expression { property-string }
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-08-17 13:52:58 $
+ * @version $Revision: 1.5 $ $Date: 2004-10-01 20:01:15 $
  */
 public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
@@ -42,7 +44,7 @@ public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
 	private javax.swing.JTextField ivjTxtName = null;
 	private javax.swing.JButton ivjBtnReturnType = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
-	private javax.swing.JTextField ivjJTextField1 = null;
+	private javax.swing.JTextField txtReturnValue = null;
 	private javax.swing.JLabel ivjLblReturnValue = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
@@ -423,7 +425,7 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			constraintsJTextField1.weightx = 1.0;
 			constraintsJTextField1.ipadx = 236;
 			constraintsJTextField1.insets = new java.awt.Insets(6, 5, 10, 4);
-			getBaseDialogContentPane().add(getJTextField1(), constraintsJTextField1);
+			getBaseDialogContentPane().add(getTxtReturnValue(), constraintsJTextField1);
 
 			java.awt.GridBagConstraints constraintsBtnReturnType = new java.awt.GridBagConstraints();
 			constraintsBtnReturnType.gridx = 4; constraintsBtnReturnType.gridy = 2;
@@ -598,12 +600,12 @@ private javax.swing.JSeparator getJSeparator1() {
  * @return javax.swing.JTextField
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JTextField getJTextField1() {
-	if (ivjJTextField1 == null) {
+private javax.swing.JTextField getTxtReturnValue() {
+	if (txtReturnValue == null) {
 		try {
-			ivjJTextField1 = new javax.swing.JTextField();
-			ivjJTextField1.setName("JTextField1");
-			ivjJTextField1.setEditable(false);
+			txtReturnValue = new javax.swing.JTextField();
+			txtReturnValue.setName("txtReturnValue");
+			txtReturnValue.setEditable(false);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -612,7 +614,7 @@ private javax.swing.JTextField getJTextField1() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjJTextField1;
+	return txtReturnValue;
 }
 /**
  * Return the LblConcurrency property value.
@@ -1480,7 +1482,10 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	}
 	
 	// page parameters
+	Iterator iterator = operation.iteratorParameter();
 	getTblParameters().setModel(new EditorTableModel());
-	((EditorTableModel)getTblParameters().getModel()).setUmlParameter(operation.iteratorParameter());
+	UmlParameter returnValue = ((EditorTableModel)getTblParameters().getModel()).setUmlParameter(iterator);
+	// set Return type
+	getTxtReturnValue().setText("" + (returnValue == null ? "" : returnValue.getDefLangName()));
 }
 }

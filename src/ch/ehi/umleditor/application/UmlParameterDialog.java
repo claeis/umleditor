@@ -23,7 +23,7 @@ import ch.ehi.uml1_4.implementation.*;
  * A Parameter is an Argument of Operation.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @version $Revision: 1.3 $ $Date: 2004-10-01 20:01:15 $
  * @see UmlOperation
  */
 public class UmlParameterDialog extends ch.softenvironment.view.BaseDialog {
@@ -646,6 +646,8 @@ protected boolean save() {
 		parameter.setKind(ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.INOUT);
 	}
 	
+//	parameter.attachBehavioralFeature(..ABORT;
+	        
 	// default value
 /*	if (getPnlDefault().getSyntax() == null) {
 		parameter.setDefaultValue(null);
@@ -683,7 +685,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			getRbtInOut().setSelected(true);
 			break;
 	}
-
+//parameter.getBehavioralFeature().getOwner())
 getTbpPane().remove(getPnlDefault()); //@see save();
 }
 }

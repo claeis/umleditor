@@ -31,7 +31,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-08-17 09:57:42 $
+ * @version $Revision: 1.5 $ $Date: 2004-10-01 20:01:15 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -206,7 +206,7 @@ private Vector createRow(UmlParameter parameter) {
 	Vector row = new Vector(4);
 	row.add(parameter.getDefLangName());
 	row.add("NYI");//parameter.getType());
-row.add(new Integer(parameter.getKind()));
+	row.add(getParameterTypeString(parameter.getKind()));
 
 	return row;
 }
@@ -498,7 +498,7 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 	} else if (object instanceof UmlParameter) {
 		currentDataRow.set(0, ((UmlParameter)object).getDefLangName());
 //		currentDataRow.set(1, ((UmlParameter)object).get());
-		currentDataRow.set(2, new Integer(((UmlParameter)object).getKind()));	
+		currentDataRow.set(2, getParameterTypeString(((UmlParameter)object).getKind()));
 	} else {
 		throw new DeveloperException(this, "updateRow()", "type <" + object.toString() + "> not updated");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
@@ -506,10 +506,27 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 	fireTableRowsUpdated(rowIndex, rowIndex);
 }
 /**
+ * Return a speaking name for int-Constant.
+ * @param kind
+ * @return
+ */
+private String getParameterTypeString(final int kind) {
+    if (kind == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.IN) {
+	    return "IN";    
+	} else if (kind == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.OUT) {
+	    return "OUT";
+	} else if (kind == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.INOUT) {
+	    return "IN/OUT";
+	} else {
+	    Tracer.getInstance().developerWarning(this, "getParamterTypeString()", "non-supported kind: " + kind);
+	    return "" + kind;
+	}
+}
+/**
  * Define the column structure for a set of UmlParameter's.
  * @param iteratorParamater (for e.g. of an UmlOperation)
  */
-public void setUmlParameter(java.util.Iterator iteratorParameter) {
+public UmlParameter setUmlParameter(java.util.Iterator iteratorParameter) {
 	// define visible columns
 	Vector columns = new Vector(3);
 	columns.add(resEditorTableModel.getString("TbcAttributeName_text")); //$NON-NLS-1$
@@ -519,11 +536,21 @@ public void setUmlParameter(java.util.Iterator iteratorParameter) {
 	setDataVector(elementVector, columns);
 
 	// build data Rows
+	UmlParameter returnValue = null;
 	while ((iteratorParameter != null) && (iteratorParameter.hasNext())) {
 		Object feature = iteratorParameter.next();
 		if (feature instanceof UmlParameter) {
-			addRowElement((UmlParameter)feature);
+		    if (((UmlParameter)feature).getKind() == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.RETURN) {
+		        // must not be displayed by Table
+		        if (returnValue != null) {
+		            Tracer.getInstance().developerError(this, "setUmlParameter()", "there is more than 1 Return Parameter in Model");
+		        }
+		        returnValue = (UmlParameter)feature;
+		    } else {
+				addRowElement((UmlParameter)feature);
+		    }
 		}
 	}
+	return returnValue;
 }
 }
