@@ -6,9 +6,14 @@ import ch.interlis.ili2c.generator.Interlis2Generator;
 import java.util.Iterator;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
+import ch.ehi.umleditor.interlis.Logging;
 
 public class TransferFromIli2cMetamodel
 {
+  private Logging log=null;
+  public TransferFromIli2cMetamodel(Logging callout){
+    log=callout;
+  }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
   private void addNamespace(ch.ehi.uml1_4.foundation.core.Namespace ns)
   {
@@ -1052,9 +1057,8 @@ public class TransferFromIli2cMetamodel
     }
   }
 
-  private void visitMetaDataFiles(Configuration config)
+  private void visitMetaDataFiles(ch.ehi.uml1_4.modelmanagement.Model model,Configuration config)
   {
-    ch.ehi.uml1_4.modelmanagement.Model model=ch.ehi.umleditor.application.LauncherView.getInstance().getModel();
     Iterator it=config.iteratorFileEntry();
     while(it.hasNext()){
       ch.interlis.ili2c.config.FileEntry fileIli=(ch.interlis.ili2c.config.FileEntry)it.next();
@@ -1078,13 +1082,13 @@ public class TransferFromIli2cMetamodel
   private PredefinedModel ilibase;
   private ch.ehi.uml1_4.modelmanagement.Package ili2modelset;
   private static int uniqueName=1;
-  public void visitTransferDescription (
+  public void visitTransferDescription (ch.ehi.uml1_4.modelmanagement.Model umlModel,
     TransferDescription   td,String configFilename,Configuration config)
   {
     syntaxBuffer=new java.io.StringWriter();
     makeSyntax=Interlis2Generator.generateElements(syntaxBuffer,td);
     ilibase=td.INTERLIS;
-    updatePredefinedModel(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+    updatePredefinedModel(umlModel);
     ili2modelset=new ch.ehi.uml1_4.implementation.UmlPackage();
     if(configFilename!=null){
       ili2modelset.setName(new NlsString(getBasename(configFilename)));
@@ -1095,12 +1099,9 @@ public class TransferFromIli2cMetamodel
     // add model contents
     visitElements(td);
     // conversion done; add model to editor
-    ch.ehi.umleditor.application.LauncherView.getInstance().getModel().addOwnedElement(ili2modelset);
+    umlModel.addOwnedElement(ili2modelset);
     // add metadata files
-    visitMetaDataFiles(config);
-    // refresh view
-    ch.ehi.umleditor.application.LauncherView.getInstance().refreshModel();
-    ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(),rsrc.getString("CIdone"));
+    visitMetaDataFiles(umlModel,config);
   }
   public void loadPredefinedIli2cModel(ch.ehi.uml1_4.modelmanagement.Package root)
   {
@@ -1111,8 +1112,6 @@ public class TransferFromIli2cMetamodel
     ili2modelset=root;
     // add model contents
     visitElements(td);
-    // refresh view
-    ch.ehi.umleditor.application.LauncherView.getInstance().refreshModel();
   }
 
 
@@ -1127,6 +1126,6 @@ public class TransferFromIli2cMetamodel
   }
 
   private void logError(String msg){
-    ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(),msg);
+    log.log(getFuncDesc(),msg);
   }
 }
