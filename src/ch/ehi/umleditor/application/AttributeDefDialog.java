@@ -29,14 +29,14 @@ import ch.softenvironment.util.*;
  * User Interface for an AttributeDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:32 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
 public class AttributeDefDialog extends BaseDialog {
 	// ModelElement
 	private static java.util.ResourceBundle resAttributeDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/AttributeDefDialog");
 	private static java.util.ResourceBundle resRoleDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/RoleDefDialog"); //$NON-NLS-1$;
 	private AttributeDef attributeDef = null;
-	private DataPanel currentDataPanel = null;
+	private BasePanel currentDataPanel = null;
 	private JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private JButton ivjBtnCancel = null;
@@ -113,7 +113,7 @@ public AttributeDefDialog(java.awt.Frame owner, boolean modal) {
  */
 private void adaptType() {
 	String item = (String)getCbxType().getSelectedItem();
-	DataPanel newPanel = null;
+	BasePanel newPanel = null;
 
 	if (item.equals(IliBaseTypeKind.NULL_TYPE) || item.equals(IliBaseTypeKind.BOOLEAN)) {
 		newPanel = null;
@@ -1136,8 +1136,8 @@ protected boolean save() {
 			DomainAttribute domainAttribute = new DomainAttribute();
 			if (getCbxType().getSelectedItem() == IliBaseTypeKind.DOMAINDEF) {
 				// either DomainDef
-				if (currentDataPanel.getObject() != null) {
-					domainAttribute.attachDomainDef((ch.ehi.interlis.domainsandconstants.DomainDef)currentDataPanel.getObject());
+				if (((DataPanel)currentDataPanel).getObject() != null) {
+					domainAttribute.attachDomainDef((ch.ehi.interlis.domainsandconstants.DomainDef)((DataPanel)currentDataPanel).getObject());
 				}
 			} else {
 				// or direct-type
@@ -1150,7 +1150,7 @@ protected boolean save() {
                                         unknown.setSyntax(getPnlTypeUnknown().getSyntax());
 					domainAttribute.attachDirect(unknown);
 				} else {
-					domainAttribute.attachDirect((ch.ehi.interlis.domainsandconstants.Type)currentDataPanel.getObject());
+					domainAttribute.attachDirect((ch.ehi.interlis.domainsandconstants.Type)((DataPanel)currentDataPanel).getObject());
 				}
 			}
 			attributeDef.attachAttrType(domainAttribute);

@@ -21,17 +21,18 @@ import java.io.*;
 import ch.softenvironment.util.*;
 /**
  * Manage the Application Settings for a single UserProfile.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:05 $
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.3 $ $Date: 2004-05-08 15:25:12 $
  */
-public class UserSettings extends java.util.Properties implements ch.softenvironment.util.UserSettings {
+public class UserSettings extends java.util.Properties implements ch.softenvironment.client.UserSettings {
 	// values for Key-Values
 	private final static String TRUE = "TRUE";
 	private final static String FALSE = "FALSE";
 	private final static String HOME_DIRECTORY = "user.home";
 	// default Settings filename
-	private final static String SETTINGS_FILE = System.getProperty(HOME_DIRECTORY) + "/.umleditor";
+	private final static String SETTINGS_FILE = System.getProperty(HOME_DIRECTORY) + java.io.File.separator + ".umleditor";
+	private final static String SEPARATOR = ";";
 
 	// Property Keys (non-NLS)
 	// @see getKeySet()
@@ -89,7 +90,7 @@ protected static UserSettings createDefault() {
 	userSettings.setShowStatusBar(new Boolean(true));
 	userSettings.setShowToolBar(new Boolean(true));
 	userSettings.setWorkingDirectory(System.getProperty(HOME_DIRECTORY));
-	userSettings.setLastFiles("");
+	userSettings.setLastFiles(new java.util.ArrayList());
 	userSettings.setConnectorZone(new Integer(10));
 
 	userSettings.setNavigationSort(NavigationTreeModel.SORT_BY_KIND_NAME);
@@ -108,14 +109,14 @@ protected static UserSettings createDefault() {
 }
 /**
  * Return whether the User is allowed to use Application or not.
- * @return boolean 
+ * @return boolean
  */
 public boolean getActive() {
 	return true;
 }
 /**
  * Return whether the User is the Administrator himself.
- * @return boolean 
+ * @return boolean
  */
 public boolean getAdmin() {
 	return false;
@@ -245,8 +246,8 @@ public java.lang.String getLanguage() {
  * Gets the lastFiles opened property (java.lang.String) value.
  * @see #setWorkingDirectory
  */
-public java.lang.String getLastFiles() {
-	return getProperty(LAST_FILES);
+public java.util.List getLastFiles() {
+	return ParserCSV.stringToArray((String)getProperty(LAST_FILES), SEPARATOR);
 }
 /**
  * Return property.
@@ -381,7 +382,7 @@ public static UserSettings load() /*throws FileNotFoundException, IOException, C
 public void save() {
 	try {
 	    FileOutputStream outputStream = new FileOutputStream(SETTINGS_FILE);
-	    super.store(outputStream, LauncherView.getInstance().getApplicationName());
+	    super.store(outputStream, LauncherView.getApplicationName());
 	} catch(IOException e) {
 		LauncherView.getInstance().handleException(e);
 	}
@@ -480,8 +481,8 @@ public void setLanguage(java.lang.String language) {
  * @param 0..n Files separated by Semikolon ';'.
  * @see #getLastFiles
  */
-public void setLastFiles(java.lang.String lastFiles) {
-	setProperty(LAST_FILES, lastFiles);
+public void setLastFiles(java.util.List lastFiles) {
+	setProperty(LAST_FILES, ParserCSV.arrayToString(lastFiles, SEPARATOR));
 }
 /**
  * Sets a property (java.lang.String) value.

@@ -27,12 +27,13 @@ import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
 
 /**
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:03 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-14 14:08:32 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -240,6 +241,28 @@ public void draw(Graphics g) {
 Tracer.getInstance().debug(this, "draw(Graphics)", e.toString());//$NON-NLS-1$
 	}
 }
+public void layoutMultiplicity(){
+	if (multiplicityFigure != null) {
+		Figure figure = getClassDiagram().findFigure(getEndElement());
+		java.awt.Point p=calculateMultiplicityPosition(figure.displayBox(), endPoint());
+		// save new values to repository
+		multiplicityFigure.updateCoordinates();
+		// update view
+		multiplicityFigure.displayBox(p,p);
+	}
+}
+
+public void layoutRolename(){
+	if (roleDefFigure != null) {
+		Figure figure = getClassDiagram().findFigure(getEndElement());
+		java.awt.Point p=calculateRolePosition(figure.displayBox(), endPoint());
+		// save new values to repository
+		roleDefFigure.updateCoordinates();
+		// update view
+		roleDefFigure.displayBox(p,p);
+	}
+}
+
 /**
  * Overwrites.
  */
@@ -355,6 +378,54 @@ protected void removeRole() {
 	}
 }
 /**
+ * Overwrites.
+ */
+public void removeInModel() {
+	try {
+		// don't call removeVisually() here -> associationDef gets lost afterwards
+		ch.ehi.uml1_4.foundation.core.Association associationDef = (ch.ehi.uml1_4.foundation.core.Association)getStartElement();
+		
+		// 1) remove visually
+		removeVisually(associationDef);
+		// 2) remove in model
+		if (associationDef != null) {
+			ElementFactory.removeElement(associationDef);
+			setModelElement(null);
+		}
+	} catch(Throwable e) {
+		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, null, this);
+	}
+}
+/**
+ * Remove everything that belongs to an AssociationDef, such as
+ * Name, Roles, Multiplicities.
+ * @param associationDef
+ */
+private void removeVisually(ch.ehi.uml1_4.foundation.core.Association associationDef) {
+	removeLabels();
+		
+	if (associationDef != null) {
+		java.util.Iterator iterator = associationDef.iteratorPresentation();
+		while (iterator.hasNext()) {
+			// Iterator contains a Composite and a PresentationAssocClass
+			Object presentation = iterator.next();
+			if (presentation instanceof PresentationAssocClass) {
+				// remove Edge from Association-Composite
+				if (((PresentationAssocClass)presentation).containsAssociation() && 
+						(getEdge() != null) &&
+						((PresentationAssocClass)presentation).getAssociation().containsRolePresentation((PresentationRole)getEdge())) {
+					((PresentationAssocClass)presentation).getAssociation().removeRolePresentation((PresentationRole)getEdge());
+					break;
+				}
+			}
+		}
+
+		getClassDiagram().remove(this);
+			
+		updateLinkFigure(associationDef);
+	}
+}
+/**
  * Remove the Figure visually ONLY.
  * Still kept in real model.
  * Special Case: Composite is kept in Diagram instead of edge itself
@@ -362,31 +433,9 @@ protected void removeRole() {
  */
 public void removeVisually() {
 	try {
-		removeLabels();
-		
-		ch.ehi.uml1_4.foundation.core.Association associationDef = (ch.ehi.uml1_4.foundation.core.Association)getStartElement();
-		if (associationDef != null) {
-			java.util.Iterator iterator = associationDef.iteratorPresentation();
-			while (iterator.hasNext()) {
-				// Iterator contains a Composite and a PresentationAssocClass
-				Object presentation = iterator.next();
-				if (presentation instanceof PresentationAssocClass) {
-					// remove Edge from Association-Composite
-					if (((PresentationAssocClass)presentation).containsAssociation() && 
-							(getEdge() != null) &&
-							((PresentationAssocClass)presentation).getAssociation().containsRolePresentation((PresentationRole)getEdge())) {
-						((PresentationAssocClass)presentation).getAssociation().removeRolePresentation((PresentationRole)getEdge());
-						break;
-					}
-				}
-			}
-
-			getClassDiagram().remove(this);
-			
-			updateLinkFigure(associationDef);
-		}
+		removeVisually((ch.ehi.uml1_4.foundation.core.Association)getStartElement());
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**

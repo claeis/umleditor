@@ -23,9 +23,9 @@ import ch.softenvironment.view.*;
  * Text-Editing Panel.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:39 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
-public class DescriptionPanel extends DataPanel {
+public class DescriptionPanel extends BasePanel implements DataPanel {
 	private Element element = null;
 	private SimpleEditorPanel ivjPnlEditor = null;
 	protected transient ch.ehi.umleditor.application.DescriptionPanelListener fieldDescriptionPanelListenerEventMulticaster = null;

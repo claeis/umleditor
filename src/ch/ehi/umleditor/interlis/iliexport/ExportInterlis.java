@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:21 $
-// $Revision: 1.1.1.1 $
+// $Date: 2004-06-14 14:46:34 $
+// $Revision: 1.2 $
 //
 
 // -beg- preserve=no 3CDA3ECD02D3 package "ExportInterlis"
@@ -61,7 +61,7 @@ public class ExportInterlis
 
   // declare/define something only in the code
   // please fill in/modify the following section
-  // -beg- preserve=no 3CDA3ECD02D3 detail_end "ExportInterlis"
+  // -beg- preserve=yes 3CDA3ECD02D3 detail_end "ExportInterlis"
   public static void writeXSD(){
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle("XML-Schema exportieren...");
@@ -80,6 +80,25 @@ public class ExportInterlis
                 }
         }
     return;
+  }
+  public static void writeIli1Fmt(){
+	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+	saveDialog.setDialogTitle("INTERLIS 1-Format exportieren...");
+	saveDialog.addChoosableFileFilter(new ch.ehi.basics.view.GenericFileFilter("ILI1 Format (*.fmt)","fmt"));
+
+	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+				String fmtFileName=saveDialog.getSelectedFile().getAbsolutePath();
+				TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
+				try{
+				   writer.setCheckModel(true);
+				   writer.setFmtFile(fmtFileName);
+				   writer.visitNamespace(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+				}catch(java.io.IOException ex){
+				  ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
+				}
+		}
+	return;
   }
 
   private static boolean checkFiles(java.util.List filev,String funcdesc){

@@ -1,7 +1,7 @@
 UML-Editor - Der UML-INTERLIS-Editor
 
 System Anforderungen
-Um die aktuelle Version des UML-Editors auszuführen, muss die JAVA-Laufzeitumgebung (JRE) Version 1.3 oder neuer auf Ihrem System installiert sein.
+Um die aktuelle Version des UML-Editors auszuführen, muss die JAVA-Laufzeitumgebung (JRE) Version 1.4.1 oder neuer auf Ihrem System installiert sein.
 Die JAVA-Laufzeitumgebung (JRE) können Sie auf der Website http://www.java.com/ gratis beziehen.
 
 Installation

@@ -17,6 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.attributes.*;
@@ -39,21 +40,21 @@ import ch.softenvironment.util.*;
  * name, attributes and methods.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:51 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-02 18:22:40 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	// TextFigure for editing the class name
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
 	private TextFigure classNameFigure;	// DON't set = null
-	private SeparatorFigure classHeaderSeparator; // DON't set = null
-
+	private SeparatorFigure attributeSeparator; // DON't set = null
+	private SeparatorFigure operationSeparator; // DON't set = null
 	// Direct reference to a composite figure which stores text figures for attribute names.
 	// This figure is also part of this composite container.
 	private GraphicalCompositeFigure attributesFigure; // DON't set = null
 
 	// Direct reference to a composite figure which stores text figures for method names.
 	// This figure is also part of this composite container.
-	private GraphicalCompositeFigure methodsFigure; // DON't set = null
+	private GraphicalCompositeFigure operationsFigure; // DON't set = null
 
 	// PopupMenu
 	private static String SUPPRESS_ATTRIBUTES_ACTION_COMMAND = "SUPPRESS_ATTRIBUTES";//$NON-NLS-1$
@@ -92,40 +93,31 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 }
 /**
  * Add an attribute.
- *
- * @param attributeName expected format "attributeName" or "attributeName : Type"
  */
 private void addAttribute() {
     try {
         // 1) add model
         ElementFactory.createAttributeDef((AbstractClassDef)getModelElement());
 
-        // 2) add view for model @see updateModel()
+        // 2) add view for model 
+        // @see updateModel()
     } catch (Throwable e) {
         LauncherView.getInstance().handleException(e);
     }
 }
 /**
- * Add a name for a method. The underlying class in the model is updated as well
- * to hold the method name.
- *
- * @param newMethod name of the new method
+ * Add a method.
  */
-private void addMethod(String newMethod) {
-/*
-	TextFigure classFigureMethod = new TextFigure() {
-		public void setText(String newString) {
-			if (!getText().equals(newString)) {
-			}
-			super.setText(newString);
-			updateMethodFigure();
-		}
-	};
-	classFigureMethod.setText(newMethod);
-	classFigureMethod.setFont(getFont());
-	methodsFigure.add(classFigureMethod);
-	updateMethodFigure();
-*/
+private void addOperation() {
+	try {
+        // 1) add model
+        ElementFactory.createUmlOperation((AbstractClassDef)getModelElement());
+
+        // 2) add view for model 
+        // @see updateModel()
+    } catch (Throwable e) {
+        LauncherView.getInstance().handleException(e);
+    }
 }
 /**
  * Add individual PopupMenu items for this class.
@@ -139,14 +131,12 @@ protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {
 			addAttribute();
 		}
 	});
-/*
- 	//future use
-	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {
+
+	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {	//$NON-NLS-1$
 		public void actionPerformed(ActionEvent event) {
-			addMethod("<method()>");
+			addOperation();
 		}
 	});
-*/
 
 	chxSuppressAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressAttributes_text")); //$NON-NLS-1$
 	chxSuppressAttributes.setActionCommand(SUPPRESS_ATTRIBUTES_ACTION_COMMAND);
@@ -202,6 +192,23 @@ private Figure createAttributeFigure(final AttributeDef attributeDef) {
     return attributeFigure;
 }
 /**
+ * Display AttributeDef in AttributeCompartment box.
+ */
+private Figure createOperationFigure(final UmlOperation operation) {
+	OperationFigure operationFigure = new OperationFigure(operation, getClassDiagram()) {
+		public void setText(String newName) {
+			String name = getPureOperationName(newName);
+			// rename Attribute (prevent ping-pong with MetaModelChange)
+			ElementUtils.trySetName(operation, name);
+			updateModel();
+		}
+	};
+	operationFigure.setText(operation.getDefLangName());
+	operationFigure.setFont(getFont());
+
+	return operationFigure;
+}
+/**
  * Overwrites.
  */
 public Object getAttribute(String name) {
@@ -254,18 +261,20 @@ protected void initialize() {
     add(nameFigure);
 
     // create a figure responsible for maintaining attributes
-    classHeaderSeparator = new SeparatorFigure();
-    attributesFigure = new GraphicalCompositeFigure(classHeaderSeparator);
+    attributeSeparator = new SeparatorFigure();
+    attributesFigure = new GraphicalCompositeFigure(attributeSeparator);
     attributesFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
     // add the figure to the Composite
     add(attributesFigure);
-/*
+
     // create a figure responsible for maintaining methods
-    methodsFigure = new GraphicalCompositeFigure(new SeparatorFigure());
-    methodsFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
+    operationSeparator = new SeparatorFigure();
+    operationsFigure = new GraphicalCompositeFigure(operationSeparator);
+    operationsFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
+    operationSeparator.setLineVisible(false);
     // add the figure to the Composite
-    add(methodsFigure);
-*/
+    add(operationsFigure);
+
     super.initialize();
 }
 	/**
@@ -285,9 +294,9 @@ Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attrib
 	attributesFigure.removeAll();
 	
 	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
-		classHeaderSeparator.setLineVisible(false);
+		attributeSeparator.setLineVisible(false);
 	} else {
-		classHeaderSeparator.setLineVisible(true);
+		attributeSeparator.setLineVisible(true);
 		Iterator iterator = null;
 		if (((PresentationAbstractClass)getNode()).isShowInheritedAttributes()) {
 			// show local + inherited attributes
@@ -298,7 +307,10 @@ Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attrib
 			iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
 		}
 		while (iterator.hasNext()) {
-			attributesFigure.add(createAttributeFigure((AttributeDef)iterator.next()));
+			Object feature = iterator.next();
+			if (feature instanceof AttributeDef) {
+				attributesFigure.add(createAttributeFigure((AttributeDef)feature));
+			}
 		}
 	}
 
@@ -309,11 +321,36 @@ Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attrib
  * Update the method figure and the ClassFigure itself as well. This causes calculating
  * the layout of contained figures.
  */
-private void updateMethodFigure() {
-/*
-    methodsFigure.update();
-    update();
+private void updateOperationFigure() {
+Tracer.getInstance().tune(this, "updateOperationFigure()", "currently all operationFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+	operationsFigure.removeAll();
+	
+/*	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
+		classHeaderSeparator.setLineVisible(false);
+	} else {*/
+		Iterator iterator = null;
+/*		if (((PresentationAbstractClass)getNode()).isShowInheritedAttributes()) {
+			// show local + inherited attributes
+			java.util.List inheritedAttributes = ((ch.ehi.interlis.modeltopicclass.AbstractClassDef)getModelElement()).getConsolidatedAttributes();
+			iterator = inheritedAttributes.iterator();
+		} else {
 */
+			// show local operations only
+			iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
+//		}
+			
+		operationSeparator.setLineVisible(false); //automatic display acc. to existing methods
+		while (iterator.hasNext()) {
+			Object feature = iterator.next();
+			if (feature instanceof UmlOperation) {
+				operationSeparator.setLineVisible(true);
+				operationsFigure.add(createOperationFigure((UmlOperation)feature));
+			}
+		}
+//	}
+
+	operationsFigure.update();
+	update();
 }
 /**
  * ModelElement changed. Therefore a refresh of the View is needed.
@@ -326,9 +363,17 @@ public void updateView() {
 		} else {
 			// node might have changed
 			super.updateView();
+			// show abstract Classes in italics
+			Font font = classNameFigure.getFont();
+			if (((AbstractClassDef)getModelElement()).isAbstract()) {
+				font = new Font(font.getName(), Font.ITALIC, font.getSize());
+			} else {
+				font = new Font(font.getName(), Font.PLAIN, font.getSize());
+			}
+			classNameFigure.setFont(font);
 			classNameFigure.setText(getModelElement().getDefLangName());
 			updateAttributeFigure();
-//			updateMethodFigure();
+			updateOperationFigure();
 		}
 	}
 }

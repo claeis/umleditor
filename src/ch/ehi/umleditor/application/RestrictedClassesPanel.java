@@ -20,8 +20,9 @@ package ch.ehi.umleditor.application;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import ch.softenvironment.util.DeveloperException;
+import ch.softenvironment.view.BasePanel;
+
 import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
@@ -31,11 +32,11 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * panel to view/edit a restriction-list of classes.
  *
  * @author: ce
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:52 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
 public class RestrictedClassesPanel
-  extends ch.softenvironment.view.DataPanel {
-  static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(RestrictedClassesPanel.class);
+  extends BasePanel implements ch.softenvironment.view.DataPanel {
+static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(RestrictedClassesPanel.class);
 
   private JScrollPane scpRestricted = new JScrollPane();
   private JTable tabRestricted = new JTable();

@@ -17,7 +17,6 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.*;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.umleditor.application.*;
@@ -31,10 +30,9 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:03 $
+ * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
  */
-public class RoleDefFigure extends NodeFigure {
-	private static java.util.ResourceBundle resRoleDefFigure = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/RoleDefFigure");  //$NON-NLS-1$
+class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
 	private LinkFigure linkFigure = null;
 
@@ -168,7 +166,7 @@ protected void initializeView() {
 				    	} else {
 					    	errorMsg = "[" + e.toString() + "]";//$NON-NLS-2$//$NON-NLS-1$
 				    	}
-						new WarningDialog(LauncherView.getInstance(), resRoleDefFigure.getString("CTInvalidInput"), resRoleDefFigure.getString("CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
+						new WarningDialog(LauncherView.getInstance(), getResourceString(RoleDefFigure.class, "CTInvalidInput"), getResourceString(RoleDefFigure.class, "CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
 			    	}
 			    	name = MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity());			    	
 		    	} else {
@@ -206,7 +204,7 @@ public void removeVisually() {
 				break;
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**
@@ -219,35 +217,17 @@ public void updateCoordinates() {
 	double y1 = rectangle.getY();
 
 	if (type == ROLE_DEF) {
-		if (getEdge().getNameAngle() != x1) {
 ch.softenvironment.util.Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates instead");//$NON-NLS-2$//$NON-NLS-1$
-			// prevent ping-pong with MetaModelChange
-			getEdge().setNameAngle(x1);
-		}
-		if (getEdge().getNameRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setNameRadius(y1);
-		}
+		getEdge().setNameAngle(x1);
+	    getEdge().setNameRadius(y1);
 	} else if (type == CARDINALITY) {
-		if (getEdge().getMultiplicityAngle() != x1) {
-			// prevent ping-pong with MetaModelChange
-			getEdge().setMultiplicityAngle(x1);
-		}
-		if (getEdge().getMultiplicityRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setMultiplicityRadius(y1);
-		}
-	} else {
-		// must be LinkFigure
-/*		if (getNode().getEast() != x1) {
-			// prevent ping-pong with MetaModelChange
-			getEdge().setMultiplicityAngle(x1);
-		}
-		if (getEdge().getMultiplicityRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setMultiplicityRadius(y1);
-		}
-		*/
+		getEdge().setMultiplicityAngle(x1);
+	    getEdge().setMultiplicityRadius(y1);
+	} else if (type == ASSOCIATION_NAME) {
+//ch.ehi.umleditor.umlpresentation.PresentationNode n = linkFigure.getNode();
+//ch.softenvironment.util.Tracer.getInstance().debug("width=" + n.getWidth() + " height="+n.getHeight() + " south="+ n.getSouth() + " east="+n.getEast());
+//		linkFigure.getNode().setWidth((int)x1);
+//		linkFigure.getNode().setHeight((int)y1);
 	}
 }
 /**
@@ -265,9 +245,7 @@ public void updateView() {
 //			super.updateView();
 			textFigure.setText(ch.ehi.umleditor.application.MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity()));
 		}
-	} else {
-		// must be LinkFigure
-		//			super.updateView();
+	} else if (type == ASSOCIATION_NAME){
 		textFigure.setText(linkFigure.getModelElement().getDefLangName());
 	}
 }
