@@ -42,6 +42,7 @@ class IvjEventHandler implements java.awt.event.ActionListener {
 public ColorChooserDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
+	show();
 }
 /**
  * connEtoC1:  (BtnAbbrechen.action.actionPerformed(java.awt.event.ActionEvent) --> ColorChooser.cancelPressed()V)
