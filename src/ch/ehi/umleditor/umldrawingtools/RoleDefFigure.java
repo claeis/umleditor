@@ -31,10 +31,9 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:14:16 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
  */
 class RoleDefFigure extends NodeFigure {
-	private static java.util.ResourceBundle resRoleDefFigure = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/RoleDefFigure");  //$NON-NLS-1$
 	private PresentationRoleFigure edgeFigure = null;
 	private LinkFigure linkFigure = null;
 
@@ -168,7 +167,7 @@ protected void initializeView() {
 				    	} else {
 					    	errorMsg = "[" + e.toString() + "]";//$NON-NLS-2$//$NON-NLS-1$
 				    	}
-						new WarningDialog(LauncherView.getInstance(), resRoleDefFigure.getString("CTInvalidInput"), resRoleDefFigure.getString("CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
+						new WarningDialog(LauncherView.getInstance(), getResourceString(RoleDefFigure.class, "CTInvalidInput"), getResourceString(RoleDefFigure.class, "CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
 			    	}
 			    	name = MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity());			    	
 		    	} else {
@@ -206,7 +205,7 @@ public void removeVisually() {
 				break;
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
 	}
 }
 /**

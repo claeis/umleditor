@@ -20,14 +20,14 @@ package ch.ehi.umleditor.application;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
 /**
- * Shortcut-Panel for a DomainDef.
+ * Details of a DomainDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:00 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class IliBaseTypeDomainDefPanel extends ch.softenvironment.view.DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeDomainDefPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeDomainDefPanel");  //$NON-NLS-1$
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
 	private javax.swing.JButton ivjBtnChangeDomainDef = null;
 	private java.awt.Dialog ownerDialog = null;
@@ -56,7 +56,7 @@ public IliBaseTypeDomainDefPanel() {
  * Comment
  */
 private void btnAssign() {
-	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(ownerDialog, resIliBaseTypeDomainDefPanel.getString("CTSelection"), true, abstractClassDef); //$NON-NLS-1$
+	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(ownerDialog, getResourceString("CTSelection"), true, abstractClassDef); //$NON-NLS-1$
 	if (dialog.isSaved()) {
 		setObject(dialog.getDomainDef(), abstractClassDef);
 	}
@@ -113,10 +113,12 @@ private javax.swing.JButton getBtnAssign() {
 		try {
 			ivjBtnAssign = new javax.swing.JButton();
 			ivjBtnAssign.setName("BtnAssign");
-			ivjBtnAssign.setToolTipText(resIliBaseTypeDomainDefPanel.getString("BtnAssign_toolTipText"));
-			ivjBtnAssign.setText(MENU_EDIT_ASSIGN);
+			ivjBtnAssign.setToolTipText("Wertebereich-Definition aus Liste auswählen");
+			ivjBtnAssign.setText("Zuordnen");
 			ivjBtnAssign.setBounds(160, 59, 98, 25);
 			// user code begin {1}
+			ivjBtnAssign.setText(CommonUserAccess.getMniEditAssignText());
+			ivjBtnAssign.setToolTipText(getResourceString("BtnAssign_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -136,10 +138,12 @@ private javax.swing.JButton getBtnChangeDomainDef() {
 		try {
 			ivjBtnChangeDomainDef = new javax.swing.JButton();
 			ivjBtnChangeDomainDef.setName("BtnChangeDomainDef");
-			ivjBtnChangeDomainDef.setToolTipText(resIliBaseTypeDomainDefPanel.getString("BtnChangeDomainDef_toolTipText"));
-			ivjBtnChangeDomainDef.setText(MENU_EDIT_CHANGE_WINDOW);
+			ivjBtnChangeDomainDef.setToolTipText("Wertebereichs-Definition bearbeiten");
+			ivjBtnChangeDomainDef.setText("Öffne Spezifikation...");
 			ivjBtnChangeDomainDef.setBounds(268, 59, 152, 25);
 			// user code begin {1}
+			ivjBtnChangeDomainDef.setToolTipText(getResourceString("BtnChangeDomainDef_toolTipText"));
+			ivjBtnChangeDomainDef.setText(CommonUserAccess.getMniEditChangeWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -159,9 +163,11 @@ private javax.swing.JLabel getLblDomainDefName() {
 		try {
 			ivjLblDomainDefName = new javax.swing.JLabel();
 			ivjLblDomainDefName.setName("LblDomainDefName");
-			ivjLblDomainDefName.setText(resIliBaseTypeDomainDefPanel.getString("LblDomainDefName_text"));
+			ivjLblDomainDefName.setToolTipText("");
+			ivjLblDomainDefName.setText("Name:");
 			ivjLblDomainDefName.setBounds(10, 22, 140, 14);
 			// user code begin {1}
+			ivjLblDomainDefName.setText(getResourceString("LblDomainDefName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}

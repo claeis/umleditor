@@ -25,11 +25,10 @@ import ch.softenvironment.view.*;
  * User Interface for a common ModelElement without an explicit GUI.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:37 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class CommonSpecificationDialog extends BaseDialog {
 	// ModelElement
-	private static java.util.ResourceBundle resCommonSpecificationDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/CommonSpecificationDialog");
 	ch.ehi.uml1_4.foundation.core.ModelElement modelElement = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
@@ -64,7 +63,7 @@ public CommonSpecificationDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.
 	super(owner, true);
 	initialize();
 	
-	setTitle(ElementUtils.getDisplayName(element) + " " + resCommonSpecificationDialog.getString("CTSpecification")); //$NON-NLS-1$
+	setTitle(ElementUtils.getDisplayName(element) + " " + getResourceString("CTSpecification")); //$NON-NLS-1$
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
@@ -280,8 +279,9 @@ private javax.swing.JLabel getLblName() {
 		try {
 			ivjLblName = new javax.swing.JLabel();
 			ivjLblName.setName("LblName");
-			ivjLblName.setText(resCommonSpecificationDialog.getString("LblName_text"));
+			ivjLblName.setText("Name:");
 			// user code begin {1}
+			ivjLblName.setText(getResourceString("LblName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -342,7 +342,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral = new javax.swing.JTabbedPane();
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
-			ivjTbpGeneral.insertTab(resCommonSpecificationDialog.getString("TbpSyntax_text"), null, getPnlSyntax(), null, 1);
+			ivjTbpGeneral.insertTab(getResourceString("TbpSyntax_text"), null, getPnlSyntax(), null, 1);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {

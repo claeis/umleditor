@@ -20,6 +20,8 @@ package ch.ehi.umleditor.umldrawingtools;
 import CH.ifa.draw.util.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.softenvironment.view.CommonUserAccess;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -33,11 +35,11 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-01-06 10:03:00 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
  */
-public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener, ch.softenvironment.view.CommonUserAccess {
+public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
-	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DelegationSelectionTool");  //$NON-NLS-1$
+//private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DelegationSelectionTool");  //$NON-NLS-1$
 	private JHotDrawTextTool textTool = null;
 
 	private static final int NONE = 0;
@@ -71,41 +73,45 @@ public class DelegationSelectionTool extends CustomSelectionTool implements java
 	private JCheckBoxMenuItem chxShowAttributeTypes = null;
 	private JCheckBoxMenuItem chxShowAttributeCardinality = null;
 	private JCheckBoxMenuItem chxShowLinkFigure = null;
+/**
+ * Constructor.
+ * @param editor
+ */
 public DelegationSelectionTool(DrawingEditor editor) {
 	super(editor);
 	textTool = new JHotDrawTextTool(editor, new TextFigure());
 
-	chxShowRole = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowRole_text")); //$NON-NLS-1$
+	chxShowRole = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowRole_text")); //$NON-NLS-1$
 	chxShowRole.setActionCommand(ROLES_ACTION_COMMAND);
     chxShowRole.addActionListener(this);
     chxShowRole.setSelected(((ClassDiagramView)view()).isShowAllRoles());
 
-    chxShowMultiplicity = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowMultiplicity_text")); //$NON-NLS-1$
+    chxShowMultiplicity = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowMultiplicity_text")); //$NON-NLS-1$
 	chxShowMultiplicity.setActionCommand(CARDINALITY_ACTION_COMMAND);
     chxShowMultiplicity.addActionListener(this);
     chxShowMultiplicity.setSelected(((ClassDiagramView)view()).isShowMultiplicities());
 
-    chxShowAssociationNames = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowAssociationNames_text"));
+    chxShowAssociationNames = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowAssociationNames_text"));
 	chxShowAssociationNames.setActionCommand(ASSOCIATION_NAME_ACTION_COMMAND);
     chxShowAssociationNames.addActionListener(this);
     chxShowAssociationNames.setSelected(((ClassDiagramView)view()).isShowAssociationNames());
 
-    chxShowAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowAttributes_text"));
+    chxShowAttributes = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowAttributes_text"));
 	chxShowAttributes.setActionCommand(ATTRIBUTES_ACTION_COMMAND);
     chxShowAttributes.addActionListener(this);
     chxShowAttributes.setSelected(((ClassDiagramView)view()).isShowAttributes());
 
-    chxShowAttributeTypes = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowAttributeTypes_text"));
+    chxShowAttributeTypes = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowAttributeTypes_text"));
 	chxShowAttributeTypes.setActionCommand(ATTRIBUTE_TYPES_ACTION_COMMAND);
     chxShowAttributeTypes.addActionListener(this);
     chxShowAttributeTypes.setSelected(((ClassDiagramView)view()).isShowAttributeTypes());
 
-    chxShowAttributeCardinality = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowAttributeCardinality_text"));
+    chxShowAttributeCardinality = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowAttributeCardinality_text"));
 	chxShowAttributeCardinality.setActionCommand(ATTRIBUTE_CARDINALITY_ACTION_COMMAND);
     chxShowAttributeCardinality.addActionListener(this);
     chxShowAttributeCardinality.setSelected(((ClassDiagramView)view()).isShowAttributeMultiplicity());
 
-    chxShowLinkFigure = new javax.swing.JCheckBoxMenuItem(resources.getString("ChxShowLinkFigure_text"));
+    chxShowLinkFigure = new javax.swing.JCheckBoxMenuItem(NodeFigure.getResourceString(DelegationSelectionTool.class, "ChxShowLinkFigure_text"));
 	chxShowLinkFigure.setActionCommand(LINK_FIGURE_ACTION_COMMAND);
     chxShowLinkFigure.addActionListener(this);
     chxShowLinkFigure.setSelected(((ClassDiagramView)view()).isShowLinkFigure());
@@ -283,7 +289,7 @@ private void dragNoteAnchor(Connector end, Figure targetFigure, int x, int y) {
 			((EdgeFigure)editedConnection).setStartConnector(end);
 			((EdgeFigure)editedConnection).changed();
 		} else {
-			new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), resources.getString("CTModellingError"), resources.getString("CENoteToNoteError"));
+			new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CENoteToNoteError"));
 		}
 	} else {
 		// 1) Presentation
@@ -381,19 +387,19 @@ protected void handlePopupMenu(MouseEvent e, int x, int y) {
 
 		menu.add(new JSeparator());
 
-		menu.add(new AbstractAction(MENU_FILE_PRINT_WINDOW) { //$NON-NLS-1$
+		menu.add(new AbstractAction(CommonUserAccess.getMniFilePrintWindowText()) { //$NON-NLS-1$
 			public void actionPerformed(ActionEvent event) {
 				mniPrintDiagram();
 			}
 		});
 
-		menu.add(new AbstractAction(resources.getString("MenuSaveDiagram")) { //$NON-NLS-1$
+		menu.add(new AbstractAction(NodeFigure.getResourceString(DelegationSelectionTool.class, "MenuSaveDiagram")) { //$NON-NLS-1$
 			public void actionPerformed(ActionEvent event) {
 				mniSaveDiagram();
 			}
 		});
 
-		menu.add(new AbstractAction(MENU_WINDOW_ORDER_AUTOMATICALLY) { //$NON-NLS-1$
+		menu.add(new AbstractAction(CommonUserAccess.getMniWindowOrderAutomaticallyText()) { //$NON-NLS-1$
 			public void actionPerformed(ActionEvent event) {
 				mniLayoutDiagram();
 			}
@@ -474,7 +480,7 @@ public void mouseDrag(MouseEvent e, int x, int y) {
 								dragDependency(newEnd, targetFigure, x, y);
 							}
 						} else {
-							new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), resources.getString("CTModellingError"), resources.getString("CEDragNodeIncompatibility"));
+							new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CEDragNodeIncompatibility"));
 						}
 
 						editedConnection.changed();
@@ -495,7 +501,7 @@ public void mouseDrag(MouseEvent e, int x, int y) {
 			}
 		}
 	} catch (Throwable exception) {
-		new ch.softenvironment.view.ErrorDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), resources.getString("CTModellingError"), exception.getMessage(), exception); //$NON-NLS-1$
+		new ch.softenvironment.view.ErrorDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), exception.getMessage(), exception); //$NON-NLS-1$
 	}
 }
 }

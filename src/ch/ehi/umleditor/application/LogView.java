@@ -25,10 +25,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-01-04 16:48:19 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:20:44 $
  */
 public class LogView extends DataPanel {
-	private static java.util.ResourceBundle resLogView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/LogView");  //$NON-NLS-1$
 	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
 	private javax.swing.JPanel ivjPnlLog = null;
 	private javax.swing.JScrollPane ivjScpLog = null;
@@ -374,8 +373,9 @@ private javax.swing.JCheckBoxMenuItem getMncWrapLines() {
 		try {
 			ivjMncWrapLines = new javax.swing.JCheckBoxMenuItem();
 			ivjMncWrapLines.setName("MncWrapLines");
-			ivjMncWrapLines.setText(resLogView.getString("MncWrapLines_text"));
+			ivjMncWrapLines.setText("Zeilen umbrechen");
 			// user code begin {1}
+			ivjMncWrapLines.setText(getResourceString("MncWrapLines_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -398,7 +398,7 @@ private javax.swing.JMenuItem getMniClear() {
 			ivjMniClear.setText("Log löschen");
 			ivjMniClear.setEnabled(false);
 			// user code begin {1}
-			ivjMniClear.setText(MENU_EDIT_REMOVE);
+			ivjMniClear.setText(CommonUserAccess.getMniEditRemoveText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -421,7 +421,7 @@ private javax.swing.JMenuItem getMniCopy() {
 			ivjMniCopy.setText("Kopieren");
 			ivjMniCopy.setEnabled(false);
 			// user code begin {1}
-			ivjMniCopy.setText(MENU_EDIT_COPY);
+			ivjMniCopy.setText(CommonUserAccess.getMniEditCopyText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -444,7 +444,7 @@ private javax.swing.JMenuItem getMniSave() {
 			ivjMniSave.setText("Speichern unter...");
 			ivjMniSave.setEnabled(false);
 			// user code begin {1}
-			ivjMniSave.setText(MENU_FILE_SAVEAS);
+			ivjMniSave.setText(CommonUserAccess.getMniFileSaveText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -467,7 +467,7 @@ private javax.swing.JMenuItem getMniSelectAll() {
 			ivjMniSelectAll.setText("Alles markieren");
 			ivjMniSelectAll.setEnabled(false);
 			// user code begin {1}
-			ivjMniSelectAll.setText(MENU_EDIT_SELECT_ALL);
+			ivjMniSelectAll.setText(CommonUserAccess.getMniEditSelectAllText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -487,10 +487,12 @@ private javax.swing.JMenuItem getMniSelectNodeInTree() {
 		try {
 			ivjMniSelectNodeInTree = new javax.swing.JMenuItem();
 			ivjMniSelectNodeInTree.setName("MniSelectNodeInTree");
-			ivjMniSelectNodeInTree.setToolTipText(resLogView.getString("MniSelectNodeInTree_toolTipText"));
-			ivjMniSelectNodeInTree.setText(resLogView.getString("MniSelectNodeInTree_text"));
+			ivjMniSelectNodeInTree.setToolTipText("Knoten in der Navigation selektieren");
+			ivjMniSelectNodeInTree.setText("Knoten selektieren");
 			ivjMniSelectNodeInTree.setEnabled(false);
 			// user code begin {1}
+			ivjMniSelectNodeInTree.setToolTipText(getResourceString("MniSelectNodeInTree_toolTipText"));
+			ivjMniSelectNodeInTree.setText(getResourceString("MniSelectNodeInTree_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -589,7 +591,7 @@ private javax.swing.JTabbedPane getTbpLog() {
 		try {
 			ivjTbpLog = new javax.swing.JTabbedPane();
 			ivjTbpLog.setName("TbpLog");
-			ivjTbpLog.insertTab(resLogView.getString("CTLog"), null, getPnlLog(), null, 0);
+			ivjTbpLog.insertTab(getResourceString("CTLog"), null, getPnlLog(), null, 0);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -676,19 +678,6 @@ private void initialize() {
 	wrapLines(false);
 	// user code end
 }
-private void wrapLines(boolean wrap)
-{
-	if (wrap) {
-		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		getTxaLog().setAutoscrolls(false);
-		getTxaLog().setLineWrap(true);
-	} else {
-		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		getTxaLog().setAutoscrolls(true);
-		getTxaLog().setLineWrap(false);
-	}
-	
-}
 /**
  * Show the lines wrapped or not.
  */
@@ -699,7 +688,7 @@ private void mncWrapLines() {
  * Comment
  */
 private void mniSave() {
-LauncherView.getInstance().nyi(MENU_FILE_SAVE);//$NON-NLS-1$
+LauncherView.getInstance().nyi("save()");//$NON-NLS-1$
 }
 /**
  * Select all nodes in NavigationTree where ID's are selected in LogText.
@@ -725,5 +714,18 @@ public void setObject(java.lang.Object object) {
  */
 public void toggleVisibility() {
 	setVisible(!(isVisible()));
+}
+private void wrapLines(boolean wrap)
+{
+	if (wrap) {
+		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		getTxaLog().setAutoscrolls(false);
+		getTxaLog().setLineWrap(true);
+	} else {
+		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		getTxaLog().setAutoscrolls(true);
+		getTxaLog().setLineWrap(false);
+	}
+	
 }
 }

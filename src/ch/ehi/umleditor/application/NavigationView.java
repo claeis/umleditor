@@ -1,39 +1,21 @@
 package ch.ehi.umleditor.application;
 
-/* This file is part of the UML/INTERLIS-Editor.
- * For more information, please see <http://www.umleditor.org/>.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import javax.swing.tree.*;
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
 /**
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2003-12-29 20:49:45 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:20:44 $
  */
 public class NavigationView extends ch.softenvironment.view.DataPanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
 	// optimize speed
-	private static java.util.ResourceBundle resNavigationView = ResourceBundle.getBundle(NavigationView.class);
 	private DefaultMutableTreeNode latestNodeInTree = null;
 	private boolean singleClickTreated = false;
 	private boolean doubleClickTreated = false;
@@ -868,9 +850,12 @@ private javax.swing.JMenuItem getMniAddToDiagram() {
 		try {
 			ivjMniAddToDiagram = new javax.swing.JMenuItem();
 			ivjMniAddToDiagram.setName("MniAddToDiagram");
-			ivjMniAddToDiagram.setToolTipText(resNavigationView.getString("MniAddToDiagram_toolTipText"));
-			ivjMniAddToDiagram.setText(resNavigationView.getString("MniAddToDiagram_text"));
+			ivjMniAddToDiagram.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
+			ivjMniAddToDiagram.setText("Einfügen in Diagram");
 			// user code begin {1}
+			ivjMniAddToDiagram.setToolTipText(getResourceString("MniAddToDiagram_toolTipText"));
+			ivjMniAddToDiagram.setText(getResourceString("MniAddToDiagram_text"));
+			
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -890,9 +875,10 @@ private javax.swing.JMenuItem getMniAssociationDef() {
 		try {
 			ivjMniAssociationDef = new javax.swing.JMenuItem();
 			ivjMniAssociationDef.setName("MniAssociationDef");
-			ivjMniAssociationDef.setText(resNavigationView.getString("MniAssociationDef_text"));
+			ivjMniAssociationDef.setText("Beziehung");
 			ivjMniAssociationDef.setEnabled(true);
 			// user code begin {1}
+			ivjMniAssociationDef.setText(getResourceString("MniAssociationDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -915,8 +901,8 @@ private javax.swing.JMenuItem getMniAttributeDef() {
 			ivjMniAttributeDef.setToolTipText("Attribut");
 			ivjMniAttributeDef.setText("AttributeDef");
 			// user code begin {1}
-			ivjMniAttributeDef.setToolTipText(resNavigationView.getString("MniAttributeDef_toolTipText"));
-			ivjMniAttributeDef.setText(resNavigationView.getString("MniAttributeDef_text"));
+			ivjMniAttributeDef.setToolTipText(getResourceString("MniAttributeDef_toolTipText"));
+			ivjMniAttributeDef.setText(getResourceString("MniAttributeDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -940,8 +926,8 @@ private javax.swing.JMenuItem getMniClassDef() {
 			ivjMniClassDef.setText("ClassDef");
 			ivjMniClassDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniClassDef.setToolTipText(resNavigationView.getString("MniClassDef_toolTipText"));
-			ivjMniClassDef.setText(resNavigationView.getString("MniClassDef_text"));
+			ivjMniClassDef.setToolTipText(getResourceString("MniClassDef_toolTipText"));
+			ivjMniClassDef.setText(getResourceString("MniClassDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -963,7 +949,7 @@ private javax.swing.JMenuItem getMniClassDiagram() {
 			ivjMniClassDiagram.setName("MniClassDiagram");
 			ivjMniClassDiagram.setText("Klassendiagramm");
 			// user code begin {1}
-			ivjMniClassDiagram.setText(resNavigationView.getString("MniClassDiagram_text"));
+			ivjMniClassDiagram.setText(getResourceString("MniClassDiagram_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -985,7 +971,7 @@ private javax.swing.JMenuItem getMniDomainDef() {
 			ivjMniDomainDef.setName("MniDomainDef");
 			ivjMniDomainDef.setText("DomainDef");
 			// user code begin {1}
-			ivjMniDomainDef.setText(resNavigationView.getString("MniDomainDef_text"));
+			ivjMniDomainDef.setText(getResourceString("MniDomainDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1009,8 +995,8 @@ private javax.swing.JMenuItem getMniFunctionDef() {
 			ivjMniFunctionDef.setText("FunctionDef");
 			ivjMniFunctionDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniFunctionDef.setToolTipText(resNavigationView.getString("MniFunctionDef_toolTipText"));
-			ivjMniFunctionDef.setText(resNavigationView.getString("MniFunctionDef_text"));
+			ivjMniFunctionDef.setToolTipText(getResourceString("MniFunctionDef_toolTipText"));
+			ivjMniFunctionDef.setText(getResourceString("MniFunctionDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1033,7 +1019,7 @@ private javax.swing.JMenuItem getMniGraphicDef() {
 			ivjMniGraphicDef.setText("GraphicDef");
 			ivjMniGraphicDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniGraphicDef.setText(resNavigationView.getString("MniGraphicDef_text"));
+			ivjMniGraphicDef.setText(getResourceString("MniGraphicDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1056,7 +1042,7 @@ private javax.swing.JMenuItem getMniGraphicParameterDef() {
 			ivjMniGraphicParameterDef.setText("GraphicParameterDef");
 			ivjMniGraphicParameterDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniGraphicParameterDef.setText(resNavigationView.getString("MniGraphicParameterDef_text"));
+			ivjMniGraphicParameterDef.setText(getResourceString("MniGraphicParameterDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1078,7 +1064,7 @@ private javax.swing.JMenuItem getMniInterlis2Def() {
 			ivjMniInterlis2Def.setName("MniInterlis2Def");
 			ivjMniInterlis2Def.setText("Interlis-Datei (Interlis2Def)");
 			// user code begin {1}
-			ivjMniInterlis2Def.setText(resNavigationView.getString("MniInterlis2Def_text"));
+			ivjMniInterlis2Def.setText(getResourceString("MniInterlis2Def_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1101,7 +1087,7 @@ private javax.swing.JMenuItem getMniLineFormTypeDef() {
 			ivjMniLineFormTypeDef.setText("LineFormTypeDef");
 			ivjMniLineFormTypeDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniLineFormTypeDef.setText(resNavigationView.getString("MniLineFormTypeDef_text"));
+			ivjMniLineFormTypeDef.setText(getResourceString("MniLineFormTypeDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1124,7 +1110,7 @@ private javax.swing.JMenuItem getMniMetaDataUseDef() {
 			ivjMniMetaDataUseDef.setText("MetaDataUseDef");
 			ivjMniMetaDataUseDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniMetaDataUseDef.setText(resNavigationView.getString("MniMetaDataUseDef_text"));
+			ivjMniMetaDataUseDef.setText(getResourceString("MniMetaDataUseDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1144,8 +1130,9 @@ private javax.swing.JMenuItem getMniMetaObjectFile() {
 		try {
 			ivjMniMetaObjectFile = new javax.swing.JMenuItem();
 			ivjMniMetaObjectFile.setName("MniMetaObjectFile");
-			ivjMniMetaObjectFile.setText(resNavigationView.getString("MniMetaObjectFile_text"));
+			ivjMniMetaObjectFile.setText("Metadatenbehälter-Datei");
 			// user code begin {1}
+			ivjMniMetaObjectFile.setText(getResourceString("MniMetaObjectFile_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1167,7 +1154,7 @@ private javax.swing.JMenuItem getMniModelDef() {
 			ivjMniModelDef.setName("MniModelDef");
 			ivjMniModelDef.setText("Interlis-Modell (ModelDef)");
 			// user code begin {1}
-			ivjMniModelDef.setText(resNavigationView.getString("MniModelDef_text"));
+			ivjMniModelDef.setText(getResourceString("MniModelDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1189,7 +1176,7 @@ private javax.swing.JMenuItem getMniOpen() {
 			ivjMniOpen.setName("MniOpen");
 			ivjMniOpen.setText("Öffnen");
 			// user code begin {1}
-			ivjMniOpen.setText(resNavigationView.getString("MniOpen_text"));
+			ivjMniOpen.setText(getResourceString("MniOpen_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1211,7 +1198,7 @@ private javax.swing.JMenuItem getMniOpenSpecification() {
 			ivjMniOpenSpecification.setName("MniOpenSpecification");
 			ivjMniOpenSpecification.setText("Öffne Spezifikation...");
 			// user code begin {1}
-			ivjMniOpenSpecification.setText(resNavigationView.getString("MniOpenSpecification_text"));
+			ivjMniOpenSpecification.setText(getResourceString("MniOpenSpecification_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1234,7 +1221,7 @@ private javax.swing.JMenuItem getMniPrint() {
 			ivjMniPrint.setText("Drucken...");
 			ivjMniPrint.setEnabled(true);
 			// user code begin {1}
-			ivjMniPrint.setText(MENU_FILE_PRINT_WINDOW);
+			ivjMniPrint.setText(CommonUserAccess.getMniFilePrintWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1256,7 +1243,7 @@ private javax.swing.JMenuItem getMniRemove() {
 			ivjMniRemove.setName("MniRemove");
 			ivjMniRemove.setText("Löschen (im Modell)");
 			// user code begin {1}
-			ivjMniRemove.setText(resNavigationView.getString("MniRemove_text"));
+			ivjMniRemove.setText(getResourceString("MniRemove_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1279,7 +1266,7 @@ private javax.swing.JMenuItem getMniRename() {
 			ivjMniRename.setText("Umbenennen");
 			ivjMniRename.setEnabled(true);
 			// user code begin {1}
-			ivjMniRename.setText(MENU_EDIT_RENAME);
+			ivjMniRename.setText(CommonUserAccess.getMniEditRenameText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1299,9 +1286,11 @@ private javax.swing.JMenuItem getMniRoleDef() {
 		try {
 			ivjMniRoleDef = new javax.swing.JMenuItem();
 			ivjMniRoleDef.setName("MniRoleDef");
-			ivjMniRoleDef.setToolTipText(resNavigationView.getString("MniRoleDef_toolTipText"));
-			ivjMniRoleDef.setText(resNavigationView.getString("MniRoleDef_text"));
+			ivjMniRoleDef.setToolTipText("Rolle eines Beziehungsendes");
+			ivjMniRoleDef.setText("Rolle");
 			// user code begin {1}
+			ivjMniRoleDef.setToolTipText(getResourceString("MniRoleDef_toolTipText"));
+			ivjMniRoleDef.setText(getResourceString("MniRoleDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1323,7 +1312,7 @@ private javax.swing.JRadioButtonMenuItem getMniSortbyKindName() {
 			ivjMniSortbyKindName.setName("MniSortbyKindName");
 			ivjMniSortbyKindName.setText("Nach Art/Name");
 			// user code begin {1}
-			ivjMniSortbyKindName.setText(resNavigationView.getString("MniSortByKindName_text"));
+			ivjMniSortbyKindName.setText(getResourceString("MniSortByKindName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1346,7 +1335,7 @@ private javax.swing.JRadioButtonMenuItem getMniSortbyName() {
 			ivjMniSortbyName.setSelected(false);
 			ivjMniSortbyName.setText("Nach Name");
 			// user code begin {1}
-			ivjMniSortbyName.setText(resNavigationView.getString("MniSortByName_text"));
+			ivjMniSortbyName.setText(getResourceString("MniSortByName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1368,7 +1357,7 @@ private javax.swing.JMenuItem getMniTopicDef() {
 			ivjMniTopicDef.setName("MniTopicDef");
 			ivjMniTopicDef.setText("TopicDef");
 			// user code begin {1}
-			ivjMniTopicDef.setText(resNavigationView.getString("MniTopicDef_text"));
+			ivjMniTopicDef.setText(getResourceString("MniTopicDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1390,7 +1379,7 @@ private javax.swing.JMenuItem getMniUmlPackage() {
 			ivjMniUmlPackage.setName("MniUmlPackage");
 			ivjMniUmlPackage.setText("UmlPackage");
 			// user code begin {1}
-			ivjMniUmlPackage.setText(resNavigationView.getString("MniUmlPackage_text"));
+			ivjMniUmlPackage.setText(getResourceString("MniUmlPackage_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1413,7 +1402,7 @@ private javax.swing.JMenuItem getMniUnitDef() {
 			ivjMniUnitDef.setText("UnitDef");
 			ivjMniUnitDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniUnitDef.setText(resNavigationView.getString("MniUnitDef_text"));
+			ivjMniUnitDef.setText(getResourceString("MniUnitDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1436,7 +1425,7 @@ private javax.swing.JMenuItem getMniViewDef() {
 			ivjMniViewDef.setText("ViewDef");
 			ivjMniViewDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniViewDef.setText(resNavigationView.getString("MniViewDef_text"));
+			ivjMniViewDef.setText(getResourceString("MniViewDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1459,7 +1448,7 @@ private javax.swing.JMenuItem getMniViewProjectionDef() {
 			ivjMniViewProjectionDef.setText("ViewProjectionDef");
 			ivjMniViewProjectionDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniViewProjectionDef.setText(resNavigationView.getString("MniViewProjectionDef_text"));
+			ivjMniViewProjectionDef.setText(getResourceString("MniViewProjectionDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1531,7 +1520,7 @@ private javax.swing.JMenu getMnuNew() {
 			ivjMnuNew.add(getMniAttributeDef());
 			ivjMnuNew.add(getMniRoleDef());
 			// user code begin {1}
-			ivjMnuNew.setText(MENU_FILE_NEW);
+			ivjMnuNew.setText(CommonUserAccess.getMniFileNewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1555,7 +1544,7 @@ private javax.swing.JMenu getMnuSort() {
 			ivjMnuSort.add(getMniSortbyName());
 			ivjMnuSort.add(getMniSortbyKindName());
 			// user code begin {1}
-			ivjMnuSort.setText(resNavigationView.getString("MnuSort_text"));
+			ivjMnuSort.setText(getResourceString("MnuSort_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1703,7 +1692,7 @@ private void initialize() {
 	sortGroup.add(getMniSortbyName());
 	sortGroup.add(getMniSortbyKindName());
         mniMoveElement = new javax.swing.JMenuItem();
-	mniMoveElement.setText("Move element...");
+	mniMoveElement.setText(getResourceString("MniMoveElement_text"));
 	mniMoveElement.addActionListener(new java.awt.event.ActionListener() {
 	  // callback Handler if Button was pressed
 	  public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1832,6 +1821,21 @@ private void mniOpen() {
 private void mniPrint() {
 	LauncherView.getInstance().printClassDiagram(openDiagram(getSelectedNode()));
 }
+private void moveElement() {
+	try {
+          MoveElementDialog moveDialog = new MoveElementDialog(
+                  LauncherView.getInstance(),"Select Target Package"
+                  , true, LauncherView.getInstance().getModel());
+          if (moveDialog.isSaved()) {
+            ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
+      		ModelElement ele=(ModelElement)getSelectedNode();
+                ele.detachNamespace();
+                ele.attachNamespace(apackage);
+          }
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
 /**
  * Comment
  */
@@ -1946,22 +1950,6 @@ private void newModelDef() {
 		handleException(e);
 	}
 }
-private void moveElement() {
-	try {
-          MoveElementDialog moveDialog = new MoveElementDialog(
-                  LauncherView.getInstance(),"Select Target Package"
-                  , true, LauncherView.getInstance().getModel());
-          if (moveDialog.isSaved()) {
-            ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
-      		ModelElement ele=(ModelElement)getSelectedNode();
-                ele.detachNamespace();
-                ele.attachNamespace(apackage);
-          }
-	} catch(Throwable e) {
-		handleException(e);
-	}
-}
-
 /**
  * Comment
  */

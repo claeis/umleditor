@@ -17,7 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.ehi.basics.i18n.ResourceBundle;
+
 import ch.ehi.interlis.associations.*;
 import java.util.*;
 import java.awt.event.*;
@@ -34,11 +34,10 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2004-04-16 09:31:34 $
+ * @version $Revision: 1.12 $ $Date: 2004-04-27 09:22:46 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
-	private static java.util.ResourceBundle resClassDiagramView = ResourceBundle.getBundle(ClassDiagramView.class);  //$NON-NLS-1$
 	private ch.ehi.umleditor.umlpresentation.Diagram diagram = null;
 	private Element parentElement = null;
 	// Menu Checkboxes
@@ -88,8 +87,8 @@ public Figure add(Element element) {
             if (modelElement.equals(element)) {
                 new WarningDialog(
                     LauncherView.getInstance(),
-                    resClassDiagramView.getString("CTAddElement"), //$NON-NLS-1$
-                    NlsUtils.formatMessage(resClassDiagramView.getString("CWElementAdded"), modelElement.getDefLangName())); //$NON-NLS-1$
+                    NodeFigure.getResourceString(ClassDiagramView.class, "CTAddElement"), //$NON-NLS-1$
+                    NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CWElementAdded"), modelElement.getDefLangName())); //$NON-NLS-1$
                 return null;
             }
         }
@@ -110,7 +109,7 @@ public Figure add(Element element) {
         throw new DeveloperException(
             this,
             "add(Element)",//$NON-NLS-1$
-            NlsUtils.formatMessage(resClassDiagramView.getString("CEInvalidType"), element.toString())); //$NON-NLS-1$
+            NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CEInvalidType"), element.toString())); //$NON-NLS-1$
     }
 }
 /**
@@ -146,7 +145,7 @@ public Figure add(Figure figure) {
 			super.add(figure);
 		}
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), ModelElementUI.CREATION_ERROR, resClassDiagramView.getString("CEFigureNotCreated"), e); //$NON-NLS-1$
+		new ErrorDialog(LauncherView.getInstance(), ModelElementUI.CREATION_ERROR, NodeFigure.getResourceString(ClassDiagramView.class, "CEFigureNotCreated"), e); //$NON-NLS-1$
 	}
 
 	return figure;
@@ -513,7 +512,7 @@ protected Element getParentElement() {
  */
 public String getTitle() {
 	Object[] tokens = { ((ModelElement)getParentElement()).getDefLangName(), ElementUtils.mapNlsString(getDiagram().getName()) };
-	return NlsUtils.formatMessage(resClassDiagramView.getString("CTClassDiagram"), tokens); //$NON-NLS-1$
+	return NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CTClassDiagram"), tokens); //$NON-NLS-1$
 }
 /**
  * Allow suppressing of MetaModelChange-Events.
@@ -912,7 +911,7 @@ private Figure saveAssociation(ch.ehi.uml1_4.foundation.core.Association associa
 	// 1) check for necessary nodes	
 	ArrayList roles = AssociationLineConnection.getRoleClassifiers(associationDef);
 	if ((roles.size() < 2) && (AssociationLineConnection.getParent(associationDef) == null)) {
-		new WarningDialog(LauncherView.getInstance(), resClassDiagramView.getString("CTAssociationNotDisplayable"), resClassDiagramView.getString("CWRoleMissing")); //$NON-NLS-2$ //$NON-NLS-1$
+		new WarningDialog(LauncherView.getInstance(), NodeFigure.getResourceString(ClassDiagramView.class, "CTAssociationNotDisplayable"), NodeFigure.getResourceString(ClassDiagramView.class, "CWRoleMissing")); //$NON-NLS-2$ //$NON-NLS-1$
 		return null;
 	} else {
 		// 2) create Composite

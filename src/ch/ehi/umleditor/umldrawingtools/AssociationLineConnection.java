@@ -40,11 +40,10 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:05:47 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
  * @see handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
-	private static java.util.ResourceBundle resAssociationLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/AssociationLineConnection");  //$NON-NLS-1$
 	private boolean showDrawing = true;
 /**
  * Create a new non-directed AssociationLineConnection.
@@ -90,16 +89,16 @@ public boolean canConnect(Figure start, Figure end) {
 		if ((start instanceof LinkFigure) && (end instanceof LinkFigure)) {
 			/* (participantFrom instanceof ch.ehi.uml1_4.foundation.core.Association && (participantTo instanceof ch.ehi.uml1_4.foundation.core.Association)) */
 			// better connect by AttributeFigures
-			shouldWarn(resAssociationLineConnection.getString("CWInbetweenAssociations")); //$NON-NLS-1$
+			shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWInbetweenAssociations")); //$NON-NLS-1$
 			return false;
 		}
 		
 		if (!((participantFrom instanceof Classifier) && (participantTo instanceof Classifier))) {
-			shouldWarn(resAssociationLineConnection.getString("CWNoClassifier")); //$NON-NLS-1$
+			shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWNoClassifier")); //$NON-NLS-1$
 			return false;
 		}
 	} catch(ClassCastException e) {
-		shouldWarn(resAssociationLineConnection.getString("CWFigureNotGeneralizable")); //$NON-NLS-1$
+		shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWFigureNotGeneralizable")); //$NON-NLS-1$
 		return false;
 	}
 
@@ -254,7 +253,7 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
 		// stop drawing interaction to user
 		getClassDiagram().remove(this); 
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, resAssociationLineConnection.getString("CWAssociationNotEstablished"), e); //$NON-NLS-2$//$NON-NLS-1$
+		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(AssociationLineConnection.class, "CWAssociationNotEstablished"), e); //$NON-NLS-2$//$NON-NLS-1$
 	}
   }
 /**
@@ -285,12 +284,11 @@ protected final void setModelElement(ModelElement modelElement) {
  */
 protected void showIllegalRelationship(java.lang.String warning) {
 	new WarningDialog(LauncherView.getInstance(),
-					resAssociationLineConnection.getString("CWAssociationNotAllowed"), //$NON-NLS-1$
+					NodeFigure.getResourceString(AssociationLineConnection.class, "CWAssociationNotAllowed"), //$NON-NLS-1$
 					warning);
 }
 /**
  * Show the Specification Dialog of the PresentationElement.
- * @author Peter Hirzel
  */
 public final void showSpecification() {
 	throw new DeveloperException(this, "showSpecification()", "see PresentationRole instead");//$NON-NLS-2$//$NON-NLS-1$

@@ -21,8 +21,6 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.uml1_4.foundation.core.*;
@@ -37,11 +35,10 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-01-06 10:00:22 $
+ * @version $Revision: 1.6 $ $Date: 2004-04-27 09:22:46 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
-	private static java.util.ResourceBundle resEdgeFigure = ResourceBundle.getBundle(EdgeFigure.class);  //$NON-NLS-1$
 	private ClassDiagramView classDiagram = null;
 	protected PresentationEdge edge = null;
 	protected ModelElement modelElement = null;
@@ -90,7 +87,7 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addDeletionMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new AbstractAction(MENU_EDIT_REMOVE) {
+	popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
 		public void actionPerformed(ActionEvent event) {
 			removeVisually();
 		}
@@ -108,24 +105,24 @@ protected void addDeletionMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu editMenu = new JMenu(MENU_EDIT);
+	JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
 
-	editMenu.add(new AbstractAction(MENU_EDIT_CUT) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCutText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniCut();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_COPY) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCopyText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniCopy();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_PASTE) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditPasteText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniPaste();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_REMOVE) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
 		public void actionPerformed(ActionEvent event) {
 			removeVisually();
 		}
@@ -146,23 +143,23 @@ protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu formatMenu = new JMenu(MENU_FORMAT);
+	JMenu formatMenu = new JMenu(CommonUserAccess.getMnuFormatText());
 /*
 	JPopupMenu fontSizeMenu = new JPopupMenu();
 	fontSizeMenu.setName("Schriftgrösse");
 	formatMenu.add(fontSizeMenu);
 */
-	formatMenu.add(new AbstractAction(MENU_FORMAT_FONT) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFontText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniFont();
 		}
 	});
-	formatMenu.add(new AbstractAction(MENU_FORMAT_LINE_COLOR) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatLineColorText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniLineColor();
 		}
 	});
-	formatMenu.add(new AbstractAction(MENU_FORMAT_FILL_COLOR) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFillColorText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniFillColor();
 		}
@@ -204,7 +201,7 @@ protected abstract void addSpecialMenu(JPopupMenu popupMenu);
  * @see NodeFigure
  */
 protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new AbstractAction(MENU_EDIT_CHANGE_WINDOW) {
+	popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditChangeWindowText()) {
 		public void actionPerformed(ActionEvent event) {
 			showSpecification();
 		}
@@ -416,14 +413,14 @@ public void insertPointAt(Point p, int index) {
  * @see addEditMenu(..)
  */
 private void mniCopy() {
-	LauncherView.getInstance().nyi(MENU_EDIT_COPY);
+	LauncherView.getInstance().nyi("Copy");
 }
 /**
  * Edit->Cut Action.
  * @see addEditMenu(..)
  */
 private void mniCut() {
-	LauncherView.getInstance().nyi(MENU_EDIT_CUT);//$NON-NLS-1$
+	LauncherView.getInstance().nyi("Cut");//$NON-NLS-1$
 }
 /**
  * FillColor Action.
@@ -438,7 +435,7 @@ private void mniFillColor() {
  * @see addEditMenu(..)
  */
 private void mniFont() {
-LauncherView.getInstance().nyi(MENU_FORMAT_FONT);
+LauncherView.getInstance().nyi("Font");
 }
 /**
  * LineColor Action.
@@ -455,7 +452,7 @@ private void mniLineColor() {
  * @see addEditMenu(..)
  */
 private void mniPaste() {
-LauncherView.getInstance().nyi(MENU_EDIT_PASTE);
+LauncherView.getInstance().nyi("Paste");
 }
 /**
  * Remove the Figure in Model (implies visual deletion).
@@ -515,7 +512,7 @@ public void removeVisually() {
 			}
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
 	}
 }
 /**

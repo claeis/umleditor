@@ -20,10 +20,7 @@ package ch.ehi.umleditor.application;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import ch.softenvironment.util.DeveloperException;
-import java.awt.event.*;
-
 import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
@@ -32,7 +29,7 @@ import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
  * panel to view/edit a INTERLIS ClassType.
  *
  * @author: ce
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:57 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class IliBaseTypeClassPanel
 //  extends JPanel {

@@ -1,5 +1,7 @@
 package ch.ehi.umleditor.umldrawingtools;
 
+import ch.softenvironment.util.ResourceManager;
+
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -21,14 +23,12 @@ package ch.ehi.umleditor.umldrawingtools;
  * Interface for presentation aspects of a ModelElement.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:59 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:22:46 $
  */
-public interface ModelElementUI extends ch.softenvironment.view.CommonUserAccess {
-	static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ModelElementUI");
-
-	static String REMOVE_IN_MODEL = resources.getString("MniRemoveInModel_text");
-	static String CREATION_ERROR = resources.getString("CECreationError");
-	static String SELECT_IN_BROWSER = resources.getString("MniSelectInBrowser_text");
+public interface ModelElementUI {
+	static String REMOVE_IN_MODEL = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniRemoveInModel_text");
+	static String CREATION_ERROR = ResourceManager.getInstance().getResource(ModelElementUI.class, "CECreationError");
+	static String SELECT_IN_BROWSER = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniSelectInBrowser_text");
 /**
  * Factory method to create a popup menu which allows to add attributes and methods.
  *

@@ -17,13 +17,11 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.basics.view.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
 import javax.swing.*;
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -48,11 +46,10 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.8 $ $Date: 2004-03-07 21:21:22 $
+ * @version $Revision: 1.9 $ $Date: 2004-04-27 09:20:44 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
-	private static java.util.ResourceBundle resLauncherView = ResourceBundle.getBundle(LauncherView.class);
         private static String version=null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/";//$NON-NLS-1$
 	public static final String UML_IMAGES = IMAGE_PATH + "UML/";//$NON-NLS-1$
@@ -69,7 +66,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	// manage persistency
 	private Model model = null;
 	private boolean hasModelChanged = false;
-	public final static String defaultFileName = resLauncherView.getString("CIUnknownFilename"); //$NON-NLS-1$
+	public final static String defaultFileName = getResourceString(LauncherView.class, "CIUnknownFilename"); //$NON-NLS-1$
 	private java.io.File currentFile = null;
 	//	private JToolBar palette = null;
 	private ToolButton defaultToolButton = null;
@@ -318,14 +315,14 @@ private void adaptTools(DrawingFrame frame) {
 	} else {
 		if (frame.getDrawingView() instanceof ClassDiagramView) {
 			Tool tool = new ZoomTool(this, true);
-			palette.add(createToolButton(UML_IMAGES + "ZOOM_IN", resLauncherView.getString("CIZoomIn_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+			palette.add(createToolButton(UML_IMAGES + "ZOOM_IN", getResourceString("CIZoomIn_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 			tool = new ZoomTool(this, false);
-			palette.add(createToolButton(UML_IMAGES + "ZOOM_OUT", resLauncherView.getString("CIZoomOut_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+			palette.add(createToolButton(UML_IMAGES + "ZOOM_OUT", getResourceString("CIZoomOut_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 			// Selection Tool (acc. to Rose)
 			tool = new DelegationSelectionTool(this);
 			tool.setUsable(true);
-			defaultToolButton = createToolButton(UML_IMAGES + "SEL", resLauncherView.getString("CISelectionTool_text"), tool); //$NON-NLS-2$//$NON-NLS-1$
+			defaultToolButton = createToolButton(UML_IMAGES + "SEL", getResourceString("CISelectionTool_text"), tool); //$NON-NLS-2$//$NON-NLS-1$
 			palette.add(defaultToolButton);
 			setSelectedTool(defaultToolButton);
 
@@ -337,12 +334,12 @@ private void adaptTools(DrawingFrame frame) {
 					}
 			};
 			tool.setUsable(true);
-			palette.add(createToolButton(UML_IMAGES + "NOTE", resLauncherView.getString("CINote_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+			palette.add(createToolButton(UML_IMAGES + "NOTE", getResourceString("CINote_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 			// Note-Anchor (acc. to Rose)
 			tool = new ConnectionTool(this, new NoteAnchorLineConnection());
 			tool.setUsable(true);
-			palette.add(createToolButton(UML_IMAGES + "NOTEANCHOR", resLauncherView.getString("CINoteAnchor_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+			palette.add(createToolButton(UML_IMAGES + "NOTEANCHOR", getResourceString("CINoteAnchor_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 			ClassDiagramView classDiagram = (ClassDiagramView)frame.getDrawingView();
 			if (classDiagram.allowsPackages()) {
@@ -354,7 +351,7 @@ private void adaptTools(DrawingFrame frame) {
 					}
 				};
 				tool.setUsable(true);
-				palette.add(createToolButton(UML_IMAGES + "PACKAGE", resLauncherView.getString("CIPakage_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+				palette.add(createToolButton(UML_IMAGES + "PACKAGE", getResourceString("CIPakage_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 			}
 			if (classDiagram.allowsClasses()) {
 				// Class
@@ -365,28 +362,28 @@ private void adaptTools(DrawingFrame frame) {
 					}
 				};
 				tool.setUsable(true);
-				palette.add(createToolButton(UML_IMAGES + "CLASS", resLauncherView.getString("CIClass_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+				palette.add(createToolButton(UML_IMAGES + "CLASS", getResourceString("CIClass_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 				// Unidirectional Association (acc. to Rose)
 				tool = new ConnectionTool(this, new AssociationLineConnection());
 				tool.setUsable(true);
-				palette.add(createToolButton(UML_IMAGES + "LINE", resLauncherView.getString("CIAssociation_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+				palette.add(createToolButton(UML_IMAGES + "LINE", getResourceString("CIAssociation_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 				// Unidirectional Association to selected Class itself
 				tool = new ClassFigureSelectionTool(this);
 				tool.setUsable(true);
-				palette.add(createToolButton(UML_IMAGES + "ASSOC_SELF", resLauncherView.getString("CIAssociationSelf_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+				palette.add(createToolButton(UML_IMAGES + "ASSOC_SELF", getResourceString("CIAssociationSelf_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 
 				// Generalization (acc. to Rose)
 				tool = new ConnectionTool(this, new GeneralizationLineConnection());
 				tool.setUsable(true);
-				palette.add(createToolButton(UML_IMAGES + "INHERITANCE", resLauncherView.getString("CIInheritance_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+				palette.add(createToolButton(UML_IMAGES + "INHERITANCE", getResourceString("CIInheritance_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 			}
 
 			// Dependency or instantiates (acc. to Rose)
 			tool = new ConnectionTool(this, new DependencyLineConnection());
 			tool.setUsable(true);
-			palette.add(createToolButton(UML_IMAGES + "DEPENDENCY", resLauncherView.getString("CIDependency_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
+			palette.add(createToolButton(UML_IMAGES + "DEPENDENCY", getResourceString("CIDependency_text"), tool)); //$NON-NLS-2$//$NON-NLS-1$
 		}
 	}
 
@@ -1198,14 +1195,14 @@ public static GenericFileFilter createHtmlFilter() {
  * @deprecated
  */
 public static GenericFileFilter createInterlisCompilerFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIIlcFilter"), "ilc");//$NON-NLS-2$ //$NON-NLS-1$
+	return new GenericFileFilter(getResourceString(LauncherView.class, "CIIlcFilter"), "ilc");//$NON-NLS-2$ //$NON-NLS-1$
 }
 /**
  * @return specific File-Filter.
  * @deprecated
  */
 public static GenericFileFilter createInterlisModelFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
+	return new GenericFileFilter(getResourceString(LauncherView.class, "CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
 }
 
 /**
@@ -1225,7 +1222,7 @@ private ToolButton createToolButton(String iconName, String toolName, Tool tool)
  * @deprecated
  */
 public static GenericFileFilter createUmlInterlisEditorFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIUmlFilter"),"uml");//$NON-NLS-2$ //$NON-NLS-1$
+	return new GenericFileFilter(getResourceString(LauncherView.class, "CIUmlFilter"),"uml");//$NON-NLS-2$ //$NON-NLS-1$
 }
 /**
  * @return specific File-Filter.
@@ -1284,7 +1281,7 @@ public void figureSelectionChanged(CH.ifa.draw.framework.DrawingView view) {}
  * Return the Application Name
  */
 public static String getApplicationName() {
-	return resLauncherView.getString("CIApplicationName"); //$NON-NLS-1$
+	return ResourceManager.getInstance().getResource(LauncherView.class, "CIApplicationName"); //$NON-NLS-1$
 }
 /**
  * Return the currently selected ClassDiagram.
@@ -1345,7 +1342,7 @@ private java.io.FileFilter getFileFilter() {
 		}
 
 		public String getDescription() {
-			return resLauncherView.getString("CIInterlisFilter"); //$NON-NLS-1$
+			return getResourceString("CIInterlisFilter"); //$NON-NLS-1$
 		}
 	};
 }
@@ -1571,7 +1568,7 @@ private javax.swing.JCheckBoxMenuItem getMncStatusbar() {
 			ivjMncStatusbar.setSelected(true);
 			ivjMncStatusbar.setText("Statusleiste");
 			// user code begin {1}
-			ivjMncStatusbar.setText(CommonUserAccess.MENU_VIEW_STATUSBAR);
+			ivjMncStatusbar.setText(CommonUserAccess.getMncViewStatusbarText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1594,7 +1591,7 @@ private javax.swing.JCheckBoxMenuItem getMncToolbar() {
 			ivjMncToolbar.setSelected(true);
 			ivjMncToolbar.setText("Standard");
 			// user code begin {1}
-			ivjMncToolbar.setText(CommonUserAccess.MENU_VIEW_SYMBOLLIST_STANDARD);
+			ivjMncToolbar.setText(CommonUserAccess.getMncViewSymbollistStandardText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1616,7 +1613,7 @@ private javax.swing.JMenuItem getMniAbout() {
 			ivjMniAbout.setName("MniAbout");
 			ivjMniAbout.setText("Info...");
 			// user code begin {1}
-			ivjMniAbout.setText(CommonUserAccess.MENU_HELP_ABOUT);
+			ivjMniAbout.setText(CommonUserAccess.getMniHelpAboutText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1639,7 +1636,7 @@ private javax.swing.JMenuItem getMniCascadeWindows() {
 			ivjMniCascadeWindows.setText("Kaskadieren");
 			ivjMniCascadeWindows.setEnabled(true);
 			// user code begin {1}
-			ivjMniCascadeWindows.setText(CommonUserAccess.MENU_WINDOW_CASCADE);
+			ivjMniCascadeWindows.setText(CommonUserAccess.getMniWindowCascadeText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1661,7 +1658,7 @@ private javax.swing.JMenuItem getMniCheckModel() {
 			ivjMniCheckModel.setName("MniCheckModel");
 			ivjMniCheckModel.setText("Modell prüfen");
 			// user code begin {1}
-			ivjMniCheckModel.setText(resLauncherView.getString("MniCheckModel_text"));
+			ivjMniCheckModel.setText(getResourceString("MniCheckModel_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1684,7 +1681,7 @@ private javax.swing.JMenuItem getMniCopy() {
 			ivjMniCopy.setText("Kopieren");
 			ivjMniCopy.setEnabled(false);
 			// user code begin {1}
-			ivjMniCopy.setText(CommonUserAccess.MENU_EDIT_COPY);
+			ivjMniCopy.setText(CommonUserAccess.getMniEditCopyText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1707,7 +1704,7 @@ private javax.swing.JMenuItem getMniCut() {
 			ivjMniCut.setText("Ausschneiden");
 			ivjMniCut.setEnabled(false);
 			// user code begin {1}
-			ivjMniCut.setText(CommonUserAccess.MENU_EDIT_CUT);
+			ivjMniCut.setText(CommonUserAccess.getMniEditCutText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1729,7 +1726,7 @@ private javax.swing.JMenuItem getMniExit() {
 			ivjMniExit.setName("MniExit");
 			ivjMniExit.setText("Beenden");
 			// user code begin {1}
-			ivjMniExit.setText(CommonUserAccess.MENU_FILE_EXIT);
+			ivjMniExit.setText(CommonUserAccess.getMniFileExit());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1751,7 +1748,7 @@ private javax.swing.JMenuItem getMniExportInterlis() {
 			ivjMniExportInterlis.setName("MniExportInterlis");
 			ivjMniExportInterlis.setText("Exportieren...");
 			// user code begin {1}
-			ivjMniExportInterlis.setText(CommonUserAccess.MENU_FILE_EXPORT);
+			ivjMniExportInterlis.setText(CommonUserAccess.getMniFileExportText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1773,7 +1770,7 @@ private javax.swing.JMenuItem getMniFileOpen() {
 			ivjMniFileOpen.setName("MniFileOpen");
 			ivjMniFileOpen.setText("Öffnen...");
 			// user code begin {1}
-			ivjMniFileOpen.setText(CommonUserAccess.MENU_FILE_OPEN_WINDOW);
+			ivjMniFileOpen.setText(CommonUserAccess.getMniFileOpenWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1796,7 +1793,7 @@ private javax.swing.JMenuItem getMniFindReplace() {
 			ivjMniFindReplace.setText("Suchen/Ersetzen...");
 			ivjMniFindReplace.setEnabled(true);
 			// user code begin {1}
-			ivjMniFindReplace.setText(CommonUserAccess.MENU_EDIT_FIND_REPLACE_WINDOW);
+			ivjMniFindReplace.setText(CommonUserAccess.getMniEditFindReplaceText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1818,7 +1815,7 @@ private javax.swing.JMenuItem getMniGroupImport() {
 			ivjMniGroupImport.setName("MniGroupImport");
 			ivjMniGroupImport.setText("Gruppe importieren...");
 			// user code begin {1}
-			ivjMniGroupImport.setText(resLauncherView.getString("MniGroupImport_text"));
+			ivjMniGroupImport.setText(getResourceString("MniGroupImport_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1838,9 +1835,9 @@ private javax.swing.JMenuItem getMniHelp() {
 		try {
 			ivjMniHelp = new javax.swing.JMenuItem();
 			ivjMniHelp.setName("MniHelp");
-			ivjMniHelp.setText("Hilfe");
+			ivjMniHelp.setText("Hilfe...");
 			// user code begin {1}
-			ivjMniHelp.setText(CommonUserAccess.MENU_HELP);
+			ivjMniHelp.setText(CommonUserAccess.getMniHelpText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1862,7 +1859,7 @@ private javax.swing.JMenuItem getMniImportInterlis() {
 			ivjMniImportInterlis.setName("MniImportInterlis");
 			ivjMniImportInterlis.setText("Importieren...");
 			// user code begin {1}
-			ivjMniImportInterlis.setText(CommonUserAccess.MENU_FILE_IMPORT);
+			ivjMniImportInterlis.setText(CommonUserAccess.getMniFileImportText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1885,8 +1882,8 @@ private javax.swing.JMenuItem getMniImportXmiRose() {
 			ivjMniImportXmiRose.setToolTipText("Rational Rose Schnittstelle");
 			ivjMniImportXmiRose.setText("Importieren...");
 			// user code begin {1}
-			ivjMniImportXmiRose.setToolTipText(resLauncherView.getString("MniImportXmiRose_toolTipText"));
-			ivjMniImportXmiRose.setText(resLauncherView.getString("MniImportXmiRose_text"));
+			ivjMniImportXmiRose.setToolTipText(getResourceString("MniImportXmiRose_toolTipText"));
+			ivjMniImportXmiRose.setText(getResourceString("MniImportXmiRose_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1908,7 +1905,7 @@ private javax.swing.JMenuItem getMniLayoutDiagram() {
 			ivjMniLayoutDiagram.setName("MniLayoutDiagram");
 			ivjMniLayoutDiagram.setText("Diagram anordnen");
 			// user code begin {1}
-			ivjMniLayoutDiagram.setText(resLauncherView.getString("MniLayoutDiagram_text"));
+			ivjMniLayoutDiagram.setText(getResourceString("MniLayoutDiagram_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1931,7 +1928,7 @@ private javax.swing.JMenuItem getMniNewFile() {
 			ivjMniNewFile.setText("Neu");
 			ivjMniNewFile.setActionCommand("MniNewFile");
 			// user code begin {1}
-			ivjMniNewFile.setText(CommonUserAccess.MENU_FILE_NEW);
+			ivjMniNewFile.setText(CommonUserAccess.getMniFileNewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1953,7 +1950,7 @@ private javax.swing.JMenuItem getMniObjectCatalog() {
 			ivjMniObjectCatalog.setName("MniObjectCatalog");
 			ivjMniObjectCatalog.setText("Objektkatalog...");
 			// user code begin {1}
-			ivjMniObjectCatalog.setText(resLauncherView.getString("MniObjectCatalog_text"));
+			ivjMniObjectCatalog.setText(getResourceString("MniObjectCatalog_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1975,7 +1972,7 @@ private javax.swing.JMenuItem getMniOptions() {
 			ivjMniOptions.setName("MniOptions");
 			ivjMniOptions.setText("Optionen...");
 			// user code begin {1}
-			ivjMniOptions.setText(CommonUserAccess.MENU_EXTRAS_OPTIONS_WINDOW);
+			ivjMniOptions.setText(CommonUserAccess.getMniExtrasOptionsWindowsText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1998,7 +1995,7 @@ private javax.swing.JMenuItem getMniPaste() {
 			ivjMniPaste.setText("Einfügen");
 			ivjMniPaste.setEnabled(false);
 			// user code begin {1}
-			ivjMniPaste.setText(CommonUserAccess.MENU_EDIT_PASTE);
+			ivjMniPaste.setText(CommonUserAccess.getMniEditPasteText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2020,7 +2017,7 @@ private javax.swing.JMenuItem getMniPrint() {
 			ivjMniPrint.setName("MniPrint");
 			ivjMniPrint.setText("Drucken...");
 			// user code begin {1}
-			ivjMniPrint.setText(CommonUserAccess.MENU_FILE_PRINT_WINDOW);
+			ivjMniPrint.setText(CommonUserAccess.getMniFilePrintWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2043,7 +2040,7 @@ private javax.swing.JMenuItem getMniRedo() {
 			ivjMniRedo.setText("Wiederherstellen");
 			ivjMniRedo.setEnabled(true);
 			// user code begin {1}
-			ivjMniRedo.setText(CommonUserAccess.MENU_EDIT_REDO);
+			ivjMniRedo.setText(CommonUserAccess.getMniEditRedoText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2066,7 +2063,7 @@ private javax.swing.JMenuItem getMniSave() {
 			ivjMniSave.setText("Speichern");
 			ivjMniSave.setEnabled(true);
 			// user code begin {1}
-			ivjMniSave.setText(CommonUserAccess.MENU_FILE_SAVE);
+			ivjMniSave.setText(CommonUserAccess.getMniFileSaveText());
 			ivjMniSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -2090,7 +2087,7 @@ private javax.swing.JMenuItem getMniSaveAs() {
 			ivjMniSaveAs.setText("Speichern unter...");
 			ivjMniSaveAs.setEnabled(true);
 			// user code begin {1}
-			ivjMniSaveAs.setText(CommonUserAccess.MENU_FILE_SAVEAS);
+			ivjMniSaveAs.setText(CommonUserAccess.getMniFileSaveAsText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2113,7 +2110,7 @@ private javax.swing.JMenuItem getMniSelectAll() {
 			ivjMniSelectAll.setText("Alles markieren");
 			ivjMniSelectAll.setEnabled(false);
 			// user code begin {1}
-			ivjMniSelectAll.setText(CommonUserAccess.MENU_EDIT_SELECT_ALL);
+			ivjMniSelectAll.setText(CommonUserAccess.getMniEditSelectAllText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2135,7 +2132,7 @@ private javax.swing.JMenuItem getMniStructure() {
 			ivjMniStructure.setName("MniStructure");
 			ivjMniStructure.setText("Struktur...");
 			// user code begin {1}
-			ivjMniStructure.setText(resLauncherView.getString("MniStructure_text"));
+			ivjMniStructure.setText(getResourceString("MniStructure_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2157,7 +2154,7 @@ private javax.swing.JMenuItem getMniTileWindows() {
 			ivjMniTileWindows.setName("MniTileWindows");
 			ivjMniTileWindows.setText("Aufteilen");
 			// user code begin {1}
-			ivjMniTileWindows.setText(CommonUserAccess.MENU_WINDOW_TILE);
+			ivjMniTileWindows.setText(CommonUserAccess.getMniWindowTileText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2180,7 +2177,7 @@ private javax.swing.JMenuItem getMniUndo() {
 			ivjMniUndo.setText("Rückgängig");
 			ivjMniUndo.setEnabled(true);
 			// user code begin {1}
-			ivjMniUndo.setText(CommonUserAccess.MENU_EDIT_UNDO);
+			ivjMniUndo.setText(CommonUserAccess.getMniEditUndoText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2203,7 +2200,7 @@ private javax.swing.JMenuItem getMniXmlExport() {
 			ivjMniXmlExport.setText("XML-Schema exportieren...");
 			ivjMniXmlExport.setActionCommand("MniExportXMLScheme");
 			// user code begin {1}
-			ivjMniXmlExport.setText(resLauncherView.getString("MniXsdExport_text"));
+			ivjMniXmlExport.setText(getResourceString("MniXsdExport_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2235,7 +2232,7 @@ private javax.swing.JMenu getMnuEdit() {
 			ivjMnuEdit.add(getJSeparator3());
 			ivjMnuEdit.add(getMniFindReplace());
 			// user code begin {1}
-			ivjMnuEdit.setText(CommonUserAccess.MENU_EDIT);
+			ivjMnuEdit.setText(CommonUserAccess.getMnuEditText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2259,7 +2256,7 @@ private javax.swing.JMenu getMnuExtras() {
 			ivjMnuExtras.add(getJSeparator5());
 			ivjMnuExtras.add(getMniOptions());
 			// user code begin {1}
-			ivjMnuExtras.setText(CommonUserAccess.MENU_EXTRAS);
+			ivjMnuExtras.setText(CommonUserAccess.getMnuExtrasText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2289,7 +2286,7 @@ private javax.swing.JMenu getMnuFile() {
 			ivjMnuFile.add(getJSeparator10());
 			ivjMnuFile.add(getMniExit());
 			// user code begin {1}
-			ivjMnuFile.setText(CommonUserAccess.MENU_FILE);
+			ivjMnuFile.setText(CommonUserAccess.getMnuFileText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2312,7 +2309,7 @@ private javax.swing.JMenu getMnuFormat() {
 			ivjMnuFormat.setText("Format");
 			ivjMnuFormat.add(getMniLayoutDiagram());
 			// user code begin {1}
-			ivjMnuFormat.setText(CommonUserAccess.MENU_FORMAT);
+			ivjMnuFormat.setText(CommonUserAccess.getMnuFormatText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2337,7 +2334,7 @@ private javax.swing.JMenu getMnuHelp() {
 			ivjMnuHelp.add(getJSeparator4());
 			ivjMnuHelp.add(getMniAbout());
 			// user code begin {1}
-			ivjMnuHelp.setText(CommonUserAccess.MENU_HELP);
+			ivjMnuHelp.setText(CommonUserAccess.getMnuHelpText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2365,7 +2362,7 @@ private javax.swing.JMenu getMnuInterlisTools() {
 			ivjMnuInterlisTools.add(getJSeparator6());
 			ivjMnuInterlisTools.add(getMniCheckModel());
 			// user code begin {1}
-			ivjMnuInterlisTools.setText(resLauncherView.getString("MnuInterlis_text"));
+			ivjMnuInterlisTools.setText(getResourceString("MnuInterlis_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2387,7 +2384,7 @@ private javax.swing.JMenu getMnuLookAndFeel() {
 			ivjMnuLookAndFeel.setName("MnuLookAndFeel");
 			ivjMnuLookAndFeel.setText("Look & Feel");
 			// user code begin {1}
-			ivjMnuLookAndFeel.setText(CommonUserAccess.MENU_VIEW_LOOK_FEEL);
+			ivjMnuLookAndFeel.setText(CommonUserAccess.getMnuViewLookAndFeelText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2411,7 +2408,7 @@ private javax.swing.JMenu getMnuReports() {
 			ivjMnuReports.add(getMniObjectCatalog());
 			ivjMnuReports.add(getMniStructure());
 			// user code begin {1}
-			ivjMnuReports.setText(CommonUserAccess.MENU_REPORTS);
+			ivjMnuReports.setText(CommonUserAccess.getMnuReportsText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2434,7 +2431,7 @@ private javax.swing.JMenu getMnuSymbollists() {
 			ivjMnuSymbollists.setText("Symbolleisten");
 			ivjMnuSymbollists.add(getMncToolbar());
 			// user code begin {1}
-			ivjMnuSymbollists.setText(CommonUserAccess.MENU_VIEW_SYMBOLLISTS);
+			ivjMnuSymbollists.setText(CommonUserAccess.getMnuViewSymbollistsText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2458,7 +2455,7 @@ private javax.swing.JMenu getMnuTools() {
 			ivjMnuTools.add(getMnuInterlisTools());
 			ivjMnuTools.add(getMnuXMI_Rose());
 			// user code begin {1}
-			ivjMnuTools.setText(CommonUserAccess.MENU_TOOLS);
+			ivjMnuTools.setText(CommonUserAccess.getMnuToolsText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2483,7 +2480,7 @@ private javax.swing.JMenu getMnuView() {
 			ivjMnuView.add(getMnuSymbollists());
 			ivjMnuView.add(getMncStatusbar());
 			// user code begin {1}
-			ivjMnuView.setText(CommonUserAccess.MENU_VIEW);
+			ivjMnuView.setText(CommonUserAccess.getMnuViewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2507,7 +2504,7 @@ private javax.swing.JMenu getMnuWindow() {
 			ivjMnuWindow.add(getMniCascadeWindows());
 			ivjMnuWindow.add(getMniTileWindows());
 			// user code begin {1}
-			ivjMnuWindow.setText(CommonUserAccess.MENU_WINDOW);
+			ivjMnuWindow.setText(CommonUserAccess.getMnuWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2530,7 +2527,7 @@ private javax.swing.JMenu getMnuXMI_Rose() {
 			ivjMnuXMI_Rose.setText("XMI/Rose");
 			ivjMnuXMI_Rose.add(getMniImportXmiRose());
 			// user code begin {1}
-			ivjMnuXMI_Rose.setText(resLauncherView.getString("MnuXMI_Rose_text"));
+			ivjMnuXMI_Rose.setText(getResourceString("MnuXMI_Rose_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -2913,7 +2910,7 @@ private javax.swing.JMenuBar getWindowJMenuBar() {
  * @param exception java.lang.Throwable
  */
 public void handleException(java.lang.Throwable exception) {
-	log(resLauncherView.getString("CERuntimeError"), exception.toString()); //$NON-NLS-1$
+	log(getResourceString("CERuntimeError"), exception.toString()); //$NON-NLS-1$
 	super.handleException(exception);
 }
 /**
@@ -2921,7 +2918,7 @@ public void handleException(java.lang.Throwable exception) {
  * @param exception java.lang.Throwable
  */
 public void handleException(java.lang.Throwable exception, String title, String message) {
-	log(resLauncherView.getString("CERuntimeError"), title + "->" + message + "[" + exception.toString() + "]");//$NON-NLS-4$//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+	log(getResourceString("CERuntimeError"), title + "->" + message + "[" + exception.toString() + "]");//$NON-NLS-4$//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	new ErrorDialog(this, title , message, exception);
 }
 /**
@@ -3106,7 +3103,9 @@ public static void main(java.lang.String[] args) {
 		// Locale influence
 		Tracer.getInstance().runtimeInfo("Locale is: " + java.util.Locale.getDefault().toString());
 		settings = UserSettings.load();
-		BaseFrame.setResourceBundle();
+		Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
+		Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
+		
 		ch.ehi.basics.types.NlsString.setDefaultLanguage(settings.getLanguage());
 
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
@@ -3139,7 +3138,7 @@ Tracer.getInstance().patch(LauncherView.class, "main()", "setModel(..)->openDiag
 	} catch (Throwable exception) {
 		System.err.println("Exception occurred in main() of javax.swing.JFrame");//$NON-NLS-1$
 		exception.printStackTrace(System.out);
-		new ErrorDialog(instance, resLauncherView.getString("CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
+		new ErrorDialog(instance, getResourceString(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
 		System.exit(-1);
 	}
 }
@@ -3180,7 +3179,7 @@ private void mniCascadeWindows() {
  */
 protected void mniCopy() {
 	tool().deactivate();
-	nyi(CommonUserAccess.MENU_EDIT_COPY);//$NON-NLS-1$
+	nyi(CommonUserAccess.getMniEditCopyText());//$NON-NLS-1$
 	tool().activate();
 }
 /**
@@ -3188,7 +3187,7 @@ protected void mniCopy() {
  */
 protected void mniCut() {
 	tool().deactivate();
-	nyi(CommonUserAccess.MENU_EDIT_CUT);//$NON-NLS-1$
+	nyi(CommonUserAccess.getMniEditCutText());//$NON-NLS-1$
 	tool().activate();
 }
 /**
@@ -3266,7 +3265,7 @@ private void mniNewFile() {
 			// create new empty project
 			ElementFactory.resetCounter();
 			setModel(null, null);
-			log(resLauncherView.getString("CIModelNew"), "");//$NON-NLS-2$ //$NON-NLS-1$
+			log(getResourceString("CIModelNew"), "");//$NON-NLS-2$ //$NON-NLS-1$
 			openInitialDiagram();
 		}
 	} catch(Throwable e) {
@@ -3289,7 +3288,7 @@ private void mniOpenFile() {
 	tool().deactivate();
 	if (saveCurrentChanges()) {
 		FileChooser openDialog = new FileChooser(getSettings().getWorkingDirectory());
-		openDialog.setDialogTitle(CommonUserAccess.CTFILE_OPEN);
+		openDialog.setDialogTitle(CommonUserAccess.getTitleFileOpen());
 		openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
 
 		if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -3300,7 +3299,7 @@ private void mniOpenFile() {
 				Model newModel=service.readFile(openDialog.getSelectedFile().getAbsolutePath());
 				MetaModel.setChangePropagation(old);
 				setModel(newModel, openDialog.getSelectedFile());
-				log(resLauncherView.getString("CIModelLoaded"), resLauncherView.getString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+				log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
 			} catch(java.io.IOException e) {
 				handleException(e,"fileopen",e.getMessage());
 	 		} catch(Throwable e) {
@@ -3323,7 +3322,7 @@ private void mniOptions() {
  */
 protected void mniPaste() {
 	tool().deactivate();
-	nyi(CommonUserAccess.MENU_EDIT_PASTE);//$NON-NLS-1$
+	nyi("Paste");//$NON-NLS-1$
 	tool().activate();
 }
 /**
@@ -3339,7 +3338,7 @@ protected void mniPrint() {
  */
 protected void mniRedo() {
 	tool().deactivate();
-	nyi(CommonUserAccess.MENU_EDIT_REDO);//$NON-NLS-1$
+	nyi("Redo");//$NON-NLS-1$
 	tool().activate();
 }
 /**
@@ -3357,7 +3356,7 @@ private boolean mniSaveAs() {
 	tool().deactivate();
 
 	FileChooser saveDialog =  new FileChooser(getSettings().getWorkingDirectory());
-	saveDialog.setDialogTitle(CommonUserAccess.MENU_FILE_SAVEAS);//$NON-NLS-1$
+	saveDialog.setDialogTitle(CommonUserAccess.getMniFileSaveAsText());
 	saveDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
 
 	if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -3428,7 +3427,7 @@ private void mniTileWindows() {
  */
 protected void mniUndo() {
 	tool().deactivate();
-	nyi(CommonUserAccess.MENU_EDIT_UNDO);//$NON-NLS-1$
+	nyi("Undo");//$NON-NLS-1$
 	tool().activate();
 }
 /**
@@ -3501,7 +3500,7 @@ public void printClassDiagram(ClassDiagramView classDiagram) {
 	}
 */
   	java.awt.print.PrinterJob printJob = java.awt.print.PrinterJob.getPrinterJob();
-    printJob.setJobName(NlsUtils.formatMessage(resLauncherView.getString("CIPrintClassDiagram"),((Diagram)classDiagram.getDiagram()).getName().getValue()));
+    printJob.setJobName(NlsUtils.formatMessage(getResourceString("CIPrintClassDiagram"),((Diagram)classDiagram.getDiagram()).getName().getValue()));
 
     java.awt.print.PageFormat pf = printJob.pageDialog(printJob.defaultPage());
     printJob.setPrintable(new PrintWrapper(classDiagram),pf);
@@ -3524,7 +3523,7 @@ public void printClassDiagram(ClassDiagramView classDiagram) {
 protected void printNavigationTree() {
 	tool().deactivate();
 
-	PrintJob printJob = getToolkit().getPrintJob(this, resLauncherView.getString("CIPrintNavTree"), null); //$NON-NLS-1$
+	PrintJob printJob = getToolkit().getPrintJob(this, getResourceString("CIPrintNavTree"), null); //$NON-NLS-1$
 
 	if (printJob != null) {
 		Graphics graphics = printJob.getGraphics();
@@ -3605,7 +3604,7 @@ private boolean saveCurrentChanges() {
 		toolDone();
 
 		if (hasModelChanged) {
-			QueryCancelDialog dialog = new QueryCancelDialog(this, CommonUserAccess.CTSAVE_CHANGES, CommonUserAccess.CQSAVE_CHANGES);
+			QueryCancelDialog dialog = new QueryCancelDialog(this, CommonUserAccess.getTitleSaveChanges(), CommonUserAccess.getQuestionSaveChanges());
 			if (dialog.isYes()) {
 				return mniSaveFile();
 			} else {
@@ -3637,7 +3636,7 @@ private void saveFile(java.io.File file) throws java.io.IOException {
 	service.writeFile(file.getAbsolutePath(), getModel());
 	setTitle(file); // set title before changed flag is cleared
 	setModelChanged(false);
-	log(resLauncherView.getString("CIModelSaved"), resLauncherView.getString("CIInFile") + file.getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+	log(getResourceString("CIModelSaved"), getResourceString("CIInFile") + file.getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
 }
 /**
  * Triggered on windowClosing-Event (Alt-F4, X-close-function).

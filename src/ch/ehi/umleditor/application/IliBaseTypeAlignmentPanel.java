@@ -23,10 +23,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Horiz/VertAlignment</b>.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:55 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class IliBaseTypeAlignmentPanel extends DataPanel {
-	private static java.util.ResourceBundle resIliBaseTypeAlignmentPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeAlignmentPanel");
 	private javax.swing.JLabel ivjLblKind = null;
 	private javax.swing.JRadioButton ivjRbtHAlignment = null;
 	private javax.swing.JRadioButton ivjRbtVertical = null;
@@ -47,9 +46,10 @@ private javax.swing.JLabel getLblKind() {
 		try {
 			ivjLblKind = new javax.swing.JLabel();
 			ivjLblKind.setName("LblKind");
-			ivjLblKind.setText(resIliBaseTypeAlignmentPanel.getString("LblKind_text"));
+			ivjLblKind.setText("Art:");
 			ivjLblKind.setBounds(10, 20, 140, 14);
 			// user code begin {1}
+			ivjLblKind.setText(getResourceString("LblKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -79,10 +79,12 @@ private javax.swing.JRadioButton getRbtHAlignment() {
 		try {
 			ivjRbtHAlignment = new javax.swing.JRadioButton();
 			ivjRbtHAlignment.setName("RbtHAlignment");
-			ivjRbtHAlignment.setToolTipText(resIliBaseTypeAlignmentPanel.getString("RbtHAlignment_toolTipText"));
-			ivjRbtHAlignment.setText(resIliBaseTypeAlignmentPanel.getString("RbtHAlignment_text"));
+			ivjRbtHAlignment.setToolTipText("Horizontal");
+			ivjRbtHAlignment.setText("Horizontal");
 			ivjRbtHAlignment.setBounds(160, 15, 140, 22);
 			// user code begin {1}
+			ivjRbtHAlignment.setToolTipText(getResourceString("RbtHAlignment_toolTipText"));
+			ivjRbtHAlignment.setText(getResourceString("RbtHAlignment_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -102,10 +104,12 @@ private javax.swing.JRadioButton getRbtVertical() {
 		try {
 			ivjRbtVertical = new javax.swing.JRadioButton();
 			ivjRbtVertical.setName("RbtVertical");
-			ivjRbtVertical.setToolTipText(resIliBaseTypeAlignmentPanel.getString("RbtVertical_toolTipText"));
-			ivjRbtVertical.setText(resIliBaseTypeAlignmentPanel.getString("RbtVertical_text"));
+			ivjRbtVertical.setToolTipText("");
+			ivjRbtVertical.setText("Vertikal");
 			ivjRbtVertical.setBounds(160, 40, 140, 22);
 			// user code begin {1}
+			ivjRbtVertical.setToolTipText(getResourceString("RbtVertical_toolTipText"));
+			ivjRbtVertical.setText(getResourceString("RbtVertical_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -131,7 +135,7 @@ private void initialize() {
 		// user code begin {1}
 		// user code end
 		setName("IliBaseTypeAlignmentPanel");
-		setToolTipText(resIliBaseTypeAlignmentPanel.getString("PnlINTERLIS_toolTipText"));
+		setToolTipText("INTERLIS Basistyp <ALIGNMENT>");
 		setLayout(null);
 		setSize(348, 109);
 		add(getRbtHAlignment(), getRbtHAlignment().getName());
@@ -141,6 +145,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
+	setToolTipText(getResourceString("PnlINTERLIS_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtHAlignment());
 	group.add(getRbtVertical());

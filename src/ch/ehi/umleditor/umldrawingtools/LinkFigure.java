@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
 
 /**
  * Draws a PresentationAssocClass of an Association.
@@ -36,7 +37,7 @@ import ch.softenvironment.util.*;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:10:30 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
@@ -236,7 +237,7 @@ public void removeVisually() {
 	} catch(ConcurrentModificationException cme) {
 		Tracer.getInstance().runtimeWarning(this, "removeVisually()", "Event-Mechanism caused redundant Ping-Pong-remove: " + cme.getLocalizedMessage());
 	} catch(Throwable e) {
-		handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, CommonUserAccess.getMniEditRemoveText(), DeveloperException.DEVELOPER_ERROR, this);
 	}
 }
 /**
