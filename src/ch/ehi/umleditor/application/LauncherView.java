@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.21 $ $Date: 2005-02-21 17:01:47 $
+ * @version $Revision: 1.22 $ $Date: 2005-02-23 16:42:00 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -2914,7 +2914,7 @@ public void handleException(java.lang.Throwable exception) {
  */
 public void handleException(java.lang.Throwable exception, String title, String message) {
 	log(getResourceString("CERuntimeError"), title + "->" + message + "[" + exception.toString() + "]");//$NON-NLS-4$//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
-	new ErrorDialog(this, title , message, exception);
+	BaseDialog.showError(this, title , message, exception);
 }
 /**
  * Initializes connections
@@ -3156,7 +3156,7 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 	} catch (Throwable exception) {
 		System.err.println("Exception occurred in main() of javax.swing.JFrame");//$NON-NLS-1$
 		exception.printStackTrace(System.out);
-		new ErrorDialog(instance, getResourceString(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
+		BaseDialog.showError(instance, getResourceString(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
 		System.exit(-1);
 	}
 }
@@ -3322,6 +3322,7 @@ private void mniOpenFile() {
 
 		if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
+			setModelChanged(false);
 			openFile(openDialog.getSelectedFile().getAbsolutePath());
 		}
 	}
@@ -3622,11 +3623,11 @@ private boolean saveCurrentChanges() {
 		toolDone();
 
 		if (hasModelChanged) {
-			QueryDialog dialog = new QueryDialog(this, CommonUserAccess.getTitleSaveChanges(), CommonUserAccess.getQuestionSaveChanges(), true);
-			if (dialog.isYes()) {
+		    Boolean answer = BaseDialog.showConfirmExit((java.awt.Component)this);
+			if (answer == Boolean.TRUE) {
 				return mniSaveFile();
 			} else {
-				return !dialog.isCanceled();
+				return !(answer == null);
 			}
 		} else {
 			return true;
@@ -3965,16 +3966,18 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 	 */
 	public void openFile(String filename) {
 		try {
-			PersistenceService service = new PersistenceService();
-			boolean old=MetaModel.setChangePropagation(false);
-			Model newModel=service.readFile(filename);
-			MetaModel.setChangePropagation(old);
-			setCurrentFile(new java.io.File(filename));
-			setModel(newModel /*, openDialog.getSelectedFile()*/);
-			log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + filename); //$NON-NLS-2$ //$NON-NLS-1$
-			mnuFileHistory.addRecent(filename);
+		    if (saveCurrentChanges()) {
+				PersistenceService service = new PersistenceService();
+				boolean old=MetaModel.setChangePropagation(false);
+				Model newModel=service.readFile(filename);
+				MetaModel.setChangePropagation(old);
+				setCurrentFile(new java.io.File(filename));
+				setModel(newModel /*, openDialog.getSelectedFile()*/);
+				log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + filename); //$NON-NLS-2$ //$NON-NLS-1$
+				mnuFileHistory.addRecent(filename);
+		    }
 		} catch(java.io.FileNotFoundException e) {
-			new WarningDialog(this, getResourceString(FileHistoryMenu.class, "CTFileMissing"), getResourceString(FileHistoryMenu.class, "CWFileMissing"));
+			BaseDialog.showWarning((java.awt.Component)this, getResourceString(FileHistoryMenu.class, "CTFileMissing"), getResourceString(FileHistoryMenu.class, "CWFileMissing"));
 			mnuFileHistory.removeRecent(filename);
 		} catch(java.io.IOException e) {
 			handleException(e,"fileopen",e.getMessage());
@@ -3982,5 +3985,4 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 			handleException(e);
 		}
 	}
-
 }
