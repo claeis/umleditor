@@ -17,10 +17,10 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.basics.view.*;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -45,11 +45,11 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-01-28 13:55:10 $
+ * @version $Revision: 1.4 $ $Date: 2004-02-04 13:14:24 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
-	private static java.util.ResourceBundle resLauncherView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/LauncherView");  //$NON-NLS-1$
+	private static java.util.ResourceBundle resLauncherView = ResourceBundle.getBundle(LauncherView.class);
         private static String version=null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/";//$NON-NLS-1$
 	public static final String UML_IMAGES = IMAGE_PATH + "UML/";//$NON-NLS-1$
@@ -1188,7 +1188,7 @@ public ClassDiagramView createClassDiagram(Element diagramElement) {
  * @deprecated
  */
 public static GenericFileFilter createHtmlFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIHtmlFilter"), "html");//$NON-NLS-2$ //$NON-NLS-1$
+	return GenericFileFilter.createHtmlFilter();
 }
 /**
  * @return specific File-Filter.
@@ -1204,14 +1204,7 @@ public static GenericFileFilter createInterlisCompilerFilter() {
 public static GenericFileFilter createInterlisModelFilter() {
 	return new GenericFileFilter(resLauncherView.getString("CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
 }
-/**
- * @return specific File-Filter.
- * @deprecated
- */
-public static GenericFileFilter createSQLFilter() {
-//	return new GenericFileFilter(resLauncherView.getString("CIHtmlFilter"), "html");//$NON-NLS-2$ //$NON-NLS-1$
-	return new GenericFileFilter("Structured Query Language (ASCII)", "sql");//$NON-NLS-2$ //$NON-NLS-1$
-}
+
 /**
  * Creates a tool button with the given image, tool, and text
  */
@@ -1236,14 +1229,14 @@ public static GenericFileFilter createUmlInterlisEditorFilter() {
  * @deprecated
  */
 public static GenericFileFilter createXmlFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIXmlFilter"), "xml");//$NON-NLS-2$ //$NON-NLS-1$
+	return GenericFileFilter.createXmlFilter();
 }
 /**
  * @return specific File-Filter.
  * @deprecated
  */
 public static GenericFileFilter createXmlSchemaFilter() {
-	return new GenericFileFilter(resLauncherView.getString("CIXsdFilter"), "xsd");
+	return GenericFileFilter.createXmlSchemaFilter();
 }
 /**
  * Deactivate the current internal frame and adapt corresponding tools.
