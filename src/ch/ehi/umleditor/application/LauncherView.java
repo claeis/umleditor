@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2004-02-04 18:21:57 $
+ * @version $Revision: 1.6 $ $Date: 2004-03-01 15:25:20 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -3297,6 +3297,8 @@ private void mniOpenFile() {
 				PersistenceService service = new PersistenceService();
 				setModel(service.readFile(openDialog.getSelectedFile().getAbsolutePath()), openDialog.getSelectedFile());
 				log(resLauncherView.getString("CIModelLoaded"), resLauncherView.getString("CIFromFile") + openDialog.getSelectedFile().getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+			} catch(java.io.IOException e) {
+				handleException(e,"fileopen",e.getMessage());
 	 		} catch(Throwable e) {
 				handleException(e);
 		 	}
@@ -3358,6 +3360,8 @@ private boolean mniSaveAs() {
 		try {
 			getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 			saveFile(saveDialog.getSelectedFile());
+		} catch(java.io.IOException e) {
+			handleException(e,"filesaveas",e.getMessage());
 		} catch(Throwable e) {
 			handleException(e);
 		}
@@ -3382,6 +3386,8 @@ private boolean mniSaveFile() {
 		try {
 			toolDone();
 			saveFile(currentFile);
+		} catch(java.io.IOException e) {
+			handleException(e,"filesave",e.getMessage());
 		} catch(Throwable e) {
 			handleException(e);
 		}
