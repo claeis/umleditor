@@ -18,6 +18,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import CH.ifa.draw.figures.*;
+import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.softenvironment.util.Tracer;
 
@@ -25,16 +26,21 @@ import ch.softenvironment.util.Tracer;
  * Figure for displaying a single UmlOperation within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1 $ $Date: 2004-03-05 17:29:33 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-02 18:23:50 $
  */
 class OperationFigure extends TextFigure {
 	private UmlOperation operation = null;
 	private ClassDiagramView classDiagram = null;
 
 	// Formatting constants
-	protected final char PARAMETER_SEPARATOR = ':';
-	protected final char PARAMETER_BEGIN = '(';
-	protected final char PARAMETER_END = ')';
+	private final char PARAMETER_SEPARATOR = ':';
+	private final char PARAMETER_BEGIN = '(';
+	private final char PARAMETER_END = ')';
+	private final char VISIBILITY_PUBLIC = '+';
+	private final char VISIBILITY_PROTECTED = '#';
+	private final char VISIBILITY_PRIVATE = '-';
+	private final char VISIBILITY_PACKAGE = '~';
+	
 /**
  * Constructor comment.
  */
@@ -72,7 +78,22 @@ public void updateModel() {
 		text = text + " " + TYPE_SEPARATOR + " " + IliBaseTypeKind.getTypeName(attributeDef,false);
 	}
 */
-	text = text + PARAMETER_BEGIN + PARAMETER_END;
+	char prefix = ' ';
+	switch (operation.getVisibility()) {
+		case VisibilityKind.PUBLIC :
+			prefix = VISIBILITY_PUBLIC;
+			break;
+		case VisibilityKind.PROTECTED :
+			prefix = VISIBILITY_PROTECTED;
+			break;
+		case VisibilityKind.PRIVATE :
+			prefix = VISIBILITY_PRIVATE;
+			break;
+		case VisibilityKind.PACKAGE :
+			prefix = VISIBILITY_PACKAGE;
+			break;
+	}
+	text = prefix + text + PARAMETER_BEGIN + PARAMETER_END;
 	super.setText(text);
 }
 }
