@@ -26,9 +26,9 @@ import ch.softenvironment.view.*;
  * User Interface for an AssociationDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-29 11:34:41 $
  */
-public class AssociationDefDialog extends BaseDialog {
+public class AssociationDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
 	private ch.ehi.interlis.associations.AssociationDef associationDef = null;
 	private AssociationDefDerived currentViewRef = null;
@@ -136,9 +136,9 @@ public AssociationDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.
 	show();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * Overwrites.
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
 	if (popupMenu.equals(getMnuAttributes())) {
 		boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
 		getMniOpenAttributeSpecification().setEnabled(isSelected);
@@ -1504,72 +1504,66 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewAttribute() {
-	try {
-		// update model
-		AttributeDef attributeDef = ElementFactory.createAttributeDef(associationDef);
-		// update view
-		((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(getTblAttributes());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewRole() {
-	try {
-		// update model
-		RoleDef roleDef = ElementFactory.createRoleDef(associationDef, null);
-		// update view
-		((EditorTableModel)getTblRoles().getModel()).addRowElement(roleDef);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(getTblRoles());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveAttribute() {
-	((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+	removeObjects(getTblAttributes());
 }
 /**
  * Move down selected Attribute in Attributes-List.
  */
 private void mniMoveDownAttribute() {
-   int [] selv=getTblAttributes().getSelectedRows();
-   if(selv.length>0){
- 	((EditorTableModel)getTblAttributes().getModel()).moveRowDown(selv[0]);
-   }
+	try {
+	   int [] selv=getTblAttributes().getSelectedRows();
+	   if(selv.length>0){
+	 	((EditorTableModel)getTblAttributes().getModel()).moveRowDown(selv[0]);
+	   }
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveRoleDef() {
-	((EditorTableModel)getTblRoles().getModel()).removeRows(getTblRoles().getSelectedRows());
+	removeObjects(getTblRoles());
 }
 /**
  * Move down selected Role in Roles-List.
  */
 private void mniMoveDownRoleDef() {
-  int [] selv=getTblRoles().getSelectedRows();
-  if(selv.length>0){
-	((EditorTableModel)getTblRoles().getModel()).moveRowDown(selv[0]);
-  }
+	try {
+		int [] selv=getTblRoles().getSelectedRows();
+		if(selv.length>0){
+			((EditorTableModel)getTblRoles().getModel()).moveRowDown(selv[0]);
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniShowAttributeSpecification() {
-	((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+	changeObjects(getTblAttributes());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniShowRoleSpecication() {
-	((EditorTableModel)getTblRoles().getModel()).showSpecification(getTblRoles().getSelectedRows());
+	changeObjects(getTblRoles());
 }
 /**
  * Save ModelElement changes.
@@ -1621,5 +1615,66 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Constraints
 	getPnlConstraints().setConstraints(associationDef);
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#changeObjects(java.lang.Object)
+ */
+public void changeObjects(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				((EditorTableModel)getTblRoles().getModel()).showSpecification(getTblRoles().getSelectedRows());
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/* (non-Javadoc)
+ * @see ch.softenvironment.view.ListMenuChoice#copyObject(java.lang.Object)
+ */
+public void copyObject(Object source) {
+	// TODO Auto-generated method stub
+	
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#newObject(java.lang.Object)
+ */
+public void newObject(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				// update model
+				AttributeDef attributeDef = ElementFactory.createAttributeDef(associationDef);
+				// update view
+				((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				// update model
+				RoleDef roleDef = ElementFactory.createRoleDef(associationDef, null);
+				// update view
+				((EditorTableModel)getTblRoles().getModel()).addRowElement(roleDef);
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#removeObjects(java.lang.Object)
+ */
+public void removeObjects(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				((EditorTableModel)getTblRoles().getModel()).removeRows(getTblRoles().getSelectedRows());
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 }
