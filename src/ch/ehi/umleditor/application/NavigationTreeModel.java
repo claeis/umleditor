@@ -10,7 +10,6 @@ import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeModelEvent;
@@ -81,14 +80,18 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
      * Adds a listener for the TreeModelEvent posted after the tree changes.
      */
     public void addTreeModelListener(TreeModelListener l) {
-        treeModelListeners.addElement(l);
+    	if (!treeModelListeners.contains(l)) {
+    		treeModelListeners.addElement(l);
+    	}
     }
 
     /**
      * Removes a listener previously added with addTreeModelListener().
      */
     public void removeTreeModelListener(TreeModelListener l) {
-        treeModelListeners.removeElement(l);
+    	if (treeModelListeners.contains(l)) {
+    		treeModelListeners.removeElement(l);
+    	}
     }
 
 
