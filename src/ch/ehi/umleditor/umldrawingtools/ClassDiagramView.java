@@ -35,7 +35,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2004-02-05 11:16:24 $
+ * @version $Revision: 1.7 $ $Date: 2004-02-05 16:48:25 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -989,24 +989,45 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    }
 	    }
 
+	    // show Associations
 	    if (tryAssociations) {
-		    // show Associations
-		    Iterator ownedElements = modelElement.getNamespace().iteratorOwnedElement();
-		    while (ownedElements.hasNext()) {
-				ch.ehi.uml1_4.implementation.AbstractModelElement ownedModelElement = (ch.ehi.uml1_4.implementation.AbstractModelElement)ownedElements.next();
-				if (ownedModelElement instanceof AssociationDef) {
-					// check whether AssociationDef really connects this node
-					Iterator roles = ((AssociationDef)ownedModelElement).iteratorConnection();
-					while (roles.hasNext()) {
-						RoleDef roleDef = (RoleDef)roles.next();
-						if (roleDef.containsParticipant() && roleDef.getParticipant().equals(modelElement)) {
-							trySaveAssociation((AssociationDef)ownedModelElement, node, roleDef);
-						}		
-					}
-				}
-		    }
+	    	// BE AWARE:
+	    	// Associations are added to the Repository as ownedElement only 
+	    	// at ONE END of at least two possible Classifier's.
+	    	
+		    // 1) modelElement IS Owner of Association
+	    	Iterator elements = modelElement.getNamespace().iteratorOwnedElement();
+	    	while (elements.hasNext()) {
+	    		Object ownedModelElement = /*(ch.ehi.uml1_4.implementation.AbstractModelElement)*/ elements.next();
+	    		if (ownedModelElement instanceof ch.ehi.uml1_4.foundation.core.Association) {
+	    			checkAssociation(modelElement, node, (ch.ehi.uml1_4.foundation.core.Association)ownedModelElement);
+	    		}
+	    	}
+		    // 2) modelElement is NOT the Owner	but the opposite
+	    	elements = ((Classifier)modelElement).iteratorAssociation();
+	    	while (elements.hasNext()) {
+	    		Object associationEnd = elements.next();
+	    		if (associationEnd instanceof AssociationEnd) {
+	    			checkAssociation(modelElement, node, ((AssociationEnd)associationEnd).getAssociation());
+	    		}
+	    	}
 	    }
     }
+}
+/**
+ * Check whether given association should have been drawn. 
+ * @param modelElement
+ * @param node
+ * @param associationDef
+ */
+private void checkAssociation(ch.ehi.uml1_4.implementation.AbstractModelElement modelElement, PresentationNode node, ch.ehi.uml1_4.foundation.core.Association associationDef) {
+	Iterator roles = associationDef.iteratorConnection();
+	while (roles.hasNext()) {
+		AssociationEnd roleDef = (AssociationEnd)roles.next();
+		if (roleDef.containsParticipant() && roleDef.getParticipant().equals(modelElement)) {
+			trySaveAssociation(associationDef, node, roleDef);
+		}		
+	}
 }
 /**
  * Draw figure and save Element into Diagram.
@@ -1212,12 +1233,12 @@ protected void showAllRoles(boolean visible) {
  * @param associationDef Relationship to be drawn
  * @param node (the already given Node of the Relationship)
  */
-private void trySaveAssociation(AssociationDef associationDef, PresentationNode node, RoleDef roleDef)  {
+private void trySaveAssociation(ch.ehi.uml1_4.foundation.core.Association associationDef, PresentationNode node, AssociationEnd roleDef)  {
 	Figure linkFigure = findFigure(associationDef);
 	if (linkFigure == null) {
 		// no composite yet
-		ArrayList roles = AssociationLineConnection.getRoleClassifiers(associationDef);
-		HashMap nodes = new HashMap();
+		List roles = AssociationLineConnection.getRoleClassifiers(associationDef);
+		Map nodes = new HashMap();
 		for (int i=0; i<roles.size(); i++) {
 			// make sure Classifier's are to be found in Diagram as well
 			Figure figure = findFigure((Classifier)((RoleDef)roles.get(i)).getParticipant());
@@ -1239,10 +1260,12 @@ private void trySaveAssociation(AssociationDef associationDef, PresentationNode 
 		  	add(associationComposite);
 		}
 	} else {
-		// composite already given => only add given node with its given role
-		ch.ehi.umleditor.umlpresentation.Association associationComposite = ((PresentationAssocClass)((LinkFigure)linkFigure).getNode()).getAssociation();
-		PresentationRole edgeRole = ElementFactory.createPresentationRole(this, associationComposite, node, roleDef);
-		loadPresentationRole(null, edgeRole);
+		// composite already given => only add role to given Node
+		if (findFigure(roleDef) == null) {
+			ch.ehi.umleditor.umlpresentation.Association associationComposite = ((PresentationAssocClass)((LinkFigure)linkFigure).getNode()).getAssociation();
+			PresentationRole edgeRole = ElementFactory.createPresentationRole(this, associationComposite, node, roleDef);
+			loadPresentationRole(null, edgeRole);
+		}	
 	}
 }
 /**
