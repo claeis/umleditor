@@ -33,7 +33,7 @@ import ch.interlis.ili2c.metamodel.TransferDescription;
 import java.io.*;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.basics.view.FileChooser;
-import ch.softenvironment.view.WarningDialog;
+import ch.softenvironment.view.BaseDialog;
 import ch.ehi.umleditor.interlis.EditorLoggingAdapter;
 // -end- 3C9086430360 import "ImportInterlis"
 
@@ -153,7 +153,7 @@ public class ImportInterlis
 		} else if (ilcFilter.accept(importDialog.getSelectedFile())) {
 			readIlcFile(newFile);
 		} else {
-			new WarningDialog(LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
+		    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
 		}
 	}
   }

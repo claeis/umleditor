@@ -35,7 +35,7 @@ import ch.softenvironment.view.*;
  * by ClassFigures).
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-23 16:46:01 $
  */
 public class GeneralizationLineConnection extends EdgeFigure {
 	private boolean showDrawing = true;
@@ -192,7 +192,7 @@ protected void handleConnect(Figure start, Figure end) {
 			}			
 	    } // else dragging of existing Generalization was done
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(GeneralizationLineConnection.class, "CEGeneralizationFailed"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(GeneralizationLineConnection.class, "CEGeneralizationFailed"), e); //$NON-NLS-1$
 	}
 }
 /**
@@ -211,7 +211,7 @@ protected void showDecoration() {
  * @see shouldWarn(EdgeFigure, Figure, Figure)
  */
 protected void showIllegalRelationship(String warning) {
-	new WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(),
+    BaseDialog.showWarning((java.awt.Component)ch.ehi.umleditor.application.LauncherView.getInstance(),
 						NodeFigure.getResourceString(GeneralizationLineConnection.class, "CWGeneralizationNotAllowed"), //$NON-NLS-1$
 						warning);
 }

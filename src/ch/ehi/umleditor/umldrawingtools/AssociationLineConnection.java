@@ -40,7 +40,7 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.4 $ $Date: 2005-02-23 16:45:45 $
  * @see handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -253,7 +253,7 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
 		// stop drawing interaction to user
 		getClassDiagram().remove(this); 
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(AssociationLineConnection.class, "CWAssociationNotEstablished"), e); //$NON-NLS-2$//$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(AssociationLineConnection.class, "CWAssociationNotEstablished"), e); //$NON-NLS-2$//$NON-NLS-1$
 	}
   }
 /**
@@ -283,7 +283,7 @@ protected final void setModelElement(ModelElement modelElement) {
  * @see shouldWarn(EdgeFigure, String)
  */
 protected void showIllegalRelationship(java.lang.String warning) {
-	new WarningDialog(LauncherView.getInstance(),
+    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					NodeFigure.getResourceString(AssociationLineConnection.class, "CWAssociationNotAllowed"), //$NON-NLS-1$
 					warning);
 }

@@ -30,7 +30,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-29 11:42:44 $
+ * @version $Revision: 1.6 $ $Date: 2005-02-23 16:46:01 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -166,7 +166,7 @@ protected void initializeView() {
 				    	} else {
 					    	errorMsg = "[" + e.toString() + "]";//$NON-NLS-2$//$NON-NLS-1$
 				    	}
-						new WarningDialog(LauncherView.getInstance(), getResourceString(RoleDefFigure.class, "CTInvalidInput"), getResourceString(RoleDefFigure.class, "CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
+				    	BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(), getResourceString(RoleDefFigure.class, "CTInvalidInput"), getResourceString(RoleDefFigure.class, "CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
 			    	}
 			    	name = MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity());			    	
 		    	} else {

@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.14 $ $Date: 2004-10-10 16:55:45 $
+ * @version $Revision: 1.15 $ $Date: 2005-02-23 16:46:01 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -85,8 +85,7 @@ public Figure add(Element element) {
         while (subjects.hasNext()) {
             ModelElement modelElement = (ModelElement) subjects.next();
             if (modelElement.equals(element)) {
-                new WarningDialog(
-                    LauncherView.getInstance(),
+                BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
                     NodeFigure.getResourceString(ClassDiagramView.class, "CTAddElement"), //$NON-NLS-1$
                     NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CWElementAdded"), modelElement.getDefLangName())); //$NON-NLS-1$
                 return null;
@@ -145,7 +144,7 @@ public Figure add(Figure figure) {
 			super.add(figure);
 		}
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), ModelElementUI.CREATION_ERROR, NodeFigure.getResourceString(ClassDiagramView.class, "CEFigureNotCreated"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), ModelElementUI.CREATION_ERROR, NodeFigure.getResourceString(ClassDiagramView.class, "CEFigureNotCreated"), e); //$NON-NLS-1$
 	}
 
 	return figure;
@@ -911,7 +910,7 @@ private Figure saveAssociation(ch.ehi.uml1_4.foundation.core.Association associa
 	// 1) check for necessary nodes	
 	ArrayList roles = AssociationLineConnection.getRoleClassifiers(associationDef);
 	if ((roles.size() < 2) && (AssociationLineConnection.getParent(associationDef) == null)) {
-		new WarningDialog(LauncherView.getInstance(), NodeFigure.getResourceString(ClassDiagramView.class, "CTAssociationNotDisplayable"), NodeFigure.getResourceString(ClassDiagramView.class, "CWRoleMissing")); //$NON-NLS-2$ //$NON-NLS-1$
+	    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(), NodeFigure.getResourceString(ClassDiagramView.class, "CTAssociationNotDisplayable"), NodeFigure.getResourceString(ClassDiagramView.class, "CWRoleMissing")); //$NON-NLS-2$ //$NON-NLS-1$
 		return null;
 	} else {
 		// 2) create Composite

@@ -36,7 +36,7 @@ import ch.softenvironment.util.*;
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:06:46 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:46:01 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -189,7 +189,7 @@ protected void handleConnect(Figure start, Figure end) {
 			addModelElement((ModelElement)dependency);
 		} // else dragging of existing Dependency was done
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, resDependencyLineConnection.getString("CEDependencyNotEstablished"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, resDependencyLineConnection.getString("CEDependencyNotEstablished"), e); //$NON-NLS-1$
 	}
 }
 /**
@@ -207,7 +207,7 @@ protected void showDecoration() {
  * @see shouldWarn(EdgeFigure, String)
  */
 protected void showIllegalRelationship(java.lang.String warning) {
-	new WarningDialog(LauncherView.getInstance(),
+    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					resDependencyLineConnection.getString("CTUnallowedDependency"), //$NON-NLS-1$
 					warning);
 }

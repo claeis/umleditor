@@ -21,6 +21,7 @@ import CH.ifa.draw.util.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.softenvironment.view.BaseDialog;
 import ch.softenvironment.view.CommonUserAccess;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2005-02-21 13:51:32 $
+ * @version $Revision: 1.8 $ $Date: 2005-02-23 16:46:01 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -317,7 +318,7 @@ private void dragNoteAnchor(Connector end, Figure targetFigure, int x, int y) {
 			((EdgeFigure)editedConnection).setStartConnector(end);
 			((EdgeFigure)editedConnection).changed();
 		} else {
-			new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CENoteToNoteError"));
+			ch.softenvironment.view.BaseDialog.showWarning((java.awt.Component)ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CENoteToNoteError"));
 		}
 	} else {
 		// 1) Presentation
@@ -395,7 +396,7 @@ ch.softenvironment.util.Tracer.getInstance().debug("DragCase = " + dragCase);
 			}
 		}
 	} catch (Throwable exception) {
-		new ch.softenvironment.view.ErrorDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), null, exception.getMessage(), exception);//$NON-NLS-1$
+		ch.softenvironment.view.BaseDialog.showError(ch.ehi.umleditor.application.LauncherView.getInstance(), null, exception.getMessage(), exception);//$NON-NLS-1$
 	}
 }
 /**
@@ -520,7 +521,7 @@ public void mouseDrag(MouseEvent e, int x, int y) {
 								dragDependency(newEnd, targetFigure, x, y);
 							}
 						} else {
-							new ch.softenvironment.view.WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CEDragNodeIncompatibility"));
+							ch.softenvironment.view.BaseDialog.showWarning((java.awt.Component)ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), NodeFigure.getResourceString(DelegationSelectionTool.class, "CEDragNodeIncompatibility"));
 						}
 
 						editedConnection.changed();
@@ -541,7 +542,7 @@ public void mouseDrag(MouseEvent e, int x, int y) {
 			}
 		}
 	} catch (Throwable exception) {
-		new ch.softenvironment.view.ErrorDialog(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), exception.getMessage(), exception); //$NON-NLS-1$
+		ch.softenvironment.view.BaseDialog.showError(ch.ehi.umleditor.application.LauncherView.getInstance(), NodeFigure.getResourceString(DelegationSelectionTool.class, "CTModellingError"), exception.getMessage(), exception); //$NON-NLS-1$
 	}
 }
 }
