@@ -22,11 +22,10 @@ package ch.ehi.umleditor.umlpresentation;
           // -end- 3C2C4C8D0362 package "Diagram"
 
           // -beg- preserve=no 3C2C4C8D0362 autoimport "Diagram"
-          import ch.ehi.uml1_4.foundation.core.Element;
+		import ch.ehi.uml1_4.foundation.core.Element;
           import ch.ehi.uml1_4.implementation.AbstractEditorElement;
           import ch.ehi.uml1_4.foundation.core.PresentationElement;
           import ch.ehi.uml1_4.foundation.core.Namespace;
-          import ch.ehi.umleditor.umlpresentation.AbstractFigure;
           import ch.ehi.basics.types.NlsString;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3C2C4C8D0362 autoimport "Diagram"
@@ -38,7 +37,7 @@ package ch.ehi.umleditor.umlpresentation;
           // -end- 3C2C4C8D0362 import "Diagram"
 
           /** @author Claude Eisenhut
-           *  @version $Revision: 1.2 $ $Date: 2004-01-03 16:00:18 $
+           *  @version $Revision: 1.3 $ $Date: 2004-01-04 17:08:34 $
            */
 public class Diagram extends AbstractEditorElement implements Element , java.io.Serializable
           {
@@ -552,9 +551,11 @@ public class Diagram extends AbstractEditorElement implements Element , java.io.
 			 */
 			public void deletePresentationElement(PresentationElement element)
 			{
+				//ch.ehi.uml1_4.changepropagation.MetaModel.setEventLogging(true);
 				ch.ehi.interlis.tools.UnlinkAllChildren remover=new ch.ehi.interlis.tools.UnlinkAllChildren();
 				remover.visit(element);
 				remover.unlinkThem();
+				//ch.ehi.uml1_4.changepropagation.MetaModel.setEventLogging(false);
 			}
             // -end- 3C2C4C8D0362 detail_end "Diagram"
 

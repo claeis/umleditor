@@ -1,11 +1,8 @@
 Offene Fragen/Arbeiten
 ----------------------------
 
-- Verschieben von Modellelementen im Navigationsbaum
 - Liste der Diagramme auf dem ein ModelElement dargestellt wird
 - Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
-- Französische Uebersetzung des Benutzer-Handbuchs fehlt
-- Englische Uebersetzung der Handbuecher fehlt
 - API: generic filters aus Launcher nach basics verschieben
 - FINAL bei Enumeration
 - Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
@@ -13,11 +10,14 @@ Offene Fragen/Arbeiten
 - Bug: Für Ili-Kompositions- und Referenzattribute kann die Reihenfolge in der Klassendefinition nicht spezifiziert werden
 - Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
-- Bug: Farbedialog zu klein
 - Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
 
-UML-Editor 2.0.3 (2003-xx-xx)
+UML-Editor 2.1.0 (2004-01-04)
 -----------------------------
+- INTERLIS-Compiler 2.1.11
+- Verschieben von Modellelementen im Navigationsbaum
+- Französische Uebersetzung des Benutzer-Handbuchs
+- Englische Uebersetzung der Handbuecher
 - Diagrammexport nach SVG (Scalable Vector Graphics)
 - Diagrammexport nach WMF (Windows Meta File)
 - NLS: Englische Texte an Programm angepasst
@@ -42,7 +42,8 @@ UML-Editor 2.0.3 (2003-xx-xx)
 - Bug: "Löschen (im Modell)" einer Beziehung in einem Diagramm löscht nur die entsprechende Rolle statt die ganze Assoziation
 - Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt (KORREKT ab JRE 1.4.1_02)
 - Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
-
+- Bug: Popup-Schalter für Zeilenumbruch im Logbereich wird nicht richtig initialisiert
+- Bug: Farbedialog zu klein
 
 
 UML-Editor 2.0.2 (2003-10-29)
