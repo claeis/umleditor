@@ -1,5 +1,10 @@
 package ch.ehi.umleditor.application;
 
+import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 
@@ -7,14 +12,16 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2004-06-29 11:38:47 $
+ * @version $Revision: 1.8 $ $Date: 2004-08-18 09:24:46 $
  */
-public class LogView extends BasePanel {
-	private static final String ID_TEXT = "<ID:";//$NON-NLS-1$
+public class LogView extends BasePanel implements HyperlinkListener {
+	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
+	private StringBuffer body = new StringBuffer();
+	
 	private javax.swing.JPanel ivjPnlLog = null;
 	private javax.swing.JScrollPane ivjScpLog = null;
 	private javax.swing.JTabbedPane ivjTbpLog = null;
-	private javax.swing.JTextArea ivjTxaLog = null;
+	private JEditorPane ivjTxaLog = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JSeparator ivjJSeparator1 = null;
 	private javax.swing.JSeparator ivjJSeparator2 = null;
@@ -81,15 +88,16 @@ protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopu
 	getMniSelectAll().setEnabled(isEmpty);
 	if (getTxaLog().getSelectedText() == null) {
 		getMniCopy().setEnabled(false);
-		getMniSelectNodeInTree().setEnabled(false);
+//		getMniSelectNodeInTree().setEnabled(false);
 	} else {
 		getMniCopy().setEnabled(true);
 	}
 
 	// popoup inside text area?
+/*
     if((currentOffset>=0) &&
-    		(currentOffset < getTxaLog().getDocument().getLength() /*prevent BadRelocationException*/)){
-        javax.swing.JTextArea t=LogView.this.getTxaLog();
+    		(currentOffset < getTxaLog().getDocument().getLength())) { //prevent BadRelocationException
+	    javax.swing.JTextArea t=LogView.this.getTxaLog();
         try{
            // get current line
            int line=t.getLineOfOffset(currentOffset);
@@ -102,6 +110,7 @@ protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopu
            handleException(ex);
          }
    }
+*/
 }
 /**
  * Append a log-message without a specific theme.
@@ -109,13 +118,19 @@ protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopu
 public void appendText(String logText) {
 	String text = getTime() + " " + logText;//$NON-NLS-1$
 
-	if (getTxaLog().getText().length() > 0) {
-		// append
-		getTxaLog().append("\n");
-		getTxaLog().append(text);
-	} else {
-		getTxaLog().setText(text);
+	body.append(text);
+	body.append("<br>" /*\n*/);
+	getTxaLog().setText("<body>" + body.toString() + "</body>");
+//	Document doc = getTxaLog().getEditorKit().createDefaultDocument();
+//	doc.insertString(0, text, null);
+//	doc.putProperty(key, pageProperties.get(key));
+//	getTxaLog().setDocument(doc);
+/*	try {
+	getTxaLog().setPage("http://java.sun.com/docs/books/tutorial/uiswing/components/editorpane.html#editorpane");
+	} catch(Throwable e) {
+		handleException(e);
 	}
+*/
 }
 /**
  * Append a log-message with a specific theme.
@@ -128,13 +143,15 @@ public void appendText(String title, String logText) {
  * @param id unique identity to trace object of log interest
  */
 public void appendText(String id, String title, String logText) {
-	appendText(title, ID_TEXT + id + "> " + logText);//$NON-NLS-1$
+Tracer.getInstance().debug("ID=" + id + " " + logText);
+	appendText(title, "<a href=\"" + id + "\"> " + logText + "</a>");//$NON-NLS-1$
 }
 /**
  * Perform the clear method.
  */
 public void clear() {
 	/* Perform the clear method. */
+	body = new StringBuffer();
 	getTxaLog().setText(null);
 }
 /**
@@ -495,11 +512,11 @@ private javax.swing.JPopupMenu getMnpLogMenu() {
 			ivjMnpLogMenu.add(getMniCopy());
 			ivjMnpLogMenu.add(getJSeparator1());
 			ivjMnpLogMenu.add(getMniSelectAll());
-			ivjMnpLogMenu.add(getMncWrapLines());
-			ivjMnpLogMenu.add(getJSeparator2());
-			ivjMnpLogMenu.add(getMniSave());
-			ivjMnpLogMenu.add(getJSeparator3());
-			ivjMnpLogMenu.add(getMniSelectNodeInTree());
+//			ivjMnpLogMenu.add(getMncWrapLines());
+//			ivjMnpLogMenu.add(getJSeparator2());
+//			ivjMnpLogMenu.add(getMniSave());
+//			ivjMnpLogMenu.add(getJSeparator3());
+//			ivjMnpLogMenu.add(getMniSelectNodeInTree());
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -544,6 +561,8 @@ private javax.swing.JScrollPane getScpLog() {
 			ivjScpLog.setName("ScpLog");
 			getScpLog().setViewportView(getTxaLog());
 			// user code begin {1}
+			ivjScpLog.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			ivjScpLog.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -589,15 +608,17 @@ private String getTime() {
  * @return javax.swing.JTextArea
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JTextArea getTxaLog() {
+private JEditorPane getTxaLog() {
 	if (ivjTxaLog == null) {
 		try {
-			ivjTxaLog = new javax.swing.JTextArea();
+			ivjTxaLog = new JEditorPane(); //javax.swing.JTextArea();
 			ivjTxaLog.setName("TxaLog");
-			ivjTxaLog.setLineWrap(true);
+//			ivjTxaLog.setLineWrap(true);
 			ivjTxaLog.setBounds(0, 0, 160, 120);
 			ivjTxaLog.setEditable(false);
 			// user code begin {1}
+			ivjTxaLog.setContentType("text/html; charset=iso-8859-1");
+			ivjTxaLog.addHyperlinkListener(this);
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -627,8 +648,8 @@ private void initConnections() throws java.lang.Exception {
 	getMniSelectAll().addActionListener(ivjEventHandler);
 	getMniCopy().addActionListener(ivjEventHandler);
 	getMniSave().addActionListener(ivjEventHandler);
-	getMniSelectNodeInTree().addActionListener(ivjEventHandler);
-	getMncWrapLines().addItemListener(ivjEventHandler);
+//	getMniSelectNodeInTree().addActionListener(ivjEventHandler);
+//	getMncWrapLines().addItemListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -657,13 +678,14 @@ private void mncWrapLines() {
 	wrapLines(getMncWrapLines().isSelected());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniSave() {
 LauncherView.getInstance().nyi("save()");//$NON-NLS-1$
 }
 /**
  * Select all nodes in NavigationTree where ID's are selected in LogText.
+ * @deprecated
  */
 private void mniSelectNodeInTree() {
     String sel=currentLine;
@@ -681,17 +703,32 @@ private void mniSelectNodeInTree() {
 public void toggleVisibility() {
 	setVisible(!(isVisible()));
 }
+/*
+ * @deprecated
+ */
 private void wrapLines(boolean wrap)
 {
 	if (wrap) {
 		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getTxaLog().setAutoscrolls(false);
-		getTxaLog().setLineWrap(true);
+//		getTxaLog().setLineWrap(true);
 	} else {
 		getScpLog().setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getTxaLog().setAutoscrolls(true);
-		getTxaLog().setLineWrap(false);
+//		getTxaLog().setLineWrap(false);
 	}
 	
+}
+/* (non-Javadoc)
+ * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
+ */
+public void hyperlinkUpdate(HyperlinkEvent e) {
+	// TODO Auto-generated method stub
+	if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+		Tracer.getInstance().debug("link Activated: " + e.getDescription());
+		String id = e.getDescription().toString().trim();
+		ModelElement modelElement=(ModelElement)LauncherView.getInstance().getModel().deepGetElementById(id);
+		LauncherView.getInstance().showSpecification(modelElement);
+	}
 }
 }
