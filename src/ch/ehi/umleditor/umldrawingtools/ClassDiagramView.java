@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.12 $ $Date: 2004-04-27 09:22:46 $
+ * @version $Revision: 1.13 $ $Date: 2004-06-14 14:08:32 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -1277,6 +1277,32 @@ protected void showAllRoles(boolean visible) {
 		Figure figure = enum.nextFigure();
 		if (figure instanceof PresentationRoleFigure) {
 			((PresentationRole)((PresentationRoleFigure)figure).getEdge()).setNameVisible(visible);
+		}
+	}
+}
+/**
+ * layout all visible rolenames in Diagram.
+ */
+protected void layoutAllVisibleRolenames() {
+	
+	FigureEnumeration enum = drawing().figures();
+	while (enum.hasMoreElements()) {
+		Figure figure = enum.nextFigure();
+		if (figure instanceof PresentationRoleFigure) {
+			((PresentationRoleFigure)figure).layoutRolename();
+		}
+	}
+}
+/**
+ * layout all visible multiplicities in Diagram.
+ */
+protected void layoutAllVisibleMultiplicities() {
+	
+	FigureEnumeration enum = drawing().figures();
+	while (enum.hasMoreElements()) {
+		Figure figure = enum.nextFigure();
+		if (figure instanceof PresentationRoleFigure) {
+			((PresentationRoleFigure)figure).layoutMultiplicity();
 		}
 	}
 }

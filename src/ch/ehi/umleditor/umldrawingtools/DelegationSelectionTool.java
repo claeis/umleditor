@@ -36,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-05-03 13:34:58 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-14 14:08:32 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -74,6 +74,8 @@ public class DelegationSelectionTool extends CustomSelectionTool implements java
 	private JCheckBoxMenuItem chxShowAttributeTypes = null;
 	private JCheckBoxMenuItem chxShowAttributeCardinality = null;
 	private JCheckBoxMenuItem chxShowLinkFigure = null;
+	private javax.swing.JMenu mnuFormat = null;
+	
 /**
  * Constructor.
  * @param editor
@@ -116,6 +118,22 @@ public DelegationSelectionTool(DrawingEditor editor) {
 	chxShowLinkFigure.setActionCommand(LINK_FIGURE_ACTION_COMMAND);
     chxShowLinkFigure.addActionListener(this);
     chxShowLinkFigure.setSelected(((ClassDiagramView)view()).isShowLinkFigure());
+
+	mnuFormat = new javax.swing.JMenu();
+	mnuFormat.setName("MnuFormat");
+	mnuFormat.setText("Format");
+	mnuFormat.setText(CommonUserAccess.getMnuFormatText());
+		
+	mnuFormat.add(new AbstractAction(CommonUserAccess.getMniWindowOrderAutomaticallyText()) { //$NON-NLS-1$
+		public void actionPerformed(ActionEvent event) {
+			mniLayoutDiagram();
+		}
+	});
+	mnuFormat.add(new AbstractAction(ch.ehi.basics.i18n.ResourceBundle.getBundle(DelegationSelectionTool.class).getString("MenuLayoutRolesCardinalities")) { //$NON-NLS-1$
+		public void actionPerformed(ActionEvent event) {
+			mniLayoutRolesAndMultiplicities();
+		}
+	});
 }
 /**
  * Invoked when an action occurs.
@@ -406,11 +424,8 @@ protected void handlePopupMenu(MouseEvent e, int x, int y) {
 			}
 		});
 
-		menu.add(new AbstractAction(CommonUserAccess.getMniWindowOrderAutomaticallyText()) { //$NON-NLS-1$
-			public void actionPerformed(ActionEvent event) {
-				mniLayoutDiagram();
-			}
-		});
+		menu.add(mnuFormat);
+
                 double scale=((ClassDiagramView)view()).getScale();
 		menu.show(e.getComponent(), (int)(e.getX()*scale), (int)(e.getY()*scale));
 	}
@@ -438,7 +453,15 @@ private void mniLayoutDiagram() {
 	ch.ehi.umleditor.format.LayoutDiagram.layoutCurrentDiagram();
 }
 /**
- * Layout the Figures in Diagram automatically.
+ * Layout the shown rolenames and cardinalities in Diagram automatically.
+ * ClassDiagramView popupMenu-Function.
+ */
+private void mniLayoutRolesAndMultiplicities() {
+	((ClassDiagramView)view()).layoutAllVisibleMultiplicities();	
+	((ClassDiagramView)view()).layoutAllVisibleRolenames();	
+}
+/**
+ * Print the Diagram.
  * ClassDiagramView popupMenu-Function.
  */
 private void mniPrintDiagram() {

@@ -33,7 +33,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-06-01 14:09:47 $
+ * @version $Revision: 1.5 $ $Date: 2004-06-14 14:08:32 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -241,6 +241,28 @@ public void draw(Graphics g) {
 Tracer.getInstance().debug(this, "draw(Graphics)", e.toString());//$NON-NLS-1$
 	}
 }
+public void layoutMultiplicity(){
+	if (multiplicityFigure != null) {
+		Figure figure = getClassDiagram().findFigure(getEndElement());
+		java.awt.Point p=calculateMultiplicityPosition(figure.displayBox(), endPoint());
+		// save new values to repository
+		multiplicityFigure.updateCoordinates();
+		// update view
+		multiplicityFigure.displayBox(p,p);
+	}
+}
+
+public void layoutRolename(){
+	if (roleDefFigure != null) {
+		Figure figure = getClassDiagram().findFigure(getEndElement());
+		java.awt.Point p=calculateRolePosition(figure.displayBox(), endPoint());
+		// save new values to repository
+		roleDefFigure.updateCoordinates();
+		// update view
+		roleDefFigure.displayBox(p,p);
+	}
+}
+
 /**
  * Overwrites.
  */
