@@ -24,9 +24,9 @@ import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a RoleDef.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:56 $
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.2 $ $Date: 2003-12-25 09:48:10 $
  */
 public class RoleDefDialog extends BaseDialog {
 	// ModelElement
@@ -69,50 +69,51 @@ public class RoleDefDialog extends BaseDialog {
 	private JMenuItem ivjMniOpenClassDefSpecification = null;
 	private JMenuItem ivjMniRemoveClassDef = null;
 	private JPopupMenu ivjMnuClassDef = null;
+        private RestrictedClassesPanel ivjTabRestricted = null;
 	private JPanel ivjPnlReferenceType = null;
 	private JCheckBox ivjChxExternal = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getBtnOk()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnOk())
 				connEtoC1(e);
-			if (e.getSource() == RoleDefDialog.this.getBtnCancel()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnCancel())
 				connEtoC2(e);
-			if (e.getSource() == RoleDefDialog.this.getBtnApply()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnApply())
 				connEtoC3(e);
-			if (e.getSource() == RoleDefDialog.this.getMniNewClassDef()) 
+			if (e.getSource() == RoleDefDialog.this.getMniNewClassDef())
 				connEtoC4(e);
-			if (e.getSource() == RoleDefDialog.this.getMniOpenClassDefSpecification()) 
+			if (e.getSource() == RoleDefDialog.this.getMniOpenClassDefSpecification())
 				connEtoC7(e);
-			if (e.getSource() == RoleDefDialog.this.getMniRemoveClassDef()) 
+			if (e.getSource() == RoleDefDialog.this.getMniRemoveClassDef())
 				connEtoC8(e);
 		};
 		public void focusGained(java.awt.event.FocusEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getTxtName()) 
+			if (e.getSource() == RoleDefDialog.this.getTxtName())
 				connEtoM1(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getRbtReference()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtReference())
 				connEtoC9(e);
-			if (e.getSource() == RoleDefDialog.this.getRbtStructure()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtStructure())
 				connEtoC10(e);
-			if (e.getSource() == RoleDefDialog.this.getRbtRelationship()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtRelationship())
 				connEtoC11(e);
 		};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
 		public void mouseExited(java.awt.event.MouseEvent e) {};
 		public void mousePressed(java.awt.event.MouseEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction()) 
+			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction())
 				connEtoC12(e);
-			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction()) 
+			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction())
 				connEtoC13(e);
 		};
 		public void mouseReleased(java.awt.event.MouseEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction()) 
+			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction())
 				connEtoC5(e);
-			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction()) 
+			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction())
 				connEtoC6(e);
 		};
 	};
@@ -140,9 +141,10 @@ public RoleDefDialog(java.awt.Frame owner, boolean modal) {
  * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
  */
 protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	boolean isSelected = getTblClassRestriction().getSelectedRow() >= 0;
+	/* ce boolean isSelected = getTblClassRestriction().getSelectedRow() >= 0;
 	getMniOpenClassDefSpecification().setEnabled(isSelected);
 	getMniRemoveClassDef().setEnabled(isSelected);
+        */
 }
 /**
  * Comment
@@ -1134,10 +1136,10 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsScpClassRestriction.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsScpClassRestriction.weightx = 1.0;
 			constraintsScpClassRestriction.weighty = 1.0;
-			constraintsScpClassRestriction.ipadx = 357;
-			constraintsScpClassRestriction.ipady = 116;
+			//constraintsScpClassRestriction.ipadx = 357;
+			//constraintsScpClassRestriction.ipady = 116;
 			constraintsScpClassRestriction.insets = new java.awt.Insets(4, 9, 4, 11);
-			getPnlDetail().add(getScpClassRestriction(), constraintsScpClassRestriction);
+			getPnlDetail().add(getTabRestricted(), constraintsScpClassRestriction);
 
 			java.awt.GridBagConstraints constraintsPnlReferenceType = new java.awt.GridBagConstraints();
 			constraintsPnlReferenceType.gridx = 1; constraintsPnlReferenceType.gridy = 7;
@@ -1400,6 +1402,22 @@ private javax.swing.JTable getTblClassRestriction() {
 	}
 	return ivjTblClassRestriction;
 }
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private RestrictedClassesPanel getTabRestricted() {
+	if (ivjTabRestricted == null) {
+		try {
+			ivjTabRestricted = new RestrictedClassesPanel();
+			ivjTabRestricted.setName("TabRestricted");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTabRestricted;
+}
 /**
  * Return the TbpGeneral property value.
  * @return javax.swing.JTabbedPane
@@ -1501,8 +1519,10 @@ private void initialize() {
 
 	getCbxCardinality().setModel(new DefaultComboBoxModel(MultiplicityConverter.getDefaultCardinalities()));
 
-	getTblClassRestriction().setModel(new EditorTableModel());
-	((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(null);
+	//ce getTblClassRestriction().setModel(new EditorTableModel());
+	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(null);
+        getTabRestricted().setOwnerDialog(this);
+
 	// user code end
 }
 /**
@@ -1573,6 +1593,11 @@ protected boolean save() {
 			roleDef.attachParticipant((AbstractClassDef)getCbxEnd().getElement());
 		}
 	}
+        roleDef.clearRestriction();
+        AbstractClassDef[] rv=(AbstractClassDef[])getTabRestricted().getObject();
+        for(int i=0;i<rv.length;i++){
+            roleDef.addRestriction(rv[i]);
+        }
 
 	// page DerivedFrom RoleDef has 0/1 RoleDefDerived
 	if (roleDef.containsRoleDefDerived()) {
@@ -1630,8 +1655,14 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	} else {
 		getCbxEnd().setElement(AbstractClassDef.class, roleDef.getAssociation(), null);
 	}
-	getTblClassRestriction().setModel(new EditorTableModel());
-	((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
+	//ce getTblClassRestriction().setModel(new EditorTableModel());
+	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
+        AbstractClassDef[] rv=new AbstractClassDef[roleDef.sizeRestriction()];
+        java.util.Iterator ri=roleDef.iteratorRestriction();
+        for(int i=0;i<rv.length;i++){
+          rv[i]=(AbstractClassDef)ri.next();
+        }
+        getTabRestricted().setObject(rv,roleDef.getAssociation());
 
 
 	// set page DerivedFrom
