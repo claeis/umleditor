@@ -9,7 +9,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.7 $ $Date: 2004-06-29 11:36:43 $
+ * @version $Revision: 1.8 $ $Date: 2004-08-17 08:21:32 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
@@ -1818,9 +1818,17 @@ private void moveElement() {
                   , true, LauncherView.getInstance().getModel());
           if (moveDialog.isSaved()) {
             ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
-      		ModelElement ele=(ModelElement)getSelectedNode();
-                ele.detachNamespace();
-                ele.attachNamespace(apackage);
+      		Element elebase=getSelectedNode();
+      		if(elebase instanceof ModelElement){
+      			ModelElement ele=(ModelElement)elebase;
+				ele.detachNamespace();
+				ele.attachNamespace(apackage);
+      		}else{
+				ch.ehi.umleditor.umlpresentation.Diagram diag =
+					(ch.ehi.umleditor.umlpresentation.Diagram) elebase;
+				diag.detachNamespace();
+				diag.attachNamespace(apackage);
+      		}
           }
 	} catch(Throwable e) {
 		handleException(e);
