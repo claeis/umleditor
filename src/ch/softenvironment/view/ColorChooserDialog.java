@@ -22,7 +22,7 @@ import java.awt.*;
  */
 public class ColorChooserDialog extends BaseDialog {
 	private static java.util.ResourceBundle resColorChooserDialog = java.util.ResourceBundle.getBundle("ch/softenvironment/nls/ColorChooserDialog");
-	java.awt.Color chosenColor = null;
+	private java.awt.Color chosenColor = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnOk = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
@@ -170,7 +170,11 @@ private javax.swing.JButton getBtnOk() {
  * @see undo()
  */
 public Color getChosenColor() {
-	return chosenColor;
+	if (isSaved() && (chosenColor == null)) {
+		return Color.white;
+	} else {
+		return chosenColor;
+	}
 }
 /**
  * Return the ColColorChooser property value.
@@ -236,29 +240,6 @@ private void initialize() {
 		};
 	getColChooser().getSelectionModel().addChangeListener(changeListener);
 	// user code end
-}
-/**
- * main entrypoint - starts the part when it is run as an application
- * @param args java.lang.String[]
- */
-public static void main(java.lang.String[] args) {
-	try {
-		ch.softenvironment.view.ColorChooserDialog aColorChooserDialog;
-		aColorChooserDialog = new ch.softenvironment.view.ColorChooserDialog(new java.awt.Frame(), false);
-		aColorChooserDialog.setModal(true);
-		aColorChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				System.exit(0);
-			};
-		});
-		aColorChooserDialog.show();
-		java.awt.Insets insets = aColorChooserDialog.getInsets();
-		aColorChooserDialog.setSize(aColorChooserDialog.getWidth() + insets.left + insets.right, aColorChooserDialog.getHeight() + insets.top + insets.bottom);
-		aColorChooserDialog.setVisible(true);
-	} catch (Throwable exception) {
-		System.err.println("Exception occurred in main() of ch.softenvironment.view.BaseDialog");//$NON-NLS-1$
-		exception.printStackTrace(System.out);
-	}
 }
 /**
  * Resets chosen color to null.
