@@ -12,12 +12,16 @@ Offene Fragen/Arbeiten
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
 
-UML-Editor 2.?? (2004-???)
+UML-Editor 2.1.1 (2004-03-01)
 -----------------------------
+- INTERLIS-Compiler 2.1.12
 - GUI: Ctrl-S zum Speichern als Keyboard-Accelerator
+- Fehlermeldungen beim Speichern/Lesen der uml-Datei verbessert
+- Beim Speichern wird der Objekt-Baum nicht mehr rekursiv abgearbeitet
 - Bug: Einfügen von ClassDef in Diagramm mit bestehender Abhängigkeit zu nicht darstellbaren Objekten (z.B. ViewDef) erzeugt ClassCastException
 - Bug: Beziehungen auf Beziehungen lassen sich nicht öffnen
 - Bug: Beim Einfügen von bestehenden Klassen in ein Diagramm, werden nicht alle möglichen Beziehungen automatisch nachgeführt
+
 
 UML-Editor 2.1.0 (2004-01-04)
 -----------------------------
