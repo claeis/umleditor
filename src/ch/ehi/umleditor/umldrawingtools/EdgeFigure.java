@@ -37,7 +37,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2003-12-30 22:09:18 $
+ * @version $Revision: 1.4 $ $Date: 2004-01-04 09:44:33 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -233,16 +233,16 @@ protected final void connectNodes() {
 			start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
 		} 
 		if (start == null) {
-Tracer.getInstance().developerError(this, "connectNodes()", "Missing StartNode: there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
+			Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: Missing StartNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
 //			shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingStartNode"), getSourceName(getStartElement()))); //$NON-NLS-1$
 			removeVisually();
-		} else {
+		} else if (getEdge().sizeEndpoint() == 2) {
 			// end -> assume dummy value
 			x = 0;
 			y = 0;
 			endPoint(x, y);
 			iterator = getEdge().iteratorEndpoint();
-			iterator.next();  
+			iterator.next(); // skip
 			Object second = iterator.next();
 			Connector end = null;
 			if ((second instanceof PresentationAssocClass) && 
@@ -256,7 +256,7 @@ Tracer.getInstance().developerError(this, "connectNodes()", "Missing StartNode: 
 				end = getClassDiagram().findNodeConnector(getEndElement(), x, y);
 			}
 			if (end == null) {
-Tracer.getInstance().developerError(this, "connectNodes()", "Missing EndNode: there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: Missing EndNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
 				//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
 				removeVisually();
 			} else {
@@ -273,6 +273,10 @@ Tracer.getInstance().developerError(this, "connectNodes()", "Missing EndNode: th
 				updateConnection();
 				endFigure().addFigureChangeListener(this);
 			}
+		} else {
+			Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
+			//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
+			removeVisually();	
 		}
 	} catch(Throwable e) {
 		Tracer.getInstance().debug(this, "connectNodes()", e.toString());
