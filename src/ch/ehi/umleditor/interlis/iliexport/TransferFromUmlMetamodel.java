@@ -1261,6 +1261,12 @@ public class TransferFromUmlMetamodel
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3D5D3A3D033B body3CFE050F004D "classRef"
+    if("ANYCLASS".equals(ref.getDefLangName())){
+    	return "ANYCLASS";
+    }
+	if("ANYSTRUCTURE".equals(ref.getDefLangName())){
+		return "ANYSTRUCTURE";
+	}
     return modelElementRef(source,ref,null);
     // -end- 3D5D3A3D033B body3CFE050F004D "classRef"
     }
@@ -1826,6 +1832,10 @@ public class TransferFromUmlMetamodel
       out.write((propc==0?"(":",")+"EXTENDED");
       propc++;
     }
+	if(def.isPropExternal()){
+	  out.write((propc==0?"(":",")+"EXTERNAL");
+	  propc++;
+	}
     if(def.getOrdering()==OrderingKind.ORDERED){
       out.write((propc==0?"(":",")+"ORDERED");
       propc++;
