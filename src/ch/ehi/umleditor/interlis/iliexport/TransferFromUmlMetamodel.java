@@ -214,6 +214,9 @@ public class TransferFromUmlMetamodel
       if(xsdFile!=null){
         config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.XMLSCHEMA );
         config.setOutputFile(xsdFile);
+      }else if(fmtFile!=null){
+		  config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.ILI1FMTDESC );
+		  config.setOutputFile(fmtFile);
       }else{
         // we need no output (except error messages)
         config.setOutputKind(ch.interlis.ili2c.config.GenerateOutputKind.NOOUTPUT );
@@ -305,39 +308,42 @@ public class TransferFromUmlMetamodel
         }
         currentFile=null;
       }
-      if(!createFileList){
-        // open
-        out = new BufferedWriter(new FileWriter(file));
-        lineNumber=1;
-        // write
-        defineLinkToModelElement(def);
-        out.write("INTERLIS 2.2;");newline();
-        visitINTERLIS2Def(def,language);
-      }
-      done.add(language);
-      java.util.Iterator otheri=languages.keySet().iterator();
-      // while other langugae with same name
-      while(otheri.hasNext()){
-        String otherLanguage=(String)otheri.next();
-        // language already done?
-        if(done.contains(otherLanguage)){
-          continue;
-        }
-        // another filename?
-        if(!filename.equals(languages.get(otherLanguage))){
-          continue;
-        }
-        // write otherLanguage to same file
-        if(!createFileList){
-          visitINTERLIS2Def(def,otherLanguage);
-        }
-        done.add(otherLanguage);
-      }
-      // close
-      if(!createFileList){
-        out.close();
-        out=null;
-      }
+		try{
+	      if(!createFileList){
+	        // open
+	        out = new BufferedWriter(new FileWriter(file));
+	        lineNumber=1;
+	        // write
+	        defineLinkToModelElement(def);
+	        out.write("INTERLIS 2.2;");newline();
+	        visitINTERLIS2Def(def,language);
+	      }
+	      done.add(language);
+	      java.util.Iterator otheri=languages.keySet().iterator();
+	      // while other langugae with same name
+	      while(otheri.hasNext()){
+	        String otherLanguage=(String)otheri.next();
+	        // language already done?
+	        if(done.contains(otherLanguage)){
+	          continue;
+	        }
+	        // another filename?
+	        if(!filename.equals(languages.get(otherLanguage))){
+	          continue;
+	        }
+	        // write otherLanguage to same file
+	        if(!createFileList){
+	          visitINTERLIS2Def(def,otherLanguage);
+	        }
+	        done.add(otherLanguage);
+	      }
+		}finally{
+			// close
+			if(!createFileList){
+			  out.close();
+			  out=null;
+			}
+		}
       if(!onlyChecking){
         if(!createFileList){
           ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc()
@@ -1275,7 +1281,6 @@ public class TransferFromUmlMetamodel
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
     out.write(def.getName().getValue(language)+" ");
-
     int propc=0;
     if(def.isAbstract()){
       out.write((propc==0?"(":",")+"ABSTRACT");
@@ -2411,7 +2416,9 @@ public class TransferFromUmlMetamodel
     if(onlyChecking){
       if(xsdFile!=null){
         return "XSD export";
-      }
+      }else if(fmtFile!=null){
+		return "FMT export";
+	  }
       return rsrc.getString("CIcheckmodel");
     }
     return rsrc.getString("CIexportinterlis");
@@ -2419,6 +2426,10 @@ public class TransferFromUmlMetamodel
    private String xsdFile=null;
    public void setXsdFile(String path){
     xsdFile=path;
+   }
+   private String fmtFile=null;
+   public void setFmtFile(String path){
+	fmtFile=path;
    }
    private boolean createFileList=false;
    private java.util.List fileList=null;
