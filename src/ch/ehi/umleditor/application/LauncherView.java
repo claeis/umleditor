@@ -45,7 +45,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2003-12-25 10:54:37 $
+ * @version $Revision: 1.3 $ $Date: 2004-01-28 13:55:10 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener {
 	// Constants
@@ -3027,21 +3027,6 @@ protected void initializeView() {
 	// initialize LauncherMenu
 	createLookAndFeelMenu(getMnuLookAndFeel());
 
-	// SQL-Menu's
-	JMenu mnuSQL = new JMenu();
-	JMenuItem mniExportSQL = new JMenuItem();
-	getMnuTools().add(mnuSQL);
-	mnuSQL.setText("SQL");
-	mnuSQL.add(mniExportSQL);
-	mniExportSQL.setText("SQL exportieren...");
-	mniExportSQL.addActionListener(new java.awt.event.ActionListener() {
-	  // callback Handler if Button was pressed
-	  public void actionPerformed(ActionEvent e) {
-		// !!! Function implementing any action at Pressing the button
-		mniSQLExport();
-	  }
-	});
-
 	// initialize Drawing Area
 	mdiListeners = new Vector();
 	addInternalFrameListener(this);
@@ -3406,17 +3391,6 @@ private boolean mniSaveFile() {
 		tool().activate();
 		return true;
 	}
-}
-/**
- * SQL-Export.
- */
-private void mniSQLExport() {
-	tool().deactivate();
-
-	ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog dialog = new ch.softenvironment.umleditor.sql.view.SQLGeneratorDialog(this, true);
-	dialog.show();
-
-	tool().activate();
 }
 /**
  * Structure-Report.
