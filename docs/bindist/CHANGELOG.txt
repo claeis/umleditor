@@ -14,7 +14,7 @@ Offene Fragen/Arbeiten
 - Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
 - Bug iliexp: wenn bei einem nicht abstrakten Nummerischen-Datentyp der Maximalwert fehlt gibt es eine Exception
 - Bug: Farbedialog zu klein
-- Bug: nach dem umhängen eine Assoziation ist in anderen Diagrammen, die diese Assoziation enthalten, der Linkknoten fälschlicherweise mit der Ursprungs-Klasse gekoppelt (Modell ist aber korrekt)
+- Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
 
 UML-Editor 2.0.3 (2003-xx-xx)
 -----------------------------

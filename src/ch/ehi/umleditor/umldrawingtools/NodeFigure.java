@@ -32,7 +32,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2003-12-30 22:11:05 $
+ * @version $Revision: 1.4 $ $Date: 2004-01-04 09:45:09 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -368,7 +368,7 @@ public void removeVisually() {
 			if (node instanceof ch.ehi.umleditor.umlpresentation.Note) {
 				node.clearPresentationEdge();
 			}
-			getClassDiagram().getDiagram().removePresentationElement(node);
+			getClassDiagram().getDiagram().deletePresentationElement(node); //removePresentationElement(node);
 		}
 	} catch(Throwable e) {
 		handleException(e, MENU_EDIT_REMOVE, ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
