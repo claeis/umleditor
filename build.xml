@@ -27,8 +27,9 @@
     <mkdir dir="${build}/classes"/>
     <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java">
       <classpath>
-        <pathelement location="lib/hd53.jar"/>
+        <pathelement location="lib/jhotdraw53.jar"/>
         <pathelement location="lib/ehibasics.jar"/>
+        <pathelement location="lib/sebase.jar"/>
         <pathelement location="lib/ili2c.jar"/>
         <pathelement location="lib/XMIFramework.jar"/>
         <pathelement location="lib/jh.jar"/>
@@ -37,6 +38,7 @@
         <pathelement location="lib/freehep-graphicsio.jar"/>
         <pathelement location="lib/freehep-graphicsio-emf.jar"/>
         <pathelement location="lib/freehep-graphicsio-svg.jar"/>
+        <pathelement location="lib/usrdocjh.jar"/>
       </classpath>
     	<src path="${src}" />
     	<!-- <src path="${build}/src"/> -->
@@ -64,27 +66,17 @@
    	<fileset dir="${src}" includes="**/*.properties"/>
     	<fileset dir="resources/de" includes="**/*.properties"/>
     	<fileset dir="resources/fr" includes="**/*.properties"/>
-    	<fileset dir="resources/en" includes="**/*.properties"/>
     	<fileset dir="${src}" includes="**/*.gif"/>
     	<fileset dir="${src}" includes="**/*.jpg"/>
     	<zipfileset src="lib/XMIFramework.jar"/>
-    	<zipfileset src="lib/hd53.jar"/>
+    	<zipfileset src="lib/jhotdraw53.jar"/>
+    	<zipfileset src="lib/sebase.jar"/>
         <zipfileset src="lib/freehep-base.jar"/>
         <zipfileset src="lib/freehep-graphics2d.jar"/>
         <zipfileset src="lib/freehep-graphicsio.jar"/>
         <zipfileset src="lib/freehep-graphicsio-emf.jar"/>
         <zipfileset src="lib/freehep-graphicsio-svg.jar"/>
-    	<fileset dir="help">
-    	  <patternset>
-	    <include name="**/*.hs"/>
-	    <include name="**/*.html"/>
-	    <include name="**/*.png"/>
-	    <include name="**/*.xml"/>
-	    <include name="**/*.jhm"/>
-	    <include name="**/*.png"/>
-	    <include name="**/JavaHelpSearch/*"/>
-	  </patternset>
-	</fileset>
+        <zipfileset src="lib/usrdocjh.jar"/>
     	<!-- <fileset dir="lib" excludes="antlr-2.6.1/**/*"/> -->
     </jar>
   </target>
@@ -117,23 +109,26 @@
   </target>
 -->
   <target depends="init" name="srcdist">
-    <delete file="${dist}/${ant.project.name}-src-${DSTAMP}.zip" quiet="true"/>
-    <zip zipfile="${dist}/${ant.project.name}-src-${DSTAMP}.zip">
-    	<zipfileset dir="." prefix="${ant.project.name}-${DSTAMP}">
+    <property file="${src}/ch/ehi/umleditor/application/Version.properties" prefix="buildnr."/>
+    <property name="buildnr" value="${buildnr.versionMajor}.${buildnr.versionMinor}.${buildnr.versionMicro}"/>
+    <delete file="${dist}/${ant.project.name}-src-${buildnr}.zip" quiet="true"/>
+    <zip zipfile="${dist}/${ant.project.name}-src-${buildnr}.zip">
+    	<zipfileset dir="." prefix="${ant.project.name}-${buildnr}">
 	    	<patternset includes="build.xml"/>
-	    	<patternset includes="UMLEditor.jpr"/>
 	    	<patternset includes="lib/**"/>
 <!--	    	<patternset includes="model/**/*.sub"/>
 	    	<patternset includes="model/**/*.cat"/>
 	    	<patternset includes="model/**/*.mdl"/>
 -->
 	    	<patternset includes="other/manifest"/>
+	    	<patternset includes="other/LICENSE.*"/>
 <!--	    	<patternset includes="build/rosemodel/**"/>
 -->
 	    	<patternset includes="src/**" excludes="**/CVS/*;**/bak~/*"/>
-	    	<!-- <patternset includes="src-hd53/**/*.class"/> -->
-	    	<patternset includes="src-hd53/src/**" excludes="**/CVS/*;**/bak~/*"/>
+		<patternset includes="resources/de/**/*.properties"/>
+		<patternset includes="resources/fr/**/*.properties"/>
 	    	<patternset includes="docs/bindist/*.txt"/>
+	    	<patternset includes="xmirose/*.ebs"/>
 <!--
 	    	<patternset includes="doc/**"/>
 	    	<patternset includes="other/**"/>
@@ -256,6 +251,15 @@
     	<fileset dir="${src}" includes="**/*.properties"/>
     	<fileset dir="${src}" includes="**/*.gif"/>
     	<fileset dir="${src}" includes="**/*.jpg"/>
+    </copy>
+  </target>
+
+  <target depends="init" name="copyres2">
+
+    <copy toDir="${src}" overwrite="true">
+    	<fileset dir="${basedir}/resources/en" includes="**/*.properties"/>
+    	<fileset dir="${basedir}/resources/en" includes="**/*.gif"/>
+    	<fileset dir="${basedir}/resources/en" includes="**/*.jpg"/>
     </copy>
   </target>
 
