@@ -33,7 +33,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.7 $ $Date: 2005-01-17 11:21:59 $
+ * @version $Revision: 1.8 $ $Date: 2005-01-18 14:37:36 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -512,24 +512,36 @@ protected void showSpecification(int selectedRows[]) {
 private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 	if (object instanceof AttributeDef) {
 		currentDataRow.set(0, ((AttributeDef)object).getDefLangName());
-		currentDataRow.set(1, IliBaseTypeKind.getTypeName(object,true));
+		currentDataRow.set(1, MultiplicityConverter.getRange(((AttributeDef)object).getMultiplicity()));
+		currentDataRow.set(2, IliBaseTypeKind.getTypeName(object,true));
 	} else if (object instanceof ClassDef) {
 		currentDataRow.set(0, ((ClassDef)object).getDefLangName());
 	} else if (object instanceof RoleDef) {
 		RoleDef roleDef = (RoleDef)object;
-		currentDataRow.set(0, roleDef.getDefLangName());
-		if (roleDef.getAggregation() == AggregationKind.AGGREGATE) {
-			currentDataRow.set(1, PresentationRoleFigure.AGGREGATION);
-		} else if (roleDef.getAggregation() == AggregationKind.COMPOSITE) {
-			currentDataRow.set(1, PresentationRoleFigure.COMPOSITE);
-		} else {
-			currentDataRow.set(1, PresentationRoleFigure.ASSOCIATION);
-		}
-		currentDataRow.set(2, MultiplicityConverter.getRange(roleDef.getMultiplicity()));
-		if (roleDef.containsParticipant()) {
-			currentDataRow.set(3, (roleDef.getParticipant().getDefLangName()));
-		} else {
-			currentDataRow.set(3, null);
+		if(tableKind==ATTRIBUTE){
+
+			currentDataRow.set(0,roleDef.getDefLangName());
+			currentDataRow.set(1,MultiplicityConverter.getRange(roleDef.getMultiplicity()));
+			if (roleDef.containsParticipant()) {
+				currentDataRow.set(2,roleDef.getParticipant().getDefLangName());
+			} else {
+				currentDataRow.set(2,null);
+			}
+		}else{
+			currentDataRow.set(0, roleDef.getDefLangName());
+			if (roleDef.getAggregation() == AggregationKind.AGGREGATE) {
+				currentDataRow.set(1, PresentationRoleFigure.AGGREGATION);
+			} else if (roleDef.getAggregation() == AggregationKind.COMPOSITE) {
+				currentDataRow.set(1, PresentationRoleFigure.COMPOSITE);
+			} else {
+				currentDataRow.set(1, PresentationRoleFigure.ASSOCIATION);
+			}
+			currentDataRow.set(2, MultiplicityConverter.getRange(roleDef.getMultiplicity()));
+			if (roleDef.containsParticipant()) {
+				currentDataRow.set(3, (roleDef.getParticipant().getDefLangName()));
+			} else {
+				currentDataRow.set(3, null);
+			}
 		}
 	} else if (object instanceof Contract) {
 		currentDataRow.set(0, ElementUtils.mapNlsString(((Contract)object).getIssuer()));
