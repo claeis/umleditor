@@ -9,7 +9,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2004-04-28 19:09:24 $
+ * @version $Revision: 1.6 $ $Date: 2004-05-03 13:38:26 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
     //private TreeDragSource ds;
@@ -2049,10 +2049,9 @@ private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelection
 	if (treeNode != null) {
 	    // rename
 	    getTreNavigation().setEditable(NavigationTreeNodeUtility.isNodeEditable(treeNode));
-
-	    // Documentation
-            LauncherView.getInstance().setDescription(treeNode);
 	}
+	// Documentation (update at deselect as well!)
+	LauncherView.getInstance().setDescription(treeNode);
 }
 /**
  * Build the visual Tree with a given UML-Model.
