@@ -46,7 +46,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.10 $ $Date: 2004-05-08 15:25:54 $
+ * @version $Revision: 1.11 $ $Date: 2004-06-14 14:17:06 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -2991,7 +2991,12 @@ getMniRedo().setEnabled(false);
 
 	mnuFileHistory = new FileHistoryMenu(this, 6, getSettings().getLastFiles());
 	getMnuFile().insert((javax.swing.JMenuItem)mnuFileHistory, 2 /* second */);
-	
+	getMnuReports().add(new AbstractAction(getResourceString("MniObjectCataloWoSecNr_text")) { //$NON-NLS-1$
+		public void actionPerformed(ActionEvent event) {
+			mniObjectCatalogWoChNr();
+		}
+	});
+
 	// restore Window Coordinates
 	java.awt.Insets insets = instance.getInsets();
 	setLocation(getSettings().getWindowX().intValue(), getSettings().getWindowY().intValue());
@@ -3285,6 +3290,11 @@ private void mniNewFile() {
 private void mniObjectCatalog() {
 	tool().deactivate();
 	ch.ehi.umleditor.objectcatalog.ObjectCatalog.writeAllHtml();
+	tool().activate();
+}
+private void mniObjectCatalogWoChNr() {
+	tool().deactivate();
+	ch.ehi.umleditor.objectcatalog.ObjectCatalog.writeAllHtml(false);
 	tool().activate();
 }
 /**
