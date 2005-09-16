@@ -29,7 +29,7 @@ import ch.softenvironment.util.*;
  * User Interface for an AttributeDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-08-17 13:52:57 $
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:51:43 $
  */
 public class AttributeDefDialog extends BaseDialog {
 	// ModelElement
@@ -1232,7 +1232,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 					getCbxType().setSelectedItem(IliBaseTypeKind.CLASS_TYPE);
 					getPnlTypeClass().setObject(type, attributeDef.getOwner());
 				} else {
-					Tracer.getInstance().nyi(this, "setElement(Element)", "Type not displayable <" + type.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: Type not displayable <" + type.toString() + ">
 				}
 			} else {
 				getCbxType().setSelectedItem(IliBaseTypeKind.DOMAINDEF);

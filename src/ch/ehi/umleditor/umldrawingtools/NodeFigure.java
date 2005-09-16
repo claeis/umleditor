@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -27,14 +26,13 @@ import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.client.ResourceManager;
-import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 /**
  * Fiure Specification for all Elements treated as Nodes in an UML-Class-Diagram.
  * @see EdgeFigure
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2005-02-21 13:51:32 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.12 $ $Date: 2005-09-16 09:50:06 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation

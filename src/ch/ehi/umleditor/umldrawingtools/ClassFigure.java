@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -30,7 +29,6 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
-import ch.softenvironment.util.*;
 
 /**
  * A ClassFigure is a graphical representation for an UML Class
@@ -39,8 +37,8 @@ import ch.softenvironment.util.*;
  * (PresentationElement). A class has a class
  * name, attributes and methods.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2005-02-21 13:51:31 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.6 $ $Date: 2005-09-16 09:50:06 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	// TextFigure for editing the class name

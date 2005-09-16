@@ -18,8 +18,6 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.uml1_4.foundation.core.*;
-import ch.softenvironment.util.Tracer;
-
 import java.awt.*;
 
 
@@ -33,8 +31,8 @@ import java.awt.*;
  * This figure will automatically be showed or hided, depending whether Association has Features
  * or not.
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2003-12-30 22:04:29 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.3 $ $Date: 2005-09-16 09:50:06 $
  */
 class AssociationAttributeFigure extends ClassFigure {
 	private LinkFigure linkFigure = null;
@@ -136,7 +134,7 @@ public void updateCoordinates() {
 	ch.ehi.umleditor.umlpresentation.PresentationAssocClass linkNode = (ch.ehi.umleditor.umlpresentation.PresentationAssocClass)linkFigure.getNode();
 	Rectangle rectangle = getPresentationFigure().displayBox();
 
-Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates instead");
+//TODO NYI: use Polar coordinates instead
 	linkNode.setClassAngle(rectangle.getX());
     linkNode.setClassRadius(rectangle.getY());
 

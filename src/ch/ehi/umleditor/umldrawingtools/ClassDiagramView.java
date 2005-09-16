@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -33,8 +32,8 @@ import ch.softenvironment.view.*;
 /**
  * Drawing View for Class-Diagram's.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.15 $ $Date: 2005-02-23 16:46:01 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.16 $ $Date: 2005-09-16 09:50:06 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -760,7 +759,7 @@ private boolean correctRoleRelocation(ch.ehi.umleditor.umlpresentation.Presentat
 	while (subjects.hasNext()) {
 		Object object = subjects.next();
 if (!(object instanceof AssociationEnd)) {
-	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "role subject is not an AssociationEnd");
+//TODO NYI: role subject is not an AssociationEnd
 	continue;	
 }
 		AssociationEnd subjectRoleDef = (AssociationEnd)object;
@@ -773,7 +772,7 @@ if (!(object instanceof AssociationEnd)) {
 				if (endpoints.hasNext()) {
 					object = endpoints.next();
 if (!(object instanceof ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)) {
-	Tracer.getInstance().nyi(this, "correctRoleRelocation(..)", "endpoint is not an umlpresentation.PresentationAbstractClass");
+//TODO NYI: endpoint is not an umlpresentation.PresentationAbstractClass
 	continue;	
 }
 					ch.ehi.umleditor.umlpresentation.PresentationAbstractClass presentationClass = (ch.ehi.umleditor.umlpresentation.PresentationAbstractClass)object;
@@ -828,7 +827,7 @@ protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
 				// role will be inserted by new Node automatically
 				nodeFigure = add((Classifier)roleDef.getParticipant());
 			} else {
-Tracer.getInstance().nyi(this, "loadPresentationRole()", "search whether Role is presented in Diagram or not");//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: search whether Role is presented in Diagram or not
 LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
                 return null;
 /*

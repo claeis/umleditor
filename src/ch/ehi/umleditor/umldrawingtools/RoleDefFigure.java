@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -29,8 +28,8 @@ import CH.ifa.draw.figures.*;
  * two separate Figures. 
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2005-02-23 16:46:01 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.7 $ $Date: 2005-09-16 09:50:06 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -217,7 +216,7 @@ public void updateCoordinates() {
 	double y1 = rectangle.getY();
 
 	if (type == ROLE_DEF) {
-ch.softenvironment.util.Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates instead");//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: use Polar coordinates instead
 		getEdge().setNameAngle(x1);
 	    getEdge().setNameRadius(y1);
 	} else if (type == CARDINALITY) {

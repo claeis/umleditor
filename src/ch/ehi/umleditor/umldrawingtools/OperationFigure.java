@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -20,13 +19,12 @@ package ch.ehi.umleditor.umldrawingtools;
 import CH.ifa.draw.figures.*;
 import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.uml1_4.implementation.UmlOperation;
-import ch.softenvironment.util.Tracer;
 
 /**
  * Figure for displaying a single UmlOperation within a ClassFigure or AssociationAttributeFigure compartment.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-06-21 11:41:02 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
  */
 class OperationFigure extends TextFigure {
 	private UmlOperation operation = null;
@@ -59,7 +57,7 @@ public String getPureOperationName(String name) {
 	if (index > 0) {
 		realName = name.substring(1 /*skip visibility*/, index);
 	} else {
-Tracer.getInstance().nyi(this, "getPureOperationName(..)", "skip <visibility return type>");
+//TODO NYI: skip <visibility return type>
 		realName = name;
 	}
 

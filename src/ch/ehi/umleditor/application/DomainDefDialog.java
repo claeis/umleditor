@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-12-03 16:36:27 $
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:51:43 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
@@ -1030,7 +1030,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);
 		} else {
-			ch.softenvironment.util.Tracer.getInstance().nyi(this, "setElement(Element)", "Type not displayable <" + type.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: Type not displayable <" + type.toString() + ">"
 		}
 	}
 }

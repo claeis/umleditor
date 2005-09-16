@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -26,7 +25,6 @@ import CH.ifa.draw.figures.ArrowTip;
 import CH.ifa.draw.framework.Figure;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.view.*;
-import ch.softenvironment.util.*;
 
 /**
  * Draw a dependency line between two Figures representing dependable ModelElement's.
@@ -35,8 +33,8 @@ import ch.softenvironment.util.*;
  * used by another one. The start class (Client) is dependend on the end class (Supplier).
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2005-02-23 16:46:01 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -140,7 +138,7 @@ protected Element getEndElement() {
 	if (getModelElement() == null) {
 		return null;
 	} else {
-Tracer.getInstance().nyi(this, "getSupplier()", "only first Dependency-Supplier is treated");//$NON-NLS-2$//$NON-NLS-1$
+//TODO: only first Dependency-Supplier is treated
   	  return (Element)((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorSupplier().next();
 	}
 }
@@ -152,7 +150,7 @@ protected Element getStartElement() {
 	if (getModelElement() == null) {
 		return null;
 	} else {
-Tracer.getInstance().nyi(this, "getClient()", "only first Dependency-Client is treated");//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: only first Dependency-Client is treated
 	    return (Element)((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorClient().next();
 	}
 }

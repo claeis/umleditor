@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2005-02-03 14:31:36 $
+ * @version $Revision: 1.6 $ $Date: 2005-09-16 09:51:43 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -365,7 +365,7 @@ public static ModelDef createModelDef(Element parent) throws ClassNotFoundExcept
  * @see createObject(..)
  */
 public static ch.ehi.umleditor.umlpresentation.Note createNote() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-Tracer.getInstance().nyi(ElementFactory.class, "createNote()", "uml.core.Comment would actually be the ModelElement");//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: uml.core.Comment would actually be the ModelElement
 	//    ModelElement comment = (ModelElement)EditorTreeElement.createElement(Comment.class);
 
 	// generic initialization
