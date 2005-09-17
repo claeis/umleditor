@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2005-02-21 13:51:32 $
+ * @version $Revision: 1.12 $ $Date: 2005-09-17 15:16:14 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -159,11 +159,12 @@ protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
 			mniLineColor();
 		}
 	});
-	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFillColorText()) {
+/*	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFillColorText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniFillColor();
 		}
 	});
+*/
 
 	popupMenu.add(formatMenu);
 }
@@ -426,10 +427,12 @@ private void mniCut() {
  * FillColor Action.
  * @see addEditMenu(..)
  */
+/*
 private void mniFillColor() {
     // makes no sense here
 	mniLineColor();
 }
+*/
 /**
  * Font Action.
  * @see addEditMenu(..)
