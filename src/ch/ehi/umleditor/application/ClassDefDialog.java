@@ -17,6 +17,8 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import ch.ehi.interlis.attributes.*;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
@@ -25,8 +27,8 @@ import ch.softenvironment.util.*;
 /**
  * User Interface for a ClassDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2005-01-14 15:47:13 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.4 $ $Date: 2005-11-05 20:06:09 $
  */
 public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
@@ -122,13 +124,17 @@ public ClassDefDialog(java.awt.Frame owner, boolean modal) {
 	initialize();
 }
 /**
- * Overwrites.
+ * @see ch.softenvironment.view.ListMenuChoice#adaptUserAction(EventObject, Object)
  */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
-	boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
-	getMniOpenAttributeSpecication().setEnabled(isSelected);
-	getMniRemoveAttribute().setEnabled(isSelected);
-	mniMoveDownAttribute.setEnabled(isSelected);
+public void adaptUserAction(EventObject event, Object control) {
+    try {
+    	boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
+    	getMniOpenAttributeSpecication().setEnabled(isSelected);
+    	getMniRemoveAttribute().setEnabled(isSelected);
+    	mniMoveDownAttribute.setEnabled(isSelected);
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 /**
  * connEtoC1:  (BtnOk.action.actionPerformed(java.awt.event.ActionEvent) --> ClassDefDialog.okPressed()V)

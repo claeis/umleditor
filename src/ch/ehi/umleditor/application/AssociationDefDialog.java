@@ -18,6 +18,8 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+import java.util.EventObject;
+
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import javax.swing.table.*;
@@ -25,8 +27,8 @@ import ch.softenvironment.view.*;
 /**
  * User Interface for an AssociationDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2005-01-14 15:47:13 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2005-11-05 20:06:09 $
  */
 public class AssociationDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
@@ -136,21 +138,25 @@ public AssociationDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.
 	show();
 }
 /**
- * Overwrites.
+ * @see ch.softenvironment.view.ListMenuChoice#adaptUserAction(EventObject, Object)
  */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
-	if (popupMenu.equals(getMnuAttributes())) {
-		boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
-		getMniOpenAttributeSpecification().setEnabled(isSelected);
-		getMniRemoveAttribute().setEnabled(isSelected);
-		mniMoveDownAttribute.setEnabled(isSelected);
-	} else {
-		// must be Roles
-		boolean isSelected = getTblRoles().getSelectedRow() >= 0;
-		getMniOpenRoleSpecification().setEnabled(isSelected);
-		getMniRemoveRoleDef().setEnabled(isSelected);
-		mniMoveDownRole.setEnabled(isSelected);
-	}
+public void adaptUserAction(EventObject event, Object control) {
+    try {
+    	if (control.equals(getMnuAttributes())) {
+    		boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
+    		getMniOpenAttributeSpecification().setEnabled(isSelected);
+    		getMniRemoveAttribute().setEnabled(isSelected);
+    		mniMoveDownAttribute.setEnabled(isSelected);
+    	} else {
+    		// must be Roles
+    		boolean isSelected = getTblRoles().getSelectedRow() >= 0;
+    		getMniOpenRoleSpecification().setEnabled(isSelected);
+    		getMniRemoveRoleDef().setEnabled(isSelected);
+    		mniMoveDownRole.setEnabled(isSelected);
+    	}
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 /**
  * connEtoC1:  (BtnOk.action.actionPerformed(java.awt.event.ActionEvent) --> ClassDefDialog.okPressed()V)
