@@ -22,8 +22,8 @@ import ch.softenvironment.util.*;
 /**
  * User Interface for a MetaDataUseDef.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:29 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.2 $ $Date: 2005-11-20 16:37:17 $
  */
 public class MetaDataUseDefDialog extends BaseDialog {
 	// ModelElement
@@ -603,6 +603,7 @@ private void initialize() {
 	}
 	// user code begin {2}
 	setTitle(resMetaDataUseDefDialog.getString("CTDialog"));
+    setSize(560, 285);
 	javax.swing.ButtonGroup buttonGroup = new javax.swing.ButtonGroup();
 	buttonGroup.add(getRbtSign());
 	buttonGroup.add(getRbtRefSystem());
