@@ -33,7 +33,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.8 $ $Date: 2005-01-18 14:37:36 $
+ * @version $Revision: 1.9 $ $Date: 2005-11-20 16:42:51 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -268,8 +268,10 @@ public void removeRows(int selectedRows[]) {
 		Element element = (Element)currentDataRow.get(currentDataRow.size() - 1);
 		if (element instanceof LineFormTypeDef) {
 			// @see IliBaseTypeLinePanel
-			LineForm lineForm = ((LineFormTypeDef)element).getLineForm();
-			lineForm.removeLineFormTypeDef((LineFormTypeDef)element);
+            if (((LineFormTypeDef)element).containsLineForm()) {
+			     LineForm lineForm = ((LineFormTypeDef)element).getLineForm();
+			     lineForm.removeLineFormTypeDef((LineFormTypeDef)element);
+            }
 		} else {
 			ElementFactory.removeElement(element);
 		}
