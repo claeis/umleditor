@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.application;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,16 +16,18 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a TopicDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2005-02-23 16:40:04 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
-public class TopicDefDialog extends BaseDialog {
+public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
 	private static java.util.ResourceBundle resTopicDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/TopicDefDialog");  //$NON-NLS-1$
 	private ch.ehi.interlis.modeltopicclass.TopicDef topicDef = null;
@@ -114,10 +115,7 @@ public TopicDefDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	boolean isSelected = getTblDepends().getSelectedRow() >= 0;
 	getMniOpenTopicDefSpecification().setEnabled(isSelected);
 	getMniRemoveTopicDepends().setEnabled(isSelected);
@@ -1058,28 +1056,22 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewTopicDepends() {
-	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resTopicDefDialog.getString("CTSelection"), true, topicDef); //$NON-NLS-1$
-	getTblDepends().setModel(new EditorTableModel());
-	((EditorTableModel)getTblDepends().getModel()).setClientDependency(topicDef.iteratorClientDependency(), resTopicDefDialog.getString("CITopicDef")); //$NON-NLS-1$
+    newObject(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniOpenTopicDefSpecification() {
-	try {
-		((EditorTableModel)getTblDepends().getModel()).showDependencySpecification(getTblDepends().getSelectedRows());
-	} catch(Throwable e) {
-		BaseDialog.showError((java.awt.Component)this, "Model error", "There is something wrong with this element! You are best adviced by deleting and recreating it again.", e);
-	}
+	changeObjects(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveTopicDepends() {
-	((EditorTableModel)getTblDepends().getModel()).removeRows(getTblDepends().getSelectedRows());
+	removeObjects(null);
 }
 /**
  * Save ModelElement changes.
@@ -1157,5 +1149,34 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getTblUses().setModel(new EditorTableModel());
 	((EditorTableModel)getTblUses().getModel()).setPatternUse(topicDef.iteratorClientDependency());
 */
+}
+
+public void changeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblDepends().getModel()).showDependencySpecification(getTblDepends().getSelectedRows());
+    } catch(Throwable e) {
+        BaseDialog.showError((java.awt.Component)this, "Model error", "There is something wrong with this element! You are best adviced by deleting and recreating it again.", e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    try {
+        ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resTopicDefDialog.getString("CTSelection"), true, topicDef); //$NON-NLS-1$
+        getTblDepends().setModel(new EditorTableModel());
+        ((EditorTableModel)getTblDepends().getModel()).setClientDependency(topicDef.iteratorClientDependency(), resTopicDefDialog.getString("CITopicDef")); //$NON-NLS-1$
+    } catch(Throwable e) {
+        handleException(e);
+    }
+    
+}
+public void removeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblDepends().getModel()).removeRows(getTblDepends().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

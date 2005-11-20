@@ -17,6 +17,8 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import javax.swing.tree.*;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
@@ -24,10 +26,10 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
 /**
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2004-08-18 09:22:58 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.8 $ $Date: 2005-11-20 16:43:58 $
  */
-public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel {
+public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
@@ -87,11 +89,8 @@ public IliBaseTypeEnumPanel() {
 	super();
 	initialize();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
-	EnumElement node = getSelectedNode();
+public void adaptUserAction(EventObject event, Object control) {
+   	EnumElement node = getSelectedNode();
 
 	boolean isEnabled = (node != null) && (node != getTreEnumeration().getModel().getRoot());
 	getMniNewDeep().setEnabled(node != null);
@@ -904,16 +903,10 @@ private void mniNewFlat() {
 	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemove() {
-	EnumElement selectedNode = getSelectedNode();
-	if (selectedNode==null || selectedNode.getEnumeration()==root) {
-		// use Root
-                root.removeEnumElement(selectedNode);
-	} else {
-                selectedNode.getEnumeration().removeEnumElement(selectedNode);
-	}
+	removeObjects(null);
 }
 /**
  * Start renaming by setting Cursor on TreeNode.
@@ -970,5 +963,30 @@ public void setObject(java.lang.Object object) {
 	}
 
 	model.setRoot(root);
+}
+public void changeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    try {
+        EnumElement selectedNode = getSelectedNode();
+        if (selectedNode==null || selectedNode.getEnumeration()==root) {
+            // use Root
+            root.removeEnumElement(selectedNode);
+        } else {
+            selectedNode.getEnumeration().removeEnumElement(selectedNode);
+        }
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

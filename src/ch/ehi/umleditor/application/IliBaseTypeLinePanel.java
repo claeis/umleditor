@@ -17,6 +17,8 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.domainsandconstants.*;
@@ -28,10 +30,10 @@ import ch.softenvironment.view.*;
 /**
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-29 11:38:03 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
-public class IliBaseTypeLinePanel extends BasePanel implements DataPanel {
+public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMenuChoice {
 	//private LineType lineType = null;
         private java.lang.Class lineTypeClass = null;
 	private ModelElement parent = null;
@@ -88,10 +90,7 @@ public IliBaseTypeLinePanel() {
 	super();
 	initialize();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	boolean isSelected = getTblLineFormTypeDef().getSelectedRow() >= 0;
 	getMniOpenLineFormTypeDefSpecification().setEnabled(isSelected);
 	getMniRemoveLineFormTypeDef().setEnabled(isSelected);
@@ -829,27 +828,22 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewLineFormTypeDef() {
-	ModelElementSelectionDialog selectionDialog = new ModelElementSelectionDialog(dialog, getResourceString("CTDialog"), true, parent, LineFormTypeDef.class); //$NON-NLS-1$
-
-	// update view
-	for (int i=0; i<selectionDialog.getSelectedItems().size(); i++) {
-		((EditorTableModel)getTblLineFormTypeDef().getModel()).addRowElement(selectionDialog.getSelectedItems().get(i));
-	}
+	newObject(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniOpenLineFormTypeDefSpecification() {
-	((EditorTableModel)getTblLineFormTypeDef().getModel()).showSpecification(getTblLineFormTypeDef().getSelectedRows());
+	changeObjects(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveLineFormTypeDef() {
-	((EditorTableModel)getTblLineFormTypeDef().getModel()).removeRows(getTblLineFormTypeDef().getSelectedRows());
+	removeObjects(null);
 }
 /**
  * Set the lineTypes general data.
@@ -931,5 +925,36 @@ private void setSurfaceType(SurfaceType surfaceType, ModelElement modelElement) 
 	}
 
 	setLinetype(surfaceType,modelElement);
+}
+
+public void changeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblLineFormTypeDef().getModel()).showSpecification(getTblLineFormTypeDef().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    try {
+        ModelElementSelectionDialog selectionDialog = new ModelElementSelectionDialog(dialog, getResourceString("CTDialog"), true, parent, LineFormTypeDef.class); //$NON-NLS-1$
+    
+        // update view
+        for (int i=0; i<selectionDialog.getSelectedItems().size(); i++) {
+            ((EditorTableModel)getTblLineFormTypeDef().getModel()).addRowElement(selectionDialog.getSelectedItems().get(i));
+        }
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void removeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblLineFormTypeDef().getModel()).removeRows(getTblLineFormTypeDef().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

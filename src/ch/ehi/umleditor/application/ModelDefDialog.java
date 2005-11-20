@@ -18,19 +18,20 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.util.*;
+
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a ModelDef.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2004-06-29 11:36:08 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.3 $ $Date: 2005-11-20 16:43:58 $
  */
-public class ModelDefDialog extends BaseDialog {
+public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
 	private static java.util.ResourceBundle resModelDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ModelDefDialog");  //$NON-NLS-1$
 	private ModelDef modelDef = null;
-	private Translation currentTranslation = null;
+//	private Translation currentTranslation = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JButton ivjBtnCancel = null;
@@ -148,10 +149,7 @@ public ModelDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Elemen
 	setElement(element);
 	show();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	boolean isSelected = getTblTranslation().getSelectedRow() >= 0;
 	getMniOpenTranslationSpecification().setEnabled(isSelected);
 	getMniRemoveTranslation().setEnabled(isSelected);
@@ -1865,5 +1863,22 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	// page Import
 	getTblImport().setModel(new EditorTableModel());
 	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorClientDependency(), ch.softenvironment.util.StringUtils.getPureClassName(ModelDef.class));
+}
+
+public void changeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
 }
 }

@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.application;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -18,21 +17,23 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
+import java.util.EventObject;
 import java.util.Iterator;
 
 import ch.ehi.basics.i18n.ResourceBundle;
 import ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind;
 import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.uml1_4.implementation.*;
+import ch.softenvironment.view.ListMenuChoice;
 /**
  * An operation is a service that an instance of the class may be requested to perform.
  * It has a name and a list of arguments.
  * Notation: visibility name ( parameter-list ) : return-type-expression { property-string }
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2004-10-01 20:01:15 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
-public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog {
+public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog implements ListMenuChoice {
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
 	private ch.ehi.uml1_4.implementation.UmlOperation operation = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
@@ -125,10 +126,7 @@ public UmlOperationDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.El
 	setElement(element);
 	show();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	boolean isSelected = getTblParameters().getSelectedRow() >= 0;
 	getMniOpenParameterSpecication().setEnabled(isSelected);
 	getMniRemoveParameter().setEnabled(isSelected);
@@ -1374,29 +1372,22 @@ LauncherView.getInstance().nyi("Move down Parameter");
 	}*/
 }
 /**
- * Add a new Parameter to Operation.
+ * @deprecated
  */
 private void mniNewParameter() {
-	try {
-		// update model
-		ch.ehi.uml1_4.implementation.UmlParameter parameter = ElementFactory.createUmlParameter(operation);
-		// update view
-		((EditorTableModel)getTblParameters().getModel()).addRowElement(parameter);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(null);
 }
 /**
- * Open UmlParameterDialog with selected Parameter.
+ * @deprecated
  */
 private void mniOpenParameterSpecification() {
-	((EditorTableModel)getTblParameters().getModel()).showSpecification(getTblParameters().getSelectedRows());
+	changeObjects(null);
 }
 /**
- * Remove selected Parameters from Model.
+ * @deprecated
  */
 private void mniRemoveParameter() {
-	((EditorTableModel)getTblParameters().getModel()).removeRows(getTblParameters().getSelectedRows());
+	removeObjects(null);
 }
 /**
  * Update Model.
@@ -1487,5 +1478,34 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	UmlParameter returnValue = ((EditorTableModel)getTblParameters().getModel()).setUmlParameter(iterator);
 	// set Return type
 	getTxtReturnValue().setText("" + (returnValue == null ? "" : returnValue.getDefLangName()));
+}
+
+public void changeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblParameters().getModel()).showSpecification(getTblParameters().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    try {
+        // update model
+        ch.ehi.uml1_4.implementation.UmlParameter parameter = ElementFactory.createUmlParameter(operation);
+        // update view
+        ((EditorTableModel)getTblParameters().getModel()).addRowElement(parameter);
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void removeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblParameters().getModel()).removeRows(getTblParameters().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

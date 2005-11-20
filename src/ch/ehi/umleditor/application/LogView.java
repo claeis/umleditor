@@ -1,4 +1,22 @@
 package ch.ehi.umleditor.application;
+/* This file is part of the umleditor project.
+ * For more information, please see <http://www.umleditor.ch>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+import java.util.EventObject;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
@@ -11,11 +29,11 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 /**
  * Log-Panel to trace output.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2005-02-23 16:40:04 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.10 $ $Date: 2005-11-20 16:43:58 $
  */
-public class LogView extends BasePanel implements HyperlinkListener {
-	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
+public class LogView extends BasePanel implements HyperlinkListener, ListMenuChoice {
+//	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
 	private StringBuffer body = new StringBuffer();
 	
 	private javax.swing.JPanel ivjPnlLog = null;
@@ -78,10 +96,7 @@ public LogView() {
 	super();
 	initialize();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	// enable/disable menu
 	boolean isEmpty = (getTxaLog().getText() != null) && (getTxaLog().getText().length() > 0);
 	getMniClear().setEnabled(isEmpty);
@@ -730,5 +745,22 @@ public void hyperlinkUpdate(HyperlinkEvent e) {
 		ModelElement modelElement=(ModelElement)LauncherView.getInstance().getModel().deepGetElementById(id);
 		LauncherView.getInstance().showSpecification(modelElement);
 	}
+}
+
+public void changeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
 }
 }
