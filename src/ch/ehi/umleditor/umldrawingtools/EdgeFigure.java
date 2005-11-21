@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.12 $ $Date: 2005-09-17 15:16:14 $
+ * @version $Revision: 1.13 $ $Date: 2005-11-21 14:12:10 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -346,7 +346,7 @@ protected java.awt.Font getFont() {
 /**
  * Return the encapsulated GeneralizableElement within NodeFigure.
  */
-protected GeneralizableElement getGeneralizableElement(Figure figure) {
+protected final GeneralizableElement getGeneralizableElement(Figure figure) {
 	return (GeneralizableElement)(((NodeFigure)figure).getModelElement());
 }
 /**
