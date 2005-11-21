@@ -16,10 +16,26 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.uml1_4.foundation.core.Classifier;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.interlis.metaobjects.MetaDataUseDef;
+import ch.ehi.interlis.metaobjects.MetaDataUseDefKind;
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.interlis.units.UnitDef;
+import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -38,11 +54,11 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2005-09-16 09:50:06 $
+ * @version $Revision: 1.7 $ $Date: 2005-11-21 14:12:52 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
-	// TextFigure for editing the class name
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
+    private GraphicalCompositeFigure nameFigure;
 	private TextFigure classNameFigure;	// DON't set = null
 	private SeparatorFigure attributeSeparator; // DON't set = null
 	private SeparatorFigure operationSeparator; // DON't set = null
@@ -126,42 +142,44 @@ private void addOperation() {
  * @see createPopupMenu()
  */
 protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new JSeparator());
-
-	popupMenu.add(new AbstractAction(resources.getString("MniNewAttributeDef_text")) { //$NON-NLS-1$
-		public void actionPerformed(ActionEvent event) {
-			addAttribute();
-		}
-	});
-
-	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {	//$NON-NLS-1$
-		public void actionPerformed(ActionEvent event) {
-			addOperation();
-		}
-	});
-
-	chxSuppressAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressAttributes_text")); //$NON-NLS-1$
-	chxSuppressAttributes.setActionCommand(SUPPRESS_ATTRIBUTES_ACTION_COMMAND);
- 	chxSuppressAttributes.addActionListener(this);
- 	chxShowInheritedAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniShowInheritedAttributes_text")); //$NON-NLS-1$
-	chxShowInheritedAttributes.setActionCommand(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND);
-	chxShowInheritedAttributes.addActionListener(this);  
-	chxSuppressOperations = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressOperations_text")); //$NON-NLS-1$
-	chxSuppressOperations.setActionCommand(SUPPRESS_OPERATIONS_ACTION_COMMAND);
-	chxSuppressOperations.addActionListener(this);
-   	if (getNode() == null) {
-	   	chxSuppressAttributes.setSelected(false);
-		chxShowInheritedAttributes.setSelected(false);
-		chxSuppressOperations.setSelected(false);
-    } else {
-	    chxSuppressAttributes.setSelected(((PresentationAbstractClass)getNode()).isSuppressAttributes());
-		chxShowInheritedAttributes.setSelected(((PresentationAbstractClass)getNode()).isShowInheritedAttributes());
-		chxSuppressOperations.setSelected(((PresentationAbstractClass)getNode()).isSuppressOperations());
- 	}
-	chxShowInheritedAttributes.setEnabled(!chxSuppressAttributes.isSelected());
-	popupMenu.add(chxSuppressAttributes);
-	popupMenu.add(chxShowInheritedAttributes);
-	popupMenu.add(chxSuppressOperations);
+    if (getModelElement() instanceof AbstractClassDef) {
+        popupMenu.add(new JSeparator());
+        
+    	popupMenu.add(new AbstractAction(resources.getString("MniNewAttributeDef_text")) { //$NON-NLS-1$
+    		public void actionPerformed(ActionEvent event) {
+    			addAttribute();
+    		}
+    	});
+    
+    	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {	//$NON-NLS-1$
+    		public void actionPerformed(ActionEvent event) {
+    			addOperation();
+    		}
+    	});
+    
+    	chxSuppressAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressAttributes_text")); //$NON-NLS-1$
+    	chxSuppressAttributes.setActionCommand(SUPPRESS_ATTRIBUTES_ACTION_COMMAND);
+     	chxSuppressAttributes.addActionListener(this);
+     	chxShowInheritedAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniShowInheritedAttributes_text")); //$NON-NLS-1$
+    	chxShowInheritedAttributes.setActionCommand(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND);
+    	chxShowInheritedAttributes.addActionListener(this);  
+    	chxSuppressOperations = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressOperations_text")); //$NON-NLS-1$
+    	chxSuppressOperations.setActionCommand(SUPPRESS_OPERATIONS_ACTION_COMMAND);
+    	chxSuppressOperations.addActionListener(this);
+       	if (getNode() == null) {
+    	   	chxSuppressAttributes.setSelected(false);
+    		chxShowInheritedAttributes.setSelected(false);
+    		chxSuppressOperations.setSelected(false);
+        } else {
+    	    chxSuppressAttributes.setSelected(((PresentationAbstractClass)getNode()).isSuppressAttributes());
+    		chxShowInheritedAttributes.setSelected(((PresentationAbstractClass)getNode()).isShowInheritedAttributes());
+    		chxSuppressOperations.setSelected(((PresentationAbstractClass)getNode()).isSuppressOperations());
+     	}
+    	chxShowInheritedAttributes.setEnabled(!chxSuppressAttributes.isSelected());
+    	popupMenu.add(chxSuppressAttributes);
+    	popupMenu.add(chxShowInheritedAttributes);
+    	popupMenu.add(chxSuppressOperations);
+    }
 }
 /**
  * ClassFigure movement is different from AssociationAttributeFigure movement.
@@ -260,11 +278,11 @@ protected void initialize() {
         }
     };
     classNameFigure.setFont(getFont());
-
+    
     // add the TextFigure to the Composite
-    GraphicalCompositeFigure nameFigure =
-        new GraphicalCompositeFigure(new SeparatorFigure());
+    nameFigure = new GraphicalCompositeFigure(new SeparatorFigure());
     nameFigure.add(classNameFigure);
+//  nameFigure.add(stereotypeFigure);
     nameFigure.getLayouter().setInsets(new Insets(0, 4, 0, 0));
     add(nameFigure);
 
@@ -301,7 +319,7 @@ protected void updateAttributeFigure() {
 //TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
 	attributesFigure.removeAll();
 	
-	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
+	if (((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
 		attributeSeparator.setLineVisible(false);
 	} else {
 		attributeSeparator.setLineVisible(true);
@@ -311,20 +329,25 @@ protected void updateAttributeFigure() {
 			java.util.List inheritedAttributes = ((ch.ehi.interlis.modeltopicclass.AbstractClassDef)getModelElement()).getConsolidatedAttributes();
 			iterator = inheritedAttributes.iterator();
 		} else {
-			// show local attributes only
-			iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
+            if (getModelElement() instanceof Classifier) {
+    			// show local attributes only
+    			iterator = ((Classifier)getModelElement()).iteratorFeature();
+            }
 		}
-		while (iterator.hasNext()) {
-			Object feature = iterator.next();
-			if (feature instanceof AttributeDef) {
-				attributesFigure.add(createAttributeFigure((AttributeDef)feature));
-			}
-		}
+        if (iterator != null) {
+    		while (iterator.hasNext()) {
+    			Object feature = iterator.next();
+    			if (feature instanceof AttributeDef) {
+    				attributesFigure.add(createAttributeFigure((AttributeDef)feature));
+    			}
+    		}
+        }
 	}
 
     attributesFigure.update();
     update();
 }
+
 /**
  * Update the method figure and the ClassFigure itself as well. This causes calculating
  * the layout of contained figures.
@@ -334,8 +357,8 @@ private void updateOperationFigure() {
 	operationsFigure.removeAll();
 	operationSeparator.setLineVisible(false);	//automatic display acc. to existing methods
 	
-	if (!((PresentationAbstractClass)getNode()).isSuppressOperations()) {
-		Iterator iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
+	if ((getModelElement() instanceof Classifier) && (!((PresentationAbstractClass)getNode()).isSuppressOperations())) {
+		Iterator iterator = ((Classifier)getModelElement()).iteratorFeature();
 			
 		while (iterator.hasNext()) {
 			Object feature = iterator.next();
@@ -349,12 +372,41 @@ private void updateOperationFigure() {
 	operationsFigure.update();
 	update();
 }
+private void updateEnumerationFigure() {
+//TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+    attributesFigure.removeAll();
+    
+    Type type = ((DomainDef)getModelElement()).getType();
+    if ((type != null) && (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)) {
+        attributeSeparator.setLineVisible(true);
+        createEnumerationFigure((ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)type, "");
+    }
+    attributesFigure.update();
+    update();
+}
+private void createEnumerationFigure(ch.ehi.interlis.domainsandconstants.basetypes.Enumeration type, String offset) {
+    Iterator iterator = type.iteratorEnumElement();
+    
+    while (iterator.hasNext()) {
+        EnumElement element = (EnumElement)iterator.next();
+        TextFigure enumFigure = new TextFigure();
+        enumFigure.setFont(getFont());
+        enumFigure.setText(offset + element.getName().getValue());
+        enumFigure.setReadOnly(true);
+        attributesFigure.add(enumFigure);
+        
+        if (element.containsChild()) {
+            createEnumerationFigure(element.getChild(), offset + "  ");
+        }
+    }
+}
 /**
  * ModelElement changed. Therefore a refresh of the View is needed.
  */
 public void updateView() {
-	if (getModelElement() != null) {
-		if (!getModelElement().containsNamespace()) {
+    ModelElement element = getModelElement();
+	if (element != null) {
+		if (!element.containsNamespace()) {
 			// case removed => parent detached this node before sending MetaModelChanged-Event
 			removeVisually();
 		} else {
@@ -362,16 +414,96 @@ public void updateView() {
 			super.updateView();
 			// show abstract Classes in italics
 			Font font = classNameFigure.getFont();
-			if (((AbstractClassDef)getModelElement()).isAbstract()) {
+			if ((element instanceof Classifier) && ((Classifier)element).isAbstract()) {
 				font = new Font(font.getName(), Font.ITALIC, font.getSize());
 			} else {
 				font = new Font(font.getName(), Font.PLAIN, font.getSize());
 			}
 			classNameFigure.setFont(font);
-			classNameFigure.setText(getModelElement().getDefLangName());
-			updateAttributeFigure();
-			updateOperationFigure();
+			classNameFigure.setText(element.getDefLangName());
+            
+            if ((element instanceof DomainDef) && ((DomainDef)element).containsType()) {
+               updateEnumerationFigure();
+            } else if (element instanceof AbstractModelElement) {
+			   updateAttributeFigure();
+			   updateOperationFigure();
+            }
 		}
 	}
+}
+/**
+ * Overwrites.
+ */
+public void setNode(ch.ehi.umleditor.umlpresentation.PresentationNode node) {
+    super.setNode(node);
+    
+    updateStereotype();
+}
+/**
+ * Show Stereotype.
+ * @see #isPseudoClassifier(Object)
+ */
+private void updateStereotype() {
+    ModelElement element = getModelElement();
+    String stereotypName = null;
+    if (element instanceof ch.ehi.interlis.metaobjects.MetaDataUseDef) {
+        attributeSeparator.setLineVisible(false);
+        ch.ehi.interlis.metaobjects.MetaDataUseDef metadata = (ch.ehi.interlis.metaobjects.MetaDataUseDef)element;
+        if (metadata.getKind() == MetaDataUseDefKind.SIGN) {
+            stereotypName = "ILISIGN";
+        } else if (metadata.getKind() == MetaDataUseDefKind.REFSYSTEM) {
+            stereotypName = "ILICRS";
+        } else {
+            stereotypName = "ILISIGN | ILICRS";
+        }
+    } else if (element instanceof UnitDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIUNIT";
+    } else if (element instanceof FunctionDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIFUNCTION";
+    } else if (element instanceof LineFormTypeDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILILINEFORM";
+    } else if (element instanceof DomainDef) {
+        Type type = ((DomainDef)element).getType();
+        if ((type != null) && (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)) {
+            stereotypName = "enumeration";
+        } else {
+            attributeSeparator.setLineVisible(false);
+            stereotypName = "ILIDOMAIN";
+        }
+    } else if (element instanceof GraphicParameterDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIRUNTIMEPARAM";
+    } else if (element instanceof ViewDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIVIEW";
+    } else if (element instanceof GraphicDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIGRAPHIC";
+    }
+    if (stereotypName != null) {
+        TextFigure stereotypeFigure = new TextFigure();
+        stereotypeFigure.setFont(getFont());
+        stereotypeFigure.setText("<<" + stereotypName + ">>");
+        stereotypeFigure.setReadOnly(true);
+        nameFigure.add(stereotypeFigure);
+    }
+}
+/**
+ * @deprecated
+ */
+protected static boolean isPseudoClassifier(Object element) {
+//TODO HACK: AbstractModelElement's which should implement Classifier
+    return (element instanceof RoleDef) ||
+        (element instanceof MetaDataUseDef) ||
+        (element instanceof UnitDef) ||
+        (element instanceof FunctionDef) ||
+        (element instanceof LineFormTypeDef) ||
+    //  (element instanceof DomainDef) ||
+        (element instanceof GraphicParameterDef) ||
+        (element instanceof ViewDef) ||
+        (element instanceof GraphicDef);
 }
 }

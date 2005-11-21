@@ -18,6 +18,8 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 
 import ch.ehi.interlis.associations.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+
 import java.util.*;
 import java.awt.event.*;
 import CH.ifa.draw.standard.*;
@@ -25,6 +27,7 @@ import CH.ifa.draw.framework.*;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.util.*;
@@ -33,7 +36,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.16 $ $Date: 2005-09-16 09:50:06 $
+ * @version $Revision: 1.17 $ $Date: 2005-11-21 14:12:52 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -95,10 +98,11 @@ public Figure add(Element element) {
     // 2) otherwise create the PresentationElement
     if (element instanceof AssociationDef) {
         return saveAssociation((AssociationDef) element);
-    } else if (element instanceof ClassDef) {
-    	return saveClassFigure((ClassDef) element, new ClassFigure());
     } else if (isDrawablePackage(element.getClass())) {
-    	return savePackageFigure((ModelElement) element, new PackageFigure());
+        return savePackageFigure((ModelElement) element, new PackageFigure());
+    } else if ((element instanceof Classifier) ||
+            ClassFigure.isPseudoClassifier(element)) {
+    	return saveClassFigure((AbstractModelElement /*Classifier*/)element, new ClassFigure()); 
     } else if (element instanceof ch.ehi.umleditor.umlpresentation.Association) {
     	return saveAssociationComposite((ch.ehi.umleditor.umlpresentation.Association) element);
 	} else if (element instanceof RoleDef) {
@@ -306,9 +310,9 @@ protected ConnectionFigure findConnection(int x, int y) {
 protected Figure findFigure(Element element) {
 	//TUNE THIS METHOD!
 	if (element != null) {
-		FigureEnumeration enum = drawing().figures();
-		while (enum.hasMoreElements()) {
-			Figure figure = enum.nextFigure();
+		FigureEnumeration enumeration = drawing().figures();
+		while (enumeration.hasMoreElements()) {
+			Figure figure = enumeration.nextFigure();
 			if ((figure instanceof RoleDefFigure) ||
 					(figure instanceof AssociationAttributeFigure)) {
 				// this are artifical figures and are to be maintained
@@ -532,12 +536,11 @@ public void ignoreMetaModelChanges(boolean ignore) {
  * Check wether Element might by added to Diagram.
  */
 public boolean isAddable(Element element) {
-	if ((element != null) && ((element instanceof AbstractClassDef) || 
-								isDrawablePackage(element.getClass()) ||
-								(element instanceof RoleDef))) {
-		return true;
-	}
-	return false;
+	return (element != null) && 
+                ((element instanceof AbstractClassDef) || 
+				isDrawablePackage(element.getClass()) ||
+				ClassFigure.isPseudoClassifier(element) ||
+                (element instanceof DomainDef));
 }
 /**
  * Return whether given Class is a drawable Package.
@@ -886,7 +889,7 @@ public void refresh() {
  */
 public Figure remove(Figure figure) {
 	// seems to be tricky in JHotDraw, to get what is wanted
-	Figure fig = super.remove(figure);
+	/*Figure fig =*/ super.remove(figure);
 	clearSelection();
 	repaint();
 	repairDamage();
@@ -940,10 +943,11 @@ private Figure saveAssociationComposite(ch.ehi.umleditor.umlpresentation.Associa
 /**
  * Draw figure and save Element into Diagram.
  */
-private Figure saveClassFigure(ClassDef classDef, Figure figure)  {
+private Figure saveClassFigure(AbstractModelElement /*Classifier*/ classifier, Figure figure)  {
+//TODO HACK: classifier type should be Classifier 
 	// create the PresentationElement
     ch.ehi.umleditor.umlpresentation.Class classDefView = (ch.ehi.umleditor.umlpresentation.Class)ElementFactory.createObject(ch.ehi.umleditor.umlpresentation.Class.class);
- 	saveNode(classDefView, classDef, figure);
+ 	saveNode(classDefView, classifier, figure);
 
   	return figure;
 }
@@ -1020,7 +1024,6 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    Iterator generalizations = ((GeneralizableElement)modelElement).iteratorSpecialization();
 		    while (generalizations.hasNext()) {
 				ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)generalizations.next();
-				GeneralizableElement generalizableElement = generalization.getParent();
 				Figure parent = findFigure(generalization.getParent());
 				Figure child = findFigure(generalization.getChild());
 				if ((parent != null) && (child != null)) {
@@ -1030,7 +1033,6 @@ private void saveNodeInDiagram(PresentationNode node, Figure figure) {
 		    generalizations = ((GeneralizableElement)modelElement).iteratorGeneralization();
 		    while (generalizations.hasNext()) {
 			    ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)generalizations.next();
-				GeneralizableElement generalizableElement = generalization.getParent();
 				Figure start = findFigure(generalization.getParent());
 				if (start != null) {
 					loadSimpleEdge(new GeneralizationLineConnection(this, start, figure, generalization));
@@ -1196,9 +1198,9 @@ Tracer.getInstance().developerWarning(this, "setDiagramElement(Element)", "unkno
 protected void showAllAssociationNames(boolean visible) {
 	showAssociationNames = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof LinkFigure) {
 			((PresentationAssocClass)((LinkFigure)figure).getNode()).getAssociation().setShowName(visible);
 			((LinkFigure)figure).changed();
@@ -1220,9 +1222,9 @@ protected void showAllAttributeMultiplicity(boolean visible) {
 protected void showAllAttributes(boolean visible) {
 	showAttributes = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof ClassFigure) {
 			((PresentationAbstractClass)((ClassFigure)figure).getNode()).setSuppressAttributes(!visible);
 		}
@@ -1241,9 +1243,9 @@ protected void showAllAttributeTypes(boolean visible) {
 protected void showAllLinkFigures(boolean visible) {
 	showLinkFigure = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof LinkFigure) {
 			figure.changed();
 		}
@@ -1257,9 +1259,9 @@ protected void showAllLinkFigures(boolean visible) {
 protected void showAllOperations(boolean visible) {
 	showAttributes = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof ClassFigure) {
 			((PresentationAbstractClass)((ClassFigure)figure).getNode()).setSuppressOperations(!visible);
 		}
@@ -1271,9 +1273,9 @@ protected void showAllOperations(boolean visible) {
 protected void showAllMultiplicities(boolean visible) {
 	showMultiplicity = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof PresentationRoleFigure) {
 			((PresentationRole)((PresentationRoleFigure)figure).getEdge()).setMultiplicityVisible(visible);
 		}
@@ -1285,9 +1287,9 @@ protected void showAllMultiplicities(boolean visible) {
 protected void showAllRoles(boolean visible) {
 	showRoles = visible;
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof PresentationRoleFigure) {
 			((PresentationRole)((PresentationRoleFigure)figure).getEdge()).setNameVisible(visible);
 		}
@@ -1298,9 +1300,9 @@ protected void showAllRoles(boolean visible) {
  */
 protected void layoutAllVisibleRolenames() {
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof PresentationRoleFigure) {
 			((PresentationRoleFigure)figure).layoutRolename();
 		}
@@ -1311,9 +1313,9 @@ protected void layoutAllVisibleRolenames() {
  */
 protected void layoutAllVisibleMultiplicities() {
 	
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof PresentationRoleFigure) {
 			((PresentationRoleFigure)figure).layoutMultiplicity();
 		}
@@ -1429,9 +1431,9 @@ Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +
  * Update all Attributes in Diagram.
  */
 private void updateAttributes() {
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if (figure instanceof ClassFigure) {
 			((ClassFigure)figure).updateAttributeFigure();
 		}

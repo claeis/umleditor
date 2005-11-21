@@ -34,7 +34,7 @@ import ch.softenvironment.view.*;
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
+ * @version $Revision: 1.5 $ $Date: 2005-11-21 14:12:52 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -79,19 +79,10 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {}
  * @param end   figure representing the end/supplier class
  */
 public boolean canConnect(Figure start, Figure end) {
-	GeneralizableElement client = null;
-	GeneralizableElement supplier = null;
+	Object /*GeneralizableElement*/ client = ((NodeFigure)start).getModelElement(); //getGeneralizableElement(start);
+	Object /*GeneralizableElement*/ supplier = ((NodeFigure)end).getModelElement(); //getGeneralizableElement(end);
 
-	try {
-		// only GeneralizableElement's are valid types
-		client = getGeneralizableElement(start);
-		supplier = getGeneralizableElement(end);
-	} catch(ClassCastException e) {
-		shouldWarn(resDependencyLineConnection.getString("CWWrongDependencyType")); //$NON-NLS-1$
-		return false;
-	}
-
-	if (!(((client instanceof Classifier) && (supplier instanceof Classifier)) ||
+	if (!((((client instanceof Classifier) || ClassFigure.isPseudoClassifier(client)) && ((supplier instanceof Classifier) || ClassFigure.isPseudoClassifier(supplier))) ||
 //			((client instanceof TopicDef) && (supplier instanceof TopicDef)) ||
 			((client instanceof ch.ehi.uml1_4.modelmanagement.Package) && (supplier instanceof ch.ehi.uml1_4.modelmanagement.Package)))) {
 		shouldWarn(resDependencyLineConnection.getString("CWNodesMustBeClassifier")); //$NON-NLS-1$
@@ -169,8 +160,8 @@ protected void handleConnect(Figure start, Figure end) {
 		if (getEdge() == null) {
 			setEdge(new ch.ehi.umleditor.umlpresentation.Dependency(), start, end);
 
-			GeneralizableElement client = getGeneralizableElement(start);
-			GeneralizableElement supplier = getGeneralizableElement(end);
+			ModelElement client = (ModelElement)((NodeFigure)start).getModelElement(); //getGeneralizableElement(start);
+            ModelElement supplier = (ModelElement)((NodeFigure)end).getModelElement(); //getGeneralizableElement(end);
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = null;
 			if ((client instanceof ModelDef) && (supplier instanceof ModelDef)) {
 				dependency = ElementFactory.createDependency(IliImport.class, client, supplier);
