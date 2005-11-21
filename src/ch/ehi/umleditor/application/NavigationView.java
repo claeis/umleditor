@@ -1,4 +1,22 @@
 package ch.ehi.umleditor.application;
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+import java.util.EventObject;
 
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
@@ -7,13 +25,14 @@ import ch.ehi.uml1_4.modelmanagement.Model;
 import javax.swing.tree.*;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.CommonUserAccess;
+import ch.softenvironment.view.ListMenuChoice;
 /**
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.10 $ $Date: 2005-02-21 13:49:32 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.11 $ $Date: 2005-11-21 14:11:17 $
  */
-public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
+public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
@@ -139,10 +158,7 @@ public NavigationView() {
 	super();
 	initialize();
 }
-/**
- * Overwrites.
- */
-protected void adaptSelection(java.awt.event.MouseEvent event, javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	Element treeNode = getSelectedNode();
 	boolean selected = (treeNode != null);
 
@@ -1807,10 +1823,10 @@ private void mniAddToDiagram() {
 	LauncherView.getInstance().getCurrentClassDiagram().add(getSelectedNode());
 }
 /**
- * Open a class diagram.
+ * @deprecated
  */
 private void mniOpen() {
-	openDiagram(getSelectedNode());
+	changeObjects(null);
 }
 /**
  * Comment
@@ -2154,5 +2170,25 @@ private void sortByKindName() {
 private void sortByName() {
 	getMniSortbyKindName().setSelected(false);
  	setOrdering(NavigationTreeModel.SORT_BY_NAME);
+}
+
+public void changeObjects(Object source) {
+    try {
+        openDiagram(getSelectedNode());
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
 }
 }
