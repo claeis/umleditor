@@ -37,7 +37,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2005-02-23 16:46:01 $
+ * @version $Revision: 1.9 $ $Date: 2005-12-09 10:47:09 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -274,7 +274,8 @@ private void dragDependency(Connector end, Figure targetFigure, int x, int y) {
 //		((EdgeFigure)editedConnection).setStartConnector(end);
 	} else /* (endPointIndex == 1) */ {
 		// 2) Model
-		dependency.changeSupplier((ModelElement)dependency.iteratorSupplier().next(), (ch.ehi.uml1_4.foundation.core.GeneralizableElement)((NodeFigure)targetFigure).getModelElement());
+		dependency.changeSupplier((ModelElement)dependency.iteratorSupplier().next(), 
+                (ModelElement)((NodeFigure)targetFigure).getModelElement());
 		// 3) show visual reconnect
 //		((EdgeFigure)editedConnection).setEndConnector(end);
 	}
