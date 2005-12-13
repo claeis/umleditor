@@ -54,7 +54,7 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2005-11-21 14:12:52 $
+ * @version $Revision: 1.8 $ $Date: 2005-12-13 17:28:39 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
@@ -504,6 +504,7 @@ protected static boolean isPseudoClassifier(Object element) {
     //  (element instanceof DomainDef) ||
         (element instanceof GraphicParameterDef) ||
         (element instanceof ViewDef) ||
-        (element instanceof GraphicDef);
+        (element instanceof GraphicDef) ||
+        (element instanceof TopicDef);
 }
 }
