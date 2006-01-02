@@ -1,5 +1,21 @@
 package ch.ehi.umleditor.application;
-
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Association;
@@ -16,14 +32,12 @@ import javax.swing.event.TreeModelEvent;
 import java.util.List;
 import java.util.Iterator;
 
-
 /**
  * Implements an adapter to
  * the metamodel as required by the NavigationView's JTree.
  *
  * @author ce
  */
-
 public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.uml1_4.changepropagation.MetaModelListener {
     public static final String SORT_BY_KIND_NAME="SORT_BY_KIND_NAME";
     public static final String SORT_BY_NAME="SORT_BY_NAME";
@@ -61,7 +75,16 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
 
     /** Invoked after nodes have been removed from the tree.
      */
-    protected void fireTreeNodesRemoved(Element e){
+    protected void fireTreeNodesRemoved(Element element){
+/*      int len = treeModelListeners.size();
+        TreeModelEvent e = new TreeModelEvent(this, getTreePath(element)); //getTreePath(utility.findParent(node)));
+        
+        for (int i = 0; i < len; i++) {
+            if (e.getPath()[0] != null) {
+                ((TreeModelListener)treeModelListeners.elementAt(i)).treeNodesRemoved(e);
+            }
+        }
+*/
     }
 
     /** Invoked after the tree has drastically changed structure from a given node down.
@@ -259,7 +282,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     }
   }
   /** adapts MetaModelChanges to TreeModelEvents.
-   * see also getChildren() for a similar structure
+   * @see also getChildren() for a similar structure
    */
   public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
     Object source=event.getSource();
@@ -268,7 +291,9 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       if(source instanceof Association){
         // roles
         if(isAttribute(ops,"Connection")){
-          fireTreeStructureChanged((ModelElement)source);
+            if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after AssocDef removal*/) {
+                fireTreeStructureChanged((ModelElement)source);
+            }
         }
       }
       // attributes
@@ -277,7 +302,9 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       }
       // associations
       if(isAttribute(ops,"Association")){
-        fireTreeStructureChanged((ModelElement)source);
+          if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after ClassDef removal (if associated)*/) {
+            fireTreeStructureChanged((ModelElement)source);
+          }
         //   track name changes in AssociationEnd events
       }
       // ParameterDefs
@@ -316,7 +343,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     }
     if(source instanceof Namespace){
       if(isAttribute(ops,"OwnedElement")){
-        fireTreeStructureChanged((ModelElement)source);
+         fireTreeStructureChanged((ModelElement)source);
       }
       if(isAttribute(ops,"Diagram")){
         fireTreeStructureChanged((ModelElement)source);
