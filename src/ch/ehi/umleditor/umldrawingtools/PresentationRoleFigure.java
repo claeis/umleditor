@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -32,8 +31,8 @@ import ch.softenvironment.view.CommonUserAccess;
 /**
  * Displayable edge between ClassFigure and LinkFigure.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-14 14:08:32 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.6 $ $Date: 2006-01-02 16:27:01 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -142,6 +141,8 @@ protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {
 	popupMenu.add(chxShowMultiplicity);
 	chxShowAssociationName.setSelected(isShowAssociationName());
 	popupMenu.add(chxShowAssociationName);
+    
+    updateCheckBoxes();
 }
 /**
  * Algorithm to determine initial Multiplicity Position.
@@ -466,16 +467,19 @@ private void setAggregationEnd(int aggregationKind) {
 protected void setModelElement(ModelElement modelElement) {
 	super.setModelElement(modelElement);
 
-	if (modelElement != null) {
-		// adapt PopupMenu
-		AssociationEnd associationEnd = getEndAssociationEnd();
-		chxNavigableEnd.setSelected(associationEnd.isNavigable());
-		chxAggregableEnd.setSelected(associationEnd.getAggregation() == AggregationKind.AGGREGATE);
-		chxCompositeEnd.setSelected(associationEnd.getAggregation() == AggregationKind.COMPOSITE);
-		chxShowAssociationName.setSelected(isShowAssociationName());
-	}
+    updateCheckBoxes();
 	
 	showDecoration();
+}
+private void updateCheckBoxes() {
+    if (modelElement != null) {
+        // adapt PopupMenu
+        AssociationEnd associationEnd = getEndAssociationEnd();
+        chxNavigableEnd.setSelected(associationEnd.isNavigable());
+        chxAggregableEnd.setSelected(associationEnd.getAggregation() == AggregationKind.AGGREGATE);
+        chxCompositeEnd.setSelected(associationEnd.getAggregation() == AggregationKind.COMPOSITE);
+        chxShowAssociationName.setSelected(isShowAssociationName());
+    }
 }
 /**
  * Set beginning (Start) AssociationEnd.
