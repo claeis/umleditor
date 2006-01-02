@@ -20,14 +20,16 @@ package ch.ehi.umleditor.application;
 import java.util.EventObject;
 
 import javax.swing.tree.*;
+
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
+import ch.ehi.uml1_4.foundation.core.Element;
 /**
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2005-11-20 16:43:58 $
+ * @version $Revision: 1.9 $ $Date: 2006-01-02 16:21:36 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
         private Enumeration root=new Enumeration();
@@ -690,12 +692,6 @@ private EnumElement getSelectedNode() {
 	return null;
 }
 /**
- * Returns the TreeModel of JTree.
- */
-private TreeModel getTreeModel() {
-	return getTreEnumeration().getModel();
-}
-/**
  * Return the TreEnumeration property value.
  * @return javax.swing.JTree
  */
@@ -874,7 +870,8 @@ private void mniNewDeep() {
                   parentNode.attachChild(new Enumeration());
                 }
                 parentNode.getChild().addEnumElement(newElement);
-
+        selectElement(newElement);
+        mniRename();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -898,6 +895,8 @@ private void mniNewFlat() {
                         int idx=selectedNode.getEnumeration().findEnumElement(selectedNode);
                         selectedNode.getEnumeration().addEnumElement(idx,newElement);
 		}
+        selectElement(newElement);
+        mniRename();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -912,7 +911,10 @@ private void mniRemove() {
  * Start renaming by setting Cursor on TreeNode.
  */
 private void mniRename() {
-	getTreEnumeration().startEditingAtPath(getTreEnumeration().getSelectionPath());
+    TreePath path = getTreEnumeration().getSelectionPath();
+    if (path != null) {
+	   getTreEnumeration().startEditingAtPath(getTreEnumeration().getSelectionPath());
+    }
 }
 /**
  * Save the documentation on currently selected EnumElement.
@@ -933,6 +935,20 @@ private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelection
 		getPnlDescription().setEnabled(true);
 		getPnlDescription().setObject(node);
 	}
+}
+public void selectElement(Element element) {
+    TreePath foundNode = ((EnumTreeModel)getTreEnumeration().getModel()).getTreePath(element);
+//    TreePath foundNode = modelAdapter.findElementDefinitionNode(element);
+
+    if (foundNode == null) {
+                // ce 20030301 was soll das machen? clearSelection()?
+//        getTreNavigation().setSelectionPath(null);
+    } else {
+//      getTreNavigation().expandPath(getTreNavigation().getSelectionPath());
+//      getTreNavigation().makeVisible(path);
+        getTreEnumeration().setSelectionPath(foundNode);
+        getTreEnumeration().scrollPathToVisible(foundNode);
+    }
 }
 /**
  * Set the Object to be displayed by panel.
