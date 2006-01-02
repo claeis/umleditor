@@ -17,12 +17,16 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.util.EventObject;
+import java.util.Iterator;
 
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
+import ch.ehi.umleditor.umlpresentation.Diagram;
 
 import javax.swing.tree.*;
+
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.CommonUserAccess;
 import ch.softenvironment.view.ListMenuChoice;
@@ -30,17 +34,18 @@ import ch.softenvironment.view.ListMenuChoice;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.11 $ $Date: 2005-11-21 14:11:17 $
+ * @version $Revision: 1.12 $ $Date: 2006-01-02 16:20:52 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
 	// optimize speed
-	private DefaultMutableTreeNode latestNodeInTree = null;
-	private boolean singleClickTreated = false;
-	private boolean doubleClickTreated = false;
+//	private DefaultMutableTreeNode latestNodeInTree = null;
+//	private boolean singleClickTreated = false;
+//	private boolean doubleClickTreated = false;
         private javax.swing.JMenuItem mniMoveElement=null;
+        private javax.swing.JMenuItem mniDiagramReferences = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JSeparator ivjJSeparator6 = null;
 	private javax.swing.JSeparator ivjJSeparator7 = null;
@@ -241,13 +246,16 @@ getMnuSort().setFont(getMniOpen().getFont());
 		getMnuNew().setEnabled(getMnuNew().getItemCount() > 0);
 	}
         mniMoveElement.setEnabled(selected);
+        mniDiagramReferences.setEnabled((treeNode instanceof ModelElement) && 
+                (!((treeNode instanceof AssociationEnd) || (treeNode instanceof Attribute) || (treeNode instanceof UmlOperation))));
 }
 /**
  * Add ModelElement to UML-Model.
  */
 private void addElement(java.lang.Class aClass) {
 	try {
-		ElementFactory.createOwnedElement(aClass, getSelectedNode());
+        selectElement(ElementFactory.createOwnedElement(aClass, getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1704,7 +1712,8 @@ private void initialize() {
 	javax.swing.ButtonGroup sortGroup = new javax.swing.ButtonGroup();
 	sortGroup.add(getMniSortbyName());
 	sortGroup.add(getMniSortbyKindName());
-        mniMoveElement = new javax.swing.JMenuItem();
+    
+    mniMoveElement = new javax.swing.JMenuItem();
 	mniMoveElement.setText(getResourceString("MniMoveElement_text"));
 	mniMoveElement.addActionListener(new java.awt.event.ActionListener() {
 	  // callback Handler if Button was pressed
@@ -1713,7 +1722,18 @@ private void initialize() {
 		moveElement();
 	  }
 	});
-        getMnpTreeActions().add(mniMoveElement);
+    getMnpTreeActions().add(mniMoveElement);
+    
+    mniDiagramReferences = new javax.swing.JMenuItem();
+    mniDiagramReferences.setName("MniAddDiagramReferences");
+//  mniDiagramReferences.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
+    mniDiagramReferences.setText(getResourceString("mniDiagramReferences_text"));
+    mniDiagramReferences.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent e) {
+         showDiagramReferences();
+      }
+    });
+    getMnpTreeActions().add(mniDiagramReferences);
 	// user code end
 }
 /**
@@ -1826,7 +1846,7 @@ private void mniAddToDiagram() {
  * @deprecated
  */
 private void mniOpen() {
-	changeObjects(null);
+//	changeObjects(null);
 }
 /**
  * Comment
@@ -1862,7 +1882,8 @@ private void moveElement() {
  */
 private void newAssociationDef() {
 	try {
-		ElementFactory.createAssociationDef(getSelectedNode());
+		selectElement(ElementFactory.createAssociationDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1872,7 +1893,8 @@ private void newAssociationDef() {
  */
 private void newAttributeDef() {
 	try {
-		ElementFactory.createAttributeDef((AbstractClassDef)(getSelectedNode()));
+        selectElement(ElementFactory.createAttributeDef((AbstractClassDef)(getSelectedNode())));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1882,7 +1904,8 @@ private void newAttributeDef() {
  */
 private void newClassDef() {
 	try {
-		ElementFactory.createClassDef(getSelectedNode());
+        selectElement(ElementFactory.createClassDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1892,7 +1915,10 @@ private void newClassDef() {
  */
 private void newClassDiagram() {
 	try {
-		LauncherView.getInstance().createClassDiagram(ElementFactory.createDiagram(getSelectedNode()));
+        Element element = ElementFactory.createDiagram(getSelectedNode());
+        LauncherView.getInstance().createClassDiagram(element);
+        selectElement(element);
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1902,7 +1928,8 @@ private void newClassDiagram() {
  */
 private void newDomainDef() {
 	try {
-		ElementFactory.createDomainDef(getSelectedNode());
+        selectElement(ElementFactory.createDomainDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1930,7 +1957,8 @@ private void newGraphicParameterDef() {
  */
 private void newInterlis2Def() {
 	try {
-		ElementFactory.createINTERLIS2Def(getSelectedNode());
+        selectElement(ElementFactory.createINTERLIS2Def(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1946,7 +1974,8 @@ private void newLineFormTypeDef() {
  */
 private void newMetaDataUseDef() {
 	try {
-		ElementFactory.createMetaDataUseDef(getSelectedNode());
+        selectElement(ElementFactory.createMetaDataUseDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1956,7 +1985,8 @@ private void newMetaDataUseDef() {
  */
 private void newMetaObjectFile() {
 	try {
-		ElementFactory.createMetaObjectFile((ch.ehi.uml1_4.implementation.UmlModel)LauncherView.getInstance().getModel());
+        selectElement(ElementFactory.createMetaObjectFile((ch.ehi.uml1_4.implementation.UmlModel)LauncherView.getInstance().getModel()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1966,7 +1996,8 @@ private void newMetaObjectFile() {
  */
 private void newModelDef() {
 	try {
-		ElementFactory.createModelDef(getSelectedNode());
+        selectElement(ElementFactory.createModelDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1976,7 +2007,8 @@ private void newModelDef() {
  */
 private void newRoleDef() {
 	try {
-		ElementFactory.createRoleDef((Association)getSelectedNode(), null);
+        selectElement(ElementFactory.createRoleDef((Association)getSelectedNode(), null));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1986,7 +2018,8 @@ private void newRoleDef() {
  */
 private void newTopicDef() {
 	try {
-		ElementFactory.createTopicDef(getSelectedNode());
+        selectElement(ElementFactory.createTopicDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1996,7 +2029,8 @@ private void newTopicDef() {
  */
 private void newUmlPackage() {
 	try {
-		ElementFactory.createOwnedElement(ch.ehi.uml1_4.implementation.UmlPackage. class, getSelectedNode());
+        selectElement(ElementFactory.createOwnedElement(ch.ehi.uml1_4.implementation.UmlPackage. class, getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -2027,7 +2061,7 @@ private ch.ehi.umleditor.umldrawingtools.ClassDiagramView openDiagram(Element di
 }
 /**
  * Remove the Element in Model.
- * @see metaModelChanged8..) for visual removement.
+ * @see metaModelChanged(..) for visual removement.
  */
 public void removeInModel() {
 	Element element = getSelectedNode();
@@ -2048,7 +2082,10 @@ public final void removeVisually() {
  * @see EditorTreeModel#valueForPathChanged(TreePath, Object)
  */
 private void renameNode() {
-	getTreNavigation().startEditingAtPath(getTreNavigation().getSelectionPath());
+    TreePath path = getTreNavigation().getSelectionPath();
+    if (path != null) {
+	   getTreNavigation().startEditingAtPath(path);
+    }
 }
 /**
  * Select given Element in NavigationTree.
@@ -2064,7 +2101,7 @@ public void selectElement(Element element) {
 //		getTreNavigation().expandPath(getTreNavigation().getSelectionPath());
 //		getTreNavigation().makeVisible(path);
 		getTreNavigation().setSelectionPath(foundNode);
-                getTreNavigation().scrollPathToVisible(foundNode);
+        getTreNavigation().scrollPathToVisible(foundNode);
 	}
 }
 /**
@@ -2139,7 +2176,6 @@ private void setOrdering(String ordering){
 }
 /**
  * Show the Specification Dialog of the PresentationElement.
- * @author Peter Hirzel
  */
 public void showSpecification() {
 	Element treeNode = getSelectedNode();
@@ -2174,7 +2210,12 @@ private void sortByName() {
 
 public void changeObjects(Object source) {
     try {
-        openDiagram(getSelectedNode());
+        Element element = getSelectedNode();
+        if (element instanceof Diagram) {
+            openDiagram(element);
+        } else {
+            showSpecification();
+        }
     } catch(Throwable e) {
         handleException(e);
     }
@@ -2190,5 +2231,51 @@ public void newObject(Object source) {
 public void removeObjects(Object source) {
     // TODO Auto-generated method stub
     
+}
+private void showDiagramReferences() {
+//    LauncherView.getInstance().nyi("Show Diagram-References");
+    java.util.Set foundElements=new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    Element element = getSelectedNode();
+    
+//TODO evtl. add this code to a Tool/Utility
+    // add root namespace to todo-list; so it is processed as a first element
+    todo.add(LauncherView.getInstance().getModel());
+    // process todo-list
+    while (!todo.isEmpty()) {
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator it = current.iteratorDiagram();
+      while (it.hasNext()) {
+        Diagram diagram = (Diagram)it.next();
+        if (diagram instanceof Diagram) {
+            Iterator presentation = diagram.iteratorPresentationElement();
+            while (presentation.hasNext()) {
+                PresentationElement object = (PresentationElement)presentation.next();
+                Iterator subjects = object.iteratorSubject();
+                while (subjects.hasNext()) {
+                    Object subject = subjects.next();
+                    if (subject.equals(element)) {
+                        foundElements.add(diagram);
+                    }
+                }
+            }
+        }
+      }
+      // search subtree
+      Iterator owned = current.iteratorOwnedElement();
+      while (owned.hasNext()) {
+        Object object = owned.next();
+        if (object instanceof Namespace) {
+            // ele is itself a container
+            // add it to todo-list
+            todo.add(object);
+        }
+      }
+
+      // remove current from todo-list
+      todo.remove(0);
+    }
+        
+    new FindDialog(LauncherView.getInstance(), false, foundElements, ((ModelElement)getSelectedNode()).getDefLangName() + "->" + getResourceString("mniDiagramReferences_text"));
 }
 }
