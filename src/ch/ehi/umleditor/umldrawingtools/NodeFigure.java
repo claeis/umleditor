@@ -32,7 +32,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.12 $ $Date: 2005-09-16 09:50:06 $
+ * @version $Revision: 1.13 $ $Date: 2006-01-02 16:34:53 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -59,12 +59,7 @@ protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	// overwrite this method in subclasses
 	addSpecialMenu(popupMenu);
 
-	popupMenu.add(new JSeparator());
-	popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
-		public void actionPerformed(ActionEvent event) {
-			selectInBrowser();
-		}
-	});
+    addSelectionMenu(popupMenu);
 	
 	popupMenu.add(new JSeparator());
 	addFormatMenu(popupMenu);
@@ -72,6 +67,18 @@ protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 
 	popupMenu.setLightWeightPopupEnabled(true);
 	return popupMenu;
+}
+/**
+ * Add a menu to Popup where Node will be selected in NavTree.
+ * @param popupMenu
+ */
+protected final void addSelectionMenu(javax.swing.JPopupMenu popupMenu) {
+    popupMenu.add(new JSeparator());
+    popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
+        public void actionPerformed(ActionEvent event) {
+            selectInBrowser();
+        }
+    });
 }
 /**
  * Add a standard Edit-Submenu to a PopupMenu.

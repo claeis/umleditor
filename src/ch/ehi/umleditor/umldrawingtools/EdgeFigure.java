@@ -34,8 +34,8 @@ import ch.softenvironment.util.*;
  * Figure Specification for all Elements treated as edges in an UML-ClassDiagram.
  * @see NodeFigure
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.13 $ $Date: 2005-11-21 14:12:10 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.14 $ $Date: 2006-01-02 16:34:53 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -226,7 +226,7 @@ protected final void connectNodes() {
 		startPoint(x, y);
 		Connector start = null;
 		if ((getModelElement() instanceof ch.ehi.uml1_4.foundation.core.Generalization) && (getStartElement() instanceof ch.ehi.uml1_4.foundation.core.Association)) {
-			start = getClassDiagram().findAssociationAttributeConnector(getStartElement(), x, y);
+			start = getClassDiagram().findAssociationAttributeConnector(getStartElement(), x, y, getModelElement());
 		} else {
 			start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
 		} 
@@ -248,7 +248,7 @@ protected final void connectNodes() {
 				// LinkFigure -> must be an AssociatenDef connected to
 				// a AssociationAttributeFigure
 				// @see ElementFactory#createPresentationRole(..)
-				end = getClassDiagram().findAssociationAttributeConnector(getEndElement(), x, y);
+				end = getClassDiagram().findAssociationAttributeConnector(getEndElement(), x, y, getModelElement());
 			} else {
 				// the usual
 				end = getClassDiagram().findNodeConnector(getEndElement(), x, y);

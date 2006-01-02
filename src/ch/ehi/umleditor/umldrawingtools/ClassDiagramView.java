@@ -36,7 +36,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.17 $ $Date: 2005-11-21 14:12:52 $
+ * @version $Revision: 1.18 $ $Date: 2006-01-02 16:34:53 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -236,16 +236,21 @@ private java.lang.Class determinePackageModelElementClass() {
 /**
  * Find the Figure of Type AssociationAttributeFigure in this DrawingView 
  * of the given AssociationDef.
- * Create the figure if suppressed yet.
+ * Create the figure if suppressed yet, because if there is an Generalization or 
+ * an "Intermediate"-Association between two Associations, the AttributeFigure of the LinkFigure
+ * are always drawn.
+ * 
+ * @param startEndElement (beginning/ending Association where modelElement "is put inbetween")
+ * @param modelElement (the element between two Associations)
  * @return Connector
  */
-protected Connector findAssociationAttributeConnector(Element element, int x, int y) {
-	LinkFigure linkFigure = (LinkFigure)findFigure(element);
+protected Connector findAssociationAttributeConnector(Element startEndElement, int x, int y, Element modelElement) {
+	LinkFigure linkFigure = (LinkFigure)findFigure(startEndElement);
 	if (linkFigure == null) {
 		return null;
 	} else {
 		// make sure AssociationAttributeFigure is not suppressed
-		AssociationAttributeFigure attrFigure = linkFigure.showAttributeFigure();
+		AssociationAttributeFigure attrFigure = linkFigure.showAttributeFigure(startEndElement, modelElement);
 		if (attrFigure == null) {
 			return null;
 		}
@@ -1373,7 +1378,11 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 		// => AttributeDef and UmlOperation
 		if (((Feature)event.getSource()).containsOwner()) {
 			figure = findFigure(((Feature)event.getSource()).getOwner());
-		}
+		} /*else if (event.getOperation().startsWith(MetaModelChange.OP__UNLINK)){
+            // AttributeDef might have been deleted in NavTree
+            //updateAttributes();
+            refresh();
+        }*/
 	} else if ((event.getSource() instanceof RoleDef) && ((RoleDef)event.getSource()).containsAssociation()) {
 		figure = findFigure((RoleDef)event.getSource());
 /*	}
