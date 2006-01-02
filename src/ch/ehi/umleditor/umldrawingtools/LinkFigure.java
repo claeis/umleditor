@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -29,15 +28,14 @@ import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.CommonUserAccess;
-
 /**
  * Draws a PresentationAssocClass of an Association.
  * An association is presented as a Composite of one LinkNode/Figure
  * and 2..* PresentationRoles. Therefore this Figure is an
  * "artificial" Node to represent an AssociationDef.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2004-06-29 11:42:44 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.6 $ $Date: 2006-01-02 16:22:56 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
@@ -49,7 +47,7 @@ class LinkFigure extends NodeFigure {
 
 	private AssociationAttributeFigure attributeFigure = null;
 	private RoleDefFigure nameFigure = null;
-	private boolean showAttributeFigure = false;
+	private boolean showAttributeFigureTemporarily = false;
 	private boolean updatingChild = false;
 
 /**
@@ -163,12 +161,13 @@ private boolean isN_Ary() {
  * Remove AssociationAttributeFigure if any.
  */
 private void removeFeatures() {
-	((PresentationAssocClass)getNode()).setClassAngle(0.0);
-	((PresentationAssocClass)getNode()).setClassRadius(0.0);
 	if (attributeFigure != null) {
-		showAttributeFigure = false;
+//		showAttributeFigure = false;
+        attributeFigure.removeAll();
 		getClassDiagram().remove(attributeFigure);
 		attributeFigure = null;
+        ((PresentationAssocClass)getNode()).setClassAngle(0.0);
+        ((PresentationAssocClass)getNode()).setClassRadius(0.0);
 	}
 }
 /**
@@ -242,14 +241,16 @@ public void removeVisually() {
 }
 /**
  * Force AttributeFigure to be drawn.
- * AttributeFigures are necessary in case of:
+ * AttributeFigure's are necessary in case of:
  * - generalized Associations
  * - Association to another Association (not n-ary)
+ * - Associations with Attributes(Features)
  * @see #updateFeatures(..)
  */
-protected AssociationAttributeFigure showAttributeFigure() {
-	showAttributeFigure = true;
-	updateView();
+protected AssociationAttributeFigure showAttributeFigure(Element startEndElement, Element modelElement) {
+//TODO nasty HACK
+showAttributeFigureTemporarily = true;
+	updateAttributeFigure((ch.ehi.uml1_4.foundation.core.Association)startEndElement, true);
 	return attributeFigure;	
 }
 /**
@@ -260,20 +261,20 @@ protected AssociationAttributeFigure showAttributeFigure() {
 private void updateFeatures(ch.ehi.uml1_4.foundation.core.Association associationDef, boolean linkNodeVisible) {
 	Iterator features = ((ch.ehi.interlis.modeltopicclass.AbstractClassDef)associationDef).iteratorFeature();
 	PresentationAssocClass linkNode = (PresentationAssocClass)getNode();
-	if (features.hasNext() || showAttributeFigure) {
+	if (features.hasNext() || showAttributeFigureTemporarily) {
 		if (attributeFigure == null) {
 			// show AttributeFigure automatically
-			if (linkNode.getClassAngle() == 0.0) {
-				linkNode.setClassAngle(getNode().getEast() + OFFSET_EAST_ATTRIBUTEFIGURE_TO_LINKFIGURE);
-			}
-			if (linkNode.getClassRadius() == 0.0) {
-				linkNode.setClassRadius(getNode().getSouth() + OFFSET_SOUTH_ATTRIBUTEFIGURE_TO_LINKFIGURE);
-			}
 			attributeFigure = new AssociationAttributeFigure(this, getClassDiagram(), linkNodeVisible);
+            if (linkNode.getClassAngle() == 0.0) {
+                linkNode.setClassAngle(getNode().getEast() + OFFSET_EAST_ATTRIBUTEFIGURE_TO_LINKFIGURE);
+            }
+            if (linkNode.getClassRadius() == 0.0) {
+                linkNode.setClassRadius(getNode().getSouth() + OFFSET_SOUTH_ATTRIBUTEFIGURE_TO_LINKFIGURE);
+            }
 			getClassDiagram().add(attributeFigure);
 		}
 		attributeFigure.updateView();
-	} else if ((attributeFigure != null) && (!showAttributeFigure)) {
+	} else if ((attributeFigure != null) && (!showAttributeFigureTemporarily)) {
 		removeFeatures();
 	}
 }
@@ -283,6 +284,7 @@ private void updateFeatures(ch.ehi.uml1_4.foundation.core.Association associatio
 private void updateInheritance(ch.ehi.uml1_4.foundation.core.Association associationDef) {
 	// if child gets  visible-> check for existing parents and create visual Generalization to it
 	Iterator iterator = associationDef.iteratorGeneralization();
+    showAttributeFigureTemporarily = (iterator.hasNext() || associationDef.iteratorSpecialization().hasNext());
 	if ((!getClassDiagram().isLoading()) && (!updatingChild) && iterator.hasNext()) {
 		Element extension = (Element)iterator.next();
 		if ((extension instanceof ClassExtends) &&((ClassExtends)extension).containsParent()) {
@@ -294,7 +296,7 @@ private void updateInheritance(ch.ehi.uml1_4.foundation.core.Association associa
 					Figure generalizationFigure = getClassDiagram().findFigure(extension);
 					if (generalizationFigure == null) {
 						updatingChild = true;
-Tracer.getInstance().debug(this, "updateInheritance()", "drawing CHILD->parent in " + toString());
+//Tracer.getInstance().debug(this, "updateInheritance()", "drawing CHILD->parent in " + toString());
 						generalizationFigure = new GeneralizationLineConnection(getClassDiagram(), this, parentAssocFigure, (ClassExtends)extension);
 						getClassDiagram().loadSimpleEdge((EdgeFigure)generalizationFigure);
 						updatingChild = false;
@@ -360,16 +362,14 @@ public void updateView() {
 			}
 			
 			// if inherited associationDef -> show in any case
-			Association parentAssociationDef = AssociationLineConnection.getParent(associationDef);
-			if (parentAssociationDef != null) {
-				showAttributeFigure = true;
-			}
-			if ((count == 2) || showAttributeFigure) {
+/*			Association parentAssociationDef = AssociationLineConnection.getParent(associationDef);
+            if (parentAssociationDef != null) {  //showAttributeFigureTemporarily = parentAssociationDef != null;
+			     showAttributeFigureTemporarily = true;
+            }
+*/
+			if ((count == 2) || showAttributeFigureTemporarily) {
 				// do the visual update
-				super.updateView();
-				updateLabels();
-				updateFeatures(associationDef, count == 2);
-				updateInheritance(associationDef);
+				updateAttributeFigure(associationDef, count == 2);
 				
 				return;
 			}
@@ -378,5 +378,16 @@ public void updateView() {
 			removeVisually();
 		}
 	}
+}
+private void updateAttributeFigure(ch.ehi.uml1_4.foundation.core.Association associationDef, boolean linkNodeVisible) {
+    updateLabels();
+    updateFeatures(associationDef, linkNodeVisible);
+//  boolean tmp = showAttributeFigureTemporarily;
+    updateInheritance(associationDef); // -> might change showAttributeFigureTemporarily
+/*  if (tmp && (!showAttributeFigureTemporarily)) {
+        // do it again because AttrbuteFigure should be erased maybe
+//        updateView();
+    }
+*/
 }
 }
