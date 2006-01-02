@@ -17,9 +17,15 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.softenvironment.view.*;
+import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.umleditor.application.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
 import ch.ehi.uml1_4.foundation.core.*;
 import CH.ifa.draw.figures.*;
 /**
@@ -29,7 +35,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2005-09-16 09:50:06 $
+ * @version $Revision: 1.8 $ $Date: 2006-01-02 16:33:00 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -73,7 +79,16 @@ public RoleDefFigure(PresentationRoleFigure edgeFigure, final int type) {
  */
 protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addSpecificationMenu(popupMenu);
-
+    
+    addSelectionMenu(popupMenu);
+    popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectOwnerInBrowser_text")) {
+        public void actionPerformed(ActionEvent event) {
+            RoleDef role = (RoleDef)getModelElement();
+            if (role.getAssociation() != null) {
+                LauncherView.getInstance().getPnlNavigation().selectElement(role.getAssociation());
+            }
+        }
+    });
 	return popupMenu;
 }
 /**
