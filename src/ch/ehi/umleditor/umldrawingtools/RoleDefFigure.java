@@ -35,7 +35,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2006-01-02 16:33:00 $
+ * @version $Revision: 1.9 $ $Date: 2006-01-09 14:08:34 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -81,6 +81,14 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
 	addSpecificationMenu(popupMenu);
     
     addSelectionMenu(popupMenu);
+    popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectTargetInBrowser_text")) {
+        public void actionPerformed(ActionEvent event) {
+            RoleDef role = (RoleDef)getModelElement();
+            if (role.getParticipant() != null) {
+                LauncherView.getInstance().getPnlNavigation().selectElement(role.getParticipant());
+            }
+        }
+    });
     popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectOwnerInBrowser_text")) {
         public void actionPerformed(ActionEvent event) {
             RoleDef role = (RoleDef)getModelElement();
