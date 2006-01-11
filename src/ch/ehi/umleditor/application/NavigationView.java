@@ -34,7 +34,7 @@ import ch.softenvironment.view.ListMenuChoice;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.12 $ $Date: 2006-01-02 16:20:52 $
+ * @version $Revision: 1.13 $ $Date: 2006-01-11 12:43:05 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
@@ -1843,10 +1843,11 @@ private void mniAddToDiagram() {
 	LauncherView.getInstance().getCurrentClassDiagram().add(getSelectedNode());
 }
 /**
+ * Triggered by Menu NavTree->Activate Diagram.
  * @deprecated
  */
 private void mniOpen() {
-//	changeObjects(null);
+	changeObjects(null);
 }
 /**
  * Comment
