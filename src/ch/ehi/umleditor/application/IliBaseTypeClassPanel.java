@@ -20,10 +20,9 @@ package ch.ehi.umleditor.application;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import ch.softenvironment.util.DeveloperException;
-import java.awt.event.*;
-
+import ch.softenvironment.view.BasePanel;
+import ch.softenvironment.view.DataPanel;
 import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
@@ -32,12 +31,9 @@ import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
  * panel to view/edit a INTERLIS ClassType.
  *
  * @author: ce
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:57 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeClassPanel
-//  extends JPanel {
- extends ch.softenvironment.view.DataPanel {
-  static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(IliBaseTypeClassPanel.class);
+public class IliBaseTypeClassPanel extends BasePanel implements DataPanel {
   GridBagLayout gridBagLayout1 = new GridBagLayout();
   JRadioButton rbClass = new JRadioButton();
   JRadioButton rbStruct = new JRadioButton();
@@ -55,8 +51,8 @@ public class IliBaseTypeClassPanel
 
   void jbInit() throws Exception {
     setLayout(gridBagLayout1);
-    rbClass.setText(rsrc.getString("RbClass_text"));
-    rbStruct.setText(rsrc.getString("RbStructure_text"));
+    rbClass.setText(getResourceString("RbClass_text"));
+    rbStruct.setText(getResourceString("RbStructure_text"));
     this.add(rbClass, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
             ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
     this.add(rbStruct, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0

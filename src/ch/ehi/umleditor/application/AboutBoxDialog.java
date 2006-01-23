@@ -24,10 +24,9 @@ import ch.softenvironment.view.*;
  * Typical Info/About User Interface.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:24 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class AboutBoxDialog extends BaseDialog {
-	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/AboutBoxDialog");
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private JLabel ivjLblContractor = null;
 	private JLabel ivjLblCopyright = null;
@@ -135,7 +134,7 @@ private javax.swing.JLabel getLblApache() {
 			ivjLblApache.setText("- Apache Software Foundation  (http://www.apache.org/)");
 			ivjLblApache.setBounds(25, 525, 353, 14);
 			// user code begin {1}
-			ivjLblApache.setText(resources.getString("LblApache_text"));
+			ivjLblApache.setText(getResourceString("LblApache_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -158,7 +157,7 @@ private javax.swing.JLabel getLblBy() {
 			ivjLblBy.setText("Entwickelt durch:");
 			ivjLblBy.setBounds(21, 280, 265, 14);
 			// user code begin {1}
-			ivjLblBy.setText(resources.getString("LblBy_text"));
+			ivjLblBy.setText(getResourceString("LblBy_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -181,7 +180,7 @@ private javax.swing.JLabel getLblContractor() {
 			ivjLblContractor.setText("Im Auftrag von KOGIS");
 			ivjLblContractor.setBounds(6, 106, 235, 25);
 			// user code begin {1}
-			ivjLblContractor.setText(resources.getString("LblContractor_text"));
+			ivjLblContractor.setText(getResourceString("LblContractor_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -205,7 +204,7 @@ private javax.swing.JLabel getLblCopyright() {
 			ivjLblCopyright.setText("Copyright");
 			ivjLblCopyright.setBounds(6, 75, 235, 25);
 			// user code begin {1}
-			ivjLblCopyright.setText(resources.getString("LblCopyright_text"));
+			ivjLblCopyright.setText(getResourceString("LblCopyright_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -274,7 +273,7 @@ private javax.swing.JLabel getLblInterlisCompilerVersion() {
 			ivjLblInterlisCompilerVersion.setText("<iliCompilerVersion>");
 			ivjLblInterlisCompilerVersion.setBounds(229, 178, 189, 14);
 			// user code begin {1}
-			ivjLblInterlisCompilerVersion.setText(resources.getString("LblInterlisCompilerVersion_text"));
+			ivjLblInterlisCompilerVersion.setText(getResourceString("LblInterlisCompilerVersion_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -410,7 +409,7 @@ private javax.swing.JLabel getLblSoftwareBy() {
 			ivjLblSoftwareBy.setText("Dieses Produkt enthält Software, die entwickelt wurde durch:");
 			ivjLblSoftwareBy.setBounds(21, 505, 371, 14);
 			// user code begin {1}
-			ivjLblSoftwareBy.setText(resources.getString("LblSoftwareBy_text"));
+			ivjLblSoftwareBy.setText(getResourceString("LblSoftwareBy_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -433,7 +432,7 @@ private javax.swing.JLabel getLblSupportedBy() {
 			ivjLblSupportedBy.setText("Unterstützt durch:");
 			ivjLblSupportedBy.setBounds(21, 403, 119, 14);
 			// user code begin {1}
-			ivjLblSupportedBy.setText(resources.getString("LblSupportedBy_text"));
+			ivjLblSupportedBy.setText(getResourceString("LblSupportedBy_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -500,7 +499,7 @@ private javax.swing.JLabel getLblVersionInterlis() {
 			ivjLblVersionInterlis.setText("INTERLIS-Version:");
 			ivjLblVersionInterlis.setBounds(21, 155, 189, 14);
 			// user code begin {1}
-			ivjLblVersionInterlis.setText(resources.getString("LblVersionInterlis_text"));
+			ivjLblVersionInterlis.setText(getResourceString("LblVersionInterlis_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -523,7 +522,7 @@ private javax.swing.JLabel getLblVersionInterlisCompiler() {
 			ivjLblVersionInterlisCompiler.setText("INTERLIS-Compiler-Version:");
 			ivjLblVersionInterlisCompiler.setBounds(21, 178, 189, 14);
 			// user code begin {1}
-			ivjLblVersionInterlisCompiler.setText(resources.getString("LblInterlisCompilerVersion_text"));
+			ivjLblVersionInterlisCompiler.setText(getResourceString("LblInterlisCompilerVersion_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -546,7 +545,7 @@ private javax.swing.JLabel getLblVersionJava() {
 			ivjLblVersionJava.setText("Java-Version:");
 			ivjLblVersionJava.setBounds(21, 219, 189, 14);
 			// user code begin {1}
-			ivjLblVersionJava.setText(resources.getString("LblVersionJava_text"));
+			ivjLblVersionJava.setText(getResourceString("LblVersionJava_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -569,7 +568,7 @@ private javax.swing.JLabel getLblVersionProgram() {
 			ivjLblVersionProgram.setText("Version:");
 			ivjLblVersionProgram.setBounds(21, 134, 189, 14);
 			// user code begin {1}
-			ivjLblVersionProgram.setText(resources.getString("LblVersionProgram_text"));
+			ivjLblVersionProgram.setText(getResourceString("LblVersionProgram_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -592,7 +591,7 @@ private javax.swing.JLabel getLblVersionUML() {
 			ivjLblVersionUML.setText("UML-Version:");
 			ivjLblVersionUML.setBounds(21, 199, 189, 14);
 			// user code begin {1}
-			ivjLblVersionUML.setText(resources.getString("LblVersionUML_text"));
+			ivjLblVersionUML.setText(getResourceString("LblVersionUML_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -615,7 +614,7 @@ private javax.swing.JLabel getLblVersionVirtualMachine() {
 			ivjLblVersionVirtualMachine.setText("VM-Version:");
 			ivjLblVersionVirtualMachine.setBounds(21, 240, 189, 14);
 			// user code begin {1}
-			ivjLblVersionVirtualMachine.setText(resources.getString("LblVersionVirtualMachine_text"));
+			ivjLblVersionVirtualMachine.setText(getResourceString("LblVersionVirtualMachine_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}

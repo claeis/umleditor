@@ -17,18 +17,21 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import javax.swing.tree.*;
+
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
+import ch.ehi.uml1_4.foundation.core.Element;
 /**
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:02 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.9 $ $Date: 2006-01-02 16:21:36 $
  */
-public class IliBaseTypeEnumPanel extends DataPanel {
-	private static java.util.ResourceBundle resourceBundle = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeEnumPanel");  //$NON-NLS-1$
+public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
@@ -88,22 +91,14 @@ public IliBaseTypeEnumPanel() {
 	super();
 	initialize();
 }
-/**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return newly created popup menu
- * @see showSpecification()
- */
-protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	EnumElement node = getSelectedNode();
+public void adaptUserAction(EventObject event, Object control) {
+   	EnumElement node = getSelectedNode();
 
 	boolean isEnabled = (node != null) && (node != getTreEnumeration().getModel().getRoot());
 	getMniNewDeep().setEnabled(node != null);
 //	getMniNewFlat().setEnabled(isEnabled);
 	getMniRemove().setEnabled(isEnabled);
 	getMniRename().setEnabled(node != null);
-
-	return popupMenu;
 }
 /**
  * connEtoC1:  (TreEnumeration.mouse.mouseReleased(java.awt.event.MouseEvent) --> IliBaseTypeEnumPanel.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
@@ -262,7 +257,11 @@ private Enumeration copyTree(Enumeration src) {
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
       if(subsrc.containsChild()){
-        subdest.attachChild(copyTree(subsrc.getChild()));
+      	Enumeration child=subsrc.getChild();
+      	// are there any child elements?
+      	if(child.sizeEnumElement()>0){
+			subdest.attachChild(copyTree(child));
+      	}
       }
     }
     return ret;
@@ -385,7 +384,7 @@ private javax.swing.JLabel getLblElementDescription() {
 			ivjLblElementDescription.setName("LblElementDescription");
 			ivjLblElementDescription.setText("Beschreibung:");
 			// user code begin {1}
-			ivjLblElementDescription.setText(resourceBundle.getString("LblElementDescription_text"));
+			ivjLblElementDescription.setText(getResourceString("LblElementDescription_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -407,7 +406,7 @@ private javax.swing.JLabel getLblElements() {
 			ivjLblElements.setName("LblElements");
 			ivjLblElements.setText("Elemente:");
 			// user code begin {1}
-			ivjLblElements.setText(resourceBundle.getString("LblElements_text"));
+			ivjLblElements.setText(getResourceString("LblElements_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -431,7 +430,7 @@ private javax.swing.JLabel getLblKind() {
 			ivjLblKind.setText("Art:");
 			ivjLblKind.setBounds(9, 7, 140, 14);
 			// user code begin {1}
-			ivjLblKind.setText(resourceBundle.getString("LblKind_text"));
+			ivjLblKind.setText(getResourceString("LblKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -453,7 +452,7 @@ private javax.swing.JMenuItem getMniNewDeep() {
 			ivjMniNewDeep.setName("MniNewDeep");
 			ivjMniNewDeep.setText("Neu (Unteraufzählung)");
 			// user code begin {1}
-			ivjMniNewDeep.setText(resourceBundle.getString("MniNewDeep_text"));
+			ivjMniNewDeep.setText(getResourceString("MniNewDeep_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -475,7 +474,7 @@ private javax.swing.JMenuItem getMniNewFlat() {
 			ivjMniNewFlat.setName("MniNewFlat");
 			ivjMniNewFlat.setText("Neu");
 			// user code begin {1}
-			ivjMniNewFlat.setText(MENU_FILE_NEW);
+			ivjMniNewFlat.setText(CommonUserAccess.getMniFileNewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -497,7 +496,7 @@ private javax.swing.JMenuItem getMniRemove() {
 			ivjMniRemove.setName("MniRemove");
 			ivjMniRemove.setText("Löschen");
 			// user code begin {1}
-			ivjMniRemove.setText(MENU_EDIT_REMOVE);
+			ivjMniRemove.setText(CommonUserAccess.getMniEditRemoveText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -519,7 +518,7 @@ private javax.swing.JMenuItem getMniRename() {
 			ivjMniRename.setName("MniRename");
 			ivjMniRename.setText("Umbenennen");
 			// user code begin {1}
-			ivjMniRename.setText(MENU_EDIT_RENAME);
+			ivjMniRename.setText(CommonUserAccess.getMniEditRenameText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -597,8 +596,8 @@ private javax.swing.JRadioButton getRbtOrdered() {
 			ivjRbtOrdered.setText("ORDERED");
 			ivjRbtOrdered.setBounds(159, 29, 140, 22);
 			// user code begin {1}
-			ivjRbtOrdered.setToolTipText(resourceBundle.getString("RbtOrdered_toolTipText"));
-			ivjRbtOrdered.setText(resourceBundle.getString("RbtOrdered_text"));
+			ivjRbtOrdered.setToolTipText(getResourceString("RbtOrdered_toolTipText"));
+			ivjRbtOrdered.setText(getResourceString("RbtOrdered_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -623,8 +622,8 @@ private javax.swing.JRadioButton getRbtOrderedCircular() {
 			ivjRbtOrderedCircular.setText("CIRCULAR");
 			ivjRbtOrderedCircular.setBounds(159, 53, 140, 22);
 			// user code begin {1}
-			ivjRbtOrderedCircular.setToolTipText(resourceBundle.getString("RbtOrderedCircular_toolTipText"));
-			ivjRbtOrderedCircular.setText(resourceBundle.getString("RbtOrderedCircular_text"));
+			ivjRbtOrderedCircular.setToolTipText(getResourceString("RbtOrderedCircular_toolTipText"));
+			ivjRbtOrderedCircular.setText(getResourceString("RbtOrderedCircular_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -648,7 +647,7 @@ private javax.swing.JRadioButton getRbtUndefined() {
 			ivjRbtUndefined.setText("Undefiniert");
 			ivjRbtUndefined.setBounds(159, 3, 140, 22);
 			// user code begin {1}
-			ivjRbtUndefined.setText(resourceBundle.getString("RbtUndefined_text"));
+			ivjRbtUndefined.setText(getResourceString("RbtUndefined_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -691,12 +690,6 @@ private EnumElement getSelectedNode() {
 		return (EnumElement)selPath.getLastPathComponent();
 	}
 	return null;
-}
-/**
- * Returns the TreeModel of JTree.
- */
-private TreeModel getTreeModel() {
-	return getTreEnumeration().getModel();
 }
 /**
  * Return the TreEnumeration property value.
@@ -803,14 +796,13 @@ constraintsJPanel1.gridheight = 2;
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	setToolTipText(resourceBundle.getString("IliBaseTypeTextPanel_toolTipText"));
+	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtUndefined());
 	group.add(getRbtOrdered());
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
-Tracer.getInstance().developerWarning(this, "initialize()", "initialization causes a corrupt TabPanel in AttributeDefDialog->Visual Builder");
 	initializeTree();
 	// user code end
 }
@@ -878,7 +870,8 @@ private void mniNewDeep() {
                   parentNode.attachChild(new Enumeration());
                 }
                 parentNode.getChild().addEnumElement(newElement);
-
+        selectElement(newElement);
+        mniRename();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -902,27 +895,26 @@ private void mniNewFlat() {
                         int idx=selectedNode.getEnumeration().findEnumElement(selectedNode);
                         selectedNode.getEnumeration().addEnumElement(idx,newElement);
 		}
+        selectElement(newElement);
+        mniRename();
 	} catch(Throwable e) {
 		handleException(e);
 	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemove() {
-	EnumElement selectedNode = getSelectedNode();
-	if (selectedNode==null || selectedNode.getEnumeration()==root) {
-		// use Root
-                root.removeEnumElement(selectedNode);
-	} else {
-                selectedNode.getEnumeration().removeEnumElement(selectedNode);
-	}
+	removeObjects(null);
 }
 /**
  * Start renaming by setting Cursor on TreeNode.
  */
 private void mniRename() {
-	getTreEnumeration().startEditingAtPath(getTreEnumeration().getSelectionPath());
+    TreePath path = getTreEnumeration().getSelectionPath();
+    if (path != null) {
+	   getTreEnumeration().startEditingAtPath(getTreEnumeration().getSelectionPath());
+    }
 }
 /**
  * Save the documentation on currently selected EnumElement.
@@ -943,6 +935,20 @@ private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelection
 		getPnlDescription().setEnabled(true);
 		getPnlDescription().setObject(node);
 	}
+}
+public void selectElement(Element element) {
+    TreePath foundNode = ((EnumTreeModel)getTreEnumeration().getModel()).getTreePath(element);
+//    TreePath foundNode = modelAdapter.findElementDefinitionNode(element);
+
+    if (foundNode == null) {
+                // ce 20030301 was soll das machen? clearSelection()?
+//        getTreNavigation().setSelectionPath(null);
+    } else {
+//      getTreNavigation().expandPath(getTreNavigation().getSelectionPath());
+//      getTreNavigation().makeVisible(path);
+        getTreEnumeration().setSelectionPath(foundNode);
+        getTreEnumeration().scrollPathToVisible(foundNode);
+    }
 }
 /**
  * Set the Object to be displayed by panel.
@@ -973,5 +979,30 @@ public void setObject(java.lang.Object object) {
 	}
 
 	model.setRoot(root);
+}
+public void changeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    try {
+        EnumElement selectedNode = getSelectedNode();
+        if (selectedNode==null || selectedNode.getEnumeration()==root) {
+            // use Root
+            root.removeEnumElement(selectedNode);
+        } else {
+            selectedNode.getEnumeration().removeEnumElement(selectedNode);
+        }
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

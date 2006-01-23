@@ -1,85 +1,106 @@
-// Copyright (c) 2002, Eisenhut Informatik
-// All rights reserved.
-// $Date: 2003-12-23 10:40:21 $
-// $Revision: 1.1.1.1 $
-//
-
-// -beg- preserve=no 3CDA3ECD02D3 package "ExportInterlis"
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 package ch.ehi.umleditor.interlis.iliexport;
-// -end- 3CDA3ECD02D3 package "ExportInterlis"
-
-// -beg- preserve=no 3CDA3ECD02D3 autoimport "ExportInterlis"
-
-// -end- 3CDA3ECD02D3 autoimport "ExportInterlis"
-
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 3CDA3ECD02D3 import "ExportInterlis"
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.basics.view.FileChooser;
+import ch.ehi.basics.view.GenericFileFilter;
 import java.io.File;
 import javax.swing.JOptionPane;
+import ch.interlis.ili2c.config.Configuration;
+import ch.interlis.ili2c.config.GenerateOutputKind;
 
-// -end- 3CDA3ECD02D3 import "ExportInterlis"
 
 public class ExportInterlis
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=yes 3CDA3ECD02D3 detail_begin "ExportInterlis"
   static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ExportInterlis.class);
 
-  // -end- 3CDA3ECD02D3 detail_begin "ExportInterlis"
-
-  // -beg- preserve=no 3CFE03D10168 head3CDA3ECD02D3 "writeFileset"
   public static void writeFileset()
-  // -end- 3CFE03D10168 head3CDA3ECD02D3 "writeFileset"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3CFE03D10168 throws3CDA3ECD02D3 "writeFileset"
-
-    // -end- 3CFE03D10168 throws3CDA3ECD02D3 "writeFileset"
     {
-    // please fill in/modify the following section
-    // -beg- preserve=yes 3CFE03D10168 body3CDA3ECD02D3 "writeFileset"
     TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
     try{
        // get list of files, that will be created
-       writer.setCreateFileList(true);
-       writer.visitNamespace(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
-       if(checkFiles(writer.getFileList(),writer.getFuncDesc())){
+       java.util.List fileList=writer.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+       if(checkFiles(fileList,writer.getFuncDesc())){
          // write the files
-         writer.setCreateFileList(false);
-         writer.visitNamespace(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+         writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
        }
     }catch(java.io.IOException ex){
       ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
     }
     return;
-    // -end- 3CFE03D10168 body3CDA3ECD02D3 "writeFileset"
     }
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3CDA3ECD02D3 detail_end "ExportInterlis"
   public static void writeXSD(){
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle("XML-Schema exportieren...");
-	saveDialog.addChoosableFileFilter(LauncherView.createXmlSchemaFilter());
+	saveDialog.addChoosableFileFilter(GenericFileFilter.createXmlSchemaFilter());
 
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
                 String xsdFileName=saveDialog.getSelectedFile().getAbsolutePath();
                 TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
                 try{
-                   writer.setCheckModel(true);
-                   writer.setXsdFile(xsdFileName);
-                   writer.visitNamespace(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+                   Configuration ili2cConfig=new Configuration();
+                   ili2cConfig.setOutputKind(GenerateOutputKind.XMLSCHEMA);
+                   ili2cConfig.setOutputFile(xsdFileName);
+                   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
                 }catch(java.io.IOException ex){
                   ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
                 }
         }
     return;
+  }
+  public static void writeGML(){
+	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+	if (saveDialog.showOutputDirDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+				String xsdFileName=saveDialog.getSelectedFile().getAbsolutePath();
+				TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
+				try{
+				   Configuration ili2cConfig=new Configuration();
+				   ili2cConfig.setOutputKind(GenerateOutputKind.GML32);
+				   ili2cConfig.setOutputFile(xsdFileName);
+				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+				}catch(java.io.IOException ex){
+				  ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
+				}
+		}
+	return;
+  }
+  public static void writeIli1Fmt(){
+	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+	saveDialog.setDialogTitle("INTERLIS 1-Format exportieren...");
+	saveDialog.addChoosableFileFilter(new ch.ehi.basics.view.GenericFileFilter("ILI1 Format (*.fmt)","fmt"));
+
+	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+				String fmtFileName=saveDialog.getSelectedFile().getAbsolutePath();
+				TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
+				try{
+					Configuration ili2cConfig=new Configuration();
+					ili2cConfig.setOutputKind(GenerateOutputKind.ILI1FMTDESC);
+					ili2cConfig.setOutputFile(fmtFileName);
+				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+				}catch(java.io.IOException ex){
+				  ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
+				}
+		}
+	return;
   }
 
   private static boolean checkFiles(java.util.List filev,String funcdesc){
@@ -115,7 +136,5 @@ public class ExportInterlis
    }
    return false;
   }
-  // -end- 3CDA3ECD02D3 detail_end "ExportInterlis"
-
 }
 

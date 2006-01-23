@@ -26,9 +26,9 @@ import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
  * to represent an UML aggregation between to classes.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:06:14 $
  */
-public class AssociationLineDecoration extends AbstractLineDecoration {
+class AssociationLineDecoration extends AbstractLineDecoration {
 	// Size of the diamond (measured as a diagonal line)
 	private int     mySize;
 

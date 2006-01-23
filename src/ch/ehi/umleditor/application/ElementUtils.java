@@ -32,7 +32,7 @@ import ch.softenvironment.util.*;
  * Utility Class for dealing with Element's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:48 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:02 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -150,7 +150,6 @@ public static java.lang.Class getElementDialog(Element element) {
 				return DependencyDialog.class;
 			}
 			String elementClass = StringUtils.getPureClassName(element);
-Tracer.getInstance().hack(ElementUtils.class, "getElementDialog(Element)", "Dialogs expected in same directory as this class");
 			dialogClass = java.lang.Class.forName(StringUtils.getPackageName(ElementUtils.class) + "." + elementClass + "Dialog");//$NON-NLS-2$//$NON-NLS-1$
 		} catch(ClassNotFoundException e) {
 			// no specific dialog for this modelElement -> try generic dialog
@@ -196,7 +195,7 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 		String warningTitle = resElementMapper.getString("CTNameConflict"); //$NON-NLS-1$
 		if (modelElement.containsNamespace()) {
 			if (modelElement.getNamespace().containsOwnedElement(newName)) {
-				new WarningDialog(LauncherView.getInstance(),
+				BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					warningTitle,
 					resElementMapper.getString("CEDuplicatedName")); //$NON-NLS-1$
 				return false;
@@ -204,7 +203,7 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 		} else {
 			if (modelElement instanceof AttributeDef) {
 				if (((AttributeDef)modelElement).getOwner().containsFeature(newName)) {
-					new WarningDialog(LauncherView.getInstance(),
+				    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 						warningTitle,
 						resElementMapper.getString("CEDuplicatedAttribute")); //$NON-NLS-1$
 					return false;

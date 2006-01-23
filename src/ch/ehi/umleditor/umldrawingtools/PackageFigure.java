@@ -30,8 +30,8 @@ import CH.ifa.draw.contrib.*;
  * representation from the data model. A Package has a package
  * name. Packages may be dependent of other Packages.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:01 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.2 $ $Date: 2005-11-20 16:46:27 $
  */
 public class PackageFigure extends NodeFigure {
 	// Composites
@@ -133,12 +133,11 @@ protected void initialize() {
     packagePathFigure = new TextFigure() {
         public void setText(String newText) {
             super.setText(newText);
-//NYI            updateName(newText);
+//TODO NYI            updateName(newText);
             update();
         }
     };
     packagePathFigure.setFont(getFont());
-//    packagePathFigure.setText("(from..)");
     packagePathFigure.setReadOnly(true);
 
     // add the TextFigure's to the Composite
@@ -149,13 +148,6 @@ protected void initialize() {
     nameFigure.add(packagePathFigure);
     nameFigure.getLayouter().setInsets(new Insets(15, 4, 0, 0));
     add(nameFigure);
-
-/*
-    nameFigure = new GraphicalCompositeFigure(new SeparatorFigure());
-    nameFigure.add(packagePathFigure);
-    nameFigure.getLayouter().setInsets(new Insets(4, 4, 0, 0));
-    add(nameFigure);
-*/
 
     super.initialize();
 }
@@ -171,7 +163,7 @@ public void updateView() {
 			// node might have changed
 			super.updateView();
 			packageNameFigure.setText(getModelElement().getDefLangName());
-//			packagePathFigure.setText(..);
+//TODO			packagePathFigure.setText("(from..)");
 		}
 	}
 }

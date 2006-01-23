@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -25,20 +24,22 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
-import ch.softenvironment.util.Tracer;
+import ch.softenvironment.util.DeveloperException;
+import ch.softenvironment.client.ResourceManager;
 import ch.softenvironment.view.*;
 /**
- * Fiure Specification for all Elements treated as Nodes in an UML-ClassDiagram.
+ * Fiure Specification for all Elements treated as Nodes in an UML-Class-Diagram.
  * @see EdgeFigure
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:00 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.13 $ $Date: 2006-01-02 16:34:53 $
  */
-public abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
+abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
 	protected ch.ehi.umleditor.umlpresentation.PresentationNode node;
 	private ClassDiagramView classDiagram = null;
 	private boolean creating = true;
+	
 /**
  * UmlFigure constructor comment.
  * @param newPresentationFigure ch.ifa.draw.framework.Figure
@@ -48,22 +49,17 @@ public NodeFigure(Figure newPresentationFigure) {
 	setCreating(true);
 }
 /**
- * Factory method to create a default popup menu.
- *
- * @return newly created popup menu
+ * Configure a given PopupMenu.
+ * Overwrite this method for specific Menu's.
+ * @return JPopupMenu
  */
-public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addSpecificationMenu(popupMenu);
 
 	// overwrite this method in subclasses
 	addSpecialMenu(popupMenu);
 
-	popupMenu.add(new JSeparator());
-	popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
-		public void actionPerformed(ActionEvent event) {
-			selectInBrowser();
-		}
-	});
+    addSelectionMenu(popupMenu);
 	
 	popupMenu.add(new JSeparator());
 	addFormatMenu(popupMenu);
@@ -73,30 +69,42 @@ public JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	return popupMenu;
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a menu to Popup where Node will be selected in NavTree.
+ * @param popupMenu
+ */
+protected final void addSelectionMenu(javax.swing.JPopupMenu popupMenu) {
+    popupMenu.add(new JSeparator());
+    popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
+        public void actionPerformed(ActionEvent event) {
+            selectInBrowser();
+        }
+    });
+}
+/**
+ * Add a standard Edit-Submenu to a PopupMenu.
  *
  * @see EdgeFigure
  * @return newly created popup menu
  */
 protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu editMenu = new JMenu(MENU_EDIT);
+	JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
 
-	editMenu.add(new AbstractAction(MENU_EDIT_CUT) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCutText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniCut();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_COPY) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCopyText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniCopy();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_PASTE) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditPasteText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniPaste();
 		}
 	});
-	editMenu.add(new AbstractAction(MENU_EDIT_REMOVE) {
+	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
 		public void actionPerformed(ActionEvent event) {
 			removeVisually();
 		}
@@ -111,29 +119,29 @@ protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
 	popupMenu.add(editMenu);
 }
 /**
- * Add an Deletion Entry to a PopupMenu.
+ * Add a Format-Submenu to a PopupMenu.
  *
  * @see EdgeFigure
  * @return newly created popup menu
  */
 protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu formatMenu = new JMenu(MENU_FORMAT);
+	JMenu formatMenu = new JMenu(CommonUserAccess.getMnuFormatText());
 /*
 	JPopupMenu fontSizeMenu = new JPopupMenu();
 	fontSizeMenu.setName("Schriftgrösse");
 	formatMenu.add(fontSizeMenu);
 */	
-	formatMenu.add(new AbstractAction(MENU_FORMAT_FONT) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFontText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniFont();
 		}
 	});
-	formatMenu.add(new AbstractAction(MENU_FORMAT_LINE_COLOR) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatLineColorText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniLineColor();
 		}
 	});
-	formatMenu.add(new AbstractAction(MENU_FORMAT_FILL_COLOR) {
+	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFillColorText()) {
 		public void actionPerformed(ActionEvent event) {
 			mniFillColor();
 		}
@@ -149,13 +157,13 @@ protected void addSpecialMenu(JPopupMenu popupMenu) {
 	// Overwrite for specific adaption
 }
 /**
- * Add an openSpecification Entry to a PopupMenu.
+ * Add an Specification Entry to a PopupMenu.
  *
  * @see EdgeFigure
  * @see createPopupMenu()
  */
 protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new AbstractAction(MENU_EDIT_CHANGE_WINDOW) {
+	popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditChangeWindowText()) {
 		public void actionPerformed(ActionEvent event) {
 			showSpecification();
 		}
@@ -172,14 +180,12 @@ public void basicDisplayBox(Point origin, Point corner) {
 	super.basicDisplayBox(origin, corner);
 	
 	if ((LauncherView.getInstance().tool() instanceof CreationTool) || (this instanceof LinkFigure)) {
-Tracer.getInstance().hack(this, "basicDisplayBox()", "anchorPoint set afterwards by CreationTool.mouseDown(..)");
+//TODO hack: anchorPoint set afterwards by CreationTool.mouseDown(..)
 		updateCoordinates();
 	}
 }
 /**
- * Standard presentation method which is delegated to the encapsulated presentation figure.
- * The presentation figure is moved as well as all contained figures.
- * @see #moveBy(int, int)
+ * Overwrites.
  */
 protected void basicMoveBy(int dx, int dy) {
     super.basicMoveBy(dx, dy);
@@ -205,8 +211,8 @@ protected ClassDiagramView getClassDiagram() {
 	return classDiagram;
 }
 /**
- * Return the name of the Font.
- * @see AttributeFigure.getFillColor()
+ * Return the nodes Fill-Color.
+ * @see AttributeFigure#getFillColor()
  * @see EdgeFigure
  */
 protected java.awt.Color getFillColor() {
@@ -223,7 +229,7 @@ protected java.awt.Color getFillColor() {
 protected java.awt.Font getFont() {
 	String font = (String)getAttribute(JHotDrawConstants.FONT_NAME);
 	if (font == null) {
-		return java.awt.Font.decode(ch.ehi.umleditor.application.LauncherView.getSettings().getFont());
+		return ch.ehi.umleditor.application.LauncherView.getSettings().getFont();
 	} else {
 		return java.awt.Font.decode(font);
 	}
@@ -269,7 +275,11 @@ protected void handleException(java.lang.Throwable exception) {
  * @param exception java.lang.Throwable
  */
 protected static void handleException(java.lang.Throwable exception, String title, String message, Object source) {
-	LauncherView.getInstance().handleException(exception, title, message + " [" + source.toString() + "]");
+	String text = message;
+	if (message == null) {
+		text = ResourceManager.getInstance().getResource(DeveloperException.class, "CTDevelopmentError");
+	}
+	LauncherView.getInstance().handleException(exception, title, text + " [" + source.toString() + "]");
 }
 /**
  * Initialize the node.
@@ -294,39 +304,39 @@ protected boolean isCreating() {
  * @see addEditMenu(..)
  */
 protected void mniCopy() {
-	LauncherView.getInstance().nyi(MENU_EDIT_COPY);
+	LauncherView.getInstance().nyi("Copy");
 }
 /**
  * Edit->Cut Action.
  * @see addEditMenu(..)
  */
 protected void mniCut() {
-	LauncherView.getInstance().nyi(MENU_EDIT_COPY);
+	LauncherView.getInstance().nyi("Cut");
 }
 /**
- * Draw figure with new FillColor.
+ * Figure's FillColor Action.
  */
 private void mniFillColor() {
 	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.getChosenColor() != null) {
+	if (dialog.isSaved()) {
 		setFillColor(dialog.getChosenColor());
 //		getClassDiagram().repaint();
 	}
 }
 /**
- * Edit->Copy Action.
+ * Font-Action.
  * @see addEditMenu(..)
  */
 private void mniFont() {
-	LauncherView.getInstance().nyi(MENU_FORMAT_FONT);
+	LauncherView.getInstance().nyi("Font");
 }
 /**
- * Edit->Copy Action.
+ * Line-Color Action.
  * @see addEditMenu(..)
  */
 private void mniLineColor() {
 	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.getChosenColor() != null) {
+	if (dialog.isSaved()) {
 		setLineColor(dialog.getChosenColor());
 //		getClassDiagram().repaint();
 	}
@@ -336,7 +346,7 @@ private void mniLineColor() {
  * @see addEditMenu(..)
  */
 protected void mniPaste() {
-	LauncherView.getInstance().nyi(MENU_EDIT_PASTE);
+	LauncherView.getInstance().nyi("Paste");
 }
 /**
  * Remove the Figure in Model (implies visual deletion).
@@ -345,15 +355,17 @@ protected void mniPaste() {
  */
 public void removeInModel() {
 	try {
+		ModelElement tmp = getModelElement();
+		
 		// 1) remove visible part
 		removeVisually();
 
 		// 2) remove in Model
-		if (getModelElement() != null) {
-			ElementFactory.removeElement(getModelElement());
+		if (tmp != null) {
+			ElementFactory.removeElement(tmp);
 		}
 	} catch(Throwable e) {
-		handleException(e, REMOVE_IN_MODEL, ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, REMOVE_IN_MODEL, null, this);
 	}
 }
 /**
@@ -370,10 +382,10 @@ public void removeVisually() {
 			if (node instanceof ch.ehi.umleditor.umlpresentation.Note) {
 				node.clearPresentationEdge();
 			}
-			getClassDiagram().getDiagram().removePresentationElement(node);
+			getClassDiagram().getDiagram().deletePresentationElement(node); //removePresentationElement(node);
 		}
 	} catch(Throwable e) {
-		handleException(e, MENU_EDIT_REMOVE, ch.softenvironment.util.DeveloperException.DEVELOPER_ERROR, this);
+		handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**
@@ -490,5 +502,11 @@ public void updateView() {
 	if (getNode().getForeground() != null) {
 		setLineColor(ColorConverter.createColor(getNode().getForeground()));
 	}
+}
+/**
+ * @see BaseFrame#getResourceString(..)
+ */
+protected static String getResourceString(java.lang.Class resource, String property) {
+	return ResourceManager.getInstance().getResource(resource, property);
 }
 }

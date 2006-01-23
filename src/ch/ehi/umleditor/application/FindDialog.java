@@ -17,16 +17,19 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.Set;
+
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.umleditor.umlpresentation.Diagram;
 /**
  * Show a Find-Dialog to search for Elements in the model.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:54 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.2 $ $Date: 2006-01-02 16:16:48 $
  */
 public class FindDialog extends ch.softenvironment.view.BaseDialog {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/FindDialog");
-	java.util.Set results = null;
+	private java.util.Set results = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnCancel = null;
 	private javax.swing.JButton ivjBtnSearch = null;
@@ -63,6 +66,23 @@ public FindDialog(java.awt.Frame owner, boolean modal) {
 	java.awt.Point parentOrigin = owner.getLocation();
 	setLocation((int)parentOrigin.getX() + 250, (int)parentOrigin.getY() + 40);
 	show();
+}
+public FindDialog(java.awt.Frame owner, boolean modal, Set results, String title) {
+    super(owner, modal);
+    initialize();
+    java.awt.Point parentOrigin = owner.getLocation();
+    setLocation((int)parentOrigin.getX() + 250, (int)parentOrigin.getY() + 40);
+    
+    setTitle(title);
+    getLblName().setVisible(false);
+    getTxtName().setVisible(false);
+    getChxIgnoreCase().setVisible(false);
+    getChxUseDocument().setVisible(false);
+    getChxUseName().setVisible(false);
+    getBtnSearch().setVisible(false);
+    
+    showResults(results);
+    show();
 }
 /**
  * connEtoC1:  (BtnSearch.action.actionPerformed(java.awt.event.ActionEvent) --> FindDialog.search()V)
@@ -473,8 +493,7 @@ private void initialize() {
  */
 private void search() {
 	try {
-		getLstSearchList().removeAll();
-		results = null;
+//		results = null;
 		
 		ch.ehi.uml1_4.tools.DefaultFindCondition condition = new ch.ehi.uml1_4.tools.DefaultFindCondition();
 		condition.setText(getTxtName().getText());
@@ -483,17 +502,27 @@ private void search() {
 		condition.setIgnoreCase(getChxIgnoreCase().isSelected());
 		
 		results = ch.ehi.uml1_4.tools.NamespaceUtility.deepFindOwnedElements(LauncherView.getInstance().getModel(), condition);
-		java.util.Iterator iterator = results.iterator();
-
-		java.util.Vector names = new java.util.Vector();
-		while (iterator.hasNext()) {
-			ModelElement element = (ModelElement)iterator.next();
-			names.add(ElementUtils.formatWithPackageName(element));
-		}
-		getLstSearchList().setListData(names);
+		showResults(results);
 	} catch(Throwable e) {
 		super.handleException(e);
 	}
+}
+private void showResults(Set results) {
+    getLstSearchList().removeAll();
+    this.results = results;
+    
+    java.util.Iterator iterator = results.iterator();
+    java.util.Vector names = new java.util.Vector();
+    while (iterator.hasNext()) {
+        Object object = iterator.next();
+        if (object instanceof ModelElement) {
+//      ModelElement element = (ModelElement)iterator.next();
+            names.add(ElementUtils.formatWithPackageName((ModelElement)object));
+        } else if (object instanceof Diagram) {
+            names.add(((Diagram)object).getName().getValue());
+        }
+    }
+    getLstSearchList().setListData(names);
 }
 /**
  * Select Element in Browser.

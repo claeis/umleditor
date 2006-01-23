@@ -1,8 +1,20 @@
-// Copyright (c) 2002, Eisenhut Informatik
-// All rights reserved.
-// $Date: 2003-12-23 10:40:30 $
-// $Revision: 1.1.1.1 $
-//
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 // -beg- preserve=no 3C9086430360 package "ImportInterlis"
 package ch.ehi.umleditor.interlis.iliimport;
@@ -21,7 +33,8 @@ import ch.interlis.ili2c.metamodel.TransferDescription;
 import java.io.*;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.basics.view.FileChooser;
-import ch.softenvironment.view.WarningDialog;
+import ch.softenvironment.view.BaseDialog;
+import ch.ehi.umleditor.interlis.EditorLoggingAdapter;
 // -end- 3C9086430360 import "ImportInterlis"
 
 /** main entry point to INTERLIS import utility
@@ -48,8 +61,8 @@ public class ImportInterlis
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3C90867502B8 body3C9086430360 "readIliFile"
-
-      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
+      LauncherView editor=LauncherView.getInstance();
+      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
       MyErrorListener el = new MyErrorListener(convert.getFuncDesc());
       Configuration config=new Configuration();
       // setup config
@@ -59,7 +72,10 @@ public class ImportInterlis
       TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,el);
       if(el.getErrorCount()==0){
         // translate the compiler metamodel to our metamodel
-        convert.visitTransferDescription(ili2cModel,null,config);
+        convert.visitTransferDescription(editor.getModel(),ili2cModel,null,config);
+        // refresh view
+        editor.refreshModel();
+        editor.log(convert.getFuncDesc(),rsrc.getString("CIdone"));
       }
     // -end- 3C90867502B8 body3C9086430360 "readIliFile"
     }
@@ -78,7 +94,8 @@ public class ImportInterlis
     // please fill in/modify the following section
     // -beg- preserve=yes 3C908B140241 body3C9086430360 "readIlcFile"
 
-      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
+      LauncherView editor=LauncherView.getInstance();
+      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
       MyErrorListener el = new MyErrorListener(convert.getFuncDesc());
       Configuration config=null;
       // read config file
@@ -94,7 +111,10 @@ public class ImportInterlis
       TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,el);
       if(el.getErrorCount()==0){
         // translate the compiler metamodel to our metamodel
-        convert.visitTransferDescription(ili2cModel,ilcFileName,config);
+        convert.visitTransferDescription(editor.getModel(),ili2cModel,ilcFileName,config);
+        // refresh view
+        editor.refreshModel();
+        editor.log(convert.getFuncDesc(),rsrc.getString("CIdone"));
       }
     // -end- 3C908B140241 body3C9086430360 "readIlcFile"
     }
@@ -110,29 +130,6 @@ public class ImportInterlis
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CD8DEC502A7 body3C9086430360 "readFileset"
-    // Wurzel des UML-Editor-Metamodells bestimmen
-    ch.ehi.uml1_4.foundation.core.Namespace root=ch.ehi.umleditor.application.LauncherView.getInstance().getModel();
-    ch.ehi.interlis.modeltopicclass.ClassDef aclass=new ch.ehi.interlis.modeltopicclass.ClassDef();
-    aclass.setDefLangName("test");
-    root.addOwnedElement(aclass);
-
-
-
-      if(false){
-      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
-      MyErrorListener el = new MyErrorListener(convert.getFuncDesc());
-      Configuration config=new Configuration();
-      // edit config file
-      if(ch.interlis.ili2c.Main.editConfig(config)){
-        // we need no output
-        config.setOutputKind(GenerateOutputKind.NOOUTPUT );
-        TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,el);
-        if(el.getErrorCount()==0){
-          // translate the compiler metamodel to our metamodel
-          convert.visitTransferDescription(ili2cModel,null,config);
-        }
-      }
-      }
     // -end- 3CD8DEC502A7 body3C9086430360 "readFileset"
     }
 
@@ -156,7 +153,7 @@ public class ImportInterlis
 		} else if (ilcFilter.accept(importDialog.getSelectedFile())) {
 			readIlcFile(newFile);
 		} else {
-			new WarningDialog(LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
+		    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
 		}
 	}
   }

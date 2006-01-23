@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,9 +16,26 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.ehi.uml1_4.foundation.core.Classifier;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.interlis.metaobjects.MetaDataUseDef;
+import ch.ehi.interlis.metaobjects.MetaDataUseDefKind;
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.interlis.units.UnitDef;
+import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +45,6 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
-import ch.softenvironment.util.*;
 
 /**
  * A ClassFigure is a graphical representation for an UML Class
@@ -38,27 +53,29 @@ import ch.softenvironment.util.*;
  * (PresentationElement). A class has a class
  * name, attributes and methods.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:51 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.9 $ $Date: 2006-01-23 16:06:43 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
-	// TextFigure for editing the class name
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
+    private GraphicalCompositeFigure nameFigure;
 	private TextFigure classNameFigure;	// DON't set = null
-	private SeparatorFigure classHeaderSeparator; // DON't set = null
-
+	private SeparatorFigure attributeSeparator; // DON't set = null
+	private SeparatorFigure operationSeparator; // DON't set = null
 	// Direct reference to a composite figure which stores text figures for attribute names.
 	// This figure is also part of this composite container.
 	private GraphicalCompositeFigure attributesFigure; // DON't set = null
 
 	// Direct reference to a composite figure which stores text figures for method names.
 	// This figure is also part of this composite container.
-	private GraphicalCompositeFigure methodsFigure; // DON't set = null
+	private GraphicalCompositeFigure operationsFigure; // DON't set = null
 
 	// PopupMenu
 	private static String SUPPRESS_ATTRIBUTES_ACTION_COMMAND = "SUPPRESS_ATTRIBUTES";//$NON-NLS-1$
+	private static String SUPPRESS_OPERATIONS_ACTION_COMMAND = "SUPPRESS_OPERATIONS";//$NON-NLS-1$
 	private static String SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND = "SHOW_INHERITED_ATTRIBUTES";//$NON-NLS-1$
 	private JCheckBoxMenuItem chxSuppressAttributes = null;
+	private JCheckBoxMenuItem chxSuppressOperations = null;
 	private JCheckBoxMenuItem chxShowInheritedAttributes = null;
 /**
  * Create a new instance of ClassFigure with a RectangleFigure as presentation figure
@@ -81,6 +98,8 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 	try {
 		if (e.getActionCommand().equals(SUPPRESS_ATTRIBUTES_ACTION_COMMAND)) {
 			((PresentationAbstractClass)getNode()).setSuppressAttributes(chxSuppressAttributes.isSelected());
+		} else if (e.getActionCommand().equals(SUPPRESS_OPERATIONS_ACTION_COMMAND)) {
+			((PresentationAbstractClass)getNode()).setSuppressOperations(chxSuppressOperations.isSelected());
 		} else if (e.getActionCommand().equals(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND)) {
 			((PresentationAbstractClass)getNode()).setShowInheritedAttributes(chxShowInheritedAttributes.isSelected());
 		}
@@ -92,78 +111,75 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 }
 /**
  * Add an attribute.
- *
- * @param attributeName expected format "attributeName" or "attributeName : Type"
  */
 private void addAttribute() {
     try {
         // 1) add model
         ElementFactory.createAttributeDef((AbstractClassDef)getModelElement());
 
-        // 2) add view for model @see updateModel()
+        // 2) add view for model 
+        // @see updateModel()
     } catch (Throwable e) {
         LauncherView.getInstance().handleException(e);
     }
 }
 /**
- * Add a name for a method. The underlying class in the model is updated as well
- * to hold the method name.
- *
- * @param newMethod name of the new method
+ * Add a method.
  */
-private void addMethod(String newMethod) {
-/*
-	TextFigure classFigureMethod = new TextFigure() {
-		public void setText(String newString) {
-			if (!getText().equals(newString)) {
-			}
-			super.setText(newString);
-			updateMethodFigure();
-		}
-	};
-	classFigureMethod.setText(newMethod);
-	classFigureMethod.setFont(getFont());
-	methodsFigure.add(classFigureMethod);
-	updateMethodFigure();
-*/
+private void addOperation() {
+	try {
+        // 1) add model
+        ElementFactory.createUmlOperation((AbstractClassDef)getModelElement());
+
+        // 2) add view for model 
+        // @see updateModel()
+    } catch (Throwable e) {
+        LauncherView.getInstance().handleException(e);
+    }
 }
 /**
  * Add individual PopupMenu items for this class.
  * @see createPopupMenu()
  */
 protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new JSeparator());
-
-	popupMenu.add(new AbstractAction(resources.getString("MniNewAttributeDef_text")) { //$NON-NLS-1$
-		public void actionPerformed(ActionEvent event) {
-			addAttribute();
-		}
-	});
-/*
- 	//future use
-	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {
-		public void actionPerformed(ActionEvent event) {
-			addMethod("<method()>");
-		}
-	});
-*/
-
-	chxSuppressAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressAttributes_text")); //$NON-NLS-1$
-	chxSuppressAttributes.setActionCommand(SUPPRESS_ATTRIBUTES_ACTION_COMMAND);
- 	chxSuppressAttributes.addActionListener(this);
- 	chxShowInheritedAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniShowInheritedAttributes_text")); //$NON-NLS-1$
-	chxShowInheritedAttributes.setActionCommand(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND);
-	chxShowInheritedAttributes.addActionListener(this);  
-   	if (getNode() == null) {
-	   	chxSuppressAttributes.setSelected(false);
-		chxShowInheritedAttributes.setSelected(false);
-    } else {
-	    chxSuppressAttributes.setSelected(((PresentationAbstractClass)getNode()).isSuppressAttributes());
-		chxShowInheritedAttributes.setSelected(((PresentationAbstractClass)getNode()).isShowInheritedAttributes());
- 	}
-	chxShowInheritedAttributes.setEnabled(!chxSuppressAttributes.isSelected());
-	popupMenu.add(chxSuppressAttributes);
-	popupMenu.add(chxShowInheritedAttributes);
+    if (getModelElement() instanceof AbstractClassDef) {
+        popupMenu.add(new JSeparator());
+        
+    	popupMenu.add(new AbstractAction(resources.getString("MniNewAttributeDef_text")) { //$NON-NLS-1$
+    		public void actionPerformed(ActionEvent event) {
+    			addAttribute();
+    		}
+    	});
+    
+    	popupMenu.add(new AbstractAction(resources.getString("MniNewMethod_text")) {	//$NON-NLS-1$
+    		public void actionPerformed(ActionEvent event) {
+    			addOperation();
+    		}
+    	});
+    
+    	chxSuppressAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressAttributes_text")); //$NON-NLS-1$
+    	chxSuppressAttributes.setActionCommand(SUPPRESS_ATTRIBUTES_ACTION_COMMAND);
+     	chxSuppressAttributes.addActionListener(this);
+     	chxShowInheritedAttributes = new javax.swing.JCheckBoxMenuItem(resources.getString("MniShowInheritedAttributes_text")); //$NON-NLS-1$
+    	chxShowInheritedAttributes.setActionCommand(SHOW_INHERITED_ATTRIBUTES_ACTION_COMMAND);
+    	chxShowInheritedAttributes.addActionListener(this);  
+    	chxSuppressOperations = new javax.swing.JCheckBoxMenuItem(resources.getString("MniSuppressOperations_text")); //$NON-NLS-1$
+    	chxSuppressOperations.setActionCommand(SUPPRESS_OPERATIONS_ACTION_COMMAND);
+    	chxSuppressOperations.addActionListener(this);
+       	if (getNode() == null) {
+    	   	chxSuppressAttributes.setSelected(false);
+    		chxShowInheritedAttributes.setSelected(false);
+    		chxSuppressOperations.setSelected(false);
+        } else {
+    	    chxSuppressAttributes.setSelected(((PresentationAbstractClass)getNode()).isSuppressAttributes());
+    		chxShowInheritedAttributes.setSelected(((PresentationAbstractClass)getNode()).isShowInheritedAttributes());
+    		chxSuppressOperations.setSelected(((PresentationAbstractClass)getNode()).isSuppressOperations());
+     	}
+    	chxShowInheritedAttributes.setEnabled(!chxSuppressAttributes.isSelected());
+    	popupMenu.add(chxSuppressAttributes);
+    	popupMenu.add(chxShowInheritedAttributes);
+    	popupMenu.add(chxSuppressOperations);
+    }
 }
 /**
  * ClassFigure movement is different from AssociationAttributeFigure movement.
@@ -200,6 +216,23 @@ private Figure createAttributeFigure(final AttributeDef attributeDef) {
     attributeFigure.setFont(getFont());
 
     return attributeFigure;
+}
+/**
+ * Display AttributeDef in AttributeCompartment box.
+ */
+private Figure createOperationFigure(final UmlOperation operation) {
+	OperationFigure operationFigure = new OperationFigure(operation, getClassDiagram()) {
+		public void setText(String newName) {
+			String name = getPureOperationName(newName);
+			// rename Attribute (prevent ping-pong with MetaModelChange)
+			ElementUtils.trySetName(operation, name);
+			updateModel();
+		}
+	};
+	operationFigure.setText(operation.getDefLangName());
+	operationFigure.setFont(getFont());
+
+	return operationFigure;
 }
 /**
  * Overwrites.
@@ -245,27 +278,29 @@ protected void initialize() {
         }
     };
     classNameFigure.setFont(getFont());
-
+    
     // add the TextFigure to the Composite
-    GraphicalCompositeFigure nameFigure =
-        new GraphicalCompositeFigure(new SeparatorFigure());
+    nameFigure = new GraphicalCompositeFigure(new SeparatorFigure());
     nameFigure.add(classNameFigure);
+//  nameFigure.add(stereotypeFigure);
     nameFigure.getLayouter().setInsets(new Insets(0, 4, 0, 0));
     add(nameFigure);
 
     // create a figure responsible for maintaining attributes
-    classHeaderSeparator = new SeparatorFigure();
-    attributesFigure = new GraphicalCompositeFigure(classHeaderSeparator);
+    attributeSeparator = new SeparatorFigure();
+    attributesFigure = new GraphicalCompositeFigure(attributeSeparator);
     attributesFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
     // add the figure to the Composite
     add(attributesFigure);
-/*
+
     // create a figure responsible for maintaining methods
-    methodsFigure = new GraphicalCompositeFigure(new SeparatorFigure());
-    methodsFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
+    operationSeparator = new SeparatorFigure();
+    operationsFigure = new GraphicalCompositeFigure(operationSeparator);
+    operationsFigure.getLayouter().setInsets(new Insets(4, 4, 4, 0));
+    operationSeparator.setLineVisible(false);
     // add the figure to the Composite
-    add(methodsFigure);
-*/
+    add(operationsFigure);
+
     super.initialize();
 }
 	/**
@@ -280,56 +315,196 @@ protected void initialize() {
  * Update the attribute figure and the ClassFigure itself as well. This causes calculating
  * the layout of contained figures.
  */
-protected void updateAttributeFigure() {
-Tracer.getInstance().tune(this, "updateAttributeFigure()", "currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+private void updateAttributeFigure() {
+//TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
 	attributesFigure.removeAll();
 	
-	if ( ((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
-		classHeaderSeparator.setLineVisible(false);
+	if (((PresentationAbstractClass)getNode()).isSuppressAttributes()) {
+		attributeSeparator.setLineVisible(false);
 	} else {
-		classHeaderSeparator.setLineVisible(true);
+		attributeSeparator.setLineVisible(true);
 		Iterator iterator = null;
 		if (((PresentationAbstractClass)getNode()).isShowInheritedAttributes()) {
 			// show local + inherited attributes
 			java.util.List inheritedAttributes = ((ch.ehi.interlis.modeltopicclass.AbstractClassDef)getModelElement()).getConsolidatedAttributes();
 			iterator = inheritedAttributes.iterator();
 		} else {
-			// show local attributes only
-			iterator = ((AbstractClassDef)getModelElement()).iteratorFeature();
+            if (getModelElement() instanceof Classifier) {
+    			// show local attributes only
+    			iterator = ((Classifier)getModelElement()).iteratorFeature();
+            }
 		}
-		while (iterator.hasNext()) {
-			attributesFigure.add(createAttributeFigure((AttributeDef)iterator.next()));
-		}
+        if (iterator != null) {
+    		while (iterator.hasNext()) {
+    			Object feature = iterator.next();
+    			if (feature instanceof AttributeDef) {
+    				attributesFigure.add(createAttributeFigure((AttributeDef)feature));
+    			}
+    		}
+        }
 	}
 
     attributesFigure.update();
     update();
 }
+
 /**
  * Update the method figure and the ClassFigure itself as well. This causes calculating
  * the layout of contained figures.
  */
-private void updateMethodFigure() {
-/*
-    methodsFigure.update();
+private void updateOperationFigure() {
+//TODO Tune: currently all operationFigure's are removed and readded at modelChange
+	operationsFigure.removeAll();
+	operationSeparator.setLineVisible(false);	//automatic display acc. to existing methods
+	
+	if ((getModelElement() instanceof Classifier) && (!((PresentationAbstractClass)getNode()).isSuppressOperations())) {
+		Iterator iterator = ((Classifier)getModelElement()).iteratorFeature();
+			
+		while (iterator.hasNext()) {
+			Object feature = iterator.next();
+			if (feature instanceof UmlOperation) {
+				operationSeparator.setLineVisible(true);
+				operationsFigure.add(createOperationFigure((UmlOperation)feature));
+			}
+		}
+	}
+
+	operationsFigure.update();
+	update();
+}
+private void updateEnumerationFigure() {
+//TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
+    attributesFigure.removeAll();
+    
+    Type type = ((DomainDef)getModelElement()).getType();
+    if ((type != null) && (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)) {
+        attributeSeparator.setLineVisible(true);
+        createEnumerationFigure((ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)type, "");
+    }
+    attributesFigure.update();
     update();
-*/
+}
+private void createEnumerationFigure(ch.ehi.interlis.domainsandconstants.basetypes.Enumeration type, String offset) {
+    Iterator iterator = type.iteratorEnumElement();
+    
+    while (iterator.hasNext()) {
+        EnumElement element = (EnumElement)iterator.next();
+        TextFigure enumFigure = new TextFigure();
+        enumFigure.setFont(getFont());
+        enumFigure.setText(offset + element.getName().getValue());
+        enumFigure.setReadOnly(true);
+        attributesFigure.add(enumFigure);
+        
+        if (element.containsChild()) {
+            createEnumerationFigure(element.getChild(), offset + "  ");
+        }
+    }
 }
 /**
  * ModelElement changed. Therefore a refresh of the View is needed.
  */
 public void updateView() {
-	if (getModelElement() != null) {
-		if (!getModelElement().containsNamespace()) {
+    ModelElement element = getModelElement();
+	if (element != null) {
+		if (!element.containsNamespace()) {
 			// case removed => parent detached this node before sending MetaModelChanged-Event
 			removeVisually();
 		} else {
 			// node might have changed
 			super.updateView();
-			classNameFigure.setText(getModelElement().getDefLangName());
-			updateAttributeFigure();
-//			updateMethodFigure();
+			// show abstract Classes in italics
+			Font font = classNameFigure.getFont();
+			if ((element instanceof Classifier) && ((Classifier)element).isAbstract()) {
+				font = new Font(font.getName(), Font.ITALIC, font.getSize());
+			} else {
+				font = new Font(font.getName(), Font.PLAIN, font.getSize());
+			}
+			classNameFigure.setFont(font);
+			classNameFigure.setText(element.getDefLangName());
+            
+            if ((element instanceof DomainDef) && ((DomainDef)element).containsType()) {
+               updateEnumerationFigure();
+            } else if (element instanceof AbstractModelElement) {
+			   updateAttributeFigure();
+			   updateOperationFigure();
+            }
 		}
 	}
+}
+/**
+ * Overwrites.
+ */
+public void setNode(ch.ehi.umleditor.umlpresentation.PresentationNode node) {
+    super.setNode(node);
+    
+    updateStereotype();
+}
+/**
+ * Show Stereotype.
+ * @see #isPseudoClassifier(Object)
+ */
+private void updateStereotype() {
+    ModelElement element = getModelElement();
+    String stereotypName = null;
+    if (element instanceof ch.ehi.interlis.metaobjects.MetaDataUseDef) {
+        attributeSeparator.setLineVisible(false);
+        ch.ehi.interlis.metaobjects.MetaDataUseDef metadata = (ch.ehi.interlis.metaobjects.MetaDataUseDef)element;
+        if (metadata.getKind() == MetaDataUseDefKind.SIGN) {
+            stereotypName = "ILISIGN";
+        } else if (metadata.getKind() == MetaDataUseDefKind.REFSYSTEM) {
+            stereotypName = "ILICRS";
+        } else {
+            stereotypName = "ILISIGN | ILICRS";
+        }
+    } else if (element instanceof UnitDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIUNIT";
+    } else if (element instanceof FunctionDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIFUNCTION";
+    } else if (element instanceof LineFormTypeDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILILINEFORM";
+    } else if (element instanceof DomainDef) {
+        Type type = ((DomainDef)element).getType();
+        if ((type != null) && (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)) {
+            stereotypName = "enumeration";
+        } else {
+            attributeSeparator.setLineVisible(false);
+            stereotypName = "ILIDOMAIN";
+        }
+    } else if (element instanceof GraphicParameterDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIRUNTIMEPARAM";
+    } else if (element instanceof ViewDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIVIEW";
+    } else if (element instanceof GraphicDef) {
+        attributeSeparator.setLineVisible(false);
+        stereotypName = "ILIGRAPHIC";
+    }
+    if (stereotypName != null) {
+        TextFigure stereotypeFigure = new TextFigure();
+        stereotypeFigure.setFont(getFont());
+        stereotypeFigure.setText("<<" + stereotypName + ">>");
+        stereotypeFigure.setReadOnly(true);
+        nameFigure.add(stereotypeFigure);
+    }
+}
+/**
+ * @deprecated
+ */
+protected static boolean isPseudoClassifier(Object element) {
+//TODO HACK: AbstractModelElement's which should implement Classifier
+    return (element instanceof RoleDef) ||
+        (element instanceof MetaDataUseDef) ||
+        (element instanceof UnitDef) ||
+        (element instanceof FunctionDef) ||
+        (element instanceof LineFormTypeDef) ||
+    //  (element instanceof DomainDef) ||
+        (element instanceof GraphicParameterDef) ||
+        (element instanceof ViewDef) ||
+        (element instanceof GraphicDef) ||
+        (element instanceof TopicDef);
 }
 }

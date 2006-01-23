@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,11 +16,16 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.*;
+import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.umleditor.application.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
 import ch.ehi.uml1_4.foundation.core.*;
 import CH.ifa.draw.figures.*;
 /**
@@ -30,11 +34,10 @@ import CH.ifa.draw.figures.*;
  * two separate Figures. 
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:03 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.9 $ $Date: 2006-01-09 14:08:34 $
  */
-public class RoleDefFigure extends NodeFigure {
-	private static java.util.ResourceBundle resRoleDefFigure = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/RoleDefFigure");  //$NON-NLS-1$
+class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
 	private LinkFigure linkFigure = null;
 
@@ -74,9 +77,26 @@ public RoleDefFigure(PresentationRoleFigure edgeFigure, final int type) {
 /**
  * Overwrites.
  */
-public javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	addSpecificationMenu(popupMenu);
-
+    
+    addSelectionMenu(popupMenu);
+    popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectTargetInBrowser_text")) {
+        public void actionPerformed(ActionEvent event) {
+            RoleDef role = (RoleDef)getModelElement();
+            if (role.getParticipant() != null) {
+                LauncherView.getInstance().getPnlNavigation().selectElement(role.getParticipant());
+            }
+        }
+    });
+    popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectOwnerInBrowser_text")) {
+        public void actionPerformed(ActionEvent event) {
+            RoleDef role = (RoleDef)getModelElement();
+            if (role.getAssociation() != null) {
+                LauncherView.getInstance().getPnlNavigation().selectElement(role.getAssociation());
+            }
+        }
+    });
 	return popupMenu;
 }
 /**
@@ -168,7 +188,7 @@ protected void initializeView() {
 				    	} else {
 					    	errorMsg = "[" + e.toString() + "]";//$NON-NLS-2$//$NON-NLS-1$
 				    	}
-						new WarningDialog(LauncherView.getInstance(), resRoleDefFigure.getString("CTInvalidInput"), resRoleDefFigure.getString("CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
+				    	BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(), getResourceString(RoleDefFigure.class, "CTInvalidInput"), getResourceString(RoleDefFigure.class, "CWInputReset") + "\n" + errorMsg);//$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$
 			    	}
 			    	name = MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity());			    	
 		    	} else {
@@ -206,7 +226,7 @@ public void removeVisually() {
 				break;
 		}
 	} catch(Throwable e) {
-		NodeFigure.handleException(e, MENU_EDIT_REMOVE, DeveloperException.DEVELOPER_ERROR, this);
+		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}
 }
 /**
@@ -219,35 +239,17 @@ public void updateCoordinates() {
 	double y1 = rectangle.getY();
 
 	if (type == ROLE_DEF) {
-		if (getEdge().getNameAngle() != x1) {
-ch.softenvironment.util.Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates instead");//$NON-NLS-2$//$NON-NLS-1$
-			// prevent ping-pong with MetaModelChange
-			getEdge().setNameAngle(x1);
-		}
-		if (getEdge().getNameRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setNameRadius(y1);
-		}
+//TODO NYI: use Polar coordinates instead
+		getEdge().setNameAngle(x1);
+	    getEdge().setNameRadius(y1);
 	} else if (type == CARDINALITY) {
-		if (getEdge().getMultiplicityAngle() != x1) {
-			// prevent ping-pong with MetaModelChange
-			getEdge().setMultiplicityAngle(x1);
-		}
-		if (getEdge().getMultiplicityRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setMultiplicityRadius(y1);
-		}
-	} else {
-		// must be LinkFigure
-/*		if (getNode().getEast() != x1) {
-			// prevent ping-pong with MetaModelChange
-			getEdge().setMultiplicityAngle(x1);
-		}
-		if (getEdge().getMultiplicityRadius() != y1) {
-			// prevent ping-pong with MetaModelChange
-		    getEdge().setMultiplicityRadius(y1);
-		}
-		*/
+		getEdge().setMultiplicityAngle(x1);
+	    getEdge().setMultiplicityRadius(y1);
+	} else if (type == ASSOCIATION_NAME) {
+//ch.ehi.umleditor.umlpresentation.PresentationNode n = linkFigure.getNode();
+//ch.softenvironment.util.Tracer.getInstance().debug("width=" + n.getWidth() + " height="+n.getHeight() + " south="+ n.getSouth() + " east="+n.getEast());
+//		linkFigure.getNode().setWidth((int)x1);
+//		linkFigure.getNode().setHeight((int)y1);
 	}
 }
 /**
@@ -265,9 +267,7 @@ public void updateView() {
 //			super.updateView();
 			textFigure.setText(ch.ehi.umleditor.application.MultiplicityConverter.getRange(edgeFigure.getEndAssociationEnd().getMultiplicity()));
 		}
-	} else {
-		// must be LinkFigure
-		//			super.updateView();
+	} else if (type == ASSOCIATION_NAME){
 		textFigure.setText(linkFigure.getModelElement().getDefLangName());
 	}
 }

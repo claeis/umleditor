@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="lib" path="lib/freehep-graphicsio-emf.jar"/>
+    <classpathentry kind="lib" path="lib/jh.jar"/>
+    <classpathentry kind="lib" path="lib/freehep-graphicsio.jar"/>
+    <classpathentry kind="lib" path="lib/freehep-base.jar"/>
+    <classpathentry kind="lib" path="lib/freehep-graphicsio-svg.jar"/>
+    <classpathentry kind="lib" path="lib/ehibasics.jar"/>
+    <classpathentry kind="lib" path="lib/hd53.jar"/>
+    <classpathentry kind="lib" path="lib/ili2c.jar"/>
+    <classpathentry kind="lib" path="lib/XMIFramework.jar"/>
+    <classpathentry kind="lib" path="lib/freehep-graphics2d.jar"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="lib" path="lib/usrdocjh.jar"/>
+    <classpathentry kind="output" path="build/classes"/>
+</classpath>

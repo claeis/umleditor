@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.umldrawingtools;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -26,7 +25,6 @@ import CH.ifa.draw.figures.ArrowTip;
 import CH.ifa.draw.framework.Figure;
 import ch.ehi.umleditor.application.*;
 import ch.softenvironment.view.*;
-import ch.softenvironment.util.*;
 
 /**
  * Draw a dependency line between two Figures representing dependable ModelElement's.
@@ -35,8 +33,8 @@ import ch.softenvironment.util.*;
  * used by another one. The start class (Client) is dependend on the end class (Supplier).
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:53 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.5 $ $Date: 2005-11-21 14:12:52 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -81,22 +79,13 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {}
  * @param end   figure representing the end/supplier class
  */
 public boolean canConnect(Figure start, Figure end) {
-	GeneralizableElement client = null;
-	GeneralizableElement supplier = null;
+	Object /*GeneralizableElement*/ client = ((NodeFigure)start).getModelElement(); //getGeneralizableElement(start);
+	Object /*GeneralizableElement*/ supplier = ((NodeFigure)end).getModelElement(); //getGeneralizableElement(end);
 
-	try {
-		// only GeneralizableElement's are valid types
-		client = getGeneralizableElement(start);
-		supplier = getGeneralizableElement(end);
-	} catch(ClassCastException e) {
-		shouldWarn(this, resDependencyLineConnection.getString("CWWrongDependencyType")); //$NON-NLS-1$
-		return false;
-	}
-
-	if (!(((client instanceof Classifier) && (supplier instanceof Classifier)) ||
+	if (!((((client instanceof Classifier) || ClassFigure.isPseudoClassifier(client)) && ((supplier instanceof Classifier) || ClassFigure.isPseudoClassifier(supplier))) ||
 //			((client instanceof TopicDef) && (supplier instanceof TopicDef)) ||
 			((client instanceof ch.ehi.uml1_4.modelmanagement.Package) && (supplier instanceof ch.ehi.uml1_4.modelmanagement.Package)))) {
-		shouldWarn(this, resDependencyLineConnection.getString("CWNodesMustBeClassifier")); //$NON-NLS-1$
+		shouldWarn(resDependencyLineConnection.getString("CWNodesMustBeClassifier")); //$NON-NLS-1$
 		return false;
 	}
 
@@ -140,7 +129,7 @@ protected Element getEndElement() {
 	if (getModelElement() == null) {
 		return null;
 	} else {
-Tracer.getInstance().nyi(this, "getSupplier()", "only first Dependency-Supplier is treated");//$NON-NLS-2$//$NON-NLS-1$
+//TODO: only first Dependency-Supplier is treated
   	  return (Element)((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorSupplier().next();
 	}
 }
@@ -152,7 +141,7 @@ protected Element getStartElement() {
 	if (getModelElement() == null) {
 		return null;
 	} else {
-Tracer.getInstance().nyi(this, "getClient()", "only first Dependency-Client is treated");//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: only first Dependency-Client is treated
 	    return (Element)((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorClient().next();
 	}
 }
@@ -171,8 +160,8 @@ protected void handleConnect(Figure start, Figure end) {
 		if (getEdge() == null) {
 			setEdge(new ch.ehi.umleditor.umlpresentation.Dependency(), start, end);
 
-			GeneralizableElement client = getGeneralizableElement(start);
-			GeneralizableElement supplier = getGeneralizableElement(end);
+			ModelElement client = (ModelElement)((NodeFigure)start).getModelElement(); //getGeneralizableElement(start);
+            ModelElement supplier = (ModelElement)((NodeFigure)end).getModelElement(); //getGeneralizableElement(end);
 			ch.ehi.uml1_4.foundation.core.Dependency dependency = null;
 			if ((client instanceof ModelDef) && (supplier instanceof ModelDef)) {
 				dependency = ElementFactory.createDependency(IliImport.class, client, supplier);
@@ -189,7 +178,7 @@ protected void handleConnect(Figure start, Figure end) {
 			addModelElement((ModelElement)dependency);
 		} // else dragging of existing Dependency was done
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, resDependencyLineConnection.getString("CEDependencyNotEstablished"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, resDependencyLineConnection.getString("CEDependencyNotEstablished"), e); //$NON-NLS-1$
 	}
 }
 /**
@@ -207,7 +196,7 @@ protected void showDecoration() {
  * @see shouldWarn(EdgeFigure, String)
  */
 protected void showIllegalRelationship(java.lang.String warning) {
-	new WarningDialog(LauncherView.getInstance(),
+    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					resDependencyLineConnection.getString("CTUnallowedDependency"), //$NON-NLS-1$
 					warning);
 }

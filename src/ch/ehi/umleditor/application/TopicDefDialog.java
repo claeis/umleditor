@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.application;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,15 +16,18 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a TopicDef.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:59 $
+ *
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
-public class TopicDefDialog extends BaseDialog {
+public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
 	private static java.util.ResourceBundle resTopicDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/TopicDefDialog");  //$NON-NLS-1$
 	private ch.ehi.interlis.modeltopicclass.TopicDef topicDef = null;
@@ -35,6 +37,9 @@ public class TopicDefDialog extends BaseDialog {
 	private javax.swing.JButton ivjBtnOk = null;
 	private javax.swing.JTabbedPane ivjTbpGeneral = null;
 	private javax.swing.JLabel ivjLblName = null;
+	private javax.swing.JLabel ivjLblOid = null;
+	private javax.swing.JLabel ivjLblExtends = null;
+	private ReferencableComboBox ivjCbxOid = null;
 	private javax.swing.JTextField ivjTxtName = null;
 	private javax.swing.JComboBox ivjCbxType = null;
 	private javax.swing.JButton ivjBtnApply = null;
@@ -56,21 +61,21 @@ public class TopicDefDialog extends BaseDialog {
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
-			if (e.getSource() == TopicDefDialog.this.getBtnOk()) 
+			if (e.getSource() == TopicDefDialog.this.getBtnOk())
 				connEtoC1(e);
-			if (e.getSource() == TopicDefDialog.this.getBtnCancel()) 
+			if (e.getSource() == TopicDefDialog.this.getBtnCancel())
 				connEtoC2(e);
-			if (e.getSource() == TopicDefDialog.this.getBtnApply()) 
+			if (e.getSource() == TopicDefDialog.this.getBtnApply())
 				connEtoC3(e);
-			if (e.getSource() == TopicDefDialog.this.getMniOpenTopicDefSpecification()) 
+			if (e.getSource() == TopicDefDialog.this.getMniOpenTopicDefSpecification())
 				connEtoC6(e);
-			if (e.getSource() == TopicDefDialog.this.getMniNewTopicDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getMniNewTopicDepends())
 				connEtoC13(e);
-			if (e.getSource() == TopicDefDialog.this.getMniRemoveTopicDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getMniRemoveTopicDepends())
 				connEtoC14(e);
 		};
 		public void focusGained(java.awt.event.FocusEvent e) {
-			if (e.getSource() == TopicDefDialog.this.getTxtName()) 
+			if (e.getSource() == TopicDefDialog.this.getTxtName())
 				connEtoM1(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
@@ -78,15 +83,15 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
 		public void mouseExited(java.awt.event.MouseEvent e) {};
 		public void mousePressed(java.awt.event.MouseEvent e) {
-			if (e.getSource() == TopicDefDialog.this.getScpDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getScpDepends())
 				connEtoC7(e);
-			if (e.getSource() == TopicDefDialog.this.getTblDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getTblDepends())
 				connEtoC8(e);
 		};
 		public void mouseReleased(java.awt.event.MouseEvent e) {
-			if (e.getSource() == TopicDefDialog.this.getScpDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getScpDepends())
 				connEtoC4(e);
-			if (e.getSource() == TopicDefDialog.this.getTblDepends()) 
+			if (e.getSource() == TopicDefDialog.this.getTblDepends())
 				connEtoC5(e);
 		};
 	};
@@ -110,10 +115,7 @@ public TopicDefDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
 }
-/**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	boolean isSelected = getTblDepends().getSelectedRow() >= 0;
 	getMniOpenTopicDefSpecification().setEnabled(isSelected);
 	getMniRemoveTopicDepends().setEnabled(isSelected);
@@ -581,6 +583,58 @@ private javax.swing.JLabel getLblName() {
 	}
 	return ivjLblName;
 }
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblExtends() {
+	if (ivjLblExtends == null) {
+		try {
+			ivjLblExtends = new javax.swing.JLabel();
+			ivjLblExtends.setName("LblExtends");
+			ivjLblExtends.setText("Extends:");
+			// user code begin {1}
+			ivjLblExtends.setText(resTopicDefDialog.getString("LblExtends_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblExtends;
+}
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblOid() {
+	if (ivjLblOid == null) {
+		try {
+			ivjLblOid = new javax.swing.JLabel();
+			ivjLblOid.setName("LblOid");
+			ivjLblOid.setText("OID:");
+			// user code begin {1}
+			ivjLblOid.setText(resTopicDefDialog.getString("LblOid_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblOid;
+}
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private ReferencableComboBox getCbxOid() {
+	if (ivjCbxOid == null) {
+		try {
+			ivjCbxOid = new ReferencableComboBox();
+			ivjCbxOid.setName("CbxOid");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjCbxOid;
+}
 /**
  * Return the JLabel1 property value.
  * @return javax.swing.JLabel
@@ -758,10 +812,53 @@ private javax.swing.JPanel getPnlDetail() {
 		try {
 			ivjPnlDetail = new javax.swing.JPanel();
 			ivjPnlDetail.setName("PnlDetail");
+		        ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
+  		        java.awt.GridBagConstraints constraintsChxAbstract = new java.awt.GridBagConstraints();
+		        constraintsChxAbstract.gridx = 0; constraintsChxAbstract.gridy = 0;
+		        constraintsChxAbstract.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsChxAbstract.insets = new java.awt.Insets(2, 2, 2, 2);
+		        ivjPnlDetail.add(getChxAbstract(), constraintsChxAbstract);
+
+  		        java.awt.GridBagConstraints constraintsChxFinal = new java.awt.GridBagConstraints();
+		        constraintsChxFinal.gridx = 0; constraintsChxFinal.gridy = 1;
+		        constraintsChxFinal.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsChxFinal.insets = new java.awt.Insets(2, 2, 2, 2);
+		        ivjPnlDetail.add(getChxFinal(), constraintsChxFinal);
+
+  		        java.awt.GridBagConstraints constraintsLblExtends = new java.awt.GridBagConstraints();
+		        constraintsLblExtends.gridx = 0; constraintsLblExtends.gridy = 2;
+		        constraintsLblExtends.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsLblExtends.insets = new java.awt.Insets(2, 2, 2, 2);
+		        ivjPnlDetail.add(getLblExtends(), constraintsLblExtends);
+
+  		        java.awt.GridBagConstraints constraintsPnlExtended = new java.awt.GridBagConstraints();
+		        constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 2;
+		        constraintsPnlExtended.weightx = 1.0;
+		        constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		        constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsPnlExtended.insets = new java.awt.Insets(0, 0, 0, 0);
+		        ivjPnlDetail.add(getPnlExtended(), constraintsPnlExtended);
+
+  		        java.awt.GridBagConstraints constraintsCbxOid = new java.awt.GridBagConstraints();
+		        constraintsCbxOid.gridx = 1; constraintsCbxOid.gridy = 3;
+		        constraintsCbxOid.weightx = 1.0;
+		        constraintsCbxOid.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		        constraintsCbxOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsCbxOid.insets = new java.awt.Insets(1, 5, 3, 6);
+		        ivjPnlDetail.add(getCbxOid(), constraintsCbxOid);
+
+  		        java.awt.GridBagConstraints constraintsLblOid = new java.awt.GridBagConstraints();
+		        constraintsLblOid.gridx = 0; constraintsLblOid.gridy = 3;
+		        constraintsLblOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		        constraintsLblOid.insets = new java.awt.Insets(2, 2, 2, 2);
+		        ivjPnlDetail.add(getLblOid(), constraintsLblOid);
+
+/*
 			ivjPnlDetail.setLayout(null);
 			getPnlDetail().add(getChxAbstract(), getChxAbstract().getName());
 			getPnlDetail().add(getChxFinal(), getChxFinal().getName());
 			getPnlDetail().add(getPnlExtended(), getPnlExtended().getName());
+  */
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -959,24 +1056,22 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewTopicDepends() {
-	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resTopicDefDialog.getString("CTSelection"), true, topicDef); //$NON-NLS-1$
-	getTblDepends().setModel(new EditorTableModel());
-	((EditorTableModel)getTblDepends().getModel()).setClientDependency(topicDef.iteratorClientDependency(), resTopicDefDialog.getString("CITopicDef")); //$NON-NLS-1$
+    newObject(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniOpenTopicDefSpecification() {
-	((EditorTableModel)getTblDepends().getModel()).showDependencySpecification(getTblDepends().getSelectedRows());
+	changeObjects(null);
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveTopicDepends() {
-	((EditorTableModel)getTblDepends().getModel()).removeRows(getTblDepends().getSelectedRows());
+	removeObjects(null);
 }
 /**
  * Save ModelElement changes.
@@ -1007,7 +1102,13 @@ protected boolean save() {
 	if (!getPnlExtended().getExtension()) {
 		return false;
 	}
-	
+	if (topicDef.containsOiddomain()) {
+		topicDef.detachOiddomain();
+	}
+	if ( (getCbxOid().getElement() != null)) {
+		topicDef.attachOiddomain((DomainDef)getCbxOid().getElement());
+	}
+
 	return super.save();
 }
 /**
@@ -1034,6 +1135,11 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(topicDef.isAbstract());
 	getChxFinal().setSelected(topicDef.isPropFinal());
 	getPnlExtended().setExtension(topicDef);
+        if(topicDef.containsOiddomain()){
+          getCbxOid().setElement(DomainDef.class, topicDef, topicDef.getOiddomain());
+        }else{
+          getCbxOid().setElement(DomainDef.class, topicDef, null);
+        }
 
 	// page Depends
 	getTblDepends().setModel(new EditorTableModel());
@@ -1043,5 +1149,34 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getTblUses().setModel(new EditorTableModel());
 	((EditorTableModel)getTblUses().getModel()).setPatternUse(topicDef.iteratorClientDependency());
 */
+}
+
+public void changeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblDepends().getModel()).showDependencySpecification(getTblDepends().getSelectedRows());
+    } catch(Throwable e) {
+        BaseDialog.showError((java.awt.Component)this, "Model error", "There is something wrong with this element! You are best adviced by deleting and recreating it again.", e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    try {
+        ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resTopicDefDialog.getString("CTSelection"), true, topicDef); //$NON-NLS-1$
+        getTblDepends().setModel(new EditorTableModel());
+        ((EditorTableModel)getTblDepends().getModel()).setClientDependency(topicDef.iteratorClientDependency(), resTopicDefDialog.getString("CITopicDef")); //$NON-NLS-1$
+    } catch(Throwable e) {
+        handleException(e);
+    }
+    
+}
+public void removeObjects(Object source) {
+    try {
+        ((EditorTableModel)getTblDepends().getModel()).removeRows(getTblDepends().getSelectedRows());
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 }

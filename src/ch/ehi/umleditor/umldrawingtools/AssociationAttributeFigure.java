@@ -18,8 +18,6 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.uml1_4.foundation.core.*;
-import ch.softenvironment.util.Tracer;
-
 import java.awt.*;
 
 
@@ -33,10 +31,10 @@ import java.awt.*;
  * This figure will automatically be showed or hided, depending whether Association has Features
  * or not.
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:45 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.3 $ $Date: 2005-09-16 09:50:06 $
  */
-public class AssociationAttributeFigure extends ClassFigure {
+class AssociationAttributeFigure extends ClassFigure {
 	private LinkFigure linkFigure = null;
 	private boolean linkNodeVisible = true;
 /**
@@ -60,7 +58,7 @@ public void draw(Graphics g) {
 	//	Draw Link-Shape
 	Rectangle rectangleAttributeFigure = displayBox();
 	if (!((rectangleAttributeFigure.x == (int)linkNode.getClassAngle()) && (rectangleAttributeFigure.y == (int)linkNode.getClassRadius()))) {
-Tracer.getInstance().debug("draw->moveBy: ClassAngle(x=)="+linkNode.getClassAngle() + " ClassRadius(y)="+linkNode.getClassRadius());
+//Tracer.getInstance().debug("draw->moveBy: ClassAngle(x=)="+linkNode.getClassAngle() + " ClassRadius(y)="+linkNode.getClassRadius());
 		moveBy((int)linkNode.getClassAngle() - rectangleAttributeFigure.x, (int)linkNode.getClassRadius() - rectangleAttributeFigure.y);
 		rectangleAttributeFigure = displayBox();
 	}
@@ -136,11 +134,11 @@ public void updateCoordinates() {
 	ch.ehi.umleditor.umlpresentation.PresentationAssocClass linkNode = (ch.ehi.umleditor.umlpresentation.PresentationAssocClass)linkFigure.getNode();
 	Rectangle rectangle = getPresentationFigure().displayBox();
 
-Tracer.getInstance().nyi(this, "updateCoordinates", "use Polar coordinates instead");
+//TODO NYI: use Polar coordinates instead
 	linkNode.setClassAngle(rectangle.getX());
     linkNode.setClassRadius(rectangle.getY());
 
-Tracer.getInstance().debug("UpdateCoordinates: ClassAngle(x="+rectangle.getX()+")="+linkNode.getClassAngle() + " ClassRadius(y"+rectangle.getY()+")="+linkNode.getClassRadius());
+//Tracer.getInstance().debug("UpdateCoordinates: ClassAngle(x="+rectangle.getX()+")="+linkNode.getClassAngle() + " ClassRadius(y"+rectangle.getY()+")="+linkNode.getClassRadius());
 	linkNode.setWidth((int)rectangle.getWidth());
 	linkNode.setHeight((int)rectangle.getHeight());
 }

@@ -20,12 +20,13 @@ package ch.ehi.umleditor.application;
 import java.awt.*;
 import java.awt.geom.*;
 import ch.softenvironment.util.*;
+import ch.ehi.basics.logging.EhiLogger;
 
 /**
  * Print Utility for PrintJob's of UmlEditor.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:50 $
+ * @version $Revision: 1.2 $ $Date: 2005-02-21 15:54:37 $
  */
 public class PrintWrapper implements java.awt.print.Printable {
 	private ch.ehi.umleditor.umldrawingtools.ClassDiagramView diagramView = null;
@@ -96,8 +97,8 @@ public int print(java.awt.Graphics graphics, java.awt.print.PageFormat pageForma
     return java.awt.print.Printable.PAGE_EXISTS;
         }
 	java.awt.print.PrinterGraphics gp = (java.awt.print.PrinterGraphics)graphics;
-	Tracer.getInstance().debug("<" + gp.getPrinterJob().getJobName() + "> is being printed");
-	Tracer.getInstance().debug("pageOrienation <" + Integer.toString(pageFormat.getOrientation()) + ">");
+	EhiLogger.traceState("<" + gp.getPrinterJob().getJobName() + "> is being printed");
+	EhiLogger.traceState("pageOrienation <" + Integer.toString(pageFormat.getOrientation()) + ">");
 
 	// set outer drawing limits
 	double x0 = pageFormat.getImageableX()+1.0;

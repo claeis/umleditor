@@ -28,8 +28,7 @@ import ch.softenvironment.view.*;
  * Panel Containing a SimpleEditorPanel to edit 0/1 or 0..* INTERLIS-Syntax.
  * @author: Peter Hirzel
  */
-public class InterlisSyntaxPanel extends DataPanel implements DataSelectorPanelListener {
-	private static java.util.ResourceBundle resInterlisSyntaxPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/InterlisSyntaxPanel");  //$NON-NLS-1$
+public class InterlisSyntaxPanel extends BasePanel implements DataPanel, DataSelectorPanelListener {
 	private SimpleEditorPanel ivjPnlEditor = null;
 	private ModelElement modelElement = null;
 	private IliSyntax iliSyntax = null;
@@ -120,8 +119,9 @@ private javax.swing.JLabel getLblUsage() {
 		try {
 			ivjLblUsage = new javax.swing.JLabel();
 			ivjLblUsage.setName("LblUsage");
-			ivjLblUsage.setText(resInterlisSyntaxPanel.getString("LblUsage_text"));
+			ivjLblUsage.setText("Abhängig von:");
 			// user code begin {1}
+			ivjLblUsage.setText(getResourceString("LblUsage_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -130,6 +130,9 @@ private javax.swing.JLabel getLblUsage() {
 		}
 	}
 	return ivjLblUsage;
+}
+public Object getObject(){
+  throw new UnsupportedOperationException();
 }
 /**
  * Return the changed object displayed.
@@ -254,7 +257,7 @@ public ch.ehi.basics.types.NlsString getSyntax() {
  * @param exception java.lang.Throwable
  */
 protected void handleException(java.lang.Throwable exception) {
-	new ErrorDialog(this, resInterlisSyntaxPanel.getString("CESyntax"), exception.toString(), exception); //$NON-NLS-1$
+    ch.softenvironment.view.BaseDialog.showError((java.awt.Component)this, getResourceString("CESyntax"), exception.toString(), exception); //$NON-NLS-1$
 }
 /**
  * Initialize the class.
@@ -275,7 +278,7 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	getPnlEditor().setToolTipText(resInterlisSyntaxPanel.getString("PnlEditor_toolTipText"));
+	getPnlEditor().setToolTipText(getResourceString("PnlEditor_toolTipText"));
 	setCurrentObject(null);
 	getPnlDataSelector().setListener(this);
 	getPnlUsage().setVisible(false);
@@ -335,6 +338,9 @@ public void setCurrentObject(java.lang.Object syntax) {
 		getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString)syntax)));
 	}
 }
+public void setObject(Object object){
+  throw new UnsupportedOperationException();
+}
 /**
  * Set the Object to be displayed by panel.
  * Only first entry in given Iterator argument is treated by this Panel.
@@ -392,11 +398,5 @@ public void setSyntax(IliSyntax iliSyntax) {
 public void setUsage(ModelElement modelElement) {
 	getPnlUsage().setVisible(true);
 	getCbxUsage().setEnabled(getCbxUsage().setUsage(modelElement));
-}
-public Object getObject(){
-  throw new UnsupportedOperationException();
-}
-public void setObject(Object object){
-  throw new UnsupportedOperationException();
 }
 }

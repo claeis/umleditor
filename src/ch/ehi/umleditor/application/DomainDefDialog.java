@@ -20,18 +20,18 @@ package ch.ehi.umleditor.application;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
+import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:45 $
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:51:43 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
-	private static java.util.ResourceBundle resDomainDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/DomainDefDialog");
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
-	private DataPanel currentDataPanel = null;
+	private BasePanel currentDataPanel = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JButton ivjBtnCancel = null;
@@ -104,7 +104,7 @@ public DomainDefDialog(java.awt.Frame owner, boolean modal) {
  */
 private void adaptType() {
 	String item = (String)getCbxType().getSelectedItem();
-	DataPanel newPanel = null;
+	BasePanel newPanel = null;
 
 	if (item.equals(IliBaseTypeKind.NULL_TYPE) ||
 			item.equals(IliBaseTypeKind.BOOLEAN)) {
@@ -155,7 +155,7 @@ private void adaptType() {
 		currentDataPanel = newPanel;
 		if (currentDataPanel != null) {
 			getTbpTypes().add(currentDataPanel);
-			getTbpTypes().setTitleAt(getTbpTypes().getTabCount() - 1, resDomainDefDialog.getString("TbcTypeSpecific_text")); //$NON-NLS-1$
+			getTbpTypes().setTitleAt(getTbpTypes().getTabCount() - 1, getResourceString("TbcTypeSpecific_text")); //$NON-NLS-1$
 			getTbpTypes().setSelectedComponent(currentDataPanel);
 		}
 	}
@@ -424,9 +424,11 @@ private javax.swing.JCheckBox getChxAbstract() {
 		try {
 			ivjChxAbstract = new javax.swing.JCheckBox();
 			ivjChxAbstract.setName("ChxAbstract");
- 			ivjChxAbstract.setToolTipText(resDomainDefDialog.getString("ChxAbstract_toolTipText"));
- 			ivjChxAbstract.setText(resDomainDefDialog.getString("ChxAbstract_text"));
+ 			ivjChxAbstract.setToolTipText("Abstrakt");
+ 			ivjChxAbstract.setText("Abstrakt");
 			// user code begin {1}
+ 			ivjChxAbstract.setToolTipText(getResourceString("ChxAbstract_toolTipText"));
+ 			ivjChxAbstract.setText(getResourceString("ChxAbstract_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -446,10 +448,12 @@ private javax.swing.JCheckBox getChxFinal() {
 		try {
 			ivjChxFinal = new javax.swing.JCheckBox();
 			ivjChxFinal.setName("ChxFinal");
- 			ivjChxFinal.setText(resDomainDefDialog.getString("ChxFinal_text"));
- 			ivjChxFinal.setToolTipText(resDomainDefDialog.getString("ChxFinal_toolTipText"));
+ 			ivjChxFinal.setText("Final");
+ 			ivjChxFinal.setToolTipText("");
 			ivjChxFinal.setEnabled(true);
 			// user code begin {1}
+			ivjChxFinal.setText(getResourceString("ChxFinal_text"));
+			ivjChxFinal.setToolTipText(getResourceString("ChxFinal_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -469,10 +473,12 @@ private javax.swing.JCheckBox getChxMandatory() {
 		try {
 			ivjChxMandatory = new javax.swing.JCheckBox();
 			ivjChxMandatory.setName("ChxMandatory");
- 			ivjChxMandatory.setToolTipText(resDomainDefDialog.getString("ChxMandatory_toolTipText"));
- 			ivjChxMandatory.setText(resDomainDefDialog.getString("ChxMandatory_text"));
+ 			ivjChxMandatory.setToolTipText("Mandatory");
+ 			ivjChxMandatory.setText("Mandatory");
 			ivjChxMandatory.setEnabled(true);
 			// user code begin {1}
+			ivjChxMandatory.setToolTipText(getResourceString("ChxMandatory_toolTipText"));
+			ivjChxMandatory.setText(getResourceString("ChxMandatory_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -492,8 +498,9 @@ private javax.swing.JLabel getLblName() {
 		try {
 			ivjLblName = new javax.swing.JLabel();
 			ivjLblName.setName("LblName");
- 			ivjLblName.setText(resDomainDefDialog.getString("LblName_text"));
+ 			ivjLblName.setText("Name:");
 			// user code begin {1}
+ 			ivjLblName.setText(getResourceString("LblName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -513,8 +520,9 @@ private javax.swing.JLabel getLblType() {
 		try {
 			ivjLblType = new javax.swing.JLabel();
 			ivjLblType.setName("LblType");
- 			ivjLblType.setText(resDomainDefDialog.getString("LblType_text"));
+ 			ivjLblType.setText("Typ:");
 			// user code begin {1}
+ 			ivjLblType.setText(getResourceString("LblType_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -901,7 +909,7 @@ private void initialize() {
 		setName("DomainDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(598, 557);
-		setTitle(resDomainDefDialog.getString("CTDialog"));
+		setTitle(getResourceString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
@@ -958,7 +966,7 @@ protected boolean save() {
                 unknown.setSyntax(getPnlTypeUnknown().getSyntax());
 		domainDef.attachType(unknown);
 	} else if (currentDataPanel != null) {
-		domainDef.attachType((ch.ehi.interlis.domainsandconstants.Type)currentDataPanel.getObject());
+		domainDef.attachType((ch.ehi.interlis.domainsandconstants.Type)((DataPanel)currentDataPanel).getObject());
 	}
 
 	return super.save();
@@ -1022,8 +1030,15 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);
 		} else {
-			ch.softenvironment.util.Tracer.getInstance().nyi(this, "setElement(Element)", "Type not displayable <" + type.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: Type not displayable <" + type.toString() + ">"
 		}
 	}
+}
+/**
+ * Overwrites.
+ */
+public void dispose() {
+    domainDef = null; // try to avoid OutOfMemoryException in case dialog might not be garbaged
+    super.dispose();
 }
 }

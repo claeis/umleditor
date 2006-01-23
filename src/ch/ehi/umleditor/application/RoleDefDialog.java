@@ -24,9 +24,9 @@ import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a RoleDef.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:56 $
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 13:52:58 $
  */
 public class RoleDefDialog extends BaseDialog {
 	// ModelElement
@@ -61,60 +61,37 @@ public class RoleDefDialog extends BaseDialog {
 	private JRadioButton ivjRbtReference = null;
 	private JRadioButton ivjRbtRelationship = null;
 	private JRadioButton ivjRbtStructure = null;
-	private JScrollPane ivjScpClassRestriction = null;
-	private javax.swing.table.TableColumn ivjTbcClassDef = null;
-	private JTable ivjTblClassRestriction = null;
-	private JSeparator ivjJSeparator1 = null;
-	private JMenuItem ivjMniNewClassDef = null;
-	private JMenuItem ivjMniOpenClassDefSpecification = null;
-	private JMenuItem ivjMniRemoveClassDef = null;
-	private JPopupMenu ivjMnuClassDef = null;
+        private RestrictedClassesPanel ivjTabRestricted = null;
 	private JPanel ivjPnlReferenceType = null;
 	private JCheckBox ivjChxExternal = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getBtnOk()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnOk())
 				connEtoC1(e);
-			if (e.getSource() == RoleDefDialog.this.getBtnCancel()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnCancel())
 				connEtoC2(e);
-			if (e.getSource() == RoleDefDialog.this.getBtnApply()) 
+			if (e.getSource() == RoleDefDialog.this.getBtnApply())
 				connEtoC3(e);
-			if (e.getSource() == RoleDefDialog.this.getMniNewClassDef()) 
-				connEtoC4(e);
-			if (e.getSource() == RoleDefDialog.this.getMniOpenClassDefSpecification()) 
-				connEtoC7(e);
-			if (e.getSource() == RoleDefDialog.this.getMniRemoveClassDef()) 
-				connEtoC8(e);
 		};
 		public void focusGained(java.awt.event.FocusEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getTxtName()) 
+			if (e.getSource() == RoleDefDialog.this.getTxtName())
 				connEtoM1(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getRbtReference()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtReference())
 				connEtoC9(e);
-			if (e.getSource() == RoleDefDialog.this.getRbtStructure()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtStructure())
 				connEtoC10(e);
-			if (e.getSource() == RoleDefDialog.this.getRbtRelationship()) 
+			if (e.getSource() == RoleDefDialog.this.getRbtRelationship())
 				connEtoC11(e);
 		};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
 		public void mouseExited(java.awt.event.MouseEvent e) {};
-		public void mousePressed(java.awt.event.MouseEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction()) 
-				connEtoC12(e);
-			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction()) 
-				connEtoC13(e);
-		};
-		public void mouseReleased(java.awt.event.MouseEvent e) {
-			if (e.getSource() == RoleDefDialog.this.getScpClassRestriction()) 
-				connEtoC5(e);
-			if (e.getSource() == RoleDefDialog.this.getTblClassRestriction()) 
-				connEtoC6(e);
-		};
+		public void mouseReleased(java.awt.event.MouseEvent e) {};
+		public void mousePressed(java.awt.event.MouseEvent e) {};
 	};
 /**
  * Constructor
@@ -122,27 +99,10 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public RoleDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	setTitle(((RoleDef)element).getAssociation().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
-}
-/**
- * Constructor
- * @param owner Symbol
- * @param modal Symbol
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-public RoleDefDialog(java.awt.Frame owner, boolean modal) {
-	super(owner, modal);
-	initialize();
-}
-/**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	boolean isSelected = getTblClassRestriction().getSelectedRow() >= 0;
-	getMniOpenClassDefSpecification().setEnabled(isSelected);
-	getMniRemoveClassDef().setEnabled(isSelected);
 }
 /**
  * Comment
@@ -216,42 +176,6 @@ private void connEtoC11(java.awt.event.ItemEvent arg1) {
 	}
 }
 /**
- * connEtoC12:  (ScpClassRestriction.mouse.mousePressed(java.awt.event.MouseEvent) --> RoleDefDialog.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
- * @param arg1 java.awt.event.MouseEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC12(java.awt.event.MouseEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.genericPopupDisplay(arg1, getMnuClassDef());
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC13:  (TblClassRestriction.mouse.mousePressed(java.awt.event.MouseEvent) --> RoleDefDialog.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
- * @param arg1 java.awt.event.MouseEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC13(java.awt.event.MouseEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.genericPopupDisplay(arg1, getMnuClassDef());
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
  * connEtoC2:  (BtnCancel.action.actionPerformed(java.awt.event.ActionEvent) --> AttributeDefDialog.cancelPressed()V)
  * @param arg1 java.awt.event.ActionEvent
  */
@@ -279,96 +203,6 @@ private void connEtoC3(java.awt.event.ActionEvent arg1) {
 		// user code begin {1}
 		// user code end
 		this.applyPressed();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC4:  (MniNewClassDef.action.actionPerformed(java.awt.event.ActionEvent) --> RoleDefDialog.mniNewClassDef()V)
- * @param arg1 java.awt.event.ActionEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC4(java.awt.event.ActionEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.mniNewClassDef();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC5:  (ScpClassRestriction.mouse.mouseReleased(java.awt.event.MouseEvent) --> RoleDefDialog.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
- * @param arg1 java.awt.event.MouseEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC5(java.awt.event.MouseEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.genericPopupDisplay(arg1, getMnuClassDef());
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC6:  (TblClassRestriction.mouse.mouseReleased(java.awt.event.MouseEvent) --> RoleDefDialog.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
- * @param arg1 java.awt.event.MouseEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC6(java.awt.event.MouseEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.genericPopupDisplay(arg1, getMnuClassDef());
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC7:  (MniOpenClassDefSpecification.action.actionPerformed(java.awt.event.ActionEvent) --> RoleDefDialog.mniOpenClassDefSpecification()V)
- * @param arg1 java.awt.event.ActionEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC7(java.awt.event.ActionEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.mniOpenClassDefSpecification();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC8:  (MniRemoveClassDef.action.actionPerformed(java.awt.event.ActionEvent) --> RoleDefDialog.mniRemoveClassDef()V)
- * @param arg1 java.awt.event.ActionEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC8(java.awt.event.ActionEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.mniRemoveClassDef();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -749,26 +583,6 @@ private javax.swing.JCheckBox getChxOrdered() {
 	return ivjChxOrdered;
 }
 /**
- * Return the JSeparator1 property value.
- * @return javax.swing.JSeparator
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JSeparator getJSeparator1() {
-	if (ivjJSeparator1 == null) {
-		try {
-			ivjJSeparator1 = new javax.swing.JSeparator();
-			ivjJSeparator1.setName("JSeparator1");
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjJSeparator1;
-}
-/**
  * Return the JLabel2 property value.
  * @return javax.swing.JLabel
  */
@@ -909,99 +723,6 @@ private javax.swing.JLabel getLblRestrictionTo() {
 	return ivjLblRestrictionTo;
 }
 /**
- * Return the MniNewClassDef property value.
- * @return javax.swing.JMenuItem
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JMenuItem getMniNewClassDef() {
-	if (ivjMniNewClassDef == null) {
-		try {
-			ivjMniNewClassDef = new javax.swing.JMenuItem();
-			ivjMniNewClassDef.setName("MniNewClassDef");
-			ivjMniNewClassDef.setText("Neu");
-			ivjMniNewClassDef.setEnabled(true);
-			// user code begin {1}
-			ivjMniNewClassDef.setText(getNewString());
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjMniNewClassDef;
-}
-/**
- * Return the MniOpenClassDefSpecification property value.
- * @return javax.swing.JMenuItem
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JMenuItem getMniOpenClassDefSpecification() {
-	if (ivjMniOpenClassDefSpecification == null) {
-		try {
-			ivjMniOpenClassDefSpecification = new javax.swing.JMenuItem();
-			ivjMniOpenClassDefSpecification.setName("MniOpenClassDefSpecification");
-			ivjMniOpenClassDefSpecification.setText("Öffne Spezifikation...");
-			ivjMniOpenClassDefSpecification.setEnabled(false);
-			// user code begin {1}
-			ivjMniOpenClassDefSpecification.setText(getChangeWindowString());
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjMniOpenClassDefSpecification;
-}
-/**
- * Return the MniRemoveClassDef property value.
- * @return javax.swing.JMenuItem
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JMenuItem getMniRemoveClassDef() {
-	if (ivjMniRemoveClassDef == null) {
-		try {
-			ivjMniRemoveClassDef = new javax.swing.JMenuItem();
-			ivjMniRemoveClassDef.setName("MniRemoveClassDef");
-			ivjMniRemoveClassDef.setText("Löschen");
-			ivjMniRemoveClassDef.setEnabled(false);
-			// user code begin {1}
-			ivjMniRemoveClassDef.setText(getRemoveString());
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjMniRemoveClassDef;
-}
-/**
- * Return the MnuClassDef property value.
- * @return javax.swing.JPopupMenu
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JPopupMenu getMnuClassDef() {
-	if (ivjMnuClassDef == null) {
-		try {
-			ivjMnuClassDef = new javax.swing.JPopupMenu();
-			ivjMnuClassDef.setName("MnuClassDef");
-			ivjMnuClassDef.add(getMniOpenClassDefSpecification());
-			ivjMnuClassDef.add(getJSeparator1());
-			ivjMnuClassDef.add(getMniNewClassDef());
-			ivjMnuClassDef.add(getMniRemoveClassDef());
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjMnuClassDef;
-}
-/**
  * Return the PnlDerivedFrom property value.
  * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
  */
@@ -1134,10 +855,10 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsScpClassRestriction.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsScpClassRestriction.weightx = 1.0;
 			constraintsScpClassRestriction.weighty = 1.0;
-			constraintsScpClassRestriction.ipadx = 357;
-			constraintsScpClassRestriction.ipady = 116;
+			//constraintsScpClassRestriction.ipadx = 357;
+			//constraintsScpClassRestriction.ipady = 116;
 			constraintsScpClassRestriction.insets = new java.awt.Insets(4, 9, 4, 11);
-			getPnlDetail().add(getScpClassRestriction(), constraintsScpClassRestriction);
+			getPnlDetail().add(getTabRestricted(), constraintsScpClassRestriction);
 
 			java.awt.GridBagConstraints constraintsPnlReferenceType = new java.awt.GridBagConstraints();
 			constraintsPnlReferenceType.gridx = 1; constraintsPnlReferenceType.gridy = 7;
@@ -1331,19 +1052,12 @@ private javax.swing.JRadioButton getRbtStructure() {
 	}
 	return ivjRbtStructure;
 }
-/**
- * Return the ScpClassRestriction property value.
- * @return javax.swing.JScrollPane
- */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JScrollPane getScpClassRestriction() {
-	if (ivjScpClassRestriction == null) {
+private RestrictedClassesPanel getTabRestricted() {
+	if (ivjTabRestricted == null) {
 		try {
-			ivjScpClassRestriction = new javax.swing.JScrollPane();
-			ivjScpClassRestriction.setName("ScpClassRestriction");
-			ivjScpClassRestriction.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			ivjScpClassRestriction.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			getScpClassRestriction().setViewportView(getTblClassRestriction());
+			ivjTabRestricted = new RestrictedClassesPanel();
+			ivjTabRestricted.setName("TabRestricted");
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1352,53 +1066,7 @@ private javax.swing.JScrollPane getScpClassRestriction() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjScpClassRestriction;
-}
-/**
- * Return the TbcClassDef property value.
- * @return javax.swing.table.TableColumn
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.table.TableColumn getTbcClassDef() {
-	if (ivjTbcClassDef == null) {
-		try {
-			ivjTbcClassDef = new javax.swing.table.TableColumn();
-			ivjTbcClassDef.setHeaderValue("ClassDef");
-			// user code begin {1}
-			ivjTbcClassDef.setHeaderValue(resRoleDefDialog.getString("TbcClassDef_header"));
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjTbcClassDef;
-}
-/**
- * Return the TblClassRestriction property value.
- * @return javax.swing.JTable
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JTable getTblClassRestriction() {
-	if (ivjTblClassRestriction == null) {
-		try {
-			ivjTblClassRestriction = new javax.swing.JTable();
-			ivjTblClassRestriction.setName("TblClassRestriction");
-			getScpClassRestriction().setColumnHeaderView(ivjTblClassRestriction.getTableHeader());
-			getScpClassRestriction().getViewport().setBackingStoreEnabled(true);
-			ivjTblClassRestriction.setBounds(0, 0, 200, 200);
-			ivjTblClassRestriction.setAutoCreateColumnsFromModel(false);
-			ivjTblClassRestriction.addColumn(getTbcClassDef());
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjTblClassRestriction;
+	return ivjTabRestricted;
 }
 /**
  * Return the TbpGeneral property value.
@@ -1461,11 +1129,6 @@ private void initConnections() throws java.lang.Exception {
 	getBtnOk().addActionListener(ivjEventHandler);
 	getBtnCancel().addActionListener(ivjEventHandler);
 	getBtnApply().addActionListener(ivjEventHandler);
-	getMniNewClassDef().addActionListener(ivjEventHandler);
-	getScpClassRestriction().addMouseListener(ivjEventHandler);
-	getTblClassRestriction().addMouseListener(ivjEventHandler);
-	getMniOpenClassDefSpecification().addActionListener(ivjEventHandler);
-	getMniRemoveClassDef().addActionListener(ivjEventHandler);
 	getRbtReference().addItemListener(ivjEventHandler);
 	getRbtStructure().addItemListener(ivjEventHandler);
 	getRbtRelationship().addItemListener(ivjEventHandler);
@@ -1501,29 +1164,11 @@ private void initialize() {
 
 	getCbxCardinality().setModel(new DefaultComboBoxModel(MultiplicityConverter.getDefaultCardinalities()));
 
-	getTblClassRestriction().setModel(new EditorTableModel());
-	((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(null);
+	//ce getTblClassRestriction().setModel(new EditorTableModel());
+	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(null);
+        getTabRestricted().setOwnerDialog(this);
+
 	// user code end
-}
-/**
- * Comment
- */
-private void mniNewClassDef() {
-	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resRoleDefDialog.getString("CTClassDefSelection"), true, roleDef); //$NON-NLS-1$
-	getTblClassRestriction().setModel(new EditorTableModel());
-	((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
-}
-/**
- * Comment
- */
-private void mniOpenClassDefSpecification() {
-	((EditorTableModel)getTblClassRestriction().getModel()).showSpecification(getTblClassRestriction().getSelectedRows());
-}
-/**
- * Comment
- */
-private void mniRemoveClassDef() {
-	((EditorTableModel)getTblClassRestriction().getModel()).removeRows(getTblClassRestriction().getSelectedRows());
 }
 /**
  * Update Model.
@@ -1573,6 +1218,11 @@ protected boolean save() {
 			roleDef.attachParticipant((AbstractClassDef)getCbxEnd().getElement());
 		}
 	}
+        roleDef.clearRestriction();
+        AbstractClassDef[] rv=(AbstractClassDef[])getTabRestricted().getObject();
+        for(int i=0;i<rv.length;i++){
+            roleDef.addRestriction(rv[i]);
+        }
 
 	// page DerivedFrom RoleDef has 0/1 RoleDefDerived
 	if (roleDef.containsRoleDefDerived()) {
@@ -1630,8 +1280,14 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	} else {
 		getCbxEnd().setElement(AbstractClassDef.class, roleDef.getAssociation(), null);
 	}
-	getTblClassRestriction().setModel(new EditorTableModel());
-	((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
+	//ce getTblClassRestriction().setModel(new EditorTableModel());
+	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
+        AbstractClassDef[] rv=new AbstractClassDef[roleDef.sizeRestriction()];
+        java.util.Iterator ri=roleDef.iteratorRestriction();
+        for(int i=0;i<rv.length;i++){
+          rv[i]=(AbstractClassDef)ri.next();
+        }
+        getTabRestricted().setObject(rv,roleDef.getAssociation());
 
 
 	// set page DerivedFrom

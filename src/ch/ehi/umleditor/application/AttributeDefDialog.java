@@ -29,14 +29,14 @@ import ch.softenvironment.util.*;
  * User Interface for an AttributeDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:32 $
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:51:43 $
  */
 public class AttributeDefDialog extends BaseDialog {
 	// ModelElement
 	private static java.util.ResourceBundle resAttributeDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/AttributeDefDialog");
 	private static java.util.ResourceBundle resRoleDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/RoleDefDialog"); //$NON-NLS-1$;
 	private AttributeDef attributeDef = null;
-	private DataPanel currentDataPanel = null;
+	private BasePanel currentDataPanel = null;
 	private JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private JButton ivjBtnCancel = null;
@@ -93,19 +93,10 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public AttributeDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	setTitle(((AttributeDef)element).getOwner().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
-}
-/**
- * Constructor
- * @param owner Symbol
- * @param modal Symbol
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-public AttributeDefDialog(java.awt.Frame owner, boolean modal) {
-	super(owner, modal);
-	initialize();
 }
 /**
  * Adapt the chosen INTERLIS type Panel and create a new default type Instance.
@@ -113,7 +104,7 @@ public AttributeDefDialog(java.awt.Frame owner, boolean modal) {
  */
 private void adaptType() {
 	String item = (String)getCbxType().getSelectedItem();
-	DataPanel newPanel = null;
+	BasePanel newPanel = null;
 
 	if (item.equals(IliBaseTypeKind.NULL_TYPE) || item.equals(IliBaseTypeKind.BOOLEAN)) {
 		newPanel = null;
@@ -1136,8 +1127,8 @@ protected boolean save() {
 			DomainAttribute domainAttribute = new DomainAttribute();
 			if (getCbxType().getSelectedItem() == IliBaseTypeKind.DOMAINDEF) {
 				// either DomainDef
-				if (currentDataPanel.getObject() != null) {
-					domainAttribute.attachDomainDef((ch.ehi.interlis.domainsandconstants.DomainDef)currentDataPanel.getObject());
+				if (((DataPanel)currentDataPanel).getObject() != null) {
+					domainAttribute.attachDomainDef((ch.ehi.interlis.domainsandconstants.DomainDef)((DataPanel)currentDataPanel).getObject());
 				}
 			} else {
 				// or direct-type
@@ -1150,7 +1141,7 @@ protected boolean save() {
                                         unknown.setSyntax(getPnlTypeUnknown().getSyntax());
 					domainAttribute.attachDirect(unknown);
 				} else {
-					domainAttribute.attachDirect((ch.ehi.interlis.domainsandconstants.Type)currentDataPanel.getObject());
+					domainAttribute.attachDirect((ch.ehi.interlis.domainsandconstants.Type)((DataPanel)currentDataPanel).getObject());
 				}
 			}
 			attributeDef.attachAttrType(domainAttribute);
@@ -1163,7 +1154,7 @@ protected boolean save() {
  */
 private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	attributeDef = (AttributeDef)element;
-
+	
 	// general & page Description
 	getTxtName().setText(attributeDef.getDefLangName());
 	getPnlDescription().setObject(element);
@@ -1241,7 +1232,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 					getCbxType().setSelectedItem(IliBaseTypeKind.CLASS_TYPE);
 					getPnlTypeClass().setObject(type, attributeDef.getOwner());
 				} else {
-					Tracer.getInstance().nyi(this, "setElement(Element)", "Type not displayable <" + type.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+//TODO NYI: Type not displayable <" + type.toString() + ">
 				}
 			} else {
 				getCbxType().setSelectedItem(IliBaseTypeKind.DOMAINDEF);

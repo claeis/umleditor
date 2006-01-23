@@ -17,26 +17,17 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import ch.softenvironment.client.ResourceManager;
 /**
  * Interface for presentation aspects of a ModelElement.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:59 $
+ * @version $Revision: 1.4 $ $Date: 2004-09-14 18:09:17 $
  */
-public interface ModelElementUI extends ch.softenvironment.view.CommonUserAccess {
-	static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ModelElementUI");
-
-	static String REMOVE_IN_MODEL = resources.getString("MniRemoveInModel_text");
-	static String CREATION_ERROR = resources.getString("CECreationError");
-	static String SELECT_IN_BROWSER = resources.getString("MniSelectInBrowser_text");
-/**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return newly created popup menu
- * @see showSpecification()
- * @see ModelElementUI
- */
-javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu);
+public interface ModelElementUI {
+	static String REMOVE_IN_MODEL = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniRemoveInModel_text");
+	static String CREATION_ERROR = ResourceManager.getInstance().getResource(ModelElementUI.class, "CECreationError");
+	static String SELECT_IN_BROWSER = ResourceManager.getInstance().getResource(ModelElementUI.class, "MniSelectInBrowser_text");
 /**
  * Return the ModelElement represented by this Interface.
  * @return ModelElement

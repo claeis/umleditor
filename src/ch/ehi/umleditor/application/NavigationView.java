@@ -1,5 +1,4 @@
 package ch.ehi.umleditor.application;
-
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,26 +16,36 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+import java.util.Iterator;
+
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.implementation.UmlOperation;
+import ch.ehi.uml1_4.modelmanagement.Model;
+import ch.ehi.umleditor.umlpresentation.Diagram;
+
 import javax.swing.tree.*;
+
 import ch.softenvironment.util.*;
+import ch.softenvironment.view.CommonUserAccess;
+import ch.softenvironment.view.ListMenuChoice;
 /**
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:47 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.13 $ $Date: 2006-01-11 12:43:05 $
  */
-public class NavigationView extends ch.softenvironment.view.DataPanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI {
+public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
     //private TreeDropTarget dt;
     private NavigationTreeModel modelAdapter=null;
 	// optimize speed
-	private static java.util.ResourceBundle resNavigationView = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/NavigationView");  //$NON-NLS-1$
-	private DefaultMutableTreeNode latestNodeInTree = null;
-	private boolean singleClickTreated = false;
-	private boolean doubleClickTreated = false;
+//	private DefaultMutableTreeNode latestNodeInTree = null;
+//	private boolean singleClickTreated = false;
+//	private boolean doubleClickTreated = false;
         private javax.swing.JMenuItem mniMoveElement=null;
+        private javax.swing.JMenuItem mniDiagramReferences = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JSeparator ivjJSeparator6 = null;
 	private javax.swing.JSeparator ivjJSeparator7 = null;
@@ -154,13 +163,7 @@ public NavigationView() {
 	super();
 	initialize();
 }
-/**
- * Factory method to create a popup menu which allows to add attributes and methods.
- *
- * @return popup menu
- * @see showSpecification()
- */
-public javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	Element treeNode = getSelectedNode();
 	boolean selected = (treeNode != null);
 
@@ -177,7 +180,7 @@ public javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 	// build "New-Menu" dynamically
 	getMnuNew().setEnabled(false);
 	getMnuNew().removeAll();
-Tracer.getInstance().patch(this, "adaptPopupMenu()", "setFont of Submenu <Neu>");//$NON-NLS-2$//$NON-NLS-1$
+//TODO Patch: setFont of Submenu <Neu>
 getMnuNew().setFont(getMniOpen().getFont());
 getMnuSort().setFont(getMniOpen().getFont());
 	if (modelAdapter != null) {
@@ -202,6 +205,11 @@ getMnuSort().setFont(getMniOpen().getFont());
 		if (isInsideUmlModel(treeNode)) {
 			addMenuItem(getMniInterlis2Def());
 			addMenuItem(getMniMetaObjectFile());
+			if (!(treeNode instanceof Model)) {
+			    // allow in any UmlPackage if not in Ili-Structure
+				addMenuItem(getMniAssociationDef());
+				addMenuItem(getMniClassDef());
+			}
 /*			addMenuItem(getMniIli2ModelSet());
 		} else if (userObject.isIli2ModelSet()) {
 			addMenuItem(getMniInterlis2Def());
@@ -238,14 +246,16 @@ getMnuSort().setFont(getMniOpen().getFont());
 		getMnuNew().setEnabled(getMnuNew().getItemCount() > 0);
 	}
         mniMoveElement.setEnabled(selected);
-	return popupMenu;
+        mniDiagramReferences.setEnabled((treeNode instanceof ModelElement) && 
+                (!((treeNode instanceof AssociationEnd) || (treeNode instanceof Attribute) || (treeNode instanceof UmlOperation))));
 }
 /**
  * Add ModelElement to UML-Model.
  */
 private void addElement(java.lang.Class aClass) {
 	try {
-		ElementFactory.createOwnedElement(aClass, getSelectedNode());
+        selectElement(ElementFactory.createOwnedElement(aClass, getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -867,9 +877,12 @@ private javax.swing.JMenuItem getMniAddToDiagram() {
 		try {
 			ivjMniAddToDiagram = new javax.swing.JMenuItem();
 			ivjMniAddToDiagram.setName("MniAddToDiagram");
-			ivjMniAddToDiagram.setToolTipText(resNavigationView.getString("MniAddToDiagram_toolTipText"));
-			ivjMniAddToDiagram.setText(resNavigationView.getString("MniAddToDiagram_text"));
+			ivjMniAddToDiagram.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
+			ivjMniAddToDiagram.setText("Einfügen in Diagram");
 			// user code begin {1}
+			ivjMniAddToDiagram.setToolTipText(getResourceString("MniAddToDiagram_toolTipText"));
+			ivjMniAddToDiagram.setText(getResourceString("MniAddToDiagram_text"));
+			
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -889,9 +902,10 @@ private javax.swing.JMenuItem getMniAssociationDef() {
 		try {
 			ivjMniAssociationDef = new javax.swing.JMenuItem();
 			ivjMniAssociationDef.setName("MniAssociationDef");
-			ivjMniAssociationDef.setText(resNavigationView.getString("MniAssociationDef_text"));
+			ivjMniAssociationDef.setText("Beziehung");
 			ivjMniAssociationDef.setEnabled(true);
 			// user code begin {1}
+			ivjMniAssociationDef.setText(getResourceString("MniAssociationDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -914,8 +928,8 @@ private javax.swing.JMenuItem getMniAttributeDef() {
 			ivjMniAttributeDef.setToolTipText("Attribut");
 			ivjMniAttributeDef.setText("AttributeDef");
 			// user code begin {1}
-			ivjMniAttributeDef.setToolTipText(resNavigationView.getString("MniAttributeDef_toolTipText"));
-			ivjMniAttributeDef.setText(resNavigationView.getString("MniAttributeDef_text"));
+			ivjMniAttributeDef.setToolTipText(getResourceString("MniAttributeDef_toolTipText"));
+			ivjMniAttributeDef.setText(getResourceString("MniAttributeDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -939,8 +953,8 @@ private javax.swing.JMenuItem getMniClassDef() {
 			ivjMniClassDef.setText("ClassDef");
 			ivjMniClassDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniClassDef.setToolTipText(resNavigationView.getString("MniClassDef_toolTipText"));
-			ivjMniClassDef.setText(resNavigationView.getString("MniClassDef_text"));
+			ivjMniClassDef.setToolTipText(getResourceString("MniClassDef_toolTipText"));
+			ivjMniClassDef.setText(getResourceString("MniClassDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -962,7 +976,7 @@ private javax.swing.JMenuItem getMniClassDiagram() {
 			ivjMniClassDiagram.setName("MniClassDiagram");
 			ivjMniClassDiagram.setText("Klassendiagramm");
 			// user code begin {1}
-			ivjMniClassDiagram.setText(resNavigationView.getString("MniClassDiagram_text"));
+			ivjMniClassDiagram.setText(getResourceString("MniClassDiagram_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -984,7 +998,7 @@ private javax.swing.JMenuItem getMniDomainDef() {
 			ivjMniDomainDef.setName("MniDomainDef");
 			ivjMniDomainDef.setText("DomainDef");
 			// user code begin {1}
-			ivjMniDomainDef.setText(resNavigationView.getString("MniDomainDef_text"));
+			ivjMniDomainDef.setText(getResourceString("MniDomainDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1008,8 +1022,8 @@ private javax.swing.JMenuItem getMniFunctionDef() {
 			ivjMniFunctionDef.setText("FunctionDef");
 			ivjMniFunctionDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniFunctionDef.setToolTipText(resNavigationView.getString("MniFunctionDef_toolTipText"));
-			ivjMniFunctionDef.setText(resNavigationView.getString("MniFunctionDef_text"));
+			ivjMniFunctionDef.setToolTipText(getResourceString("MniFunctionDef_toolTipText"));
+			ivjMniFunctionDef.setText(getResourceString("MniFunctionDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1032,7 +1046,7 @@ private javax.swing.JMenuItem getMniGraphicDef() {
 			ivjMniGraphicDef.setText("GraphicDef");
 			ivjMniGraphicDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniGraphicDef.setText(resNavigationView.getString("MniGraphicDef_text"));
+			ivjMniGraphicDef.setText(getResourceString("MniGraphicDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1055,7 +1069,7 @@ private javax.swing.JMenuItem getMniGraphicParameterDef() {
 			ivjMniGraphicParameterDef.setText("GraphicParameterDef");
 			ivjMniGraphicParameterDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniGraphicParameterDef.setText(resNavigationView.getString("MniGraphicParameterDef_text"));
+			ivjMniGraphicParameterDef.setText(getResourceString("MniGraphicParameterDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1077,7 +1091,7 @@ private javax.swing.JMenuItem getMniInterlis2Def() {
 			ivjMniInterlis2Def.setName("MniInterlis2Def");
 			ivjMniInterlis2Def.setText("Interlis-Datei (Interlis2Def)");
 			// user code begin {1}
-			ivjMniInterlis2Def.setText(resNavigationView.getString("MniInterlis2Def_text"));
+			ivjMniInterlis2Def.setText(getResourceString("MniInterlis2Def_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1100,7 +1114,7 @@ private javax.swing.JMenuItem getMniLineFormTypeDef() {
 			ivjMniLineFormTypeDef.setText("LineFormTypeDef");
 			ivjMniLineFormTypeDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniLineFormTypeDef.setText(resNavigationView.getString("MniLineFormTypeDef_text"));
+			ivjMniLineFormTypeDef.setText(getResourceString("MniLineFormTypeDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1123,7 +1137,7 @@ private javax.swing.JMenuItem getMniMetaDataUseDef() {
 			ivjMniMetaDataUseDef.setText("MetaDataUseDef");
 			ivjMniMetaDataUseDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniMetaDataUseDef.setText(resNavigationView.getString("MniMetaDataUseDef_text"));
+			ivjMniMetaDataUseDef.setText(getResourceString("MniMetaDataUseDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1143,8 +1157,9 @@ private javax.swing.JMenuItem getMniMetaObjectFile() {
 		try {
 			ivjMniMetaObjectFile = new javax.swing.JMenuItem();
 			ivjMniMetaObjectFile.setName("MniMetaObjectFile");
-			ivjMniMetaObjectFile.setText(resNavigationView.getString("MniMetaObjectFile_text"));
+			ivjMniMetaObjectFile.setText("Metadatenbehälter-Datei");
 			// user code begin {1}
+			ivjMniMetaObjectFile.setText(getResourceString("MniMetaObjectFile_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1166,7 +1181,7 @@ private javax.swing.JMenuItem getMniModelDef() {
 			ivjMniModelDef.setName("MniModelDef");
 			ivjMniModelDef.setText("Interlis-Modell (ModelDef)");
 			// user code begin {1}
-			ivjMniModelDef.setText(resNavigationView.getString("MniModelDef_text"));
+			ivjMniModelDef.setText(getResourceString("MniModelDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1188,7 +1203,7 @@ private javax.swing.JMenuItem getMniOpen() {
 			ivjMniOpen.setName("MniOpen");
 			ivjMniOpen.setText("Öffnen");
 			// user code begin {1}
-			ivjMniOpen.setText(resNavigationView.getString("MniOpen_text"));
+			ivjMniOpen.setText(getResourceString("MniOpen_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1210,7 +1225,7 @@ private javax.swing.JMenuItem getMniOpenSpecification() {
 			ivjMniOpenSpecification.setName("MniOpenSpecification");
 			ivjMniOpenSpecification.setText("Öffne Spezifikation...");
 			// user code begin {1}
-			ivjMniOpenSpecification.setText(resNavigationView.getString("MniOpenSpecification_text"));
+			ivjMniOpenSpecification.setText(getResourceString("MniOpenSpecification_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1233,7 +1248,7 @@ private javax.swing.JMenuItem getMniPrint() {
 			ivjMniPrint.setText("Drucken...");
 			ivjMniPrint.setEnabled(true);
 			// user code begin {1}
-			ivjMniPrint.setText(MENU_FILE_PRINT_WINDOW);
+			ivjMniPrint.setText(CommonUserAccess.getMniFilePrintWindowText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1255,7 +1270,7 @@ private javax.swing.JMenuItem getMniRemove() {
 			ivjMniRemove.setName("MniRemove");
 			ivjMniRemove.setText("Löschen (im Modell)");
 			// user code begin {1}
-			ivjMniRemove.setText(resNavigationView.getString("MniRemove_text"));
+			ivjMniRemove.setText(getResourceString("MniRemove_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1278,7 +1293,7 @@ private javax.swing.JMenuItem getMniRename() {
 			ivjMniRename.setText("Umbenennen");
 			ivjMniRename.setEnabled(true);
 			// user code begin {1}
-			ivjMniRename.setText(MENU_EDIT_RENAME);
+			ivjMniRename.setText(CommonUserAccess.getMniEditRenameText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1298,9 +1313,11 @@ private javax.swing.JMenuItem getMniRoleDef() {
 		try {
 			ivjMniRoleDef = new javax.swing.JMenuItem();
 			ivjMniRoleDef.setName("MniRoleDef");
-			ivjMniRoleDef.setToolTipText(resNavigationView.getString("MniRoleDef_toolTipText"));
-			ivjMniRoleDef.setText(resNavigationView.getString("MniRoleDef_text"));
+			ivjMniRoleDef.setToolTipText("Rolle eines Beziehungsendes");
+			ivjMniRoleDef.setText("Rolle");
 			// user code begin {1}
+			ivjMniRoleDef.setToolTipText(getResourceString("MniRoleDef_toolTipText"));
+			ivjMniRoleDef.setText(getResourceString("MniRoleDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1322,7 +1339,7 @@ private javax.swing.JRadioButtonMenuItem getMniSortbyKindName() {
 			ivjMniSortbyKindName.setName("MniSortbyKindName");
 			ivjMniSortbyKindName.setText("Nach Art/Name");
 			// user code begin {1}
-			ivjMniSortbyKindName.setText(resNavigationView.getString("MniSortByKindName_text"));
+			ivjMniSortbyKindName.setText(getResourceString("MniSortByKindName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1345,7 +1362,7 @@ private javax.swing.JRadioButtonMenuItem getMniSortbyName() {
 			ivjMniSortbyName.setSelected(false);
 			ivjMniSortbyName.setText("Nach Name");
 			// user code begin {1}
-			ivjMniSortbyName.setText(resNavigationView.getString("MniSortByName_text"));
+			ivjMniSortbyName.setText(getResourceString("MniSortByName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1367,7 +1384,7 @@ private javax.swing.JMenuItem getMniTopicDef() {
 			ivjMniTopicDef.setName("MniTopicDef");
 			ivjMniTopicDef.setText("TopicDef");
 			// user code begin {1}
-			ivjMniTopicDef.setText(resNavigationView.getString("MniTopicDef_text"));
+			ivjMniTopicDef.setText(getResourceString("MniTopicDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1389,7 +1406,7 @@ private javax.swing.JMenuItem getMniUmlPackage() {
 			ivjMniUmlPackage.setName("MniUmlPackage");
 			ivjMniUmlPackage.setText("UmlPackage");
 			// user code begin {1}
-			ivjMniUmlPackage.setText(resNavigationView.getString("MniUmlPackage_text"));
+			ivjMniUmlPackage.setText(getResourceString("MniUmlPackage_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1412,7 +1429,7 @@ private javax.swing.JMenuItem getMniUnitDef() {
 			ivjMniUnitDef.setText("UnitDef");
 			ivjMniUnitDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniUnitDef.setText(resNavigationView.getString("MniUnitDef_text"));
+			ivjMniUnitDef.setText(getResourceString("MniUnitDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1435,7 +1452,7 @@ private javax.swing.JMenuItem getMniViewDef() {
 			ivjMniViewDef.setText("ViewDef");
 			ivjMniViewDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniViewDef.setText(resNavigationView.getString("MniViewDef_text"));
+			ivjMniViewDef.setText(getResourceString("MniViewDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1458,7 +1475,7 @@ private javax.swing.JMenuItem getMniViewProjectionDef() {
 			ivjMniViewProjectionDef.setText("ViewProjectionDef");
 			ivjMniViewProjectionDef.setEnabled(true);
 			// user code begin {1}
-			ivjMniViewProjectionDef.setText(resNavigationView.getString("MniViewProjectionDef_text"));
+			ivjMniViewProjectionDef.setText(getResourceString("MniViewProjectionDef_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1530,7 +1547,7 @@ private javax.swing.JMenu getMnuNew() {
 			ivjMnuNew.add(getMniAttributeDef());
 			ivjMnuNew.add(getMniRoleDef());
 			// user code begin {1}
-			ivjMnuNew.setText(MENU_FILE_NEW);
+			ivjMnuNew.setText(CommonUserAccess.getMniFileNewText());
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1554,7 +1571,7 @@ private javax.swing.JMenu getMnuSort() {
 			ivjMnuSort.add(getMniSortbyName());
 			ivjMnuSort.add(getMniSortbyKindName());
 			// user code begin {1}
-			ivjMnuSort.setText(resNavigationView.getString("MnuSort_text"));
+			ivjMnuSort.setText(getResourceString("MnuSort_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1571,12 +1588,6 @@ private javax.swing.JMenu getMnuSort() {
  */
 public final ch.ehi.uml1_4.foundation.core.ModelElement getModelElement() {
 	throw new DeveloperException(this, "getModelElement()", "not of interest here");//$NON-NLS-2$//$NON-NLS-1$
-}
-/**
- * Return the changed object displayed.
- */
-public final java.lang.Object getObject() {
-	return null;
 }
 /**
  * Return the ScpNavigation property value.
@@ -1701,8 +1712,9 @@ private void initialize() {
 	javax.swing.ButtonGroup sortGroup = new javax.swing.ButtonGroup();
 	sortGroup.add(getMniSortbyName());
 	sortGroup.add(getMniSortbyKindName());
-        mniMoveElement = new javax.swing.JMenuItem();
-	mniMoveElement.setText("Move element...");
+    
+    mniMoveElement = new javax.swing.JMenuItem();
+	mniMoveElement.setText(getResourceString("MniMoveElement_text"));
 	mniMoveElement.addActionListener(new java.awt.event.ActionListener() {
 	  // callback Handler if Button was pressed
 	  public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1710,7 +1722,18 @@ private void initialize() {
 		moveElement();
 	  }
 	});
-        getMnpTreeActions().add(mniMoveElement);
+    getMnpTreeActions().add(mniMoveElement);
+    
+    mniDiagramReferences = new javax.swing.JMenuItem();
+    mniDiagramReferences.setName("MniAddDiagramReferences");
+//  mniDiagramReferences.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
+    mniDiagramReferences.setText(getResourceString("mniDiagramReferences_text"));
+    mniDiagramReferences.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent e) {
+         showDiagramReferences();
+      }
+    });
+    getMnpTreeActions().add(mniDiagramReferences);
 	// user code end
 }
 /**
@@ -1820,10 +1843,11 @@ private void mniAddToDiagram() {
 	LauncherView.getInstance().getCurrentClassDiagram().add(getSelectedNode());
 }
 /**
- * Open a class diagram.
+ * Triggered by Menu NavTree->Activate Diagram.
+ * @deprecated
  */
 private void mniOpen() {
-	openDiagram(getSelectedNode());
+	changeObjects(null);
 }
 /**
  * Comment
@@ -1831,12 +1855,36 @@ private void mniOpen() {
 private void mniPrint() {
 	LauncherView.getInstance().printClassDiagram(openDiagram(getSelectedNode()));
 }
+private void moveElement() {
+	try {
+          MoveElementDialog moveDialog = new MoveElementDialog(
+                  LauncherView.getInstance(),"Select Target Package"
+                  , true, LauncherView.getInstance().getModel());
+          if (moveDialog.isSaved()) {
+            ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
+      		Element elebase=getSelectedNode();
+      		if(elebase instanceof ModelElement){
+      			ModelElement ele=(ModelElement)elebase;
+				ele.detachNamespace();
+				ele.attachNamespace(apackage);
+      		}else{
+				ch.ehi.umleditor.umlpresentation.Diagram diag =
+					(ch.ehi.umleditor.umlpresentation.Diagram) elebase;
+				diag.detachNamespace();
+				diag.attachNamespace(apackage);
+      		}
+          }
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
 /**
  * Comment
  */
 private void newAssociationDef() {
 	try {
-		ElementFactory.createAssociationDef(getSelectedNode());
+		selectElement(ElementFactory.createAssociationDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1846,7 +1894,8 @@ private void newAssociationDef() {
  */
 private void newAttributeDef() {
 	try {
-		ElementFactory.createAttributeDef((AbstractClassDef)(getSelectedNode()));
+        selectElement(ElementFactory.createAttributeDef((AbstractClassDef)(getSelectedNode())));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1856,7 +1905,8 @@ private void newAttributeDef() {
  */
 private void newClassDef() {
 	try {
-		ElementFactory.createClassDef(getSelectedNode());
+        selectElement(ElementFactory.createClassDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1866,7 +1916,10 @@ private void newClassDef() {
  */
 private void newClassDiagram() {
 	try {
-		LauncherView.getInstance().createClassDiagram(ElementFactory.createDiagram(getSelectedNode()));
+        Element element = ElementFactory.createDiagram(getSelectedNode());
+        LauncherView.getInstance().createClassDiagram(element);
+        selectElement(element);
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1876,7 +1929,8 @@ private void newClassDiagram() {
  */
 private void newDomainDef() {
 	try {
-		ElementFactory.createDomainDef(getSelectedNode());
+        selectElement(ElementFactory.createDomainDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1904,7 +1958,8 @@ private void newGraphicParameterDef() {
  */
 private void newInterlis2Def() {
 	try {
-		ElementFactory.createINTERLIS2Def(getSelectedNode());
+        selectElement(ElementFactory.createINTERLIS2Def(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1920,7 +1975,8 @@ private void newLineFormTypeDef() {
  */
 private void newMetaDataUseDef() {
 	try {
-		ElementFactory.createMetaDataUseDef(getSelectedNode());
+        selectElement(ElementFactory.createMetaDataUseDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1930,7 +1986,8 @@ private void newMetaDataUseDef() {
  */
 private void newMetaObjectFile() {
 	try {
-		ElementFactory.createMetaObjectFile((ch.ehi.uml1_4.implementation.UmlModel)LauncherView.getInstance().getModel());
+        selectElement(ElementFactory.createMetaObjectFile((ch.ehi.uml1_4.implementation.UmlModel)LauncherView.getInstance().getModel()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1940,33 +1997,19 @@ private void newMetaObjectFile() {
  */
 private void newModelDef() {
 	try {
-		ElementFactory.createModelDef(getSelectedNode());
+        selectElement(ElementFactory.createModelDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
 }
-private void moveElement() {
-	try {
-          MoveElementDialog moveDialog = new MoveElementDialog(
-                  LauncherView.getInstance(),"Select Target Package"
-                  , true, LauncherView.getInstance().getModel());
-          if (moveDialog.isSaved()) {
-            ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
-      		ModelElement ele=(ModelElement)getSelectedNode();
-                ele.detachNamespace();
-                ele.attachNamespace(apackage);
-          }
-	} catch(Throwable e) {
-		handleException(e);
-	}
-}
-
 /**
  * Comment
  */
 private void newRoleDef() {
 	try {
-		ElementFactory.createRoleDef((Association)getSelectedNode(), null);
+        selectElement(ElementFactory.createRoleDef((Association)getSelectedNode(), null));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1976,7 +2019,8 @@ private void newRoleDef() {
  */
 private void newTopicDef() {
 	try {
-		ElementFactory.createTopicDef(getSelectedNode());
+        selectElement(ElementFactory.createTopicDef(getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -1986,7 +2030,8 @@ private void newTopicDef() {
  */
 private void newUmlPackage() {
 	try {
-		ElementFactory.createOwnedElement(ch.ehi.uml1_4.implementation.UmlPackage. class, getSelectedNode());
+        selectElement(ElementFactory.createOwnedElement(ch.ehi.uml1_4.implementation.UmlPackage. class, getSelectedNode()));
+        renameNode();
 	} catch(Throwable e) {
 		handleException(e);
 	}
@@ -2017,7 +2062,7 @@ private ch.ehi.umleditor.umldrawingtools.ClassDiagramView openDiagram(Element di
 }
 /**
  * Remove the Element in Model.
- * @see metaModelChanged8..) for visual removement.
+ * @see metaModelChanged(..) for visual removement.
  */
 public void removeInModel() {
 	Element element = getSelectedNode();
@@ -2038,7 +2083,10 @@ public final void removeVisually() {
  * @see EditorTreeModel#valueForPathChanged(TreePath, Object)
  */
 private void renameNode() {
-	getTreNavigation().startEditingAtPath(getTreNavigation().getSelectionPath());
+    TreePath path = getTreNavigation().getSelectionPath();
+    if (path != null) {
+	   getTreNavigation().startEditingAtPath(path);
+    }
 }
 /**
  * Select given Element in NavigationTree.
@@ -2054,7 +2102,7 @@ public void selectElement(Element element) {
 //		getTreNavigation().expandPath(getTreNavigation().getSelectionPath());
 //		getTreNavigation().makeVisible(path);
 		getTreNavigation().setSelectionPath(foundNode);
-                getTreNavigation().scrollPathToVisible(foundNode);
+        getTreNavigation().scrollPathToVisible(foundNode);
 	}
 }
 /**
@@ -2066,10 +2114,9 @@ private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelection
 	if (treeNode != null) {
 	    // rename
 	    getTreNavigation().setEditable(NavigationTreeNodeUtility.isNodeEditable(treeNode));
-
-	    // Documentation
-            LauncherView.getInstance().setDescription(treeNode);
 	}
+	// Documentation (update at deselect as well!)
+	LauncherView.getInstance().setDescription(treeNode);
 }
 /**
  * Build the visual Tree with a given UML-Model.
@@ -2108,10 +2155,6 @@ public synchronized void setModel(Namespace namespace) {
 		handleException(e);
 	}
 }
-/**
- * Set the Object to be displayed by panel.
- */
-public final void setObject(java.lang.Object object) {}
 private void setOrdering(String ordering){
   if(!modelAdapter.getOrdering().equals(ordering)){
     modelAdapter.setOrdering(ordering);
@@ -2134,7 +2177,6 @@ private void setOrdering(String ordering){
 }
 /**
  * Show the Specification Dialog of the PresentationElement.
- * @author Peter Hirzel
  */
 public void showSpecification() {
 	Element treeNode = getSelectedNode();
@@ -2165,5 +2207,76 @@ private void sortByKindName() {
 private void sortByName() {
 	getMniSortbyKindName().setSelected(false);
  	setOrdering(NavigationTreeModel.SORT_BY_NAME);
+}
+
+public void changeObjects(Object source) {
+    try {
+        Element element = getSelectedNode();
+        if (element instanceof Diagram) {
+            openDiagram(element);
+        } else {
+            showSpecification();
+        }
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+private void showDiagramReferences() {
+//    LauncherView.getInstance().nyi("Show Diagram-References");
+    java.util.Set foundElements=new java.util.HashSet();
+    java.util.ArrayList todo=new java.util.ArrayList(); // collection of containers not yet visited
+    Element element = getSelectedNode();
+    
+//TODO evtl. add this code to a Tool/Utility
+    // add root namespace to todo-list; so it is processed as a first element
+    todo.add(LauncherView.getInstance().getModel());
+    // process todo-list
+    while (!todo.isEmpty()) {
+      Namespace current=(Namespace)todo.get(0);
+      java.util.Iterator it = current.iteratorDiagram();
+      while (it.hasNext()) {
+        Diagram diagram = (Diagram)it.next();
+        if (diagram instanceof Diagram) {
+            Iterator presentation = diagram.iteratorPresentationElement();
+            while (presentation.hasNext()) {
+                PresentationElement object = (PresentationElement)presentation.next();
+                Iterator subjects = object.iteratorSubject();
+                while (subjects.hasNext()) {
+                    Object subject = subjects.next();
+                    if (subject.equals(element)) {
+                        foundElements.add(diagram);
+                    }
+                }
+            }
+        }
+      }
+      // search subtree
+      Iterator owned = current.iteratorOwnedElement();
+      while (owned.hasNext()) {
+        Object object = owned.next();
+        if (object instanceof Namespace) {
+            // ele is itself a container
+            // add it to todo-list
+            todo.add(object);
+        }
+      }
+
+      // remove current from todo-list
+      todo.remove(0);
+    }
+        
+    new FindDialog(LauncherView.getInstance(), false, foundElements, ((ModelElement)getSelectedNode()).getDefLangName() + "->" + getResourceString("mniDiagramReferences_text"));
 }
 }

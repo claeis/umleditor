@@ -20,15 +20,16 @@ package ch.ehi.umleditor.application;
 import ch.ehi.basics.view.*;
 import javax.swing.*;
 import java.util.*;
+
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.view.*;
 /**
  * User Interface for a INTERLIS2Def.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:13 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2005-11-20 16:43:58 $
  */
-public class INTERLIS2DefDialog extends BaseDialog {
+public class INTERLIS2DefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
 	private static java.util.ResourceBundle resINTERLIS2DefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/INTERLIS2DefDialog");  //$NON-NLS-1$
 	ch.ehi.interlis.modeltopicclass.INTERLIS2Def interlis2Def = null;
@@ -107,12 +108,7 @@ public INTERLIS2DefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.El
 	setElement(element);
 	show();
 }
-/**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
- * Overwrite this method.
- * @see #genericPopupDisplay()
- */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
+public void adaptUserAction(EventObject event, Object control) {
 	getMniChange().setEnabled(getTblFileName().getSelectedRow() >= 0);
 }
 /**
@@ -880,7 +876,7 @@ private javax.swing.JTable getTblFileName() {
 			ivjTblFileName = new javax.swing.JTable();
 			ivjTblFileName.setName("TblFileName");
 			getScpFilename().setColumnHeaderView(ivjTblFileName.getTableHeader());
-			getScpFilename().getViewport().setBackingStoreEnabled(true);
+//			getScpFilename().getViewport().setBackingStoreEnabled(true);
 			ivjTblFileName.setBounds(0, 0, 200, 200);
 			ivjTblFileName.setEnabled(true);
 			ivjTblFileName.addColumn(getTbcLanguage());
@@ -1027,13 +1023,10 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniChange() {
-	int row = getTblFileName().getSelectedRow();
-	getTxtLanguage().setText((String)getTblFileName().getModel().getValueAt(row, 0));
-	getTxtFilename().setText((String)getTblFileName().getModel().getValueAt(row, 1));
-	getDlgFilename().setVisible(true);
+	changeObjects(null);
 }
 /**
  * Save ModelElement changes.
@@ -1051,7 +1044,7 @@ protected boolean save() {
  */
 private boolean saveFileName() {
 	if (!ElementUtils.trySetName(interlis2Def, getTxtFilename().getText(), getTxtLanguage().getText())) {
-		new WarningDialog(getDlgFilename(), resINTERLIS2DefDialog.getString("CTNameConflict"), resINTERLIS2DefDialog.getString("CENameExists")); //$NON-NLS-2$ //$NON-NLS-1$
+	    ch.softenvironment.view.BaseDialog.showWarning((java.awt.Component)getDlgFilename(), resINTERLIS2DefDialog.getString("CTNameConflict"), resINTERLIS2DefDialog.getString("CENameExists")); //$NON-NLS-2$ //$NON-NLS-1$
 		return false;
 	}
 	getDlgFilename().dispose();
@@ -1102,5 +1095,28 @@ private void setLanguageTable() {
 
 	getTblFileName().setModel(new EditorTableModel());
 	((EditorTableModel)getTblFileName().getModel()).setTranslationFile(filenames.iterator());
+}
+
+public void changeObjects(Object source) {
+    try {
+        int row = getTblFileName().getSelectedRow();
+        getTxtLanguage().setText((String)getTblFileName().getModel().getValueAt(row, 0));
+        getTxtFilename().setText((String)getTblFileName().getModel().getValueAt(row, 1));
+        getDlgFilename().setVisible(true);
+    } catch(Throwable e) {
+        handleException(e);
+    }
+}
+public void copyObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void newObject(Object source) {
+    // TODO Auto-generated method stub
+    
+}
+public void removeObjects(Object source) {
+    // TODO Auto-generated method stub
+    
 }
 }

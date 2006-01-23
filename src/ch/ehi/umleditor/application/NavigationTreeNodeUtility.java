@@ -24,27 +24,28 @@ import javax.swing.Icon;
  * Utility Class for TreeNode's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:41 $
+ * @version $Revision: 1.3 $ $Date: 2004-09-20 19:09:29 $
  */
 public class NavigationTreeNodeUtility {
   private NavigationTreeNodeUtility(){
   }
   /** returns the appropriate icon
    */
-  static public Icon getIcon(Object node) {
-        String fileName;
+  static public Icon getIcon(Object node, boolean expanded) {
+    String fileName = null;
+    
   	if (node instanceof ch.ehi.umleditor.umlpresentation.Diagram) {
 		fileName = "classDiagram.gif";//$NON-NLS-1$
 	}else if (node instanceof ch.ehi.uml1_4.implementation.UmlModel) {
-		return getPackageLeafIcon();
+		return getPackageLeafIcon(expanded);
 	} else if (node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def) {
-		return getPackageLeafIcon();
+		return getPackageLeafIcon(expanded);
 	} else if (node instanceof ch.ehi.interlis.modeltopicclass.ModelDef) {
-		return getPackageLeafIcon();
+		return getPackageLeafIcon(expanded);
 	} else if (node instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
-		return getPackageLeafIcon();
+		return getPackageLeafIcon(expanded);
 	} else if (node instanceof ch.ehi.uml1_4.implementation.UmlPackage) {
-		return getPackageLeafIcon();
+		return getPackageLeafIcon(expanded);
 	} else {
 		// all other types are standard
 		fileName = ch.softenvironment.util.StringUtils.getPureClassName(node) + ".gif";
@@ -63,7 +64,11 @@ public class NavigationTreeNodeUtility {
   static public String getName(Object element) {
 	if (element instanceof ch.ehi.uml1_4.implementation.UmlModel) {
 		// show the fileName of UmlModel
-                java.io.File file=LauncherView.getInstance().getCurrentFile();
+        java.io.File file = null;
+        if (LauncherView.getInstance() != null) {
+        	// allow external tools to use this Utility
+        	file = LauncherView.getInstance().getCurrentFile();
+        }
 		return file!=null ? file.getName() : LauncherView.defaultFileName;
 	} else if (isModelElement(element)) {
 		return ((ModelElement)element).getDefLangName();
@@ -75,8 +80,15 @@ public class NavigationTreeNodeUtility {
    * Return the standard package-Symbol.
    * @return Icon representing a Package.
    */
-  static private Icon getPackageLeafIcon() {
-  	return javax.swing.UIManager.getIcon("Tree.closedIcon");//$NON-NLS-1$
+  static private Icon getPackageLeafIcon(boolean expanded) {
+/*
+  	if (expanded) {
+  		
+  	} else {
+  		return javax.swing.UIManager.getIcon("Tree.closedIcon");
+  	}
+*/
+  	return null; // will adapt closed/openedPackage automatically
   }
   /**
    * Return whether Specification Dialog exists or not.

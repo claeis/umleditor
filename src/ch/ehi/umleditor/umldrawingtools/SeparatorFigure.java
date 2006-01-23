@@ -26,9 +26,9 @@ import CH.ifa.draw.figures.*;
  * from other figures beneath in addition.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:03 $
+ * @version $Revision: 1.2 $ $Date: 2003-12-30 22:07:47 $
  */
-public class SeparatorFigure extends LineFigure {
+class SeparatorFigure extends LineFigure {
 	private boolean lineVisible = true;
 
 //	static final long serialVersionUID = 7110919055213080660L;

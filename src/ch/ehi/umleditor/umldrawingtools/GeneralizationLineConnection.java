@@ -35,10 +35,9 @@ import ch.softenvironment.view.*;
  * by ClassFigures).
  *
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:56 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-23 16:46:01 $
  */
 public class GeneralizationLineConnection extends EdgeFigure {
-	private static java.util.ResourceBundle resGeneralizationLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/GeneralizationLineConnection");  //$NON-NLS-1$
 	private boolean showDrawing = true;
 /**
  * Used for new Generalization's in ClassDiagram's by UML-Tool.
@@ -71,7 +70,7 @@ public GeneralizationLineConnection(ClassDiagramView classDiagram, Figure start,
  * @return newly created popup menu
  */
 protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu editMenu = new JMenu(MENU_EDIT);
+	JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
 
 	editMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
 		public void actionPerformed(ActionEvent event) {
@@ -100,7 +99,7 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {}
  * @return  true, if an inheritance relationship can be established, false otherwise
  */
 public boolean canConnect(Figure start, Figure end) {
-	String typeError = resGeneralizationLineConnection.getString("CWGeneralizationNodeTypes"); //$NON-NLS-1$
+	String typeError = NodeFigure.getResourceString(GeneralizationLineConnection.class, "CWGeneralizationNodeTypes"); //$NON-NLS-1$
 	GeneralizableElement child = null;
 	GeneralizableElement parent = null;
 
@@ -109,20 +108,20 @@ public boolean canConnect(Figure start, Figure end) {
 		child = getGeneralizableElement(start);
 		parent = getGeneralizableElement(end);
 	} catch(ClassCastException e) {
-		shouldWarn(this, typeError);
+		shouldWarn(typeError);
 		return false;
 	}
 
 	if (!(((child instanceof AbstractClassDef) && (parent instanceof AbstractClassDef)) ||
 			((child instanceof TopicDef) && (parent instanceof TopicDef)))) {
-		shouldWarn(this, typeError);
+		shouldWarn(typeError);
 		return false;
 	}
 
 	if (getEdge() == null) {
 		String error = ElementUtils.checkInheritance(parent, child);
 		if (error != null) {
-			shouldWarn(this, error);
+			shouldWarn(error);
 			return false;
 		}
 	} // else given Generalization was dragged
@@ -145,10 +144,10 @@ public final void draw(Graphics g) {
  * @return Element	superclass/parent/generalization(end)
  */
 protected Element getEndElement() {
-	if (getModelElement() == null) {
-		return null;
-	} else {
+	if ((getModelElement() != null) && ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).containsParent()) {
 		return ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).getParent();
+	} else {
+		return null;
 	}
 }
 /**
@@ -156,10 +155,10 @@ protected Element getEndElement() {
  * @return Element	subclass/child/specialization/(start)
  */
 protected Element getStartElement() {
-	if (getModelElement() == null) {
-		return null;
-	} else {
+	if ((getModelElement() != null) && ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).containsChild()) {
 		return ((ch.ehi.uml1_4.foundation.core.Generalization)getModelElement()).getChild();
+	} else {
+		return null;
 	}
 }
 /**
@@ -193,7 +192,7 @@ protected void handleConnect(Figure start, Figure end) {
 			}			
 	    } // else dragging of existing Generalization was done
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, resGeneralizationLineConnection.getString("CEGeneralizationFailed"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, NodeFigure.getResourceString(GeneralizationLineConnection.class, "CEGeneralizationFailed"), e); //$NON-NLS-1$
 	}
 }
 /**
@@ -212,8 +211,8 @@ protected void showDecoration() {
  * @see shouldWarn(EdgeFigure, Figure, Figure)
  */
 protected void showIllegalRelationship(String warning) {
-	new WarningDialog(ch.ehi.umleditor.application.LauncherView.getInstance(),
-						resGeneralizationLineConnection.getString("CWGeneralizationNotAllowed"), //$NON-NLS-1$
+    BaseDialog.showWarning((java.awt.Component)ch.ehi.umleditor.application.LauncherView.getInstance(),
+						NodeFigure.getResourceString(GeneralizationLineConnection.class, "CWGeneralizationNotAllowed"), //$NON-NLS-1$
 						warning);
 }
 /**

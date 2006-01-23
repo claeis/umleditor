@@ -23,7 +23,7 @@ import java.awt.Component;
  * TreeCellRenderer for a TreeNode.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:39 $
+ * @version $Revision: 1.2 $ $Date: 2004-09-20 19:09:29 $
  */
 public class NavigationTreeCellRenderer	extends javax.swing.tree.DefaultTreeCellRenderer {
 /**
@@ -50,7 +50,7 @@ public Component getTreeCellRendererComponent(
 
 	super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
-        javax.swing.Icon icon=NavigationTreeNodeUtility.getIcon(value);
+        javax.swing.Icon icon=NavigationTreeNodeUtility.getIcon(value, expanded);
         if(icon!=null){
           setIcon(icon);
         }

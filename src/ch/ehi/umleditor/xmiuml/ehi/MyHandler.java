@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:41:29 $
-// $Revision: 1.1.1.1 $
+// $Date: 2005-02-21 15:53:48 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3CF1D26803CA package "MyHandler"
@@ -19,6 +19,9 @@ import org.xml.sax.*;
 import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
+import ch.ehi.uml1_4.implementation.UmlModel;
+import ch.softenvironment.util.Tracer;
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3CF1D26803CA import "MyHandler"
 
 public class MyHandler implements org.xml.sax.ContentHandler
@@ -33,11 +36,15 @@ public class MyHandler implements org.xml.sax.ContentHandler
   // please fill in/modify the following section
   // -beg- preserve=yes 3CF1D26803CA detail_end "MyHandler"
 
+  private Locator currentLocation=null;
+  private ErrorHandler eh=null;
+  
   // map<String TID, Object obj>
   private java.util.Map objMap = new java.util.HashMap();
   private java.util.Set usedObjsTID = new java.util.HashSet();
   private java.util.Set missingObjsTID = new java.util.HashSet();
   private Object actualObject = null;
+  private UmlModel umlModel = null;
   private String currentElementTag=null;
   private boolean secondPass=false;
   private boolean inNlsString=false;
@@ -60,6 +67,7 @@ public class MyHandler implements org.xml.sax.ContentHandler
 
   public void setDocumentLocator(Locator locator)
   {
+  	currentLocation=locator;
   }
 
   public void startDocument() throws SAXException
@@ -84,8 +92,12 @@ public class MyHandler implements org.xml.sax.ContentHandler
   public void processingInstruction(String target, String data) throws SAXException
   {
   }
-
-  public void startElement(String namespaceURI, String localName, String rawName, Attributes atts) throws SAXException
+  public void setErrorHandler(ErrorHandler handler)
+  {
+  	eh=handler;
+  }
+  public void startElement(String namespaceURI, String localName, String rawName, Attributes atts) 
+  	throws SAXException
   {
     Object attsObj = null;
     Class objClass = null;
@@ -108,17 +120,13 @@ public class MyHandler implements org.xml.sax.ContentHandler
         {
           // Objekt noch nicht erzeugt. neues Objekt erzeugen
           Class cls=Class.forName(qualifiedClassName);
-//          try{
             attsObj = cls.newInstance();
-/*          }catch(java.lang.InstantiationException ex){
-        ex.printStackTrace();
-      ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","new");
-            ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
-              ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
-          }
-*/          // Abbildung der TID auf Objekt in Tabelle eintragen
+          // Abbildung der TID auf Objekt in Tabelle eintragen
           objMap.put(atts.getValue(0), attsObj);
           actualObject = attsObj;
+          if(actualObject instanceof UmlModel){
+          	umlModel=(UmlModel)actualObject;
+          }
         }
         else
         {
@@ -134,20 +142,20 @@ public class MyHandler implements org.xml.sax.ContentHandler
           currentObjObjectAdds=(HashMap)setObjects.get(actualObject.getClass());
         }
       }catch(IllegalAccessException ex){
-        ex.printStackTrace();
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+        throw new SAXException(ex);
       }catch(java.lang.InstantiationException ex){
-      //  ex.printStackTrace();
-      // LauncherView.log() doesn't work. don't know why not
-      //System.out.println("hallo");
-      //ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","hallo");
-//            ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
-      System.out.println("tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+			ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
+			,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+		throw new SAXException(ex);
       }catch(ClassNotFoundException ex){
-        ex.printStackTrace();
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
               ,"tid <"+tid+"> tag <"+localName+"> class <"+qualifiedClassName+">"+ex.getLocalizedMessage());
+		EhiLogger.debug("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+		throw new SAXException(ex);
       }
 
 
@@ -161,7 +169,7 @@ public class MyHandler implements org.xml.sax.ContentHandler
     }
     else if(atts.getLength()>1)
     {
-      System.out.println("You can't have more then 1 Attribute!");
+      eh.error(new SAXParseException("You can't have more then 1 Attribute!",currentLocation));
     }
 
   }
@@ -197,34 +205,43 @@ public class MyHandler implements org.xml.sax.ContentHandler
                 Method set=(Method)currentObjValueSets.get(currentElementTag);
                 Class parameterType=set.getParameterTypes()[0];
                 Object valueObject=null;
-                if(parameterType==Boolean.TYPE || parameterType==Class.forName("java.lang.Boolean")){
+                if(parameterType==Boolean.TYPE || parameterType==java.lang.Boolean.class){
                   valueObject = Boolean.valueOf(value);
-                }else if(parameterType==Character.TYPE || parameterType==Class.forName("java.lang.Character")){
+                }else if(parameterType==Character.TYPE || parameterType==java.lang.Character.class){
                   valueObject = new Character(value.charAt(0));
-                }else if(parameterType==Byte.TYPE || parameterType==Class.forName("java.lang.Byte")){
+                }else if(parameterType==Byte.TYPE || parameterType==java.lang.Byte.class){
                   valueObject = Byte.valueOf(value);
-                }else if(parameterType==Short.TYPE || parameterType==Class.forName("java.lang.Short")){
+                }else if(parameterType==Short.TYPE || parameterType==java.lang.Short.class){
                   valueObject = Short.valueOf(value);
-                }else if(parameterType==Integer.TYPE || parameterType==Class.forName("java.lang.Integer")){
+                }else if(parameterType==Integer.TYPE || parameterType==java.lang.Integer.class){
                   valueObject = Integer.valueOf(value);
-                }else if(parameterType==Long.TYPE || parameterType==Class.forName("java.lang.Long")){
+                }else if(parameterType==Long.TYPE || parameterType==java.lang.Long.class){
                   valueObject = Long.valueOf(value);
-                }else if(parameterType==Float.TYPE || parameterType==Class.forName("java.lang.Float")){
+                }else if(parameterType==Float.TYPE || parameterType==java.lang.Float.class){
                   valueObject = Float.valueOf(value);
-                }else if(parameterType==Double.TYPE || parameterType==Class.forName("java.lang.Double")){
+                }else if(parameterType==Double.TYPE || parameterType==java.lang.Double.class){
                   valueObject = Double.valueOf(value);
-                }else if(parameterType==Class.forName("java.lang.String")){
+                }else if(parameterType==java.lang.String.class){
                   valueObject = value;
                 }
                 // invoke setXX() method on current object to set value
                 set.invoke(actualObject,new Object[]{valueObject});
               }else{
-                System.out.println("unexpected Element <"+currentElementTag+">");
+                eh.error(new SAXParseException("unexpected Element <"+currentElementTag+">",currentLocation));
               }
             }
-            catch(Throwable ex){
-              ex.printStackTrace();
+			catch(IllegalArgumentException ex){
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				throw new SAXException(ex);
+			}
+            catch(IllegalAccessException ex){
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+            	throw new SAXException(ex);
             }
+			catch(InvocationTargetException ex){
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				throw new SAXException(ex);
+			}
           }
         }
         content=null;
@@ -249,9 +266,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
     return qualifiedClassName;
   }
 
-  public Object getActualObject()
+  public Object getUmlModel()
   {
-    return actualObject;
+    return umlModel;
   }
 
 

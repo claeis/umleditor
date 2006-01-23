@@ -20,10 +20,11 @@ package ch.ehi.umleditor.application;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import ch.softenvironment.util.DeveloperException;
-import java.awt.event.*;
+import ch.softenvironment.view.BasePanel;
+import ch.softenvironment.view.DataPanel;
 
+import java.awt.event.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidKind;
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
@@ -32,11 +33,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
  * panel to view/edit a INTERLIS OidType.
  *
  * @author: ce
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:08 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
  */
-public class IliBaseTypeOidPanel
-  extends ch.softenvironment.view.DataPanel {
-  static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(IliBaseTypeOidPanel.class);
+public class IliBaseTypeOidPanel extends BasePanel implements DataPanel {
   GridBagLayout gridBagLayout1 = new GridBagLayout();
   JRadioButton rbAny = new JRadioButton();
   JRadioButton rbText = new JRadioButton();
@@ -55,7 +54,7 @@ public class IliBaseTypeOidPanel
   }
 
   void jbInit() throws Exception {
-    rbAny.setText(rsrc.getString("RbAny_text"));
+    rbAny.setText(getResourceString("RbAny_text"));
     rbAny.addItemListener(new java.awt.event.ItemListener() {
 
       public void itemStateChanged(ItemEvent e) {
@@ -63,14 +62,14 @@ public class IliBaseTypeOidPanel
       }
     });
     this.setLayout(gridBagLayout1);
-    rbText.setText(rsrc.getString("RbText_text"));
+    rbText.setText(getResourceString("RbText_text"));
     rbText.addItemListener(new java.awt.event.ItemListener() {
 
       public void itemStateChanged(ItemEvent e) {
         kind_itemStateChanged(e);
       }
     });
-    rbNumeric.setText(rsrc.getString("RbNumeric_text"));
+    rbNumeric.setText(getResourceString("RbNumeric_text"));
     rbNumeric.addItemListener(new java.awt.event.ItemListener() {
 
       public void itemStateChanged(ItemEvent e) {

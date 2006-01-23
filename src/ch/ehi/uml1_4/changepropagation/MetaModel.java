@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:37:16 $
-// $Revision: 1.1.1.1 $
+// $Date: 2005-02-21 15:55:35 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3C454ADA00E4 package "MetaModel"
@@ -15,13 +15,13 @@ import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
 // import declarations
 // please fill in/modify the following section
-// -beg- preserve=no 3C454ADA00E4 import "MetaModel"
-
+// -beg- preserve=yes 3C454ADA00E4 import "MetaModel"
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3C454ADA00E4 import "MetaModel"
 
 /** This class implements a singleton pattern and is the subject in an oberver pattern.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:16 $
+ *  @version $Revision: 1.5 $ $Date: 2005-02-21 15:55:35 $
  */
 public class MetaModel
 {
@@ -77,9 +77,15 @@ public class MetaModel
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3C47EB26012C body3C454ADA00E4 "notifyChange"
-    if(doEventLogging){
-      ch.softenvironment.util.Tracer.getInstance().debug(this, "notifyChange()", change.toString());
+    // no change propagation?
+    if(!doChangePropagation){
+    	return;
     }
+    // log change?
+    if(doEventLogging){
+      EhiLogger.traceState(change.toString());
+    }
+    // notify change
     java.util.Iterator it=iteratorMetaModelListener();
     while(it.hasNext()){
       MetaModelListener listener=(MetaModelListener)it.next();
@@ -194,6 +200,16 @@ public class MetaModel
     boolean ret=getInstance().doEventLogging;
     getInstance().doEventLogging=doIt;
     return ret;
+  }
+  private boolean doChangePropagation=true;
+  /** enable/disable change propagation
+   * @returns old status
+   */
+  static public boolean setChangePropagation(boolean doIt)
+  {
+	boolean ret=getInstance().doChangePropagation;
+	getInstance().doChangePropagation=doIt;
+	return ret;
   }
 
   // -end- 3C454ADA00E4 detail_end "MetaModel"

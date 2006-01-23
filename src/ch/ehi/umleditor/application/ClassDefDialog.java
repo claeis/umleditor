@@ -17,6 +17,8 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.EventObject;
+
 import ch.ehi.interlis.attributes.*;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
@@ -25,10 +27,10 @@ import ch.softenvironment.util.*;
 /**
  * User Interface for a ClassDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:35 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.4 $ $Date: 2005-11-05 20:06:09 $
  */
-public class ClassDefDialog extends BaseDialog {
+public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
 	private static java.util.ResourceBundle resClassDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ClassDefDialog");
 	ch.ehi.interlis.modeltopicclass.ClassDef classDef = null;
@@ -122,13 +124,17 @@ public ClassDefDialog(java.awt.Frame owner, boolean modal) {
 	initialize();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * @see ch.softenvironment.view.ListMenuChoice#adaptUserAction(EventObject, Object)
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
-	getMniOpenAttributeSpecication().setEnabled(isSelected);
-	getMniRemoveAttribute().setEnabled(isSelected);
-	mniMoveDownAttribute.setEnabled(isSelected);
+public void adaptUserAction(EventObject event, Object control) {
+    try {
+    	boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
+    	getMniOpenAttributeSpecication().setEnabled(isSelected);
+    	getMniRemoveAttribute().setEnabled(isSelected);
+    	mniMoveDownAttribute.setEnabled(isSelected);
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 /**
  * connEtoC1:  (BtnOk.action.actionPerformed(java.awt.event.ActionEvent) --> ClassDefDialog.okPressed()V)
@@ -1120,23 +1126,16 @@ private void initialize() {
 	// user code end
 }
 /**
- * Add a new AttributeDef to Attributes-Table.
+ * @deprecated
  */
 private void mniNewAttribute() {
-	try {
-		// update model
-		AttributeDef attributeDef = ElementFactory.createAttributeDef(classDef);
-		// update view
-		((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(null);
 }
 /**
- * Remove selected Attributes from Attributes-List.
+ * @deprecated
  */
 private void mniRemoveAttribute() {
-	((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+	removeObjects(null);
 }
 /**
  * Move down selected Attribute in Attributes-List.
@@ -1149,11 +1148,10 @@ private void mniMoveDownAttribute() {
 }
 
 /**
- * Show the Specification Dialog of the selected Attributes.
- * @author Peter Hirzel
+ * @deprecated
  */
 private void mniShowAttributeSpecification() {
-	((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+	changeObjects(getTblAttributes());
 }
 /**
  * Save ModelElement changes.
@@ -1220,12 +1218,50 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
-	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(classDef.iteratorFeature());
+	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(classDef);
 
 	// page Constraints
 	getPnlConstraints().setConstraints(classDef);
 
 	// page ParameterDef
 	getPnlParameters().setParameterDefs(classDef);
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#changeObjects(java.lang.Object)
+ */
+public void changeObjects(Object source) {
+	try {
+		if ((source != null) && (source.equals(getMnuAttributes()) || source.equals(getTblAttributes()))) {
+			((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#copyObject(java.lang.Object)
+ */
+public void copyObject(Object source) {
+	// TODO Auto-generated method stub
+	
+}
+/** 
+ * @see ch.softenvironment.view.ListMenuChoice#newObject(java.lang.Object)
+ */
+public void newObject(Object source) {
+	try {
+		// update model
+		AttributeDef attributeDef = ElementFactory.createAttributeDef(classDef);
+		// update view
+		((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#removeObjects(java.lang.Object)
+ */
+public void removeObjects(Object source) {
+	((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
 }
 }

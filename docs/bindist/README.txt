@@ -1,7 +1,7 @@
 UML-Editor - The UML/INTERLIS Editor
 
 System Configuration
-In order to execute the UML Editor, the JAVA run-time environment (JRE) version 1.3.1 or a more recent version must be installed on your system.
+In order to execute the UML Editor, the JAVA run-time environment (JRE) version 1.4.1 or a more recent version must be installed on your system.
 A free version of the JAVA run time environment (JRE) is available at the website http://www.java.com/.
 
 Installation

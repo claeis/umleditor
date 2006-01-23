@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:40 $
-// $Revision: 1.1.1.1 $
+// $Date: 2005-02-21 15:53:06 $
+// $Revision: 1.7 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -49,8 +49,9 @@ public class HtmlWriter
   static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlWriter.class);
 
   // used in STRUCTURE pass to suppress links to element definitions
-  private boolean linkElements;
+  private boolean linkElements;  
 
+  private ch.interlis.ili2c.generator.IndentPrintWriter clsFile=null;
   private java.io.Writer out=null;
   //hashmap<object, string>
   // indexMap is setup in CONTENTS pass
@@ -122,7 +123,10 @@ public class HtmlWriter
     walkTree(apackage);
 
     pass=BODY;
+    //clsFile=new ch.interlis.ili2c.generator.IndentPrintWriter(new java.io.BufferedWriter(new java.io.FileWriter("c:/tmp/ce.txt")));
     walkTree(apackage);
+    //clsFile.close();
+    //clsFile=null;
 
     pass=INDEX;
     walkTree(apackage);
@@ -155,7 +159,12 @@ public class HtmlWriter
     String aName = numeration+"_"+defLangName;
 
     //??concated value für die Angabe der Werte+serialNumber, bzw. index vom Value
-    String value = numeration+" "+defLangName;
+    String value;
+    if(suppressChNr){
+		value = defLangName;
+    }else{
+		value = numeration+" "+defLangName;
+    }
 
 
     //damit nur einmal die indexMap gefüllt wird!
@@ -172,7 +181,11 @@ public class HtmlWriter
       int numerationId[] = (int[])indexMap.get((ModelElement)apackage);
 
       //concatedValue: numerationId+deflangName
-      concatedValue = Integer.toString(numerationId[0])+" "+defLangName;
+	  if(suppressChNr){
+		concatedValue = defLangName;
+	  }else{
+		concatedValue = Integer.toString(numerationId[0])+" "+defLangName;
+	  }
 
       //concatedValue für den Link innerhalb der HTML-Datei
       aNameStructure = Integer.toString(numerationId[0])+"_"+defLangName;
@@ -247,13 +260,21 @@ public class HtmlWriter
 
               if(pass==BODY)
               {
-                out.write("<H2><a name=\""+aNamePackage+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTpackages")+"</a></H2>");newline();
+              	if(suppressChNr){
+					out.write("<H2><a name=\""+aNamePackage+"\">"+rsrc.getString("CTpackages")+"</a></H2>");newline();
+              	}else{
+					out.write("<H2><a name=\""+aNamePackage+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTpackages")+"</a></H2>");newline();
+              	}
                 out.write("<UL>");newline();
               }
 
               if(pass==CONTENTS)
               {
-                out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+aNamePackage+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTpackages")+"</a></p>");newline();
+				if(suppressChNr){
+					out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+aNamePackage+"\">"+rsrc.getString("CTpackages")+"</a></p>");newline();
+				}else{
+					out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+aNamePackage+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTpackages")+"</a></p>");newline();
+				}
                 //out.write("<UL>");newline();
               }
               hasHeader=true;
@@ -301,7 +322,11 @@ public class HtmlWriter
           if(!hasHeader){
             if(pass==BODY)
             {
-              out.write("<H2><a name=\""+numeration+"."+iddP+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTclasses")+"</a></H2>");newline();
+            	if(suppressChNr){
+					out.write("<H2><a name=\""+numeration+"."+iddP+"\">"+rsrc.getString("CTclasses")+"</a></H2>");newline();
+            	}else{
+					out.write("<H2><a name=\""+numeration+"."+iddP+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTclasses")+"</a></H2>");newline();
+            	}
               out.write("<UL>");newline();
             }
 
@@ -311,7 +336,11 @@ public class HtmlWriter
               classesSectionNo[0] = numeration;
               classesSectionNo[1] = iddP;
               indexMap.put("Klassen", classesSectionNo);
-              out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+numeration+"."+iddP+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTclasses")+"</a></p>");newline();
+              if(suppressChNr){
+				out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+numeration+"."+iddP+"\">"+rsrc.getString("CTclasses")+"</a></p>");newline();
+              }else{
+				out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+numeration+"."+iddP+"\">"+numeration+"."+iddP+" "+rsrc.getString("CTclasses")+"</a></p>");newline();
+              }
             }
 
             hasHeader=true;
@@ -377,7 +406,11 @@ public class HtmlWriter
       //für den Link innerhalb der HTML-Datei
       aName = numeration+"_"+classDefName;
       //concatedValue, dass geschrieben wird später
-      value = numeration+" "+classDefName;
+      if(suppressChNr){
+		value = classDefName;
+      }else{
+		value = numeration+" "+classDefName;
+      }
     }else{
       value = classDefName;
     }
@@ -385,6 +418,7 @@ public class HtmlWriter
     if(pass==BODY)
     {
       out.write("<H2><a name=\""+aName+"\">"+value+"</a></H2>");newline();
+      if(clsFile!=null)clsFile.println(aclass.getDefLangName());
     }
 
     if(pass==CONTENTS)
@@ -504,18 +538,49 @@ public class HtmlWriter
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CEE8B8A003D body3CEE891B03C7 "visitAttribute"
-    String type=getAttrType(attr);
+    String typeLabel=getAttrType(attr);
     if(pass==BODY)
     {
       String style="";
       if(createSeperator){
         style=" STYLE=\"border-top: solid black; border-top-width: 2px\"";
       }
+      if(clsFile!=null){
+		clsFile.indent();
+		clsFile.println(attr.getDefLangName());
+      }
       out.write("<TR><TD "+style+">"+encodeString(attr.getDefLangName())
           +"</TD><TD "+style+">"+mapMultiplicity(attr.getMultiplicity())
-          +"</TD><TD "+style+">"+encodeString(type)
+          +"</TD><TD "+style+">"+encodeString(typeLabel)
           +"</TD><TD "+style+">"+encodeDescription(mapNlsString(attr.getDocumentation()))
           +"</TD></TR>");newline();
+		ch.ehi.interlis.domainsandconstants.Type type=null;
+		ch.ehi.interlis.attributes.DomainAttribute attrType=(ch.ehi.interlis.attributes.DomainAttribute)((AttributeDef)attr).getAttrType();
+		if(attrType.containsDirect()){
+		  type=attrType.getDirect();
+		}
+		if(type!=null && type instanceof Enumeration){
+			if(pass==BODY)
+			{
+				if(clsFile!=null)clsFile.indent();
+				Iterator elei=getEnumEleIterator((Enumeration)type);
+				while(elei.hasNext()){
+				  ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=(ch.ehi.interlis.domainsandconstants.basetypes.EnumElement)elei.next();
+					  String eleName=getEnumEleName(ele);
+
+					if(clsFile!=null)clsFile.println(eleName);
+					out.write("<TR><TD "+style+">"
+						+"</TD><TD "+style+">"
+						+"</TD><TD "+style+">"+encodeString(eleName)
+						+"</TD><TD "+style+">"+encodeDescription(mapNlsString(ele.getDocumentation()))
+						+"</TD></TR>");newline();
+				}
+				if(clsFile!=null)clsFile.unindent();
+			}
+		}
+		if(clsFile!=null)clsFile.unindent();
+
+
     }
     return;
     // -end- 3CEE8B8A003D body3CEE891B03C7 "visitAttribute"
@@ -545,6 +610,11 @@ public class HtmlWriter
           +"</TD><TD"+style+">"+encodeString(type)
           +"</TD><TD"+style+">"+encodeDescription(mapNlsString(role.getDocumentation()))
           +"</TD></TR>");newline();
+      if(clsFile!=null){
+		clsFile.indent();
+		clsFile.println(role.getDefLangName());
+		clsFile.unindent();
+      }
     }
     return;
     // -end- 3CEE8BA20395 body3CEE891B03C7 "visitRole"
@@ -598,7 +668,11 @@ public class HtmlWriter
         ret=rsrc.getString("CTtypeTEXT");
       }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
         ch.ehi.interlis.domainsandconstants.basetypes.NumericType num=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)type;
-        ret=num.getMinDec().toString()+".."+num.getMaxDec().toString();
+        if(num.getMinDec()!=null && num.getMaxDec()!=null){
+			ret=num.getMinDec().toString()+".."+num.getMaxDec().toString();
+        }else{
+			ret=rsrc.getString("CTtypeNUMERIC");
+        }
         if(num.containsUnitDef()){
           ret=ret+"["+encodeString(num.getUnitDef().getDefLangName())+"]";
         }
@@ -931,10 +1005,10 @@ public class HtmlWriter
     public int compare(Object o1, Object o2)
     {
       if(!(o1 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
       }
       if(!(o2 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
       }
       ModelElement e1=(ModelElement)o1;
       ModelElement e2=(ModelElement)o2;
@@ -957,10 +1031,10 @@ public class HtmlWriter
     public int compare(Object o1, Object o2)
     {
       if(!(o1 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o1.toString());
       }
       if(!(o2 instanceof ModelElement)){
-        ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
+        //ch.softenvironment.util.Tracer.getInstance().debug(o2.toString());
       }
       ModelElement e1=(ModelElement)o1;
       ModelElement e2=(ModelElement)o2;
@@ -1053,7 +1127,11 @@ public class HtmlWriter
       //für den Link innerhalb der HTML-Datei
       aName = numeration+"_"+domDefName;
       //concatedValue, dass geschrieben wird später
-      value = numeration+" "+domDefName;
+	  if(suppressChNr){
+		value = domDefName;
+	  }else{
+		value = numeration+" "+domDefName;
+	  }
     }else{
       value = domDefName;
     }
@@ -1066,6 +1144,7 @@ public class HtmlWriter
     if(pass==CONTENTS)
     {
       out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"+aName+"\">"+value+"</a></P>");newline();
+      if(clsFile!=null)clsFile.println(domdef.getDefLangName());
     }
 
     if(pass==STRUCTURE)
@@ -1093,6 +1172,7 @@ public class HtmlWriter
         out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"+rsrc.getString("CTtabDescription")+"</font></TD></TR>");newline();
         boolean createSeperator=true;
         Iterator elei=getEnumEleIterator(def);
+        if(clsFile!=null)clsFile.indent();
         while(elei.hasNext()){
           ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=(ch.ehi.interlis.domainsandconstants.basetypes.EnumElement)elei.next();
     if(pass==BODY)
@@ -1107,9 +1187,11 @@ public class HtmlWriter
       out.write("<TR><TD"+style+">"+encodeString(eleName)
           +"</TD><TD"+style+">"+encodeDescription(mapNlsString(ele.getDocumentation()))
           +"</TD></TR>");newline();
+      if(clsFile!=null)clsFile.println(eleName);
     }
 
         }
+        if(clsFile!=null)clsFile.unindent();
         out.write("</TABLE>");newline();
     }
     return;
@@ -1142,6 +1224,12 @@ public class HtmlWriter
     getEnumEleSubEles(accu,def);
     return accu.iterator();
   }
+
+  // suppress chapter numbers
+  private boolean suppressChNr=false;
+	public void setChapterNumbering(boolean suppress){	
+		suppressChNr=suppress;
+	}
   // -end- 3CEE891B03C7 detail_end "HtmlWriter"
 
 }

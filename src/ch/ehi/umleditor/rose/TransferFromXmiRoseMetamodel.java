@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2003-12-23 10:40:44 $
-// $Revision: 1.1.1.1 $
+// $Date: 2005-01-17 09:56:00 $
+// $Revision: 1.3 $
 //
 
 // -beg- preserve=no 3E0DB0710357 package "TransferFromXmiRoseMetamodel"
@@ -98,7 +98,6 @@ public class TransferFromXmiRoseMetamodel
     // declare any checked exceptions
     // please fill in/modify the following section
     // -beg- preserve=no 3E0F4B74007C throws3E0DB0710357 "visitValue"
-
     // -end- 3E0F4B74007C throws3E0DB0710357 "visitValue"
     {
     // please fill in/modify the following section
@@ -108,6 +107,7 @@ public class TransferFromXmiRoseMetamodel
     }
     if(obj instanceof XMIObject){
       XMIObject oneobj=(XMIObject)obj;
+      try{
       if(oneobj.getXMIName().equals("UML:Class")){
         return visitAbstractClass(oneobj,arg);
       }else if(oneobj.getXMIName().equals("UML:Association")){
@@ -130,9 +130,18 @@ public class TransferFromXmiRoseMetamodel
         return visitDiagram(oneobj,arg);
       }else if(oneobj.getXMIName().equals("UML:Attribute")){
         return visitAttribute(oneobj,arg);
+	  }else if(oneobj.getXMIName().equals("UML:Operation")){
+		return visitOperation(oneobj,arg);
+	  }else if(oneobj.getXMIName().equals("UML:Parameter")){
+		return visitParameter(oneobj,arg);
       }else if(oneobj.getXMIName().equals("UML:DiagramElement")){
         return visitDiagramElement(oneobj,arg);
       }
+	  }catch (java.lang.RuntimeException ex){
+	  	System.err.println("Id "+oneobj.getXMIId()+" :"+ex.getCause());
+	  	//ex.printStackTrace();
+	  	throw ex;
+	  }
     }else if(obj instanceof Collection){
       //System.out.println(obj);
       Collection elev=(Collection)obj;
@@ -289,7 +298,7 @@ public class TransferFromXmiRoseMetamodel
     }else{
       impclass=(ch.ehi.uml1_4.foundation.core.ModelElement)xmi2imp.get(aclass);
     }
-    // visit Attributes
+    // visit Attributes/Operations
     Object obj=aclass.getXMIValueOfValue("UML:Classifier.feature");
     visitValue(obj,impclass);
     // visit Generalization
@@ -925,6 +934,94 @@ public class TransferFromXmiRoseMetamodel
     }
     return min==1;
   }
+
+  public java.lang.Object visitOperation(XMIObject ops, java.lang.Object aclass)
+	{
+	if(aclass instanceof ch.ehi.interlis.modeltopicclass.AbstractClassDef){
+	  if(pass==2){
+		  ch.ehi.uml1_4.implementation.UmlOperation impop=new ch.ehi.uml1_4.implementation.UmlOperation();
+		  impop.setDefLangName((String)ops.getXMIValueOfValue("name"));
+		  String docu=findTaggedValue(ops.getXMIId(),"documentation");
+		  if(docu!=null){
+			impop.setDocumentation(new NlsString(docu));
+		  }
+		String visibility=(String)ops.getXMIValueOfValue("visibility");
+		if(visibility.equals("public")){
+			impop.setVisibility(ch.ehi.uml1_4.foundation.datatypes.VisibilityKind.PUBLIC);
+		}else if(visibility.equals("private")){
+			impop.setVisibility(ch.ehi.uml1_4.foundation.datatypes.VisibilityKind.PRIVATE);
+		}else if(visibility.equals("protected")){
+			impop.setVisibility(ch.ehi.uml1_4.foundation.datatypes.VisibilityKind.PROTECTED);
+		}else if(visibility.equals("package")){
+			impop.setVisibility(ch.ehi.uml1_4.foundation.datatypes.VisibilityKind.PACKAGE);
+		}
+		//isSpecification = 'false' 
+		String ownerScope=(String)ops.getXMIValueOfValue("ownerScope");
+		if(ownerScope.equals("instance")){
+			impop.setOwnerScope(ch.ehi.uml1_4.foundation.datatypes.ScopeKind.INSTANCE); 
+		}else if(ownerScope.equals("classifier")){
+			impop.setOwnerScope(ch.ehi.uml1_4.foundation.datatypes.ScopeKind.CLASSIFIER); 
+		}
+		String isQuery=(String)ops.getXMIValueOfValue("isQuery");
+		impop.setQuery(isQuery.equals("true")?true:false);
+		String concurrency=(String)ops.getXMIValueOfValue("concurrency");
+		if(concurrency.equals("sequential")){
+			impop.setConcurrency(ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind.SEQUENTIAL);
+		}else if(concurrency.equals("quarded")){
+			impop.setConcurrency(ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind.GUARDED);
+		}else if(concurrency.equals("concurrent")){
+			impop.setConcurrency(ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind.CONCURRENT);
+		}
+		String isRoot=(String)ops.getXMIValueOfValue("isRoot");
+		impop.setRoot(isRoot.equals("true")?true:false);
+		String isLeaf=(String)ops.getXMIValueOfValue("isLeaf");
+		impop.setLeaf(isLeaf.equals("true")?true:false);
+		String isAbstract=(String)ops.getXMIValueOfValue("isAbstract");
+		impop.setAbstract(isAbstract.equals("true")?true:false);
+		String specification=(String)ops.getXMIValueOfValue("specification");
+		impop.setSpecification(new NlsString(specification));
+
+		Object obj=ops.getXMIValueOfValue("UML:BehavioralFeature.parameter");
+		visitValue(obj,impop);
+
+		  ((ch.ehi.uml1_4.foundation.core.Classifier)aclass).addFeature(impop);
+	  }
+	}
+	return null;
+	}
+
+	public java.lang.Object visitParameter(XMIObject param, java.lang.Object ops)
+	  {
+	  if(ops instanceof ch.ehi.uml1_4.foundation.core.Operation){
+		if(pass==2){
+			ch.ehi.uml1_4.implementation.UmlParameter impparam=new ch.ehi.uml1_4.implementation.UmlParameter();
+			impparam.setDefLangName((String)param.getXMIValueOfValue("name"));
+			String docu=findTaggedValue(param.getXMIId(),"documentation");
+			if(docu!=null){
+			  impparam.setDocumentation(new NlsString(docu));
+			}
+		  // visibility = 'public'
+		  // isSpecification = 'false' 
+		   
+		  String kind=(String)param.getXMIValueOfValue("kind");
+		  if(kind.equals("inout")){
+			  impparam.setKind(ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.INOUT); 
+		  }else if(kind.equals("in")){
+			  impparam.setKind(ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.IN); 
+		  }else if(kind.equals("out")){
+			  impparam.setKind(ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.OUT); 
+		  }else if(kind.equals("return")){
+			  impparam.setKind(ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.RETURN); 
+		  }
+		  // type = 'G.1'
+
+
+			((ch.ehi.uml1_4.foundation.core.Operation)ops).addParameter(impparam);
+		}
+	  }
+	  return null;
+	  }
+
   // -end- 3E0DB0710357 detail_end "TransferFromXmiRoseMetamodel"
 
 }

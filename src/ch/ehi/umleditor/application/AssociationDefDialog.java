@@ -18,6 +18,8 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+import java.util.EventObject;
+
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.associations.*;
 import javax.swing.table.*;
@@ -25,12 +27,11 @@ import ch.softenvironment.view.*;
 /**
  * User Interface for an AssociationDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:28 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2005-11-05 20:06:09 $
  */
-public class AssociationDefDialog extends BaseDialog {
+public class AssociationDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
-	private static java.util.ResourceBundle resAssociationDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/AssociationDefDialog");
 	private ch.ehi.interlis.associations.AssociationDef associationDef = null;
 	private AssociationDefDerived currentViewRef = null;
 	private javax.swing.JMenuItem mniMoveDownAttribute = null;
@@ -137,21 +138,25 @@ public AssociationDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.
 	show();
 }
 /**
- * Adapt the given PopupMenu before displaying it (for e.g. disable Items).
+ * @see ch.softenvironment.view.ListMenuChoice#adaptUserAction(EventObject, Object)
  */
-protected void adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	if (popupMenu.equals(getMnuAttributes())) {
-		boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
-		getMniOpenAttributeSpecification().setEnabled(isSelected);
-		getMniRemoveAttribute().setEnabled(isSelected);
-		mniMoveDownAttribute.setEnabled(isSelected);
-	} else {
-		// must be Roles
-		boolean isSelected = getTblRoles().getSelectedRow() >= 0;
-		getMniOpenRoleSpecification().setEnabled(isSelected);
-		getMniRemoveRoleDef().setEnabled(isSelected);
-		mniMoveDownRole.setEnabled(isSelected);
-	}
+public void adaptUserAction(EventObject event, Object control) {
+    try {
+    	if (control.equals(getMnuAttributes())) {
+    		boolean isSelected = getTblAttributes().getSelectedRow() >= 0;
+    		getMniOpenAttributeSpecification().setEnabled(isSelected);
+    		getMniRemoveAttribute().setEnabled(isSelected);
+    		mniMoveDownAttribute.setEnabled(isSelected);
+    	} else {
+    		// must be Roles
+    		boolean isSelected = getTblRoles().getSelectedRow() >= 0;
+    		getMniOpenRoleSpecification().setEnabled(isSelected);
+    		getMniRemoveRoleDef().setEnabled(isSelected);
+    		mniMoveDownRole.setEnabled(isSelected);
+    	}
+    } catch(Throwable e) {
+        handleException(e);
+    }
 }
 /**
  * connEtoC1:  (BtnOk.action.actionPerformed(java.awt.event.ActionEvent) --> ClassDefDialog.okPressed()V)
@@ -622,7 +627,7 @@ private ReferencableComboBox getCbxViewableRef() {
 			ivjCbxViewableRef.setToolTipText("");
 			ivjCbxViewableRef.setEditable(false);
 			// user code begin {1}
-			ivjCbxViewableRef.setToolTipText(resAssociationDefDialog.getString("CbxViewableRef_toolTipText"));
+			ivjCbxViewableRef.setToolTipText(getResourceString("CbxViewableRef_toolTipText"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -645,8 +650,8 @@ private javax.swing.JCheckBox getChxAbstract() {
 			ivjChxAbstract.setToolTipText("");
 			ivjChxAbstract.setText("Abstrakt");
 			// user code begin {1}
-			ivjChxAbstract.setToolTipText(resAssociationDefDialog.getString("ChxAbstract_toolTipText"));
-			ivjChxAbstract.setText(resAssociationDefDialog.getString("ChxAbstract_text"));
+			ivjChxAbstract.setToolTipText(getResourceString("ChxAbstract_toolTipText"));
+			ivjChxAbstract.setText(getResourceString("ChxAbstract_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -670,8 +675,8 @@ private javax.swing.JCheckBox getChxFinal() {
 			ivjChxFinal.setText("Final");
 			ivjChxFinal.setEnabled(true);
 			// user code begin {1}
-			ivjChxFinal.setToolTipText(resAssociationDefDialog.getString("ChxFinal_toolTipText"));
-			ivjChxFinal.setText(resAssociationDefDialog.getString("ChxFinal_text"));
+			ivjChxFinal.setToolTipText(getResourceString("ChxFinal_toolTipText"));
+			ivjChxFinal.setText(getResourceString("ChxFinal_text"));
 			ivjChxFinal.setEnabled(true);
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -829,8 +834,8 @@ private javax.swing.JLabel getLblDerivedFrom() {
 			ivjLblDerivedFrom.setToolTipText("");
 			ivjLblDerivedFrom.setText("Abgeleitet von:");
 			// user code begin {1}
-			ivjLblDerivedFrom.setToolTipText(resAssociationDefDialog.getString("LblDerivedFrom_toolTipText"));
-			ivjLblDerivedFrom.setText(resAssociationDefDialog.getString("LblDerivedFrom_text"));
+			ivjLblDerivedFrom.setToolTipText(getResourceString("LblDerivedFrom_toolTipText"));
+			ivjLblDerivedFrom.setText(getResourceString("LblDerivedFrom_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -852,7 +857,7 @@ private javax.swing.JLabel getLblName() {
 			ivjLblName.setName("LblName");
 			ivjLblName.setText("Name:");
 			// user code begin {1}
-			ivjLblName.setText(resAssociationDefDialog.getString("LblName_text"));
+			ivjLblName.setText(getResourceString("LblName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1212,7 +1217,7 @@ private javax.swing.table.TableColumn getTbcAttributeName() {
 			ivjTbcAttributeName = new javax.swing.table.TableColumn();
 			ivjTbcAttributeName.setHeaderValue("Name");
 			// user code begin {1}
-			ivjTbcAttributeName.setHeaderValue(resAssociationDefDialog.getString("TbcAttributeName_text"));
+			ivjTbcAttributeName.setHeaderValue(getResourceString("TbcAttributeName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1233,7 +1238,7 @@ private javax.swing.table.TableColumn getTbcAttributeType() {
 			ivjTbcAttributeType = new javax.swing.table.TableColumn();
 			ivjTbcAttributeType.setHeaderValue("Typ");
 			// user code begin {1}
-			ivjTbcAttributeType.setHeaderValue(resAssociationDefDialog.getString("TbcAttributeType_text"));
+			ivjTbcAttributeType.setHeaderValue(getResourceString("TbcAttributeType_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1254,7 +1259,7 @@ private javax.swing.table.TableColumn getTbcRoleCardinality() {
 			ivjTbcRoleCardinality = new javax.swing.table.TableColumn();
 			ivjTbcRoleCardinality.setHeaderValue("Kardinalität");
 			// user code begin {1}
-			ivjTbcRoleCardinality.setHeaderValue(resAssociationDefDialog.getString("TbcRoleCardinality_text"));
+			ivjTbcRoleCardinality.setHeaderValue(getResourceString("TbcRoleCardinality_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1275,7 +1280,7 @@ private javax.swing.table.TableColumn getTbcRoleClassDef() {
 			ivjTbcRoleClassDef = new javax.swing.table.TableColumn();
 			ivjTbcRoleClassDef.setHeaderValue("Klasse");
 			// user code begin {1}
-			ivjTbcRoleClassDef.setHeaderValue(resAssociationDefDialog.getString("TbcRoleClass_text"));
+			ivjTbcRoleClassDef.setHeaderValue(getResourceString("TbcRoleClass_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1296,7 +1301,7 @@ private javax.swing.table.TableColumn getTbcRoleKind() {
 			ivjTbcRoleKind = new javax.swing.table.TableColumn();
 			ivjTbcRoleKind.setHeaderValue("Art");
 			// user code begin {1}
-			ivjTbcRoleKind.setHeaderValue(resAssociationDefDialog.getString("TbcRoleKind_text"));
+			ivjTbcRoleKind.setHeaderValue(getResourceString("TbcRoleKind_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1317,7 +1322,7 @@ private javax.swing.table.TableColumn getTbcRoleName() {
 			ivjTbcRoleName = new javax.swing.table.TableColumn();
 			ivjTbcRoleName.setHeaderValue("Name");
 			// user code begin {1}
-			ivjTbcRoleName.setHeaderValue(resAssociationDefDialog.getString("TbcRoleName_text"));
+			ivjTbcRoleName.setHeaderValue(getResourceString("TbcRoleName_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1399,9 +1404,9 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getDetailString(), null, getJPanel1(), null, 1);
-			ivjTbpGeneral.insertTab(resAssociationDefDialog.getString("TbpAttributes_text"), null, getPnlAttributes(), null, 2);
-			ivjTbpGeneral.insertTab(resAssociationDefDialog.getString("TbpRoles_text"), null, getJPanel3(), null, 3);
-			ivjTbpGeneral.insertTab(resAssociationDefDialog.getString("TbpRestrictions_text"), null, getPnlConstraints(), null, 4);
+			ivjTbpGeneral.insertTab(getResourceString("TbpAttributes_text"), null, getPnlAttributes(), null, 2);
+			ivjTbpGeneral.insertTab(getResourceString("TbpRoles_text"), null, getJPanel3(), null, 3);
+			ivjTbpGeneral.insertTab(getResourceString("TbpRestrictions_text"), null, getPnlConstraints(), null, 4);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1480,10 +1485,10 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	setTitle(resAssociationDefDialog.getString("CTDialog"));
+	setTitle(getResourceString("CTDialog"));
 
         mniMoveDownAttribute=new javax.swing.JMenuItem();
-	mniMoveDownAttribute.setText(resAssociationDefDialog.getString("MniMoveDownAttribute_text"));
+	mniMoveDownAttribute.setText(getResourceString("MniMoveDownAttribute_text"));
 	mniMoveDownAttribute.addActionListener(new java.awt.event.ActionListener() {
 	  // callback handler if menu item was selected
 	  public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1493,7 +1498,7 @@ private void initialize() {
 	getMnuAttributes().add(mniMoveDownAttribute);
 
         mniMoveDownRole=new javax.swing.JMenuItem();
-	mniMoveDownRole.setText(resAssociationDefDialog.getString("MniMoveDownRole_text"));
+	mniMoveDownRole.setText(getResourceString("MniMoveDownRole_text"));
 	mniMoveDownRole.addActionListener(new java.awt.event.ActionListener() {
 	  // callback handler if menu item was selected
 	  public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1505,72 +1510,66 @@ private void initialize() {
 	// user code end
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewAttribute() {
-	try {
-		// update model
-		AttributeDef attributeDef = ElementFactory.createAttributeDef(associationDef);
-		// update view
-		((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(getTblAttributes());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniNewRole() {
-	try {
-		// update model
-		RoleDef roleDef = ElementFactory.createRoleDef(associationDef, null);
-		// update view
-		((EditorTableModel)getTblRoles().getModel()).addRowElement(roleDef);
-	} catch(Throwable e) {
-		handleException(e);
-	}
+	newObject(getTblRoles());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveAttribute() {
-	((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+	removeObjects(getTblAttributes());
 }
 /**
  * Move down selected Attribute in Attributes-List.
  */
 private void mniMoveDownAttribute() {
-   int [] selv=getTblAttributes().getSelectedRows();
-   if(selv.length>0){
- 	((EditorTableModel)getTblAttributes().getModel()).moveRowDown(selv[0]);
-   }
+	try {
+	   int [] selv=getTblAttributes().getSelectedRows();
+	   if(selv.length>0){
+	 	((EditorTableModel)getTblAttributes().getModel()).moveRowDown(selv[0]);
+	   }
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniRemoveRoleDef() {
-	((EditorTableModel)getTblRoles().getModel()).removeRows(getTblRoles().getSelectedRows());
+	removeObjects(getTblRoles());
 }
 /**
  * Move down selected Role in Roles-List.
  */
 private void mniMoveDownRoleDef() {
-  int [] selv=getTblRoles().getSelectedRows();
-  if(selv.length>0){
-	((EditorTableModel)getTblRoles().getModel()).moveRowDown(selv[0]);
-  }
+	try {
+		int [] selv=getTblRoles().getSelectedRows();
+		if(selv.length>0){
+			((EditorTableModel)getTblRoles().getModel()).moveRowDown(selv[0]);
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniShowAttributeSpecification() {
-	((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+	changeObjects(getTblAttributes());
 }
 /**
- * Comment
+ * @deprecated
  */
 private void mniShowRoleSpecication() {
-	((EditorTableModel)getTblRoles().getModel()).showSpecification(getTblRoles().getSelectedRows());
+	changeObjects(getTblRoles());
 }
 /**
  * Save ModelElement changes.
@@ -1614,7 +1613,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
-	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(associationDef.iteratorFeature());
+	((EditorTableModel)getTblAttributes().getModel()).setAttributeDef(associationDef);
 
 	// page Roles
 	getTblRoles().setModel(new EditorTableModel());
@@ -1622,5 +1621,66 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Constraints
 	getPnlConstraints().setConstraints(associationDef);
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#changeObjects(java.lang.Object)
+ */
+public void changeObjects(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				((EditorTableModel)getTblAttributes().getModel()).showSpecification(getTblAttributes().getSelectedRows());
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				((EditorTableModel)getTblRoles().getModel()).showSpecification(getTblRoles().getSelectedRows());
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/* (non-Javadoc)
+ * @see ch.softenvironment.view.ListMenuChoice#copyObject(java.lang.Object)
+ */
+public void copyObject(Object source) {
+	// TODO Auto-generated method stub
+	
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#newObject(java.lang.Object)
+ */
+public void newObject(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				// update model
+				AttributeDef attributeDef = ElementFactory.createAttributeDef(associationDef);
+				// update view
+				((EditorTableModel)getTblAttributes().getModel()).addRowElement(attributeDef);
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				// update model
+				RoleDef roleDef = ElementFactory.createRoleDef(associationDef, null);
+				// update view
+				((EditorTableModel)getTblRoles().getModel()).addRowElement(roleDef);
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
+}
+/**
+ * @see ch.softenvironment.view.ListMenuChoice#removeObjects(java.lang.Object)
+ */
+public void removeObjects(Object source) {
+	try {
+		if (source != null) {
+			if (source.equals(getMnuAttributes()) || source.equals(getTblAttributes())) {
+				((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+			} else if (source.equals(getMnuRoles()) || source.equals(getTblRoles())) {
+				((EditorTableModel)getTblRoles().getModel()).removeRows(getTblRoles().getSelectedRows());
+			}
+		}
+	} catch(Throwable e) {
+		handleException(e);
+	}
 }
 }

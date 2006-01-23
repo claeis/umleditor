@@ -30,7 +30,7 @@ import ch.softenvironment.view.*;
  * A Note anchor line is drawn dotted.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:00 $
+ * @version $Revision: 1.3 $ $Date: 2005-02-23 16:46:01 $
  */
 public class NoteAnchorLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resNoteAnchorLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/NoteAnchorLineConnection");  //$NON-NLS-1$
@@ -77,11 +77,11 @@ protected void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {}
  */
 public boolean canConnect(Figure start, Figure end) {
 	if (!((start instanceof NoteFigure) || (end instanceof NoteFigure))) {
-		shouldWarn(this, resNoteAnchorLineConnection.getString("CWNoteNeeded")); //$NON-NLS-1$
+		shouldWarn(resNoteAnchorLineConnection.getString("CWNoteNeeded")); //$NON-NLS-1$
 		return false;
 	} 
 	if (!((start instanceof NodeFigure) && (end instanceof NodeFigure))) {
-		shouldWarn(this, resNoteAnchorLineConnection.getString("CWNodeType")); //$NON-NLS-1$
+		shouldWarn(resNoteAnchorLineConnection.getString("CWNodeType")); //$NON-NLS-1$
 		return false;
 	}
 
@@ -177,7 +177,7 @@ protected void handleConnect(Figure start, Figure end) {
 	    	getClassDiagram().getDiagram().addPresentationElement(getEdge());
 		} // else NoteAnchorLine was dragged
 	} catch(Throwable e) {
-		new ErrorDialog(LauncherView.getInstance(), CREATION_ERROR, resNoteAnchorLineConnection.getString("CENoteNotConnected"), e); //$NON-NLS-1$
+	    BaseDialog.showError(LauncherView.getInstance(), CREATION_ERROR, resNoteAnchorLineConnection.getString("CENoteNotConnected"), e); //$NON-NLS-1$
 	}
 }
 /**
@@ -185,7 +185,7 @@ protected void handleConnect(Figure start, Figure end) {
  * @see shouldWarn(EdgeFigure, String)
  */
 protected void showIllegalRelationship(java.lang.String warning) {
-	new WarningDialog(LauncherView.getInstance(),
+    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
 					resNoteAnchorLineConnection.getString("CWConnectionNotEstablished"), //$NON-NLS-1$
 					warning);
 }
