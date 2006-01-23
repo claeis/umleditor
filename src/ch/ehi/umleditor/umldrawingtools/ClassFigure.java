@@ -54,7 +54,7 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2005-12-13 17:28:39 $
+ * @version $Revision: 1.9 $ $Date: 2006-01-23 16:06:43 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
@@ -315,7 +315,7 @@ protected void initialize() {
  * Update the attribute figure and the ClassFigure itself as well. This causes calculating
  * the layout of contained figures.
  */
-protected void updateAttributeFigure() {
+private void updateAttributeFigure() {
 //TODO Tune: currently all attributeFigure's are removed and readded at modelChange");//$NON-NLS-2$//$NON-NLS-1$
 	attributesFigure.removeAll();
 	

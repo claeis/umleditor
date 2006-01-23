@@ -36,7 +36,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.18 $ $Date: 2006-01-02 16:34:53 $
+ * @version $Revision: 1.19 $ $Date: 2006-01-23 16:06:43 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -1444,7 +1444,7 @@ private void updateAttributes() {
 	while (enumeration.hasMoreElements()) {
 		Figure figure = enumeration.nextFigure();
 		if (figure instanceof ClassFigure) {
-			((ClassFigure)figure).updateAttributeFigure();
+			((ClassFigure)figure).updateView();
 		}
 	}
 }
