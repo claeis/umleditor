@@ -67,7 +67,7 @@ public class JARClassLoader extends URLClassLoader
 			}
 			catch(Throwable t)
 			{
-				LauncherView.getInstance().log("plugin","Error while starting plugin " + name);
+				ch.ehi.basics.logging.EhiLogger.logError("Error while starting plugin " + name,t);
 
 			}
 		}
