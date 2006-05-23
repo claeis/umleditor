@@ -25,8 +25,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
 /**
  * INTERLIS BaseType representation of <b>BasketType</b>.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:23 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2006-05-23 07:33:29 $
  */
 public class IliBaseTypeBasketPanel extends BasePanel implements DataPanel {
 	private ReferencableComboBox ivjCbxTopicDef = null;
@@ -287,7 +287,6 @@ private javax.swing.JRadioButton getRbtView() {
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
-			ivjRbtView.setText(getResourceString("RbtView_text"));
 			// user code end
 			handleException(ivjExc);
 		}
