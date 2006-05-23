@@ -22,18 +22,19 @@ import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.attributes.*;
-import ch.ehi.interlis.tools.RoleDefUtility;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.ehi.uml1_4.implementation.UmlParameter;
 import ch.ehi.umleditor.umldrawingtools.*;
 import java.util.*;
+
+import ch.softenvironment.client.ResourceManager;
 import ch.softenvironment.util.*;
 /**
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.9 $ $Date: 2005-11-20 16:42:51 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.10 $ $Date: 2006-05-23 09:18:36 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -486,9 +487,15 @@ protected void showDependencySpecification(int selectedRows[]) {
 		int currentRowIndex = selectedRows[i];
 		Vector currentDataRow = (Vector)elementVector.get(currentRowIndex);
 		Element element = (Element)currentDataRow.get(currentDataRow.size() - 1);
-		LauncherView.getInstance().showSpecification((Element)((Dependency)element).iteratorSupplier().next());
-
-		updateRow(currentRowIndex, currentDataRow, element);
+        
+        Iterator it = ((Dependency)element).iteratorSupplier();
+        if (it.hasNext()) {
+		  LauncherView.getInstance().showSpecification((Element)it.next());
+		  updateRow(currentRowIndex, currentDataRow, element);
+        } else {
+            Tracer.getInstance().developerError(this, "showDependencySpecification()", "Corrupt model -> Dependendency has no supplier");
+            throw new DeveloperException(this, "showDependencySpecification()", ResourceManager.getResource(EditorTableModel.class, "CMDependencyProblem"), ResourceManager.getResource(EditorTableModel.class, "CTDependencyProblem"));
+        }
 	}
 }
 /**
