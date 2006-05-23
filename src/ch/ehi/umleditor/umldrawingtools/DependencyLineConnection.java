@@ -21,9 +21,12 @@ import ch.ehi.uml1_4.implementation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import java.awt.Graphics;
+import java.util.Iterator;
+
 import CH.ifa.draw.figures.ArrowTip;
 import CH.ifa.draw.framework.Figure;
 import ch.ehi.umleditor.application.*;
+import ch.softenvironment.util.Tracer;
 import ch.softenvironment.view.*;
 
 /**
@@ -34,7 +37,7 @@ import ch.softenvironment.view.*;
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2005-11-21 14:12:52 $
+ * @version $Revision: 1.6 $ $Date: 2006-05-23 07:45:27 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -142,7 +145,13 @@ protected Element getStartElement() {
 		return null;
 	} else {
 //TODO NYI: only first Dependency-Client is treated
-	    return (Element)((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorClient().next();
+        Iterator it = ((ch.ehi.uml1_4.foundation.core.Dependency)getModelElement()).iteratorClient();
+        if (it.hasNext()) {
+	       return (Element)it.next();
+        } else {
+            Tracer.getInstance().developerError(this, "getStartElement()", "Dependency should have had at least a client => modelling problem?");
+            return null;
+        }
 	}
 }
 /**
