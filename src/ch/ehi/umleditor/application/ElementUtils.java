@@ -32,7 +32,7 @@ import ch.softenvironment.util.*;
  * Utility Class for dealing with Element's.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:02 $
+ * @version $Revision: 1.4 $ $Date: 2006-06-13 14:28:17 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -156,6 +156,31 @@ public static java.lang.Class getElementDialog(Element element) {
 			dialogClass = CommonSpecificationDialog.class;
 		}
 		return dialogClass;
+	}
+}
+/** change an existing nls value by cloning it or creating a new one.
+ * @param oldString
+ * @param newValueInDefaultLanguage
+ * @return new string
+ */
+public static ch.ehi.basics.types.NlsString changeNlsString(ch.ehi.basics.types.NlsString oldString,String newValueInDefaultLanguage) {
+	if (oldString == null) {
+		return new ch.ehi.basics.types.NlsString(newValueInDefaultLanguage);
+	} else {
+	    return new ch.ehi.basics.types.NlsString(oldString,newValueInDefaultLanguage);
+	}
+}
+/** change an existing nls value by cloning it or creating a new one.
+ * @param oldString
+ * @param newValue
+ * @param language
+ * @return new string
+ */
+public static ch.ehi.basics.types.NlsString changeNlsString(ch.ehi.basics.types.NlsString oldString,String newValue,String language) {
+	if (oldString == null) {
+		return new ch.ehi.basics.types.NlsString(language,newValue);
+	} else {
+	    return new ch.ehi.basics.types.NlsString(oldString,language,newValue);
 	}
 }
 /**
