@@ -28,9 +28,11 @@ import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumTreeValueType;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
@@ -69,7 +71,7 @@ import ch.ehi.uml1_4.modelmanagement.ElementImport;
 
 /** definiert einen Wertebereich.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2003-12-23 17:13:49 $
+ *  @version $Revision: 1.3 $ $Date: 2006-06-13 14:37:20 $
  */
 public class DomainDef extends AbstractNamespace implements DataType , java.io.Serializable
 {
@@ -111,11 +113,13 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
     detachType();
     clearDomainAttribute();
     detachNamespace();
+    clearTopicDef();
+    clearAbstractClassDef();
     clearGeneralization();
     clearSpecialization();
     // Role RefSys: RefSys object(s) may point to this
+    clearEnumTreeValueType();
     detachLineType();
-    clearTopicDef();
     setName(null);
     clearObjectFlowState();
     clearClassifierInState();
@@ -476,6 +480,246 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
   }
   // -end- 33598CAA030E _unlink_body358A5E2403D8 "ModelElement::_unlinkNamespace"
 
+  // -beg- preserve=no 3FE86E5801B9 code358A5E2403D8 "topicDef"
+  private java.util.Set topicDef = new java.util.HashSet();
+  // -end- 3FE86E5801B9 code358A5E2403D8 "topicDef"
+
+  /** add a TopicDef.
+   *  
+   *  @see #removeTopicDef
+   *  @see #containsTopicDef
+   *  @see #iteratorTopicDef
+   *  @see #clearTopicDef
+   *  @see #sizeTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 add_head358A5E2403D8 "DomainDef::addTopicDef"
+  public void addTopicDef(TopicDef topicDef1)
+  // -end- 3FE86E5801B9 add_head358A5E2403D8 "DomainDef::addTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 add_body358A5E2403D8 "DomainDef::addTopicDef"
+    topicDef.add(topicDef1);
+    topicDef1._linkOiddomain(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addTopicDef"));
+    return;
+    // -end- 3FE86E5801B9 add_body358A5E2403D8 "DomainDef::addTopicDef"
+  }
+
+  /** disconnect a TopicDef.
+   *  @see #addTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 remove_head358A5E2403D8 "DomainDef::removeTopicDef"
+  public TopicDef removeTopicDef(TopicDef topicDef1)
+  // -end- 3FE86E5801B9 remove_head358A5E2403D8 "DomainDef::removeTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 remove_body358A5E2403D8 "DomainDef::removeTopicDef"
+    TopicDef ret=null;
+    if(topicDef1==null || !topicDef.contains(topicDef1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = topicDef1;
+    topicDef.remove(topicDef1);
+    topicDef1._unlinkOiddomain(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeTopicDef"));
+    return ret;
+    // -end- 3FE86E5801B9 remove_body358A5E2403D8 "DomainDef::removeTopicDef"
+  }
+
+  /** tests if a given TopicDef is connected.
+   *  @see #addTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 test_head358A5E2403D8 "DomainDef::containsTopicDef"
+  public boolean containsTopicDef(TopicDef topicDef1)
+  // -end- 3FE86E5801B9 test_head358A5E2403D8 "DomainDef::containsTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 test_body358A5E2403D8 "DomainDef::containsTopicDef"
+    return topicDef.contains(topicDef1);
+    // -end- 3FE86E5801B9 test_body358A5E2403D8 "DomainDef::containsTopicDef"
+  }
+
+  /** used to enumerate all connected TopicDefs.
+   *  @see #addTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 get_all_head358A5E2403D8 "DomainDef::iteratorTopicDef"
+  public java.util.Iterator iteratorTopicDef()
+  // -end- 3FE86E5801B9 get_all_head358A5E2403D8 "DomainDef::iteratorTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 get_all_body358A5E2403D8 "DomainDef::iteratorTopicDef"
+    return topicDef.iterator();
+    // -end- 3FE86E5801B9 get_all_body358A5E2403D8 "DomainDef::iteratorTopicDef"
+  }
+
+  /** disconnect all TopicDefs.
+   *  @see #addTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 remove_all_head358A5E2403D8 "DomainDef::clearTopicDef"
+  public void clearTopicDef()
+  // -end- 3FE86E5801B9 remove_all_head358A5E2403D8 "DomainDef::clearTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 remove_all_body358A5E2403D8 "DomainDef::clearTopicDef"
+    if(sizeTopicDef()>0){
+      for(java.util.Iterator p = topicDef.iterator(); p.hasNext();){
+        ((TopicDef)p.next())._unlinkOiddomain(this);
+      }
+      topicDef.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearTopicDef"));
+    }
+    // -end- 3FE86E5801B9 remove_all_body358A5E2403D8 "DomainDef::clearTopicDef"
+  }
+
+  /** returns the number of TopicDefs.
+   *  @see #addTopicDef
+   */
+  // -beg- preserve=no 3FE86E5801B9 size_head358A5E2403D8 "DomainDef::sizeTopicDef"
+  public int sizeTopicDef()
+  // -end- 3FE86E5801B9 size_head358A5E2403D8 "DomainDef::sizeTopicDef"
+  {
+    // -beg- preserve=no 3FE86E5801B9 size_body358A5E2403D8 "DomainDef::sizeTopicDef"
+    return topicDef.size();
+    // -end- 3FE86E5801B9 size_body358A5E2403D8 "DomainDef::sizeTopicDef"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 3FE86E5801B9 _link_body358A5E2403D8 "DomainDef::_linkTopicDef"
+  public void _linkTopicDef(TopicDef topicDef1)
+  {
+    topicDef.add(topicDef1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkTopicDef"));
+    return;
+  }
+  // -end- 3FE86E5801B9 _link_body358A5E2403D8 "DomainDef::_linkTopicDef"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 3FE86E5801B9 _unlink_body358A5E2403D8 "DomainDef::_unlinkTopicDef"
+  public void _unlinkTopicDef(TopicDef topicDef1)
+  {
+    topicDef.remove(topicDef1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkTopicDef"));
+    return;
+  }
+  // -end- 3FE86E5801B9 _unlink_body358A5E2403D8 "DomainDef::_unlinkTopicDef"
+
+  // -beg- preserve=no 448921B70173 code358A5E2403D8 "abstractClassDef"
+  private java.util.Set abstractClassDef = new java.util.HashSet();
+  // -end- 448921B70173 code358A5E2403D8 "abstractClassDef"
+
+  /** add a AbstractClassDef.
+   *  
+   *  @see #removeAbstractClassDef
+   *  @see #containsAbstractClassDef
+   *  @see #iteratorAbstractClassDef
+   *  @see #clearAbstractClassDef
+   *  @see #sizeAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 add_head358A5E2403D8 "DomainDef::addAbstractClassDef"
+  public void addAbstractClassDef(AbstractClassDef abstractClassDef1)
+  // -end- 448921B70173 add_head358A5E2403D8 "DomainDef::addAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 add_body358A5E2403D8 "DomainDef::addAbstractClassDef"
+    abstractClassDef.add(abstractClassDef1);
+    abstractClassDef1._linkOiddomain(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addAbstractClassDef"));
+    return;
+    // -end- 448921B70173 add_body358A5E2403D8 "DomainDef::addAbstractClassDef"
+  }
+
+  /** disconnect a AbstractClassDef.
+   *  @see #addAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 remove_head358A5E2403D8 "DomainDef::removeAbstractClassDef"
+  public AbstractClassDef removeAbstractClassDef(AbstractClassDef abstractClassDef1)
+  // -end- 448921B70173 remove_head358A5E2403D8 "DomainDef::removeAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 remove_body358A5E2403D8 "DomainDef::removeAbstractClassDef"
+    AbstractClassDef ret=null;
+    if(abstractClassDef1==null || !abstractClassDef.contains(abstractClassDef1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = abstractClassDef1;
+    abstractClassDef.remove(abstractClassDef1);
+    abstractClassDef1._unlinkOiddomain(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeAbstractClassDef"));
+    return ret;
+    // -end- 448921B70173 remove_body358A5E2403D8 "DomainDef::removeAbstractClassDef"
+  }
+
+  /** tests if a given AbstractClassDef is connected.
+   *  @see #addAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 test_head358A5E2403D8 "DomainDef::containsAbstractClassDef"
+  public boolean containsAbstractClassDef(AbstractClassDef abstractClassDef1)
+  // -end- 448921B70173 test_head358A5E2403D8 "DomainDef::containsAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 test_body358A5E2403D8 "DomainDef::containsAbstractClassDef"
+    return abstractClassDef.contains(abstractClassDef1);
+    // -end- 448921B70173 test_body358A5E2403D8 "DomainDef::containsAbstractClassDef"
+  }
+
+  /** used to enumerate all connected AbstractClassDefs.
+   *  @see #addAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 get_all_head358A5E2403D8 "DomainDef::iteratorAbstractClassDef"
+  public java.util.Iterator iteratorAbstractClassDef()
+  // -end- 448921B70173 get_all_head358A5E2403D8 "DomainDef::iteratorAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 get_all_body358A5E2403D8 "DomainDef::iteratorAbstractClassDef"
+    return abstractClassDef.iterator();
+    // -end- 448921B70173 get_all_body358A5E2403D8 "DomainDef::iteratorAbstractClassDef"
+  }
+
+  /** disconnect all AbstractClassDefs.
+   *  @see #addAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 remove_all_head358A5E2403D8 "DomainDef::clearAbstractClassDef"
+  public void clearAbstractClassDef()
+  // -end- 448921B70173 remove_all_head358A5E2403D8 "DomainDef::clearAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 remove_all_body358A5E2403D8 "DomainDef::clearAbstractClassDef"
+    if(sizeAbstractClassDef()>0){
+      for(java.util.Iterator p = abstractClassDef.iterator(); p.hasNext();){
+        ((AbstractClassDef)p.next())._unlinkOiddomain(this);
+      }
+      abstractClassDef.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearAbstractClassDef"));
+    }
+    // -end- 448921B70173 remove_all_body358A5E2403D8 "DomainDef::clearAbstractClassDef"
+  }
+
+  /** returns the number of AbstractClassDefs.
+   *  @see #addAbstractClassDef
+   */
+  // -beg- preserve=no 448921B70173 size_head358A5E2403D8 "DomainDef::sizeAbstractClassDef"
+  public int sizeAbstractClassDef()
+  // -end- 448921B70173 size_head358A5E2403D8 "DomainDef::sizeAbstractClassDef"
+  {
+    // -beg- preserve=no 448921B70173 size_body358A5E2403D8 "DomainDef::sizeAbstractClassDef"
+    return abstractClassDef.size();
+    // -end- 448921B70173 size_body358A5E2403D8 "DomainDef::sizeAbstractClassDef"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 448921B70173 _link_body358A5E2403D8 "DomainDef::_linkAbstractClassDef"
+  public void _linkAbstractClassDef(AbstractClassDef abstractClassDef1)
+  {
+    abstractClassDef.add(abstractClassDef1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkAbstractClassDef"));
+    return;
+  }
+  // -end- 448921B70173 _link_body358A5E2403D8 "DomainDef::_linkAbstractClassDef"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 448921B70173 _unlink_body358A5E2403D8 "DomainDef::_unlinkAbstractClassDef"
+  public void _unlinkAbstractClassDef(AbstractClassDef abstractClassDef1)
+  {
+    abstractClassDef.remove(abstractClassDef1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkAbstractClassDef"));
+    return;
+  }
+  // -end- 448921B70173 _unlink_body358A5E2403D8 "DomainDef::_unlinkAbstractClassDef"
+
   // -beg- preserve=no 335C14A5019A code358A5E2403D8 "generalization"
   private java.util.Set generalization = new java.util.HashSet();
   // -end- 335C14A5019A code358A5E2403D8 "generalization"
@@ -716,6 +960,126 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
   }
   // -end- 335C146B01D6 _unlink_body358A5E2403D8 "GeneralizableElement::_unlinkSpecialization"
 
+  // -beg- preserve=no 44897D730306 code358A5E2403D8 "enumTreeValueType"
+  private java.util.Set enumTreeValueType = new java.util.HashSet();
+  // -end- 44897D730306 code358A5E2403D8 "enumTreeValueType"
+
+  /** add a EnumTreeValueType.
+   *  
+   *  @see #removeEnumTreeValueType
+   *  @see #containsEnumTreeValueType
+   *  @see #iteratorEnumTreeValueType
+   *  @see #clearEnumTreeValueType
+   *  @see #sizeEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 add_head358A5E2403D8 "DomainDef::addEnumTreeValueType"
+  public void addEnumTreeValueType(EnumTreeValueType enumTreeValueType1)
+  // -end- 44897D730306 add_head358A5E2403D8 "DomainDef::addEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 add_body358A5E2403D8 "DomainDef::addEnumTreeValueType"
+    enumTreeValueType.add(enumTreeValueType1);
+    enumTreeValueType1._linkEnumBasedOn(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addEnumTreeValueType"));
+    return;
+    // -end- 44897D730306 add_body358A5E2403D8 "DomainDef::addEnumTreeValueType"
+  }
+
+  /** disconnect a EnumTreeValueType.
+   *  @see #addEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 remove_head358A5E2403D8 "DomainDef::removeEnumTreeValueType"
+  public EnumTreeValueType removeEnumTreeValueType(EnumTreeValueType enumTreeValueType1)
+  // -end- 44897D730306 remove_head358A5E2403D8 "DomainDef::removeEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 remove_body358A5E2403D8 "DomainDef::removeEnumTreeValueType"
+    EnumTreeValueType ret=null;
+    if(enumTreeValueType1==null || !enumTreeValueType.contains(enumTreeValueType1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = enumTreeValueType1;
+    enumTreeValueType.remove(enumTreeValueType1);
+    enumTreeValueType1._unlinkEnumBasedOn(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeEnumTreeValueType"));
+    return ret;
+    // -end- 44897D730306 remove_body358A5E2403D8 "DomainDef::removeEnumTreeValueType"
+  }
+
+  /** tests if a given EnumTreeValueType is connected.
+   *  @see #addEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 test_head358A5E2403D8 "DomainDef::containsEnumTreeValueType"
+  public boolean containsEnumTreeValueType(EnumTreeValueType enumTreeValueType1)
+  // -end- 44897D730306 test_head358A5E2403D8 "DomainDef::containsEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 test_body358A5E2403D8 "DomainDef::containsEnumTreeValueType"
+    return enumTreeValueType.contains(enumTreeValueType1);
+    // -end- 44897D730306 test_body358A5E2403D8 "DomainDef::containsEnumTreeValueType"
+  }
+
+  /** used to enumerate all connected EnumTreeValueTypes.
+   *  @see #addEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 get_all_head358A5E2403D8 "DomainDef::iteratorEnumTreeValueType"
+  public java.util.Iterator iteratorEnumTreeValueType()
+  // -end- 44897D730306 get_all_head358A5E2403D8 "DomainDef::iteratorEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 get_all_body358A5E2403D8 "DomainDef::iteratorEnumTreeValueType"
+    return enumTreeValueType.iterator();
+    // -end- 44897D730306 get_all_body358A5E2403D8 "DomainDef::iteratorEnumTreeValueType"
+  }
+
+  /** disconnect all EnumTreeValueTypes.
+   *  @see #addEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 remove_all_head358A5E2403D8 "DomainDef::clearEnumTreeValueType"
+  public void clearEnumTreeValueType()
+  // -end- 44897D730306 remove_all_head358A5E2403D8 "DomainDef::clearEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 remove_all_body358A5E2403D8 "DomainDef::clearEnumTreeValueType"
+    if(sizeEnumTreeValueType()>0){
+      for(java.util.Iterator p = enumTreeValueType.iterator(); p.hasNext();){
+        ((EnumTreeValueType)p.next())._unlinkEnumBasedOn(this);
+      }
+      enumTreeValueType.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearEnumTreeValueType"));
+    }
+    // -end- 44897D730306 remove_all_body358A5E2403D8 "DomainDef::clearEnumTreeValueType"
+  }
+
+  /** returns the number of EnumTreeValueTypes.
+   *  @see #addEnumTreeValueType
+   */
+  // -beg- preserve=no 44897D730306 size_head358A5E2403D8 "DomainDef::sizeEnumTreeValueType"
+  public int sizeEnumTreeValueType()
+  // -end- 44897D730306 size_head358A5E2403D8 "DomainDef::sizeEnumTreeValueType"
+  {
+    // -beg- preserve=no 44897D730306 size_body358A5E2403D8 "DomainDef::sizeEnumTreeValueType"
+    return enumTreeValueType.size();
+    // -end- 44897D730306 size_body358A5E2403D8 "DomainDef::sizeEnumTreeValueType"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 44897D730306 _link_body358A5E2403D8 "DomainDef::_linkEnumTreeValueType"
+  public void _linkEnumTreeValueType(EnumTreeValueType enumTreeValueType1)
+  {
+    enumTreeValueType.add(enumTreeValueType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkEnumTreeValueType"));
+    return;
+  }
+  // -end- 44897D730306 _link_body358A5E2403D8 "DomainDef::_linkEnumTreeValueType"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 44897D730306 _unlink_body358A5E2403D8 "DomainDef::_unlinkEnumTreeValueType"
+  public void _unlinkEnumTreeValueType(EnumTreeValueType enumTreeValueType1)
+  {
+    enumTreeValueType.remove(enumTreeValueType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkEnumTreeValueType"));
+    return;
+  }
+  // -end- 44897D730306 _unlink_body358A5E2403D8 "DomainDef::_unlinkEnumTreeValueType"
+
   // -beg- preserve=no 3948F00C0213 code358A5E2403D8 "lineType"
   private LineType lineType;
   // -end- 3948F00C0213 code358A5E2403D8 "lineType"
@@ -805,126 +1169,6 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
     return;
   }
   // -end- 3948F00C0213 _unlink_body358A5E2403D8 "DomainDef::_unlinkLineType"
-
-  // -beg- preserve=no 3FE86E5801B9 code358A5E2403D8 "topicDef"
-  private java.util.Set topicDef = new java.util.HashSet();
-  // -end- 3FE86E5801B9 code358A5E2403D8 "topicDef"
-
-  /** add a TopicDef.
-   *  
-   *  @see #removeTopicDef
-   *  @see #containsTopicDef
-   *  @see #iteratorTopicDef
-   *  @see #clearTopicDef
-   *  @see #sizeTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 add_head358A5E2403D8 "DomainDef::addTopicDef"
-  public void addTopicDef(TopicDef topicDef1)
-  // -end- 3FE86E5801B9 add_head358A5E2403D8 "DomainDef::addTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 add_body358A5E2403D8 "DomainDef::addTopicDef"
-    topicDef.add(topicDef1);
-    topicDef1._linkOiddomain(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addTopicDef"));
-    return;
-    // -end- 3FE86E5801B9 add_body358A5E2403D8 "DomainDef::addTopicDef"
-  }
-
-  /** disconnect a TopicDef.
-   *  @see #addTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 remove_head358A5E2403D8 "DomainDef::removeTopicDef"
-  public TopicDef removeTopicDef(TopicDef topicDef1)
-  // -end- 3FE86E5801B9 remove_head358A5E2403D8 "DomainDef::removeTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 remove_body358A5E2403D8 "DomainDef::removeTopicDef"
-    TopicDef ret=null;
-    if(topicDef1==null || !topicDef.contains(topicDef1)){
-      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
-    }
-    ret = topicDef1;
-    topicDef.remove(topicDef1);
-    topicDef1._unlinkOiddomain(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeTopicDef"));
-    return ret;
-    // -end- 3FE86E5801B9 remove_body358A5E2403D8 "DomainDef::removeTopicDef"
-  }
-
-  /** tests if a given TopicDef is connected.
-   *  @see #addTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 test_head358A5E2403D8 "DomainDef::containsTopicDef"
-  public boolean containsTopicDef(TopicDef topicDef1)
-  // -end- 3FE86E5801B9 test_head358A5E2403D8 "DomainDef::containsTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 test_body358A5E2403D8 "DomainDef::containsTopicDef"
-    return topicDef.contains(topicDef1);
-    // -end- 3FE86E5801B9 test_body358A5E2403D8 "DomainDef::containsTopicDef"
-  }
-
-  /** used to enumerate all connected TopicDefs.
-   *  @see #addTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 get_all_head358A5E2403D8 "DomainDef::iteratorTopicDef"
-  public java.util.Iterator iteratorTopicDef()
-  // -end- 3FE86E5801B9 get_all_head358A5E2403D8 "DomainDef::iteratorTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 get_all_body358A5E2403D8 "DomainDef::iteratorTopicDef"
-    return topicDef.iterator();
-    // -end- 3FE86E5801B9 get_all_body358A5E2403D8 "DomainDef::iteratorTopicDef"
-  }
-
-  /** disconnect all TopicDefs.
-   *  @see #addTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 remove_all_head358A5E2403D8 "DomainDef::clearTopicDef"
-  public void clearTopicDef()
-  // -end- 3FE86E5801B9 remove_all_head358A5E2403D8 "DomainDef::clearTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 remove_all_body358A5E2403D8 "DomainDef::clearTopicDef"
-    if(sizeTopicDef()>0){
-      for(java.util.Iterator p = topicDef.iterator(); p.hasNext();){
-        ((TopicDef)p.next())._unlinkOiddomain(this);
-      }
-      topicDef.clear();
-      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearTopicDef"));
-    }
-    // -end- 3FE86E5801B9 remove_all_body358A5E2403D8 "DomainDef::clearTopicDef"
-  }
-
-  /** returns the number of TopicDefs.
-   *  @see #addTopicDef
-   */
-  // -beg- preserve=no 3FE86E5801B9 size_head358A5E2403D8 "DomainDef::sizeTopicDef"
-  public int sizeTopicDef()
-  // -end- 3FE86E5801B9 size_head358A5E2403D8 "DomainDef::sizeTopicDef"
-  {
-    // -beg- preserve=no 3FE86E5801B9 size_body358A5E2403D8 "DomainDef::sizeTopicDef"
-    return topicDef.size();
-    // -end- 3FE86E5801B9 size_body358A5E2403D8 "DomainDef::sizeTopicDef"
-  }
-
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 3FE86E5801B9 _link_body358A5E2403D8 "DomainDef::_linkTopicDef"
-  public void _linkTopicDef(TopicDef topicDef1)
-  {
-    topicDef.add(topicDef1);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkTopicDef"));
-    return;
-  }
-  // -end- 3FE86E5801B9 _link_body358A5E2403D8 "DomainDef::_linkTopicDef"
-
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 3FE86E5801B9 _unlink_body358A5E2403D8 "DomainDef::_unlinkTopicDef"
-  public void _unlinkTopicDef(TopicDef topicDef1)
-  {
-    topicDef.remove(topicDef1);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkTopicDef"));
-    return;
-  }
-  // -end- 3FE86E5801B9 _unlink_body358A5E2403D8 "DomainDef::_unlinkTopicDef"
 
   // -beg- preserve=no 358A612E03B8 var358A5E2403D8 "name"
 
