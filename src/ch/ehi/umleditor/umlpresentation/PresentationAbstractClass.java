@@ -1,8 +1,21 @@
-// Copyright (c) 2002, Eisenhut Informatik
-// All rights reserved.
-// $Date: 2004-03-07 21:14:44 $
-// $Revision: 1.2 $
-//
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 
 // -beg- preserve=no 3D47AB2F01F2 package "PresentationAbstractClass"
 package ch.ehi.umleditor.umlpresentation;
@@ -20,7 +33,7 @@ import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D47AB2F01F2 import "PresentationAbstractClass"
 
 /** @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2004-03-07 21:14:44 $
+ *  @version $Revision: 1.3 $ $Date: 2006-06-13 14:32:00 $
  */
 public abstract class PresentationAbstractClass extends PresentationNode
 {
@@ -184,6 +197,37 @@ public abstract class PresentationAbstractClass extends PresentationNode
       ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setShowOperationSignatures"));
     }
     // -end- 404B904201B3 set_body3D47AB2F01F2 "showOperationSignatures"
+  }
+
+  // -beg- preserve=no 448D2E2D0234 var3D47AB2F01F2 "showNamePrefix"
+  private int showNamePrefix = ShowNamePrefixKind.HIDE;
+  // -end- 448D2E2D0234 var3D47AB2F01F2 "showNamePrefix"
+
+  /** get current value of showNamePrefix
+   *  @see #setShowNamePrefix
+   */
+  // -beg- preserve=no 448D2E2D0234 get_head3D47AB2F01F2 "showNamePrefix"
+  public  int getShowNamePrefix()
+  // -end- 448D2E2D0234 get_head3D47AB2F01F2 "showNamePrefix"
+  {
+    // -beg- preserve=no 448D2E2D0234 get_body3D47AB2F01F2 "showNamePrefix"
+    return showNamePrefix;
+    // -end- 448D2E2D0234 get_body3D47AB2F01F2 "showNamePrefix"
+  }
+
+  /** set current value of showNamePrefix
+   *  @see #getShowNamePrefix
+   */
+  // -beg- preserve=no 448D2E2D0234 set_head3D47AB2F01F2 "showNamePrefix"
+  public  void setShowNamePrefix(int value1)
+  // -end- 448D2E2D0234 set_head3D47AB2F01F2 "showNamePrefix"
+  {
+    // -beg- preserve=no 448D2E2D0234 set_body3D47AB2F01F2 "showNamePrefix"
+    if(showNamePrefix != value1){
+      showNamePrefix = value1;
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setShowNamePrefix"));
+    }
+    // -end- 448D2E2D0234 set_body3D47AB2F01F2 "showNamePrefix"
   }
 
   // declare/define something only in the code
