@@ -25,7 +25,7 @@ import ch.softenvironment.view.*;
  * User Interface for a ModelDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2005-11-20 16:43:58 $
+ * @version $Revision: 1.4 $ $Date: 2006-06-13 14:27:23 $
  */
 public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
@@ -73,8 +73,16 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JMenuItem ivjMniRemoveTranslation = null;
 	private javax.swing.JPopupMenu ivjMnuTranslation = null;
 	private javax.swing.JLabel ivjLblType = null;
-	private javax.swing.JPanel ivjPnlDetail = null;
+	private javax.swing.JPanel ivjPnlLanguage = null;
 
+	private javax.swing.JPanel pnlDetail = null;
+	private javax.swing.JLabel lblIssuerURI = null;
+	private javax.swing.JCheckBox cbIsContracted = null;
+	private javax.swing.JLabel lblVersion = null;
+	private javax.swing.JLabel lblVersionComment = null;
+	private javax.swing.JTextField txtIssuerURI = null;
+	private javax.swing.JTextField txtVersion = null;
+	private javax.swing.JTextArea txtVersionComment = null;
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			if (e.getSource() == ModelDefDialog.this.getBtnOk()) 
@@ -1282,19 +1290,19 @@ private DescriptionPanel getPnlDescription() {
  * @return javax.swing.JPanel
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JPanel getPnlDetail() {
-	if (ivjPnlDetail == null) {
+private javax.swing.JPanel getPnlLanguage() {
+	if (ivjPnlLanguage == null) {
 		try {
-			ivjPnlDetail = new javax.swing.JPanel();
-			ivjPnlDetail.setName("PnlDetail");
-			ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
+			ivjPnlLanguage = new javax.swing.JPanel();
+			ivjPnlLanguage.setName("PnlLanguage");
+			ivjPnlLanguage.setLayout(new java.awt.GridBagLayout());
 
 			java.awt.GridBagConstraints constraintsLblLanguage = new java.awt.GridBagConstraints();
 			constraintsLblLanguage.gridx = 1; constraintsLblLanguage.gridy = 1;
 			constraintsLblLanguage.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsLblLanguage.ipadx = 41;
 			constraintsLblLanguage.insets = new java.awt.Insets(17, 11, 11, 3);
-			getPnlDetail().add(getLblLanguage(), constraintsLblLanguage);
+			getPnlLanguage().add(getLblLanguage(), constraintsLblLanguage);
 
 			java.awt.GridBagConstraints constraintsCbxLanguage = new java.awt.GridBagConstraints();
 			constraintsCbxLanguage.gridx = 2; constraintsCbxLanguage.gridy = 1;
@@ -1302,14 +1310,14 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsCbxLanguage.weightx = 1.0;
 			constraintsCbxLanguage.ipadx = 83;
 			constraintsCbxLanguage.insets = new java.awt.Insets(14, 3, 5, 38);
-			getPnlDetail().add(getCbxLanguage(), constraintsCbxLanguage);
+			getPnlLanguage().add(getCbxLanguage(), constraintsCbxLanguage);
 
 			java.awt.GridBagConstraints constraintsLblTranslation = new java.awt.GridBagConstraints();
 			constraintsLblTranslation.gridx = 1; constraintsLblTranslation.gridy = 2;
 			constraintsLblTranslation.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsLblTranslation.ipadx = 65;
 			constraintsLblTranslation.insets = new java.awt.Insets(6, 11, 2, 3);
-			getPnlDetail().add(getLblTranslation(), constraintsLblTranslation);
+			getPnlLanguage().add(getLblTranslation(), constraintsLblTranslation);
 
 			java.awt.GridBagConstraints constraintsScpTranslation = new java.awt.GridBagConstraints();
 			constraintsScpTranslation.gridx = 1; constraintsScpTranslation.gridy = 3;
@@ -1320,7 +1328,7 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsScpTranslation.ipadx = 355;
 			constraintsScpTranslation.ipady = 110;
 			constraintsScpTranslation.insets = new java.awt.Insets(2, 11, 6, 8);
-			getPnlDetail().add(getScpTranslation(), constraintsScpTranslation);
+			getPnlLanguage().add(getScpTranslation(), constraintsScpTranslation);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1329,7 +1337,7 @@ private javax.swing.JPanel getPnlDetail() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjPnlDetail;
+	return ivjPnlLanguage;
 }
 /**
  * Return the JPanel3 property value.
@@ -1599,12 +1607,12 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 		try {
 			ivjTbpGeneral = new javax.swing.JTabbedPane();
 			ivjTbpGeneral.setName("TbpGeneral");
-			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
-			ivjTbpGeneral.insertTab(getDetailString(), null, getPnlDetail(), null, 1);
-			ivjTbpGeneral.insertTab(resModelDefDialog.getString("TbpContract_title"), null, getPnlContract(), null, 2);
-			ivjTbpGeneral.insertTab(resModelDefDialog.getString("TbpImport_title"), null, getPnlImport(), null, 3);
+			ivjTbpGeneral.addTab(getDescriptionString(), null, getPnlDescription());
+			ivjTbpGeneral.addTab(getDetailString(), null, getPnlDetail());
+			ivjTbpGeneral.addTab("Language", null, getPnlLanguage());
+			//ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpContract_title"), null, getPnlContract());
+			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpImport_title"), null, getPnlImport());
 			// user code begin {1}
-			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
 			// user code end
@@ -1800,8 +1808,18 @@ protected boolean save() {
 			break;
 		}
 	}
-	
 	// page Detail
+	modelDef.setIssuerURI( ElementUtils.changeNlsString(modelDef.getIssuerURI(),getTxtIssuerURI().getText()));
+	modelDef.setVersion(ElementUtils.changeNlsString(modelDef.getVersion(),getTxtVersion().getText()));
+	modelDef.setVersionComment(ElementUtils.changeNlsString(modelDef.getVersionComment(),getTxtVersionComment().getText()));
+	// any ili2.2 items?
+	if(modelDef.sizeContract()>0){
+		// remove ili2.2 items
+		modelDef.clearContract();
+	}
+	modelDef.setContracted(getCbIsContracted().isSelected());
+	
+	// page Language
 	modelDef.setBaseLanguage((String)getCbxLanguage().getSelectedItem());
 		
 	return super.save();
@@ -1837,8 +1855,20 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		}
 		default: // illegal ModelDefKind
 	}
-
+	
 	// page Detail
+	getTxtIssuerURI().setText(ElementUtils.mapNlsString(modelDef.getIssuerURI()));
+	getTxtVersion().setText(ElementUtils.mapNlsString(modelDef.getVersion()));
+	getTxtVersionComment().setText(ElementUtils.mapNlsString(modelDef.getVersionComment()));
+	// any ili2.2 items?
+	if(modelDef.sizeContract()>0){
+		// migrate them to ili2.3 
+		// (and remove them at dialog save time)
+		getCbIsContracted().setSelected(true);
+	}else{
+		getCbIsContracted().setSelected(modelDef.isContracted());
+	}
+	// page Language
 	Vector languages = new Vector();
 	Set validLanguages = modelDef.getValidSecondLanguages();
 	languages.add("");//$NON-NLS-1$
@@ -1857,8 +1887,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	((EditorTableModel)getTblTranslation().getModel()).setTranslation(modelDef.iteratorTranslation());
 	
 	// page Contract
-	getTblContract().setModel(new EditorTableModel());
-	((EditorTableModel)getTblContract().getModel()).setContract(modelDef.iteratorContract());
+	//getTblContract().setModel(new EditorTableModel());
+	//((EditorTableModel)getTblContract().getModel()).setContract(modelDef.iteratorContract());
 
 	// page Import
 	getTblImport().setModel(new EditorTableModel());
@@ -1881,4 +1911,142 @@ public void removeObjects(Object source) {
     // TODO Auto-generated method stub
     
 }
+	/**
+	 * This method initializes pnlDetail
+	 * 
+	 * @return javax.swing.JPanel
+	 */
+	private javax.swing.JPanel getPnlDetail() {
+		if(pnlDetail == null) {
+			pnlDetail = new javax.swing.JPanel();
+			java.awt.GridBagConstraints consGridBagConstraints2 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints3 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints1 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints4 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints5 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints7 = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consGridBagConstraints6 = new java.awt.GridBagConstraints();
+			consGridBagConstraints5.weightx = 1.0;
+			consGridBagConstraints5.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consGridBagConstraints5.gridx = 2;
+			consGridBagConstraints5.gridy = 1;
+			consGridBagConstraints7.weightx = 1.0;
+			consGridBagConstraints7.weighty = 1.0;
+			consGridBagConstraints7.fill = java.awt.GridBagConstraints.BOTH;
+			consGridBagConstraints7.gridx = 2;
+			consGridBagConstraints7.gridy = 3;
+			consGridBagConstraints2.gridx = 1;
+			consGridBagConstraints2.gridy = 1;
+			consGridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consGridBagConstraints4.gridx = 1;
+			consGridBagConstraints4.gridy = 3;
+			consGridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consGridBagConstraints3.gridx = 1;
+			consGridBagConstraints3.gridy = 2;
+			consGridBagConstraints3.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consGridBagConstraints6.weightx = 1.0;
+			consGridBagConstraints6.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consGridBagConstraints6.gridx = 2;
+			consGridBagConstraints6.gridy = 2;
+			consGridBagConstraints1.gridx = 2;
+			consGridBagConstraints1.gridy = 4;
+			consGridBagConstraints1.anchor = java.awt.GridBagConstraints.WEST;
+			pnlDetail.setLayout(new java.awt.GridBagLayout());
+			pnlDetail.add(getLblIssuerURI(), consGridBagConstraints2);
+			pnlDetail.add(getCbIsContracted(), consGridBagConstraints1);
+			pnlDetail.add(getLblVersion(), consGridBagConstraints3);
+			pnlDetail.add(getLblVersionComment(), consGridBagConstraints4);
+			pnlDetail.add(getTxtIssuerURI(), consGridBagConstraints5);
+			pnlDetail.add(getTxtVersion(), consGridBagConstraints6);
+			pnlDetail.add(getTxtVersionComment(), consGridBagConstraints7);
+			pnlDetail.setName("pnlDetail");
+		}
+		return pnlDetail;
+	}
+	/**
+	 * This method initializes lblIssuerURI
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	private javax.swing.JLabel getLblIssuerURI() {
+		if(lblIssuerURI == null) {
+			lblIssuerURI = new javax.swing.JLabel();
+			lblIssuerURI.setText("Issuer URI:");
+			lblIssuerURI.setName("lblIssuerURI");
+		}
+		return lblIssuerURI;
+	}
+	/**
+	 * This method initializes cbIsContracted
+	 * 
+	 * @return javax.swing.JCheckBox
+	 */
+	private javax.swing.JCheckBox getCbIsContracted() {
+		if(cbIsContracted == null) {
+			cbIsContracted = new javax.swing.JCheckBox();
+			cbIsContracted.setName("cbIsContracted");
+			cbIsContracted.setText("Contracted");
+		}
+		return cbIsContracted;
+	}
+	/**
+	 * This method initializes lblVersion
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	private javax.swing.JLabel getLblVersion() {
+		if(lblVersion == null) {
+			lblVersion = new javax.swing.JLabel();
+			lblVersion.setText("Version:");
+		}
+		return lblVersion;
+	}
+	/**
+	 * This method initializes lblVersionComment
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	private javax.swing.JLabel getLblVersionComment() {
+		if(lblVersionComment == null) {
+			lblVersionComment = new javax.swing.JLabel();
+			lblVersionComment.setText("Version comment:");
+		}
+		return lblVersionComment;
+	}
+	/**
+	 * This method initializes txtIssuerURI
+	 * 
+	 * @return javax.swing.JTextField
+	 */
+	private javax.swing.JTextField getTxtIssuerURI() {
+		if(txtIssuerURI == null) {
+			txtIssuerURI = new javax.swing.JTextField();
+			txtIssuerURI.setName("txtIssuerURI");
+		}
+		return txtIssuerURI;
+	}
+	/**
+	 * This method initializes txtVersion
+	 * 
+	 * @return javax.swing.JTextField
+	 */
+	private javax.swing.JTextField getTxtVersion() {
+		if(txtVersion == null) {
+			txtVersion = new javax.swing.JTextField();
+			txtVersion.setName("txtVersion");
+		}
+		return txtVersion;
+	}
+	/**
+	 * This method initializes txtVersionComment
+	 * 
+	 * @return javax.swing.JTextArea
+	 */
+	private javax.swing.JTextArea getTxtVersionComment() {
+		if(txtVersionComment == null) {
+			txtVersionComment = new javax.swing.JTextArea();
+			txtVersionComment.setName("txtVersionComment");
+		}
+		return txtVersionComment;
+	}
 }

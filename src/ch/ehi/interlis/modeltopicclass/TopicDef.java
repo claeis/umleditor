@@ -30,8 +30,8 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.interlis.domainsandconstants.basetypes.BasketType;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.BasketType;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.TopicDefKind;
 import ch.ehi.basics.tools.AbstractVisitor;
@@ -62,7 +62,7 @@ import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
 
 /** Definiert ein Thema.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2003-12-23 17:13:54 $
+ *  @version $Revision: 1.3 $ $Date: 2006-06-13 14:22:01 $
  */
 public class TopicDef extends AbstractNamespace implements Package , DefinitionProxy , java.io.Serializable
 {
@@ -164,8 +164,9 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
     detachNamespace();
     clearSupplierDependency();
     clearGeneralization();
-    clearBasketType();
     detachOiddomain();
+    detachBasketoid();
+    clearBasketType();
     setName(null);
     clearImportedElement();
     clearPresentation();
@@ -950,6 +951,186 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
   }
   // -end- 335C14A5019A _unlink_body358A5E3B0132 "GeneralizableElement::_unlinkGeneralization"
 
+  // -beg- preserve=no 3FE86E5801E1 code358A5E3B0132 "oiddomain"
+  private DomainDef oiddomain;
+  // -end- 3FE86E5801E1 code358A5E3B0132 "oiddomain"
+
+  /** attaches a Oiddomain.
+   *  
+   *  @see #detachOiddomain
+   *  @see #getOiddomain
+   *  @see #containsOiddomain
+   */
+  // -beg- preserve=no 3FE86E5801E1 attach_head358A5E3B0132 "TopicDef::attachOiddomain"
+  public void attachOiddomain(DomainDef oiddomain1)
+  // -end- 3FE86E5801E1 attach_head358A5E3B0132 "TopicDef::attachOiddomain"
+  {
+    // -beg- preserve=no 3FE86E5801E1 attach_body358A5E3B0132 "TopicDef::attachOiddomain"
+    if(oiddomain!=null) {throw new java.lang.IllegalStateException("already a oiddomain attached");}
+    if(oiddomain1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as oiddomain");}
+    oiddomain = oiddomain1;
+    oiddomain1._linkTopicDef(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachOiddomain"));
+    return;
+    // -end- 3FE86E5801E1 attach_body358A5E3B0132 "TopicDef::attachOiddomain"
+  }
+
+  /** disconnect the currently attached Oiddomain.
+   *  @see #attachOiddomain
+   */
+  // -beg- preserve=no 3FE86E5801E1 detach_head358A5E3B0132 "TopicDef::detachOiddomain"
+  public DomainDef detachOiddomain()
+  // -end- 3FE86E5801E1 detach_head358A5E3B0132 "TopicDef::detachOiddomain"
+  {
+    // -beg- preserve=no 3FE86E5801E1 detach_body358A5E3B0132 "TopicDef::detachOiddomain"
+    DomainDef ret = null;
+    if(oiddomain!=null){
+      oiddomain._unlinkTopicDef(this);
+      ret = oiddomain;
+      oiddomain = null;
+    }
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachOiddomain"));
+    return ret;
+    // -end- 3FE86E5801E1 detach_body358A5E3B0132 "TopicDef::detachOiddomain"
+  }
+
+  /** get the currently attached Oiddomain.
+   *  @see #attachOiddomain
+   */
+  // -beg- preserve=no 3FE86E5801E1 get_head358A5E3B0132 "TopicDef::getOiddomain"
+  public DomainDef getOiddomain()
+  // -end- 3FE86E5801E1 get_head358A5E3B0132 "TopicDef::getOiddomain"
+  {
+    // -beg- preserve=no 3FE86E5801E1 get_body358A5E3B0132 "TopicDef::getOiddomain"
+    if(oiddomain==null) {throw new java.lang.IllegalStateException("no oiddomain attached");}
+    return oiddomain;
+    // -end- 3FE86E5801E1 get_body358A5E3B0132 "TopicDef::getOiddomain"
+  }
+
+  /** tests if there is a Oiddomain attached.
+   *  @see #attachOiddomain
+   */
+  // -beg- preserve=no 3FE86E5801E1 test_head358A5E3B0132 "TopicDef::containsOiddomain"
+  public boolean containsOiddomain()
+  // -end- 3FE86E5801E1 test_head358A5E3B0132 "TopicDef::containsOiddomain"
+  {
+    // -beg- preserve=no 3FE86E5801E1 test_body358A5E3B0132 "TopicDef::containsOiddomain"
+    return oiddomain!=null;
+    // -end- 3FE86E5801E1 test_body358A5E3B0132 "TopicDef::containsOiddomain"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 3FE86E5801E1 _link_body358A5E3B0132 "TopicDef::_linkOiddomain"
+  public void _linkOiddomain(DomainDef oiddomain1)
+  {
+    oiddomain = oiddomain1;
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkOiddomain"));
+    return;
+  }
+  // -end- 3FE86E5801E1 _link_body358A5E3B0132 "TopicDef::_linkOiddomain"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 3FE86E5801E1 _unlink_body358A5E3B0132 "TopicDef::_unlinkOiddomain"
+  public void _unlinkOiddomain(DomainDef oiddomain1)
+  {
+    oiddomain = null;
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkOiddomain"));
+    return;
+  }
+  // -end- 3FE86E5801E1 _unlink_body358A5E3B0132 "TopicDef::_unlinkOiddomain"
+
+  // -beg- preserve=no 44891FCB0324 code358A5E3B0132 "basketoid"
+  private DomainDef basketoid;
+  // -end- 44891FCB0324 code358A5E3B0132 "basketoid"
+
+  /** attaches a Basketoid.
+   *  
+   *  @see #detachBasketoid
+   *  @see #getBasketoid
+   *  @see #containsBasketoid
+   */
+  // -beg- preserve=no 44891FCB0324 attach_head358A5E3B0132 "TopicDef::attachBasketoid"
+  public void attachBasketoid(DomainDef basketoid1)
+  // -end- 44891FCB0324 attach_head358A5E3B0132 "TopicDef::attachBasketoid"
+  {
+    // -beg- preserve=no 44891FCB0324 attach_body358A5E3B0132 "TopicDef::attachBasketoid"
+    if(basketoid!=null) {throw new java.lang.IllegalStateException("already a basketoid attached");}
+    if(basketoid1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as basketoid");}
+    basketoid = basketoid1;
+    basketoid1._linkTopicDef(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachBasketoid"));
+    return;
+    // -end- 44891FCB0324 attach_body358A5E3B0132 "TopicDef::attachBasketoid"
+  }
+
+  /** disconnect the currently attached Basketoid.
+   *  @see #attachBasketoid
+   */
+  // -beg- preserve=no 44891FCB0324 detach_head358A5E3B0132 "TopicDef::detachBasketoid"
+  public DomainDef detachBasketoid()
+  // -end- 44891FCB0324 detach_head358A5E3B0132 "TopicDef::detachBasketoid"
+  {
+    // -beg- preserve=no 44891FCB0324 detach_body358A5E3B0132 "TopicDef::detachBasketoid"
+    DomainDef ret = null;
+    if(basketoid!=null){
+      basketoid._unlinkTopicDef(this);
+      ret = basketoid;
+      basketoid = null;
+    }
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachBasketoid"));
+    return ret;
+    // -end- 44891FCB0324 detach_body358A5E3B0132 "TopicDef::detachBasketoid"
+  }
+
+  /** get the currently attached Basketoid.
+   *  @see #attachBasketoid
+   */
+  // -beg- preserve=no 44891FCB0324 get_head358A5E3B0132 "TopicDef::getBasketoid"
+  public DomainDef getBasketoid()
+  // -end- 44891FCB0324 get_head358A5E3B0132 "TopicDef::getBasketoid"
+  {
+    // -beg- preserve=no 44891FCB0324 get_body358A5E3B0132 "TopicDef::getBasketoid"
+    if(basketoid==null) {throw new java.lang.IllegalStateException("no basketoid attached");}
+    return basketoid;
+    // -end- 44891FCB0324 get_body358A5E3B0132 "TopicDef::getBasketoid"
+  }
+
+  /** tests if there is a Basketoid attached.
+   *  @see #attachBasketoid
+   */
+  // -beg- preserve=no 44891FCB0324 test_head358A5E3B0132 "TopicDef::containsBasketoid"
+  public boolean containsBasketoid()
+  // -end- 44891FCB0324 test_head358A5E3B0132 "TopicDef::containsBasketoid"
+  {
+    // -beg- preserve=no 44891FCB0324 test_body358A5E3B0132 "TopicDef::containsBasketoid"
+    return basketoid!=null;
+    // -end- 44891FCB0324 test_body358A5E3B0132 "TopicDef::containsBasketoid"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 44891FCB0324 _link_body358A5E3B0132 "TopicDef::_linkBasketoid"
+  public void _linkBasketoid(DomainDef basketoid1)
+  {
+    basketoid = basketoid1;
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkBasketoid"));
+    return;
+  }
+  // -end- 44891FCB0324 _link_body358A5E3B0132 "TopicDef::_linkBasketoid"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 44891FCB0324 _unlink_body358A5E3B0132 "TopicDef::_unlinkBasketoid"
+  public void _unlinkBasketoid(DomainDef basketoid1)
+  {
+    basketoid = null;
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkBasketoid"));
+    return;
+  }
+  // -end- 44891FCB0324 _unlink_body358A5E3B0132 "TopicDef::_unlinkBasketoid"
+
   // -beg- preserve=no 3CC001F302B7 code358A5E3B0132 "basketType"
   private java.util.Set basketType = new java.util.HashSet();
   // -end- 3CC001F302B7 code358A5E3B0132 "basketType"
@@ -1069,96 +1250,6 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
     return;
   }
   // -end- 3CC001F302B7 _unlink_body358A5E3B0132 "TopicDef::_unlinkBasketType"
-
-  // -beg- preserve=no 3FE86E5801E1 code358A5E3B0132 "oiddomain"
-  private DomainDef oiddomain;
-  // -end- 3FE86E5801E1 code358A5E3B0132 "oiddomain"
-
-  /** attaches a Oiddomain.
-   *  
-   *  @see #detachOiddomain
-   *  @see #getOiddomain
-   *  @see #containsOiddomain
-   */
-  // -beg- preserve=no 3FE86E5801E1 attach_head358A5E3B0132 "TopicDef::attachOiddomain"
-  public void attachOiddomain(DomainDef oiddomain1)
-  // -end- 3FE86E5801E1 attach_head358A5E3B0132 "TopicDef::attachOiddomain"
-  {
-    // -beg- preserve=no 3FE86E5801E1 attach_body358A5E3B0132 "TopicDef::attachOiddomain"
-    if(oiddomain!=null) {throw new java.lang.IllegalStateException("already a oiddomain attached");}
-    if(oiddomain1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as oiddomain");}
-    oiddomain = oiddomain1;
-    oiddomain1._linkTopicDef(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachOiddomain"));
-    return;
-    // -end- 3FE86E5801E1 attach_body358A5E3B0132 "TopicDef::attachOiddomain"
-  }
-
-  /** disconnect the currently attached Oiddomain.
-   *  @see #attachOiddomain
-   */
-  // -beg- preserve=no 3FE86E5801E1 detach_head358A5E3B0132 "TopicDef::detachOiddomain"
-  public DomainDef detachOiddomain()
-  // -end- 3FE86E5801E1 detach_head358A5E3B0132 "TopicDef::detachOiddomain"
-  {
-    // -beg- preserve=no 3FE86E5801E1 detach_body358A5E3B0132 "TopicDef::detachOiddomain"
-    DomainDef ret = null;
-    if(oiddomain!=null){
-      oiddomain._unlinkTopicDef(this);
-      ret = oiddomain;
-      oiddomain = null;
-    }
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachOiddomain"));
-    return ret;
-    // -end- 3FE86E5801E1 detach_body358A5E3B0132 "TopicDef::detachOiddomain"
-  }
-
-  /** get the currently attached Oiddomain.
-   *  @see #attachOiddomain
-   */
-  // -beg- preserve=no 3FE86E5801E1 get_head358A5E3B0132 "TopicDef::getOiddomain"
-  public DomainDef getOiddomain()
-  // -end- 3FE86E5801E1 get_head358A5E3B0132 "TopicDef::getOiddomain"
-  {
-    // -beg- preserve=no 3FE86E5801E1 get_body358A5E3B0132 "TopicDef::getOiddomain"
-    if(oiddomain==null) {throw new java.lang.IllegalStateException("no oiddomain attached");}
-    return oiddomain;
-    // -end- 3FE86E5801E1 get_body358A5E3B0132 "TopicDef::getOiddomain"
-  }
-
-  /** tests if there is a Oiddomain attached.
-   *  @see #attachOiddomain
-   */
-  // -beg- preserve=no 3FE86E5801E1 test_head358A5E3B0132 "TopicDef::containsOiddomain"
-  public boolean containsOiddomain()
-  // -end- 3FE86E5801E1 test_head358A5E3B0132 "TopicDef::containsOiddomain"
-  {
-    // -beg- preserve=no 3FE86E5801E1 test_body358A5E3B0132 "TopicDef::containsOiddomain"
-    return oiddomain!=null;
-    // -end- 3FE86E5801E1 test_body358A5E3B0132 "TopicDef::containsOiddomain"
-  }
-
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 3FE86E5801E1 _link_body358A5E3B0132 "TopicDef::_linkOiddomain"
-  public void _linkOiddomain(DomainDef oiddomain1)
-  {
-    oiddomain = oiddomain1;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkOiddomain"));
-    return;
-  }
-  // -end- 3FE86E5801E1 _link_body358A5E3B0132 "TopicDef::_linkOiddomain"
-
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 3FE86E5801E1 _unlink_body358A5E3B0132 "TopicDef::_unlinkOiddomain"
-  public void _unlinkOiddomain(DomainDef oiddomain1)
-  {
-    oiddomain = null;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkOiddomain"));
-    return;
-  }
-  // -end- 3FE86E5801E1 _unlink_body358A5E3B0132 "TopicDef::_unlinkOiddomain"
 
   // -beg- preserve=no 358A618100F1 var358A5E3B0132 "name"
 

@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+
 // -beg- preserve=no 3C1DAD070376 package "RoleDef"
 package ch.ehi.interlis.associations;
 // -end- 3C1DAD070376 package "RoleDef"
@@ -26,6 +27,7 @@ import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.associations.Participant;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
@@ -67,7 +69,7 @@ import ch.ehi.uml1_4.modelmanagement.ElementImport;
 // -end- 3C1DAD070376 import "RoleDef"
 
 /** @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2005-01-14 15:51:12 $
+ *  @version $Revision: 1.3 $ $Date: 2006-06-13 14:24:13 $
  */
 public class RoleDef extends AbstractModelElement implements AssociationEnd , java.io.Serializable
 {
@@ -93,6 +95,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     detachParticipant();
     detachRoleDefDerived();
     clearRestriction();
+    clearXorParticipant();
     setName(null);
     clearAssociationEndRole();
     clearLinkEnd();
@@ -141,6 +144,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     // -beg- preserve=no 3D4FA21C0090 body3C1DAD070376 "enumerateChildren"
     java.util.Iterator it=null;
     if(containsRoleDefDerived())visitor.visit(getRoleDefDerived());
+    it=iteratorXorParticipant();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
     it=iteratorQualifier();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getMultiplicity());
@@ -449,6 +453,126 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
   }
   // -end- 3D4A37EC02CC _unlink_body3C1DAD070376 "RoleDef::_unlinkRestriction"
 
+  // -beg- preserve=no 4489342E01A2 code3C1DAD070376 "xorParticipant"
+  private java.util.Set xorParticipant = new java.util.HashSet();
+  // -end- 4489342E01A2 code3C1DAD070376 "xorParticipant"
+
+  /** add a XorParticipant.
+   *  
+   *  @see #removeXorParticipant
+   *  @see #containsXorParticipant
+   *  @see #iteratorXorParticipant
+   *  @see #clearXorParticipant
+   *  @see #sizeXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 add_head3C1DAD070376 "RoleDef::addXorParticipant"
+  public void addXorParticipant(Participant xorParticipant1)
+  // -end- 4489342E01A2 add_head3C1DAD070376 "RoleDef::addXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 add_body3C1DAD070376 "RoleDef::addXorParticipant"
+    xorParticipant.add(xorParticipant1);
+    xorParticipant1._linkAssociation(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addXorParticipant"));
+    return;
+    // -end- 4489342E01A2 add_body3C1DAD070376 "RoleDef::addXorParticipant"
+  }
+
+  /** disconnect a XorParticipant.
+   *  @see #addXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 remove_head3C1DAD070376 "RoleDef::removeXorParticipant"
+  public Participant removeXorParticipant(Participant xorParticipant1)
+  // -end- 4489342E01A2 remove_head3C1DAD070376 "RoleDef::removeXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 remove_body3C1DAD070376 "RoleDef::removeXorParticipant"
+    Participant ret=null;
+    if(xorParticipant1==null || !xorParticipant.contains(xorParticipant1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = xorParticipant1;
+    xorParticipant.remove(xorParticipant1);
+    xorParticipant1._unlinkAssociation(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeXorParticipant"));
+    return ret;
+    // -end- 4489342E01A2 remove_body3C1DAD070376 "RoleDef::removeXorParticipant"
+  }
+
+  /** tests if a given XorParticipant is connected.
+   *  @see #addXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 test_head3C1DAD070376 "RoleDef::containsXorParticipant"
+  public boolean containsXorParticipant(Participant xorParticipant1)
+  // -end- 4489342E01A2 test_head3C1DAD070376 "RoleDef::containsXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 test_body3C1DAD070376 "RoleDef::containsXorParticipant"
+    return xorParticipant.contains(xorParticipant1);
+    // -end- 4489342E01A2 test_body3C1DAD070376 "RoleDef::containsXorParticipant"
+  }
+
+  /** used to enumerate all connected XorParticipants.
+   *  @see #addXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 get_all_head3C1DAD070376 "RoleDef::iteratorXorParticipant"
+  public java.util.Iterator iteratorXorParticipant()
+  // -end- 4489342E01A2 get_all_head3C1DAD070376 "RoleDef::iteratorXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 get_all_body3C1DAD070376 "RoleDef::iteratorXorParticipant"
+    return xorParticipant.iterator();
+    // -end- 4489342E01A2 get_all_body3C1DAD070376 "RoleDef::iteratorXorParticipant"
+  }
+
+  /** disconnect all XorParticipants.
+   *  @see #addXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 remove_all_head3C1DAD070376 "RoleDef::clearXorParticipant"
+  public void clearXorParticipant()
+  // -end- 4489342E01A2 remove_all_head3C1DAD070376 "RoleDef::clearXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 remove_all_body3C1DAD070376 "RoleDef::clearXorParticipant"
+    if(sizeXorParticipant()>0){
+      for(java.util.Iterator p = xorParticipant.iterator(); p.hasNext();){
+        ((Participant)p.next())._unlinkAssociation(this);
+      }
+      xorParticipant.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearXorParticipant"));
+    }
+    // -end- 4489342E01A2 remove_all_body3C1DAD070376 "RoleDef::clearXorParticipant"
+  }
+
+  /** returns the number of XorParticipants.
+   *  @see #addXorParticipant
+   */
+  // -beg- preserve=no 4489342E01A2 size_head3C1DAD070376 "RoleDef::sizeXorParticipant"
+  public int sizeXorParticipant()
+  // -end- 4489342E01A2 size_head3C1DAD070376 "RoleDef::sizeXorParticipant"
+  {
+    // -beg- preserve=no 4489342E01A2 size_body3C1DAD070376 "RoleDef::sizeXorParticipant"
+    return xorParticipant.size();
+    // -end- 4489342E01A2 size_body3C1DAD070376 "RoleDef::sizeXorParticipant"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4489342E01A2 _link_body3C1DAD070376 "RoleDef::_linkXorParticipant"
+  public void _linkXorParticipant(Participant xorParticipant1)
+  {
+    xorParticipant.add(xorParticipant1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkXorParticipant"));
+    return;
+  }
+  // -end- 4489342E01A2 _link_body3C1DAD070376 "RoleDef::_linkXorParticipant"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4489342E01A2 _unlink_body3C1DAD070376 "RoleDef::_unlinkXorParticipant"
+  public void _unlinkXorParticipant(Participant xorParticipant1)
+  {
+    xorParticipant.remove(xorParticipant1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkXorParticipant"));
+    return;
+  }
+  // -end- 4489342E01A2 _unlink_body3C1DAD070376 "RoleDef::_unlinkXorParticipant"
+
   // -beg- preserve=no 3C1DB2470332 var3C1DAD070376 "name"
 
   // -end- 3C1DB2470332 var3C1DAD070376 "name"
@@ -729,6 +853,37 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
       ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setIliAttributeIdx"));
     }
     // -end- 41E7C5470205 set_body3C1DAD070376 "iliAttributeIdx"
+  }
+
+  // -beg- preserve=no 448932E50098 var3C1DAD070376 "propHiding"
+  private boolean propHiding;
+  // -end- 448932E50098 var3C1DAD070376 "propHiding"
+
+  /** get current value of propHiding
+   *  @see #setPropHiding
+   */
+  // -beg- preserve=no 448932E50098 get_head3C1DAD070376 "propHiding"
+  public  boolean isPropHiding()
+  // -end- 448932E50098 get_head3C1DAD070376 "propHiding"
+  {
+    // -beg- preserve=no 448932E50098 get_body3C1DAD070376 "propHiding"
+    return propHiding;
+    // -end- 448932E50098 get_body3C1DAD070376 "propHiding"
+  }
+
+  /** set current value of propHiding
+   *  @see #isPropHiding
+   */
+  // -beg- preserve=no 448932E50098 set_head3C1DAD070376 "propHiding"
+  public  void setPropHiding(boolean value1)
+  // -end- 448932E50098 set_head3C1DAD070376 "propHiding"
+  {
+    // -beg- preserve=no 448932E50098 set_body3C1DAD070376 "propHiding"
+    if(propHiding != value1){
+      propHiding = value1;
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setPropHiding"));
+    }
+    // -end- 448932E50098 set_body3C1DAD070376 "propHiding"
   }
 
   // -beg- preserve=no 33CD50F90302 code3C1DAD070376 "associationEndRole"
