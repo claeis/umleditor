@@ -359,6 +359,9 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    if(def.isContracted()){
+		out.write("CONTRACTED ");
+    }
     switch(def.getKind()){
       case ModelDefKind.REFSYSTEM:
         out.write("REFSYSTEM ");
@@ -376,6 +379,23 @@ public class TransferFromUmlMetamodel
     	model2file.put(modelName,currentFile);
     }
     out.write("MODEL "+modelName+" ("+language+")");
+    // issuerURI
+    newline();
+    String issuerURI=mapNls(def.getIssuerURI());
+    if(issuerURI!=null){
+		out.write("AT \""+issuerURI+"\"");
+    }else{
+		logErrorMsg(def,"ModelDef "+modelName+" requires an issuer URI");
+    }
+    // version
+	newline();
+	String version=mapNls(def.getVersion());
+	if(version!=null){
+		out.write("VERSION \""+version+"\" ");
+	}else{
+		logErrorMsg(def,"ModelDef "+modelName+" requires a version");
+	}
+	visitExplanation(def.getVersionComment());
     // if this is a modeldef in a translated language?
     if(def.getBaseLanguage()!=null && !def.getBaseLanguage().equals(language)){
       Iterator translationi=def.iteratorTranslation();
@@ -394,16 +414,6 @@ public class TransferFromUmlMetamodel
     out.write(" =");newline();
     inc_ind();
 
-    // CONTRACTs
-    Iterator contracti=def.iteratorContract();
-    while(contracti.hasNext()){
-      Contract contract=(Contract)contracti.next();
-      out.write(getIndent());
-      out.write("CONTRACT ISSUED BY ");
-      out.write(contract.getIssuer().getValue(language));
-      visitExplanation(contract.getDocumentation());
-      out.write(";");newline();
-    }
 
     // IMPORTs
     int impc=0;
@@ -477,6 +487,13 @@ public class TransferFromUmlMetamodel
     newline();
     out.write("END "+def.getName().getValue(language)+".");newline();
     return;
+    }
+    private String mapNls(NlsString str)
+    {
+    	if(str!=null){
+    		return str.getValue(language);
+    	}
+    	return null;
     }
   public void visitTopicDef(TopicDef def)
     throws java.io.IOException
