@@ -34,7 +34,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.10 $ $Date: 2006-05-23 09:18:36 $
+ * @version $Revision: 1.11 $ $Date: 2006-06-21 14:31:34 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -291,7 +291,7 @@ public void setAttributeDef(AbstractClassDef aclass) {
 	// define visible columns
 	Vector columns = new Vector(3);
 	columns.add(resEditorTableModel.getString("TbcAttributeName_text")); //$NON-NLS-1$
-	columns.add("Cardinality"); //$NON-NLS-1$
+	columns.add(resEditorTableModel.getString("TbcAttributeCardinality_text")); //$NON-NLS-1$
 	columns.add(resEditorTableModel.getString("TbcAttributeType_text")); //$NON-NLS-1$
 
 	setDataVector(elementVector, columns);
