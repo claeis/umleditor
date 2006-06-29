@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2004-08-30 07:56:42 $
-// $Revision: 1.4 $
+// $Date: 2006-06-29 21:28:44 $
+// $Revision: 1.5 $
 //
 
 // -beg- preserve=no 3CEB5BA003CF package "XMLInterlisDecoder"
@@ -17,10 +17,9 @@ package ch.ehi.umleditor.xmiuml.ehi;
 // -beg- preserve=yes 3CEB5BA003CF import "XMLInterlisDecoder"
 import org.xml.sax.*;
 import java.io.*;
-import org.xml.sax.helpers.DefaultHandler;
-import org.apache.xerces.parsers.SAXParser;
 import org.xml.sax.helpers.XMLReaderFactory;
-import ch.softenvironment.util.Tracer;
+
+import ch.ehi.basics.logging.EhiLogger;
 // -end- 3CEB5BA003CF import "XMLInterlisDecoder"
 
 public class XMLInterlisDecoder
@@ -108,7 +107,7 @@ public class XMLInterlisDecoder
           ch.ehi.umleditor.application.LauncherView.getInstance().log("decoder","Object <"+tid+"> is never used");
         }
       }
-      Tracer.getInstance().debug("Actual Object: "+object);
+      EhiLogger.debug("Actual Object: "+object);
       inputStream.close();
     }
 
@@ -121,7 +120,7 @@ public class XMLInterlisDecoder
 		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err - Message: "+ex.getMessage()); //message
 		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","System ID: "+exSax.getSystemId()); //system ID
 		ch.ehi.umleditor.application.LauncherView.getInstance().log("decode","Err at line: "+exSax.getLineNumber()); //line Number
-		Tracer.getInstance().runtimeError(this,"parse",ex.toString());
+		EhiLogger.logError(ex);
 		// TODO ex.printStackTrace();
       	throw new IOException(ex.getMessage());
 
@@ -136,7 +135,7 @@ public class XMLInterlisDecoder
 			java.lang.reflect.InvocationTargetException iex=(java.lang.reflect.InvocationTargetException)ex;
 			ex=iex.getTargetException();
 		}
-    	Tracer.getInstance().runtimeError(this,"parse",ex.toString());
+        EhiLogger.logError(ex);;
     	// TODO ex.printStackTrace();
 		ex.printStackTrace();
 	  throw new IOException(ex.getMessage());
