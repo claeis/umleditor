@@ -40,8 +40,8 @@ import ch.softenvironment.util.*;
 /**
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2005-09-16 09:51:43 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.7 $ $Date: 2006-06-29 22:08:56 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -81,7 +81,7 @@ public static ch.ehi.umleditor.umlpresentation.Association createAssociationComp
  * @see createObject(..)
  * @deprecated
  */
-protected static AssociationDef createAssociationDef(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+protected static AssociationDef createAssociationDef(Element parent) {
 	// generic initialization
 	AssociationDef associationDef = (AssociationDef)createOwnedElement(AssociationDef.class, parent);
 
@@ -92,7 +92,7 @@ protected static AssociationDef createAssociationDef(Element parent) throws Clas
  * Convention: The Association is added as OwnedElement to FromParticipant's parent.
  * @see createAssociationDef(Element)
  */
-public static AssociationDef createAssociationDef(GeneralizableElement participantFrom, GeneralizableElement participantTo) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static AssociationDef createAssociationDef(GeneralizableElement participantFrom, GeneralizableElement participantTo) {
 	// generic initialization
 	AssociationDef associationDef = createAssociationDef(((ModelElement)participantFrom).getNamespace());
 
@@ -107,7 +107,7 @@ public static AssociationDef createAssociationDef(GeneralizableElement participa
  * AttributeDef are added as Feature to AbstractClassDef.
  * @see createObject(..)
  */
-public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef) {
 	// generic initialization
 	AttributeDef attributeDef = (AttributeDef)createObject(AttributeDef.class);
 
@@ -137,7 +137,7 @@ public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef)
  * Operations are added as Feature to AbstractClassDef.
  * @see createObject(..)
  */
-public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef) {
 	// generic initialization
 	UmlOperation operation = (UmlOperation)createObject(UmlOperation.class);
 
@@ -172,7 +172,7 @@ public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef)
  * Parameters are added as Parameter to Operations.
  * @see createObject(..)
  */
-public static UmlParameter createUmlParameter(UmlOperation operation) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static UmlParameter createUmlParameter(UmlOperation operation) {
 	// generic initialization
 	UmlParameter parameter = (UmlParameter)createObject(UmlParameter.class);
 
@@ -197,7 +197,7 @@ public static BasketType createBasketType() /*throws ClassNotFoundException, Ins
  * Return a default ClassDef Instance.
  * @see createObject(..)
  */
-public static ClassDef createClassDef(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ClassDef createClassDef(Element parent) {
 	// generic initialization
 	ClassDef classDef = (ClassDef)createOwnedElement(ClassDef.class, parent);
 
@@ -210,7 +210,7 @@ public static ClassDef createClassDef(Element parent) throws ClassNotFoundExcept
  * Return a default AttributeDef Instance.
  * @see createObject(..)
  */
-public static Contract createContract(ModelDef modelDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static Contract createContract(ModelDef modelDef) {
 	// generic initialization
 	Contract contract = (Contract)createObject(Contract.class);
 
@@ -228,7 +228,7 @@ public static Contract createContract(ModelDef modelDef) throws ClassNotFoundExc
  *            modelled by an Iterator.
  * @see createObject(..)
  */
-public static ch.ehi.uml1_4.foundation.core.Dependency createDependency(java.lang.Class dependencyClass, ModelElement client, ModelElement supplier) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ch.ehi.uml1_4.foundation.core.Dependency createDependency(java.lang.Class dependencyClass, ModelElement client, ModelElement supplier) {
 	// generic initialization
 	ch.ehi.uml1_4.foundation.core.Dependency dependency = (ch.ehi.uml1_4.foundation.core.Dependency)createObject(dependencyClass);
 
@@ -242,7 +242,7 @@ public static ch.ehi.uml1_4.foundation.core.Dependency createDependency(java.lan
  * Return a default ClassDef Instance.
  * @see createObject(..)
  */
-public static ch.ehi.umleditor.umlpresentation.Diagram createDiagram(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ch.ehi.umleditor.umlpresentation.Diagram createDiagram(Element parent) {
 	// generic initialization
 	ch.ehi.umleditor.umlpresentation.Diagram diagram = (ch.ehi.umleditor.umlpresentation.Diagram)createObject(ch.ehi.umleditor.umlpresentation.Diagram.class);
 	((Namespace)parent).addDiagram(diagram);
@@ -253,7 +253,7 @@ public static ch.ehi.umleditor.umlpresentation.Diagram createDiagram(Element par
  * Return a default DomainDef Instance.
  * @see createObject(..)
  */
-public static DomainDef createDomainDef(Element element) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static DomainDef createDomainDef(Element element) {
 	// generic initialization
 	DomainDef domainDef = (DomainDef)createOwnedElement(DomainDef.class, element);
 
@@ -269,7 +269,7 @@ public static DomainDef createDomainDef(Element element) throws ClassNotFoundExc
  * Return a default ClassDef Instance.
  * @see createObject(..)
  */
-public static EnumElement createEnumElement() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static EnumElement createEnumElement() {
 	// generic initialization
 	EnumElement enumElement = (EnumElement)createObject(EnumElement.class);
 
@@ -281,7 +281,7 @@ public static EnumElement createEnumElement() throws ClassNotFoundException, Ins
  * Create Generalization between given parent and child.
  * @see createObject(..)
  */
-public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(GeneralizableElement parent, GeneralizableElement child) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(GeneralizableElement parent, GeneralizableElement child) {
 	ch.ehi.uml1_4.foundation.core.Generalization generalization = null;
 
 	if ((child instanceof AssociationDef) || (child instanceof ClassDef) ) {
@@ -292,7 +292,7 @@ public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(
     } else if (child instanceof DomainDef) {
 	    generalization = (ch.ehi.uml1_4.foundation.core.Generalization)createObject(DomainExtends.class);
     } else {
-	    throw new DeveloperException(ElementFactory.class, "createGeneralization()", "undefined Generalization");//$NON-NLS-2$//$NON-NLS-1$
+	    throw new DeveloperException("undefined Generalization");//$NON-NLS-2$//$NON-NLS-1$
     }
 
 	// create the ends of Edge
@@ -305,7 +305,7 @@ public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(
  * Return a default INTERLIS2Def Instance.
  * @see createObject(..)
  */
-public static INTERLIS2Def createINTERLIS2Def(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static INTERLIS2Def createINTERLIS2Def(Element parent) {
 	// generic initialization
 	INTERLIS2Def interlis2Def = (INTERLIS2Def)createOwnedElement(INTERLIS2Def.class, parent);
 
@@ -318,7 +318,7 @@ public static INTERLIS2Def createINTERLIS2Def(Element parent) throws ClassNotFou
  * Return a default LineFormTypeRef Instance.
  * @see createObject(..)
  */
-public static LineFormTypeDef createLineFormTypeDef(LineForm lineForm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static LineFormTypeDef createLineFormTypeDef(LineForm lineForm) {
 	// generic initialization
 	LineFormTypeDef lineFormTypeDef = (LineFormTypeDef)createObject(LineFormTypeDef.class);
 
@@ -331,7 +331,7 @@ public static LineFormTypeDef createLineFormTypeDef(LineForm lineForm) throws Cl
  * Return a default ClassDef Instance.
  * @see createObject(..)
  */
-public static MetaDataUseDef createMetaDataUseDef(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static MetaDataUseDef createMetaDataUseDef(Element parent) {
 	// generic initialization
 	MetaDataUseDef metaDataUseDef = (MetaDataUseDef)createOwnedElement(MetaDataUseDef.class, parent);
 
@@ -344,14 +344,14 @@ public static MetaDataUseDef createMetaDataUseDef(Element parent) throws ClassNo
  * Return a default MetaObjectFile Instance.
  * @see createOwnedElement(..)
  */
-public static MetaObjectFile createMetaObjectFile(UmlModel parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static MetaObjectFile createMetaObjectFile(UmlModel parent) {
 	return (MetaObjectFile)createOwnedElement(MetaObjectFile.class, parent);
 }
 /**
  * Return a default ModelDef Instance.
  * @see createObject(..)
  */
-public static ModelDef createModelDef(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ModelDef createModelDef(Element parent) {
 	// generic initialization
 	ModelDef modelDef = (ModelDef)createOwnedElement(ModelDef.class, parent);
 
@@ -364,7 +364,7 @@ public static ModelDef createModelDef(Element parent) throws ClassNotFoundExcept
  * Return a default AttributeDef Instance.
  * @see createObject(..)
  */
-public static ch.ehi.umleditor.umlpresentation.Note createNote() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ch.ehi.umleditor.umlpresentation.Note createNote() {
 //TODO NYI: uml.core.Comment would actually be the ModelElement
 	//    ModelElement comment = (ModelElement)EditorTreeElement.createElement(Comment.class);
 
@@ -398,11 +398,7 @@ public static Object createObject(java.lang.Class className) {
         object = className.newInstance();
     } catch (Throwable e) {
         //ClassNotFoundException InstantiationException, IllegalAccessException)
-        throw new DeveloperException(
-            ElementFactory.class,
-            "createObject(Class)",//$NON-NLS-1$
-            e.toString(),
-            resElementMapper.getString("CEInstantiationError")); //$NON-NLS-1$
+        throw new DeveloperException(resElementMapper.getString("CEInstantiationError"), null, e); //$NON-NLS-1$
     }
 
     // set default name
@@ -425,7 +421,7 @@ public static Object createObject(java.lang.Class className) {
  * Return a default OwnedElement Instance.
  * @see createObject(..)
  */
-public static ModelElement createOwnedElement(java.lang.Class aClass, Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static ModelElement createOwnedElement(java.lang.Class aClass, Element parent) {
 	// generic initialization
 	ModelElement modelElement = (ModelElement)createObject(aClass);
 	((Namespace)parent).addOwnedElement(modelElement);
@@ -473,7 +469,7 @@ public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentati
  * Return a default ClassDef Instance.
  * @see createObject(..)
  */
-public static RoleDef createRoleDef(ch.ehi.uml1_4.foundation.core.Association association, Classifier classifier) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static RoleDef createRoleDef(ch.ehi.uml1_4.foundation.core.Association association, Classifier classifier) {
 	// generic initialization
 	RoleDef roleDef = (RoleDef)createObject(RoleDef.class);
 
@@ -504,7 +500,7 @@ public static StructuredUnitType createStructuredUnitType() /*throws ClassNotFou
  * Return a default ModelDef Instance.
  * @see createObject(..)
  */
-public static TopicDef createTopicDef(Element parent) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static TopicDef createTopicDef(Element parent) {
 	// generic initialization
 	TopicDef topicDef = (TopicDef)createOwnedElement(TopicDef.class, parent);
 
@@ -519,7 +515,7 @@ public static TopicDef createTopicDef(Element parent) throws ClassNotFoundExcept
  * Return a default Translation Instance.
  * @see createObject(..)
  */
-public static Translation createTranslation(ModelDef modelDef) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public static Translation createTranslation(ModelDef modelDef) {
 	// generic initialization
 	Translation translation = (Translation)createObject(Translation.class);
 
@@ -585,7 +581,7 @@ public static void removeElement(Element element) {
 	} else if (element instanceof RoleDef) {
 //		((RoleDef)element).getAssociation().removeConnection((RoleDef)element);
 //		((RoleDef)element).detachParticipant();
-Tracer.getInstance().developerWarning(ElementFactory.class, "removeElement(Element)", "cast by Association-Interface at next Model-Release by CE");
+Tracer.getInstance().developerWarning("cast by Association-Interface at next Model-Release by CE");
 		((AssociationDef)((RoleDef)element).getAssociation()).deepRemoveConnection((AssociationEnd)element);
 	} else if (element instanceof Contract) {
 		// remove from iteratorContract
@@ -611,10 +607,10 @@ Tracer.getInstance().developerWarning(ElementFactory.class, "removeElement(Eleme
 			ClassDef owner = ((ParameterDef)element).getClassDef();
 			owner.removeParameterDef((ParameterDef)element);
 		} else {
-			throw new DeveloperException(ElementFactory.class, "removeElement(Element)", "ParameterDef is not attached to a ClassDef -> no removing possible");
+			throw new DeveloperException("ParameterDef is not attached to a ClassDef -> no removing possible");
 		}
 	} else{
-		throw new DeveloperException(ElementFactory.class, "removeElement(Element)", "element <" + element.toString() + "> NYI");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("element <" + element.toString() + "> NYI");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
 }
 /**

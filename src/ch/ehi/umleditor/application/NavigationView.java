@@ -34,7 +34,7 @@ import ch.softenvironment.view.ListMenuChoice;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.13 $ $Date: 2006-01-11 12:43:05 $
+ * @version $Revision: 1.14 $ $Date: 2006-06-29 22:08:56 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
@@ -1587,7 +1587,7 @@ private javax.swing.JMenu getMnuSort() {
  * @see ModelElementUI
  */
 public final ch.ehi.uml1_4.foundation.core.ModelElement getModelElement() {
-	throw new DeveloperException(this, "getModelElement()", "not of interest here");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("not of interest here");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Return the ScpNavigation property value.
@@ -2076,7 +2076,7 @@ public void removeInModel() {
  * @see ModelElementUI
  */
 public final void removeVisually() {
-	throw new DeveloperException(this, "removeVisually", "use removeInModel() or via ClassDiagram instead");	//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("use removeInModel() or via ClassDiagram instead");	//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Switch selected Node into editing Mode.

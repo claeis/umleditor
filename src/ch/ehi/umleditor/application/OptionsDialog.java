@@ -22,8 +22,8 @@ import ch.softenvironment.view.*;
 /**
  * User Interface for an Option dialog.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:48 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.2 $ $Date: 2006-06-29 22:08:56 $
  */
 public class OptionsDialog extends BaseDialog {
 	private static java.util.ResourceBundle resOptionsDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/OptionsDialog");  //$NON-NLS-1$
@@ -633,7 +633,7 @@ protected boolean save() {
 	settings.setDiagramWidth(new Integer(getTxtDiagramWidth().getText()));
 	settings.setDiagramHeight(new Integer(getTxtDiagramHeight().getText()));
 	
-	LauncherView.getInstance().getSettings().save();
+	LauncherView.getSettings().save();
 	return super.save();
 }
 /**

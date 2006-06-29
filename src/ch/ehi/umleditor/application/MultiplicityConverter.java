@@ -25,8 +25,8 @@ import ch.softenvironment.util.*;
  * Convert Multiplicity into Strings and vice versa.
  * Manage different Cardinality's.
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2005-02-10 12:13:18 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.3 $ $Date: 2006-06-29 22:08:56 $
  */
 public abstract class MultiplicityConverter {
 	// acc. ti UML Specification V1.4
@@ -88,7 +88,7 @@ public static Multiplicity createMultiplicity(String range) {
 			}		
 			return multiplicity;
 		} catch(NumberFormatException e) {
-			throw new DeveloperException(MultiplicityConverter.class, "getRange(Multiplicity)", "Gültige Formatbeispiele:\n- 0\n- 4..*\n- 1,5..9,27..*", "Eingabefehler");
+			throw new DeveloperException("Gültige Formatbeispiele:\n- 0\n- 4..*\n- 1,5..9,27..*", "Eingabefehler", e);
 		}
 	}
 }

@@ -23,8 +23,8 @@ import javax.swing.Icon;
 /**
  * Utility Class for TreeNode's.
  *
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-09-20 19:09:29 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2006-06-29 22:08:56 $
  */
 public class NavigationTreeNodeUtility {
   private NavigationTreeNodeUtility(){
@@ -52,7 +52,7 @@ public class NavigationTreeNodeUtility {
 	}
   	java.net.URL url = node.getClass().getResource(LauncherView.IMAGE_PATH + "Navigation/" + fileName);//$NON-NLS-1$
   	if (url == null) {
-  		ch.softenvironment.util.Tracer.getInstance().developerWarning(null, "getIcon(Object)", "file not found <" + fileName + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+  		ch.softenvironment.util.Tracer.getInstance().developerWarning("file not found <" + fileName + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
   		return null;
   	} else {
   		return new javax.swing.ImageIcon(url);

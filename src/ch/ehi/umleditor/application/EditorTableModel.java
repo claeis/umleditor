@@ -34,7 +34,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.11 $ $Date: 2006-06-21 14:31:34 $
+ * @version $Revision: 1.12 $ $Date: 2006-06-29 22:08:56 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -93,7 +93,7 @@ public Vector addRowElement(Object object) {
 		// @see INTERLIS2DefDialog#setElement()
 		row = createRow((Vector)object);
 	} else {
-		throw new DeveloperException(this, "addRow(Element)", "unsupported type <" + object.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("unsupported type <" + object.toString() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
 
 	// keep pointer to instance for deletion at Index==last
@@ -213,7 +213,7 @@ private Vector createRow(Dependency dependency) {
 		ModelElement element = (ModelElement)iterator.next();
 		row.add(element.getDefLangName());
 	} else {
-		Tracer.getInstance().developerError(this, "createRow()", "Bad modelled Dependency discovered!");
+		Tracer.getInstance().developerError("Bad modelled Dependency discovered!");
 	}
 
 	return row;
@@ -493,8 +493,8 @@ protected void showDependencySpecification(int selectedRows[]) {
 		  LauncherView.getInstance().showSpecification((Element)it.next());
 		  updateRow(currentRowIndex, currentDataRow, element);
         } else {
-            Tracer.getInstance().developerError(this, "showDependencySpecification()", "Corrupt model -> Dependendency has no supplier");
-            throw new DeveloperException(this, "showDependencySpecification()", ResourceManager.getResource(EditorTableModel.class, "CMDependencyProblem"), ResourceManager.getResource(EditorTableModel.class, "CTDependencyProblem"));
+            Tracer.getInstance().developerError("Corrupt model -> Dependendency has no supplier");
+            throw new DeveloperException(ResourceManager.getResource(EditorTableModel.class, "CMDependencyProblem"), ResourceManager.getResource(EditorTableModel.class, "CTDependencyProblem"));
         }
 	}
 }
@@ -569,7 +569,7 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 //		currentDataRow.set(1, ((UmlParameter)object).get());
 		currentDataRow.set(2, getParameterTypeString(((UmlParameter)object).getKind()));
 	} else {
-		throw new DeveloperException(this, "updateRow()", "type <" + object.toString() + "> not updated");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("type <" + object.toString() + "> not updated");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
 
 	fireTableRowsUpdated(rowIndex, rowIndex);
@@ -587,7 +587,7 @@ private String getParameterTypeString(final int kind) {
 	} else if (kind == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.INOUT) {
 	    return "IN/OUT";
 	} else {
-	    Tracer.getInstance().developerWarning(this, "getParamterTypeString()", "non-supported kind: " + kind);
+	    Tracer.getInstance().developerWarning("non-supported kind: " + kind);
 	    return "" + kind;
 	}
 }
@@ -613,7 +613,7 @@ public UmlParameter setUmlParameter(java.util.Iterator iteratorParameter) {
 		    if (((UmlParameter)feature).getKind() == ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind.RETURN) {
 		        // must not be displayed by Table
 		        if (returnValue != null) {
-		            Tracer.getInstance().developerError(this, "setUmlParameter()", "there is more than 1 Return Parameter in Model");
+		            Tracer.getInstance().developerError("there is more than 1 Return Parameter in Model");
 		        }
 		        returnValue = (UmlParameter)feature;
 		    } else {

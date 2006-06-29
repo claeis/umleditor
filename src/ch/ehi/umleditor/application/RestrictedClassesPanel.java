@@ -31,8 +31,8 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 /**
  * panel to view/edit a restriction-list of classes.
  *
- * @author: ce
- * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
+ * @author ce
+ * @version $Revision: 1.3 $ $Date: 2006-06-29 22:08:56 $
  */
 public class RestrictedClassesPanel
   extends BasePanel implements ch.softenvironment.view.DataPanel {
@@ -156,7 +156,7 @@ protected void setOwnerDialog(javax.swing.JDialog ownerDialog) {
  * @see #setObject(Object, ModelElement) -> call first
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.

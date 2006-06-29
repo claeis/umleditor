@@ -47,8 +47,8 @@ import ch.softenvironment.util.*;
  * - LogView
  * - DrawingArea
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.22 $ $Date: 2005-02-23 16:42:00 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.23 $ $Date: 2006-06-29 22:08:56 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -68,7 +68,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	// manage persistency
 	private Model model = null;
 	private boolean hasModelChanged = false;
-	public final static String defaultFileName = getResourceString(LauncherView.class, "CIUnknownFilename"); //$NON-NLS-1$
+	public final static String defaultFileName = ResourceManager.getResource(LauncherView.class, "CIUnknownFilename"); //$NON-NLS-1$
 	private java.io.File currentFile = null;
 	//	private JToolBar palette = null;
 	private ToolButton defaultToolButton = null;
@@ -411,10 +411,10 @@ private void addInternalFrame(ClassDiagramView drawingView) {
 	internalFrame.getContentPane().add(sp);
 
 	// all registered listeners to the new internal frame
-	java.util.Enumeration enum = mdiListeners.elements();
-	while (enum.hasMoreElements()) {
+	java.util.Enumeration enumeration = mdiListeners.elements();
+	while (enumeration.hasMoreElements()) {
 		internalFrame.addInternalFrameListener(
-			(javax.swing.event.InternalFrameListener)enum.nextElement());
+			(javax.swing.event.InternalFrameListener)enumeration.nextElement());
 	}
 
 	// add Frame to Desktop
@@ -422,10 +422,7 @@ private void addInternalFrame(ClassDiagramView drawingView) {
 	try {
 		internalFrame.setSelected(true);
 	} catch (java.beans.PropertyVetoException e) {
-		Tracer.getInstance().runtimeWarning(
-			this,
-			"addInternalFrame(..)",//$NON-NLS-1$
-			"PropertyVetoEception ignored");//$NON-NLS-1$
+		Tracer.getInstance().runtimeWarning("PropertyVetoEception ignored");//$NON-NLS-1$
 	}
 
 	// set the internalFrame's size
@@ -1143,24 +1140,6 @@ private void connEtoC9(java.awt.event.ActionEvent arg1) {
 	}
 }
 /**
- * connEtoM2:  (MncToolbar.action.actionPerformed(java.awt.event.ActionEvent) --> TlbToolbar.toggleVisbility()V)
- * @param arg1 java.awt.event.ActionEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoM2(java.awt.event.ActionEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		getTlbStandard().toggleVisbility();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
  * Creates and opens a ClassDiagram within an InternalFrame.
  * Children will have the same parent as ClassDiagram itself.
  * The same ClassDiagram may be opened once at most.
@@ -1208,7 +1187,7 @@ private ToolButton createToolButton(String iconName, String toolName, Tool tool)
 	try {
 		return new ToolButton(this, iconName, toolName, tool);
 	} catch(NullPointerException e) {
-		Tracer.getInstance().developerError(this, "createToolButton(..)", "File <" + iconName + "> could not be found!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+		Tracer.getInstance().developerError("File <" + iconName + "> could not be found!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}
 
 	return null;
@@ -1276,7 +1255,7 @@ public void figureSelectionChanged(CH.ifa.draw.framework.DrawingView view) {}
  * Return the Application Name
  */
 public static String getApplicationName() {
-	return ResourceManager.getInstance().getResource(LauncherView.class, "CIApplicationName"); //$NON-NLS-1$
+	return ResourceManager.getResource(LauncherView.class, "CIApplicationName"); //$NON-NLS-1$
 }
 /**
  * Return the currently selected ClassDiagram.
@@ -2836,7 +2815,7 @@ private JPanel getTreProjects() {
 	// There must be a hideen connection "connEtoC1" which cannot be removed properly
 	// resp. saveBean() generates references
 	// @see inner class mouseReleased()
-	Tracer.getInstance().developerWarning(this, "getTreProjects()", "VA-BUG: method actually not necessary");//$NON-NLS-2$//$NON-NLS-1$
+	Tracer.getInstance().developerWarning("VA-BUG: method actually not necessary");//$NON-NLS-2$//$NON-NLS-1$
 	return new JPanel();
 }
 /**
@@ -3101,7 +3080,7 @@ public void log(String title, String logText) {
 	try {
 		getPnlLog().appendText(title, logText);
 	} catch(Throwable e) {
-		Tracer.getInstance().developerError(this, "log(String, String)", e.getLocalizedMessage());
+		Tracer.getInstance().developerError(e.getLocalizedMessage());
 	}
 }
 /**
@@ -3111,7 +3090,7 @@ public void log(String id, String title, String logText) {
 	try {
 		getPnlLog().appendText(id, title, logText);
 	} catch(Throwable e) {
-		Tracer.getInstance().developerError(this, "log(String, String, String)", e.getLocalizedMessage());
+		Tracer.getInstance().developerError(e.getLocalizedMessage());
 	}
 }
 /**
@@ -3156,7 +3135,7 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 	} catch (Throwable exception) {
 		System.err.println("Exception occurred in main() of javax.swing.JFrame");//$NON-NLS-1$
 		exception.printStackTrace(System.out);
-		BaseDialog.showError(instance, getResourceString(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
+		BaseDialog.showError(instance, ResourceManager.getResource(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
 		System.exit(-1);
 	}
 }
@@ -3842,25 +3821,6 @@ public void showStatus(String string) {
 	getStbStatusbar().setStatus(string);
 }
 /**
- * Show/hide LogView.
- * @deprecated
- */
-private void toggleLogView() {
-/*
-	if (getMncLogView().isSelected()) {
-		getPnlLog().setVisible(true);
-		getSettings().setShowLogView(new Boolean(true));
-		getSppMain().getBottomComponent().setBounds(0, 0, getSppMain().getBottomComponent().getWidth(), 60);
-	} else {
-		int deltaHeight = getPnlLog().getHeight();
-		getPnlLog().setVisible(false);
-		getSettings().setShowLogView(new Boolean(false));
-		getSppMain().getBottomComponent().setBounds(0, 0, getSppMain().getBottomComponent().getWidth(), 1);
-		getSppMain().getTopComponent().setBounds(0, 0, getSppMain().getTopComponent().getWidth(), getSppMain().getTopComponent().getHeight() + deltaHeight - 1);
-	}
-*/
-}
-/**
  * Show/hide Standard Toolbar.
  */
 private void toggleStandardToolbar() {
@@ -3977,7 +3937,7 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 				mnuFileHistory.addRecent(filename);
 		    }
 		} catch(java.io.FileNotFoundException e) {
-			BaseDialog.showWarning((java.awt.Component)this, getResourceString(FileHistoryMenu.class, "CTFileMissing"), getResourceString(FileHistoryMenu.class, "CWFileMissing"));
+			BaseDialog.showWarning((java.awt.Component)this, ResourceManager.getResource(FileHistoryMenu.class, "CTFileMissing"), ResourceManager.getResource(FileHistoryMenu.class, "CWFileMissing"));
 			mnuFileHistory.removeRecent(filename);
 		} catch(java.io.IOException e) {
 			handleException(e,"fileopen",e.getMessage());

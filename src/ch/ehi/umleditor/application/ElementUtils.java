@@ -31,8 +31,8 @@ import ch.softenvironment.util.*;
 /**
  * Utility Class for dealing with Element's.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2006-06-13 14:28:17 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2006-06-29 22:08:56 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -128,7 +128,7 @@ public static String getDisplayName(java.lang.Class type) {
 	}
 
 	// should never reach here
-	Tracer.getInstance().developerError(ElementUtils.class, "getDisplayName(Class)", "No NLS-Property for type <" + type.getName() + ">");
+	Tracer.getInstance().developerError("No NLS-Property for type <" + type.getName() + ">");
 	return StringUtils.getPureClassName(type);
 }
 /**
@@ -234,7 +234,7 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 					return false;
 				}
 			} else {
-				Tracer.getInstance().developerWarning(ElementUtils.class, "trySetName()", "<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 			}
 		}
 		modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(), language, newName));
