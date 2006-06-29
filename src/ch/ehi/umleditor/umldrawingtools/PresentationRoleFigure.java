@@ -32,7 +32,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2006-01-02 16:27:01 $
+ * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:01 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -239,7 +239,7 @@ public void draw(Graphics g) {
 			removeMultiplicity();
 		}
 	} catch(Throwable e) {
-Tracer.getInstance().debug(this, "draw(Graphics)", e.toString());//$NON-NLS-1$
+Tracer.getInstance().debug(e.toString());//$NON-NLS-1$
 	}
 }
 public void layoutMultiplicity(){

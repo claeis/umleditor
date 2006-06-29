@@ -23,7 +23,6 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.interlis.modeltopicclass.ClassExtends;
-import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.softenvironment.util.*;
@@ -35,7 +34,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2006-01-02 16:22:56 $
+ * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:00 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
@@ -234,7 +233,7 @@ public void removeVisually() {
 			}
 		}
 	} catch(ConcurrentModificationException cme) {
-		Tracer.getInstance().runtimeWarning(this, "removeVisually()", "Event-Mechanism caused redundant Ping-Pong-remove: " + cme.getLocalizedMessage());
+		Tracer.getInstance().runtimeWarning("Event-Mechanism caused redundant Ping-Pong-remove: " + cme.getLocalizedMessage());
 	} catch(Throwable e) {
 		handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
 	}

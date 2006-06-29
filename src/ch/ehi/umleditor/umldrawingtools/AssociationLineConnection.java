@@ -39,8 +39,8 @@ import ch.softenvironment.util.*;
  * - an Association is managed graphically by a Composite instead of an Edge.
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2005-02-23 16:45:45 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.5 $ $Date: 2006-06-29 22:16:01 $
  * @see handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -65,7 +65,7 @@ public AssociationLineConnection(ClassFigure classFigure) {
  * Overwrites.
  */
 protected final void addModelElement(ModelElement relationship) {
-	throw new DeveloperException(this, "addModelElement(ModelElement)", "done in handleException");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("done in handleException");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Add individual PopupMenu items for this class.
@@ -120,7 +120,7 @@ public final void draw(Graphics g) {
  * @return Element
  */
 protected final ch.ehi.uml1_4.foundation.core.Element getEndElement() {
-	throw new DeveloperException(this, "getEndElement()", "@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Return the Parent AssociationDef if any.
@@ -172,7 +172,7 @@ protected static ArrayList getRoleClassifiers(ch.ehi.uml1_4.foundation.core.Asso
  * @return Element
  */
 protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
-	throw new DeveloperException(this, "getStartElement()", "@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
 }
  /**
   * Create a new Association. By Default the association is not Navigable and of NONE AggregationKind.
@@ -222,7 +222,7 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
 			ch.ehi.umleditor.umlpresentation.Association associationComposite = ElementFactory.createAssociationComposite(associationDef, getClassDiagram().isShowAssociationNames());
 
 			// introduce an artificial Link
-			PresentationAssocClass linkView = associationComposite.getLinkPresentation();
+//			PresentationAssocClass linkView = associationComposite.getLinkPresentation();
 
 			// create the two PresentationRole's
 			java.util.Iterator iteratorRole = associationDef.iteratorConnection();
@@ -270,13 +270,13 @@ public final void removeVisually() {
  * Overwrites
  */
 public final void setEdge(PresentationEdge edge, Figure start, Figure end) {
-	throw new DeveloperException(this, "setEdge(..)", "@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("@see handleConnect(..)");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Overwrites.
  */
 protected final void setModelElement(ModelElement modelElement) {
-	throw new DeveloperException(this, "setModelElement(ModelElement)", "only a Creator -> go for LinkFigure instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("only a Creator -> go for LinkFigure instead");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Show Warning message because Relationship is illegal between current start and end Figure.
@@ -291,7 +291,7 @@ protected void showIllegalRelationship(java.lang.String warning) {
  * Show the Specification Dialog of the PresentationElement.
  */
 public final void showSpecification() {
-	throw new DeveloperException(this, "showSpecification()", "see PresentationRole instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("see PresentationRole instead");//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Overwrites.

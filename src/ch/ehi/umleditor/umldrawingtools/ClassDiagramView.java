@@ -36,7 +36,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.19 $ $Date: 2006-01-23 16:06:43 $
+ * @version $Revision: 1.20 $ $Date: 2006-06-29 22:16:00 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -108,10 +108,7 @@ public Figure add(Element element) {
 	} else if (element instanceof RoleDef) {
     	return loadPresentationRole((RoleDef)element, null);
     } else {
-        throw new DeveloperException(
-            this,
-            "add(Element)",//$NON-NLS-1$
-            NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CEInvalidType"), element.toString())); //$NON-NLS-1$
+        throw new DeveloperException(NlsUtils.formatMessage(NodeFigure.getResourceString(ClassDiagramView.class, "CEInvalidType"), element.toString())); //$NON-NLS-1$
     }
 }
 /**
@@ -184,7 +181,7 @@ public static boolean allowsClasses(Element element) {
 					return true;
 				}
 			} catch(ClassNotFoundException e) {
-				Tracer.getInstance().developerError(ClassDiagramView.class, "allowsClasses(Element)", "Class <" + validOwnedElements[i] + "> does not exist!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().developerError("Class <" + validOwnedElements[i] + "> does not exist!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 			}
 		}
 	}
@@ -212,7 +209,7 @@ public static boolean allowsPackages(Element element) {
 					return true;
 				}
 			} catch(ClassNotFoundException e) {
-				Tracer.getInstance().developerError(ClassDiagramView.class, "allowsPackages(Element)", "Class <" + validOwnedElements[i] + "> does not exist!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().developerError("Class <" + validOwnedElements[i] + "> does not exist!");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 			}
 		}
 	}
@@ -262,9 +259,9 @@ protected Connector findAssociationAttributeConnector(Element startEndElement, i
  * @return ClassFigure
  */
 protected ClassFigure findClassFigure(int x, int y) {
-	FigureEnumeration enum = drawing().figures();
-	while (enum.hasMoreElements()) {
-		Figure figure = enum.nextFigure();
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
 		if ((figure instanceof ClassFigure) &&
 				(!(figure instanceof AssociationAttributeFigure)) &&
 				(figure.containsPoint(x, y))) {
@@ -699,7 +696,7 @@ private boolean correctNode(EdgeFigure edgeFigure, PresentationEdge edge, Elemen
 			} else {
 				Figure targetFigure = findFigure(targetNode);
 				if (targetFigure != null) {
-					Tracer.getInstance().developerWarning(this, "correctNode(..)", "AUTO-CORRECTION: endpoint[" + index + "]=child->relocation:"); // + " <current Classifier>"/*presentationNode.getName().getValue()*/ + "=>" + targetClient.getName().getValue());
+					Tracer.getInstance().developerWarning("AUTO-CORRECTION: endpoint[" + index + "]=child->relocation:"); // + " <current Classifier>"/*presentationNode.getName().getValue()*/ + "=>" + targetClient.getName().getValue());
 					// change the presentation Connection
 					edge.setEndpoint(index, ((NodeFigure)targetFigure).getNode());
 					Connector connector = findNodeConnector(targetNode, 0, 0);
@@ -733,7 +730,7 @@ private boolean correctDependencyRelocation(DependencyLineConnection dependencyF
 			}
 		}
 	}
-	Tracer.getInstance().developerWarning(this, "correctDependencyRelocation(..)", "AUTO-CORRECTION: Removing Dependency-Presentation from Diagram");
+	Tracer.getInstance().developerWarning("AUTO-CORRECTION: Removing Dependency-Presentation from Diagram");
 	getDiagram().deletePresentationElement(dependency);	
 	return false;
 }
@@ -753,7 +750,7 @@ private boolean correctGeneralizationRelocation(GeneralizationLineConnection gen
 		}
 	}
 
-	Tracer.getInstance().developerWarning(this, "correctGeneralizationRelocation(..)", "AUTO-CORRECTION: Removing Generalization-Presentation from Diagram");
+	Tracer.getInstance().developerWarning("AUTO-CORRECTION: Removing Generalization-Presentation from Diagram");
 	getDiagram().deletePresentationElement(generalization);	
 	return false;
 }
@@ -791,7 +788,7 @@ if (!(object instanceof ch.ehi.umleditor.umlpresentation.PresentationAbstractCla
 								Classifier wrongClassDef = (Classifier)classSubjects.next();
 							}
 */
-						Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
+						Tracer.getInstance().developerWarning("AUTO-CORRECTION: endpoint[1]->relocation:" + " <current Classifier>"/*wrongClassDef.getName().getValue()*/ + "=>" + targetClass.getName().getValue());
 						ClassFigure newClass = (ClassFigure)findFigure(targetClass);
 						if (newClass != null) {
 							// damage will be changed by LinkFigure#updateView()
@@ -815,7 +812,7 @@ while(its.hasNext()) {
 }
 */		
 	getDiagram().removePresentationElement(role);
-	Tracer.getInstance().developerWarning(this, "correctRoleRelocation(..)", "AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
+	Tracer.getInstance().developerWarning("AUTO-CORRECTION: removing PresentationRole because no AssociationEnd is set!");
 	return false;
 }
 /**
@@ -1153,7 +1150,7 @@ public void setDiagramElement(Element diagram) {
 				}
 			}
 		} else {
-Tracer.getInstance().developerWarning(this, "setDiagramElement(Element)", "unknown Edge-Type");			//$NON-NLS-2$//$NON-NLS-1$
+Tracer.getInstance().developerWarning("unknown Edge-Type");			//$NON-NLS-2$//$NON-NLS-1$
 		}
 	}
 
@@ -1164,7 +1161,7 @@ Tracer.getInstance().developerWarning(this, "setDiagramElement(Element)", "unkno
 		loadSimpleEdge(new DependencyLineConnection(this, (PresentationEdge)dependency));
 	}
 	if(!associations.sort()) {
-		throw new DeveloperException(this, "setDiagramElement(..)", "TopoSort could not sort!");
+		throw new DeveloperException("TopoSort could not sort!");
 	}
 	iterator = associations.getResult().iterator();
 	while (iterator.hasNext()) {
@@ -1405,7 +1402,7 @@ public void update(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
 					((PresentationRoleFigure)figure).updateView();
 				}
 			} else if (event.getOperation().startsWith(MetaModelChange.OP_CHANGE)) {
-Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +getDiagram().getName().getValue() + ", Event=" + event.toString() + ", type=" + event.getOperation());
+//Tracer.getInstance().debug("Check diagram for Relocation=" +getDiagram().getName().getValue() + ", Event=" + event.toString() + ", type=" + event.getOperation());
 				if ((figure instanceof PresentationRoleFigure) && event.getOperation().equals("changeParticipant")) {
 					PresentationRoleFigure roleFigure = (PresentationRoleFigure)figure;
 					PresentationRole role = (PresentationRole)roleFigure.getEdge();
@@ -1417,7 +1414,7 @@ Tracer.getInstance().debug(this, "update(..)", "Check diagram for Relocation=" +
 						Iterator subjects = presentationClass.iteratorSubject();
 						Connector end = findNodeConnector((Element)subjects.next(), 0, 0);
 						if (end == null) {
-							Tracer.getInstance().developerWarning(this, "update(..)", "AUTO-CORRECTION: Removing PresentationRole from Diagram");
+							Tracer.getInstance().developerWarning("AUTO-CORRECTION: Removing PresentationRole from Diagram");
 							getDiagram().deletePresentationElement(role);
 						} else {
 							roleFigure.setEndConnector(end);

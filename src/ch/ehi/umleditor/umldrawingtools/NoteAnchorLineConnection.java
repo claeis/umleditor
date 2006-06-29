@@ -29,8 +29,8 @@ import ch.softenvironment.view.*;
  * Draw an anchor line from a Note to any Figure.
  * A Note anchor line is drawn dotted.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2005-02-23 16:46:01 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2006-06-29 22:16:00 $
  */
 public class NoteAnchorLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resNoteAnchorLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/NoteAnchorLineConnection");  //$NON-NLS-1$
@@ -194,6 +194,6 @@ protected void showIllegalRelationship(java.lang.String warning) {
  * @author Peter Hirzel
  */
 public final void showSpecification() {
-	throw new DeveloperException(this, "showSpecification()", "no Dialog assumed");
+	throw new DeveloperException("no Dialog assumed");
 }
 }

@@ -21,7 +21,6 @@ import CH.ifa.draw.util.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.umlpresentation.*;
-import ch.softenvironment.view.BaseDialog;
 import ch.softenvironment.view.CommonUserAccess;
 
 import javax.swing.*;
@@ -37,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2005-12-09 10:47:09 $
+ * @version $Revision: 1.10 $ $Date: 2006-06-29 22:16:01 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -167,7 +166,7 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 			((ClassDiagramView)view()).showAllLinkFigures(chxShowLinkFigure.isSelected());
 		}
 	} catch(Throwable exception) {
-		ch.softenvironment.util.Tracer.getInstance().runtimeError(this, "actionPerformed(ActionEvent)", e.toString())		;
+		ch.softenvironment.util.Tracer.getInstance().runtimeError(e.toString(), exception);
 		ch.ehi.umleditor.application.LauncherView.getInstance().handleException(exception);
 	}
 }
@@ -197,7 +196,7 @@ private int checkDragCase(ConnectionFigure edgeFigure, int x, int y) {
 				return MOVE_ENDPOINT;
 			}
 		} else {
-			throw new ch.softenvironment.util.DeveloperException(this, "checkDragCase(..)", "start-Node should be set");
+			throw new ch.softenvironment.util.DeveloperException("start-Node should be set");
 		}
 
 		if (iterator.hasNext()) {
@@ -212,7 +211,7 @@ private int checkDragCase(ConnectionFigure edgeFigure, int x, int y) {
 				return MOVE_ENDPOINT;
 			}
 		} else {
-			throw new ch.softenvironment.util.DeveloperException(this, "checkDragCase(..)", "end-Node should be set");
+			throw new ch.softenvironment.util.DeveloperException("end-Node should be set");
 		}
 	}
 
@@ -387,7 +386,7 @@ protected void handleMouseDown(MouseEvent e, int x, int y) {
 			){
 				// only spliting is possible, new Connections must be done by appropriate tools
 				dragCase = checkDragCase(editedConnection, splitX, splitY);
-ch.softenvironment.util.Tracer.getInstance().debug("DragCase = " + dragCase);
+//ch.softenvironment.util.Tracer.getInstance().debug("DragCase = " + dragCase);
 			}
 			
 			// update DocumentationPanel in Launcher if Diagram was selected
@@ -455,6 +454,7 @@ private boolean isWithinRange(Point p, int x, int y) {
  * ClassDiagramView popupMenu-Function.
  */
 private void mniFindModel() {
+//TODO
 	ch.ehi.umleditor.application.LauncherView.getInstance().nyi("Modell in NavTree selektieren");
 }
 /**

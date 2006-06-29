@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.14 $ $Date: 2006-01-02 16:34:53 $
+ * @version $Revision: 1.15 $ $Date: 2006-06-29 22:16:01 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -231,7 +231,7 @@ protected final void connectNodes() {
 			start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
 		} 
 		if (start == null) {
-			Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: Missing StartNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
+			Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing StartNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
 //			shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingStartNode"), getSourceName(getStartElement()))); //$NON-NLS-1$
 			removeVisually();
 		} else if (getEdge().sizeEndpoint() == 2) {
@@ -254,7 +254,7 @@ protected final void connectNodes() {
 				end = getClassDiagram().findNodeConnector(getEndElement(), x, y);
 			}
 			if (end == null) {
-				Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: Missing EndNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing EndNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
 				//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
 				removeVisually();
 			} else {
@@ -272,12 +272,12 @@ protected final void connectNodes() {
 				endFigure().addFigureChangeListener(this);
 			}
 		} else if (getEdge().sizeEndpoint() == 1) {
-			Tracer.getInstance().developerWarning(this, "connectNodes()", "AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
+			Tracer.getInstance().developerWarning("AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
 			//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
 			removeVisually();	
 		}
 	} catch(Throwable e) {
-		Tracer.getInstance().debug(this, "connectNodes()", e.toString());
+		Tracer.getInstance().developerWarning(e.toString());
 	}
 }
 /**
@@ -685,7 +685,7 @@ public void updateConnection() {
 		super.updateConnection();
 	} catch(Throwable e) {
 		// in case of dragging a NullPointerExcepion might be experienced
-		Tracer.getInstance().debug(this, "updateConnection()", "JHotDraw-Error ignored [" + e.toString() + "]");
+		Tracer.getInstance().developerWarning("JHotDraw-Error ignored [" + e.toString() + "]");
 	}
 }
 /**

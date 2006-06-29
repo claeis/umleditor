@@ -54,7 +54,7 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2006-01-23 16:06:43 $
+ * @version $Revision: 1.10 $ $Date: 2006-06-29 22:16:01 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
@@ -105,7 +105,7 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 		}
 		// updateAttributeFigure(); => is called by Model-Change
 	} catch(Throwable exception) {
-		ch.softenvironment.util.Tracer.getInstance().runtimeError(this, "actionPerformed(ActionEvent)", e.toString())		;
+		ch.softenvironment.util.Tracer.getInstance().runtimeError(e.toString(), exception)		;
 		ch.ehi.umleditor.application.LauncherView.getInstance().handleException(exception);
 	}
 }

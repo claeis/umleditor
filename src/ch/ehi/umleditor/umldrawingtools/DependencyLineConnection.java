@@ -37,7 +37,7 @@ import ch.softenvironment.view.*;
  * A DependencyLineConnection has an arrow at the end point and is dotted.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2006-05-23 07:45:27 $
+ * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:01 $
  */
 public class DependencyLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection");  //$NON-NLS-1$
@@ -149,7 +149,7 @@ protected Element getStartElement() {
         if (it.hasNext()) {
 	       return (Element)it.next();
         } else {
-            Tracer.getInstance().developerError(this, "getStartElement()", "Dependency should have had at least a client => modelling problem?");
+            Tracer.getInstance().developerError("Dependency should have had at least a client => modelling problem?");
             return null;
         }
 	}
