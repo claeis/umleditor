@@ -27,7 +27,7 @@ import java.util.*;
  * Enumeration-utility.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:03 $
+ * @version $Revision: 1.2 $ $Date: 2006-07-03 09:01:46 $
  */
 public abstract class IliBaseTypeKind {
 	// Names of Interlis types to display
@@ -47,6 +47,9 @@ public abstract class IliBaseTypeKind {
 	protected final static String CLASS_TYPE = resIliBaseTypeKind.getString("CIClassType"); //$NON-NLS-1$
 	protected final static String DOMAINDEF = resIliBaseTypeKind.getString("CIDomainDef"); //$NON-NLS-1$
 	protected final static String UNKNOWN = resIliBaseTypeKind.getString("CIUnknown"); //$NON-NLS-1$
+	protected final static String DATE = resIliBaseTypeKind.getString("CIDate"); //$NON-NLS-1$
+	protected final static String DATETIME = resIliBaseTypeKind.getString("CIDateTime"); //$NON-NLS-1$
+	protected final static String TIME = resIliBaseTypeKind.getString("CITime"); //$NON-NLS-1$
 //	protected final static String REFERENCE = "REFERENCE";
 //	protected final static String STRUCTURE = "STRUCTURE";
 /**
@@ -88,6 +91,9 @@ private static Vector getStandardTypes() {
 	standardTypes.add(ENUM);
 
 	standardTypes.add(NUMERIC);
+	standardTypes.add(DATE);
+	standardTypes.add(DATETIME);
+	standardTypes.add(TIME);
 	standardTypes.add(COORD);
 	standardTypes.add(BASKET);
 	standardTypes.add(POLYLINE);
@@ -119,6 +125,12 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 					return ENUM;
 				} else if (type instanceof NumericalType) {
 					return NUMERIC;
+				} else if (type instanceof DateType) {
+					return DATE;
+				} else if (type instanceof DateTimeType) {
+					return DATETIME;
+				} else if (type instanceof TimeType) {
+					return TIME;
 				} else if (type instanceof CoordinateType) {
 					return COORD;
 				} else if (type instanceof ClassType) {

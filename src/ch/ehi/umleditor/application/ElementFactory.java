@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2006-06-29 22:08:56 $
+ * @version $Revision: 1.8 $ $Date: 2006-07-03 09:01:47 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -384,6 +384,33 @@ public static NumericType createNumericType() /*throws ClassNotFoundException, I
 	type.setRangeDefined(false);
 
 	adaptNumericalType(type);
+
+	return type;
+}
+/**
+ * Return a default DateType Instance.
+ */
+public static DateType createDateType() 
+{
+	DateType type = new DateType();
+
+	return type;
+}
+/**
+ * Return a default DateTimeType Instance.
+ */
+public static DateTimeType createDateTimeType() 
+{
+	DateTimeType type = new DateTimeType();
+
+	return type;
+}
+/**
+ * Return a default TimeType Instance.
+ */
+public static TimeType createTimeType() 
+{
+	TimeType type = new TimeType();
 
 	return type;
 }

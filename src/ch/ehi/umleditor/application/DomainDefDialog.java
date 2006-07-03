@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2005-09-16 09:51:43 $
+ * @version $Revision: 1.5 $ $Date: 2006-07-03 09:01:47 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
@@ -53,7 +53,10 @@ public class DomainDefDialog extends BaseDialog {
 	private IliBaseTypeTextPanel ivjPnlTypeText = null;
 	private IliBaseTypeOidPanel ivjPnlTypeOid = null;
 	private IliBaseTypeClassPanel ivjPnlTypeClass = null;
-        private InterlisSyntaxPanel ivjPnlTypeUnknown=null;
+    private InterlisSyntaxPanel ivjPnlTypeUnknown=null;
+	private IliBaseTypeDatePanel ivjPnlTypeDate=null;
+	private IliBaseTypeDateTimePanel ivjPnlTypeDateTime=null;
+	private IliBaseTypeTimePanel ivjPnlTypeTime=null;
 	private IliBaseTypeNumericPanel ivjPnlTypeNumeric = null;
 	private javax.swing.JTabbedPane ivjTbpTypes = null;
 	private ExtendedPanel ivjPnlExtended = null;
@@ -143,6 +146,12 @@ private void adaptType() {
 		getPnlTypeClass().setObject(new ClassType(), domainDef);
 	} else if (item.equals(IliBaseTypeKind.UNKNOWN)) {
 		newPanel = getPnlTypeUnknown();
+	} else if (item.equals(IliBaseTypeKind.DATE)) {
+		newPanel = getPnlTypeDate();
+	} else if (item.equals(IliBaseTypeKind.DATETIME)) {
+		newPanel = getPnlTypeDateTime();
+	} else if (item.equals(IliBaseTypeKind.TIME)) {
+		newPanel = getPnlTypeTime();
 	} else if (item.equals(IliBaseTypeKind.AREA)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new Tesselation(), domainDef);
@@ -826,6 +835,63 @@ private InterlisSyntaxPanel getPnlTypeUnknown() {
 	return ivjPnlTypeUnknown;
 }
 /**
+ * Return the PnlTypeDate property value.
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private IliBaseTypeDatePanel getPnlTypeDate() {
+	if (ivjPnlTypeDate == null) {
+		try {
+			ivjPnlTypeDate = new IliBaseTypeDatePanel();
+			ivjPnlTypeDate.setName("PnlTypeDate");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlTypeDate;
+}
+/**
+ * Return the PnlTypeDateTime property value.
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private IliBaseTypeDateTimePanel getPnlTypeDateTime() {
+	if (ivjPnlTypeDateTime == null) {
+		try {
+			ivjPnlTypeDateTime = new IliBaseTypeDateTimePanel();
+			ivjPnlTypeDateTime.setName("PnlTypeDateTime");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlTypeDateTime;
+}
+/**
+ * Return the PnlTypeTime property value.
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private IliBaseTypeTimePanel getPnlTypeTime() {
+	if (ivjPnlTypeTime == null) {
+		try {
+			ivjPnlTypeTime = new IliBaseTypeTimePanel();
+			ivjPnlTypeTime.setName("PnlTypeTime");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlTypeTime;
+}
+/**
  * Return the TbpTypes property value.
  * @return javax.swing.JTabbedPane
  */
@@ -847,6 +913,9 @@ private javax.swing.JTabbedPane getTbpTypes() {
 			ivjTbpTypes.insertTab("PnlTypeUnknown", null, getPnlTypeUnknown(), null, 9);
 			ivjTbpTypes.insertTab("PnlTypeOid", null, getPnlTypeOid(), null, 10);
 			ivjTbpTypes.insertTab("PnlTypeClass", null, getPnlTypeClass(), null, 11);
+			ivjTbpTypes.insertTab("PnlTypeDate", null, getPnlTypeDate(), null, 12);
+			ivjTbpTypes.insertTab("PnlTypeDateTime", null, getPnlTypeDateTime(), null, 13);
+			ivjTbpTypes.insertTab("PnlTypeTime", null, getPnlTypeTime(), null, 14);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -926,6 +995,9 @@ private void initialize() {
 	getTbpTypes().remove(getPnlTypeUnknown());
 	getTbpTypes().remove(getPnlTypeOid());
 	getTbpTypes().remove(getPnlTypeClass());
+	getTbpTypes().remove(getPnlTypeDate());
+	getTbpTypes().remove(getPnlTypeDateTime());
+	getTbpTypes().remove(getPnlTypeTime());
 
 	getCbxType().setModel(new javax.swing.DefaultComboBoxModel(IliBaseTypeKind.getDomainDefTypes()));
 	getCbxType().setSelectedItem(IliBaseTypeKind.NULL_TYPE);
@@ -1026,6 +1098,15 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof ClassType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.CLASS_TYPE);
 			getPnlTypeClass().setObject(type, domainDef);
+		} else if (type instanceof DateType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.DATE);
+			getPnlTypeDate().setObject(type, domainDef);
+		} else if (type instanceof DateTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.DATETIME);
+			getPnlTypeDateTime().setObject(type, domainDef);
+		} else if (type instanceof TimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.TIME);
+			getPnlTypeTime().setObject(type, domainDef);
 		} else if (type instanceof UnknownType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);
