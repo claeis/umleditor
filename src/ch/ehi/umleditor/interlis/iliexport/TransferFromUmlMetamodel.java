@@ -282,7 +282,7 @@ public class TransferFromUmlMetamodel
 	        lineNumber=1;
 	        // write
 	        defineLinkToModelElement(def);
-	        out.write("INTERLIS 2.2;");newline();
+	        out.write("INTERLIS 2.3;");newline();
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
@@ -1361,6 +1361,25 @@ public class TransferFromUmlMetamodel
         visitEnumeration((ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)def);
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
         visitNumericalType(owner,(ch.ehi.interlis.domainsandconstants.basetypes.NumericalType)def);
+	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateType){
+		ch.ehi.interlis.domainsandconstants.basetypes.DateType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateType)def;
+		out.write("XMLDate ");
+		out.write(visitDate(type.getMin()));
+		out.write(" .. ");
+		out.write(visitDate(type.getMax()));
+	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType){
+		ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType)def;
+		// XMLDateTime "2000-01-01T00:00:00.000" .. "2005-12-31T23:59:59.999"
+		out.write("XMLDateTime ");
+		out.write(visitDateTime(type.getMin()));
+		out.write(" .. ");
+		out.write(visitDateTime(type.getMax()));
+	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.TimeType){
+		ch.ehi.interlis.domainsandconstants.basetypes.TimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.TimeType)def;
+		out.write("XMLTime ");
+		out.write(visitTime(type.getMin()));
+		out.write(" .. ");
+		out.write(visitTime(type.getMax()));
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
       out.write("COORD");
@@ -1510,6 +1529,48 @@ public class TransferFromUmlMetamodel
     return;
     }
 
+	public String visitDate(ch.ehi.interlis.domainsandconstants.basetypes.DateValue def)
+	{
+		StringBuffer ret=new StringBuffer();
+		ret.append("\"");
+		ret.append(Integer.toString(def.getYear()));
+		ret.append("-");
+		ret.append(Integer.toString(def.getMonth()));
+		ret.append("-");
+		ret.append(Integer.toString(def.getDay()));
+		ret.append("\"");
+		return ret.toString();
+	}
+	public String visitDateTime(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeValue def)
+	{
+		StringBuffer ret=new StringBuffer();
+		ret.append("\"");
+		ret.append(Integer.toString(def.getYear()));
+		ret.append("-");
+		ret.append(Integer.toString(def.getMonth()));
+		ret.append("-");
+		ret.append(Integer.toString(def.getDay()));
+		ret.append("T");
+		ret.append(Integer.toString(def.getHours()));
+		ret.append(":");
+		ret.append(Integer.toString(def.getMinutes()));
+		ret.append(":");
+		ret.append(Float.toString(def.getSeconds()));
+		ret.append("\"");
+		return ret.toString();
+	}
+	public String visitTime(ch.ehi.interlis.domainsandconstants.basetypes.TimeValue def)
+	{
+		StringBuffer ret=new StringBuffer();
+		ret.append("\"");
+		ret.append(Integer.toString(def.getHours()));
+		ret.append(":");
+		ret.append(Integer.toString(def.getMinutes()));
+		ret.append(":");
+		ret.append(Float.toString(def.getSeconds()));
+		ret.append("\"");
+		return ret.toString();
+	}
   public String visitIliDim(IliDim def)
     {
     return def.toString();
