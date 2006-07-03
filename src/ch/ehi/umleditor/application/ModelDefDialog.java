@@ -25,7 +25,7 @@ import ch.softenvironment.view.*;
  * User Interface for a ModelDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2006-06-13 14:27:23 $
+ * @version $Revision: 1.5 $ $Date: 2006-07-03 09:29:43 $
  */
 public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
@@ -1609,7 +1609,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.addTab(getDescriptionString(), null, getPnlDescription());
 			ivjTbpGeneral.addTab(getDetailString(), null, getPnlDetail());
-			ivjTbpGeneral.addTab("Language", null, getPnlLanguage());
+			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpLanguage_title"), null, getPnlLanguage());
 			//ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpContract_title"), null, getPnlContract());
 			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpImport_title"), null, getPnlImport());
 			// user code begin {1}
@@ -1935,12 +1935,15 @@ public void removeObjects(Object source) {
 			consGridBagConstraints7.fill = java.awt.GridBagConstraints.BOTH;
 			consGridBagConstraints7.gridx = 2;
 			consGridBagConstraints7.gridy = 3;
+			consGridBagConstraints7.insets = new java.awt.Insets(5,5,5,5);
+			consGridBagConstraints5.insets = new java.awt.Insets(5,5,5,5);
 			consGridBagConstraints2.gridx = 1;
 			consGridBagConstraints2.gridy = 1;
 			consGridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			consGridBagConstraints4.gridx = 1;
 			consGridBagConstraints4.gridy = 3;
 			consGridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consGridBagConstraints4.insets = new java.awt.Insets(5,5,5,5);
 			consGridBagConstraints3.gridx = 1;
 			consGridBagConstraints3.gridy = 2;
 			consGridBagConstraints3.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -1948,9 +1951,13 @@ public void removeObjects(Object source) {
 			consGridBagConstraints6.fill = java.awt.GridBagConstraints.HORIZONTAL;
 			consGridBagConstraints6.gridx = 2;
 			consGridBagConstraints6.gridy = 2;
+			consGridBagConstraints6.insets = new java.awt.Insets(5,5,5,5);
+			consGridBagConstraints2.insets = new java.awt.Insets(5,5,5,5);
 			consGridBagConstraints1.gridx = 2;
 			consGridBagConstraints1.gridy = 4;
 			consGridBagConstraints1.anchor = java.awt.GridBagConstraints.WEST;
+			consGridBagConstraints3.insets = new java.awt.Insets(5,5,5,5);
+			consGridBagConstraints1.insets = new java.awt.Insets(5,5,5,5);
 			pnlDetail.setLayout(new java.awt.GridBagLayout());
 			pnlDetail.add(getLblIssuerURI(), consGridBagConstraints2);
 			pnlDetail.add(getCbIsContracted(), consGridBagConstraints1);
@@ -1971,7 +1978,7 @@ public void removeObjects(Object source) {
 	private javax.swing.JLabel getLblIssuerURI() {
 		if(lblIssuerURI == null) {
 			lblIssuerURI = new javax.swing.JLabel();
-			lblIssuerURI.setText("Issuer URI:");
+			lblIssuerURI.setText(resModelDefDialog.getString("lblIssuerURI_text"));
 			lblIssuerURI.setName("lblIssuerURI");
 		}
 		return lblIssuerURI;
@@ -1985,7 +1992,7 @@ public void removeObjects(Object source) {
 		if(cbIsContracted == null) {
 			cbIsContracted = new javax.swing.JCheckBox();
 			cbIsContracted.setName("cbIsContracted");
-			cbIsContracted.setText("Contracted");
+			cbIsContracted.setText(resModelDefDialog.getString("cbIsContracted_text"));
 		}
 		return cbIsContracted;
 	}
@@ -1997,7 +2004,7 @@ public void removeObjects(Object source) {
 	private javax.swing.JLabel getLblVersion() {
 		if(lblVersion == null) {
 			lblVersion = new javax.swing.JLabel();
-			lblVersion.setText("Version:");
+			lblVersion.setText(resModelDefDialog.getString("lblVersion_text"));
 		}
 		return lblVersion;
 	}
@@ -2009,7 +2016,7 @@ public void removeObjects(Object source) {
 	private javax.swing.JLabel getLblVersionComment() {
 		if(lblVersionComment == null) {
 			lblVersionComment = new javax.swing.JLabel();
-			lblVersionComment.setText("Version comment:");
+			lblVersionComment.setText(resModelDefDialog.getString("lblVersionComment_text"));
 		}
 		return lblVersionComment;
 	}
