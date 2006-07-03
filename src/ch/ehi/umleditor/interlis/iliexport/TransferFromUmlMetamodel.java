@@ -218,7 +218,7 @@ public class TransferFromUmlMetamodel
                 //}
 
       // run compiler
-      ch.interlis.ili2c.Main.runCompiler(config,el);
+      ch.interlis.ili2c.Main.runCompiler(config);
       // remove temporary files
       for(java.util.Iterator i=tempFiles.iterator();i.hasNext();){
         File f=((FileListEntry)i.next()).file;
@@ -1296,10 +1296,18 @@ public class TransferFromUmlMetamodel
       Text text=(Text)def;
       switch(text.getKind()){
         case TextKind.UNDEFINED:
-          out.write("TEXT");
+			String typeTag="TEXT";
+			if(text.isMultiline()){
+				typeTag="MTEXT";
+			}
+			out.write(typeTag);
           break;
         case TextKind.MAXLEN:
-          out.write("TEXT*"+Long.toString(text.getMaxLength()));
+        	typeTag="TEXT";
+			if(text.isMultiline()){
+				typeTag="MTEXT";
+			}
+          out.write(typeTag+"*"+Long.toString(text.getMaxLength()));
           break;
         case TextKind.NAME:
           out.write("NAME");

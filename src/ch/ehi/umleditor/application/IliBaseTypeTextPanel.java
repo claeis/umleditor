@@ -24,13 +24,13 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>Text</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
+ * @version $Revision: 1.4 $ $Date: 2006-07-03 15:25:26 $
  */
 public class IliBaseTypeTextPanel extends BasePanel implements DataPanel {
 private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel");  //$NON-NLS-1$
-	private javax.swing.JRadioButton ivjRbtLength = null;
+	private javax.swing.JRadioButton ivjRbtMultiLine = null;
 	private javax.swing.JRadioButton ivjRbtName = null;
-	private javax.swing.JRadioButton ivjRbtUnspecified = null;
+	private javax.swing.JRadioButton ivjRbtSingleLine = null;
 	private javax.swing.JRadioButton ivjRbtURI = null;
 	private javax.swing.JTextField ivjTxtLength = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
@@ -44,8 +44,10 @@ class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.It
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
-			if (e.getSource() == IliBaseTypeTextPanel.this.getRbtLength())
+			if (e.getSource() == IliBaseTypeTextPanel.this.getRbtMultiLine())
 				connEtoC1(e);
+			if (e.getSource() == IliBaseTypeTextPanel.this.getRbtSingleLine())
+				connEtoC2(e);
 		};
 	};
 /**
@@ -64,7 +66,20 @@ private void connEtoC1(java.awt.event.ItemEvent arg1) {
 	try {
 		// user code begin {1}
 		// user code end
-		this.rbtLength_ItemStateChanged(arg1);
+		this.length_StateChanged(arg1);
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+private void connEtoC2(java.awt.event.ItemEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.length_StateChanged(arg1);
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -95,9 +110,14 @@ private void connEtoM1(java.awt.event.FocusEvent arg1) {
  * Return Kind.
  */
 private int getkind() {
-	if (getRbtUnspecified().isSelected()) {
-		return TextKind.UNDEFINED;
-	} else if (getRbtLength().isSelected()) {
+	if (getRbtSingleLine().isSelected() || getRbtMultiLine().isSelected()) {
+		String txt=getTxtLength().getText();
+		if(txt!=null){
+			txt=txt.trim();
+		}
+		if(txt==null || txt.length()==0){
+			return TextKind.UNDEFINED;
+		}
 		return TextKind.MAXLEN;
 	} else if (getRbtName().isSelected()) {
 		return TextKind.NAME;
@@ -161,11 +181,15 @@ public java.lang.Object getObject() {
 	Text type = new Text();
 
 	// kind
-	type.setKind(getkind());
+	int kind=getkind();
+	type.setKind(kind);
 
-	if (getkind() == TextKind.MAXLEN) {
+	if (kind==TextKind.MAXLEN || kind==TextKind.UNDEFINED){
+		type.setMultiline(getRbtMultiLine().isSelected()); 
+	}
+	if (kind == TextKind.MAXLEN) {
 		// length
-		type.setMaxLength((new Long(getTxtLength().getText())).longValue());
+		type.setMaxLength(Long.parseLong(getTxtLength().getText()));
 	} else {
 		type.setMaxLength(0);
 	}
@@ -177,15 +201,15 @@ public java.lang.Object getObject() {
  * @return javax.swing.JRadioButton
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JRadioButton getRbtLength() {
-	if (ivjRbtLength == null) {
+private javax.swing.JRadioButton getRbtMultiLine() {
+	if (ivjRbtMultiLine == null) {
 		try {
-			ivjRbtLength = new javax.swing.JRadioButton();
-			ivjRbtLength.setName("RbtLength");
-			ivjRbtLength.setText("TEXT");
-			ivjRbtLength.setBounds(160, 40, 140, 22);
+			ivjRbtMultiLine = new javax.swing.JRadioButton();
+			ivjRbtMultiLine.setName("RbtMultiLine");
+			ivjRbtMultiLine.setText("Multiline");
+			ivjRbtMultiLine.setBounds(160, 40, 140, 22);
 			// user code begin {1}
-			ivjRbtLength.setText(getResourceString("RbtLength_text"));
+			ivjRbtMultiLine.setText(getResourceString("RbtMultiLine_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -193,7 +217,7 @@ private javax.swing.JRadioButton getRbtLength() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjRbtLength;
+	return ivjRbtMultiLine;
 }
 /**
  * Return the RbtName property value.
@@ -223,15 +247,15 @@ private javax.swing.JRadioButton getRbtName() {
  * @return javax.swing.JRadioButton
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JRadioButton getRbtUnspecified() {
-	if (ivjRbtUnspecified == null) {
+private javax.swing.JRadioButton getRbtSingleLine() {
+	if (ivjRbtSingleLine == null) {
 		try {
-			ivjRbtUnspecified = new javax.swing.JRadioButton();
-			ivjRbtUnspecified.setName("RbtUnspecified");
-			ivjRbtUnspecified.setText("Undefiniert");
-			ivjRbtUnspecified.setBounds(160, 15, 140, 22);
+			ivjRbtSingleLine = new javax.swing.JRadioButton();
+			ivjRbtSingleLine.setName("RbtSingleLine");
+			ivjRbtSingleLine.setText("Single line");
+			ivjRbtSingleLine.setBounds(160, 15, 140, 22);
 			// user code begin {1}
-			ivjRbtUnspecified.setText(getResourceString("RbtUnspecified_text"));
+			ivjRbtSingleLine.setText(getResourceString("RbtSingleLine_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -239,7 +263,7 @@ private javax.swing.JRadioButton getRbtUnspecified() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjRbtUnspecified;
+	return ivjRbtSingleLine;
 }
 /**
  * Return the RbtURI property value.
@@ -302,7 +326,8 @@ protected void handleException(java.lang.Throwable exception) {
 private void initConnections() throws java.lang.Exception {
 	// user code begin {1}
 	// user code end
-	getRbtLength().addItemListener(ivjEventHandler);
+	getRbtMultiLine().addItemListener(ivjEventHandler);
+	getRbtSingleLine().addItemListener(ivjEventHandler);
 	getTxtLength().addFocusListener(ivjEventHandler);
 }
 /**
@@ -317,8 +342,8 @@ private void initialize() {
 		setToolTipText("INTERLIS Basistyp <TEXT>");
 		setLayout(null);
 		setSize(572, 126);
-		add(getRbtUnspecified(), getRbtUnspecified().getName());
-		add(getRbtLength(), getRbtLength().getName());
+		add(getRbtSingleLine(), getRbtSingleLine().getName());
+		add(getRbtMultiLine(), getRbtMultiLine().getName());
 		add(getRbtName(), getRbtName().getName());
 		add(getRbtURI(), getRbtURI().getName());
 		add(getTxtLength(), getTxtLength().getName());
@@ -331,25 +356,21 @@ private void initialize() {
 	// user code begin {2}
 	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
-	group.add(getRbtUnspecified());
+	group.add(getRbtSingleLine());
 	group.add(getRbtName());
-	group.add(getRbtLength());
+	group.add(getRbtMultiLine());
 	group.add(getRbtURI());
-	getRbtUnspecified().setSelected(true);
-	getTxtLength().setText("0");//$NON-NLS-1$
+	getRbtSingleLine().setSelected(true);
+	getTxtLength().setText("");
 	// user code end
 }
 /**
  * Control Length TextField.
  */
-private void rbtLength_ItemStateChanged(java.awt.event.ItemEvent itemEvent) {
-	boolean isSelected = getRbtLength().isSelected();
+private void length_StateChanged(java.awt.event.ItemEvent itemEvent) {
+	boolean isSelected = getRbtMultiLine().isSelected() || getRbtSingleLine().isSelected();
 	getTxtLength().setEditable(isSelected);
 	getTxtLength().setEnabled(isSelected);
-
-	if (!isSelected) {
-		getTxtLength().setText(null);
-	}
 }
 /**
  * Set the Object to be displayed by panel.
@@ -360,12 +381,21 @@ public void setObject(java.lang.Object object) {
 	// kind
 	switch (type.getKind()) {
 		case TextKind.UNDEFINED: {
-			getRbtUnspecified().setSelected(true);
+			if(type.isMultiline()){
+				getRbtMultiLine().setSelected(true);
+			}else{
+				getRbtSingleLine().setSelected(true);
+			}
+			getTxtLength().setText("");
 			break;
 		}
 		case TextKind.MAXLEN: {
-			getRbtLength().setSelected(true);
-			getTxtLength().setText((new Long(type.getMaxLength()).toString()));
+			if(type.isMultiline()){
+				getRbtMultiLine().setSelected(true);
+			}else{
+				getRbtSingleLine().setSelected(true);
+			}
+			getTxtLength().setText(Long.toString(type.getMaxLength()));
 			break;
 		}
 		case TextKind.NAME: {

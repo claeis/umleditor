@@ -733,6 +733,7 @@ public class TransferFromIli2cMetamodel
       }else{
         text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.UNDEFINED);
       }
+		text.setMultiline(!((TextType) dd).isNormalized());
       // URI and NAME are represented as TypeAlias in ili2c
 
     }else if (dd instanceof EnumerationType){
