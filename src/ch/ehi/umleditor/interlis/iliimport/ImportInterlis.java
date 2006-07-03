@@ -69,8 +69,8 @@ public class ImportInterlis
       config.addFileEntry(new FileEntry(IliFileName,FileEntryKind.ILIMODELFILE));
       // we need no output
       config.setOutputKind(GenerateOutputKind.NOOUTPUT );
-      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,el);
-      if(el.getErrorCount()==0){
+      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config);
+      if(ili2cModel!=null){
         // translate the compiler metamodel to our metamodel
         convert.visitTransferDescription(editor.getModel(),ili2cModel,null,config);
         // refresh view
@@ -108,8 +108,8 @@ public class ImportInterlis
                 }
       // we need no output
       config.setOutputKind(GenerateOutputKind.NOOUTPUT );
-      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,el);
-      if(el.getErrorCount()==0){
+      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config);
+      if(ili2cModel!=null){
         // translate the compiler metamodel to our metamodel
         convert.visitTransferDescription(editor.getModel(),ili2cModel,ilcFileName,config);
         // refresh view
