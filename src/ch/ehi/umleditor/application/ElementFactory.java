@@ -24,6 +24,7 @@ import ch.ehi.interlis.metaobjects.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.*;
 import java.util.*;
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.implementation.*;
@@ -41,7 +42,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2006-07-03 09:01:47 $
+ * @version $Revision: 1.9 $ $Date: 2006-07-03 16:46:22 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -354,7 +355,14 @@ public static MetaObjectFile createMetaObjectFile(UmlModel parent) {
 public static ModelDef createModelDef(Element parent) {
 	// generic initialization
 	ModelDef modelDef = (ModelDef)createOwnedElement(ModelDef.class, parent);
-
+	modelDef.setIssuerURI(new NlsString("mailto:"+System.getProperty("user.name")+"@localhost"));
+	Calendar current=Calendar.getInstance();
+	java.text.DecimalFormat digit4 = new java.text.DecimalFormat("0000");
+	java.text.DecimalFormat digit2 = new java.text.DecimalFormat("00");
+	String version=digit4.format(current.get(Calendar.YEAR))
+		+digit2.format(current.get(Calendar.MONTH))
+		+digit2.format(current.get(Calendar.DAY_OF_MONTH));
+	modelDef.setVersion(new NlsString(version));
 	// default initialization
 	modelDef.setKind(ModelDefKind.DATA);
 
