@@ -28,7 +28,7 @@ import ch.softenvironment.view.*;
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.6 $ $Date: 2006-07-03 13:38:50 $
+ * @version $Revision: 1.7 $ $Date: 2006-07-03 15:48:44 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
@@ -1087,8 +1087,25 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax(convertedType);
 		} else if (type instanceof CoordinateType) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
-			getPnlTypeCoord().setObject(type, domainDef);
+			CoordinateType ct=(CoordinateType)type;
+			java.util.Iterator dimi=ct.iteratorDim();
+			boolean isIli22=false;
+			while(dimi.hasNext()){
+				NumericalType dim=(NumericalType)dimi.next();
+				if(dim instanceof StructuredUnitType){
+					isIli22=true;
+				}
+			}
+			if(!isIli22){
+				getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
+				getPnlTypeCoord().setObject(type, domainDef);
+			}else{
+				// 2.2 type; doesn't exist in 2.3
+				// convert to Syntax
+				UnknownType convertedType=ElementUtils.convertType(type);
+				getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
+				getPnlTypeUnknown().setSyntax(convertedType);
+			}
 		} else if (type instanceof IliPolyline) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
 			getPnlTypeLine().setObject(type, domainDef);
