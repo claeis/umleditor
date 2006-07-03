@@ -27,7 +27,7 @@ import java.util.*;
  * Enumeration-utility.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2006-07-03 09:01:46 $
+ * @version $Revision: 1.3 $ $Date: 2006-07-03 13:44:47 $
  */
 public abstract class IliBaseTypeKind {
 	// Names of Interlis types to display
@@ -95,7 +95,6 @@ private static Vector getStandardTypes() {
 	standardTypes.add(DATETIME);
 	standardTypes.add(TIME);
 	standardTypes.add(COORD);
-	standardTypes.add(BASKET);
 	standardTypes.add(POLYLINE);
 	standardTypes.add(SURFACE);
 
