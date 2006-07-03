@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2006-06-29 21:28:44 $
-// $Revision: 1.5 $
+// $Date: 2006-07-03 09:14:14 $
+// $Revision: 1.6 $
 //
 
 // -beg- preserve=no 3CEB5BA003CF package "XMLInterlisDecoder"
@@ -18,7 +18,6 @@ package ch.ehi.umleditor.xmiuml.ehi;
 import org.xml.sax.*;
 import java.io.*;
 import org.xml.sax.helpers.XMLReaderFactory;
-
 import ch.ehi.basics.logging.EhiLogger;
 // -end- 3CEB5BA003CF import "XMLInterlisDecoder"
 
@@ -107,7 +106,7 @@ public class XMLInterlisDecoder
           ch.ehi.umleditor.application.LauncherView.getInstance().log("decoder","Object <"+tid+"> is never used");
         }
       }
-      EhiLogger.debug("Actual Object: "+object);
+	  EhiLogger.traceState("root-object: "+object);
       inputStream.close();
     }
 
