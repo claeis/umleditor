@@ -28,11 +28,13 @@ import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.interlis.attributes.*;
 import ch.softenvironment.util.Tracer;
 import ch.softenvironment.util.*;
+import ch.ehi.basics.logging.EhiLogger;
+
 /**
  * Utility Class for dealing with Element's.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2006-06-29 22:08:56 $
+ * @version $Revision: 1.6 $ $Date: 2006-07-03 13:38:50 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -241,4 +243,20 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 	}
 	return true;
 }
+public static UnknownType convertType(ch.ehi.interlis.domainsandconstants.Type type)
+{
+	java.io.StringWriter iliout=new java.io.StringWriter();
+	ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel toili=new ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel();
+	toili.setup(iliout,ch.ehi.basics.types.NlsString.getDefaultLanguage());
+	try{
+		toili.visitType(null,type);
+	}catch(java.io.IOException ex){
+		EhiLogger.logError("failed to convert type",ex);
+	}
+	String ret=iliout.toString();
+	UnknownType convertedType=new UnknownType();
+	convertedType.setSyntax(new ch.ehi.basics.types.NlsString(ret));			
+	return convertedType;
+}
+
 }

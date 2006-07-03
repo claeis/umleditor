@@ -21,12 +21,14 @@ import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
 import ch.softenvironment.util.Tracer;
+import ch.ehi.basics.logging.EhiLogger;
 import ch.softenvironment.view.*;
+
 /**
  * User Interface for a DomainDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.5 $ $Date: 2006-07-03 09:01:47 $
+ * @version $Revision: 1.6 $ $Date: 2006-07-03 13:38:50 $
  */
 public class DomainDefDialog extends BaseDialog {
 	// ModelElement
@@ -1074,15 +1076,19 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof Enumeration) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.ENUM);
 			getPnlTypeEnum().setObject(type);
-		} else if (type instanceof NumericalType) {
+		} else if (type instanceof NumericType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.NUMERIC);
 			getPnlTypeNumeric().setObject(type, domainDef);
+		} else if (type instanceof StructuredUnitType
+				|| type instanceof BasketType) {
+			// 2.2 type; doesn't exist in 2.3
+			// convert to Syntax
+			UnknownType convertedType=ElementUtils.convertType(type);
+			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
+			getPnlTypeUnknown().setSyntax(convertedType);
 		} else if (type instanceof CoordinateType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
 			getPnlTypeCoord().setObject(type, domainDef);
-		} else if (type instanceof BasketType) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.BASKET);
-			getPnlTypeBasket().setObject(type, domainDef);
 		} else if (type instanceof IliPolyline) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
 			getPnlTypeLine().setObject(type, domainDef);

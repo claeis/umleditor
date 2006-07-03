@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>NumericalType</b>.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
+ * @version $Revision: 1.4 $ $Date: 2006-07-03 13:38:50 $
  */
 public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
 	private JRadioButton ivjRbtUnspecified = null;
@@ -56,8 +56,6 @@ class IvjEventHandler implements java.awt.event.ItemListener {
 				connEtoC1(e);
 			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeUndefined()) 
 				connEtoC2(e);
-			if (e.getSource() == IliBaseTypeNumericPanel.this.getRbtRangeStructured()) 
-				connEtoC3(e);
 		};
 	};
 /**
@@ -91,24 +89,6 @@ private void connEtoC1(java.awt.event.ItemEvent arg1) {
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
 private void connEtoC2(java.awt.event.ItemEvent arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.rangeChanged();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
-/**
- * connEtoC3:  (RbtRangeStructured.item.itemStateChanged(java.awt.event.ItemEvent) --> IliBaseTypeNumericPanel.rangeChanged()V)
- * @param arg1 java.awt.event.ItemEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoC3(java.awt.event.ItemEvent arg1) {
 	try {
 		// user code begin {1}
 		// user code end
@@ -312,17 +292,6 @@ private javax.swing.JLabel getLblUnit() {
  */
 public java.lang.Object getObject() {
 	NumericalType type = null;
-	if (getRbtRangeStructured().isSelected()) {
-		type = ElementFactory.createStructuredUnitType();
-		String structDec = getTxtMinStruct().getText();
-		if ((structDec != null) && (structDec.length() > 0)) {
-			((StructuredUnitType)type).setMinStruc(StructDec.parseStructDec(structDec));
-		}
-		structDec = getTxtMaxStruct().getText();
-		if ((structDec != null) && (structDec.length() > 0)) {
-			((StructuredUnitType)type).setMaxStruc(StructDec.parseStructDec(structDec));
-		}
-	} else {
 		type = ElementFactory.createNumericType();
 		// Range
 		if (getRbtRangeDefined().isSelected()) {
@@ -330,7 +299,6 @@ public java.lang.Object getObject() {
 			((NumericType)type).setMinDec((IliDim)getPnlMin().getObject());
 			((NumericType)type).setMaxDec((IliDim)getPnlMax().getObject());
 		}
-	}
 
 	type.setCircular(getChxCircular().isSelected());
 	if (type.containsUnitDef()) {
@@ -441,7 +409,6 @@ private javax.swing.JPanel getPnlTop() {
 			getPnlTop().add(getRbtClockwise(), getRbtClockwise().getName());
 			getPnlTop().add(getRbtCounterClockwise(), getRbtCounterClockwise().getName());
 			getPnlTop().add(getRbtRangeUndefined(), getRbtRangeUndefined().getName());
-			getPnlTop().add(getRbtRangeStructured(), getRbtRangeStructured().getName());
 			getPnlTop().add(getTxtMinStruct(), getTxtMinStruct().getName());
 			getPnlTop().add(getTxtMaxStruct(), getTxtMaxStruct().getName());
 			// user code begin {1}
@@ -534,7 +501,7 @@ private javax.swing.JRadioButton getRbtRangeDefined() {
  * @return javax.swing.JRadioButton
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JRadioButton getRbtRangeStructured() {
+private javax.swing.JRadioButton XXgetRbtRangeStructured() {
 	if (ivjRbtRangeStructured == null) {
 		try {
 			ivjRbtRangeStructured = new javax.swing.JRadioButton();
@@ -661,7 +628,6 @@ private void initConnections() throws java.lang.Exception {
 	// user code end
 	getRbtRangeDefined().addItemListener(ivjEventHandler);
 	getRbtRangeUndefined().addItemListener(ivjEventHandler);
-	getRbtRangeStructured().addItemListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -711,7 +677,6 @@ private void initialize() {
 	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 	group.add(getRbtRangeUndefined());
 	group.add(getRbtRangeDefined());
-	group.add(getRbtRangeStructured());
 	getRbtRangeUndefined().setSelected(false);
 
 	group = new javax.swing.ButtonGroup();
@@ -736,15 +701,6 @@ private void rangeChanged() {
 		getPnlMax().setVisible(true);
 		getTxtMinStruct().setVisible(false);
 		getTxtMaxStruct().setVisible(false);
-	} else if (getRbtRangeStructured().isSelected()) {
-		getLblMin().setVisible(true);
-		getLblMin().setText(getResourceString("LblMinStruct_text")); //$NON-NLS-1$
-		getLblMax().setVisible(true);
-		getLblMax().setText(getResourceString("LblMaxStruct_text")); //$NON-NLS-1$
-		getPnlMin().setVisible(false);
-		getPnlMax().setVisible(false);
-		getTxtMinStruct().setVisible(true);
-		getTxtMaxStruct().setVisible(true);
 	} else {
 		// undefined
 		getLblMin().setVisible(false);
@@ -768,7 +724,6 @@ public final void setObject(java.lang.Object object) throws DeveloperException {
 public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.ModelElement modelElement) {
 	NumericalType type = (NumericalType)object;
 
-	if (type instanceof NumericType) {
 		if (((NumericType)type).isRangeDefined()) {
 			getRbtRangeDefined().setSelected(true);
 			getPnlMin().setObject(((NumericType)type).getMinDec());
@@ -776,16 +731,6 @@ public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.Mod
 		} else {
 			getRbtRangeUndefined().setSelected(true);
 		}
-	} else {
-		// StructuredUnitType
-		getRbtRangeStructured().setSelected(true);
-		if (((StructuredUnitType)type).getMinStruc() != null) {
-			getTxtMinStruct().setText(((StructuredUnitType)type).getMinStruc().toString());
-		}
-		if (((StructuredUnitType)type).getMaxStruc() != null) {
-			getTxtMaxStruct().setText(((StructuredUnitType)type).getMaxStruc().toString());
-		}
-	}
 
 	// @see #chxCircular_ItemStateChanged()
 	getChxCircular().setSelected(type.isCircular());
