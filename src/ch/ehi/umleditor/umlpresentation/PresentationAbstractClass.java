@@ -33,7 +33,7 @@ import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D47AB2F01F2 import "PresentationAbstractClass"
 
 /** @author Claude Eisenhut
- *  @version $Revision: 1.3 $ $Date: 2006-06-13 14:32:00 $
+ *  @version $Revision: 1.4 $ $Date: 2006-07-03 06:18:46 $
  */
 public abstract class PresentationAbstractClass extends PresentationNode
 {
@@ -228,6 +228,37 @@ public abstract class PresentationAbstractClass extends PresentationNode
       ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setShowNamePrefix"));
     }
     // -end- 448D2E2D0234 set_body3D47AB2F01F2 "showNamePrefix"
+  }
+
+  // -beg- preserve=no 44A8B25B03E6 var3D47AB2F01F2 "showConstraints"
+  private int showConstraints = ShowConstraintsKind.HIDE;
+  // -end- 44A8B25B03E6 var3D47AB2F01F2 "showConstraints"
+
+  /** get current value of showConstraints
+   *  @see #setShowConstraints
+   */
+  // -beg- preserve=no 44A8B25B03E6 get_head3D47AB2F01F2 "showConstraints"
+  public  int getShowConstraints()
+  // -end- 44A8B25B03E6 get_head3D47AB2F01F2 "showConstraints"
+  {
+    // -beg- preserve=no 44A8B25B03E6 get_body3D47AB2F01F2 "showConstraints"
+    return showConstraints;
+    // -end- 44A8B25B03E6 get_body3D47AB2F01F2 "showConstraints"
+  }
+
+  /** set current value of showConstraints
+   *  @see #getShowConstraints
+   */
+  // -beg- preserve=no 44A8B25B03E6 set_head3D47AB2F01F2 "showConstraints"
+  public  void setShowConstraints(int value1)
+  // -end- 44A8B25B03E6 set_head3D47AB2F01F2 "showConstraints"
+  {
+    // -beg- preserve=no 44A8B25B03E6 set_body3D47AB2F01F2 "showConstraints"
+    if(showConstraints != value1){
+      showConstraints = value1;
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setShowConstraints"));
+    }
+    // -end- 44A8B25B03E6 set_body3D47AB2F01F2 "showConstraints"
   }
 
   // declare/define something only in the code
