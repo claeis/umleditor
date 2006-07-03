@@ -721,8 +721,8 @@ public class TransferFromIli2cMetamodel
       ch.ehi.interlis.domainsandconstants.basetypes.Text text=new ch.ehi.interlis.domainsandconstants.basetypes.Text();
       ret=text;
       text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.URI);
-    }else if (dd instanceof NumericalType){
-      return visitNumericalType (scope,(NumericalType) dd);
+    }else if (dd instanceof NumericType){
+      return visitNumericalType (scope,(NumericType) dd);
     }else if (dd instanceof TextType){
       int len = ((TextType) dd).getMaxLength();
       ch.ehi.interlis.domainsandconstants.basetypes.Text text=new ch.ehi.interlis.domainsandconstants.basetypes.Text();
@@ -854,31 +854,6 @@ public class TransferFromIli2cMetamodel
         Table r=(Table)ri.next();
         classtype.addRestrictedTo(findClassDef(r));
       }
-	}else if (dd instanceof BasketType){
-	  ch.ehi.interlis.domainsandconstants.basetypes.BasketType baskettype=new ch.ehi.interlis.domainsandconstants.basetypes.BasketType();
-	  ret=baskettype;
-	  BasketType bt = (BasketType) dd;
-	  switch(bt.getKind()){
-		case Properties.eUNDEFINED:
-		default:
-			baskettype.setKind(ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.UNDEFINED);
-			break;
-		case Properties.eDATA:
-			baskettype.setKind(ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.DATA);
-			break;
-		case Properties.eVIEW:
-			baskettype.setKind(ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.VIEW);
-			break;
-		case Properties.eBASE:
-			baskettype.setKind(ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.BASE);
-			break;
-		case Properties.eGRAPHIC:
-			baskettype.setKind(ch.ehi.interlis.domainsandconstants.basetypes.BasketKind.GRAPHIC);
-			break;
-	  }
-	  if(bt.getTopic()!=null){
-	  	baskettype.attachBasketSchema(findTopicDef(bt.getTopic()));
-	  }
     }else{
       // handle unknown types in a generic way
       ch.ehi.interlis.domainsandconstants.UnknownType ukn=new ch.ehi.interlis.domainsandconstants.UnknownType();
