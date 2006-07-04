@@ -27,7 +27,7 @@ package ch.ehi.umleditor.interlis.iliimport;
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=yes 3C9086430360 import "ImportInterlis"
-import ch.interlis.ili2c.metamodel.ErrorListener;
+import ch.ehi.basics.logging.EhiLogger;
 import ch.interlis.ili2c.config.*;
 import ch.interlis.ili2c.metamodel.TransferDescription;
 import java.io.*;
@@ -63,7 +63,6 @@ public class ImportInterlis
     // -beg- preserve=yes 3C90867502B8 body3C9086430360 "readIliFile"
       LauncherView editor=LauncherView.getInstance();
       TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
-      MyErrorListener el = new MyErrorListener(convert.getFuncDesc());
       Configuration config=new Configuration();
       // setup config
       config.addFileEntry(new FileEntry(IliFileName,FileEntryKind.ILIMODELFILE));
@@ -96,15 +95,14 @@ public class ImportInterlis
 
       LauncherView editor=LauncherView.getInstance();
       TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
-      MyErrorListener el = new MyErrorListener(convert.getFuncDesc());
       Configuration config=null;
       // read config file
                 try{
                   config=PersistenceService.readConfig(ilcFileName);
                 }catch(FileNotFoundException ex){
-                  el.error(new ErrorListener.ErrorEvent(ex,null,0,ErrorListener.ErrorEvent.SEVERITY_ERROR));
+                  EhiLogger.logError(ex);
                 }catch(IOException ex){
-                  el.error(new ErrorListener.ErrorEvent(ex,null,0,ErrorListener.ErrorEvent.SEVERITY_ERROR));
+					EhiLogger.logError(ex);
                 }
       // we need no output
       config.setOutputKind(GenerateOutputKind.NOOUTPUT );
