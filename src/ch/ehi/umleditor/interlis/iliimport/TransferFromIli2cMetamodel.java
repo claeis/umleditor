@@ -183,6 +183,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.modeltopicclass.TopicDef topicdef=findTopicDef(topic);
     topicdef.setName(new NlsString(topic.getName()));
 
+	// documentation
+	String ilidoc=topic.getDocumentation();
+	if(ilidoc!=null){
+		topicdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     topicdef.setAbstract(topic.isAbstract());
     topicdef.setPropFinal(topic.isFinal());
     if(topic.isViewTopic()){
@@ -232,6 +238,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.modeltopicclass.ClassDef classdef=findClassDef(tdef);
     classdef.setName(new NlsString(tdef.getName()));
 
+	// documentation
+	String ilidoc=tdef.getDocumentation();
+	if(ilidoc!=null){
+		classdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     classdef.setAbstract(tdef.isAbstract());
     classdef.setPropFinal(tdef.isFinal());
     if (tdef.isIdentifiable()){
@@ -264,6 +276,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.associations.AssociationDef assocdef=findAssociationDef(assoc);
     assocdef.setName(new NlsString(assoc.getName()));
 
+	// documentation
+	String ilidoc=assoc.getDocumentation();
+	if(ilidoc!=null){
+		assocdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     assocdef.setAbstract(assoc.isAbstract());
     assocdef.setPropFinal(assoc.isFinal());
     //classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
@@ -294,6 +312,14 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.views.ViewDef viewdef=findViewDef(view);
     viewdef.setName(new NlsString(view.getName()));
+    
+	// documentation
+	String ilidoc=view.getDocumentation();
+	if(ilidoc!=null){
+		viewdef.setDocumentation(new NlsString(ilidoc));
+	}
+
+
     makeSyntax.printView(view);
     viewdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(viewdef);
@@ -305,6 +331,13 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.graphicdescriptions.GraphicDef gfxdef=findGraphicDef(graph);
     gfxdef.setName(new NlsString(graph.getName()));
+    
+	// documentation
+	String ilidoc=graph.getDocumentation();
+	if(ilidoc!=null){
+		gfxdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     makeSyntax.printGraphic(graph);
     gfxdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(gfxdef);
@@ -318,9 +351,17 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.units.UnitDef unitdef=findUnitDef(u);
     unitdef.setName(new NlsString(u.getName()));
+    
     if (!u.getDocName().equals(u.getName())) {
       unitdef.setDescName(new NlsString(u.getDocName()));
     }
+
+	// documentation
+	String ilidoc=u.getDocumentation();
+	if(ilidoc!=null){
+		unitdef.setDocumentation(new NlsString(ilidoc));
+	}
+
 
     makeSyntax.printUnit(u.getContainer(),u);
     unitdef.setSyntax(new NlsString(getSyntax()));
@@ -333,6 +374,12 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.metaobjects.ParameterDef paramdef=new ch.ehi.interlis.metaobjects.ParameterDef();
     paramdef.setName(new NlsString(par.getName()));
+	// documentation
+	String ilidoc=par.getDocumentation();
+	if(ilidoc!=null){
+		paramdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     makeSyntax.printParameter(par.getContainer(),par);
     paramdef.setSyntax(new NlsString(getSyntax()));
     ((ch.ehi.interlis.modeltopicclass.ClassDef)getNamespace()).addParameterDef(paramdef);
@@ -343,6 +390,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.graphicdescriptions.GraphicParameterDef pdef=findGraphicParameterDef(par);
     pdef.setName(new NlsString(par.getName()));
 
+	// documentation
+	String ilidoc=par.getDocumentation();
+	if(ilidoc!=null){
+		pdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     makeSyntax.printGraphicParameterDef(par);
     pdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(pdef);
@@ -351,6 +404,13 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.metaobjects.MetaDataUseDef mdef=new ch.ehi.interlis.metaobjects.MetaDataUseDef();
     mdef.setName(new NlsString(mu.getName()));
+    
+	// documentation
+	String ilidoc=mu.getDocumentation();
+	if(ilidoc!=null){
+		mdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
     DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
     if(basket!=null){
@@ -367,6 +427,12 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printConstraint(constr);
     expr.setSyntax(new NlsString(getSyntax()));
     cdef.setBody(expr);
+	// documentation
+	String ilidoc=constr.getDocumentation();
+	if(ilidoc!=null){
+		cdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     getNamespace().addConstraint(cdef);
   }
 
@@ -507,6 +573,13 @@ public class TransferFromIli2cMetamodel
 
     ch.ehi.interlis.associations.RoleDef roledef=new ch.ehi.interlis.associations.RoleDef();
     roledef.setName(new NlsString(role.getName()));
+    
+	// documentation
+	String ilidoc=role.getDocumentation();
+	if(ilidoc!=null){
+		roledef.setDocumentation(new NlsString(ilidoc));
+	}
+
     roledef.setAbstract(role.isAbstract());
     roledef.setPropFinal(role.isFinal());
     roledef.setPropExtended(role.getExtending()!=null);
@@ -602,7 +675,13 @@ public class TransferFromIli2cMetamodel
     }
 
     model.setName(new NlsString(mdef.getName()));
-
+	
+	// documentation
+	String ilidoc=mdef.getDocumentation();
+	if(ilidoc!=null){
+		model.setDocumentation(new NlsString(ilidoc));
+	}
+	
     // kind
     if(mdef instanceof DataModel){
       model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.DATA);
@@ -614,21 +693,18 @@ public class TransferFromIli2cMetamodel
       model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.SYMBOLOGY);
     }
 
-
+	// version
+	model.setVersion(new NlsString(mdef.getModelVersion()));
+	String verCmt=mdef.getModelVersionExpl();
+	if(verCmt!=null){
+		model.setVersionComment(new NlsString(verCmt));
+	}
+	
+	// issuer
+	model.setIssuerURI(new NlsString(mdef.getIssuer()));
+	
     // contracts
-    Contract[] contractv=mdef.getContracts();
-    for (int i=0;i<contractv.length;i++)
-    {
-      ch.ehi.interlis.modeltopicclass.Contract contract=new ch.ehi.interlis.modeltopicclass.Contract();
-      contract.setIssuer(new NlsString(contractv[i].getIssuer()));
-      String expl=contractv[i].getExplanation();
-      if ((expl != null) && (expl.length() > 0))
-      {
-        contract.setDocumentation(new NlsString(expl));
-      }
-      model.addContract(contract);
-    }
-
+    model.setContracted(mdef.isContracted());
 
     // imports
     Importable[] imported = mdef.getImporting ();
@@ -650,10 +726,10 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2def=null;
     if(mdef==ilibase){
       ili2def=findINTERLIS2Def(getPredefinedName());
-      ili2def.setVersion(2.2);
+      ili2def.setVersion(2.3);
     }else{
       ili2def=findINTERLIS2Def(mdef.getFileName());
-      ili2def.setVersion(2.2);
+      ili2def.setVersion(2.3);
     }
 
     ili2def.addOwnedElement(model);
@@ -669,6 +745,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.domainsandconstants.DomainDef domaindef=findDomainDef(dd);
     domaindef.setName(new NlsString(dd.getName()));
 
+	// documentation
+	String ilidoc=dd.getDocumentation();
+	if(ilidoc!=null){
+		domaindef.setDocumentation(new NlsString(ilidoc));
+	}
+	
     domaindef.setAbstract(dd.isAbstract());
     domaindef.setPropFinal(dd.isFinal());
     // TODO handle MANDATORY DomainDef
@@ -957,6 +1039,12 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
     ret.setName(new NlsString(ee.getName()));
 
+	// documentation
+	String ilidoc=ee.getDocumentation();
+	if(ilidoc!=null){
+		ret.setDocumentation(new NlsString(ilidoc));
+	}
+
 
     ch.interlis.ili2c.metamodel.Enumeration subEnum = ee.getSubEnumeration();
     if (subEnum != null)
@@ -971,6 +1059,13 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lfdef=findLineFormTypeDef(lf);
     lfdef.setName(new NlsString(lf.getName()));
+    
+	// documentation
+	String ilidoc=lf.getDocumentation();
+	if(ilidoc!=null){
+		lfdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     Table struct=lf.getSegmentStructure();
     if(struct!=null){
       lfdef.attachStructure(findClassDef(struct));
@@ -985,6 +1080,13 @@ public class TransferFromIli2cMetamodel
   {
     ch.ehi.interlis.functions.FunctionDef funcdef=findFunctionDef(f);
     funcdef.setName(new NlsString(f.getName()));
+
+	// documentation
+	String ilidoc=f.getDocumentation();
+	if(ilidoc!=null){
+		funcdef.setDocumentation(new NlsString(ilidoc));
+	}
+
     makeSyntax.printFunctionDeclaration(f.getContainer(),f);
     funcdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(funcdef);
