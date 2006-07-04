@@ -1459,18 +1459,19 @@ public class TransferFromUmlMetamodel
       throws java.io.IOException
     {
     out.write("("); newline();
-    String sep="";
     inc_ind();
     java.util.Iterator eleIt=def.iteratorEnumElement();
     while(eleIt.hasNext()){
       EnumElement ele=(EnumElement)eleIt.next();
       visitDocumentation(ele.getDocumentation());
-      out.write(getIndent()+sep+ele.getName().getValue(language));
+      out.write(getIndent()+ele.getName().getValue(language));
       if(ele.containsChild()){
         visitEnumeration(ele.getChild());
       }
+      if(eleIt.hasNext()){
+		out.write(",");
+      }
       newline();
-      sep=",";
     }
     dec_ind();
     out.write(getIndent()+")");
