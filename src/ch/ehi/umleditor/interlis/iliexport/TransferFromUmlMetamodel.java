@@ -1897,8 +1897,8 @@ public class TransferFromUmlMetamodel
 			}
 			// ASSERT: same type
 			// compare name
-		  String name1=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p1.object);if(name1==null)name1="";
-		  String name2=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(p2.object);if(name2==null)name2="";
+		  String name1=getName4sorting(p1.object);
+		  String name2=getName4sorting(p2.object);
 		  int compareName =  name1.compareToIgnoreCase(name2);
 		  return compareName;
 		}
@@ -1922,7 +1922,27 @@ public class TransferFromUmlMetamodel
     logErrorMsg("loop in definitions: "+loopele.toString());
     return new java.util.LinkedList(children);
     }
-
+	private static String getName4sorting(Object ele)
+	{
+		String name1=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(ele);
+		if(name1==null)name1="";
+		if(name1.equals("") && ele instanceof AssociationDef){
+		  Iterator ri=((AssociationDef)ele).iteratorConnection();
+		  StringBuffer nb=new StringBuffer();
+		  while(ri.hasNext()){
+			 Object obj=ri.next();
+			 if(obj instanceof RoleDef){
+			  RoleDef role=(RoleDef)obj;
+			  String n=role.getDefLangName();
+			  if(n!=null){
+			  	nb.append(n);
+			  }
+			 }
+		  }
+		  name1=nb.toString();
+		}
+		return name1;
+	}
   private void addTypeCondition(java.util.Set children, TopoSort ts, ModelElement def, Type type)
     {
     if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
