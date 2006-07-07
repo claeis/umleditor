@@ -30,7 +30,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2005-11-20 16:43:58 $
+ * @version $Revision: 1.11 $ $Date: 2006-07-07 06:48:14 $
  */
 public class LogView extends BasePanel implements HyperlinkListener, ListMenuChoice {
 //	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
@@ -131,7 +131,16 @@ public void adaptUserAction(EventObject event, Object control) {
  * Append a log-message without a specific theme.
  */
 public void appendText(String logText) {
-	String text = getTime() + " " + logText;//$NON-NLS-1$
+	StringBuffer t=new StringBuffer(getTime() + " " +logText);
+	
+	// replace control chars with entity refs
+	for(int ti=t.length()-1;ti>=0;ti--){
+		char c=t.charAt(ti);
+		if(c=='<')t.replace(ti,ti+1,"&lt;");
+		if(c=='>')t.replace(ti,ti+1,"&gt;");
+		if(c=='&')t.replace(ti,ti+1,"&amp;");
+	}
+	String text =  t.toString();//$NON-NLS-1$
 
 	body.append(text);
 	body.append("<br>" /*\n*/);
