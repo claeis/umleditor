@@ -557,6 +557,8 @@ public class TransferFromUmlMetamodel
           sep=",";
           depc++;
         }
+      }else{
+      	// ignore other kind of Dependency
       }
     }
     if(depc>0){
@@ -1047,19 +1049,20 @@ public class TransferFromUmlMetamodel
     {
     NlsString defNls=element.getSyntax();
     String def = defNls!=null ? defNls.getValue(language) : "";
+    if(def==null || def.length()==0){
+    	return;
+    }
     // for each line
-    int last=0;
-    int next=def.indexOf("\n",last);
-    while(next>-1){
-      String line=def.substring(last,next);
-      out.write(getIndent()+line);newline();
-      last=next+1;
-      next=def.indexOf("\n",last);
+	java.io.LineNumberReader lines=new java.io.LineNumberReader(new java.io.StringReader(def));
+	String line;
+	try{
+		while((line=lines.readLine())!=null){
+			out.write(getIndent()+line);newline();
+		}
+	}catch(java.io.IOException ex){
+		ch.ehi.basics.logging.EhiLogger.logError(ex);
+	}    
     }
-      String line=def.substring(last);
-      out.write(getIndent()+line);newline();
-    }
-
   public String classRef(ModelElement source, AbstractClassDef ref)
     {
     if("ANYCLASS".equals(ref.getDefLangName())){
@@ -1371,20 +1374,20 @@ public class TransferFromUmlMetamodel
         visitNumericalType(owner,(ch.ehi.interlis.domainsandconstants.basetypes.NumericalType)def);
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateType){
 		ch.ehi.interlis.domainsandconstants.basetypes.DateType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateType)def;
-		out.write("XMLDate ");
+		out.write("FORMAT INTERLIS.XMLDate ");
 		out.write(visitDate(type.getMin()));
 		out.write(" .. ");
 		out.write(visitDate(type.getMax()));
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType){
 		ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType)def;
 		// XMLDateTime "2000-01-01T00:00:00.000" .. "2005-12-31T23:59:59.999"
-		out.write("XMLDateTime ");
+		out.write("FORMAT INTERLIS.XMLDateTime ");
 		out.write(visitDateTime(type.getMin()));
 		out.write(" .. ");
 		out.write(visitDateTime(type.getMax()));
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.TimeType){
 		ch.ehi.interlis.domainsandconstants.basetypes.TimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.TimeType)def;
-		out.write("XMLTime ");
+		out.write("FORMAT INTERLIS.XMLTime ");
 		out.write(visitTime(type.getMin()));
 		out.write(" .. ");
 		out.write(visitTime(type.getMax()));
