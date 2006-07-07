@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.23 $ $Date: 2006-06-29 22:08:56 $
+ * @version $Revision: 1.24 $ $Date: 2006-07-07 06:46:10 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3895,8 +3895,7 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 	}
 	return array;
 }
-	private ch.ehi.umleditor.plugin.loader.PluginLoader pluginLoader=new ch.ehi.umleditor.plugin.loader.PluginLoader();
-	private void initPlugins()
+	public String getUmlEditorHome()
 	{
 		String umleditorHome;
 		String classpath = System.getProperty("java.class.path");
@@ -3908,7 +3907,13 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 		}else{
 			umleditorHome =System.getProperty("user.dir");
 		}
-		System.err.println(umleditorHome);
+		return umleditorHome;
+	}
+	private ch.ehi.umleditor.plugin.loader.PluginLoader pluginLoader=new ch.ehi.umleditor.plugin.loader.PluginLoader();
+	private void initPlugins()
+	{
+		String umleditorHome=getUmlEditorHome();
+		EhiLogger.logState(umleditorHome);
 		if(umleditorHome != null){
 			pluginLoader.loadPlugins(umleditorHome+"/plugins");
 		}
