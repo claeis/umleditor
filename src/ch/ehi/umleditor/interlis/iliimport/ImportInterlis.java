@@ -51,7 +51,7 @@ public class ImportInterlis
   /** read a single INTERLIS model file.
    */
   // -beg- preserve=no 3C90867502B8 head3C9086430360 "readIliFile"
-  public static void readIliFile(String IliFileName)
+  public static void readIliFile(File iliFiles[])
   // -end- 3C90867502B8 head3C9086430360 "readIliFile"
     // declare any checked exceptions
     // please fill in/modify the following section
@@ -61,13 +61,26 @@ public class ImportInterlis
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3C90867502B8 body3C9086430360 "readIliFile"
-      LauncherView editor=LauncherView.getInstance();
-      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
-      Configuration config=new Configuration();
-      // setup config
-      config.addFileEntry(new FileEntry(IliFileName,FileEntryKind.ILIMODELFILE));
-      // we need no output
-      config.setOutputKind(GenerateOutputKind.NOOUTPUT );
+	LauncherView editor=LauncherView.getInstance();
+	TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
+	java.util.ArrayList modeldirv = new java.util.ArrayList();
+	modeldirv.add(editor.getUmlEditorHome()+"/ilimodels");
+	java.util.ArrayList filev=new java.util.ArrayList();
+	for(int filei=0;filei<iliFiles.length;filei++){
+		filev.add(iliFiles[filei].getAbsolutePath());
+		if(filei==0){
+			modeldirv.add(iliFiles[filei].getParentFile().getAbsolutePath());
+		}
+	}
+	Configuration config=ch.interlis.ili2c.ModelScan.getConfigWithFiles(modeldirv,filev);
+	if(config==null){
+		editor.log(convert.getFuncDesc(),"failed");
+		return;
+	}
+	logIliFiles(config);
+	config.setGenerateWarnings(false);
+	config.setOutputKind(GenerateOutputKind.NOOUTPUT);
+
       TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config);
       if(ili2cModel!=null){
         // translate the compiler metamodel to our metamodel
@@ -128,6 +141,20 @@ public class ImportInterlis
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CD8DEC502A7 body3C9086430360 "readFileset"
+	FileChooser importDialog = new FileChooser(LauncherView.getSettings().getImportDirectory());
+	importDialog.setDialogTitle(rsrc.getString("CTfileSelector"));
+	ch.ehi.basics.view.GenericFileFilter ilcFilter = LauncherView.createInterlisCompilerFilter();
+	importDialog.addChoosableFileFilter(ilcFilter);
+
+	if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+		LauncherView.getSettings().setImportDirectory(importDialog.getCurrentDirectory().getAbsolutePath());
+		String newFile = importDialog.getSelectedFile().getAbsolutePath();
+		if (ilcFilter.accept(importDialog.getSelectedFile())) {
+			readIlcFile(newFile);
+		} else {
+			BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
+		}
+	}
     // -end- 3CD8DEC502A7 body3C9086430360 "readFileset"
     }
 
@@ -138,22 +165,23 @@ public class ImportInterlis
   {
    	FileChooser importDialog = new FileChooser(LauncherView.getSettings().getImportDirectory());
 	importDialog.setDialogTitle(rsrc.getString("CTfileSelector"));
+	importDialog.setMultiSelectionEnabled(true);
 	ch.ehi.basics.view.GenericFileFilter iliFilter = LauncherView.createInterlisModelFilter();
-	ch.ehi.basics.view.GenericFileFilter ilcFilter = LauncherView.createInterlisCompilerFilter();
 	importDialog.addChoosableFileFilter(iliFilter);
-	importDialog.addChoosableFileFilter(ilcFilter);
 
 	if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setImportDirectory(importDialog.getCurrentDirectory().getAbsolutePath());
-		String newFile = importDialog.getSelectedFile().getAbsolutePath();
-		if (iliFilter.accept(importDialog.getSelectedFile())) {
-			readIliFile(newFile);
-		} else if (ilcFilter.accept(importDialog.getSelectedFile())) {
-			readIlcFile(newFile);
-		} else {
-		    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),rsrc.getString("CTunkwFormat"),rsrc.getString("CIunkwFormat"));
-		}
+		File filev[] = importDialog.getSelectedFiles();
+		readIliFile(filev);
 	}
+  }
+  static private void logIliFiles(ch.interlis.ili2c.config.Configuration config)
+  {
+	  java.util.Iterator filei=config.iteratorFileEntry();
+	  while(filei.hasNext()){
+		  ch.interlis.ili2c.config.FileEntry file=(ch.interlis.ili2c.config.FileEntry)filei.next();
+		  EhiLogger.logState("ilifile <"+file.getFilename()+">");
+	  }
   }
   // -end- 3C9086430360 detail_end "ImportInterlis"
 
