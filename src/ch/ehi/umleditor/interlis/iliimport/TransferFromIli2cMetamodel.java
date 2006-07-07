@@ -175,10 +175,10 @@ public class TransferFromIli2cMetamodel
   }
 
 
-  private void visitTopicDef(Topic topic)
+  private ch.ehi.interlis.modeltopicclass.TopicDef visitTopicDef(Topic topic)
   {
     if (topic == null)
-      return;
+      return null;
 
     ch.ehi.interlis.modeltopicclass.TopicDef topicdef=findTopicDef(topic);
     topicdef.setName(new NlsString(topic.getName()));
@@ -228,12 +228,12 @@ public class TransferFromIli2cMetamodel
 
     CreateDiagramUtility.classes(topicdef);
     removeNamespace();
-
+	return topicdef;
   }
 
 
 
-  private void visitClassDef(Table tdef)
+  private ch.ehi.interlis.modeltopicclass.ClassDef visitClassDef(Table tdef)
   {
     ch.ehi.interlis.modeltopicclass.ClassDef classdef=findClassDef(tdef);
     classdef.setName(new NlsString(tdef.getName()));
@@ -268,10 +268,10 @@ public class TransferFromIli2cMetamodel
     visitElements(tdef);
     removeNamespace();
 
-
+	return classdef;
   }
 
-  private void visitAssociationDef(AssociationDef assoc)
+  private ch.ehi.interlis.associations.AssociationDef visitAssociationDef(AssociationDef assoc)
   {
     ch.ehi.interlis.associations.AssociationDef assocdef=findAssociationDef(assoc);
     assocdef.setName(new NlsString(assoc.getName()));
@@ -304,11 +304,11 @@ public class TransferFromIli2cMetamodel
     addNamespace(assocdef);
     visitElements(assoc);
     removeNamespace();
-
+	return assocdef;
   }
 
 
-  private void visitView (View view)
+  private ch.ehi.interlis.views.ViewDef visitView (View view)
   {
     ch.ehi.interlis.views.ViewDef viewdef=findViewDef(view);
     viewdef.setName(new NlsString(view.getName()));
@@ -323,11 +323,12 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printView(view);
     viewdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(viewdef);
+    return viewdef;
   }
 
 
 
-  private void visitGraphic (Graphic graph)
+  private ch.ehi.interlis.graphicdescriptions.GraphicDef visitGraphic (Graphic graph)
   {
     ch.ehi.interlis.graphicdescriptions.GraphicDef gfxdef=findGraphicDef(graph);
     gfxdef.setName(new NlsString(graph.getName()));
@@ -341,13 +342,14 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printGraphic(graph);
     gfxdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(gfxdef);
+    return gfxdef;
   }
 
 
 
 
 
-  private void visitUnit (Unit u)
+  private ch.ehi.interlis.units.UnitDef visitUnit (Unit u)
   {
     ch.ehi.interlis.units.UnitDef unitdef=findUnitDef(u);
     unitdef.setName(new NlsString(u.getName()));
@@ -366,6 +368,7 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printUnit(u.getContainer(),u);
     unitdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(unitdef);
+	return unitdef;
 
   }
 
@@ -385,7 +388,7 @@ public class TransferFromIli2cMetamodel
     ((ch.ehi.interlis.modeltopicclass.ClassDef)getNamespace()).addParameterDef(paramdef);
   }
 
-  private void visitGraphicParameterDef (GraphicParameterDef par)
+  private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef visitRuntimeParameterDef (GraphicParameterDef par)
   {
     ch.ehi.interlis.graphicdescriptions.GraphicParameterDef pdef=findGraphicParameterDef(par);
     pdef.setName(new NlsString(par.getName()));
@@ -399,8 +402,9 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printGraphicParameterDef(par);
     pdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(pdef);
+    return pdef;
   }
-  private void visitMetaDataUseDef(MetaDataUseDef mu)
+  private ch.ehi.interlis.metaobjects.MetaDataUseDef visitMetaDataUseDef(MetaDataUseDef mu)
   {
     ch.ehi.interlis.metaobjects.MetaDataUseDef mdef=new ch.ehi.interlis.metaobjects.MetaDataUseDef();
     mdef.setName(new NlsString(mu.getName()));
@@ -419,6 +423,7 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printMetaDataUseDef(mu);
     mdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(mdef);
+    return mdef;
   }
   private void visitConstraint(Constraint constr)
   {
@@ -663,15 +668,17 @@ public class TransferFromIli2cMetamodel
     return "<"+rsrc.getString("CTpredefinedModel")+">";
   }
 
-  private void visitModel (Model mdef)
+  private ch.ehi.interlis.modeltopicclass.ModelDef visitModel (Model mdef)
   {
     Iterator it;
-    if(mdef==ilibase && modelMap.containsKey(mdef))return;
+    if(mdef==ilibase && modelMap.containsKey(mdef)){
+    	return null;
+    }
     ch.ehi.interlis.modeltopicclass.ModelDef model=findModelDef(mdef);
 
     // language
     if(mdef.getLanguage()!=null){
-	model.setBaseLanguage(mdef.getLanguage());
+		model.setBaseLanguage(mdef.getLanguage());
     }
 
     model.setName(new NlsString(mdef.getName()));
@@ -737,10 +744,10 @@ public class TransferFromIli2cMetamodel
     visitElements (mdef);
     CreateDiagramUtility.topicOverview(model);
     removeNamespace();
-
+	return model;
   }
 
-  private void visitDomainDef (Domain dd)
+  private ch.ehi.interlis.domainsandconstants.DomainDef visitDomainDef (Domain dd)
   {
     ch.ehi.interlis.domainsandconstants.DomainDef domaindef=findDomainDef(dd);
     domaindef.setName(new NlsString(dd.getName()));
@@ -782,6 +789,7 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.domainsandconstants.Type type=visitType(dd.getContainer(),btype);
     domaindef.attachType(type);
     getNamespace().addOwnedElement(domaindef);
+    return domaindef;
   }
 
   private ch.ehi.interlis.domainsandconstants.Type visitType(Container scope,Type dd)
@@ -1055,7 +1063,7 @@ public class TransferFromIli2cMetamodel
   }
 
 
-  private void visitLineFormTypeDef (LineForm lf)
+  private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineFormTypeDef (LineForm lf)
   {
     ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lfdef=findLineFormTypeDef(lf);
     lfdef.setName(new NlsString(lf.getName()));
@@ -1071,12 +1079,13 @@ public class TransferFromIli2cMetamodel
       lfdef.attachStructure(findClassDef(struct));
     }
     getNamespace().addOwnedElement(lfdef);
+    return lfdef;
 
   }
 
 
 
-  private void visitFunctionDeclaration(Function f)
+  private ch.ehi.interlis.functions.FunctionDef visitFunctionDeclaration(Function f)
   {
     ch.ehi.interlis.functions.FunctionDef funcdef=findFunctionDef(f);
     funcdef.setName(new NlsString(f.getName()));
@@ -1090,11 +1099,13 @@ public class TransferFromIli2cMetamodel
     makeSyntax.printFunctionDeclaration(f.getContainer(),f);
     funcdef.setSyntax(new NlsString(getSyntax()));
     getNamespace().addOwnedElement(funcdef);
+    return funcdef;
   }
 
   private void visitElements (Container container)
   {
-    Class lastClass = null;
+    ch.ehi.uml1_4.foundation.core.ModelElement lastUmlEle = null;
+	ch.ehi.uml1_4.foundation.core.ModelElement nextUmlEle = null;
 
 	int attrIdx=0;
     Iterator it = container.iterator();
@@ -1103,41 +1114,41 @@ public class TransferFromIli2cMetamodel
 
       if (elt instanceof Model)
       {
-        visitModel((Model) elt);
+        nextUmlEle=visitModel((Model) elt);
       }
 
       else if (elt instanceof MetaDataUseDef)
       {
-        visitMetaDataUseDef((MetaDataUseDef) elt);
+		nextUmlEle=visitMetaDataUseDef((MetaDataUseDef) elt);
       }
       else if (elt instanceof Unit)
       {
-        visitUnit((Unit) elt);
+		nextUmlEle=visitUnit((Unit) elt);
       }
       else if (elt instanceof Function)
       {
-        visitFunctionDeclaration ((Function) elt);
+		nextUmlEle=visitFunctionDeclaration ((Function) elt);
       }
       else if (elt instanceof LineForm)
       {
-        visitLineFormTypeDef ((LineForm) elt);
+		nextUmlEle=visitLineFormTypeDef ((LineForm) elt);
       }
       else if (elt instanceof Domain)
       {
-        visitDomainDef ((Domain) elt);
+		nextUmlEle=visitDomainDef ((Domain) elt);
       }
       else if (elt instanceof GraphicParameterDef)
       {
-        visitGraphicParameterDef((GraphicParameterDef) elt);
+		nextUmlEle=visitRuntimeParameterDef((GraphicParameterDef) elt);
       }
       else if (elt instanceof Topic)
       {
-        visitTopicDef((Topic) elt);
+		nextUmlEle=visitTopicDef((Topic) elt);
       }
 
       else if (elt instanceof AssociationDef)
       {
-        visitAssociationDef((AssociationDef) elt);
+		nextUmlEle=visitAssociationDef((AssociationDef) elt);
       }
       else if (elt instanceof Table)
       {
@@ -1147,16 +1158,16 @@ public class TransferFromIli2cMetamodel
         */
         if (!((Table) elt).isImplicit ())
         {
-          visitClassDef((Table) elt);
+			nextUmlEle=visitClassDef((Table) elt);
         }
       }
       else if (elt instanceof View)
       {
-        visitView((View) elt);
+		nextUmlEle=visitView((View) elt);
       }
       else if (elt instanceof Graphic)
       {
-        visitGraphic ((Graphic) elt);
+		nextUmlEle=visitGraphic ((Graphic) elt);
       }
 
       else if (elt instanceof AttributeDef)
@@ -1175,6 +1186,15 @@ public class TransferFromIli2cMetamodel
       else if (elt instanceof Constraint)
       {
         visitConstraint((Constraint) elt);
+      }
+      
+      if(nextUmlEle!=null && lastUmlEle!=null){
+      	// add dependency to keep ordering the same as in ili-file
+		ch.ehi.umleditor.application.ElementFactory.createDependency(ch.ehi.uml1_4.implementation.UmlUsage.class, nextUmlEle, lastUmlEle);
+      }
+      if(nextUmlEle!=null){
+		lastUmlEle=nextUmlEle;
+		nextUmlEle=null;
       }
     }
   }
