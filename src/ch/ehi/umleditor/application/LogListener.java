@@ -23,20 +23,15 @@ import ch.ehi.basics.logging.LogEvent;
 
 /**
  * @author ce
- * @version $Revision: 1.1 $ $Date: 2005-02-21 17:01:47 $
+ * @version $Revision: 1.2 $ $Date: 2006-07-07 06:47:19 $
  */
-public class LogListener implements ch.ehi.basics.logging.LogListener {
+public class LogListener extends ch.ehi.basics.logging.AbstractStdListener {
 	LogView out=null;
 	public LogListener(LogView out1){
 		out=out1;
 	}
-	public void logEvent(LogEvent event) {
-		ArrayList msgv=ch.ehi.basics.logging.StdListener.formatOutput(event,false,false);
-		Iterator msgi=msgv.iterator();
-		while(msgi.hasNext()){
-			String msg=(String)msgi.next();
-			out.appendText(msg);
-		}
+	public void outputMsgLine(int kind, int level, String msg) {
+		out.appendText(msg);
 	}
 
 }
