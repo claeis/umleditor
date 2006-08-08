@@ -30,7 +30,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * Log-Panel to trace output.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2006-07-07 06:48:14 $
+ * @version $Revision: 1.12 $ $Date: 2006-08-08 06:17:08 $
  */
 public class LogView extends BasePanel implements HyperlinkListener, ListMenuChoice {
 //	private static final String ID_TEXT = "ID:";//$NON-NLS-1$
@@ -131,7 +131,11 @@ public void adaptUserAction(EventObject event, Object control) {
  * Append a log-message without a specific theme.
  */
 public void appendText(String logText) {
-	StringBuffer t=new StringBuffer(getTime() + " " +logText);
+	appendRawText(escapeText(logText));
+}
+private String escapeText(String txt)
+{
+	StringBuffer t=new StringBuffer(txt);
 	
 	// replace control chars with entity refs
 	for(int ti=t.length()-1;ti>=0;ti--){
@@ -140,9 +144,12 @@ public void appendText(String logText) {
 		if(c=='>')t.replace(ti,ti+1,"&gt;");
 		if(c=='&')t.replace(ti,ti+1,"&amp;");
 	}
-	String text =  t.toString();//$NON-NLS-1$
-
-	body.append(text);
+	return t.toString();
+}
+private void appendRawText(String logText) {
+	body.append(getTime());
+	body.append(" ");
+	body.append(logText);
 	body.append("<br>" /*\n*/);
 	getTxaLog().setText("<body>" + body.toString() + "</body>");
 //	Document doc = getTxaLog().getEditorKit().createDefaultDocument();
@@ -160,7 +167,7 @@ public void appendText(String logText) {
  * Append a log-message with a specific theme.
  */
 public void appendText(String title, String logText) {
-	appendText("[" + title + "] " + logText);//$NON-NLS-2$//$NON-NLS-1$
+	appendRawText(escapeText("[" + title + "] " + logText));//$NON-NLS-2$//$NON-NLS-1$
 }
 /**
  * Append a log-message with a specific theme.
@@ -168,7 +175,7 @@ public void appendText(String title, String logText) {
  */
 public void appendText(String id, String title, String logText) {
 Tracer.getInstance().debug("ID=" + id + " " + logText);
-	appendText(title, "<a href=\"" + id + "\"> " + logText + "</a>");//$NON-NLS-1$
+	appendRawText(escapeText("[" + title + "] " )+ "<a href=\"" + id + "\"> " + escapeText(logText) + "</a>");//$NON-NLS-1$
 }
 /**
  * Perform the clear method.
