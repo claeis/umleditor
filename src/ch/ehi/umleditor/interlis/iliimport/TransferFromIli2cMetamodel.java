@@ -6,13 +6,10 @@ import ch.interlis.ili2c.generator.Interlis2Generator;
 import java.util.Iterator;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
-import ch.ehi.umleditor.interlis.Logging;
 
 public class TransferFromIli2cMetamodel
 {
-  private Logging log=null;
-  public TransferFromIli2cMetamodel(Logging callout){
-    log=callout;
+  public TransferFromIli2cMetamodel(){
   }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
   private void addNamespace(ch.ehi.uml1_4.foundation.core.Namespace ns)
@@ -1265,9 +1262,5 @@ public class TransferFromIli2cMetamodel
 
   public String getFuncDesc(){
     return rsrc.getString("CIiliimport");
-  }
-
-  private void logError(String msg){
-    log.log(getFuncDesc(),msg);
   }
 }

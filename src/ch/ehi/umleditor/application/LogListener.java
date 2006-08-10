@@ -20,13 +20,16 @@ package ch.ehi.umleditor.application;
 import java.util.ArrayList;
 import java.util.Iterator;
 import ch.ehi.basics.logging.LogEvent;
+import ch.ehi.basics.logging.EhiLogger;
+import ch.interlis.ili2c.CompilerLogEvent;
 
 /**
  * @author ce
- * @version $Revision: 1.2 $ $Date: 2006-07-07 06:47:19 $
+ * @version $Revision: 1.3 $ $Date: 2006-08-10 16:25:41 $
  */
 public class LogListener extends ch.ehi.basics.logging.AbstractStdListener {
-	LogView out=null;
+	private LogView out=null;
+	private LogListenerCompilerMsgMapper compilerMapper=null;
 	public LogListener(LogView out1){
 		out=out1;
 	}
@@ -34,4 +37,22 @@ public class LogListener extends ch.ehi.basics.logging.AbstractStdListener {
 		out.appendText(msg);
 	}
 
+	public void logEvent(LogEvent event) {
+		if(event instanceof CompilerLogEvent && compilerMapper!=null){
+			CompilerLogEvent ie=(CompilerLogEvent)event;
+			if(ie.getRawEventMsg()!=null){
+				String id=compilerMapper.getId(ie);
+				if(id!=null){
+					EhiLogger.debug("raw msg "+ie.getRawEventMsg());
+					out.appendText(id,compilerMapper.getTitle(),ie.getRawEventMsg());
+					return;
+				}
+			}
+		}
+		super.logEvent(event);
+	}
+	public void setCompilerMsgMapper(LogListenerCompilerMsgMapper mapper)
+	{
+		compilerMapper=mapper;
+	}
 }

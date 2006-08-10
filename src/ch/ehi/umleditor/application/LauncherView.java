@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.24 $ $Date: 2006-07-07 06:46:10 $
+ * @version $Revision: 1.25 $ $Date: 2006-08-10 16:25:41 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -58,6 +58,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	// Launcher as Singleton
 	private static LauncherView instance = null;
 	private static UserSettings settings;
+	private LogListener logListener=null;
+
 	// Internal frame, which is currently activated (receiving all mouse input)
 	private DrawingFrame currentFrame = null;
 	private Diagram initialDiagram = null;
@@ -3116,7 +3118,8 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 				EhiLogger.getInstance().setTraceFiler(false); // default config is: filter trace messages
 			}
 		}
-		EhiLogger.getInstance().addListener(new LogListener(instance.getPnlLog()));
+		instance.logListener=new LogListener(instance.getPnlLog());
+		EhiLogger.getInstance().addListener(instance.logListener);
 		instance.setLookAndFeel(getSettings().getLookAndFeel());
 	//TODO patch: setModel(..)->openDiagram would be too early here
 	instance.setCurrentFile(null);
@@ -3138,6 +3141,10 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 		BaseDialog.showError(instance, ResourceManager.getResource(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
 		System.exit(-1);
 	}
+}
+public LogListener getLogListener()
+{
+	return logListener;
 }
 /**
  *This function gets called when a change to a metamodel object occured.
@@ -3743,8 +3750,7 @@ private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 		// @see #openInitialDiagram()
 		initialDiagram = (Diagram)ElementFactory.createDiagram(topicDef);
                 try{
-                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel(
-                    new ch.ehi.umleditor.interlis.EditorLoggingAdapter(this)).loadPredefinedIli2cModel(this.model);
+                  new ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel().loadPredefinedIli2cModel(this.model);
                 }catch(Exception ex){
                   handleException(ex);
                 }

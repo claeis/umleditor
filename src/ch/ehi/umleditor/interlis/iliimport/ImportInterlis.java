@@ -34,7 +34,6 @@ import java.io.*;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.basics.view.FileChooser;
 import ch.softenvironment.view.BaseDialog;
-import ch.ehi.umleditor.interlis.EditorLoggingAdapter;
 // -end- 3C9086430360 import "ImportInterlis"
 
 /** main entry point to INTERLIS import utility
@@ -62,7 +61,7 @@ public class ImportInterlis
     // please fill in/modify the following section
     // -beg- preserve=yes 3C90867502B8 body3C9086430360 "readIliFile"
 	LauncherView editor=LauncherView.getInstance();
-	TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
+	TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
 	java.util.ArrayList modeldirv = new java.util.ArrayList();
 	modeldirv.add(editor.getUmlEditorHome()+"/ilimodels");
 	java.util.ArrayList filev=new java.util.ArrayList();
@@ -107,7 +106,7 @@ public class ImportInterlis
     // -beg- preserve=yes 3C908B140241 body3C9086430360 "readIlcFile"
 
       LauncherView editor=LauncherView.getInstance();
-      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel(new EditorLoggingAdapter(editor));
+      TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
       Configuration config=null;
       // read config file
                 try{

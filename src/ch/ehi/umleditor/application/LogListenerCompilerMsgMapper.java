@@ -1,7 +1,5 @@
-package ch.ehi.umleditor.interlis;
-
-/* This file is part of the UML/INTERLIS-Editor.
- * For more information, please see <http://www.umleditor.org/>.
+/* This file is part of the umleditor project.
+ * For more information, please see <http://www.interlis.ch>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,22 +15,15 @@ package ch.ehi.umleditor.interlis;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+package ch.ehi.umleditor.application;
 
-import ch.ehi.umleditor.application.LauncherView;
+import ch.interlis.ili2c.CompilerLogEvent;
 
-/** logging adapter to umleditor application
- * @author: ce
- * @version $Revision: 1.1 $ $Date: 2003-12-25 10:55:33 $
+/**
+ * @author ce
+ * @version $Revision: 1.1 $ $Date: 2006-08-10 16:25:41 $
  */
-public class EditorLoggingAdapter implements Logging {
-  private LauncherView app=null;
-  public EditorLoggingAdapter(LauncherView application){
-    app=application;
-  }
-  public void log(String title, String logText){
-    app.log(title,logText);
-  }
-  public void log(String modelElementId, String title, String logText){
-    app.log(modelElementId,title,logText);
-  }
+public interface LogListenerCompilerMsgMapper {
+	String getId(CompilerLogEvent event);
+	String getTitle();
 }

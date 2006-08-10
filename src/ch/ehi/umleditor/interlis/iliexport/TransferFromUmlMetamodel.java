@@ -172,7 +172,7 @@ public class TransferFromUmlMetamodel
       todo.remove(0);
     }
     if(runIli2c){
-      MyErrorListener el=new MyErrorListener();
+      //MyErrorListener el=new MyErrorListener();
       // build compiler config file
       	config.clearBoidEntry();
       	config.clearFileEntry();
@@ -218,7 +218,12 @@ public class TransferFromUmlMetamodel
                 //}
 
       // run compiler
-      ch.interlis.ili2c.Main.runCompiler(config);
+      try{
+		ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener().setCompilerMsgMapper(new MyErrorListener());
+		ch.interlis.ili2c.Main.runCompiler(config);
+      }finally{
+		ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener().setCompilerMsgMapper(null);
+      }
       // remove temporary files
       for(java.util.Iterator i=tempFiles.iterator();i.hasNext();){
         File f=((FileListEntry)i.next()).file;
@@ -2186,31 +2191,24 @@ public class TransferFromUmlMetamodel
   /** adapts error messages of the compiler to the umleditor
    *
    */
-  class MyErrorListener implements ch.interlis.ili2c.metamodel.ErrorListener {
-    private ch.ehi.umleditor.application.LauncherView app=null;
-    /** called by the compiler for every error message
+  class MyErrorListener implements ch.ehi.umleditor.application.LogListenerCompilerMsgMapper {
+    /** called by the LogListener for every ili2c error message
      *
      */
-    public void error(ch.interlis.ili2c.metamodel.ErrorListener.ErrorEvent evt) {
-      if(app==null){
-        app=ch.ehi.umleditor.application.LauncherView.getInstance();
-      }
-      if(app!=null){
-        errc++;
-        String msg=evt.getMessage();
+    public String getId(ch.interlis.ili2c.CompilerLogEvent evt) {
         // translate filename and linenumber to element id
         int line=evt.getLine();
-        String filename=evt.getFileName();
+        String filename=evt.getFilename();
         String id=null;
         id=findElementId(filename,line);
         if(id!=null){
-          app.log(id,getFuncDesc(),msg);
-        }else{
-          app.log(getFuncDesc(),msg);
+          return id;
         }
-          //errOutput.append(evt.toString ());
-          //errOutput.append("\n");
-        }
+        return null;
+    }
+    public String getTitle()
+    {
+    	return getFuncDesc();
     }
   }
 
