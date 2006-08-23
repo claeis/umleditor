@@ -24,7 +24,7 @@ import ch.softenvironment.view.*;
  * Typical Info/About User Interface.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
+ * @version $Revision: 1.3 $ $Date: 2006-08-23 12:31:59 $
  */
 public class AboutBoxDialog extends BaseDialog {
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
@@ -316,7 +316,7 @@ private javax.swing.JLabel getLblInterlisVersion() {
 		try {
 			ivjLblInterlisVersion = new javax.swing.JLabel();
 			ivjLblInterlisVersion.setName("LblInterlisVersion");
-			ivjLblInterlisVersion.setText("2.2");
+			ivjLblInterlisVersion.setText("2.3");
 			ivjLblInterlisVersion.setBounds(229, 155, 189, 14);
 			// user code begin {1}
 			// user code end
