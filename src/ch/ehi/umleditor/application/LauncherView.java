@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.25 $ $Date: 2006-08-10 16:25:41 $
+ * @version $Revision: 1.26 $ $Date: 2006-09-27 20:04:22 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -1172,14 +1172,16 @@ public ClassDiagramView createClassDiagram(Element diagramElement) {
  * @deprecated
  */
 public static GenericFileFilter createInterlisCompilerFilter() {
-	return new GenericFileFilter(getResourceString(LauncherView.class, "CIIlcFilter"), "ilc");//$NON-NLS-2$ //$NON-NLS-1$
+//TODO move to GenericFileFilter.createIlc()
+	return new GenericFileFilter(ResourceManager.getResource(LauncherView.class, "CIIlcFilter"), "ilc");//$NON-NLS-2$ //$NON-NLS-1$
 }
 /**
  * @return specific File-Filter.
  * @deprecated
  */
 public static GenericFileFilter createInterlisModelFilter() {
-	return new GenericFileFilter(getResourceString(LauncherView.class, "CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
+//TODO move to GenericFileFilter.createIli()
+	return new GenericFileFilter(ResourceManager.getResource(LauncherView.class, "CIIliFilter"), "ili");//$NON-NLS-2$ //$NON-NLS-1$
 }
 
 /**
@@ -1199,7 +1201,7 @@ private ToolButton createToolButton(String iconName, String toolName, Tool tool)
  * @deprecated
  */
 public static GenericFileFilter createUmlInterlisEditorFilter() {
-	return new GenericFileFilter(getResourceString(LauncherView.class, "CIUmlFilter"),"uml");//$NON-NLS-2$ //$NON-NLS-1$
+	return new GenericFileFilter(ResourceManager.getResource(LauncherView.class, "CIUmlFilter"),"uml");//$NON-NLS-2$ //$NON-NLS-1$
 }
 /**
  * @return specific File-Filter.
@@ -1207,13 +1209,6 @@ public static GenericFileFilter createUmlInterlisEditorFilter() {
  */
 public static GenericFileFilter createXmlFilter() {
 	return GenericFileFilter.createXmlFilter();
-}
-/**
- * @return specific File-Filter.
- * @deprecated
- */
-public static GenericFileFilter createXmlSchemaFilter() {
-	return GenericFileFilter.createXmlSchemaFilter();
 }
 /**
  * Deactivate the current internal frame and adapt corresponding tools.
