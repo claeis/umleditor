@@ -32,7 +32,7 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.13 $ $Date: 2006-01-02 16:34:53 $
+ * @version $Revision: 1.14 $ $Date: 2006-10-03 13:54:25 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -277,7 +277,7 @@ protected void handleException(java.lang.Throwable exception) {
 protected static void handleException(java.lang.Throwable exception, String title, String message, Object source) {
 	String text = message;
 	if (message == null) {
-		text = ResourceManager.getInstance().getResource(DeveloperException.class, "CTDevelopmentError");
+		text = ResourceManager.getResource(DeveloperException.class, "CTDevelopmentError");
 	}
 	LauncherView.getInstance().handleException(exception, title, text + " [" + source.toString() + "]");
 }
@@ -507,6 +507,6 @@ public void updateView() {
  * @see BaseFrame#getResourceString(..)
  */
 protected static String getResourceString(java.lang.Class resource, String property) {
-	return ResourceManager.getInstance().getResource(resource, property);
+	return ResourceManager.getResource(resource, property);
 }
 }
