@@ -26,7 +26,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * INTERLIS BaseType representation of <b>BasketType</b>.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2006-05-23 07:33:29 $
+ * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeBasketPanel extends BasePanel implements DataPanel {
 	private ReferencableComboBox ivjCbxTopicDef = null;
@@ -79,7 +79,7 @@ private int getkind() {
 	} else if (getRbtURI().isSelected()) {
 		return TextKind.URI;
 	} else {*/
-		throw new DeveloperException(this, "getKind()", "nothing choosed");//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("nothing choosed");//$NON-NLS-1$
 //	}
 }
 /**
@@ -392,7 +392,7 @@ private void initialize() {
  * Set the Object to be displayed by panel.
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.
@@ -423,7 +423,7 @@ public void setObject(java.lang.Object object, ModelElement modelElement) {
 			break;
 		}
 		default: {
-			throw new ch.softenvironment.util.DeveloperException(this, "setKind()", "Unknown Kind <" + type.getKind() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+			throw new ch.softenvironment.util.DeveloperException("Unknown Kind <" + type.getKind() + ">");//$NON-NLS-1$
 		}
 	}
 

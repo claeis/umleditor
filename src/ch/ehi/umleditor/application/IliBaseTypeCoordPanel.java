@@ -24,16 +24,16 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
 /**
  * INTERLIS BaseType representation of <b>CoordinatType</b>.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-04-28 19:09:24 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
-	private int oldDim = 0;
-	private int newDim = 0;
+//	private int oldDim = 0;
+//	private int newDim = 0;
 	private boolean secondEvent = false;
 	private /*final*/ static String TAB_TITLE = getResourceString(IliBaseTypeCoordPanel.class, "CINumeric"); //$NON-NLS-1$
 	// generated code
-	private java.util.ArrayList numericDimensions = new java.util.ArrayList();
+//	private java.util.ArrayList numericDimensions = new java.util.ArrayList();
 	private javax.swing.JLabel ivjLblPiHalfAxis = null;
 	private javax.swing.JLabel ivjLblZeroAxis = null;
 	private IliBaseTypeNumericPanel ivjPnlNumeric1D = null;
@@ -216,12 +216,12 @@ private void dimensionChanged(java.awt.event.ItemEvent itemEvent) {
 		getTbpNumericTypes().remove(getPnlNumeric3D());
 		
 		if (getRbt1D().isSelected()) {
-			newDim = 1;
+			//newDim = 1;
 		} else if (getRbt2D().isSelected()) {
-			newDim = 2;
+			//newDim = 2;
 			addDimensionPanel(getPnlNumeric2D(), 2);
 		} else if (getRbt3D().isSelected()) {
-			newDim = 3;
+			//newDim = 3;
 			addDimensionPanel(getPnlNumeric2D(), 2);
 			addDimensionPanel(getPnlNumeric3D(), 3);
 		}
@@ -667,7 +667,7 @@ private void initialize() {
 	// user code end
 }
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.
@@ -691,20 +691,20 @@ public void setObject(java.lang.Object object, ModelElement modelElement) {
 	
 		java.util.Iterator iterator = type.iteratorDim();
 		if (iterator.hasNext()) {
-			oldDim = 1;
+			//oldDim = 1;
 			getPnlNumeric1D().setObject(iterator.next(), modelElement);
 			getRbt1D().setSelected(true);
 		}
 		else {
-			throw new DeveloperException(this, "setDimension()", "unexpected Dimension");//$NON-NLS-2$//$NON-NLS-1$
+			throw new DeveloperException("unexpected Dimension");//$NON-NLS-1$
 		}
 	
 		if (iterator.hasNext()) {
-			oldDim = 2;
+			//oldDim = 2;
 			getPnlNumeric2D().setObject(iterator.next(), modelElement);
 			getRbt2D().setSelected(true);
 			if (iterator.hasNext()) {
-				oldDim = 3;
+				//oldDim = 3;
 				getPnlNumeric3D().setObject(iterator.next(), modelElement);
 				getRbt3D().setSelected(true);
 			} else {

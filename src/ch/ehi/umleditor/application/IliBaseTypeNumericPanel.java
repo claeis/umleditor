@@ -25,8 +25,8 @@ import ch.softenvironment.view.*;
 /**
  * INTERLIS BaseType representation of <b>NumericalType</b>.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2006-07-03 13:38:50 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
 	private JRadioButton ivjRbtUnspecified = null;
@@ -160,7 +160,7 @@ private int getkind() {
 	} else if (getRbtCounterClockwise().isSelected()) {
 		return RotationKind.COUNTERCLOCKWISE;
 	} else {
-		throw new DeveloperException(this, "getKind()", "nothing choosed");//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("nothing choosed");//$NON-NLS-1$
 	}
 }
 /**
@@ -716,7 +716,7 @@ private void rangeChanged() {
  * @see #setObject(Object, ModelElement) -> call first
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.
@@ -761,7 +761,7 @@ public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.Mod
 			break;
 		}
 		default: {
-			throw new DeveloperException(this, "setObject()", "Unknown Kind <" + type.getDirection() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+			throw new DeveloperException("Unknown Kind <" + type.getDirection() + ">");//$NON-NLS-1$
 		}
 	}
 }

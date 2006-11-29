@@ -23,8 +23,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
 /**
  * INTERLIS BaseType representation of <b>Text</b>.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2006-07-03 15:25:26 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeTextPanel extends BasePanel implements DataPanel {
 private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel");  //$NON-NLS-1$
@@ -124,7 +124,7 @@ private int getkind() {
 	} else if (getRbtURI().isSelected()) {
 		return TextKind.URI;
 	} else {
-		throw new DeveloperException(this, "getKind()", "nothing choosed");//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("nothing choosed");//$NON-NLS-1$
 	}
 }
 /**
@@ -407,7 +407,7 @@ public void setObject(java.lang.Object object) {
 			break;
 		}
 		default: {
-			throw new ch.softenvironment.util.DeveloperException(this, "setKind()", "Unknown Kind <" + type.getKind() + ">");
+			throw new ch.softenvironment.util.DeveloperException("Unknown Kind <" + type.getKind() + ">");
 		}
 	}
 }

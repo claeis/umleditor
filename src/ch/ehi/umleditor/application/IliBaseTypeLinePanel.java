@@ -31,7 +31,7 @@ import ch.softenvironment.view.*;
  * INTERLIS BaseType representation of <b>LineType</b>.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
+ * @version $Revision: 1.7 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMenuChoice {
 	//private LineType lineType = null;
@@ -877,7 +877,7 @@ private void setLinetype(LineType lineType,ModelElement modelElement) {
  * Set the Object to be displayed by panel.
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setPolyline/Surface/Area(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setPolyline/Surface/Area(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.

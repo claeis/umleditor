@@ -29,7 +29,7 @@ import ch.ehi.uml1_4.foundation.core.Element;
  * INTERLIS BaseType representation of <b>Enumeration</b>.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2006-01-02 16:21:36 $
+ * @version $Revision: 1.10 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
         private Enumeration root=new Enumeration();
@@ -369,7 +369,7 @@ private int getkind() {
 	} else if (getRbtOrderedCircular().isSelected()) {
 		return EnumKind.CIRCULAR;
 	} else {
-		throw new DeveloperException(this, "getKind()", "nothing choosed");//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("nothing choosed"); //$NON-NLS-1$
 	}
 }
 /**
@@ -974,7 +974,7 @@ public void setObject(java.lang.Object object) {
 			break;
 		}
 		default: {
-			throw new ch.softenvironment.util.DeveloperException(this, "setKind()", "Unknown Kind <" + type.getKind() + ">");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+			throw new ch.softenvironment.util.DeveloperException("Unknown Kind <" + type.getKind() + ">"); //$NON-NLS-1$
 		}
 	}
 

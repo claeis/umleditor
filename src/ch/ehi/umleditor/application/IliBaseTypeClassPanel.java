@@ -30,15 +30,15 @@ import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 /**
  * panel to view/edit a INTERLIS ClassType.
  *
- * @author: ce
- * @version $Revision: 1.3 $ $Date: 2004-04-27 18:52:12 $
+ * @author ce
+ * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeClassPanel extends BasePanel implements DataPanel {
-  GridBagLayout gridBagLayout1 = new GridBagLayout();
-  JRadioButton rbClass = new JRadioButton();
-  JRadioButton rbStruct = new JRadioButton();
-  RestrictedClassesPanel tabRestricted = new RestrictedClassesPanel();
-  private JDialog thisDialog=null;
+    private GridBagLayout gridBagLayout1 = new GridBagLayout();
+    private JRadioButton rbClass = new JRadioButton();
+    private JRadioButton rbStruct = new JRadioButton();
+    private RestrictedClassesPanel tabRestricted = new RestrictedClassesPanel();
+    private JDialog thisDialog=null;
 
   public IliBaseTypeClassPanel() {
     try {
@@ -85,7 +85,7 @@ protected void setOwnerDialog(javax.swing.JDialog ownerDialog) {
  * @see #setObject(Object, ModelElement) -> call first
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.

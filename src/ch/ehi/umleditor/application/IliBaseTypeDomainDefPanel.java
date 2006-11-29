@@ -24,8 +24,8 @@ import ch.softenvironment.view.CommonUserAccess;
 /**
  * Details of a DomainDef.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2004-04-28 19:28:29 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeDomainDefPanel extends ch.softenvironment.view.BasePanel implements ch.softenvironment.view.DataPanel {
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
@@ -256,7 +256,7 @@ public void setDialog(java.awt.Dialog owner) {
  * Set the Object to be displayed by panel.
  */
 public final void setObject(java.lang.Object object) throws DeveloperException {
-	throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+	throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 }
 /**
  * Set the Object to be displayed by panel.

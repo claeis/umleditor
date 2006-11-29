@@ -19,11 +19,10 @@ package ch.ehi.umleditor.application;
 import ch.softenvironment.view.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.softenvironment.util.*;
-import javax.swing.*;
 
 /**
  * @author ce
- * @version $Revision: 1.1 $ $Date: 2006-07-03 09:01:46 $
+ * @version $Revision: 1.2 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeDateTimePanel extends BasePanel implements DataPanel {
 	private static java.util.ResourceBundle res = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeDateTimePanel");  //$NON-NLS-1$
@@ -82,7 +81,7 @@ public class IliBaseTypeDateTimePanel extends BasePanel implements DataPanel {
 	}
 
 	public void setObject(Object arg0) {
-		throw new DeveloperException(this, "setObject(Object)", "call setObject(Object, ModelElement) instead");//$NON-NLS-2$//$NON-NLS-1$
+		throw new DeveloperException("call setObject(Object, ModelElement) instead");//$NON-NLS-1$
 	}
 	/**
 	 * Set the Object to be displayed by panel.
