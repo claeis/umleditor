@@ -28,7 +28,7 @@ import ch.softenvironment.util.*;
  * User Interface for a ClassDef.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2005-11-05 20:06:09 $
+ * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
 public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	// keep ModelElement
@@ -1170,7 +1170,7 @@ protected boolean save() {
 	} else if (getRbtStructure().isSelected()) {
 			classDef.setKind(ClassDefKind.STRUCTURE);
 	} else {
-		Tracer.getInstance().developerWarning(this, "save()", "ClassDef.kind not properly initialized");//$NON-NLS-2$//$NON-NLS-1$
+		Tracer.getInstance().developerWarning("ClassDef.kind not properly initialized");//$NON-NLS-2$//$NON-NLS-1$
 	}
 	getPnlDescription().getObject();
 

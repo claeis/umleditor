@@ -25,8 +25,8 @@ import ch.softenvironment.util.*;
 /**
  * Generic User Interface Panel to treat INTERLIS-EXTENDS.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2005-02-23 16:40:03 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
 public class ExtendedPanel extends javax.swing.JPanel {
 	private static java.util.ResourceBundle resExtendedPanel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ExtendedPanel");
@@ -214,7 +214,7 @@ public boolean getClassifierExtension(String name) {
  */
 public boolean getExtension() {
 	if (getCbxExtends().hasElementChanged()) {
-Tracer.getInstance().developerWarning(this, "getExtension()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
 		if (currentGeneralization != null) {
 			generalizableElement.removeGeneralization(currentGeneralization);
 			currentGeneralization = null;
@@ -342,7 +342,7 @@ public void setClassifierExtension(GeneralizableElement generalizableElement) {
 		TopicDef topicDefThis = ((AbstractClassDef)generalizableElement).getParentTopicDef();
 		java.util.Iterator iterator = generalizableElement.iteratorGeneralization();
 		if (iterator.hasNext()) {
-Tracer.getInstance().developerWarning(this, "setClassifierExtension()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
 			currentGeneralization = (Generalization)iterator.next();
 			if ((currentGeneralization instanceof ClassExtends) && topicDefThis.containsBaseTopicDef()) {
 				// set extended only as selected if inside an extended topic
@@ -370,7 +370,7 @@ private void setExtendables(GeneralizableElement generalizableElement) {
 //	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements((ModelElement)generalizableElement, TopicDef.class);
 //	java.util.Iterator iterator = set.iterator();
 	if (iterator.hasNext()) {
-Tracer.getInstance().developerWarning(this, "setExtendables()", "INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
 		ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)iterator.next();
 		parent = generalization.getParent();
 	}

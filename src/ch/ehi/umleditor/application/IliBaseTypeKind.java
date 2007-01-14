@@ -26,8 +26,8 @@ import java.util.*;
  * Presentation Utility for a set of INTERLIS Types.
  * Enumeration-utility.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.3 $ $Date: 2006-07-03 13:44:47 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.4 $ $Date: 2007-01-14 08:17:16 $
  */
 public abstract class IliBaseTypeKind {
 	// Names of Interlis types to display
@@ -153,7 +153,7 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 			} else if (domainAttribute.containsDomainDef()) {
 				return domainAttribute.getDomainDef().getDefLangName() + (tagDomainDef ? resIliBaseTypeKind.getString("CIDomainDefSuffix") : ""); //$NON-NLS-1$
 			} else {
-				Tracer.getInstance().runtimeWarning(IliBaseTypeKind.class, "setElement(Element)", "DomainAttribute contains neiter directType nor DomainDef");//$NON-NLS-2$//$NON-NLS-1$
+				Tracer.getInstance().runtimeWarning("DomainAttribute contains neiter directType nor DomainDef");//$NON-NLS-2$//$NON-NLS-1$
 			}
 		} /* else if (((AttributeDef)object).getAttrType() instanceof ch.ehi.interlis.attributes.ReferenceAttribute) {
 			return REFERENCE_STRING;

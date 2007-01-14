@@ -28,8 +28,8 @@ import ch.softenvironment.util.*;
 /**
  * User Interface for an AttributeDef.
  *
- * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.7 $ $Date: 2006-07-03 15:48:44 $
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.8 $ $Date: 2007-01-14 08:17:17 $
  */
 public class AttributeDefDialog extends BaseDialog {
 	// ModelElement
@@ -1342,12 +1342,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				if (((DomainAttribute)attrType).containsDomainDef()) {
 					domainDef = ((DomainAttribute)attrType).getDomainDef();
 				} else {
-					Tracer.getInstance().runtimeWarning(this, "setElement(Element)", "DomainAttribute contains neither DirectType nor DomainDef");//$NON-NLS-2$//$NON-NLS-1$
+					Tracer.getInstance().runtimeWarning("DomainAttribute contains neither DirectType nor DomainDef");
 				}
 				getPnlTypeDomainDef().setObject(domainDef, attributeDef.getOwner());
 			}
 		} else {
-			Tracer.getInstance().developerError(this, "setElement(Element)", "should be a certain AttrType");//$NON-NLS-2$//$NON-NLS-1$
+			Tracer.getInstance().developerError("should be a certain AttrType");
 		}
 	}
 }

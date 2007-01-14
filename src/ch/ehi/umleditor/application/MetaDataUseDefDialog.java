@@ -23,7 +23,7 @@ import ch.softenvironment.util.*;
  * User Interface for a MetaDataUseDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2005-11-20 16:37:17 $
+ * @version $Revision: 1.3 $ $Date: 2007-01-14 08:17:16 $
  */
 public class MetaDataUseDefDialog extends BaseDialog {
 	// ModelElement
@@ -625,7 +625,7 @@ protected boolean save() {
 	} else if (getRbtRefSystem().isSelected()) {
 		metaDataUseDef.setKind(ch.ehi.interlis.metaobjects.MetaDataUseDefKind.REFSYSTEM);
 	} else {
-		Tracer.getInstance().developerWarning(this, "save()", "MetaDataUseDef.kind not properly initialized");//$NON-NLS-2$//$NON-NLS-1$
+		Tracer.getInstance().developerWarning("MetaDataUseDef.kind not properly initialized");//$NON-NLS-2$//$NON-NLS-1$
 	}
 
 	getPnlDescription().getObject();
