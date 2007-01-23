@@ -462,6 +462,11 @@ public class TransferFromIli2cMetamodel
         assoc.setName(new NlsString(thisclass.getDefLangName()+dest.getDefLangName()));
         ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
         destRole.setName(new NlsString(attrib.getName()));
+		// documentation
+		String ilidoc=attrib.getDocumentation();
+		if(ilidoc!=null){
+			destRole.setDocumentation(new NlsString(ilidoc));
+		}
         destRole.attachParticipant(dest);
         destRole.setMultiplicity(visitCardinality(type.getCardinality()));
         destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
@@ -496,6 +501,11 @@ public class TransferFromIli2cMetamodel
         assoc.setName(new NlsString(dest.getDefLangName()+thisclass.getDefLangName()));
         ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
         destRole.setName(new NlsString(attrib.getName()));
+		// documentation
+		String ilidoc=attrib.getDocumentation();
+		if(ilidoc!=null){
+			destRole.setDocumentation(new NlsString(ilidoc));
+		}
         destRole.attachParticipant(dest);
 		destRole.setIliAttributeIdx(attrIdx);
 		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
@@ -525,6 +535,12 @@ public class TransferFromIli2cMetamodel
     attrdef.setAbstract(attrib.isAbstract());
     attrdef.setPropFinal(attrib.isFinal());
     attrdef.setPropExtended(attrib.getExtending()!=null);
+    
+	// documentation
+	String ilidoc=attrib.getDocumentation();
+	if(ilidoc!=null){
+		attrdef.setDocumentation(new NlsString(ilidoc));
+	}
 
     // TODO FunctionCall
     // TODO AttributeValueUsage
