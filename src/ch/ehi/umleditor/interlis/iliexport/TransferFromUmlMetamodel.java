@@ -545,7 +545,7 @@ public class TransferFromUmlMetamodel
     inc_ind();
 
     if(def.containsOiddomain()){
-      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));newline();
+      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
     }
 
     int depc=0;
