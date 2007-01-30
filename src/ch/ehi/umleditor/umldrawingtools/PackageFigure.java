@@ -18,10 +18,8 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.awt.*;
-import java.util.*;
 import CH.ifa.draw.figures.*;
 import CH.ifa.draw.framework.*;
-import CH.ifa.draw.standard.*;
 import CH.ifa.draw.contrib.*;
 
 /**
@@ -31,7 +29,7 @@ import CH.ifa.draw.contrib.*;
  * name. Packages may be dependent of other Packages.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2005-11-20 16:46:27 $
+ * @version $Revision: 1.3 $ $Date: 2007-01-30 18:44:35 $
  */
 public class PackageFigure extends NodeFigure {
 	// Composites
@@ -97,19 +95,7 @@ private java.awt.Polygon getPolygon() {
 	p.addPoint(widthUpperRectangle + dx, heightUpperRectangle + dy);
 
 	return p;
-}
-	/**
-	 * Return default handles on all four edges for this figure.
-	 */
-	public Vector handles() {
-		Vector handles = new Vector();
-		handles.addElement(new NullHandle(this, RelativeLocator.northWest()));
-		handles.addElement(new NullHandle(this, RelativeLocator.northEast()));
-		handles.addElement(new NullHandle(this, RelativeLocator.southWest()));
-		handles.addElement(new NullHandle(this, RelativeLocator.southEast()));
-
-		return handles;
-	}
+}	
 /**
  * Hook method called to initizialize a ClassFigure.
  * It is called from the constructors and the clone() method.

@@ -19,9 +19,7 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import CH.ifa.draw.figures.*;
-import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
@@ -35,13 +33,14 @@ import ch.ehi.umleditor.umlpresentation.*;
  *
  * A Note is attached only in Diagram and not in Model.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.3 $ $Date: 2004-06-29 11:42:44 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.4 $ $Date: 2007-01-30 18:44:35 $
  */
 public class NoteFigure extends NodeFigure {
 	// Composites
 	private TextFigure textFigure;
-/**
+
+    /**
  * Create a new instance of NoteFigure with a RectangleFigure as presentation figure.
  */
 public NoteFigure() {
@@ -73,31 +72,19 @@ public void draw(Graphics g) {
 
 	super.draw(g);
 
-	// cut top-right corner
+	// cut top-right corner since rectangle is already drawn
 	Rectangle rectangle = displayBox();
 	int cutOffWidth = 10;
 	int leftX = rectangle.x + rectangle.width - cutOffWidth;
 	int rightX = rectangle.x + rectangle.width - 1;
-	int topY = rectangle.y + cutOffWidth - 1;
-	int bottomY = rectangle.y + cutOffWidth-1;
+	int bottomY = rectangle.y + cutOffWidth - 1;
 	g.drawLine(leftX, rectangle.y, rightX, bottomY);
 	g.drawLine(leftX, rectangle.y, leftX, bottomY);
 	g.drawLine(leftX, bottomY, rightX, bottomY);
-	g.setColor(java.awt.Color.WHITE);
+    
+	g.setColor(java.awt.Color.WHITE /*diagram-background*/);
 	g.drawLine(leftX, rectangle.y, rightX, rectangle.y);
 	g.drawLine(rightX, rectangle.y, rightX, bottomY);
-}
-/**
- * Return default handles on all four edges for this figure.
- */
-public Vector handles() {
-	Vector handles = new Vector();
-	handles.addElement(new NullHandle(this, RelativeLocator.northWest()));
-	handles.addElement(new NullHandle(this, RelativeLocator.northEast()));
-	handles.addElement(new NullHandle(this, RelativeLocator.southWest()));
-	handles.addElement(new NullHandle(this, RelativeLocator.southEast()));
-
-	return handles;
 }
 /**
  * Hook method called to initizialize a ClassFigure.

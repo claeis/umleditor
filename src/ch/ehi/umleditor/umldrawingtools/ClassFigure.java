@@ -41,7 +41,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import CH.ifa.draw.figures.*;
-import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.umleditor.application.*;
@@ -54,7 +53,7 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2006-06-29 22:16:01 $
+ * @version $Revision: 1.11 $ $Date: 2007-01-30 18:44:35 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
@@ -245,18 +244,6 @@ public Object getAttribute(String name) {
 	} else {
 		return super.getAttribute(name);
 	}
-}
-/**
- * Return default handles on all four edges for this figure.
- */
-public Vector handles() {
-	Vector handles = new Vector();
-	handles.addElement(new NullHandle(getPresentationFigure(), RelativeLocator.northWest()));
-	handles.addElement(new NullHandle(getPresentationFigure(), RelativeLocator.northEast()));
-	handles.addElement(new NullHandle(getPresentationFigure(), RelativeLocator.southWest()));
-	handles.addElement(new NullHandle(getPresentationFigure(), RelativeLocator.southEast()));
-
-	return handles;
 }
 /**
  * Hook method called to initizialize a ClassFigure.

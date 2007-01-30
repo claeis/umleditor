@@ -19,6 +19,8 @@ package ch.ehi.umleditor.umldrawingtools;
 import ch.ehi.uml1_4.foundation.core.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
+
 import javax.swing.*;
 import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
@@ -32,9 +34,11 @@ import ch.softenvironment.view.*;
  * @see EdgeFigure
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.14 $ $Date: 2006-10-03 13:54:25 $
+ * @version $Revision: 1.15 $ $Date: 2007-01-30 18:44:35 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
+    protected java.util.Vector handles = null;
+    
 	// keep reference to real model's presentation
 	protected ch.ehi.umleditor.umlpresentation.PresentationNode node;
 	private ClassDiagramView classDiagram = null;
@@ -47,6 +51,25 @@ abstract class NodeFigure extends GraphicalCompositeFigure implements ModelEleme
 public NodeFigure(Figure newPresentationFigure) {
 	super(newPresentationFigure);
 	setCreating(true);
+}
+/**
+ * Overwrites.
+ * 
+ * Return default handles on all four edges for this figure.
+ * 
+ * If a this figure is selected => show only that it is selected
+ * (no resize or whatever possible).
+ */
+public Vector handles() {
+    if (handles == null) {
+        handles = new Vector(4);
+        handles.addElement(new NullHandle(this, RelativeLocator.northWest()));
+        handles.addElement(new NullHandle(this, RelativeLocator.northEast()));
+        handles.addElement(new NullHandle(this, RelativeLocator.southWest()));
+        handles.addElement(new NullHandle(this, RelativeLocator.southEast()));
+    }
+
+    return handles;
 }
 /**
  * Configure a given PopupMenu.
@@ -179,7 +202,9 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
 public void basicDisplayBox(Point origin, Point corner) {
 	super.basicDisplayBox(origin, corner);
 	
-	if ((LauncherView.getInstance().tool() instanceof CreationTool) || (this instanceof LinkFigure)) {
+	if ((LauncherView.getInstance().tool() instanceof CreationTool) 
+            || (this instanceof LinkFigure)
+            /*|| (this instanceof NoteFigure)*/) {
 //TODO hack: anchorPoint set afterwards by CreationTool.mouseDown(..)
 		updateCoordinates();
 	}

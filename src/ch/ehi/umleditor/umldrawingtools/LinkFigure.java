@@ -19,7 +19,7 @@ package ch.ehi.umleditor.umldrawingtools;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import CH.ifa.draw.standard.*;
+
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
 import ch.ehi.interlis.modeltopicclass.ClassExtends;
@@ -34,11 +34,11 @@ import ch.softenvironment.view.CommonUserAccess;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:00 $
+ * @version $Revision: 1.8 $ $Date: 2007-01-30 18:44:35 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
-	public final static int SIZE_MIN = 4;
+	public final static int SIZE_MIN = 6;
 	public final static int SIZE_MAX = 12;
 	private final static int OFFSET_EAST_ATTRIBUTEFIGURE_TO_LINKFIGURE = -30;
 	private final static int OFFSET_SOUTH_ATTRIBUTEFIGURE_TO_LINKFIGURE = 80;
@@ -50,7 +50,7 @@ class LinkFigure extends NodeFigure {
 	private boolean updatingChild = false;
 
 /**
- * Create a new instance of NoteFigure with a RectangleFigure as presentation figure.
+ * Create a new instance of LinkFigure with suppressed Diamond.
  */
 public LinkFigure() {
 	this(new DiamondFigure(new Point(0, 0), new Point(0, 0)));
@@ -78,6 +78,8 @@ protected final JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
 public void draw(Graphics g) {
 //	g.setColor(getLineColor());
 
+//TODO rotate Diamond according to angle of its association
+    
 	// Draw Link-Shape
 	Rectangle r = displayBox();
 	int deltaX = getNode().getEast() - r.x;
@@ -108,6 +110,12 @@ public void draw(Graphics g) {
 	int figureSize = getDiamondSize();
 	getPresentationFigure().displayBox(new Rectangle(getNode().getEast(), getNode().getSouth(), figureSize, figureSize));
 
+    /* show XOR connector
+    if (isXOR()) {
+        g.setColor(Color.red);
+        g.fillOval(r.x - (SIZE_MAX / 2 + 3), r.y, 3, 16);
+    }*/
+    
 	super.draw(g);
 }
 /**
@@ -129,18 +137,7 @@ protected int getDiamondSize() {
 	}
 	return figureSize;
 }
-/**
- * Return default handles on all four edges for this figure.
- */
-public Vector handles() {
-	Vector handles = new Vector();
-	handles.addElement(new NullHandle(this, RelativeLocator.north()));
-	handles.addElement(new NullHandle(this, RelativeLocator.east()));
-	handles.addElement(new NullHandle(this, RelativeLocator.south()));
-	handles.addElement(new NullHandle(this, RelativeLocator.west()));
 
-	return handles;
-}
 /**
  * Determine if this Node must present a Diamond or not.
  */

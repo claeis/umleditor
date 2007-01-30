@@ -35,7 +35,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2006-01-09 14:08:34 $
+ * @version $Revision: 1.10 $ $Date: 2007-01-30 18:44:35 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -150,10 +150,10 @@ public ModelElement getModelElement() {
 }
 /**
  * This figure has no handles.
- */
 public java.util.Vector handles() {
 	return new java.util.Vector();
 }
+ */
 /**
  * Hook method called to initizialize a ClassFigure.
  * It is called from the constructors and the clone() method.
