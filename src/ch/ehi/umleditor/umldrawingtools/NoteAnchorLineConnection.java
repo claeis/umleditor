@@ -30,7 +30,7 @@ import ch.softenvironment.view.*;
  * A Note anchor line is drawn dotted.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2006-06-29 22:16:00 $
+ * @version $Revision: 1.5 $ $Date: 2007-03-06 14:30:14 $
  */
 public class NoteAnchorLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resNoteAnchorLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/NoteAnchorLineConnection");  //$NON-NLS-1$
@@ -162,7 +162,7 @@ protected void handleConnect(Figure start, Figure end) {
 	try {
 		if (getEdge() == null) {
 			NodeFigure child = (NodeFigure)start;
-			NodeFigure parent = (NodeFigure)end;
+//			NodeFigure parent = (NodeFigure)end;
 
 			// Def.: start must always be the NoteFigure
 			if (child instanceof NoteFigure) {
