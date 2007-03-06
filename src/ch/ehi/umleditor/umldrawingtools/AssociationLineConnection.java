@@ -18,14 +18,17 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.awt.*;
-import java.awt.Graphics;
 import java.util.*;
 import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.*;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassExtends;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.application.*;
+
 import CH.ifa.draw.framework.*;
+
 import ch.softenvironment.view.*;
 import ch.softenvironment.util.*;
 /**
@@ -40,8 +43,8 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2006-06-29 22:16:01 $
- * @see handleConnect(Figure, Figure)
+ * @version $Revision: 1.6 $ $Date: 2007-03-06 16:16:18 $
+ * @see #handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
 	private boolean showDrawing = true;
@@ -78,31 +81,31 @@ protected final void addSpecialMenu(javax.swing.JPopupMenu popupMenu) {}
  * @see handleConnect()
  */
 public boolean canConnect(Figure start, Figure end) {
-	// user may see what line is being drawn
-	showDrawing = true;
-		
-	try {
-		// only GeneralizableElement's are valid types
-		GeneralizableElement participantFrom = getGeneralizableElement(start);
-		GeneralizableElement participantTo = getGeneralizableElement(end);
+    // user may see what line is being drawn
+    showDrawing = true;
+        
+    try {
+        // only GeneralizableElement's are valid types
+        GeneralizableElement participantFrom = getGeneralizableElement(start);
+        GeneralizableElement participantTo = getGeneralizableElement(end);
 
-		if ((start instanceof LinkFigure) && (end instanceof LinkFigure)) {
-			/* (participantFrom instanceof ch.ehi.uml1_4.foundation.core.Association && (participantTo instanceof ch.ehi.uml1_4.foundation.core.Association)) */
-			// better connect by AttributeFigures
-			shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWInbetweenAssociations")); //$NON-NLS-1$
-			return false;
-		}
-		
-		if (!((participantFrom instanceof Classifier) && (participantTo instanceof Classifier))) {
-			shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWNoClassifier")); //$NON-NLS-1$
-			return false;
-		}
-	} catch(ClassCastException e) {
-		shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWFigureNotGeneralizable")); //$NON-NLS-1$
-		return false;
-	}
+        if ((start instanceof LinkFigure) && (end instanceof LinkFigure)) {
+            /* (participantFrom instanceof ch.ehi.uml1_4.foundation.core.Association && (participantTo instanceof ch.ehi.uml1_4.foundation.core.Association)) */
+            // better connect by AttributeFigures
+            shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWInbetweenAssociations")); //$NON-NLS-1$
+            return false;
+        }
+        
+        if (!((participantFrom instanceof Classifier) && (participantTo instanceof Classifier))) {
+            shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWNoClassifier")); //$NON-NLS-1$
+            return false;
+        }
+    } catch(ClassCastException e) {
+        shouldWarn(NodeFigure.getResourceString(AssociationLineConnection.class, "CWFigureNotGeneralizable")); //$NON-NLS-1$
+        return false;
+    }
 
-	return true;
+    return true;
 }
 /**
  * Overwrites.
@@ -195,24 +198,68 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
 		if (((start instanceof LinkFigure) && ((end instanceof ClassFigure) && (!(end instanceof AssociationAttributeFigure)))) ||
 			((end instanceof LinkFigure) && ((start instanceof ClassFigure) && (!(start instanceof AssociationAttributeFigure))))) {
 //			if ((participantFrom instanceof ch.ehi.uml1_4.foundation.core.Association) ||
-//				(participantTo instanceof ch.ehi.uml1_4.foundation.core.Association))
-			// case: n-ary -> Composite and Link are already existing
-			PresentationAssocClass linkView = null;
-			RoleDef roleDef = null;
-			PresentationNode classifier = null;
-			if (start instanceof LinkFigure) {
-				// start is an Association
-				linkView = (PresentationAssocClass)((LinkFigure)start).getNode();
-				roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantFrom, (Classifier)participantTo);
-				classifier = ((ClassFigure)end).getNode();
-			} else {
-				// end is an Association
-				linkView = (PresentationAssocClass)((LinkFigure)end).getNode();
-				roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantTo, (Classifier)participantFrom);
-				classifier = ((ClassFigure)start).getNode();
-			}
-			PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
-			getClassDiagram().loadPresentationRole(null, edgeRole);
+//				(participantTo instanceof ch.ehi.uml1_4.foundation.core.Association))                     
+            
+            // Composite and Link are already existing
+            PresentationAssocClass linkView = null;
+            RoleDef roleDef = null;
+            PresentationNode classifier = null;
+            ClassFigure xorEnd2 = null;
+            if (start instanceof LinkFigure) {
+                // start is an Association
+                linkView = (PresentationAssocClass)((LinkFigure)start).getNode();
+                roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantFrom, (Classifier)participantTo);
+                xorEnd2 = (ClassFigure)end;
+                classifier = xorEnd2.getNode();
+            } else {
+                // end is an Association
+                linkView = (PresentationAssocClass)((LinkFigure)end).getNode();
+                roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantTo, (Classifier)participantFrom);
+                xorEnd2 = (ClassFigure)start;
+                classifier = xorEnd2.getNode();
+            }
+            
+            LinkNodeDialog dialog = new LinkNodeDialog(getClassDiagram(), linkView.getAssociation(), classifier);
+            dialog.setVisible(true);
+            if (dialog.isSaved()) {                               
+                if (dialog.isNAry()) {
+                    PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
+                    getClassDiagram().loadPresentationRole(null, edgeRole);
+                } else { // XOR 
+//TODO suppress XOR-Role                    
+PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
+getClassDiagram().loadPresentationRole(null, edgeRole);
+
+                    // 1) create the constraint
+                    /*Participant participant =*/ ElementFactory.createParticipant(dialog.getXorParticipant(), (AbstractClassDef)roleDef.getParticipant());
+                    
+                    // 2) create additional XOR Note
+                    ch.ehi.umleditor.umlpresentation.Note note = ElementFactory.createNote();
+//                  RoleDef roleDef = participant.getAssociation();
+                    //AbstractClassDef targetClass = participant.getParticipant();
+                    note.setContent(new NlsString("XOR" /* (" + dialog.getXorParticipant().getParticipant().getName().getValue() + " & " + roleDef.getParticipant().getName().getValue() + ")"*/));
+                    NoteFigure noteFigure = new NoteFigure();
+                    // @see ClassDiagramView#add(Figure)
+                    noteFigure.setClassDiagram(getClassDiagram());
+                    noteFigure.setNode(note);
+                    ClassFigure xorEnd1 = (ClassFigure)getClassDiagram().findFigure(dialog.getXorParticipant().getParticipant());
+                    noteFigure.basicMoveBy((xorEnd1.getNode().getEast() + xorEnd2.getNode().getEast()) /2, 
+                            (xorEnd1.getNode().getSouth() + xorEnd2.getNode().getSouth()) /2);
+                    getClassDiagram().saveNodeInDiagram(note, noteFigure);
+                    
+                    // 3) connect both note-edges with XOR-ends
+                    NoteEdge edge = new NoteEdge();
+                    NoteAnchorLineConnection noteEdge = new NoteAnchorLineConnection(getClassDiagram(), edge);
+                    noteEdge.setEdge(edge, noteFigure, xorEnd1);
+                    getClassDiagram().getDiagram().addPresentationElement(edge /*noteEdge.getEdge()*/);
+                    getClassDiagram().loadSimpleEdge(noteEdge);
+                    edge = new NoteEdge();
+                    noteEdge = new NoteAnchorLineConnection(getClassDiagram(), edge);
+                    noteEdge.setEdge(edge, noteFigure, xorEnd2 /*getClassDiagram().findFigure(classifier)*/);
+                    getClassDiagram().getDiagram().addPresentationElement(edge /*noteEdge.getEdge()*/);
+                    getClassDiagram().loadSimpleEdge(noteEdge);
+                }                
+            }                        
 	} else if (((start instanceof AssociationAttributeFigure) && (end instanceof ClassFigure)) 
 				|| ((end instanceof AssociationAttributeFigure) && (end instanceof ClassFigure))
 				|| ((end instanceof ClassFigure) && (end instanceof ClassFigure))) {
