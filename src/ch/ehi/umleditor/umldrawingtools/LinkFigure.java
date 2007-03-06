@@ -34,7 +34,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * "artificial" Node to represent an AssociationDef.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2007-01-30 18:44:35 $
+ * @version $Revision: 1.9 $ $Date: 2007-03-06 16:14:00 $
  */
 class LinkFigure extends NodeFigure {
 	// shape dimensions (should be dividable by 2)
@@ -54,6 +54,7 @@ class LinkFigure extends NodeFigure {
  */
 public LinkFigure() {
 	this(new DiamondFigure(new Point(0, 0), new Point(0, 0)));
+//NYI!  connectorVisibility(true);
 }
 /**
  * Create a new instance of ClassFigure with a given presentation figure
@@ -135,9 +136,19 @@ protected int getDiamondSize() {
 	} else if (getClassDiagram().isShowLinkFigure()) {
 		figureSize = SIZE_MIN;
 	}
+//NYI! in JHotDraw 53 => connectorVisibility(figureSize > 0);
 	return figureSize;
 }
-
+/**
+ * Overwrites.
+ * No handles at all.
+ */
+public Vector handles() {
+    if (handles == null) {
+        handles = new Vector(0);
+    }
+    return handles;
+}
 /**
  * Determine if this Node must present a Diamond or not.
  */

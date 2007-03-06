@@ -36,7 +36,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.20 $ $Date: 2006-06-29 22:16:00 $
+ * @version $Revision: 1.21 $ $Date: 2007-03-06 16:14:00 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -646,16 +646,27 @@ public void keyPressed(KeyEvent e) {
  * Show a Composite Edge by means the different Association types.
  */
 private void loadAssociation(ch.ehi.umleditor.umlpresentation.Association composite) {
-    // LinkFigure
+    // 1) LinkFigure
     LinkFigure linkFigure = new LinkFigure();
 	loadNode(composite.getLinkPresentation(), linkFigure);
 
-    // RoleFigure's
+    // 2) RoleFigure's
     java.util.Iterator iteratorRole = composite.iteratorRolePresentation();
     while(iteratorRole.hasNext()) {
     	loadPresentationRole(null, (PresentationRole)iteratorRole.next());
     }
-
+    
+/* XOR Participant's between RoleFigure's
+    AssociationDef assoc = (AssociationDef)composite.iteratorSubject().next();
+    java.util.Iterator iteratorConnection = assoc.iteratorConnection();
+    while(iteratorConnection.hasNext()) {
+        RoleDef roleDef = (RoleDef)iteratorConnection.next();
+        Iterator iteratorXorParticipant = roleDef.iteratorXorParticipant();
+        while (iteratorXorParticipant.hasNext()) {
+            loadXorConstraint((Participant)iteratorXorParticipant.next());
+        }
+    }
+*/
 	linkFigure.setCreating(false);
 }
 /**
@@ -818,7 +829,7 @@ while(its.hasNext()) {
 /**
  * Add a single PresentationRole to Diagram.
  */
-protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {	
+protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
 	if (role == null) {
 		Figure linkFigure = findFigure(roleDef.getAssociation());
 		if (linkFigure == null) {
@@ -968,7 +979,7 @@ protected void saveNode(ch.ehi.umleditor.umlpresentation.PresentationNode node, 
  * Map Figure to View, save Coordinates of a Node
  * and add it to the contained Diagram-Element.
  */
-private void saveNodeInDiagram(PresentationNode node, Figure figure) {
+protected void saveNodeInDiagram(PresentationNode node, Figure figure) {
 	// show figure as late as possible (because of FigureName generation, save Failures etc)
 	super.add(figure);
 	((NodeFigure)figure).update();
@@ -1095,6 +1106,8 @@ private Figure savePackageFigure(ModelElement modelElement, Figure figure)  {
 }
 /**
  * Set the presentationModel of this Diagram and draw contained Figures (PresentationElement's).
+ * The whole diagram is displayed, where dependencies of elements is maintained
+ * at drawing time (for e.g. an Association cannot be drawn until its nodes are shown).
  */
 public void setDiagramElement(Element diagram) {
 	this.diagram = (Diagram)diagram;
