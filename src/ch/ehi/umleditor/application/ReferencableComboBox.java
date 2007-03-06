@@ -22,11 +22,11 @@ import ch.ehi.uml1_4.foundation.core.*;
 /**
  * ComboBox showing possible Referencable ModelElement's.
  * 
- * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:51 $
+ * @author Peter Hirzel <i>soft</i>Environment 
+ * @version $Revision: 1.2 $ $Date: 2007-03-06 12:49:02 $
  */
 public class ReferencableComboBox extends javax.swing.JComboBox {
-	private static java.util.ResourceBundle resReferencableComboBox = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ReferencableComboBox");  //$NON-NLS-1$
+//	private static java.util.ResourceBundle resReferencableComboBox = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ReferencableComboBox");  //$NON-NLS-1$
 	private ModelElement client = null;
 	private java.util.TreeSet referencables = null;
 	private String initialItem = null;
