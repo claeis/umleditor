@@ -36,13 +36,12 @@ import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
 import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.umleditor.umldrawingtools.*;
 import ch.ehi.interlis.attributes.*;
-import ch.softenvironment.util.Tracer;
 import ch.softenvironment.util.*;
 /**
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2006-07-03 16:46:22 $
+ * @version $Revision: 1.10 $ $Date: 2007-03-06 12:47:18 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -79,7 +78,7 @@ public static ch.ehi.umleditor.umlpresentation.Association createAssociationComp
 }
 /**
  * Return a default AssociationDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  * @deprecated
  */
 protected static AssociationDef createAssociationDef(Element parent) {
@@ -91,7 +90,7 @@ protected static AssociationDef createAssociationDef(Element parent) {
 /**
  * Return a default AssociationDef link to two Roles Instances.
  * Convention: The Association is added as OwnedElement to FromParticipant's parent.
- * @see createAssociationDef(Element)
+ * @see #createAssociationDef(Element)
  */
 public static AssociationDef createAssociationDef(GeneralizableElement participantFrom, GeneralizableElement participantTo) {
 	// generic initialization
@@ -106,7 +105,7 @@ public static AssociationDef createAssociationDef(GeneralizableElement participa
 /**
  * Return a default AttributeDef Instance.
  * AttributeDef are added as Feature to AbstractClassDef.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef) {
 	// generic initialization
@@ -136,7 +135,7 @@ public static AttributeDef createAttributeDef(AbstractClassDef abstractClassDef)
 /**
  * Return a default UmlOperation Instance.
  * Operations are added as Feature to AbstractClassDef.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef) {
 	// generic initialization
@@ -171,7 +170,7 @@ public static UmlOperation createUmlOperation(AbstractClassDef abstractClassDef)
 /**
  * Return a default UmlParameter Instance.
  * Parameters are added as Parameter to Operations.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static UmlParameter createUmlParameter(UmlOperation operation) {
 	// generic initialization
@@ -196,7 +195,7 @@ public static BasketType createBasketType() /*throws ClassNotFoundException, Ins
 }
 /**
  * Return a default ClassDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ClassDef createClassDef(Element parent) {
 	// generic initialization
@@ -209,7 +208,7 @@ public static ClassDef createClassDef(Element parent) {
 }
 /**
  * Return a default AttributeDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static Contract createContract(ModelDef modelDef) {
 	// generic initialization
@@ -227,7 +226,7 @@ public static Contract createContract(ModelDef modelDef) {
 /**
  * Defintion: A Dependency has only one Client and one Supplier even if
  *            modelled by an Iterator.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ch.ehi.uml1_4.foundation.core.Dependency createDependency(java.lang.Class dependencyClass, ModelElement client, ModelElement supplier) {
 	// generic initialization
@@ -241,7 +240,7 @@ public static ch.ehi.uml1_4.foundation.core.Dependency createDependency(java.lan
 }
 /**
  * Return a default ClassDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ch.ehi.umleditor.umlpresentation.Diagram createDiagram(Element parent) {
 	// generic initialization
@@ -252,7 +251,7 @@ public static ch.ehi.umleditor.umlpresentation.Diagram createDiagram(Element par
 }
 /**
  * Return a default DomainDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static DomainDef createDomainDef(Element element) {
 	// generic initialization
@@ -268,7 +267,7 @@ public static DomainDef createDomainDef(Element element) {
 }
 /**
  * Return a default ClassDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static EnumElement createEnumElement() {
 	// generic initialization
@@ -280,7 +279,7 @@ public static EnumElement createEnumElement() {
 }
 /**
  * Create Generalization between given parent and child.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(GeneralizableElement parent, GeneralizableElement child) {
 	ch.ehi.uml1_4.foundation.core.Generalization generalization = null;
@@ -304,7 +303,7 @@ public static ch.ehi.uml1_4.foundation.core.Generalization createGeneralization(
 }
 /**
  * Return a default INTERLIS2Def Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static INTERLIS2Def createINTERLIS2Def(Element parent) {
 	// generic initialization
@@ -317,7 +316,7 @@ public static INTERLIS2Def createINTERLIS2Def(Element parent) {
 }
 /**
  * Return a default LineFormTypeRef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static LineFormTypeDef createLineFormTypeDef(LineForm lineForm) {
 	// generic initialization
@@ -330,7 +329,7 @@ public static LineFormTypeDef createLineFormTypeDef(LineForm lineForm) {
 }
 /**
  * Return a default ClassDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static MetaDataUseDef createMetaDataUseDef(Element parent) {
 	// generic initialization
@@ -343,14 +342,14 @@ public static MetaDataUseDef createMetaDataUseDef(Element parent) {
 }
 /**
  * Return a default MetaObjectFile Instance.
- * @see createOwnedElement(..)
+ * @see #createOwnedElement(..)
  */
 public static MetaObjectFile createMetaObjectFile(UmlModel parent) {
 	return (MetaObjectFile)createOwnedElement(MetaObjectFile.class, parent);
 }
 /**
  * Return a default ModelDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ModelDef createModelDef(Element parent) {
 	// generic initialization
@@ -370,7 +369,7 @@ public static ModelDef createModelDef(Element parent) {
 }
 /**
  * Return a default AttributeDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ch.ehi.umleditor.umlpresentation.Note createNote() {
 //TODO NYI: uml.core.Comment would actually be the ModelElement
@@ -454,7 +453,7 @@ public static Object createObject(java.lang.Class className) {
 }
 /**
  * Return a default OwnedElement Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static ModelElement createOwnedElement(java.lang.Class aClass, Element parent) {
 	// generic initialization
@@ -473,7 +472,11 @@ public static ModelElement createOwnedElement(java.lang.Class aClass, Element pa
  *  - n-ary Association between > 2 nodes
  *  - extended binary Associations
  *  - Associations with Attributes
- * @see createObject(..)
+ * @see #createObject(..)
+ * @param classDiagram diagram where new role is to be shown
+ * @associationComposite LinkNode's composite
+ * @node the new Classifier/-Figure to be connected
+ * @roleDef represented by node
  */
 public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentationRole(ClassDiagramView classDiagram, ch.ehi.umleditor.umlpresentation.Association associationComposite, ch.ehi.umleditor.umlpresentation.PresentationNode node, AssociationEnd roleDef)  {
 	ch.ehi.umleditor.umlpresentation.PresentationRole edge = (ch.ehi.umleditor.umlpresentation.PresentationRole)createObject(ch.ehi.umleditor.umlpresentation.PresentationRole.class);
@@ -502,7 +505,7 @@ public static ch.ehi.umleditor.umlpresentation.PresentationRole createPresentati
 }
 /**
  * Return a default ClassDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static RoleDef createRoleDef(ch.ehi.uml1_4.foundation.core.Association association, Classifier classifier) {
 	// generic initialization
@@ -522,6 +525,28 @@ public static RoleDef createRoleDef(ch.ehi.uml1_4.foundation.core.Association as
 	return roleDef;
 }
 /**
+ * Create an XOR-Constraint between to AssociationEnd's.
+ * If an existing role of an association gets an XOR-Constraint to another 
+ * Class (ClassDef) a Participant instance maps the XOR-Role-Constraint.
+ * 
+ * Definition by the UML/INTERLIS-Editor:
+ * - concerns the very same Association => no alternate Association for XOR-edge
+ * @param existingRoleDef
+ * @param targetClass
+ */
+public static Participant createParticipant(RoleDef existingRoleDef, AbstractClassDef targetClass) {
+    Participant participant = new Participant();
+    // define Role of an Association to be XORed
+    participant.attachAssociation(existingRoleDef); //dialog.getXorParticipant().addXorParticipant(participant);                    
+    // add the new XOR-target
+    participant.attachParticipant(targetClass);
+    
+    // INTERLIS restriction to certain subtypes of targetClass
+//  participant.addRestriction(subClass);
+    
+    return participant;
+}
+/**
  * Return a default StructuredUnitType Instance.
  */
 public static StructuredUnitType createStructuredUnitType() /*throws ClassNotFoundException, InstantiationException, IllegalAccessException */ {
@@ -533,7 +558,7 @@ public static StructuredUnitType createStructuredUnitType() /*throws ClassNotFou
 }
 /**
  * Return a default ModelDef Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static TopicDef createTopicDef(Element parent) {
 	// generic initialization
@@ -548,7 +573,7 @@ public static TopicDef createTopicDef(Element parent) {
 }
 /**
  * Return a default Translation Instance.
- * @see createObject(..)
+ * @see #createObject(..)
  */
 public static Translation createTranslation(ModelDef modelDef) {
 	// generic initialization
@@ -565,7 +590,7 @@ public static Translation createTranslation(ModelDef modelDef) {
 }
 /**
  * Return a default AttributeDef Instance.
- * @see createElement(..)
+ * @see #createElement(..)
  */
 public static void removeElement(Element element) {
 /*
