@@ -35,7 +35,7 @@ import ch.softenvironment.util.*;
  * @see NodeFigure
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.15 $ $Date: 2006-06-29 22:16:01 $
+ * @version $Revision: 1.16 $ $Date: 2007-03-12 18:30:46 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
 	// keep reference to real model's presentation
@@ -213,12 +213,16 @@ protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
  * @see #setEdge(..)
  */
 protected final void connectNodes() {
-	try {
-		java.util.Iterator iterator = getEdge().iteratorWayPoint();
+	try {		
 		Vector wayPoints = new Vector();
-		while (iterator.hasNext()) {
-			wayPoints.add(iterator.next());
-		}
+        if (getEdge() == null) {
+            Tracer.getInstance().developerWarning("edge not set");
+        } else {
+            java.util.Iterator iterator = getEdge().iteratorWayPoint();
+    		while (iterator.hasNext()) {
+    			wayPoints.add(iterator.next());
+    		}
+        }
 	
 		// start -> assume dummy value
 		int x = 0;
@@ -239,7 +243,7 @@ protected final void connectNodes() {
 			x = 0;
 			y = 0;
 			endPoint(x, y);
-			iterator = getEdge().iteratorEndpoint();
+            java.util.Iterator iterator = getEdge().iteratorEndpoint();
 			iterator.next(); // skip
 			Object second = iterator.next();
 			Connector end = null;

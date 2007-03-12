@@ -30,7 +30,7 @@ import ch.softenvironment.view.*;
  * A Note anchor line is drawn dotted.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.5 $ $Date: 2007-03-06 14:30:14 $
+ * @version $Revision: 1.6 $ $Date: 2007-03-12 18:30:46 $
  */
 public class NoteAnchorLineConnection extends EdgeFigure {
 	private static java.util.ResourceBundle resNoteAnchorLineConnection = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/NoteAnchorLineConnection");  //$NON-NLS-1$
@@ -88,7 +88,13 @@ public boolean canConnect(Figure start, Figure end) {
 	return true;
 }
 /**
- * Draw the line which is a dotted line for a Note Anchor connection. Instead
+ * Overwrites.
+ */
+protected void drawLine(Graphics g, int x1, int y1, int x2, int y2) {
+    drawNoteLine(g, x1, y1, x2, y2);
+}
+/**
+ * Draw the line which is a dotted line for a Note Anchor connection in UML. Instead
  * of drawing one line from start point to end point, the line is divided into
  * several small lines each 2 pixels long and 5 pixels away from the previous
  * line. Some minor inaccuracy are possible due to rounding errors or incomplete
@@ -100,7 +106,7 @@ public boolean canConnect(Figure start, Figure end) {
  * @param x2 end x point
  * @param y2 end y point
  */
-protected void drawLine(Graphics g, int x1, int y1, int x2, int y2) {
+protected static void drawNoteLine(Graphics g, int x1, int y1, int x2, int y2) {
     int xDistance = x2 - x1;
     int yDistance = y2 - y1;
     double direction = Math.PI / 2 - Math.atan2(xDistance, yDistance);

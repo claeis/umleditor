@@ -20,7 +20,9 @@ import ch.ehi.interlis.associations.*;
 import javax.swing.*;
 import java.awt.Graphics;
 import java.util.Iterator;
+
 import CH.ifa.draw.framework.*;
+
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.uml1_4.foundation.datatypes.*;
@@ -32,7 +34,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:01 $
+ * @version $Revision: 1.8 $ $Date: 2007-03-12 18:30:46 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -60,6 +62,7 @@ public class PresentationRoleFigure extends EdgeFigure implements java.awt.event
 
 	private RoleDefFigure roleDefFigure = null;
 	private RoleDefFigure multiplicityFigure = null;
+
 /**
  * Create a new instance.
  * Used at reopening of ClassDiagram's containing Dependencies.
@@ -238,6 +241,44 @@ public void draw(Graphics g) {
 			// automatic suppression of undefined Cardinality
 			removeMultiplicity();
 		}
+        
+        Iterator iteratorXorParticipant = ((RoleDef)getModelElement()).iteratorXorParticipant();
+        while (iteratorXorParticipant.hasNext()) {
+            Participant participant = (Participant)iteratorXorParticipant.next();
+            LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());
+            ClassFigure target = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant());
+            Connector xorLink = linkFigure.connectorAt(0, 0);
+            ClassFigure xorStartNode = (ClassFigure)getClassDiagram().findFigure(participant.getAssociation().getParticipant());
+            Connector xorEndNode = target.connectorAt(0, 0);
+            
+            // pseudo XOR-edge(Part of roleDef)
+            g.drawLine(xorLink.displayBox().x, xorLink.displayBox().y, 
+                    xorEndNode.displayBox().x, xorEndNode.displayBox().y);                                
+
+            // XOR-Note            
+            int noteX = (xorStartNode.getNode().getEast() + target.getNode().getEast()) /2;
+            int noteY = (xorStartNode.getNode().getSouth() + target.getNode().getSouth()) /2;
+            g.drawString("{ XOR }", noteX, noteY);                               
+            
+            // NoteAnchor: pseudo XOR-edge to XOR-Note
+            NoteAnchorLineConnection.drawNoteLine(g, 
+                    (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
+                    noteX, noteY);
+            
+            // NoteAnchor: original PresentationRole-edge to XOR-Note
+            //Connector originialRoleStart = getStartConnector();
+            //Connector originialRoleEnd = getEndConnector();
+            NoteAnchorLineConnection.drawNoteLine(g,
+                    (/*originialRoleStart.displayBox().x*/xorStartNode.getNode().getEast() + xorLink.displayBox().x/*originialRoleEnd.displayBox().x*/) / 2, (xorStartNode.getNode().getSouth() /*originialRoleStart.displayBox().y*/ + xorLink.displayBox().y /*originialRoleEnd.displayBox().y*/) /2,
+                    noteX, noteY);
+/*                
+                XorEdge lc = new XorEdge(getClassDiagram(), participant);
+                lc.connectStart(start);
+                lc.connectEnd(end);   
+                lc.updateConnection();
+*/
+            }
+//        }
 	} catch(Throwable e) {
 Tracer.getInstance().debug(e.toString());//$NON-NLS-1$
 	}
@@ -555,8 +596,8 @@ protected void updateLabels() {
 private void updateLinkFigure(ch.ehi.uml1_4.foundation.core.Association associationDef) {
 	Figure linkFigure = getClassDiagram().findFigure(associationDef);
 	if (linkFigure != null) {
-		((LinkFigure)linkFigure).updateView();
-	}
+		((LinkFigure)linkFigure).updateView();               
+    }
 }
 /**
  * Overwrites.

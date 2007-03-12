@@ -20,7 +20,6 @@ package ch.ehi.umleditor.umldrawingtools;
 import java.awt.*;
 import java.util.*;
 import ch.ehi.umleditor.umlpresentation.*;
-import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.*;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassExtends;
@@ -43,7 +42,7 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.6 $ $Date: 2007-03-06 16:16:18 $
+ * @version $Revision: 1.7 $ $Date: 2007-03-12 18:30:46 $
  * @see #handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -202,19 +201,22 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
             
             // Composite and Link are already existing
             PresentationAssocClass linkView = null;
-            RoleDef roleDef = null;
+            ch.ehi.uml1_4.foundation.core.Association from = null;
+            Classifier to = null;
             PresentationNode classifier = null;
             ClassFigure xorEnd2 = null;
             if (start instanceof LinkFigure) {
                 // start is an Association
                 linkView = (PresentationAssocClass)((LinkFigure)start).getNode();
-                roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantFrom, (Classifier)participantTo);
+                from = (ch.ehi.uml1_4.foundation.core.Association)participantFrom;
+                to = (Classifier)participantTo;
                 xorEnd2 = (ClassFigure)end;
                 classifier = xorEnd2.getNode();
             } else {
                 // end is an Association
                 linkView = (PresentationAssocClass)((LinkFigure)end).getNode();
-                roleDef = ElementFactory.createRoleDef((ch.ehi.uml1_4.foundation.core.Association)participantTo, (Classifier)participantFrom);
+                from = (ch.ehi.uml1_4.foundation.core.Association)participantTo;
+                to = (Classifier)participantFrom;
                 xorEnd2 = (ClassFigure)start;
                 classifier = xorEnd2.getNode();
             }
@@ -223,21 +225,23 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
             dialog.setVisible(true);
             if (dialog.isSaved()) {                               
                 if (dialog.isNAry()) {
+                    RoleDef roleDef = ElementFactory.createRoleDef(from, to);
                     PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
                     getClassDiagram().loadPresentationRole(null, edgeRole);
                 } else { // XOR 
-//TODO suppress XOR-Role                    
-PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
-getClassDiagram().loadPresentationRole(null, edgeRole);
-
                     // 1) create the constraint
-                    /*Participant participant =*/ ElementFactory.createParticipant(dialog.getXorParticipant(), (AbstractClassDef)roleDef.getParticipant());
+                    /*Participant participant =*/ ElementFactory.createParticipant(dialog.getXorParticipant(), (AbstractClassDef)to/*(AbstractClassDef)roleDef.getParticipant()*/);
                     
+                    //getClassDiagram().loadXorRole(participant);
+                    PresentationRoleFigure roleFigure = (PresentationRoleFigure)getClassDiagram().findFigure(dialog.getXorParticipant());
+                    //roleFigure.addXorRole(participant);
+                    roleFigure.updateView();
+/*                    
                     // 2) create additional XOR Note
                     ch.ehi.umleditor.umlpresentation.Note note = ElementFactory.createNote();
 //                  RoleDef roleDef = participant.getAssociation();
                     //AbstractClassDef targetClass = participant.getParticipant();
-                    note.setContent(new NlsString("XOR" /* (" + dialog.getXorParticipant().getParticipant().getName().getValue() + " & " + roleDef.getParticipant().getName().getValue() + ")"*/));
+                    note.setContent(new NlsString("XOR")); // (" + dialog.getXorParticipant().getParticipant().getName().getValue() + " & " + roleDef.getParticipant().getName().getValue() + ")"));
                     NoteFigure noteFigure = new NoteFigure();
                     // @see ClassDiagramView#add(Figure)
                     noteFigure.setClassDiagram(getClassDiagram());
@@ -251,13 +255,14 @@ getClassDiagram().loadPresentationRole(null, edgeRole);
                     NoteEdge edge = new NoteEdge();
                     NoteAnchorLineConnection noteEdge = new NoteAnchorLineConnection(getClassDiagram(), edge);
                     noteEdge.setEdge(edge, noteFigure, xorEnd1);
-                    getClassDiagram().getDiagram().addPresentationElement(edge /*noteEdge.getEdge()*/);
+                    getClassDiagram().getDiagram().addPresentationElement(edge); //noteEdge.getEdge()
                     getClassDiagram().loadSimpleEdge(noteEdge);
                     edge = new NoteEdge();
                     noteEdge = new NoteAnchorLineConnection(getClassDiagram(), edge);
-                    noteEdge.setEdge(edge, noteFigure, xorEnd2 /*getClassDiagram().findFigure(classifier)*/);
-                    getClassDiagram().getDiagram().addPresentationElement(edge /*noteEdge.getEdge()*/);
+                    noteEdge.setEdge(edge, noteFigure, xorEnd2); //getClassDiagram().findFigure(classifier)
+                    getClassDiagram().getDiagram().addPresentationElement(edge);  //noteEdge.getEdge()
                     getClassDiagram().loadSimpleEdge(noteEdge);
+*/                    
                 }                
             }                        
 	} else if (((start instanceof AssociationAttributeFigure) && (end instanceof ClassFigure)) 

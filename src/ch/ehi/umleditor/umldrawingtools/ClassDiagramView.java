@@ -24,6 +24,7 @@ import java.util.*;
 import java.awt.event.*;
 import CH.ifa.draw.standard.*;
 import CH.ifa.draw.framework.*;
+
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 import ch.ehi.uml1_4.foundation.core.*;
@@ -36,7 +37,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.21 $ $Date: 2007-03-06 16:14:00 $
+ * @version $Revision: 1.22 $ $Date: 2007-03-12 18:30:46 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -655,15 +656,16 @@ private void loadAssociation(ch.ehi.umleditor.umlpresentation.Association compos
     while(iteratorRole.hasNext()) {
     	loadPresentationRole(null, (PresentationRole)iteratorRole.next());
     }
-    
-/* XOR Participant's between RoleFigure's
+/*    
+    // 3) XOR Participant's between RoleFigure's
     AssociationDef assoc = (AssociationDef)composite.iteratorSubject().next();
     java.util.Iterator iteratorConnection = assoc.iteratorConnection();
     while(iteratorConnection.hasNext()) {
         RoleDef roleDef = (RoleDef)iteratorConnection.next();
         Iterator iteratorXorParticipant = roleDef.iteratorXorParticipant();
         while (iteratorXorParticipant.hasNext()) {
-            loadXorConstraint((Participant)iteratorXorParticipant.next());
+            //loadXorConstraint((Participant)iteratorXorParticipant.next());
+            roleFigure.addXorRole(participant);
         }
     }
 */
