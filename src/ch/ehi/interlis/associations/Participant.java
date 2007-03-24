@@ -22,6 +22,7 @@ package ch.ehi.interlis.associations;
 // -end- 448933B703CF package "Participant"
 
 // -beg- preserve=no 448933B703CF autoimport "Participant"
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.basics.tools.AbstractVisitor;
@@ -34,9 +35,9 @@ import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 448933B703CF import "Participant"
 
 /** @author Claude Eisenhut
- *  @version $Revision: 1.1 $ $Date: 2006-06-13 14:24:14 $
+ *  @version $Revision: 1.2 $ $Date: 2007-03-24 20:18:27 $
  */
-public class Participant
+public class Participant extends AbstractModelElement
 {
   // declare/define something only in the code
   // please fill in/modify the following section
@@ -59,7 +60,7 @@ public class Participant
     detachAssociation();
     detachParticipant();
     clearRestriction();
-    
+    super.unlinkAll();
     // -end- 448D37E501EC body448933B703CF "unlinkAll"
     }
 
@@ -75,7 +76,7 @@ public class Participant
     // please fill in/modify the following section
     // -beg- preserve=no 448D37E50200 body448933B703CF "enumerateChildren"
     java.util.Iterator it=null;
-    
+    super.enumerateChildren(visitor);
     // -end- 448D37E50200 body448933B703CF "enumerateChildren"
     }
 
