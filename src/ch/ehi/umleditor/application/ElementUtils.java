@@ -25,8 +25,8 @@ import ch.softenvironment.view.*;
 import ch.ehi.uml1_4.implementation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.attributes.*;
-import ch.softenvironment.util.Tracer;
 import ch.softenvironment.util.*;
 import ch.ehi.basics.logging.EhiLogger;
 
@@ -34,7 +34,7 @@ import ch.ehi.basics.logging.EhiLogger;
  * Utility Class for dealing with Element's.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.6 $ $Date: 2006-07-03 13:38:50 $
+ * @version $Revision: 1.7 $ $Date: 2007-03-27 14:07:11 $
  */
 public abstract class ElementUtils {
 	// the concrete model presented by this TreeElement
@@ -235,11 +235,15 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 						resElementMapper.getString("CEDuplicatedAttribute")); //$NON-NLS-1$
 					return false;
 				}
-			} else {
+			} else if (modelElement instanceof Participant) {
+                // XOR updates real RoleDef name
+                ((Participant)modelElement).getAssociation().setName(new ch.ehi.basics.types.NlsString(modelElement.getName(), language, newName));
+                return true;
+            } else {
 				Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 			}
 		}
-		modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(), language, newName));
+        modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(), language, newName));        
 	}
 	return true;
 }
