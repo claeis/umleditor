@@ -42,7 +42,7 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.7 $ $Date: 2007-03-12 18:30:46 $
+ * @version $Revision: 1.8 $ $Date: 2007-03-27 15:57:52 $
  * @see #handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -226,16 +226,22 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
             if (dialog.isSaved()) {                               
                 if (dialog.isNAry()) {
                     RoleDef roleDef = ElementFactory.createRoleDef(from, to);
-                    PresentationRole edgeRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
-                    getClassDiagram().loadPresentationRole(null, edgeRole);
+                    PresentationRole nAryRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), classifier, roleDef);
+                    getClassDiagram().loadPresentationRole(null, nAryRole);
                 } else { // XOR 
                     // 1) create the constraint
-                    /*Participant participant =*/ ElementFactory.createParticipant(dialog.getXorParticipant(), (AbstractClassDef)to/*(AbstractClassDef)roleDef.getParticipant()*/);
+                    Participant participant = ElementFactory.createParticipant(dialog.getXorParticipant(), (AbstractClassDef)to/*(AbstractClassDef)roleDef.getParticipant()*/);
                     
+                    // 2) add role only for "cloned" drawing, shares same roleDef (definition by INTERLIS)
+                    NodeFigure nodeFigure = (NodeFigure)getClassDiagram().findFigure((AbstractClassDef)to);
+                    PresentationRole xorRole = ElementFactory.createPresentationRole(getClassDiagram(), linkView.getAssociation(), nodeFigure.getNode(), participant /*dialog.getXorParticipant()*/);
+                    getClassDiagram().loadPresentationRole(null, xorRole);
+/*                    
                     //getClassDiagram().loadXorRole(participant);
                     PresentationRoleFigure roleFigure = (PresentationRoleFigure)getClassDiagram().findFigure(dialog.getXorParticipant());
                     //roleFigure.addXorRole(participant);
                     roleFigure.updateView();
+*/                    
 /*                    
                     // 2) create additional XOR Note
                     ch.ehi.umleditor.umlpresentation.Note note = ElementFactory.createNote();

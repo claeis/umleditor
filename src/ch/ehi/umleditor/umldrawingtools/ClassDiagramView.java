@@ -37,7 +37,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.22 $ $Date: 2007-03-12 18:30:46 $
+ * @version $Revision: 1.23 $ $Date: 2007-03-27 15:57:51 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -839,8 +839,14 @@ protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
 			saveAssociation((AssociationDef)roleDef.getAssociation());
 		} else {
 			// make sure Classifier is to be found in Diagram as well
-			Figure nodeFigure = //addClassifier(roleDef);
-								 findFigure((Classifier)roleDef.getParticipant());
+			Figure nodeFigure = null;
+            if (role.iteratorEndpoint().hasNext()) {
+                // might point to an XOR-branch as well
+                nodeFigure = findFigure((Classifier)role.iteratorEndpoint().next());
+            } else {
+                // the "main" role end
+                nodeFigure = findFigure((Classifier)roleDef.getParticipant());
+            }
 			if (nodeFigure == null) {
 				// role will be inserted by new Node automatically
 				nodeFigure = add((Classifier)roleDef.getParticipant());
@@ -862,7 +868,12 @@ LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
 		}
 		return null;
 	} else {
-		if (correctRoleRelocation(role)) {
+		if (role.iteratorSubject().hasNext() && (role.iteratorSubject().next() instanceof Participant)) {
+            // show XOR
+            EdgeFigure figure = new PresentationRoleFigure(this, role);
+            loadSimpleEdge(figure);
+            return figure;
+        } else if (correctRoleRelocation(role)) {
 			// show role visually
 			EdgeFigure figure = new PresentationRoleFigure(this, role);
 			loadSimpleEdge(figure);

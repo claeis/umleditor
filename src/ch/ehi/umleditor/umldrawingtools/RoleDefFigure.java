@@ -17,6 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.softenvironment.view.*;
+import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.umleditor.application.*;
@@ -35,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2007-01-30 18:44:35 $
+ * @version $Revision: 1.11 $ $Date: 2007-03-27 15:57:51 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -260,7 +261,13 @@ public void updateView() {
 		if (getModelElement() != null) {
 			// node might have changed
 //			super.updateView();
-			textFigure.setText(getModelElement().getDefLangName());
+            if (getModelElement() instanceof Participant) {
+                // XOR
+                textFigure.setText(((Participant)getModelElement()).getAssociation().getDefLangName());                
+            } else {
+                // RoleDef
+                textFigure.setText(getModelElement().getDefLangName());
+            }
 		}
 	} else if (type == CARDINALITY) {
 		if ((getEdge() != null) && (edgeFigure.getEndAssociationEnd() != null)) {

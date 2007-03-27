@@ -34,7 +34,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2007-03-12 18:30:46 $
+ * @version $Revision: 1.9 $ $Date: 2007-03-27 15:57:51 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -89,14 +89,14 @@ public PresentationRoleFigure(ClassDiagramView classDiagram, PresentationRole ed
 	chxShowAssociationName = new JCheckBoxMenuItem(resPresentationRoleFigure.getString("ChxShowAssociationName_text")); //$NON-NLS-1$
 	initalizeCheckBox(chxShowAssociationName, SHOW_ASSOCIATION_NAME);
 
-    setModelElement((ModelElement)edge.iteratorSubject().next());
+    setModelElement((ModelElement)edge.iteratorSubject().next()); // first is always the "main edge", further ones might be XOR-branches
 }
 /**
  * Handler for ActionListener.
  * 
  * Navigation => 0, 1 or both edges possible.
  * Aggregation is XOR Composite and may be set only on one side of an association.
- * @see addSpecialMenu()
+ * @see #addSpecialMenu()
  */
 public void actionPerformed(java.awt.event.ActionEvent e) {
 	if (e.getActionCommand().equals(NAVIGATION_END)) {
@@ -242,43 +242,39 @@ public void draw(Graphics g) {
 			removeMultiplicity();
 		}
         
-        Iterator iteratorXorParticipant = ((RoleDef)getModelElement()).iteratorXorParticipant();
-        while (iteratorXorParticipant.hasNext()) {
-            Participant participant = (Participant)iteratorXorParticipant.next();
+//        Iterator iteratorXorParticipant = ((RoleDef)getModelElement()).iteratorXorParticipant();
+//        while (iteratorXorParticipant.hasNext()) {
+        if (getModelElement() instanceof Participant) {
+            // XOR-branch
+            Participant participant = (Participant)getModelElement(); //iteratorXorParticipant.next();
             LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());
             ClassFigure target = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant());
             Connector xorLink = linkFigure.connectorAt(0, 0);
             ClassFigure xorStartNode = (ClassFigure)getClassDiagram().findFigure(participant.getAssociation().getParticipant());
             Connector xorEndNode = target.connectorAt(0, 0);
-            
+/*            
             // pseudo XOR-edge(Part of roleDef)
             g.drawLine(xorLink.displayBox().x, xorLink.displayBox().y, 
                     xorEndNode.displayBox().x, xorEndNode.displayBox().y);                                
-
+*/
             // XOR-Note            
             int noteX = (xorStartNode.getNode().getEast() + target.getNode().getEast()) /2;
             int noteY = (xorStartNode.getNode().getSouth() + target.getNode().getSouth()) /2;
-            g.drawString("{ XOR }", noteX, noteY);                               
-            
-            // NoteAnchor: pseudo XOR-edge to XOR-Note
-            NoteAnchorLineConnection.drawNoteLine(g, 
-                    (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
-                    noteX, noteY);
-            
+            g.drawString("{ XOR (INTERLIS) }", noteX, noteY);                               
+           
             // NoteAnchor: original PresentationRole-edge to XOR-Note
             //Connector originialRoleStart = getStartConnector();
             //Connector originialRoleEnd = getEndConnector();
             NoteAnchorLineConnection.drawNoteLine(g,
                     (/*originialRoleStart.displayBox().x*/xorStartNode.getNode().getEast() + xorLink.displayBox().x/*originialRoleEnd.displayBox().x*/) / 2, (xorStartNode.getNode().getSouth() /*originialRoleStart.displayBox().y*/ + xorLink.displayBox().y /*originialRoleEnd.displayBox().y*/) /2,
                     noteX, noteY);
-/*                
-                XorEdge lc = new XorEdge(getClassDiagram(), participant);
-                lc.connectStart(start);
-                lc.connectEnd(end);   
-                lc.updateConnection();
-*/
-            }
-//        }
+            
+            // NoteAnchor: pseudo XOR-edge to XOR-Note
+            NoteAnchorLineConnection.drawNoteLine(g, 
+                (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
+                noteX, noteY);
+        }                       
+//    }
 	} catch(Throwable e) {
 Tracer.getInstance().debug(e.toString());//$NON-NLS-1$
 	}
@@ -317,7 +313,15 @@ public void figureRemoved(FigureChangeEvent e) {
  * @return AssociationEnd (RoleDef)
  */
 protected AssociationEnd getEndAssociationEnd() {
-	return (AssociationEnd)getModelElement();
+    if (getModelElement() instanceof AssociationEnd) {
+	   return (AssociationEnd)getModelElement();
+    } else if (getModelElement() instanceof Participant) {
+        // must be XOR-Participant
+        return (AssociationEnd)((Participant)getModelElement()).getAssociation();
+    } else {
+        // probably not intitialized yet
+        return null;
+    }
 }
 /**
  * Return the ending ModelElement of the Relationship 
@@ -325,11 +329,18 @@ protected AssociationEnd getEndAssociationEnd() {
  * @return Element
  */
 protected Element getEndElement() {
-	if ((getModelElement() != null) && (((AssociationEnd)getModelElement()).containsParticipant())) {
-		return ((AssociationEnd)getModelElement()).getParticipant();
-	} else {
-  		return null;
-	}
+	if (getModelElement() != null) {
+        if (getModelElement() instanceof AssociationEnd) {
+            if (((AssociationEnd)getModelElement()).containsParticipant()) {
+                return ((AssociationEnd)getModelElement()).getParticipant();
+            }
+        } else if (getModelElement() instanceof Participant) {
+            // XOR
+            return ((Participant)getModelElement()).getParticipant();
+        }
+    }
+		
+    return null;
 }
 /**
  * Return the starting ModelElement of the Relationship 
