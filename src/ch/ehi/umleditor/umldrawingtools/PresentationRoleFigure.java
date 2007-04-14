@@ -18,7 +18,9 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 import ch.ehi.interlis.associations.*;
 import javax.swing.*;
+
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.util.Iterator;
 
 import CH.ifa.draw.framework.*;
@@ -34,7 +36,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.9 $ $Date: 2007-03-27 15:57:51 $
+ * @version $Revision: 1.10 $ $Date: 2007-04-14 10:26:22 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -124,6 +126,29 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 	} else if (e.getActionCommand().equals(SHOW_ASSOCIATION_NAME)) {
 		((PresentationRole)getEdge()).getAssociation().setShowName(chxShowAssociationName.isSelected());
 	}
+}
+/**
+ * Overwrites.
+ */
+protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
+    JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
+
+    if (!isXorEdge()) {
+        editMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
+            public void actionPerformed(ActionEvent event) {
+                removeVisually();
+            }
+        });
+        editMenu.add(new JSeparator());
+    }
+    
+    editMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
+        public void actionPerformed(ActionEvent event) {
+            removeInModel();
+        }
+    });
+
+    popupMenu.add(editMenu);
 }
 /**
  * Add individual PopupMenu items for this class.
@@ -244,7 +269,7 @@ public void draw(Graphics g) {
         
 //        Iterator iteratorXorParticipant = ((RoleDef)getModelElement()).iteratorXorParticipant();
 //        while (iteratorXorParticipant.hasNext()) {
-        if (getModelElement() instanceof Participant) {
+        if (isXorEdge()) {
             // XOR-branch
             Participant participant = (Participant)getModelElement(); //iteratorXorParticipant.next();
             LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());
@@ -290,7 +315,7 @@ public void layoutMultiplicity(){
 	}
 }
 
-public void layoutRolename(){
+public void layoutRolename() {
 	if (roleDefFigure != null) {
 		Figure figure = getClassDiagram().findFigure(getEndElement());
 		java.awt.Point p=calculateRolePosition(figure.displayBox(), endPoint());
@@ -380,6 +405,9 @@ private JCheckBoxMenuItem initalizeCheckBox(JCheckBoxMenuItem checkBox, String a
  */
 private boolean isShowAssociationName() {
 	return ((PresentationRole)getEdge()).getAssociation().isShowName();
+}
+private boolean isXorEdge() {
+    return getModelElement() instanceof Participant;
 }
 /**
  * Move the RoleDef and Cardinality Figures.
