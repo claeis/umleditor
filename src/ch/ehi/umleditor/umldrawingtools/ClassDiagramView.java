@@ -37,7 +37,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.23 $ $Date: 2007-03-27 15:57:51 $
+ * @version $Revision: 1.24 $ $Date: 2007-04-17 15:50:42 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -98,14 +98,26 @@ public Figure add(Element element) {
 
     // 2) otherwise create the PresentationElement
     if (element instanceof AssociationDef) {
-        return saveAssociation((AssociationDef) element);
+        Figure edge =  saveAssociation((AssociationDef)element);
+        // add XOR-edges of this association
+        Iterator it = ((AssociationDef)element).iteratorConnection();
+        while (it.hasNext()) {
+            // each RoleDef might be also an XOR-end
+            RoleDef role = (RoleDef)it.next();
+            Iterator xorIt = role.iteratorXorParticipant();
+            while(xorIt.hasNext()) {
+                Participant p = (Participant)xorIt.next();
+                checkXorRole((AbstractModelElement)p.getParticipant());
+            }
+        }
+        return edge;
     } else if (isDrawablePackage(element.getClass())) {
         return savePackageFigure((ModelElement) element, new PackageFigure());
     } else if ((element instanceof Classifier) ||
             ClassFigure.isPseudoClassifier(element)) {
     	return saveClassFigure((AbstractModelElement /*Classifier*/)element, new ClassFigure()); 
     } else if (element instanceof ch.ehi.umleditor.umlpresentation.Association) {
-    	return saveAssociationComposite((ch.ehi.umleditor.umlpresentation.Association) element);
+    	return saveAssociationComposite((ch.ehi.umleditor.umlpresentation.Association)element);
 	} else if (element instanceof RoleDef) {
     	return loadPresentationRole((RoleDef)element, null);
     } else {
@@ -659,14 +671,14 @@ private void loadAssociation(ch.ehi.umleditor.umlpresentation.Association compos
 /*    
     // 3) XOR Participant's between RoleFigure's
     AssociationDef assoc = (AssociationDef)composite.iteratorSubject().next();
-    java.util.Iterator iteratorConnection = assoc.iteratorConnection();
+    java.util.Iterator iteratorConnection = assoc.iteratorXorAssociation();
     while(iteratorConnection.hasNext()) {
         RoleDef roleDef = (RoleDef)iteratorConnection.next();
         Iterator iteratorXorParticipant = roleDef.iteratorXorParticipant();
-        while (iteratorXorParticipant.hasNext()) {
+       // while (iteratorXorParticipant.hasNext()) {
             //loadXorConstraint((Participant)iteratorXorParticipant.next());
-            roleFigure.addXorRole(participant);
-        }
+         //   roleFigure.addXorRole(participant);
+       // }
     }
 */
 	linkFigure.setCreating(false);
@@ -870,18 +882,24 @@ LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
 	} else {
 		if (role.iteratorSubject().hasNext() && (role.iteratorSubject().next() instanceof Participant)) {
             // show XOR
-            EdgeFigure figure = new PresentationRoleFigure(this, role);
-            loadSimpleEdge(figure);
-            return figure;
+            return loadRole(role);
         } else if (correctRoleRelocation(role)) {
 			// show role visually
-			EdgeFigure figure = new PresentationRoleFigure(this, role);
-			loadSimpleEdge(figure);
-			return figure;
+            return loadRole(role);
 		} else {
 			return null;
 		}
 	}
+}
+/**
+ * Draw the presentation Role.
+ * @param role
+ * @return
+ */
+private EdgeFigure loadRole(PresentationRole role) {
+    EdgeFigure figure = new PresentationRoleFigure(this, role);
+    loadSimpleEdge(figure);
+    return figure;
 }
 /**
  * Show a simple Edge by means plain EdgeFigure as Dependency or Generalization.
@@ -1099,13 +1117,41 @@ protected void saveNodeInDiagram(PresentationNode node, Figure figure) {
  * @param associationDef
  */
 private void checkAssociation(ch.ehi.uml1_4.implementation.AbstractModelElement modelElement, PresentationNode node, ch.ehi.uml1_4.foundation.core.Association associationDef) {
-	Iterator roles = associationDef.iteratorConnection();
-	while (roles.hasNext()) {
-		AssociationEnd roleDef = (AssociationEnd)roles.next();
+	Iterator it = associationDef.iteratorConnection();
+	while (it.hasNext()) {
+		AssociationEnd roleDef = (AssociationEnd)it.next();
 		if (roleDef.containsParticipant() && roleDef.getParticipant().equals(modelElement)) {
 			trySaveAssociation(associationDef, node, roleDef);
 		}		
-	}
+	}    
+    
+    checkXorRole(modelElement);
+}
+/**
+ * Add an XOR-edge to given XOR-ClassDef if association and the XOR-Node is already drawn.
+ * @param modelElement
+ */
+private void checkXorRole(ch.ehi.uml1_4.implementation.AbstractModelElement modelElement) {    
+    if (modelElement instanceof ClassDef) {
+        Iterator it = ((ClassDef)modelElement).iteratorXorAssociation();
+        while (it.hasNext()) {
+            // add XOR-Constraint if AssociationDef is already drawn (when add XOR-node to diagram)
+            Participant participant = (Participant)it.next(); //iteratorXorAssociation().next();
+            if (findFigure(participant) == null) {
+                LinkFigure edge = (LinkFigure)findFigure(participant.getAssociation().getAssociation());
+                if (edge != null) {
+                    // @see AssociationLineConnection#handleConnect()
+                    PresentationAssocClass linkView = (PresentationAssocClass)edge.getNode();
+                    NodeFigure nodeFigure = (NodeFigure)findFigure(modelElement);  
+                    if (nodeFigure != null) {
+                        // XOR-node exists too
+                        PresentationRole xorRole = ElementFactory.createPresentationRole(this,  linkView.getAssociation(), nodeFigure.getNode(), participant);
+                        loadPresentationRole(null, xorRole);
+                    }
+                }
+            }
+        }
+    }
 }
 /**
  * Draw figure and save Element into Diagram.
