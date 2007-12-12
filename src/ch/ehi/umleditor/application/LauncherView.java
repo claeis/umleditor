@@ -48,7 +48,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.26 $ $Date: 2006-09-27 20:04:22 $
+ * @version $Revision: 1.27 $ $Date: 2007-12-12 19:01:06 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3110,7 +3110,7 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 		
 		for(int i=0;i<args.length;i++){
 			if(args[i].equals("-trace") || args[i].equals("-debug")){
-				EhiLogger.getInstance().setTraceFiler(false); // default config is: filter trace messages
+				EhiLogger.getInstance().setTraceFilter(false); // default config is: filter trace messages
 			}
 		}
 		instance.logListener=new LogListener(instance.getPnlLog());
