@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.12 $ $Date: 2007-12-19 08:06:40 $
+ * @version $Revision: 1.13 $ $Date: 2007-12-19 09:20:23 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -310,7 +310,7 @@ public static INTERLIS2Def createINTERLIS2Def(Element parent) {
 	INTERLIS2Def interlis2Def = (INTERLIS2Def)createOwnedElement(INTERLIS2Def.class, parent);
 
 	// default initialization
-	interlis2Def.setVersion(2.2);
+	interlis2Def.setVersion(2.3);
 
 	return interlis2Def;
 }
