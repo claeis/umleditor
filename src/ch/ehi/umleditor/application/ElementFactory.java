@@ -41,7 +41,7 @@ import ch.softenvironment.util.*;
  * Factory to create Default Element-Types (such as ClassDef and the like).
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2007-03-27 14:07:11 $
+ * @version $Revision: 1.12 $ $Date: 2007-12-19 08:06:40 $
  */
 public abstract class ElementFactory {
 	// the concrete model presented by this TreeElement
@@ -359,8 +359,8 @@ public static ModelDef createModelDef(Element parent) {
 	java.text.DecimalFormat digit4 = new java.text.DecimalFormat("0000");
 	java.text.DecimalFormat digit2 = new java.text.DecimalFormat("00");
 	String version=digit4.format(current.get(Calendar.YEAR))
-		+digit2.format(current.get(Calendar.MONTH))
-		+digit2.format(current.get(Calendar.DAY_OF_MONTH));
+		+"-"+digit2.format(current.get(Calendar.MONTH)+1)
+		+"-"+digit2.format(current.get(Calendar.DAY_OF_MONTH));
 	modelDef.setVersion(new NlsString(version));
 	// default initialization
 	modelDef.setKind(ModelDefKind.DATA);
