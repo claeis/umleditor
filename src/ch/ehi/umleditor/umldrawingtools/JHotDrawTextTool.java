@@ -35,7 +35,7 @@ import java.awt.event.*;
  * @see FloatingTextField
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.2 $ $Date: 2005-02-21 13:51:32 $
+ * @version $Revision: 1.3 $ $Date: 2007-12-19 07:56:06 $
  */
 public class JHotDrawTextTool extends CreationTool implements ActionListener {
 
@@ -185,7 +185,17 @@ fTextField.addActionListener(this);
 		}
 
 		fTextField.createOverlay((Container)view(), figure.getFont());
-		fTextField.setBounds(fieldBounds(figure), figure.getText());
+		// scale position, paint() of FloatingTextField.fEditWidget (JTextField)
+		// uses the scaled position
+		Rectangle rect=fieldBounds(figure);
+		double scale=1.0;
+        DrawingView v=view();
+        if (v instanceof CH.ifa.draw.contrib.zoom.ZoomDrawingView) {
+            scale=((CH.ifa.draw.contrib.zoom.ZoomDrawingView)v).getScale();
+        }
+        rect.x=(int)(rect.x*scale);
+        rect.y=(int)(rect.y*scale);
+		fTextField.setBounds(rect, figure.getText());
 
 		setTypingTarget(figure);
 		setUndoActivity(createUndoActivity());
