@@ -28,6 +28,7 @@ package ch.ehi.umleditor.interlis.iliimport;
 // please fill in/modify the following section
 // -beg- preserve=yes 3C9086430360 import "ImportInterlis"
 import ch.ehi.basics.logging.EhiLogger;
+import ch.interlis.ili2c.Ili2cException;
 import ch.interlis.ili2c.config.*;
 import ch.interlis.ili2c.metamodel.TransferDescription;
 import java.io.*;
@@ -71,8 +72,10 @@ public class ImportInterlis
 			modeldirv.add(iliFiles[filei].getParentFile().getAbsolutePath());
 		}
 	}
-	Configuration config=ch.interlis.ili2c.ModelScan.getConfigWithFiles(modeldirv,filev);
-	if(config==null){
+	Configuration config;
+	try {
+		config = ch.interlis.ili2c.ModelScan.getConfigWithFiles(modeldirv,filev);
+	} catch (Ili2cException e) {
 		editor.log(convert.getFuncDesc(),"failed");
 		return;
 	}
