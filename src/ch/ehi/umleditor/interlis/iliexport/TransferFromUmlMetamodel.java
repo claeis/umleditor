@@ -1675,10 +1675,10 @@ public class TransferFromUmlMetamodel
     // more (XOR) participants?
     Iterator xori=def.iteratorXorParticipant();
     if(xori.hasNext()){
-    	newline();
     	inc_ind();
         while(xori.hasNext()){
         	Participant xor=(Participant)xori.next();
+        	newline();
         	out.write(getIndent()+" OR ");
             if(xor.containsParticipant()){
                 out.write(classRef(def.getAssociation(),(AbstractClassDef)xor.getParticipant()));
