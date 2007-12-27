@@ -600,11 +600,11 @@ public class TransferFromIli2cMetamodel
 
     roledef.setAbstract(role.isAbstract());
     roledef.setPropFinal(role.isFinal());
+    roledef.setPropExternal(role.isExternal());
     roledef.setPropExtended(role.getExtending()!=null);
     roledef.setOrdering(role.isOrdered()
       ? ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED
       : ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
-    // TODO handle external
     switch(role.getKind()){
       case RoleDef.Kind.eASSOCIATE:
         roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.NONE);
@@ -619,7 +619,27 @@ public class TransferFromIli2cMetamodel
     if(role.getCardinality()!=null){
       roledef.setMultiplicity(visitCardinality(role.getCardinality()));
     }
-    roledef.attachParticipant(findViewable(role.getDestination()));
+    Iterator ri=role.iteratorReference();
+    if(ri.hasNext()){
+    	ReferenceType first=(ReferenceType)ri.next();
+        roledef.attachParticipant(findViewable(first.getReferred()));
+        Iterator resti=first.iteratorRestrictedTo();
+    	while(resti.hasNext()){
+    		AbstractClassDef rest=(AbstractClassDef)resti.next();
+            roledef.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(rest));
+    	}
+        while(ri.hasNext()){
+        	ReferenceType r=(ReferenceType)ri.next();
+            ch.ehi.interlis.associations.Participant p=new ch.ehi.interlis.associations.Participant();
+        	roledef.addXorParticipant(p);
+        	p.attachParticipant((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(r.getReferred()));
+            resti=r.iteratorRestrictedTo();
+        	while(resti.hasNext()){
+        		AbstractClassDef rest=(AbstractClassDef)resti.next();
+                p.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(rest));
+        	}
+        }
+    }
     // TODO handle derived from in RoleDef
 
     ((ch.ehi.uml1_4.foundation.core.Association)getNamespace()).addConnection(roledef);
