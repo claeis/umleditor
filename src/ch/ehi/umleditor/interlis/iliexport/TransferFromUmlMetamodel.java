@@ -29,6 +29,7 @@ import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.views.ViewDef;
 import ch.ehi.interlis.views.ViewProjectionDef;
@@ -701,11 +702,11 @@ public class TransferFromUmlMetamodel
 
     int propc=0;
     if(def.isAbstract()){
-      out.write((propc==0?"(":",")+"ABSTRACT");
+      out.write((propc==0?" (":",")+"ABSTRACT");
       propc++;
     }
     if(def.isPropFinal()){
-      out.write((propc==0?"(":",")+"FINAL");
+      out.write((propc==0?" (":",")+"FINAL");
       propc++;
     }
     if(propc>0){
@@ -725,7 +726,7 @@ public class TransferFromUmlMetamodel
         }
       }
     }
-    out.write("= ");
+    out.write(" = ");
     if(def.isMandatory()){
       out.write("MANDATORY ");
     }
@@ -797,11 +798,11 @@ public class TransferFromUmlMetamodel
 
     int propc=0;
     if(def.isAbstract()){
-      out.write((propc==0?"(":",")+"ABSTRACT");
+      out.write((propc==0?" (":",")+"ABSTRACT");
       propc++;
     }
     if(def.isPropFinal()){
-      out.write((propc==0?"(":",")+"FINAL");
+      out.write((propc==0?" (":",")+"FINAL");
       propc++;
     }
     Iterator extendsi=def.iteratorGeneralization();
@@ -810,7 +811,7 @@ public class TransferFromUmlMetamodel
       if(obj instanceof ch.ehi.interlis.modeltopicclass.ClassExtends){
         ch.ehi.interlis.modeltopicclass.ClassExtends extend=(ch.ehi.interlis.modeltopicclass.ClassExtends)obj;
         if(extend.containsParent() && extend.isExtended()){
-          out.write((propc==0?"(":",")+"EXTENDED");
+          out.write((propc==0?" (":",")+"EXTENDED");
           propc++;
         }
       }
@@ -1497,7 +1498,7 @@ public class TransferFromUmlMetamodel
       	}else{
 			out.write(visitIliDim(ntype.getMinDec()));
       	}
-        out.write("..");
+        out.write(" .. ");
 		if(ntype.getMaxDec()==null){
 			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxdecRequired"));
 		}else{
@@ -1652,19 +1653,54 @@ public class TransferFromUmlMetamodel
       MultiplicityRange card=(MultiplicityRange)(def.getMultiplicity().iteratorRange().next());
       out.write(visitCardinality(card)+" ");
     }
+    
+    // first participant
+    {
+        if(def.containsParticipant()){
+            out.write(classRef(def.getAssociation(),(AbstractClassDef)def.getParticipant()));
+          }else{
+            logErrorMsg(def,rsrc.getString("CEnoParticipant"));
+          }
 
-    if(def.containsParticipant()){
-      out.write(classRef(def.getAssociation(),(AbstractClassDef)def.getParticipant()));
-    }else{
-      logErrorMsg(def,rsrc.getString("CEnoParticipant"));
+          String sep=" RESTRICTION ( ";
+          Iterator restrictioni=def.iteratorRestriction();
+          if(restrictioni.hasNext()){
+      		while(restrictioni.hasNext()){
+      		  out.write(sep+classRef(def.getAssociation(),(AbstractClassDef)restrictioni.next()));
+      		  sep="; ";
+      		}
+      		out.write(")");
+          }
     }
-
-    String sep=" RESTRICTED TO ";
-    Iterator restrictioni=def.iteratorRestriction();
-    while(restrictioni.hasNext()){
-      out.write(sep+classRef(def.getAssociation(),(AbstractClassDef)restrictioni.next()));
-      sep=", ";
+    // more (XOR) participants?
+    Iterator xori=def.iteratorXorParticipant();
+    if(xori.hasNext()){
+    	newline();
+    	inc_ind();
+        while(xori.hasNext()){
+        	Participant xor=(Participant)xori.next();
+        	out.write(getIndent()+" OR ");
+            if(xor.containsParticipant()){
+                out.write(classRef(def.getAssociation(),(AbstractClassDef)xor.getParticipant()));
+            }else{
+                logErrorMsg(def,rsrc.getString("CEnoParticipant"));
+            }
+            String sep=" RESTRICTION ( ";
+            Iterator restrictioni=xor.iteratorRestriction();
+            if(restrictioni.hasNext()){
+        		while(restrictioni.hasNext()){
+        		  out.write(sep+classRef(def.getAssociation(),(AbstractClassDef)restrictioni.next()));
+        		  sep="; ";
+        		}
+        		out.write(")");
+            }
+        	
+        }
+    	dec_ind();
+        newline();
+		out.write(getIndent());
     }
+    
     // ':=' Factor
     if (def.containsRoleDefDerived()) {
 	visitIliSyntaxLine(def.getRoleDefDerived());
