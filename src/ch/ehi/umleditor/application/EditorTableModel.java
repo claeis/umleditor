@@ -34,7 +34,7 @@ import ch.softenvironment.util.*;
  * Specific TableModel for UMLEditor-Dialog Tables.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.12 $ $Date: 2006-06-29 22:08:56 $
+ * @version $Revision: 1.13 $ $Date: 2007-12-27 10:32:08 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
@@ -135,7 +135,15 @@ private Vector createRow(RoleDef roleDef) {
 	}
 	row.add(MultiplicityConverter.getRange(roleDef.getMultiplicity()));
 	if (roleDef.containsParticipant()) {
-		row.add(roleDef.getParticipant().getDefLangName());
+		String className=roleDef.getParticipant().getDefLangName();
+		Iterator xori=roleDef.iteratorXorParticipant();
+		while(xori.hasNext()){
+			Participant xor=(Participant)xori.next();
+			if(xor.containsParticipant()){
+				className=className+"¦"+xor.getParticipant().getDefLangName();
+			}
+		}
+		row.add(className);
 	} else {
 		row.add(null);
 	}
@@ -547,7 +555,16 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 			}
 			currentDataRow.set(2, MultiplicityConverter.getRange(roleDef.getMultiplicity()));
 			if (roleDef.containsParticipant()) {
-				currentDataRow.set(3, (roleDef.getParticipant().getDefLangName()));
+				
+				String className=roleDef.getParticipant().getDefLangName();
+				Iterator xori=roleDef.iteratorXorParticipant();
+				while(xori.hasNext()){
+					Participant xor=(Participant)xori.next();
+					if(xor.containsParticipant()){
+						className=className+"¦"+xor.getParticipant().getDefLangName();
+					}
+				}
+				currentDataRow.set(3, className);
 			} else {
 				currentDataRow.set(3, null);
 			}
