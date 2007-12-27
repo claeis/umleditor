@@ -26,7 +26,7 @@ import ch.softenvironment.view.*;
  * User Interface for a RoleDef.
  *
  * @author: Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.4 $ $Date: 2004-08-17 13:52:58 $
+ * @version $Revision: 1.5 $ $Date: 2007-12-27 17:00:27 $
  */
 public class RoleDefDialog extends BaseDialog {
 	// ModelElement
@@ -46,7 +46,6 @@ public class RoleDefDialog extends BaseDialog {
 	private InterlisSyntaxPanel ivjPnlDerivedFrom = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private JComboBox ivjCbxCardinality = null;
-	private ReferencableComboBox ivjCbxEnd = null;
 	private JCheckBox ivjChxOrdered = null;
 	private JLabel ivjLblCardinality = null;
 	private JLabel ivjLblEnd = null;
@@ -57,11 +56,11 @@ public class RoleDefDialog extends BaseDialog {
 	private JCheckBox ivjChxNavigable = null;
 	private JLabel ivjLblKind = null;
 	private JLabel ivjLblReferenceKind = null;
-	private JLabel ivjLblRestrictionTo = null;
 	private JRadioButton ivjRbtReference = null;
 	private JRadioButton ivjRbtRelationship = null;
 	private JRadioButton ivjRbtStructure = null;
-        private RestrictedClassesPanel ivjTabRestricted = null;
+    private ParticipantsPanel ivjTabParticipants = null;
+        
 	private JPanel ivjPnlReferenceType = null;
 	private JCheckBox ivjChxExternal = null;
 
@@ -424,28 +423,6 @@ private javax.swing.JComboBox getCbxCardinality() {
 	return ivjCbxCardinality;
 }
 /**
- * Return the CbxEnd property value.
- * @return ch.ehi.umleditor.application.ReferencableComboBox
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private ReferencableComboBox getCbxEnd() {
-	if (ivjCbxEnd == null) {
-		try {
-			ivjCbxEnd = new ch.ehi.umleditor.application.ReferencableComboBox();
-			ivjCbxEnd.setName("CbxEnd");
-			ivjCbxEnd.setEnabled(true);
-			ivjCbxEnd.setEditable(false);
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjCbxEnd;
-}
-/**
  * Return the JCheckBox1 property value.
  * @return javax.swing.JCheckBox
  */
@@ -700,29 +677,6 @@ private javax.swing.JLabel getLblReferenceKind() {
 	return ivjLblReferenceKind;
 }
 /**
- * Return the LblRestrictionTo property value.
- * @return javax.swing.JLabel
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JLabel getLblRestrictionTo() {
-	if (ivjLblRestrictionTo == null) {
-		try {
-			ivjLblRestrictionTo = new javax.swing.JLabel();
-			ivjLblRestrictionTo.setName("LblRestrictionTo");
-			ivjLblRestrictionTo.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjLblRestrictionTo.setText("Restriktion:");
-			// user code begin {1}
-			ivjLblRestrictionTo.setText(resRoleDefDialog.getString("LblRestrictionTo_text"));
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjLblRestrictionTo;
-}
-/**
  * Return the PnlDerivedFrom property value.
  * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
  */
@@ -826,15 +780,15 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsLblEnd.insets = new java.awt.Insets(7, 15, 8, 9);
 			getPnlDetail().add(getLblEnd(), constraintsLblEnd);
 
-			java.awt.GridBagConstraints constraintsCbxEnd = new java.awt.GridBagConstraints();
-			constraintsCbxEnd.gridx = 2; constraintsCbxEnd.gridy = 5;
-			constraintsCbxEnd.fill = java.awt.GridBagConstraints.HORIZONTAL;
-			constraintsCbxEnd.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsCbxEnd.weightx = 1.0;
-			constraintsCbxEnd.ipadx = 253;
-			constraintsCbxEnd.insets = new java.awt.Insets(3, 9, 3, 11);
-			getPnlDetail().add(getCbxEnd(), constraintsCbxEnd);
-
+			java.awt.GridBagConstraints constraintsScpClassRestriction = new java.awt.GridBagConstraints();
+			constraintsScpClassRestriction.gridx = 2; constraintsScpClassRestriction.gridy = 5;
+			constraintsScpClassRestriction.fill = java.awt.GridBagConstraints.BOTH;
+			constraintsScpClassRestriction.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsScpClassRestriction.weightx = 1.0;
+			constraintsScpClassRestriction.weighty = 1.0;
+			constraintsScpClassRestriction.insets = new java.awt.Insets(4, 9, 4, 11);
+			getPnlDetail().add(getTabParticipants(), constraintsScpClassRestriction);
+			
 			java.awt.GridBagConstraints constraintsChxNavigable = new java.awt.GridBagConstraints();
 			constraintsChxNavigable.gridx = 2; constraintsChxNavigable.gridy = 3;
 			constraintsChxNavigable.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -842,26 +796,10 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsChxNavigable.insets = new java.awt.Insets(3, 9, 5, 212);
 			getPnlDetail().add(getChxNavigable(), constraintsChxNavigable);
 
-			java.awt.GridBagConstraints constraintsLblRestrictionTo = new java.awt.GridBagConstraints();
-			constraintsLblRestrictionTo.gridx = 1; constraintsLblRestrictionTo.gridy = 6;
-			constraintsLblRestrictionTo.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsLblRestrictionTo.ipadx = 75;
-			constraintsLblRestrictionTo.insets = new java.awt.Insets(3, 15, 133, 9);
-			getPnlDetail().add(getLblRestrictionTo(), constraintsLblRestrictionTo);
 
-			java.awt.GridBagConstraints constraintsScpClassRestriction = new java.awt.GridBagConstraints();
-			constraintsScpClassRestriction.gridx = 2; constraintsScpClassRestriction.gridy = 6;
-			constraintsScpClassRestriction.fill = java.awt.GridBagConstraints.BOTH;
-			constraintsScpClassRestriction.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsScpClassRestriction.weightx = 1.0;
-			constraintsScpClassRestriction.weighty = 1.0;
-			//constraintsScpClassRestriction.ipadx = 357;
-			//constraintsScpClassRestriction.ipady = 116;
-			constraintsScpClassRestriction.insets = new java.awt.Insets(4, 9, 4, 11);
-			getPnlDetail().add(getTabRestricted(), constraintsScpClassRestriction);
 
 			java.awt.GridBagConstraints constraintsPnlReferenceType = new java.awt.GridBagConstraints();
-			constraintsPnlReferenceType.gridx = 1; constraintsPnlReferenceType.gridy = 7;
+			constraintsPnlReferenceType.gridx = 1; constraintsPnlReferenceType.gridy = 6;
 			constraintsPnlReferenceType.gridwidth = 2;
 			constraintsPnlReferenceType.fill = java.awt.GridBagConstraints.HORIZONTAL;
 			constraintsPnlReferenceType.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -1052,12 +990,11 @@ private javax.swing.JRadioButton getRbtStructure() {
 	}
 	return ivjRbtStructure;
 }
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private RestrictedClassesPanel getTabRestricted() {
-	if (ivjTabRestricted == null) {
+private ParticipantsPanel getTabParticipants() {
+	if (ivjTabParticipants == null) {
 		try {
-			ivjTabRestricted = new RestrictedClassesPanel();
-			ivjTabRestricted.setName("TabRestricted");
+			ivjTabParticipants = new ParticipantsPanel();
+			ivjTabParticipants.setName("TabParticipants");
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1066,7 +1003,7 @@ private RestrictedClassesPanel getTabRestricted() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjTabRestricted;
+	return ivjTabParticipants;
 }
 /**
  * Return the TbpGeneral property value.
@@ -1164,9 +1101,7 @@ private void initialize() {
 
 	getCbxCardinality().setModel(new DefaultComboBoxModel(MultiplicityConverter.getDefaultCardinalities()));
 
-	//ce getTblClassRestriction().setModel(new EditorTableModel());
-	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(null);
-        getTabRestricted().setOwnerDialog(this);
+    getTabParticipants().setOwnerDialog(this);
 
 	// user code end
 }
@@ -1209,20 +1144,91 @@ protected boolean save() {
 	roleDef.setOrdering(getChxOrdered().isSelected() ? OrderingKind.ORDERED : OrderingKind.UNORDERED);
 	roleDef.setPropExternal(getChxExternal().isSelected());
 	roleDef.setNavigable(getChxNavigable().isSelected());
-	if (getCbxEnd().hasElementChanged()) {
+	
+	//if (getCbxEnd().hasElementChanged()) {
 		// remove ClassDef
-		if (roleDef.containsParticipant()) {
-			roleDef.detachParticipant();
-		}
-		if (getCbxEnd().getElement() != null) {
-			roleDef.attachParticipant((AbstractClassDef)getCbxEnd().getElement());
-		}
-	}
-        roleDef.clearRestriction();
-        AbstractClassDef[] rv=(AbstractClassDef[])getTabRestricted().getObject();
-        for(int i=0;i<rv.length;i++){
-            roleDef.addRestriction(rv[i]);
-        }
+		//if (roleDef.containsParticipant()) {
+			//roleDef.detachParticipant();
+		//}
+		//if (getCbxEnd().getElement() != null) {
+			//roleDef.attachParticipant((AbstractClassDef)getCbxEnd().getElement());
+		//}
+	//}
+        //roleDef.clearRestriction();
+        //AbstractClassDef[] rv=(AbstractClassDef[])getTabRestricted().getObject();
+        //for(int i=0;i<rv.length;i++){
+            //roleDef.addRestriction(rv[i]);
+        //}
+    ParticipantsPanelItem[] pv=(ParticipantsPanelItem[])getTabParticipants().getObject();
+    java.util.HashMap tpv=new java.util.HashMap();
+    java.util.HashSet seenv=new java.util.HashSet();
+    for(int i=0;i<pv.length;i++){
+    	tpv.put(pv[i].getTarget(), pv[i]);
+    }
+    if (roleDef.containsParticipant()){
+    	// if participant is not in list
+    	if(!tpv.containsKey(roleDef.getParticipant())){
+    		// remove it
+    		roleDef.detachParticipant();
+    		roleDef.clearRestriction();
+    	}else{
+    		// update restrictions
+    		roleDef.clearRestriction();
+    		ParticipantsPanelItem pvi=(ParticipantsPanelItem)tpv.get(roleDef.getParticipant());
+			AbstractClassDef[] rv=pvi.getRestrictions();
+			for(int rvi=0;rvi<rv.length;rvi++){
+    			roleDef.addRestriction(rv[rvi]);
+			}
+			// remember as updated
+    		seenv.add(roleDef.getParticipant());
+    	}
+    }
+    java.util.Iterator xori=roleDef.iteratorXorParticipant();
+    java.util.HashSet delp=new java.util.HashSet();
+    while(xori.hasNext()){
+    	Participant xor=(Participant)xori.next();
+    	// if participant is not in list
+    	if(!tpv.containsKey(xor.getParticipant())){
+  			// remember to remove it
+    		delp.add(xor);
+    	}else{
+    		// update restrictions
+    		xor.clearRestriction();
+    		ParticipantsPanelItem pvi=(ParticipantsPanelItem)tpv.get(xor.getParticipant());
+			AbstractClassDef[] rv=pvi.getRestrictions();
+			for(int rvi=0;rvi<rv.length;rvi++){
+    			xor.addRestriction(rv[rvi]);
+			}
+			// remember as updated
+    		seenv.add(xor.getParticipant());
+    	}
+    }
+    java.util.Iterator deli=delp.iterator();
+    while(deli.hasNext()){
+    	Participant xor=(Participant)deli.next();
+    	xor.unlinkAll();
+    }
+    for(int i=0;i<pv.length;i++){
+    	if(!seenv.contains(pv[i].getTarget())){
+    		// new participant
+    		// add it
+    		if(!roleDef.containsParticipant()){
+    			roleDef.attachParticipant(pv[i].getTarget());
+    			AbstractClassDef[] rv=pv[i].getRestrictions();
+    			for(int rvi=0;rvi<rv.length;rvi++){
+        			roleDef.addRestriction(rv[rvi]);
+    			}
+    		}else{
+    	    	Participant xor=new Participant();
+    	    	roleDef.addXorParticipant(xor);
+    			xor.attachParticipant(pv[i].getTarget());
+    			AbstractClassDef[] rv=pv[i].getRestrictions();
+    			for(int rvi=0;rvi<rv.length;rvi++){
+        			xor.addRestriction(rv[rvi]);
+    			}
+    		}
+    	}
+    }
 
 	// page DerivedFrom RoleDef has 0/1 RoleDefDerived
 	if (roleDef.containsRoleDefDerived()) {
@@ -1275,20 +1281,21 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxOrdered().setSelected(roleDef.getOrdering() == OrderingKind.ORDERED);
 	getChxExternal().setSelected(roleDef.isPropExternal());
 	getChxNavigable().setSelected(roleDef.isNavigable());
+    ParticipantsPanelItem[] pv=null;
+    int offset=0;
 	if (roleDef.containsParticipant()) {
-		getCbxEnd().setElement(AbstractClassDef.class, roleDef.getAssociation(), roleDef.getParticipant());
-	} else {
-		getCbxEnd().setElement(AbstractClassDef.class, roleDef.getAssociation(), null);
+	    offset=1;
 	}
-	//ce getTblClassRestriction().setModel(new EditorTableModel());
-	//ce ((EditorTableModel)getTblClassRestriction().getModel()).setRestrictedClassDef(roleDef.iteratorRestriction());
-        AbstractClassDef[] rv=new AbstractClassDef[roleDef.sizeRestriction()];
-        java.util.Iterator ri=roleDef.iteratorRestriction();
-        for(int i=0;i<rv.length;i++){
-          rv[i]=(AbstractClassDef)ri.next();
-        }
-        getTabRestricted().setObject(rv,roleDef.getAssociation());
-
+    pv=new ParticipantsPanelItem[roleDef.sizeXorParticipant()+offset];
+    if(offset==1){
+        pv[0]=new ParticipantsPanelItem((AbstractClassDef)roleDef.getParticipant(),roleDef.iteratorRestriction());
+    }
+    java.util.Iterator pi=roleDef.iteratorXorParticipant();
+    for(int i=0;i<roleDef.sizeXorParticipant();i++){
+    	Participant p=(Participant)pi.next();
+    	pv[i+offset]=new ParticipantsPanelItem(p.getParticipant(),p.iteratorRestriction());
+    }
+    getTabParticipants().setObject(pv,roleDef.getAssociation());
 
 	// set page DerivedFrom
 	if (roleDef.containsRoleDefDerived()) {
