@@ -24,6 +24,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.standard.*;
@@ -48,7 +49,7 @@ import ch.softenvironment.util.*;
  * - DrawingArea
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.27 $ $Date: 2007-12-12 19:01:06 $
+ * @version $Revision: 1.28 $ $Date: 2007-12-28 10:11:42 $
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener, javax.swing.event.InternalFrameListener, FileHistoryListener {
 	// Constants
@@ -3804,6 +3805,9 @@ private void setCurrentFile(java.io.File file) {
  * The Dialog will be presented generically according to the User Selection.
  */
 public void showSpecification(Element element) {
+	if(element instanceof ch.ehi.interlis.associations.Participant){
+		element=((ch.ehi.interlis.associations.Participant)element).getAssociation();
+	}
 	try {
 		java.lang.Class types[] = { java.awt.Frame.class, Element.class };
 		Object args[] = { this, element };
