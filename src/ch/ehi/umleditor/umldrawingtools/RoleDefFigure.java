@@ -36,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * @see PresentationRoleFigure#getEdge() to keep Presentation-Data.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2007-03-27 15:57:51 $
+ * @version $Revision: 1.12 $ $Date: 2007-12-28 10:27:16 $
  */
 class RoleDefFigure extends NodeFigure {
 	private PresentationRoleFigure edgeFigure = null;
@@ -84,15 +84,31 @@ protected javax.swing.JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu
     addSelectionMenu(popupMenu);
     popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectTargetInBrowser_text")) {
         public void actionPerformed(ActionEvent event) {
-            RoleDef role = (RoleDef)getModelElement();
-            if (role.getParticipant() != null) {
-                LauncherView.getInstance().getPnlNavigation().selectElement(role.getParticipant());
+        	ModelElement ele=getModelElement();
+        	Classifier target=null;
+        	if(ele instanceof Participant){
+        		Participant participant=((Participant)ele);
+                if (participant.containsParticipant() ) {
+                	target=participant.getParticipant();
+                }
+        	}else{
+                RoleDef role = (RoleDef)ele;
+                if (role.containsParticipant() ) {
+                	target=role.getParticipant();
+                }
+        	}
+            if (target != null) {
+                LauncherView.getInstance().getPnlNavigation().selectElement(target);
             }
         }
     });
     popupMenu.add(new AbstractAction(getResourceString(RoleDefFigure.class, "MniSelectOwnerInBrowser_text")) {
         public void actionPerformed(ActionEvent event) {
-            RoleDef role = (RoleDef)getModelElement();
+        	ModelElement ele=getModelElement();
+        	if(ele instanceof Participant){
+        		ele=((Participant)ele).getAssociation();
+        	}
+            RoleDef role = (RoleDef)ele;
             if (role.getAssociation() != null) {
                 LauncherView.getInstance().getPnlNavigation().selectElement(role.getAssociation());
             }
