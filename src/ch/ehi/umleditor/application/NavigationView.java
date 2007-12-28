@@ -34,7 +34,7 @@ import ch.softenvironment.view.ListMenuChoice;
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.14 $ $Date: 2006-06-29 22:08:56 $
+ * @version $Revision: 1.15 $ $Date: 2007-12-28 10:12:43 $
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
     //private TreeDragSource ds;
@@ -2093,6 +2093,9 @@ private void renameNode() {
  * If necessary make path visible before.
  */
 public void selectElement(Element element) {
+	if(element instanceof ch.ehi.interlis.associations.Participant){
+		element=((ch.ehi.interlis.associations.Participant)element).getAssociation();
+	}
 	TreePath foundNode = modelAdapter.findElementDefinitionNode(element);
 
 	if (foundNode == null) {
