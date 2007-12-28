@@ -269,6 +269,15 @@ public class CreateDiagramUtility
           skipAssoc=true;
           continue;
         }
+        java.util.Iterator pi=role.iteratorXorParticipant();
+        while(!skipAssoc && pi.hasNext()){
+        	ch.ehi.interlis.associations.Participant p=(ch.ehi.interlis.associations.Participant)pi.next();
+            end=p.getParticipant();
+            if(!classv.containsKey(end)){
+              skipAssoc=true;
+              continue;
+            }
+        }
       }
 
       // all ends on this diagram?
@@ -287,13 +296,25 @@ public class CreateDiagramUtility
             rolei=assocdef.iteratorConnection();
             while(rolei.hasNext()){
               role=(RoleDef)rolei.next();
-              ClassDef end=(ClassDef)role.getParticipant();
+              AbstractClassDef end=(AbstractClassDef)role.getParticipant();
               ch.ehi.umleditor.umlpresentation.PresentationRole roleFig=new ch.ehi.umleditor.umlpresentation.PresentationRole();
               roleFig.addEndpoint(linkFig);
               roleFig.addEndpoint((ch.ehi.umleditor.umlpresentation.Class)classv.get(end));
               roleFig.addSubject(role);
               assocFig.addRolePresentation(roleFig);
               edgev.add(roleFig);
+              // xor	
+              java.util.Iterator pi=role.iteratorXorParticipant();
+              while(!skipAssoc && pi.hasNext()){
+              	ch.ehi.interlis.associations.Participant p=(ch.ehi.interlis.associations.Participant)pi.next();
+                  end=p.getParticipant();
+                  roleFig=new ch.ehi.umleditor.umlpresentation.PresentationRole();
+                  roleFig.addEndpoint(linkFig);
+                  roleFig.addEndpoint((ch.ehi.umleditor.umlpresentation.Class)classv.get(end));
+                  roleFig.addSubject(p);
+                  assocFig.addRolePresentation(roleFig);
+                  edgev.add(roleFig);
+              }
             }
 
             assocFig.addSubject(assocdef);
@@ -303,10 +324,10 @@ public class CreateDiagramUtility
     }
 
     // layout diagram
-    Layout.layout(nodev,edgev,0,0
-          ,ch.ehi.umleditor.application.LauncherView.getSettings().getDiagramWidth().intValue()
-          ,ch.ehi.umleditor.application.LauncherView.getSettings().getDiagramHeight().intValue()
-      );
+    //Layout.layout(nodev,edgev,0,0
+    //      ,ch.ehi.umleditor.application.LauncherView.getSettings().getDiagramWidth().intValue()
+    //      ,ch.ehi.umleditor.application.LauncherView.getSettings().getDiagramHeight().intValue()
+    //  );
     return;
     // -end- 3CDBB82502CB body3CD8E2DF0062 "classes"
     }
