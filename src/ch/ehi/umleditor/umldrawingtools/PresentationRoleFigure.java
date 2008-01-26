@@ -36,7 +36,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2007-04-14 10:26:22 $
+ * @version $Revision: 1.11 $ $Date: 2008-01-26 22:30:05 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -272,32 +272,34 @@ public void draw(Graphics g) {
         if (isXorEdge()) {
             // XOR-branch
             Participant participant = (Participant)getModelElement(); //iteratorXorParticipant.next();
-            LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());
-            ClassFigure target = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant());
-            Connector xorLink = linkFigure.connectorAt(0, 0);
+            LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());                                   
             ClassFigure xorStartNode = (ClassFigure)getClassDiagram().findFigure(participant.getAssociation().getParticipant());
-            Connector xorEndNode = target.connectorAt(0, 0);
+            ClassFigure xorEndNode = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant()); //Connector xorEndNode = target.connectorAt(0, 0);
+            //Figure assocFig = getClassDiagram().findFigure(participant.getAssociation());
+            //java.awt.Point assocPoint = assocFig.center();
+            //Connector originialRoleStart = getStartConnector();
+            //Connector originialRoleEnd = getEndConnector();
 /*            
             // pseudo XOR-edge(Part of roleDef)
             g.drawLine(xorLink.displayBox().x, xorLink.displayBox().y, 
                     xorEndNode.displayBox().x, xorEndNode.displayBox().y);                                
 */
             // XOR-Note            
-            int noteX = (xorStartNode.getNode().getEast() + target.getNode().getEast()) /2;
-            int noteY = (xorStartNode.getNode().getSouth() + target.getNode().getSouth()) /2;
-            g.drawString("{ XOR (INTERLIS) }", noteX, noteY);                               
+            int noteX = (xorStartNode.getNode().getEast() + xorEndNode.getNode().getEast()) /2;
+            int noteY = (xorStartNode.getNode().getSouth() + xorEndNode.getNode().getSouth()) /2 - 20;
+            g.drawString("{XOR (INTERLIS)}", noteX, noteY);                               
            
-            // NoteAnchor: original PresentationRole-edge to XOR-Note
-            //Connector originialRoleStart = getStartConnector();
-            //Connector originialRoleEnd = getEndConnector();
+            // NoteAnchor: original PresentationRole-edge to XOR-Note            
             NoteAnchorLineConnection.drawNoteLine(g,
-                    (/*originialRoleStart.displayBox().x*/xorStartNode.getNode().getEast() + xorLink.displayBox().x/*originialRoleEnd.displayBox().x*/) / 2, (xorStartNode.getNode().getSouth() /*originialRoleStart.displayBox().y*/ + xorLink.displayBox().y /*originialRoleEnd.displayBox().y*/) /2,
-                    noteX, noteY);
+//                  (/*originialRoleStart.displayBox().x*/ xorStartNode.getNode().getEast() + xorLink.displayBox().x /*originialRoleEnd.displayBox().x*/) / 2, (xorStartNode.getNode().getSouth() /*originialRoleStart.displayBox().y*/ + xorLink.displayBox().y /*originialRoleEnd.displayBox().y*/) /2,
+                    (linkFigure.center().x + xorStartNode.center().x /*assocPoint.x*/) / 2, (linkFigure.center().y + xorStartNode.center().y /*assocPoint.y*/) / 2,
+                    noteX + 40, noteY + 3);
             
             // NoteAnchor: pseudo XOR-edge to XOR-Note
             NoteAnchorLineConnection.drawNoteLine(g, 
-                (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
-                noteX, noteY);
+//              (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
+                (linkFigure.center().x + xorEndNode.center().x) / 2, (linkFigure.center().y + xorEndNode.center().y) / 2,
+                noteX + 40, noteY + 3);
         }                       
 //    }
 	} catch(Throwable e) {
