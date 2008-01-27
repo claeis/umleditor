@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2005-01-17 09:56:00 $
-// $Revision: 1.3 $
+// $Date: 2008-01-27 22:10:29 $
+// $Revision: 1.4 $
 //
 
 // -beg- preserve=no 3E0DB0710357 package "TransferFromXmiRoseMetamodel"
@@ -222,14 +222,14 @@ public class TransferFromXmiRoseMetamodel
     }else if(arg instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
       if(pass==1){
         ch.ehi.interlis.domainsandconstants.DomainDef imptype=(ch.ehi.interlis.domainsandconstants.DomainDef)arg;
-	ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enum = (ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)imptype.getType();
+	ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration = (ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)imptype.getType();
         ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
         ele.setDefLangName((String)attr.getXMIValueOfValue("name"));
         String docu=findTaggedValue(attr.getXMIId(),"documentation");
         if(docu!=null){
           ele.setDocumentation(new NlsString(docu));
         }
-        enum.addEnumElement(ele);
+        enumeration.addEnumElement(ele);
       }
     }
     return null;
@@ -262,9 +262,9 @@ public class TransferFromXmiRoseMetamodel
         }else if("enumeration".equals(stereotype)){
           ch.ehi.interlis.domainsandconstants.DomainDef imptype= new ch.ehi.interlis.domainsandconstants.DomainDef();
           impclass=imptype;
-          ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enum = new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
-          enum.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.UNDEFINED);
-          imptype.attachType(enum);
+          ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration = new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
+          enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.UNDEFINED);
+          imptype.attachType(enumeration);
         }else{
           ((ch.ehi.interlis.modeltopicclass.ClassDef)impclass).setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
         }

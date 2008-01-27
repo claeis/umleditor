@@ -860,16 +860,16 @@ public class TransferFromIli2cMetamodel
       // URI and NAME are represented as TypeAlias in ili2c
 
     }else if (dd instanceof EnumerationType){
-      ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enum;
+      ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration;
       EnumerationType et = (EnumerationType) dd;
-      enum=visitEnumeration(et.getEnumeration());
-      ret=enum;
+      enumeration=visitEnumeration(et.getEnumeration());
+      ret=enumeration;
       if (et.isCircular()){
-        enum.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.CIRCULAR);
+    	  enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.CIRCULAR);
       }else if (et.isOrdered()){
-        enum.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.ORDERED);
+    	  enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.ORDERED);
       }else{
-        enum.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.UNDEFINED);
+    	  enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.UNDEFINED);
       }
     }else if (dd instanceof CoordType)
     {
