@@ -36,7 +36,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2008-01-26 22:30:05 $
+ * @version $Revision: 1.12 $ $Date: 2008-04-05 16:28:49 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -274,36 +274,66 @@ public void draw(Graphics g) {
             Participant participant = (Participant)getModelElement(); //iteratorXorParticipant.next();
             LinkFigure linkFigure = (LinkFigure)getClassDiagram().findFigure(participant.getAssociation().getAssociation());                                   
             ClassFigure xorStartNode = (ClassFigure)getClassDiagram().findFigure(participant.getAssociation().getParticipant());
-            ClassFigure xorEndNode = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant()); //Connector xorEndNode = target.connectorAt(0, 0);
-            //Figure assocFig = getClassDiagram().findFigure(participant.getAssociation());
-            //java.awt.Point assocPoint = assocFig.center();
-            //Connector originialRoleStart = getStartConnector();
-            //Connector originialRoleEnd = getEndConnector();
-/*            
-            // pseudo XOR-edge(Part of roleDef)
-            g.drawLine(xorLink.displayBox().x, xorLink.displayBox().y, 
-                    xorEndNode.displayBox().x, xorEndNode.displayBox().y);                                
-*/
-            // XOR-Note            
-            int noteX = (xorStartNode.getNode().getEast() + xorEndNode.getNode().getEast()) /2;
-            int noteY = (xorStartNode.getNode().getSouth() + xorEndNode.getNode().getSouth()) /2 - 20;
-            g.drawString("{XOR (INTERLIS)}", noteX, noteY);                               
-           
-            // NoteAnchor: original PresentationRole-edge to XOR-Note            
-            NoteAnchorLineConnection.drawNoteLine(g,
-//                  (/*originialRoleStart.displayBox().x*/ xorStartNode.getNode().getEast() + xorLink.displayBox().x /*originialRoleEnd.displayBox().x*/) / 2, (xorStartNode.getNode().getSouth() /*originialRoleStart.displayBox().y*/ + xorLink.displayBox().y /*originialRoleEnd.displayBox().y*/) /2,
-                    (linkFigure.center().x + xorStartNode.center().x /*assocPoint.x*/) / 2, (linkFigure.center().y + xorStartNode.center().y /*assocPoint.y*/) / 2,
-                    noteX + 40, noteY + 3);
+            ClassFigure xorEndNode = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant());                                                          
+                  
+            int xorStartEdgeX = xorStartNode.center().x;
+            int xorStartEdgeY = xorStartNode.center().y;
+            int xorEndEdgeX = xorEndNode.center().x;
+            int xorEndEdgeY = xorEndNode.center().y;
             
+            WayPoint startWayPoint = null;
+            Figure fig = getClassDiagram().findFigure(participant.getAssociation());
+            if (fig != null) {
+            	java.util.Iterator iterator = ((PresentationRoleFigure)fig).getEdge().iteratorWayPoint();
+            	if (iterator.hasNext()) {
+            		startWayPoint = (WayPoint)iterator.next(); // take closest to LinkNode
+                	xorStartEdgeX = startWayPoint.getEast();
+                	xorStartEdgeY = startWayPoint.getSouth();
+                }
+            }
+            WayPoint endWayPoint = null;
+            java.util.Iterator iterator = getEdge().iteratorWayPoint();
+            if (iterator.hasNext()) {
+            	endWayPoint = (WayPoint)iterator.next();  // take closest to LinkNode
+            	xorEndEdgeX = endWayPoint.getEast();
+            	xorEndEdgeY = endWayPoint.getSouth();
+            }
+            
+            // XOR-Note            
+            int noteX = (xorStartEdgeX + xorEndEdgeX) / 2; //(xorStartNode.getNode().getEast() + xorEndNode.getNode().getEast()) /2;
+            int noteY = (xorStartEdgeY + xorEndEdgeY) / 2 - 20; //(xorStartNode.getNode().getSouth() + xorEndNode.getNode().getSouth()) /2 - 20;
+            g.drawString("{XOR(ILI)}", noteX, noteY);
+            
+            // add Text-offset
+            noteX = noteX + 20;
+            noteY = noteY - 10;
+            // NoteAnchor: original PresentationRole-edge to XOR-Note    
+            if (startWayPoint == null) {
+	            NoteAnchorLineConnection.drawNoteLine(g,
+	            		// "connect" in the middle between LinkNode and xorEndNode
+	                    (linkFigure.center().x + xorStartEdgeX) / 2, (linkFigure.center().y + xorStartEdgeY) / 2,
+	                    noteX, noteY);
+            } else {
+            	NoteAnchorLineConnection.drawNoteLine(g,	        			
+            			xorStartEdgeX, xorStartEdgeY,
+                        noteX, noteY);
+            }
+                        
             // NoteAnchor: pseudo XOR-edge to XOR-Note
-            NoteAnchorLineConnection.drawNoteLine(g, 
-//              (xorLink.displayBox().x + xorEndNode.displayBox().x) / 2, (xorLink.displayBox().y + xorEndNode.displayBox().y) /2,
-                (linkFigure.center().x + xorEndNode.center().x) / 2, (linkFigure.center().y + xorEndNode.center().y) / 2,
-                noteX + 40, noteY + 3);
-        }                       
+	        if (endWayPoint == null) {	 
+	        	// "connect" in the middle between LinkNode and xorEndNode
+	            NoteAnchorLineConnection.drawNoteLine(g, 
+	                (linkFigure.center().x + xorEndEdgeX) / 2, (linkFigure.center().y + xorEndEdgeY) / 2,
+	                noteX, noteY);
+	        } else {
+	        	NoteAnchorLineConnection.drawNoteLine(g,	        			
+	        		endWayPoint.getEast(), endWayPoint.getSouth(),
+                    noteX, noteY);
+	        }    
+        }
 //    }
 	} catch(Throwable e) {
-Tracer.getInstance().debug(e.toString());//$NON-NLS-1$
+Tracer.getInstance().debug(e.getLocalizedMessage());
 	}
 }
 public void layoutMultiplicity(){
