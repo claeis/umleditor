@@ -17,7 +17,7 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import java.awt.Component;
+
 
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.uml1_4.foundation.core.Association;
@@ -31,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -44,7 +45,7 @@ import javax.swing.JComboBox;
  * When connecting an Association to a Linknode, it must
  * be confirmed whether it is an "n-ary" or "XOR" kind.
  * @author Peter Hirzel <i>soft</i>Environment
- * @version $Revision: 1.1 $ $Date: 2007-03-06 16:10:39 $
+ * @version $Revision: 1.2 $ $Date: 2008-04-08 09:59:17 $
  */
 public class LinkNodeDialog extends BaseDialog implements Evaluator {
     private JPanel pnlMain = null;
@@ -65,7 +66,7 @@ public class LinkNodeDialog extends BaseDialog implements Evaluator {
      * @param assoc
      * @param xorNode
      */
-    public LinkNodeDialog(Component owner, ch.ehi.umleditor.umlpresentation.Association assoc, PresentationNode xorNode) {
+    public LinkNodeDialog(Frame owner, ch.ehi.umleditor.umlpresentation.Association assoc, PresentationNode xorNode) {
         super(owner, true);
 		initialize();
 
