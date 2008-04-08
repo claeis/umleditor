@@ -26,6 +26,7 @@ import ch.ehi.interlis.metaobjects.MetaDataUseDefKind;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.*;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
@@ -53,7 +54,7 @@ import ch.ehi.umleditor.application.*;
  * name, attributes and methods.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.11 $ $Date: 2007-01-30 18:44:35 $
+ * @version $Revision: 1.12 $ $Date: 2008-04-08 09:58:25 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure");  //$NON-NLS-1$
@@ -196,6 +197,12 @@ protected void basicMoveBy(int dx, int dy) {
 				((PresentationRoleFigure)figure).getEndElement().equals(this.getModelElement())) {
 			// only move Roles of moved Node
 			((PresentationRoleFigure)figure).moveRelative(dx, dy);
+		}
+		
+		// XOR-Note
+		Iterator assocs = edge.iteratorSubject();
+		while (assocs.hasNext()) {
+			getClassDiagram().removeXorNote(assocs.next());
 		}
     }
 }

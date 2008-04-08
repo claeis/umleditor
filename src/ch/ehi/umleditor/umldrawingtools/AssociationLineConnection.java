@@ -42,7 +42,7 @@ import ch.softenvironment.util.*;
  * - the AssociationLineConnection is not added to a diagram itself.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.8 $ $Date: 2007-03-27 15:57:52 $
+ * @version $Revision: 1.9 $ $Date: 2008-04-08 09:58:25 $
  * @see #handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
@@ -221,7 +221,7 @@ protected final ch.ehi.uml1_4.foundation.core.Element getStartElement() {
                 classifier = xorEnd2.getNode();
             }
             
-            LinkNodeDialog dialog = new LinkNodeDialog(getClassDiagram(), linkView.getAssociation(), classifier);
+            LinkNodeDialog dialog = new LinkNodeDialog(LauncherView.getInstance() /*getClassDiagram()*/, linkView.getAssociation(), classifier);
             dialog.setVisible(true);
             if (dialog.isSaved()) {                               
                 if (dialog.isNAry()) {

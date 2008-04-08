@@ -37,7 +37,7 @@ import ch.softenvironment.view.*;
  * Drawing View for Class-Diagram's.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.24 $ $Date: 2007-04-17 15:50:42 $
+ * @version $Revision: 1.25 $ $Date: 2008-04-08 09:58:25 $
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
@@ -50,6 +50,40 @@ public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
 	private boolean showRoles = true;
 	private boolean showMultiplicity = false;
 	private boolean loading = false;
+	
+	private java.util.Map xorNotes = new java.util.HashMap();
+	/**
+	 * Create XOR-Note ONCE for all Participants only.
+	 * @param roleDef
+	 * @param position
+	 */
+	protected void addXorNote(RoleDef roleDef, java.awt.Dimension position) {
+		if (!xorNotes.containsKey(roleDef)) {
+			xorNotes.put(roleDef, position);
+		}
+	}
+	/**
+	 * Useful to force recalculation of the position of XOR-Note.
+	 * @param roleDefOrParticipant
+	 */
+	protected void removeXorNote(Object roleDefOrParticipant) {
+		RoleDef roleDef = null;
+		if (roleDefOrParticipant instanceof RoleDef) {
+			roleDef = ((RoleDef)roleDefOrParticipant);
+		} else if (roleDefOrParticipant instanceof Participant) {
+			roleDef = ((Participant)roleDefOrParticipant).getAssociation();
+		}
+		if ((roleDef != null) && xorNotes.containsKey(roleDef)) {
+			xorNotes.remove(roleDef);
+		}
+	}
+	protected java.awt.Dimension getXorNote(RoleDef roleDef) {
+		if (xorNotes.containsKey(roleDef)) {
+			return (java.awt.Dimension)xorNotes.get(roleDef);
+		} else {
+			return null;
+		}
+	}
 	
 	/*
 	 * flag

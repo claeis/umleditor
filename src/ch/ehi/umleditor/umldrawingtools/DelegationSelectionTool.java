@@ -36,7 +36,7 @@ import CH.ifa.draw.figures.*;
  * TextFigure.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.10 $ $Date: 2006-06-29 22:16:01 $
+ * @version $Revision: 1.11 $ $Date: 2008-04-08 09:58:25 $
  */
 public class DelegationSelectionTool extends CustomSelectionTool implements java.awt.event.ActionListener {
 	// TextTool which will be invoked at the top level container
@@ -177,6 +177,8 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 private int checkDragCase(ConnectionFigure edgeFigure, int x, int y) {
 	wayPointIndex = ((EdgeFigure)edgeFigure).getWayPointIndex(x, y);
 	if (wayPointIndex > 0) {
+		((EdgeFigure)edgeFigure).getClassDiagram().removeXorNote(((EdgeFigure)edgeFigure).getModelElement());
+//TODO trigger PresentationRoleFigure#updateFigure() to draw XOR-Note		
 		return MOVE_WAYPOINT;
 	} else if ((edgeFigure instanceof PresentationRoleFigure) ||
 				(edgeFigure instanceof GeneralizationLineConnection) ||

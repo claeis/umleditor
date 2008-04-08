@@ -36,7 +36,7 @@ import ch.softenvironment.view.CommonUserAccess;
  * Displayable edge between ClassFigure and LinkFigure.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.12 $ $Date: 2008-04-05 16:28:49 $
+ * @version $Revision: 1.13 $ $Date: 2008-04-08 09:58:25 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
 	// NLS Constants
@@ -276,23 +276,29 @@ public void draw(Graphics g) {
             ClassFigure xorStartNode = (ClassFigure)getClassDiagram().findFigure(participant.getAssociation().getParticipant());
             ClassFigure xorEndNode = (ClassFigure)getClassDiagram().findFigure(participant.getParticipant());                                                          
                   
+            // AssociationEnd
             int xorStartEdgeX = xorStartNode.center().x;
             int xorStartEdgeY = xorStartNode.center().y;
+            // XOR-Participant
             int xorEndEdgeX = xorEndNode.center().x;
             int xorEndEdgeY = xorEndNode.center().y;
             
             WayPoint startWayPoint = null;
-            Figure fig = getClassDiagram().findFigure(participant.getAssociation());
-            if (fig != null) {
-            	java.util.Iterator iterator = ((PresentationRoleFigure)fig).getEdge().iteratorWayPoint();
-            	if (iterator.hasNext()) {
-            		startWayPoint = (WayPoint)iterator.next(); // take closest to LinkNode
-                	xorStartEdgeX = startWayPoint.getEast();
-                	xorStartEdgeY = startWayPoint.getSouth();
-                }
+            Figure roleDefFig = getClassDiagram().findFigure(participant.getAssociation());
+            if (roleDefFig == null) {
+            	getClassDiagram().removeXorNote(participant.getAssociation());
+            	return;
+            }     
+                    	
+        	java.util.Iterator iterator = ((PresentationRoleFigure)roleDefFig).getEdge().iteratorWayPoint();
+        	if (iterator.hasNext()) {
+        		startWayPoint = (WayPoint)iterator.next(); // take closest to LinkNode
+            	xorStartEdgeX = startWayPoint.getEast();
+            	xorStartEdgeY = startWayPoint.getSouth();                	
             }
+        	
             WayPoint endWayPoint = null;
-            java.util.Iterator iterator = getEdge().iteratorWayPoint();
+            iterator = getEdge().iteratorWayPoint();
             if (iterator.hasNext()) {
             	endWayPoint = (WayPoint)iterator.next();  // take closest to LinkNode
             	xorEndEdgeX = endWayPoint.getEast();
@@ -300,13 +306,19 @@ public void draw(Graphics g) {
             }
             
             // XOR-Note            
-            int noteX = (xorStartEdgeX + xorEndEdgeX) / 2; //(xorStartNode.getNode().getEast() + xorEndNode.getNode().getEast()) /2;
-            int noteY = (xorStartEdgeY + xorEndEdgeY) / 2 - 20; //(xorStartNode.getNode().getSouth() + xorEndNode.getNode().getSouth()) /2 - 20;
-            g.drawString("{XOR(ILI)}", noteX, noteY);
+            int noteX = (xorStartEdgeX + xorEndEdgeX) / 2;
+            int noteY = (xorStartEdgeY + xorEndEdgeY) / 2 - 20;
+            java.awt.Dimension dim = getClassDiagram().getXorNote(participant.getAssociation());
+        	if (dim == null) {
+        		getClassDiagram().addXorNote(participant.getAssociation(), new java.awt.Dimension(noteX, noteY));        		
+        	} else {
+        		noteX = dim.width;
+        		noteY = dim.height;
+        	}        	
             
             // add Text-offset
-            noteX = noteX + 20;
-            noteY = noteY - 10;
+            noteX = noteX + 10;
+            noteY = noteY - 5;
             // NoteAnchor: original PresentationRole-edge to XOR-Note    
             if (startWayPoint == null) {
 	            NoteAnchorLineConnection.drawNoteLine(g,
@@ -329,7 +341,10 @@ public void draw(Graphics g) {
 	        	NoteAnchorLineConnection.drawNoteLine(g,	        			
 	        		endWayPoint.getEast(), endWayPoint.getSouth(),
                     noteX, noteY);
-	        }    
+	        }   
+	        
+	        // Overwrite line in text
+	        g.drawString("{XOR}", noteX - 10, noteY + 5);
         }
 //    }
 	} catch(Throwable e) {
