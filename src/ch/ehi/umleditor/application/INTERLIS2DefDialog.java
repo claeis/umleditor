@@ -19,6 +19,8 @@ package ch.ehi.umleditor.application;
  */
 import ch.ehi.basics.view.*;
 import javax.swing.*;
+
+import java.awt.Point;
 import java.util.*;
 
 import ch.ehi.interlis.modeltopicclass.*;
@@ -27,7 +29,7 @@ import ch.softenvironment.view.*;
  * User Interface for a INTERLIS2Def.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
- * @version $Revision: 1.4 $ $Date: 2005-11-20 16:43:58 $
+ * @version $Revision: 1.5 $ $Date: 2008-04-08 08:05:02 $
  */
 public class INTERLIS2DefDialog extends BaseDialog implements ListMenuChoice {
 	// ModelElement
@@ -580,13 +582,16 @@ private javax.swing.JButton getBtnOk() {
 private javax.swing.JDialog getDlgFilename() {
 	if (ivjDlgFilename == null) {
 		try {
-			ivjDlgFilename = new javax.swing.JDialog(this);
+			ivjDlgFilename = new javax.swing.JDialog(this, true);
 			ivjDlgFilename.setName("DlgFilename");
 			ivjDlgFilename.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			ivjDlgFilename.setBounds(124, 215, 488, 148);
 			ivjDlgFilename.setTitle(resINTERLIS2DefDialog.getString("DlgFilename_title"));
 			getDlgFilename().setContentPane(getJDialogContentPane());
 			// user code begin {1}
+			// @see BaseDialog#setRelativeLocation()
+			ivjDlgFilename.setLocation(new Point(this.getX() + BaseFrame.X_CHILD_OFFSET,
+						this.getY() + BaseFrame.Y_CHILD_OFFSET));		
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
