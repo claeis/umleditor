@@ -1,7 +1,7 @@
 // Copyright (c) 2002, Eisenhut Informatik
 // All rights reserved.
-// $Date: 2005-02-21 15:53:06 $
-// $Revision: 1.7 $
+// $Date: 2008-07-30 15:53:11 $
+// $Revision: 1.8 $
 //
 
 // -beg- preserve=no 3CEE891B03C7 package "HtmlWriter"
@@ -51,7 +51,7 @@ public class HtmlWriter
   // used in STRUCTURE pass to suppress links to element definitions
   private boolean linkElements;  
 
-  private ch.interlis.ili2c.generator.IndentPrintWriter clsFile=null;
+  private ch.ehi.basics.io.IndentPrintWriter clsFile=null;
   private java.io.Writer out=null;
   //hashmap<object, string>
   // indexMap is setup in CONTENTS pass
@@ -653,7 +653,7 @@ public class HtmlWriter
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=yes 3CEE891B03C7 detail_end "HtmlWriter"
-  private String getAttrType(Attribute attr)
+  public static String getAttrType(Attribute attr)
   {
     String ret="";
     if((attr instanceof AttributeDef) && ((AttributeDef)attr).containsAttrType()){
@@ -661,6 +661,8 @@ public class HtmlWriter
       ch.ehi.interlis.attributes.DomainAttribute attrType=(ch.ehi.interlis.attributes.DomainAttribute)((AttributeDef)attr).getAttrType();
       if(attrType.containsDomainDef()){
         type=attrType.getDomainDef().getType();
+        ret=attrType.getDomainDef().getDefLangName();
+        return ret;
       }else if(attrType.containsDirect()){
         type=attrType.getDirect();
       }
@@ -674,7 +676,7 @@ public class HtmlWriter
 			ret=rsrc.getString("CTtypeNUMERIC");
         }
         if(num.containsUnitDef()){
-          ret=ret+"["+encodeString(num.getUnitDef().getDefLangName())+"]";
+          ret=ret+"["+num.getUnitDef().getDefLangName()+"]";
         }
       }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
         ret=rsrc.getString("CTtypeNUMERIC");
@@ -686,7 +688,7 @@ public class HtmlWriter
         ret=rsrc.getString("CTtypeVALIGNMENT");
       }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration){
         if(attrType.containsDomainDef()){
-          ret=encodeString(attrType.getDomainDef().getDefLangName());
+          ret=attrType.getDomainDef().getDefLangName();
         }else{
           ret=rsrc.getString("CTtypeENUM");
         }
