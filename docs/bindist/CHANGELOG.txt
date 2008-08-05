@@ -1,21 +1,116 @@
-Offene Fragen/Arbeiten
-----------------------------
-- Liste der Diagramme auf dem ein ModelElement dargestellt wird
-- selectTarget, selectOwner auf RoleDef-NavPopup 
-- Kardinalitaet von Attributen in Liste auf Klassendialog anzeigen
-- Nichts, gem. Diagramm, ILIPATH, ILIMODEL, ILITOPIC oder UMLPACKAGE bei Klasse darstellen
-- API: generic filters aus Launcher nach basics verschieben
-- FINAL bei Enumeration
-- INTERLIS ohne Kommentar exportieren
-- featurecatalog: special section that lists deprectated elements inl. links to replacements
-- Bug: Diagramm wird nicht richtig nachgeführt (JRE 1.4.1-b21 "ATi Mobility M4" Typ="M4 AGP4x" DAC="internal 350Mhz" 16MByte; Treiberanbieter ATi; Version 6.13.10.5004; Datum 10. Jan 2002; at2mtai.sys)
-- Bug: s.o. (JRE="SE 1.4.1_01" Grafikkarte="ATI Mobility M6" TreiberVersion="5.13.1.3207" Auflösung="1024x768, 32bit Farben" OS="Windows 2000 Service Pack 2" Rechner="Fujits Siemens LifeBook E-Series")
-- Bug: Für Ili-Kompositions- und Referenzattribute kann die Reihenfolge in der Klassendefinition nicht spezifiziert werden
-- Bug: Reihenfolge der Modelle ist bei der Funktion "Modell prüfen" nicht korrekt
-- Bug: nach dem Umhängen eine Assoziation wird in anderen OFFENEN Diagrammen, die diese Assoziation enthalten, das Diagramm nicht automatisch korrigiert (Modell und geschlossene Diagramme sind aber korrekt)
-- Bug: Popup-Item "Ganzes" im Diagramm wird nicht nach geführt, wenn über Dialog geändert
-- Bug: Fehler "java.io.IOException: unexpected Element" beim Oeffnen einer uml-Datei, die mit einer neueren Version des Uml-Editors erstellt wurde 
-- Bug iliexp: bei einem französischen Modell wird trotzdem de als Sprache exportiert
+UML-Editor 3.1.1 (2008-07-30) 
+----------------------------------
+- ili2c-3.6.7
+- XOR drawing improved
+
+UML-Editor 3.1.0 (2007-12-28) 
+----------------------------------
+- iliexp: added RoleDef XOR
+- iliimp: added RoleDef XOR
+- iliimp: added RoleDef RESTRICTIONS
+- iliimp: added EXTERNAL
+- RoleDef dialog added XOR
+
+UML-Editor 3.0.2 (2007-12-19) 
+----------------------------------
+- bug iliimp: ignored ilidoc comments for attributes
+- bug iliexp: missing ';' at end of TopicDef OID AS
+- sf1845385: incorrect redraw if scaled
+- Bug: active edit box jumped to middle of upper drawing border, due to new layout triggered by a revalidate() call from LauncherView.setStatus()
+
+UML-Editor 3.0.1 (2006-08-11) BETA
+----------------------------------
+- INTERLIS-Compiler 3.1.2
+- bug: plain text instead of links to model elements in logview
+- sf1518703: renamed menu item in LogView ("Effacer le journal" au lieu de "Supprimer")
+
+UML-Editor 3.0.0 (2006-07-07) BETA
+----------------------------------
+- FILE FORMAT CHANGED: 
+-   This version can read old file format, but may generate an incorrect ili.
+-   Old versions (>=2.4.0) can read new file format with loss and may generate an incorrect ili.
+- INTERLIS-Compiler 2.6.0
+- repository adapted to ili2.3
+- repository new per class setting "show constraints"
+- repository new per class setting "show name prefix"
+- ModelDef dialog adapted to ili2.3
+- Date/Time/DateTime panel added 
+- AttributeDef/DomainDef dialogs convert StructuredUnitType and BasketType (removed in ili2.3) to Synatx
+- AttributeDef/DomainDef dialogs convert (CoordinateType->dim instanceof StructuredUnitType) (removed in ili2.3) to Synatx
+- iliexp: ModelDef adapted to ili2.3
+- iliexp: Date/Time/DateTime added 
+- iliexp: semicolon at end of enum element instead of in front
+- iliexp: sort AssociationDef's without name according to concatenated rolenames
+- iliexp: superfluous newlines removed
+- iliimp: read ilidoc comments
+- iliimp: autoconfig ilimodels from current directory and ${umleditor}/ilimodels
+- iliimp: move ilc import to "import group" menu item
+- iliimp: add dependencies to keep ordering as in imported ili-file
+- datatype TEXT adapted to ili2.3
+- Label ClassDef::Attributes::Cardinality externalized 
+
+UML-Editor 2.7.0 (2006-01-23)
+-----------------------------
+- doublclick on NavTree opens Specification of selected Element
+- new NavTree PopupMenu: Diagram-References
+- new PopupMenu: Select Target; Select Owner in NavTree
+- Bug: removing last attribute from an Association suppresses AttributeFigure
+- Bug: Popup-Checkboxes check state in AssociationEnd (aggregated, composite)
+- Bug: NavTree remains as is after ClassDef removal
+- Bug: drag and drop of dependeny didn't work
+- Bug: allow drag and drop of dependency between TopicDef and non-TopicDef
+- Bug: sebase.jar was not up to date
+- Bug: if cardinality or type of attributes are enabled/disabled on a diagram, the enum elements on domaindefs on that diagram disappear
+
+UML-Editor 2.6.0 (2005-12-06)
+-----------------------------
+- display all kind of definitions as class with a stereotype (e.g. domaindefs)
+- INTERLIS-Compiler 2.6.3
+- Bug: entering of cardinality '*' is not interpreted as '0..*'
+
+UML-Editor 2.5.1 (2005-01-27)
+-----------------------------
+- Bug: deletion of a unitdef doesn't cleanup references from numericaltype's
+- Bug: wrong update of row in table, after "Details..." on an attribute on classdef/associationdef dialog
+- Bug: ili2c called with wrong ordering of ili-files
+
+UML-Editor 2.5.0 (2005-01-17)
+-----------------------------
+- FILE FORMAT CHANGED: 
+-   iliAttributeIdx added to RoleDef. 
+-   This version can read old file format. 
+-   Old versions (>=2.4.0) can read new file format with loss and will generate an incorrect ili.
+-   Old versions (<2.4.0) can't read new file format ("unexpected Element <IliAttributeIdx>")
+- INTERLIS-Compiler 2.6.0
+- iliimp: supports now datatype BASKET
+- Bug fc: domains get numbered in report w/o section number
+- Bug: Closing Application by Alt-F4 (Closing Icon) does not hide Launcher any more if last changes not saved yet.
+- show cardinality of attributes on classdef/associationdef dialog
+- iliexp: generate struct or ref attr depending on host/referenced type
+- allow to reorder struct/ref attr on host classdef/associationdef dialog
+- add notice in readme about license
+- iliexp: check cardinality with ref/struct attributes
+- iliimp: keep attribute index of ref/struct attributes
+- iliimp: keep cardinality of ref/struct attributes
+
+UML-Editor 2.4.0 (2004-09-03)
+-----------------------------
+- preliminary GML 3.2 application schema generator added
+- roseimp: imports also operations
+- error processing in uml-file decoder improved; skips unexpected elements
+- Bug iliexp: doesn't export datatype BASKET
+- Bug: class cast exception if moved element is a diagram
+
+UML-Editor 2.3.1 (2004-06-23)
+-----------------------------
+- fc: list EnumElements of attributes in feature catalog
+- nls_fr: changed wrong menu item text "Supprimer du diagramme" in logview
+- Bug iliimp: "IllegalStateException: no ownedElement with given name" if predefined model INTERLIS moved by user
+- Bug: removing of the last sub-element was incomplete; created () when exported to ili
+- Bug: stack overflow because of missing resource
+- Bug: didn't use default locale in some cases
+- Bug: select and change Operation-Name causes wrong renaming (inlcuding visbility-character)
+
 
 UML-Editor 2.3.0 (2004-06-14)
 -----------------------------

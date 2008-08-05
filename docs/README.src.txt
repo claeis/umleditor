@@ -1,5 +1,8 @@
 UML-Editor - The UML/INTERLIS Editor
 
+License
+The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
+
 System Configuration
 In order to compile the UML Editor, a JAVA software development kit (JDK) version 1.4.1 or a more recent version must be installed on your system.
 A free version of the JAVA software development kit (JDK) is available at the website http://java.sun.com/j2se/.

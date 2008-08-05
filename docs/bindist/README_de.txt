@@ -1,5 +1,8 @@
 UML-Editor - Der UML-INTERLIS-Editor
 
+Lizenz
+Der UML-Editor ist lizensiert unter der LGPL (Lesser GNU Public License).
+
 System Anforderungen
 Um die aktuelle Version des UML-Editors auszuführen, muss die JAVA-Laufzeitumgebung (JRE) Version 1.4.1 oder neuer auf Ihrem System installiert sein.
 Die JAVA-Laufzeitumgebung (JRE) können Sie auf der Website http://www.java.com/ gratis beziehen.
