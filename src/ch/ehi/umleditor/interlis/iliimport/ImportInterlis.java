@@ -75,6 +75,10 @@ public class ImportInterlis
 	Configuration config;
 	try {
 		config = ch.interlis.ili2c.ModelScan.getConfigWithFiles(modeldirv,filev);
+		if(config==null){
+			editor.log(convert.getFuncDesc(),"failed");
+			return;
+		}
 	} catch (Ili2cException e) {
 		editor.log(convert.getFuncDesc(),"failed");
 		return;
