@@ -451,7 +451,6 @@ public class TransferFromIli2cMetamodel
   }
   private void visitAttribute(AttributeDef attrib,int attrIdx)
   {
-    //System.out.println(attrib.getName());
     Type btype=attrib.getDomain();
     if(btype instanceof CompositionType){
         // StructureAttribute
@@ -535,6 +534,7 @@ public class TransferFromIli2cMetamodel
     attrdef.setAbstract(attrib.isAbstract());
     attrdef.setPropFinal(attrib.isFinal());
     attrdef.setPropExtended(attrib.getExtending()!=null);
+    attrdef.setPropTransient(attrib.isTransient());
     
 	// documentation
 	String ilidoc=attrib.getDocumentation();

@@ -1100,6 +1100,10 @@ public class TransferFromUmlMetamodel
       out.write((propc==0?"(":",")+"EXTENDED");
       propc++;
     }
+    if(def.isPropTransient()){
+        out.write((propc==0?"(":",")+"TRANSIENT");
+        propc++;
+      }
     if(propc>0){
       out.write(") ");
     }

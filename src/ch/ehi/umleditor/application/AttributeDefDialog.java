@@ -48,6 +48,7 @@ public class AttributeDefDialog extends BaseDialog {
 	private JButton ivjBtnApply = null;
 	private JCheckBox ivjChxAbstract = null;
 	private JCheckBox ivjChxFinal = null;
+	private JCheckBox ivjChxTransient = null;
 	private JPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private JLabel ivjLblType = null;
@@ -533,6 +534,23 @@ private javax.swing.JCheckBox getChxFinal() {
 	}
 	return ivjChxFinal;
 }
+private javax.swing.JCheckBox getChxTransient() {
+	if (ivjChxTransient == null) {
+		try {
+			ivjChxTransient = new javax.swing.JCheckBox();
+			ivjChxTransient.setName("ChxTransient");
+			ivjChxTransient.setText(resAttributeDefDialog.getString("ChxTransient_text"));
+			ivjChxTransient.setBounds(165, 13, 140, 22);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjChxTransient;
+}
 /**
  * Return the LblCardinality property value.
  * @return javax.swing.JLabel
@@ -665,6 +683,7 @@ private javax.swing.JPanel getPnlDetail() {
 			getPnlDetail().add(getChxAbstract(), getChxAbstract().getName());
 			getPnlDetail().add(getChxExtended(), getChxExtended().getName());
 			getPnlDetail().add(getChxFinal(), getChxFinal().getName());
+			getPnlDetail().add(getChxTransient(), getChxTransient().getName());
 			getPnlDetail().add(getCbxCardinality(), getCbxCardinality().getName());
 			getPnlDetail().add(getLblCardinality(), getLblCardinality().getName());
 			// user code begin {1}
@@ -1112,6 +1131,7 @@ protected boolean save() {
 	attributeDef.setAbstract(getChxAbstract().isSelected());
 	attributeDef.setPropExtended(getChxExtended().isSelected());
 	attributeDef.setPropFinal(getChxFinal().isSelected());
+	attributeDef.setPropTransient(getChxTransient().isSelected());
 	attributeDef.setMultiplicity(MultiplicityConverter.createMultiplicity((String)getCbxCardinality().getSelectedItem()));
 
 	// page Constraints
@@ -1235,6 +1255,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(attributeDef.isAbstract());
 	getChxExtended().setSelected(attributeDef.isPropExtended());
 	getChxFinal().setSelected(attributeDef.isPropFinal());
+	getChxTransient().setSelected(attributeDef.isPropTransient());
 	getCbxCardinality().setSelectedItem(MultiplicityConverter.getRange(attributeDef.getMultiplicity()));
 
 	// page Constraints
