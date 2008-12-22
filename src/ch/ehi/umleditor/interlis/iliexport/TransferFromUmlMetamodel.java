@@ -1372,11 +1372,14 @@ public class TransferFromUmlMetamodel
       }else if(classtype.getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE){
         out.write("STRUCTURE");
       }
-      String sep=" RESTRICTED TO ";
       Iterator restrictioni=classtype.iteratorRestrictedTo();
-      while(restrictioni.hasNext()){
-        out.write(sep+classRef(owner,(AbstractClassDef)restrictioni.next()));
-        sep=", ";
+      if(restrictioni.hasNext()){
+          String sep=" RESTRICTION ( ";
+          while(restrictioni.hasNext()){
+              out.write(sep+classRef(owner,(AbstractClassDef)restrictioni.next()));
+              sep="; ";
+          }
+          out.write(" )");
       }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration){
         visitEnumeration((ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)def);
@@ -2001,6 +2004,16 @@ public class TransferFromUmlMetamodel
       while(dimi.hasNext()){
         addNumericalTypeCondition(children,ts,def,(NumericalType)dimi.next());
       }
+    }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.ClassType){
+        ch.ehi.interlis.domainsandconstants.basetypes.ClassType classtype=(ch.ehi.interlis.domainsandconstants.basetypes.ClassType)type;
+        Iterator restrictioni=classtype.iteratorRestrictedTo();
+        if(restrictioni.hasNext()){
+            while(restrictioni.hasNext()){
+            	AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
+                ts.addcond(supplier,def);
+            }
+        }
+    	
     }else if(type instanceof ch.ehi.interlis.domainsandconstants.linetypes.LineType){
       ch.ehi.interlis.domainsandconstants.linetypes.LineType ltype=(ch.ehi.interlis.domainsandconstants.linetypes.LineType)type;
       if(ltype.containsLineForm()){
