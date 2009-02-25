@@ -173,7 +173,7 @@ public class TransferFromUmlMetamodel
       // remove current from todo-list
       todo.remove(0);
     }
-    if(runIli2c){
+    if(errc==0 && runIli2c){
       //MyErrorListener el=new MyErrorListener();
       // build compiler config file
       	config.clearBoidEntry();
