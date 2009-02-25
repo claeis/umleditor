@@ -67,6 +67,7 @@ import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import java.io.*;
 import java.util.Iterator;
 import ch.ehi.basics.tools.TopoSort;
@@ -384,7 +385,7 @@ public class TransferFromUmlMetamodel
     if(runIli2c){
     	model2file.put(modelName,currentFile);
     }
-    out.write("MODEL "+modelName+" ("+language+")");
+    out.write("MODEL "+visitIliName(def,modelName)+" ("+language+")");
     // issuerURI
     newline();
     String issuerURI=mapNls(def.getIssuerURI());
@@ -512,7 +513,7 @@ public class TransferFromUmlMetamodel
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.TopicDefKind.VIEW){
       out.write("VIEW ");
     }
-    out.write("TOPIC "+def.getName().getValue(language));
+    out.write("TOPIC "+visitIliName(def,def.getName().getValue(language)));
 
     int propc=0;
     if(def.isAbstract()){
@@ -675,7 +676,7 @@ public class TransferFromUmlMetamodel
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
       out.write(getIndent());
-      out.write(def.getName().getValue(language));
+      out.write(visitIliName(def,def.getName().getValue(language)));
       out.write(" : ");
       out.write(classRef(def,def.getStructure()));
       out.write(";");newline();
@@ -698,7 +699,7 @@ public class TransferFromUmlMetamodel
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     String name=def.getName().getValue(language);
-    out.write(getIndent()+name);
+    out.write(getIndent()+visitIliName(def,name));
 
     int propc=0;
     if(def.isAbstract()){
@@ -794,7 +795,7 @@ public class TransferFromUmlMetamodel
     }else{
       out.write("CLASS ");
     }
-    out.write(def.getName().getValue(language));
+    out.write(visitIliName(def,def.getName().getValue(language)));
 
     int propc=0;
     if(def.isAbstract()){
@@ -896,7 +897,7 @@ public class TransferFromUmlMetamodel
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
     out.write("ASSOCIATION ");
-    out.write(def.getName().getValue(language));
+    out.write(visitIliName(def,def.getName().getValue(language)));
 
     int propc=0;
     if(def.isAbstract()){
@@ -1086,7 +1087,7 @@ public class TransferFromUmlMetamodel
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
-    out.write(def.getName().getValue(language)+" ");
+    out.write(visitIliName(def,def.getName().getValue(language))+" ");
     int propc=0;
     if(def.isAbstract()){
       out.write((propc==0?"(":",")+"ABSTRACT");
@@ -1172,7 +1173,7 @@ public class TransferFromUmlMetamodel
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
       out.write(getIndent());
-      out.write(oppend.getName().getValue(language)+" ");
+      out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
 
       int propc=0;
       if(oppend.isAbstract()){
@@ -1247,7 +1248,7 @@ public class TransferFromUmlMetamodel
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
       out.write(getIndent());
-      out.write(oppend.getName().getValue(language)+" ");
+      out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
 
       int propc=0;
       if(oppend.isAbstract()){
@@ -1302,7 +1303,7 @@ public class TransferFromUmlMetamodel
     return;
     }
 
-  public void visitType(ModelElement owner, Type def)
+  public void visitType(AbstractModelElement owner, Type def)
       throws java.io.IOException
     {
     if(def instanceof Text){
@@ -1382,20 +1383,20 @@ public class TransferFromUmlMetamodel
           out.write(" )");
       }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration){
-        visitEnumeration((ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)def);
+        visitEnumeration(owner,(ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)def);
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
         visitNumericalType(owner,(ch.ehi.interlis.domainsandconstants.basetypes.NumericalType)def);
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateType){
 		ch.ehi.interlis.domainsandconstants.basetypes.DateType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateType)def;
 		out.write("FORMAT INTERLIS.XMLDate ");
       	if(isDateNull(type.getMin())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEminvalRequired"));
       	}else{
     		out.write(visitDate(type.getMin()));
       	}
 		out.write(" .. ");
       	if(isDateNull(type.getMax())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEmaxvalRequired"));
       	}else{
     		out.write(visitDate(type.getMax()));
       	}
@@ -1404,13 +1405,13 @@ public class TransferFromUmlMetamodel
 		// XMLDateTime "2000-01-01T00:00:00.000" .. "2005-12-31T23:59:59.999"
 		out.write("FORMAT INTERLIS.XMLDateTime ");
       	if(isDateTimeNull(type.getMin())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEminvalRequired"));
       	}else{
     		out.write(visitDateTime(type.getMin()));
       	}
 		out.write(" .. ");
       	if(isDateTimeNull(type.getMax())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEmaxvalRequired"));
       	}else{
     		out.write(visitDateTime(type.getMax()));
       	}
@@ -1418,13 +1419,13 @@ public class TransferFromUmlMetamodel
 		ch.ehi.interlis.domainsandconstants.basetypes.TimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.TimeType)def;
 		out.write("FORMAT INTERLIS.XMLTime ");
       	if(isTimeNull(type.getMin())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEminvalRequired"));
       	}else{
       		out.write(visitTime(type.getMin()));
       	}
 		out.write(" .. ");
       	if(isTimeNull(type.getMax())){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+			logErrorMsg(owner,rsrc.getString("CEmaxvalRequired"));
       	}else{
       		out.write(visitTime(type.getMax()));
       	}
@@ -1495,7 +1496,7 @@ public class TransferFromUmlMetamodel
     return modelElementRef(source,ref,null);
     }
 
-  public void visitEnumeration(Enumeration def)
+  public void visitEnumeration(AbstractModelElement owner,Enumeration def)
       throws java.io.IOException
     {
     out.write("("); newline();
@@ -1504,9 +1505,9 @@ public class TransferFromUmlMetamodel
     while(eleIt.hasNext()){
       EnumElement ele=(EnumElement)eleIt.next();
       visitDocumentation(ele.getDocumentation());
-      out.write(getIndent()+ele.getName().getValue(language));
+      out.write(getIndent()+visitIliName(owner,ele.getName().getValue(language)));
       if(ele.containsChild()){
-        visitEnumeration(ele.getChild());
+        visitEnumeration(owner,ele.getChild());
       }
       if(eleIt.hasNext()){
 		out.write(",");
@@ -1518,20 +1519,20 @@ public class TransferFromUmlMetamodel
     return;
     }
 
-  public void visitNumericalType(ModelElement owner, NumericalType def)
+  public void visitNumericalType(AbstractModelElement owner, NumericalType def)
       throws java.io.IOException
     {
     if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType){
       ch.ehi.interlis.domainsandconstants.basetypes.NumericType ntype=(ch.ehi.interlis.domainsandconstants.basetypes.NumericType)def;
       if(ntype.isRangeDefined()){
       	if(ntype.getMinDec()==null){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmindecRequired"));
+			logErrorMsg(owner,rsrc.getString("CEmindecRequired"));
       	}else{
 			out.write(visitIliDim(ntype.getMinDec()));
       	}
         out.write(" .. ");
 		if(ntype.getMaxDec()==null){
-			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxdecRequired"));
+			logErrorMsg(owner,rsrc.getString("CEmaxdecRequired"));
 		}else{
 	        out.write(visitIliDim(ntype.getMaxDec()));
 		}
@@ -1656,7 +1657,7 @@ public class TransferFromUmlMetamodel
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     out.write(getIndent());
-    out.write(def.getName().getValue(language)+" ");
+    out.write(visitIliName(def,def.getName().getValue(language))+" ");
 
     int propc=0;
     if(def.isAbstract()){
@@ -2230,7 +2231,7 @@ public class TransferFromUmlMetamodel
   /** logs an error message for a given element
    *
    */
-  private void logErrorMsg(AbstractEditorElement def,String msg){
+  private void logErrorMsg(AbstractModelElement def,String msg){
     ch.ehi.umleditor.application.LauncherView.getInstance().log(def.getOid(),getFuncDesc(),msg);
     errc++;
   }
@@ -2401,5 +2402,14 @@ public class TransferFromUmlMetamodel
     		this.object=object;
     	}
     }
+    private String visitIliName(AbstractModelElement def,String name)
+    throws java.io.IOException
+    {
+    	if(!name.matches("[a-zA-Z][a-zA-Z_0-9]*")){
+    		logErrorMsg(def,ch.ehi.basics.i18n.MessageFormat.format(rsrc,"CEillegalIliName",name));
+    	}
+    	return name;
+    }
+
 }
 
