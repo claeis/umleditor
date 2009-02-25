@@ -1141,7 +1141,7 @@ public class TransferFromUmlMetamodel
         if(isMandatory){
           out.write("MANDATORY ");
         }
-        visitType(def.getOwner(),attrType.getDirect());
+        visitType(def,attrType.getDirect());
       }
     }else{
         if(isMandatory){
