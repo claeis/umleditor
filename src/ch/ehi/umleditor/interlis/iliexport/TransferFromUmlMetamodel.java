@@ -1388,22 +1388,46 @@ public class TransferFromUmlMetamodel
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateType){
 		ch.ehi.interlis.domainsandconstants.basetypes.DateType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateType)def;
 		out.write("FORMAT INTERLIS.XMLDate ");
-		out.write(visitDate(type.getMin()));
+      	if(isDateNull(type.getMin())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+      	}else{
+    		out.write(visitDate(type.getMin()));
+      	}
 		out.write(" .. ");
-		out.write(visitDate(type.getMax()));
+      	if(isDateNull(type.getMax())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+      	}else{
+    		out.write(visitDate(type.getMax()));
+      	}
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType){
 		ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType)def;
 		// XMLDateTime "2000-01-01T00:00:00.000" .. "2005-12-31T23:59:59.999"
 		out.write("FORMAT INTERLIS.XMLDateTime ");
-		out.write(visitDateTime(type.getMin()));
+      	if(isDateTimeNull(type.getMin())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+      	}else{
+    		out.write(visitDateTime(type.getMin()));
+      	}
 		out.write(" .. ");
-		out.write(visitDateTime(type.getMax()));
+      	if(isDateTimeNull(type.getMax())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+      	}else{
+    		out.write(visitDateTime(type.getMax()));
+      	}
 	}else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.TimeType){
 		ch.ehi.interlis.domainsandconstants.basetypes.TimeType type=(ch.ehi.interlis.domainsandconstants.basetypes.TimeType)def;
 		out.write("FORMAT INTERLIS.XMLTime ");
-		out.write(visitTime(type.getMin()));
+      	if(isTimeNull(type.getMin())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEminvalRequired"));
+      	}else{
+      		out.write(visitTime(type.getMin()));
+      	}
 		out.write(" .. ");
-		out.write(visitTime(type.getMax()));
+      	if(isTimeNull(type.getMax())){
+			logErrorMsg((AbstractEditorElement)owner,rsrc.getString("CEmaxvalRequired"));
+      	}else{
+      		out.write(visitTime(type.getMax()));
+      	}
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
       out.write("COORD");
@@ -1566,6 +1590,11 @@ public class TransferFromUmlMetamodel
 		ret.append("\"");
 		return ret.toString();
 	}
+	public boolean isDateNull(ch.ehi.interlis.domainsandconstants.basetypes.DateValue def)
+	{
+		if(def!=null) return false;
+		return true;
+	}
 	public String visitDateTime(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeValue def)
 	{
 		StringBuffer ret=new StringBuffer();
@@ -1584,6 +1613,11 @@ public class TransferFromUmlMetamodel
 		ret.append("\"");
 		return ret.toString();
 	}
+	public boolean isDateTimeNull(ch.ehi.interlis.domainsandconstants.basetypes.DateTimeValue def)
+	{
+		if(def!=null) return false;
+		return true;
+	}
 	public String visitTime(ch.ehi.interlis.domainsandconstants.basetypes.TimeValue def)
 	{
 		StringBuffer ret=new StringBuffer();
@@ -1595,6 +1629,11 @@ public class TransferFromUmlMetamodel
 		ret.append(Float.toString(def.getSeconds()));
 		ret.append("\"");
 		return ret.toString();
+	}
+	public boolean isTimeNull(ch.ehi.interlis.domainsandconstants.basetypes.TimeValue def)
+	{
+		if(def!=null) return false;
+		return true;
 	}
   public String visitIliDim(IliDim def)
     {
