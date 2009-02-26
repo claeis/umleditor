@@ -1,9 +1,10 @@
-UML-Editor 3.1.4 (2009-02-xx) 
+UML-Editor 3.1.4 (2009-02-26) 
 ----------------------------------
-- iliexp: link missing min/max errmsg to AttributeDef
+- iliexp: link "missing min/max" errmsg to AttributeDef (instead of ClassDef)
 - bug iliexp: NullPointerException if no min/max (date/time/dateTime)
 - iliexp: check if names adhere to ili rules "[a-zA-Z][a-zA-Z_0-9]*"
-- iliexp: run ili-compiler only if no errors found by umleditor
+- iliexp: run ili-compiler only if no errors found in model by umleditor
+- ili2c-4.1.1
 
 UML-Editor 3.1.3 (2008-12-22) 
 ----------------------------------
