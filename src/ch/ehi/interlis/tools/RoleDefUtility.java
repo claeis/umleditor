@@ -35,7 +35,14 @@ public class RoleDefUtility {
 			return false;
 		}
 		RoleDef oppend=getOppEnd(role);
-		Classifier thisClass=role.getParticipant();
+		if(oppend==null){
+			// association incomplete
+			return false; 
+		}
+		if(!oppend.containsParticipant()){
+			// association incomplete
+			return false; 
+		}
 		Classifier oppendClass=oppend.getParticipant();
 		if(role.getAggregation()==AggregationKind.COMPOSITE 
 				&& oppendClass instanceof ClassDef 
@@ -53,7 +60,19 @@ public class RoleDefUtility {
 			return false;
 		}
 		RoleDef oppend=getOppEnd(role);
+		if(oppend==null){
+			// association incomplete
+			return false; 
+		}
+		if(!role.containsParticipant()){
+			// association incomplete
+			return false; 
+		}
 		Classifier thisClass=role.getParticipant();
+		if(!oppend.containsParticipant()){
+			// association incomplete
+			return false; 
+		}
 		Classifier oppendClass=oppend.getParticipant();
 		if(role.getAggregation()==AggregationKind.NONE
 		&& thisClass instanceof ClassDef

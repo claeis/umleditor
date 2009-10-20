@@ -1,3 +1,8 @@
+UML-Editor 3.1.5 (2009-10-20) 
+----------------------------------
+- ili2c-4.2.0
+- iliexp: missleading errmsg "no participant attached" if association incomplete defined
+
 UML-Editor 3.1.4 (2009-02-26) 
 ----------------------------------
 - iliexp: link "missing min/max" errmsg to AttributeDef (instead of ClassDef)
