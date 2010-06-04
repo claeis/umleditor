@@ -3103,7 +3103,14 @@ public static void main(java.lang.String[] args) {
 		//Locale.setDefault(new Locale(settings.getLanguage(), settings.getCountry()));
 		//Tracer.getInstance().runtimeInfo("Locale might have changed to: " + java.util.Locale.getDefault().toString());
 		
-ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
+		// ce2010-06-04 distinguish use interface langauge and langugage of model-element-names
+		// use getSettings().getLanguage() for the user interface language
+		// use ch.ehi.basics.types.NlsString.getDefaultLanguage() for the language of model-element-names
+		//   (use of NlsString.getDefaultLanguage() is not fully correct, because the default language of a 
+		//   model-element depends on the containing ModelDef-Element and not an application global setting!)
+		
+		// initialize language of model-element-names to the language of the user interface
+		ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
 
@@ -3128,6 +3135,8 @@ ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 
 
 		instance.show();
+		EhiLogger.logState("default language of model-elementnames set to '"+ch.ehi.basics.types.NlsString.getDefaultLanguage()+"'");
+
 		instance.openInitialDiagram();
 
 		instance.setVisible(true);

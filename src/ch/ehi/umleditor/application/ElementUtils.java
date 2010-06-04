@@ -210,7 +210,7 @@ public static String mapNlsString(ch.ehi.basics.types.NlsString nlsString, Strin
  * Do not allow same name for different ModelElement's.
  */
 public static boolean trySetName(ModelElement modelElement, String newName) {
-	return trySetName(modelElement, newName, LauncherView.getSettings().getLanguage());
+	return trySetName(modelElement, newName, ch.ehi.basics.types.NlsString.getDefaultLanguage());
 }
 /**
  * Set the ModelElement.name if there is no name-conflict.

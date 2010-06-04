@@ -1,6 +1,7 @@
 UML-Editor 3.1.x (2010-06-xx) 
 ----------------------------------
 - uml file decoder: "Name" (NlsString) content was replaced by "DefLangName" 
+- seperate setting of model language from user interface language
 
 UML-Editor 3.1.5 (2009-10-20) 
 ----------------------------------
