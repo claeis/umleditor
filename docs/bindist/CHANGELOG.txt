@@ -1,3 +1,7 @@
+UML-Editor 3.1.x (2010-06-xx) 
+----------------------------------
+- uml file decoder: "Name" (NlsString) content was replaced by "DefLangName" 
+
 UML-Editor 3.1.5 (2009-10-20) 
 ----------------------------------
 - ili2c-4.2.0

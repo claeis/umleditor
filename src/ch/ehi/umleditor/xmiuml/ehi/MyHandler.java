@@ -164,7 +164,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
       if(!secondPass){
         ch.ehi.basics.types.NlsString old=(ch.ehi.basics.types.NlsString)actualObject;
         ch.ehi.basics.types.NlsString newstr=new ch.ehi.basics.types.NlsString(old,atts.getValue(1),atts.getValue(2));
+        actualObject=newstr;
         objMap.put(nlsStringID, newstr);
+        //EhiLogger.debug("nlsString "+atts.getValue(1)+" "+atts.getValue(2));
       }
     }
     else if(atts.getLength()>1)
@@ -185,7 +187,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
           if(secondPass){
             try{
               String value = content.toString();
-              if(currentObjObjectAdds.containsKey(currentElementTag)){
+              if(actualObject instanceof ch.ehi.uml1_4.implementation.AbstractModelElement && currentElementTag.equals("DefLangName")){
+            	  // skip derived property DefLangName
+              }else if(currentObjObjectAdds.containsKey(currentElementTag)){
                 // get object that this value references
                 if(!objMap.containsKey(value)){
                   if(!missingObjsTID.contains(value)){
