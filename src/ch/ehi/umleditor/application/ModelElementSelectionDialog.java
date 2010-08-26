@@ -185,22 +185,30 @@ private void fillList(ModelElement modelElement, java.lang.Class referenceClass)
 	java.util.Iterator iterator = set.iterator();
 	while (iterator.hasNext()) {
 		Object referencableObject = iterator.next();
-		java.util.Iterator iteratorDependency = modelElement.iteratorClientDependency();
-		boolean found = false;
-		while (!found && iteratorDependency.hasNext()) {
-			Dependency dependency = (Dependency)iteratorDependency.next();
-			java.util.Iterator iteratorSupplier = dependency.iteratorSupplier();
-			while (!found && iteratorSupplier.hasNext()) {
-				Object supplier = iteratorSupplier.next();
-				if (supplier.equals(referencableObject)) {
-					// only show not yet mapped Elements
-					found = true;
+		// select box for IMPORTS or DEPENDS ON?  // TODO: refactor; caller should clearer signal what kind of list he asks for 
+		if(referenceClass==TopicDef.class || referenceClass==ModelDef.class){
+			// sort out already referenced elements
+			java.util.Iterator iteratorDependency = modelElement.iteratorClientDependency();
+			boolean found = false;
+			while (!found && iteratorDependency.hasNext()) {
+				Dependency dependency = (Dependency)iteratorDependency.next();
+				java.util.Iterator iteratorSupplier = dependency.iteratorSupplier();
+				while (!found && iteratorSupplier.hasNext()) {
+					Object supplier = iteratorSupplier.next();
+					if (supplier.equals(referencableObject)) {
+						// referencableObject is a referenced element already
+						// do not offer  it in select box
+						found = true;
+					}
 				}
 			}
-		}
-		if (!found) {
+			if (!found) {
+				referencables.add(referencableObject);
+			}
+		}else{
 			referencables.add(referencableObject);
 		}
+			
 	}
 
 	// create displayable list (which contains a null Element more in addition to translations)
