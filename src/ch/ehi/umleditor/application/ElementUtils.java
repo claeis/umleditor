@@ -29,6 +29,7 @@ import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.attributes.*;
 import ch.softenvironment.util.*;
 import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.basics.tools.StringUtility;
 
 /**
  * Utility Class for dealing with Element's.
@@ -241,6 +242,15 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
                 return true;
             } else {
 				Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
+			}
+		}
+		newName=newName.trim();
+		if(!(modelElement instanceof ch.ehi.interlis.associations.AssociationDef)){
+			if(newName.length()==0){
+			    BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(),
+						warningTitle,
+						"name should not be empty"); //$NON-NLS-1$
+				return false;
 			}
 		}
         modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(), language, newName));        
