@@ -70,6 +70,7 @@
    	<fileset dir="${src}" includes="**/*.properties"/>
     	<fileset dir="resources/de" includes="**/*.properties"/>
     	<fileset dir="resources/fr" includes="**/*.properties"/>
+    	<fileset dir="resources/it" includes="**/*.properties"/>
     	<fileset dir="${src}" includes="**/*.gif"/>
     	<fileset dir="${src}" includes="**/*.jpg"/>
     	<zipfileset src="lib/XMIFramework.jar"/>
@@ -131,6 +132,7 @@
 	    	<patternset includes="src/**" excludes="**/CVS/*;**/bak~/*"/>
 		<patternset includes="resources/de/**/*.properties"/>
 		<patternset includes="resources/fr/**/*.properties"/>
+		<patternset includes="resources/it/**/*.properties"/>
 	    	<patternset includes="docs/bindist/*.txt"/>
 	    	<patternset includes="docs/README.src.txt"/>
 	    	<patternset includes="xmirose/*.ebs"/>
@@ -266,6 +268,14 @@
     	<fileset dir="${basedir}/resources/en" includes="**/*.properties"/>
     	<fileset dir="${basedir}/resources/en" includes="**/*.gif"/>
     	<fileset dir="${basedir}/resources/en" includes="**/*.jpg"/>
+    </copy>
+  </target>
+  
+  <target depends="init" name="copyres3">
+
+    <copy toDir="${basedir}/resources/it" overwrite="true">
+    	<mapper type="glob" from="*_de.properties" to="*_it.properties"/>
+    	<fileset dir="${basedir}/resources/de" includes="**/*.properties"/>
     </copy>
   </target>
 
