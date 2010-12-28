@@ -2282,4 +2282,7 @@ private void showDiagramReferences() {
         
     new FindDialog(LauncherView.getInstance(), false, foundElements, ((ModelElement)getSelectedNode()).getDefLangName() + "->" + getResourceString("mniDiagramReferences_text"));
 }
+public NavigationTreeModel getModelAdapter(){
+	return modelAdapter;
+}
 }

@@ -960,6 +960,18 @@ public void refresh() {
 		setDiagramElement(diagram);
 	}
 }
+public void updateFigures() {
+	FigureEnumeration enumeration = drawing().figures();
+	while (enumeration.hasMoreElements()) {
+		Figure figure = enumeration.nextFigure();
+		if (figure instanceof NodeFigure) {
+			((NodeFigure)figure).updateView();
+		}else if (figure instanceof EdgeFigure) {
+			((EdgeFigure)figure).updateView();
+		}
+	}
+}
+
 /**
  * Removes a figure from the drawing.
  * No influence on Model.

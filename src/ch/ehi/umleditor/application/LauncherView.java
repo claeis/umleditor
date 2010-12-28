@@ -19,6 +19,7 @@ package ch.ehi.umleditor.application;
  */
 import ch.ehi.basics.view.*;
 import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.basics.types.NlsString;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ import CH.ifa.draw.standard.*;
 import CH.ifa.draw.util.*;
 import ch.ehi.umleditor.umldrawingtools.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.uml1_4.changepropagation.*;
 import ch.ehi.umleditor.xmiuml.*;
@@ -56,6 +58,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
         private static String version=null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/";//$NON-NLS-1$
 	public static final String UML_IMAGES = IMAGE_PATH + "UML/";//$NON-NLS-1$
+	public static final NlsString TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE=new NlsString("en","org.umleditor.config.defaultModellingLanguage");
 	// Launcher as Singleton
 	private static LauncherView instance = null;
 	private static UserSettings settings;
@@ -102,6 +105,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniFindReplace = null;
 	private JMenuItem ivjMniHelp = null;
 	private JMenuItem ivjMniOptions = null;
+	private JMenuItem ivjMniModellanguage = null;
 	private JMenuItem ivjMniPaste = null;
 	private JMenuItem ivjMniRedo = null;
 	private JMenuItem ivjMniSave = null;
@@ -164,6 +168,8 @@ class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListen
 				connEtoC15(e);
 			if (e.getSource() == LauncherView.this.getMniOptions())
 				connEtoC6(e);
+			if (e.getSource() == LauncherView.this.getMniModellanguage())
+				connEtoC40(e);
 			if (e.getSource() == LauncherView.this.getMniObjectCatalog())
 				connEtoC9(e);
 			if (e.getSource() == LauncherView.this.getMniImportInterlis())
@@ -1088,6 +1094,19 @@ private void connEtoC6(java.awt.event.ActionEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+private void connEtoC40(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniModellanguage();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
 /**
  * connEtoC7:  (MniFindReplace.action.actionPerformed(java.awt.event.ActionEvent) --> LauncherView.mniFindReplace()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -1954,6 +1973,23 @@ private javax.swing.JMenuItem getMniOptions() {
 	}
 	return ivjMniOptions;
 }
+private javax.swing.JMenuItem getMniModellanguage() {
+	if (ivjMniModellanguage == null) {
+		try {
+			ivjMniModellanguage = new javax.swing.JMenuItem();
+			ivjMniModellanguage.setName("MniOptions");
+			ivjMniModellanguage.setText("Modellanguage...");
+			// user code begin {1}
+			ivjMniStructure.setText(getResourceString("MniModellanguage_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMniModellanguage;
+}
 /**
  * Return the MniPaste property value.
  * @return javax.swing.JMenuItem
@@ -2227,6 +2263,7 @@ private javax.swing.JMenu getMnuExtras() {
 			ivjMnuExtras.setText("Extras");
 			ivjMnuExtras.add(getJSeparator5());
 			ivjMnuExtras.add(getMniOptions());
+			ivjMnuExtras.add(getMniModellanguage());
 			// user code begin {1}
 			ivjMnuExtras.setText(CommonUserAccess.getMnuExtrasText());
 			// user code end
@@ -2913,6 +2950,7 @@ private void initConnections() throws java.lang.Exception {
 //	getMniHelp().addActionListener(ivjEventHandler);
 	getMniPrint().addActionListener(ivjEventHandler);
 	getMniOptions().addActionListener(ivjEventHandler);
+	getMniModellanguage().addActionListener(ivjEventHandler);
 	getMniObjectCatalog().addActionListener(ivjEventHandler);
 	getMniImportInterlis().addActionListener(ivjEventHandler);
 	getMniExportInterlis().addActionListener(ivjEventHandler);
@@ -3135,7 +3173,6 @@ public static void main(java.lang.String[] args) {
 
 
 		instance.show();
-		EhiLogger.logState("default language of model-elementnames set to '"+ch.ehi.basics.types.NlsString.getDefaultLanguage()+"'");
 
 		instance.openInitialDiagram();
 
@@ -3146,6 +3183,9 @@ public static void main(java.lang.String[] args) {
 		BaseDialog.showError(instance, ResourceManager.getResource(LauncherView.class, "CTStartupError"), "in main()", exception);//$NON-NLS-2$ //$NON-NLS-1$
 		System.exit(-1);
 	}
+}
+private static void logModellingLanguage() {
+	EhiLogger.logState("default language of model-elementnames set to '"+ch.ehi.basics.types.NlsString.getDefaultLanguage()+"'");
 }
 public LogListener getLogListener()
 {
@@ -3325,6 +3365,19 @@ private void mniOpenFile() {
 private void mniOptions() {
 	tool().deactivate();
 	new OptionsDialog(this);
+	tool().activate();
+}
+/**
+ * Show Modellanguage Dialog.
+ */
+private void mniModellanguage() {
+	tool().deactivate();
+	//
+	ModellanguageDialog dlg=new ModellanguageDialog(this,getResourceString("DlgModellanguage"),true);
+	String lang=dlg.getSelectedLanguage();
+	if(lang!=null){
+		setModellingLanguage(lang);
+	}
 	tool().activate();
 }
 /**
@@ -3724,6 +3777,39 @@ protected void setLookAndFeel(String style) {
 	// keep Settings in Profile
 	getSettings().setLookAndFeel(style);
 }
+
+private void setModellingLanguage(String lang) {
+	TaggedValue defLangTag=null;
+	Iterator defLangIt=this.model.iteratorTaggedValue();
+	while(defLangIt.hasNext()){
+		defLangTag=(TaggedValue)defLangIt.next();
+		if(defLangTag.getName().equals(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE)){
+			break;
+		}
+	}
+	if(defLangTag==null){
+		defLangTag=(TaggedValue)ElementFactory.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
+		defLangTag.setName(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE);
+		this.model.addTaggedValue(defLangTag);
+		
+	}
+	defLangTag.setDataValue(lang);
+	NlsString.setDefaultLanguage(lang);
+	logModellingLanguage();
+	
+	// refresh view
+	getPnlNavigation().getModelAdapter().fireTreeNodesChanged(this.model);
+	refreshDocumentation();
+	JInternalFrame[] frames = getDtpDrawArea().getAllFrames();
+	for (int i=0; i<frames.length; i++) {
+		Object dv=((DrawingFrame)frames[i]).getDrawingView();
+		if (dv instanceof ClassDiagramView) {
+			ClassDiagramView diagramView = (ClassDiagramView)dv;
+			diagramView.updateFigures();
+		}
+	}
+}
+
 /**
  * Set a new Model.
  * @param model UmlModel
@@ -3747,7 +3833,10 @@ private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 	MetaModel.getInstance().addMetaModelListener(this);
 	if (model == null) {
 		this.model = (Model)ElementFactory.createObject(ch.ehi.uml1_4.implementation.UmlModel.class);
-		// ch.ehi.interlis.modeltopicclass.Ili2ModelSet ili2ModelSet = (Ili2ModelSet)ElementMapper.createOwnedElement(Ili2ModelSet.class, this.model);
+		TaggedValue defaultModellingLanguage=(TaggedValue)ElementFactory.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
+		defaultModellingLanguage.setDataValue(NlsString.getDefaultLanguage());
+		defaultModellingLanguage.setName(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE);
+		this.model.addTaggedValue(defaultModellingLanguage);
 		INTERLIS2Def interlis2Def = ElementFactory.createINTERLIS2Def(this.model);
 		ModelDef modelDef = ElementFactory.createModelDef(interlis2Def);
 		TopicDef topicDef = ElementFactory.createTopicDef(modelDef);
@@ -3762,6 +3851,37 @@ private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 	} else {
 		this.model = model;
 	}
+	
+	String deflang=null;
+	Iterator defLangIt=this.model.iteratorTaggedValue();
+	while(defLangIt.hasNext()){
+		TaggedValue defLangTag=(TaggedValue)defLangIt.next();
+		if(defLangTag.getName().equals(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE)){
+			deflang=ch.ehi.basics.tools.StringUtility.purge(defLangTag.getDataValue());
+			break;
+		}
+	}
+	if(deflang==null){
+		// get any language
+		Iterator eleIt=model.iteratorOwnedElement();
+		while(eleIt.hasNext()){
+			ModelElement ele=(ModelElement)eleIt.next();
+			NlsString name=ele.getName();
+			Map nameLst=name.getAllValues();
+			Iterator langIt=nameLst.keySet().iterator();
+			while(langIt.hasNext()){
+				deflang=ch.ehi.basics.tools.StringUtility.purge((String)langIt.next());
+				if(deflang!=null){
+					break;
+				}
+			}
+			if(deflang!=null){
+				break;
+			}
+		}
+	}
+	NlsString.setDefaultLanguage(deflang);
+	logModellingLanguage();
 
 	getPnlNavigation().setModel(this.model);
 

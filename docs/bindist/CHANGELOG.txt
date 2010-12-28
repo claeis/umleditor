@@ -1,7 +1,8 @@
-UML-Editor 3.1.x (2010-06-xx) 
+UML-Editor 3.2.0 (2010-12-28) 
 ----------------------------------
 - bug uml file decoder: "Name" (NlsString) content was replaced by "DefLangName" 
 - seperate setting of model language from user interface language
+- support multilingual models
 - bug: DomainDef  selection dialog called by AttributeDef dialog suppressed DomainDefs referenced by dependecies of the ClassDef
 
 UML-Editor 3.1.5 (2009-10-20) 
