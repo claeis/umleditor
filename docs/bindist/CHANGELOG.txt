@@ -9,7 +9,7 @@ UML-Editor 3.2.0 (2010-12-28)
 - bug uml file decoder: "Name" (NlsString) content was replaced by "DefLangName" 
 - seperate setting of model language from user interface language
 - support multilingual models
-- catch emmpty names
+- catch empty names
 - ili2c-4.3.3
 - bug: DomainDef  selection dialog called by AttributeDef dialog suppressed DomainDefs referenced by dependecies of the ClassDef
 
