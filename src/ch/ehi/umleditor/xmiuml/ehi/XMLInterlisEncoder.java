@@ -314,12 +314,16 @@ public class XMLInterlisEncoder
     return className.toString();
   }
 
-  public void encode(Object rootObj, Writer out)
+  public void encode(Object rootObj, Writer out,String version)
   throws IOException
   {
     this.out = out;
       out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");newline();
-      out.write("<ch.ehi.umleditor.1>");newline();
+      if(version.equals("1.0")){
+          out.write("<ch.ehi.umleditor.1>");newline();
+      }else{
+          out.write("<ch.ehi.umleditor xmlns=\"http://schemas.umleditor.org/umleditor/1.1\">");newline();
+      }
       try{
         addPendingObject(rootObj);
         while(pendingObjects.size()>0){
@@ -332,7 +336,11 @@ public class XMLInterlisEncoder
         }
         // rootObj should be the last written object
         writeObject(rootObj);
-		out.write("</ch.ehi.umleditor.1>");newline();
+        if(version.equals("1.0")){
+    		out.write("</ch.ehi.umleditor.1>");newline();
+        }else{
+    		out.write("</ch.ehi.umleditor>");newline();
+        }
       }
       catch(IllegalAccessException ex){
     	throw new IOException(ex.getLocalizedMessage());
@@ -347,7 +355,7 @@ public class XMLInterlisEncoder
   {
     Writer out;
       out = new BufferedWriter(new FileWriter(path));
-      encode(obj,out);
+      encode(obj,out,path.endsWith("-uml1.uml")?"1.0":"1.1");
       out.close();
   }
 

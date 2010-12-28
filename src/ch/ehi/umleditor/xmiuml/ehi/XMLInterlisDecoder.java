@@ -94,6 +94,9 @@ public class XMLInterlisDecoder
       parser.parse(inputSource);
       object = myHandler.getUmlModel();
       inputStream.close();
+      if(object==null){
+    	  return null;
+      }
       inputStream = new FileInputStream(new File(path));
       inputSource = new InputSource(inputStream);
       myHandler.setSecondPass(true);
@@ -127,17 +130,11 @@ public class XMLInterlisDecoder
     catch(SAXException exSax)
     {
 		Throwable  ex = exSax;
-		if (exSax.getException() != null){
-			ex = exSax.getException();
-		}
 		if(ex instanceof java.lang.reflect.InvocationTargetException){
 			java.lang.reflect.InvocationTargetException iex=(java.lang.reflect.InvocationTargetException)ex;
 			ex=iex.getTargetException();
 		}
-        EhiLogger.logError(ex);;
-    	// TODO ex.printStackTrace();
-		ex.printStackTrace();
-	  throw new IOException(ex.getMessage());
+        throw new IOException(ex.getLocalizedMessage(),ex);
     }
     return object;
   }

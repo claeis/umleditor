@@ -102,7 +102,20 @@ public class MyHandler implements org.xml.sax.ContentHandler
     Object attsObj = null;
     Class objClass = null;
     level++;
-    currentElementTag = rawName;
+    if(level==1){
+    	if(namespaceURI.equals("") && localName.equals("ch.ehi.umleditor.1")){
+    		// ok
+    	}else if(namespaceURI.equals("http://schemas.umleditor.org/umleditor/1.1") && localName.equals("ch.ehi.umleditor")){
+    		// ok
+    	}else{
+        	if(localName.startsWith("ch.ehi.umleditor")){
+        		EhiLogger.traceUnusualState("file from an unknown umleditor version; will try to read");
+        	}else{
+        		throw new SAXException("unexpected xml file");
+        	}
+    	}
+    }
+    currentElementTag = localName;
     if(level==3){
       content=new StringBuffer();
     }

@@ -4070,10 +4070,15 @@ public CH.ifa.draw.framework.DrawingView[] views() {
 				boolean old=MetaModel.setChangePropagation(false);
 				Model newModel=service.readFile(filename);
 				MetaModel.setChangePropagation(old);
-				setCurrentFile(new java.io.File(filename));
-				setModel(newModel /*, openDialog.getSelectedFile()*/);
-				log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + filename); //$NON-NLS-2$ //$NON-NLS-1$
-				mnuFileHistory.addRecent(filename);
+				if(newModel==null){
+					// load failed
+					log(getResourceString("CIModelLoaded"), "failed to load " + filename); //$NON-NLS-2$ //$NON-NLS-1$
+				}else{
+					setCurrentFile(new java.io.File(filename));
+					setModel(newModel /*, openDialog.getSelectedFile()*/);
+					log(getResourceString("CIModelLoaded"), getResourceString("CIFromFile") + filename); //$NON-NLS-2$ //$NON-NLS-1$
+					mnuFileHistory.addRecent(filename);
+				}
 		    }
 		} catch(java.io.FileNotFoundException e) {
 			BaseDialog.showWarning((java.awt.Component)this, ResourceManager.getResource(FileHistoryMenu.class, "CTFileMissing"), ResourceManager.getResource(FileHistoryMenu.class, "CWFileMissing"));
