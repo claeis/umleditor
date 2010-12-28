@@ -1980,7 +1980,7 @@ private javax.swing.JMenuItem getMniModellanguage() {
 			ivjMniModellanguage.setName("MniOptions");
 			ivjMniModellanguage.setText("Modellanguage...");
 			// user code begin {1}
-			ivjMniStructure.setText(getResourceString("MniModellanguage_text"));
+			ivjMniModellanguage.setText(getResourceString("MniModellanguage_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
