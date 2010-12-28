@@ -134,7 +134,7 @@ public class XMLInterlisDecoder
 			java.lang.reflect.InvocationTargetException iex=(java.lang.reflect.InvocationTargetException)ex;
 			ex=iex.getTargetException();
 		}
-        throw new IOException(ex.getLocalizedMessage(),ex);
+        throw new IOException(ex.getLocalizedMessage());
     }
     return object;
   }
