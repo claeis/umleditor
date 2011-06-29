@@ -471,6 +471,7 @@ public class TransferFromIli2cMetamodel
         destRole.setMultiplicity(visitCardinality(type.getCardinality()));
         destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
         destRole.setIliAttributeIdx(attrIdx);
+        destRole.setPropExtended(attrib.getExtending()!=null);
         assoc.addConnection(destRole);
         ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
         srcRole.attachParticipant(thisclass);

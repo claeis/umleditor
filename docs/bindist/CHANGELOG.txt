@@ -2,6 +2,7 @@ UML-Editor 3.2.1 (2011-06-29)
 ----------------------------------
 - bug iliimp: missing FormattedType
 - bug iliimp: import with wrong language of modelling
+- bug iliimp: incomplete import of EXTENDED struct attr
 - ili2c-4.3.6
 
 UML-Editor 3.2.0 (2010-12-28) 
