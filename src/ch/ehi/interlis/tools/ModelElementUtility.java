@@ -233,8 +233,9 @@ public class ModelElementUtility
         ret.append(ref.getName().getValue(language));
         return ret.toString();
     }
+    
+    // get Model or Topic of source
     if(source!=null && source.containsNamespace()){
-      // get Model or Topic of source
       parent=source.getNamespace();
       while(parent.containsNamespace() && !(parent instanceof TopicDef) && !(parent instanceof ModelDef)){
         parent=parent.getNamespace();
@@ -242,7 +243,7 @@ public class ModelElementUtility
       sourceScope=parent;
     }
 
-    // get Model and Topic of ref
+    // get Model or Topic of ref
     if(ref.containsNamespace()){
       parent=ref.getNamespace();
       while(parent.containsNamespace() && !(parent instanceof TopicDef) && !(parent instanceof ModelDef)){
@@ -263,7 +264,7 @@ public class ModelElementUtility
       throw new IllegalStateException(ret.toString()+" not inside a ModelDef/TopicDef");
     }
     TopicDef topic=null;
-    // ModelElement inside a topic?
+    // ref ModelElement inside a topic?
     if(parent instanceof TopicDef){
       topic=(TopicDef)parent;
       // source and ref in same topic?
@@ -272,23 +273,28 @@ public class ModelElementUtility
         ret.append(ref.getName().getValue(language));
         return ret.toString();
       }
-      // find model
+      // ASSERT: source and ref not in same topic
+      // return qualified name
+      
+      // find model of ref
       while(!(parent instanceof ModelDef)){
         parent=parent.getNamespace();
       }
+    }else{
+    	// ref at modellevel
+        // source and ref in same model?
+        if(parent==sourceScope){
+          // return unqualified name
+          ret.append(ref.getName().getValue(language));
+          return ret.toString();
+        }
     }
 
-    // source and ref in same model?
-    if(parent==sourceScope){
-      // return unqualified name
-      ret.append(ref.getName().getValue(language));
-      return ret.toString();
-    }
 
-    // neither same model nor same topic; return qualified name
+    // return qualified name
     ret.append(parent.getName().getValue(language));
     ret.append(".");
-    // ModelElement inside a topic?
+    // ref inside a topic?
     if(topic!=null){
       ret.append(topic.getName().getValue(language));
       ret.append(".");

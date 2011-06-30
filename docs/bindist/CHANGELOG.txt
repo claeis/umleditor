@@ -2,6 +2,10 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
+UML-Editor 3.2.2 (2011-06-xx) 
+----------------------------------
+- bug iliexp: exported an unqualified name if source element at model level and referenced element in a topic in the same model
+
 UML-Editor 3.2.1 (2011-06-29) 
 ----------------------------------
 - bug iliimp: missing FormattedType
