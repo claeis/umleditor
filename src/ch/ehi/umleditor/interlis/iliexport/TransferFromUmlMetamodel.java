@@ -1821,14 +1821,19 @@ public class TransferFromUmlMetamodel
       // topics may contain elements that reference elements which are peer to the topic
       // therfore all non-topics should come before the topics
       if(def instanceof TopicDef){
-        i=children.iterator();
-        while(i.hasNext()){
-          ModelElement supplier=(ModelElement)i.next();
-          if(supplier!=def && !(supplier instanceof TopicDef)){
-              // force non-topic to be in front of topic
-              ts.addcond(supplier,def);
+          i=children.iterator();
+          while(i.hasNext()){
+            ModelElement child=(ModelElement)i.next();
+            if(child!=def && !(child instanceof TopicDef)){
+            	if(isDependentOnTopic(child, (TopicDef)def)){
+            		// child depends on a child of def
+                    ts.addcond(def,child);
+            	}else{
+                    // force non-topic to be in front of topic
+                    ts.addcond(child,def);
+            	}
+            }
           }
-        }
       }
 
       // consider explicit dependencies
@@ -2013,6 +2018,56 @@ public class TransferFromUmlMetamodel
     logErrorMsg("loop in definitions: "+loopele.toString());
     return new java.util.LinkedList(children);
     }
+  private boolean isDependentOnTopic(ModelElement client,TopicDef supplierTopic)
+  {
+
+		Iterator i;
+
+		// consider classrefs in reference/structure attributes
+		if (client instanceof AbstractClassDef) {
+			i = ((AbstractClassDef) client).iteratorAssociation();
+			while (i.hasNext()) {
+				Object obj = i.next();
+				if (obj instanceof RoleDef) {
+					RoleDef role = (RoleDef) obj;
+					if (role.getAssociation().sizeConnection() > 2) {
+						continue;
+					}
+					if (RoleDefUtility.isIliAttr(role)) {
+						RoleDef oppend = getOppEnd(role);
+						if (oppend.containsParticipant()) {
+							ch.ehi.uml1_4.foundation.core.Classifier supplierc = oppend
+									.getParticipant();
+							AbstractClassDef supplier = (AbstractClassDef) oppend
+									.getParticipant();
+							if (supplier.containsParentTopicDef() && supplier.getParentTopicDef().equals(supplierTopic)) {
+								return true;
+							}
+						}
+
+						if (oppend.sizeRestriction() > 0) {
+							Iterator restri = oppend.iteratorRestriction();
+							while (restri.hasNext()) {
+								AbstractClassDef supplier = (AbstractClassDef) restri
+										.next();
+								if (supplier.containsParentTopicDef() && supplier.getParentTopicDef().equals(supplierTopic)) {
+									return true;
+								}
+							}
+						}
+					}
+
+				} else {
+					// ignore others; should not have others
+				}
+			}
+		}
+		return false;
+  }
+  private java.util.Set getUsingModelDefChildren(java.util.Set children,TopicDef def)
+  {
+	  return null;
+  }
 	private static String getName4sorting(Object ele)
 	{
 		String name1=ch.ehi.umleditor.application.NavigationTreeNodeUtility.getName(ele);
@@ -2050,7 +2105,9 @@ public class TransferFromUmlMetamodel
         if(restrictioni.hasNext()){
             while(restrictioni.hasNext()){
             	AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
-                ts.addcond(supplier,def);
+                if(children.contains(supplier)){
+                    ts.addcond(supplier,def);
+                }
             }
         }
     	
