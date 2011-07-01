@@ -2,6 +2,10 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
+UML-Editor 3.2.3 (2011-06-xx) 
+----------------------------------
+- bug iliimp: incomplete import of EXTERNAL+EXTENDED reference attr 
+
 UML-Editor 3.2.2 (2011-06-30) 
 ----------------------------------
 - bug iliexp: exported an unqualified name if source element at model level and referenced element in a topic in the same model

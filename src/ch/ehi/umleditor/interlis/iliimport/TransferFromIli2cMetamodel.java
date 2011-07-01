@@ -515,6 +515,8 @@ public class TransferFromIli2cMetamodel
 		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
 		m.addRange(r);
 		destRole.setMultiplicity(m);
+        destRole.setPropExtended(attrib.getExtending()!=null);
+        destRole.setPropExternal(type.isExternal());
         assoc.addConnection(destRole);
         ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
         srcRole.attachParticipant(thisclass);
