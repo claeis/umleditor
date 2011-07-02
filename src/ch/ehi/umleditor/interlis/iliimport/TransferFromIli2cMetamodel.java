@@ -10,6 +10,8 @@ import ch.ehi.basics.logging.EhiLogger;
 
 public class TransferFromIli2cMetamodel
 {
+	public static final String TAGGEDVALUE_ILI_PREFIX="ili:";
+	public static final String TAGGEDVALUE_LANG="";
   public TransferFromIli2cMetamodel(){
   }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
@@ -186,6 +188,9 @@ public class TransferFromIli2cMetamodel
 	if(ilidoc!=null){
 		topicdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
+	
+	// meta values
+	visitMetaValues(topicdef,topic.getMetaValues());
 
     topicdef.setAbstract(topic.isAbstract());
     topicdef.setPropFinal(topic.isFinal());
@@ -241,6 +246,9 @@ public class TransferFromIli2cMetamodel
 	if(ilidoc!=null){
 		classdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
+	
+	// meta values
+	visitMetaValues(classdef,tdef.getMetaValues());
 
     classdef.setAbstract(tdef.isAbstract());
     classdef.setPropFinal(tdef.isFinal());
@@ -280,6 +288,9 @@ public class TransferFromIli2cMetamodel
 		assocdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
 
+	// meta values
+	visitMetaValues(assocdef,assoc.getMetaValues());
+	
     assocdef.setAbstract(assoc.isAbstract());
     assocdef.setPropFinal(assoc.isFinal());
     //classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
@@ -467,6 +478,8 @@ public class TransferFromIli2cMetamodel
 		if(ilidoc!=null){
 			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
 		}
+		// meta values
+		visitMetaValues(destRole,attrib.getMetaValues());
         destRole.attachParticipant(dest);
         destRole.setMultiplicity(visitCardinality(type.getCardinality()));
         destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
@@ -507,6 +520,8 @@ public class TransferFromIli2cMetamodel
 		if(ilidoc!=null){
 			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
 		}
+		// meta values
+		visitMetaValues(destRole,attrib.getMetaValues());
         destRole.attachParticipant(dest);
 		destRole.setIliAttributeIdx(attrIdx);
 		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
@@ -545,10 +560,20 @@ public class TransferFromIli2cMetamodel
 	if(ilidoc!=null){
 		attrdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
+	// meta values
+	visitMetaValues(attrdef,attrib.getMetaValues());
 
     // TODO FunctionCall
     // TODO AttributeValueUsage
     // TODO Constant
+    makeSyntax.printAttributeBasePath(attrib.getContainer(),attrib);
+    String ilitxt=ch.ehi.basics.tools.StringUtility.purge(getSyntax());
+    if(ilitxt!=null){
+    	ch.ehi.interlis.attributes.AttributeValueUsage value=new ch.ehi.interlis.attributes.AttributeValueUsage();
+    	value.setSyntax(new NlsString(modelLanguage,ilitxt));
+    	attrdef.attachAttributeValueUsage(value);
+    }
+	
 
     ch.ehi.interlis.attributes.AttrType battrtype=null;
 
@@ -601,6 +626,8 @@ public class TransferFromIli2cMetamodel
 	if(ilidoc!=null){
 		roledef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
+	// meta values
+	visitMetaValues(roledef,role.getMetaValues());
 
     roledef.setAbstract(role.isAbstract());
     roledef.setPropFinal(role.isFinal());
@@ -732,6 +759,9 @@ public class TransferFromIli2cMetamodel
 		model.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
 	
+	// meta values
+	visitMetaValues(model,mdef.getMetaValues());
+	
     // kind
     if(mdef instanceof DataModel){
       model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.DATA);
@@ -763,10 +793,12 @@ public class TransferFromIli2cMetamodel
       for (int i = 0; i < imported.length; i++)
       {
         Model curImport = (Model) imported[i];
-        ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef(curImport);
-        ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
-        iliimport.addSupplier(supplier);
-        iliimport.addClient(model);
+        if(curImport!=ilibase){
+            ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef(curImport);
+            ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
+            iliimport.addSupplier(supplier);
+            iliimport.addClient(model);
+        }
       }
     }
 
@@ -790,6 +822,24 @@ public class TransferFromIli2cMetamodel
 	return model;
   }
 
+  private void visitMetaValues(ch.ehi.uml1_4.foundation.core.ModelElement ele,ch.ehi.basics.settings.Settings values)
+  {
+		if (values != null) {
+			for (Iterator valuei = values.getValues().iterator(); valuei
+					.hasNext();) {
+				String name = (String) valuei.next();
+				String value = values.getValue(name);
+				ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue umlTag;
+				umlTag = (ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue) ch.ehi.umleditor.application.ElementFactory
+						.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
+				umlTag.setName(new NlsString(TAGGEDVALUE_LANG, TAGGEDVALUE_ILI_PREFIX
+						+ name));
+				umlTag.setDataValue(value);
+				ele.addTaggedValue(umlTag);
+
+			}
+		}
+  }
   private ch.ehi.interlis.domainsandconstants.DomainDef visitDomainDef (Domain dd)
   {
     ch.ehi.interlis.domainsandconstants.DomainDef domaindef=findDomainDef(dd);
@@ -800,6 +850,9 @@ public class TransferFromIli2cMetamodel
 	if(ilidoc!=null){
 		domaindef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
+	
+	// meta values
+	visitMetaValues(domaindef,dd.getMetaValues());
 	
     domaindef.setAbstract(dd.isAbstract());
     domaindef.setPropFinal(dd.isFinal());
@@ -1096,6 +1149,8 @@ public class TransferFromIli2cMetamodel
 		ret.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
 
+	// meta values
+	visitMetaValues(ret,ee.getMetaValues());
 
     ch.interlis.ili2c.metamodel.Enumeration subEnum = ee.getSubEnumeration();
     if (subEnum != null)

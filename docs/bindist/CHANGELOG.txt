@@ -5,6 +5,9 @@ TODO
 UML-Editor 3.2.3 (2011-06-xx) 
 ----------------------------------
 - bug iliimp: incomplete import of EXTERNAL+EXTENDED reference attr 
+- bug iliexp: failed to export ref attr with EXTERNAL or RESTRICTION
+- iliexp: eliminated superfluous IMPORTS INTERLIS
+- iliimp/exp: support ili-metaattributes
 
 UML-Editor 3.2.2 (2011-06-30) 
 ----------------------------------

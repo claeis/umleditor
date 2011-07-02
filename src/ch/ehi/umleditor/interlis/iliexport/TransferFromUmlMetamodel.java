@@ -66,8 +66,11 @@ import ch.ehi.uml1_4.modelmanagement.Package;
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
+
 import java.io.*;
 import java.util.Iterator;
 import ch.ehi.basics.tools.TopoSort;
@@ -356,6 +359,29 @@ public class TransferFromUmlMetamodel
     }
     return;
     }
+  public void visitTaggedValues(ModelElement def)
+  throws java.io.IOException
+  {
+		TaggedValue umlTag=null;
+		Iterator defLangIt=def.iteratorTaggedValue();
+		while(defLangIt.hasNext()){
+			umlTag=(TaggedValue)defLangIt.next();
+			String name=umlTag.getName().getValue(TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+			if(name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)){
+				String value=umlTag.getDataValue();
+			      out.write(getIndent());
+				  out.write("!!@ ");
+				  out.write(name.substring(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX.length()));
+				  out.write("=");
+				  if(value.indexOf(' ')!=-1 || value.indexOf('=')!=-1 || value.indexOf(';')!=-1 || value.indexOf(',')!=-1 || value.indexOf('"')!=-1 || value.indexOf('\\')!=-1){
+					  out.write("\""+value+"\"");newline();
+				  }else{
+					  out.write(value);newline();
+				  }
+				
+			}
+		}
+  }
   public void visitModelDef(ModelDef def)
     throws java.io.IOException
     {
@@ -366,6 +392,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     if(def.isContracted()){
 		out.write("CONTRACTED ");
     }
@@ -509,6 +536,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     out.write(getIndent());
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.TopicDefKind.VIEW){
       out.write("VIEW ");
@@ -698,6 +726,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     String name=def.getName().getValue(language);
     out.write(getIndent()+visitIliName(def,name));
 
@@ -789,6 +818,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     out.write(getIndent());
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE){
       out.write("STRUCTURE ");
@@ -895,6 +925,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     out.write(getIndent());
     out.write("ASSOCIATION ");
     out.write(visitIliName(def,def.getName().getValue(language)));
@@ -1086,6 +1117,7 @@ public class TransferFromUmlMetamodel
     {
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     out.write(getIndent());
     out.write(visitIliName(def,def.getName().getValue(language))+" ");
     int propc=0;
@@ -1172,6 +1204,7 @@ public class TransferFromUmlMetamodel
 
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
+      visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
 
@@ -1247,6 +1280,7 @@ public class TransferFromUmlMetamodel
 
       defineLinkToModelElement(oppend);
       visitDocumentation(oppend.getDocumentation());
+      visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
 
@@ -1505,6 +1539,7 @@ public class TransferFromUmlMetamodel
     while(eleIt.hasNext()){
       EnumElement ele=(EnumElement)eleIt.next();
       visitDocumentation(ele.getDocumentation());
+      visitTaggedValues(ele);
       out.write(getIndent()+visitIliName(owner,ele.getName().getValue(language)));
       if(ele.containsChild()){
         visitEnumeration(owner,ele.getChild());
@@ -1656,6 +1691,7 @@ public class TransferFromUmlMetamodel
     {
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     out.write(getIndent());
     out.write(visitIliName(def,def.getName().getValue(language))+" ");
 
