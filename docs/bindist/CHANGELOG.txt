@@ -2,12 +2,13 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
-UML-Editor 3.2.3 (2011-06-xx) 
+UML-Editor 3.2.3 (2011-07-04) 
 ----------------------------------
 - bug iliimp: incomplete import of EXTERNAL+EXTENDED reference attr 
 - bug iliexp: failed to export ref attr with EXTERNAL or RESTRICTION
 - iliexp: eliminated superfluous IMPORTS INTERLIS
 - iliimp/exp: support ili-metaattributes
+- ili2c-4.3.7
 
 UML-Editor 3.2.2 (2011-06-30) 
 ----------------------------------
