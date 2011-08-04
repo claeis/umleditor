@@ -1,11 +1,16 @@
 package ch.ehi.umleditor.application;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.tree.*;
 
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.modelmanagement.Package;
@@ -249,13 +254,32 @@ private void initialize() {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	java.util.Vector lv=new java.util.Vector();
-	lv.add("de");lv.add("fr");lv.add("it");lv.add("rm");
-	String lang = NlsString.getDefaultLanguage();
-	if(!lv.contains(lang)){
-		lv.add(lang);
+	
+	// get the languages
+	Set languages = new HashSet();
+	{
+		java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getChildElements(LauncherView.getInstance().getModel(), INTERLIS2Def.class);
+		java.util.Iterator iterator = set.iterator();
+		set=new HashSet();
+		while(iterator.hasNext()){
+			INTERLIS2Def def=(INTERLIS2Def)iterator.next();
+			set.addAll(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(def, ModelDef.class));
+		}
+		iterator=set.iterator();
+		while (iterator.hasNext()) {
+			ModelDef modelDef = (ModelDef)iterator.next();
+			// 1) get the BaseLanguage
+			if (modelDef.getBaseLanguage() != null) {
+				 languages.add(modelDef.getBaseLanguage());
+			}
+			// 2) get the ValidSecondLanguages
+			languages.addAll(modelDef.getValidSecondLanguages());
+		}
+		
 	}
-	getCbxLanguage().setModel(new DefaultComboBoxModel(lv));
+	String lang = NlsString.getDefaultLanguage();
+	languages.add(lang);
+	getCbxLanguage().setModel(new DefaultComboBoxModel(new java.util.Vector(languages)));
 	getCbxLanguage().setSelectedItem(lang);
 	// user code end
 }
