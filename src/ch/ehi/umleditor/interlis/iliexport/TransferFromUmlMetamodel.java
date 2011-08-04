@@ -72,7 +72,10 @@ import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.TopoSort;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
@@ -255,15 +258,30 @@ public class TransferFromUmlMetamodel
     }
     java.util.HashSet done=new java.util.HashSet(); // collection of visited languages
     // enumerate all languages
-    java.util.Map languages=def.getName().getAllValues();
-    java.util.Iterator languagei=languages.keySet().iterator();
+	Set languages = new HashSet();
+    {
+    	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getChildElements(def, ModelDef.class);
+    	java.util.Iterator iterator = set.iterator();
+
+    	// get the languages
+    	while (iterator.hasNext()) {
+    		ModelDef modelDef = (ModelDef)iterator.next();
+    		// 1) get the BaseLanguage
+    		if (modelDef.getBaseLanguage() != null) {
+    			 languages.add(modelDef.getBaseLanguage());
+    		}
+    		// 2) get the ValidSecondLanguages
+    		languages.addAll(modelDef.getValidSecondLanguages());
+    	}
+    }
+    java.util.Iterator languagei=languages.iterator();
     while(languagei.hasNext()){
       String language=(String)languagei.next();
       if(done.contains(language)){
         continue;
       }
       File file=null;
-      String filename=(String)languages.get(language);
+      String filename=(String)def.getName().getValue(language);
       // if checkmode
       if(runIli2c){
         // create temporary file
@@ -296,7 +314,7 @@ public class TransferFromUmlMetamodel
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
-	      java.util.Iterator otheri=languages.keySet().iterator();
+	      java.util.Iterator otheri=languages.iterator();
 	      // while other langugae with same name
 	      while(otheri.hasNext()){
 	        String otherLanguage=(String)otheri.next();
@@ -305,7 +323,7 @@ public class TransferFromUmlMetamodel
 	          continue;
 	        }
 	        // another filename?
-	        if(!filename.equals(languages.get(otherLanguage))){
+	        if(!filename.equals(def.getName().getValue(otherLanguage))){
 	          continue;
 	        }
 	        // write otherLanguage to same file
@@ -386,10 +404,11 @@ public class TransferFromUmlMetamodel
     throws java.io.IOException
     {
     // check if ModelDef defines current language
-    if(!def.getName().getAllValues().containsKey(language)){
-      // current language is not defined by this ModelDef
-      return;
-    }
+	String baseLanguage=def.getBaseLanguage();
+    if(!((baseLanguage!=null && baseLanguage.equals(language)) || def.getValidSecondLanguages().contains(language))){
+        // current language is not defined by this ModelDef
+        return;
+      }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
