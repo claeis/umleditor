@@ -1816,6 +1816,18 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
     // declare/define something only in the code
     // please fill in/modify the following section
     // -beg- preserve=no 358A5DB202C5 detail_end "ModelDef"
+    public java.util.Iterator iteratorIliImport()
+    {
+      java.util.Iterator impi=super.iteratorClientDependency();
+      java.util.ArrayList imps=new java.util.ArrayList();
+      while(impi.hasNext()){
+    	  Dependency dep=(Dependency)impi.next();
+    	  if(dep instanceof IliImport){
+    		  imps.add(dep);
+    	  }
+      }
+      return imps.iterator();
+    }
 
     // -end- 358A5DB202C5 detail_end "ModelDef"
 

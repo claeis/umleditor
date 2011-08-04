@@ -1726,7 +1726,7 @@ private void mniNewContract() {
 private void mniNewImport() {
 	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(this, resModelDefDialog.getString("CTImportSelection"), true, modelDef); //$NON-NLS-1$
 	getTblImport().setModel(new EditorTableModel());
-	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorClientDependency(), resModelDefDialog.getString("TbcModelDefName_header"));//$NON-NLS-1$
+	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorIliImport(), resModelDefDialog.getString("TbcModelDefName_header"));//$NON-NLS-1$
 }
 /**
  * Comment
@@ -1894,7 +1894,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page Import
 	getTblImport().setModel(new EditorTableModel());
-	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorClientDependency(), ch.softenvironment.util.StringUtils.getPureClassName(ModelDef.class));
+	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorIliImport(), ch.softenvironment.util.StringUtils.getPureClassName(ModelDef.class));
 }
 
 public void changeObjects(Object source) {

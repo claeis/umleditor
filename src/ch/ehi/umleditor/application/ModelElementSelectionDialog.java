@@ -188,7 +188,12 @@ private void fillList(ModelElement modelElement, java.lang.Class referenceClass)
 		// select box for IMPORTS or DEPENDS ON?  // TODO: refactor; caller should clearer signal what kind of list he asks for 
 		if(referenceClass==TopicDef.class || referenceClass==ModelDef.class){
 			// sort out already referenced elements
-			java.util.Iterator iteratorDependency = modelElement.iteratorClientDependency();
+			java.util.Iterator iteratorDependency = null;
+			if(referenceClass==ModelDef.class){
+				iteratorDependency=((ModelDef)modelElement).iteratorIliImport();
+			}else{
+				iteratorDependency=modelElement.iteratorClientDependency();
+			}
 			boolean found = false;
 			while (!found && iteratorDependency.hasNext()) {
 				Dependency dependency = (Dependency)iteratorDependency.next();
