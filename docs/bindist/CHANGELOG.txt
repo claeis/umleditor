@@ -2,6 +2,13 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
+UML-Editor 3.2.4 (2011-08-04) 
+----------------------------------
+- offer list of common languages in combobox of ModelDef dialog 
+- offer list of languages used in ili-models in editor-languageselection dialog
+- show only IliImport-elements in Import-List; suppress other Dependencies
+- bug iliexp: fixed export of models in language different from ui language
+
 UML-Editor 3.2.3 (2011-07-04) 
 ----------------------------------
 - bug iliimp: incomplete import of EXTERNAL+EXTENDED reference attr 
