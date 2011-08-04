@@ -19,6 +19,7 @@ package ch.ehi.umleditor.application;
  */
 import java.util.*;
 
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.view.*;
 /**
@@ -1870,16 +1871,17 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	}
 	// page Language
 	Vector languages = new Vector();
-	Set validLanguages = modelDef.getValidSecondLanguages();
 	languages.add("");//$NON-NLS-1$
-/*	languages.add("De_CH");
-	languages.add("Fr_CH");
-	languages.add("It_CH");
-	languages.add("En_US");
-*/
-	Iterator iterator = validLanguages.iterator();
-	while (iterator.hasNext()) {
-		languages.add((String)iterator.next());
+	languages.add("de");
+	languages.add("fr");
+	languages.add("it");
+	languages.add("rm");
+	languages.add("en");
+	if(modelDef.getBaseLanguage()!=null && !languages.contains(modelDef.getBaseLanguage())){
+		languages.add(modelDef.getBaseLanguage());
+	}
+	if(NlsString.getDefaultLanguage()!=null && !languages.contains(NlsString.getDefaultLanguage())){
+		languages.add(NlsString.getDefaultLanguage());
 	}
 	getCbxLanguage().setModel(new javax.swing.DefaultComboBoxModel(languages));
 	getCbxLanguage().setSelectedItem(modelDef.getBaseLanguage());
