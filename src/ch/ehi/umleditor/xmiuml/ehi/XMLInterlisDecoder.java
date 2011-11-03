@@ -63,7 +63,7 @@ public class XMLInterlisDecoder
 
     try
     {
-      parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
+      parser = XMLReaderFactory.createXMLReader();
       //parser.setFeature("http://xml.org/sax/features/validation",true);
     }
 

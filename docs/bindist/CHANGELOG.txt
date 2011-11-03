@@ -2,6 +2,10 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
+UML-Editor 3.3.0 (2011-11-03) 
+----------------------------------
+- ili2c-4.4.1
+
 UML-Editor 3.2.4 (2011-08-04) 
 ----------------------------------
 - offer list of common languages in combobox of ModelDef dialog 
