@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package ch.ehi.umleditor.interlis.modelcheck;
+
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
@@ -26,9 +27,11 @@ public class CheckModel
     {
     TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
     try{
+    	ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
 		Configuration ili2cConfig=new Configuration();
+		ili2cConfig.setAutoCompleteModelList(true);
 		ili2cConfig.setOutputKind(GenerateOutputKind.NOOUTPUT);
-       writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+       writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig,settings);
     }catch(java.io.IOException ex){
       ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
     }

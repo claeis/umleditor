@@ -3,6 +3,8 @@ package ch.ehi.umleditor.interlis.iliimport;
 import ch.interlis.ili2c.metamodel.*;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.generator.Interlis2Generator;
+
+import java.io.File;
 import java.util.Iterator;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
@@ -29,9 +31,8 @@ public class TransferFromIli2cMetamodel
   }
 
   private java.util.HashMap fileMap=new java.util.HashMap();
-  private ch.ehi.interlis.modeltopicclass.INTERLIS2Def findINTERLIS2Def(String language,String filename1)
+  private ch.ehi.interlis.modeltopicclass.INTERLIS2Def findINTERLIS2Def(String language,String filename)
   {
-    String filename=getBasename(filename1);
     if(fileMap.containsKey(filename)){
       return (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(filename);
     }
@@ -810,7 +811,13 @@ public class TransferFromIli2cMetamodel
       ili2def=findINTERLIS2Def(modelLanguage,getPredefinedName());
       ili2def.setVersion(2.3);
     }else{
-      ili2def=findINTERLIS2Def(modelLanguage,mdef.getFileName());
+     File cache=new File(System.getProperty("user.home"),".ilicache");
+     File ilifile=new File(mdef.getFileName());
+     String iliFileName=ilifile.getName();
+     if(ilifile.getAbsoluteFile().getParent().startsWith(cache.getAbsolutePath())){
+    	 iliFileName="<"+iliFileName+">";
+     }
+      ili2def=findINTERLIS2Def(modelLanguage,iliFileName);
       ili2def.setVersion(2.3);
     }
 

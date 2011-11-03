@@ -63,31 +63,18 @@ public class ImportInterlis
     // -beg- preserve=yes 3C90867502B8 body3C9086430360 "readIliFile"
 	LauncherView editor=LauncherView.getInstance();
 	TransferFromIli2cMetamodel convert=new TransferFromIli2cMetamodel();
-	java.util.ArrayList modeldirv = new java.util.ArrayList();
-	modeldirv.add(editor.getUmlEditorHome()+"/ilimodels");
-	java.util.ArrayList filev=new java.util.ArrayList();
+	Configuration config=new Configuration();
 	for(int filei=0;filei<iliFiles.length;filei++){
-		filev.add(iliFiles[filei].getAbsolutePath());
-		if(filei==0){
-			modeldirv.add(iliFiles[filei].getParentFile().getAbsolutePath());
-		}
+         config.addFileEntry(new ch.interlis.ili2c.config.FileEntry(
+        		 iliFiles[filei].getAbsolutePath(),ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
 	}
-	Configuration config;
-	try {
-		config = ch.interlis.ili2c.ModelScan.getConfigWithFiles(modeldirv,filev);
-		if(config==null){
-			editor.log(convert.getFuncDesc(),"failed");
-			return;
-		}
-	} catch (Ili2cException e) {
-		editor.log(convert.getFuncDesc(),"failed");
-		return;
-	}
-	logIliFiles(config);
 	config.setGenerateWarnings(false);
 	config.setOutputKind(GenerateOutputKind.NOOUTPUT);
-
-      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config);
+	config.setAutoCompleteModelList(true);
+	
+	ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+	
+      TransferDescription ili2cModel=ch.interlis.ili2c.Main.runCompiler(config,settings);
       if(ili2cModel!=null){
         // translate the compiler metamodel to our metamodel
         convert.visitTransferDescription(editor.getModel(),ili2cModel,null,config);

@@ -43,7 +43,7 @@ public class LogListener extends ch.ehi.basics.logging.AbstractStdListener {
 			if(ie.getRawEventMsg()!=null){
 				String id=compilerMapper.getId(ie);
 				if(id!=null){
-					EhiLogger.debug("raw msg "+ie.getRawEventMsg());
+					//EhiLogger.debug("raw msg "+ie.getRawEventMsg());
 					out.appendText(id,compilerMapper.getTitle(),ie.getRawEventMsg());
 					return;
 				}

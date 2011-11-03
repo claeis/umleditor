@@ -40,6 +40,11 @@ public class UserSettings extends ApplicationOptions implements ch.softenvironme
 //	private final static String LOG_WIDTH = "LOG_WIDTH";
 	private final static String DESCRIPTION_HEIGHT = "DESCRIPTION_HEIGHT";
 	private final static String DESCRIPTION_WIDTH = "DESCRIPTION_WIDTH";
+	public final static String ILIDIRS = ch.interlis.ili2c.gui.UserSettings.ILIDIRS;
+	public final static String DEFAULT_ILIDIRS = "http://models.interlis.ch/";
+	public final static String HTTP_PROXY_HOST = ch.interlis.ili2c.gui.UserSettings.HTTP_PROXY_HOST;
+	public final static String HTTP_PROXY_PORT = ch.interlis.ili2c.gui.UserSettings.HTTP_PROXY_PORT;
+	
 /**
  * Create Default UserSettings.
  */
@@ -69,6 +74,7 @@ protected UserSettings() {
 //	userSettings.setLogWidth(new Integer(10));
 	setDescriptionHeight(new Integer(270));
 	setDescriptionWidth(new Integer(200));
+	setIlidirs(DEFAULT_ILIDIRS);
 }
 public UserSettings(String filename) {
     super(filename, new UserSettings());
@@ -202,4 +208,24 @@ public void setNavigationSort(java.lang.String value) {
 public void setShowLogView(java.lang.Boolean showLogView) {
 	setProperty(SHOW_LOG_VIEW, showLogView.toString());
 }
+
+public java.lang.String getIlidirs() {
+	return getProperty(ILIDIRS);
+}
+public void setIlidirs(java.lang.String workingDirectory) {
+	setProperty(ILIDIRS, workingDirectory);
+}
+public java.lang.String getHttpProxyHost() {
+	return getProperty(HTTP_PROXY_HOST);
+}
+public void setHttpProxyHost(java.lang.String workingDirectory) {
+	setProperty(HTTP_PROXY_HOST, workingDirectory);
+}
+public java.lang.String getHttpProxyPort() {
+	return getProperty(HTTP_PROXY_PORT);
+}
+public void setHttpProxyPort(java.lang.String workingDirectory) {
+	setProperty(HTTP_PROXY_PORT, workingDirectory);
+}
+
 }

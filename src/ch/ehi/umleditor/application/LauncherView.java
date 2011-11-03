@@ -106,6 +106,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniHelp = null;
 	private JMenuItem ivjMniOptions = null;
 	private JMenuItem ivjMniModellanguage = null;
+	private JMenuItem ivjMniRepoSetting = null;
 	private JMenuItem ivjMniPaste = null;
 	private JMenuItem ivjMniRedo = null;
 	private JMenuItem ivjMniSave = null;
@@ -170,6 +171,8 @@ class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListen
 				connEtoC6(e);
 			if (e.getSource() == LauncherView.this.getMniModellanguage())
 				connEtoC40(e);
+			if (e.getSource() == LauncherView.this.getMniRepoSetting())
+				connEtoC41(e);
 			if (e.getSource() == LauncherView.this.getMniObjectCatalog())
 				connEtoC9(e);
 			if (e.getSource() == LauncherView.this.getMniImportInterlis())
@@ -1107,6 +1110,19 @@ private void connEtoC40(java.awt.event.ActionEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+private void connEtoC41(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniRepoSetting();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
 /**
  * connEtoC7:  (MniFindReplace.action.actionPerformed(java.awt.event.ActionEvent) --> LauncherView.mniFindReplace()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -1990,6 +2006,23 @@ private javax.swing.JMenuItem getMniModellanguage() {
 	}
 	return ivjMniModellanguage;
 }
+private javax.swing.JMenuItem getMniRepoSetting() {
+	if (ivjMniRepoSetting == null) {
+		try {
+			ivjMniRepoSetting = new javax.swing.JMenuItem();
+			ivjMniRepoSetting.setName("MniRepoSetting");
+			ivjMniRepoSetting.setText("Model Repositories...");
+			// user code begin {1}
+			ivjMniRepoSetting.setText(getResourceString("MniRepoSetting_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMniRepoSetting;
+}
 /**
  * Return the MniPaste property value.
  * @return javax.swing.JMenuItem
@@ -2264,6 +2297,7 @@ private javax.swing.JMenu getMnuExtras() {
 			ivjMnuExtras.add(getJSeparator5());
 			ivjMnuExtras.add(getMniOptions());
 			ivjMnuExtras.add(getMniModellanguage());
+			ivjMnuExtras.add(getMniRepoSetting());
 			// user code begin {1}
 			ivjMnuExtras.setText(CommonUserAccess.getMnuExtrasText());
 			// user code end
@@ -2696,6 +2730,14 @@ public static UserSettings getSettings() {
 	}
 	return settings;
 }
+public static ch.ehi.basics.settings.Settings getIli2cSettings() {
+	ch.ehi.basics.settings.Settings settings=new ch.ehi.basics.settings.Settings();
+	settings.setValue(ch.interlis.ili2c.gui.UserSettings.ILIDIRS, getSettings().getIlidirs());
+	settings.setValue(ch.interlis.ili2c.gui.UserSettings.HTTP_PROXY_HOST, getSettings().getHttpProxyHost());
+	settings.setValue(ch.interlis.ili2c.gui.UserSettings.HTTP_PROXY_PORT, getSettings().getHttpProxyPort());
+	return settings;
+}
+
 /**
  * Return the SppControlArea property value.
  * @return javax.swing.JSplitPane
@@ -2951,6 +2993,7 @@ private void initConnections() throws java.lang.Exception {
 	getMniPrint().addActionListener(ivjEventHandler);
 	getMniOptions().addActionListener(ivjEventHandler);
 	getMniModellanguage().addActionListener(ivjEventHandler);
+	getMniRepoSetting().addActionListener(ivjEventHandler);
 	getMniObjectCatalog().addActionListener(ivjEventHandler);
 	getMniImportInterlis().addActionListener(ivjEventHandler);
 	getMniExportInterlis().addActionListener(ivjEventHandler);
@@ -3377,6 +3420,24 @@ private void mniModellanguage() {
 	String lang=dlg.getSelectedLanguage();
 	if(lang!=null){
 		setModellingLanguage(lang);
+	}
+	tool().activate();
+}
+private void mniRepoSetting() {
+	tool().deactivate();
+	//
+	RepositoriesDialog dlg=new RepositoriesDialog(this);
+	dlg.setIlidirs(settings.getIlidirs());
+	dlg.setHttpProxyHost(settings.getHttpProxyHost());
+	dlg.setHttpProxyPort(settings.getHttpProxyPort());
+	if(dlg.showDialog()==RepositoriesDialog.OK_OPTION){
+		String ilidirs=dlg.getIlidirs();
+		if(ilidirs==null){
+			ilidirs=UserSettings.DEFAULT_ILIDIRS;
+		}
+		settings.setIlidirs(ilidirs);
+		settings.setHttpProxyHost(dlg.getHttpProxyHost());
+		settings.setHttpProxyPort(dlg.getHttpProxyPort());
 	}
 	tool().activate();
 }

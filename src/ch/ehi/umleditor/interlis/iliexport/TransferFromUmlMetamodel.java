@@ -43,6 +43,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
 import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
 import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
+import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.ModelDefKind;
 import ch.ehi.interlis.modeltopicclass.Translation;
@@ -148,7 +149,7 @@ public class TransferFromUmlMetamodel
    */
   transient private ModelElement lastModelElement=null;
 
-  private void visitNamespace(Namespace ns,Configuration config)
+  private void visitNamespace(Namespace ns,Configuration config,ch.ehi.basics.settings.Settings settings)
     throws java.io.IOException
     {
     if(runIli2c){
@@ -228,7 +229,7 @@ public class TransferFromUmlMetamodel
       // run compiler
       try{
 		ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener().setCompilerMsgMapper(new MyErrorListener());
-		ch.interlis.ili2c.Main.runCompiler(config);
+		ch.interlis.ili2c.Main.runCompiler(config,settings);
       }finally{
 		ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener().setCompilerMsgMapper(null);
       }
@@ -2427,16 +2428,16 @@ public class TransferFromUmlMetamodel
     }
     return rsrc.getString("CIexportinterlis");
    }
-   public void runCompiler(Namespace ns,Configuration config)
+   public void runCompiler(Namespace ns,Configuration config,ch.ehi.basics.settings.Settings settings)
 	 throws java.io.IOException
 	 {
 	 	runIli2c=true;
-		visitNamespace(ns,config);
+		visitNamespace(ns,config,settings);
 	 }
 	public void writeIliFiles(Namespace ns)
 	  throws java.io.IOException
 	  {
-	  	visitNamespace(ns,null);
+	  	visitNamespace(ns,null,null);
 	  }
    private boolean createFileList=false;
    private java.util.List fileList=null;
@@ -2446,7 +2447,7 @@ public class TransferFromUmlMetamodel
 	try{
 		createFileList=true;
 		fileList=new java.util.ArrayList();
-		visitNamespace(ns,null);
+		visitNamespace(ns,null,null);
 	}
 	finally{
 		createFileList=false;

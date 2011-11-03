@@ -5,6 +5,9 @@ TODO
 UML-Editor 3.3.0 (2011-11-03) 
 ----------------------------------
 - ili2c-4.4.1
+- make use of repositories when importing ili-files 
+- make use of repositories during model check 
+- import ili-files from repositories as "<model.ili>" to prevent later export
 
 UML-Editor 3.2.4 (2011-08-04) 
 ----------------------------------

@@ -55,10 +55,12 @@ public class ExportInterlis
                 String xsdFileName=saveDialog.getSelectedFile().getAbsolutePath();
                 TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
                 try{
+                	ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
                    Configuration ili2cConfig=new Configuration();
+           		ili2cConfig.setAutoCompleteModelList(true);
                    ili2cConfig.setOutputKind(GenerateOutputKind.XMLSCHEMA);
                    ili2cConfig.setOutputFile(xsdFileName);
-                   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+                   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig,settings);
                 }catch(java.io.IOException ex){
                   ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
                 }
@@ -72,10 +74,12 @@ public class ExportInterlis
 				String xsdFileName=saveDialog.getSelectedFile().getAbsolutePath();
 				TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
 				try{
+			    	ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
 				   Configuration ili2cConfig=new Configuration();
+					ili2cConfig.setAutoCompleteModelList(true);
 				   ili2cConfig.setOutputKind(GenerateOutputKind.GML32);
 				   ili2cConfig.setOutputFile(xsdFileName);
-				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig,settings);
 				}catch(java.io.IOException ex){
 				  ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
 				}
@@ -92,10 +96,12 @@ public class ExportInterlis
 				String fmtFileName=saveDialog.getSelectedFile().getAbsolutePath();
 				TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
 				try{
+			    	ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
 					Configuration ili2cConfig=new Configuration();
+					ili2cConfig.setAutoCompleteModelList(true);
 					ili2cConfig.setOutputKind(GenerateOutputKind.ILI1FMTDESC);
 					ili2cConfig.setOutputFile(fmtFileName);
-				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig);
+				   writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig,settings);
 				}catch(java.io.IOException ex){
 				  ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
 				}
