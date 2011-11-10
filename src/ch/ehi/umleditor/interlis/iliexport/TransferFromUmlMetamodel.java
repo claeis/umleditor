@@ -286,6 +286,7 @@ public class TransferFromUmlMetamodel
       // if checkmode
       if(runIli2c){
         // create temporary file
+    	//File umleditordir=new File(System.getProperty("java.io.tmpdir"),"umleditor");
         file=File.createTempFile("umleditor",".ili");
         currentFile=new FileListEntry(file);
         tempFiles.add(currentFile);
@@ -1871,152 +1872,37 @@ public class TransferFromUmlMetamodel
     while(defi.hasNext()){
       ModelElement def=(ModelElement)defi.next();
       ts.add(def);
-
+      {
       Iterator i;
 
-      // topics may contain elements that reference elements which are peer to the topic
-      // therfore all non-topics should come before the topics
+      // elements inside of a topic may reference elements which are peer to the topic
+      if(def instanceof TopicDef){
+    	  TopicDef topicDef=(TopicDef)def;
+          i=ch.ehi.interlis.tools.ModelElementUtility.getChildElements(topicDef,null).iterator();
+          while(i.hasNext()){
+            ModelElement child=(ModelElement)i.next();
+            if(child!=def && !(child instanceof TopicDef)){
+                addSimpleEleCond(children, ts, topicDef,child);
+            }
+          }
+      }
+      
+      // elements may reference elements inside a topic
       if(def instanceof TopicDef){
           i=children.iterator();
           while(i.hasNext()){
             ModelElement child=(ModelElement)i.next();
             if(child!=def && !(child instanceof TopicDef)){
             	if(isDependentOnTopic(child, (TopicDef)def)){
-            		// child depends on a child of def
+            		// child depends on a element inside of topic def
                     ts.addcond(def,child);
-            	}else{
-                    // force non-topic to be in front of topic
-                    ts.addcond(child,def);
             	}
             }
           }
       }
-
-      // consider explicit dependencies
-      i=def.iteratorClientDependency();
-      while(i.hasNext()){
-        ch.ehi.uml1_4.foundation.core.Dependency dep=(ch.ehi.uml1_4.foundation.core.Dependency)i.next();
-        Iterator j=dep.iteratorSupplier();
-        while(j.hasNext()){
-          ModelElement supplier=(ModelElement)j.next();
-          if(children.contains(supplier)){
-            ts.addcond(supplier,def);
-          }
-        }
       }
-
-      // consider generalisation
-      if(def instanceof ch.ehi.uml1_4.foundation.core.GeneralizableElement){
-        i=((ch.ehi.uml1_4.foundation.core.GeneralizableElement)def).iteratorGeneralization();
-        while(i.hasNext()){
-          ch.ehi.uml1_4.foundation.core.Generalization gen=(ch.ehi.uml1_4.foundation.core.Generalization)i.next();
-          if(gen.containsParent()){
-            ModelElement supplier=gen.getParent();
-            if(children.contains(supplier)){
-              ts.addcond(supplier,def);
-            }
-          }
-        }
-      }
-
-      // consider classrefs in reference/structure attributes
-      if(def instanceof AbstractClassDef){
-        i=((AbstractClassDef)def).iteratorAssociation();
-        while(i.hasNext()){
-           Object obj=i.next();
-           if(obj instanceof RoleDef){
-            RoleDef role=(RoleDef)obj;
-            if(role.getAssociation().sizeConnection()>2){
-            	continue;
-            }
-            if(RoleDefUtility.isIliAttr(role)){
-              RoleDef oppend=getOppEnd(role);
-              if(oppend.containsParticipant()){
-                ch.ehi.uml1_4.foundation.core.Classifier supplierc=oppend.getParticipant();
-                AbstractClassDef supplier=(AbstractClassDef)oppend.getParticipant();
-                if(children.contains(supplier)){
-                  ts.addcond(supplier,def);
-                }
-              }
-
-              if(oppend.sizeRestriction()>0){
-                Iterator restri=oppend.iteratorRestriction();
-                while(restri.hasNext()){
-                  AbstractClassDef supplier=(AbstractClassDef)restri.next();
-                  if(children.contains(supplier)){
-                    ts.addcond(supplier,def);
-                  }
-                }
-              }
-            }
-
-           }else{
-            // ignore others; should not have others
-           }
-        }
-      }
-
-      // consider classrefs in roledefs
-      if((def instanceof AssociationDef)
-          && !((AssociationDef)def).isStructureAttribute() && !((AssociationDef)def).isReferenceAttribute()){
-        i=((AssociationDef)def).iteratorConnection();
-        while(i.hasNext()){
-           Object obj=i.next();
-           if(obj instanceof RoleDef){
-            RoleDef role=(RoleDef)obj;
-            if(role.containsParticipant()){
-              AbstractClassDef supplier=(AbstractClassDef)role.getParticipant();
-              if(children.contains(supplier)){
-                ts.addcond(supplier,def);
-              }
-            }
-            Iterator restrictioni=role.iteratorRestriction();
-            while(restrictioni.hasNext()){
-              AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
-              if(children.contains(supplier)){
-                ts.addcond(supplier,def);
-              }
-            }
-           }else{
-            // ignore others; should not have others
-           }
-        }
-      }
-
-      // consider domainrefs in attributes
-      if(def instanceof AbstractClassDef){
-        i=((AbstractClassDef)def).iteratorFeature();
-        while(i.hasNext()){
-           Object obj=i.next();
-           if(obj instanceof AttributeDef){
-            AttributeDef attr=(AttributeDef)obj;
-            if(attr.containsAttrType()){
-              DomainAttribute attrType=(DomainAttribute)attr.getAttrType();
-              if(attrType.containsDomainDef()){
-                  ModelElement supplier=attrType.getDomainDef();
-                  if(children.contains(supplier)){
-                    ts.addcond(supplier,def);
-                  }
-              }
-              if(attrType.containsDirect()){
-                // consider type in attributes
-                addTypeCondition(children,ts,def,attrType.getDirect());
-              }
-            }
-
-           }else{
-            // ignore others; should not have others
-           }
-        }
-      }
-
-      // consider type in domaindefs
-      if(def instanceof DomainDef){
-        DomainDef domain=(DomainDef)def;
-        if(domain.containsType()){
-          addTypeCondition(children,ts,def,domain.getType());
-        }
-      }
+      
+      addSimpleEleCond(children, ts, def,def);
 
     }
     if(ts.sort()){
@@ -2074,6 +1960,138 @@ public class TransferFromUmlMetamodel
     logErrorMsg("loop in definitions: "+loopele.toString());
     return new java.util.LinkedList(children);
     }
+
+private void addSimpleEleCond(java.util.Set children,
+		ch.ehi.basics.tools.TopoSort ts, ModelElement defDef, ModelElement defEle) {
+	// consider explicit dependencies
+      Iterator i=defEle.iteratorClientDependency();
+      while(i.hasNext()){
+        ch.ehi.uml1_4.foundation.core.Dependency dep=(ch.ehi.uml1_4.foundation.core.Dependency)i.next();
+        Iterator j=dep.iteratorSupplier();
+        while(j.hasNext()){
+          ModelElement supplier=(ModelElement)j.next();
+          if(children.contains(supplier)){
+            ts.addcond(supplier,defDef);
+          }
+        }
+      }
+
+      // consider generalisation
+      if(defEle instanceof ch.ehi.uml1_4.foundation.core.GeneralizableElement){
+        i=((ch.ehi.uml1_4.foundation.core.GeneralizableElement)defEle).iteratorGeneralization();
+        while(i.hasNext()){
+          ch.ehi.uml1_4.foundation.core.Generalization gen=(ch.ehi.uml1_4.foundation.core.Generalization)i.next();
+          if(gen.containsParent()){
+            ModelElement supplier=gen.getParent();
+            if(children.contains(supplier)){
+              ts.addcond(supplier,defDef);
+            }
+          }
+        }
+      }
+
+      // consider classrefs in reference/structure attributes
+      if(defEle instanceof AbstractClassDef){
+        i=((AbstractClassDef)defEle).iteratorAssociation();
+        while(i.hasNext()){
+           Object obj=i.next();
+           if(obj instanceof RoleDef){
+            RoleDef role=(RoleDef)obj;
+            if(role.getAssociation().sizeConnection()>2){
+            	continue;
+            }
+            if(RoleDefUtility.isIliAttr(role)){
+              RoleDef oppend=getOppEnd(role);
+              if(oppend.containsParticipant()){
+                ch.ehi.uml1_4.foundation.core.Classifier supplierc=oppend.getParticipant();
+                AbstractClassDef supplier=(AbstractClassDef)oppend.getParticipant();
+                if(children.contains(supplier)){
+                  ts.addcond(supplier,defDef);
+                }
+              }
+
+              if(oppend.sizeRestriction()>0){
+                Iterator restri=oppend.iteratorRestriction();
+                while(restri.hasNext()){
+                  AbstractClassDef supplier=(AbstractClassDef)restri.next();
+                  if(children.contains(supplier)){
+                    ts.addcond(supplier,defDef);
+                  }
+                }
+              }
+            }
+
+           }else{
+            // ignore others; should not have others
+           }
+        }
+      }
+
+      // consider classrefs in roledefs
+      if((defEle instanceof AssociationDef)
+          && !((AssociationDef)defEle).isStructureAttribute() && !((AssociationDef)defEle).isReferenceAttribute()){
+        i=((AssociationDef)defEle).iteratorConnection();
+        while(i.hasNext()){
+           Object obj=i.next();
+           if(obj instanceof RoleDef){
+            RoleDef role=(RoleDef)obj;
+            if(role.containsParticipant()){
+              AbstractClassDef supplier=(AbstractClassDef)role.getParticipant();
+              if(children.contains(supplier)){
+                ts.addcond(supplier,defDef);
+              }
+            }
+            Iterator restrictioni=role.iteratorRestriction();
+            while(restrictioni.hasNext()){
+              AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
+              if(children.contains(supplier)){
+                ts.addcond(supplier,defDef);
+              }
+            }
+           }else{
+            // ignore others; should not have others
+           }
+        }
+      }
+
+      // consider domainrefs in attributes
+      if(defEle instanceof AbstractClassDef){
+        i=((AbstractClassDef)defEle).iteratorFeature();
+        while(i.hasNext()){
+           Object obj=i.next();
+           if(obj instanceof AttributeDef){
+            AttributeDef attr=(AttributeDef)obj;
+            if(attr.containsAttrType()){
+              DomainAttribute attrType=(DomainAttribute)attr.getAttrType();
+              if(attrType.containsDomainDef()){
+                  ModelElement supplier=attrType.getDomainDef();
+                  if(children.contains(supplier)){
+                    ts.addcond(supplier,defDef);
+                  }
+              }
+              if(attrType.containsDirect()){
+                // consider type in attributes
+                addTypeCondition(children,ts,defDef,attrType.getDirect());
+              }
+            }
+
+           }else{
+            // ignore others; should not have others
+           }
+        }
+      }
+
+      // consider type in domaindefs
+      if(defEle instanceof DomainDef){
+        DomainDef domain=(DomainDef)defEle;
+        if(domain.containsType()){
+          addTypeCondition(children,ts,defDef,domain.getType());
+        }
+      }
+}
+  
+  /** checks if a client element references an element in a supplying Topic.
+   */
   private boolean isDependentOnTopic(ModelElement client,TopicDef supplierTopic)
   {
 
@@ -2119,10 +2137,6 @@ public class TransferFromUmlMetamodel
 			}
 		}
 		return false;
-  }
-  private java.util.Set getUsingModelDefChildren(java.util.Set children,TopicDef def)
-  {
-	  return null;
   }
 	private static String getName4sorting(Object ele)
 	{

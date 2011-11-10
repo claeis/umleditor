@@ -2,12 +2,14 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
-UML-Editor 3.3.0 (2011-11-03) 
+UML-Editor 3.3.1 (2011-11-10) 
 ----------------------------------
+- JRE 1.6 required
 - ili2c-4.4.1
 - make use of repositories when importing ili-files 
 - make use of repositories during model check 
 - import ili-files from repositories as "<model.ili>" to prevent later export
+- bug iliexp: fixed sorting ("loop in definitions: ModificationReference->Modifications->ModInfo->ModificationReference")
 
 UML-Editor 3.2.4 (2011-08-04) 
 ----------------------------------
