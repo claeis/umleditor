@@ -4,7 +4,7 @@ License
 The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
 
 System Configuration
-In order to compile the UML Editor, a JAVA software development kit (JDK) version 1.4.1 or a more recent version must be installed on your system.
+In order to compile the UML Editor, a JAVA software development kit (JDK) version 1.6 or a more recent version must be installed on your system.
 A free version of the JAVA software development kit (JDK) is available at the website http://java.sun.com/j2se/.
 Also required is the build tool ant. Download it from http://ant.apache.org and install it as documented there.
 
