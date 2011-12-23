@@ -214,7 +214,6 @@ public boolean getClassifierExtension(String name) {
  */
 public boolean getExtension() {
 	if (getCbxExtends().hasElementChanged()) {
-Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
 		if (currentGeneralization != null) {
 			generalizableElement.removeGeneralization(currentGeneralization);
 			currentGeneralization = null;
@@ -338,16 +337,11 @@ public void setClassifierExtension(GeneralizableElement generalizableElement) {
 
 	// set the generalization by name
 	boolean extended = false;
-	if (((AbstractClassDef)generalizableElement).containsParentTopicDef()) {
+	if (currentGeneralization!=null && ((AbstractClassDef)generalizableElement).containsParentTopicDef()) {
 		TopicDef topicDefThis = ((AbstractClassDef)generalizableElement).getParentTopicDef();
-		java.util.Iterator iterator = generalizableElement.iteratorGeneralization();
-		if (iterator.hasNext()) {
-Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
-			currentGeneralization = (Generalization)iterator.next();
-			if ((currentGeneralization instanceof ClassExtends) && topicDefThis.containsBaseTopicDef()) {
-				// set extended only as selected if inside an extended topic
-				extended = ((ClassExtends)currentGeneralization).isExtended();
-			}
+		if ((currentGeneralization instanceof ClassExtends) && topicDefThis.containsBaseTopicDef()) {
+			// set extended only as selected if inside an extended topic
+			extended = ((ClassExtends)currentGeneralization).isExtended();
 		}
 	}
 	getChxExtended().setSelected(extended);
@@ -367,12 +361,12 @@ private void setExtendables(GeneralizableElement generalizableElement) {
 	// get the current base element
 	GeneralizableElement parent = null;
 	java.util.Iterator iterator = generalizableElement.iteratorGeneralization();
-//	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements((ModelElement)generalizableElement, TopicDef.class);
-//	java.util.Iterator iterator = set.iterator();
 	if (iterator.hasNext()) {
-Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
-		ch.ehi.uml1_4.foundation.core.Generalization generalization = (ch.ehi.uml1_4.foundation.core.Generalization)iterator.next();
-		parent = generalization.getParent();
+		currentGeneralization = (ch.ehi.uml1_4.foundation.core.Generalization)iterator.next();
+		parent = currentGeneralization.getParent();
+		if(iterator.hasNext()){
+			Tracer.getInstance().developerWarning("INTERLIS implements 1 Generalization only");//$NON-NLS-2$//$NON-NLS-1$
+		}
 	}
 
 	getCbxExtends().setElement(generalizableElement.getClass(), generalizableElement, parent);

@@ -2,6 +2,10 @@ TODO
 --------------------
 - change file format to support CONTINUOUS SUBDIVISION
 
+UML-Editor 3.3.2 (2011-12-xx) 
+----------------------------------
+- bug gui: fixed specialization/extension of classdef/domaindef/topicdef
+
 UML-Editor 3.3.1 (2011-11-10) 
 ----------------------------------
 - JRE 1.6 required
