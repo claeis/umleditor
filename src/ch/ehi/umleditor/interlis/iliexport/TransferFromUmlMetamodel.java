@@ -1182,7 +1182,12 @@ public class TransferFromUmlMetamodel
       DomainAttribute attrType=(DomainAttribute)def.getAttrType();
       if(attrType.containsDomainDef()){
           if(useStruct){
-            out.write("BAG "+visitCardinality(mr)+" OF ");
+        	if(def.getOrdering()==OrderingKind.ORDERED){
+                out.write("LIST ");
+        	}else{
+                out.write("BAG ");
+        	}
+            out.write(visitCardinality(mr)+" OF ");
           }else if(isMandatory){
             out.write("MANDATORY ");
           }
@@ -1192,9 +1197,11 @@ public class TransferFromUmlMetamodel
             out.write("_");
           }
       }else if(attrType.containsDirect()){
-        if(isMandatory){
-          out.write("MANDATORY ");
-        }
+    	if(!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)){
+            if(isMandatory){
+                out.write("MANDATORY ");
+              }
+    	}
         visitType(def,attrType.getDirect());
       }
     }else{
@@ -1437,6 +1444,68 @@ public class TransferFromUmlMetamodel
           }
           out.write(" )");
       }
+    }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType){
+			boolean useStruct = false;
+			boolean isMandatory = false;
+			ch.ehi.uml1_4.foundation.datatypes.Multiplicity m = ((AttributeDef) owner)
+					.getMultiplicity();
+			ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange mr = null;
+			if (m != null) {
+				mr = (ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange) m
+						.iteratorRange().next();
+				if (mr.getUpper() > 1) {
+					useStruct = true;
+				}
+				if (mr.getLower() == 1) {
+					isMandatory = true;
+				}
+			}
+
+			if (useStruct) {
+	        	if(((AttributeDef) owner).getOrdering()==OrderingKind.ORDERED){
+	                out.write("LIST ");
+	        	}else{
+	                out.write("BAG ");
+	        	}
+				out.write(visitCardinality(mr) + " OF ");
+			} else if (isMandatory) {
+				out.write("MANDATORY ");
+			}
+        ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType structattrtype=(ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)def;
+        if(structattrtype.containsParticipant()){
+          out.write(classRef(owner,structattrtype.getParticipant()));
+        }else{
+          out.write("ANYSTRUCTURE");
+        }
+        Iterator restrictioni=structattrtype.iteratorRestrictedTo();
+        if(restrictioni.hasNext()){
+            String sep=" RESTRICTION ( ";
+            while(restrictioni.hasNext()){
+                out.write(sep+classRef(owner,(AbstractClassDef)restrictioni.next()));
+                sep="; ";
+            }
+            out.write(" )");
+        }
+    }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType){
+        ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType structattrtype=(ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType)def;
+        out.write("REFERENCE TO ");
+        if(structattrtype.isPropExternal()){
+            out.write("(EXTERNAL) ");
+        }
+        if(structattrtype.containsParticipant()){
+          out.write(classRef(owner,structattrtype.getParticipant()));
+        }else{
+          out.write("ANYCLASS");
+        }
+        Iterator restrictioni=structattrtype.iteratorRestrictedTo();
+        if(restrictioni.hasNext()){
+            String sep=" RESTRICTION ( ";
+            while(restrictioni.hasNext()){
+                out.write(sep+classRef(owner,(AbstractClassDef)restrictioni.next()));
+                sep="; ";
+            }
+            out.write(" )");
+        }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.Enumeration){
         visitEnumeration(owner,(ch.ehi.interlis.domainsandconstants.basetypes.Enumeration)def);
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType){
@@ -2181,6 +2250,40 @@ private void addSimpleEleCond(java.util.Set children,
             }
         }
     	
+    }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType){
+        ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType structattrtype=(ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)type;
+        if(structattrtype.containsParticipant()){
+        	AbstractClassDef supplier=structattrtype.getParticipant();
+            if(children.contains(supplier)){
+                ts.addcond(supplier,def);
+            }
+        }
+        Iterator restrictioni=structattrtype.iteratorRestrictedTo();
+        if(restrictioni.hasNext()){
+            while(restrictioni.hasNext()){
+            	AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
+                if(children.contains(supplier)){
+                    ts.addcond(supplier,def);
+                }
+            }
+        }
+    }else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType){
+        ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType refattrtype=(ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType)type;
+        if(refattrtype.containsParticipant()){
+        	AbstractClassDef supplier=refattrtype.getParticipant();
+            if(children.contains(supplier)){
+                ts.addcond(supplier,def);
+            }
+        }
+        Iterator restrictioni=refattrtype.iteratorRestrictedTo();
+        if(restrictioni.hasNext()){
+            while(restrictioni.hasNext()){
+            	AbstractClassDef supplier=(AbstractClassDef)restrictioni.next();
+                if(children.contains(supplier)){
+                    ts.addcond(supplier,def);
+                }
+            }
+        }
     }else if(type instanceof ch.ehi.interlis.domainsandconstants.linetypes.LineType){
       ch.ehi.interlis.domainsandconstants.linetypes.LineType ltype=(ch.ehi.interlis.domainsandconstants.linetypes.LineType)type;
       if(ltype.containsLineForm()){

@@ -54,7 +54,8 @@ public ParticipantDialog(java.awt.Dialog owner, String title, boolean modal,Part
 	super(owner, title, modal);
 	this.item=new ParticipantsPanelItem(item);
 	initialize();
-	getLstModelElements().setObject(this.item.getRestrictions(), context);
+	java.util.Set referenceableElements=ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements(context, AbstractClassDef.class);
+	getLstModelElements().setObject(this.item.getRestrictions(), context,referenceableElements);
 	show();
 }
 /**

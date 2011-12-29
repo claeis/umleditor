@@ -33,6 +33,7 @@ import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
+import ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.associations.Participant;
@@ -72,7 +73,7 @@ import ch.ehi.umleditor.umlpresentation.Diagram;
 
 /** Definiert eine Klasse.
  *  @author Claude Eisenhut
- *  @version $Revision: 1.2 $ $Date: 2006-06-13 14:22:01 $
+ *  @version $Revision: 1.19 $ $Date: 2003/12/21 16:25:30 $
  */
 public abstract class AbstractClassDef extends AbstractNamespace implements ViewableDef , DefinitionProxy , Class , java.io.Serializable
 {
@@ -166,6 +167,8 @@ public abstract class AbstractClassDef extends AbstractNamespace implements View
     detachOiddomain();
     // Role RefSysRef: RefSysRef object(s) may point to this
     clearClassType();
+    clearRestrictedRefAttrType();
+    clearRefAttrType();
     // Role Metaobject: Metaobject object(s) may point to this
     clearAssociation();
     clearRestrictedAssociation();
@@ -1098,6 +1101,246 @@ public abstract class AbstractClassDef extends AbstractNamespace implements View
     return;
   }
   // -end- 3FDC4A7B0396 _unlink_body358A5E62016A "AbstractClassDef::_unlinkClassType"
+
+  // -beg- preserve=no 4EF99D22001E code358A5E62016A "restrictedRefAttrType"
+  private java.util.Set restrictedRefAttrType = new java.util.HashSet();
+  // -end- 4EF99D22001E code358A5E62016A "restrictedRefAttrType"
+
+  /** add a RestrictedRefAttrType.
+   *  
+   *  @see #removeRestrictedRefAttrType
+   *  @see #containsRestrictedRefAttrType
+   *  @see #iteratorRestrictedRefAttrType
+   *  @see #clearRestrictedRefAttrType
+   *  @see #sizeRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E add_head358A5E62016A "AbstractClassDef::addRestrictedRefAttrType"
+  public void addRestrictedRefAttrType(RefAttrType restrictedRefAttrType1)
+  // -end- 4EF99D22001E add_head358A5E62016A "AbstractClassDef::addRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E add_body358A5E62016A "AbstractClassDef::addRestrictedRefAttrType"
+    restrictedRefAttrType.add(restrictedRefAttrType1);
+    restrictedRefAttrType1._linkRestrictedTo(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addRestrictedRefAttrType"));
+    return;
+    // -end- 4EF99D22001E add_body358A5E62016A "AbstractClassDef::addRestrictedRefAttrType"
+  }
+
+  /** disconnect a RestrictedRefAttrType.
+   *  @see #addRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E remove_head358A5E62016A "AbstractClassDef::removeRestrictedRefAttrType"
+  public RefAttrType removeRestrictedRefAttrType(RefAttrType restrictedRefAttrType1)
+  // -end- 4EF99D22001E remove_head358A5E62016A "AbstractClassDef::removeRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E remove_body358A5E62016A "AbstractClassDef::removeRestrictedRefAttrType"
+    RefAttrType ret=null;
+    if(restrictedRefAttrType1==null || !restrictedRefAttrType.contains(restrictedRefAttrType1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = restrictedRefAttrType1;
+    restrictedRefAttrType.remove(restrictedRefAttrType1);
+    restrictedRefAttrType1._unlinkRestrictedTo(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeRestrictedRefAttrType"));
+    return ret;
+    // -end- 4EF99D22001E remove_body358A5E62016A "AbstractClassDef::removeRestrictedRefAttrType"
+  }
+
+  /** tests if a given RestrictedRefAttrType is connected.
+   *  @see #addRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E test_head358A5E62016A "AbstractClassDef::containsRestrictedRefAttrType"
+  public boolean containsRestrictedRefAttrType(RefAttrType restrictedRefAttrType1)
+  // -end- 4EF99D22001E test_head358A5E62016A "AbstractClassDef::containsRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E test_body358A5E62016A "AbstractClassDef::containsRestrictedRefAttrType"
+    return restrictedRefAttrType.contains(restrictedRefAttrType1);
+    // -end- 4EF99D22001E test_body358A5E62016A "AbstractClassDef::containsRestrictedRefAttrType"
+  }
+
+  /** used to enumerate all connected RestrictedRefAttrTypes.
+   *  @see #addRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E get_all_head358A5E62016A "AbstractClassDef::iteratorRestrictedRefAttrType"
+  public java.util.Iterator iteratorRestrictedRefAttrType()
+  // -end- 4EF99D22001E get_all_head358A5E62016A "AbstractClassDef::iteratorRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E get_all_body358A5E62016A "AbstractClassDef::iteratorRestrictedRefAttrType"
+    return restrictedRefAttrType.iterator();
+    // -end- 4EF99D22001E get_all_body358A5E62016A "AbstractClassDef::iteratorRestrictedRefAttrType"
+  }
+
+  /** disconnect all RestrictedRefAttrTypes.
+   *  @see #addRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E remove_all_head358A5E62016A "AbstractClassDef::clearRestrictedRefAttrType"
+  public void clearRestrictedRefAttrType()
+  // -end- 4EF99D22001E remove_all_head358A5E62016A "AbstractClassDef::clearRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E remove_all_body358A5E62016A "AbstractClassDef::clearRestrictedRefAttrType"
+    if(sizeRestrictedRefAttrType()>0){
+      for(java.util.Iterator p = restrictedRefAttrType.iterator(); p.hasNext();){
+        ((RefAttrType)p.next())._unlinkRestrictedTo(this);
+      }
+      restrictedRefAttrType.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearRestrictedRefAttrType"));
+    }
+    // -end- 4EF99D22001E remove_all_body358A5E62016A "AbstractClassDef::clearRestrictedRefAttrType"
+  }
+
+  /** returns the number of RestrictedRefAttrTypes.
+   *  @see #addRestrictedRefAttrType
+   */
+  // -beg- preserve=no 4EF99D22001E size_head358A5E62016A "AbstractClassDef::sizeRestrictedRefAttrType"
+  public int sizeRestrictedRefAttrType()
+  // -end- 4EF99D22001E size_head358A5E62016A "AbstractClassDef::sizeRestrictedRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D22001E size_body358A5E62016A "AbstractClassDef::sizeRestrictedRefAttrType"
+    return restrictedRefAttrType.size();
+    // -end- 4EF99D22001E size_body358A5E62016A "AbstractClassDef::sizeRestrictedRefAttrType"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99D22001E _link_body358A5E62016A "AbstractClassDef::_linkRestrictedRefAttrType"
+  public void _linkRestrictedRefAttrType(RefAttrType restrictedRefAttrType1)
+  {
+    restrictedRefAttrType.add(restrictedRefAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkRestrictedRefAttrType"));
+    return;
+  }
+  // -end- 4EF99D22001E _link_body358A5E62016A "AbstractClassDef::_linkRestrictedRefAttrType"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99D22001E _unlink_body358A5E62016A "AbstractClassDef::_unlinkRestrictedRefAttrType"
+  public void _unlinkRestrictedRefAttrType(RefAttrType restrictedRefAttrType1)
+  {
+    restrictedRefAttrType.remove(restrictedRefAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkRestrictedRefAttrType"));
+    return;
+  }
+  // -end- 4EF99D22001E _unlink_body358A5E62016A "AbstractClassDef::_unlinkRestrictedRefAttrType"
+
+  // -beg- preserve=no 4EF99D2B006A code358A5E62016A "refAttrType"
+  private java.util.Set refAttrType = new java.util.HashSet();
+  // -end- 4EF99D2B006A code358A5E62016A "refAttrType"
+
+  /** add a RefAttrType.
+   *  
+   *  @see #removeRefAttrType
+   *  @see #containsRefAttrType
+   *  @see #iteratorRefAttrType
+   *  @see #clearRefAttrType
+   *  @see #sizeRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A add_head358A5E62016A "AbstractClassDef::addRefAttrType"
+  public void addRefAttrType(RefAttrType refAttrType1)
+  // -end- 4EF99D2B006A add_head358A5E62016A "AbstractClassDef::addRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A add_body358A5E62016A "AbstractClassDef::addRefAttrType"
+    refAttrType.add(refAttrType1);
+    refAttrType1._linkParticipant(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addRefAttrType"));
+    return;
+    // -end- 4EF99D2B006A add_body358A5E62016A "AbstractClassDef::addRefAttrType"
+  }
+
+  /** disconnect a RefAttrType.
+   *  @see #addRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A remove_head358A5E62016A "AbstractClassDef::removeRefAttrType"
+  public RefAttrType removeRefAttrType(RefAttrType refAttrType1)
+  // -end- 4EF99D2B006A remove_head358A5E62016A "AbstractClassDef::removeRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A remove_body358A5E62016A "AbstractClassDef::removeRefAttrType"
+    RefAttrType ret=null;
+    if(refAttrType1==null || !refAttrType.contains(refAttrType1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = refAttrType1;
+    refAttrType.remove(refAttrType1);
+    refAttrType1._unlinkParticipant(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeRefAttrType"));
+    return ret;
+    // -end- 4EF99D2B006A remove_body358A5E62016A "AbstractClassDef::removeRefAttrType"
+  }
+
+  /** tests if a given RefAttrType is connected.
+   *  @see #addRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A test_head358A5E62016A "AbstractClassDef::containsRefAttrType"
+  public boolean containsRefAttrType(RefAttrType refAttrType1)
+  // -end- 4EF99D2B006A test_head358A5E62016A "AbstractClassDef::containsRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A test_body358A5E62016A "AbstractClassDef::containsRefAttrType"
+    return refAttrType.contains(refAttrType1);
+    // -end- 4EF99D2B006A test_body358A5E62016A "AbstractClassDef::containsRefAttrType"
+  }
+
+  /** used to enumerate all connected RefAttrTypes.
+   *  @see #addRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A get_all_head358A5E62016A "AbstractClassDef::iteratorRefAttrType"
+  public java.util.Iterator iteratorRefAttrType()
+  // -end- 4EF99D2B006A get_all_head358A5E62016A "AbstractClassDef::iteratorRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A get_all_body358A5E62016A "AbstractClassDef::iteratorRefAttrType"
+    return refAttrType.iterator();
+    // -end- 4EF99D2B006A get_all_body358A5E62016A "AbstractClassDef::iteratorRefAttrType"
+  }
+
+  /** disconnect all RefAttrTypes.
+   *  @see #addRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A remove_all_head358A5E62016A "AbstractClassDef::clearRefAttrType"
+  public void clearRefAttrType()
+  // -end- 4EF99D2B006A remove_all_head358A5E62016A "AbstractClassDef::clearRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A remove_all_body358A5E62016A "AbstractClassDef::clearRefAttrType"
+    if(sizeRefAttrType()>0){
+      for(java.util.Iterator p = refAttrType.iterator(); p.hasNext();){
+        ((RefAttrType)p.next())._unlinkParticipant(this);
+      }
+      refAttrType.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearRefAttrType"));
+    }
+    // -end- 4EF99D2B006A remove_all_body358A5E62016A "AbstractClassDef::clearRefAttrType"
+  }
+
+  /** returns the number of RefAttrTypes.
+   *  @see #addRefAttrType
+   */
+  // -beg- preserve=no 4EF99D2B006A size_head358A5E62016A "AbstractClassDef::sizeRefAttrType"
+  public int sizeRefAttrType()
+  // -end- 4EF99D2B006A size_head358A5E62016A "AbstractClassDef::sizeRefAttrType"
+  {
+    // -beg- preserve=no 4EF99D2B006A size_body358A5E62016A "AbstractClassDef::sizeRefAttrType"
+    return refAttrType.size();
+    // -end- 4EF99D2B006A size_body358A5E62016A "AbstractClassDef::sizeRefAttrType"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99D2B006A _link_body358A5E62016A "AbstractClassDef::_linkRefAttrType"
+  public void _linkRefAttrType(RefAttrType refAttrType1)
+  {
+    refAttrType.add(refAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkRefAttrType"));
+    return;
+  }
+  // -end- 4EF99D2B006A _link_body358A5E62016A "AbstractClassDef::_linkRefAttrType"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99D2B006A _unlink_body358A5E62016A "AbstractClassDef::_unlinkRefAttrType"
+  public void _unlinkRefAttrType(RefAttrType refAttrType1)
+  {
+    refAttrType.remove(refAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkRefAttrType"));
+    return;
+  }
+  // -end- 4EF99D2B006A _unlink_body358A5E62016A "AbstractClassDef::_unlinkRefAttrType"
 
   // -beg- preserve=no 33E265070353 code358A5E62016A "association"
   private java.util.Set association = new java.util.HashSet();

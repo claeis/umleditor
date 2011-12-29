@@ -117,6 +117,13 @@ public ModelElementSelectionDialog(java.awt.Dialog owner, String title, boolean 
 	fillList(context, aclass);
 	show();
 }
+public ModelElementSelectionDialog(java.awt.Dialog owner, String dlgTitle, String lstTitle,boolean modal, ModelElement context,Set referenceableElements) {
+	super(owner, dlgTitle, modal);
+	initialize();
+	getLblClassName().setText(lstTitle);
+	fillList(context, referenceableElements);
+	show();
+}
 /**
  * connEtoC1:  (BtnAssign.action.actionPerformed(java.awt.event.ActionEvent) --> ModelElementSelectionDialog.okPressed()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -178,11 +185,27 @@ private void connEtoC3(javax.swing.event.ListSelectionEvent arg1) {
  *	  bTopic (ch.softenvironment.topics)
  *     :
  */
-private void fillList(ModelElement modelElement, java.lang.Class referenceClass) {
+private void fillList(ModelElement modelElement, java.util.Set set) {
 	referencables = new java.util.TreeSet(new ModelElementComparator());
+	referencables.addAll(set);
+	
+	// create displayable list (which contains a null Element more in addition to translations)
+	// show Referencable Element-Names in Cbx
+	Vector names = new Vector();
+	names.add(new String());	// allow also an Empty-Element => (+/-)1
+	iterator = referencables.iterator();
+	while (iterator.hasNext()) {
+		ModelElement refModelElement = (ModelElement)iterator.next();
+		names.add(ElementUtils.formatWithPackageName(refModelElement));
+	}
+//	setModel(new javax.swing.DefaultComboBoxModel(names));
+	getLstModelElements().setListData(names);
+}
+private void fillList(ModelElement modelElement, java.lang.Class referenceClass) {
 
-	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements(modelElement, referenceClass);
-	java.util.Iterator iterator = set.iterator();
+	java.util.Set set = new HashSet();
+	java.util.Set candidates = ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements(modelElement, referenceClass);
+	java.util.Iterator iterator = candidates.iterator();
 	while (iterator.hasNext()) {
 		Object referencableObject = iterator.next();
 		// select box for IMPORTS or DEPENDS ON?  // TODO: refactor; caller should clearer signal what kind of list he asks for 
@@ -208,25 +231,14 @@ private void fillList(ModelElement modelElement, java.lang.Class referenceClass)
 				}
 			}
 			if (!found) {
-				referencables.add(referencableObject);
+				set.add(referencableObject);
 			}
 		}else{
-			referencables.add(referencableObject);
+			set.add(referencableObject);
 		}
 			
 	}
-
-	// create displayable list (which contains a null Element more in addition to translations)
-	// show Referencable Element-Names in Cbx
-	Vector names = new Vector();
-	names.add(new String());	// allow also an Empty-Element => (+/-)1
-	iterator = referencables.iterator();
-	while (iterator.hasNext()) {
-		ModelElement refModelElement = (ModelElement)iterator.next();
-		names.add(ElementUtils.formatWithPackageName(refModelElement));
-	}
-//	setModel(new javax.swing.DefaultComboBoxModel(names));
-	getLstModelElements().setListData(names);
+	fillList(modelElement, set);
 }
 /**
  * Return the BaseDialogContentPane property value.

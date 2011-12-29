@@ -24,6 +24,7 @@ package ch.ehi.interlis.modeltopicclass;
 // -beg- preserve=no 3D21C62B03BA autoimport "ClassDef"
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.metaobjects.ParameterDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
 import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
@@ -37,7 +38,7 @@ import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D21C62B03BA import "ClassDef"
 
 /** @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:34 $
+ *  @version $Revision: 1.19 $ $Date: 2003/12/21 16:25:30 $
  */
 public class ClassDef extends AbstractClassDef
 {
@@ -60,6 +61,8 @@ public class ClassDef extends AbstractClassDef
     // -beg- preserve=no 3D4FA21A01B9 body3D21C62B03BA "unlinkAll"
     
     clearParameterDef();
+    clearRestrictedStructAttrType();
+    clearStructAttrType();
     detachSurfaceType();
     clearLineFormTypeDef();
     super.unlinkAll();
@@ -247,6 +250,246 @@ public class ClassDef extends AbstractClassDef
     return;
   }
   // -end- 3941016100B0 _unlink_body3D21C62B03BA "ClassDef::_unlinkParameterDef"
+
+  // -beg- preserve=no 4EF99B6B02E9 code3D21C62B03BA "restrictedStructAttrType"
+  private java.util.Set restrictedStructAttrType = new java.util.HashSet();
+  // -end- 4EF99B6B02E9 code3D21C62B03BA "restrictedStructAttrType"
+
+  /** add a RestrictedStructAttrType.
+   *  
+   *  @see #removeRestrictedStructAttrType
+   *  @see #containsRestrictedStructAttrType
+   *  @see #iteratorRestrictedStructAttrType
+   *  @see #clearRestrictedStructAttrType
+   *  @see #sizeRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 add_head3D21C62B03BA "ClassDef::addRestrictedStructAttrType"
+  public void addRestrictedStructAttrType(StructAttrType restrictedStructAttrType1)
+  // -end- 4EF99B6B02E9 add_head3D21C62B03BA "ClassDef::addRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 add_body3D21C62B03BA "ClassDef::addRestrictedStructAttrType"
+    restrictedStructAttrType.add(restrictedStructAttrType1);
+    restrictedStructAttrType1._linkRestrictedTo(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addRestrictedStructAttrType"));
+    return;
+    // -end- 4EF99B6B02E9 add_body3D21C62B03BA "ClassDef::addRestrictedStructAttrType"
+  }
+
+  /** disconnect a RestrictedStructAttrType.
+   *  @see #addRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 remove_head3D21C62B03BA "ClassDef::removeRestrictedStructAttrType"
+  public StructAttrType removeRestrictedStructAttrType(StructAttrType restrictedStructAttrType1)
+  // -end- 4EF99B6B02E9 remove_head3D21C62B03BA "ClassDef::removeRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 remove_body3D21C62B03BA "ClassDef::removeRestrictedStructAttrType"
+    StructAttrType ret=null;
+    if(restrictedStructAttrType1==null || !restrictedStructAttrType.contains(restrictedStructAttrType1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = restrictedStructAttrType1;
+    restrictedStructAttrType.remove(restrictedStructAttrType1);
+    restrictedStructAttrType1._unlinkRestrictedTo(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeRestrictedStructAttrType"));
+    return ret;
+    // -end- 4EF99B6B02E9 remove_body3D21C62B03BA "ClassDef::removeRestrictedStructAttrType"
+  }
+
+  /** tests if a given RestrictedStructAttrType is connected.
+   *  @see #addRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 test_head3D21C62B03BA "ClassDef::containsRestrictedStructAttrType"
+  public boolean containsRestrictedStructAttrType(StructAttrType restrictedStructAttrType1)
+  // -end- 4EF99B6B02E9 test_head3D21C62B03BA "ClassDef::containsRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 test_body3D21C62B03BA "ClassDef::containsRestrictedStructAttrType"
+    return restrictedStructAttrType.contains(restrictedStructAttrType1);
+    // -end- 4EF99B6B02E9 test_body3D21C62B03BA "ClassDef::containsRestrictedStructAttrType"
+  }
+
+  /** used to enumerate all connected RestrictedStructAttrTypes.
+   *  @see #addRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 get_all_head3D21C62B03BA "ClassDef::iteratorRestrictedStructAttrType"
+  public java.util.Iterator iteratorRestrictedStructAttrType()
+  // -end- 4EF99B6B02E9 get_all_head3D21C62B03BA "ClassDef::iteratorRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 get_all_body3D21C62B03BA "ClassDef::iteratorRestrictedStructAttrType"
+    return restrictedStructAttrType.iterator();
+    // -end- 4EF99B6B02E9 get_all_body3D21C62B03BA "ClassDef::iteratorRestrictedStructAttrType"
+  }
+
+  /** disconnect all RestrictedStructAttrTypes.
+   *  @see #addRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 remove_all_head3D21C62B03BA "ClassDef::clearRestrictedStructAttrType"
+  public void clearRestrictedStructAttrType()
+  // -end- 4EF99B6B02E9 remove_all_head3D21C62B03BA "ClassDef::clearRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 remove_all_body3D21C62B03BA "ClassDef::clearRestrictedStructAttrType"
+    if(sizeRestrictedStructAttrType()>0){
+      for(java.util.Iterator p = restrictedStructAttrType.iterator(); p.hasNext();){
+        ((StructAttrType)p.next())._unlinkRestrictedTo(this);
+      }
+      restrictedStructAttrType.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearRestrictedStructAttrType"));
+    }
+    // -end- 4EF99B6B02E9 remove_all_body3D21C62B03BA "ClassDef::clearRestrictedStructAttrType"
+  }
+
+  /** returns the number of RestrictedStructAttrTypes.
+   *  @see #addRestrictedStructAttrType
+   */
+  // -beg- preserve=no 4EF99B6B02E9 size_head3D21C62B03BA "ClassDef::sizeRestrictedStructAttrType"
+  public int sizeRestrictedStructAttrType()
+  // -end- 4EF99B6B02E9 size_head3D21C62B03BA "ClassDef::sizeRestrictedStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B6B02E9 size_body3D21C62B03BA "ClassDef::sizeRestrictedStructAttrType"
+    return restrictedStructAttrType.size();
+    // -end- 4EF99B6B02E9 size_body3D21C62B03BA "ClassDef::sizeRestrictedStructAttrType"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99B6B02E9 _link_body3D21C62B03BA "ClassDef::_linkRestrictedStructAttrType"
+  public void _linkRestrictedStructAttrType(StructAttrType restrictedStructAttrType1)
+  {
+    restrictedStructAttrType.add(restrictedStructAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkRestrictedStructAttrType"));
+    return;
+  }
+  // -end- 4EF99B6B02E9 _link_body3D21C62B03BA "ClassDef::_linkRestrictedStructAttrType"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99B6B02E9 _unlink_body3D21C62B03BA "ClassDef::_unlinkRestrictedStructAttrType"
+  public void _unlinkRestrictedStructAttrType(StructAttrType restrictedStructAttrType1)
+  {
+    restrictedStructAttrType.remove(restrictedStructAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkRestrictedStructAttrType"));
+    return;
+  }
+  // -end- 4EF99B6B02E9 _unlink_body3D21C62B03BA "ClassDef::_unlinkRestrictedStructAttrType"
+
+  // -beg- preserve=no 4EF99B7901BD code3D21C62B03BA "structAttrType"
+  private java.util.Set structAttrType = new java.util.HashSet();
+  // -end- 4EF99B7901BD code3D21C62B03BA "structAttrType"
+
+  /** add a StructAttrType.
+   *  
+   *  @see #removeStructAttrType
+   *  @see #containsStructAttrType
+   *  @see #iteratorStructAttrType
+   *  @see #clearStructAttrType
+   *  @see #sizeStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD add_head3D21C62B03BA "ClassDef::addStructAttrType"
+  public void addStructAttrType(StructAttrType structAttrType1)
+  // -end- 4EF99B7901BD add_head3D21C62B03BA "ClassDef::addStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD add_body3D21C62B03BA "ClassDef::addStructAttrType"
+    structAttrType.add(structAttrType1);
+    structAttrType1._linkParticipant(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addStructAttrType"));
+    return;
+    // -end- 4EF99B7901BD add_body3D21C62B03BA "ClassDef::addStructAttrType"
+  }
+
+  /** disconnect a StructAttrType.
+   *  @see #addStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD remove_head3D21C62B03BA "ClassDef::removeStructAttrType"
+  public StructAttrType removeStructAttrType(StructAttrType structAttrType1)
+  // -end- 4EF99B7901BD remove_head3D21C62B03BA "ClassDef::removeStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD remove_body3D21C62B03BA "ClassDef::removeStructAttrType"
+    StructAttrType ret=null;
+    if(structAttrType1==null || !structAttrType.contains(structAttrType1)){
+      throw new java.lang.IllegalArgumentException("cannot remove null or unknown object");
+    }
+    ret = structAttrType1;
+    structAttrType.remove(structAttrType1);
+    structAttrType1._unlinkParticipant(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"removeStructAttrType"));
+    return ret;
+    // -end- 4EF99B7901BD remove_body3D21C62B03BA "ClassDef::removeStructAttrType"
+  }
+
+  /** tests if a given StructAttrType is connected.
+   *  @see #addStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD test_head3D21C62B03BA "ClassDef::containsStructAttrType"
+  public boolean containsStructAttrType(StructAttrType structAttrType1)
+  // -end- 4EF99B7901BD test_head3D21C62B03BA "ClassDef::containsStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD test_body3D21C62B03BA "ClassDef::containsStructAttrType"
+    return structAttrType.contains(structAttrType1);
+    // -end- 4EF99B7901BD test_body3D21C62B03BA "ClassDef::containsStructAttrType"
+  }
+
+  /** used to enumerate all connected StructAttrTypes.
+   *  @see #addStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD get_all_head3D21C62B03BA "ClassDef::iteratorStructAttrType"
+  public java.util.Iterator iteratorStructAttrType()
+  // -end- 4EF99B7901BD get_all_head3D21C62B03BA "ClassDef::iteratorStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD get_all_body3D21C62B03BA "ClassDef::iteratorStructAttrType"
+    return structAttrType.iterator();
+    // -end- 4EF99B7901BD get_all_body3D21C62B03BA "ClassDef::iteratorStructAttrType"
+  }
+
+  /** disconnect all StructAttrTypes.
+   *  @see #addStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD remove_all_head3D21C62B03BA "ClassDef::clearStructAttrType"
+  public void clearStructAttrType()
+  // -end- 4EF99B7901BD remove_all_head3D21C62B03BA "ClassDef::clearStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD remove_all_body3D21C62B03BA "ClassDef::clearStructAttrType"
+    if(sizeStructAttrType()>0){
+      for(java.util.Iterator p = structAttrType.iterator(); p.hasNext();){
+        ((StructAttrType)p.next())._unlinkParticipant(this);
+      }
+      structAttrType.clear();
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"clearStructAttrType"));
+    }
+    // -end- 4EF99B7901BD remove_all_body3D21C62B03BA "ClassDef::clearStructAttrType"
+  }
+
+  /** returns the number of StructAttrTypes.
+   *  @see #addStructAttrType
+   */
+  // -beg- preserve=no 4EF99B7901BD size_head3D21C62B03BA "ClassDef::sizeStructAttrType"
+  public int sizeStructAttrType()
+  // -end- 4EF99B7901BD size_head3D21C62B03BA "ClassDef::sizeStructAttrType"
+  {
+    // -beg- preserve=no 4EF99B7901BD size_body3D21C62B03BA "ClassDef::sizeStructAttrType"
+    return structAttrType.size();
+    // -end- 4EF99B7901BD size_body3D21C62B03BA "ClassDef::sizeStructAttrType"
+  }
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99B7901BD _link_body3D21C62B03BA "ClassDef::_linkStructAttrType"
+  public void _linkStructAttrType(StructAttrType structAttrType1)
+  {
+    structAttrType.add(structAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkStructAttrType"));
+    return;
+  }
+  // -end- 4EF99B7901BD _link_body3D21C62B03BA "ClassDef::_linkStructAttrType"
+
+  /** DONT USE; link management internal
+   */
+  // -beg- preserve=no 4EF99B7901BD _unlink_body3D21C62B03BA "ClassDef::_unlinkStructAttrType"
+  public void _unlinkStructAttrType(StructAttrType structAttrType1)
+  {
+    structAttrType.remove(structAttrType1);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkStructAttrType"));
+    return;
+  }
+  // -end- 4EF99B7901BD _unlink_body3D21C62B03BA "ClassDef::_unlinkStructAttrType"
 
   // -beg- preserve=no 3948F2A001D6 code3D21C62B03BA "surfaceType"
   private SurfaceType surfaceType;

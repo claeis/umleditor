@@ -24,8 +24,12 @@ import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.BasePanel;
 
 import java.awt.event.*;
+import java.util.Iterator;
+
 import javax.swing.table.DefaultTableModel;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 
 /**
@@ -49,6 +53,7 @@ static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBund
   private  JMenuItem mniAdd = new JMenuItem();
   private  JMenuItem mniRemove = new JMenuItem();
   private ModelElement context=null;
+  private java.util.Set referencableElements=new java.util.HashSet();
   private JDialog thisDialog=null;
 
   public RestrictedClassesPanel() {
@@ -59,7 +64,6 @@ static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBund
       ex.printStackTrace();
     }
   }
-
   void jbInit() throws Exception {
     // change default layout manager to gridbag, so that scrollpanel fills the
     // available space
@@ -115,7 +119,7 @@ static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBund
     mniAdd.setEnabled(true);
     mniAdd.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
-       	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(thisDialog, "AbstractClassDef", true, context,AbstractClassDef.class);
+       	ModelElementSelectionDialog dialog = new ModelElementSelectionDialog(thisDialog, "AbstractClassDef",ElementUtils.getDisplayName(AbstractClassDef.class), true, context,referencableElements);
         java.util.List selv=dialog.getSelectedItems();
 	for (int i=0; i<selv.size(); i++) {
 		model.addRow(new Object[]{selv.get(i)});
@@ -161,8 +165,9 @@ public final void setObject(java.lang.Object object) throws DeveloperException {
 /**
  * Set the Object to be displayed by panel.
  */
-public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.ModelElement context) {
+public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.ModelElement context,java.util.Set referencableElements) {
   this.context=context;
+  this.referencableElements=referencableElements;
   // update View
   AbstractClassDef[] classv=(AbstractClassDef[])object;
   Object[][] data=new Object[classv.length][1];

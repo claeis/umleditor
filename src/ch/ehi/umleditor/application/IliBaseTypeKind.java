@@ -50,8 +50,8 @@ public abstract class IliBaseTypeKind {
 	protected final static String DATE = resIliBaseTypeKind.getString("CIDate"); //$NON-NLS-1$
 	protected final static String DATETIME = resIliBaseTypeKind.getString("CIDateTime"); //$NON-NLS-1$
 	protected final static String TIME = resIliBaseTypeKind.getString("CITime"); //$NON-NLS-1$
-//	protected final static String REFERENCE = "REFERENCE";
-//	protected final static String STRUCTURE = "STRUCTURE";
+	protected final static String REFERENCE = resIliBaseTypeKind.getString("CIReference"); //$NON-NLS-1$
+	protected final static String STRUCTURE = resIliBaseTypeKind.getString("CIStructure"); //$NON-NLS-1$
 /**
  * Return a set of displayable TypeNames.
  * @see AttributeDefDialog
@@ -59,8 +59,8 @@ public abstract class IliBaseTypeKind {
 public static Vector getAttributeDefTypes() {
 	Vector attributeDefTypes = getStandardTypes();
 	attributeDefTypes.add(DOMAINDEF);
-//	attributeDefTypes.add(REFERENCE);
-//	attributeDefTypes.add(STRUCTURE);
+	attributeDefTypes.add(REFERENCE);
+	attributeDefTypes.add(STRUCTURE);
 
 	return attributeDefTypes;
 }
@@ -134,6 +134,18 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 					return COORD;
 				} else if (type instanceof ClassType) {
 					return CLASS_TYPE;
+				} else if (type instanceof StructAttrType) {
+					StructAttrType structAttrType=(StructAttrType)type;
+					if(structAttrType.containsParticipant()){
+						return structAttrType.getParticipant().getDefLangName();
+					}
+					return "ANYSTRUCTURE";
+				} else if (type instanceof RefAttrType) {
+					RefAttrType refAttrType=(RefAttrType)type;
+					if(refAttrType.containsParticipant()){
+						return refAttrType.getParticipant().getDefLangName();
+					}
+					return "ANYCLASS";
 				} else if (type instanceof OidType) {
 					return OID_TYPE;
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.UnknownType) {
@@ -155,11 +167,7 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 			} else {
 				Tracer.getInstance().runtimeWarning("DomainAttribute contains neiter directType nor DomainDef");//$NON-NLS-2$//$NON-NLS-1$
 			}
-		} /* else if (((AttributeDef)object).getAttrType() instanceof ch.ehi.interlis.attributes.ReferenceAttribute) {
-			return REFERENCE_STRING;
-		} else if (((AttributeDef)object).getAttrType() instanceof StructureAttribute) {
-			return STRUCTURE_STRING;
-		} */
+		}
 	}
 
 	return resIliBaseTypeKind.getString("CINoType"); //$NON-NLS-1$

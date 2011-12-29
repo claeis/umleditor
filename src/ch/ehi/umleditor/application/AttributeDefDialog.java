@@ -23,6 +23,7 @@ import javax.swing.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
 import ch.ehi.interlis.attributes.*;
+import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.softenvironment.view.*;
 import ch.softenvironment.util.*;
 /**
@@ -49,6 +50,7 @@ public class AttributeDefDialog extends BaseDialog {
 	private JCheckBox ivjChxAbstract = null;
 	private JCheckBox ivjChxFinal = null;
 	private JCheckBox ivjChxTransient = null;
+	private JCheckBox ivjChxOrdered = null;
 	private JPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private JLabel ivjLblType = null;
@@ -65,6 +67,8 @@ public class AttributeDefDialog extends BaseDialog {
 	private IliBaseTypeTimePanel ivjPnlTypeTime=null;
 	private IliBaseTypeOidPanel ivjPnlTypeOid = null;
 	private IliBaseTypeClassPanel ivjPnlTypeClass = null;
+	private IliBaseTypeStructAttrPanel ivjPnlTypeStructAttr = null;
+	private IliBaseTypeRefAttrPanel ivjPnlTypeRefAttr = null;
 	private InterlisSyntaxPanel ivjPnlSyntax = null;
 	private JCheckBox ivjChxExtended = null;
 	private IliBaseTypeDomainDefPanel ivjPnlTypeDomainDef = null;
@@ -154,6 +158,14 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.CLASS_TYPE)) {
 		newPanel = getPnlTypeClass();
 		getPnlTypeClass().setObject(new ClassType(), attributeDef.getOwner());
+	} else if (item.equals(IliBaseTypeKind.STRUCTURE)) {
+		newPanel = getPnlTypeStructAttr();
+		getPnlTypeStructAttr().setOwnerDialog(this);
+		getPnlTypeStructAttr().setObject(new StructAttrType(), attributeDef.getOwner());
+	} else if (item.equals(IliBaseTypeKind.REFERENCE)) {
+		newPanel = getPnlTypeRefAttr();
+		getPnlTypeRefAttr().setOwnerDialog(this);
+		getPnlTypeRefAttr().setObject(new RefAttrType(), attributeDef.getOwner());
 	} else if (item.equals(IliBaseTypeKind.DOMAINDEF)) {
 		newPanel = getPnlTypeDomainDef();
 		getPnlTypeDomainDef().setDialog(this);
@@ -163,17 +175,6 @@ private void adaptType() {
 			handleException(e);
 		}
 	}
-/*		case IliBaseTypeKind.REFERENCE: {
-			newPanel = getPnlTypeReference();
-			getPnlTypeReference().setObject(null, attributeDef.getOwner());
-			break;
-		}
-		case IliBaseTypeKind.STRUCTURE: {
-			newPanel = getPnlTypeStructure();
-			getPnlTypeStructure().setObject(ElementMapper.createStructureAttribute(), attributeDef.getOwner());
-			break;
-		}
-*/
 
 	if (currentDataPanel != newPanel) {
 		if (currentDataPanel != null) {
@@ -551,6 +552,23 @@ private javax.swing.JCheckBox getChxTransient() {
 	}
 	return ivjChxTransient;
 }
+private javax.swing.JCheckBox getChxOrdered() {
+	if (ivjChxOrdered == null) {
+		try {
+			ivjChxOrdered = new javax.swing.JCheckBox();
+			ivjChxOrdered.setName("ChxTransient");
+			ivjChxOrdered.setText(resRoleDefDialog.getString("ChxOrdered_text"));
+			ivjChxOrdered.setBounds(165, 42, 140, 22);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjChxOrdered;
+}
 /**
  * Return the LblCardinality property value.
  * @return javax.swing.JLabel
@@ -684,6 +702,7 @@ private javax.swing.JPanel getPnlDetail() {
 			getPnlDetail().add(getChxExtended(), getChxExtended().getName());
 			getPnlDetail().add(getChxFinal(), getChxFinal().getName());
 			getPnlDetail().add(getChxTransient(), getChxTransient().getName());
+			getPnlDetail().add(getChxOrdered(), getChxOrdered().getName());
 			getPnlDetail().add(getCbxCardinality(), getCbxCardinality().getName());
 			getPnlDetail().add(getLblCardinality(), getLblCardinality().getName());
 			// user code begin {1}
@@ -992,6 +1011,36 @@ private IliBaseTypeClassPanel getPnlTypeClass() {
 	}
 	return ivjPnlTypeClass;
 }
+private IliBaseTypeStructAttrPanel getPnlTypeStructAttr() {
+	if (ivjPnlTypeStructAttr == null) {
+		try {
+			ivjPnlTypeStructAttr = new ch.ehi.umleditor.application.IliBaseTypeStructAttrPanel();
+			ivjPnlTypeStructAttr.setName("PnlTypeStructAttr");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlTypeStructAttr;
+}
+private IliBaseTypeRefAttrPanel getPnlTypeRefAttr() {
+	if (ivjPnlTypeRefAttr == null) {
+		try {
+			ivjPnlTypeRefAttr = new ch.ehi.umleditor.application.IliBaseTypeRefAttrPanel();
+			ivjPnlTypeRefAttr.setName("PnlTypeRefAttr");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlTypeRefAttr;
+}
 /**
  * Return the TbpGeneral property value.
  * @return javax.swing.JTabbedPane
@@ -1019,6 +1068,8 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab("PnlTypeTime", null, getPnlTypeTime(), null, 14);
 			ivjTbpGeneral.insertTab("PnlTypeOid", null, getPnlTypeOid(), null, 15);
 			ivjTbpGeneral.insertTab("PnlTypeClass", null, getPnlTypeClass(), null, 16);
+			ivjTbpGeneral.insertTab("PnlTypeStructAttr", null, getPnlTypeStructAttr(), null, 17);
+			ivjTbpGeneral.insertTab("PnlTypeRefAttr", null, getPnlTypeRefAttr(), null, 18);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1095,8 +1146,6 @@ private void initialize() {
 	getTbpGeneral().remove(getPnlTypeLine());
 	getTbpGeneral().remove(getPnlTypeNumeric());
 	getTbpGeneral().remove(getPnlTypeText());
-//	getTbpGeneral().remove(getPnlTypeReference());
-//	getTbpGeneral().remove(getPnlTypeStructure());
 	getTbpGeneral().remove(getPnlTypeDomainDef());
 	getTbpGeneral().remove(getPnlTypeUnknown());
 	getTbpGeneral().remove(getPnlTypeDate());
@@ -1104,6 +1153,8 @@ private void initialize() {
 	getTbpGeneral().remove(getPnlTypeTime());
 	getTbpGeneral().remove(getPnlTypeOid());
 	getTbpGeneral().remove(getPnlTypeClass());
+	getTbpGeneral().remove(getPnlTypeStructAttr());
+	getTbpGeneral().remove(getPnlTypeRefAttr());
 
 	getCbxType().setModel(new javax.swing.DefaultComboBoxModel(IliBaseTypeKind.getAttributeDefTypes()));
 	getCbxType().setSelectedItem(IliBaseTypeKind.NULL_TYPE);
@@ -1132,6 +1183,7 @@ protected boolean save() {
 	attributeDef.setPropExtended(getChxExtended().isSelected());
 	attributeDef.setPropFinal(getChxFinal().isSelected());
 	attributeDef.setPropTransient(getChxTransient().isSelected());
+	attributeDef.setOrdering(getChxOrdered().isSelected() ? OrderingKind.ORDERED : OrderingKind.UNORDERED);
 	attributeDef.setMultiplicity(MultiplicityConverter.createMultiplicity((String)getCbxCardinality().getSelectedItem()));
 
 	// page Constraints
@@ -1209,12 +1261,6 @@ protected boolean save() {
           remover.unlinkThem();
 	}
 	if (getCbxType().getSelectedItem() != IliBaseTypeKind.getNullType()) {
-/*		if (currentDataPanel == getPnlTypeStructure()) {
-			attributeDef.attachAttrType((StructureAttribute)getPnlTypeStructure().getObject());
-		} else if (currentDataPanel == getPnlTypeReference()) {
-			attributeDef.attachAttrType((ReferenceAttribute)getPnlTypeReference().getObject());
-		} else {
-*/
 			// must be DomainType
 			DomainAttribute domainAttribute = new DomainAttribute();
 			if (getCbxType().getSelectedItem() == IliBaseTypeKind.DOMAINDEF) {
@@ -1237,7 +1283,6 @@ protected boolean save() {
 				}
 			}
 			attributeDef.attachAttrType(domainAttribute);
-//		}
 	}
 	return super.save();
 }
@@ -1256,6 +1301,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxExtended().setSelected(attributeDef.isPropExtended());
 	getChxFinal().setSelected(attributeDef.isPropFinal());
 	getChxTransient().setSelected(attributeDef.isPropTransient());
+	getChxOrdered().setSelected(attributeDef.getOrdering()==OrderingKind.ORDERED ? true:false);
+
 	getCbxCardinality().setSelectedItem(MultiplicityConverter.getRange(attributeDef.getMultiplicity()));
 
 	// page Constraints
@@ -1274,14 +1321,6 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	if (attributeDef.containsAttrType()) {
 		// page specific type
 		AttrType attrType = attributeDef.getAttrType();
-/*		if (attrType instanceof StructureAttribute) {
-			getCbxType().setSelectedIndex(IliBaseTypeKind.STRUCTURE);
-			getPnlTypeStructure().setObject(attrType, attributeDef.getOwner());
-		} else if (attrType instanceof ReferenceAttribute) {
-			getCbxType().setSelectedIndex(IliBaseTypeKind.REFERENCE);
-			getPnlTypeReference().setObject(attrType, attributeDef.getOwner());
-		} else
-*/
 		if (attrType instanceof DomainAttribute) {
 			// @see DomainDefDialog#setElement(Element)
 			if (((DomainAttribute)attrType).containsDirect()) {
@@ -1354,6 +1393,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				} else if (type instanceof ClassType) {
 					getCbxType().setSelectedItem(IliBaseTypeKind.CLASS_TYPE);
 					getPnlTypeClass().setObject(type, attributeDef.getOwner());
+				} else if (type instanceof StructAttrType) {
+					getCbxType().setSelectedItem(IliBaseTypeKind.STRUCTURE);
+					getPnlTypeStructAttr().setObject(type, attributeDef.getOwner());
+				} else if (type instanceof RefAttrType) {
+					getCbxType().setSelectedItem(IliBaseTypeKind.REFERENCE);
+					getPnlTypeRefAttr().setObject(type, attributeDef.getOwner());
 				} else {
 //TODO NYI: Type not displayable <" + type.toString() + ">
 				}

@@ -199,6 +199,11 @@ protected void setElement(java.lang.Class referenceClass, ModelElement modelElem
 					modelElement,
 					currentModelElement);
 }
+protected void setElement(Set referencableElements, ModelElement modelElement, ModelElement currentModelElement) {
+	setDisplayList(referencableElements,
+					modelElement,
+					currentModelElement);
+}
 /**
  * Overwrites.
  * @see #setElement(..)

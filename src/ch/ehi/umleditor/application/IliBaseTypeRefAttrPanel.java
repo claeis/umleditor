@@ -25,25 +25,26 @@ import javax.swing.*;
 import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.BasePanel;
 import ch.softenvironment.view.DataPanel;
-import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
+import ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 
 /**
- * panel to view/edit a INTERLIS ClassType.
+ * panel to view/edit a INTERLIS ReferenceAttr.
  *
  * @author ce
  * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
-public class IliBaseTypeClassPanel extends BasePanel implements DataPanel {
+public class IliBaseTypeRefAttrPanel extends BasePanel implements DataPanel {
+	private static java.util.ResourceBundle resRoleDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/RoleDefDialog"); //$NON-NLS-1$;
     private GridBagLayout gridBagLayout1 = new GridBagLayout();
-    private JRadioButton rbClass = new JRadioButton();
-    private JRadioButton rbStruct = new JRadioButton();
+    private ReferencableComboBox cbStruct = new ReferencableComboBox();
+    private JCheckBox cbxExternal = new JCheckBox();
     private RestrictedClassesPanel tabRestricted = new RestrictedClassesPanel();
     private JDialog thisDialog=null;
 
-  public IliBaseTypeClassPanel() {
+  public IliBaseTypeRefAttrPanel() {
     try {
       jbInit();
     }
@@ -54,30 +55,30 @@ public class IliBaseTypeClassPanel extends BasePanel implements DataPanel {
 
   void jbInit() throws Exception {
     setLayout(gridBagLayout1);
-    rbClass.setText(getResourceString("RbClass_text"));
-    rbStruct.setText(getResourceString("RbStructure_text"));
-    this.add(rbClass, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-    this.add(rbStruct, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
-            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(new JLabel(resRoleDefDialog.getString("LblEnd_text")), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(11,11, 0, 0), 0, 0));
+    this.add(cbStruct, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(11, 11, 0, 11), 0, 0));
+    this.add(new JLabel(resRoleDefDialog.getString("ChxExternal_text")), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(11,11, 0, 0), 0, 0));
+    this.add(cbxExternal, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(11, 11, 0, 11), 0, 0));
     //tabRestricted.setPreferredSize(new Dimension(220,220));
+    this.add(new JLabel(resRoleDefDialog.getString("LblRestrictionTo_text")), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(11, 11, 11, 0), 0, 0));
     this.add(tabRestricted, new GridBagConstraints(
-    0 // gridx
-    ,1 // gridy
-    ,2 // gridwidth
+    1 // gridx
+    ,2 // gridy
+    ,1 // gridwidth
     ,1 // gridheight
     , 1.0 // weightx
     , 1.0 // weighty
     , GridBagConstraints.CENTER // anchor
     , GridBagConstraints.BOTH // fill
-    , new Insets(0, 0, 0, 0) // insets
+    , new Insets(11, 11,11, 11) // insets
     , 0 // ipadx
     , 0 // ipady
     ));
-	javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
-	group.add(rbClass);
-	group.add(rbStruct);
-	rbClass.setSelected(true);
   }
 protected void setOwnerDialog(javax.swing.JDialog ownerDialog) {
 	thisDialog = ownerDialog;
@@ -94,24 +95,29 @@ public final void setObject(java.lang.Object object) throws DeveloperException {
  * Set the Object to be displayed by panel.
  */
 public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.ModelElement modelElement) {
-  // initalize aggregations
-  //pnlNumeric.setObject(ElementFactory.createNumericType(), modelElement);
 
-  // update View
-  ClassType type=(ClassType)object;
-  if(type.getKind()==ClassDefKind.CLASS){
-	rbClass.setSelected(true);
-  }else if(type.getKind()==ClassDefKind.STRUCTURE){
-	rbStruct.setSelected(true);
-  }
+	  java.util.Set referenceableElements=ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements(modelElement, AbstractClassDef.class);
+	  for(Iterator refi=referenceableElements.iterator();refi.hasNext();){
+		  AbstractClassDef ref=(AbstractClassDef)refi.next();
+		  if((ref instanceof ClassDef) && ((ClassDef)ref).getKind()==ClassDefKind.STRUCTURE){
+			  refi.remove();
+		  }
+	  }
 
+  RefAttrType type=(RefAttrType)object;
+
+  cbxExternal.setSelected(type.isPropExternal());
   AbstractClassDef[] rv=new AbstractClassDef[type.sizeRestrictedTo()];
   java.util.Iterator ri=type.iteratorRestrictedTo();
   for(int i=0;i<rv.length;i++){
     rv[i]=(AbstractClassDef)ri.next();
   }
-  java.util.Set referenceableElements=ch.ehi.interlis.tools.ModelElementUtility.getReferencableElements(modelElement, AbstractClassDef.class);
   tabRestricted.setObject(rv,modelElement,referenceableElements);
+  AbstractClassDef participant=null;
+  if(type.containsParticipant()){
+	  participant=type.getParticipant();
+  }
+  cbStruct.setElement(referenceableElements, modelElement, participant);
 
 }
 /**
@@ -119,12 +125,12 @@ public void setObject(java.lang.Object object, ch.ehi.uml1_4.foundation.core.Mod
  */
 public java.lang.Object getObject() {
   // get values from view
-  ClassType type=new ClassType();
-    	if (rbClass.isSelected()) {
-          type.setKind(ClassDefKind.CLASS);
-    	}else if (rbStruct.isSelected()) {
-          type.setKind(ClassDefKind.STRUCTURE);
-        }
+  RefAttrType type=new RefAttrType();
+  type.setPropExternal(cbxExternal.isSelected());
+  AbstractClassDef participant=(AbstractClassDef)cbStruct.getElement();
+  if(participant!=null){
+	  type.attachParticipant(participant);
+  }
   AbstractClassDef[] rv=(AbstractClassDef[])tabRestricted.getObject();
   for(int i=0;i<rv.length;i++){
     if(!type.containsRestrictedTo(rv[i])){
