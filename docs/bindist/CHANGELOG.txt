@@ -1,14 +1,14 @@
 TODO
 --------------------
-- change file format to support CONTINUOUS SUBDIVISION
 
-UML-Editor 3.4.0 (2011-12-28) 
+UML-Editor 3.4.0 (2011-12-29) 
 ----------------------------------
 - FILE FORMAT CHANGED: 
 -   This version can read old file format, but may generate an incorrect ili.
 -   Old versions can read new file format with loss and may generate an incorrect ili.
 - bug gui: fixed specialization/extension of classdef/domaindef/topicdef
 - enable modeling of ili struct attr and ili ref attr as UML attribute
+- ili2c-4.4.2
 
 UML-Editor 3.3.1 (2011-11-10) 
 ----------------------------------
