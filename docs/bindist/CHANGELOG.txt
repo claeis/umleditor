@@ -4,6 +4,7 @@ TODO
 UML-Editor 3.4.1 (2012-01-26) 
 ----------------------------------
 - bug gui: encoding of resources in sebase corrected
+- bug iliimp: wrong multiplicity if MANDATORY BOOLEAN
 
 UML-Editor 3.4.0 (2011-12-29) 
 ----------------------------------

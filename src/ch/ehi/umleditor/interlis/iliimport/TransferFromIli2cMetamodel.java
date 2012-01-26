@@ -592,12 +592,11 @@ public class TransferFromIli2cMetamodel
               || predefinedBaseType==ilibase.NAME.getType()
               || predefinedBaseType==ilibase.URI.getType()
               ){
-            btype=predefinedBaseType;
+            attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseType));
+          }else{
+              TypeAlias type=(TypeAlias)btype;
+              attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
           }
-        }
-        if(btype instanceof TypeAlias){
-          TypeAlias type=(TypeAlias)btype;
-          attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
         }else{
           if(btype!=null){
             attrtype.attachDirect(visitType(attrib.getContainer(),btype));
