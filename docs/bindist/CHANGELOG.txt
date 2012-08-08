@@ -1,6 +1,11 @@
 TODO
 --------------------
 
+UML-Editor 3.4.2 (2012-08-08) 
+----------------------------------
+- fixed encoding of properties/translations
+- ili2c-4.4.7
+
 UML-Editor 3.4.1 (2012-01-26) 
 ----------------------------------
 - bug gui: encoding of resources in sebase corrected
