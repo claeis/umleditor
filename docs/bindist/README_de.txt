@@ -14,6 +14,7 @@ Ausführen
 Um den UML-Editor auszuführen, geben Sie auf der Kommandozeile folgendes Kommando ein
 
 java -jar umleditor.jar [options]
+java -Duser.language=FR -jar umleditor.jar
 
 Kommentare/Anregungen
 Bitte senden Sie Kommentare an ce@eisenhutinformatik.ch.

@@ -14,6 +14,7 @@ How to run it?
 To start the UML Editor, enter the following command at the commandline prompt
 
 java -jar umleditor.jar [options]
+java -Duser.language=FR -jar umleditor.jar
 
 Comments/Suggestions
 Please send comments to ce@eisenhutinformatik.ch.
