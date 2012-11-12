@@ -1,5 +1,6 @@
-TODO
---------------------
+UML-Editor 3.4.3 (2012-11-12) 
+----------------------------------
+- fixed encoding of properties/translations in sebase
 
 UML-Editor 3.4.2 (2012-08-08) 
 ----------------------------------
