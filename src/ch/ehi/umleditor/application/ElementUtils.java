@@ -17,6 +17,10 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.util.Iterator;
+
+import javax.swing.JTextField;
+
 import ch.ehi.interlis.graphicdescriptions.*;
 import ch.ehi.interlis.functions.*;
 import ch.ehi.interlis.domainsandconstants.*;
@@ -25,11 +29,14 @@ import ch.softenvironment.view.*;
 import ch.ehi.uml1_4.implementation.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.attributes.*;
 import ch.softenvironment.util.*;
 import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.basics.tools.StringUtility;
+import ch.ehi.basics.types.NlsString;
 
 /**
  * Utility Class for dealing with Element's.
@@ -272,5 +279,51 @@ public static UnknownType convertType(ch.ehi.interlis.domainsandconstants.Type t
 	convertedType.setSyntax(new ch.ehi.basics.types.NlsString(ret));			
 	return convertedType;
 }
+public static String getIliTaggedValue(ModelDef def,
+		String tagName) {
+	TaggedValue umlTag=null;
+	Iterator defLangIt=def.iteratorTaggedValue();
+	while(defLangIt.hasNext()){
+		umlTag=(TaggedValue)defLangIt.next();
+		String name=umlTag.getName().getValue(TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+		if(name.equals(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX+tagName)){
+			String value=umlTag.getDataValue();
+			return value;
+		}
+	}
+	return null;
+}
+
+	public static void setIliTaggedValue(ModelDef def, String iliTagName,
+			String tagValue) {
+		tagValue = StringUtility.purge(tagValue);
+		TaggedValue umlTag = null;
+		Iterator defLangIt = def.iteratorTaggedValue();
+		String umlTagName = TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX
+				+ iliTagName;
+		while (defLangIt.hasNext()) {
+			umlTag = (TaggedValue) defLangIt.next();
+			String name = umlTag.getName().getValue(
+					TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+			if (name.equals(umlTagName)) {
+				if (tagValue == null) {
+					def.removeTaggedValue(umlTag);
+				} else {
+					umlTag.setDataValue(tagValue);
+				}
+				return;
+			}
+		}
+		if (tagValue != null) {
+			umlTag = (TaggedValue) ch.ehi.umleditor.application.ElementFactory
+					.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
+			umlTag.setName(new NlsString(
+					TransferFromIli2cMetamodel.TAGGEDVALUE_LANG,
+					umlTagName));
+			umlTag.setDataValue(tagValue);
+			def.addTaggedValue(umlTag);
+
+		}
+	}
 
 }

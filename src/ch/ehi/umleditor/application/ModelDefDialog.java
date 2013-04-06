@@ -78,10 +78,16 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 
 	private javax.swing.JPanel pnlDetail = null;
 	private javax.swing.JLabel lblIssuerURI = null;
+	private javax.swing.JLabel lblTechnicalContact = null;
+	private javax.swing.JLabel lblIDGeoIV = null;
+	private javax.swing.JLabel lblFurtherInformation = null;
 	private javax.swing.JCheckBox cbIsContracted = null;
 	private javax.swing.JLabel lblVersion = null;
 	private javax.swing.JLabel lblVersionComment = null;
 	private javax.swing.JTextField txtIssuerURI = null;
+	private javax.swing.JTextField txtTechnicalContact = null;
+	private javax.swing.JTextField txtIDGeoIV = null;
+	private javax.swing.JTextField txtFurtherInformation = null;
 	private javax.swing.JTextField txtVersion = null;
 	private javax.swing.JTextArea txtVersionComment = null;
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
@@ -1687,7 +1693,7 @@ private void initialize() {
 		// user code end
 		setName("ModelDefSpecificationDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(426, 347);
+		setSize(426, 357);
 		setTitle(resModelDefDialog.getString("ModelDefSpecificationDialog_title"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
@@ -1813,6 +1819,9 @@ protected boolean save() {
 	modelDef.setIssuerURI( ElementUtils.changeNlsString(modelDef.getIssuerURI(),getTxtIssuerURI().getText()));
 	modelDef.setVersion(ElementUtils.changeNlsString(modelDef.getVersion(),getTxtVersion().getText()));
 	modelDef.setVersionComment(ElementUtils.changeNlsString(modelDef.getVersionComment(),getTxtVersionComment().getText()));
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT,getTxtTechnicalContact().getText());
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION,getTxtFurtherInformation().getText());
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV,getTxtIDGeoIV().getText());
 	// any ili2.2 items?
 	if(modelDef.sizeContract()>0){
 		// remove ili2.2 items
@@ -1861,6 +1870,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getTxtIssuerURI().setText(ElementUtils.mapNlsString(modelDef.getIssuerURI()));
 	getTxtVersion().setText(ElementUtils.mapNlsString(modelDef.getVersion()));
 	getTxtVersionComment().setText(ElementUtils.mapNlsString(modelDef.getVersionComment()));
+	getTxtTechnicalContact().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT));
+	getTxtFurtherInformation().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION));
+	getTxtIDGeoIV().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV));
 	// any ili2.2 items?
 	if(modelDef.sizeContract()>0){
 		// migrate them to ili2.3 
@@ -1921,53 +1933,92 @@ public void removeObjects(Object source) {
 	private javax.swing.JPanel getPnlDetail() {
 		if(pnlDetail == null) {
 			pnlDetail = new javax.swing.JPanel();
-			java.awt.GridBagConstraints consGridBagConstraints2 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints3 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints1 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints4 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints5 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints7 = new java.awt.GridBagConstraints();
-			java.awt.GridBagConstraints consGridBagConstraints6 = new java.awt.GridBagConstraints();
-			consGridBagConstraints5.weightx = 1.0;
-			consGridBagConstraints5.fill = java.awt.GridBagConstraints.HORIZONTAL;
-			consGridBagConstraints5.gridx = 2;
-			consGridBagConstraints5.gridy = 1;
-			consGridBagConstraints7.weightx = 1.0;
-			consGridBagConstraints7.weighty = 1.0;
-			consGridBagConstraints7.fill = java.awt.GridBagConstraints.BOTH;
-			consGridBagConstraints7.gridx = 2;
-			consGridBagConstraints7.gridy = 3;
-			consGridBagConstraints7.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints5.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints2.gridx = 1;
-			consGridBagConstraints2.gridy = 1;
-			consGridBagConstraints2.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			consGridBagConstraints4.gridx = 1;
-			consGridBagConstraints4.gridy = 3;
-			consGridBagConstraints4.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			consGridBagConstraints4.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints3.gridx = 1;
-			consGridBagConstraints3.gridy = 2;
-			consGridBagConstraints3.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			consGridBagConstraints6.weightx = 1.0;
-			consGridBagConstraints6.fill = java.awt.GridBagConstraints.HORIZONTAL;
-			consGridBagConstraints6.gridx = 2;
-			consGridBagConstraints6.gridy = 2;
-			consGridBagConstraints6.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints2.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints1.gridx = 2;
-			consGridBagConstraints1.gridy = 4;
-			consGridBagConstraints1.anchor = java.awt.GridBagConstraints.WEST;
-			consGridBagConstraints3.insets = new java.awt.Insets(5,5,5,5);
-			consGridBagConstraints1.insets = new java.awt.Insets(5,5,5,5);
+			java.awt.GridBagConstraints consLblIssuerURI = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consLblVersion = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consCbIsContracted = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consLblVersionComment = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtIssuerURI = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtVersionComment = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtVersion = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consLblTechnicalContact = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtTechnicalContact = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consLblIDGeoIV = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtIDGeoIV = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consLblFurtherInformation = new java.awt.GridBagConstraints();
+			java.awt.GridBagConstraints consTxtFurtherInformation = new java.awt.GridBagConstraints();
+			consLblIssuerURI.gridx = 1;
+			consLblIssuerURI.gridy = 1;
+			consLblIssuerURI.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblIssuerURI.insets = new java.awt.Insets(5,5,5,5);
+			consTxtIssuerURI.weightx = 1.0;
+			consTxtIssuerURI.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consTxtIssuerURI.gridx = 2;
+			consTxtIssuerURI.gridy = 1;
+			consTxtIssuerURI.insets = new java.awt.Insets(5,5,5,5);
+			consLblVersion.gridx = 1;
+			consLblVersion.gridy = 2;
+			consLblVersion.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblVersion.insets = new java.awt.Insets(5,5,5,5);
+			consTxtVersion.weightx = 1.0;
+			consTxtVersion.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consTxtVersion.gridx = 2;
+			consTxtVersion.gridy = 2;
+			consTxtVersion.insets = new java.awt.Insets(5,5,5,5);
+			consLblVersionComment.gridx = 1;
+			consLblVersionComment.gridy = 3;
+			consLblVersionComment.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblVersionComment.insets = new java.awt.Insets(5,5,5,5);
+			consTxtVersionComment.weightx = 1.0;
+			consTxtVersionComment.weighty = 1.0;
+			consTxtVersionComment.fill = java.awt.GridBagConstraints.BOTH;
+			consTxtVersionComment.gridx = 2;
+			consTxtVersionComment.gridy = 3;
+			consTxtVersionComment.insets = new java.awt.Insets(5,5,5,5);
+			consCbIsContracted.gridx = 2;
+			consCbIsContracted.gridy = 4;
+			consCbIsContracted.anchor = java.awt.GridBagConstraints.WEST;
+			consCbIsContracted.insets = new java.awt.Insets(5,5,5,5);
+			consLblTechnicalContact.gridx = 1;
+			consLblTechnicalContact.gridy = 5;
+			consLblTechnicalContact.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblTechnicalContact.insets = new java.awt.Insets(5,5,5,5);
+			consTxtTechnicalContact.weightx = 1.0;
+			consTxtTechnicalContact.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consTxtTechnicalContact.gridx = 2;
+			consTxtTechnicalContact.gridy = 5;
+			consTxtTechnicalContact.insets = new java.awt.Insets(5,5,5,5);
+			consLblIDGeoIV.gridx = 1;
+			consLblIDGeoIV.gridy = 6;
+			consLblIDGeoIV.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblIDGeoIV.insets = new java.awt.Insets(5,5,5,5);
+			consTxtIDGeoIV.weightx = 1.0;
+			consTxtIDGeoIV.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consTxtIDGeoIV.gridx = 2;
+			consTxtIDGeoIV.gridy = 6;
+			consTxtIDGeoIV.insets = new java.awt.Insets(5,5,5,5);
+			consLblFurtherInformation.gridx = 1;
+			consLblFurtherInformation.gridy = 7;
+			consLblFurtherInformation.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			consLblFurtherInformation.insets = new java.awt.Insets(5,5,5,5);
+			consTxtFurtherInformation.weightx = 1.0;
+			consTxtFurtherInformation.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			consTxtFurtherInformation.gridx = 2;
+			consTxtFurtherInformation.gridy = 7;
+			consTxtFurtherInformation.insets = new java.awt.Insets(5,5,5,5);
 			pnlDetail.setLayout(new java.awt.GridBagLayout());
-			pnlDetail.add(getLblIssuerURI(), consGridBagConstraints2);
-			pnlDetail.add(getCbIsContracted(), consGridBagConstraints1);
-			pnlDetail.add(getLblVersion(), consGridBagConstraints3);
-			pnlDetail.add(getLblVersionComment(), consGridBagConstraints4);
-			pnlDetail.add(getTxtIssuerURI(), consGridBagConstraints5);
-			pnlDetail.add(getTxtVersion(), consGridBagConstraints6);
-			pnlDetail.add(getTxtVersionComment(), consGridBagConstraints7);
+			pnlDetail.add(getLblIssuerURI(), consLblIssuerURI);
+			pnlDetail.add(getTxtIssuerURI(), consTxtIssuerURI);
+			pnlDetail.add(getLblVersion(), consLblVersion);
+			pnlDetail.add(getTxtVersion(), consTxtVersion);
+			pnlDetail.add(getLblVersionComment(), consLblVersionComment);
+			pnlDetail.add(getTxtVersionComment(), consTxtVersionComment);
+			pnlDetail.add(getCbIsContracted(), consCbIsContracted);
+			pnlDetail.add(getLblTechnicalContact(), consLblTechnicalContact);
+			pnlDetail.add(getTxtTechnicalContact(), consTxtTechnicalContact);
+			pnlDetail.add(getLblIDGeoIV(), consLblIDGeoIV);
+			pnlDetail.add(getTxtIDGeoIV(), consTxtIDGeoIV);
+			pnlDetail.add(getLblFurtherInformation(), consLblFurtherInformation);
+			pnlDetail.add(getTxtFurtherInformation(), consTxtFurtherInformation);
 			pnlDetail.setName("pnlDetail");
 		}
 		return pnlDetail;
@@ -1984,6 +2035,30 @@ public void removeObjects(Object source) {
 			lblIssuerURI.setName("lblIssuerURI");
 		}
 		return lblIssuerURI;
+	}
+	private javax.swing.JLabel getLblTechnicalContact() {
+		if(lblTechnicalContact == null) {
+			lblTechnicalContact = new javax.swing.JLabel();
+			lblTechnicalContact.setText(resModelDefDialog.getString("lblTechnicalContact_text"));
+			lblTechnicalContact.setName("lblTechnicalContact");
+		}
+		return lblTechnicalContact;
+	}
+	private javax.swing.JLabel getLblIDGeoIV() {
+		if(lblIDGeoIV == null) {
+			lblIDGeoIV = new javax.swing.JLabel();
+			lblIDGeoIV.setText(resModelDefDialog.getString("lblIDGeoIV_text"));
+			lblIDGeoIV.setName("lblIDGeoIV");
+		}
+		return lblIDGeoIV;
+	}
+	private javax.swing.JLabel getLblFurtherInformation() {
+		if(lblFurtherInformation == null) {
+			lblFurtherInformation = new javax.swing.JLabel();
+			lblFurtherInformation.setText(resModelDefDialog.getString("lblFurtherInformation_text"));
+			lblFurtherInformation.setName("lblFurtherInformation");
+		}
+		return lblFurtherInformation;
 	}
 	/**
 	 * This method initializes cbIsContracted
@@ -2033,6 +2108,30 @@ public void removeObjects(Object source) {
 			txtIssuerURI.setName("txtIssuerURI");
 		}
 		return txtIssuerURI;
+	}
+	private javax.swing.JTextField getTxtTechnicalContact() {
+		if(txtTechnicalContact == null) {
+			txtTechnicalContact = new javax.swing.JTextField();
+			txtTechnicalContact.setToolTipText("mailto:models@office.admin.ch");
+			txtTechnicalContact.setName("txtTechnicalContact");
+		}
+		return txtTechnicalContact;
+	}
+	private javax.swing.JTextField getTxtIDGeoIV() {
+		if(txtIDGeoIV == null) {
+			txtIDGeoIV = new javax.swing.JTextField();
+			txtIDGeoIV.setToolTipText("199.1,199.2,199.3");
+			txtIDGeoIV.setName("txtIDGeoIV");
+		}
+		return txtIDGeoIV;
+	}
+	private javax.swing.JTextField getTxtFurtherInformation() {
+		if(txtFurtherInformation == null) {
+			txtFurtherInformation = new javax.swing.JTextField();
+			txtFurtherInformation.setToolTipText("http://www.office.admin.ch/datamodels/docs.html");
+			txtFurtherInformation.setName("txtFurtherInformation");
+		}
+		return txtFurtherInformation;
 	}
 	/**
 	 * This method initializes txtVersion

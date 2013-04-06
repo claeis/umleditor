@@ -1,3 +1,7 @@
+UML-Editor 3.5.0 (2013-04-06) 
+----------------------------------
+- added fields furtherInformation, technicalContact, IDGeoIV on ModelDef dialog
+
 UML-Editor 3.4.3 (2012-11-12) 
 ----------------------------------
 - fixed encoding of properties/translations in sebase
