@@ -337,8 +337,10 @@ public class TransferFromUmlMetamodel
 		}finally{
 			// close
 			if(!createFileList){
-			  out.close();
-			  out=null;
+				if(out!=null){
+					  out.close();
+					  out=null;
+				}
 			}
 		}
       if(!runIli2c){
