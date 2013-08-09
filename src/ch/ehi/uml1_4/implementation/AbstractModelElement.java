@@ -902,8 +902,8 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       }
       // -end- 33598CAA030E _unlink_body3CE225AB0092 "ModelElement::_unlinkNamespace"
 
-      // -beg- preserve=no 33FFE57B0395 code3CE225AB0092 "clientDependency"
-      private java.util.Set clientDependency = new java.util.HashSet();
+      // -beg- preserve=yes 33FFE57B0395 code3CE225AB0092 "clientDependency"
+      private java.util.List clientDependency = new java.util.ArrayList();
       // -end- 33FFE57B0395 code3CE225AB0092 "clientDependency"
 
       /** add a ClientDependency.
@@ -918,10 +918,12 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       public void addClientDependency(Dependency clientDependency1)
       // -end- 33FFE57B0395 add_head3CE225AB0092 "ModelElement::addClientDependency"
       {
-        // -beg- preserve=no 33FFE57B0395 add_body3CE225AB0092 "ModelElement::addClientDependency"
-        clientDependency.add(clientDependency1);
-        clientDependency1._linkClient(this);
-        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addClientDependency"));
+        // -beg- preserve=yes 33FFE57B0395 add_body3CE225AB0092 "ModelElement::addClientDependency"
+    	  if(!clientDependency.contains(clientDependency1)){
+    	        clientDependency.add(clientDependency1);
+    	        clientDependency1._linkClient(this);
+    	        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addClientDependency"));
+    	  }
         return;
         // -end- 33FFE57B0395 add_body3CE225AB0092 "ModelElement::addClientDependency"
       }
@@ -1002,11 +1004,13 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 
       /** DONT USE; link management internal
        */
-      // -beg- preserve=no 33FFE57B0395 _link_body3CE225AB0092 "ModelElement::_linkClientDependency"
+      // -beg- preserve=yes 33FFE57B0395 _link_body3CE225AB0092 "ModelElement::_linkClientDependency"
       public void _linkClientDependency(Dependency clientDependency1)
       {
-        clientDependency.add(clientDependency1);
-        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkClientDependency"));
+    	  if(!clientDependency.contains(clientDependency1)){
+    	        clientDependency.add(clientDependency1);
+    	        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkClientDependency"));
+    	  }
         return;
       }
       // -end- 33FFE57B0395 _link_body3CE225AB0092 "ModelElement::_linkClientDependency"
