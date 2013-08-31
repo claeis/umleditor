@@ -1193,8 +1193,8 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       }
       // -end- 33E901E003D4 _unlink_body3CE225AB0092 "ModelElement::_unlinkTaggedValue"
 
-      // -beg- preserve=no 33EA67BB010E code3CE225AB0092 "constraint"
-      private java.util.Set constraint = new java.util.HashSet();
+      // -beg- preserve=yes 33EA67BB010E code3CE225AB0092 "constraint"
+      private java.util.List constraint = new java.util.ArrayList();
       // -end- 33EA67BB010E code3CE225AB0092 "constraint"
 
       /** add a Constraint.
@@ -1210,9 +1210,11 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       // -end- 33EA67BB010E add_head3CE225AB0092 "ModelElement::addConstraint"
       {
         // -beg- preserve=no 33EA67BB010E add_body3CE225AB0092 "ModelElement::addConstraint"
-        constraint.add(constraint1);
-        constraint1._linkConstrainedElement(this);
-        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addConstraint"));
+    	  if(!constraint.contains(constraint1)){
+    	        constraint.add(constraint1);
+    	        constraint1._linkConstrainedElement(this);
+    	        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addConstraint"));
+    	  }
         return;
         // -end- 33EA67BB010E add_body3CE225AB0092 "ModelElement::addConstraint"
       }
@@ -1296,8 +1298,10 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       // -beg- preserve=no 33EA67BB010E _link_body3CE225AB0092 "ModelElement::_linkConstraint"
       public void _linkConstraint(Constraint constraint1)
       {
-        constraint.add(constraint1);
-        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkConstraint"));
+    	  if(!constraint.contains(constraint1)){
+    	        constraint.add(constraint1);
+    	        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkConstraint"));
+    	  }
         return;
       }
       // -end- 33EA67BB010E _link_body3CE225AB0092 "ModelElement::_linkConstraint"
