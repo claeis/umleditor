@@ -98,10 +98,18 @@ public ModelElement getConstraints() {
 	java.util.Iterator iterator = getPnlDataSelector().getObjects().iterator();
 	try {
 		while (iterator.hasNext()) {
-			ConstraintExpression expression = new ConstraintExpression();
-			expression.setSyntax((NlsString)iterator.next());
-			ConstraintDef constraintDef = (ConstraintDef)ElementFactory.createObject(ConstraintDef.class);
-			constraintDef.setBody(expression);
+			Object eleo=iterator.next();
+			ConstraintDef constraintDef = null;
+			if(eleo instanceof NlsString){
+				// new constraint
+				ConstraintExpression expression = new ConstraintExpression();
+				expression.setSyntax((NlsString)eleo);
+				constraintDef = (ConstraintDef)ElementFactory.createObject(ConstraintDef.class);
+				constraintDef.setBody(expression);
+			}else{
+				// existing constraint
+				constraintDef = (ConstraintDef)eleo;
+			}
 			modelElement.addConstraint(constraintDef);
 		}
 	} catch(Throwable e) {
@@ -295,6 +303,11 @@ public void removeObject(java.lang.Object object) {}
  * @return the saved object
  */
 public java.lang.Object saveChanges(java.lang.Object object) {
+	if(object instanceof ConstraintDef){
+		ConstraintDef constraintDef = (ConstraintDef)object;
+		((ConstraintExpression)constraintDef.getBody()).setSyntax(new NlsString(((ConstraintExpression)constraintDef.getBody()).getSyntax(), getPnlEditor().getText()));
+		return constraintDef;
+	}
 	return new NlsString((NlsString)object, getPnlEditor().getText());
 }
 /**
@@ -321,7 +334,7 @@ public void setConstraints(ModelElement modelElement) {
 	java.util.ArrayList list = new java.util.ArrayList();
 	while ((iterator != null) && iterator.hasNext()) {
 		ch.ehi.uml1_4.foundation.core.Constraint constraint = (ch.ehi.uml1_4.foundation.core.Constraint)iterator.next();
-		list.add(((ConstraintExpression)constraint.getBody()).getSyntax());
+		list.add(constraint);
 	}
 
 	getPnlDataSelector().setObjects(list);
@@ -335,7 +348,12 @@ public void setCurrentObject(java.lang.Object syntax) {
 		getPnlEditor().setText(null);
 	} else {
 		getPnlEditor().setEditable(true);
-		getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString)syntax)));
+		if(syntax instanceof ConstraintDef){
+			ConstraintDef constraintDef = (ConstraintDef)syntax;
+			getPnlEditor().setText(ElementUtils.mapNlsString(((ConstraintExpression)constraintDef.getBody()).getSyntax()));
+		}else{
+			getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString)syntax)));
+		}
 	}
 }
 public void setObject(Object object){
