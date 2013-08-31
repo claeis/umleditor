@@ -27,11 +27,11 @@ public interface TaggedValue extends Element , ModelElement , java.io.Serializab
 {
   // declare/define something only in the code
   // please fill in/modify the following section
-  // -beg- preserve=no 337A4EF7002C detail_begin "TaggedValue"
-
+  // -beg- preserve=yes 337A4EF7002C detail_begin "TaggedValue"
+	  public static final String TAGGEDVALUE_LANG="";
   // -end- 337A4EF7002C detail_begin "TaggedValue"
 
-  /** attaches a ModelElement.
+/** attaches a ModelElement.
    *  
    *  @see #detachModelElement
    *  @see #getModelElement

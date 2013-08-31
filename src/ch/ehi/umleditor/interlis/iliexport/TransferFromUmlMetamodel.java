@@ -388,7 +388,7 @@ public class TransferFromUmlMetamodel
 		Iterator defLangIt=def.iteratorTaggedValue();
 		while(defLangIt.hasNext()){
 			umlTag=(TaggedValue)defLangIt.next();
-			String name=umlTag.getName().getValue(TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+			String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
 			if(name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)){
 				String value=umlTag.getDataValue();
 			      out.write(getIndent());

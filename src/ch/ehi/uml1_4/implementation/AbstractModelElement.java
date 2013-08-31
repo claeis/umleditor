@@ -23,28 +23,28 @@ package ch.ehi.uml1_4.implementation;
 
     // -beg- preserve=no 3CE225AB0092 autoimport "AbstractModelElement"
     import ch.ehi.uml1_4.foundation.core.ModelElement;
-    import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-    import ch.ehi.basics.tools.AbstractVisitor;
-    import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-    import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-    import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-    import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-    import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-    import ch.ehi.uml1_4.foundation.core.Namespace;
-    import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-    import ch.ehi.uml1_4.foundation.core.Dependency;
-    import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-    import ch.ehi.uml1_4.foundation.core.Constraint;
-    import ch.ehi.uml1_4.foundation.core.PresentationElement;
-    import ch.ehi.uml1_4.foundation.core.Component;
-    import ch.ehi.uml1_4.foundation.core.ElementResidence;
-    import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-    import ch.ehi.uml1_4.foundation.core.Flow;
-    import ch.ehi.uml1_4.foundation.core.Comment;
-    import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-    import ch.ehi.uml1_4.modelmanagement.Package;
-    import ch.ehi.uml1_4.modelmanagement.ElementImport;
-    import ch.ehi.basics.types.NlsString;
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
+import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.foundation.core.Constraint;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.foundation.core.Component;
+import ch.ehi.uml1_4.foundation.core.ElementResidence;
+import ch.ehi.uml1_4.foundation.core.TemplateParameter;
+import ch.ehi.uml1_4.foundation.core.Flow;
+import ch.ehi.uml1_4.foundation.core.Comment;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
+import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import ch.ehi.basics.types.NlsString;
     // -end- 3CE225AB0092 autoimport "AbstractModelElement"
 
     // import declarations
@@ -1026,8 +1026,55 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
       }
       // -end- 33FFE57B0395 _unlink_body3CE225AB0092 "ModelElement::_unlinkClientDependency"
 
-      // -beg- preserve=no 33E901E003D4 code3CE225AB0092 "taggedValue"
-      private java.util.Set taggedValue = new java.util.HashSet();
+      // -beg- preserve=yes 33E901E003D4 code3CE225AB0092 "taggedValue"
+      private java.util.List<TaggedValue> taggedValue = new java.util.ArrayList<TaggedValue>(){
+
+		@Override
+		public boolean add(TaggedValue arg0) {
+			int i=indexOf(arg0);
+			// not found?
+			if(i==-1){
+				// add it
+				return super.add(arg0);
+			}
+			// found, replace with new value
+			super.set(i, arg0);
+			return false;
+		}
+
+		@Override
+		public boolean contains(Object arg0) {
+			int i=indexOf(arg0);
+			if(i==-1){
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		public int indexOf(Object arg0) {
+			TaggedValue arg=(TaggedValue)arg0;
+			for(int i=0;i<size();i++){
+				TaggedValue ele=get(i);
+				if(ele.getName().getValue(TaggedValue.TAGGEDVALUE_LANG).equals(arg.getName().getValue(TaggedValue.TAGGEDVALUE_LANG))){
+					return i;
+				}
+			}
+			// not found
+			return -1;
+		}
+
+		@Override
+		public boolean remove(Object arg0) {
+			int i=indexOf(arg0);
+			if(i==-1){
+				return false;
+			}
+			super.remove(i);
+			return true;
+		}
+    	  
+      };
       // -end- 33E901E003D4 code3CE225AB0092 "taggedValue"
 
       /** add a TaggedValue.

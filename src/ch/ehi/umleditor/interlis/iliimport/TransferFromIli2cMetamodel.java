@@ -6,15 +6,16 @@ import ch.interlis.ili2c.generator.Interlis2Generator;
 
 import java.io.File;
 import java.util.Iterator;
+
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
 import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 
 public class TransferFromIli2cMetamodel
 {
 	public static final String TAGGEDVALUE_ILI_PREFIX="ili:";
-	public static final String TAGGEDVALUE_LANG="";
-  public TransferFromIli2cMetamodel(){
+	public TransferFromIli2cMetamodel(){
   }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
   private void addNamespace(ch.ehi.uml1_4.foundation.core.Namespace ns)
@@ -831,14 +832,14 @@ public class TransferFromIli2cMetamodel
   private void visitMetaValues(ch.ehi.uml1_4.foundation.core.ModelElement ele,ch.ehi.basics.settings.Settings values)
   {
 		if (values != null) {
-			for (Iterator valuei = values.getValues().iterator(); valuei
+			for (Iterator valuei = values.getValuesIterator(); valuei
 					.hasNext();) {
 				String name = (String) valuei.next();
 				String value = values.getValue(name);
 				ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue umlTag;
 				umlTag = (ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue) ch.ehi.umleditor.application.ElementFactory
 						.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
-				umlTag.setName(new NlsString(TAGGEDVALUE_LANG, TAGGEDVALUE_ILI_PREFIX
+				umlTag.setName(new NlsString(TaggedValue.TAGGEDVALUE_LANG, TAGGEDVALUE_ILI_PREFIX
 						+ name));
 				umlTag.setDataValue(value);
 				ele.addTaggedValue(umlTag);

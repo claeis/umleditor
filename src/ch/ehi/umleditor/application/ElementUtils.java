@@ -285,7 +285,7 @@ public static String getIliTaggedValue(ModelDef def,
 	Iterator defLangIt=def.iteratorTaggedValue();
 	while(defLangIt.hasNext()){
 		umlTag=(TaggedValue)defLangIt.next();
-		String name=umlTag.getName().getValue(TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+		String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
 		if(name.equals(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX+tagName)){
 			String value=umlTag.getDataValue();
 			return value;
@@ -304,7 +304,7 @@ public static String getIliTaggedValue(ModelDef def,
 		while (defLangIt.hasNext()) {
 			umlTag = (TaggedValue) defLangIt.next();
 			String name = umlTag.getName().getValue(
-					TransferFromIli2cMetamodel.TAGGEDVALUE_LANG);
+					TaggedValue.TAGGEDVALUE_LANG);
 			if (name.equals(umlTagName)) {
 				if (tagValue == null) {
 					def.removeTaggedValue(umlTag);
@@ -318,7 +318,7 @@ public static String getIliTaggedValue(ModelDef def,
 			umlTag = (TaggedValue) ch.ehi.umleditor.application.ElementFactory
 					.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
 			umlTag.setName(new NlsString(
-					TransferFromIli2cMetamodel.TAGGEDVALUE_LANG,
+					TaggedValue.TAGGEDVALUE_LANG,
 					umlTagName));
 			umlTag.setDataValue(tagValue);
 			def.addTaggedValue(umlTag);

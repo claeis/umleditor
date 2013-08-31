@@ -1,3 +1,9 @@
+UML-Editor 3.5.1 (2013-xx-xx) 
+----------------------------------
+- bug iliexp: fixed NullPointerException if export to an illegal path
+- keep ordering of ModelDef/IMPORTS
+- keep ordering of TaggedValues
+
 UML-Editor 3.5.0 (2013-04-06) 
 ----------------------------------
 - added fields furtherInformation, technicalContact, IDGeoIV on ModelDef dialog
