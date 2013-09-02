@@ -1,10 +1,11 @@
-UML-Editor 3.5.1 (2013-xx-xx) 
+UML-Editor 3.5.1 (2013-09-02) 
 ----------------------------------
 - bug iliexp: fixed NullPointerException if export to an illegal path
 - keep ordering of ModelDef/IMPORTS
 - keep ordering of TaggedValues
 - keep ordering of Constraints
 - bug: keep documentation of constraints after classdef edits 
+- ili2c-4.4.14
 
 UML-Editor 3.5.0 (2013-04-06) 
 ----------------------------------
