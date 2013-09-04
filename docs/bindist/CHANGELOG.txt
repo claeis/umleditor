@@ -1,3 +1,7 @@
+UML-Editor 3.5.2 (2013-09-04) 
+----------------------------------
+- bug: fixed exception if reading some uml-files (because Name of TaggedValue is not yet set)
+
 UML-Editor 3.5.1 (2013-09-02) 
 ----------------------------------
 - bug iliexp: fixed NullPointerException if export to an illegal path

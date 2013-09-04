@@ -24,6 +24,7 @@ package ch.ehi.uml1_4.implementation;
     // -beg- preserve=no 3CE225AB0092 autoimport "AbstractModelElement"
     import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
 import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
@@ -1054,6 +1055,10 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		@Override
 		public int indexOf(Object arg0) {
 			TaggedValue arg=(TaggedValue)arg0;
+			if(arg.getName()==null){
+				// when loading from file by ch.ehi.umleditor.xmiuml.ehi.MyHandler TaggedValue is added before Name is set
+				return super.indexOf(arg);
+			}
 			for(int i=0;i<size();i++){
 				TaggedValue ele=get(i);
 				if(ele.getName().getValue(TaggedValue.TAGGEDVALUE_LANG).equals(arg.getName().getValue(TaggedValue.TAGGEDVALUE_LANG))){
