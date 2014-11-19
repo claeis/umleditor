@@ -632,14 +632,14 @@ public class TransferFromIli2cMetamodel
             // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
             // resolve them first
             if(btype instanceof TypeAlias){
-              Type predefinedBaseType=btype.resolveAliases();
-              if(predefinedBaseType==ilibase.BOOLEAN.getType()
-                  || predefinedBaseType==ilibase.HALIGNMENT.getType()
-                  || predefinedBaseType==ilibase.VALIGNMENT.getType()
-                  || predefinedBaseType==ilibase.NAME.getType()
-                  || predefinedBaseType==ilibase.URI.getType()
+              Domain predefinedBaseDomain=((TypeAlias) btype).getAliasing();
+              if(predefinedBaseDomain==ilibase.BOOLEAN
+                  || predefinedBaseDomain==ilibase.HALIGNMENT
+                  || predefinedBaseDomain==ilibase.VALIGNMENT
+                  || predefinedBaseDomain==ilibase.NAME
+                  || predefinedBaseDomain==ilibase.URI
                   ){
-                attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseType));
+                attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseDomain.getType()));
               }else{
                   TypeAlias type=(TypeAlias)btype;
                   attrtype.attachDomainDef(findDomainDef(type.getAliasing()));

@@ -1,7 +1,8 @@
 UML-Editor 3.6.0 (2014-11-xx) 
 ----------------------------------
-- unwrap multivalue struct attrs to normal uml attrs
+- iliimp: unwrap multivalue struct attrs to normal uml attrs
 - iliimp: import interlis struct attrs as uml attrs
+- bug iliimp: keep DomainRef to DomainDef with BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI
 
 UML-Editor 3.5.2 (2013-09-04) 
 ----------------------------------
