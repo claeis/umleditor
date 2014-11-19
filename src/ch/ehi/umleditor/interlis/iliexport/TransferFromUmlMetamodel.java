@@ -100,6 +100,10 @@ public class TransferFromUmlMetamodel
    */
   transient private boolean runIli2c=false;
 
+  /** name of attribute in wrapper structure (that implements multi-value attributes)
+   */
+  public final static String VALUE_ATTR="value";
+  
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
     {
@@ -2602,7 +2606,7 @@ private void addSimpleEleCond(java.util.Set children,
               }
             }
           }
-          out.write("= value "+(extended?"(EXTENDED)":"")+": MANDATORY "+name+"; END "+name+"_;");newline();
+          out.write("= "+VALUE_ATTR+" "+(extended?"(EXTENDED)":"")+": MANDATORY "+name+"; END "+name+"_;");newline();
     }
     flushedDomainStructs.addAll(domainStructs);
     domainStructs.clear();

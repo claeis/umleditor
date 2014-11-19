@@ -11,10 +11,13 @@ import ch.ehi.basics.types.NlsString;
 import ch.ehi.basics.i18n.MessageFormat;
 import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 
 public class TransferFromIli2cMetamodel
 {
 	public static final String TAGGEDVALUE_ILI_PREFIX="ili:";
+	private final boolean unwrapMultiValueStructAttrs=true;
+	
 	public TransferFromIli2cMetamodel(){
   }
   private java.util.ArrayList namespaceStack=new java.util.ArrayList();
@@ -467,47 +470,51 @@ public class TransferFromIli2cMetamodel
   {
     Type btype=attrib.getDomain();
     if(btype instanceof CompositionType){
-        // StructureAttribute
-        CompositionType type=(CompositionType)btype;
-        ch.ehi.interlis.associations.AssociationDef assoc=new ch.ehi.interlis.associations.AssociationDef();
-        ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)type.getComponentType());
-        ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
-        assoc.setName(new NlsString(modelLanguage,thisclass.getDefLangName()+dest.getDefLangName()));
-        ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
-        destRole.setName(new NlsString(modelLanguage,attrib.getName()));
-		// documentation
-		String ilidoc=attrib.getDocumentation();
-		if(ilidoc!=null){
-			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
-		}
-		// meta values
-		visitMetaValues(destRole,attrib.getMetaValues());
-        destRole.attachParticipant(dest);
-        destRole.setMultiplicity(visitCardinality(type.getCardinality()));
-        destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
-        destRole.setIliAttributeIdx(attrIdx);
-        destRole.setPropExtended(attrib.getExtending()!=null);
-        assoc.addConnection(destRole);
-        ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
-        srcRole.attachParticipant(thisclass);
-        srcRole.setName(thisclass.getName());
-        srcRole.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
-        srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.STRUCTURE);
-		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-		r.setLower(0);
-		r.setUpper(1);
-		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-		m.addRange(r);
-		srcRole.setMultiplicity(m);
-        assoc.addConnection(srcRole);
-        java.util.Iterator rIt=type.iteratorRestrictedTo();
-        while(rIt.hasNext()){
-          destRole.addRestriction(findClassDef((Table)rIt.next()));
-        }
-        // TODO FunctionCall
-        // TODO AttributeValueUsage
-        thisclass.getNamespace().addOwnedElement(assoc);
-        return;
+    	if(unwrapMultiValueStructAttrs && isMultiValueAttributeWrapper(btype)){
+    		// map as a UML attribute (see further down)
+    	}else{
+            // StructureAttribute
+            CompositionType type=(CompositionType)btype;
+            ch.ehi.interlis.associations.AssociationDef assoc=new ch.ehi.interlis.associations.AssociationDef();
+            ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)type.getComponentType());
+            ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
+            assoc.setName(new NlsString(modelLanguage,thisclass.getDefLangName()+dest.getDefLangName()));
+            ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
+            destRole.setName(new NlsString(modelLanguage,attrib.getName()));
+    		// documentation
+    		String ilidoc=attrib.getDocumentation();
+    		if(ilidoc!=null){
+    			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
+    		}
+    		// meta values
+    		visitMetaValues(destRole,attrib.getMetaValues());
+            destRole.attachParticipant(dest);
+            destRole.setMultiplicity(visitCardinality(type.getCardinality()));
+            destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+            destRole.setIliAttributeIdx(attrIdx);
+            destRole.setPropExtended(attrib.getExtending()!=null);
+            assoc.addConnection(destRole);
+            ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
+            srcRole.attachParticipant(thisclass);
+            srcRole.setName(thisclass.getName());
+            srcRole.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
+            srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.STRUCTURE);
+    		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+    		r.setLower(0);
+    		r.setUpper(1);
+    		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+    		m.addRange(r);
+    		srcRole.setMultiplicity(m);
+            assoc.addConnection(srcRole);
+            java.util.Iterator rIt=type.iteratorRestrictedTo();
+            while(rIt.hasNext()){
+              destRole.addRestriction(findClassDef((Table)rIt.next()));
+            }
+            // TODO FunctionCall
+            // TODO AttributeValueUsage
+            thisclass.getNamespace().addOwnedElement(assoc);
+            return;
+    	}
     }else if(btype instanceof ReferenceType){
         // ReferenceAttribute
         ReferenceType type=(ReferenceType)btype;
@@ -579,44 +586,96 @@ public class TransferFromIli2cMetamodel
 
     ch.ehi.interlis.attributes.AttrType battrtype=null;
 
-    if (attrib instanceof LocalAttribute){
-        // DomainAttribute
+    ch.ehi.uml1_4.foundation.datatypes.Multiplicity m=null;
+    if(unwrapMultiValueStructAttrs && btype instanceof CompositionType){
+    	// normales ili Attribut in Wrapper
+    	// ASSERT isMultiValueAttributeWrapper(btype)
         ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
         battrtype=attrtype;
-        // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
-        // resolve them first
-        if(btype instanceof TypeAlias){
-          Type predefinedBaseType=btype.resolveAliases();
-          if(predefinedBaseType==ilibase.BOOLEAN.getType()
-              || predefinedBaseType==ilibase.HALIGNMENT.getType()
-              || predefinedBaseType==ilibase.VALIGNMENT.getType()
-              || predefinedBaseType==ilibase.NAME.getType()
-              || predefinedBaseType==ilibase.URI.getType()
-              ){
-            attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseType));
-          }else{
-              TypeAlias type=(TypeAlias)btype;
-              attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
-          }
-        }else{
-          if(btype!=null){
-            attrtype.attachDirect(visitType(attrib.getContainer(),btype));
-          }
+        CompositionType ctype=(CompositionType)btype;
+        m=visitCardinality(ctype.getCardinality());
+        LocalAttribute wrappedValue=(LocalAttribute) ctype.getComponentType().getElement(LocalAttribute.class, TransferFromUmlMetamodel.VALUE_ATTR);
+        TypeAlias type=(TypeAlias)wrappedValue.getDomain();  // Type vom value Attribut innerhalb der Struktur
+        attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
+    }else{
+    	// normales ili Attribut
+        if (attrib instanceof LocalAttribute){
+            // DomainAttribute
+            ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
+            battrtype=attrtype;
+            // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
+            // resolve them first
+            if(btype instanceof TypeAlias){
+              Type predefinedBaseType=btype.resolveAliases();
+              if(predefinedBaseType==ilibase.BOOLEAN.getType()
+                  || predefinedBaseType==ilibase.HALIGNMENT.getType()
+                  || predefinedBaseType==ilibase.VALIGNMENT.getType()
+                  || predefinedBaseType==ilibase.NAME.getType()
+                  || predefinedBaseType==ilibase.URI.getType()
+                  ){
+                attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseType));
+              }else{
+                  TypeAlias type=(TypeAlias)btype;
+                  attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
+              }
+            }else{
+              if(btype!=null){
+                attrtype.attachDirect(visitType(attrib.getContainer(),btype));
+              }
+            }
         }
+        ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+        r.setLower( btype.isMandatory() ? 1 : 0);
+        r.setUpper(1);
+        m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+        m.addRange(r);
     }
 
-    ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-    r.setLower( btype.isMandatory() ? 1 : 0);
-    r.setUpper(1);
-    ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-    m.addRange(r);
+    
     attrdef.setMultiplicity(m);
 
     attrdef.attachAttrType(battrtype);
     ((ch.ehi.uml1_4.foundation.core.Classifier)getNamespace()).addFeature(attrdef);
   }
 
-  private void visitRoleDef(RoleDef role)
+  private boolean isMultiValueAttributeWrapper(Type btype) {
+	if(!(btype instanceof CompositionType)){
+		return false;
+	}
+	CompositionType type=(CompositionType)btype;
+	Table table=type.getComponentType();
+	// check that only one attribute named "value"
+	Iterator<ViewableTransferElement> attrIter=table.getAttributesAndRoles2();
+	if(!attrIter.hasNext()){
+		// keine Attribute
+		return false;
+	}
+	ViewableTransferElement attr=attrIter.next();
+	if(attrIter.hasNext()){
+		// mehr als ein Attribut
+		return false;
+	}
+	if(!(attr.obj instanceof LocalAttribute)){
+		// kein Attribut, sondern RoleDef
+		return false;
+	}
+	LocalAttribute a=(LocalAttribute)attr.obj;
+	if(!a.getName().equals(TransferFromUmlMetamodel.VALUE_ATTR)){
+		// Attribut hat falschen Namen
+		return false;
+	}
+	// check that type of attribute is a Domain
+	if(!(a.getDomain() instanceof TypeAlias)){
+		return false;
+	}
+	TypeAlias attrType=(TypeAlias)a.getDomain();
+	// check that Domain name is derived from the structure name
+	if(!table.getName().equals(attrType.getAliasing().getName()+"_")){
+		return false;
+	}
+	return true;
+}
+private void visitRoleDef(RoleDef role)
   {
 
     ch.ehi.interlis.associations.RoleDef roledef=new ch.ehi.interlis.associations.RoleDef();
