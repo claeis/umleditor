@@ -104,6 +104,8 @@ public class TransferFromUmlMetamodel
    */
   public final static String VALUE_ATTR="value";
   
+  private boolean useMultiValueStructAttrs=false;
+  
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
     {
@@ -316,7 +318,12 @@ public class TransferFromUmlMetamodel
 	        lineNumber=1;
 	        // write
 	        defineLinkToModelElement(def);
-	        out.write("INTERLIS 2.3;");newline();
+	        out.write("INTERLIS "+def.getVersion()+";");newline();
+	        if(Double.toString(def.getVersion()).equals("2.3")){
+	        	useMultiValueStructAttrs=true;
+	        }else{
+	        	useMultiValueStructAttrs=false;
+	        }
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
@@ -1170,14 +1177,14 @@ public class TransferFromUmlMetamodel
 
     out.write(": ");
 
-    boolean useStruct=false;
+    boolean isMultiValue=false;
     boolean isMandatory=false;
       ch.ehi.uml1_4.foundation.datatypes.Multiplicity m=def.getMultiplicity();
       ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange mr=null;
       if(m!=null){
         mr=(ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange)m.iteratorRange().next();
         if(mr.getUpper()>1){
-          useStruct=true;
+          isMultiValue=true;
         }
         if(mr.getLower()==1){
           isMandatory=true;
@@ -1187,7 +1194,7 @@ public class TransferFromUmlMetamodel
     if(def.containsAttrType()){
       DomainAttribute attrType=(DomainAttribute)def.getAttrType();
       if(attrType.containsDomainDef()){
-          if(useStruct){
+          if(isMultiValue){
         	if(def.getOrdering()==OrderingKind.ORDERED){
                 out.write("LIST ");
         	}else{
@@ -1198,7 +1205,7 @@ public class TransferFromUmlMetamodel
             out.write("MANDATORY ");
           }
           out.write(domainRef(def.getOwner(),attrType.getDomainDef()));
-          if(useStruct){
+          if(isMultiValue  && useMultiValueStructAttrs){
             // reference to STRUCTURE and not DomainDef
             out.write("_");
           }
@@ -2583,31 +2590,33 @@ private void addSimpleEleCond(java.util.Set children,
    private void flushDomainStructs()
     throws java.io.IOException
    {
-    Iterator defi=domainStructs.iterator();
-    while(defi.hasNext()){
-      DomainDef def=(DomainDef)defi.next();
-      String name=def.getName().getValue(language);
-      out.write(getIndent()+"STRUCTURE "+name+"_ ");
-          // if base and base in list of domainstructs?
-            // generate EXTENDS
-          boolean extended=false;
-          Iterator extendsi=def.iteratorGeneralization();
-          while(extendsi.hasNext()){
-            Object obj=extendsi.next();
-            if(obj instanceof ch.ehi.interlis.domainsandconstants.DomainExtends){
-              ch.ehi.interlis.domainsandconstants.DomainExtends extend=(ch.ehi.interlis.domainsandconstants.DomainExtends)obj;
-              if(extend.containsParent()){
-                DomainDef supplier=(DomainDef)extend.getParent();
-                if(flushedDomainStructs.contains(supplier)){
-                  out.write("EXTENDS "+domainRef(def,supplier)+"_ ");
-                  extended=true;
-                }
-                break;
-              }
-            }
-          }
-          out.write("= "+VALUE_ATTR+" "+(extended?"(EXTENDED)":"")+": MANDATORY "+name+"; END "+name+"_;");newline();
-    }
+	   if(useMultiValueStructAttrs){
+		    Iterator defi=domainStructs.iterator();
+		    while(defi.hasNext()){
+		      DomainDef def=(DomainDef)defi.next();
+		      String name=def.getName().getValue(language);
+		      out.write(getIndent()+"STRUCTURE "+name+"_ ");
+		          // if base and base in list of domainstructs?
+		            // generate EXTENDS
+		          boolean extended=false;
+		          Iterator extendsi=def.iteratorGeneralization();
+		          while(extendsi.hasNext()){
+		            Object obj=extendsi.next();
+		            if(obj instanceof ch.ehi.interlis.domainsandconstants.DomainExtends){
+		              ch.ehi.interlis.domainsandconstants.DomainExtends extend=(ch.ehi.interlis.domainsandconstants.DomainExtends)obj;
+		              if(extend.containsParent()){
+		                DomainDef supplier=(DomainDef)extend.getParent();
+		                if(flushedDomainStructs.contains(supplier)){
+		                  out.write("EXTENDS "+domainRef(def,supplier)+"_ ");
+		                  extended=true;
+		                }
+		                break;
+		              }
+		            }
+		          }
+		          out.write("= "+VALUE_ATTR+" "+(extended?"(EXTENDED)":"")+": MANDATORY "+name+"; END "+name+"_;");newline();
+		    }
+	   }
     flushedDomainStructs.addAll(domainStructs);
     domainStructs.clear();
    }

@@ -894,7 +894,7 @@ private void visitRoleDef(RoleDef role)
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2def=null;
     if(mdef==ilibase){
       ili2def=findINTERLIS2Def(modelLanguage,getPredefinedName());
-      ili2def.setVersion(2.3);
+      ili2def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
     }else{
      File cache=new File(System.getProperty("user.home"),".ilicache");
      File ilifile=new File(mdef.getFileName());
@@ -903,7 +903,7 @@ private void visitRoleDef(RoleDef role)
     	 iliFileName="<"+iliFileName+">";
      }
       ili2def=findINTERLIS2Def(modelLanguage,iliFileName);
-      ili2def.setVersion(2.3);
+      ili2def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
     }
 
     ili2def.addOwnedElement(model);
