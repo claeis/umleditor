@@ -1,9 +1,13 @@
-UML-Editor 3.6.0 (2014-11-xx) 
+UML-Editor 3.6.0 (2014-12-30) 
 ----------------------------------
 - iliimp: unwrap multivalue struct attrs to normal uml attrs
 - iliimp: import interlis struct attrs as uml attrs
 - bug iliimp: keep DomainRef to DomainDef with BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI
 - iliexp: export multivalue attrs with ili2.4 syntax
+- bug iliimp: failed to import SET CONSTRAINT
+- bug iliimp: failed to import ViewDef/Selection
+- bug iliimp: failed to import ViewDef/ALL OF
+- ili2c-4.5.6
 
 UML-Editor 3.5.2 (2013-09-04) 
 ----------------------------------
