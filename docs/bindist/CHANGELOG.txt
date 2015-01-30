@@ -1,3 +1,7 @@
+UML-Editor 3.6.1 (2015-01-30) 
+----------------------------------
+- bug iliexp: failed to sort ModelDef inside one ili-file according to dependencies/imports
+
 UML-Editor 3.6.0 (2014-12-30) 
 ----------------------------------
 - iliimp: unwrap multivalue struct attrs to normal uml attrs

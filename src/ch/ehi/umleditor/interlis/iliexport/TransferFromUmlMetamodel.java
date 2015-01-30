@@ -368,27 +368,13 @@ public class TransferFromUmlMetamodel
     throws java.io.IOException
     {
     this.language=language;
-    // enumerate all ModelDef
-    java.util.ArrayList todo=new java.util.ArrayList(); // collection of packages not yet visited
-    // add root package to todo-list; so it is processed as a first element
-    todo.add(def);
-    while(!todo.isEmpty()){
-      Namespace current=(Namespace)todo.get(0);
-      if(current instanceof ModelDef){
+    
+    // enumerate and sort all ModelDef
+    java.util.List todo=sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(def, ModelDef.class));
+    // visit all ModelDef
+    for(Object current : todo){
         newline();
         visitModelDef((ModelDef)current);
-      }else{
-        // add child packages to end of todo list; so we walk the tree by level
-        java.util.Iterator childi=current.iteratorOwnedElement();
-        while(childi.hasNext()){
-          Object obj=childi.next();
-          if(obj instanceof Package){
-            todo.add(obj);
-          }
-        }
-      }
-      // remove current from todo-list
-      todo.remove(0);
     }
     return;
     }
