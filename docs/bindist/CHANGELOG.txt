@@ -1,6 +1,7 @@
 UML-Editor 3.6.1 (2015-01-30) 
 ----------------------------------
 - bug iliexp: failed to sort ModelDef inside one ili-file according to dependencies/imports
+- ili2c-4.5.7
 
 UML-Editor 3.6.0 (2014-12-30) 
 ----------------------------------
