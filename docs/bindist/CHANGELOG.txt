@@ -1,3 +1,7 @@
+UML-Editor 3.6.2 (2015-04-xx) 
+----------------------------------
+- improved label "Language of model presentation"
+
 UML-Editor 3.6.1 (2015-01-30) 
 ----------------------------------
 - bug iliexp: failed to sort ModelDef inside one ili-file according to dependencies/imports
