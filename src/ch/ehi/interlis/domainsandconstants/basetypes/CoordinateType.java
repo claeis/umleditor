@@ -280,10 +280,19 @@ public class CoordinateType extends BaseType implements java.io.Serializable
                   // -end- 39EEB6C10061 size_body394886B10363 "CoordinateType::sizeDim"
                 }
 
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 394886B10363 detail_end "CoordinateType"
 
+				// declare/define something only in the code
+                // please fill in/modify the following section
+                // -beg- preserve=yes 394886B10363 detail_end "CoordinateType"
+                private boolean _generic=false;
+                public boolean isGeneric() {
+					return _generic;
+				}
+
+				public void setGeneric(boolean generic) {
+					this._generic = generic;
+				}
+                
                 // -end- 394886B10363 detail_end "CoordinateType"
 
               }

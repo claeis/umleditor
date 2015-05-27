@@ -1,6 +1,7 @@
 UML-Editor 3.6.2 (2015-04-xx) 
 ----------------------------------
 - improved label "Language of model presentation"
+- iliimp: import GENERIC
 
 UML-Editor 3.6.1 (2015-01-30) 
 ----------------------------------

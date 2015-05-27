@@ -112,7 +112,7 @@ public class NamespaceUtility
     }
 
 
-    throw new java.lang.IllegalStateException("no ownedElement with given name");
+    throw new java.lang.IllegalStateException("no ownedElement with given name <"+name+">");
               // -end- 3CC7BCC30114 body3CC7BC920362 "deepGetOwnedElement"
               }
 

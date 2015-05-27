@@ -1030,6 +1030,7 @@ private void visitRoleDef(RoleDef role)
     {
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType coord=new ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType();
       ret=coord;
+      coord.setGeneric(((CoordType) dd).isGeneric());
       NumericalType[] nts = ((CoordType) dd).getDimensions();
       for (int i = 0; i < nts.length; i++)
       {
