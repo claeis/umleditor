@@ -27,7 +27,6 @@ import javax.swing.*;
  * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:03 $
  */
 public class IliDimPanel extends BasePanel implements DataPanel {
-	private JComboBox ivjCbxAccuracy = null;
 	private JTextField ivjTxtValue = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 
@@ -64,29 +63,6 @@ private void connEtoM1(java.awt.event.FocusEvent arg1) {
 	}
 }
 /**
- * Return the CbxAccuracy property value.
- * @return javax.swing.JComboBox
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JComboBox getCbxAccuracy() {
-	if (ivjCbxAccuracy == null) {
-		try {
-			ivjCbxAccuracy = new javax.swing.JComboBox();
-			ivjCbxAccuracy.setName("CbxAccuracy");
-			ivjCbxAccuracy.setToolTipText("");
-			ivjCbxAccuracy.setBounds(113, 0, 47, 23);
-			// user code begin {1}
-			ivjCbxAccuracy.setToolTipText(getResourceString("CbxAccuracy_toolTipText"));
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjCbxAccuracy;
-}
-/**
  * Return the changed object displayed.
  */
 public Object getObject() {
@@ -94,12 +70,6 @@ public Object getObject() {
 		return null;
 	} else {
 		IliDim iliDim = IliDim.parseIliDim(getTxtValue().getText());
-		if (getCbxAccuracy().getSelectedIndex() > 0) {
-			iliDim.setAccuracy(((Long)getCbxAccuracy().getSelectedItem()).longValue());
-		} else {
-			// assume 0
-			iliDim.setAccuracy(0);
-		}
 		return iliDim;
 	}
 }
@@ -158,17 +128,11 @@ private void initialize() {
 		setLayout(null);
 		setSize(161, 24);
 		add(getTxtValue(), getTxtValue().getName());
-		add(getCbxAccuracy(), getCbxAccuracy().getName());
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
 		handleException(ivjExc);
 	}
 	// user code begin {2}
-	java.util.Vector accuracy = new java.util.Vector(6);
-	for (int i=0; i<6; i++) {
-		accuracy.add(new Long(i));
-	}
-	getCbxAccuracy().setModel(new DefaultComboBoxModel(accuracy));
 	setObject(null);
 	// user code end
 }
@@ -179,10 +143,8 @@ public void setObject(Object object) {
 	IliDim iliDim = (IliDim)object;
 	if (iliDim == null) {
 		getTxtValue().setText(null);
-		getCbxAccuracy().setSelectedIndex(0);
 	} else {
 		getTxtValue().setText(iliDim.toString());
-		getCbxAccuracy().setSelectedItem(new Long(iliDim.getAccuracy()));
 	}
 }
 }
