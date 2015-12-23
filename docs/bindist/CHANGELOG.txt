@@ -1,9 +1,9 @@
-UML-Editor 3.6.2 (2015-04-xx) 
+UML-Editor 3.6.2 (2015-12-23) 
 ----------------------------------
 - improved label "Language of model presentation"
 - removed accuracy combobox from AREA/SURFACE panel
-
 - iliimp: import GENERIC
+- ili2c-4.5.20
 
 UML-Editor 3.6.1 (2015-01-30) 
 ----------------------------------

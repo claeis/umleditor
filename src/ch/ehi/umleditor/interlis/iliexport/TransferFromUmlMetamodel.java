@@ -70,6 +70,7 @@ import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import ch.ehi.umleditor.application.ElementUtils;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 
 import java.io.*;
