@@ -33,6 +33,10 @@ hs_err_pid*
 build/*
 !build/build.xml
 
+#Eclipse
+.classpath .project .settings/
+
+
 ### Linux ###
 *~
 
