@@ -1,0 +1,12 @@
+LblCopyright_text = Ein Open Source Projekt
+LblContractor_text = Im Auftrag von KOGIS
+LblBy_text = by
+LblVersionJava_text = Java-Version:
+LblVersionVirtualMachine_text = Java-VM-Version:
+LblVersionProgram_text = Programm-Version:
+LblVersionInterlis_text = INTERLIS-Version:
+LblVersionUML_text = UML-Version:
+LblSoftwareBy_text = Dieses Produkt enthält Software, die entwickelt wurde durch:
+LblApache_text = - Apache Software Foundation  (http://www.apache.org/)
+LblSoftEnvironment_text = - softEnvironment (http://www.softenvironment.ch/)
+CTDialogTitle = About: {0}

@@ -1,0 +1,700 @@
+package ch.ehi.umleditor.application;
+
+import java.awt.*;
+import javax.swing.*;
+import ch.softenvironment.util.*;
+import ch.softenvironment.view.*;
+
+/**
+ * Typical Info/About User Interface.
+ */
+public class AboutBoxDialog extends BaseDialog {
+	private static java.util.ResourceBundle resAboutBoxDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/AboutBoxDialog");
+	IvjEventHandler ivjEventHandler = new IvjEventHandler();
+	private JLabel ivjLblContractor = null;
+	private JLabel ivjLblCopyright = null;
+	private JLabel ivjLblVersion = null;
+	private JLabel ivjLblEisenhutLogo = null;
+	private JLabel ivjLblBy = null;
+	private JLabel ivjLblInterlisVersion = null;
+	private JLabel ivjLblJavaVMVersion = null;
+	private JLabel ivjLblUMLVersion = null;
+	private JLabel ivjLblVersionInterlis = null;
+	private JLabel ivjLblVersionJava = null;
+	private JLabel ivjLblVersionProgram = null;
+	private JLabel ivjLblVersionUML = null;
+	private JLabel ivjLblVersionVirtualMachine = null;
+	private JLabel ivjLblJavaVersion = null;
+	private JButton ivjBtnOk = null;
+	private JLabel ivjLblDuke = null;
+	private JLabel ivjLblInterlisImage = null;
+	private JPanel ivjPnlBottom = null;
+	private JPanel ivjPnlContents = null;
+	private JPanel ivjPnlLeft = null;
+	private JPanel ivjTxpInfo = null;
+	private JLabel ivjLblApache = null;
+	private JLabel ivjLblSoftEnvironment = null;
+	private JLabel ivjLblSoftwareBy = null;
+
+class IvjEventHandler implements java.awt.event.ActionListener {
+		public void actionPerformed(java.awt.event.ActionEvent e) {
+			if (e.getSource() == AboutBoxDialog.this.getBtnOk())
+				connEtoM1(e);
+		};
+	};
+/**
+ * Constructor
+ */
+public AboutBoxDialog(java.awt.Frame owner) {
+	super(owner, true);
+	initialize();
+	setRelativeLocation(owner);
+	show();
+}
+/**
+ * Constructor
+ * @param owner Symbol
+ * @param modal Symbol
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+public AboutBoxDialog(java.awt.Frame owner, boolean modal) {
+	super(owner, modal);
+	initialize();
+}
+/**
+ * connEtoM1:  (OkButton.action.actionPerformed(java.awt.event.ActionEvent) --> TemplateViewAboutBox.dispose()V)
+ * @param arg1 java.awt.event.ActionEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoM1(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.dispose();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+/**
+ * Return the OkButton property value.
+ * @return javax.swing.JButton
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JButton getBtnOk() {
+	if (ivjBtnOk == null) {
+		try {
+			ivjBtnOk = new javax.swing.JButton();
+			ivjBtnOk.setName("BtnOk");
+			ivjBtnOk.setText("OK");
+			// user code begin {1}
+			ivjBtnOk.setText(getOKString());
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjBtnOk;
+}
+/**
+ * Return the LblApache property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblApache() {
+	if (ivjLblApache == null) {
+		try {
+			ivjLblApache = new javax.swing.JLabel();
+			ivjLblApache.setName("LblApache");
+			ivjLblApache.setText("- Apache Software Foundation  (http://www.apache.org/)");
+			ivjLblApache.setBounds(35, 357, 353, 14);
+			// user code begin {1}
+			ivjLblApache.setText(resAboutBoxDialog.getString("LblApache_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblApache;
+}
+/**
+ * Return the LblBy property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblBy() {
+	if (ivjLblBy == null) {
+		try {
+			ivjLblBy = new javax.swing.JLabel();
+			ivjLblBy.setName("LblBy");
+			ivjLblBy.setText(resAboutBoxDialog.getString("LblBy_text"));
+			ivjLblBy.setBounds(20, 249, 265, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblBy;
+}
+/**
+ * Return the UserName property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblContractor() {
+	if (ivjLblContractor == null) {
+		try {
+			ivjLblContractor = new javax.swing.JLabel();
+			ivjLblContractor.setName("LblContractor");
+			ivjLblContractor.setText(resAboutBoxDialog.getString("LblContractor_text"));
+			ivjLblContractor.setBounds(6, 106, 235, 25);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblContractor;
+}
+/**
+ * Return the Copyright property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblCopyright() {
+	if (ivjLblCopyright == null) {
+		try {
+			ivjLblCopyright = new javax.swing.JLabel();
+			ivjLblCopyright.setName("LblCopyright");
+			ivjLblCopyright.setFont(new java.awt.Font("Arial", 2, 12));
+			ivjLblCopyright.setText(resAboutBoxDialog.getString("LblCopyright_text"));
+			ivjLblCopyright.setBounds(6, 75, 235, 25);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblCopyright;
+}
+/**
+ * Return the IconLabel property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblDuke() {
+	if (ivjLblDuke == null) {
+		try {
+			ivjLblDuke = new javax.swing.JLabel();
+			ivjLblDuke.setName("LblDuke");
+			ivjLblDuke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ch/ehi/umleditor/images/dukeMagnify.gif")));
+			ivjLblDuke.setText("");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblDuke;
+}
+/**
+ * Return the LblEisenhutLogo property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblEisenhutLogo() {
+	if (ivjLblEisenhutLogo == null) {
+		try {
+			ivjLblEisenhutLogo = new javax.swing.JLabel();
+			ivjLblEisenhutLogo.setName("LblEisenhutLogo");
+			ivjLblEisenhutLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ch/ehi/umleditor/images/ehi_logo.gif")));
+			ivjLblEisenhutLogo.setText("JLabel3");
+			ivjLblEisenhutLogo.setBounds(20, 267, 267, 51);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblEisenhutLogo;
+}
+/**
+ * Return the JLabel2 property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblInterlisImage() {
+	if (ivjLblInterlisImage == null) {
+		try {
+			ivjLblInterlisImage = new javax.swing.JLabel();
+			ivjLblInterlisImage.setName("LblInterlisImage");
+			ivjLblInterlisImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ch/ehi/umleditor/images/interlis_logo.gif")));
+			ivjLblInterlisImage.setText("JLabel2");
+			ivjLblInterlisImage.setBounds(178, 21, 119, 54);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblInterlisImage;
+}
+/**
+ * Return the LblInterlisVersion property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblInterlisVersion() {
+	if (ivjLblInterlisVersion == null) {
+		try {
+			ivjLblInterlisVersion = new javax.swing.JLabel();
+			ivjLblInterlisVersion.setName("LblInterlisVersion");
+			ivjLblInterlisVersion.setText("2.2");
+			ivjLblInterlisVersion.setBounds(178, 155, 134, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblInterlisVersion;
+}
+/**
+ * Return the LblUMLVersion property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblJavaVersion() {
+	if (ivjLblJavaVersion == null) {
+		try {
+			ivjLblJavaVersion = new javax.swing.JLabel();
+			ivjLblJavaVersion.setName("LblJavaVersion");
+			ivjLblJavaVersion.setText("<JavaVersion>");
+			ivjLblJavaVersion.setBounds(178, 196, 134, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblJavaVersion;
+}
+/**
+ * Return the LblJavaVMVersion property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblJavaVMVersion() {
+	if (ivjLblJavaVMVersion == null) {
+		try {
+			ivjLblJavaVMVersion = new javax.swing.JLabel();
+			ivjLblJavaVMVersion.setName("LblJavaVMVersion");
+			ivjLblJavaVMVersion.setText("<VMVersion>");
+			ivjLblJavaVMVersion.setBounds(178, 217, 134, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblJavaVMVersion;
+}
+/**
+ * Return the LblSoftEnvironment property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblSoftEnvironment() {
+	if (ivjLblSoftEnvironment == null) {
+		try {
+			ivjLblSoftEnvironment = new javax.swing.JLabel();
+			ivjLblSoftEnvironment.setName("LblSoftEnvironment");
+			ivjLblSoftEnvironment.setText("- softEnvironment (http://www.softenvironment.ch/)");
+			ivjLblSoftEnvironment.setBounds(35, 376, 353, 14);
+			// user code begin {1}
+			ivjLblSoftEnvironment.setText(resAboutBoxDialog.getString("LblSoftEnvironment_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblSoftEnvironment;
+}
+/**
+ * Return the LblSoftwareBy property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblSoftwareBy() {
+	if (ivjLblSoftwareBy == null) {
+		try {
+			ivjLblSoftwareBy = new javax.swing.JLabel();
+			ivjLblSoftwareBy.setName("LblSoftwareBy");
+			ivjLblSoftwareBy.setText("Dieses Produkt enthält Software, die entwickelt wurde durch:");
+			ivjLblSoftwareBy.setBounds(20, 333, 371, 14);
+			// user code begin {1}
+			ivjLblSoftwareBy.setText(resAboutBoxDialog.getString("LblSoftwareBy_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblSoftwareBy;
+}
+/**
+ * Return the LblUMLVersion property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblUMLVersion() {
+	if (ivjLblUMLVersion == null) {
+		try {
+			ivjLblUMLVersion = new javax.swing.JLabel();
+			ivjLblUMLVersion.setName("LblUMLVersion");
+			ivjLblUMLVersion.setText("1.4");
+			ivjLblUMLVersion.setBounds(178, 176, 134, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblUMLVersion;
+}
+/**
+ * Return the Version property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersion() {
+	if (ivjLblVersion == null) {
+		try {
+			ivjLblVersion = new javax.swing.JLabel();
+			ivjLblVersion.setName("LblVersion");
+			ivjLblVersion.setText("<ProgramVersion>");
+			ivjLblVersion.setBounds(178, 134, 134, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersion;
+}
+/**
+ * Return the LblVersionInterlis property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersionInterlis() {
+	if (ivjLblVersionInterlis == null) {
+		try {
+			ivjLblVersionInterlis = new javax.swing.JLabel();
+			ivjLblVersionInterlis.setName("LblVersionInterlis");
+			ivjLblVersionInterlis.setText(resAboutBoxDialog.getString("LblVersionInterlis_text"));
+			ivjLblVersionInterlis.setBounds(51, 155, 118, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersionInterlis;
+}
+/**
+ * Return the LblVersionJava property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersionJava() {
+	if (ivjLblVersionJava == null) {
+		try {
+			ivjLblVersionJava = new javax.swing.JLabel();
+			ivjLblVersionJava.setName("LblVersionJava");
+			ivjLblVersionJava.setText(resAboutBoxDialog.getString("LblVersionJava_text"));
+			ivjLblVersionJava.setBounds(21, 196, 118, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersionJava;
+}
+/**
+ * Return the LblVersionProgram property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersionProgram() {
+	if (ivjLblVersionProgram == null) {
+		try {
+			ivjLblVersionProgram = new javax.swing.JLabel();
+			ivjLblVersionProgram.setName("LblVersionProgram");
+			ivjLblVersionProgram.setText(resAboutBoxDialog.getString("LblVersionProgram_text"));
+			ivjLblVersionProgram.setBounds(21, 134, 118, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersionProgram;
+}
+/**
+ * Return the LblVersionUML property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersionUML() {
+	if (ivjLblVersionUML == null) {
+		try {
+			ivjLblVersionUML = new javax.swing.JLabel();
+			ivjLblVersionUML.setName("LblVersionUML");
+			ivjLblVersionUML.setText(resAboutBoxDialog.getString("LblVersionUML_text"));
+			ivjLblVersionUML.setBounds(51, 176, 118, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersionUML;
+}
+/**
+ * Return the LblVersionVirtualMachine property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblVersionVirtualMachine() {
+	if (ivjLblVersionVirtualMachine == null) {
+		try {
+			ivjLblVersionVirtualMachine = new javax.swing.JLabel();
+			ivjLblVersionVirtualMachine.setName("LblVersionVirtualMachine");
+			ivjLblVersionVirtualMachine.setText(resAboutBoxDialog.getString("LblVersionVirtualMachine_text"));
+			ivjLblVersionVirtualMachine.setBounds(21, 217, 118, 14);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblVersionVirtualMachine;
+}
+/**
+ * Return the ButtonPane property value.
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getPnlBottom() {
+	if (ivjPnlBottom == null) {
+		try {
+			ivjPnlBottom = new javax.swing.JPanel();
+			ivjPnlBottom.setName("PnlBottom");
+			ivjPnlBottom.setLayout(new java.awt.FlowLayout());
+			getPnlBottom().add(getBtnOk(), getBtnOk().getName());
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlBottom;
+}
+/**
+ * Return the JDialogContentPane property value.
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getPnlContents() {
+	if (ivjPnlContents == null) {
+		try {
+			ivjPnlContents = new javax.swing.JPanel();
+			ivjPnlContents.setName("PnlContents");
+			ivjPnlContents.setLayout(new java.awt.BorderLayout());
+			getPnlContents().add(getPnlBottom(), "South");
+			getPnlContents().add(getTxpInfo(), "Center");
+			getPnlContents().add(getPnlLeft(), "West");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlContents;
+}
+/**
+ * Return the IconPane property value.
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getPnlLeft() {
+	if (ivjPnlLeft == null) {
+		try {
+			ivjPnlLeft = new javax.swing.JPanel();
+			ivjPnlLeft.setName("PnlLeft");
+			ivjPnlLeft.setLayout(new java.awt.FlowLayout());
+			getPnlLeft().add(getLblDuke(), getLblDuke().getName());
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlLeft;
+}
+/**
+ * Return the TextPane property value.
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getTxpInfo() {
+	if (ivjTxpInfo == null) {
+		try {
+			ivjTxpInfo = new javax.swing.JPanel();
+			ivjTxpInfo.setName("TxpInfo");
+			ivjTxpInfo.setLayout(null);
+			getTxpInfo().add(getLblVersion(), getLblVersion().getName());
+			getTxpInfo().add(getLblCopyright(), getLblCopyright().getName());
+			getTxpInfo().add(getLblContractor(), getLblContractor().getName());
+			getTxpInfo().add(getLblInterlisImage(), getLblInterlisImage().getName());
+			getTxpInfo().add(getLblEisenhutLogo(), getLblEisenhutLogo().getName());
+			getTxpInfo().add(getLblBy(), getLblBy().getName());
+			getTxpInfo().add(getLblVersionJava(), getLblVersionJava().getName());
+			getTxpInfo().add(getLblVersionVirtualMachine(), getLblVersionVirtualMachine().getName());
+			getTxpInfo().add(getLblJavaVersion(), getLblJavaVersion().getName());
+			getTxpInfo().add(getLblVersionProgram(), getLblVersionProgram().getName());
+			getTxpInfo().add(getLblJavaVMVersion(), getLblJavaVMVersion().getName());
+			getTxpInfo().add(getLblVersionInterlis(), getLblVersionInterlis().getName());
+			getTxpInfo().add(getLblInterlisVersion(), getLblInterlisVersion().getName());
+			getTxpInfo().add(getLblVersionUML(), getLblVersionUML().getName());
+			getTxpInfo().add(getLblUMLVersion(), getLblUMLVersion().getName());
+			getTxpInfo().add(getLblSoftwareBy(), getLblSoftwareBy().getName());
+			getTxpInfo().add(getLblApache(), getLblApache().getName());
+			getTxpInfo().add(getLblSoftEnvironment(), getLblSoftEnvironment().getName());
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTxpInfo;
+}
+/**
+ * Called whenever the part throws an exception.
+ * @param exception java.lang.Throwable
+ */
+protected void handleException(java.lang.Throwable exception) {
+	super.handleException(exception);
+}
+/**
+ * Initializes connections
+ * @exception java.lang.Exception The exception description.
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void initConnections() throws java.lang.Exception {
+	// user code begin {1}
+	// user code end
+	getBtnOk().addActionListener(ivjEventHandler);
+}
+/**
+ * Initialize the class.
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void initialize() {
+	try {
+		// user code begin {1}
+		getLblVersion().setText(LauncherView.getVersion());
+		getLblJavaVersion().setText(System.getProperty("java.version"));
+		getLblJavaVMVersion().setText(System.getProperty("java.vm.version"));
+		// user code end
+		setName("DlgAboutBox");
+		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setSize(493, 475);
+		setTitle("Info zum UML/INTERLIS-Editor");
+		setContentPane(getPnlContents());
+		initConnections();
+	} catch (java.lang.Throwable ivjExc) {
+		handleException(ivjExc);
+	}
+	// user code begin {2}
+	setTitle(NlsUtils.formatMessage(resAboutBoxDialog.getString("CTDialogTitle")
+            , LauncherView.getInstance().getApplicationName()));
+	// user code end
+}
+/**
+ * main entrypoint - starts the part when it is run as an application
+ * @param args java.lang.String[]
+ */
+public static void main(java.lang.String[] args) {
+	try {
+		AboutBoxDialog aAboutBoxDialog;
+		aAboutBoxDialog = new AboutBoxDialog(new java.awt.Frame());
+		aAboutBoxDialog.setModal(true);
+		aAboutBoxDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				System.exit(0);
+			};
+		});
+		aAboutBoxDialog.show();
+		java.awt.Insets insets = aAboutBoxDialog.getInsets();
+		aAboutBoxDialog.setSize(aAboutBoxDialog.getWidth() + insets.left + insets.right, aAboutBoxDialog.getHeight() + insets.top + insets.bottom);
+		aAboutBoxDialog.setVisible(true);
+	} catch (Throwable exception) {
+		System.err.println("Exception occurred in main() of ch.softenvironment.view.BaseDialog");//$NON-NLS-1$
+		exception.printStackTrace(System.out);
+	}
+}
+}

@@ -1,0 +1,816 @@
+UML-Editor 3.6.2 (2015-12-23) 
+----------------------------------
+- improved label "Language of model presentation"
+- removed accuracy combobox from AREA/SURFACE panel
+- iliimp: import GENERIC
+- ili2c-4.5.20
+
+UML-Editor 3.6.1 (2015-01-30) 
+----------------------------------
+- bug iliexp: failed to sort ModelDef inside one ili-file according to dependencies/imports
+- ili2c-4.5.7
+
+UML-Editor 3.6.0 (2014-12-30) 
+----------------------------------
+- iliimp: unwrap multivalue struct attrs to normal uml attrs
+- iliimp: import interlis struct attrs as uml attrs
+- bug iliimp: keep DomainRef to DomainDef with BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI
+- iliexp: export multivalue attrs with ili2.4 syntax
+- bug iliimp: failed to import SET CONSTRAINT
+- bug iliimp: failed to import ViewDef/Selection
+- bug iliimp: failed to import ViewDef/ALL OF
+- ili2c-4.5.6
+
+UML-Editor 3.5.2 (2013-09-04) 
+----------------------------------
+- bug: fixed exception if reading some uml-files (because Name of TaggedValue is not yet set)
+
+UML-Editor 3.5.1 (2013-09-02) 
+----------------------------------
+- bug iliexp: fixed NullPointerException if export to an illegal path
+- keep ordering of ModelDef/IMPORTS
+- keep ordering of TaggedValues
+- keep ordering of Constraints
+- bug: keep documentation of constraints after classdef edits 
+- ili2c-4.4.14
+
+UML-Editor 3.5.0 (2013-04-06) 
+----------------------------------
+- added fields furtherInformation, technicalContact, IDGeoIV on ModelDef dialog
+
+UML-Editor 3.4.3 (2012-11-12) 
+----------------------------------
+- fixed encoding of properties/translations in sebase
+
+UML-Editor 3.4.2 (2012-08-08) 
+----------------------------------
+- fixed encoding of properties/translations
+- ili2c-4.4.7
+
+UML-Editor 3.4.1 (2012-01-26) 
+----------------------------------
+- bug gui: encoding of resources in sebase corrected
+- bug iliimp: wrong multiplicity if MANDATORY BOOLEAN
+
+UML-Editor 3.4.0 (2011-12-29) 
+----------------------------------
+- FILE FORMAT CHANGED: 
+-   This version can read old file format, but may generate an incorrect ili.
+-   Old versions can read new file format with loss and may generate an incorrect ili.
+- bug gui: fixed specialization/extension of classdef/domaindef/topicdef
+- enable modeling of ili struct attr and ili ref attr as UML attribute
+- ili2c-4.4.2
+
+UML-Editor 3.3.1 (2011-11-10) 
+----------------------------------
+- JRE 1.6 required
+- ili2c-4.4.1
+- make use of repositories when importing ili-files 
+- make use of repositories during model check 
+- import ili-files from repositories as "<model.ili>" to prevent later export
+- bug iliexp: fixed sorting ("loop in definitions: ModificationReference->Modifications->ModInfo->ModificationReference")
+
+UML-Editor 3.2.4 (2011-08-04) 
+----------------------------------
+- offer list of common languages in combobox of ModelDef dialog 
+- offer list of languages used in ili-models in editor-languageselection dialog
+- show only IliImport-elements in Import-List; suppress other Dependencies
+- bug iliexp: fixed export of models in language different from ui language
+
+UML-Editor 3.2.3 (2011-07-04) 
+----------------------------------
+- bug iliimp: incomplete import of EXTERNAL+EXTENDED reference attr 
+- bug iliexp: failed to export ref attr with EXTERNAL or RESTRICTION
+- iliexp: eliminated superfluous IMPORTS INTERLIS
+- iliimp/exp: support ili-metaattributes
+- ili2c-4.3.7
+
+UML-Editor 3.2.2 (2011-06-30) 
+----------------------------------
+- bug iliexp: exported an unqualified name if source element at model level and referenced element in a topic in the same model
+- bug iliexp: wrong ordering of elements in model if struct at model level contained a reference to a class inside a topic
+
+UML-Editor 3.2.1 (2011-06-29) 
+----------------------------------
+- bug iliimp: missing FormattedType
+- bug iliimp: import with wrong language of modelling
+- bug iliimp: incomplete import of EXTENDED struct attr
+- ili2c-4.3.6
+
+UML-Editor 3.2.0 (2010-12-28) 
+----------------------------------
+- FILE FORMAT CHANGED: 
+-   This version can read old file format.
+-   This version can save old file format with loss
+-   Old versions can read new file format with loss.
+-   use a filename that ends with "-uml1.uml" to save old file format.
+- bug uml file decoder: handle unknown xml file formats
+- bug uml file decoder: "Name" (NlsString) content was replaced by "DefLangName" 
+- seperate setting of model language from user interface language
+- support multilingual models
+- catch empty names
+- ili2c-4.3.3
+- bug: DomainDef  selection dialog called by AttributeDef dialog suppressed DomainDefs referenced by dependecies of the ClassDef
+
+UML-Editor 3.1.5 (2009-10-20) 
+----------------------------------
+- ili2c-4.2.0
+- iliexp: missleading errmsg "no participant attached" if association incomplete defined
+
+UML-Editor 3.1.4 (2009-02-26) 
+----------------------------------
+- iliexp: link "missing min/max" errmsg to AttributeDef (instead of ClassDef)
+- bug iliexp: NullPointerException if no min/max (date/time/dateTime)
+- iliexp: check if names adhere to ili rules "[a-zA-Z][a-zA-Z_0-9]*"
+- iliexp: run ili-compiler only if no errors found in model by umleditor
+- ili2c-4.1.1
+
+UML-Editor 3.1.3 (2008-12-22) 
+----------------------------------
+- ili2c-4.0.2
+- bug iliexp: generated illegal syntax in ClassType restrictions 
+
+UML-Editor 3.1.2 (2008-09-03) 
+----------------------------------
+- ili2c-3.6.8
+- iliimp: NullPointerException if required model missing
+- iliimp: added TRANSIENT
+- iliexp: added TRANSIENT
+- AttributeDef dialog: added TRANSIENT
+
+UML-Editor 3.1.1 (2008-07-30) 
+----------------------------------
+- ili2c-3.6.7
+- XOR drawing improved
+
+UML-Editor 3.1.0 (2007-12-28) 
+----------------------------------
+- iliexp: added RoleDef XOR
+- iliimp: added RoleDef XOR
+- iliimp: added RoleDef RESTRICTIONS
+- iliimp: added EXTERNAL
+- RoleDef dialog added XOR
+
+UML-Editor 3.0.2 (2007-12-19) 
+----------------------------------
+- bug iliimp: ignored ilidoc comments for attributes
+- bug iliexp: missing ';' at end of TopicDef OID AS
+- sf1845385: incorrect redraw if scaled
+- Bug: active edit box jumped to middle of upper drawing border, due to new layout triggered by a revalidate() call from LauncherView.setStatus()
+
+UML-Editor 3.0.1 (2006-08-11) BETA
+----------------------------------
+- INTERLIS-Compiler 3.1.2
+- bug: plain text instead of links to model elements in logview
+- sf1518703: renamed menu item in LogView ("Effacer le journal" au lieu de "Supprimer")
+
+UML-Editor 3.0.0 (2006-07-07) BETA
+----------------------------------
+- FILE FORMAT CHANGED: 
+-   This version can read old file format, but may generate an incorrect ili.
+-   Old versions (>=2.4.0) can read new file format with loss and may generate an incorrect ili.
+- INTERLIS-Compiler 2.6.0
+- repository adapted to ili2.3
+- repository new per class setting "show constraints"
+- repository new per class setting "show name prefix"
+- ModelDef dialog adapted to ili2.3
+- Date/Time/DateTime panel added 
+- AttributeDef/DomainDef dialogs convert StructuredUnitType and BasketType (removed in ili2.3) to Synatx
+- AttributeDef/DomainDef dialogs convert (CoordinateType->dim instanceof StructuredUnitType) (removed in ili2.3) to Synatx
+- iliexp: ModelDef adapted to ili2.3
+- iliexp: Date/Time/DateTime added 
+- iliexp: semicolon at end of enum element instead of in front
+- iliexp: sort AssociationDef's without name according to concatenated rolenames
+- iliexp: superfluous newlines removed
+- iliimp: read ilidoc comments
+- iliimp: autoconfig ilimodels from current directory and ${umleditor}/ilimodels
+- iliimp: move ilc import to "import group" menu item
+- iliimp: add dependencies to keep ordering as in imported ili-file
+- datatype TEXT adapted to ili2.3
+- Label ClassDef::Attributes::Cardinality externalized 
+
+UML-Editor 2.7.0 (2006-01-23)
+-----------------------------
+- doublclick on NavTree opens Specification of selected Element
+- new NavTree PopupMenu: Diagram-References
+- new PopupMenu: Select Target; Select Owner in NavTree
+- Bug: removing last attribute from an Association suppresses AttributeFigure
+- Bug: Popup-Checkboxes check state in AssociationEnd (aggregated, composite)
+- Bug: NavTree remains as is after ClassDef removal
+- Bug: drag and drop of dependeny didn't work
+- Bug: allow drag and drop of dependency between TopicDef and non-TopicDef
+- Bug: sebase.jar was not up to date
+- Bug: if cardinality or type of attributes are enabled/disabled on a diagram, the enum elements on domaindefs on that diagram disappear
+
+UML-Editor 2.6.0 (2005-12-06)
+-----------------------------
+- display all kind of definitions as class with a stereotype (e.g. domaindefs)
+- INTERLIS-Compiler 2.6.3
+- Bug: entering of cardinality '*' is not interpreted as '0..*'
+
+UML-Editor 2.5.1 (2005-01-27)
+-----------------------------
+- Bug: deletion of a unitdef doesn't cleanup references from numericaltype's
+- Bug: wrong update of row in table, after "Details..." on an attribute on classdef/associationdef dialog
+- Bug: ili2c called with wrong ordering of ili-files
+
+UML-Editor 2.5.0 (2005-01-17)
+-----------------------------
+- FILE FORMAT CHANGED: 
+-   iliAttributeIdx added to RoleDef. 
+-   This version can read old file format. 
+-   Old versions (>=2.4.0) can read new file format with loss and will generate an incorrect ili.
+-   Old versions (<2.4.0) can't read new file format ("unexpected Element <IliAttributeIdx>")
+- INTERLIS-Compiler 2.6.0
+- iliimp: supports now datatype BASKET
+- Bug fc: domains get numbered in report w/o section number
+- Bug: Closing Application by Alt-F4 (Closing Icon) does not hide Launcher any more if last changes not saved yet.
+- show cardinality of attributes on classdef/associationdef dialog
+- iliexp: generate struct or ref attr depending on host/referenced type
+- allow to reorder struct/ref attr on host classdef/associationdef dialog
+- add notice in readme about license
+- iliexp: check cardinality with ref/struct attributes
+- iliimp: keep attribute index of ref/struct attributes
+- iliimp: keep cardinality of ref/struct attributes
+
+UML-Editor 2.4.0 (2004-09-03)
+-----------------------------
+- preliminary GML 3.2 application schema generator added
+- roseimp: imports also operations
+- error processing in uml-file decoder improved; skips unexpected elements
+- Bug iliexp: doesn't export datatype BASKET
+- Bug: class cast exception if moved element is a diagram
+
+UML-Editor 2.3.1 (2004-06-23)
+-----------------------------
+- fc: list EnumElements of attributes in feature catalog
+- nls_fr: changed wrong menu item text "Supprimer du diagramme" in logview
+- Bug iliimp: "IllegalStateException: no ownedElement with given name" if predefined model INTERLIS moved by user
+- Bug: removing of the last sub-element was incomplete; created () when exported to ili
+- Bug: stack overflow because of missing resource
+- Bug: didn't use default locale in some cases
+- Bug: select and change Operation-Name causes wrong renaming (inlcuding visbility-character)
+
+
+UML-Editor 2.3.0 (2004-06-14)
+-----------------------------
+- iliexp: Ausgabe der Modellelemente zusätzlich nach Typ und Name sortieren
+- in Diagramm angezeigte Rollen/Kardinalitäten neu anordnen
+- Datei-Menu enthält Liste der zuletzt geöffneten Dateien
+- Merkmalskatalog auch ohne Kapitelnummerierung (für einfachere Uebernahme ins Word)
+- Bug: "Loeschen im Modell" im Diagramm funktioniert nicht; loescht nur im Diagramm
+
+
+UML-Editor 2.2.1 (2004-04-20)
+-----------------------------
+- Support für Plugins
+- Abstrakte Klassen werden kursiv dargestellt
+- Bug: Position der AssociationClass wird nicht für Diagramm Groesse berücksichtigt
+- Bug: beim löschen von DomainDefs werden die Referenzen in AttributeDefs nicht richtig nachgeführt (tritt nur auf bei fehlerhafter uml-Datei)
+- Bug iliexp: ANYCLASS wurde als INTERLIS.ANYCLASS exportiert
+- Bug iliexp: EXTERNAL hat in RoleDef gefehlt 
+
+
+UML-Editor 2.1.3 (2004-03-02)
+-----------------------------
+- Bug fc: Exception bei NumericType mit undefiniertem Bereich
+- Bug iliexp: Exception bei NumericType mit definiertem Bereich ohne min/max
+- Bug: Klassenname lässt sich in Diagramm nicht editieren
+- Bug: Navigationsbaum wird bei der Funktion "Aus Modell entfernen" nicht richtig nachgeführt 
+
+
+UML-Editor 2.1.1 (2004-03-01)
+-----------------------------
+- INTERLIS-Compiler 2.1.12
+- GUI: Ctrl-S zum Speichern als Keyboard-Accelerator
+- Fehlermeldungen beim Speichern/Lesen der uml-Datei verbessert
+- Beim Speichern wird der Objekt-Baum nicht mehr rekursiv abgearbeitet
+- Bug: Einfügen von ClassDef in Diagramm mit bestehender Abhängigkeit zu nicht darstellbaren Objekten (z.B. ViewDef) erzeugt ClassCastException
+- Bug: Beziehungen auf Beziehungen lassen sich nicht öffnen
+- Bug: Beim Einfügen von bestehenden Klassen in ein Diagramm, werden nicht alle möglichen Beziehungen automatisch nachgeführt
+
+
+UML-Editor 2.1.0 (2004-01-04)
+-----------------------------
+- INTERLIS-Compiler 2.1.11
+- Verschieben von Modellelementen im Navigationsbaum
+- Französische Uebersetzung des Benutzer-Handbuchs
+- Englische Uebersetzung der Handbuecher
+- Diagrammexport nach SVG (Scalable Vector Graphics)
+- Diagrammexport nach WMF (Windows Meta File)
+- NLS: Englische Texte an Programm angepasst
+- NLS: Französische Texte an Programm angepasst
+- NLS: Deutsche Texte an Programm angepasst
+- API: TransferFromIli2cMetamodel kann neu ohne GUI benutzt werden
+- GUI: OID auf TopicDefDialog hinzufuegen
+- GUI: neuer Dialog fuer LineFomTypeDef
+- GUI: neuer Typ OIDType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ ClassType auf DomainDefDialog und AttributDefDialog 
+- GUI: neuer Typ UnknownType auf DomainDefDialog und AttributDefDialog 
+- iliimp, iliexp: OIDType, ClassType hinzugefuegt
+- iliimp, iliexp: LineFormTypeDef hinzugefuegt
+- Bug: RoleDefDialog: beim Loeschen eines Elementes aus der Restricted Liste, wird das Element gelöscht und nicht nur aus der Liste entfernt
+- Bug iliexp: "fileXY written" NLS fehlt
+- Bug: Beim ClassDefDialog kann EXTENDED nicht gesetzt werden, wenn die Basis-Klasse in einem indirekten Basis-Topic ist
+- Bug: RoleDefDialog es koennen keine AssociationDef in Restricted Liste eingefuegt werden
+- Bug: Farbe der Klasse lässt sich nicht ändern
+- Bug: Einfügen von Parent-Klassen bei Vererbung in ein anderes Diagram erzeugt Exception
+- Bug: beim Löschen eines Attributes einer Beziehung gibt es eine Exception
+- Bug: Öffnen von Diagrammen mit Vererbungen ohne Parent-Klasse erzeugt eine Exception
+- Bug: "Löschen (im Modell)" einer Beziehung in einem Diagramm löscht nur die entsprechende Rolle statt die ganze Assoziation
+- Bug: Popupmenu des Logbereichs erscheint nicht vollstaendig sichtbar, wenn das Hauptfenster am unteren Bildschirmrand liegt (KORREKT ab JRE 1.4.1_02)
+- Bug: Popup-Schalter für Kardinalität bei Rollen wird nicht richtig initialisiert
+- Bug: Popup-Schalter für Zeilenumbruch im Logbereich wird nicht richtig initialisiert
+- Bug: Farbedialog zu klein
+
+
+UML-Editor 2.0.2 (2003-10-29)
+-----------------------------
+- INTERLIS-Compiler 2.1.9
+- Englische Uebersetzung der Programm-Texte hinzugefuegt
+- Bug iliimp: Konsistenzbedingung gehen verloren
+- Reihenfolge der Rollen kann auf dem AssociationDef Dialog geändert werden (MoveDown) 
+- Reihenfolge der Attribute kann auf dem AssociationDef/ClassDef Dialog geändert werden (MoveDown) 
+- RoleDef Kardinalität für neue RoleDef's ist neu per Default "0..*" statt "undefiniert"
+- RoleDefDialog hat neu CheckBox "Extern"
+- einfacher SQL-Generator (noch ohne Beziehungen)
+- XML-Elemente in UML-Datei auf neuer Zeile
+- Abhängigkeiten zwischen Klassen sollen auch über Paketgrenzen möglich sein
+- Bug iliimp: exception wenn keine BOID (Mapping) zu MetaDataUseDef vorhanden ist
+- Bug iliimp: exception wenn Model INTERLIS noch nicht vorhanden
+- Bug iliexp: Role-Factor bei RoleDef wird nicht exportiert
+- Bug iliexp: Factor bei AttributeDef wird nicht exportiert
+- Bug: Statusbar zeigt kein "SelektionsWerkzeug" mehr, wenn kein Diagramm offen ist (z.B. nach Schliessen internalFrame)
+- Bug: PopupMenu auch unter Unix/Mac OS X unterstützt
+- Bug: Beschreibungspanel wird bei neuem Modell deaktiviert
+- Bug: Illegale "Linien" werden nach unerlaubtem Zeichnen direkt im Diagramm gelöscht
+- Bug: LinkFigure#removeVisually() -> ConcurrentException ignored
+
+
+UML-Editor 2.0.1 (2003-08-10)
+-----------------------------
+- INTERLIS-Compiler 2.1.8
+- Bug: Suche in der Online-Hilfe funktioniert nicht
+- Bug: beim Suchen werden Attribute und Rollen nicht mitberücksichtigt
+- Bug: beim Oeffnen von Uml-Modellen ohne Modell "INTERLIS" können die Spezifikationsdialoge nicht mehr geöffnet werden
+
+
+UML-Editor 2.0.0 (2003-07-12)
+-----------------------------
+- Bestätigungsdialog vor Ili-Export; damit existierende Dateien nicht überschrieben werden
+- Dokumentation
+- Bug: Modellelemente aus INTERLIS werden nicht in Comboboxen angeboten (z.B ANGLE)
+- Bug: Beziehungen zu Beziehungen können nicht modelliert/dargestellt werden
+- Bug: spezialisierte Beziehungen ohne Rollen können nicht dargestellt werden
+- Bug: Beziehungen zu Beziehungen werden mit einem unerwünschten Knick in der Linie dargestellt
+- Bug: UnitDef-Dialog: "Abbrechen" und "Ok" sind nicht uebersetzbar
+- Bug: DEL-Taste bei Rollenname, schaltet die Rollennamenanzeigen nicht persistent aus
+- Bug: bei einer mehrgliedrigen Beziehung kann die Beziehungsmitte nicht individuell verschoben werden
+- Bug: Drucken funktioniert nicht richtig (Workaround: Diagramm in Datei speichern)
+- Bug iliimp: keine Logmeldung am Ende der Funktion
+- Bug: bei der Sortierung im Navigationsbaum soll Gross/Kleinschreibung ignoriert werden
+
+
+UML-Editor 1.9.6 (2003-06-21)
+-----------------------------
+- Bug iliexp: Attribute mit Kardinalitaet>1 und einem spezialisierten Wertebereich erzeugen ein ungueltiges INTERLIS-Modell
+- Bug iliimp: Beziehungen zu Beziehungen ergeben beim Erzeugen der Diagramme eine classcast-Exception
+
+
+UML-Editor 1.9.5 (2003-05-31)
+-----------------------------
+- Bug: bei DomainDefDialog waren 'Beschreibung'- und 'Detail'-Reiterbezeichnung nicht übersetzbar
+- Bug fr: Dateititel beim Objektkatalog war fehlerhaft (ohne Dateiname) 
+- Bug: Wenn im Diagram bei einer Linie ein Start/Endknoten fehlt, wird die Linie nach einer Mitteilung gelöscht. Diese Mitteilung führte zu einer Exception.
+
+
+UML-Editor 1.9.4 (2003-04-27)
+-----------------------------
+- Bug: Rhomben (bei der Assoziation) werden z.T. innerhalb der Klasse gezeichnet
+
+
+UML-Editor (2003-04-22)
+----------------------------
+- Bug: nicht alle Texte sind auf fr übersetzt
+- Bug: Version aus Resource lesen
+- Bug: beim Aendern der Definition eines AREA/SURFACE/POLYLINE Attributes, wird die Wertebereichsdefinition der Stuetzpunkte gelöscht
+- Bug: Im ENUM Dialog gehen die Namen der Elemente verloren
+
+
+UML-Editor (2003-04-02)
+----------------------------
+- Bug: EnumElement.gif kreiert
+- Bug: MANDATORY wird nicht richtig exportiert
+- Bug: Im Navigationsbaum erscheinen doppelte Scrollbalken
+- Bug: "Aenderungen speichern?": Abbrechen funktioniert jetzt
+- Bug: aktuelle Art der Sortierung wird (im NavTree-Popupmenu) angezeigt
+- Bug: Darstellung einer Assoziation mit Attributen führt zu einer Exception
+- Bug: Attributseperator nicht darstellen, wenn Attribute unterdrückt werden
+- Bug: im Diagramm sollen Eingaben von Klassen- und Attributnamen mit Enter abgeschlossen werden können
+- Bug: RoleDefDialog war zu wenig hoch
+- Bug: verschieben von mehrere Elementen im Diagramm -> Rollen werden mit "Offset" verschoben
+- Bug: beim "Löschen im Modell" eines Pakets, werden offene Diagramme nicht geschlossen
+- Bug: DomainDef Spezifikation (ABSTRACT, MANDATORY, FINAL) waren nicht in Resource
+- Bug: Contract Dialog Titel war nicht in Resource
+- Bug: AttributeDef Dialog ABSTRACT war nicht in Resource
+- Bug: AttributeDef Dialog Ableitung war nicht in Resource
+- Bug: Baskettype Dialog war VIEW nicht in Resource
+- Bug: Navigation-Popupmenu war UmlPackage nicht in Resource
+- Bug: Navigation-Popupmenu ViewProjectionDef gibt es in ILI2.2 nicht mehr; entfernt
+- Bug: für Diagram wird falsches Icon im Navigationsbaum angezeigt
+- Bug: bei Generalisierung und Abhängigkeit im Diagramm-Popupmenu keine Spezifikations- und SelectInBrowser-Funktion
+- Bug: Bei ReferencableComboBox wurde das aktuelle Modellelement nicht angezeigt, wenn schon ein anderes Modellelement mit dem selben Namen in der Liste vorkam
+- Bug: Popupmenu im Diagramm erscheint bei gezoomtem Diagramm an der falschen Position
+- Bug: neue INTERLIS2Def wurden mit Version 2.1 erzeugt
+
+
+UML-Editor (2003-03-18)
+----------------------------
+- Bug: beim Aendern des Wertebereichs eines Attributs (DomainRef) wurde die alte Objektstruktur nicht vollständig aus dem Metamodell entfernt
+- Xsd exp: targetNamespace hinzugefügt
+
+
+UML-Editor (2003-03-09)
+----------------------------
+- Bug: Attributtyp in Diagramm darstellen ohne Text "[Wertebereich]"
+- Bug: innerhalb eines UmlPackages enthält Popupmenu im Navigationsbaum keine Eintraege zum Erzeugen von INTERLIS-Elementen 
+- Bug: Strukturierte Zahlenbereiche werden nicht richtig gespeichert
+- Bug: "Selektieren im Navigationsbaum" selektiert zwar, aber scrollt nicht
+- Bug: Spracheinstellung des Systems wird ignoriert
+- Bug: nach dem Speichern wird das Modell immer wieder als modifiziert gekennzeichnet
+- Bug: beim Suchen unter Einbezug der Beschreibung gibt es bei leerer Beschreibung eine Exception
+
+
+UML-Editor (2003-03-04)
+----------------------------
+- Modell INTERLIS ist immer vorhanden und wird beim importieren nicht neu erzeugt
+- an Ili 2.2 Compiler anpassen
+- Navigationsbaum nach Name oder Art/Name sortieren
+- Funktion Berichte::Struktur
+- Bei Berichten nach Name sortieren
+- Bei Berichten zwischen Rolle und Attributen ein dickerer Strich 
+- Bei Berichten ein Sub-Paket wählen 
+- AttributeDefDialog => Ableitung hat nur noch AttributePath (null oder Text des Syntax-Panel)
+- #121: Launcher->Bearbeiten->Suchen nach Elementen möglich (ein selektiertes Element in der ERgebnisliste wird im NavTree selektiert)
+- #107: Link-Diamant von Assoziationen ein/ausblendbar
+- #105: Assoziationsnamen in Diagramm darstellbar (auf Diagramm und Assoziation manipulierbar)
+- #123: Attribut-Typ & -Kardinalität kann im Diagramm dargestellt werden, Format: name[multiplicity] : Typ - ("Umbenennen" nur für Name möglich)
+- #106: Diagram->neu Funktion "In Navigationsbaum selektieren"
+- Methoden-Separator bei Klassen wird nicht mehr dargestellt
+- Ili exp: Attribute mit Kardinalität>1
+- Zoom: kein Moduswechsel (wie Rational Rose)
+- ZoomIcons: Windows Standard Symbole (Plus/Minus innerhalb der Lupe)
+- Diagram: neue Popup-Funktion("Attribute anzeigen") -> setzt auf allen Klassen <suppressAttribute> property
+- NavTree hat neue Popup-Funktionen "Sortieren"
+- Fenstereinstellungen wie Fenstergrössem, -Position, LogView- und DescriptionPanel-Grösse werden gespeichert
+- Waypoint löschen nur mit Doppelklick und nicht mit Klick
+- "Waypoint anfassen" mit Fangkreis
+- roseimp: bei Spezialisierung einer Klasse mit gleichen Namen wird das Flag EXTENDED gesetzt
+- Bug fix iliexp/imp: BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI
+- Bug fix iliexp: UNIT und DOMAIN wird am Anfang eines Topics nicht geschrieben
+- Bug fix iliexp: UnitDef in Topic wird nicht exportiert
+- Bug fix: Kardinalität bei Attribute wurde falsch angezeigt und gespeichert (get-Funktion zu AttributeDef.multiplicity war falsch) 
+- Bug fix: bei Berichten <predefined> unterdrücken
+
+UML-Editor (2003-02-16)
+----------------------------
+- Modellelemente im Navigationsbaum verschieben
+- Diagramme können neu als Bitmap (JPEG) gespeichert werden
+- Attribute haben neu eine Kardinalitaet und sind nicht nur OPTIONAL/MANDATORY
+- Feature #120: ModelElementSelectionDialog sortiert mit nachfolgendem PackageNamen in Klammern
+- Feature #117: Für Klassen werden gegenüberliegende Rollen im Navigationsbaum angezeigt (schnelles Erkennen von Verbindungen)
+- Feature #118: Lokale Attribute einer Klasse können im Diagramm pro Klasse einzeln ein- und ausgeblendet werden
+- Feature #119: Geerbte Attribute einer Klasse können im Diagramm pro Klasse einzeln ein- und ausgeschaltet werden (gilt auch für Assoziations-Attribute)
+- Feature #124: UmlPackage in NavTree erstellbar und einfügbar in ClassDiagram
+- NLS der Software (Deutsche Begriffe statt INTERLIS-Syntaxelemente)
+- Bug #109: DomainDef wird mit Text*40 neu erzeugt
+- Bug #63: LogView kann nicht mehr unsichtbar (Menu->Ansicht) gemacht werden. Die Laufzeit-Infos sind zu wichtig, als dass sie unterdrückt werden sollten.
+- Bug fix: Skalierte Diagramme erzeugen beim Drucken keinen Fehler mehr
+- Bug fix: Drucken verbessert (automatisches "Fit to page" der aktuellen Sicht im Diagramm auf druckbaren Bereich des Druckers)
+- Bug fix iliexp: RoleDef ohne definierte End-Klasse gibt eine Logmeldung und keine Exception mehr
+- Bug #122: DomainDefDialog  -> Extends passt sich dynamisch an
+- Bug #108: Vererbungspfeil -> etwas dreieckiger als vorher
+- Bug #116: Zoomen neu mit separater Vergrösserung und Verkleinerung
+- Bug #115: Bei Drücken der rechten Maustaste wird ZoomTool aufgehoben und Default-SelektionsTool wird aktiv, d.h. PopupMenu erfolgt automatisch
+- Bug #114: ConstraintDef's können im Navigationsbaum gelöscht werden
+- Bug: ParameterDef's können im Navigationsbaum gelöscht werden
+- Dialoge -> Diverse kosmetische Verbesserungen 
+- ExentedPanel -> zeigt "Erweitert:" für TopicDef, "Spezialisiert:" für alle andern Typen
+- IliBaseLineTypePanel nutzt externalisierten "LineFormTypeDef" Table-header
+- TranslationDialog -> Titelanzeige korrigiert
+- MetaObjectFileDialog -> Titelanzeige korrigiert
+- Bug fix: Notiz graphisch umhängen (Teil von Bug #76)
+- Bug fix: Note und Notizlinie -> popup hat kein unnötiges "Ändern Spezifikation" mehr
+
+
+UML-Editor (2003-01-15)
+----------------------------
+- XMI-Dateien von Rational Rose können importiert werden
+- Bug fix: beim Löschen einer DomainDef wurden Verweise von Attributen nicht nachgeführt 
+- Bug fix iliexp: Fehlermeldung falls zyklischen Definitionen 
+- Bug fix iliexp: EXTENDED AssociationDef führte zu einer Exception 
+- Bug fix roseimp: Attribut mit Wertebereich ENUM und max. Kardinalitaet 1 wird als Attribut uebernommen 
+- Bug fix roseimp: Attribut mit Wertebereich Class wird als Komposition uebernommen 
+
+
+UML-Editor (2002-11-08)
+----------------------------
+- UML-Toolbar hat neues ZOOM-Werkzeug: Zoom anklicken, Bereich im Diagram einrahmen mit linker Maustaste => vergrössern; rechte Maustaste verkleinert
+- RoleDefFigure's (wie "+rolle" oder Kardinalität "0..*") erzeugen keine Linien-Verbindungsfehler mehr beim drüberfahren.
+- RoleDef einfügen aus NavTree (ausser bei einer von mehreren) fehlenden n-ary Rolle
+- VM und Java-Version von OptionenDialog nach AboutBox gewechselt
+- Bug #83: Dokumentationspanel-Cursor korrigiert
+- Bug #84: Änderungen speichern Dialog erscheint nicht mehr für ungeänderte Modelle
+- Bug #76: AssociationDef können graphisch ummodelliert werden (Änderung auf anderen offenen Diagrammen erst nach Schliessen/Öffnen sichtbar; zudem ist Linienzug während Drag nicht sichtbar)
+- Bug  #61: vorhandene, mögliche Edges werden beim Einfügen von Nodes ins Diagram visualisiert
+- Bug fix iliimp: bei Strukturattributen wurde das falschen Assoziationsende als Komposition festgelegt
+- Bug fix iliimp: bei Referenzattributen wurde das falschen Assoziationsende als Referenz festgelegt
+- Bug fix iliexp: Zahlen mit Genauigkeit 0 wurden falsch exportiert
+
+
+UML-Editor (2002-10-20)
+----------------------------
+- ein neues Modell enthält von Anfang an ein TopicDef
+- ObjKatalog: Assoziationen für Struktur- und Referenzattribute werden unterdrückt
+- Bug fix iliexp: UnitDef auf Stufe ModelDef wurde nicht erzeugt
+- Bug fix iliexp: führendes Schlüsselwort UNIT wurde nicht erzeugt
+- Bug fix iliimp: bei einer Compilerwarnung wird der Import-Vorgang nicht abgebrochen
+
+
+UML-Editor (2002-10-11)
+----------------------------
+- newlines in Strings bleiben beim Speichern erhalten
+- Umlaute werden gespeichert und wieder eingelesen
+
+
+UML-Editor (2002-10-08)
+----------------------------
+- Reihenfolge der Modellelemente im Navigationsbaum wird beibehalten
+- Bug fix #71: DiagramM
+- Bug fix #73: scrollbar ModelElementSelectionView
+- Bug fix: Combobox mit referenzierbaren Elementen zeigt aktuelles Element an (auch wenn es nicht mehr in der List ist)
+- Launcher->Extras->Optionen hat neues Panel, das Java-Version und -VM anzeigt
+- iliimp: ModelElement für Metadatenbaskets wird erzeugt
+- iliimp: Bug fix im Compiler (BoidEntry); damit auch Modelle mit Metadaten importiert werden können
+- iliimp: bei einem Compilerfehler wird der Import-Vorgang abgebrochen
+- iliimp: Bug fix im Compiler (MetaObject);damit RefSys bei NumericType richtig übernommen wird
+- Bug fix: ModelDef Auswahl enthielt nicht alle verfügbaren ModelDefs
+- Bug fix iliexp: Schlüsselwort PARAMETER war nicht eingerückt
+- Bug fix iliexp: UnitRef bei NumericalType wurde nicht geschrieben
+- Bug fix iliexp: RefSys bei NumericalType hat eine unbeabsichtigte neue Zeile erzeugt 
+- Bug fix iliexp: ModelDef.IMPORTS hat vollstaendig gefehlt
+- Bug fix iliexp: ModelDef.CONTRACT hat vollstaendig gefehlt
+
+UML-Editor (2002-09-20)
+----------------------------
+- Modell prüfen
+- RoleDefDialog: Referenzart verschoben nach Detail-Reiter
+- EnumPanel: Beschreibung neben Baum (zusätzliche Labels)
+- DomainDefPanel: Knöpfe umbenannt (inkl. ToolTips)
+- CoordPanel: RotationDef als CheckBox und umplatziert
+- ClassDefDialog: Typ nach Detail-Reiter umplatziert
+- Neu: AlignmentPanel auf AttributeDefDialog und DomainDefDialog
+- PrintDialog: NavTree kann nicht mehr hier gedruckt werden
+- Bug Fix: #47 AutoSelect von TextFeldern mittels Tabulator
+- Bug fix iliimp: RoleDef.aggregation wird auch bei Struktur und Referenzattributen initialisiert
+- Bug fix iliexp: Strukturattribut ohne Kardinalitaet kann exportiert werden
+- Bug fix iliexp: keine Leerzeilen ausgeben fuer ModelElemente die nicht ausgegeben werden
+- Bug fix iliimp: bei Struktur und Referenzattributen Rollenname und Assoziationsname generieren
+- Bug fix: #62 Drucken immer möglich
+- StandardToolBar: Drucken und Speichern möglich
+- Launcher->Ansicht: StandardToolBar kann ein/aus geschaltet werden
+- Bug fix: #65 PresentationRoleFigure-update
+- Bug fix: #63 LogView Sichtbarkeit ein/aus
+- Bug fix: #49 Kardinalitäten/Rollen -> wahlweise anzeigen für ganzes Diagramm oder einzeln via PresentationRole-PopupMenu
+- LauncherView -> neuer Dialog für Optionen (nur absolutes Minimum)
+- Bug fix: #60 -> UmlToolBar wird jetzt korrekt angepasst (für JDK 1.3.1)
+- iliexp: bereit für Übersetzung der Fixtexte
+- iliimp: bereit für Übersetzung der Fixtexte
+- modelcheck: bereit für Übersetzung der Fixtexte
+- layout: bereit für Übersetzung der Fixtexte
+
+
+UML-Editor (2002-09-04)
+----------------------------
+- INTERLIS erzeugen
+- Automatische Reihenfolge der Elemente beim INTERLIS export
+- Beschreibung wird mit nach INTERLIS exportiert
+- Bug fix: #58
+- Bug fix: #59
+- Generierte <Namen> haben keine spitzen Klammern mehr
+- Rollenname und Kardinalität wird beim Verschieben der ClassDef relativ mitverschoben (z.Z. immer noch kartesisch)
+- Beschreibung im Launcher wird jetzt auch bei Anklicken von Diagramm-Komponenten angezeigt
+- Bug fix: #57 (Boolean, VAlignment & HAlignment) als neue DirectTypes selektierbar in DomainDefDialog und AttributeDefDialog
+- NumericPanel stellt jetzt auch StructuredUnitType nebst NumericType dar
+- AssociationAttributes werden automatisch dargestellt
+
+
+UML-Editor (2002-08-23)
+----------------------------
+- INTERLIS erzeugen (noch unvollstaendig)
+- Objektkatalog erzeugen
+- MetaDataUseDefDialog erlaubt neu auch die Eingabe von "Basket-OID"
+- MetaObjectFile neu unter "Konzeptueller Sicht" einfügbar
+- Im Launcher gibt es eine neue Menu-Datei-"Speichern unter..." Funktion
+- WorkingDirectory wird "im Kopf behalten"
+- RoleDef-Nodes may be deleted in NavTree
+- Bug Fix (JHotDraw): PopupMenu in Klassendiagrammen jetzt besser sichtbar
+- WayPoints in Linienzügen werden (korrekt) im PräsentationsModel gespeichert und auch beim Öffnen von Diagrammen dargestellt 
+- WayPoints können durch wieder anklicken des entsprechenden Linien- oder auch durch das Standard "Selektions-Werkzeug" eingefügt werden
+- Look & Feel Einstellungen verschoben von <Launcher->Extras> nach <Launcher->Ansicht>
+- Bug fix: es sind nur noch 'Look & Feel' Einstellungen gemäss benutzter Plattform möglich
+- (#38, #24)) RoleDef-Bezeichnung wird neu als eigene Figur dargestellt
+- (#49) Kardinalität wird neu als eigene Figure dargestellt (werden nur eingeblendet, wenn auch ein Wert via RoleDefDialog eingegeben wurde)
+- RoleDefDialog -> Table "RESTRICTED TO" erlaubt das Mapping von ClassDef-Restrictions
+- UmlUsage kann zusätzlich auf INTERLIS-Syntax Panel modelliert werden (UnitDef, FunctionDef, LineFormTypeDef, GraphicParameterDef, ViewDef,GraphicDef) 
+- Vererbte Assoziationen können grafisch modelliert werden
+- n-ary Assoziationen können grafisch modelliert werden
+- Associations können vom NavTree ins Diagramm eingefügt werden
+- Association-PopupMenu adaptiert nach entsprechender PresentationRoleFigure
+- Multiplicity und Rollen werden generisch dargestellt (RO)
+- AttributeDefDialog -> Reference & Structure entfernt
+- RoleDefDialog erweitert als Assoziation/Structure/Reference (inkl. Restricted To-Tabelle)
+- Settings-Filename = "user.home/.umleditor"
+- IliBaseTypeLinePanel -> LineForm-Toggle wurde zwecks Vereinfachung entfernt
+- Bug fix: Note's wieder verwendbar in Diagrammen
+- Bug fix: NoteAnchorLine muss mind. mit einer NoteFigure verbunden sein
+- WarningDialog neu mit optionalem Scrollbar
+- Bug ID #37
+- Bug ID #40
+- Bug ID #54: LogView PopupMenu (NullPointerExc. korrigiert)
+- Bug ID #05: Zeilenumbruch in LogView via Popup einstellbar (Default: ohne Umbruch)
+- Bug ID #53: Explanation aus ContractDialog und ModelDef->Vertrag gelöscht
+- Bug ID #51: korrigiert
+- Bug ID #33: ModelDef werden nur noch über IliImport statt UmlUsage abhängig gemacht (Dependency)
+- Bug ID #42: Folgefehler aus Bug ID #33
+- Bug ID #48: Simpler Hardcopy-Mechanismus der aktuellen Sicht via Datei->Drucken...
+- Bug ID #52: EXTENDED wird beim Speichern von Class/AssociationDefDialog geprüft und entsprechend zurück gesetzt
+- Bug ID #11: Import sind jetzt auch über Dialog möglich
+- Bug ID #15: TopicDefDialog Depends->Neu/Löschen ergänzt
+
+
+UML-Editor (2002-06-14)
+----------------------------
+- Bug ID #8:  in ComboBoxen sind nur Auswahlen möglich, wenn im Model vorhanden
+- Bug ID #9:  Circular-CheckBox ist unabhängig von UnitRef
+- Bug ID #29: Log-Eintrag nach <Datei öffnen> korrigiert
+- BUG ID #30: Splashscreen, Titel in Launcher und AboutBox nach "UML/INTERLIS-Editor" umbenannt
+- Bug ID #33: ReferencableComboBox zeigt qualifizierte Namen an
+- Bug ID #22/23/34: AsociationDefDialog erlaubt Tabellen-Selektionen für Attribute und Rollen
+- Bug ID #41: Assoziationen können neu auch im NavTree hinzugefügt werden (inkl. <Rolle neu/löschen>)
+- Bug ID #44: AttributeDef-Typen werden jetzt korrekt angezeigt
+- Bug ID #46: PatternDef/Use nicht mehr modellierbar in NavTree oder TopicDefDialog
+- Bug ID #43: nach Import mit erweiterten Themen/Klassen kann die ClassDef-Spezifikationen aufgerufen werden
+
+
+UML-Editor (2002-06-11)
+----------------------------
+- Metamodell für mehrsprachige Modelle anpassen
+- INTERLIS importieren: Diagramme erzeugen
+- INTERLIS importieren: Definitionen wo notwendig als Syntax erzeugen
+- Objektkatalog erzeugen
+- Drucken
+- XML als Dateiformat (noch nicht XMI!)
+
+- Bug ID #6: ClassDefDialog "Art" in "Typ" umbenannt
+- Bug ID #6: Bezeichnungstype "DATA" nach "<unrestricted>" in ModelDefDialog und TopicDefDialog geändert
+- Bug ID #5: LogView mit automatischem Zeilenumbruch
+- Bug ID #7: DomainDefDialog setzt bei Typwahl den spezifischen Reiter
+- Bug ID #13: TopicDefDialog -> korrekter Titel
+- Bug ID #19: Mandatory ist nur speicherbar, wenn AttrTypeDef angekreuzt ist
+- Bug ID #20: AttributeDefDialog setzt bei Typwahl den spezifischen Reiter
+- Bug ID #21: ENUM zeigt richtigen ToolTip an
+- Bug ID #27: Drucken des aktuellen Diagrams über Datei->Drucken oder NavTree-Selektion
+- neue Funktion "Interlis-Export"
+- Bug ID #10: ModelDefDialog -> Translation wird als Tabelle dargestellt, Language verknüpft
+- Interlis2DefDialog angepasst (gibt Dateinamensliste entsprechend ModelDef-Sprachen an)
+- EnumPanel erlaubt auch die Eingabe von Documentation pro selektiertem EnumElement
+- ClassDefDialog "Art:" in "Typ:" umbenannt
+- ModelDef/TopicDef Umbenamslung von "DATA" in "<Data>"
+- UmlModelDialog => "Author" wird mit "h" geschrieben
+- Bei DomainDef und AttributeDef wird nach Typ-Wahl immer Reiter des Typs dargestellt
+- TopicDefDialog zeigt korrekten Titel "TopicDef (Spezifikation)"
+- EnumPanel -> Hypertext korrigiert
+- DokPanel speichert geänderten Text nach jedem Tastendruck
+- Neue Funktion: Launcher->Format->Diagramm anordnen
+- Type <Line> wird durch 3 konkrete Typen (POLYLINE, SURFACE, AREA) definiert
+- LinePanel erlaubt 0 oder 1 LineForm
+- AttributeDefDialog: DomainAttribute unterscheidet neu direct<Type> oder DomainDef
+- AttributeDefDialog: AttrTypeDef 0/1 kann angezeigt werden
+- Bug fix: Gleiche Elemente können nicht mehr mehrfach in einem Diagramm hinzugefügt werden
+- Structure's beinhalten zusätzliches Attribut: Part-type
+- Neue Funktion: Gruppe Importieren
+- Neue Funktion: ObjectCatalogue generieren
+- Neue FUnktion: Modelcheck
+- Bug fix: Dialoge sollten nicht mehr 2x geöffnet werden, nach Doppelclick in NavTree
+
+
+
+UML-Editor (2002-04-30)
+----------------------------
+- Interlis SyntaxPanel kann mehrere Iteratoren (Constraints, etc) darstellen
+- Plausibilisierung: Name von ModelElementen nur einmal vorhanden
+- ClassDefDialog (Constraint, ParameterDef speicherbar)
+- AssociationDefDialog (Constraint, Attribute und Rollen speicherbar)
+- AttributeDefDialog (Constraint speicherbar)
+- RoleDefDialog (AbgeleitetVon INTERLIS-Syntax speicherbar)
+- MetaDataUseDefDialog (INTERLIS-Syntax speicherbar)
+- ModelDefDialog (Type, Sprache, Translation, Contract, Import speicherbar)
+- new ContractDialog
+- TopicDef (Type, Abstract, Final speicherbar)
+- ParameterDef und ConstraintDef können nur noch über Dialoge und nicht mehr im NavTree eingefügt werden
+- new PatternUseDialog
+- INTERLIS2DefDialog (Version speicherbar)
+- Type NUMERIC (Def. Bereich speicherbar)
+- AttributeDefDialog (alle spezifischen Typen wechselbar)
+- LineType (Linientyp und Linienform speicherbar)
+- Structure (Art, Kardinalität speicherbar)
+- DomainDefDialog (Detail ausser erweitert, Typen wechselbar)
+- TopicDefDialog (Extends speicherbar)
+- ClassDefDialog (Extends speicherbar)
+- DomainDefDialog (Extends speicherbar)
+- AssociationDefDialog (Extended, DerivedFrom speicherbar)
+- AttributeDefDialog (kind + Syntax speicherbar)
+- UnitDefDialog (Definition speicherbar)
+- PatternUseDialog (PatternDef-Syntax speicherbar)
+- Textuelle Korrekturen (INTERLIS in Dialogen)
+- NumericTypePanel (RefSys, UnitRef speicherbar)
+- ReferenceType (REFERENCE TO speicherbar)
+- LineTypePanel (ControlPoints, LinAttr speicherbar)
+- MetaDataUseDefDialog (kind speicherbar)
+- AttributeDefDialog (Art "Undefiniert" ergänzt);
+- BasketType (speicherbar)
+- EnumType (speicherbar)
+- Bug fix: Renaming AttributeDef in NavTree führt Änderung im Klassendiagramm nach
+- Bug fix: Renaming Nodes in ClassDiagrams wird korrekt plausibilisiert
+- Attribut-Namen in einer Klassen werden auf Gleichnamigkeit plausibilisiert
+- Bei beenden der Applikation über Close-Button (X oder Alt-F4) wird Datei-Speicherung nachgefragt
+- Name nach renaming von NavTree-Knoten werden korrekt dargestellt
+- NavTree->neue Funktion(Einfügen in Diagramm) => Knoten in aktuelles Diagramm übernehmen
+- Line-Type (Arcs/Straights als Flags)
+- INTERLIS einlesen, ohne Diagramme und Syntaxdefinitionen
+
+
+UML-Editor (2002-03-14)
+----------------------------
+- Migration von JHotDraw5.2 zu Version 5.3
+- Fenster kaskadieren/aufteilen
+- neue Assoziation-PopupMenu-Funktion: Composite
+- LogView PopupMenu erweitert
+- RoleDef sichtbar in Navigationsbereich
+- Doppelclick auf ClassDiagram öffnet es
+- erste Version SplashScreen
+- RoleDefDialog verbessert
+- ClassDefDialog verbessert (Attributes-list)
+- AttributeDefDialog verbessert (dynamische Typen <None>, TEXT, ENUM, NUMERIC, COORD zum Teil persistent)
+- DomainDefDialog verbessert (dynamische Typen)
+- generische Dialoge für alle einfachen Navigationsbereich-ModellElemente
+- neu: UnitDefDialog
+- Entfernen von Nodes im Navigationsbereich führt ClassDiagrams nach
+- Entfernen von Edges im Navigationsbereich führt ClassDiagrams nach
+- Entfernen eines ClassDiagrams im Navigationsbereich schliesst Diagram wenn es geöffnet war
+- ClassDef-Attributes persistent
+- AttributeDef können im ClassDiagram hinzugefügt werden
+- Default Model wird bis inkl. ModelDef + Klassen-Diagramm erzeugt, Diagram wird geöffnet und LogicalView wird expandiert
+- Associations (via RoleDef) navigierbar in beiden Richtungen, Aggregable/Composite nur auf einer Seite
+- anzeigen/verstecken LogView via LauncherMenu->Ansicht
+- Notizen können mit Notiz-Anker-Linie an Klassen, Pakete oder andere Notizen "geheftet" werden
+- Kardinalitäten können in PopDown Liste eingegeben werden (s. RoleDef)
+- UmlModelDialog -> Author & Version können abgespeichert werden
+
+
+UML-Editor (2002-02-21)
+----------------------------
+- Vererbungen können grafisch modelliert werden
+- Assoziationen können grafisch modelliert werden
+- Abhängigkeiten können grafisch modelliert werden
+- diverse Fehler korrigiert
+- neuer Spezifikationsdialog für Abhängigkeiten
+- neuer Spezifikationsdialog für Vererbungen
+- Popupmenu für Vererbungen, Assoziationen und Abhängigkeiten
+- Umbennen von Elementen in Klassendiagrammen
+- Anmerkungen in Diagrammen werden gespeichert
+
+
+UML-Editor (2002-01-30)
+----------------------------
+- Funktionen um Beziehungen grafisch zu bearbeiten
+- ClassDef kann auch in ModelDef eingefügt werden
+- VISUELLES Löschen von Paket und Klasse in Diagramm
+- Symbole im Navigationsfenster erscheinen
+
+
+UML-Editor (2002-01-25)
+----------------------------
+- Spezifikationsdialoge vervollständigt
+- Name und Dokumentation mit Metamodell verknüpft
+- Menu vervollständigt
+
+
+UML-Editor (2002-01-21)
+----------------------------
+- Haupt-Programmfenster
+- Layout der Spezifikationsdialoge
+- Navigationsfenster
+- Modell speichern/lesen
+- Metamodell (nicht sichtbar)

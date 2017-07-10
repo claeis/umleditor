@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/XMIFramework.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/usrdocjh.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/sebase.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/jhotdraw53.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/jh.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/ili2c.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/freehep-graphicsio-svg.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/freehep-graphicsio-emf.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/freehep-graphicsio.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/freehep-graphics2d.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/freehep-base.jar"/>
+	<classpathentry kind="lib" path="/home/alejandro/eclipse-workspace/umleditor-3.6.2/lib/ehibasics.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

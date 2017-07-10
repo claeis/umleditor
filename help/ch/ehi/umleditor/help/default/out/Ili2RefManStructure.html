@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INTERLIS2 - Referenzhandbuch</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,next --> 
+<meta name="src" content="Ili2RefManStructure.tex"> 
+<meta name="date" content="2003-07-11 11:48:00"> 
+<link rel="stylesheet" type="text/css" href="Ili2RefManStructure.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                        
+
+                                                                                        
+<h2 class="titleHead">INTERLIS2 - Referenzhandbuch</h2>
+ <div class="author" ></div>
+<br>
+<div class="date" ><span 
+class="cmr-12x-x-120">11.</span><span 
+class="cmr-12x-x-120">&nbsp;Juli 2003</span></div>
+                                                                                        
+
+                                                                                        
+</div>
+                                                                                        
+
+                                                                                        
+<h2 class="likechapterHead"><a 
+  id="x1-1000"></a>Inhaltsverzeichnis</h2> <div class="tableofcontents">
+<span class="chapterToc"> <a 
+href="#Q1-1-3">Abbildungsverzeichnis</a></span>
+<br><span class="chapterToc">1 <a 
+href="#x1-30001" id="QQ2-1-4">Grundprinzipien</a></span>
+<br>&nbsp;<span class="sectionToc">1.1 <a 
+href="#x1-40001.1" id="QQ2-1-5">&Uuml;bersicht</a></span>
+<br>&nbsp;<span class="sectionToc">1.2 <a 
+href="#x1-50001.2" id="QQ2-1-6">Nutzung von Modellen</a></span>
+<br>&nbsp;<span class="sectionToc">1.3 <a 
+href="#x1-60001.3" id="QQ2-1-7">Gliederung in Modelle und Themen</a></span>
+<br>&nbsp;<span class="sectionToc">1.4 <a 
+href="#x1-70001.4" id="QQ2-1-8">Objekt-Konzept</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">1.4.1 <a 
+href="#x1-80001.4.1" id="QQ2-1-9">Objekte und Klassen</a></span>
+<br>&nbsp;<span class="sectionToc">1.5 <a 
+href="#x1-90001.5" id="QQ2-1-10">Sichten-Konzept</a></span>
+<br>&nbsp;<span class="sectionToc">1.6 <a 
+href="#x1-100001.6" id="QQ2-1-11">Grafik-Konzept</a></span>
+<br>&nbsp;<span class="sectionToc">1.7 <a 
+href="#x1-110001.7" id="QQ2-1-12">Kontrakte</a></span>
+<br><span class="chapterToc">2 <a 
+href="#x1-120002" id="QQ2-1-13">Beschreibungssprache</a></span>
+<br>&nbsp;<span class="sectionToc">2.1 <a 
+href="#x1-130002.1" id="QQ2-1-14">Verwendete Syntax</a></span>
+<br>&nbsp;<span class="sectionToc">2.2 <a 
+href="#x1-140002.2" id="QQ2-1-15">Grundsymbole der Sprache</a></span>
+<br>&nbsp;<span class="sectionToc">2.3 <a 
+href="#x1-150002.3" id="QQ2-1-16">Hauptregel</a></span>
+<br>&nbsp;<span class="sectionToc">2.4 <a 
+href="#x1-160002.4" id="QQ2-1-17">Vererbung</a></span>
+<br>&nbsp;<span class="sectionToc">2.5 <a 
+href="#x1-170002.5" id="QQ2-1-18">Modelle, Themen, Klassen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.5.1 <a 
+href="#x1-180002.5.1" id="QQ2-1-19">Modelle</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.5.2 <a 
+href="#x1-190002.5.2" id="QQ2-1-20">Themen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.5.3 <a 
+href="#x1-200002.5.3" id="QQ2-1-21">Klassen und Strukturen</a></span>
+<br>&nbsp;<span class="sectionToc">2.6 <a 
+href="#x1-210002.6" id="QQ2-1-22">Attribute</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.6.1 <a 
+href="#x1-220002.6.1" id="QQ2-1-23">Allgemeines</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.6.2 <a 
+href="#x1-230002.6.2" id="QQ2-1-24">Attribute mit Wertebereichen als Typ</a></span>
+<br>&nbsp;<span class="sectionToc">2.7 <a 
+href="#x1-240002.7" id="QQ2-1-25">Eigentliche Beziehungen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.7.1 <a 
+href="#x1-250002.7.1" id="QQ2-1-26">Allgemeines</a></span>
+                                                                                        
+
+                                                                                        
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.7.2 <a 
+href="#x1-260002.7.2" id="QQ2-1-27">St&auml;rke der Beziehung</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.7.3 <a 
+href="#x1-270002.7.3" id="QQ2-1-28">Kardinalit&auml;t</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.7.4 <a 
+href="#x1-280002.7.4" id="QQ2-1-29">Geordnete Beziehungen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.7.5 <a 
+href="#x1-290002.7.5" id="QQ2-1-30">Beziehungszug&auml;nge</a></span>
+<br>&nbsp;<span class="sectionToc">2.8 <a 
+href="#x1-300002.8" id="QQ2-1-31">Wertebereiche und Konstanten</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.1 <a 
+href="#x1-310002.8.1" id="QQ2-1-32">Zeichenketten</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.2 <a 
+href="#x1-320002.8.2" id="QQ2-1-33">Aufz&auml;hlungen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.3 <a 
+href="#x1-330002.8.3" id="QQ2-1-34">Textausrichtungen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.4 <a 
+href="#x1-340002.8.4" id="QQ2-1-35">Boolean</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.5 <a 
+href="#x1-350002.8.5" id="QQ2-1-36">Numerische Datentypen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.6 <a 
+href="#x1-360002.8.6" id="QQ2-1-37">Strukturierte Wertebereiche</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.7 <a 
+href="#x1-370002.8.7" id="QQ2-1-38">Koordinaten</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.8 <a 
+href="#x1-380002.8.8" id="QQ2-1-39">Wertebereiche von Objektidentifikationen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.9 <a 
+href="#x1-390002.8.9" id="QQ2-1-40">Beh&auml;lter</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.10 <a 
+href="#x1-400002.8.10" id="QQ2-1-41">Klassentypen</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.11 <a 
+href="#x1-410002.8.11" id="QQ2-1-42">Linienz&uuml;ge</a></span>
+<br>&nbsp;&nbsp;<span class="subsectionToc">2.8.12 <a 
+href="#x1-450002.8.12" id="QQ2-1-46">Einzelfl&auml;chen und Gebietseinteilungen</a></span>
+<br>&nbsp;<span class="sectionToc">2.9 <a 
+href="#x1-490002.9" id="QQ2-1-50">Einheiten</a></span>
+<br>&nbsp;<span class="sectionToc">2.10 <a 
+href="#x1-500002.10" id="QQ2-1-51">Umgang mit Metaobjekten</a></span>
+<br>&nbsp;<span class="sectionToc">2.11 <a 
+href="#x1-510002.11" id="QQ2-1-52">Laufzeitparameter</a></span>
+<br>&nbsp;<span class="sectionToc">2.12 <a 
+href="#x1-520002.12" id="QQ2-1-53">Konsistenzbedingungen</a></span>
+<br>&nbsp;<span class="sectionToc">2.13 <a 
+href="#x1-530002.13" id="QQ2-1-54">Ausdr&uuml;cke</a></span>
+<br>&nbsp;<span class="sectionToc">2.14 <a 
+href="#x1-540002.14" id="QQ2-1-55">Funktionen</a></span>
+<br>&nbsp;<span class="sectionToc">2.15 <a 
+href="#x1-550002.15" id="QQ2-1-56">Sichten</a></span>
+<br>&nbsp;<span class="sectionToc">2.16 <a 
+href="#x1-560002.16" id="QQ2-1-57">Darstellungsbeschreibungen</a></span>
+<br><span class="chapterToc">3 <a 
+href="#x1-570003" id="QQ2-1-58">Sequentieller Transfer</a></span>
+<br><span class="appendixToc">A <a 
+href="#x1-58000A" id="QQ2-1-59">(normativ) Das interne INTERLIS-Datenmodell</a></span>
+<br><span class="appendixToc">B <a 
+href="#x1-59000B" id="QQ2-1-60">(normativ f&uuml;r CH) Zeichentabelle</a></span>
+<br><span class="appendixToc">C <a 
+href="#x1-60000C" id="QQ2-1-61">(informativ) Das kleine Beispiel Roads</a></span>
+<br><span class="appendixToc">D <a 
+href="#x1-61000D" id="QQ2-1-62">(informativ) Index</a></span>
+<br><span class="appendixToc">E <a 
+href="#x1-62000E" id="QQ2-1-63">(Standard-Erweiterungsvorschlag) Aufbau von Objektidentifikatoren (OID)</a></span>
+                                                                                        
+
+                                                                                        
+<br><span class="appendixToc">F <a 
+href="#x1-63000F" id="QQ2-1-64">(Standard-Erweiterungsvorschlag) Eindeutigkeit von Benutzerschl&uuml;sseln</a></span>
+<br><span class="appendixToc">G <a 
+href="#x1-64000G" id="QQ2-1-65">(Standard-Erweiterungsvorschlag) Einheiten-Definitionen</a></span>
+<br><span class="appendixToc">H <a 
+href="#x1-65000H" id="QQ2-1-66">(Standard-Erweiterungsvorschlag) Zeit-Definitionen</a></span>
+<br><span class="appendixToc">I <a 
+href="#x1-66000I" id="QQ2-1-67">(Standard-Erweiterungsvorschlag) Farben-Definitionen</a></span>
+<br><span class="appendixToc">J  <a 
+href="#x1-67000J" id="QQ2-1-68">(Standard-Erweiterungsvorschlag)  Koordinatensysteme  und
+Koordinaten-Referenzsysteme</a></span>
+<br><span class="appendixToc">K <a 
+href="#x1-68000K" id="QQ2-1-69">(Standard-Erweiterungsvorschlag) Signaturenmodelle</a></span>
+<br><span class="appendixToc">L <a 
+href="#x1-69000L" id="QQ2-1-70">(informativ) Glossar</a></span>
+</div>
+                                                                                        
+
+                                                                                        
+<h2 class="likechapterHead"><a 
+  id="x1-2000"></a>Abbildungsverzeichnis</h2> <a 
+  id="Q1-1-3"></a> <div class="tableofcontents"><span class="lofToc">&nbsp;<a 
+href="#x1-57001">Figur 1: Datentransfer zwischen verschiedenen
+Datenbanken &uuml;ber gemeinsames Datenmodell (Datenschema) beschrieben
+mit gemeinsamer Datenbeschreibungssprache.</a></span><br>
+</div>
+                                                                                        
+
+                                                                                        
+<h2 class="chapterHead"><span class="titlemark">Kapitel&nbsp;1</span><br><a 
+  id="x1-30001"></a>Grundprinzipien</h2>
+<h3 class="sectionHead"><span class="titlemark">1.1   </span> <a 
+  id="x1-40001.1"></a>&Uuml;bersicht</h3>
+<!--l. 136--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">1.2   </span> <a 
+  id="x1-50001.2"></a>Nutzung von Modellen</h3>
+<!--l. 139--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">1.3   </span> <a 
+  id="x1-60001.3"></a>Gliederung in Modelle und Themen</h3>
+<!--l. 141--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">1.4   </span> <a 
+  id="x1-70001.4"></a>Objekt-Konzept</h3>
+<!--l. 143--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">1.4.1   </span> <a 
+  id="x1-80001.4.1"></a>Objekte und Klassen</h4>
+<!--l. 144--><p class="noindent">1.4.2 Klassenerweiterung und Polymorphismus 14 1.4.3 Meta-Modelle und Meta-Objekte 14 1.4.4
+Beziehungen zwischen Objekten 15 1.4.5 Beh&auml;lter, Replikation und Datentransfer
+16
+<h3 class="sectionHead"><span class="titlemark">1.5   </span> <a 
+  id="x1-90001.5"></a>Sichten-Konzept</h3>
+<!--l. 151--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">1.6   </span> <a 
+  id="x1-100001.6"></a>Grafik-Konzept</h3>
+                                                                                        
+
+                                                                                        
+<!--l. 153--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">1.7   </span> <a 
+  id="x1-110001.7"></a>Kontrakte</h3>
+<!--l. 155--><p class="noindent">1.8 Dienste, Werkzeugf&auml;higkeiten und Konformit&auml;t 20 1.9 Das kleine Beispiel Roads als Einstieg
+21 1.10 Weitere Gliederung des Referenzhandbuchs 22
+                                                                                        
+
+                                                                                        
+<h2 class="chapterHead"><span class="titlemark">Kapitel&nbsp;2</span><br><a 
+  id="x1-120002"></a>Beschreibungssprache</h2>
+<h3 class="sectionHead"><span class="titlemark">2.1   </span> <a 
+  id="x1-130002.1"></a>Verwendete Syntax</h3>
+<!--l. 164--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.2   </span> <a 
+  id="x1-140002.2"></a>Grundsymbole der Sprache</h3>
+<!--l. 165--><p class="noindent">2.2.1 Zeichenvorrat, Zwischenr&auml;ume und Zeilenenden 24 2.2.2 Namen 24 2.2.3 Zeichenketten 24
+2.2.4 Zahlen 25 2.2.5 Eigenschaftsmengen 25 2.2.6 Erl&auml;uterungen 26 2.2.7 Sonderzeichen und
+reservierte W&ouml;rter 26 2.2.8 Kommentare 27 2.2.8.1 Zeilenkommentar 27 2.2.8.2 Blockkommentar
+27
+<h3 class="sectionHead"><span class="titlemark">2.3   </span> <a 
+  id="x1-150002.3"></a>Hauptregel</h3>
+<!--l. 179--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.4   </span> <a 
+  id="x1-160002.4"></a>Vererbung</h3>
+<!--l. 181--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.5   </span> <a 
+  id="x1-170002.5"></a>Modelle, Themen, Klassen</h3>
+<!--l. 183--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.5.1   </span> <a 
+  id="x1-180002.5.1"></a>Modelle</h4>
+<!--l. 186--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.5.2   </span> <a 
+  id="x1-190002.5.2"></a>Themen</h4>
+                                                                                        
+
+                                                                                        
+<!--l. 189--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.5.3   </span> <a 
+  id="x1-200002.5.3"></a>Klassen und Strukturen</h4>
+<!--l. 191--><p class="noindent">2.5.4 Namensr&auml;ume 32
+<h3 class="sectionHead"><span class="titlemark">2.6   </span> <a 
+  id="x1-210002.6"></a>Attribute</h3>
+<!--l. 196--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.6.1   </span> <a 
+  id="x1-220002.6.1"></a>Allgemeines</h4>
+<!--l. 198--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.6.2   </span> <a 
+  id="x1-230002.6.2"></a>Attribute mit Wertebereichen als Typ</h4>
+<!--l. 201--><p class="noindent">2.6.3 Referenzattribute 34 2.6.4 Strukturattribut 34
+<h3 class="sectionHead"><span class="titlemark">2.7   </span> <a 
+  id="x1-240002.7"></a>Eigentliche Beziehungen</h3>
+<!--l. 207--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.7.1   </span> <a 
+  id="x1-250002.7.1"></a>Allgemeines</h4>
+<!--l. 209--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.7.2   </span> <a 
+  id="x1-260002.7.2"></a>St&auml;rke der Beziehung</h4>
+                                                                                        
+
+                                                                                        
+<!--l. 212--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.7.3   </span> <a 
+  id="x1-270002.7.3"></a>Kardinalit&auml;t</h4>
+<!--l. 215--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.7.4   </span> <a 
+  id="x1-280002.7.4"></a>Geordnete Beziehungen</h4>
+<!--l. 217--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.7.5   </span> <a 
+  id="x1-290002.7.5"></a>Beziehungszug&auml;nge</h4>
+<!--l. 220--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.8   </span> <a 
+  id="x1-300002.8"></a>Wertebereiche und Konstanten</h3>
+<!--l. 223--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.1   </span> <a 
+  id="x1-310002.8.1"></a>Zeichenketten</h4>
+<!--l. 226--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.2   </span> <a 
+  id="x1-320002.8.2"></a>Aufz&auml;hlungen</h4>
+<!--l. 229--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.3   </span> <a 
+  id="x1-330002.8.3"></a>Textausrichtungen</h4>
+<!--l. 232--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.4   </span> <a 
+  id="x1-340002.8.4"></a>Boolean</h4>
+                                                                                        
+
+                                                                                        
+<!--l. 235--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.5   </span> <a 
+  id="x1-350002.8.5"></a>Numerische Datentypen</h4>
+<!--l. 238--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.6   </span> <a 
+  id="x1-360002.8.6"></a>Strukturierte Wertebereiche</h4>
+<!--l. 240--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.7   </span> <a 
+  id="x1-370002.8.7"></a>Koordinaten</h4>
+<!--l. 243--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.8   </span> <a 
+  id="x1-380002.8.8"></a>Wertebereiche von Objektidentifikationen</h4>
+<!--l. 246--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.9   </span> <a 
+  id="x1-390002.8.9"></a>Beh&auml;lter</h4>
+<!--l. 249--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.10   </span> <a 
+  id="x1-400002.8.10"></a>Klassentypen</h4>
+<!--l. 251--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.11   </span> <a 
+  id="x1-410002.8.11"></a>Linienz&uuml;ge</h4>
+<!--l. 253--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.11.1   </span> <a 
+  id="x1-420002.8.11.1"></a>Geometrie des Linienzugs</h5>
+                                                                                        
+
+                                                                                        
+<!--l. 255--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.11.2   </span> <a 
+  id="x1-430002.8.11.2"></a>Linienzug mit Strecken und Kreisbogen als vordefinierte Kurvenst&uuml;cke</h5>
+<!--l. 258--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.11.3   </span> <a 
+  id="x1-440002.8.11.3"></a>Weitere Kurvenst&uuml;ck-Formen</h5>
+<!--l. 261--><p class="noindent">
+<h4 class="subsectionHead"><span class="titlemark">2.8.12   </span> <a 
+  id="x1-450002.8.12"></a>Einzelfl&auml;chen und Gebietseinteilungen</h4>
+<!--l. 263--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.12.1   </span> <a 
+  id="x1-460002.8.12.1"></a>Geometrie von Fl&auml;chen</h5>
+<!--l. 265--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.12.2   </span> <a 
+  id="x1-470002.8.12.2"></a>Einzelfl&auml;chen</h5>
+<!--l. 268--><p class="noindent">
+<h5 class="subsubsectionHead"><span class="titlemark">2.8.12.3   </span> <a 
+  id="x1-480002.8.12.3"></a>Fl&auml;chen einer Gebietseinteilung</h5>
+<!--l. 270--><p class="noindent">2.8.12.4 Erweiterbarkeit 57
+<h3 class="sectionHead"><span class="titlemark">2.9   </span> <a 
+  id="x1-490002.9"></a>Einheiten</h3>
+<!--l. 274--><p class="noindent">2.9.1 Basiseinheiten 57 2.9.2 Abgeleitete Einheiten 58 2.9.3 Zusammengesetzte Einheiten 58 2.9.4
+Strukturierte Einheiten 58
+<h3 class="sectionHead"><span class="titlemark">2.10   </span> <a 
+  id="x1-500002.10"></a>Umgang mit Metaobjekten</h3>
+                                                                                        
+
+                                                                                        
+<!--l. 281--><p class="noindent">2.10.1 Allgemeines 59 2.10.2 Parameter 60 2.10.2.1 Parameter f&uuml;r Referenz- und
+Koordinatensysteme 60 2.10.2.2 Parameter von Signaturen 61 2.10.3 Referenzsysteme
+61
+<h3 class="sectionHead"><span class="titlemark">2.11   </span> <a 
+  id="x1-510002.11"></a>Laufzeitparameter</h3>
+<!--l. 290--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.12   </span> <a 
+  id="x1-520002.12"></a>Konsistenzbedingungen</h3>
+<!--l. 292--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.13   </span> <a 
+  id="x1-530002.13"></a>Ausdr&uuml;cke</h3>
+<!--l. 294--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.14   </span> <a 
+  id="x1-540002.14"></a>Funktionen</h3>
+<!--l. 297--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.15   </span> <a 
+  id="x1-550002.15"></a>Sichten</h3>
+<!--l. 300--><p class="noindent">
+<h3 class="sectionHead"><span class="titlemark">2.16   </span> <a 
+  id="x1-560002.16"></a>Darstellungsbeschreibungen</h3>
+                                                                                        
+
+                                                                                        
+<h2 class="chapterHead"><span class="titlemark">Kapitel&nbsp;3</span><br><a 
+  id="x1-570003"></a>Sequentieller Transfer</h2>
+<!--l. 304--><p class="noindent">3.1 Einleitung 79 3.2 Allgemeine Regeln f&uuml;r den sequentiellen Transfer 79 3.2.1 Ableitbarkeit aus
+dem Datenmodell 79 3.2.2 Lesen von erweiterten Modellen 79 3.2.3 Aufbau eines Transfers:
+Vorspann 79 3.2.4 Transferierbare Objekte 80 3.2.5 Reihenfolge der Objekte im Datenbereich 80
+3.2.6 Codierung der Objekte 80 3.2.7 Transferarten 80 3.3 XML-Codierung 81 3.3.1 Einleitung 81
+3.3.2 Zeichencodierung 82 3.3.3 Allgemeiner Aufbau der Transferdatei 82 3.3.4 Vorspann 83
+3.3.4.1 Bedeutung und Inhalt der Alias-Tabelle 83 3.3.5 Datenbereich 88 3.3.6 Codierung von
+Themen 88 3.3.7 Codierung von Klassen 89 3.3.8 Codierung von Sichten 89 3.3.9 Codierung
+von Beziehungen mit eigener Identit&auml;t 89 3.3.10 Codierung von Beziehungen ohne
+eigene Identit&auml;t 90 3.3.11 Codierung von Grafikdefinitionen 90 3.3.12 Codierung von
+Attributen 90 3.3.12.1 Allgemeine Regeln 90 3.3.12.2 Codierung von Zeichenkette,
+URI und NAME 91 3.3.12.3 Codierung von Aufz&auml;hlungen 91 3.3.12.4 Codierung von
+numerischen Datentypen 91 3.3.12.5 Codierung von strukturierten Wertebereichen 91 3.3.12.6
+Codierung von BASKET 91 3.3.12.7 Codierung von CLASS 91 3.3.12.8 Codierung von
+STRUCTURE 92 3.3.12.9 Codierung von BAG OF und LIST OF 92 3.3.12.10 Codierung
+von Koordinaten 92 3.3.12.11 Codierung von POLYLINE 92 3.3.12.12 Codierung von
+SURFACE und AREA 93 3.3.12.13 Codierung von Referenzen 94 3.3.12.14 Codierung von
+METAOBJECT und METAOBJECT OF 94 3.4 Verwendung von XML-Werkzeugen
+94
+<a 
+  id="x1-57001"></a>
+<!--l. 345--><p class="noindent">Figur 2: Spezialisierung der Modellierung eines Konzepts von Stufe Bund &uuml;ber kantonale
+(l&auml;nderspezifische) bis lokale Stufe. 11 Figur 3: Vererbungs-Hierarchie von Adresse, Person und
+Geb&auml;ude. 12 Figur 4: Nachf&uuml;hrung in der Prim&auml;r-Datenbank und anschliessende Nachlieferung
+an Sekund&auml;r-Datenbanken (ein doppelter Pfeil bedeutet inkrementelle Nachlieferung). 17 Figur 5:
+Grafikdefinitionen, die einerseits auf Daten und Sichten und andererseits auf Signaturen
+aufbauen, um daraus eine Grafik zu erzeugen (abstrahierte Darstellung). 19 Figur 6: Die
+verschiedenen Einsatzgebiete von INTERLIS (ein doppelter Pfeil bedeutet inkrementelle
+Nachlieferung). 21 Figur 7: Das kleine Beispiel Roads. 22 Tabelle 1: Reservierte W&ouml;rter in
+INTERLIS 2. 27 Figur 8: Beispiel einer Aufz&auml;hlung. 41 Figur 9: Textausrichtung horizontal
+(HALIGNMENT) und vertikal (VALIGNMENT). 43 Figur 10: Beispiele von ebenen
+Kurvenst&uuml;cken. 48 Figur 11: Beispiele von ebenen Mengen, die nicht Kurvenst&uuml;cke sind (ein
+doppelter Kreis bedeutet &#8221;nicht glatt&#8221;und ein doppeltes Rechteck &#8221;nicht injektiv&#8221;). 49 Figur 12:
+Beispiele von (ebenen) Linienz&uuml;gen. 49 Figur 13: Beispiele von ebenen Mengen, die nicht
+Linienz&uuml;ge sind (ein doppelter Kreis bedeutet hier &#8221;nicht stetig&#8221;und der Rhombus &#8221;nicht Bild
+eines Intervalls&#8221;). 49 Figur 14: Beispiele von (ebenen) einfachen Linienz&uuml;gen. 50 Figur 15: a)
+Die Pfeilh&ouml;he darf nicht gr&ouml;sser als die angegebene Toleranz sein; b), c) unzul&auml;ssige
+&Uuml;berschneidungen eines Linienzuges, da Strecke und Kreisbogen, die sich treffen, nicht von einem
+gemeinsamem St&uuml;tzpunkt ausgehen. 51 Figur 16: Beispiele von Fl&auml;chenelementen. 54 Figur 17:
+Beispiele von Punktmengen im Raum, die nicht Fl&auml;chenelemente sind (ein doppelter Kreis
+bedeutet hier &#8221;nicht glatt&#8221;). 54 Figur 18: Beispiele von Fl&auml;chen im Raum. 54 Figur 19:
+Beispiele ebener Punktmengen, die nicht Fl&auml;chen sind (ein doppelter Kreis bedeutet
+&#8221;singul&auml;rer Punkt&#8221;). 54 Figur 20: Ebene Fl&auml;che mit R&auml;ndern und Enklaven. 54 Figur 21:
+                                                                                        
+
+                                                                                        
+a) Beispiele von allgemeinen ebenen Fl&auml;chen; b) Beispiele von ebenen Mengen, die
+nicht allgemeine Fl&auml;chen sind, weil ihr Inneres nicht zusammenh&auml;ngend ist. Diese
+ebenen Mengen k&ouml;nnen aber in allgemeine Fl&auml;chen unterteilt werden (&#8221;--&#8221;zeigt die
+Unterteilung in Fl&auml;chenelemente und &#8221;===&#8221;die Unterteilung in allgemeine Fl&auml;chen). 55
+Figur 22: Verschiedene m&ouml;gliche Aufteilungen des Randes einer allgemeinen Fl&auml;che. 55
+Figur 23: Nicht erlaubte Linien von Fl&auml;chen. 55 Figur 24: Einzelfl&auml;chen (SURFACE).
+56 Figur 25: Gebietseinteilung (AREA). 56 Tabelle 2: In INTERLIS 2 zugelassene
+UCS/Unicode-Zeichen und deren Codierung. 101 Figur 26: UML-Klassendiagramm der
+Datenmodelle. 103 Figur 27: Grafik, erzeugt aus den Daten- und Grafikbeschreibungen. 124
+Figur I.1: Eignung verschiedener Farbr&auml;ume f&uuml;r die Zwecke von INTERLIS. 142 Figur I.2:
+Die Umrechnung von XYZ zu L*a*b*. 142 Figur I.3: Umrechnung vom kartesischen
+L*a*b*-Raum in die polare Form L*C*abh*ab (nach [Sangwine/Horne, 1998]). 143 Figur I.4:
+Der Farbraum L*C*abh*ab arbeitet mit polaren Koordinaten auf L*a*b*. 143 Figur
+I.5: Berechnung des Farbunterschieds im kartesischen L*a*b*-Raum. 144 Figur I.6:
+Kartesische und polare Koordinaten einer sehr weit vom Nullpunkt entfernten Farbe (zur
+Umrechnung vgl. Figur I.3). 144 Figur I.7: Kartesische und polare Koordinaten einiger
+Farben. 146 Figur J.1: Von der Erdoberfl&auml;che zu zweidimensionalen Lagekoordinaten.
+152
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-57002r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;A</span><br><a 
+  id="x1-58000A"></a>(normativ) Das interne INTERLIS-Datenmodell</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-58001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;B</span><br><a 
+  id="x1-59000B"></a>(normativ f&uuml;r CH) Zeichentabelle</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-59001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;C</span><br><a 
+  id="x1-60000C"></a>(informativ) Das kleine Beispiel Roads</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-60001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;D</span><br><a 
+  id="x1-61000D"></a>(informativ) Index</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-61001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;E</span><br><a 
+  id="x1-62000E"></a>(Standard-Erweiterungsvorschlag) Aufbau von Objektidentifikatoren (OID)</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-62001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;F</span><br><a 
+  id="x1-63000F"></a>(Standard-Erweiterungsvorschlag) Eindeutigkeit von Benutzerschl&uuml;sseln</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-63001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;G</span><br><a 
+  id="x1-64000G"></a>(Standard-Erweiterungsvorschlag) Einheiten-Definitionen</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-64001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;H</span><br><a 
+  id="x1-65000H"></a>(Standard-Erweiterungsvorschlag) Zeit-Definitionen</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-65001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;I</span><br><a 
+  id="x1-66000I"></a>(Standard-Erweiterungsvorschlag) Farben-Definitionen</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-66001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;J</span><br><a 
+  id="x1-67000J"></a>(Standard-Erweiterungsvorschlag) Koordinatensysteme und Koordinaten-Referenzsysteme</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-67001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;K</span><br><a 
+  id="x1-68000K"></a>(Standard-Erweiterungsvorschlag) Signaturenmodelle</h2>
+                                                                                        
+
+                                                                                        
+<a 
+  id="x1-68001r58"></a>
+<h2 class="appendixHead"><span class="titlemark">Anhang&nbsp;L</span><br><a 
+  id="x1-69000L"></a>(informativ) Glossar</h2>
+ 
+</body></html> 
+
+                                                                                        
+
+

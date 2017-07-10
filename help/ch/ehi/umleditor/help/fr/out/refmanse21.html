@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>D.4 Fichier de modle INTERLIS</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cis.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,3,next --> 
+<meta name="src" content="refman.tex"> 
+<meta name="date" content="2003-07-12 12:26:00"> 
+<link rel="stylesheet" type="text/css" href="refman.css"> 
+</head><body 
+>
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanap5.html" >next</a>] [<a 
+href="refmanse20.html" >prev</a>] [<a 
+href="refmanse20.html#tailrefmanse20.html" >prev-tail</a>] [<a 
+href="#tailrefmanse21.html">tail</a>] [<a 
+href="refmanap4.html#refmanse21.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">D.4   </span> <a 
+  id="x30-81000D.4"></a>Fichier de mod&egrave;le INTERLIS</h3>
+<!--l. 143--><p class="noindent">Un fichier de mod&egrave;le INTERLIS poss&egrave;de en principe l&#8217;extension <span 
+class="cmti-12">.ili </span>et contient
+des caract&egrave;res ASCII. Lors de l&#8217;importation/exportation (cf. <span 
+class="tcrm-1200">§  </span><a 
+href="refmanse6.html#x10-160003.1.7">3.1.7<!--tex4ht:ref: sec_TOOLS --></a>) d&#8217;un mod&egrave;le
+INTERLIS, le code INTERLIS est escompt&eacute; comme suit dans un fichier
+ASCII.
+<!--l. 146--><p class="noindent">Exemple relatif au mod&egrave;le Roads (cf. figure  <a 
+href="refmanch3.html#x9-80011">3.1<!--tex4ht:ref: fig_UMLEditor --></a>)<span class="frenchb-nbsp">&nbsp;</span>:
+<br class="newline">
+                                                                          
+
+                                                                          
+<table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+\textbf{INTERLIS}&nbsp;2.2;
+&nbsp;<br />
+&nbsp;<br />\textbf{MODEL}&nbsp;ModelDef3&nbsp;(de)&nbsp;=
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;\textbf{DOMAIN}
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;Point2D=&nbsp;\textbf{COORD&nbsp;NUMERIC&nbsp;CIRCULAR,&nbsp;NUMERIC};
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;\textbf{TOPIC&nbsp;TOPIC}&nbsp;Roads&nbsp;=
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;StreetAxis&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geometry&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;StreetAxis;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;LandCover&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geometry&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;LandCover;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;PointObject&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;PointObject;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Position&nbsp;de&nbsp;nom&nbsp;de&nbsp;rue&nbsp;(StreetName)
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;StreetNamePosition&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NamPos&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NamOri&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;StreetNamePosition;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{UNIT}
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PI&nbsp;/&nbsp;180&nbsp;[rad]
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;Street&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;Street;
+&nbsp;<br />
+                                                                          
+
+                                                                          
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{ASSOCIATION}&nbsp;StreetNamePositionAssoc&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StreetNamePosition&nbsp;--&nbsp;{0..*}&nbsp;StreetNamePosition;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Street&nbsp;--&nbsp;{1}&nbsp;Street;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;StreetNamePositionAssoc;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{ASSOCIATION}&nbsp;StreetAxisAssoc&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Street&nbsp;--&nbsp;{1}&nbsp;Street;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StreetAxis&nbsp;--&nbsp;{9223372036854775807..*}&nbsp;StreetAxis;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;StreetAxisAssoc;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;\textbf{END&nbsp;TOPIC}&nbsp;Roads;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;\textbf{TOPIC&nbsp;TOPIC}&nbsp;RoadsExtended&nbsp;=
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;PointObjectExtended
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{EXTENDS}&nbsp;ModelDef3.\textbf{TOPIC}&nbsp;Roads.PointObject&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;PointObjectExtended;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{CLASS}&nbsp;StreetAxisExtended
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{EXTENDS}&nbsp;ModelDef3.\textbf{TOPIC}&nbsp;Roads.StreetAxis&nbsp;=
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precision&nbsp;:&nbsp;\textbf{TEXT*}20;
+&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;\textbf{END}&nbsp;StreetAxisExtended;
+&nbsp;<br />
+&nbsp;<br />&nbsp;&nbsp;\textbf{END&nbsp;TOPIC}&nbsp;RoadsExtended;
+&nbsp;<br />
+&nbsp;<br />\textbf{END}&nbsp;ModelDef3.
+</div>
+</td></tr></table>
+<!--l. 214--><p class="nopar">
+                                                                          
+
+                                                                          
+<div class="crosslinks"><p class="noindent">[<a 
+href="refmanap5.html" >next</a>] [<a 
+href="refmanse20.html" >prev</a>] [<a 
+href="refmanse20.html#tailrefmanse20.html" >prev-tail</a>] [<a 
+href="refmanse21.html" >front</a>] [<a 
+href="refmanap4.html#refmanse21.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent"><a 
+  id="tailrefmanse21.html"></a>  
+</body></html> 
