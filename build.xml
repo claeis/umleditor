@@ -30,7 +30,7 @@
   <target depends="init" name="compile">
     <!-- Compile the java code from ${src} into ${build}/classes -->
     <mkdir dir="${build}/classes"/>
-    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java" debug="on"  source="1.6" target="1.6">
+    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java" debug="on"  source="1.6" target="1.6" includeantruntime="false">
       <classpath>
         <pathelement location="lib/jhotdraw53.jar"/>
         <pathelement location="lib/sebase.jar"/>
