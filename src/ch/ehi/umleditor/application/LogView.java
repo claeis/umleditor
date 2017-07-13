@@ -422,7 +422,7 @@ private javax.swing.JMenuItem getMniClear() {
 		try {
 			ivjMniClear = new javax.swing.JMenuItem();
 			ivjMniClear.setName("MniClear");
-			ivjMniClear.setText("Log löschen");
+			ivjMniClear.setText("Log lÃ¶schen");
 			ivjMniClear.setEnabled(false);
 			// user code begin {1}
 			ivjMniClear.setText(getResourceString("MniClear_text"));

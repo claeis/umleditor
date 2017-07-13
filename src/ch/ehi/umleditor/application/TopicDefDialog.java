@@ -415,7 +415,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Ãœbernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -690,7 +690,7 @@ private javax.swing.JMenuItem getMniOpenTopicDefSpecification() {
 		try {
 			ivjMniOpenTopicDefSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenTopicDefSpecification.setName("MniOpenTopicDefSpecification");
-			ivjMniOpenTopicDefSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenTopicDefSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenTopicDefSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenTopicDefSpecification.setText(getChangeWindowString());
@@ -713,7 +713,7 @@ private javax.swing.JMenuItem getMniRemoveTopicDepends() {
 		try {
 			ivjMniRemoveTopicDepends = new javax.swing.JMenuItem();
 			ivjMniRemoveTopicDepends.setName("MniRemoveTopicDepends");
-			ivjMniRemoveTopicDepends.setText("Löschen");
+			ivjMniRemoveTopicDepends.setText("LÃ¶schen");
 			ivjMniRemoveTopicDepends.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveTopicDepends.setText(getRemoveString());

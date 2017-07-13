@@ -86,7 +86,7 @@ public class AreaMeasurement extends BaseType implements java.io.Serializable
                 // -end- 358A689901BA var358A66DF006A "mini"
 
                 /** get current value of mini
-                 *  min Fl‰chenmass
+                 *  min Fl√§chenmass
                  *  @see #setMini
                  */
                 // -beg- preserve=no 358A689901BA get_head358A66DF006A "mini"
@@ -118,7 +118,7 @@ public class AreaMeasurement extends BaseType implements java.io.Serializable
                 // -end- 358A68A10252 var358A66DF006A "maxi"
 
                 /** get current value of maxi
-                 *  max Fl‰chenmass
+                 *  max Fl√§chenmass
                  *  @see #setMaxi
                  */
                 // -beg- preserve=no 358A68A10252 get_head358A66DF006A "maxi"

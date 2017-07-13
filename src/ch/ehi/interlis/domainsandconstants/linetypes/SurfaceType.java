@@ -34,7 +34,7 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
               // -end- 358A65100028 import "SurfaceType"
 
-              /** Grundeigenschaften von flächenorientierten Datentypen.
+              /** Grundeigenschaften von flÃ¤chenorientierten Datentypen.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:45 $
                */

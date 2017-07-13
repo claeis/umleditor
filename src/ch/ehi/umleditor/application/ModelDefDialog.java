@@ -717,7 +717,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Ãœbernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -928,7 +928,7 @@ private javax.swing.JLabel getLblTranslation() {
 		try {
 			ivjLblTranslation = new javax.swing.JLabel();
 			ivjLblTranslation.setName("LblTranslation");
-			ivjLblTranslation.setText("Übersetzung:");
+			ivjLblTranslation.setText("Ãœbersetzung:");
 			// user code begin {1}
 			ivjLblTranslation.setText(resModelDefDialog.getString("LblTranslation_text"));
 			// user code end
@@ -1041,7 +1041,7 @@ private javax.swing.JMenuItem getMniOpenContractSpecification() {
 		try {
 			ivjMniOpenContractSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenContractSpecification.setName("MniOpenContractSpecification");
-			ivjMniOpenContractSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenContractSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenContractSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenContractSpecification.setText(getChangeWindowString());
@@ -1064,7 +1064,7 @@ private javax.swing.JMenuItem getMniOpenImportSpecification() {
 		try {
 			ivjMniOpenImportSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenImportSpecification.setName("MniOpenImportSpecification");
-			ivjMniOpenImportSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenImportSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenImportSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenImportSpecification.setText(getChangeWindowString());
@@ -1087,7 +1087,7 @@ private javax.swing.JMenuItem getMniOpenTranslationSpecification() {
 		try {
 			ivjMniOpenTranslationSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenTranslationSpecification.setName("MniOpenTranslationSpecification");
-			ivjMniOpenTranslationSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenTranslationSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenTranslationSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenTranslationSpecification.setText(getChangeWindowString());
@@ -1110,7 +1110,7 @@ private javax.swing.JMenuItem getMniRemoveContract() {
 		try {
 			ivjMniRemoveContract = new javax.swing.JMenuItem();
 			ivjMniRemoveContract.setName("MniRemoveContract");
-			ivjMniRemoveContract.setText("Löschen");
+			ivjMniRemoveContract.setText("LÃ¶schen");
 			ivjMniRemoveContract.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveContract.setText(getRemoveString());
@@ -1133,7 +1133,7 @@ private javax.swing.JMenuItem getMniRemoveImport() {
 		try {
 			ivjMniRemoveImport = new javax.swing.JMenuItem();
 			ivjMniRemoveImport.setName("MniRemoveImport");
-			ivjMniRemoveImport.setText("Löschen");
+			ivjMniRemoveImport.setText("LÃ¶schen");
 			ivjMniRemoveImport.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveImport.setText(getRemoveString());
@@ -1156,7 +1156,7 @@ private javax.swing.JMenuItem getMniRemoveTranslation() {
 		try {
 			ivjMniRemoveTranslation = new javax.swing.JMenuItem();
 			ivjMniRemoveTranslation.setName("MniRemoveTranslation");
-			ivjMniRemoveTranslation.setText("Löschen");
+			ivjMniRemoveTranslation.setText("LÃ¶schen");
 			ivjMniRemoveTranslation.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveTranslation.setText(getRemoveString());

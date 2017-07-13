@@ -558,7 +558,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Ãœbernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -939,7 +939,7 @@ private javax.swing.JMenuItem getMniOpenAttributeSpecification() {
 		try {
 			ivjMniOpenAttributeSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenAttributeSpecification.setName("MniOpenAttributeSpecification");
-			ivjMniOpenAttributeSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenAttributeSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenAttributeSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenAttributeSpecification.setText(getChangeWindowString());
@@ -962,7 +962,7 @@ private javax.swing.JMenuItem getMniOpenRoleSpecification() {
 		try {
 			ivjMniOpenRoleSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenRoleSpecification.setName("MniOpenRoleSpecification");
-			ivjMniOpenRoleSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenRoleSpecification.setText("Ã–ffne Spezifikation...");
 			ivjMniOpenRoleSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenRoleSpecification.setText(getChangeWindowString());
@@ -985,7 +985,7 @@ private javax.swing.JMenuItem getMniRemoveAttribute() {
 		try {
 			ivjMniRemoveAttribute = new javax.swing.JMenuItem();
 			ivjMniRemoveAttribute.setName("MniRemoveAttribute");
-			ivjMniRemoveAttribute.setText("Löschen");
+			ivjMniRemoveAttribute.setText("LÃ¶schen");
 			ivjMniRemoveAttribute.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveAttribute.setText(getRemoveString());
@@ -1008,7 +1008,7 @@ private javax.swing.JMenuItem getMniRemoveRoleDef() {
 		try {
 			ivjMniRemoveRoleDef = new javax.swing.JMenuItem();
 			ivjMniRemoveRoleDef.setName("MniRemoveRoleDef");
-			ivjMniRemoveRoleDef.setText("Löschen");
+			ivjMniRemoveRoleDef.setText("LÃ¶schen");
 			ivjMniRemoveRoleDef.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveRoleDef.setText(getRemoveString());
@@ -1257,7 +1257,7 @@ private javax.swing.table.TableColumn getTbcRoleCardinality() {
 	if (ivjTbcRoleCardinality == null) {
 		try {
 			ivjTbcRoleCardinality = new javax.swing.table.TableColumn();
-			ivjTbcRoleCardinality.setHeaderValue("Kardinalität");
+			ivjTbcRoleCardinality.setHeaderValue("KardinalitÃ¤t");
 			// user code begin {1}
 			ivjTbcRoleCardinality.setHeaderValue(getResourceString("TbcRoleCardinality_text"));
 			// user code end

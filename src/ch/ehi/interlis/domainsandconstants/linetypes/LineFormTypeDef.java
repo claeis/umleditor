@@ -461,7 +461,7 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
   // -end- 3949DD3800F3 var3940ECC60372 "explanation"
 
   /** get current value of explanation
-   *  Erl‰uterung zu der Verbindungsgeometrie.
+   *  Erl√§uterung zu der Verbindungsgeometrie.
    *  @see #setExplanation
    */
   // -beg- preserve=no 3949DD3800F3 get_head3940ECC60372 "explanation"

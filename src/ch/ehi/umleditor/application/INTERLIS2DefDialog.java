@@ -453,7 +453,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Ãœbernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -772,7 +772,7 @@ private javax.swing.JMenuItem getMniChange() {
 		try {
 			ivjMniChange = new javax.swing.JMenuItem();
 			ivjMniChange.setName("MniChange");
-			ivjMniChange.setText("Ändern...");
+			ivjMniChange.setText("Ã„ndern...");
 			ivjMniChange.setEnabled(false);
 			// user code begin {1}
 			ivjMniChange.setText(getChangeWindowString());

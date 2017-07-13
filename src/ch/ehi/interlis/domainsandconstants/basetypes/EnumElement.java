@@ -54,7 +54,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 358A69810091 import "EnumElement"
 
-              /** Definiert ein Element einer Aufz‰hlung.
+              /** Definiert ein Element einer Aufz√§hlung.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:18 $
                */

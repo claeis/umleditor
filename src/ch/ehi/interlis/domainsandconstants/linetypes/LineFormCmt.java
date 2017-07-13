@@ -176,7 +176,7 @@ public class LineFormCmt extends AbstractEditorElement implements java.io.Serial
                 // -end- 35B870D802CB var35B870B60005 "explanation"
 
                 /** get current value of explanation
-                 *  Erl‰uterung der Verbindungsgeometrie.
+                 *  Erl√§uterung der Verbindungsgeometrie.
                  *  @see #setExplanation
                  */
                 // -beg- preserve=no 35B870D802CB get_head35B870B60005 "explanation"

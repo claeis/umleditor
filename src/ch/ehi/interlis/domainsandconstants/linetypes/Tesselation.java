@@ -32,7 +32,7 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
               // -end- 36D5626603E5 import "Tesselation"
 
-              /** Definiert ein Fl‰chenwertebereich ohne ‹berlappung.
+              /** Definiert ein Fl√§chenwertebereich ohne √úberlappung.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:46 $
                */

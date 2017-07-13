@@ -347,7 +347,7 @@ public class ProjectionAttributeDef extends AbstractEditorElement implements jav
             // -end- 3961A69A0300 var3961A31B0231 "properties"
 
             /** get current value of properties
-             *  Vererbungseigenschaften für dieses Attribut.
+             *  Vererbungseigenschaften fÃ¼r dieses Attribut.
              *  @see #setProperties
              */
             // -beg- preserve=no 3961A69A0300 get_head3961A31B0231 "properties"

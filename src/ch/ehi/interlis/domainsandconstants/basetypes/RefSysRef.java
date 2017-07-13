@@ -157,7 +157,7 @@ public class RefSysRef extends AbstractEditorElement implements java.io.Serializ
                 // -end- 39489C8D0143 var39489AFF0050 "modelName"
 
                 /** get current value of modelName
-                 *  Name des Modells das die Definition enth‰lt.
+                 *  Name des Modells das die Definition enth√§lt.
                  *  @see #setModelName
                  */
                 // -beg- preserve=no 39489C8D0143 get_head39489AFF0050 "modelName"
@@ -189,7 +189,7 @@ public class RefSysRef extends AbstractEditorElement implements java.io.Serializ
                 // -end- 39489C970147 var39489AFF0050 "topicName"
 
                 /** get current value of topicName
-                 *  Name des Themas das die Definition enth‰lt.
+                 *  Name des Themas das die Definition enth√§lt.
                  *  @see #setTopicName
                  */
                 // -beg- preserve=no 39489C970147 get_head39489AFF0050 "topicName"

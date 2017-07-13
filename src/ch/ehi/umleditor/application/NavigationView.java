@@ -877,8 +877,8 @@ private javax.swing.JMenuItem getMniAddToDiagram() {
 		try {
 			ivjMniAddToDiagram = new javax.swing.JMenuItem();
 			ivjMniAddToDiagram.setName("MniAddToDiagram");
-			ivjMniAddToDiagram.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
-			ivjMniAddToDiagram.setText("Einfügen in Diagram");
+			ivjMniAddToDiagram.setToolTipText("FÃ¼gt Selektierten Knoten im aktuellen Diagram ein");
+			ivjMniAddToDiagram.setText("EinfÃ¼gen in Diagram");
 			// user code begin {1}
 			ivjMniAddToDiagram.setToolTipText(getResourceString("MniAddToDiagram_toolTipText"));
 			ivjMniAddToDiagram.setText(getResourceString("MniAddToDiagram_text"));
@@ -1157,7 +1157,7 @@ private javax.swing.JMenuItem getMniMetaObjectFile() {
 		try {
 			ivjMniMetaObjectFile = new javax.swing.JMenuItem();
 			ivjMniMetaObjectFile.setName("MniMetaObjectFile");
-			ivjMniMetaObjectFile.setText("Metadatenbehälter-Datei");
+			ivjMniMetaObjectFile.setText("MetadatenbehÃ¤lter-Datei");
 			// user code begin {1}
 			ivjMniMetaObjectFile.setText(getResourceString("MniMetaObjectFile_text"));
 			// user code end
@@ -1201,7 +1201,7 @@ private javax.swing.JMenuItem getMniOpen() {
 		try {
 			ivjMniOpen = new javax.swing.JMenuItem();
 			ivjMniOpen.setName("MniOpen");
-			ivjMniOpen.setText("Öffnen");
+			ivjMniOpen.setText("Ã–ffnen");
 			// user code begin {1}
 			ivjMniOpen.setText(getResourceString("MniOpen_text"));
 			// user code end
@@ -1223,7 +1223,7 @@ private javax.swing.JMenuItem getMniOpenSpecification() {
 		try {
 			ivjMniOpenSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenSpecification.setName("MniOpenSpecification");
-			ivjMniOpenSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenSpecification.setText("Ã–ffne Spezifikation...");
 			// user code begin {1}
 			ivjMniOpenSpecification.setText(getResourceString("MniOpenSpecification_text"));
 			// user code end
@@ -1268,7 +1268,7 @@ private javax.swing.JMenuItem getMniRemove() {
 		try {
 			ivjMniRemove = new javax.swing.JMenuItem();
 			ivjMniRemove.setName("MniRemove");
-			ivjMniRemove.setText("Löschen (im Modell)");
+			ivjMniRemove.setText("LÃ¶schen (im Modell)");
 			// user code begin {1}
 			ivjMniRemove.setText(getResourceString("MniRemove_text"));
 			// user code end
@@ -1726,7 +1726,7 @@ private void initialize() {
     
     mniDiagramReferences = new javax.swing.JMenuItem();
     mniDiagramReferences.setName("MniAddDiagramReferences");
-//  mniDiagramReferences.setToolTipText("Fügt Selektierten Knoten im aktuellen Diagram ein");
+//  mniDiagramReferences.setToolTipText("FÃ¼gt Selektierten Knoten im aktuellen Diagram ein");
     mniDiagramReferences.setText(getResourceString("mniDiagramReferences_text"));
     mniDiagramReferences.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -86,7 +86,7 @@ public class Length extends BaseType implements java.io.Serializable
                 // -end- 358A688A037B var358A66D90315 "mini"
 
                 /** get current value of mini
-                 *  min Längenmass
+                 *  min LÃ¤ngenmass
                  *  @see #setMini
                  */
                 // -beg- preserve=no 358A688A037B get_head358A66D90315 "mini"
@@ -118,7 +118,7 @@ public class Length extends BaseType implements java.io.Serializable
                 // -end- 358A68930310 var358A66D90315 "maxi"
 
                 /** get current value of maxi
-                 *  max Längenmass
+                 *  max LÃ¤ngenmass
                  *  @see #setMaxi
                  */
                 // -beg- preserve=no 358A68930310 get_head358A66D90315 "maxi"

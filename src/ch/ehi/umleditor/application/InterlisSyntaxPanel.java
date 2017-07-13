@@ -127,7 +127,7 @@ private javax.swing.JLabel getLblUsage() {
 		try {
 			ivjLblUsage = new javax.swing.JLabel();
 			ivjLblUsage.setName("LblUsage");
-			ivjLblUsage.setText("Abh‰ngig von:");
+			ivjLblUsage.setText("Abh√§ngig von:");
 			// user code begin {1}
 			ivjLblUsage.setText(getResourceString("LblUsage_text"));
 			// user code end

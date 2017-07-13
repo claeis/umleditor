@@ -898,7 +898,7 @@ protected Figure loadPresentationRole(RoleDef roleDef, PresentationRole role) {
 				nodeFigure = add((Classifier)roleDef.getParticipant());
 			} else {
 //TODO NYI: search whether Role is presented in Diagram or not
-LauncherView.getInstance().nyi("RoleDef zu Diagramm einfügen");//$NON-NLS-1$
+LauncherView.getInstance().nyi("RoleDef zu Diagramm einfÃ¼gen");//$NON-NLS-1$
                 return null;
 /*
 				// add NEW role to composite

@@ -54,7 +54,7 @@ package ch.ehi.interlis.modeltopicclass;
 
               // -end- 3940AEA40090 import "IliImport"
 
-              /** Definiert eine Abh‰ngigkeit von einem anderen Modell.
+              /** Definiert eine Abh√§ngigkeit von einem anderen Modell.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:42 $
                */

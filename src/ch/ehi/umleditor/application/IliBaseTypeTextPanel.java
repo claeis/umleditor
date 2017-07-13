@@ -159,7 +159,7 @@ private javax.swing.JLabel getLblMax() {
 		try {
 			ivjLblMax = new javax.swing.JLabel();
 			ivjLblMax.setName("LblMax");
-			ivjLblMax.setToolTipText("Max. Länge");
+			ivjLblMax.setToolTipText("Max. LÃ¤nge");
 			ivjLblMax.setText("Max. length:");
 			ivjLblMax.setBounds(308, 43, 140, 14);
 			// user code begin {1}

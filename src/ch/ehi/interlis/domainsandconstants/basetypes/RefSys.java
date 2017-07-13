@@ -36,7 +36,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 3948A1BC012D import "RefSys"
 
-              /** Definiert das Referenzsystem für Nummerische Werte.
+              /** Definiert das Referenzsystem fÃ¼r Nummerische Werte.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:28 $
                */

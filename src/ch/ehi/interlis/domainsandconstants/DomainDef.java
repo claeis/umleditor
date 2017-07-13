@@ -1204,7 +1204,7 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
   // -end- 39479DD502F3 var358A5E2403D8 "mandatory"
 
   /** get current value of mandatory
-   *  definiert ob der UNDEFINED Wert auch zum Wertebereich gehört.
+   *  definiert ob der UNDEFINED Wert auch zum Wertebereich gehÃ¶rt.
    *  @see #setMandatory
    */
   // -beg- preserve=no 39479DD502F3 get_head358A5E2403D8 "mandatory"

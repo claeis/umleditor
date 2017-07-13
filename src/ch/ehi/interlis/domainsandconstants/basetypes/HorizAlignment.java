@@ -32,7 +32,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 358A674F007F import "HorizAlignment"
 
-              /** Definiert einen Datentyp für die horizontalen Textausrichtung.
+              /** Definiert einen Datentyp fÃ¼r die horizontalen Textausrichtung.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:20 $
                */

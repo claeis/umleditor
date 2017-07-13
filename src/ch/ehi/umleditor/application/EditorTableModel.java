@@ -140,7 +140,7 @@ private Vector createRow(RoleDef roleDef) {
 		while(xori.hasNext()){
 			Participant xor=(Participant)xori.next();
 			if(xor.containsParticipant()){
-				className=className+"¦"+xor.getParticipant().getDefLangName();
+				className=className+"Â¦"+xor.getParticipant().getDefLangName();
 			}
 		}
 		row.add(className);
@@ -561,7 +561,7 @@ private void updateRow(int rowIndex, Vector currentDataRow, Object object) {
 				while(xori.hasNext()){
 					Participant xor=(Participant)xori.next();
 					if(xor.containsParticipant()){
-						className=className+"¦"+xor.getParticipant().getDefLangName();
+						className=className+"Â¦"+xor.getParticipant().getDefLangName();
 					}
 				}
 				currentDataRow.set(3, className);

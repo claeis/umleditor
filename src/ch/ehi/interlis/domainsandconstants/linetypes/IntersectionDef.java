@@ -180,7 +180,7 @@ public class IntersectionDef extends AbstractEditorElement implements Element , 
                 // -end- 35B873200343 var35B872AB0146 "maxi"
 
                 /** get current value of maxi
-                 *  Toleranzwert für Überschnneidungen
+                 *  Toleranzwert fÃ¼r Ãœberschnneidungen
                  *  @see #setMaxi
                  */
                 // -beg- preserve=no 35B873200343 get_head35B872AB0146 "maxi"
