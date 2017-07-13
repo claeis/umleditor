@@ -1,5 +1,20 @@
 package ch.ehi.umleditor.umldrawingtools;
 
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JSeparator;
+
+import CH.ifa.draw.contrib.CustomSelectionTool;
+import CH.ifa.draw.figures.TextFigure;
+import CH.ifa.draw.framework.ConnectionFigure;
+import CH.ifa.draw.framework.Connector;
+import CH.ifa.draw.framework.DrawingEditor;
+import CH.ifa.draw.framework.Figure;
+import CH.ifa.draw.framework.Tool;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,18 +32,13 @@ package ch.ehi.umleditor.umldrawingtools;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import CH.ifa.draw.util.*;
-import ch.ehi.uml1_4.foundation.core.*;
+import CH.ifa.draw.util.UndoableTool;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.umleditor.application.LauncherView;
-import ch.ehi.umleditor.umlpresentation.*;
+import ch.ehi.umleditor.umlpresentation.Note;
+import ch.ehi.umleditor.umlpresentation.PresentationNode;
 import ch.softenvironment.view.CommonUserAccess;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import CH.ifa.draw.framework.*;
-import CH.ifa.draw.contrib.*;
-import CH.ifa.draw.figures.*;
 
 /**
  * Delegate mouse selection to a specific TextTool if

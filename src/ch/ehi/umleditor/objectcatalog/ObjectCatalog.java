@@ -137,7 +137,9 @@ public class ObjectCatalog
                         diag.printAll(g);
                         FileOutputStream os = new FileOutputStream(filename);
                         com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
+                        //javax.imageio.ImageIO.write(img, "JPEG", os);
                         com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
+                        
                         // Lossless, please
                         param.setQuality(1.0f, false);
                         ie.setJPEGEncodeParam(param);
