@@ -40,8 +40,8 @@ public class DomainDefDialog extends BaseDialog {
 	private javax.swing.JButton ivjBtnOk = null;
 	private javax.swing.JLabel ivjLblName = null;
 	private javax.swing.JTextField ivjTxtName = null;
-	private javax.swing.JLabel ivjLblMetaAttrb = null;
-	private javax.swing.JTextField ivjTxtMetaAttrb = null;
+	private javax.swing.JLabel ivjLblMetaAttrbDom = null;
+	private javax.swing.JTextField ivjTxtMetaAttrbDom = null;
 	private javax.swing.JButton ivjBtnApply = null;
 	private javax.swing.JComboBox ivjCbxType = null;
 	private javax.swing.JCheckBox ivjChxAbstract = null;
@@ -78,7 +78,7 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 		public void focusGained(java.awt.event.FocusEvent e) {
 			if (e.getSource() == DomainDefDialog.this.getTxtName())
 				connEtoM1(e);
-			if(e.getSource() == DomainDefDialog.this.getTxtMetaAttrb())
+			if(e.getSource() == DomainDefDialog.this.getTxtMetaAttrbDom())
 				connEtoM2(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
@@ -274,7 +274,7 @@ private void connEtoM2(java.awt.event.FocusEvent arg1) {
 	try {
 		// user code begin {1}
 		// user code end
-		getTxtMetaAttrb().selectAll();
+		getTxtMetaAttrbDom().selectAll();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -311,21 +311,21 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			getBaseDialogContentPane().add(getTxtName(), constraintsTxtName);
 			
 			//show label for MetaAttrb
-			java.awt.GridBagConstraints constraintsLblMetaAttrb = new java.awt.GridBagConstraints();
-			constraintsLblMetaAttrb.gridx = 1; constraintsLblMetaAttrb.gridy = 1;
-			constraintsLblMetaAttrb.ipadx = 104;
-			constraintsLblMetaAttrb.insets = new java.awt.Insets(80, 10, 4, 5);
-			getBaseDialogContentPane().add(getLblMetaAttrb(), constraintsLblMetaAttrb);
+			java.awt.GridBagConstraints constraintsLblMetaAttrbDom = new java.awt.GridBagConstraints();
+			constraintsLblMetaAttrbDom.gridx = 1; constraintsLblMetaAttrbDom.gridy = 1;
+			constraintsLblMetaAttrbDom.ipadx = 104;
+			constraintsLblMetaAttrbDom.insets = new java.awt.Insets(80, 10, 4, 5);
+			getBaseDialogContentPane().add(getLblMetaAttrbDom(), constraintsLblMetaAttrbDom);
 
 			//show textfield for MetaAttrb
-			java.awt.GridBagConstraints constraintsTxtMetaAttrb = new java.awt.GridBagConstraints();
-			constraintsTxtMetaAttrb.gridx = 2; constraintsTxtMetaAttrb.gridy = 1;
-			constraintsTxtMetaAttrb.gridwidth = 3;
-			constraintsTxtMetaAttrb.fill = java.awt.GridBagConstraints.HORIZONTAL;
-			constraintsTxtMetaAttrb.weightx = 1.0;
-			constraintsTxtMetaAttrb.ipadx = 221;
-			constraintsTxtMetaAttrb.insets = new java.awt.Insets(85, 5, 2, 161);
-			getBaseDialogContentPane().add(getTxtMetaAttrb(), constraintsTxtMetaAttrb);
+			java.awt.GridBagConstraints constraintsTxtMetaAttrbDom = new java.awt.GridBagConstraints();
+			constraintsTxtMetaAttrbDom.gridx = 2; constraintsTxtMetaAttrbDom.gridy = 1;
+			constraintsTxtMetaAttrbDom.gridwidth = 3;
+			constraintsTxtMetaAttrbDom.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			constraintsTxtMetaAttrbDom.weightx = 1.0;
+			constraintsTxtMetaAttrbDom.ipadx = 221;
+			constraintsTxtMetaAttrbDom.insets = new java.awt.Insets(85, 5, 2, 161);
+			getBaseDialogContentPane().add(getTxtMetaAttrbDom(), constraintsTxtMetaAttrbDom);
 
 			java.awt.GridBagConstraints constraintsTbpTypes = new java.awt.GridBagConstraints();
 			constraintsTbpTypes.gridx = 1; constraintsTbpTypes.gridy = 3;
@@ -565,14 +565,14 @@ private javax.swing.JLabel getLblName() {
  * @return javax.swing.JLabel
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JLabel getLblMetaAttrb() {
-	if (ivjLblMetaAttrb == null) {
+private javax.swing.JLabel getLblMetaAttrbDom() {
+	if (ivjLblMetaAttrbDom == null) {
 		try {
-			ivjLblMetaAttrb = new javax.swing.JLabel();
-			ivjLblMetaAttrb.setName("LblMetaAttrb");
-			ivjLblMetaAttrb.setText("Display name:");
+			ivjLblMetaAttrbDom = new javax.swing.JLabel();
+			ivjLblMetaAttrbDom.setName("LblMetaAttrbDom");
+			ivjLblMetaAttrbDom.setText("Display name:");
 			// user code begin {1}
-			ivjLblMetaAttrb.setText(getResourceString("LblMetaAttrb_text"));
+			ivjLblMetaAttrbDom.setText(getResourceString("LblMetaAttrbDom_text"));
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -580,8 +580,9 @@ private javax.swing.JLabel getLblMetaAttrb() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjLblMetaAttrb;
+	return ivjLblMetaAttrbDom;
 }
+
 /**
  * Return the LblName1 property value.
  * @return javax.swing.JLabel
@@ -1014,11 +1015,11 @@ private javax.swing.JTextField getTxtName() {
  * @return javax.swing.JTextField
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JTextField getTxtMetaAttrb() {
-	if (ivjTxtMetaAttrb == null) {
+private javax.swing.JTextField getTxtMetaAttrbDom() {
+	if (ivjTxtMetaAttrbDom == null) {
 		try {
-			ivjTxtMetaAttrb = new javax.swing.JTextField();
-			ivjTxtMetaAttrb.setName("TxtMetaAttrb");
+			ivjTxtMetaAttrbDom = new javax.swing.JTextField();
+			ivjTxtMetaAttrbDom.setName("TxtMetaAttrbDom");
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1027,8 +1028,9 @@ private javax.swing.JTextField getTxtMetaAttrb() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjTxtMetaAttrb;
+	return ivjTxtMetaAttrbDom;
 }
+
 /**
  * Called whenever the part throws an exception.
  * @param exception java.lang.Throwable
@@ -1049,7 +1051,7 @@ private void initConnections() throws java.lang.Exception {
 	getBtnApply().addActionListener(ivjEventHandler);
 	getCbxType().addItemListener(ivjEventHandler);
 	getTxtName().addFocusListener(ivjEventHandler);
-	getTxtMetaAttrb().addFocusListener(ivjEventHandler);
+	getTxtMetaAttrbDom().addFocusListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -1158,6 +1160,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof Enumeration) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.ENUM);
 			getPnlTypeEnum().setObject(type);
+			//muestra?
 		} else if (type instanceof NumericType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.NUMERIC);
 			getPnlTypeNumeric().setObject(type, domainDef);

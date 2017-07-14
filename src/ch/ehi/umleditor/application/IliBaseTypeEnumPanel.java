@@ -52,6 +52,11 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JLabel ivjLblElements = null;
 	private javax.swing.JPanel ivjJPanel1 = null;
 	private javax.swing.JPanel ivjPnlKind = null;
+	
+	private javax.swing.JPanel ivjPnlMetaAttrbEnum = null;
+	private javax.swing.JLabel ivjLblMetaAttrbEnum = null;
+	private javax.swing.JTextField ivjTxtMetaAttrbEnum = null;
+	//Enum meta atributos aún no agregados al panel
 
 class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelListener, java.awt.event.ActionListener, java.awt.event.MouseListener, javax.swing.event.TreeSelectionListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -292,6 +297,7 @@ private javax.swing.JPanel getJPanel1() {
 			constraintsLblElementDescription.ipady = 14;
 			constraintsLblElementDescription.insets = new java.awt.Insets(7, 7, 2, 132);
 			getJPanel1().add(getLblElementDescription(), constraintsLblElementDescription);
+			
 
 			java.awt.GridBagConstraints constraintsPnlDescription = new java.awt.GridBagConstraints();
 			constraintsPnlDescription.gridx = 1; constraintsPnlDescription.gridy = 2;
@@ -305,6 +311,7 @@ private javax.swing.JPanel getJPanel1() {
 			getJPanel1().add(getPnlDescription(), constraintsPnlDescription);
 			// user code begin {1}
 			// user code end
+			
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
 			// user code end
@@ -312,6 +319,48 @@ private javax.swing.JPanel getJPanel1() {
 		}
 	}
 	return ivjJPanel1;
+}
+/**
+ * Return the JPanel PnlMetaAttrb property value.
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getJPnlMetaAttrb() {
+	if (ivjPnlMetaAttrbEnum == null) {
+		try {
+			ivjPnlMetaAttrbEnum = new javax.swing.JPanel();
+			ivjPnlMetaAttrbEnum.setName("PnlMetaAttrb");
+			ivjPnlMetaAttrbEnum.setLayout(new java.awt.GridBagLayout());
+
+			java.awt.GridBagConstraints constraintsLblMetaAttrb = new java.awt.GridBagConstraints();
+			constraintsLblMetaAttrb.gridx = 1; constraintsLblMetaAttrb.gridy = 1;
+			constraintsLblMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsLblMetaAttrb.ipadx = 140;
+			constraintsLblMetaAttrb.ipady = 14;
+			constraintsLblMetaAttrb.insets = new java.awt.Insets(7, 7, 2, 132);
+			getJPnlMetaAttrb().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrb);
+			
+
+			java.awt.GridBagConstraints constraintsPnlMetaAttrb = new java.awt.GridBagConstraints();
+			constraintsPnlMetaAttrb.gridx = 1; constraintsPnlMetaAttrb.gridy = 2;
+			constraintsPnlMetaAttrb.fill = java.awt.GridBagConstraints.BOTH;
+			constraintsPnlMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsPnlMetaAttrb.weightx = 1.0;
+			constraintsPnlMetaAttrb.weighty = 1.0;
+			constraintsPnlMetaAttrb.ipadx = 243;
+			constraintsPnlMetaAttrb.ipady = 69;
+			constraintsPnlMetaAttrb.insets = new java.awt.Insets(2, 5, 3, 5);
+			getJPnlMetaAttrb().add(getJPnlMetaAttrb(), constraintsPnlMetaAttrb);
+			// user code begin {1}
+			// user code end
+			
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttrbEnum;
 }
 /**
  * Return the JPopupMenu1 property value.
@@ -393,6 +442,48 @@ private javax.swing.JLabel getLblElementDescription() {
 		}
 	}
 	return ivjLblElementDescription;
+}
+/**
+ * Return the JTextField3 property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JTextField getTxtMetaAttrbEnum() {
+	if (ivjTxtMetaAttrbEnum == null) {
+		try {
+			ivjTxtMetaAttrbEnum = new javax.swing.JTextField();
+			ivjTxtMetaAttrbEnum.setName("TxtMetaAttrbEnum");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTxtMetaAttrbEnum;
+}
+/**
+ * Return the JLabel3 property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblMetaAttrbEnum() {
+	if (ivjLblMetaAttrbEnum == null) {
+		try {
+			ivjLblMetaAttrbEnum = new javax.swing.JLabel();
+			ivjLblMetaAttrbEnum.setName("LblMetaAttrbEnum");
+			ivjLblMetaAttrbEnum.setText("Display name:");
+			// user code begin {1}
+			ivjLblMetaAttrbEnum.setText(getResourceString("LblMetaAttrbEnum_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblMetaAttrbEnum;
 }
 /**
  * Return the LblElements property value.
