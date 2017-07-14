@@ -40,6 +40,8 @@ public class DomainDefDialog extends BaseDialog {
 	private javax.swing.JButton ivjBtnOk = null;
 	private javax.swing.JLabel ivjLblName = null;
 	private javax.swing.JTextField ivjTxtName = null;
+	private javax.swing.JLabel ivjLblMetaAttrb = null;
+	private javax.swing.JTextField ivjTxtMetaAttrb = null;
 	private javax.swing.JButton ivjBtnApply = null;
 	private javax.swing.JComboBox ivjCbxType = null;
 	private javax.swing.JCheckBox ivjChxAbstract = null;
@@ -76,6 +78,8 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 		public void focusGained(java.awt.event.FocusEvent e) {
 			if (e.getSource() == DomainDefDialog.this.getTxtName())
 				connEtoM1(e);
+			if(e.getSource() == DomainDefDialog.this.getTxtMetaAttrb())
+				connEtoM2(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
@@ -262,6 +266,24 @@ private void connEtoM1(java.awt.event.FocusEvent arg1) {
 	}
 }
 /**
+ * connEtoM2:  (TxtMetaAttrb.focus.focusGained(java.awt.event.FocusEvent) --> TxtMetaAttrb.selectAll()V)
+ * @param arg1 java.awt.event.FocusEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoM2(java.awt.event.FocusEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		getTxtMetaAttrb().selectAll();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+/**
  * Return the BaseDialogContentPane property value.
  * @return javax.swing.JPanel
  */
@@ -285,8 +307,25 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			constraintsTxtName.fill = java.awt.GridBagConstraints.HORIZONTAL;
 			constraintsTxtName.weightx = 1.0;
 			constraintsTxtName.ipadx = 221;
-			constraintsTxtName.insets = new java.awt.Insets(13, 5, 2, 161);
+			constraintsTxtName.insets = new java.awt.Insets(22, 5, 2, 161);
 			getBaseDialogContentPane().add(getTxtName(), constraintsTxtName);
+			
+			//show label for MetaAttrb
+			java.awt.GridBagConstraints constraintsLblMetaAttrb = new java.awt.GridBagConstraints();
+			constraintsLblMetaAttrb.gridx = 1; constraintsLblMetaAttrb.gridy = 1;
+			constraintsLblMetaAttrb.ipadx = 104;
+			constraintsLblMetaAttrb.insets = new java.awt.Insets(80, 10, 4, 5);
+			getBaseDialogContentPane().add(getLblMetaAttrb(), constraintsLblMetaAttrb);
+
+			//show textfield for MetaAttrb
+			java.awt.GridBagConstraints constraintsTxtMetaAttrb = new java.awt.GridBagConstraints();
+			constraintsTxtMetaAttrb.gridx = 2; constraintsTxtMetaAttrb.gridy = 1;
+			constraintsTxtMetaAttrb.gridwidth = 3;
+			constraintsTxtMetaAttrb.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			constraintsTxtMetaAttrb.weightx = 1.0;
+			constraintsTxtMetaAttrb.ipadx = 221;
+			constraintsTxtMetaAttrb.insets = new java.awt.Insets(85, 5, 2, 161);
+			getBaseDialogContentPane().add(getTxtMetaAttrb(), constraintsTxtMetaAttrb);
 
 			java.awt.GridBagConstraints constraintsTbpTypes = new java.awt.GridBagConstraints();
 			constraintsTbpTypes.gridx = 1; constraintsTbpTypes.gridy = 3;
@@ -520,6 +559,28 @@ private javax.swing.JLabel getLblName() {
 		}
 	}
 	return ivjLblName;
+}
+/**
+ * Return the JLabel2 property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblMetaAttrb() {
+	if (ivjLblMetaAttrb == null) {
+		try {
+			ivjLblMetaAttrb = new javax.swing.JLabel();
+			ivjLblMetaAttrb.setName("LblMetaAttrb");
+			ivjLblMetaAttrb.setText("Display name:");
+			// user code begin {1}
+			ivjLblMetaAttrb.setText(getResourceString("LblMetaAttrb_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblMetaAttrb;
 }
 /**
  * Return the LblName1 property value.
@@ -949,6 +1010,26 @@ private javax.swing.JTextField getTxtName() {
 	return ivjTxtName;
 }
 /**
+ * Return the JTextField2 property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JTextField getTxtMetaAttrb() {
+	if (ivjTxtMetaAttrb == null) {
+		try {
+			ivjTxtMetaAttrb = new javax.swing.JTextField();
+			ivjTxtMetaAttrb.setName("TxtMetaAttrb");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTxtMetaAttrb;
+}
+/**
  * Called whenever the part throws an exception.
  * @param exception java.lang.Throwable
  */
@@ -968,6 +1049,7 @@ private void initConnections() throws java.lang.Exception {
 	getBtnApply().addActionListener(ivjEventHandler);
 	getCbxType().addItemListener(ivjEventHandler);
 	getTxtName().addFocusListener(ivjEventHandler);
+	getTxtMetaAttrb().addFocusListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
