@@ -19,3 +19,13 @@ Para crear una distribución binaria, utilice
 ~~~
 ant bindist
 ~~~
+:exclamation: 
+## Nota  
+El proyecto incluye librerías propias de jdk1.6, algunas descontinuadas por oracle, se recomienda no ejecutar
+~~~
+ant clean
+~~~
+rompe las dependencias incluidas en build/
+## Licencia
+The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
+
