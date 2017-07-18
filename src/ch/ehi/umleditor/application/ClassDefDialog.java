@@ -1250,9 +1250,9 @@ protected boolean save() {
 	if (!ElementUtils.trySetName(classDef, getTxtName().getText())) {
 		return false;
 	}
-	if (!ElementUtils.trySetName(classDef, getTxtMetaAttrb().getText())) {
+	/*if (!ElementUtils.trySetName(classDef, getTxtMetaAttrb().getText())) {
 		return false;
-	}
+	}*/
 	if (getRbtClass().isSelected()) {
 		classDef.setKind(ClassDefKind.CLASS);
 	} else if (getRbtStructure().isSelected()) {

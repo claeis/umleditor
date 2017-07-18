@@ -340,17 +340,14 @@ private javax.swing.JPanel getJPnlMetaAttrb() {
 			constraintsLblMetaAttrb.insets = new java.awt.Insets(7, 7, 2, 132);
 			getJPnlMetaAttrb().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrb);
 			
-
-			java.awt.GridBagConstraints constraintsPnlMetaAttrb = new java.awt.GridBagConstraints();
-			constraintsPnlMetaAttrb.gridx = 1; constraintsPnlMetaAttrb.gridy = 2;
-			constraintsPnlMetaAttrb.fill = java.awt.GridBagConstraints.BOTH;
-			constraintsPnlMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsPnlMetaAttrb.weightx = 1.0;
-			constraintsPnlMetaAttrb.weighty = 1.0;
-			constraintsPnlMetaAttrb.ipadx = 243;
-			constraintsPnlMetaAttrb.ipady = 69;
-			constraintsPnlMetaAttrb.insets = new java.awt.Insets(2, 5, 3, 5);
-			getJPnlMetaAttrb().add(getJPnlMetaAttrb(), constraintsPnlMetaAttrb);
+			java.awt.GridBagConstraints constraintsTxtMetaAttrb = new java.awt.GridBagConstraints();
+			constraintsTxtMetaAttrb.gridx = 1; constraintsTxtMetaAttrb.gridy = 1;
+			constraintsTxtMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsTxtMetaAttrb.ipadx = 140;
+			constraintsTxtMetaAttrb.ipady = 14;
+			constraintsTxtMetaAttrb.insets = new java.awt.Insets(7, 7, 2, 132);
+			getJPnlMetaAttrb().add(getLblMetaAttrbEnum(), constraintsTxtMetaAttrb);
+		
 			// user code begin {1}
 			// user code end
 			
@@ -473,7 +470,7 @@ private javax.swing.JLabel getLblMetaAttrbEnum() {
 		try {
 			ivjLblMetaAttrbEnum = new javax.swing.JLabel();
 			ivjLblMetaAttrbEnum.setName("LblMetaAttrbEnum");
-			ivjLblMetaAttrbEnum.setText("Display name:");
+			ivjLblMetaAttrbEnum.setText("Element - Display name:");
 			// user code begin {1}
 			ivjLblMetaAttrbEnum.setText(getResourceString("LblMetaAttrbEnum_text"));
 			// user code end
@@ -882,6 +879,17 @@ constraintsJPanel1.gridheight = 2;
 		constraintsJPanel1.weighty = 1.0;
 		constraintsJPanel1.insets = new java.awt.Insets(1, 4, 6, 6);
 		add(getJPanel1(), constraintsJPanel1);
+		
+		java.awt.GridBagConstraints constraintsJpnlMetaAttrb = new java.awt.GridBagConstraints();
+		constraintsJpnlMetaAttrb.gridx = 2; constraintsJPanel1.gridy = 2;
+		constraintsJpnlMetaAttrb.gridheight = 2;
+		constraintsJpnlMetaAttrb.fill = java.awt.GridBagConstraints.BOTH;
+		constraintsJpnlMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		constraintsJpnlMetaAttrb.weightx = 1.0;
+		constraintsJpnlMetaAttrb.weighty = 1.0;
+		constraintsJpnlMetaAttrb.insets = new java.awt.Insets(5, 3, 6, 6);
+		add(getJPnlMetaAttrb(), constraintsJpnlMetaAttrb);
+		
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
 		handleException(ivjExc);
