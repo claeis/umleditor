@@ -732,6 +732,12 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
               // -end- 3C8F5ABE022D set_body3940F0250373 "syntax"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3940F0250373 detail_end "ViewProjectionDef"

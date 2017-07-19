@@ -42,7 +42,12 @@ public class TopicDefKind implements java.io.Serializable
 
                 // -end- 3C1DBC750311 detail_begin "TopicDefKind"
 
-                // -beg- preserve=no 3C1DBC8300D7 var3C1DBC750311 "DATA"
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1343155464300998846L;
+
+				// -beg- preserve=no 3C1DBC8300D7 var3C1DBC750311 "DATA"
                 public static final int DATA = 1;
                 // -end- 3C1DBC8300D7 var3C1DBC750311 "DATA"
 

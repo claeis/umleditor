@@ -30,6 +30,7 @@ import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D21C62B03BA autoimport "ClassDef"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -734,6 +735,12 @@ public class ClassDef extends AbstractClassDef
     }
     // -end- 3940FA6701DE set_body3D21C62B03BA "kind"
   }
+
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
 
   // declare/define something only in the code
   // please fill in/modify the following section

@@ -2720,6 +2720,12 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact , java.i
                   // -end- 327A878400D2 set_body358A5F0B0113 "isAbstract"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 358A5F0B0113 detail_end "INTERLIS2Def"

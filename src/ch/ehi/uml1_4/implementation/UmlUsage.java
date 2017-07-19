@@ -129,6 +129,12 @@ public class UmlUsage extends AbstractDependency implements Usage , java.io.Seri
         // -end- 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"
         }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
       // declare/define something only in the code
       // please fill in/modify the following section
       // -beg- preserve=no 3C68EC6E02C0 detail_end "UmlUsage"

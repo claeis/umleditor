@@ -26,6 +26,10 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:38 $
  */
 public class ContractDialog extends BaseDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6700175440920935395L;
 	// ModelElement
 	private static java.util.ResourceBundle resContractDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ContractDialog");
 	Contract contract = null;
@@ -61,7 +65,6 @@ public ContractDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Elemen
 	super(owner, true);
 	initialize();
 
-	setTitle(ElementUtils.getDisplayName(element) + " " + resContractDialog.getString("CTDialog")); //$NON-NLS-1$
 	setRelativeLocation(owner);
 	setElement(element);
 	show();

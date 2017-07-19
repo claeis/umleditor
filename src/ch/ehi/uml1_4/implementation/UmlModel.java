@@ -1035,6 +1035,12 @@ public class UmlModel extends AbstractNamespace implements Model , java.io.Seria
       // -end- 327A878400D2 set_body3C4FDE4A01DE "isAbstract"
     }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // declare/define something only in the code
     // please fill in/modify the following section
     // -beg- preserve=no 3C4FDE4A01DE detail_end "UmlModel"

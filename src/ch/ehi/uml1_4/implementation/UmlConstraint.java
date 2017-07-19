@@ -417,6 +417,12 @@ public class UmlConstraint extends AbstractModelElement implements Constraint
         // -end- 32866F630244 set_body4551E98A02BB "body"
       }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
       // declare/define something only in the code
       // please fill in/modify the following section
       // -beg- preserve=no 4551E98A02BB detail_end "UmlConstraint"

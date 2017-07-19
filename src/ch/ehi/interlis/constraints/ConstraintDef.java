@@ -420,6 +420,12 @@ public class ConstraintDef extends AbstractModelElement implements Constraint , 
               // -end- 32866F630244 set_body3941018702C7 "body"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3941018702C7 detail_end "ConstraintDef"

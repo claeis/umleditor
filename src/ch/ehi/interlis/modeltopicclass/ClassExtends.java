@@ -310,6 +310,12 @@ public class ClassExtends extends AbstractGeneralization implements Generalizati
                   // -end- 3C68E22702BD set_body3C1DABC0011D "extended"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C1DABC0011D detail_end "ClassExtends"

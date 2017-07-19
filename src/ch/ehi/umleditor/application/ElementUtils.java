@@ -85,6 +85,7 @@ public static String formatWithPackageName(ModelElement modelElement) {
 public static String getDisplayName(Element element) {
 	return getDisplayName(element.getClass());
 }
+
 /**
  * Return the default language String.
  */
@@ -94,52 +95,78 @@ public static String getDisplayName(java.lang.Class type) {
 //	ClassExtends; TopicExtends	=> @see GeneralizationDialog
 //	UmlUsage; TopicDepends		=> @see DependencyDialog
 
-	if (type.equals(DomainDef.class)) {
-		return resElementMapper.getString("CTDomainDef");
+		if (type.equals(DomainDef.class)) {
+			return resElementMapper.getString("CTDomainDef");
+		}
+		if (type.equals(ModelDef.class)) {
+			return resElementMapper.getString("CTModelDef");
+		}
+		if (type.equals(ClassDef.class)) {
+			return resElementMapper.getString("CTClassDef");
+		}
+		if (type.equals(AbstractClassDef.class)) {
+			return resElementMapper.getString("CTAbstractClassDef");
+		}
+		if (type.equals(TopicDef.class)) {
+			return resElementMapper.getString("CTTopicDef");
+		}
+		if (type.equals(FunctionDef.class)) {
+			return resElementMapper.getString("CTFunctionDef");
+		}
+		if (type.equals(ch.ehi.interlis.graphicdescriptions.GraphicDef.class)) {
+			return resElementMapper.getString("CTGraphicDef");
+		}
+		if (type.equals(GraphicParameterDef.class)) {
+			return resElementMapper.getString("CTGraphicParameterDef");
+		}
+		if (type.equals(LineFormTypeDef.class)) {
+			return resElementMapper.getString("CTLineFormTypeDef");
+		}
+		if (type.equals(UmlPackage.class)) {
+			return resElementMapper.getString("CTUmlPackage");
+		}
+		if (type.equals(ch.ehi.interlis.views.ViewDef.class)) {
+			return resElementMapper.getString("CTViewDef");
+		}
+		if (type.equals(ch.ehi.interlis.views.ViewProjectionDef.class)) {
+			return resElementMapper.getString("CTViewProjectionDef");
+		}
+		if (type.equals(ch.ehi.interlis.modeltopicclass.Contract.class)) {
+			return resElementMapper.getString("CTContract");
+		}
+		if (type.equals(ch.ehi.interlis.constraints.ConstraintDef.class)){
+			return resElementMapper.getString("CTConstraintDef");
+		}
+		
+		// should never reach here
+		Tracer.getInstance().developerError("No NLS-Property for type <" + type.getName() + ">");
+		return StringUtils.getPureClassName(type);
 	}
-	if (type.equals(ModelDef.class)) {
-		return resElementMapper.getString("CTModelDef");
-	}
-	if (type.equals(ClassDef.class)) {
-		return resElementMapper.getString("CTClassDef");
-	}
-	if (type.equals(AbstractClassDef.class)) {
-		return resElementMapper.getString("CTAbstractClassDef");
-	}
-	if (type.equals(TopicDef.class)) {
-		return resElementMapper.getString("CTTopicDef");
-	}
-	if (type.equals(FunctionDef.class)) {
-		return resElementMapper.getString("CTFunctionDef");
-	}
-	if (type.equals(ch.ehi.interlis.graphicdescriptions.GraphicDef.class)) {
-		return resElementMapper.getString("CTGraphicDef");
-	}
-	if (type.equals(GraphicParameterDef.class)) {
-		return resElementMapper.getString("CTGraphicParameterDef");
-	}
-	if (type.equals(LineFormTypeDef.class)) {
-		return resElementMapper.getString("CTLineFormTypeDef");
-	}
-	if (type.equals(UmlPackage.class)) {
-		return resElementMapper.getString("CTUmlPackage");
-	}
-	if (type.equals(ch.ehi.interlis.views.ViewDef.class)) {
-		return resElementMapper.getString("CTViewDef");
-	}
-	if (type.equals(ch.ehi.interlis.views.ViewProjectionDef.class)) {
-		return resElementMapper.getString("CTViewProjectionDef");
-	}
-	if (type.equals(ch.ehi.interlis.modeltopicclass.Contract.class)) {
-		return resElementMapper.getString("CTContract");
-	}
-	if (type.equals(ch.ehi.interlis.constraints.ConstraintDef.class)) {
-		return resElementMapper.getString("CTConstraintDef");
-	}
+/**
+ * Set the ModelElement.metaAttrb 
+ */
+public static Boolean trySetMetaAttrb(ModelElement modelElement, String newMetaAttrb) {
 
-	// should never reach here
-	Tracer.getInstance().developerError("No NLS-Property for type <" + type.getName() + ">");
-	return StringUtils.getPureClassName(type);
+		String language =  ch.ehi.basics.types.NlsString.getDefaultLanguage();
+		
+			if (modelElement instanceof Participant) {
+               ((Participant)modelElement).getAssociation().setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));
+               Tracer.getInstance().developerWarning("De alguna manera pudo enviar eso D:");
+                return true;
+            } else {
+				Tracer.getInstance().developerWarning("< Elemento Modelo : " + modelElement.toString() +" y el meta atributo es:"+newMetaAttrb);
+			}
+		
+		newMetaAttrb=newMetaAttrb.trim();
+		if(!(modelElement instanceof ch.ehi.interlis.associations.AssociationDef)){
+			if(newMetaAttrb.length()==0){
+			    //BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(), "warning",//maybe can add this in some properties file "display name should not be empty");
+				return false;
+			}
+		}
+        modelElement.setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));        
+	
+	return true;
 }
 /**
  * Return a new ModelElement Instance.

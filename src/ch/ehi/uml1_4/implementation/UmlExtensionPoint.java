@@ -374,6 +374,12 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
     // -end- 3634E53A00DC set_body4551A7D50075 "location"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 4551A7D50075 detail_end "UmlExtensionPoint"

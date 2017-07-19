@@ -610,6 +610,12 @@ public class UmlParameter extends AbstractModelElement implements Parameter
     // -end- 335BC753038E set_body40432B0300AE "kind"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 40432B0300AE detail_end "UmlParameter"

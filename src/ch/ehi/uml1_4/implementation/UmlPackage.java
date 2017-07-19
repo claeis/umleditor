@@ -784,6 +784,12 @@ public class UmlPackage extends AbstractNamespace implements Package , java.io.S
         // -end- 327A878400D2 set_body3C68E11703C1 "isAbstract"
       }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
       // declare/define something only in the code
       // please fill in/modify the following section
       // -beg- preserve=no 3C68E11703C1 detail_end "UmlPackage"

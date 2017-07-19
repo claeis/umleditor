@@ -2902,6 +2902,20 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
             }
             // -end- 3C1DF92B0234 set_body3CE225AB0092 "documentation"
           }
+          
+          //add meta attributes to project
+          private NlsString metaAttrb = null;
+          
+          public NlsString getMetaAttrb() {
+        	  return metaAttrb;
+          }
+          
+          public void setMettaAttrb(NlsString value) {
+        	  if(metaAttrb!=value &&(metaAttrb==null || !metaAttrb.equals(value))) {
+        		  metaAttrb = value;
+        		  ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMettaAttrb"));
+        	  }
+          }
 
           // declare/define something only in the code
           // please fill in/modify the following section

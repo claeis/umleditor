@@ -3600,6 +3600,18 @@ public class UmlStereotype implements Stereotype
         // -end- 3C1DF92B0234 set_body448D24D90367 "documentation"
       }
 
+	@Override
+	public NlsString getMetaAttrb() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
       // declare/define something only in the code
       // please fill in/modify the following section
       // -beg- preserve=no 448D24D90367 detail_end "UmlStereotype"

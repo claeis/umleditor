@@ -27,6 +27,7 @@ import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 448933B703CF autoimport "Participant"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -379,6 +380,12 @@ public class Participant extends AbstractModelElement
     return;
   }
   // -end- 4489358A00CE _unlink_body448933B703CF "Participant::_unlinkRestriction"
+
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
 
   // declare/define something only in the code
   // please fill in/modify the following section

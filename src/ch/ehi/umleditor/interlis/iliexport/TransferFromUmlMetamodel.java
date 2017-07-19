@@ -413,6 +413,7 @@ public class TransferFromUmlMetamodel
       }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     if(def.isContracted()){
 		out.write("CONTRACTED ");
@@ -2351,6 +2352,31 @@ private void addSimpleEleCond(java.util.Set children,
       out.write(getIndent()+beg+line);newline();
       out.write(getIndent()+" */");newline();
     }
+  
+  // Add Meta attributes ili2db
+  public void visitMetaAttrb(NlsString nlsdoc)
+  throws java.io.IOException{
+	  if(nlsdoc==null)return;
+	  String doc=nlsdoc.getValue(language).trim();
+	  if(doc.length()==0)return;
+	  String beg=" !!@ili2db.";
+	  String metaAttrb="dispName=";//Can be a variable later
+	  
+	  // for each line
+	  int last=0;
+	  int next=doc.indexOf("\n",last);
+	  while(next>-1){
+	      String line=doc.substring(last,next);
+	      out.write(getIndent()+beg+line);newline();
+	      beg="   ";
+	      last=next+1;
+	      next=doc.indexOf("\n",last);
+	    }
+	  
+	  String line=doc.substring(last,next);
+	  out.write(getIndent()+beg+metaAttrb+line);newline();
+	  
+  }
 
   public void visitExplanation(NlsString nlsdoc)
     throws java.io.IOException

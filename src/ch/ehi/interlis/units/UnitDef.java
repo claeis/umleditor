@@ -761,6 +761,12 @@ public class UnitDef extends AbstractModelElement implements ModelElement , IliS
     // -end- 3C8F5ABE022D set_body3940EC1D0094 "syntax"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 3940EC1D0094 detail_end "UnitDef"

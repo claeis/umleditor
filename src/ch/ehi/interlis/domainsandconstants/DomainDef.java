@@ -2582,6 +2582,12 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
     // -end- 327A877E006E set_body358A5E2403D8 "isLeaf"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 358A5E2403D8 detail_end "DomainDef"

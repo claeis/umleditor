@@ -320,6 +320,12 @@ public class TopicDepends extends AbstractDependency implements Usage , java.io.
                 }
                 // -end- 335C0D7A02E4 _unlink_body3C17712203B7 "Dependency::_unlinkSupplier"
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C17712203B7 detail_end "TopicDepends"

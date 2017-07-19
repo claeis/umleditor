@@ -401,6 +401,12 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax , ja
                   // -end- 3C8F5ABE022D set_body3940EE310270 "syntax"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3940EE310270 detail_end "ParameterDef"

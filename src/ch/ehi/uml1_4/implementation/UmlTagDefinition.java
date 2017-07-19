@@ -2989,6 +2989,18 @@ public class UmlTagDefinition implements TagDefinition
             // -end- 3C1DF92B0234 set_body448D24EA007C "documentation"
           }
 
+		@Override
+		public NlsString getMetaAttrb() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void setMetaAttrb(NlsString value) {
+			// TODO Auto-generated method stub
+			
+		}
+
           // declare/define something only in the code
           // please fill in/modify the following section
           // -beg- preserve=no 448D24EA007C detail_end "UmlTagDefinition"

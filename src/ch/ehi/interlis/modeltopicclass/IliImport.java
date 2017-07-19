@@ -360,6 +360,12 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   // -end- 3CE1360202DA set_body3940AEA40090 "language"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3940AEA40090 detail_end "IliImport"

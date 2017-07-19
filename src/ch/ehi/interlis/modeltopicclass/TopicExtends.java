@@ -279,6 +279,12 @@ public class TopicExtends extends AbstractGeneralization implements Generalizati
                 }
                 // -end- 335C14A50352 _unlink_body3C17718D0099 "Generalization::_unlinkChild"
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C17718D0099 detail_end "TopicExtends"

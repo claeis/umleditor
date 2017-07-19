@@ -1557,6 +1557,12 @@ public class AttributeDef extends AbstractModelElement implements Attribute , ja
     }
   }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
   // -end- 358A5F6F01B7 detail_end "AttributeDef"
 
 }

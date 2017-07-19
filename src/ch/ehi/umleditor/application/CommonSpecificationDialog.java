@@ -28,6 +28,10 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class CommonSpecificationDialog extends BaseDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8132412233745703532L;
 	// ModelElement
 	ch.ehi.uml1_4.foundation.core.ModelElement modelElement = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
@@ -62,8 +66,6 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public CommonSpecificationDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
-	
-	setTitle(ElementUtils.getDisplayName(element) + " " + getResourceString("CTSpecification")); //$NON-NLS-1$
 	setRelativeLocation(owner);
 	setElement(element);
 	show();

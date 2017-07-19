@@ -2338,6 +2338,12 @@ public class UmlUseCase extends AbstractNamespace implements UseCase
     // -end- 327A878400D2 set_body4551A5AD02B6 "isAbstract"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 4551A5AD02B6 detail_end "UmlUseCase"

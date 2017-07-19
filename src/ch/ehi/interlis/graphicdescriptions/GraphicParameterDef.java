@@ -370,6 +370,12 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
               // -end- 3C8F5ABE022D set_body3947A91501AA "syntax"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3947A91501AA detail_end "GraphicParameterDef"

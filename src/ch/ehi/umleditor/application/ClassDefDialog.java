@@ -31,6 +31,10 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
 public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -702437324945597770L;
 	// keep ModelElement
 	private static java.util.ResourceBundle resClassDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ClassDefDialog");
 	ch.ehi.interlis.modeltopicclass.ClassDef classDef = null;
@@ -1250,9 +1254,9 @@ protected boolean save() {
 	if (!ElementUtils.trySetName(classDef, getTxtName().getText())) {
 		return false;
 	}
-	/*if (!ElementUtils.trySetName(classDef, getTxtMetaAttrb().getText())) {
+	if (!ElementUtils.trySetMetaAttrb(classDef, getTxtMetaAttrb().getText())){
 		return false;
-	}*/
+	}
 	if (getRbtClass().isSelected()) {
 		classDef.setKind(ClassDefKind.CLASS);
 	} else if (getRbtStructure().isSelected()) {

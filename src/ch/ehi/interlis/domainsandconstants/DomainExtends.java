@@ -279,6 +279,12 @@ public class DomainExtends extends AbstractGeneralization implements Generalizat
                 }
                 // -end- 335C146B0352 _unlink_body3C1DD59D0109 "Generalization::_unlinkParent"
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C1DD59D0109 detail_end "DomainExtends"

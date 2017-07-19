@@ -266,6 +266,12 @@ public class RoleDefDerived extends AbstractDependency implements IliSyntax , Ab
                   // -end- 33EB8A4500B4 set_body3C1DB6CB0118 "mapping"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C1DB6CB0118 detail_end "RoleDefDerived"

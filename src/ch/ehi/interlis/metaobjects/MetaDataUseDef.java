@@ -365,6 +365,12 @@ public class MetaDataUseDef extends AbstractModelElement implements ModelElement
                   // -end- 3C8F5ABE022D set_body3C1DC6BA03C6 "syntax"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C1DC6BA03C6 detail_end "MetaDataUseDef"

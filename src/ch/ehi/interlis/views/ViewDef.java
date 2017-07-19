@@ -1056,6 +1056,12 @@ public class ViewDef extends AbstractModelElement implements ViewableDef , IliSy
               // -end- 3C8F5ABE022D set_body3940EF380079 "syntax"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3940EF380079 detail_end "ViewDef"

@@ -1730,6 +1730,12 @@ public class UmlActor extends AbstractNamespace implements Actor
     // -end- 327A878400D2 set_body4551A5A200BB "isAbstract"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 4551A5A200BB detail_end "UmlActor"

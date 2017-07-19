@@ -361,6 +361,12 @@ public class AssociationDefDerived extends AbstractDependency implements Abstrac
                   // -end- 33EB8A4500B4 set_body3C1DB4C00011 "mapping"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3C1DB4C00011 detail_end "AssociationDefDerived"

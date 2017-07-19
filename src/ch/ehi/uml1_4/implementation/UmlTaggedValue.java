@@ -3076,6 +3076,18 @@ public class UmlTaggedValue implements TaggedValue
                 // -end- 335D4BA70064 set_body448D24F502DB "name"
               }
 
+			@Override
+			public NlsString getMetaAttrb() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
               // declare/define something only in the code
               // please fill in/modify the following section
               // -beg- preserve=no 448D24F502DB detail_end "UmlTaggedValue"

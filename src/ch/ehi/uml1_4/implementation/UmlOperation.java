@@ -1318,6 +1318,12 @@ public class UmlOperation extends AbstractModelElement implements Operation
     // -end- 33D1265902DA set_body40432AE50263 "visibility"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 40432AE50263 detail_end "UmlOperation"

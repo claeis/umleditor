@@ -1489,6 +1489,16 @@ public interface ModelElement extends Element , java.io.Serializable
   // -beg- preserve=no 327A5C7301CC detail_end "ModelElement"
 
   // -end- 327A5C7301CC detail_end "ModelElement"
-
+   
+   /**
+    * get current value of meta attribute
+    * @see #getMetaAttrb()
+    */
+   NlsString getMetaAttrb();
+   /**
+    * set current value of meta attrubute
+    * @see #getName()
+    */
+   void setMetaAttrb(NlsString value);
 }
 

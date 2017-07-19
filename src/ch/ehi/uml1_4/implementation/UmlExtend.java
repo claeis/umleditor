@@ -510,6 +510,12 @@ public class UmlExtend extends AbstractModelElement implements Extend
     // -end- 35FDD71C026C set_body4551A78D0108 "condition"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 4551A78D0108 detail_end "UmlExtend"

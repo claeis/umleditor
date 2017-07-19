@@ -374,6 +374,12 @@ public class EnumElement extends AbstractModelElement implements ModelElement , 
                   // -end- 394895E40137 set_body358A69810091 "nameList"
                 }
 
+				@Override
+				public void setMetaAttrb(NlsString value) {
+					// TODO Auto-generated method stub
+					
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 358A69810091 detail_end "EnumElement"

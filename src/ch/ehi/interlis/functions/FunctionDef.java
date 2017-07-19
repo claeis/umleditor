@@ -499,6 +499,12 @@ public class FunctionDef extends AbstractModelElement implements ModelElement , 
               // -end- 3C8F5ABE022D set_body3960AFB50130 "syntax"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3960AFB50130 detail_end "FunctionDef"

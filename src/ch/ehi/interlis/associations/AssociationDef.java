@@ -1323,6 +1323,12 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
         ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"swapConnection"));
       }
 
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
   // -end- 3C178E4F0366 detail_end "AssociationDef"
 
 }

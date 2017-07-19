@@ -1819,6 +1819,7 @@ protected boolean save() {
 	modelDef.setIssuerURI( ElementUtils.changeNlsString(modelDef.getIssuerURI(),getTxtIssuerURI().getText()));
 	modelDef.setVersion(ElementUtils.changeNlsString(modelDef.getVersion(),getTxtVersion().getText()));
 	modelDef.setVersionComment(ElementUtils.changeNlsString(modelDef.getVersionComment(),getTxtVersionComment().getText()));
+	// ch.interlis.ilirepository.MakeIliModelsXml don't works at new version of ili2c 
 	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT,getTxtTechnicalContact().getText());
 	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION,getTxtFurtherInformation().getText());
 	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV,getTxtIDGeoIV().getText());

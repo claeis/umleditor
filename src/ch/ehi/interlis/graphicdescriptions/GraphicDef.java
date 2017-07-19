@@ -725,6 +725,12 @@ public class GraphicDef extends AbstractModelElement implements ModelElement , I
               // -end- 3C8F5ABE022D set_body3940F1F903B2 "syntax"
             }
 
+			@Override
+			public void setMetaAttrb(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
             // declare/define something only in the code
             // please fill in/modify the following section
             // -beg- preserve=no 3940F1F903B2 detail_end "GraphicDef"

@@ -1761,6 +1761,12 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     // -end- 3611BCE602DA set_body3C1DAD070376 "visibility"
   }
 
+@Override
+public void setMetaAttrb(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
+
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 3C1DAD070376 detail_end "RoleDef"
