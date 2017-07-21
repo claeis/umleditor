@@ -116,6 +116,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
             clearImportedBy();
             // Role EditorTreeElement: EditorTreeElement object(s) may point to this
             setName(null);
+            setMetaAttrb(null);
             setDocumentation(null);
             super.unlinkAll();
             // -end- 3D4FA218006C body3CE225CF036F "unlinkAll"
@@ -139,6 +140,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
             it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
             it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
             visitor.visit(getName());
+            visitor.visit(getMetaAttrb());
             visitor.visit(getDocumentation());
             super.enumerateChildren(visitor);
             // -end- 3D4FA2180076 body3CE225CF036F "enumerateChildren"
