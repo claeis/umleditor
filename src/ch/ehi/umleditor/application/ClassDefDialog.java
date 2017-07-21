@@ -1294,6 +1294,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// general & page Description
 	getTxtName().setText(classDef.getDefLangName());
+	getTxtMetaAttrb().setText(classDef.getDefLangMetaAttrb());
 	getPnlDescription().setObject(element);
 	switch (classDef.getKind()) {
 		case ClassDefKind.CLASS: {

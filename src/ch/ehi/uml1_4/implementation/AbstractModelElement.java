@@ -167,6 +167,26 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
     return;
         // -end- 3CE222250149 body3CE225AB0092 "setDefLangName"
         }
+      
+      public String getDefLangMetaAttrb(){
+    		NlsString metaAttrb=getMetaAttrb();
+    		return metaAttrb!=null ? metaAttrb.getValue() : null;
+    	}
+
+    	public void setDefLangMetaAttrb(){
+    		NlsString oldMetaAttrb=getMetaAttrb();
+    	    	if(oldMetaAttrb==null){
+    	      		setMetaAttrb(new NlsString(metaAttrb));
+    		    }else if(oldMetaAttrb.getValue()==null){
+    	      	if(metaAttrb!=null){
+    	      		setMetaAttrb(new NlsString(oldMetaAttrb, metaAttrb.toString()));
+    	      	}
+    	    }else if(!oldMetaAttrb.getValue().equals(metaAttrb)){
+    	    	setMetaAttrb(new NlsString(oldMetaAttrb, metaAttrb.toString()));
+    	    }
+    	    return;
+    	}
+      
 
       // -beg- preserve=no 33CF8BD500F1 code3CE225AB0092 "behavior"
       private java.util.Set behavior = new java.util.HashSet();

@@ -2366,8 +2366,8 @@ private void addSimpleEleCond(java.util.Set children,
 	  int last=0;
 	  int next=doc.indexOf("\n",last);
 	  while(next>-1){
-	      String line=doc.substring(last,next);
-	      out.write(getIndent()+beg+line);newline();
+	      String line=doc.substring (last,next);
+	      out.write(getIndent()+beg+metaAttrb+line);newline();
 	      beg="   ";
 	      last=next+1;
 	      next=doc.indexOf("\n",last);
