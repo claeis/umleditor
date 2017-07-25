@@ -345,8 +345,8 @@ private javax.swing.JPanel getJPnlMetaAttrb() {
 			constraintsTxtMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsTxtMetaAttrb.ipadx = 140;
 			constraintsTxtMetaAttrb.ipady = 14;
-			constraintsTxtMetaAttrb.insets = new java.awt.Insets(7, 7, 2, 132);
-			getJPnlMetaAttrb().add(getLblMetaAttrbEnum(), constraintsTxtMetaAttrb);
+			constraintsTxtMetaAttrb.insets = new java.awt.Insets(7, 165, 2, 132);
+			getJPnlMetaAttrb().add(getTxtMetaAttrbEnum(), constraintsTxtMetaAttrb);
 		
 			// user code begin {1}
 			// user code end

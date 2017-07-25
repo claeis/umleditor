@@ -1101,6 +1101,9 @@ protected boolean save() {
 	if (!ElementUtils.trySetName(domainDef, getTxtName().getText())) {
 		return false;
 	}
+	if (!ElementUtils.trySetMetaAttrb(domainDef, getTxtMetaAttrbDom().getText())){
+		return false;
+	}
 	getPnlDescription().getObject();
 
 	// page details

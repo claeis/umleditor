@@ -46,7 +46,12 @@ public class Participant extends AbstractModelElement
 
   // -end- 448933B703CF detail_begin "Participant"
 
-  // -beg- preserve=no 448D37E501EC head448933B703CF "unlinkAll"
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3562951267695748062L;
+
+// -beg- preserve=no 448D37E501EC head448933B703CF "unlinkAll"
   public void unlinkAll()
   // -end- 448D37E501EC head448933B703CF "unlinkAll"
     // declare any checked exceptions
@@ -386,6 +391,7 @@ public void setMetaAttrb(NlsString value) {
 	// TODO Auto-generated method stub
 	
 }
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

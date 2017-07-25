@@ -1492,12 +1492,12 @@ public interface ModelElement extends Element , java.io.Serializable
    
    /**
     * get current value of meta attribute
-    * @see #getMetaAttrb()
+    * @see #setMetaAttrb()
     */
    NlsString getMetaAttrb();
    /**
     * set current value of meta attrubute
-    * @see #getName()
+    * @see #getMetaAttrb()
     */
    void setMetaAttrb(NlsString value);
 }

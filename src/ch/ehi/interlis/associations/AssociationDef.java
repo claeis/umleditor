@@ -149,6 +149,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     clearOwnedElement();
     clearDiagram();
     setDocumentation(null);

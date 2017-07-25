@@ -146,27 +146,23 @@ public static String getDisplayName(java.lang.Class type) {
  * Set the ModelElement.metaAttrb 
  */
 public static Boolean trySetMetaAttrb(ModelElement modelElement, String newMetaAttrb) {
-
-		String language =  ch.ehi.basics.types.NlsString.getDefaultLanguage();
+	String language = ch.ehi.basics.types.NlsString.getDefaultLanguage();
+	if ((modelElement != null) && (!newMetaAttrb.equals(mapNlsString(modelElement.getMetaAttrb(), language)))) {
 		
-			if (modelElement instanceof Participant) {
-               ((Participant)modelElement).getAssociation().setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));
-               Tracer.getInstance().developerWarning("De alguna manera pudo enviar eso D:");
-                return true;
-            } else {
-				Tracer.getInstance().developerWarning("< Elemento Modelo : " + modelElement.toString() +" y el meta atributo es:"+newMetaAttrb);
-			}
-		
-		newMetaAttrb=newMetaAttrb.trim();
-		if(!(modelElement instanceof ch.ehi.interlis.associations.AssociationDef)){
-			if(newMetaAttrb.length()==0){
-			    //BaseDialog.showWarning((java.awt.Component)LauncherView.getInstance(), "warning",//maybe can add this in some properties file "display name should not be empty");
-				return false;
-			}
+		if (modelElement instanceof Participant) {
+            // XOR updates real RoleDef name
+			System.out.println("modelo es instancia de participante");
+            ((Participant)modelElement).getAssociation().setMetaAttrb(new ch.ehi.basics.types.NlsString(language, newMetaAttrb));
+            return true;
+        } else {
+        	System.out.println("no es participante modelElement"+modelElement.toString());
+			Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 		}
-        modelElement.setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));        
+		
+		 modelElement.setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));      
+	}
 	
-	return true;
+	return true;	
 }
 /**
  * Return a new ModelElement Instance.
