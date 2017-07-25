@@ -93,6 +93,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement , IliS
     // Role NumericConst: NumericConst object(s) may point to this
     // Role StructUnitConst: StructUnitConst object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDescName(null);
     clearBehavior();
     clearPartition();
@@ -664,6 +665,14 @@ public class UnitDef extends AbstractModelElement implements ModelElement , IliS
     super.setName(value1);
     // -end- 3949DF3B00EA set_body3940EC1D0094 "name"
   }
+  
+  public NlsString getMetaAttrb(){
+	  return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value){
+	  super.setMettaAttrb(value);
+  }
 
   // -beg- preserve=no 3949DF400029 var3940EC1D0094 "descName"
   private NlsString descName = null;
@@ -761,11 +770,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement , IliS
     // -end- 3C8F5ABE022D set_body3940EC1D0094 "syntax"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

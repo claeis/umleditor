@@ -124,6 +124,7 @@ public class UmlActor extends AbstractNamespace implements Actor
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 4551A85800F6 body4551A5A200BB "unlinkAll"
@@ -1730,11 +1731,15 @@ public class UmlActor extends AbstractNamespace implements Actor
     // -end- 327A878400D2 set_body4551A5A200BB "isAbstract"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+	public NlsString getMetaAttrb(){
+			 return super.getMetaAttrb();
+	}
+	  
+	public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	}
+
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

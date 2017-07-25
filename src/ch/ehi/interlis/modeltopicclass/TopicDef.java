@@ -1765,11 +1765,15 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
       // -end- 327A877E006E set_body358A5E3B0132 "isLeaf"
     }
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+    public NlsString getMetaAttrb(){
+		 return super.getMetaAttrb();
+	 }
+		  
+	 public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	 }
+
+
 
     // declare/define something only in the code
     // please fill in/modify the following section

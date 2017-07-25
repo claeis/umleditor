@@ -106,6 +106,7 @@ public class TopicExtends extends AbstractGeneralization implements Generalizati
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21A0051 body3C17718D0099 "unlinkAll"
@@ -279,11 +280,14 @@ public class TopicExtends extends AbstractGeneralization implements Generalizati
                 }
                 // -end- 335C14A50352 _unlink_body3C17718D0099 "Generalization::_unlinkChild"
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+               	 return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+               	super.setMettaAttrb(value);
+               	
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

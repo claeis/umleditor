@@ -126,6 +126,7 @@ public class UmlPackage extends AbstractNamespace implements Package , java.io.S
       clearImportedBy();
       // Role EditorTreeElement: EditorTreeElement object(s) may point to this
       setName(null);
+      setMetaAttrb(null);
       setDocumentation(null);
       super.unlinkAll();
       // -end- 3D4FA218001C body3C68E11703C1 "unlinkAll"
@@ -784,11 +785,13 @@ public class UmlPackage extends AbstractNamespace implements Package , java.io.S
         // -end- 327A878400D2 set_body3C68E11703C1 "isAbstract"
       }
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+      public NlsString getMetaAttrb(){
+    		 return super.getMetaAttrb();
+    	  }
+    	  
+	  public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	  }
 
       // declare/define something only in the code
       // please fill in/modify the following section

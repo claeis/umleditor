@@ -736,11 +736,14 @@ public class ClassDef extends AbstractClassDef
     // -end- 3940FA6701DE set_body3D21C62B03BA "kind"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
+  public NlsString getMetaAttrb(){
+	 return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value) {
+	super.setMettaAttrb(value);
 	
-}
+  }
 
   // declare/define something only in the code
   // please fill in/modify the following section

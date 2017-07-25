@@ -65,6 +65,7 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax , ja
                   detachMetaobject();
                   detachAttrType();
                   setName(null);
+                  setMetaAttrb(null);
                   setSyntax(null);
                   super.unlinkAll();
                   // -end- 3D4FA21B0391 body3940EE310270 "unlinkAll"
@@ -401,11 +402,13 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax , ja
                   // -end- 3C8F5ABE022D set_body3940EE310270 "syntax"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+                	return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+                	 super.setMettaAttrb(value);	
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

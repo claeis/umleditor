@@ -130,6 +130,7 @@ public class UmlModel extends AbstractNamespace implements Model , java.io.Seria
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 3D4FA21703AA body3C4FDE4A01DE "unlinkAll"
@@ -1035,11 +1036,15 @@ public class UmlModel extends AbstractNamespace implements Model , java.io.Seria
       // -end- 327A878400D2 set_body3C4FDE4A01DE "isAbstract"
     }
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+    public NlsString getMetaAttrb(){
+		 return super.getMetaAttrb();
+    }
+	  
+    public void setMetaAttrb(NlsString value) {
+	  super.setMettaAttrb(value);	
+    }
+
+
 
     // declare/define something only in the code
     // please fill in/modify the following section

@@ -110,6 +110,7 @@ public class RoleDefDerived extends AbstractDependency implements IliSyntax , Ab
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21C00EA body3C1DB6CB0118 "unlinkAll"
@@ -266,11 +267,14 @@ public class RoleDefDerived extends AbstractDependency implements IliSyntax , Ab
                   // -end- 33EB8A4500B4 set_body3C1DB6CB0118 "mapping"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+               	 return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+               	super.setMettaAttrb(value);
+               	
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

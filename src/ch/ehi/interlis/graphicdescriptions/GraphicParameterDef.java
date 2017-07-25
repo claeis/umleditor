@@ -83,6 +83,7 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
               detachDomainAttribute();
               detachNamespace();
               setName(null);
+              setMetaAttrb(null);
               clearBehavior();
               clearPartition();
               clearCollaboration();
@@ -370,11 +371,13 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
               // -end- 3C8F5ABE022D set_body3947A91501AA "syntax"
             }
 
-			@Override
-			public void setMetaAttrb(NlsString value) {
-				// TODO Auto-generated method stub
-				
-			}
+            public NlsString getMetaAttrb(){
+           	 	return super.getMetaAttrb();
+             }
+             
+             public void setMetaAttrb(NlsString value) {
+            	 super.setMettaAttrb(value);	
+             }
 
             // declare/define something only in the code
             // please fill in/modify the following section

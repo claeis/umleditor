@@ -103,6 +103,7 @@ public class UmlTagDefinition implements TagDefinition
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setMetaAttrb(null);
         setDocumentation(null);
         
         // -end- 448D365F003C body448D24EA007C "unlinkAll"
@@ -125,6 +126,7 @@ public class UmlTagDefinition implements TagDefinition
         it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
         it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
         visitor.visit(getName());
+        visitor.visit(getMetaAttrb());
         visitor.visit(getDocumentation());
         
         // -end- 448D365F0050 body448D24EA007C "enumerateChildren"
@@ -2991,7 +2993,6 @@ public class UmlTagDefinition implements TagDefinition
 
 		@Override
 		public NlsString getMetaAttrb() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 

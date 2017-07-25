@@ -386,11 +386,13 @@ public class Participant extends AbstractModelElement
   }
   // -end- 4489358A00CE _unlink_body448933B703CF "Participant::_unlinkRestriction"
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+  public NlsString getMetaAttrb(){
+	 return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value) {
+	super.setMettaAttrb(value);	
+  }
 
 
   // declare/define something only in the code

@@ -103,6 +103,7 @@ public class UmlUsage extends AbstractDependency implements Usage , java.io.Seri
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setMetaAttrb(null);
         setDocumentation(null);
         super.unlinkAll();
         // -end- 3D4FA218003A body3C68EC6E02C0 "unlinkAll"
@@ -128,12 +129,14 @@ public class UmlUsage extends AbstractDependency implements Usage , java.io.Seri
         super.enumerateChildren(visitor);
         // -end- 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"
         }
-
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+      
+      	public NlsString getMetaAttrb(){
+    		 return super.getMetaAttrb();
+    	}
+    	  
+    	public void setMetaAttrb(NlsString value) {
+    		super.setMettaAttrb(value);	
+    	}
 
       // declare/define something only in the code
       // please fill in/modify the following section

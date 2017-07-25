@@ -108,6 +108,7 @@ public class UmlStereotype implements Stereotype
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     
     // -end- 448D3645021F body448D24D90367 "unlinkAll"
@@ -132,6 +133,7 @@ public class UmlStereotype implements Stereotype
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     
     // -end- 448D364A028B body448D24D90367 "enumerateChildren"

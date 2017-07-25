@@ -101,6 +101,7 @@ public class AttributeDef extends AbstractModelElement implements Attribute , ja
     detachConstant();
     detachAttributeValueUsage();
     setName(null);
+    setMetaAttrb(null);
     setConsistencyRequirement(null);
     clearAssociationEndRole();
     clearAttributeLink();
@@ -1557,11 +1558,15 @@ public class AttributeDef extends AbstractModelElement implements Attribute , ja
     }
   }
 
-	@Override
+	  public NlsString getMetaAttrb(){
+			 return super.getMetaAttrb();
+	  }
+		  
 	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
+		  super.setMettaAttrb(value);	
 	}
+
+
 
   // -end- 358A5F6F01B7 detail_end "AttributeDef"
 

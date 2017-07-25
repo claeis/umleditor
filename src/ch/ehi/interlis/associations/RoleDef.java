@@ -97,6 +97,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     clearRestriction();
     clearXorParticipant();
     setName(null);
+    setMetaAttrb(null);
     clearAssociationEndRole();
     clearLinkEnd();
     detachAssociation();
@@ -1761,11 +1762,15 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     // -end- 3611BCE602DA set_body3C1DAD070376 "visibility"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+	  public NlsString getMetaAttrb(){
+			 return super.getMetaAttrb();
+	  }
+		  
+	public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	}
+
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

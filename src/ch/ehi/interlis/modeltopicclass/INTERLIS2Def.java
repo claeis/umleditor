@@ -157,6 +157,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact , java.i
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA2190398 body358A5F0B0113 "unlinkAll"
@@ -186,6 +187,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact , java.i
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21903AC body358A5F0B0113 "enumerateChildren"
@@ -2720,11 +2722,13 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact , java.i
                   // -end- 327A878400D2 set_body358A5F0B0113 "isAbstract"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+                	return super.getMetaAttrb();
+	             }
+	           	  
+	             public void setMetaAttrb(NlsString value) {
+	            	 super.setMettaAttrb(value);	
+	             }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

@@ -89,6 +89,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement , I
               clearSignAttribute();
               detachExtended();
               setName(null);
+              setMetaAttrb(null);
               clearBehavior();
               clearPartition();
               clearCollaboration();
@@ -725,11 +726,13 @@ public class GraphicDef extends AbstractModelElement implements ModelElement , I
               // -end- 3C8F5ABE022D set_body3940F1F903B2 "syntax"
             }
 
-			@Override
-			public void setMetaAttrb(NlsString value) {
-				// TODO Auto-generated method stub
-				
-			}
+            public NlsString getMetaAttrb(){
+            	return super.getMetaAttrb();
+             }
+             
+             public void setMetaAttrb(NlsString value) {
+            	 super.setMettaAttrb(value);	
+             }
 
             // declare/define something only in the code
             // please fill in/modify the following section

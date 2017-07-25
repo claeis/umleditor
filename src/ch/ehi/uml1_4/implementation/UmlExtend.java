@@ -107,6 +107,7 @@ public class UmlExtend extends AbstractModelElement implements Extend
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 4551A89A0367 body4551A78D0108 "unlinkAll"
@@ -510,11 +511,13 @@ public class UmlExtend extends AbstractModelElement implements Extend
     // -end- 35FDD71C026C set_body4551A78D0108 "condition"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+  public NlsString getMetaAttrb(){
+	  return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value) {
+	  super.setMettaAttrb(value);	
+  }
 
   // declare/define something only in the code
   // please fill in/modify the following section

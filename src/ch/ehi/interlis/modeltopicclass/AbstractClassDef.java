@@ -175,6 +175,7 @@ public abstract class AbstractClassDef extends AbstractNamespace implements View
     clearXorAssociation();
     clearXorRestrictedAssociation();
     setName(null);
+    setMetaAttrb(null);
     // Role AttributePath: AttributePath object(s) may point to this
     // Role RenamedViewableRef: RenamedViewableRef object(s) may point to this
     // Role ViewProjectionDef: ViewProjectionDef object(s) may point to this

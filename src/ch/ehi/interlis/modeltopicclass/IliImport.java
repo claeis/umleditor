@@ -104,6 +104,7 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA219037A body3940AEA40090 "unlinkAll"
@@ -360,11 +361,13 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   // -end- 3CE1360202DA set_body3940AEA40090 "language"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+                	return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+                	 super.setMettaAttrb(value);
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

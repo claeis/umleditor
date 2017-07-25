@@ -96,6 +96,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 4551A8750007 body4551A5AD02B6 "enumerateChildren"
@@ -156,6 +157,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 4551A87801CE body4551A5AD02B6 "unlinkAll"
@@ -2338,11 +2340,14 @@ public class UmlUseCase extends AbstractNamespace implements UseCase
     // -end- 327A878400D2 set_body4551A5AD02B6 "isAbstract"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+	  public NlsString getMetaAttrb(){
+			 return super.getMetaAttrb();
+	}
+		  
+	public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	}
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

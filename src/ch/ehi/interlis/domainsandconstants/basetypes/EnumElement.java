@@ -81,6 +81,7 @@ public class EnumElement extends AbstractModelElement implements ModelElement , 
                   detachEnumeration();
                   detachChild();
                   setName(null);
+                  setMetaAttrb(null);
                   setNameList(null);
                   clearBehavior();
                   clearPartition();
@@ -374,11 +375,13 @@ public class EnumElement extends AbstractModelElement implements ModelElement , 
                   // -end- 394895E40137 set_body358A69810091 "nameList"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+               	 	return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+                	 super.setMettaAttrb(value);	
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

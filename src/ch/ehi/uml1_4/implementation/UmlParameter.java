@@ -98,6 +98,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 40432E440097 body40432B0300AE "unlinkAll"
@@ -610,11 +611,13 @@ public class UmlParameter extends AbstractModelElement implements Parameter
     // -end- 335BC753038E set_body40432B0300AE "kind"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+  public NlsString getMetaAttrb(){
+		 return super.getMetaAttrb();
+  }
+	  
+  public void setMetaAttrb(NlsString value) {
+	  super.setMettaAttrb(value);	
+  }
 
   // declare/define something only in the code
   // please fill in/modify the following section

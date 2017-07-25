@@ -1961,11 +1961,15 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact
                   // -end- 327A878400D2 set_body3D6248EA02E3 "isAbstract"
                 }
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+                	return super.getMetaAttrb();
+	             }
+	           	  
+	             public void setMetaAttrb(NlsString value) {
+	            	 super.setMettaAttrb(value);	
+	             }
+
+
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

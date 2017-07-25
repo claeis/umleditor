@@ -103,6 +103,7 @@ public class UmlTaggedValue implements TaggedValue
             clearImportedBy();
             // Role EditorTreeElement: EditorTreeElement object(s) may point to this
             setName(null);
+            setMetaAttrb(null);
             
             // -end- 448D366F02B6 body448D24F502DB "unlinkAll"
             }
@@ -124,7 +125,7 @@ public class UmlTaggedValue implements TaggedValue
             it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
             it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
             visitor.visit(getName());
-            
+            visitor.visit(getMetaAttrb());
             // -end- 448D366F02C0 body448D24F502DB "enumerateChildren"
             }
 

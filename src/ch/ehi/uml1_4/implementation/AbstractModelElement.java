@@ -101,6 +101,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setMetaAttrb(null);
         setDocumentation(null);
         super.unlinkAll();
         // -end- 3D4FA03E02C3 body3CE225AB0092 "unlinkAll"

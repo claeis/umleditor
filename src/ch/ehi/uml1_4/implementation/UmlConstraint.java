@@ -104,6 +104,7 @@ public class UmlConstraint extends AbstractModelElement implements Constraint
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setMetaAttrb(null);
         setDocumentation(null);
         super.unlinkAll();
         // -end- 4551E9BF00CC body4551E98A02BB "unlinkAll"
@@ -417,11 +418,13 @@ public class UmlConstraint extends AbstractModelElement implements Constraint
         // -end- 32866F630244 set_body4551E98A02BB "body"
       }
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+      public NlsString getMetaAttrb(){
+    		 return super.getMetaAttrb();
+      }
+    	  
+      public void setMetaAttrb(NlsString value) {
+    		super.setMettaAttrb(value);	
+      }
 
       // declare/define something only in the code
       // please fill in/modify the following section

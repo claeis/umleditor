@@ -103,6 +103,7 @@ public class UmlInclude extends AbstractModelElement implements Include
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 4551A8880145 body4551A7840119 "unlinkAll"
@@ -309,11 +310,14 @@ public class UmlInclude extends AbstractModelElement implements Include
   }
   // -end- 35FDD9A50046 _unlink_body4551A7840119 "Include::_unlinkBase"
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
+  public NlsString getMetaAttrb(){
+	 return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value) {
+	super.setMettaAttrb(value);
 	
-}
+  }
 
   // declare/define something only in the code
   // please fill in/modify the following section

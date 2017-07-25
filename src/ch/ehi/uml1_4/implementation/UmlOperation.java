@@ -103,6 +103,7 @@ public class UmlOperation extends AbstractModelElement implements Operation
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 40432E3302E2 body40432AE50263 "unlinkAll"
@@ -126,6 +127,7 @@ public class UmlOperation extends AbstractModelElement implements Operation
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 40432E380194 body40432AE50263 "enumerateChildren"
@@ -1318,11 +1320,15 @@ public class UmlOperation extends AbstractModelElement implements Operation
     // -end- 33D1265902DA set_body40432AE50263 "visibility"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+	  public NlsString getMetaAttrb(){
+			 return super.getMetaAttrb();
+	  }
+	  
+	public void setMetaAttrb(NlsString value) {
+		  super.setMettaAttrb(value);	
+	}
+
+
 
   // declare/define something only in the code
   // please fill in/modify the following section

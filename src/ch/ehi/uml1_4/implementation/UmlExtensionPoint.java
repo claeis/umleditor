@@ -106,6 +106,7 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setMetaAttrb(null);
     setDocumentation(null);
     super.unlinkAll();
     // -end- 4551A8B0030F body4551A7D50075 "unlinkAll"
@@ -374,11 +375,13 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
     // -end- 3634E53A00DC set_body4551A7D50075 "location"
   }
 
-@Override
-public void setMetaAttrb(NlsString value) {
-	// TODO Auto-generated method stub
-	
-}
+  public NlsString getMetaAttrb(){
+	 return super.getMetaAttrb();
+  }
+  
+  public void setMetaAttrb(NlsString value) {
+	super.setMettaAttrb(value);	
+  }
 
   // declare/define something only in the code
   // please fill in/modify the following section

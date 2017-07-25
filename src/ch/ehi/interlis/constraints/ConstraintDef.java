@@ -107,6 +107,7 @@ public class ConstraintDef extends AbstractModelElement implements Constraint , 
               clearImportedBy();
               // Role EditorTreeElement: EditorTreeElement object(s) may point to this
               setName(null);
+              setMetaAttrb(null);
               setDocumentation(null);
               super.unlinkAll();
               // -end- 3D4FA218015C body3941018702C7 "unlinkAll"
@@ -420,11 +421,13 @@ public class ConstraintDef extends AbstractModelElement implements Constraint , 
               // -end- 32866F630244 set_body3941018702C7 "body"
             }
 
-			@Override
-			public void setMetaAttrb(NlsString value) {
-				// TODO Auto-generated method stub
-				
-			}
+            public NlsString getMetaAttrb(){
+            	return super.getMetaAttrb();
+             }
+             
+             public void setMetaAttrb(NlsString value) {
+            	 super.setMettaAttrb(value);
+             }
 
             // declare/define something only in the code
             // please fill in/modify the following section

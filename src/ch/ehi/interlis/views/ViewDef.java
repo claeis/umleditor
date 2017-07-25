@@ -92,6 +92,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef , IliSy
               detachProjectionAttributes();
               clearConstraintDef();
               setName(null);
+              setMetaAttrb(null);
               setCompositionAttr(null);
               // Role AttributePath: AttributePath object(s) may point to this
               // Role RenamedViewableRef: RenamedViewableRef object(s) may point to this
@@ -1056,11 +1057,15 @@ public class ViewDef extends AbstractModelElement implements ViewableDef , IliSy
               // -end- 3C8F5ABE022D set_body3940EF380079 "syntax"
             }
 
-			@Override
-			public void setMetaAttrb(NlsString value) {
-				// TODO Auto-generated method stub
-				
-			}
+            public NlsString getMetaAttrb(){
+            	return super.getMetaAttrb();
+            }
+       	  
+         public void setMetaAttrb(NlsString value) {
+        	 super.setMettaAttrb(value);	
+         }
+
+
 
             // declare/define something only in the code
             // please fill in/modify the following section

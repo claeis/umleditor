@@ -105,6 +105,7 @@ public class TopicDepends extends AbstractDependency implements Usage , java.io.
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21A0029 body3C17712203B7 "unlinkAll"
@@ -320,11 +321,13 @@ public class TopicDepends extends AbstractDependency implements Usage , java.io.
                 }
                 // -end- 335C0D7A02E4 _unlink_body3C17712203B7 "Dependency::_unlinkSupplier"
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+               	 	return super.getMetaAttrb();
+                 }
+                 
+                 public void setMetaAttrb(NlsString value) {
+                	 super.setMettaAttrb(value);
+                 }
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

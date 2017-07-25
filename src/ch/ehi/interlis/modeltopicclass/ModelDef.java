@@ -1831,11 +1831,15 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
       return imps.iterator();
     }
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-		
-	}
+    public NlsString getMetaAttrb(){
+		 return super.getMetaAttrb();
+    }
+	  
+    public void setMetaAttrb(NlsString value) {
+	  super.setMettaAttrb(value);	
+    }
+
+
 
     // -end- 358A5DB202C5 detail_end "ModelDef"
 
