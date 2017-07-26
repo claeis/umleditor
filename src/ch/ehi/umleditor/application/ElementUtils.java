@@ -151,11 +151,9 @@ public static Boolean trySetMetaAttrb(ModelElement modelElement, String newMetaA
 		
 		if (modelElement instanceof Participant) {
             // XOR updates real RoleDef name
-			System.out.println("modelo es instancia de participante");
             ((Participant)modelElement).getAssociation().setMetaAttrb(new ch.ehi.basics.types.NlsString(language, newMetaAttrb));
             return true;
         } else {
-        	System.out.println("no es participante modelElement"+modelElement.toString());
 			Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 		}
 		

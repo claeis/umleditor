@@ -557,6 +557,7 @@ public class TransferFromUmlMetamodel
 
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     out.write(getIndent());
@@ -674,6 +675,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -693,6 +695,7 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     dec_ind();
@@ -705,6 +708,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -724,6 +728,7 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
       out.write(getIndent());
       out.write(visitIliName(def,def.getName().getValue(language)));
@@ -747,6 +752,7 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     String name=def.getName().getValue(language);
@@ -829,6 +835,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -839,6 +846,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     out.write(getIndent());
@@ -946,6 +954,7 @@ public class TransferFromUmlMetamodel
     }
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     out.write(getIndent());
@@ -1056,6 +1065,7 @@ public class TransferFromUmlMetamodel
         throws java.io.IOException
     {
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)def.getBody());
     return;
@@ -1066,6 +1076,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -1076,6 +1087,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -1086,6 +1098,7 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitIliSyntax(def);
     return;
@@ -1138,6 +1151,7 @@ public class TransferFromUmlMetamodel
       throws java.io.IOException
     {
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     out.write(getIndent());
@@ -1232,6 +1246,7 @@ public class TransferFromUmlMetamodel
     if(RoleDefUtility.isIliStructAttr(def)){
 
       defineLinkToModelElement(oppend);
+      visitMetaAttrb(oppend.getMetaAttrb());
       visitDocumentation(oppend.getDocumentation());
       visitTaggedValues(def);
       out.write(getIndent());
@@ -1308,6 +1323,7 @@ public class TransferFromUmlMetamodel
       // if(assoc.sizeConnection()!=2){ log error}
 
       defineLinkToModelElement(oppend);
+      visitMetaAttrb(oppend.getMetaAttrb());
       visitDocumentation(oppend.getDocumentation());
       visitTaggedValues(def);
       out.write(getIndent());
@@ -1629,6 +1645,7 @@ public class TransferFromUmlMetamodel
     java.util.Iterator eleIt=def.iteratorEnumElement();
     while(eleIt.hasNext()){
       EnumElement ele=(EnumElement)eleIt.next();
+      visitMetaAttrb(ele.getMetaAttrb());
       visitDocumentation(ele.getDocumentation());
       visitTaggedValues(ele);
       out.write(getIndent()+visitIliName(owner,ele.getName().getValue(language)));
@@ -1781,6 +1798,7 @@ public class TransferFromUmlMetamodel
         throws java.io.IOException
     {
     defineLinkToModelElement(def);
+    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
     visitTaggedValues(def);
     out.write(getIndent());
@@ -2362,19 +2380,7 @@ private void addSimpleEleCond(java.util.Set children,
 	  String beg=" !!@ili2db.";
 	  String metaAttrb="dispName=";//Can be a variable later
 	  
-	  // for each line
-	  int last=0;
-	  int next=doc.indexOf("\n",last);
-	  while(next>-1){
-	      String line=doc.substring (last,next);
-	      out.write(getIndent()+beg+metaAttrb+line);newline();
-	      beg="   ";
-	      last=next+1;
-	      next=doc.indexOf("\n",last);
-	    }
-	  
-	  String line=doc.substring(last,next);
-	  out.write(getIndent()+beg+metaAttrb+line);newline();
+	  out.write(getIndent()+beg+metaAttrb+doc);newline();
 	  
   }
 
