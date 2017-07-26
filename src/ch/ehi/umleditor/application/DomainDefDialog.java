@@ -1113,7 +1113,7 @@ protected boolean save() {
 	if (!getPnlExtended().getExtension()) {
 		return false;
 	}
-
+	
 	// page specific type
 	if (domainDef.containsType()) {
 		domainDef.detachType();
@@ -1141,6 +1141,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// general & page Description
 	getTxtName().setText(domainDef.getDefLangName());
+	getTxtMetaAttrbDom().setText(domainDef.getDefLangMetaAttrb());
 	getPnlDescription().setObject(element);
 
 	// page Details
