@@ -130,6 +130,7 @@ public class UmlExtend extends AbstractModelElement implements Extend
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 4551A89D027B body4551A78D0108 "enumerateChildren"

@@ -125,6 +125,7 @@ public class UmlUsage extends AbstractDependency implements Usage , java.io.Seri
         it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
         it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
         visitor.visit(getName());
+        visitor.visit(getMetaAttrb());
         visitor.visit(getDocumentation());
         super.enumerateChildren(visitor);
         // -end- 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"

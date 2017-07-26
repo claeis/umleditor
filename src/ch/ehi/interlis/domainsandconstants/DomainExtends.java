@@ -106,6 +106,7 @@ public class DomainExtends extends AbstractGeneralization implements Generalizat
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21B0016 body3C1DD59D0109 "unlinkAll"
@@ -128,6 +129,7 @@ public class DomainExtends extends AbstractGeneralization implements Generalizat
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21B0020 body3C1DD59D0109 "enumerateChildren"
@@ -279,11 +281,17 @@ public class DomainExtends extends AbstractGeneralization implements Generalizat
                 }
                 // -end- 335C146B0352 _unlink_body3C1DD59D0109 "Generalization::_unlinkParent"
 
-				@Override
-				public void setMetaAttrb(NlsString value) {
-					// TODO Auto-generated method stub
-					
-				}
+                public NlsString getMetaAttrb(){
+           		 return super.getMetaAttrb();
+             }
+           	  
+             public void setMetaAttrb(NlsString value) {
+           	  super.setMettaAttrb(value);	
+             }
+
+
+
+
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

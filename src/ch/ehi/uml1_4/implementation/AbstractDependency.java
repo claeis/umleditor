@@ -102,6 +102,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
               clearImportedBy();
               // Role EditorTreeElement: EditorTreeElement object(s) may point to this
               setName(null);
+              setMetaAttrb(null);
               setDocumentation(null);
               super.unlinkAll();
               // -end- 3E42412A026D body3E42404202F6 "unlinkAll"
@@ -123,6 +124,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getDocumentation());
               super.enumerateChildren(visitor);
               // -end- 3E42412D01B3 body3E42404202F6 "enumerateChildren"

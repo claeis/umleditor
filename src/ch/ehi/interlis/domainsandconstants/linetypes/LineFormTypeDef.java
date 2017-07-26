@@ -127,6 +127,7 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
     // -beg- preserve=no 3D4FA21B036A body3940ECC60372 "enumerateChildren"
     java.util.Iterator it=null;
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getExplanation());
     it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());

@@ -127,6 +127,7 @@ public class TopicDepends extends AbstractDependency implements Usage , java.io.
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21A0033 body3C17712203B7 "enumerateChildren"

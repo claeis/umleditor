@@ -125,6 +125,7 @@ public class UmlInclude extends AbstractModelElement implements Include
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 4551A88B03DE body4551A7840119 "enumerateChildren"

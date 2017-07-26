@@ -149,6 +149,7 @@ public class UmlActor extends AbstractNamespace implements Actor
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 4551A85C008D body4551A5A200BB "enumerateChildren"

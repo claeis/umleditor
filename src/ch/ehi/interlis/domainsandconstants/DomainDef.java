@@ -175,6 +175,7 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
     java.util.Iterator it=null;
     if(containsType())visitor.visit(getType());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     it=iteratorFeature();while(it.hasNext())visitor.visit(it.next());
     it=iteratorOwnedElement();while(it.hasNext())visitor.visit(it.next());
     it=iteratorDiagram();while(it.hasNext())visitor.visit(it.next());

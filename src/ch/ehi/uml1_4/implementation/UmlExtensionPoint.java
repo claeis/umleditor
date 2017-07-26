@@ -129,6 +129,7 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 4551A8B302E1 body4551A7D50075 "enumerateChildren"

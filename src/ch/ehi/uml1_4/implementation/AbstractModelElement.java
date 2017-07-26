@@ -123,6 +123,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
         it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
         it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
         visitor.visit(getName());
+        visitor.visit(getMetaAttrb());
         visitor.visit(getDocumentation());
         super.enumerateChildren(visitor);
         // -end- 3D4FA03E0309 body3CE225AB0092 "enumerateChildren"

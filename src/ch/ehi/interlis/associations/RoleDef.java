@@ -147,6 +147,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd , ja
     if(containsRoleDefDerived())visitor.visit(getRoleDefDerived());
     it=iteratorXorParticipant();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     it=iteratorQualifier();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getMultiplicity());
     it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());

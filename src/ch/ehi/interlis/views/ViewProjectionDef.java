@@ -136,6 +136,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
               if(containsProjectionAttributes())visitor.visit(getProjectionAttributes());
               it=iteratorConstraintDef();while(it.hasNext())visitor.visit(it.next());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getSyntax());
               it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());

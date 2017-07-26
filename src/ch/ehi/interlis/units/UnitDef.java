@@ -140,6 +140,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement , IliS
     if(containsComposedUnit())visitor.visit(getComposedUnit());
     if(containsStructuredUnit())visitor.visit(getStructuredUnit());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDescName());
     it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());

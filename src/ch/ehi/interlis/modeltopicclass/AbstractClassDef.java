@@ -230,6 +230,7 @@ public abstract class AbstractClassDef extends AbstractNamespace implements View
     java.util.Iterator it=null;
     it=iteratorFeature();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());

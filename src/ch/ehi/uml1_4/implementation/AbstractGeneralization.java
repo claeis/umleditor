@@ -106,6 +106,7 @@ public abstract class AbstractGeneralization extends AbstractModelElement implem
               clearImportedBy();
               // Role EditorTreeElement: EditorTreeElement object(s) may point to this
               setName(null);
+              setMetaAttrb(null);
               setDocumentation(null);
               super.unlinkAll();
               // -end- 3E4241A4007E body3E4241810290 "unlinkAll"
@@ -128,6 +129,7 @@ public abstract class AbstractGeneralization extends AbstractModelElement implem
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getDocumentation());
               super.enumerateChildren(visitor);
               // -end- 3E4241A70295 body3E4241810290 "enumerateChildren"

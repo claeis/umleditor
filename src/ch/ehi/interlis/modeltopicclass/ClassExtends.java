@@ -129,6 +129,7 @@ public class ClassExtends extends AbstractGeneralization implements Generalizati
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21A0083 body3C1DABC0011D "enumerateChildren"

@@ -168,6 +168,7 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
     detachBasketoid();
     clearBasketType();
     setName(null);
+    setMetaAttrb(null);
     clearImportedElement();
     clearPresentation();
     clearDiagram();
@@ -209,6 +210,7 @@ public class TopicDef extends AbstractNamespace implements Package , DefinitionP
     java.util.Iterator it=null;
     it=iteratorOwnedElement();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     it=iteratorImportedElement();while(it.hasNext())visitor.visit(it.next());
     it=iteratorDiagram();while(it.hasNext())visitor.visit(it.next());
     it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());

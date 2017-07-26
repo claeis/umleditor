@@ -86,6 +86,7 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax , ja
                   if(containsMetaobject())visitor.visit(getMetaobject());
                   if(containsAttrType())visitor.visit(getAttrType());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getSyntax());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21B0392 body3940EE310270 "enumerateChildren"

@@ -155,6 +155,7 @@ public class UmlModel extends AbstractNamespace implements Model , java.io.Seria
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 3D4FA21703BE body3C4FDE4A01DE "enumerateChildren"

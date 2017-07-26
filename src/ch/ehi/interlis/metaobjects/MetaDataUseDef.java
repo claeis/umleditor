@@ -122,6 +122,7 @@ public class MetaDataUseDef extends AbstractModelElement implements ModelElement
                   // -beg- preserve=no 3D4FA21B03CD body3C1DC6BA03C6 "enumerateChildren"
                   java.util.Iterator it=null;
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());

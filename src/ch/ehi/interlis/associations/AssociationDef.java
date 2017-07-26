@@ -176,6 +176,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     it=iteratorOwnedElement();while(it.hasNext())visitor.visit(it.next());
     it=iteratorDiagram();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getDocumentation());

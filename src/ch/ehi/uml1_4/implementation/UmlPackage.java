@@ -151,6 +151,7 @@ public class UmlPackage extends AbstractNamespace implements Package , java.io.S
       it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
       it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
       visitor.visit(getName());
+      visitor.visit(getMetaAttrb());
       visitor.visit(getDocumentation());
       super.enumerateChildren(visitor);
       // -end- 3D4FA2180026 body3C68E11703C1 "enumerateChildren"

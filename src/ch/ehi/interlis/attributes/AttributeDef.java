@@ -154,6 +154,7 @@ public class AttributeDef extends AbstractModelElement implements Attribute , ja
     if(containsConstant())visitor.visit(getConstant());
     if(containsAttributeValueUsage())visitor.visit(getAttributeValueUsage());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getConsistencyRequirement());
     visitor.visit(getInitialValue());
     visitor.visit(getMultiplicity());

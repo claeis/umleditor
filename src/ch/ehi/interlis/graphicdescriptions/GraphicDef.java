@@ -135,6 +135,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement , I
               it=iteratorSelection();while(it.hasNext())visitor.visit(it.next());
               it=iteratorSignAttribute();while(it.hasNext())visitor.visit(it.next());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());

@@ -121,6 +121,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter
     it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
     it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
     visitor.visit(getName());
+    visitor.visit(getMetaAttrb());
     visitor.visit(getDocumentation());
     super.enumerateChildren(visitor);
     // -end- 40432E4701E6 body40432B0300AE "enumerateChildren"

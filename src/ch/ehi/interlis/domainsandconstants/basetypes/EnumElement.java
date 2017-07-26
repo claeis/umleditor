@@ -125,6 +125,7 @@ public class EnumElement extends AbstractModelElement implements ModelElement , 
                   java.util.Iterator it=null;
                   if(containsChild())visitor.visit(getChild());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getNameList());
                   it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());

@@ -135,6 +135,7 @@ public class RoleDefDerived extends AbstractDependency implements IliSyntax , Ab
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21C00F4 body3C1DB6CB0118 "enumerateChildren"

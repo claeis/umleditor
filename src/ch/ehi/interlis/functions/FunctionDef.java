@@ -129,6 +129,7 @@ public class FunctionDef extends AbstractModelElement implements ModelElement , 
               it=iteratorArgument();while(it.hasNext())visitor.visit(it.next());
               if(containsResult())visitor.visit(getResult());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getExplanation());
               it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());

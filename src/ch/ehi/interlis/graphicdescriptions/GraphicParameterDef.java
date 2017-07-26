@@ -126,6 +126,7 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
               java.util.Iterator it=null;
               if(containsDomainAttribute())visitor.visit(getDomainAttribute());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
               it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());

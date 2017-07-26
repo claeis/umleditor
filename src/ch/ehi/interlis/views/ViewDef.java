@@ -146,6 +146,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef , IliSy
               if(containsProjectionAttributes())visitor.visit(getProjectionAttributes());
               it=iteratorConstraintDef();while(it.hasNext())visitor.visit(it.next());
               visitor.visit(getName());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getCompositionAttr());
               visitor.visit(getSyntax());
               it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
