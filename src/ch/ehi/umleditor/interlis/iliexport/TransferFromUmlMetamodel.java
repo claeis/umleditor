@@ -557,8 +557,8 @@ public class TransferFromUmlMetamodel
 
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     out.write(getIndent());
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.TopicDefKind.VIEW){
@@ -675,8 +675,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -695,8 +695,8 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     dec_ind();
     return;
@@ -708,8 +708,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -728,8 +728,8 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
       out.write(getIndent());
       out.write(visitIliName(def,def.getName().getValue(language)));
       out.write(" : ");
@@ -752,8 +752,8 @@ public class TransferFromUmlMetamodel
       inc_ind();
     }
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     String name=def.getName().getValue(language);
     out.write(getIndent()+visitIliName(def,name));
@@ -835,8 +835,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -846,8 +846,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     out.write(getIndent());
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE){
@@ -954,8 +954,8 @@ public class TransferFromUmlMetamodel
     }
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     out.write(getIndent());
     out.write("ASSOCIATION ");
@@ -1065,8 +1065,8 @@ public class TransferFromUmlMetamodel
         throws java.io.IOException
     {
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)def.getBody());
     return;
     }
@@ -1076,8 +1076,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -1087,8 +1087,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -1098,8 +1098,8 @@ public class TransferFromUmlMetamodel
     {
     newline();
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitIliSyntax(def);
     return;
     }
@@ -1151,8 +1151,8 @@ public class TransferFromUmlMetamodel
       throws java.io.IOException
     {
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     out.write(getIndent());
     out.write(visitIliName(def,def.getName().getValue(language))+" ");
@@ -1246,8 +1246,8 @@ public class TransferFromUmlMetamodel
     if(RoleDefUtility.isIliStructAttr(def)){
 
       defineLinkToModelElement(oppend);
-      visitMetaAttrb(oppend.getMetaAttrb());
       visitDocumentation(oppend.getDocumentation());
+      visitMetaAttrb(oppend.getMetaAttrb());
       visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
@@ -1323,8 +1323,8 @@ public class TransferFromUmlMetamodel
       // if(assoc.sizeConnection()!=2){ log error}
 
       defineLinkToModelElement(oppend);
-      visitMetaAttrb(oppend.getMetaAttrb());
       visitDocumentation(oppend.getDocumentation());
+      visitMetaAttrb(oppend.getMetaAttrb());
       visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(oppend,oppend.getName().getValue(language))+" ");
@@ -1645,8 +1645,8 @@ public class TransferFromUmlMetamodel
     java.util.Iterator eleIt=def.iteratorEnumElement();
     while(eleIt.hasNext()){
       EnumElement ele=(EnumElement)eleIt.next();
-      visitMetaAttrb(ele.getMetaAttrb());
       visitDocumentation(ele.getDocumentation());
+      visitMetaAttrb(ele.getMetaAttrb());
       visitTaggedValues(ele);
       out.write(getIndent()+visitIliName(owner,ele.getName().getValue(language)));
       if(ele.containsChild()){
@@ -1798,8 +1798,8 @@ public class TransferFromUmlMetamodel
         throws java.io.IOException
     {
     defineLinkToModelElement(def);
-    visitMetaAttrb(def.getMetaAttrb());
     visitDocumentation(def.getDocumentation());
+    visitMetaAttrb(def.getMetaAttrb());
     visitTaggedValues(def);
     out.write(getIndent());
     out.write(visitIliName(def,def.getName().getValue(language))+" ");
@@ -2377,10 +2377,10 @@ private void addSimpleEleCond(java.util.Set children,
 	  if(nlsdoc==null)return;
 	  String doc=nlsdoc.getValue(language).trim();
 	  if(doc.length()==0)return;
-	  String beg=" !!@ili2db.";
+	  String beg="!!@ili2db.";
 	  String metaAttrb="dispName=";//Can be a variable later
 	  
-	  out.write(getIndent()+beg+metaAttrb+doc);newline();
+	  out.write(getIndent()+beg+metaAttrb+'"'+doc+'"');newline();
 	  
   }
 
