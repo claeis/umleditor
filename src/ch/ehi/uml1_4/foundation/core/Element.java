@@ -73,6 +73,8 @@ public interface Element extends Visitable , java.io.Serializable
   // -beg- preserve=no 327A5C330208 detail_end "Element"
 
   // -end- 327A5C330208 detail_end "Element"
+   public NlsString getMetaAttrb();
+   public void setMetaAttrb(NlsString value);
 
 }
 

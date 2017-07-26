@@ -61,6 +61,7 @@ public class Contract extends AbstractEditorElement implements Element , java.io
                   
                   detachModelDef();
                   setIssuer(null);
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA2190352 body3940AD20009C "unlinkAll"
@@ -79,6 +80,7 @@ public class Contract extends AbstractEditorElement implements Element , java.io
                   // -beg- preserve=no 3D4FA219035C body3940AD20009C "enumerateChildren"
                   java.util.Iterator it=null;
                   visitor.visit(getIssuer());
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA219035C body3940AD20009C "enumerateChildren"
@@ -236,6 +238,19 @@ public class Contract extends AbstractEditorElement implements Element , java.io
                   }
                   // -end- 3C1DF92B0234 set_body3940AD20009C "documentation"
                 }
+                
+                private NlsString metaAttrb = null;
+
+				public NlsString getMetaAttrb() {
+					return metaAttrb;
+				}
+
+				public void setMetaAttrb(NlsString value) {
+	                  if(metaAttrb!=value && (metaAttrb==null || !metaAttrb.equals(value))){
+	                	  metaAttrb = value;
+	                      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMetaAttrb"));
+	                    }
+				}
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

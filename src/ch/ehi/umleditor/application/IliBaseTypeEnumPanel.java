@@ -34,6 +34,7 @@ import ch.ehi.uml1_4.foundation.core.Element;
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
+        private Element element = null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
 	private javax.swing.JRadioButton ivjRbtOrderedCircular = null;
 	private javax.swing.JScrollPane ivjScpTree = null;
@@ -68,6 +69,10 @@ class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelLi
 				connEtoC5(e);
 			if (e.getSource() == IliBaseTypeEnumPanel.this.getMniRename()) 
 				connEtoC6(e);
+		};
+		public void focusGained(java.awt.event.FocusEvent newEvent) {
+			if (newEvent.getSource() == IliBaseTypeEnumPanel.this.getTxtMetaAttrbEnum())
+				connEtoM1(newEvent);
 		};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
@@ -231,6 +236,25 @@ private void connEtoC7(java.util.EventObject arg1) {
 		handleException(ivjExc);
 	}
 }
+
+/**
+ * connEtoM2:  (TxtMetaAttrb.focus.focusGained(java.awt.event.FocusEvent) --> TxtMetaAttrb.selectAll()V)
+ * @param arg1 java.awt.event.FocusEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoM1(java.util.EventObject arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.saveMetaAttrb();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
 /**
  * connEtoC8:  (TreEnumeration.mouse.mousePressed(java.awt.event.MouseEvent) --> IliBaseTypeEnumPanel.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
  * @param arg1 java.awt.event.MouseEvent
@@ -259,6 +283,7 @@ private Enumeration copyTree(Enumeration src) {
       EnumElement subdest=new EnumElement();
       ret.addEnumElement(subdest);
       subdest.setDocumentation(subsrc.getDocumentation());
+      subdest.setMetaAttrb(subsrc.getMetaAttrb());
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
       if(subsrc.containsChild()){
@@ -825,6 +850,7 @@ private void initConnections() throws java.lang.Exception {
 	getMniNewDeep().addActionListener(ivjEventHandler);
 	getMniRemove().addActionListener(ivjEventHandler);
 	getMniRename().addActionListener(ivjEventHandler);
+	getTxtMetaAttrbEnum().addActionListener(ivjEventHandler);
 	getPnlDescription().addDescriptionPanelListener(ivjEventHandler);
 }
 /**
@@ -902,6 +928,7 @@ constraintsJPanel1.gridheight = 2;
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
+	getTxtMetaAttrbEnum().setEnabled(false);
 	initializeTree();
 	// user code end
 }
@@ -1021,18 +1048,30 @@ private void mniRename() {
 private void saveDocumentation() {
 	getPnlDescription().getObject();
 }
+
+/**
+ * Save the meta attribute on currently selected EnumElement.
+ */
+private void saveMetaAttrb(){
+	element.setMetaAttrb(new ch.ehi.basics.types.NlsString(element.getMetaAttrb(), getTxtMetaAttrbEnum().getText()));
+}
 /**
  * Adapt anything when Tree-Selection changes.
  */
 private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelectionEvent) {
+	
 	EnumElement node = getSelectedNode();
 	if (node == null) {
 		getPnlDescription().setEnabled(false);
 		getPnlDescription().setObject(null);
+		getTxtMetaAttrbEnum().setEnabled(false);
 	} else {
 		// EnumElement
 		getPnlDescription().setEnabled(true);
 		getPnlDescription().setObject(node);
+		getTxtMetaAttrbEnum().setEnabled(true);
+		getTxtMetaAttrbEnum().setText(ElementUtils.mapNlsString(node.getMetaAttrb()));
+		
 	}
 }
 public void selectElement(Element element) {

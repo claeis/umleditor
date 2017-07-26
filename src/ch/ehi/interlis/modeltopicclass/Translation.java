@@ -60,6 +60,7 @@ public class Translation extends AbstractEditorElement implements Element , java
                   // -beg- preserve=no 3D4FA21A0110 body3C1DC4060258 "unlinkAll"
                   
                   detachModelDef();
+                  setMetaAttrb(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21A0110 body3C1DC4060258 "unlinkAll"
@@ -77,6 +78,7 @@ public class Translation extends AbstractEditorElement implements Element , java
                   // please fill in/modify the following section
                   // -beg- preserve=no 3D4FA21A012D body3C1DC4060258 "enumerateChildren"
                   java.util.Iterator it=null;
+                  visitor.visit(getMetaAttrb());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA21A012D body3C1DC4060258 "enumerateChildren"
@@ -265,6 +267,19 @@ public class Translation extends AbstractEditorElement implements Element , java
                   }
                   // -end- 3C1DF92B0234 set_body3C1DC4060258 "documentation"
                 }
+                
+                private NlsString metaAttrb = null;
+
+				public NlsString getMetaAttrb() {
+					return metaAttrb;
+				}
+
+				public void setMetaAttrb(NlsString value) {
+					if(metaAttrb!=value && (metaAttrb==null || !metaAttrb.equals(value))){
+	                    metaAttrb = value;
+	                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMetaAttrb"));
+	                  }
+				}
 
                 // declare/define something only in the code
                 // please fill in/modify the following section
