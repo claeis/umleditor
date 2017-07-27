@@ -83,6 +83,7 @@ public abstract class PresentationNode extends AbstractEditorElement implements 
               detachDiagram();
               // Role PresentationComposite: PresentationComposite object(s) may point to this
               clearPresentationEdge();
+              setMetaAttrb(null);
               setDocumentation(null);
               super.unlinkAll();
               // -end- 3D4FA2170151 body3C2C47C102EE "unlinkAll"
@@ -102,6 +103,7 @@ public abstract class PresentationNode extends AbstractEditorElement implements 
               java.util.Iterator it=null;
               visitor.visit(getForeground());
               visitor.visit(getBackground());
+              visitor.visit(getMetaAttrb());
               visitor.visit(getDocumentation());
               super.enumerateChildren(visitor);
               // -end- 3D4FA2170183 body3C2C47C102EE "enumerateChildren"
@@ -683,6 +685,17 @@ public abstract class PresentationNode extends AbstractEditorElement implements 
                 ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setDocumentation"));
               }
               // -end- 3C1DF92B0234 set_body3C2C47C102EE "documentation"
+            }
+            
+            private NlsString metaAttrb = null;
+            public NlsString getMetaAttrb(){
+            	return metaAttrb;
+            }
+            public void setMetaAttrb(NlsString value){
+            	if(metaAttrb!=value && (metaAttrb==null || !metaAttrb.equals(value))){
+            		metaAttrb = value;
+                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMetaAttrb"));
+                  }
             }
 
             // declare/define something only in the code

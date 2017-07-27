@@ -10,7 +10,8 @@ package ch.ehi.uml1_4.implementation;
 
           // -beg- preserve=no 3D746BAC0281 autoimport "AbstractEditorElement"
           import ch.ehi.basics.tools.Visitable;
-          import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3D746BAC0281 autoimport "AbstractEditorElement"
 
           // import declarations
@@ -102,6 +103,15 @@ public abstract class AbstractEditorElement implements Visitable , java.io.Seria
             // -beg- preserve=no 3D746BAC0281 detail_end "AbstractEditorElement"
 
             // -end- 3D746BAC0281 detail_end "AbstractEditorElement"
-
+            private NlsString metaAttrb = null;
+            public NlsString getMetaAttrb(){
+            	return metaAttrb;
+            }
+            public void setMetaAttrb(NlsString value){
+            	if(metaAttrb!=value && (metaAttrb==null || !metaAttrb.equals(value))){
+            		metaAttrb = value;
+                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMetaAttrb"));
+                  }
+            }
           }
 

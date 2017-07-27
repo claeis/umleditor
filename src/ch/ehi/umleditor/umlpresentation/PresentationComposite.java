@@ -65,6 +65,7 @@ public abstract class PresentationComposite extends AbstractEditorElement implem
               detachDiagram();
               // Role PresentationComposite: PresentationComposite object(s) may point to this
               clearPresentationEdge();
+              setMetaAttrb(null);
               setDocumentation(null);
               super.unlinkAll();
               // -end- 3D4FA21702E2 body3C346EED0276 "unlinkAll"
@@ -547,6 +548,17 @@ public abstract class PresentationComposite extends AbstractEditorElement implem
             // -beg- preserve=no 3C346EED0276 detail_end "PresentationComposite"
 
             // -end- 3C346EED0276 detail_end "PresentationComposite"
+            
+            private NlsString metaAttrb = null;
+            public NlsString getMetaAttrb(){
+            	return metaAttrb;
+            }
+            public void setMetaAttrb(NlsString value){
+            	if(metaAttrb!=value && (metaAttrb==null || !metaAttrb.equals(value))){
+            		metaAttrb = value;
+                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMetaAttrb"));
+                  }
+            }
 
           }
 

@@ -1053,6 +1053,7 @@ private void saveDocumentation() {
  * Save the meta attribute on currently selected EnumElement.
  */
 private void saveMetaAttrb(){
+	System.out.println("intentando hacer set del enum: "+getTxtMetaAttrbEnum().getText());
 	element.setMetaAttrb(new ch.ehi.basics.types.NlsString(element.getMetaAttrb(), getTxtMetaAttrbEnum().getText()));
 }
 /**

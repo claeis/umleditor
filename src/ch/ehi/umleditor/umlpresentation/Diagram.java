@@ -591,5 +591,12 @@ public class Diagram extends AbstractEditorElement implements Element , java.io.
 			}
   // -end- 3C2C4C8D0362 detail_end "Diagram"
 
+			public NlsString getMetaAttrb(){
+				 return super.getMetaAttrb();
+			}
+			  
+			public void setMetaAttrb(NlsString value) {
+				super.setMetaAttrb(value);	
+			}
 }
 
