@@ -24,17 +24,16 @@ package ch.ehi.uml1_4.foundation.core;
  */
 public interface TemplateArgument extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3A5E408501C5 detail_begin "TemplateArgument"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3A5E408501C5 detail_begin "TemplateArgument"
 
-  // -end- 3A5E408501C5 detail_begin "TemplateArgument"
+// -end- 3A5E408501C5 detail_begin "TemplateArgument"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3A5E408501C5 detail_end "TemplateArgument"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3A5E408501C5 detail_end "TemplateArgument"
 
-  // -end- 3A5E408501C5 detail_end "TemplateArgument"
+// -end- 3A5E408501C5 detail_end "TemplateArgument"
 
 }
-

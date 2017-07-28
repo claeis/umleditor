@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.foundation.datatypes.Expression;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:43 $
  */
-public interface ArgListsExpression extends Expression , java.io.Serializable
+public interface ArgListsExpression extends Expression, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3611D37B0280 detail_begin "ArgListsExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3611D37B0280 detail_begin "ArgListsExpression"
 
-  // -end- 3611D37B0280 detail_begin "ArgListsExpression"
+// -end- 3611D37B0280 detail_begin "ArgListsExpression"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3611D37B0280 detail_end "ArgListsExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3611D37B0280 detail_end "ArgListsExpression"
 
-  // -end- 3611D37B0280 detail_end "ArgListsExpression"
+// -end- 3611D37B0280 detail_end "ArgListsExpression"
 
 }
-

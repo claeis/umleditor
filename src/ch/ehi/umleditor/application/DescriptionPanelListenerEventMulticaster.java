@@ -27,7 +27,7 @@ public class DescriptionPanelListenerEventMulticaster extends java.awt.AWTEventM
  * @param b java.util.EventListener
  */
 protected DescriptionPanelListenerEventMulticaster(java.util.EventListener a, java.util.EventListener b) {
-	super(a, b);
+								super(a, b);
 }
 /**
  * Add new listener to support multicast events.
@@ -36,7 +36,7 @@ protected DescriptionPanelListenerEventMulticaster(java.util.EventListener a, ja
  * @param b ch.ehi.umleditor.application.DescriptionPanelListener
  */
 public static ch.ehi.umleditor.application.DescriptionPanelListener add(ch.ehi.umleditor.application.DescriptionPanelListener a, ch.ehi.umleditor.application.DescriptionPanelListener b) {
-	return (ch.ehi.umleditor.application.DescriptionPanelListener)addInternal(a, b);
+								return (ch.ehi.umleditor.application.DescriptionPanelListener)addInternal(a, b);
 }
 /**
  * Add new listener to support multicast events.
@@ -45,31 +45,31 @@ public static ch.ehi.umleditor.application.DescriptionPanelListener add(ch.ehi.u
  * @param b java.util.EventListener
  */
 protected static java.util.EventListener addInternal(java.util.EventListener a, java.util.EventListener b) {
-	if (a == null)  return b;
-	if (b == null)  return a;
-	return new DescriptionPanelListenerEventMulticaster(a, b);
+								if (a == null) return b;
+								if (b == null) return a;
+								return new DescriptionPanelListenerEventMulticaster(a, b);
 }
 /**
- * 
+ *
  * @param newEvent java.util.EventObject
  */
 public void pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(java.util.EventObject newEvent) {
-	((ch.ehi.umleditor.application.DescriptionPanelListener)a).pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(newEvent);
-	((ch.ehi.umleditor.application.DescriptionPanelListener)b).pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(newEvent);
+								((ch.ehi.umleditor.application.DescriptionPanelListener)a).pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(newEvent);
+								((ch.ehi.umleditor.application.DescriptionPanelListener)b).pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(newEvent);
 }
 /**
- * 
+ *
  * @return java.util.EventListener
  * @param oldl ch.ehi.umleditor.application.DescriptionPanelListener
  */
 protected java.util.EventListener remove(ch.ehi.umleditor.application.DescriptionPanelListener oldl) {
-	if (oldl == a)  return b;
-	if (oldl == b)  return a;
-	java.util.EventListener a2 = removeInternal(a, oldl);
-	java.util.EventListener b2 = removeInternal(b, oldl);
-	if (a2 == a && b2 == b)
-		return this;
-	return addInternal(a2, b2);
+								if (oldl == a) return b;
+								if (oldl == b) return a;
+								java.util.EventListener a2 = removeInternal(a, oldl);
+								java.util.EventListener b2 = removeInternal(b, oldl);
+								if (a2 == a && b2 == b)
+																return this;
+								return addInternal(a2, b2);
 }
 /**
  * Remove listener to support multicast events.
@@ -78,10 +78,10 @@ protected java.util.EventListener remove(ch.ehi.umleditor.application.Descriptio
  * @param oldl ch.ehi.umleditor.application.DescriptionPanelListener
  */
 public static ch.ehi.umleditor.application.DescriptionPanelListener remove(ch.ehi.umleditor.application.DescriptionPanelListener l, ch.ehi.umleditor.application.DescriptionPanelListener oldl) {
-	if (l == oldl || l == null)
-		return null;
-	if(l instanceof DescriptionPanelListenerEventMulticaster)
-		return (ch.ehi.umleditor.application.DescriptionPanelListener)((ch.ehi.umleditor.application.DescriptionPanelListenerEventMulticaster) l).remove(oldl);
-	return l;
+								if (l == oldl || l == null)
+																return null;
+								if(l instanceof DescriptionPanelListenerEventMulticaster)
+																return (ch.ehi.umleditor.application.DescriptionPanelListener)((ch.ehi.umleditor.application.DescriptionPanelListenerEventMulticaster)l).remove(oldl);
+								return l;
 }
 }

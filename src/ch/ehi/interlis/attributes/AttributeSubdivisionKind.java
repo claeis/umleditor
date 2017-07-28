@@ -36,29 +36,28 @@ package ch.ehi.interlis.attributes;
  */
 public class AttributeSubdivisionKind
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
 
-  // -end- 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
+// -end- 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
 
-  // -beg- preserve=no 44892BD7005F var44892B8B03C7 "NONE"
-  public static final int NONE = 0;
-  // -end- 44892BD7005F var44892B8B03C7 "NONE"
+// -beg- preserve=no 44892BD7005F var44892B8B03C7 "NONE"
+public static final int NONE = 0;
+// -end- 44892BD7005F var44892B8B03C7 "NONE"
 
-  // -beg- preserve=no 44892BDE018C var44892B8B03C7 "SUBDIVISION"
-  public static final int SUBDIVISION = 1;
-  // -end- 44892BDE018C var44892B8B03C7 "SUBDIVISION"
+// -beg- preserve=no 44892BDE018C var44892B8B03C7 "SUBDIVISION"
+public static final int SUBDIVISION = 1;
+// -end- 44892BDE018C var44892B8B03C7 "SUBDIVISION"
 
-  // -beg- preserve=no 44892BEC031C var44892B8B03C7 "CONTINUOUS"
-  public static final int CONTINUOUS = 2;
-  // -end- 44892BEC031C var44892B8B03C7 "CONTINUOUS"
+// -beg- preserve=no 44892BEC031C var44892B8B03C7 "CONTINUOUS"
+public static final int CONTINUOUS = 2;
+// -end- 44892BEC031C var44892B8B03C7 "CONTINUOUS"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 44892B8B03C7 detail_end "AttributeSubdivisionKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 44892B8B03C7 detail_end "AttributeSubdivisionKind"
 
-  // -end- 44892B8B03C7 detail_end "AttributeSubdivisionKind"
+// -end- 44892B8B03C7 detail_end "AttributeSubdivisionKind"
 
 }
-

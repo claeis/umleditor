@@ -24,12 +24,12 @@ import CH.ifa.draw.figures.*;
  * A SeparatorFigure is similar to a LineFigure
  * but draws only a horizontal line and separates
  * from other figures beneath in addition.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.2 $ $Date: 2003-12-30 22:07:47 $
  */
 class SeparatorFigure extends LineFigure {
-	private boolean lineVisible = true;
+private boolean lineVisible = true;
 
 //	static final long serialVersionUID = 7110919055213080660L;
 
@@ -37,21 +37,21 @@ class SeparatorFigure extends LineFigure {
  * Create a new SeparatorFigure
  */
 public SeparatorFigure() {
-    super();
+								super();
 }
 /**
  * Draw the separation line and to hold some space free
  */
 public void draw(Graphics g) {
-    if (lineVisible) {
-        g.setColor(getFrameColor());
-        g.drawLine(startPoint().x, startPoint().y, endPoint().x - 1, startPoint().y);
-    }
+								if (lineVisible) {
+																g.setColor(getFrameColor());
+																g.drawLine(startPoint().x, startPoint().y, endPoint().x - 1, startPoint().y);
+								}
 }
 /**
  * Set whether line shall be drawn visible or invisible.
  */
 public void setLineVisible(boolean visible) {
-    lineVisible = visible;
+								lineVisible = visible;
 }
 }

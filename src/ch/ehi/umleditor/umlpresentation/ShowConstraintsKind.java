@@ -23,33 +23,32 @@ package ch.ehi.umleditor.umlpresentation;
  */
 public class ShowConstraintsKind
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 44A8B1E30195 detail_begin "ShowConstraintsKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 44A8B1E30195 detail_begin "ShowConstraintsKind"
 
-  // -end- 44A8B1E30195 detail_begin "ShowConstraintsKind"
+// -end- 44A8B1E30195 detail_begin "ShowConstraintsKind"
 
-  // -beg- preserve=no 44A8B1FE0234 var44A8B1E30195 "HIDE"
-  public static final int HIDE = 0;
-  // -end- 44A8B1FE0234 var44A8B1E30195 "HIDE"
+// -beg- preserve=no 44A8B1FE0234 var44A8B1E30195 "HIDE"
+public static final int HIDE = 0;
+// -end- 44A8B1FE0234 var44A8B1E30195 "HIDE"
 
-  // -beg- preserve=no 44A8B20902D0 var44A8B1E30195 "NAME"
-  public static final int NAME = 1;
-  // -end- 44A8B20902D0 var44A8B1E30195 "NAME"
+// -beg- preserve=no 44A8B20902D0 var44A8B1E30195 "NAME"
+public static final int NAME = 1;
+// -end- 44A8B20902D0 var44A8B1E30195 "NAME"
 
-  // -beg- preserve=no 44A8B20F00F8 var44A8B1E30195 "TITLE"
-  public static final int TITLE = 2;
-  // -end- 44A8B20F00F8 var44A8B1E30195 "TITLE"
+// -beg- preserve=no 44A8B20F00F8 var44A8B1E30195 "TITLE"
+public static final int TITLE = 2;
+// -end- 44A8B20F00F8 var44A8B1E30195 "TITLE"
 
-  // -beg- preserve=no 44A8B22B006C var44A8B1E30195 "SYNTAX"
-  public static final int SYNTAX = 3;
-  // -end- 44A8B22B006C var44A8B1E30195 "SYNTAX"
+// -beg- preserve=no 44A8B22B006C var44A8B1E30195 "SYNTAX"
+public static final int SYNTAX = 3;
+// -end- 44A8B22B006C var44A8B1E30195 "SYNTAX"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 44A8B1E30195 detail_end "ShowConstraintsKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 44A8B1E30195 detail_end "ShowConstraintsKind"
 
-  // -end- 44A8B1E30195 detail_end "ShowConstraintsKind"
+// -end- 44A8B1E30195 detail_end "ShowConstraintsKind"
 
 }
-

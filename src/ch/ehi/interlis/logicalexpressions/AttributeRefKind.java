@@ -17,36 +17,35 @@
  */
 
 
-          // -beg- preserve=no 3C3F11490216 package "AttributeRefKind"
+// -beg- preserve=no 3C3F11490216 package "AttributeRefKind"
 package ch.ehi.interlis.logicalexpressions;
-          // -end- 3C3F11490216 package "AttributeRefKind"
+// -end- 3C3F11490216 package "AttributeRefKind"
 
-          // -beg- preserve=no 3C3F11490216 autoimport "AttributeRefKind"
+// -beg- preserve=no 3C3F11490216 autoimport "AttributeRefKind"
 
-          // -end- 3C3F11490216 autoimport "AttributeRefKind"
+// -end- 3C3F11490216 autoimport "AttributeRefKind"
 
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 3C3F11490216 import "AttributeRefKind"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F11490216 import "AttributeRefKind"
 
-          // -end- 3C3F11490216 import "AttributeRefKind"
+// -end- 3C3F11490216 import "AttributeRefKind"
 
-          /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:01 $
-           */
+/** @author Claude Eisenhut
+ *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:01 $
+ */
 public interface AttributeRefKind extends java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F11490216 detail_begin "AttributeRefKind"
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F11490216 detail_begin "AttributeRefKind"
 
-            // -end- 3C3F11490216 detail_begin "AttributeRefKind"
+// -end- 3C3F11490216 detail_begin "AttributeRefKind"
 
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F11490216 detail_end "AttributeRefKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F11490216 detail_end "AttributeRefKind"
 
-            // -end- 3C3F11490216 detail_end "AttributeRefKind"
+// -end- 3C3F11490216 detail_end "AttributeRefKind"
 
-          }
-
+}

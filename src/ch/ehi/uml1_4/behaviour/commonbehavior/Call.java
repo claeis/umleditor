@@ -23,17 +23,16 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
  */
 public interface Call extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33F7F0080050 detail_begin "Call"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33F7F0080050 detail_begin "Call"
 
-  // -end- 33F7F0080050 detail_begin "Call"
+// -end- 33F7F0080050 detail_begin "Call"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33F7F0080050 detail_end "Call"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33F7F0080050 detail_end "Call"
 
-  // -end- 33F7F0080050 detail_end "Call"
+// -end- 33F7F0080050 detail_end "Call"
 
 }
-

@@ -17,70 +17,69 @@
  */
 
 
-              // -beg- preserve=no 358A671700BB package "Date"
+// -beg- preserve=no 358A671700BB package "Date"
 package ch.ehi.interlis.domainsandconstants.basetypes;
-              // -end- 358A671700BB package "Date"
+// -end- 358A671700BB package "Date"
 
-              // -beg- preserve=no 358A671700BB autoimport "Date"
-              import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-              import ch.ehi.basics.tools.AbstractVisitor;
-              // -end- 358A671700BB autoimport "Date"
+// -beg- preserve=no 358A671700BB autoimport "Date"
+import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
+import ch.ehi.basics.tools.AbstractVisitor;
+// -end- 358A671700BB autoimport "Date"
 
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 358A671700BB import "Date"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 358A671700BB import "Date"
 
-              // -end- 358A671700BB import "Date"
+// -end- 358A671700BB import "Date"
 
-              /** Wird nur in INTERLIS1 verwendet.
-               *  @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:16 $
-               */
+/** Wird nur in INTERLIS1 verwendet.
+ *  @author Claude Eisenhut
+ *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:16 $
+ */
 public class Date extends BaseType implements java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 358A671700BB detail_begin "Date"
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 358A671700BB detail_begin "Date"
 
-                // -end- 358A671700BB detail_begin "Date"
+// -end- 358A671700BB detail_begin "Date"
 
-                // -beg- preserve=no 3D4FA21B00B6 head358A671700BB "unlinkAll"
-                public void unlinkAll()
-                // -end- 3D4FA21B00B6 head358A671700BB "unlinkAll"
-                  // declare any checked exceptions
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B00B6 throws358A671700BB "unlinkAll"
+// -beg- preserve=no 3D4FA21B00B6 head358A671700BB "unlinkAll"
+public void unlinkAll()
+// -end- 3D4FA21B00B6 head358A671700BB "unlinkAll"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA21B00B6 throws358A671700BB "unlinkAll"
 
-                  // -end- 3D4FA21B00B6 throws358A671700BB "unlinkAll"
-                  {
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B00B6 body358A671700BB "unlinkAll"
-                  
-                  super.unlinkAll();
-                  // -end- 3D4FA21B00B6 body358A671700BB "unlinkAll"
-                  }
+// -end- 3D4FA21B00B6 throws358A671700BB "unlinkAll"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 3D4FA21B00B6 body358A671700BB "unlinkAll"
 
-                // -beg- preserve=no 3D4FA21B00B7 head358A671700BB "enumerateChildren"
-                public void enumerateChildren(AbstractVisitor visitor)
-                // -end- 3D4FA21B00B7 head358A671700BB "enumerateChildren"
-                  // declare any checked exceptions
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B00B7 throws358A671700BB "enumerateChildren"
+        super.unlinkAll();
+        // -end- 3D4FA21B00B6 body358A671700BB "unlinkAll"
+}
 
-                  // -end- 3D4FA21B00B7 throws358A671700BB "enumerateChildren"
-                  {
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B00B7 body358A671700BB "enumerateChildren"
-                  java.util.Iterator it=null;
-                  super.enumerateChildren(visitor);
-                  // -end- 3D4FA21B00B7 body358A671700BB "enumerateChildren"
-                  }
+// -beg- preserve=no 3D4FA21B00B7 head358A671700BB "enumerateChildren"
+public void enumerateChildren(AbstractVisitor visitor)
+// -end- 3D4FA21B00B7 head358A671700BB "enumerateChildren"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA21B00B7 throws358A671700BB "enumerateChildren"
 
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 358A671700BB detail_end "Date"
+// -end- 3D4FA21B00B7 throws358A671700BB "enumerateChildren"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 3D4FA21B00B7 body358A671700BB "enumerateChildren"
+        java.util.Iterator it=null;
+        super.enumerateChildren(visitor);
+        // -end- 3D4FA21B00B7 body358A671700BB "enumerateChildren"
+}
 
-                // -end- 358A671700BB detail_end "Date"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 358A671700BB detail_end "Date"
 
-              }
+// -end- 358A671700BB detail_end "Date"
 
+}

@@ -22,19 +22,18 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:42 $
  */
-public interface Relationship extends ModelElement , java.io.Serializable
+public interface Relationship extends ModelElement, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3634C5000082 detail_begin "Relationship"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3634C5000082 detail_begin "Relationship"
 
-  // -end- 3634C5000082 detail_begin "Relationship"
+// -end- 3634C5000082 detail_begin "Relationship"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3634C5000082 detail_end "Relationship"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3634C5000082 detail_end "Relationship"
 
-  // -end- 3634C5000082 detail_end "Relationship"
+// -end- 3634C5000082 detail_end "Relationship"
 
 }
-

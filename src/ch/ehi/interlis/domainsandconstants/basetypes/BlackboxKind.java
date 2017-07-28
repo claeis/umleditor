@@ -36,25 +36,24 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
  */
 public class BlackboxKind
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448981CF022E detail_begin "BlackboxKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 448981CF022E detail_begin "BlackboxKind"
 
-  // -end- 448981CF022E detail_begin "BlackboxKind"
+// -end- 448981CF022E detail_begin "BlackboxKind"
 
-  // -beg- preserve=no 448981E102B6 var448981CF022E "XML"
-  public static final int XML = 1;
-  // -end- 448981E102B6 var448981CF022E "XML"
+// -beg- preserve=no 448981E102B6 var448981CF022E "XML"
+public static final int XML = 1;
+// -end- 448981E102B6 var448981CF022E "XML"
 
-  // -beg- preserve=no 448981ED01A5 var448981CF022E "BINARY"
-  public static final int BINARY = 2;
-  // -end- 448981ED01A5 var448981CF022E "BINARY"
+// -beg- preserve=no 448981ED01A5 var448981CF022E "BINARY"
+public static final int BINARY = 2;
+// -end- 448981ED01A5 var448981CF022E "BINARY"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448981CF022E detail_end "BlackboxKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 448981CF022E detail_end "BlackboxKind"
 
-  // -end- 448981CF022E detail_end "BlackboxKind"
+// -end- 448981CF022E detail_end "BlackboxKind"
 
 }
-

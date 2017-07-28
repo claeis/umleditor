@@ -19,7 +19,7 @@ package ch.ehi.umleditor.application;
  */
 public interface DescriptionPanelListener extends java.util.EventListener {
 /**
- * 
+ *
  * @param newEvent java.util.EventObject
  */
 void pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(java.util.EventObject newEvent);

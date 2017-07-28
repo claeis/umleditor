@@ -17,66 +17,66 @@
  */
 
 
-    // -beg- preserve=no 3C68EC6E02C0 package "UmlUsage"
+// -beg- preserve=no 3C68EC6E02C0 package "UmlUsage"
 package ch.ehi.uml1_4.implementation;
-    // -end- 3C68EC6E02C0 package "UmlUsage"
+// -end- 3C68EC6E02C0 package "UmlUsage"
 
-    // -beg- preserve=no 3C68EC6E02C0 autoimport "UmlUsage"
-    import ch.ehi.uml1_4.foundation.core.Usage;
-    import ch.ehi.uml1_4.implementation.AbstractDependency;
-    import ch.ehi.basics.tools.AbstractVisitor;
-    import ch.ehi.uml1_4.foundation.core.ModelElement;
-    import ch.ehi.uml1_4.foundation.core.PresentationElement;
-    import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-    import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-    import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-    import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-    import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-    import ch.ehi.uml1_4.foundation.core.Namespace;
-    import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-    import ch.ehi.uml1_4.foundation.core.Dependency;
-    import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-    import ch.ehi.uml1_4.foundation.core.Constraint;
-    import ch.ehi.uml1_4.foundation.core.Component;
-    import ch.ehi.uml1_4.foundation.core.ElementResidence;
-    import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-    import ch.ehi.uml1_4.foundation.core.Flow;
-    import ch.ehi.uml1_4.foundation.core.Comment;
-    import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-    import ch.ehi.uml1_4.modelmanagement.Package;
-    import ch.ehi.uml1_4.modelmanagement.ElementImport;
-    import ch.ehi.basics.types.NlsString;
-    // -end- 3C68EC6E02C0 autoimport "UmlUsage"
+// -beg- preserve=no 3C68EC6E02C0 autoimport "UmlUsage"
+import ch.ehi.uml1_4.foundation.core.Usage;
+import ch.ehi.uml1_4.implementation.AbstractDependency;
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
+import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.foundation.core.Constraint;
+import ch.ehi.uml1_4.foundation.core.Component;
+import ch.ehi.uml1_4.foundation.core.ElementResidence;
+import ch.ehi.uml1_4.foundation.core.TemplateParameter;
+import ch.ehi.uml1_4.foundation.core.Flow;
+import ch.ehi.uml1_4.foundation.core.Comment;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
+import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import ch.ehi.basics.types.NlsString;
+// -end- 3C68EC6E02C0 autoimport "UmlUsage"
 
-    // import declarations
-    // please fill in/modify the following section
-    // -beg- preserve=no 3C68EC6E02C0 import "UmlUsage"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C68EC6E02C0 import "UmlUsage"
 
-    // -end- 3C68EC6E02C0 import "UmlUsage"
+// -end- 3C68EC6E02C0 import "UmlUsage"
 
-    /** @author Claude Eisenhut
-     *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:16 $
-     */
-public class UmlUsage extends AbstractDependency implements Usage , java.io.Serializable
-    {
-      // declare/define something only in the code
-      // please fill in/modify the following section
-      // -beg- preserve=no 3C68EC6E02C0 detail_begin "UmlUsage"
+/** @author Claude Eisenhut
+ *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:16 $
+ */
+public class UmlUsage extends AbstractDependency implements Usage, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C68EC6E02C0 detail_begin "UmlUsage"
 
-      // -end- 3C68EC6E02C0 detail_begin "UmlUsage"
+// -end- 3C68EC6E02C0 detail_begin "UmlUsage"
 
-      // -beg- preserve=no 3D4FA218003A head3C68EC6E02C0 "unlinkAll"
-      public void unlinkAll()
-      // -end- 3D4FA218003A head3C68EC6E02C0 "unlinkAll"
-        // declare any checked exceptions
-        // please fill in/modify the following section
-        // -beg- preserve=no 3D4FA218003A throws3C68EC6E02C0 "unlinkAll"
+// -beg- preserve=no 3D4FA218003A head3C68EC6E02C0 "unlinkAll"
+public void unlinkAll()
+// -end- 3D4FA218003A head3C68EC6E02C0 "unlinkAll"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA218003A throws3C68EC6E02C0 "unlinkAll"
 
-        // -end- 3D4FA218003A throws3C68EC6E02C0 "unlinkAll"
-        {
+// -end- 3D4FA218003A throws3C68EC6E02C0 "unlinkAll"
+{
         // please fill in/modify the following section
         // -beg- preserve=no 3D4FA218003A body3C68EC6E02C0 "unlinkAll"
-        
+
         clearClient();
         clearSupplier();
         clearPresentation();
@@ -107,43 +107,42 @@ public class UmlUsage extends AbstractDependency implements Usage , java.io.Seri
         setDocumentation(null);
         super.unlinkAll();
         // -end- 3D4FA218003A body3C68EC6E02C0 "unlinkAll"
-        }
+}
 
-      // -beg- preserve=no 3D4FA2180044 head3C68EC6E02C0 "enumerateChildren"
-      public void enumerateChildren(AbstractVisitor visitor)
-      // -end- 3D4FA2180044 head3C68EC6E02C0 "enumerateChildren"
-        // declare any checked exceptions
-        // please fill in/modify the following section
-        // -beg- preserve=no 3D4FA2180044 throws3C68EC6E02C0 "enumerateChildren"
+// -beg- preserve=no 3D4FA2180044 head3C68EC6E02C0 "enumerateChildren"
+public void enumerateChildren(AbstractVisitor visitor)
+// -end- 3D4FA2180044 head3C68EC6E02C0 "enumerateChildren"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA2180044 throws3C68EC6E02C0 "enumerateChildren"
 
-        // -end- 3D4FA2180044 throws3C68EC6E02C0 "enumerateChildren"
-        {
+// -end- 3D4FA2180044 throws3C68EC6E02C0 "enumerateChildren"
+{
         // please fill in/modify the following section
         // -beg- preserve=no 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"
         java.util.Iterator it=null;
-        it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
-        it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
-        it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
+        it=iteratorBehavior(); while(it.hasNext()) visitor.visit(it.next());
+        it=iteratorTaggedValue(); while(it.hasNext()) visitor.visit(it.next());
+        it=iteratorTemplateParameter(); while(it.hasNext()) visitor.visit(it.next());
         visitor.visit(getName());
         visitor.visit(getMetaAttrb());
         visitor.visit(getDocumentation());
         super.enumerateChildren(visitor);
         // -end- 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"
-        }
-      
-      	public NlsString getMetaAttrb(){
-    		 return super.getMetaAttrb();
-    	}
-    	  
-    	public void setMetaAttrb(NlsString value) {
-    		super.setMettaAttrb(value);	
-    	}
+}
 
-      // declare/define something only in the code
-      // please fill in/modify the following section
-      // -beg- preserve=no 3C68EC6E02C0 detail_end "UmlUsage"
+public NlsString getMetaAttrb(){
+        return super.getMetaAttrb();
+}
 
-      // -end- 3C68EC6E02C0 detail_end "UmlUsage"
+public void setMetaAttrb(NlsString value) {
+        super.setMettaAttrb(value);
+}
 
-    }
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C68EC6E02C0 detail_end "UmlUsage"
 
+// -end- 3C68EC6E02C0 detail_end "UmlUsage"
+
+}

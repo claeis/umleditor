@@ -48,281 +48,281 @@ import javax.swing.JComboBox;
  * @version $Revision: 1.2 $ $Date: 2008-04-08 09:59:17 $
  */
 public class LinkNodeDialog extends BaseDialog implements Evaluator {
-    private JPanel pnlMain = null;
-    private JPanel jPanel = null;
-    private JPanel pnlSouth = null;
-    private JButton btnOk = null;
-    private JButton btnCancel = null;
-    private JPanel pnlCenter = null;
-    private JRadioButton rbtNAry = null;
-    private JRadioButton rbtXor = null;
-    private JLabel lblLinkKind = null;
-    private JLabel lblRole = null;
-    private JComboBox cbxXorParticipant = null;
+private JPanel pnlMain = null;
+private JPanel jPanel = null;
+private JPanel pnlSouth = null;
+private JButton btnOk = null;
+private JButton btnCancel = null;
+private JPanel pnlCenter = null;
+private JRadioButton rbtNAry = null;
+private JRadioButton rbtXor = null;
+private JLabel lblLinkKind = null;
+private JLabel lblRole = null;
+private JComboBox cbxXorParticipant = null;
 
-    /**
-     * Choose whether Role is n-ary or XOR.
-     * @param owner
-     * @param assoc
-     * @param xorNode
-     */
-    public LinkNodeDialog(Frame owner, ch.ehi.umleditor.umlpresentation.Association assoc, PresentationNode xorNode) {
+/**
+ * Choose whether Role is n-ary or XOR.
+ * @param owner
+ * @param assoc
+ * @param xorNode
+ */
+public LinkNodeDialog(Frame owner, ch.ehi.umleditor.umlpresentation.Association assoc, PresentationNode xorNode) {
         super(owner, true);
-		initialize();
+        initialize();
 
         try {
-            java.util.Vector roles = new java.util.Vector();
-            Iterator it = ((Association)assoc.iteratorSubject().next()).iteratorConnection();
-            while (it.hasNext()) {
-                RoleDef role = (RoleDef)it.next();
-                if ((role.getParticipant() != null) && (!role.getParticipant().equals(xorNode.iteratorSubject().next()))) {
-                    // do not XOR to xorNode itself
-                    roles.add(role /*.getName().getValue()*/);
-                }                
-            }
-            JComboBoxUtility.initComboBox(cbxXorParticipant, roles, "name", true, this);
+                java.util.Vector roles = new java.util.Vector();
+                Iterator it = ((Association)assoc.iteratorSubject().next()).iteratorConnection();
+                while (it.hasNext()) {
+                        RoleDef role = (RoleDef)it.next();
+                        if ((role.getParticipant() != null) && (!role.getParticipant().equals(xorNode.iteratorSubject().next()))) {
+                                // do not XOR to xorNode itself
+                                roles.add(role /*.getName().getValue()*/);
+                        }
+                }
+                JComboBoxUtility.initComboBox(cbxXorParticipant, roles, "name", true, this);
         } catch(Throwable e) {
-            handleException(e);
-        }
-    }
-
-    /**
-     * This method initializes this
-     */
-    private void initialize() {
-    	try {
-            this.setSize(new Dimension(567, 172));
-            this.setContentPane(getPnlMain());
-            this.setTitle("Association to Linknode");
-    			
-            ButtonGroup group = new ButtonGroup();
-            group.add(getRbtNAry());
-            group.add(getRbtXor());
-            
-            checkConsistency();
-    	}
-    	catch (java.lang.Throwable e) {
-            handleException(e);
-    	}
-    }
-
-    /**
-     * This method initializes pnlMain	
-     * 	
-     * @return javax.swing.JPanel	
-     */
-    private JPanel getPnlMain() {
-        if (pnlMain == null) {
-            try {
-                pnlMain = new JPanel();
-                pnlMain.setLayout(new BoxLayout(getPnlMain(), BoxLayout.Y_AXIS));
-                pnlMain.add(getJPanel(), null);
-            } catch (java.lang.Throwable e) {
                 handleException(e);
-            }
+        }
+}
+
+/**
+ * This method initializes this
+ */
+private void initialize() {
+        try {
+                this.setSize(new Dimension(567, 172));
+                this.setContentPane(getPnlMain());
+                this.setTitle("Association to Linknode");
+
+                ButtonGroup group = new ButtonGroup();
+                group.add(getRbtNAry());
+                group.add(getRbtXor());
+
+                checkConsistency();
+        }
+        catch (java.lang.Throwable e) {
+                handleException(e);
+        }
+}
+
+/**
+ * This method initializes pnlMain
+ *
+ * @return javax.swing.JPanel
+ */
+private JPanel getPnlMain() {
+        if (pnlMain == null) {
+                try {
+                        pnlMain = new JPanel();
+                        pnlMain.setLayout(new BoxLayout(getPnlMain(), BoxLayout.Y_AXIS));
+                        pnlMain.add(getJPanel(), null);
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return pnlMain;
-    }
+}
 
-    /**
-     * This method initializes jPanel	
-     * 	
-     * @return javax.swing.JPanel	
-     */
-    private JPanel getJPanel() {
+/**
+ * This method initializes jPanel
+ *
+ * @return javax.swing.JPanel
+ */
+private JPanel getJPanel() {
         if (jPanel == null) {
-            try {
-                jPanel = new JPanel();
-                jPanel.setLayout(new BorderLayout());
-                jPanel.add(getPnlSouth(), BorderLayout.SOUTH);
-                jPanel.add(getPnlCenter(), BorderLayout.CENTER);
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        jPanel = new JPanel();
+                        jPanel.setLayout(new BorderLayout());
+                        jPanel.add(getPnlSouth(), BorderLayout.SOUTH);
+                        jPanel.add(getPnlCenter(), BorderLayout.CENTER);
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return jPanel;
-    }
+}
 
-    /**
-     * This method initializes pnlSouth	
-     * 	
-     * @return javax.swing.JPanel	
-     */
-    private JPanel getPnlSouth() {
+/**
+ * This method initializes pnlSouth
+ *
+ * @return javax.swing.JPanel
+ */
+private JPanel getPnlSouth() {
         if (pnlSouth == null) {
-            try {
-                pnlSouth = new JPanel();
-                pnlSouth.setLayout(new FlowLayout());
-                pnlSouth.setPreferredSize(new Dimension(0, 30));
-                pnlSouth.add(getBtnOk(), null);
-                pnlSouth.add(getBtnCancel(), null);
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        pnlSouth = new JPanel();
+                        pnlSouth.setLayout(new FlowLayout());
+                        pnlSouth.setPreferredSize(new Dimension(0, 30));
+                        pnlSouth.add(getBtnOk(), null);
+                        pnlSouth.add(getBtnCancel(), null);
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return pnlSouth;
-    }
+}
 
-    /**
-     * This method initializes btnOk	
-     * 	
-     * @return javax.swing.JButton	
-     */
-    private JButton getBtnOk() {
+/**
+ * This method initializes btnOk
+ *
+ * @return javax.swing.JButton
+ */
+private JButton getBtnOk() {
         if (btnOk == null) {
-            try {
-                btnOk = new JButton();
-                btnOk.setText(getOKString());
-                btnOk.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                        okPressed();
-                    }
-                });
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        btnOk = new JButton();
+                        btnOk.setText(getOKString());
+                        btnOk.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                                                okPressed();
+                                        }
+                                });
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return btnOk;
-    }
+}
 
-    /**
-     * This method initializes btnCancel	
-     * 	
-     * @return javax.swing.JButton	
-     */
-    private JButton getBtnCancel() {
+/**
+ * This method initializes btnCancel
+ *
+ * @return javax.swing.JButton
+ */
+private JButton getBtnCancel() {
         if (btnCancel == null) {
-            try {
-                btnCancel = new JButton();
-                btnCancel.setText(getCancelString());
-                btnCancel.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                        cancelPressed();
-                    }
-                });
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        btnCancel = new JButton();
+                        btnCancel.setText(getCancelString());
+                        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                                                cancelPressed();
+                                        }
+                                });
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return btnCancel;
-    }
+}
 
-    /**
-     * This method initializes pnlCenter	
-     * 	
-     * @return javax.swing.JPanel	
-     */
-    private JPanel getPnlCenter() {
+/**
+ * This method initializes pnlCenter
+ *
+ * @return javax.swing.JPanel
+ */
+private JPanel getPnlCenter() {
         if (pnlCenter == null) {
-            try {
-                lblRole = new JLabel();
-                lblRole.setBounds(new Rectangle(121, 67, 82, 15));
-                lblRole.setToolTipText("Involved XOR-Role");
-                lblRole.setText("Participant:");
-                lblLinkKind = new JLabel();
-                lblLinkKind.setBounds(new Rectangle(22, 5, 164, 24));
-                lblLinkKind.setText("Choose type of Link:");
-                pnlCenter = new JPanel();
-                pnlCenter.setLayout(null);
-                pnlCenter.add(getRbtNAry(), null);
-                pnlCenter.add(getRbtXor(), null);
-                pnlCenter.add(lblLinkKind, null);
-                pnlCenter.add(lblRole, null);
-                pnlCenter.add(getCbxXorParticipant(), null);
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        lblRole = new JLabel();
+                        lblRole.setBounds(new Rectangle(121, 67, 82, 15));
+                        lblRole.setToolTipText("Involved XOR-Role");
+                        lblRole.setText("Participant:");
+                        lblLinkKind = new JLabel();
+                        lblLinkKind.setBounds(new Rectangle(22, 5, 164, 24));
+                        lblLinkKind.setText("Choose type of Link:");
+                        pnlCenter = new JPanel();
+                        pnlCenter.setLayout(null);
+                        pnlCenter.add(getRbtNAry(), null);
+                        pnlCenter.add(getRbtXor(), null);
+                        pnlCenter.add(lblLinkKind, null);
+                        pnlCenter.add(lblRole, null);
+                        pnlCenter.add(getCbxXorParticipant(), null);
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return pnlCenter;
-    }
+}
 
-    /**
-     * This method initializes rbtNAry	
-     * 	
-     * @return javax.swing.JRadioButton	
-     */
-    private JRadioButton getRbtNAry() {
+/**
+ * This method initializes rbtNAry
+ *
+ * @return javax.swing.JRadioButton
+ */
+private JRadioButton getRbtNAry() {
         if (rbtNAry == null) {
-            try {
-                rbtNAry = new JRadioButton();
-                rbtNAry.setBounds(new Rectangle(24, 38, 106, 21));
-                rbtNAry.setSelected(true);
-                rbtNAry.setText("n-ary");
-                rbtNAry.addItemListener(new java.awt.event.ItemListener() {
-                    public void itemStateChanged(java.awt.event.ItemEvent e) {
-                        checkConsistency();
-                    }
-                });
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        rbtNAry = new JRadioButton();
+                        rbtNAry.setBounds(new Rectangle(24, 38, 106, 21));
+                        rbtNAry.setSelected(true);
+                        rbtNAry.setText("n-ary");
+                        rbtNAry.addItemListener(new java.awt.event.ItemListener() {
+                                        public void itemStateChanged(java.awt.event.ItemEvent e) {
+                                                checkConsistency();
+                                        }
+                                });
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return rbtNAry;
-    }
+}
 
-    /**
-     * This method initializes rbtXor	
-     * 	
-     * @return javax.swing.JRadioButton	
-     */
-    private JRadioButton getRbtXor() {
+/**
+ * This method initializes rbtXor
+ *
+ * @return javax.swing.JRadioButton
+ */
+private JRadioButton getRbtXor() {
         if (rbtXor == null) {
-            try {
-                rbtXor = new JRadioButton();
-                rbtXor.setBounds(new Rectangle(24, 61, 62, 23));
-                rbtXor.setText("XOR");
-                rbtXor.addItemListener(new java.awt.event.ItemListener() {
-                    public void itemStateChanged(java.awt.event.ItemEvent e) {
-                        checkConsistency();
-                    }
-                });
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        rbtXor = new JRadioButton();
+                        rbtXor.setBounds(new Rectangle(24, 61, 62, 23));
+                        rbtXor.setText("XOR");
+                        rbtXor.addItemListener(new java.awt.event.ItemListener() {
+                                        public void itemStateChanged(java.awt.event.ItemEvent e) {
+                                                checkConsistency();
+                                        }
+                                });
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return rbtXor;
-    }
+}
 
-    /**
-     * This method initializes cbxXorParticipant	
-     * 	
-     * @return javax.swing.JComboBox	
-     */
-    private JComboBox getCbxXorParticipant() {
+/**
+ * This method initializes cbxXorParticipant
+ *
+ * @return javax.swing.JComboBox
+ */
+private JComboBox getCbxXorParticipant() {
         if (cbxXorParticipant == null) {
-            try {
-                cbxXorParticipant = new JComboBox();
-                cbxXorParticipant.setBounds(new Rectangle(222, 64, 321, 19));
-                cbxXorParticipant.addItemListener(new java.awt.event.ItemListener() {
-                    public void itemStateChanged(java.awt.event.ItemEvent e) {
-                        checkConsistency();
-                    }
-                });
-            } catch (java.lang.Throwable e) {
-                handleException(e);
-            }
+                try {
+                        cbxXorParticipant = new JComboBox();
+                        cbxXorParticipant.setBounds(new Rectangle(222, 64, 321, 19));
+                        cbxXorParticipant.addItemListener(new java.awt.event.ItemListener() {
+                                        public void itemStateChanged(java.awt.event.ItemEvent e) {
+                                                checkConsistency();
+                                        }
+                                });
+                } catch (java.lang.Throwable e) {
+                        handleException(e);
+                }
         }
         return cbxXorParticipant;
-    }
-    public boolean isNAry() {
+}
+public boolean isNAry() {
         return (isSaved() && getRbtNAry().isSelected());
-    }
-    public boolean isXor() {
+}
+public boolean isXor() {
         return (isSaved() && getRbtXor().isSelected() && (getCbxXorParticipant().getSelectedItem() != null));
-    }
-    public RoleDef getXorParticipant() {
+}
+public RoleDef getXorParticipant() {
         return (RoleDef)getCbxXorParticipant().getSelectedItem();
-    }
+}
 
-    public Object evaluate(Object owner, final String property) {
+public Object evaluate(Object owner, final String property) {
         if (owner != null) {
-            return ((RoleDef)owner).getName().getValue();
+                return ((RoleDef)owner).getName().getValue();
         }
         return null;
-    }
-    private void checkConsistency() {
+}
+private void checkConsistency() {
         getCbxXorParticipant().setEnabled(getRbtXor().isSelected());
         getBtnOk().setEnabled(getRbtNAry().isSelected() ||
-                getCbxXorParticipant().getSelectedItem() != null);
-    }
+                              getCbxXorParticipant().getSelectedItem() != null);
+}
 }  //  @jve:decl-index=0:visual-constraint="10,10"

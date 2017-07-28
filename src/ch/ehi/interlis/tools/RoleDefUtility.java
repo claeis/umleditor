@@ -25,87 +25,87 @@ import ch.ehi.uml1_4.foundation.core.Classifier;
  * @author ce
  */
 public class RoleDefUtility {
-	private RoleDefUtility(){
-	}
-	/** tests if role is a ili struct attr
-	 */
-	static public boolean isIliStructAttr(RoleDef role){
-		AssociationDef assoc=(AssociationDef)role.getAssociation();
-		if(assoc.sizeConnection()!=2){
-			return false;
-		}
-		RoleDef oppend=getOppEnd(role);
-		if(oppend==null){
-			// association incomplete
-			return false; 
-		}
-		if(!oppend.containsParticipant()){
-			// association incomplete
-			return false; 
-		}
-		Classifier oppendClass=oppend.getParticipant();
-		if(role.getAggregation()==AggregationKind.COMPOSITE 
-				&& oppendClass instanceof ClassDef 
-				&& ((ClassDef)oppendClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE){
-			return true;
-		}
-		return false;
-	}
-	/** tests if role is a ili reference attr
-	 */
-	static public boolean isIliRefAttr(RoleDef role)
-	{
-		AssociationDef assoc=(AssociationDef)role.getAssociation();
-		if(assoc.sizeConnection()!=2){
-			return false;
-		}
-		RoleDef oppend=getOppEnd(role);
-		if(oppend==null){
-			// association incomplete
-			return false; 
-		}
-		if(!role.containsParticipant()){
-			// association incomplete
-			return false; 
-		}
-		Classifier thisClass=role.getParticipant();
-		if(!oppend.containsParticipant()){
-			// association incomplete
-			return false; 
-		}
-		Classifier oppendClass=oppend.getParticipant();
-		if(role.getAggregation()==AggregationKind.NONE
-		&& thisClass instanceof ClassDef
-		&& ((ClassDef)thisClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE 
-		&& ((oppendClass instanceof ClassDef
-			&& ((ClassDef)oppendClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS)
-			|| oppendClass instanceof AssociationDef
-			)
-		&& oppend.getAggregation()==AggregationKind.NONE){
-			return true;
-		}
-		return false;
-	}
-	/** tests if role is a ili reference or struct attr
-	 */
-	static public boolean isIliAttr(RoleDef role)
-	{
-		return isIliRefAttr(role) || isIliStructAttr(role);
-	}
-	/** get other end of a bidrectional association
-	 *
-	 */
-	static public RoleDef getOppEnd(RoleDef athis)
-	{
-	  AssociationDef assoc=(AssociationDef)athis.getAssociation();
-	  java.util.Iterator rolei=assoc.iteratorConnection();
-	  while(rolei.hasNext()){
-		RoleDef obj=(RoleDef)rolei.next();
-		if(obj!=athis){
-		  return obj;
-		}
-	  }
-	  return null;
-	}
+private RoleDefUtility(){
+}
+/** tests if role is a ili struct attr
+ */
+static public boolean isIliStructAttr(RoleDef role){
+								AssociationDef assoc=(AssociationDef)role.getAssociation();
+								if(assoc.sizeConnection()!=2) {
+																return false;
+								}
+								RoleDef oppend=getOppEnd(role);
+								if(oppend==null) {
+																// association incomplete
+																return false;
+								}
+								if(!oppend.containsParticipant()) {
+																// association incomplete
+																return false;
+								}
+								Classifier oppendClass=oppend.getParticipant();
+								if(role.getAggregation()==AggregationKind.COMPOSITE
+											&& oppendClass instanceof ClassDef
+											&& ((ClassDef)oppendClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE) {
+																return true;
+								}
+								return false;
+}
+/** tests if role is a ili reference attr
+ */
+static public boolean isIliRefAttr(RoleDef role)
+{
+								AssociationDef assoc=(AssociationDef)role.getAssociation();
+								if(assoc.sizeConnection()!=2) {
+																return false;
+								}
+								RoleDef oppend=getOppEnd(role);
+								if(oppend==null) {
+																// association incomplete
+																return false;
+								}
+								if(!role.containsParticipant()) {
+																// association incomplete
+																return false;
+								}
+								Classifier thisClass=role.getParticipant();
+								if(!oppend.containsParticipant()) {
+																// association incomplete
+																return false;
+								}
+								Classifier oppendClass=oppend.getParticipant();
+								if(role.getAggregation()==AggregationKind.NONE
+											&& thisClass instanceof ClassDef
+											&& ((ClassDef)thisClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE
+											&& ((oppendClass instanceof ClassDef
+																&& ((ClassDef)oppendClass).getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS)
+															|| oppendClass instanceof AssociationDef
+															)
+											&& oppend.getAggregation()==AggregationKind.NONE) {
+																return true;
+								}
+								return false;
+}
+/** tests if role is a ili reference or struct attr
+ */
+static public boolean isIliAttr(RoleDef role)
+{
+								return isIliRefAttr(role) || isIliStructAttr(role);
+}
+/** get other end of a bidrectional association
+ *
+ */
+static public RoleDef getOppEnd(RoleDef athis)
+{
+								AssociationDef assoc=(AssociationDef)athis.getAssociation();
+								java.util.Iterator rolei=assoc.iteratorConnection();
+								while(rolei.hasNext()) {
+																RoleDef obj=(RoleDef)rolei.next();
+																if(obj!=athis) {
+																								return obj;
+																}
+								}
+								return null;
+}
 
 }

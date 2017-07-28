@@ -4,10 +4,10 @@ package ch.ehi.umleditor.plugin;
  * @author ce
  */
 public abstract class AbstractPlugin {
-	public void addMenuItems(javax.swing.JMenuBar menuBar){
-	}
-	public void start(){
-	}
-	public void end(){
-	}
+public void addMenuItems(javax.swing.JMenuBar menuBar){
+}
+public void start(){
+}
+public void end(){
+}
 }

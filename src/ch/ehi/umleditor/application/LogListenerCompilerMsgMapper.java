@@ -24,6 +24,6 @@ import ch.interlis.ili2c.CompilerLogEvent;
  * @version $Revision: 1.1 $ $Date: 2006-08-10 16:25:41 $
  */
 public interface LogListenerCompilerMsgMapper {
-	String getId(CompilerLogEvent event);
-	String getTitle();
+String getId(CompilerLogEvent event);
+String getTitle();
 }

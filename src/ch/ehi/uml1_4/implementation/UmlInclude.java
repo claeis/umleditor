@@ -59,272 +59,271 @@ import ch.ehi.basics.types.NlsString;
  */
 public class UmlInclude extends AbstractModelElement implements Include
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 4551A7840119 detail_begin "UmlInclude"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 4551A7840119 detail_begin "UmlInclude"
 
-  // -end- 4551A7840119 detail_begin "UmlInclude"
+// -end- 4551A7840119 detail_begin "UmlInclude"
 
-  // -beg- preserve=no 4551A8880145 head4551A7840119 "unlinkAll"
-  public void unlinkAll()
-  // -end- 4551A8880145 head4551A7840119 "unlinkAll"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 4551A8880145 throws4551A7840119 "unlinkAll"
+// -beg- preserve=no 4551A8880145 head4551A7840119 "unlinkAll"
+public void unlinkAll()
+// -end- 4551A8880145 head4551A7840119 "unlinkAll"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 4551A8880145 throws4551A7840119 "unlinkAll"
 
-    // -end- 4551A8880145 throws4551A7840119 "unlinkAll"
-    {
-    // please fill in/modify the following section
-    // -beg- preserve=no 4551A8880145 body4551A7840119 "unlinkAll"
-    
-    detachAddition();
-    detachBase();
-    clearBehavior();
-    clearPartition();
-    clearCollaboration();
-    clearClassifierRole();
-    clearCollaborationInstanceSet();
-    detachNamespace();
-    clearClientDependency();
-    clearTaggedValue();
-    clearConstraint();
-    clearSupplierDependency();
-    clearPresentation();
-    clearContainer();
-    clearTemplateParameter();
-    clearTargetFlow();
-    clearSourceFlow();
-    clearDefaultParameter();
-    clearComment();
-    // Role TemplateArgument: TemplateArgument object(s) may point to this
-    // Role ParameterDefinition: TemplateParameter object(s) may point to this
-    clearStereotype();
-    clearReferenceTag();
-    clearImportedBy();
-    // Role EditorTreeElement: EditorTreeElement object(s) may point to this
-    setName(null);
-    setMetaAttrb(null);
-    setDocumentation(null);
-    super.unlinkAll();
-    // -end- 4551A8880145 body4551A7840119 "unlinkAll"
-    }
+// -end- 4551A8880145 throws4551A7840119 "unlinkAll"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 4551A8880145 body4551A7840119 "unlinkAll"
 
-  // -beg- preserve=no 4551A88B03DE head4551A7840119 "enumerateChildren"
-  public void enumerateChildren(AbstractVisitor visitor)
-  // -end- 4551A88B03DE head4551A7840119 "enumerateChildren"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 4551A88B03DE throws4551A7840119 "enumerateChildren"
+        detachAddition();
+        detachBase();
+        clearBehavior();
+        clearPartition();
+        clearCollaboration();
+        clearClassifierRole();
+        clearCollaborationInstanceSet();
+        detachNamespace();
+        clearClientDependency();
+        clearTaggedValue();
+        clearConstraint();
+        clearSupplierDependency();
+        clearPresentation();
+        clearContainer();
+        clearTemplateParameter();
+        clearTargetFlow();
+        clearSourceFlow();
+        clearDefaultParameter();
+        clearComment();
+        // Role TemplateArgument: TemplateArgument object(s) may point to this
+        // Role ParameterDefinition: TemplateParameter object(s) may point to this
+        clearStereotype();
+        clearReferenceTag();
+        clearImportedBy();
+        // Role EditorTreeElement: EditorTreeElement object(s) may point to this
+        setName(null);
+        setMetaAttrb(null);
+        setDocumentation(null);
+        super.unlinkAll();
+        // -end- 4551A8880145 body4551A7840119 "unlinkAll"
+}
 
-    // -end- 4551A88B03DE throws4551A7840119 "enumerateChildren"
-    {
-    // please fill in/modify the following section
-    // -beg- preserve=no 4551A88B03DE body4551A7840119 "enumerateChildren"
-    java.util.Iterator it=null;
-    it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
-    it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
-    it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
-    visitor.visit(getName());
-    visitor.visit(getMetaAttrb());
-    visitor.visit(getDocumentation());
-    super.enumerateChildren(visitor);
-    // -end- 4551A88B03DE body4551A7840119 "enumerateChildren"
-    }
+// -beg- preserve=no 4551A88B03DE head4551A7840119 "enumerateChildren"
+public void enumerateChildren(AbstractVisitor visitor)
+// -end- 4551A88B03DE head4551A7840119 "enumerateChildren"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 4551A88B03DE throws4551A7840119 "enumerateChildren"
 
-  // -beg- preserve=no 35FDD995038E code4551A7840119 "addition"
-  private UseCase addition;
-  // -end- 35FDD995038E code4551A7840119 "addition"
+// -end- 4551A88B03DE throws4551A7840119 "enumerateChildren"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 4551A88B03DE body4551A7840119 "enumerateChildren"
+        java.util.Iterator it=null;
+        it=iteratorBehavior(); while(it.hasNext()) visitor.visit(it.next());
+        it=iteratorTaggedValue(); while(it.hasNext()) visitor.visit(it.next());
+        it=iteratorTemplateParameter(); while(it.hasNext()) visitor.visit(it.next());
+        visitor.visit(getName());
+        visitor.visit(getMetaAttrb());
+        visitor.visit(getDocumentation());
+        super.enumerateChildren(visitor);
+        // -end- 4551A88B03DE body4551A7840119 "enumerateChildren"
+}
 
-  /** attaches a Addition.
-   *  
-   *  @see #detachAddition
-   *  @see #getAddition
-   *  @see #containsAddition
-   */
-  // -beg- preserve=no 35FDD995038E attach_head4551A7840119 "Include::attachAddition"
-  public void attachAddition(UseCase addition1)
-  // -end- 35FDD995038E attach_head4551A7840119 "Include::attachAddition"
-  {
-    // -beg- preserve=no 35FDD995038E attach_body4551A7840119 "Include::attachAddition"
-    if(addition!=null) {throw new java.lang.IllegalStateException("already a addition attached");}
-    if(addition1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as addition");}
-    addition = addition1;
-    addition1._linkBaseInclude(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachAddition"));
-    return;
-    // -end- 35FDD995038E attach_body4551A7840119 "Include::attachAddition"
-  }
+// -beg- preserve=no 35FDD995038E code4551A7840119 "addition"
+private UseCase addition;
+// -end- 35FDD995038E code4551A7840119 "addition"
 
-  /** disconnect the currently attached Addition.
-   *  @see #attachAddition
-   */
-  // -beg- preserve=no 35FDD995038E detach_head4551A7840119 "Include::detachAddition"
-  public UseCase detachAddition()
-  // -end- 35FDD995038E detach_head4551A7840119 "Include::detachAddition"
-  {
-    // -beg- preserve=no 35FDD995038E detach_body4551A7840119 "Include::detachAddition"
-    UseCase ret = null;
-    if(addition!=null){
-      addition._unlinkBaseInclude(this);
-      ret = addition;
-      addition = null;
-    }
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachAddition"));
-    return ret;
-    // -end- 35FDD995038E detach_body4551A7840119 "Include::detachAddition"
-  }
+/** attaches a Addition.
+ *
+ *  @see #detachAddition
+ *  @see #getAddition
+ *  @see #containsAddition
+ */
+// -beg- preserve=no 35FDD995038E attach_head4551A7840119 "Include::attachAddition"
+public void attachAddition(UseCase addition1)
+// -end- 35FDD995038E attach_head4551A7840119 "Include::attachAddition"
+{
+        // -beg- preserve=no 35FDD995038E attach_body4551A7840119 "Include::attachAddition"
+        if(addition!=null) {throw new java.lang.IllegalStateException("already a addition attached");}
+        if(addition1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as addition");}
+        addition = addition1;
+        addition1._linkBaseInclude(this);
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachAddition"));
+        return;
+        // -end- 35FDD995038E attach_body4551A7840119 "Include::attachAddition"
+}
 
-  /** get the currently attached Addition.
-   *  @see #attachAddition
-   */
-  // -beg- preserve=no 35FDD995038E get_head4551A7840119 "Include::getAddition"
-  public UseCase getAddition()
-  // -end- 35FDD995038E get_head4551A7840119 "Include::getAddition"
-  {
-    // -beg- preserve=no 35FDD995038E get_body4551A7840119 "Include::getAddition"
-    if(addition==null) {throw new java.lang.IllegalStateException("no addition attached");}
-    return addition;
-    // -end- 35FDD995038E get_body4551A7840119 "Include::getAddition"
-  }
+/** disconnect the currently attached Addition.
+ *  @see #attachAddition
+ */
+// -beg- preserve=no 35FDD995038E detach_head4551A7840119 "Include::detachAddition"
+public UseCase detachAddition()
+// -end- 35FDD995038E detach_head4551A7840119 "Include::detachAddition"
+{
+        // -beg- preserve=no 35FDD995038E detach_body4551A7840119 "Include::detachAddition"
+        UseCase ret = null;
+        if(addition!=null) {
+                addition._unlinkBaseInclude(this);
+                ret = addition;
+                addition = null;
+        }
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachAddition"));
+        return ret;
+        // -end- 35FDD995038E detach_body4551A7840119 "Include::detachAddition"
+}
 
-  /** tests if there is a Addition attached.
-   *  @see #attachAddition
-   */
-  // -beg- preserve=no 35FDD995038E test_head4551A7840119 "Include::containsAddition"
-  public boolean containsAddition()
-  // -end- 35FDD995038E test_head4551A7840119 "Include::containsAddition"
-  {
-    // -beg- preserve=no 35FDD995038E test_body4551A7840119 "Include::containsAddition"
-    return addition!=null;
-    // -end- 35FDD995038E test_body4551A7840119 "Include::containsAddition"
-  }
+/** get the currently attached Addition.
+ *  @see #attachAddition
+ */
+// -beg- preserve=no 35FDD995038E get_head4551A7840119 "Include::getAddition"
+public UseCase getAddition()
+// -end- 35FDD995038E get_head4551A7840119 "Include::getAddition"
+{
+        // -beg- preserve=no 35FDD995038E get_body4551A7840119 "Include::getAddition"
+        if(addition==null) {throw new java.lang.IllegalStateException("no addition attached");}
+        return addition;
+        // -end- 35FDD995038E get_body4551A7840119 "Include::getAddition"
+}
 
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 35FDD995038E _link_body4551A7840119 "Include::_linkAddition"
-  public void _linkAddition(UseCase addition1)
-  {
-    addition = addition1;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkAddition"));
-    return;
-  }
-  // -end- 35FDD995038E _link_body4551A7840119 "Include::_linkAddition"
+/** tests if there is a Addition attached.
+ *  @see #attachAddition
+ */
+// -beg- preserve=no 35FDD995038E test_head4551A7840119 "Include::containsAddition"
+public boolean containsAddition()
+// -end- 35FDD995038E test_head4551A7840119 "Include::containsAddition"
+{
+        // -beg- preserve=no 35FDD995038E test_body4551A7840119 "Include::containsAddition"
+        return addition!=null;
+        // -end- 35FDD995038E test_body4551A7840119 "Include::containsAddition"
+}
 
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 35FDD995038E _unlink_body4551A7840119 "Include::_unlinkAddition"
-  public void _unlinkAddition(UseCase addition1)
-  {
-    addition = null;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkAddition"));
-    return;
-  }
-  // -end- 35FDD995038E _unlink_body4551A7840119 "Include::_unlinkAddition"
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 35FDD995038E _link_body4551A7840119 "Include::_linkAddition"
+public void _linkAddition(UseCase addition1)
+{
+        addition = addition1;
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkAddition"));
+        return;
+}
+// -end- 35FDD995038E _link_body4551A7840119 "Include::_linkAddition"
 
-  // -beg- preserve=no 35FDD9A50046 code4551A7840119 "base"
-  private UseCase base;
-  // -end- 35FDD9A50046 code4551A7840119 "base"
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 35FDD995038E _unlink_body4551A7840119 "Include::_unlinkAddition"
+public void _unlinkAddition(UseCase addition1)
+{
+        addition = null;
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkAddition"));
+        return;
+}
+// -end- 35FDD995038E _unlink_body4551A7840119 "Include::_unlinkAddition"
 
-  /** attaches a Base.
-   *  
-   *  @see #detachBase
-   *  @see #getBase
-   *  @see #containsBase
-   */
-  // -beg- preserve=no 35FDD9A50046 attach_head4551A7840119 "Include::attachBase"
-  public void attachBase(UseCase base1)
-  // -end- 35FDD9A50046 attach_head4551A7840119 "Include::attachBase"
-  {
-    // -beg- preserve=no 35FDD9A50046 attach_body4551A7840119 "Include::attachBase"
-    if(base!=null) {throw new java.lang.IllegalStateException("already a base attached");}
-    if(base1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as base");}
-    base = base1;
-    base1._linkAdditionInclude(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachBase"));
-    return;
-    // -end- 35FDD9A50046 attach_body4551A7840119 "Include::attachBase"
-  }
+// -beg- preserve=no 35FDD9A50046 code4551A7840119 "base"
+private UseCase base;
+// -end- 35FDD9A50046 code4551A7840119 "base"
 
-  /** disconnect the currently attached Base.
-   *  @see #attachBase
-   */
-  // -beg- preserve=no 35FDD9A50046 detach_head4551A7840119 "Include::detachBase"
-  public UseCase detachBase()
-  // -end- 35FDD9A50046 detach_head4551A7840119 "Include::detachBase"
-  {
-    // -beg- preserve=no 35FDD9A50046 detach_body4551A7840119 "Include::detachBase"
-    UseCase ret = null;
-    if(base!=null){
-      base._unlinkAdditionInclude(this);
-      ret = base;
-      base = null;
-    }
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachBase"));
-    return ret;
-    // -end- 35FDD9A50046 detach_body4551A7840119 "Include::detachBase"
-  }
+/** attaches a Base.
+ *
+ *  @see #detachBase
+ *  @see #getBase
+ *  @see #containsBase
+ */
+// -beg- preserve=no 35FDD9A50046 attach_head4551A7840119 "Include::attachBase"
+public void attachBase(UseCase base1)
+// -end- 35FDD9A50046 attach_head4551A7840119 "Include::attachBase"
+{
+        // -beg- preserve=no 35FDD9A50046 attach_body4551A7840119 "Include::attachBase"
+        if(base!=null) {throw new java.lang.IllegalStateException("already a base attached");}
+        if(base1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as base");}
+        base = base1;
+        base1._linkAdditionInclude(this);
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachBase"));
+        return;
+        // -end- 35FDD9A50046 attach_body4551A7840119 "Include::attachBase"
+}
 
-  /** get the currently attached Base.
-   *  @see #attachBase
-   */
-  // -beg- preserve=no 35FDD9A50046 get_head4551A7840119 "Include::getBase"
-  public UseCase getBase()
-  // -end- 35FDD9A50046 get_head4551A7840119 "Include::getBase"
-  {
-    // -beg- preserve=no 35FDD9A50046 get_body4551A7840119 "Include::getBase"
-    if(base==null) {throw new java.lang.IllegalStateException("no base attached");}
-    return base;
-    // -end- 35FDD9A50046 get_body4551A7840119 "Include::getBase"
-  }
+/** disconnect the currently attached Base.
+ *  @see #attachBase
+ */
+// -beg- preserve=no 35FDD9A50046 detach_head4551A7840119 "Include::detachBase"
+public UseCase detachBase()
+// -end- 35FDD9A50046 detach_head4551A7840119 "Include::detachBase"
+{
+        // -beg- preserve=no 35FDD9A50046 detach_body4551A7840119 "Include::detachBase"
+        UseCase ret = null;
+        if(base!=null) {
+                base._unlinkAdditionInclude(this);
+                ret = base;
+                base = null;
+        }
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachBase"));
+        return ret;
+        // -end- 35FDD9A50046 detach_body4551A7840119 "Include::detachBase"
+}
 
-  /** tests if there is a Base attached.
-   *  @see #attachBase
-   */
-  // -beg- preserve=no 35FDD9A50046 test_head4551A7840119 "Include::containsBase"
-  public boolean containsBase()
-  // -end- 35FDD9A50046 test_head4551A7840119 "Include::containsBase"
-  {
-    // -beg- preserve=no 35FDD9A50046 test_body4551A7840119 "Include::containsBase"
-    return base!=null;
-    // -end- 35FDD9A50046 test_body4551A7840119 "Include::containsBase"
-  }
+/** get the currently attached Base.
+ *  @see #attachBase
+ */
+// -beg- preserve=no 35FDD9A50046 get_head4551A7840119 "Include::getBase"
+public UseCase getBase()
+// -end- 35FDD9A50046 get_head4551A7840119 "Include::getBase"
+{
+        // -beg- preserve=no 35FDD9A50046 get_body4551A7840119 "Include::getBase"
+        if(base==null) {throw new java.lang.IllegalStateException("no base attached");}
+        return base;
+        // -end- 35FDD9A50046 get_body4551A7840119 "Include::getBase"
+}
 
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 35FDD9A50046 _link_body4551A7840119 "Include::_linkBase"
-  public void _linkBase(UseCase base1)
-  {
-    base = base1;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkBase"));
-    return;
-  }
-  // -end- 35FDD9A50046 _link_body4551A7840119 "Include::_linkBase"
+/** tests if there is a Base attached.
+ *  @see #attachBase
+ */
+// -beg- preserve=no 35FDD9A50046 test_head4551A7840119 "Include::containsBase"
+public boolean containsBase()
+// -end- 35FDD9A50046 test_head4551A7840119 "Include::containsBase"
+{
+        // -beg- preserve=no 35FDD9A50046 test_body4551A7840119 "Include::containsBase"
+        return base!=null;
+        // -end- 35FDD9A50046 test_body4551A7840119 "Include::containsBase"
+}
 
-  /** DONT USE; link management internal
-   */
-  // -beg- preserve=no 35FDD9A50046 _unlink_body4551A7840119 "Include::_unlinkBase"
-  public void _unlinkBase(UseCase base1)
-  {
-    base = null;
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkBase"));
-    return;
-  }
-  // -end- 35FDD9A50046 _unlink_body4551A7840119 "Include::_unlinkBase"
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 35FDD9A50046 _link_body4551A7840119 "Include::_linkBase"
+public void _linkBase(UseCase base1)
+{
+        base = base1;
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkBase"));
+        return;
+}
+// -end- 35FDD9A50046 _link_body4551A7840119 "Include::_linkBase"
 
-  public NlsString getMetaAttrb(){
-	 return super.getMetaAttrb();
-  }
-  
-  public void setMetaAttrb(NlsString value) {
-	super.setMettaAttrb(value);
-	
-  }
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 35FDD9A50046 _unlink_body4551A7840119 "Include::_unlinkBase"
+public void _unlinkBase(UseCase base1)
+{
+        base = null;
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_unlinkBase"));
+        return;
+}
+// -end- 35FDD9A50046 _unlink_body4551A7840119 "Include::_unlinkBase"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 4551A7840119 detail_end "UmlInclude"
+public NlsString getMetaAttrb(){
+        return super.getMetaAttrb();
+}
 
-  // -end- 4551A7840119 detail_end "UmlInclude"
+public void setMetaAttrb(NlsString value) {
+        super.setMettaAttrb(value);
 
 }
 
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 4551A7840119 detail_end "UmlInclude"
+
+// -end- 4551A7840119 detail_end "UmlInclude"
+
+}

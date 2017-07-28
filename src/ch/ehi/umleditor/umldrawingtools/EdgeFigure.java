@@ -33,32 +33,32 @@ import ch.softenvironment.util.*;
 /**
  * Figure Specification for all Elements treated as edges in an UML-ClassDiagram.
  * @see NodeFigure
- * 
- * @author Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.16 $ $Date: 2007-03-12 18:30:46 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
-	// keep reference to real model's presentation
-	private ClassDiagramView classDiagram = null;
-	protected PresentationEdge edge = null;
-	protected ModelElement modelElement = null;
-	// mouse-Event suppression
-	private EdgeFigure lastInvalidEdge = null;
+// keep reference to real model's presentation
+private ClassDiagramView classDiagram = null;
+protected PresentationEdge edge = null;
+protected ModelElement modelElement = null;
+// mouse-Event suppression
+private EdgeFigure lastInvalidEdge = null;
 /**
  * EdgeFigure constructor comment.
  * Used by any UML-Tool.
  */
 public EdgeFigure() {
-	super();
-	setLineColor(determineForegroundColor(null));
-	showDecoration();
+        super();
+        setLineColor(determineForegroundColor(null));
+        showDecoration();
 }
 /**
  * EdgeFigure constructor comment.
  */
 public EdgeFigure(ClassDiagramView classDiagram) {
-	this();
-	setClassDiagram(classDiagram);
+        this();
+        setClassDiagram(classDiagram);
 }
 /**
  * Factory method to create a default popup menu.
@@ -67,19 +67,19 @@ public EdgeFigure(ClassDiagramView classDiagram) {
  * @see NodeFigure
  */
 protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
-	addSpecificationMenu(popupMenu);
+        addSpecificationMenu(popupMenu);
 
-	// overwrite this method in subclasses
-	addSpecialMenu(popupMenu);
+        // overwrite this method in subclasses
+        addSpecialMenu(popupMenu);
 
-    addSelectInBrowserMenu(popupMenu);
+        addSelectInBrowserMenu(popupMenu);
 
-	popupMenu.add(new JSeparator());
-	addFormatMenu(popupMenu);
-	addEditMenu(popupMenu);
+        popupMenu.add(new JSeparator());
+        addFormatMenu(popupMenu);
+        addEditMenu(popupMenu);
 
-	popupMenu.setLightWeightPopupEnabled(true);
-	return popupMenu;
+        popupMenu.setLightWeightPopupEnabled(true);
+        return popupMenu;
 }
 /**
  * Add a Deletion Entry to a PopupMenu.
@@ -87,16 +87,16 @@ protected JPopupMenu adaptPopupMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addDeletionMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
-		public void actionPerformed(ActionEvent event) {
-			removeVisually();
-		}
-	});
-	popupMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
-		public void actionPerformed(ActionEvent event) {
-			removeInModel();
-		}
-	});
+        popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                removeVisually();
+                        }
+                });
+        popupMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
+                        public void actionPerformed(ActionEvent event) {
+                                removeInModel();
+                        }
+                });
 }
 /**
  * Add an Edit-Submenu to a PopupMenu.
@@ -105,36 +105,36 @@ protected void addDeletionMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
+        JMenu editMenu = new JMenu(CommonUserAccess.getMnuEditText());
 
-	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCutText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniCut();
-		}
-	});
-	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCopyText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniCopy();
-		}
-	});
-	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditPasteText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniPaste();
-		}
-	});
-	editMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
-		public void actionPerformed(ActionEvent event) {
-			removeVisually();
-		}
-	});
-	editMenu.add(new JSeparator());
-	editMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
-		public void actionPerformed(ActionEvent event) {
-			removeInModel();
-		}
-	});
+        editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCutText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                mniCut();
+                        }
+                });
+        editMenu.add(new AbstractAction(CommonUserAccess.getMniEditCopyText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                mniCopy();
+                        }
+                });
+        editMenu.add(new AbstractAction(CommonUserAccess.getMniEditPasteText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                mniPaste();
+                        }
+                });
+        editMenu.add(new AbstractAction(CommonUserAccess.getMniEditRemoveText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                removeVisually();
+                        }
+                });
+        editMenu.add(new JSeparator());
+        editMenu.add(new AbstractAction(REMOVE_IN_MODEL) {
+                        public void actionPerformed(ActionEvent event) {
+                                removeInModel();
+                        }
+                });
 
-	popupMenu.add(editMenu);
+        popupMenu.add(editMenu);
 }
 /**
  * Add a Format Submenu to a PopupMenu.
@@ -143,30 +143,30 @@ protected void addEditMenu(javax.swing.JPopupMenu popupMenu) {
  * @return newly created popup menu
  */
 protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
-	JMenu formatMenu = new JMenu(CommonUserAccess.getMnuFormatText());
+        JMenu formatMenu = new JMenu(CommonUserAccess.getMnuFormatText());
 /*
-	JPopupMenu fontSizeMenu = new JPopupMenu();
-	fontSizeMenu.setName("Schriftgrösse");
-	formatMenu.add(fontSizeMenu);
-*/
-	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFontText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniFont();
-		}
-	});
-	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatLineColorText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniLineColor();
-		}
-	});
+   JPopupMenu fontSizeMenu = new JPopupMenu();
+   fontSizeMenu.setName("Schriftgrösse");
+   formatMenu.add(fontSizeMenu);
+ */
+        formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFontText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                mniFont();
+                        }
+                });
+        formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatLineColorText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                mniLineColor();
+                        }
+                });
 /*	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFillColorText()) {
-		public void actionPerformed(ActionEvent event) {
-			mniFillColor();
-		}
-	});
-*/
+    public void actionPerformed(ActionEvent event) {
+      mniFillColor();
+    }
+   });
+ */
 
-	popupMenu.add(formatMenu);
+        popupMenu.add(formatMenu);
 }
 /**
  * Save the presentation in Model which will cause Diagram to draw this edge.
@@ -175,19 +175,19 @@ protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
  *  - second	=> end of LineConnection
  */
 protected void addModelElement(ModelElement relationship) {
-	setModelElement(relationship);
-	getEdge().addSubject(relationship);
+        setModelElement(relationship);
+        getEdge().addSubject(relationship);
 
-    // keep references
-    getClassDiagram().getDiagram().addPresentationElement(getEdge());
+        // keep references
+        getClassDiagram().getDiagram().addPresentationElement(getEdge());
 }
 protected void addSelectInBrowserMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new JSeparator());
-	popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
-		public void actionPerformed(ActionEvent event) {
-			selectInBrowser();
-		}
-	});
+        popupMenu.add(new JSeparator());
+        popupMenu.add(new AbstractAction(ModelElementUI.SELECT_IN_BROWSER) {
+                        public void actionPerformed(ActionEvent event) {
+                                selectInBrowser();
+                        }
+                });
 }
 /**
  * Add individual PopupMenu items for this class.
@@ -202,134 +202,134 @@ protected abstract void addSpecialMenu(JPopupMenu popupMenu);
  * @see NodeFigure
  */
 protected void addSpecificationMenu(javax.swing.JPopupMenu popupMenu) {
-	popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditChangeWindowText()) {
-		public void actionPerformed(ActionEvent event) {
-			showSpecification();
-		}
-	});
+        popupMenu.add(new AbstractAction(CommonUserAccess.getMniEditChangeWindowText()) {
+                        public void actionPerformed(ActionEvent event) {
+                                showSpecification();
+                        }
+                });
 }
 /**
  * Connect Handles of the two Nodes connected to this Edge.
  * @see #setEdge(..)
  */
 protected final void connectNodes() {
-	try {		
-		Vector wayPoints = new Vector();
-        if (getEdge() == null) {
-            Tracer.getInstance().developerWarning("edge not set");
-        } else {
-            java.util.Iterator iterator = getEdge().iteratorWayPoint();
-    		while (iterator.hasNext()) {
-    			wayPoints.add(iterator.next());
-    		}
-        }
-	
-		// start -> assume dummy value
-		int x = 0;
-		int y = 0;
-		startPoint(x, y);
-		Connector start = null;
-		if ((getModelElement() instanceof ch.ehi.uml1_4.foundation.core.Generalization) && (getStartElement() instanceof ch.ehi.uml1_4.foundation.core.Association)) {
-			start = getClassDiagram().findAssociationAttributeConnector(getStartElement(), x, y, getModelElement());
-		} else {
-			start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
-		} 
-		if (start == null) {
-			Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing StartNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
+        try {
+                Vector wayPoints = new Vector();
+                if (getEdge() == null) {
+                        Tracer.getInstance().developerWarning("edge not set");
+                } else {
+                        java.util.Iterator iterator = getEdge().iteratorWayPoint();
+                        while (iterator.hasNext()) {
+                                wayPoints.add(iterator.next());
+                        }
+                }
+
+                // start -> assume dummy value
+                int x = 0;
+                int y = 0;
+                startPoint(x, y);
+                Connector start = null;
+                if ((getModelElement() instanceof ch.ehi.uml1_4.foundation.core.Generalization) && (getStartElement() instanceof ch.ehi.uml1_4.foundation.core.Association)) {
+                        start = getClassDiagram().findAssociationAttributeConnector(getStartElement(), x, y, getModelElement());
+                } else {
+                        start = getClassDiagram().findNodeConnector(getStartElement(), x, y);
+                }
+                if (start == null) {
+                        Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing StartNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getStartElement()));//$NON-NLS-2$//$NON-NLS-1$
 //			shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingStartNode"), getSourceName(getStartElement()))); //$NON-NLS-1$
-			removeVisually();
-		} else if (getEdge().sizeEndpoint() == 2) {
-			// end -> assume dummy value
-			x = 0;
-			y = 0;
-			endPoint(x, y);
-            java.util.Iterator iterator = getEdge().iteratorEndpoint();
-			iterator.next(); // skip
-			Object second = iterator.next();
-			Connector end = null;
-			if ((second instanceof PresentationAssocClass) && 
-				((getModelElement() instanceof RoleDef) || ((getModelElement() instanceof ch.ehi.uml1_4.foundation.core.Generalization)))) {
-				// LinkFigure -> must be an AssociatenDef connected to
-				// a AssociationAttributeFigure
-				// @see ElementFactory#createPresentationRole(..)
-				end = getClassDiagram().findAssociationAttributeConnector(getEndElement(), x, y, getModelElement());
-			} else {
-				// the usual
-				end = getClassDiagram().findNodeConnector(getEndElement(), x, y);
-			}
-			if (end == null) {
-				Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing EndNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
-				//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
-				removeVisually();
-			} else {
-				connectStart(start);
-				setEndConnector(end);
-	
-				// set split-points
-				for (int i=0; i<wayPoints.size(); i++) {
-					WayPoint currentPoint = (WayPoint)wayPoints.get(i);
-					super.insertPointAt(new Point(currentPoint.getEast(), currentPoint.getSouth()), i + 1);
-				}
-	
-				// create start and endPoint()
-				updateConnection();
-				endFigure().addFigureChangeListener(this);
-			}
-		} else if (getEdge().sizeEndpoint() == 1) {
-			Tracer.getInstance().developerWarning("AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
-			//shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
-			removeVisually();	
-		}
-	} catch(Throwable e) {
-		Tracer.getInstance().developerWarning(e.toString());
-	}
+                        removeVisually();
+                } else if (getEdge().sizeEndpoint() == 2) {
+                        // end -> assume dummy value
+                        x = 0;
+                        y = 0;
+                        endPoint(x, y);
+                        java.util.Iterator iterator = getEdge().iteratorEndpoint();
+                        iterator.next(); // skip
+                        Object second = iterator.next();
+                        Connector end = null;
+                        if ((second instanceof PresentationAssocClass) &&
+                            ((getModelElement() instanceof RoleDef) || ((getModelElement() instanceof ch.ehi.uml1_4.foundation.core.Generalization)))) {
+                                // LinkFigure -> must be an AssociatenDef connected to
+                                // a AssociationAttributeFigure
+                                // @see ElementFactory#createPresentationRole(..)
+                                end = getClassDiagram().findAssociationAttributeConnector(getEndElement(), x, y, getModelElement());
+                        } else {
+                                // the usual
+                                end = getClassDiagram().findNodeConnector(getEndElement(), x, y);
+                        }
+                        if (end == null) {
+                                Tracer.getInstance().developerWarning("AUTO-CORRECT: Missing EndNode->there must have been an improper deletion of nodes/edges before=>" + getSourceName(getEndElement()));//$NON-NLS-2$//$NON-NLS-1$
+                                //shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
+                                removeVisually();
+                        } else {
+                                connectStart(start);
+                                setEndConnector(end);
+
+                                // set split-points
+                                for (int i=0; i<wayPoints.size(); i++) {
+                                        WayPoint currentPoint = (WayPoint)wayPoints.get(i);
+                                        super.insertPointAt(new Point(currentPoint.getEast(), currentPoint.getSouth()), i + 1);
+                                }
+
+                                // create start and endPoint()
+                                updateConnection();
+                                endFigure().addFigureChangeListener(this);
+                        }
+                } else if (getEdge().sizeEndpoint() == 1) {
+                        Tracer.getInstance().developerWarning("AUTO-CORRECT: 2 endpoints expected");//$NON-NLS-2$//$NON-NLS-1$
+                        //shouldWarn(NlsUtils.formatMessage(resEdgeFigure.getString("CWMissingEndNode"), getSourceName(getEndElement()))); //$NON-NLS-1$
+                        removeVisually();
+                }
+        } catch(Throwable e) {
+                Tracer.getInstance().developerWarning(e.toString());
+        }
 }
 /**
  * Create a WayPoint.
  * @param p Coordinates of WayPoint
  */
 protected static WayPoint createWayPoint(Point p) {
-	WayPoint wayPoint = (WayPoint)ElementFactory.createObject(WayPoint.class);
-	wayPoint.setEast(p.x);
-	wayPoint.setSouth(p.y);
+        WayPoint wayPoint = (WayPoint)ElementFactory.createObject(WayPoint.class);
+        wayPoint.setEast(p.x);
+        wayPoint.setSouth(p.y);
 
-	return wayPoint;
+        return wayPoint;
 }
 /**
  * Assume default Color if none.
  */
 protected java.awt.Color determineForegroundColor(PresentationEdge edge) {
-	if ((edge == null) || (edge.getForeground() == null)) {
-		return ch.ehi.umleditor.application.LauncherView.getSettings().getForegroundColor();
-	} else {
-		return ColorConverter.createColor(edge.getForeground());
-	}
+        if ((edge == null) || (edge.getForeground() == null)) {
+                return ch.ehi.umleditor.application.LauncherView.getSettings().getForegroundColor();
+        } else {
+                return ColorConverter.createColor(edge.getForeground());
+        }
 }
 /**
  * @see setAttribute(..)
  */
 public Object getAttribute(String name) {
-    if (name.equals(Figure.POPUP_MENU)) {
-        return adaptPopupMenu(new JPopupMenu());
-    } else if (name.equals(JHotDrawConstants.FONT_NAME)) {
-		if ((getEdge() != null) && (getEdge().getFont() != null)) {
-			return getEdge().getFont();
-		}
-	}
+        if (name.equals(Figure.POPUP_MENU)) {
+                return adaptPopupMenu(new JPopupMenu());
+        } else if (name.equals(JHotDrawConstants.FONT_NAME)) {
+                if ((getEdge() != null) && (getEdge().getFont() != null)) {
+                        return getEdge().getFont();
+                }
+        }
 
-    return super.getAttribute(name);
+        return super.getAttribute(name);
 }
 /**
  * Return the classDiagram where this Figure is shown.
  */
 protected ClassDiagramView getClassDiagram() {
-	return classDiagram;
+        return classDiagram;
 }
 /**
  * Return the Model's presentationElement.
  */
 public PresentationEdge getEdge() {
-	return edge;
+        return edge;
 }
 /**
  * Return the ending Element of the Relationship.
@@ -340,47 +340,47 @@ protected abstract Element getEndElement();
  * Return the name of the Font.
  */
 protected java.awt.Font getFont() {
-	String font = (String)getAttribute(JHotDrawConstants.FONT_NAME);
-	if (font == null) {
-		return ch.ehi.umleditor.application.LauncherView.getSettings().getFont();
-	} else {
-		return java.awt.Font.decode(font);
-	}
+        String font = (String)getAttribute(JHotDrawConstants.FONT_NAME);
+        if (font == null) {
+                return ch.ehi.umleditor.application.LauncherView.getSettings().getFont();
+        } else {
+                return java.awt.Font.decode(font);
+        }
 }
 /**
  * Return the encapsulated GeneralizableElement within NodeFigure.
  */
 protected final GeneralizableElement getGeneralizableElement(Figure figure) {
-	return (GeneralizableElement)(((NodeFigure)figure).getModelElement());
+        return (GeneralizableElement)(((NodeFigure)figure).getModelElement());
 }
 /**
  * Return the drawing color for the Frame.
  * @see NodeFigure
  */
 protected java.awt.Color getLineColor() {
-	java.awt.Color color = (java.awt.Color)getAttribute(JHotDrawConstants.FRAME_COLOR);
-	if (color == null) {
-		return ch.ehi.umleditor.application.LauncherView.getSettings().getForegroundColor();
-	} else {
-		return (java.awt.Color)getAttribute(JHotDrawConstants.FRAME_COLOR);
-	}
+        java.awt.Color color = (java.awt.Color)getAttribute(JHotDrawConstants.FRAME_COLOR);
+        if (color == null) {
+                return ch.ehi.umleditor.application.LauncherView.getSettings().getForegroundColor();
+        } else {
+                return (java.awt.Color)getAttribute(JHotDrawConstants.FRAME_COLOR);
+        }
 }
 /**
  * Return the ModelElement displayed by this Figure.
  * @return ModelElement
  */
 public ch.ehi.uml1_4.foundation.core.ModelElement getModelElement() {
-	return modelElement;
+        return modelElement;
 }
 private String getSourceName(Element element) {
-	String edgeName = StringUtils.getPureClassName(this.getClass()) + ":";
-	if (element == null) {
-		return edgeName + "<???>";
-	} else if (element instanceof ModelElement) {
-		return edgeName + ((ModelElement)element).getName().getValue();
-	} else {
-		return edgeName + element.toString();
-	}
+        String edgeName = StringUtils.getPureClassName(this.getClass()) + ":";
+        if (element == null) {
+                return edgeName + "<???>";
+        } else if (element instanceof ModelElement) {
+                return edgeName + ((ModelElement)element).getName().getValue();
+        } else {
+                return edgeName + element.toString();
+        }
 }
 /**
  * Return the starting Element of the Relationship.
@@ -392,14 +392,14 @@ protected abstract Element getStartElement();
  * @see PolyLineFigure#joinSegments() for Algorithm.
  */
 protected int getWayPointIndex(int x, int y) {
-	for (int i=1; i<(fPoints.size() - 1); i++) {
-		Point p = pointAt(i);
-		if (CH.ifa.draw.util.Geom.length(x, y, p.x, p.y) < ch.ehi.umleditor.application.LauncherView.getSettings().getConnectorZone().intValue()) {
+        for (int i=1; i<(fPoints.size() - 1); i++) {
+                Point p = pointAt(i);
+                if (CH.ifa.draw.util.Geom.length(x, y, p.x, p.y) < ch.ehi.umleditor.application.LauncherView.getSettings().getConnectorZone().intValue()) {
 //			removePointAt(i);
-			return i;
-		}
-	}
-	return -1;
+                        return i;
+                }
+        }
+        return -1;
 }
 /**
  * Overwrites.
@@ -408,58 +408,58 @@ protected int getWayPointIndex(int x, int y) {
  * #splitSegment(int x, int y)
  */
 public void insertPointAt(Point p, int index) {
-	if (getEdge() != null) {
-	    super.insertPointAt(p, index);
- 		getEdge().addWayPoint(index - 1, createWayPoint(p));
-    }
+        if (getEdge() != null) {
+                super.insertPointAt(p, index);
+                getEdge().addWayPoint(index - 1, createWayPoint(p));
+        }
 }
 /**
  * Edit->Copy Action.
  * @see addEditMenu(..)
  */
 private void mniCopy() {
-	LauncherView.getInstance().nyi("Copy");
+        LauncherView.getInstance().nyi("Copy");
 }
 /**
  * Edit->Cut Action.
  * @see addEditMenu(..)
  */
 private void mniCut() {
-	LauncherView.getInstance().nyi("Cut");//$NON-NLS-1$
+        LauncherView.getInstance().nyi("Cut");//$NON-NLS-1$
 }
 /**
  * FillColor Action.
  * @see addEditMenu(..)
  */
 /*
-private void mniFillColor() {
+   private void mniFillColor() {
     // makes no sense here
-	mniLineColor();
-}
-*/
+   mniLineColor();
+   }
+ */
 /**
  * Font Action.
  * @see addEditMenu(..)
  */
 private void mniFont() {
-LauncherView.getInstance().nyi("Font");
+        LauncherView.getInstance().nyi("Font");
 }
 /**
  * LineColor Action.
  * @see addEditMenu(..)
  */
 private void mniLineColor() {
-	ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
-	if (dialog.isSaved()) {
-		setLineColor(dialog.getChosenColor());
-	}
+        ColorChooserDialog dialog = new ColorChooserDialog(LauncherView.getInstance(), true);
+        if (dialog.isSaved()) {
+                setLineColor(dialog.getChosenColor());
+        }
 }
 /**
  * Edit->Paste Action.
  * @see addEditMenu(..)
  */
 private void mniPaste() {
-LauncherView.getInstance().nyi("Paste");
+        LauncherView.getInstance().nyi("Paste");
 }
 /**
  * Remove the Figure in Model (implies visual deletion).
@@ -468,18 +468,18 @@ LauncherView.getInstance().nyi("Paste");
  * @see ClassDiagramView#updateEdgeFigure(..)
  */
 public void removeInModel() {
-	try {
-		// 1) remove visually
-		removeVisually();
+        try {
+                // 1) remove visually
+                removeVisually();
 
-		// 2) remove in model
-		if (getModelElement() != null) {
-		    ElementFactory.removeElement(getModelElement());
-	 		setModelElement(null);
-		}
-	} catch(Throwable e) {
-		NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, null, this);
-	}
+                // 2) remove in model
+                if (getModelElement() != null) {
+                        ElementFactory.removeElement(getModelElement());
+                        setModelElement(null);
+                }
+        } catch(Throwable e) {
+                NodeFigure.handleException(e, NodeFigure.REMOVE_IN_MODEL, null, this);
+        }
 }
 /**
  * Overwrites.
@@ -487,64 +487,64 @@ public void removeInModel() {
  * @see #joinSegments(int x, int y)
  */
 public void removePointAt(int i) {
-	if (getEdge() != null) {
-		super.removePointAt(i);
-		getEdge().removeWayPoint(i - 1);
-	}
+        if (getEdge() != null) {
+                super.removePointAt(i);
+                getEdge().removeWayPoint(i - 1);
+        }
 }
 /**
  * Remove the Figure visually ONLY in its Diagram.
  * Still kept in real model.
  */
 public void removeVisually() {
-	try {
-		// 1) remove drawing
-		if (getClassDiagram() != null) {
-			// remove drawing
-			getClassDiagram().remove(this);
+        try {
+                // 1) remove drawing
+                if (getClassDiagram() != null) {
+                        // remove drawing
+                        getClassDiagram().remove(this);
 
-			// 2) remove in model
-			if ((edge != null) && getClassDiagram().getDiagram().containsPresentationElement(edge)) {
-				// remove Edge from Diagram
-				getClassDiagram().getDiagram().removePresentationElement(edge);
-		/*
-				// remove WayPoints
-				edge.clearWayPoint();
+                        // 2) remove in model
+                        if ((edge != null) && getClassDiagram().getDiagram().containsPresentationElement(edge)) {
+                                // remove Edge from Diagram
+                                getClassDiagram().getDiagram().removePresentationElement(edge);
+                                /*
+                                    // remove WayPoints
+                                    edge.clearWayPoint();
 
-				if (edge.containsSubject(getModelElement())) {
-					// remove from model
-					edge.removeSubject(getModelElement());
-				}
-		*/
-			}
-		}
-	} catch(Throwable e) {
-		NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
-	}
+                                    if (edge.containsSubject(getModelElement())) {
+                                      // remove from model
+                                      edge.removeSubject(getModelElement());
+                                    }
+                                 */
+                        }
+                }
+        } catch(Throwable e) {
+                NodeFigure.handleException(e, CommonUserAccess.getMniEditRemoveText(), null, this);
+        }
 }
 /**
  * Select the ModelElement of this Figure in NavigationTree.
  */
 public void selectInBrowser() {
-	LauncherView.getInstance().getPnlNavigation().selectElement(getModelElement());
+        LauncherView.getInstance().getPnlNavigation().selectElement(getModelElement());
 }
 /**
  * Extend Attribute-map with Popup-Menu and
  * make sure LineDecorations change Colors as well.
  */
 public void setAttribute(String name, Object value) {
-    if (name.equals(JHotDrawConstants.FRAME_COLOR)) {
-	    // don't forget to change color of Decoration
-	    if (getStartDecoration() != null) {
-			((AbstractLineDecoration)getStartDecoration()).setBorderColor((java.awt.Color)value);
-   		   		changed();
-    	}
-	    if (getEndDecoration() != null) {
-			((AbstractLineDecoration)getEndDecoration()).setBorderColor((java.awt.Color)value);
-  	    		changed();
-  	  	}
-    }
-    super.setAttribute(name, value);
+        if (name.equals(JHotDrawConstants.FRAME_COLOR)) {
+                // don't forget to change color of Decoration
+                if (getStartDecoration() != null) {
+                        ((AbstractLineDecoration)getStartDecoration()).setBorderColor((java.awt.Color)value);
+                        changed();
+                }
+                if (getEndDecoration() != null) {
+                        ((AbstractLineDecoration)getEndDecoration()).setBorderColor((java.awt.Color)value);
+                        changed();
+                }
+        }
+        super.setAttribute(name, value);
 }
 /**
  * Set the ClassDiagram drawing this Edge.
@@ -557,7 +557,7 @@ public void setAttribute(String name, Object value) {
  * @see NodeFigure
  */
 private void setClassDiagram(ClassDiagramView classDiagram) {
-	this.classDiagram = classDiagram;
+        this.classDiagram = classDiagram;
 }
 /**
  * Set the Edge and its Coordinates.
@@ -567,19 +567,19 @@ private void setClassDiagram(ClassDiagramView classDiagram) {
  * @see #connectNodes()
  */
 public void setEdge(PresentationEdge edge, Figure start, Figure end) {
-	this.edge = edge;
+        this.edge = edge;
 
-	// save Color
-	getEdge().setForeground(ColorConverter.createColor(getLineColor()));
+        // save Color
+        getEdge().setForeground(ColorConverter.createColor(getLineColor()));
 
-	edge.addEndpoint(((NodeFigure)start).getNode());
-	edge.addEndpoint(((NodeFigure)end).getNode());
+        edge.addEndpoint(((NodeFigure)start).getNode());
+        edge.addEndpoint(((NodeFigure)end).getNode());
 }
 /**
  * Overwrites for promoting visibility only.
  */
 protected void setEndConnector(Connector newEndConnector) {
-	super.setEndConnector(newEndConnector);
+        super.setEndConnector(newEndConnector);
 }
 /**
  * Set the Font.
@@ -588,12 +588,12 @@ protected void setEndConnector(Connector newEndConnector) {
  * @see setAttribute(..)
  */
 protected void setFont(String font) {
-	setAttribute(JHotDrawConstants.FONT_NAME, font);
+        setAttribute(JHotDrawConstants.FONT_NAME, font);
 
-	if ((getEdge() != null) && (!getEdge().getFont().equalsIgnoreCase(font))) {
-		// prevent ping-pong with MetaModelChange
-		getEdge().setFont(font);
-	}
+        if ((getEdge() != null) && (!getEdge().getFont().equalsIgnoreCase(font))) {
+                // prevent ping-pong with MetaModelChange
+                getEdge().setFont(font);
+        }
 }
 /**
  * Set the Line/Frame Color.
@@ -601,18 +601,18 @@ protected void setFont(String font) {
  * @see setAttribute(..)
  */
 protected void setLineColor(java.awt.Color color) {
-	setAttribute(JHotDrawConstants.FRAME_COLOR, color);
+        setAttribute(JHotDrawConstants.FRAME_COLOR, color);
 
-	if ((getEdge() != null) && (!ColorConverter.isSame(getEdge().getForeground(), color))) {
-		// prevent ping-pong by MetaModelChange
-		getEdge().setForeground(ColorConverter.createColor(color));
-	}
+        if ((getEdge() != null) && (!ColorConverter.isSame(getEdge().getForeground(), color))) {
+                // prevent ping-pong by MetaModelChange
+                getEdge().setForeground(ColorConverter.createColor(color));
+        }
 }
 /**
  * ModelElement displayed by this Edge.
  */
 protected void setModelElement(ModelElement modelElement) {
-	this.modelElement = modelElement;
+        this.modelElement = modelElement;
 }
 /**
  * Overwrites.
@@ -621,27 +621,27 @@ protected void setModelElement(ModelElement modelElement) {
  * @see ConnectionTool.mouseDrag(MouseEvent e, int x, int y)
  */
 public void setPointAt(Point p, int index) {
-	if (getEdge() != null) {
-		super.setPointAt(p, index);
-		if ((index != 0) && (index < pointCount() - 1)) {
-			// only treat points within endPoints
-			getEdge().setWayPoint(index - 1, createWayPoint(p));
-		}
-	}
+        if (getEdge() != null) {
+                super.setPointAt(p, index);
+                if ((index != 0) && (index < pointCount() - 1)) {
+                        // only treat points within endPoints
+                        getEdge().setWayPoint(index - 1, createWayPoint(p));
+                }
+        }
 }
 /**
  * Overwrites for promoting visibility only.
  */
 protected void setStartConnector(Connector newStartConnector) {
-	super.setStartConnector(newStartConnector);
+        super.setStartConnector(newStartConnector);
 }
 /**
  * Set's the current UML-Tool's view as Diagram.
  * @see #updateView() Sequence of call is important
  */
 protected void setToolView() {
-	// keep the classDiagram where this figure is drawn
-    setClassDiagram((ClassDiagramView)((AbstractTool)LauncherView.getInstance().tool()).view());
+        // keep the classDiagram where this figure is drawn
+        setClassDiagram((ClassDiagramView)((AbstractTool)LauncherView.getInstance().tool()).view());
 }
 /**
  * Check wether user must be warned because of illegal Relationship.
@@ -650,27 +650,27 @@ protected void setToolView() {
  * @see canConnect(Figure, Figure)
  */
 protected void shouldWarn(String warning) {
-	if ((lastInvalidEdge == null) || (!(lastInvalidEdge.equals(this)))) {
-		lastInvalidEdge = this;
-		this.showIllegalRelationship(warning);
-	}
-	// undraw illegal Relationship
+        if ((lastInvalidEdge == null) || (!(lastInvalidEdge.equals(this)))) {
+                lastInvalidEdge = this;
+                this.showIllegalRelationship(warning);
+        }
+        // undraw illegal Relationship
 //	release();
 //	invalidate();
 //	changed();
 
-	// this EdgeFigure is not any more desired in Diagram
-	if (getClassDiagram() != null) {
-		getClassDiagram().remove(this);
-	}
+        // this EdgeFigure is not any more desired in Diagram
+        if (getClassDiagram() != null) {
+                getClassDiagram().remove(this);
+        }
 }
 /**
  * Decorate the RelationShip-Ends.
  * Overwrite this method for specific behaviour.
  */
 protected void showDecoration() {
-	setStartDecoration(null);
-    setEndDecoration(null);
+        setStartDecoration(null);
+        setEndDecoration(null);
 }
 /**
  * Show Warning message because Relationship is illegal between current start and end Figure.
@@ -685,47 +685,47 @@ public abstract void showSpecification();
  * Overwrites.
  */
 public void updateConnection() {
-	try {
-		super.updateConnection();
-	} catch(Throwable e) {
-		// in case of dragging a NullPointerExcepion might be experienced
-		Tracer.getInstance().developerWarning("JHotDraw-Error ignored [" + e.toString() + "]");
-	}
+        try {
+                super.updateConnection();
+        } catch(Throwable e) {
+                // in case of dragging a NullPointerExcepion might be experienced
+                Tracer.getInstance().developerWarning("JHotDraw-Error ignored [" + e.toString() + "]");
+        }
 }
 /**
  * Make the changes visible immediately.
  */
 protected void updateImmediately() {
-	/* comment by Wolfram
-		changing a figure and drawing the changes (-> updating) are two separate methods.
-		This provides more flexibility if you have a sequence of changes but want to redraw only once.
-		Thus, changed() marks the figure as dirty (e.g calling figureInvalidated()) whereas figureRequestUpdate()
-		performs the redraw afterwards (unfortunatelly the programmer must take care of this).
+        /* comment by Wolfram
+           changing a figure and drawing the changes (-> updating) are two separate methods.
+           This provides more flexibility if you have a sequence of changes but want to redraw only once.
+           Thus, changed() marks the figure as dirty (e.g calling figureInvalidated()) whereas figureRequestUpdate()
+           performs the redraw afterwards (unfortunatelly the programmer must take care of this).
 
-		I admit that in most circumstances figureChanged() and figureRequestUpdate() should probably do the same.
-		The concept is inconsistent in so far that one time you call a method (changed) on a figure to do
-		something and the other time you notify a listener (figureRequestUpdate).
-		Perhaps we need a method (Figure.update() ?) that makes this more consistent.
-	*/
-	willChange();
-	if (listener() != null) {
-		listener().figureRequestUpdate(new FigureChangeEvent(this));
-	}
-	changed();
+           I admit that in most circumstances figureChanged() and figureRequestUpdate() should probably do the same.
+           The concept is inconsistent in so far that one time you call a method (changed) on a figure to do
+           something and the other time you notify a listener (figureRequestUpdate).
+           Perhaps we need a method (Figure.update() ?) that makes this more consistent.
+         */
+        willChange();
+        if (listener() != null) {
+                listener().figureRequestUpdate(new FigureChangeEvent(this));
+        }
+        changed();
 }
 /**
  * ModelElement changed from outside. Therefore a refresh of the View is needed.
  * @see #setClassDiagram(ClassDiagramView)
  */
 public void updateView() {
-	// don't remove while establishing connection
-	if (getClassDiagram() != null) {
-		if ((getStartElement() == null) || (getEndElement() == null) ||
-				(getClassDiagram().findFigure(getStartElement()) == null) ||
-				(getClassDiagram().findFigure(getEndElement()) == null)) {
-			// both presentationNodes are to be found in ClassDiagram
-			removeVisually();
-		}
-	}
+        // don't remove while establishing connection
+        if (getClassDiagram() != null) {
+                if ((getStartElement() == null) || (getEndElement() == null) ||
+                    (getClassDiagram().findFigure(getStartElement()) == null) ||
+                    (getClassDiagram().findFigure(getEndElement()) == null)) {
+                        // both presentationNodes are to be found in ClassDiagram
+                        removeVisually();
+                }
+        }
 }
 }

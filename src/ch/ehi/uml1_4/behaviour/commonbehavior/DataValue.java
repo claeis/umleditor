@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:57 $
  */
-public interface DataValue extends Instance , java.io.Serializable
+public interface DataValue extends Instance, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33BC9AFB02E4 detail_begin "DataValue"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33BC9AFB02E4 detail_begin "DataValue"
 
-  // -end- 33BC9AFB02E4 detail_begin "DataValue"
+// -end- 33BC9AFB02E4 detail_begin "DataValue"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33BC9AFB02E4 detail_end "DataValue"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33BC9AFB02E4 detail_end "DataValue"
 
-  // -end- 33BC9AFB02E4 detail_end "DataValue"
+// -end- 33BC9AFB02E4 detail_end "DataValue"
 
 }
-

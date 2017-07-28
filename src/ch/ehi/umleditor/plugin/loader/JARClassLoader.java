@@ -18,120 +18,120 @@ import ch.ehi.umleditor.application.LauncherView;
  */
 public class JARClassLoader extends URLClassLoader
 {
-	private String path;
-	private JAR jar;
-	private ArrayList pluginClasses = new ArrayList();
+private String path;
+private JAR jar;
+private ArrayList pluginClasses = new ArrayList();
 
 
-	public JARClassLoader(String path,PluginLoader pluginLoader)
-		throws IOException
-	{
+public JARClassLoader(String path,PluginLoader pluginLoader)
+throws IOException
+{
 
-		super(new URL[] { new URL("file","",path) });
+								super(new URL[] { new URL("file","",path) });
 
-		URL u = new URL("jar", "", new URL("file","",path) + "!/");
-		JarURLConnection uc = (JarURLConnection)u.openConnection();
+								URL u = new URL("jar", "", new URL("file","",path) + "!/");
+								JarURLConnection uc = (JarURLConnection)u.openConnection();
 
-		JarFile zipFile = uc.getJarFile();
+								JarFile zipFile = uc.getJarFile();
 
-		jar = new JAR(path,this);
+								jar = new JAR(path,this);
 
-		Enumeration entires = zipFile.entries();
-		while(entires.hasMoreElements())
-		{
-			ZipEntry entry = (ZipEntry)entires.nextElement();
-			String name = entry.getName();
-			//System.err.println(name);
-			if(name.endsWith("Plugin.class")){
-				pluginClasses.add(name);
-			}
-		}
+								Enumeration entires = zipFile.entries();
+								while(entires.hasMoreElements())
+								{
+																ZipEntry entry = (ZipEntry)entires.nextElement();
+																String name = entry.getName();
+																//System.err.println(name);
+																if(name.endsWith("Plugin.class")) {
+																								pluginClasses.add(name);
+																}
+								}
 
-		pluginLoader.addPluginJAR(jar);
+								pluginLoader.addPluginJAR(jar);
 
-	}
-	void startAllPlugins()
-	{
+}
+void startAllPlugins()
+{
 
-		boolean ok = true;
+								boolean ok = true;
 
-		for(int i = 0; i < pluginClasses.size(); i++)
-		{
-			String name = (String)pluginClasses.get(i);
-			name = fileToClass(name);
-			try
-			{
-				Class clazz = loadClass(name);
-				AbstractPlugin plugin=(AbstractPlugin)clazz.newInstance();
-				jar.addPlugin(plugin);
-			}
-			catch(Throwable t)
-			{
-				ch.ehi.basics.logging.EhiLogger.logError("Error while starting plugin " + name,t);
+								for(int i = 0; i < pluginClasses.size(); i++)
+								{
+																String name = (String)pluginClasses.get(i);
+																name = fileToClass(name);
+																try
+																{
+																								Class clazz = loadClass(name);
+																								AbstractPlugin plugin=(AbstractPlugin)clazz.newInstance();
+																								jar.addPlugin(plugin);
+																}
+																catch(Throwable t)
+																{
+																								ch.ehi.basics.logging.EhiLogger.logError("Error while starting plugin " + name,t);
 
-			}
-		}
-	}
-	/**
-	 * Converts a file name to a class name. All slash characters are
-	 * replaced with periods and the trailing '.class' is removed.
-	 */
-	public static String fileToClass(String name)
-	{
-		char[] clsName = name.toCharArray();
-		for(int i = clsName.length - 6; i >= 0; i--)
-			if(clsName[i] == '/')
-				clsName[i] = '.';
-		return new String(clsName,0,clsName.length - 6);
-	}
+																}
+								}
+}
+/**
+ * Converts a file name to a class name. All slash characters are
+ * replaced with periods and the trailing '.class' is removed.
+ */
+public static String fileToClass(String name)
+{
+								char[] clsName = name.toCharArray();
+								for(int i = clsName.length - 6; i >= 0; i--)
+																if(clsName[i] == '/')
+																								clsName[i] = '.';
+								return new String(clsName,0,clsName.length - 6);
+}
 
-	/**
-	 * A JAR file.
-	 */
-	public static class JAR
-	{
-		public JARClassLoader getClassLoader()
-		{
-			return classLoader;
-		}
-	
-	
-		public void addPlugin(AbstractPlugin plugin)
-		{
-			//plugin.jar = JAR.this;
-	
-			plugin.start();
-	
-			plugins.addElement(plugin);
-		}
-	
-		public AbstractPlugin[] getPlugins()
-		{
-			AbstractPlugin[] array = new AbstractPlugin[plugins.size()];
-			plugins.copyInto(array);
-			return array;
-		}
-	
-		public JAR(String path, JARClassLoader classLoader)
-		{
-			this.path = path;
-			this.classLoader = classLoader;
-			plugins = new Vector();
-		}
-	
-		// package-private members
-		void getPlugins(Vector vector)
-		{
-			for(int i = 0; i < plugins.size(); i++)
-			{
-				vector.addElement(plugins.elementAt(i));
-			}
-		}
-	
-		// private members
-		private String path;
-		private JARClassLoader classLoader;
-		private Vector plugins;
-	}
+/**
+ * A JAR file.
+ */
+public static class JAR
+{
+public JARClassLoader getClassLoader()
+{
+								return classLoader;
+}
+
+
+public void addPlugin(AbstractPlugin plugin)
+{
+								//plugin.jar = JAR.this;
+
+								plugin.start();
+
+								plugins.addElement(plugin);
+}
+
+public AbstractPlugin[] getPlugins()
+{
+								AbstractPlugin[] array = new AbstractPlugin[plugins.size()];
+								plugins.copyInto(array);
+								return array;
+}
+
+public JAR(String path, JARClassLoader classLoader)
+{
+								this.path = path;
+								this.classLoader = classLoader;
+								plugins = new Vector();
+}
+
+// package-private members
+void getPlugins(Vector vector)
+{
+								for(int i = 0; i < plugins.size(); i++)
+								{
+																vector.addElement(plugins.elementAt(i));
+								}
+}
+
+// private members
+private String path;
+private JARClassLoader classLoader;
+private Vector plugins;
+}
 
 }

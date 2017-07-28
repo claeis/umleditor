@@ -19,8 +19,8 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 /**
  * Converter between java.awt.Color and ch.ehi.umleditor.umlpresentation.Color.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:51 $
  */
 public abstract class ColorConverter {
@@ -29,46 +29,46 @@ public abstract class ColorConverter {
  * @return converted java.awt.Color.
  */
 public static java.awt.Color createColor(ch.ehi.umleditor.umlpresentation.Color color) {
-	if (color == null) {
-		return null;
-	} else {
-		return new java.awt.Color(color.getRed(),
-								color.getGreen(),
-								color.getBlue());
-	}
+								if (color == null) {
+																return null;
+								} else {
+																return new java.awt.Color(color.getRed(),
+																																										color.getGreen(),
+																																										color.getBlue());
+								}
 }
 /**
  * @return ch.ehi.umleditor.umlpresentation.Color
  * @param converted java.awt.Color.
  */
 public static ch.ehi.umleditor.umlpresentation.Color createColor(java.awt.Color awtColor) {
-	if (awtColor == null) {
-		return null;
-	} else {
-		ch.ehi.umleditor.umlpresentation.Color presentationColor = new ch.ehi.umleditor.umlpresentation.Color();
-	    presentationColor.setRed(awtColor.getRed());
-	    presentationColor.setGreen(awtColor.getGreen());
-	    presentationColor.setBlue(awtColor.getBlue());
+								if (awtColor == null) {
+																return null;
+								} else {
+																ch.ehi.umleditor.umlpresentation.Color presentationColor = new ch.ehi.umleditor.umlpresentation.Color();
+																presentationColor.setRed(awtColor.getRed());
+																presentationColor.setGreen(awtColor.getGreen());
+																presentationColor.setBlue(awtColor.getBlue());
 
-	    return presentationColor;
-	}
+																return presentationColor;
+								}
 }
 /**
  * Return whether Colors mean the same RGB value.
  */
 public static boolean isSame(ch.ehi.umleditor.umlpresentation.Color presentationColor, java.awt.Color color) {
-	if (presentationColor == null) {
-		if (color == null) {
-			return true;
-		} else {
-			return false;
-		}
-	} else if (color == null) {
-		return false;
-	}
-		
-	return (presentationColor.getRed() == color.getRed()) &&
-			(presentationColor.getGreen() == color.getGreen()) &&
-			(presentationColor.getBlue() == color.getBlue());
+								if (presentationColor == null) {
+																if (color == null) {
+																								return true;
+																} else {
+																								return false;
+																}
+								} else if (color == null) {
+																return false;
+								}
+
+								return (presentationColor.getRed() == color.getRed()) &&
+															(presentationColor.getGreen() == color.getGreen()) &&
+															(presentationColor.getBlue() == color.getBlue());
 }
 }

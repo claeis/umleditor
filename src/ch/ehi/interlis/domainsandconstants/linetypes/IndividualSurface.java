@@ -17,70 +17,69 @@
  */
 
 
-              // -beg- preserve=no 36D5626F01E9 package "IndividualSurface"
+// -beg- preserve=no 36D5626F01E9 package "IndividualSurface"
 package ch.ehi.interlis.domainsandconstants.linetypes;
-              // -end- 36D5626F01E9 package "IndividualSurface"
+// -end- 36D5626F01E9 package "IndividualSurface"
 
-              // -beg- preserve=no 36D5626F01E9 autoimport "IndividualSurface"
-              import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
-              import ch.ehi.basics.tools.AbstractVisitor;
-              // -end- 36D5626F01E9 autoimport "IndividualSurface"
+// -beg- preserve=no 36D5626F01E9 autoimport "IndividualSurface"
+import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
+import ch.ehi.basics.tools.AbstractVisitor;
+// -end- 36D5626F01E9 autoimport "IndividualSurface"
 
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 36D5626F01E9 import "IndividualSurface"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 36D5626F01E9 import "IndividualSurface"
 
-              // -end- 36D5626F01E9 import "IndividualSurface"
+// -end- 36D5626F01E9 import "IndividualSurface"
 
-              /** Definiert ein Flächenwertebereich mit Überlappung.
-               *  @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:36 $
-               */
+/** Definiert ein Flächenwertebereich mit Überlappung.
+ *  @author Claude Eisenhut
+ *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:36 $
+ */
 public class IndividualSurface extends SurfaceType implements java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 36D5626F01E9 detail_begin "IndividualSurface"
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 36D5626F01E9 detail_begin "IndividualSurface"
 
-                // -end- 36D5626F01E9 detail_begin "IndividualSurface"
+// -end- 36D5626F01E9 detail_begin "IndividualSurface"
 
-                // -beg- preserve=no 3D4FA21B0357 head36D5626F01E9 "unlinkAll"
-                public void unlinkAll()
-                // -end- 3D4FA21B0357 head36D5626F01E9 "unlinkAll"
-                  // declare any checked exceptions
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B0357 throws36D5626F01E9 "unlinkAll"
+// -beg- preserve=no 3D4FA21B0357 head36D5626F01E9 "unlinkAll"
+public void unlinkAll()
+// -end- 3D4FA21B0357 head36D5626F01E9 "unlinkAll"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA21B0357 throws36D5626F01E9 "unlinkAll"
 
-                  // -end- 3D4FA21B0357 throws36D5626F01E9 "unlinkAll"
-                  {
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B0357 body36D5626F01E9 "unlinkAll"
-                  
-                  super.unlinkAll();
-                  // -end- 3D4FA21B0357 body36D5626F01E9 "unlinkAll"
-                  }
+// -end- 3D4FA21B0357 throws36D5626F01E9 "unlinkAll"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 3D4FA21B0357 body36D5626F01E9 "unlinkAll"
 
-                // -beg- preserve=no 3D4FA21B035F head36D5626F01E9 "enumerateChildren"
-                public void enumerateChildren(AbstractVisitor visitor)
-                // -end- 3D4FA21B035F head36D5626F01E9 "enumerateChildren"
-                  // declare any checked exceptions
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B035F throws36D5626F01E9 "enumerateChildren"
+        super.unlinkAll();
+        // -end- 3D4FA21B0357 body36D5626F01E9 "unlinkAll"
+}
 
-                  // -end- 3D4FA21B035F throws36D5626F01E9 "enumerateChildren"
-                  {
-                  // please fill in/modify the following section
-                  // -beg- preserve=no 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
-                  java.util.Iterator it=null;
-                  super.enumerateChildren(visitor);
-                  // -end- 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
-                  }
+// -beg- preserve=no 3D4FA21B035F head36D5626F01E9 "enumerateChildren"
+public void enumerateChildren(AbstractVisitor visitor)
+// -end- 3D4FA21B035F head36D5626F01E9 "enumerateChildren"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3D4FA21B035F throws36D5626F01E9 "enumerateChildren"
 
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 36D5626F01E9 detail_end "IndividualSurface"
+// -end- 3D4FA21B035F throws36D5626F01E9 "enumerateChildren"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
+        java.util.Iterator it=null;
+        super.enumerateChildren(visitor);
+        // -end- 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
+}
 
-                // -end- 36D5626F01E9 detail_end "IndividualSurface"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 36D5626F01E9 detail_end "IndividualSurface"
 
-              }
+// -end- 36D5626F01E9 detail_end "IndividualSurface"
 
+}

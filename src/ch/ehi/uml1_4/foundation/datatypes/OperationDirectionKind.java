@@ -23,17 +23,16 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface OperationDirectionKind extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD6F930032 detail_begin "OperationDirectionKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD6F930032 detail_begin "OperationDirectionKind"
 
-  // -end- 33DD6F930032 detail_begin "OperationDirectionKind"
+// -end- 33DD6F930032 detail_begin "OperationDirectionKind"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD6F930032 detail_end "OperationDirectionKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD6F930032 detail_end "OperationDirectionKind"
 
-  // -end- 33DD6F930032 detail_end "OperationDirectionKind"
+// -end- 33DD6F930032 detail_end "OperationDirectionKind"
 
 }
-

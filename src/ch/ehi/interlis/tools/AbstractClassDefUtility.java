@@ -27,56 +27,56 @@ import java.util.*;
  * @author ce
  */
 public class AbstractClassDefUtility {
-	private AbstractClassDefUtility(){
-	}
-	static public List getIliAttributes(AbstractClassDef aclass){ 
-		Iterator it=aclass.iteratorFeature();
-		ArrayList attrlist=new ArrayList();
-		while ((it != null) && (it.hasNext())) {
-			Object feature = it.next();
-			if (feature instanceof AttributeDef) {
-				attrlist.add((AttributeDef)feature);
-			}
-		}
-		ArrayList rolesSorted=new ArrayList();
-		it=aclass.iteratorAssociation();
-		while(it.hasNext()){
-		   Object obj=it.next();
-		   if(obj instanceof RoleDef && RoleDefUtility.isIliAttr((RoleDef)obj)){
-			rolesSorted.add(RoleDefUtility.getOppEnd((RoleDef)obj));
-		   }else{
-			// ignore others; should not have others
-		   }
-		}
-	
-		java.util.Collections.sort(rolesSorted,new java.util.Comparator(){
-		  public int compare(Object o1,Object o2){
-			int idx1=((RoleDef)o1).getIliAttributeIdx();
-			int idx2=((RoleDef)o2).getIliAttributeIdx();
-			if(idx1==idx2){
-				if(idx1==-1){
-					// both not yet ordered
-					// sort according to name
-					return ((RoleDef)o1).getDefLangName().compareTo(((RoleDef)o2).getDefLangName());
-				}
-				return 0;
-			}
-			if(idx1==-1)return 1;
-			if(idx2==-1)return -1;
-			if(idx1<idx2)return -1;
-			return 1;
-		  }
-		});
-		it=rolesSorted.iterator();
-		while (it.hasNext()){
-		  RoleDef role = (RoleDef) it.next();
-		  int idx=role.getIliAttributeIdx();
-		  if(idx==-1 || idx>=attrlist.size()){
-			attrlist.add(role);
-		  }else{
-			attrlist.add(idx,role);
-		  }
-		}
-		return attrlist;
-	}
+private AbstractClassDefUtility(){
+}
+static public List getIliAttributes(AbstractClassDef aclass){
+								Iterator it=aclass.iteratorFeature();
+								ArrayList attrlist=new ArrayList();
+								while ((it != null) && (it.hasNext())) {
+																Object feature = it.next();
+																if (feature instanceof AttributeDef) {
+																								attrlist.add((AttributeDef)feature);
+																}
+								}
+								ArrayList rolesSorted=new ArrayList();
+								it=aclass.iteratorAssociation();
+								while(it.hasNext()) {
+																Object obj=it.next();
+																if(obj instanceof RoleDef && RoleDefUtility.isIliAttr((RoleDef)obj)) {
+																								rolesSorted.add(RoleDefUtility.getOppEnd((RoleDef)obj));
+																}else{
+																								// ignore others; should not have others
+																}
+								}
+
+								java.util.Collections.sort(rolesSorted,new java.util.Comparator(){
+																								public int compare(Object o1,Object o2){
+																																int idx1=((RoleDef)o1).getIliAttributeIdx();
+																																int idx2=((RoleDef)o2).getIliAttributeIdx();
+																																if(idx1==idx2) {
+																																								if(idx1==-1) {
+																								                        // both not yet ordered
+																								                        // sort according to name
+																																																return ((RoleDef)o1).getDefLangName().compareTo(((RoleDef)o2).getDefLangName());
+																																								}
+																																								return 0;
+																																}
+																																if(idx1==-1) return 1;
+																																if(idx2==-1) return -1;
+																																if(idx1<idx2) return -1;
+																																return 1;
+																								}
+																});
+								it=rolesSorted.iterator();
+								while (it.hasNext()) {
+																RoleDef role = (RoleDef) it.next();
+																int idx=role.getIliAttributeIdx();
+																if(idx==-1 || idx>=attrlist.size()) {
+																								attrlist.add(role);
+																}else{
+																								attrlist.add(idx,role);
+																}
+								}
+								return attrlist;
+}
 }

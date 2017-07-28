@@ -20,14 +20,14 @@ package ch.ehi.umleditor.umldrawingtools;
 import ch.softenvironment.client.ResourceManager;
 /**
  * Interface for presentation aspects of a ModelElement.
- * 
- * @author Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.5 $ $Date: 2006-06-29 22:16:01 $
  */
 public interface ModelElementUI {
-	static String REMOVE_IN_MODEL = ResourceManager.getResource(ModelElementUI.class, "MniRemoveInModel_text");
-	static String CREATION_ERROR = ResourceManager.getResource(ModelElementUI.class, "CECreationError");
-	static String SELECT_IN_BROWSER = ResourceManager.getResource(ModelElementUI.class, "MniSelectInBrowser_text");
+static String REMOVE_IN_MODEL = ResourceManager.getResource(ModelElementUI.class, "MniRemoveInModel_text");
+static String CREATION_ERROR = ResourceManager.getResource(ModelElementUI.class, "CECreationError");
+static String SELECT_IN_BROWSER = ResourceManager.getResource(ModelElementUI.class, "MniSelectInBrowser_text");
 /**
  * Return the ModelElement represented by this Interface.
  * @return ModelElement

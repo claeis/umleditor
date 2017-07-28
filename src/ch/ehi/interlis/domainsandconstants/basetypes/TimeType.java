@@ -39,115 +39,114 @@ import ch.ehi.basics.tools.AbstractVisitor;
  */
 public class TimeType extends BaseType
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448985E10132 detail_begin "TimeType"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 448985E10132 detail_begin "TimeType"
 
-  // -end- 448985E10132 detail_begin "TimeType"
+// -end- 448985E10132 detail_begin "TimeType"
 
-  // -beg- preserve=no 448E7B8A03E2 head448985E10132 "unlinkAll"
-  public void unlinkAll()
-  // -end- 448E7B8A03E2 head448985E10132 "unlinkAll"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 448E7B8A03E2 throws448985E10132 "unlinkAll"
+// -beg- preserve=no 448E7B8A03E2 head448985E10132 "unlinkAll"
+public void unlinkAll()
+// -end- 448E7B8A03E2 head448985E10132 "unlinkAll"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 448E7B8A03E2 throws448985E10132 "unlinkAll"
 
-    // -end- 448E7B8A03E2 throws448985E10132 "unlinkAll"
-    {
-    // please fill in/modify the following section
-    // -beg- preserve=no 448E7B8A03E2 body448985E10132 "unlinkAll"
-    
-    setMin(null);
-    setMax(null);
-    super.unlinkAll();
-    // -end- 448E7B8A03E2 body448985E10132 "unlinkAll"
-    }
+// -end- 448E7B8A03E2 throws448985E10132 "unlinkAll"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 448E7B8A03E2 body448985E10132 "unlinkAll"
 
-  // -beg- preserve=no 448E7B8E00F8 head448985E10132 "enumerateChildren"
-  public void enumerateChildren(AbstractVisitor visitor)
-  // -end- 448E7B8E00F8 head448985E10132 "enumerateChildren"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 448E7B8E00F8 throws448985E10132 "enumerateChildren"
-
-    // -end- 448E7B8E00F8 throws448985E10132 "enumerateChildren"
-    {
-    // please fill in/modify the following section
-    // -beg- preserve=no 448E7B8E00F8 body448985E10132 "enumerateChildren"
-    java.util.Iterator it=null;
-    visitor.visit(getMin());
-    visitor.visit(getMax());
-    super.enumerateChildren(visitor);
-    // -end- 448E7B8E00F8 body448985E10132 "enumerateChildren"
-    }
-
-  // -beg- preserve=no 448987630278 var448985E10132 "min"
-  private TimeValue min = null;
-  // -end- 448987630278 var448985E10132 "min"
-
-  /** get current value of min
-   *  @see #setMin
-   */
-  // -beg- preserve=no 448987630278 get_head448985E10132 "min"
-  public  TimeValue getMin()
-  // -end- 448987630278 get_head448985E10132 "min"
-  {
-    // -beg- preserve=no 448987630278 get_body448985E10132 "min"
-    return min;
-    // -end- 448987630278 get_body448985E10132 "min"
-  }
-
-  /** set current value of min
-   *  @see #getMin
-   */
-  // -beg- preserve=no 448987630278 set_head448985E10132 "min"
-  public  void setMin(TimeValue value1)
-  // -end- 448987630278 set_head448985E10132 "min"
-  {
-    // -beg- preserve=no 448987630278 set_body448985E10132 "min"
-    if(min!=value1 && (min==null || !min.equals(value1))){
-      min = value1;
-      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMin"));
-    }
-    // -end- 448987630278 set_body448985E10132 "min"
-  }
-
-  // -beg- preserve=no 4489876D005F var448985E10132 "max"
-  private TimeValue max = null;
-  // -end- 4489876D005F var448985E10132 "max"
-
-  /** get current value of max
-   *  @see #setMax
-   */
-  // -beg- preserve=no 4489876D005F get_head448985E10132 "max"
-  public  TimeValue getMax()
-  // -end- 4489876D005F get_head448985E10132 "max"
-  {
-    // -beg- preserve=no 4489876D005F get_body448985E10132 "max"
-    return max;
-    // -end- 4489876D005F get_body448985E10132 "max"
-  }
-
-  /** set current value of max
-   *  @see #getMax
-   */
-  // -beg- preserve=no 4489876D005F set_head448985E10132 "max"
-  public  void setMax(TimeValue value1)
-  // -end- 4489876D005F set_head448985E10132 "max"
-  {
-    // -beg- preserve=no 4489876D005F set_body448985E10132 "max"
-    if(max!=value1 && (max==null || !max.equals(value1))){
-      max = value1;
-      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMax"));
-    }
-    // -end- 4489876D005F set_body448985E10132 "max"
-  }
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448985E10132 detail_end "TimeType"
-
-  // -end- 448985E10132 detail_end "TimeType"
-
+        setMin(null);
+        setMax(null);
+        super.unlinkAll();
+        // -end- 448E7B8A03E2 body448985E10132 "unlinkAll"
 }
 
+// -beg- preserve=no 448E7B8E00F8 head448985E10132 "enumerateChildren"
+public void enumerateChildren(AbstractVisitor visitor)
+// -end- 448E7B8E00F8 head448985E10132 "enumerateChildren"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 448E7B8E00F8 throws448985E10132 "enumerateChildren"
+
+// -end- 448E7B8E00F8 throws448985E10132 "enumerateChildren"
+{
+        // please fill in/modify the following section
+        // -beg- preserve=no 448E7B8E00F8 body448985E10132 "enumerateChildren"
+        java.util.Iterator it=null;
+        visitor.visit(getMin());
+        visitor.visit(getMax());
+        super.enumerateChildren(visitor);
+        // -end- 448E7B8E00F8 body448985E10132 "enumerateChildren"
+}
+
+// -beg- preserve=no 448987630278 var448985E10132 "min"
+private TimeValue min = null;
+// -end- 448987630278 var448985E10132 "min"
+
+/** get current value of min
+ *  @see #setMin
+ */
+// -beg- preserve=no 448987630278 get_head448985E10132 "min"
+public TimeValue getMin()
+// -end- 448987630278 get_head448985E10132 "min"
+{
+        // -beg- preserve=no 448987630278 get_body448985E10132 "min"
+        return min;
+        // -end- 448987630278 get_body448985E10132 "min"
+}
+
+/** set current value of min
+ *  @see #getMin
+ */
+// -beg- preserve=no 448987630278 set_head448985E10132 "min"
+public void setMin(TimeValue value1)
+// -end- 448987630278 set_head448985E10132 "min"
+{
+        // -beg- preserve=no 448987630278 set_body448985E10132 "min"
+        if(min!=value1 && (min==null || !min.equals(value1))) {
+                min = value1;
+                ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMin"));
+        }
+        // -end- 448987630278 set_body448985E10132 "min"
+}
+
+// -beg- preserve=no 4489876D005F var448985E10132 "max"
+private TimeValue max = null;
+// -end- 4489876D005F var448985E10132 "max"
+
+/** get current value of max
+ *  @see #setMax
+ */
+// -beg- preserve=no 4489876D005F get_head448985E10132 "max"
+public TimeValue getMax()
+// -end- 4489876D005F get_head448985E10132 "max"
+{
+        // -beg- preserve=no 4489876D005F get_body448985E10132 "max"
+        return max;
+        // -end- 4489876D005F get_body448985E10132 "max"
+}
+
+/** set current value of max
+ *  @see #getMax
+ */
+// -beg- preserve=no 4489876D005F set_head448985E10132 "max"
+public void setMax(TimeValue value1)
+// -end- 4489876D005F set_head448985E10132 "max"
+{
+        // -beg- preserve=no 4489876D005F set_body448985E10132 "max"
+        if(max!=value1 && (max==null || !max.equals(value1))) {
+                max = value1;
+                ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setMax"));
+        }
+        // -end- 4489876D005F set_body448985E10132 "max"
+}
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 448985E10132 detail_end "TimeType"
+
+// -end- 448985E10132 detail_end "TimeType"
+
+}

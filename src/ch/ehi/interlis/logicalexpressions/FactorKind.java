@@ -17,36 +17,35 @@
  */
 
 
-          // -beg- preserve=no 3C3F10E70034 package "FactorKind"
+// -beg- preserve=no 3C3F10E70034 package "FactorKind"
 package ch.ehi.interlis.logicalexpressions;
-          // -end- 3C3F10E70034 package "FactorKind"
+// -end- 3C3F10E70034 package "FactorKind"
 
-          // -beg- preserve=no 3C3F10E70034 autoimport "FactorKind"
+// -beg- preserve=no 3C3F10E70034 autoimport "FactorKind"
 
-          // -end- 3C3F10E70034 autoimport "FactorKind"
+// -end- 3C3F10E70034 autoimport "FactorKind"
 
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 3C3F10E70034 import "FactorKind"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F10E70034 import "FactorKind"
 
-          // -end- 3C3F10E70034 import "FactorKind"
+// -end- 3C3F10E70034 import "FactorKind"
 
-          /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:05 $
-           */
+/** @author Claude Eisenhut
+ *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:05 $
+ */
 public interface FactorKind extends java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F10E70034 detail_begin "FactorKind"
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F10E70034 detail_begin "FactorKind"
 
-            // -end- 3C3F10E70034 detail_begin "FactorKind"
+// -end- 3C3F10E70034 detail_begin "FactorKind"
 
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F10E70034 detail_end "FactorKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F10E70034 detail_end "FactorKind"
 
-            // -end- 3C3F10E70034 detail_end "FactorKind"
+// -end- 3C3F10E70034 detail_end "FactorKind"
 
-          }
-
+}

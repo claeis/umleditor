@@ -21,48 +21,48 @@ import javax.swing.JTree;
 import java.awt.Component;
 /**
  * TreeCellRenderer for a TreeNode.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.2 $ $Date: 2004-09-20 19:09:29 $
  */
-public class NavigationTreeCellRenderer	extends javax.swing.tree.DefaultTreeCellRenderer {
+public class NavigationTreeCellRenderer extends javax.swing.tree.DefaultTreeCellRenderer {
 /**
-  * This is messaged from JTree whenever it needs to get the size
-  * of the component or it wants to draw it.
-  * This attempts to set the font based on value, which will be
-  * a TreeNode.
-  */
+ * This is messaged from JTree whenever it needs to get the size
+ * of the component or it wants to draw it.
+ * This attempts to set the font based on value, which will be
+ * a TreeNode.
+ */
 public NavigationTreeCellRenderer() {
-	super();
+								super();
 }
 /**
  * Adapt the correct LeafIcon.
  * @see NavigationView.initializeTree()
  */
 public Component getTreeCellRendererComponent(
-		JTree tree,
-		Object value,
-		boolean sel,
-		boolean expanded,
-		boolean leaf,
-		int row,
-		boolean hasFocus) {
+								JTree tree,
+								Object value,
+								boolean sel,
+								boolean expanded,
+								boolean leaf,
+								int row,
+								boolean hasFocus) {
 
-	super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+								super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
-        javax.swing.Icon icon=NavigationTreeNodeUtility.getIcon(value, expanded);
-        if(icon!=null){
-          setIcon(icon);
-        }
-         String name = NavigationTreeNodeUtility.getName(value);
-         setText(name);
+								javax.swing.Icon icon=NavigationTreeNodeUtility.getIcon(value, expanded);
+								if(icon!=null) {
+																setIcon(icon);
+								}
+								String name = NavigationTreeNodeUtility.getName(value);
+								setText(name);
 
-	if (value != null) {
-		// show ClassName as ToolTip
-		setToolTipText(ch.softenvironment.util.StringUtils.getPureClassName(value));
-	}
+								if (value != null) {
+																// show ClassName as ToolTip
+																setToolTipText(ch.softenvironment.util.StringUtils.getPureClassName(value));
+								}
 
-	return this;
+								return this;
 }
 /**
  * paint is subclassed to draw the background correctly.
@@ -92,7 +92,7 @@ public void paint(java.awt.Graphics g) {
         g.fillRect(offset, 0, getWidth() - 1 - offset, getHeight() - 1);
     } else
         g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-*/
-    super.paint(g);
+ */
+								super.paint(g);
 }
 }
