@@ -33,8 +33,21 @@ build/*
 !build/build.xml
 
 #Eclipse
-.classpath .project .settings/
-
+.classpath
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.settings/
+# External tool builders
+.externalToolBuilders/
 
 ### Linux ###
 *~
