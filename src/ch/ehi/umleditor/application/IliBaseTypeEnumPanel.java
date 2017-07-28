@@ -32,9 +32,11 @@ import ch.ehi.uml1_4.foundation.core.Element;
  * @version $Revision: 1.10 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
-        private Enumeration root=new Enumeration();
+      
+	private static final long serialVersionUID = 449811716103797974L;
+		private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
-        private Element element = null;
+        
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
 	private javax.swing.JRadioButton ivjRbtOrderedCircular = null;
 	private javax.swing.JScrollPane ivjScpTree = null;
@@ -54,12 +56,13 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JPanel ivjJPanel1 = null;
 	private javax.swing.JPanel ivjPnlKind = null;
 	
-	private javax.swing.JPanel ivjPnlMetaAttrbEnum = null;
+	private MetaAttrbEnumPanel ivjPnlMetaAttrbEnum = null;
 	private javax.swing.JLabel ivjLblMetaAttrbEnum = null;
-	private javax.swing.JTextField ivjTxtMetaAttrbEnum = null;
+	private javax.swing.JPanel ivjJPanel2 = null;
+	
 	//Enum meta atributos aún no agregados al panel
 
-class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelListener, java.awt.event.ActionListener, java.awt.event.MouseListener, javax.swing.event.TreeSelectionListener {
+class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelListener, ch.ehi.umleditor.application.MetaAttrbEnumPanelListener, java.awt.event.ActionListener, java.awt.event.MouseListener, javax.swing.event.TreeSelectionListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			if (e.getSource() == IliBaseTypeEnumPanel.this.getMniNewFlat()) 
 				connEtoC3(e);
@@ -69,10 +72,6 @@ class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelLi
 				connEtoC5(e);
 			if (e.getSource() == IliBaseTypeEnumPanel.this.getMniRename()) 
 				connEtoC6(e);
-		};
-		public void focusGained(java.awt.event.FocusEvent newEvent) {
-			if (newEvent.getSource() == IliBaseTypeEnumPanel.this.getTxtMetaAttrbEnum())
-				connEtoM1(newEvent);
 		};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
@@ -92,6 +91,10 @@ class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelLi
 		public void valueChanged(javax.swing.event.TreeSelectionEvent e) {
 			if (e.getSource() == IliBaseTypeEnumPanel.this.getTreEnumeration()) 
 				connEtoC2(e);
+		}
+		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
+			if(newEvent.getSource() == IliBaseTypeEnumPanel.this.getPnlMetaAttrbEnum())
+				connEtoC9(newEvent);
 		};
 	};
 /**
@@ -237,24 +240,7 @@ private void connEtoC7(java.util.EventObject arg1) {
 	}
 }
 
-/**
- * connEtoM2:  (TxtMetaAttrb.focus.focusGained(java.awt.event.FocusEvent) --> TxtMetaAttrb.selectAll()V)
- * @param arg1 java.awt.event.FocusEvent
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private void connEtoM1(java.util.EventObject arg1) {
-	try {
-		// user code begin {1}
-		// user code end
-		this.saveMetaAttrb();
-		// user code begin {2}
-		// user code end
-	} catch (java.lang.Throwable ivjExc) {
-		// user code begin {3}
-		// user code end
-		handleException(ivjExc);
-	}
-}
+
 /**
  * connEtoC8:  (TreEnumeration.mouse.mousePressed(java.awt.event.MouseEvent) --> IliBaseTypeEnumPanel.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
  * @param arg1 java.awt.event.MouseEvent
@@ -273,6 +259,26 @@ private void connEtoC8(java.awt.event.MouseEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+
+/**
+ * connEtoC9:  (PnlMetaAttrbEnum.MetaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject) --> IliBaseTypeEnumPanel.saveMetaAttrb()V)
+ * @param arg1 java.util.EventObject
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoC9(java.util.EventObject arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.saveMetaAttrbEnum();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+
 private Enumeration copyTree(Enumeration src) {
     Enumeration ret=new Enumeration();
     ret.setKind(src.getKind());
@@ -350,28 +356,31 @@ private javax.swing.JPanel getJPanel1() {
  * @return javax.swing.JPanel
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JPanel getJPnlMetaAttrb() {
-	if (ivjPnlMetaAttrbEnum == null) {
+private javax.swing.JPanel getJPanel2() {
+	if (ivjJPanel2 == null) {
 		try {
-			ivjPnlMetaAttrbEnum = new javax.swing.JPanel();
-			ivjPnlMetaAttrbEnum.setName("PnlMetaAttrb");
-			ivjPnlMetaAttrbEnum.setLayout(new java.awt.GridBagLayout());
+			ivjJPanel2 = new javax.swing.JPanel();
+			ivjJPanel2.setName("JPanel2");
+			ivjJPanel2.setLayout(new java.awt.GridBagLayout());
 
-			java.awt.GridBagConstraints constraintsLblMetaAttrb = new java.awt.GridBagConstraints();
-			constraintsLblMetaAttrb.gridx = 1; constraintsLblMetaAttrb.gridy = 1;
-			constraintsLblMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsLblMetaAttrb.ipadx = 140;
-			constraintsLblMetaAttrb.ipady = 14;
-			constraintsLblMetaAttrb.insets = new java.awt.Insets(7, 7, 2, 132);
-			getJPnlMetaAttrb().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrb);
+			java.awt.GridBagConstraints constraintsLblMetaAttrbEnum = new java.awt.GridBagConstraints();
+			constraintsLblMetaAttrbEnum.gridx = 1; constraintsLblMetaAttrbEnum.gridy = 1;
+			constraintsLblMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsLblMetaAttrbEnum.ipadx = 140;
+			constraintsLblMetaAttrbEnum.ipady = 14;
+			constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 7, 2, 132);
+			getJPanel2().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrbEnum);
 			
-			java.awt.GridBagConstraints constraintsTxtMetaAttrb = new java.awt.GridBagConstraints();
-			constraintsTxtMetaAttrb.gridx = 1; constraintsTxtMetaAttrb.gridy = 1;
-			constraintsTxtMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsTxtMetaAttrb.ipadx = 140;
-			constraintsTxtMetaAttrb.ipady = 14;
-			constraintsTxtMetaAttrb.insets = new java.awt.Insets(7, 165, 2, 132);
-			getJPnlMetaAttrb().add(getTxtMetaAttrbEnum(), constraintsTxtMetaAttrb);
+			java.awt.GridBagConstraints constraintsPnlMetaAttrbEnum = new java.awt.GridBagConstraints();
+			constraintsPnlMetaAttrbEnum.gridx = 1; constraintsPnlMetaAttrbEnum.gridy = 2;
+			constraintsPnlMetaAttrbEnum.fill = java.awt.GridBagConstraints.BOTH;
+			constraintsPnlMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsPnlMetaAttrbEnum.weightx = 1.0;
+			constraintsPnlMetaAttrbEnum.weighty = 1.0;
+			constraintsPnlMetaAttrbEnum.ipadx = 243;
+			constraintsPnlMetaAttrbEnum.ipady = 69;
+			constraintsPnlMetaAttrbEnum.insets = new java.awt.Insets(2, 5, 7, 5);
+			getJPanel2().add(getPnlMetaAttrbEnum(), constraintsPnlMetaAttrbEnum);
 		
 			// user code begin {1}
 			// user code end
@@ -382,7 +391,7 @@ private javax.swing.JPanel getJPnlMetaAttrb() {
 			handleException(ivjExc);
 		}
 	}
-	return ivjPnlMetaAttrbEnum;
+	return ivjJPanel2;
 }
 /**
  * Return the JPopupMenu1 property value.
@@ -465,26 +474,7 @@ private javax.swing.JLabel getLblElementDescription() {
 	}
 	return ivjLblElementDescription;
 }
-/**
- * Return the JTextField3 property value.
- * @return javax.swing.JTextField
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JTextField getTxtMetaAttrbEnum() {
-	if (ivjTxtMetaAttrbEnum == null) {
-		try {
-			ivjTxtMetaAttrbEnum = new javax.swing.JTextField();
-			ivjTxtMetaAttrbEnum.setName("TxtMetaAttrbEnum");
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjTxtMetaAttrbEnum;
-}
+
 /**
  * Return the JLabel3 property value.
  * @return javax.swing.JLabel
@@ -670,6 +660,26 @@ private DescriptionPanel getPnlDescription() {
 	return ivjPnlDescription;
 }
 /**
+ * Return the PnlMetaAttrbEnum property value.
+ * @return ch.ehi.umleditor.application.DescriptionPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private MetaAttrbEnumPanel getPnlMetaAttrbEnum() {
+	if (ivjPnlMetaAttrbEnum == null) {
+		try {
+			ivjPnlMetaAttrbEnum = new ch.ehi.umleditor.application.MetaAttrbEnumPanel();
+			ivjPnlMetaAttrbEnum.setName("PnlMetaAttrbEnum");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttrbEnum;
+}
+/**
  * Return the PnlKind property value.
  * @return javax.swing.JPanel
  */
@@ -850,8 +860,9 @@ private void initConnections() throws java.lang.Exception {
 	getMniNewDeep().addActionListener(ivjEventHandler);
 	getMniRemove().addActionListener(ivjEventHandler);
 	getMniRename().addActionListener(ivjEventHandler);
-	getTxtMetaAttrbEnum().addActionListener(ivjEventHandler);
 	getPnlDescription().addDescriptionPanelListener(ivjEventHandler);
+	getPnlMetaAttrbEnum().addMetaAttrbEnumPanelListener(ivjEventHandler);
+	
 }
 /**
  * Initialize the class.
@@ -898,7 +909,7 @@ private void initialize() {
 
 		java.awt.GridBagConstraints constraintsJPanel1 = new java.awt.GridBagConstraints();
 		constraintsJPanel1.gridx = 2; constraintsJPanel1.gridy = 2;
-constraintsJPanel1.gridheight = 2;
+		constraintsJPanel1.gridheight = 2;
 		constraintsJPanel1.fill = java.awt.GridBagConstraints.BOTH;
 		constraintsJPanel1.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsJPanel1.weightx = 1.0;
@@ -906,15 +917,15 @@ constraintsJPanel1.gridheight = 2;
 		constraintsJPanel1.insets = new java.awt.Insets(1, 4, 6, 6);
 		add(getJPanel1(), constraintsJPanel1);
 		
-		java.awt.GridBagConstraints constraintsJpnlMetaAttrb = new java.awt.GridBagConstraints();
-		constraintsJpnlMetaAttrb.gridx = 2; constraintsJPanel1.gridy = 2;
-		constraintsJpnlMetaAttrb.gridheight = 2;
-		constraintsJpnlMetaAttrb.fill = java.awt.GridBagConstraints.BOTH;
-		constraintsJpnlMetaAttrb.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		constraintsJpnlMetaAttrb.weightx = 1.0;
-		constraintsJpnlMetaAttrb.weighty = 1.0;
-		constraintsJpnlMetaAttrb.insets = new java.awt.Insets(5, 3, 6, 6);
-		add(getJPnlMetaAttrb(), constraintsJpnlMetaAttrb);
+		java.awt.GridBagConstraints constraintsJPanel2 = new java.awt.GridBagConstraints();
+		constraintsJPanel2.gridx = 2; constraintsJPanel2.gridy = 2;
+		constraintsJPanel2.gridheight = 2;
+		constraintsJPanel2.fill = java.awt.GridBagConstraints.BOTH;
+		constraintsJPanel2.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		constraintsJPanel2.weightx = 1.0;
+		constraintsJPanel2.weighty = 1.0;
+		constraintsJPanel2.insets = new java.awt.Insets(5, 3, 6, 6);
+		add(getJPanel2(), constraintsJPanel2);
 		
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
@@ -928,7 +939,6 @@ constraintsJPanel1.gridheight = 2;
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
-	getTxtMetaAttrbEnum().setEnabled(false);
 	initializeTree();
 	// user code end
 }
@@ -1052,9 +1062,8 @@ private void saveDocumentation() {
 /**
  * Save the meta attribute on currently selected EnumElement.
  */
-private void saveMetaAttrb(){
-	System.out.println("intentando hacer set del enum: "+getTxtMetaAttrbEnum().getText());
-	element.setMetaAttrb(new ch.ehi.basics.types.NlsString(element.getMetaAttrb(), getTxtMetaAttrbEnum().getText()));
+private void saveMetaAttrbEnum(){
+	getPnlMetaAttrbEnum().getObject();
 }
 /**
  * Adapt anything when Tree-Selection changes.
@@ -1065,15 +1074,17 @@ private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelection
 	if (node == null) {
 		getPnlDescription().setEnabled(false);
 		getPnlDescription().setObject(null);
-		getTxtMetaAttrbEnum().setEnabled(false);
+		
+		getPnlMetaAttrbEnum().setEnabled(false);
+		getPnlMetaAttrbEnum().setObject(null);
 	} else {
 		// EnumElement
 		getPnlDescription().setEnabled(true);
 		getPnlDescription().setObject(node);
-		getTxtMetaAttrbEnum().setEnabled(true);
-		getTxtMetaAttrbEnum().setText(ElementUtils.mapNlsString(node.getMetaAttrb()));
 		
-	}
+		getPnlMetaAttrbEnum().setEnabled(true);
+		getPnlMetaAttrbEnum().setObject(node);
+			}
 }
 public void selectElement(Element element) {
     TreePath foundNode = ((EnumTreeModel)getTreEnumeration().getModel()).getTreePath(element);

@@ -18,7 +18,9 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.uml1_4.foundation.core.Element;
-import ch.softenvironment.view.*;
+import ch.softenvironment.view.BasePanel;
+import ch.softenvironment.view.DataPanel;
+import ch.softenvironment.view.SimpleEditorPanel;
 /**
  * Text-Editing Panel.
  * 
@@ -26,6 +28,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.2 $ $Date: 2004-04-27 18:52:12 $
  */
 public class DescriptionPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = 7963252980662658683L;
 	private Element element = null;
 	private SimpleEditorPanel ivjPnlEditor = null;
 	protected transient ch.ehi.umleditor.application.DescriptionPanelListener fieldDescriptionPanelListenerEventMulticaster = null;

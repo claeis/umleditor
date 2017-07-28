@@ -147,8 +147,6 @@ public static String getDisplayName(java.lang.Class type) {
  */
 public static Boolean trySetMetaAttrb(ModelElement modelElement, String newMetaAttrb) {
 	String language = ch.ehi.basics.types.NlsString.getDefaultLanguage();
-	System.out.println("intentando hacer set a MetaAttrb...");
-	System.out.println("modelo: "+modelElement.toString()+" meta atributo:"+ newMetaAttrb);
 	if ((modelElement != null) && (!newMetaAttrb.equals(mapNlsString(modelElement.getMetaAttrb(), language)))) {
 		
 		if (modelElement instanceof Participant) {
