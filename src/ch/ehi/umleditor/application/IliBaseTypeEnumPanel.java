@@ -371,7 +371,7 @@ private javax.swing.JPanel getJPanel2() {
                         constraintsLblMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
                         constraintsLblMetaAttrbEnum.ipadx = 140;
                         constraintsLblMetaAttrbEnum.ipady = 14;
-                        constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 25, 2, 120);
+                        constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 7, 2, 120);
                         getJPanel2().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrbEnum);
 
                         java.awt.GridBagConstraints constraintsPnlMetaAttrbEnum = new java.awt.GridBagConstraints();
@@ -888,7 +888,7 @@ private void initialize() {
                 constraintsScpTree.weighty = 1.0;
                 constraintsScpTree.ipadx = 142;
                 constraintsScpTree.ipady = 78;
-                constraintsScpTree.insets = new java.awt.Insets(2, 10, 7, 4);
+                constraintsScpTree.insets = new java.awt.Insets(2, 10, 7, 9);
                 add(getScpTree(), constraintsScpTree);
 
                 java.awt.GridBagConstraints constraintsLblElements = new java.awt.GridBagConstraints();
@@ -927,7 +927,7 @@ private void initialize() {
                 constraintsJPanel2.anchor = java.awt.GridBagConstraints.NORTHWEST;
                 constraintsJPanel2.weightx = 1.0;
                 constraintsJPanel2.weighty = 1.0;
-                constraintsJPanel2.insets = new java.awt.Insets(9, 10, 12, 6);
+                constraintsJPanel2.insets = new java.awt.Insets(1, 10, 6, 6);
                 add(getJPanel2(), constraintsJPanel2);
 
                 initConnections();
