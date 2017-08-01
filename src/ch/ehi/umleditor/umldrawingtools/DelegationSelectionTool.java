@@ -35,7 +35,6 @@ import CH.ifa.draw.framework.Tool;
 import CH.ifa.draw.util.UndoableTool;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.umleditor.application.LauncherView;
-import ch.ehi.umleditor.umlpresentation.Class;
 import ch.ehi.umleditor.umlpresentation.Note;
 import ch.ehi.umleditor.umlpresentation.PresentationNode;
 import ch.softenvironment.view.CommonUserAccess;
@@ -199,8 +198,7 @@ private int checkDragCase(ConnectionFigure edgeFigure, int x, int y) {
                 java.util.Iterator iterator = ((EdgeFigure)edgeFigure).getEdge().iteratorEndpoint();
                 if (iterator.hasNext()) {
                         dragSourceNode = (PresentationNode)iterator.next();
-                        if (((dragSourceNode instanceof Class) ||
-                             (dragSourceNode instanceof ch.ehi.umleditor.umlpresentation.Package) ||
+                        if (((dragSourceNode instanceof ch.ehi.umleditor.umlpresentation.Package) ||
                              (dragSourceNode instanceof Note)) &&
                             isWithinRange(edgeFigure.startPoint(), x, y)) {
 

@@ -136,14 +136,14 @@ static public void writeDiagram(ch.ehi.umleditor.umldrawingtools.ClassDiagramVie
                                 java.awt.Graphics2D g=img.createGraphics();
                                 diag.printAll(g);
                                 FileOutputStream os = new FileOutputStream(filename);
-                                com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
+                                //com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
                                 //javax.imageio.ImageIO.write(img, "JPEG", os);
-                                com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
+                                //com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
 
                                 // Lossless, please
-                                param.setQuality(1.0f, false);
-                                ie.setJPEGEncodeParam(param);
-                                ie.encode(img);
+                                //param.setQuality(1.0f, false);
+                                //ie.setJPEGEncodeParam(param);
+                                //ie.encode(img);
                                 os.close();
                         }
                 }catch(IOException ex) {
