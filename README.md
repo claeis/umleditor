@@ -12,20 +12,14 @@ Para instalar el editor UML, extraiga el archivo zip en un nuevo directorio.
 Para compilar el editor UML, cambie al directorio recién creado e introduzca el siguiente comando en el prompt comandos:
 
 ~~~
-ant compile jar run
+ant clean compile jar run
 ~~~
 
 Para crear una distribución binaria, utilice
 ~~~
 ant bindist
 ~~~
-:exclamation: 
-## Nota  
-El proyecto incluye librerías propias de jdk1.6, algunas descontinuadas por oracle, se recomienda no ejecutar
-~~~
-ant clean
-~~~
-rompe las dependencias incluidas en build/
+
 ## Licencia
 The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
 
