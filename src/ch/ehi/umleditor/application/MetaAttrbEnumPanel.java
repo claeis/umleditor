@@ -1,10 +1,32 @@
 package ch.ehi.umleditor.application;
 
+/* This file is part of the UML/INTERLIS-Editor.
+ * For more information, please see <http://www.umleditor.org/>.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.softenvironment.view.BasePanel;
 import ch.softenvironment.view.DataPanel;
 import ch.softenvironment.view.SimpleEditorPanel;
-
+/**
+ * Text-Editing Panel.
+ *
+ * @author: Ivan Alejandro List 
+ * @version $Revision: 3.2.6 $ $Date: 2017-08-02 11:51:12 $
+ */
 public class MetaAttrbEnumPanel extends BasePanel implements DataPanel {
 
 	private static final long serialVersionUID = 1628286338283254334L;
