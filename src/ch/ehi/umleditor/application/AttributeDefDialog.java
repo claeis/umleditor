@@ -45,6 +45,8 @@ private JButton ivjBtnOk = null;
 private JTabbedPane ivjTbpGeneral = null;
 private JLabel ivjLblName = null;
 private JTextField ivjTxtName = null;
+private javax.swing.JLabel ivjLblMetaAttrbAt = null;
+private javax.swing.JTextField ivjTxtMetaAttrbAt = null;
 private JComboBox ivjCbxType = null;
 private JButton ivjBtnApply = null;
 private JCheckBox ivjChxAbstract = null;
@@ -88,6 +90,8 @@ public void actionPerformed(java.awt.event.ActionEvent e) {
 public void focusGained(java.awt.event.FocusEvent e) {
 								if (e.getSource() == AttributeDefDialog.this.getTxtName())
 																connEtoM1(e);
+						        if(e.getSource() == AttributeDefDialog.this.getTxtMetaAttrbAt())
+					                							connEtoM2(e);
 };
 public void focusLost(java.awt.event.FocusEvent e) {
 };
@@ -280,85 +284,118 @@ private void connEtoM1(java.awt.event.FocusEvent arg1) {
 								}
 }
 /**
+ * connEtoM2:  (TxtMetaAttrbAt.focus.focusGained(java.awt.event.FocusEvent) --> TxtMetaAttrb.selectAll()V)
+ * @param arg1 java.awt.event.FocusEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoM2(java.awt.event.FocusEvent arg1) {
+        try {
+                // user code begin {1}
+                // user code end
+                getTxtMetaAttrbAt().selectAll();
+                // user code begin {2}
+                // user code end
+        } catch (java.lang.Throwable ivjExc) {
+                // user code begin {3}
+                // user code end
+                handleException(ivjExc);
+        }
+}
+/**
  * Return the BaseDialogContentPane property value.
  * @return javax.swing.JPanel
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
 private javax.swing.JPanel getBaseDialogContentPane() {
-								if (ivjBaseDialogContentPane == null) {
-																try {
-																								ivjBaseDialogContentPane = new javax.swing.JPanel();
-																								ivjBaseDialogContentPane.setName("BaseDialogContentPane");
-																								ivjBaseDialogContentPane.setLayout(new java.awt.GridBagLayout());
+		if (ivjBaseDialogContentPane == null) {
+			try {
+											ivjBaseDialogContentPane = new javax.swing.JPanel();
+											ivjBaseDialogContentPane.setName("BaseDialogContentPane");
+											ivjBaseDialogContentPane.setLayout(new java.awt.GridBagLayout());
 
-																								java.awt.GridBagConstraints constraintsLblName = new java.awt.GridBagConstraints();
-																								constraintsLblName.gridx = 0; constraintsLblName.gridy = 0;
-																								constraintsLblName.ipadx = 104;
-																								constraintsLblName.insets = new java.awt.Insets(22, 19, 8, 3);
-																								getBaseDialogContentPane().add(getLblName(), constraintsLblName);
+											java.awt.GridBagConstraints constraintsLblName = new java.awt.GridBagConstraints();
+											constraintsLblName.gridx = 0; constraintsLblName.gridy = 0;
+											constraintsLblName.ipadx = 104;
+											constraintsLblName.insets = new java.awt.Insets(22, 19, 8, 3);
+											getBaseDialogContentPane().add(getLblName(), constraintsLblName);
 
-																								java.awt.GridBagConstraints constraintsTxtName = new java.awt.GridBagConstraints();
-																								constraintsTxtName.gridx = 1; constraintsTxtName.gridy = 0;
-																								constraintsTxtName.gridwidth = 4;
-																								constraintsTxtName.fill = java.awt.GridBagConstraints.HORIZONTAL;
-																								constraintsTxtName.weightx = 1.0;
-																								constraintsTxtName.ipadx = 317;
-																								constraintsTxtName.insets = new java.awt.Insets(19, 3, 5, 117);
-																								getBaseDialogContentPane().add(getTxtName(), constraintsTxtName);
+											java.awt.GridBagConstraints constraintsTxtName = new java.awt.GridBagConstraints();
+											constraintsTxtName.gridx = 1; constraintsTxtName.gridy = 0;
+											constraintsTxtName.gridwidth = 4;
+											constraintsTxtName.fill = java.awt.GridBagConstraints.HORIZONTAL;
+											constraintsTxtName.weightx = 1.0;
+											constraintsTxtName.ipadx = 317;
+											constraintsTxtName.insets = new java.awt.Insets(19, 3, 5, 117);
+											getBaseDialogContentPane().add(getTxtName(), constraintsTxtName);
+											
+											java.awt.GridBagConstraints constraintsLblMetaAttrbAt = new java.awt.GridBagConstraints();
+											constraintsLblMetaAttrbAt.gridx = 0; constraintsLblMetaAttrbAt.gridy = 0;
+											constraintsLblMetaAttrbAt.ipadx = 104;
+											constraintsLblMetaAttrbAt.insets = new java.awt.Insets(80, 19, 8, 3);
+											getBaseDialogContentPane().add(getLblMetaAttrbAt(), constraintsLblMetaAttrbAt);
 
-																								java.awt.GridBagConstraints constraintsTbpGeneral = new java.awt.GridBagConstraints();
-																								constraintsTbpGeneral.gridx = 0; constraintsTbpGeneral.gridy = 2;
-																								constraintsTbpGeneral.gridwidth = 5;
-																								constraintsTbpGeneral.fill = java.awt.GridBagConstraints.BOTH;
-																								constraintsTbpGeneral.weightx = 1.0;
-																								constraintsTbpGeneral.weighty = 1.0;
-																								constraintsTbpGeneral.ipady = -2;
-																								constraintsTbpGeneral.insets = new java.awt.Insets(4, 12, 4, 11);
-																								getBaseDialogContentPane().add(getTbpGeneral(), constraintsTbpGeneral);
+											java.awt.GridBagConstraints constraintsTxtMetaAttrbAt = new java.awt.GridBagConstraints();
+											constraintsTxtMetaAttrbAt.gridx = 1; constraintsTxtMetaAttrbAt.gridy = 0;
+											constraintsTxtMetaAttrbAt.gridwidth = 4;
+											constraintsTxtMetaAttrbAt.fill = java.awt.GridBagConstraints.HORIZONTAL;
+											constraintsTxtMetaAttrbAt.weightx = 1.0;
+											constraintsTxtMetaAttrbAt.ipadx = 317;
+											constraintsTxtMetaAttrbAt.insets = new java.awt.Insets(85, 3, 5, 117);
+											getBaseDialogContentPane().add(getTxtMetaAttrbAt(), constraintsTxtMetaAttrbAt);
 
-																								java.awt.GridBagConstraints constraintsLblType = new java.awt.GridBagConstraints();
-																								constraintsLblType.gridx = 0; constraintsLblType.gridy = 1;
-																								constraintsLblType.ipadx = 117;
-																								constraintsLblType.insets = new java.awt.Insets(9, 19, 8, 3);
-																								getBaseDialogContentPane().add(getLblType(), constraintsLblType);
+											java.awt.GridBagConstraints constraintsTbpGeneral = new java.awt.GridBagConstraints();
+											constraintsTbpGeneral.gridx = 0; constraintsTbpGeneral.gridy = 2;
+											constraintsTbpGeneral.gridwidth = 5;
+											constraintsTbpGeneral.fill = java.awt.GridBagConstraints.BOTH;
+											constraintsTbpGeneral.weightx = 1.0;
+											constraintsTbpGeneral.weighty = 1.0;
+											constraintsTbpGeneral.ipady = -2;
+											constraintsTbpGeneral.insets = new java.awt.Insets(4, 12, 4, 11);
+											getBaseDialogContentPane().add(getTbpGeneral(), constraintsTbpGeneral);
 
-																								java.awt.GridBagConstraints constraintsCbxType = new java.awt.GridBagConstraints();
-																								constraintsCbxType.gridx = 1; constraintsCbxType.gridy = 1;
-																								constraintsCbxType.gridwidth = 3;
-																								constraintsCbxType.fill = java.awt.GridBagConstraints.HORIZONTAL;
-																								constraintsCbxType.weightx = 1.0;
-																								constraintsCbxType.ipadx = 79;
-																								constraintsCbxType.insets = new java.awt.Insets(5, 3, 3, 20);
-																								getBaseDialogContentPane().add(getCbxType(), constraintsCbxType);
+											java.awt.GridBagConstraints constraintsLblType = new java.awt.GridBagConstraints();
+											constraintsLblType.gridx = 0; constraintsLblType.gridy = 1;
+											constraintsLblType.ipadx = 117;
+											constraintsLblType.insets = new java.awt.Insets(9, 19, 8, 3);
+											getBaseDialogContentPane().add(getLblType(), constraintsLblType);
 
-																								java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
-																								constraintsBtnOk.gridx = 0; constraintsBtnOk.gridy = 3;
-																								constraintsBtnOk.gridwidth = 2;
-																								constraintsBtnOk.ipadx = 64;
-																								constraintsBtnOk.insets = new java.awt.Insets(5, 80, 9, 13);
-																								getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
+											java.awt.GridBagConstraints constraintsCbxType = new java.awt.GridBagConstraints();
+											constraintsCbxType.gridx = 1; constraintsCbxType.gridy = 1;
+											constraintsCbxType.gridwidth = 3;
+											constraintsCbxType.fill = java.awt.GridBagConstraints.HORIZONTAL;
+											constraintsCbxType.weightx = 1.0;
+											constraintsCbxType.ipadx = 79;
+											constraintsCbxType.insets = new java.awt.Insets(5, 3, 3, 20);
+											getBaseDialogContentPane().add(getCbxType(), constraintsCbxType);
 
-																								java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
-																								constraintsBtnCancel.gridx = 2; constraintsBtnCancel.gridy = 3;
-																								constraintsBtnCancel.ipadx = 18;
-																								constraintsBtnCancel.insets = new java.awt.Insets(5, 13, 9, 14);
-																								getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
+											java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
+											constraintsBtnOk.gridx = 0; constraintsBtnOk.gridy = 3;
+											constraintsBtnOk.gridwidth = 2;
+											constraintsBtnOk.ipadx = 64;
+											constraintsBtnOk.insets = new java.awt.Insets(5, 80, 9, 13);
+											getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
 
-																								java.awt.GridBagConstraints constraintsBtnApply = new java.awt.GridBagConstraints();
-																								constraintsBtnApply.gridx = 3; constraintsBtnApply.gridy = 3;
-																								constraintsBtnApply.gridwidth = 2;
-																								constraintsBtnApply.ipadx = 8;
-																								constraintsBtnApply.insets = new java.awt.Insets(5, 14, 9, 124);
-																								getBaseDialogContentPane().add(getBtnApply(), constraintsBtnApply);
-																								// user code begin {1}
-																								// user code end
-																} catch (java.lang.Throwable ivjExc) {
-																								// user code begin {2}
-																								// user code end
-																								handleException(ivjExc);
-																}
-								}
-								return ivjBaseDialogContentPane;
+											java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
+											constraintsBtnCancel.gridx = 2; constraintsBtnCancel.gridy = 3;
+											constraintsBtnCancel.ipadx = 18;
+											constraintsBtnCancel.insets = new java.awt.Insets(5, 13, 9, 14);
+											getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
+
+											java.awt.GridBagConstraints constraintsBtnApply = new java.awt.GridBagConstraints();
+											constraintsBtnApply.gridx = 3; constraintsBtnApply.gridy = 3;
+											constraintsBtnApply.gridwidth = 2;
+											constraintsBtnApply.ipadx = 8;
+											constraintsBtnApply.insets = new java.awt.Insets(5, 14, 9, 124);
+											getBaseDialogContentPane().add(getBtnApply(), constraintsBtnApply);
+											// user code begin {1}
+											// user code end
+			} catch (java.lang.Throwable ivjExc) {
+											// user code begin {2}
+											// user code end
+											handleException(ivjExc);
+			}
+		}
+		return ivjBaseDialogContentPane;
 }
 /**
  * Return the BtnApply property value.
@@ -598,21 +635,42 @@ private javax.swing.JLabel getLblCardinality() {
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
 private javax.swing.JLabel getLblName() {
-								if (ivjLblName == null) {
-																try {
-																								ivjLblName = new javax.swing.JLabel();
-																								ivjLblName.setName("LblName");
-																								ivjLblName.setText("Name:");
-																								// user code begin {1}
-																								ivjLblName.setText(resAttributeDefDialog.getString("LblName_text"));
-																								// user code end
-																} catch (java.lang.Throwable ivjExc) {
-																								// user code begin {2}
-																								// user code end
-																								handleException(ivjExc);
-																}
-								}
-								return ivjLblName;
+		if (ivjLblName == null) {
+					try {
+							ivjLblName = new javax.swing.JLabel();
+							ivjLblName.setName("LblName");
+							ivjLblName.setText("Name:");
+							// user code begin {1}
+							ivjLblName.setText(resAttributeDefDialog.getString("LblName_text"));
+							// user code end
+					} catch (java.lang.Throwable ivjExc) {
+							// user code begin {2}
+							// user code end
+							handleException(ivjExc);
+					}
+		}
+		return ivjLblName;
+}
+/**
+ * Return the JLabel13 property value.
+ * @return javax.swing.JLabel
+ */
+private javax.swing.JLabel getLblMetaAttrbAt() {
+	if (ivjLblMetaAttrbAt == null) {
+				try {
+						ivjLblMetaAttrbAt = new javax.swing.JLabel();
+						ivjLblMetaAttrbAt.setName("LblMetaAttrbAt_text");
+						ivjLblMetaAttrbAt.setText("Display name:");
+						// user code begin {1}
+						ivjLblMetaAttrbAt.setText(resAttributeDefDialog.getString("LblMetaAttrbAt_text"));
+						// user code end
+				} catch (java.lang.Throwable ivjExc) {
+						// user code begin {2}
+						// user code end
+						handleException(ivjExc);
+				}
+	}
+	return ivjLblMetaAttrbAt;
 }
 /**
  * Return the JLabel11 property value.
@@ -1087,19 +1145,39 @@ private javax.swing.JTabbedPane getTbpGeneral() {
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
 private javax.swing.JTextField getTxtName() {
-								if (ivjTxtName == null) {
-																try {
-																								ivjTxtName = new javax.swing.JTextField();
-																								ivjTxtName.setName("TxtName");
-																								// user code begin {1}
-																								// user code end
-																} catch (java.lang.Throwable ivjExc) {
-																								// user code begin {2}
-																								// user code end
-																								handleException(ivjExc);
-																}
-								}
-								return ivjTxtName;
+	if (ivjTxtName == null) {
+		try {
+				ivjTxtName = new javax.swing.JTextField();
+				ivjTxtName.setName("TxtName");
+				// user code begin {1}
+				// user code end
+		} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+		}
+	}
+	return ivjTxtName;
+}
+/**
+ * Return the JTextField2 property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JTextField getTxtMetaAttrbAt() {
+        if (ivjTxtMetaAttrbAt == null) {
+                try {
+                		ivjTxtMetaAttrbAt = new javax.swing.JTextField();
+                		ivjTxtMetaAttrbAt.setName("TxtMetaAttrbAt");
+                        // user code begin {1}
+                        // user code end
+                } catch (java.lang.Throwable ivjExc) {
+                        // user code begin {2}
+                        // user code end
+                        handleException(ivjExc);
+                }
+        }
+        return ivjTxtMetaAttrbAt;
 }
 /**
  * Called whenever the part throws an exception.
@@ -1121,6 +1199,7 @@ private void initConnections() throws java.lang.Exception {
 								getBtnApply().addActionListener(ivjEventHandler);
 								getCbxType().addItemListener(ivjEventHandler);
 								getTxtName().addFocusListener(ivjEventHandler);
+								getTxtMetaAttrbAt().addFocusListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -1175,6 +1254,9 @@ protected boolean save() {
 								if (!ElementUtils.trySetName(attributeDef, getTxtName().getText())) {
 																return false;
 								}
+								if (!ElementUtils.trySetMetaAttrb(attributeDef, getTxtMetaAttrbAt().getText())) {
+					                return false;
+					        }
 								// ??? ce2003-04-05 Why is this call required? Does the function name
 								// match the semantics?
 								getPnlDescription().getObject();
@@ -1295,6 +1377,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 								// general & page Description
 								getTxtName().setText(attributeDef.getDefLangName());
+								getTxtMetaAttrbAt().setText(attributeDef.getDefLangMetaAttrb());
 								getPnlDescription().setObject(element);
 
 								// page Details

@@ -146,21 +146,12 @@ public static String getDisplayName(java.lang.Class type) {
  * Set the ModelElement.metaAttrb
  */
 public static Boolean trySetMetaAttrb(ModelElement modelElement, String newMetaAttrb) {
-								String language = ch.ehi.basics.types.NlsString.getDefaultLanguage();
-								if ((modelElement != null) && (!newMetaAttrb.equals(mapNlsString(modelElement.getMetaAttrb(), language)))) {
+	String language = ch.ehi.basics.types.NlsString.getDefaultLanguage();
+	if ((modelElement != null) && (!newMetaAttrb.equals(mapNlsString(modelElement.getMetaAttrb(), language)))) {
+		modelElement.setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));
+	}
 
-																if (modelElement instanceof Participant) {
-																								// XOR updates real RoleDef name
-																								((Participant)modelElement).getAssociation().setMetaAttrb(new ch.ehi.basics.types.NlsString(language, newMetaAttrb));
-																								return true;
-																} else {
-																								Tracer.getInstance().developerWarning("<" + modelElement.toString() + " cannot be not checked yet because of missing namespace");//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
-																}
-
-																modelElement.setMetaAttrb(new ch.ehi.basics.types.NlsString(modelElement.getMetaAttrb(), language, newMetaAttrb));
-								}
-
-								return true;
+	return true;
 }
 /**
  * Return a new ModelElement Instance.
