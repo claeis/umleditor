@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 // -beg- preserve=no 3FDC4B1603A1 package "OidKind"
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 3FDC4B1603A1 package "OidKind"
@@ -31,33 +30,33 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -end- 3FDC4B1603A1 import "OidKind"
 
-/** @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:25 $
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:25 $
  */
-public class OidKind
-{
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3FDC4B1603A1 detail_begin "OidKind"
+public class OidKind {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3FDC4B1603A1 detail_begin "OidKind"
 
-// -end- 3FDC4B1603A1 detail_begin "OidKind"
+	// -end- 3FDC4B1603A1 detail_begin "OidKind"
 
-// -beg- preserve=no 3FDC4B3401C4 var3FDC4B1603A1 "ANY"
-public static final int ANY = 1;
-// -end- 3FDC4B3401C4 var3FDC4B1603A1 "ANY"
+	// -beg- preserve=no 3FDC4B3401C4 var3FDC4B1603A1 "ANY"
+	public static final int ANY = 1;
+	// -end- 3FDC4B3401C4 var3FDC4B1603A1 "ANY"
 
-// -beg- preserve=no 3FDC4B3603C5 var3FDC4B1603A1 "TEXT"
-public static final int TEXT = 2;
-// -end- 3FDC4B3603C5 var3FDC4B1603A1 "TEXT"
+	// -beg- preserve=no 3FDC4B3603C5 var3FDC4B1603A1 "TEXT"
+	public static final int TEXT = 2;
+	// -end- 3FDC4B3603C5 var3FDC4B1603A1 "TEXT"
 
-// -beg- preserve=no 3FDC4B390030 var3FDC4B1603A1 "NUMERIC"
-public static final int NUMERIC = 3;
-// -end- 3FDC4B390030 var3FDC4B1603A1 "NUMERIC"
+	// -beg- preserve=no 3FDC4B390030 var3FDC4B1603A1 "NUMERIC"
+	public static final int NUMERIC = 3;
+	// -end- 3FDC4B390030 var3FDC4B1603A1 "NUMERIC"
 
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3FDC4B1603A1 detail_end "OidKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3FDC4B1603A1 detail_end "OidKind"
 
-// -end- 3FDC4B1603A1 detail_end "OidKind"
+	// -end- 3FDC4B1603A1 detail_end "OidKind"
 
 }

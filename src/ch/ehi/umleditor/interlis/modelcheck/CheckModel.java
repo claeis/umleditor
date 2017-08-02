@@ -21,21 +21,20 @@ import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
 
-public class CheckModel
-{
-public static void checkAll()
-{
-        TransferFromUmlMetamodel writer=new TransferFromUmlMetamodel();
-        try{
-                ch.ehi.basics.settings.Settings settings=ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
-                Configuration ili2cConfig=new Configuration();
-                ili2cConfig.setAutoCompleteModelList(true);
-                ili2cConfig.setOutputKind(GenerateOutputKind.NOOUTPUT);
-                writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig,settings);
-        }catch(java.io.IOException ex) {
-                ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),ex.getLocalizedMessage());
-        }
-        return;
-}
+public class CheckModel {
+	public static void checkAll() {
+		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
+		try {
+			ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+			Configuration ili2cConfig = new Configuration();
+			ili2cConfig.setAutoCompleteModelList(true);
+			ili2cConfig.setOutputKind(GenerateOutputKind.NOOUTPUT);
+			writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(), ili2cConfig,
+					settings);
+		} catch (java.io.IOException ex) {
+			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+		}
+		return;
+	}
 
 }

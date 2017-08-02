@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 // -beg- preserve=no 3C3F11CD0324 package "ProjectionAttributeKind"
 package ch.ehi.interlis.views;
 // -end- 3C3F11CD0324 package "ProjectionAttributeKind"
@@ -31,21 +30,21 @@ package ch.ehi.interlis.views;
 
 // -end- 3C3F11CD0324 import "ProjectionAttributeKind"
 
-/** @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:30 $
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:30 $
  */
-public interface ProjectionAttributeKind extends java.io.Serializable
-{
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3C3F11CD0324 detail_begin "ProjectionAttributeKind"
+public interface ProjectionAttributeKind extends java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C3F11CD0324 detail_begin "ProjectionAttributeKind"
 
-// -end- 3C3F11CD0324 detail_begin "ProjectionAttributeKind"
+	// -end- 3C3F11CD0324 detail_begin "ProjectionAttributeKind"
 
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3C3F11CD0324 detail_end "ProjectionAttributeKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C3F11CD0324 detail_end "ProjectionAttributeKind"
 
-// -end- 3C3F11CD0324 detail_end "ProjectionAttributeKind"
+	// -end- 3C3F11CD0324 detail_end "ProjectionAttributeKind"
 
 }

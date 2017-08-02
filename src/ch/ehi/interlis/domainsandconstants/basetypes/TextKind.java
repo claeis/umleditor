@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 // -beg- preserve=no 3C1EF8DE0043 package "TextKind"
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 3C1EF8DE0043 package "TextKind"
@@ -31,37 +30,37 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -end- 3C1EF8DE0043 import "TextKind"
 
-/** @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:34 $
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:34 $
  */
-public class TextKind implements java.io.Serializable
-{
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3C1EF8DE0043 detail_begin "TextKind"
+public class TextKind implements java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1EF8DE0043 detail_begin "TextKind"
 
-// -end- 3C1EF8DE0043 detail_begin "TextKind"
+	// -end- 3C1EF8DE0043 detail_begin "TextKind"
 
-// -beg- preserve=no 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"
-public static final int UNDEFINED = 1;
-// -end- 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"
+	// -beg- preserve=no 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"
+	public static final int UNDEFINED = 1;
+	// -end- 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"
 
-// -beg- preserve=no 3C1EF8FA013D var3C1EF8DE0043 "MAXLEN"
-public static final int MAXLEN = 2;
-// -end- 3C1EF8FA013D var3C1EF8DE0043 "MAXLEN"
+	// -beg- preserve=no 3C1EF8FA013D var3C1EF8DE0043 "MAXLEN"
+	public static final int MAXLEN = 2;
+	// -end- 3C1EF8FA013D var3C1EF8DE0043 "MAXLEN"
 
-// -beg- preserve=no 3C1EF8FD0391 var3C1EF8DE0043 "NAME"
-public static final int NAME = 3;
-// -end- 3C1EF8FD0391 var3C1EF8DE0043 "NAME"
+	// -beg- preserve=no 3C1EF8FD0391 var3C1EF8DE0043 "NAME"
+	public static final int NAME = 3;
+	// -end- 3C1EF8FD0391 var3C1EF8DE0043 "NAME"
 
-// -beg- preserve=no 3C1EF9000060 var3C1EF8DE0043 "URI"
-public static final int URI = 4;
-// -end- 3C1EF9000060 var3C1EF8DE0043 "URI"
+	// -beg- preserve=no 3C1EF9000060 var3C1EF8DE0043 "URI"
+	public static final int URI = 4;
+	// -end- 3C1EF9000060 var3C1EF8DE0043 "URI"
 
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3C1EF8DE0043 detail_end "TextKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1EF8DE0043 detail_end "TextKind"
 
-// -end- 3C1EF8DE0043 detail_end "TextKind"
+	// -end- 3C1EF8DE0043 detail_end "TextKind"
 
 }

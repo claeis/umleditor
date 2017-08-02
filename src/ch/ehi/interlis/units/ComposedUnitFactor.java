@@ -40,7 +40,7 @@ import ch.ehi.basics.tools.AbstractVisitor;
  */
 public class ComposedUnitFactor extends AbstractEditorElement implements java.io.Serializable
 {
-// declare/define something only in the code
+	// declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 394A20F3001B detail_begin "ComposedUnitFactor"
 

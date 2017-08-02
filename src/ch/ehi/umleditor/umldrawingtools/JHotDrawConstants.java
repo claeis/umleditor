@@ -28,18 +28,18 @@ package ch.ehi.umleditor.umldrawingtools;
  * @see AttributeFigure.getFrame/FillColor()
  */
 public abstract class JHotDrawConstants {
-// @see ColorMap
-public final static String TRANSPARENT_COLOR = "None";
-// @see AttributeFigure.drawFrame(Graphics)
-public final static String TEXT_COLOR = "TextColor";
-// @see TextFigure.getAttribute(String)
-//	public final static String FONT_SIZE = "FontSize";
-//	public final static String FONT_STYLE = "FontStyle";
-public final static String FONT_NAME = "FontName";
-// @see AttributeFigure.getFrame/FillColor()
-public final static String FILL_COLOR = "FillColor";
-public final static String FRAME_COLOR = "FrameColor";
+	// @see ColorMap
+	public final static String TRANSPARENT_COLOR = "None";
+	// @see AttributeFigure.drawFrame(Graphics)
+	public final static String TEXT_COLOR = "TextColor";
+	// @see TextFigure.getAttribute(String)
+	// public final static String FONT_SIZE = "FontSize";
+	// public final static String FONT_STYLE = "FontStyle";
+	public final static String FONT_NAME = "FontName";
+	// @see AttributeFigure.getFrame/FillColor()
+	public final static String FILL_COLOR = "FillColor";
+	public final static String FRAME_COLOR = "FrameColor";
 
-// Tool-Commands
-public final static String DELECTE_COMMAND = "Delete";
+	// Tool-Commands
+	public final static String DELECTE_COMMAND = "Delete";
 }

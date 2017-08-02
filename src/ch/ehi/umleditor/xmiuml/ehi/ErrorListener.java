@@ -5,27 +5,27 @@
 //
 
 package ch.ehi.umleditor.xmiuml.ehi;
+
 import org.xml.sax.SAXParseException;
 import org.xml.sax.SAXException;
 import ch.softenvironment.util.Tracer;
 import ch.ehi.basics.logging.EhiLogger;
 
-public class ErrorListener implements org.xml.sax.ErrorHandler
-{
-public void error(SAXParseException err) throws SAXException
-{
-								EhiLogger.traceUnusualState("Parsing Error - Line: "+err.getLineNumber()+", URI: "+err.getSystemId()+", Message: "+err.getMessage());
-}
+public class ErrorListener implements org.xml.sax.ErrorHandler {
+	public void error(SAXParseException err) throws SAXException {
+		EhiLogger.traceUnusualState("Parsing Error - Line: " + err.getLineNumber() + ", URI: " + err.getSystemId()
+				+ ", Message: " + err.getMessage());
+	}
 
-public void fatalError(SAXParseException fatalErr) throws SAXException
-{
-								EhiLogger.traceUnusualState("Parsing FatalError - Line: "+fatalErr.getLineNumber()+", URI: "+fatalErr.getSystemId()+", Message: "+fatalErr.getMessage());
-								throw fatalErr;
-}
+	public void fatalError(SAXParseException fatalErr) throws SAXException {
+		EhiLogger.traceUnusualState("Parsing FatalError - Line: " + fatalErr.getLineNumber() + ", URI: "
+				+ fatalErr.getSystemId() + ", Message: " + fatalErr.getMessage());
+		throw fatalErr;
+	}
 
-public void  warning (SAXParseException warning) throws SAXException
-{
-								EhiLogger.traceUnusualState("Parsing Warning - Line: "+warning.getLineNumber()+", URI: "+warning.getSystemId()+", Message: "+warning.getMessage());
-}
+	public void warning(SAXParseException warning) throws SAXException {
+		EhiLogger.traceUnusualState("Parsing Warning - Line: " + warning.getLineNumber() + ", URI: "
+				+ warning.getSystemId() + ", Message: " + warning.getMessage());
+	}
 
 }

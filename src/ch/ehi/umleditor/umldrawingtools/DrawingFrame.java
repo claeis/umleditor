@@ -19,6 +19,7 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 import CH.ifa.draw.framework.*;
 import CH.ifa.draw.contrib.*;
+
 /**
  * This class represents a JInternalFrame with a JHotDraw drawing area.
  *
@@ -26,75 +27,87 @@ import CH.ifa.draw.contrib.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:54 $
  */
 public class DrawingFrame extends MDI_InternalFrame implements ch.ehi.uml1_4.changepropagation.MetaModelListener {
-/**
- * DrawingFrame constructor comment.
- * @param title java.lang.String
- */
-public DrawingFrame() {
-								super("(untitled)", true, true, true, true);
-}
-/**
- * Destroy this Internal Frame.
- */
-public void dispose() {
-								unregisterListener();
-								super.dispose();
-}
-/**
- * This function gets called when a change to a metamodel object occured.
- * @see MetaModelListener
- */
-public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
-								if (getDrawingView() instanceof ClassDiagramView) {
-																ClassDiagramView diagramView = (ClassDiagramView)getDrawingView();
+	/**
+	 * DrawingFrame constructor comment.
+	 * 
+	 * @param title
+	 *            java.lang.String
+	 */
+	public DrawingFrame() {
+		super("(untitled)", true, true, true, true);
+	}
 
-																if (diagramView.getParentElement().equals(event.getSource()) && event.getOperation().equals("clearDiagram")) {
-																								// package of this diagram has been deleted => remove contained diagrams too
-																								super.dispose(); // unregister of listener done by _unlinkAll()
-																}
-//		if ((event.getSource() == diagramView.getDiagram()) || (event.getSource() == diagramView.getParentElement())) {
-																// 1) update Diagram Title
-																setTitle(diagramView.getTitle());
-																repaint();
-//		} else {
-																// 2) update Figures within Diagram
-																diagramView.update(event);
-//		}
-								}
-}
-/**
- * Register this Frame's drawing for Model changes.
- */
-protected void registerListener() {
-								if ((getDrawingView() instanceof ClassDiagramView) &&
-												(!ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().containsMetaModelListener(this))) {
-																((ClassDiagramView)getDrawingView()).refresh();
-																// unregister Listener
-																ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().addMetaModelListener(this);
-								}
-}
-/**
- * Set the drawing view which represents the internal frame
- *
- * @param   newInternalDrawingView  drawing view for this internal frame
- */
-public void setDrawingView(DrawingView newInternalDrawingView) {
-								super.setDrawingView(newInternalDrawingView);
+	/**
+	 * Destroy this Internal Frame.
+	 */
+	public void dispose() {
+		unregisterListener();
+		super.dispose();
+	}
 
-								if (newInternalDrawingView instanceof ClassDiagramView) {
-																setTitle(((ClassDiagramView)newInternalDrawingView).getTitle());
-																// register Listener
-																registerListener();
-								}
-}
-/**
- * Unregister this Frame's drawing for Model changes.
- */
-protected void unregisterListener() {
-								if ((getDrawingView() instanceof ClassDiagramView) &&
-												(ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().containsMetaModelListener(this))) {
-																// unregister Listener
-																ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().removeMetaModelListener(this);
-								}
-}
+	/**
+	 * This function gets called when a change to a metamodel object occured.
+	 * 
+	 * @see MetaModelListener
+	 */
+	public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
+		if (getDrawingView() instanceof ClassDiagramView) {
+			ClassDiagramView diagramView = (ClassDiagramView) getDrawingView();
+
+			if (diagramView.getParentElement().equals(event.getSource())
+					&& event.getOperation().equals("clearDiagram")) {
+				// package of this diagram has been deleted => remove contained
+				// diagrams too
+				super.dispose(); // unregister of listener done by _unlinkAll()
+			}
+			// if ((event.getSource() == diagramView.getDiagram()) ||
+			// (event.getSource() == diagramView.getParentElement())) {
+			// 1) update Diagram Title
+			setTitle(diagramView.getTitle());
+			repaint();
+			// } else {
+			// 2) update Figures within Diagram
+			diagramView.update(event);
+			// }
+		}
+	}
+
+	/**
+	 * Register this Frame's drawing for Model changes.
+	 */
+	protected void registerListener() {
+		if ((getDrawingView() instanceof ClassDiagramView)
+				&& (!ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().containsMetaModelListener(this))) {
+			((ClassDiagramView) getDrawingView()).refresh();
+			// unregister Listener
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().addMetaModelListener(this);
+		}
+	}
+
+	/**
+	 * Set the drawing view which represents the internal frame
+	 *
+	 * @param newInternalDrawingView
+	 *            drawing view for this internal frame
+	 */
+	public void setDrawingView(DrawingView newInternalDrawingView) {
+		super.setDrawingView(newInternalDrawingView);
+
+		if (newInternalDrawingView instanceof ClassDiagramView) {
+			setTitle(((ClassDiagramView) newInternalDrawingView).getTitle());
+			// register Listener
+			registerListener();
+		}
+	}
+
+	/**
+	 * Unregister this Frame's drawing for Model changes.
+	 */
+	protected void unregisterListener() {
+		if ((getDrawingView() instanceof ClassDiagramView)
+				&& (ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().containsMetaModelListener(this))) {
+			// unregister Listener
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().removeMetaModelListener(this);
+		}
+	}
 }

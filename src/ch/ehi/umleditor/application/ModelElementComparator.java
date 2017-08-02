@@ -27,29 +27,29 @@ import ch.ehi.uml1_4.tools.ModelElementUtility;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:36 $
  */
 public class ModelElementComparator implements java.util.Comparator {
-/**
- * ModelElementComparator constructor comment.
- */
-protected ModelElementComparator() {
-								super();
-}
-/**
- * Compare by defaultLanguageName.
- */
-public int compare(Object o1, Object o2) {
-								if(o1==o2) {
-																// return equal only if it is the same object!!
-																// otherwise the element may not find its way into the lists
-																return 0;
-								}
+	/**
+	 * ModelElementComparator constructor comment.
+	 */
+	protected ModelElementComparator() {
+		super();
+	}
 
-								int ret= ((ModelElement)o1).getDefLangName().compareTo(((ModelElement)o2).getDefLangName());
-								if(ret!=0) {
-																return ret;
-								}
-								// compare path to elements
-								return ModelElementUtility.getUmlPath((ModelElement)o1,null).compareTo(
-																ModelElementUtility.getUmlPath((ModelElement)o2,null)
-																);
-}
+	/**
+	 * Compare by defaultLanguageName.
+	 */
+	public int compare(Object o1, Object o2) {
+		if (o1 == o2) {
+			// return equal only if it is the same object!!
+			// otherwise the element may not find its way into the lists
+			return 0;
+		}
+
+		int ret = ((ModelElement) o1).getDefLangName().compareTo(((ModelElement) o2).getDefLangName());
+		if (ret != 0) {
+			return ret;
+		}
+		// compare path to elements
+		return ModelElementUtility.getUmlPath((ModelElement) o1, null)
+				.compareTo(ModelElementUtility.getUmlPath((ModelElement) o2, null));
+	}
 }

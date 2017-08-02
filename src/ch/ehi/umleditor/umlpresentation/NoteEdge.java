@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 // -beg- preserve=no 3D4AB587020E package "NoteEdge"
 package ch.ehi.umleditor.umlpresentation;
 // -end- 3D4AB587020E package "NoteEdge"
@@ -32,54 +31,55 @@ import ch.ehi.basics.tools.AbstractVisitor;
 
 // -end- 3D4AB587020E import "NoteEdge"
 
-/** The line that links a Note to a PresentationElement.
- *  @author Claude Eisenhut
- *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:13 $
+/**
+ * The line that links a Note to a PresentationElement.
+ * 
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:13 $
  */
-public class NoteEdge extends PresentationEdge
-{
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3D4AB587020E detail_begin "NoteEdge"
+public class NoteEdge extends PresentationEdge {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4AB587020E detail_begin "NoteEdge"
 
-// -end- 3D4AB587020E detail_begin "NoteEdge"
+	// -end- 3D4AB587020E detail_begin "NoteEdge"
 
-// -beg- preserve=no 3D4FA2170366 head3D4AB587020E "unlinkAll"
-public void unlinkAll()
-// -end- 3D4FA2170366 head3D4AB587020E "unlinkAll"
-// declare any checked exceptions
-// please fill in/modify the following section
-// -beg- preserve=no 3D4FA2170366 throws3D4AB587020E "unlinkAll"
+	// -beg- preserve=no 3D4FA2170366 head3D4AB587020E "unlinkAll"
+	public void unlinkAll()
+	// -end- 3D4FA2170366 head3D4AB587020E "unlinkAll"
+	// declare any checked exceptions
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4FA2170366 throws3D4AB587020E "unlinkAll"
 
-// -end- 3D4FA2170366 throws3D4AB587020E "unlinkAll"
-{
-        // please fill in/modify the following section
-        // -beg- preserve=no 3D4FA2170366 body3D4AB587020E "unlinkAll"
+	// -end- 3D4FA2170366 throws3D4AB587020E "unlinkAll"
+	{
+		// please fill in/modify the following section
+		// -beg- preserve=no 3D4FA2170366 body3D4AB587020E "unlinkAll"
 
-        super.unlinkAll();
-        // -end- 3D4FA2170366 body3D4AB587020E "unlinkAll"
-}
+		super.unlinkAll();
+		// -end- 3D4FA2170366 body3D4AB587020E "unlinkAll"
+	}
 
-// -beg- preserve=no 3D4FA217036E head3D4AB587020E "enumerateChildren"
-public void enumerateChildren(AbstractVisitor visitor)
-// -end- 3D4FA217036E head3D4AB587020E "enumerateChildren"
-// declare any checked exceptions
-// please fill in/modify the following section
-// -beg- preserve=no 3D4FA217036E throws3D4AB587020E "enumerateChildren"
+	// -beg- preserve=no 3D4FA217036E head3D4AB587020E "enumerateChildren"
+	public void enumerateChildren(AbstractVisitor visitor)
+	// -end- 3D4FA217036E head3D4AB587020E "enumerateChildren"
+	// declare any checked exceptions
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4FA217036E throws3D4AB587020E "enumerateChildren"
 
-// -end- 3D4FA217036E throws3D4AB587020E "enumerateChildren"
-{
-        // please fill in/modify the following section
-        // -beg- preserve=no 3D4FA217036E body3D4AB587020E "enumerateChildren"
-        java.util.Iterator it=null;
-        super.enumerateChildren(visitor);
-        // -end- 3D4FA217036E body3D4AB587020E "enumerateChildren"
-}
+	// -end- 3D4FA217036E throws3D4AB587020E "enumerateChildren"
+	{
+		// please fill in/modify the following section
+		// -beg- preserve=no 3D4FA217036E body3D4AB587020E "enumerateChildren"
+		java.util.Iterator it = null;
+		super.enumerateChildren(visitor);
+		// -end- 3D4FA217036E body3D4AB587020E "enumerateChildren"
+	}
 
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 3D4AB587020E detail_end "NoteEdge"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4AB587020E detail_end "NoteEdge"
 
-// -end- 3D4AB587020E detail_end "NoteEdge"
+	// -end- 3D4AB587020E detail_end "NoteEdge"
 
 }

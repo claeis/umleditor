@@ -19,6 +19,7 @@ package ch.ehi.umleditor.application;
  */
 import javax.swing.JTree;
 import java.awt.Component;
+
 /**
  * TreeCellRenderer for a TreeNode.
  *
@@ -26,73 +27,61 @@ import java.awt.Component;
  * @version $Revision: 1.2 $ $Date: 2004-09-20 19:09:29 $
  */
 public class NavigationTreeCellRenderer extends javax.swing.tree.DefaultTreeCellRenderer {
-/**
- * This is messaged from JTree whenever it needs to get the size
- * of the component or it wants to draw it.
- * This attempts to set the font based on value, which will be
- * a TreeNode.
- */
-public NavigationTreeCellRenderer() {
-								super();
-}
-/**
- * Adapt the correct LeafIcon.
- * @see NavigationView.initializeTree()
- */
-public Component getTreeCellRendererComponent(
-								JTree tree,
-								Object value,
-								boolean sel,
-								boolean expanded,
-								boolean leaf,
-								int row,
-								boolean hasFocus) {
+	/**
+	 * This is messaged from JTree whenever it needs to get the size of the
+	 * component or it wants to draw it. This attempts to set the font based on
+	 * value, which will be a TreeNode.
+	 */
+	public NavigationTreeCellRenderer() {
+		super();
+	}
 
-								super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+	/**
+	 * Adapt the correct LeafIcon.
+	 * 
+	 * @see NavigationView.initializeTree()
+	 */
+	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf,
+			int row, boolean hasFocus) {
 
-								javax.swing.Icon icon=NavigationTreeNodeUtility.getIcon(value, expanded);
-								if(icon!=null) {
-																setIcon(icon);
-								}
-								String name = NavigationTreeNodeUtility.getName(value);
-								setText(name);
+		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
-								if (value != null) {
-																// show ClassName as ToolTip
-																setToolTipText(ch.softenvironment.util.StringUtils.getPureClassName(value));
-								}
+		javax.swing.Icon icon = NavigationTreeNodeUtility.getIcon(value, expanded);
+		if (icon != null) {
+			setIcon(icon);
+		}
+		String name = NavigationTreeNodeUtility.getName(value);
+		setText(name);
 
-								return this;
-}
-/**
- * paint is subclassed to draw the background correctly.
- *
- * Hint for JRE 1.2.2
- *		JLabel currently does not allow backgrounds other than white, and it
- *		will also fill behind the icon.  Something that isn't desirable.
- */
-public void paint(java.awt.Graphics g) {
-/*
-    java.awt.Color bColor;
-    javax.swing.Icon currentI = getIcon();
+		if (value != null) {
+			// show ClassName as ToolTip
+			setToolTipText(ch.softenvironment.util.StringUtils.getPureClassName(value));
+		}
 
-    if (selected)
-        bColor = java.awt.Color.yellow;
-    else
-        if (getParent() != null)
-            // Pick background color up from parent (which will come from
-            //   the JTree we're contained in).
-            bColor = getParent().getBackground();
-        else
-            bColor = getBackground();
-    g.setColor(bColor);
-    if (currentI != null && getText() != null) {
-        int offset = (currentI.getIconWidth() + getIconTextGap());
+		return this;
+	}
 
-        g.fillRect(offset, 0, getWidth() - 1 - offset, getHeight() - 1);
-    } else
-        g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
- */
-								super.paint(g);
-}
+	/**
+	 * paint is subclassed to draw the background correctly.
+	 *
+	 * Hint for JRE 1.2.2 JLabel currently does not allow backgrounds other than
+	 * white, and it will also fill behind the icon. Something that isn't
+	 * desirable.
+	 */
+	public void paint(java.awt.Graphics g) {
+		/*
+		 * java.awt.Color bColor; javax.swing.Icon currentI = getIcon();
+		 * 
+		 * if (selected) bColor = java.awt.Color.yellow; else if (getParent() !=
+		 * null) // Pick background color up from parent (which will come from
+		 * // the JTree we're contained in). bColor =
+		 * getParent().getBackground(); else bColor = getBackground();
+		 * g.setColor(bColor); if (currentI != null && getText() != null) { int
+		 * offset = (currentI.getIconWidth() + getIconTextGap());
+		 * 
+		 * g.fillRect(offset, 0, getWidth() - 1 - offset, getHeight() - 1); }
+		 * else g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
+		 */
+		super.paint(g);
+	}
 }

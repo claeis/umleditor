@@ -51,7 +51,7 @@ public abstract class PresentationEdge extends AbstractEditorElement implements 
 // -end- 3C2C47C7009D detail_begin "PresentationEdge"
 
 // -beg- preserve=no 3D4FA2170074 head3C2C47C7009D "unlinkAll"
-public void unlinkAll()
+	public void unlinkAll()
 // -end- 3D4FA2170074 head3C2C47C7009D "unlinkAll"
 // declare any checked exceptions
 // please fill in/modify the following section

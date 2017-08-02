@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 // -beg- preserve=no 44892B8B03C7 package "AttributeSubdivisionKind"
 package ch.ehi.interlis.attributes;
 // -end- 44892B8B03C7 package "AttributeSubdivisionKind"
@@ -31,33 +30,33 @@ package ch.ehi.interlis.attributes;
 
 // -end- 44892B8B03C7 import "AttributeSubdivisionKind"
 
-/** @author Claude Eisenhut
- *  @version $Revision: 1.1 $ $Date: 2006-06-13 14:23:04 $
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1 $ $Date: 2006-06-13 14:23:04 $
  */
-public class AttributeSubdivisionKind
-{
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
+public class AttributeSubdivisionKind {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
 
-// -end- 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
+	// -end- 44892B8B03C7 detail_begin "AttributeSubdivisionKind"
 
-// -beg- preserve=no 44892BD7005F var44892B8B03C7 "NONE"
-public static final int NONE = 0;
-// -end- 44892BD7005F var44892B8B03C7 "NONE"
+	// -beg- preserve=no 44892BD7005F var44892B8B03C7 "NONE"
+	public static final int NONE = 0;
+	// -end- 44892BD7005F var44892B8B03C7 "NONE"
 
-// -beg- preserve=no 44892BDE018C var44892B8B03C7 "SUBDIVISION"
-public static final int SUBDIVISION = 1;
-// -end- 44892BDE018C var44892B8B03C7 "SUBDIVISION"
+	// -beg- preserve=no 44892BDE018C var44892B8B03C7 "SUBDIVISION"
+	public static final int SUBDIVISION = 1;
+	// -end- 44892BDE018C var44892B8B03C7 "SUBDIVISION"
 
-// -beg- preserve=no 44892BEC031C var44892B8B03C7 "CONTINUOUS"
-public static final int CONTINUOUS = 2;
-// -end- 44892BEC031C var44892B8B03C7 "CONTINUOUS"
+	// -beg- preserve=no 44892BEC031C var44892B8B03C7 "CONTINUOUS"
+	public static final int CONTINUOUS = 2;
+	// -end- 44892BEC031C var44892B8B03C7 "CONTINUOUS"
 
-// declare/define something only in the code
-// please fill in/modify the following section
-// -beg- preserve=no 44892B8B03C7 detail_end "AttributeSubdivisionKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 44892B8B03C7 detail_end "AttributeSubdivisionKind"
 
-// -end- 44892B8B03C7 detail_end "AttributeSubdivisionKind"
+	// -end- 44892B8B03C7 detail_end "AttributeSubdivisionKind"
 
 }
