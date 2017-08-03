@@ -1,3 +1,8 @@
+UML-Editor 3.6.3 (2017-08-03)
+----------------------------------
+- Support to "display name" from ili2db at Class, Attributes, Domains and Attributes type enumeration.
+- fix unused imports.
+
 UML-Editor 3.6.2 (2015-12-23) 
 ----------------------------------
 - improved label "Language of model presentation"
