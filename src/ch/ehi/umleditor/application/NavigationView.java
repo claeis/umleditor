@@ -20,15 +20,24 @@ package ch.ehi.umleditor.application;
 import java.util.EventObject;
 import java.util.Iterator;
 
-import ch.ehi.interlis.modeltopicclass.*;
-import ch.ehi.uml1_4.foundation.core.*;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
+
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.uml1_4.foundation.core.Association;
+import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Attribute;
+import ch.ehi.uml1_4.foundation.core.Element;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
 import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
+import ch.ehi.umleditor.umldrawingtools.ModelElementUI;
 import ch.ehi.umleditor.umlpresentation.Diagram;
-
-import javax.swing.tree.*;
-
-import ch.softenvironment.util.*;
+import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.CommonUserAccess;
 import ch.softenvironment.view.ListMenuChoice;
 
@@ -154,6 +163,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		public void mouseExited(java.awt.event.MouseEvent e) {
 		};
 
+		
 		public void mousePressed(java.awt.event.MouseEvent e) {
 			if (e.getSource() == NavigationView.this.getTreNavigation())
 				connEtoC30(e);
@@ -830,6 +840,15 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		try {
 			// user code begin {1}
 			// user code end
+
+				if(SwingUtilities.isRightMouseButton(arg1)){
+				  int selRow = ivjTreNavigation.getRowForLocation(arg1.getX(), arg1.getY());
+			         TreePath selPath = ivjTreNavigation.getPathForLocation(arg1.getX(), arg1.getY());
+			         			ivjTreNavigation.setSelectionPath(selPath); 
+			                 if (selRow>-1){
+			                	 ivjTreNavigation.setSelectionRow(selRow); 
+			                 }
+			 }
 			this.genericPopupDisplay(arg1, getMnpTreeActions());
 			// user code begin {2}
 			// user code end
