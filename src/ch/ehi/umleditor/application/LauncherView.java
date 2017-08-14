@@ -25,6 +25,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -3951,6 +3952,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		FileChooser saveDialog = new FileChooser(getSettings().getWorkingDirectory());
 		saveDialog.setDialogTitle(CommonUserAccess.getMniFileSaveAsText());
 		saveDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
+		//saveDialog.addChoosableFileFilter(new FileNameExtensionFilter("UML Files", "uml"));
 
 		if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
@@ -4250,10 +4252,10 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private void saveFile(java.io.File file) throws java.io.IOException {
 		PersistenceService service = new PersistenceService();
 		// do not save file name in UmlModel
-		service.writeFile(file.getAbsolutePath(), getModel());
+		service.writeFile(file.getAbsolutePath()+".uml", getModel());
 		setCurrentFile(file); // set title before changed flag is cleared
 		setModelChanged(false);
-		log(getResourceString("CIModelSaved"), getResourceString("CIInFile") + file.getAbsolutePath()); //$NON-NLS-2$ //$NON-NLS-1$
+		log(getResourceString("CIModelSaved"), getResourceString("CIInFile") + file.getAbsolutePath()+".uml"); //$NON-NLS-2$ //$NON-NLS-1$
 		mnuFileHistory.addRecent(file.getAbsolutePath());
 	}
 
