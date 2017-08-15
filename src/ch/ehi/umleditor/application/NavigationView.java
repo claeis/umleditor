@@ -2109,9 +2109,9 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getTreNavigation().setRowHeight(-1);
 		getTreNavigation().setRootVisible(true);
 
-		// set Multiple Row selection model
+		// set Single Row selection model (at multiple selection don't works right click for remove or move element)
 		DefaultTreeSelectionModel selectionModel = new DefaultTreeSelectionModel();
-		selectionModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+		selectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		getTreNavigation().setSelectionModel(selectionModel);
 
 		// Enable tool tips for the tree
