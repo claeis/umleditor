@@ -163,7 +163,8 @@ public class ImportInterlis {
 		importDialog.setDialogTitle(rsrc.getString("CTfileSelector"));
 		importDialog.setMultiSelectionEnabled(true);
 		ch.ehi.basics.view.GenericFileFilter iliFilter = LauncherView.createInterlisModelFilter();
-		importDialog.addChoosableFileFilter(iliFilter);
+		//importDialog.addChoosableFileFilter(iliFilter);
+		importDialog.setFileFilter(iliFilter);
 
 		if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setImportDirectory(importDialog.getCurrentDirectory().getAbsolutePath());

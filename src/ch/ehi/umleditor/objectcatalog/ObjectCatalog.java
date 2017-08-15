@@ -66,7 +66,8 @@ public class ObjectCatalog {
 			}
 			FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 			saveDialog.setDialogTitle(rsrc.getString("CTstructFileSelector"));
-			saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
+			//saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
+			saveDialog.setFileFilter(GenericFileFilter.createHtmlFilter());
 
 			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
@@ -168,7 +169,8 @@ public class ObjectCatalog {
 			}
 			FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 			saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
-			saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
+			//saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
+			saveDialog.setFileFilter(GenericFileFilter.createHtmlFilter());
 
 			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());

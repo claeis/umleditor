@@ -3854,7 +3854,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		if (saveCurrentChanges()) {
 			FileChooser openDialog = new FileChooser(getSettings().getWorkingDirectory());
 			openDialog.setDialogTitle(CommonUserAccess.getTitleFileOpen());
-			openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
+			//openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
+			openDialog.setFileFilter(createUmlInterlisEditorFilter());
 
 			if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 				getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
