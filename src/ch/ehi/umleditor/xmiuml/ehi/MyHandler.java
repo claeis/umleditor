@@ -8,6 +8,11 @@
 package ch.ehi.umleditor.xmiuml.ehi;
 // -end- 3CF1D26803CA package "MyHandler"
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 // -beg- preserve=no 3CF1D26803CA autoimport "MyHandler"
 
 // -end- 3CF1D26803CA autoimport "MyHandler"
@@ -15,14 +20,15 @@ package ch.ehi.umleditor.xmiuml.ehi;
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=yes 3CF1D26803CA import "MyHandler"
-import org.xml.sax.*;
-import java.lang.reflect.*;
-import java.util.*;
-import java.io.*;
-import ch.ehi.uml1_4.implementation.UmlModel;
-import ch.softenvironment.util.Tracer;
+import org.xml.sax.Attributes;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 import ch.ehi.basics.logging.EhiLogger;
 // -end- 3CF1D26803CA import "MyHandler"
+import ch.ehi.uml1_4.implementation.UmlModel;
 
 public class MyHandler implements org.xml.sax.ContentHandler {
 	// declare/define something only in the code
@@ -187,10 +193,16 @@ public class MyHandler implements org.xml.sax.ContentHandler {
 			if (secondPass) {
 				try {
 					String value = content.toString();
+					
 					if (actualObject instanceof ch.ehi.uml1_4.implementation.AbstractModelElement
 							&& currentElementTag.equals("DefLangName")) {
 						// skip derived property DefLangName
-					} else if (currentObjObjectAdds.containsKey(currentElementTag)) {
+					}
+					else if(actualObject instanceof ch.ehi.uml1_4.implementation.AbstractModelElement
+							&& currentElementTag.equals("DefLangMetaAttrb")){
+						// skip derived property DefLangMetaAttrb
+					}
+					else if (currentObjObjectAdds.containsKey(currentElementTag)) {
 						// get object that this value references
 						if (!objMap.containsKey(value)) {
 							if (!missingObjsTID.contains(value)) {
