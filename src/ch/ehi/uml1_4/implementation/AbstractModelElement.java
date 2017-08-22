@@ -100,6 +100,8 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
 		setMetaAttrb(null);
+		setMetaName(null);
+		setMetaMsg(null);
 		setDocumentation(null);
 		super.unlinkAll();
 		// -end- 3D4FA03E02C3 body3CE225AB0092 "unlinkAll"
@@ -128,6 +130,8 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 			visitor.visit(it.next());
 		visitor.visit(getName());
 		visitor.visit(getMetaAttrb());
+		visitor.visit(getMetaName());
+		visitor.visit(getMetaMsg());
 		visitor.visit(getDocumentation());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA03E0309 body3CE225AB0092 "enumerateChildren"
@@ -182,13 +186,48 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	public void setDefLangMetaAttrb() {
 		NlsString oldMetaAttrb = getMetaAttrb();
 		if (oldMetaAttrb == null) {
-			setMetaAttrb(new NlsString(metaAttrb));
 		} else if (oldMetaAttrb.getValue() == null) {
 			if (metaAttrb != null) {
 				setMetaAttrb(new NlsString(oldMetaAttrb, metaAttrb.toString()));
 			}
 		} else if (!oldMetaAttrb.getValue().equals(metaAttrb)) {
 			setMetaAttrb(new NlsString(oldMetaAttrb, metaAttrb.toString()));
+		}
+		return;
+	}
+	
+	public String getDefLangMetaName() {
+		NlsString metaName = getMetaName();
+		return metaName != null ? metaName.getValue() : null;
+	}
+
+	public void setDefLangMetaName() {
+		NlsString oldMetaName = getMetaName();
+		if (oldMetaName == null) {
+		} else if (oldMetaName.getValue() == null) {
+			if (metaName != null) {
+				setMetaName(new NlsString(oldMetaName, metaName.toString()));
+			}
+		} else if (!oldMetaName.getValue().equals(metaName)) {
+			setMetaName(new NlsString(oldMetaName, metaName.toString()));
+		}
+		return;
+	}
+	
+	public String getDefLangMetaMsg() {
+		NlsString metaMsg = getMetaMsg();
+		return metaMsg != null ? metaMsg.getValue() : null;
+	}
+
+	public void setDefLangMetaMsg() {
+		NlsString oldMetaMsg = getMetaMsg();
+		if (oldMetaMsg == null) {
+		} else if (oldMetaMsg.getValue() == null) {
+			if (metaMsg != null) {
+				setMetaMsg(new NlsString(oldMetaMsg, metaMsg.toString()));
+			}
+		} else if (!oldMetaMsg.getValue().equals(metaMsg)) {
+			setMetaMsg(new NlsString(oldMetaMsg, metaMsg.toString()));
 		}
 		return;
 	}
@@ -3877,6 +3916,35 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 			metaAttrb = value;
 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMettaAttrb"));
+		}
+	}
+	
+	private NlsString metaName = null;
+	
+	public NlsString getMetaName() {
+		return metaName;
+	}
+
+	public void setMetaName(NlsString value) {
+		if (metaName != value && (metaName == null || !metaName.equals(value))) {
+			metaName = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaName"));
+		}
+	}
+
+	
+	private NlsString metaMsg = null;
+	
+	public NlsString getMetaMsg() {
+		return metaMsg;
+	}
+
+	public void setMetaMsg(NlsString value) {
+		if (metaMsg != value && (metaMsg == null || !metaMsg.equals(value))) {
+			metaMsg = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
 		}
 	}
 

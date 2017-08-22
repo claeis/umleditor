@@ -109,6 +109,8 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
 		setMetaAttrb(null);
+		setMetaName(null);
+		setMetaMsg(null);
 		setDocumentation(null);
 		super.unlinkAll();
 		// -end- 3D4FA218015C body3941018702C7 "unlinkAll"
@@ -138,6 +140,8 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 			visitor.visit(it.next());
 		visitor.visit(getName());
 		visitor.visit(getMetaAttrb());
+		visitor.visit(getMetaName());
+		visitor.visit(getMetaMsg());
 		visitor.visit(getDocumentation());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA2180170 body3941018702C7 "enumerateChildren"
@@ -539,7 +543,22 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
+	}
+	
+	public NlsString getMetaName() {
+		return super.getMetaName();
+	}
+	
+	public void setMetaName(NlsString value) {
+		super.setMetaName(value);
+	}
+	public NlsString getMetaMsg() {
+		return super.getMetaMsg();
+	}
+	
+	public void setMetaMsg(NlsString value) {
+		super.setMetaMsg(value);
 	}
 
 	// declare/define something only in the code

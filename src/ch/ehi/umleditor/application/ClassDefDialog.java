@@ -54,6 +54,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JButton ivjBtnApply = null;
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
+	//private javax.swing.JPanel ivjPnlMetaConstraints = null;
 	private InterlisSyntaxPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
@@ -939,7 +940,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjPnlConstraints.setName("PnlConstraints");
 				// user code begin {1}
 				// user code end
-			} catch (java.lang.Throwable ivjExc) {
+			} catch (java.lang.Throwable ivjExc) {//aqui
 				// user code begin {2}
 				// user code end
 				handleException(ivjExc);

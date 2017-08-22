@@ -1083,6 +1083,8 @@ public class TransferFromUmlMetamodel {
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
 		visitMetaAttrb(def.getMetaAttrb());
+		visitMetaName(def.getMetaName());
+		visitMetaMsg(def.getMetaMsg());
 		visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression) def.getBody());
 		return;
 	}
@@ -2386,12 +2388,42 @@ public class TransferFromUmlMetamodel {
 		if (doc.length() == 0)
 			return;
 		String beg = "!!@ili2db.";
-		String metaAttrb = "dispName=";// Can be a variable later
+		String metaAttrb = "dispName=";
 
 		out.write(getIndent() + beg + metaAttrb + '"' + doc + '"');
 		newline();
 
 	}
+	
+	// Add Meta attribute name for ilivalid constraint
+	public void visitMetaName(NlsString nlsdoc) throws java.io.IOException {
+		if (nlsdoc == null)
+			return;
+		String doc = nlsdoc.getValue(language).trim();
+		if (doc.length() == 0)
+			return;
+		String beg = "!!@";
+		String metaName = "name=";
+
+		out.write(getIndent() + beg + metaName + doc);
+		newline();
+
+	}
+	
+	//Add Meta attribute msg for ilivalid constraing
+	public void visitMetaMsg(NlsString nlsdoc) throws java.io.IOException {
+		if (nlsdoc == null)
+			return;
+		String doc = nlsdoc.getValue(language).trim();
+		if (doc.length() == 0)
+			return;
+		String beg = "!!@ilivalid.";
+		String metaMsg = "msg=";
+
+		out.write(getIndent() + beg + metaMsg + '"' + doc + '"');
+		newline();
+
+	}	
 
 	public void visitExplanation(NlsString nlsdoc) throws java.io.IOException {
 		if (nlsdoc == null)
