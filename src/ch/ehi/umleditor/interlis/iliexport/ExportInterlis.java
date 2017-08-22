@@ -18,12 +18,15 @@
 package ch.ehi.umleditor.interlis.iliexport;
 
 import ch.ehi.umleditor.application.LauncherView;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.view.GenericFileFilter;
 import java.io.File;
 import javax.swing.JOptionPane;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
+import ch.interlis.ili2c.metamodel.TransferDescription;
+import ch.interlis.ili2c.Ili2cException;
 
 public class ExportInterlis {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ExportInterlis.class);
@@ -34,10 +37,14 @@ public class ExportInterlis {
 			// get list of files, that will be created
 			java.util.List fileList = writer
 					.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
-			if (checkFiles(fileList, writer.getFuncDesc())) {
-				// write the files
-				writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
-			}
+			//if(checkModels(fileList)){
+				if (checkFiles(fileList, writer.getFuncDesc())) {
+					// write the files
+					JOptionPane.showMessageDialog(null, "File exported!", "Info", JOptionPane.INFORMATION_MESSAGE);
+					writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
+				}
+			//}
+			
 		} catch (java.io.IOException ex) {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
 		}
@@ -118,6 +125,51 @@ public class ExportInterlis {
 		return;
 	}
 
+	private static Boolean checkModels(java.util.List file){
+		//ch.ehi.umleditor.interlis.modelcheck.CheckModel.checkAll();
+		java.util.List apprv = new java.util.ArrayList();
+		java.util.Iterator filei = file.iterator();
+		
+		TransferFromIli2cMetamodel convert = new TransferFromIli2cMetamodel();
+		Boolean confirm = false;
+		
+		//try{
+		
+			
+			Configuration config = new Configuration();
+		
+		while(filei.hasNext()){
+			File selectedFile = (File) filei.next();
+			
+			config.addFileEntry(new ch.interlis.ili2c.config.FileEntry(selectedFile.getAbsolutePath(),
+					ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
+		}
+		config.setGenerateWarnings(false);
+		config.setOutputKind(GenerateOutputKind.NOOUTPUT);
+		config.setAutoCompleteModelList(true);
+
+		ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+
+		TransferDescription ili2cModel = ch.interlis.ili2c.Main.runCompiler(config, settings);
+		if (ili2cModel != null) {
+			confirm = true;
+
+		} else{
+			confirm = false;
+			  JOptionPane.showMessageDialog(null, "Could not save the file has errors, please check the model", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+		//} catch(Ili2cException ex){
+		//	editor.log(convert.getFuncDesc(), ex.getLocalizedMessage());
+		//}
+		return confirm;
+	}
+	/**
+	 * Check if the files exist at current path and show a JoptionPane to confirm reemplace
+	 * @param filev List of files to export
+	 * @param funcdesc Description of current export mode
+	 * @return a boolean value to confirm if the file exist
+	 */
 	private static boolean checkFiles(java.util.List filev, String funcdesc) {
 		java.util.List apprv = new java.util.ArrayList();
 		java.util.Iterator filei = filev.iterator();
