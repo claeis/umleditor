@@ -55,11 +55,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
 	private javax.swing.JPanel ivjPnlMetaConstraints = null;
-	private javax.swing.JLabel ivjLblMetaName = null;
-	private javax.swing.JTextField ivjTxtMetaName = null;
-	private javax.swing.JLabel ivjLblMetaMsg = null;
-	private javax.swing.JTextField ivjTxtMetaMsg = null;
-	private InterlisSyntaxPanel ivjPnlConstraints = null;
+	private InterlisSyntaxConstraintPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
 	private javax.swing.JScrollPane ivjScpAttributes = null;
@@ -546,43 +542,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjPnlMetaConstraints.setName("MetaConstraintsContentPane");
 				ivjPnlMetaConstraints.setLayout(new java.awt.GridBagLayout());
 				
-				// show label metaName at panel
-				java.awt.GridBagConstraints constraintsLblMetaName = new java.awt.GridBagConstraints();
-				constraintsLblMetaName.gridx = 1;
-				constraintsLblMetaName.gridy = 1;
-				constraintsLblMetaName.ipadx = 104;
-				constraintsLblMetaName.insets = new java.awt.Insets(80, 11, 10, 6);
-				getPnlMetaConstraints().add(getLblMetaName(), constraintsLblMetaName);
-
-				// show textfield metaName in panel
-				java.awt.GridBagConstraints constraintsTxtMetaName = new java.awt.GridBagConstraints();
-				constraintsTxtMetaName.gridx = 1;
-				constraintsTxtMetaName.gridy = 2;
-				constraintsTxtMetaName.gridwidth = 2;
-				constraintsTxtMetaName.fill = java.awt.GridBagConstraints.HORIZONTAL;
-				constraintsTxtMetaName.weightx = 1.0;
-				constraintsTxtMetaName.ipadx = 315;
-				constraintsTxtMetaName.insets = new java.awt.Insets(80, 12, 10, 15);
-				getPnlMetaConstraints().add(getTxtMetaName(), constraintsTxtMetaName);
 				
-				// show label metaMsg at panel
-				java.awt.GridBagConstraints constraintsLblMetaMsg = new java.awt.GridBagConstraints();
-				constraintsLblMetaMsg.gridx = 2;
-				constraintsLblMetaMsg.gridy = 1;
-				constraintsLblMetaMsg.ipadx = 104;
-				constraintsLblMetaMsg.insets = new java.awt.Insets(70, 11, 7, 6);
-				getPnlMetaConstraints().add(getLblMetaMsg(), constraintsLblMetaMsg);
-
-				// show textfield metaName in panel
-				java.awt.GridBagConstraints constraintsTxtMetaMsg = new java.awt.GridBagConstraints();
-				constraintsTxtMetaMsg.gridx = 2;
-				constraintsTxtMetaMsg.gridy = 2;
-				constraintsTxtMetaMsg.gridwidth = 2;
-				constraintsTxtMetaMsg.fill = java.awt.GridBagConstraints.HORIZONTAL;
-				constraintsTxtMetaMsg.weightx = 1.0;
-				constraintsTxtMetaMsg.ipadx = 315;
-				constraintsTxtMetaMsg.insets = new java.awt.Insets(70, 12, 7, 15);
-				getPnlMetaConstraints().add(getTxtMetaMsg(), constraintsTxtMetaMsg);
 				
 				InterlisSyntaxPanel constraintsPnlConstraints = new InterlisSyntaxPanel();
 				getPnlMetaConstraints().add(getPnlConstraints(), constraintsPnlConstraints);
@@ -814,53 +774,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 		return ivjLblMetaAttrb;
 	}
-	/**
-	 * Return the JLabelMetaName property value.
-	 * 
-	 * @return javax.swing.JLabel
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JLabel getLblMetaName() {
-		if (ivjLblMetaName == null) {
-			try {
-				ivjLblMetaName = new javax.swing.JLabel();
-				ivjLblMetaName.setName("LblMetaName");
-				ivjLblMetaName.setText("Name:");
-				// user code begin {1}
-				ivjLblMetaName.setText(resClassDefDialog.getString("LblMetaName_text"));
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjLblMetaName;
-	}
 	
-	/**
-	 * Return the JLabelMetaMsg property value.
-	 * 
-	 * @return javax.swing.JLabel
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JLabel getLblMetaMsg() {
-		if (ivjLblMetaMsg == null) {
-			try {
-				ivjLblMetaMsg = new javax.swing.JLabel();
-				ivjLblMetaMsg.setName("LblMetaMsg");
-				ivjLblMetaMsg.setText("Message:");
-				// user code begin {1}
-				ivjLblMetaMsg.setText(resClassDefDialog.getString("LblMetaMsg_text"));
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjLblMetaMsg;
-	}
 
 	/**
 	 * Return the LocalColumnModelDefaultListSelectionModel property value.
@@ -1048,10 +962,10 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	 * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private InterlisSyntaxPanel getPnlConstraints() {
+	private InterlisSyntaxConstraintPanel getPnlConstraints() {
 		if (ivjPnlConstraints == null) {
 			try {
-				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxPanel();
+				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxConstraintPanel();
 				ivjPnlConstraints.setName("PnlConstraints");
 				// user code begin {1}
 				// user code end
@@ -1423,49 +1337,6 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		return ivjTxtMetaAttrb;
 	}
 	
-	/**
-	 * Return the JTextField2 property value.
-	 * 
-	 * @return javax.swing.JTextField
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTextField getTxtMetaName() {
-		if (ivjTxtMetaName == null) {
-			try {
-				ivjTxtMetaName = new javax.swing.JTextField();
-				ivjTxtMetaName.setName("TxtMetaName");
-				// user code begin {1}
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjTxtMetaName;
-	}
-	
-	/**
-	 * Return the JTextField2 property value.
-	 * 
-	 * @return javax.swing.JTextField
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTextField getTxtMetaMsg() {
-		if (ivjTxtMetaMsg == null) {
-			try {
-				ivjTxtMetaMsg = new javax.swing.JTextField();
-				ivjTxtMetaMsg.setName("TxtMetaMsg");
-				// user code begin {1}
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjTxtMetaMsg;
-	}
 
 	/**
 	 * Called whenever the part throws an exception.
