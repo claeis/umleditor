@@ -1509,7 +1509,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 			// user code end
 			setName("ClassDefDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(527, 404);
+			setSize(627, 504);
 			setTitle("Klasse");
 			setContentPane(getBaseDialogContentPane());
 			initConnections();
