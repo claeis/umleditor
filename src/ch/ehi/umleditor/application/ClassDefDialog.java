@@ -55,7 +55,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
 	private javax.swing.JPanel ivjPnlMetaConstraints = null;
-	private InterlisSyntaxConstraintPanel ivjPnlConstraints = null;
+	private InterlisSyntaxPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
 	private javax.swing.JScrollPane ivjScpAttributes = null;
@@ -961,11 +961,11 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	 * 
 	 * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
 	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private InterlisSyntaxConstraintPanel getPnlConstraints() {
+	/* WARNING: THIS METHOD WILL BE REGENERATED.*/ 
+	private InterlisSyntaxPanel getPnlConstraints() {
 		if (ivjPnlConstraints == null) {
 			try {
-				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxConstraintPanel();
+				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxPanel();
 				ivjPnlConstraints.setName("PnlConstraints");
 				// user code begin {1}
 				// user code end
@@ -1280,8 +1280,8 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpParameter_text"), null, getPnlParameters(),
 						null, 3);
 				ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlConstraints(),
-				//ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlMetaConstraints(),
 						null, 4);
+				
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
