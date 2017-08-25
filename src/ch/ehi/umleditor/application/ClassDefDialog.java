@@ -55,7 +55,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
 	private javax.swing.JPanel ivjPnlMetaConstraints = null;
-	private InterlisSyntaxPanel ivjPnlConstraints = null;
+	private InterlisConstraintSyntaxPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
 	private javax.swing.JScrollPane ivjScpAttributes = null;
@@ -544,7 +544,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				
 				
 				
-				InterlisSyntaxPanel constraintsPnlConstraints = new InterlisSyntaxPanel();
+				InterlisConstraintSyntaxPanel constraintsPnlConstraints = new InterlisConstraintSyntaxPanel();
 				getPnlMetaConstraints().add(getPnlConstraints(), constraintsPnlConstraints);
 
 				// user code begin {2}
@@ -962,10 +962,10 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	 * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED.*/ 
-	private InterlisSyntaxPanel getPnlConstraints() {
+	private InterlisConstraintSyntaxPanel getPnlConstraints() {
 		if (ivjPnlConstraints == null) {
 			try {
-				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxPanel();
+				ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisConstraintSyntaxPanel();
 				ivjPnlConstraints.setName("PnlConstraints");
 				// user code begin {1}
 				// user code end
@@ -1473,7 +1473,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 
 		// page Constraints
-		getPnlConstraints().getConstraints();
+		// getPnlConstraints().getConstraints();
 
 		// page ParameterDef
 		getPnlParameters().getParameterDefs();
@@ -1515,7 +1515,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		((EditorTableModel) getTblAttributes().getModel()).setAttributeDef(classDef);
 
 		// page Constraints
-		getPnlConstraints().setConstraints(classDef);
+		// getPnlConstraints().setConstraints(classDef);
 
 		// page ParameterDef
 		getPnlParameters().setParameterDefs(classDef);
