@@ -76,4 +76,9 @@ void setDocumentation(NlsString value1)
 public NlsString getMetaAttrb();
 public void setMetaAttrb(NlsString value);
 
+public NlsString getMetaName();
+public void setMetaName(NlsString value);
+
+public NlsString getMetaMsg();
+public void setMetaMsg(NlsString value);
 }

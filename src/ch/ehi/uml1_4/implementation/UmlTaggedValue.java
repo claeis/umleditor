@@ -4101,17 +4101,80 @@ public class UmlTaggedValue implements TaggedValue {
 		// -end- 335D4BA70064 set_body448D24F502DB "name"
 	}
 
-	@Override
-	public NlsString getMetaAttrb() {
-		// TODO Auto-generated method stub
-		return null;
+private NlsString metaAttrb = null;
+	
+	/**
+	 * get current value of meta attribute
+	 * 
+	 * @see #setMetaAttrb
+	 */
+	public NlsString getMetaAttrb() {		
+		return metaAttrb;
 	}
 
-	@Override
-	public void setMetaAttrb(NlsString value) {
-		// TODO Auto-generated method stub
-
+	/**
+	 * set current value of meta attribute
+	 * 
+	 * @see #getMetaAttrb
+	 */
+	public void setMetaAttrb(NlsString value1) {
+		if (metaAttrb != value1 && (metaAttrb == null || !metaAttrb.equals(value1))) {
+			metaAttrb = value1;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
+		}
 	}
+
+	private NlsString metaName = null;
+	
+	/**
+	 * get current value of meta name
+	 * 
+	 * @see #setMetaName
+	 */
+	public NlsString getMetaName() {
+		return metaName;
+	}
+	
+	/**
+	 * set current value of meta name
+	 * 
+	 * @see #getMetaName
+	 */
+	public void setMetaName(NlsString value) {
+		if (metaName != value && (metaName == null || !metaName.equals(value))) {
+			metaName = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaName"));
+		}
+	}
+
+	private NlsString metaMsg = null;
+	
+	/**
+	 * get current value of meta message
+	 * 
+	 * @see #setMetaMsg
+	 */
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return metaMsg;
+	}
+
+	/**
+	 * set current value of meta message
+	 * 
+	 * @see #getMetaMsg
+	 */
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		if (metaMsg != value && (metaMsg == null || !metaMsg.equals(value))) {
+			metaMsg = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
+		}
+	}
+
 
 	// declare/define something only in the code
 	// please fill in/modify the following section

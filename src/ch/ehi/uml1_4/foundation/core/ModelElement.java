@@ -1495,9 +1495,34 @@ void setName(NlsString value1)
  * @see #setMetaAttrb()
  */
 NlsString getMetaAttrb();
+
 /**
- * set current value of meta attrubute
+ * set current value of meta attribute
  * @see #getMetaAttrb()
  */
 void setMetaAttrb(NlsString value);
+
+/**
+ * get current value of meta name
+ * @see #setMetaName()
+ */
+NlsString getMetaName();
+
+/**
+ * set current value of meta name
+ * @see #getMetaName()
+ */
+void setMetaName(NlsString value);
+
+/**
+ * get current value of meta message
+ * @see #setMetaMsg()
+ */
+NlsString getMetaMsg();
+
+/**
+ * set current value of meta message
+ * @see #getMetaMsg()
+ */
+void setMetaMsg(NlsString value);
 }
