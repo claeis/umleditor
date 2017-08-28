@@ -24,9 +24,12 @@ import ch.ehi.basics.view.GenericFileFilter;
 import java.io.File;
 import javax.swing.JOptionPane;
 import ch.interlis.ili2c.config.Configuration;
+import ch.interlis.ili2c.config.FileEntry;
 import ch.interlis.ili2c.config.GenerateOutputKind;
 import ch.interlis.ili2c.metamodel.TransferDescription;
 import ch.interlis.ili2c.Ili2cException;
+import ch.interlis.ili2c.Ili2cFailure;
+import ch.interlis.ili2c.Main;
 
 public class ExportInterlis {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ExportInterlis.class);
@@ -37,13 +40,13 @@ public class ExportInterlis {
 			// get list of files, that will be created
 			java.util.List fileList = writer
 					.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
-			//if(checkModels(fileList)){
+			if(checkModels(fileList)){
 				if (checkFiles(fileList, writer.getFuncDesc())) {
 					// write the files
 					JOptionPane.showMessageDialog(null, "File exported!", "Info", JOptionPane.INFORMATION_MESSAGE);
 					writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
 				}
-			//}
+			}
 			
 		} catch (java.io.IOException ex) {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
@@ -130,38 +133,36 @@ public class ExportInterlis {
 		java.util.List apprv = new java.util.ArrayList();
 		java.util.Iterator filei = file.iterator();
 		
-		TransferFromIli2cMetamodel convert = new TransferFromIli2cMetamodel();
+		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
 		Boolean confirm = false;
 		
-		//try{
-		
+		try{
+				ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+				Configuration ili2cConfig = new Configuration();
 			
-			Configuration config = new Configuration();
-		
-		while(filei.hasNext()){
-			File selectedFile = (File) filei.next();
+			while(filei.hasNext()){
+				File selectedFile = (File) filei.next();
 			
-			config.addFileEntry(new ch.interlis.ili2c.config.FileEntry(selectedFile.getAbsolutePath(),
-					ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
+				ili2cConfig.addFileEntry(new ch.interlis.ili2c.config.FileEntry(selectedFile.getAbsolutePath(),
+						ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
+				
+			}
+
+			ili2cConfig.setGenerateWarnings(false);
+			ili2cConfig.setOutputKind(GenerateOutputKind.NOOUTPUT);
+			ili2cConfig.setAutoCompleteModelList(true);
+	
+			writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig, settings);
+			
+			  if(writer.getErrors()){
+				  //compiler not failed
+				  confirm = true;
+			  }
+			  
+		} catch(java.io.IOException ex){
+			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+			JOptionPane.showMessageDialog(null,","+writer.getFuncDesc()+" "+ex.getLocalizedMessage());
 		}
-		config.setGenerateWarnings(false);
-		config.setOutputKind(GenerateOutputKind.NOOUTPUT);
-		config.setAutoCompleteModelList(true);
-
-		ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
-
-		TransferDescription ili2cModel = ch.interlis.ili2c.Main.runCompiler(config, settings);
-		if (ili2cModel != null) {
-			confirm = true;
-
-		} else{
-			confirm = false;
-			  JOptionPane.showMessageDialog(null, "Could not save the file has errors, please check the model", "Error", JOptionPane.ERROR_MESSAGE);
-
-		}
-		//} catch(Ili2cException ex){
-		//	editor.log(convert.getFuncDesc(), ex.getLocalizedMessage());
-		//}
 		return confirm;
 	}
 	/**

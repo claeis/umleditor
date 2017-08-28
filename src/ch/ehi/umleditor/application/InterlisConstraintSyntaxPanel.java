@@ -327,7 +327,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				constraintsLblMetaName.insets = new java.awt.Insets(1, 11, 10, 6);
 				getPnlMetaValues().add(getLblMetaName(), constraintsLblMetaName);
 
-				// show textfield metaName in panel
+				// show text field metaName in panel
 				java.awt.GridBagConstraints constraintsTxtMetaName = new java.awt.GridBagConstraints();
 				constraintsTxtMetaName.gridx = 1;
 				constraintsTxtMetaName.gridy = 2;
@@ -346,7 +346,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				constraintsLblMetaMsg.insets = new java.awt.Insets(2, 11, 7, 6);
 				getPnlMetaValues().add(getLblMetaMsg(), constraintsLblMetaMsg);
 
-				// show textfield metaName in panel
+				// show text field metaName in panel
 				java.awt.GridBagConstraints constraintsTxtMetaMsg = new java.awt.GridBagConstraints();
 				constraintsTxtMetaMsg.gridx = 2;
 				constraintsTxtMetaMsg.gridy = 2;
@@ -449,11 +449,12 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			setName("PnlInterlisSyntax");
 			setBorder(new javax.swing.border.EtchedBorder());
 			setLayout(new java.awt.BorderLayout());
-			setSize(382, 165);
+			setSize(482, 165);
+			add(getPnlMetaValues(), "North");
 			add(getPnlEditor(), "Center");
 			add(getPnlDataSelector(), "South");
 			add(getPnlUsage(), "North");
-			add(getPnlMetaValues(), "North");
+			
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);
 		}

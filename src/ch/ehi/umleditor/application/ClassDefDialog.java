@@ -54,7 +54,6 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JButton ivjBtnApply = null;
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
-	private javax.swing.JPanel ivjPnlMetaConstraints = null;
 	private InterlisConstraintSyntaxPanel ivjPnlConstraints = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
@@ -527,34 +526,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 		return ivjBaseDialogContentPane;
 	}
-	
-	/**
-	 * Return the MetaConstraints Panel property value.
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JPanel getPnlMetaConstraints() {
-		if (ivjPnlMetaConstraints == null) {
-			try {
-			} catch (java.lang.Throwable ivjExc) {
-				ivjPnlMetaConstraints = new javax.swing.JPanel();
-				ivjPnlMetaConstraints.setName("MetaConstraintsContentPane");
-				ivjPnlMetaConstraints.setLayout(new java.awt.GridBagLayout());
-				
-				
-				
-				InterlisConstraintSyntaxPanel constraintsPnlConstraints = new InterlisConstraintSyntaxPanel();
-				getPnlMetaConstraints().add(getPnlConstraints(), constraintsPnlConstraints);
 
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjPnlMetaConstraints;
-
-	}
 
 	/**
 	 * Return the BtnApply property value.
@@ -1473,7 +1445,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 
 		// page Constraints
-		// getPnlConstraints().getConstraints();
+		getPnlConstraints().getConstraints();
 
 		// page ParameterDef
 		getPnlParameters().getParameterDefs();
@@ -1515,7 +1487,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		((EditorTableModel) getTblAttributes().getModel()).setAttributeDef(classDef);
 
 		// page Constraints
-		// getPnlConstraints().setConstraints(classDef);
+		getPnlConstraints().setConstraints(classDef);
 
 		// page ParameterDef
 		getPnlParameters().setParameterDefs(classDef);

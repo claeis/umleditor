@@ -79,11 +79,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 import ch.ehi.basics.tools.TopoSort;
+import ch.interlis.ili2c.Main;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
+import ch.interlis.ili2c.metamodel.TransferDescription;
 
 public class TransferFromUmlMetamodel {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(TransferFromUmlMetamodel.class);
+	boolean errors = false;
 
 	/**
 	 * current output stream
@@ -251,7 +254,12 @@ public class TransferFromUmlMetamodel {
 			try {
 				ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener()
 						.setCompilerMsgMapper(new MyErrorListener());
-				ch.interlis.ili2c.Main.runCompiler(config, settings);
+				TransferDescription ret = ch.interlis.ili2c.Main.runCompiler(config, settings);
+				//ret.getLastModel();
+				  if(ret==null){
+					  //compiler failed
+					  setErrors(true);
+				  }
 			} finally {
 				ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener().setCompilerMsgMapper(null);
 			}
@@ -266,7 +274,18 @@ public class TransferFromUmlMetamodel {
 		}
 		return;
 	}
+	/**
+	 * Set value errors 
+	 * @param value
+	 */
+	public void setErrors(Boolean value){
+		this.errors = value;
+	}
 
+	public Boolean getErrors(){
+		return errors;
+	}
+	
 	public void setup(java.io.Writer out, String language) {
 		this.out = out;
 		this.language = language;
@@ -699,6 +718,8 @@ public class TransferFromUmlMetamodel {
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
 		visitMetaAttrb(def.getMetaAttrb());
+		visitMetaName(def.getMetaName());
+		visitMetaMsg(def.getMetaMsg());
 		visitIliSyntax(def);
 		return;
 	}
