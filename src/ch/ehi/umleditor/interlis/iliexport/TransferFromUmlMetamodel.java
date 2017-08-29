@@ -255,7 +255,6 @@ public class TransferFromUmlMetamodel {
 				ch.ehi.umleditor.application.LauncherView.getInstance().getLogListener()
 						.setCompilerMsgMapper(new MyErrorListener());
 				TransferDescription ret = ch.interlis.ili2c.Main.runCompiler(config, settings);
-				//ret.getLastModel();
 				  if(ret==null){
 					  //compiler failed
 					  setErrors(true);

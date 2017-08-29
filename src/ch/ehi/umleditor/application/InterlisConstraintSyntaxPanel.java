@@ -1,5 +1,8 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.Label;
+import java.awt.TextField;
+
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.IliSyntax;
 import ch.ehi.interlis.constraints.ConstraintDef;
@@ -315,10 +318,51 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		if (ivjPnlMetaValues == null) {
 			try {
 				ivjPnlMetaValues = new javax.swing.JPanel();
+				ivjPnlMetaValues.setBorder(new javax.swing.border.EtchedBorder());
 				ivjPnlMetaValues.setName("PnlMetaValues");
-				ivjPnlMetaValues.setPreferredSize(new java.awt.Dimension(0, 40));// Revisar esto 
-				ivjPnlMetaValues.setLayout(new java.awt.GridBagLayout());
+				ivjPnlMetaValues.setPreferredSize(new java.awt.Dimension(200, 165));// Revisar esto 
+				ivjPnlMetaValues.setLayout(new java.awt.GridLayout());
 				
+				/*
+				java.awt.Label lbl = new Label();
+				java.awt.TextField txt = new TextField();
+				
+				lbl.setText("Constraint name:");
+				ivjPnlMetaValues.add(lbl);
+				ivjPnlMetaValues.add(txt);
+				*/
+				
+				ivjPnlMetaValues.setLayout(new java.awt.GridBagLayout());
+
+				javax.swing.JLabel lbl = new javax.swing.JLabel();
+				lbl.setName("LblMetaAttrbEnum");
+				lbl.setText("Element - Display name:");
+				
+				java.awt.GridBagConstraints constraintsLblMetaAttrbEnum = new java.awt.GridBagConstraints();
+				constraintsLblMetaAttrbEnum.gridx = 1;
+				constraintsLblMetaAttrbEnum.gridy = 1;
+				constraintsLblMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsLblMetaAttrbEnum.ipadx = 140;
+				constraintsLblMetaAttrbEnum.ipady = 14;
+				constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 7, 2, 120);
+				ivjPnlMetaValues.add(lbl, constraintsLblMetaAttrbEnum);
+				
+				ch.ehi.umleditor.application.MetaAttrbEnumPanel txt = new ch.ehi.umleditor.application.MetaAttrbEnumPanel();
+				txt.setName("PnlMetaAttrbEnum");
+
+				java.awt.GridBagConstraints constraintsPnlMetaAttrbEnum = new java.awt.GridBagConstraints();
+				constraintsPnlMetaAttrbEnum.gridx = 1;
+				constraintsPnlMetaAttrbEnum.gridy = 2;
+				constraintsPnlMetaAttrbEnum.fill = java.awt.GridBagConstraints.BOTH;
+				constraintsPnlMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsPnlMetaAttrbEnum.weightx = 1.0;
+				constraintsPnlMetaAttrbEnum.weighty = 1.0;
+				constraintsPnlMetaAttrbEnum.ipadx = 243;
+				constraintsPnlMetaAttrbEnum.ipady = 69;
+				ivjPnlMetaValues.add(getTxtMetaName(),constraintsPnlMetaAttrbEnum);
+				
+				
+				/*
 				// show label metaName at panel
 				java.awt.GridBagConstraints constraintsLblMetaName = new java.awt.GridBagConstraints();
 				constraintsLblMetaName.gridx = 1;
@@ -356,6 +400,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				constraintsTxtMetaMsg.ipadx = 315;
 				constraintsTxtMetaMsg.insets = new java.awt.Insets(2, 12, 7, 15);
 				getPnlMetaValues().add(getTxtMetaMsg(), constraintsTxtMetaMsg);
+				*/
 			} catch (java.lang.Throwable ivjExc) {
 				// user code begin {2}
 				// user code end
@@ -450,7 +495,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			setBorder(new javax.swing.border.EtchedBorder());
 			setLayout(new java.awt.BorderLayout());
 			setSize(482, 165);
-			add(getPnlMetaValues(), "North");
+			add(getPnlMetaValues(), "East");
 			add(getPnlEditor(), "Center");
 			add(getPnlDataSelector(), "South");
 			add(getPnlUsage(), "North");
@@ -462,7 +507,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		getPnlEditor().setToolTipText(getResourceString("PnlEditor_toolTipText"));
 		setCurrentObject(null);
 		getPnlDataSelector().setListener(this);
-		getPnlMetaValues().setVisible(false);
+		getPnlMetaValues().setVisible(true);
 		getPnlUsage().setVisible(false);
 		// user code end
 	}

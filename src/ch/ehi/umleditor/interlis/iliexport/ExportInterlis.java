@@ -40,13 +40,15 @@ public class ExportInterlis {
 			// get list of files, that will be created
 			java.util.List fileList = writer
 					.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
-			if(checkModels(fileList)){
+			
+			//if(checkModels(fileList)){
 				if (checkFiles(fileList, writer.getFuncDesc())) {
 					// write the files
-					JOptionPane.showMessageDialog(null, "File exported!", "Info", JOptionPane.INFORMATION_MESSAGE);
+					//checkModels(fileList);
+					//JOptionPane.showMessageDialog(null, "File exported!", "Info", JOptionPane.INFORMATION_MESSAGE);
 					writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
 				}
-			}
+			//}
 			
 		} catch (java.io.IOException ex) {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
@@ -128,7 +130,7 @@ public class ExportInterlis {
 		return;
 	}
 
-	private static Boolean checkModels(java.util.List file){
+	private static void checkModels(java.util.List file){
 		//ch.ehi.umleditor.interlis.modelcheck.CheckModel.checkAll();
 		java.util.List apprv = new java.util.ArrayList();
 		java.util.Iterator filei = file.iterator();
@@ -144,8 +146,7 @@ public class ExportInterlis {
 				File selectedFile = (File) filei.next();
 			
 				ili2cConfig.addFileEntry(new ch.interlis.ili2c.config.FileEntry(selectedFile.getAbsolutePath(),
-						ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
-				
+						ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));				
 			}
 
 			ili2cConfig.setGenerateWarnings(false);
@@ -163,7 +164,7 @@ public class ExportInterlis {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
 			JOptionPane.showMessageDialog(null,","+writer.getFuncDesc()+" "+ex.getLocalizedMessage());
 		}
-		return confirm;
+		//return confirm;
 	}
 	/**
 	 * Check if the files exist at current path and show a JoptionPane to confirm reemplace
