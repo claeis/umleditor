@@ -614,9 +614,9 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			
 		} else {
 			getPnlEditor().setEditable(true);
-			getPnlMetaName().setEnabled(true);
-			getTxtMetaMsg().setEditable(true);
 			if (syntax instanceof ConstraintDef) {
+				getPnlMetaName().setEnabled(true);
+				getTxtMetaMsg().setEditable(true);
 				ConstraintDef constraintDef = (ConstraintDef) syntax;
 				getPnlEditor().setText(
 						ElementUtils.mapNlsString(((ConstraintExpression) constraintDef.getBody()).getSyntax()));
