@@ -24,7 +24,6 @@ import ch.softenvironment.view.SimpleEditorPanel;
 public class MetaNamePanel extends BasePanel implements DataPanel{
 	
 	private static final long serialVersionUID = 1629508891527519069L;
-	//private Element element = null;
 	private Element element = null;
 	private SimpleEditorPanel ivjPnlEdit = null;
 	protected transient ch.ehi.umleditor.application.MetaNamePanelListener fieldMetaNamePanelListenerEventMulticaster = null;

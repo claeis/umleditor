@@ -62,7 +62,7 @@ implements ch.ehi.umleditor.application.MetaNamePanelListener {
 	 *
 	 * @return java.util.EventListener
 	 * @param oldl
-	 *            ch.ehi.umleditor.application.MetaAttrbEnu,criptionPanelListener
+	 *            ch.ehi.umleditor.application.MetaName,criptionPanelListener
 	 */
 	protected java.util.EventListener remove(ch.ehi.umleditor.application.MetaNamePanelListener oldl) {
 		if (oldl == a)

@@ -36,9 +36,10 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	private javax.swing.JLabel ivjLblMetaName = null;
 	private javax.swing.JPanel ivjPnlMetaValues = null;
 	
-	//Maybe Later can add this
+	IvjEventHandlerMsg ivjEventHandlerMsg = new IvjEventHandlerMsg();
 	private javax.swing.JLabel ivjLblMetaMsg = null;
-	private javax.swing.JTextField ivjTxtMetaMsg = null;
+	private MetaMsgPanel ivjPnlMetaMsg = null; 
+	
 	
 	class IvjEventHandler implements ch.ehi.umleditor.application.MetaNamePanelListener{
 		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
@@ -47,8 +48,15 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		};
 	};
 
+	class IvjEventHandlerMsg implements ch.ehi.umleditor.application.MetaMsgPanelListener{
+		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
+			if (newEvent.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaMsg())
+				connEtoC10(newEvent);
+		};
+	};
+
 	/**
-	 * DescriptionPanel constructor comment.
+	 * InterlisConstraintSyntaxPanel constructor comment.
 	 */
 	public InterlisConstraintSyntaxPanel() {
 		super();
@@ -109,9 +117,9 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	}
 
 	/**
-	 * Return the PnlMetaAttrbEnum property value.
+	 * Return the PnlMetaName property value.
 	 * 
-	 * @return ch.ehi.umleditor.application.DescriptionPanel
+	 * @return ch.ehi.umleditor.application.MetaNamePanel
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
 	private MetaNamePanel getPnlMetaName() {
@@ -131,9 +139,30 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	}
 	
 	/**
+	 * Return the PnlMetaMsg property value.
+	 * 
+	 * @return ch.ehi.umleditor.application.MetaMsgPanel
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private MetaMsgPanel getPnlMetaMsg() {
+		if (ivjPnlMetaMsg == null) {
+			try {
+				ivjPnlMetaMsg = new ch.ehi.umleditor.application.MetaMsgPanel();
+				ivjPnlMetaMsg.setName("PnlMetaMsg");
+				// user code begin {1}
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjPnlMetaMsg;
+	}
+	
+	/**
 	 * connEtoC9:
-	 * (PnlMetaAttrbEnum.MetaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
-	 * --> IliBaseTypeEnumPanel.saveMetaAttrb()V)
+	 * (PnlMetaName.MetaNamePanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
 	 * 
 	 * @param arg1
 	 *            java.util.EventObject
@@ -144,6 +173,28 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			// user code begin {1}
 			// user code end
 			this.saveMetaName();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	/**
+	 * connEtoC9:
+	 * (PnlMetaMsg.MetaMsgPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
+	 * 
+	 * @param arg1
+	 *            java.util.EventObject
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC10(java.util.EventObject arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			this.saveMetaMsg();
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -228,28 +279,6 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		return ivjLblMetaMsg;
 	}
 
-	
-	/**
-	 * Return the JTextField2 property value.
-	 * 
-	 * @return javax.swing.JTextField
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTextField getTxtMetaMsg() {
-		if (ivjTxtMetaMsg == null) {
-			try {
-				ivjTxtMetaMsg = new javax.swing.JTextField();
-				ivjTxtMetaMsg.setName("TxtMetaMsg");
-				// user code begin {1}
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjTxtMetaMsg;
-	}
 
 	/**
 	 * Return the LblUsage property value.
@@ -345,11 +374,19 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		return ivjPnlEditor;
 	}
 	/**
-	 * Save the meta attribute on currently selected EnumElement.
+	 * Save the ilivalid meta name on currently selected EnumElement.
 	 */
 	private void saveMetaName() {
 		getPnlMetaName().getObject();
 	}
+	
+	/**
+	 * Save the ilivalid meta message on currently selected EnumElement.
+	 */
+	private void saveMetaMsg() {
+		getPnlMetaMsg().getObject();
+	}
+	
 	/**
 	 * Return the PnlUsage property value.
 	 * 
@@ -364,19 +401,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				ivjPnlMetaValues.setName("PnlMetaValues");
 				ivjPnlMetaValues.setPreferredSize(new java.awt.Dimension(200, 165));// Revisar esto 
 				ivjPnlMetaValues.setLayout(new java.awt.GridLayout());
-				
-				/* Test fabian
-				java.awt.Label lbl = new Label();
-				java.awt.TextField txt = new TextField();
-				
-				lbl.setText("Constraint name:");
-				ivjPnlMetaValues.add(lbl);
-				ivjPnlMetaValues.add(txt);
-				*/
-				
 				ivjPnlMetaValues.setLayout(new java.awt.GridBagLayout());
-				
-				
 				
 				// show label metaName at panel
 				java.awt.GridBagConstraints constraintsLblMetaName = new java.awt.GridBagConstraints();
@@ -386,6 +411,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				//constraintsLblMetaName.insets = new java.awt.Insets(1, 11, 10, 6);
 				getPnlMetaValues().add(getLblMetaName(), constraintsLblMetaName);
 				
+				// show ilivalid name at panel
 				java.awt.GridBagConstraints constraintsPnlMetaName = new java.awt.GridBagConstraints();
 				constraintsPnlMetaName.gridx = 1;
 				constraintsPnlMetaName.gridy = 2;
@@ -397,7 +423,6 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				constraintsPnlMetaName.ipady = 69;
 				getPnlMetaValues().add(getPnlMetaName(), constraintsPnlMetaName);
 
-				
 				// show label metaMsg at panel
 				java.awt.GridBagConstraints constraintsLblMetaMsg = new java.awt.GridBagConstraints();
 				constraintsLblMetaMsg.gridx = 2;
@@ -406,16 +431,17 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				//constraintsLblMetaMsg.insets = new java.awt.Insets(2, 11, 7, 6);
 				getPnlMetaValues().add(getLblMetaMsg(), constraintsLblMetaMsg);
 
-				// show text field metaName in panel
-				java.awt.GridBagConstraints constraintsTxtMetaMsg = new java.awt.GridBagConstraints();
-				constraintsTxtMetaMsg.gridx = 2;
-				constraintsTxtMetaMsg.gridy = 2;
-				constraintsTxtMetaMsg.gridwidth = 2;
-				constraintsTxtMetaMsg.fill = java.awt.GridBagConstraints.HORIZONTAL;
-				constraintsTxtMetaMsg.weightx = 1.0;
-				constraintsTxtMetaMsg.ipadx = 315;
-				//constraintsTxtMetaMsg.insets = new java.awt.Insets(2, 12, 7, 15);
-				getPnlMetaValues().add(getTxtMetaMsg(), constraintsTxtMetaMsg);
+				// show ilivalid msg at panel
+				java.awt.GridBagConstraints constraintsPnlMetaMsg = new java.awt.GridBagConstraints();
+				constraintsPnlMetaMsg.gridx = 2;
+				constraintsPnlMetaMsg.gridy = 2;
+				constraintsPnlMetaMsg.fill = java.awt.GridBagConstraints.BOTH;
+				constraintsPnlMetaMsg.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsPnlMetaMsg.weightx = 1.0;
+				constraintsPnlMetaMsg.weighty = 1.0;
+				constraintsPnlMetaMsg.ipadx = 243;
+				constraintsPnlMetaMsg.ipady = 69;
+				getPnlMetaValues().add(getPnlMetaMsg(), constraintsPnlMetaMsg);
 				
 			} catch (java.lang.Throwable ivjExc) {
 				// user code begin {2}
@@ -502,6 +528,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	private void initConnections() throws java.lang.Exception {
 		//
 		getPnlMetaName().addMetaNamePanelListener(ivjEventHandler);
+		getPnlMetaMsg().addMetaMsgPanelListener(ivjEventHandlerMsg);
 	}
 	/**
 	 * Initialize the class.
@@ -529,6 +556,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		setCurrentObject(null);
 		getPnlDataSelector().setListener(this);
 		getPnlMetaName().setEnabled(false);
+		getPnlMetaMsg().setEnabled(false);
 		getPnlUsage().setVisible(false);
 		// user code end
 	}
@@ -554,9 +582,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			ConstraintDef constraintDef = (ConstraintDef) object;
 			((ConstraintExpression) constraintDef.getBody()).setSyntax(new NlsString(
 					((ConstraintExpression) constraintDef.getBody()).getSyntax(), getPnlEditor().getText()));
-			//try set this object
-			//getPnlMetaName().setObject(constraintDef);
-			
+		
 			return constraintDef;
 		}
 		return new NlsString((NlsString) object, getPnlEditor().getText());
@@ -571,6 +597,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		getPnlDataSelector().setVisible(false);
 		getPnlEditor().setEditable(true);
 		getPnlMetaName().setEnabled(true);
+		getPnlMetaMsg().setEnabled(true);
 
 		if (((ConstraintExpression) constraint.getBody()).getSyntax() == null) {
 			getPnlEditor().setText(new String());
@@ -610,22 +637,26 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			
 			getPnlMetaName().setEnabled(false);
 			getPnlMetaName().setObject(null);
-			getTxtMetaMsg().setEditable(false);
+			
+			getPnlMetaMsg().setEnabled(false);
+			getPnlMetaMsg().setObject(null);
+			
 			
 		} else {
 			getPnlEditor().setEditable(true);
 			if (syntax instanceof ConstraintDef) {
 				getPnlMetaName().setEnabled(true);
-				getTxtMetaMsg().setEditable(true);
+				getPnlMetaMsg().setEnabled(true);
+				
 				ConstraintDef constraintDef = (ConstraintDef) syntax;
 				getPnlEditor().setText(
 						ElementUtils.mapNlsString(((ConstraintExpression) constraintDef.getBody()).getSyntax()));
 				getPnlMetaName().setObject(constraintDef);
+				getPnlMetaMsg().setObject(constraintDef);
 				
 			} else {
 				getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString) syntax)));
-				//getPnlMetaName().setEnabled(false);
-				//getPnlMetaName().setObject(null);
+				//Maybe here can solve the issue that don't save the current object
 			}
 			
 		}

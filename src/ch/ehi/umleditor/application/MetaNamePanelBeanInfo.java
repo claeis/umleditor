@@ -3,7 +3,7 @@ package ch.ehi.umleditor.application;
 public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 	/**
 	 * Gets the
-	 * addMetaAttrEnumbPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
+	 * addMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
@@ -13,8 +13,8 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 		try {
 			/*
 			 * Create and return the
-			 * addMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.
-			 * MetaAttrbEnumPanelListener) method descriptor.
+			 * addMetaNamePanelListener(ch.ehi.umleditor.application.
+			 * MetaNamePanelListener) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
 			try {
@@ -134,7 +134,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 	}
 
 	/**
-	 * Gets the MetaAttrbEnumPanel event set descriptor.
+	 * Gets the MetaNamePanel event set descriptor.
 	 * 
 	 * @return java.beans.EventSetDescriptor
 	 */
@@ -143,7 +143,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 		try {
 			try {
 				/*
-				 * Try using method descriptors to create the MetaAttrbEnumPanel
+				 * Try using method descriptors to create the MetaNamePanel
 				 * event set descriptor.
 				 */
 				java.beans.MethodDescriptor eventMethodDescriptors[] = {
@@ -204,7 +204,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 
 	/**
 	 * Gets the
-	 * metaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
+	 * metaNamePanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
@@ -214,7 +214,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 		try {
 			/*
 			 * Create and return the
-			 * metaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(
+			 * metaNamePanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(
 			 * java.util.EventObject) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
@@ -425,7 +425,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 		java.beans.BeanDescriptor aDescriptor = null;
 		try {
 			/*
-			 * Create and return the MetaAttrbEnumPanelBeanInfo bean descriptor.
+			 * Create and return the MetaNamePanelBeanInfo bean descriptor.
 			 */
 			aDescriptor = new java.beans.BeanDescriptor(ch.ehi.umleditor.application.MetaNamePanel.class);
 			/* aDescriptor.setExpert(false); */
@@ -614,7 +614,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 			;
 			aDescriptor.setDisplayName("pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)");
 			/*
-			 * aDescriptor.setShortMetaAttrbEnum(
+			 * aDescriptor.setShortMetaName(
 			 * "pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)"
 			 * );
 			 */
@@ -632,7 +632,7 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 
 	/**
 	 * Gets the
-	 * removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
+	 * removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
@@ -642,8 +642,8 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 		try {
 			/*
 			 * Create and return the
-			 * removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.
-			 * MetaAttrbEnumPanelListener) method descriptor.
+			 * removeMetaNamePanelListener(ch.ehi.umleditor.application.
+			 * MetaNamePanelListener) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
 			try {
@@ -680,12 +680,12 @@ public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 			;
 			/*
 			 * aDescriptor.setDisplayName(
-			 * "removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)"
+			 * "removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)"
 			 * );
 			 */
 			/*
-			 * aDescriptor.setShortMetaAttrbEnum(
-			 * "removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)"
+			 * aDescriptor.setShortMetaName(
+			 * "removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)"
 			 * );
 			 */
 			/* aDescriptor.setExpert(false); */
