@@ -202,6 +202,14 @@ public class MyHandler implements org.xml.sax.ContentHandler {
 							&& currentElementTag.equals("DefLangMetaAttrb")){
 						// skip derived property DefLangMetaAttrb
 					}
+					else if(actualObject instanceof ch.ehi.uml1_4.implementation.AbstractModelElement
+							&& currentElementTag.equals("DefLangMetaName")){
+						// skip derived property DefLangMetaName
+					}
+					else if(actualObject instanceof ch.ehi.uml1_4.implementation.AbstractModelElement
+							&& currentElementTag.equals("DefLangMetaMsg")){
+						// skip derived property DefLangMetaMsg
+					}
 					else if (currentObjObjectAdds.containsKey(currentElementTag)) {
 						// get object that this value references
 						if (!objMap.containsKey(value)) {

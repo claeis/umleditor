@@ -1,43 +1,20 @@
 package ch.ehi.umleditor.application;
-/* This file is part of the UML/INTERLIS-Editor.
- * For more information, please see <http://www.umleditor.org/>.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-import java.lang.Class;
-/**
- * Text-Editing Panel.
- *
- * @author: Ivan Alejandro List 
- * @version $Revision: 3.2.6 $ $Date: 2017-08-02 11:54:18 $
- */
-public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
+
+public class MetaNamePanelBeanInfo extends java.beans.SimpleBeanInfo{
 	/**
 	 * Gets the
-	 * addMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
+	 * addMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
 	 */
-	public java.beans.MethodDescriptor addMetaAttrbEnumPanelListener_chehiumleditorapplicationMetaAttrbEnumPanelListenerMethodDescriptor() {
+	public java.beans.MethodDescriptor addMetaNamePanelListener_chehiumleditorapplicationMetaNamePanelListenerMethodDescriptor() {
 		java.beans.MethodDescriptor aDescriptor = null;
 		try {
 			/*
 			 * Create and return the
-			 * addMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.
-			 * MetaAttrbEnumPanelListener) method descriptor.
+			 * addMetaNamePanelListener(ch.ehi.umleditor.application.
+			 * MetaNamePanelListener) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
 			try {
@@ -45,12 +22,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 				 * Attempt to find the method using getMethod with parameter
 				 * types.
 				 */
-				Class aParameterTypes[] = { ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class };
-				aMethod = getBeanClass().getMethod("addMetaAttrbEnumPanelListener", aParameterTypes);
+				Class aParameterTypes[] = { ch.ehi.umleditor.application.MetaNamePanelListener.class };
+				aMethod = getBeanClass().getMethod("addMetaNamePanelListener", aParameterTypes);
 			} catch (java.lang.Throwable exception) {
 				/* Since getMethod failed, call findMethod. */
 				handleException(exception);
-				aMethod = findMethod(getBeanClass(), "addMetaAttrbEnumPanelListener", 1);
+				aMethod = findMethod(getBeanClass(), "addMetaNamePanelListener", 1);
 			}
 			;
 			try {
@@ -157,20 +134,20 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	}
 
 	/**
-	 * Gets the MetaAttrbEnumPanel event set descriptor.
+	 * Gets the MetaNamePanel event set descriptor.
 	 * 
 	 * @return java.beans.EventSetDescriptor
 	 */
-	public java.beans.EventSetDescriptor metaAttrbEnumPanelEventSetDescriptor() {
+	public java.beans.EventSetDescriptor metaNamePanelEventSetDescriptor() {
 		java.beans.EventSetDescriptor aDescriptor = null;
 		try {
 			try {
 				/*
-				 * Try using method descriptors to create the MetaAttrbEnumPanel
+				 * Try using method descriptors to create the MetaNamePanel
 				 * event set descriptor.
 				 */
 				java.beans.MethodDescriptor eventMethodDescriptors[] = {
-						metaAttrbEnumPanelpnlEditSimpleEditPanel_txaEditKey_keyReleased_javautilEventObjectMethodEventDescriptor(),
+						metaNamePanelpnlEditSimpleEditPanel_txaEditKey_keyReleased_javautilEventObjectMethodEventDescriptor(),
 						pnlEditSimpleEditPanel_txaEditKey_keyReleased_javautilEventObjectMethodEventDescriptor() };
 				java.lang.reflect.Method anAddMethod = null;
 				try {
@@ -179,12 +156,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 					 * types.
 					 */
 					Class anAddMethodParameterTypes[] = {
-							ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class };
-					anAddMethod = getBeanClass().getMethod("addMetaAttrbEnumPanelListener", anAddMethodParameterTypes);
+							ch.ehi.umleditor.application.MetaNamePanelListener.class };
+					anAddMethod = getBeanClass().getMethod("addMetaNamePanelListener", anAddMethodParameterTypes);
 				} catch (java.lang.Throwable exception) {
 					/* Since getMethod failed, call findMethod. */
 					handleException(exception);
-					anAddMethod = findMethod(getBeanClass(), "addMetaAttrbEnumPanelListener", 1);
+					anAddMethod = findMethod(getBeanClass(), "addMetaNamePanelListener", 1);
 				}
 				;
 				java.lang.reflect.Method aRemoveMethod = null;
@@ -194,17 +171,17 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 					 * types.
 					 */
 					Class aRemoveMethodParameterTypes[] = {
-							ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class };
-					aRemoveMethod = getBeanClass().getMethod("removeMetaAttrbEnumPanelListener",
+							ch.ehi.umleditor.application.MetaNamePanelListener.class };
+					aRemoveMethod = getBeanClass().getMethod("removeMetaNamePanelListener",
 							aRemoveMethodParameterTypes);
 				} catch (java.lang.Throwable exception) {
 					/* Since getMethod failed, call findMethod. */
 					handleException(exception);
-					aRemoveMethod = findMethod(getBeanClass(), "removeMetaAttrbEnumPanelListener", 1);
+					aRemoveMethod = findMethod(getBeanClass(), "removeMetaNamePanelListener", 1);
 				}
 				;
-				aDescriptor = new java.beans.EventSetDescriptor("metaAttrbEnumPanel",
-						ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class, eventMethodDescriptors,
+				aDescriptor = new java.beans.EventSetDescriptor("metaNamePanel",
+						ch.ehi.umleditor.application.MetaNamePanelListener.class, eventMethodDescriptors,
 						anAddMethod, aRemoveMethod);
 			} catch (java.lang.Throwable exception) {
 				/*
@@ -212,9 +189,9 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 				 */
 				handleException(exception);
 				java.lang.String eventMethodNames[] = { "pnlEditSimpleEditPanel_txaEditKey_keyReleased" };
-				aDescriptor = new java.beans.EventSetDescriptor(getBeanClass(), "metaAttrbEnumPanel",
-						ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class, eventMethodNames,
-						"addMetaAttrbEnumPanelListener", "removeMetaAttrbEnumPanelListener");
+				aDescriptor = new java.beans.EventSetDescriptor(getBeanClass(), "metaNamePanel",
+						ch.ehi.umleditor.application.MetaNamePanelListener.class, eventMethodNames,
+						"addMetaNamePanelListener", "removeMetaNamePanelListener");
 			}
 			;
 
@@ -227,17 +204,17 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 
 	/**
 	 * Gets the
-	 * metaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
+	 * metaNamePanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
 	 */
-	public java.beans.MethodDescriptor metaAttrbEnumPanelpnlEditSimpleEditPanel_txaEditKey_keyReleased_javautilEventObjectMethodEventDescriptor() {
+	public java.beans.MethodDescriptor metaNamePanelpnlEditSimpleEditPanel_txaEditKey_keyReleased_javautilEventObjectMethodEventDescriptor() {
 		java.beans.MethodDescriptor aDescriptor = null;
 		try {
 			/*
 			 * Create and return the
-			 * metaAttrbEnumPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(
+			 * metaNamePanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(
 			 * java.util.EventObject) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
@@ -247,12 +224,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 				 * types.
 				 */
 				Class aParameterTypes[] = { java.util.EventObject.class };
-				aMethod = (ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class)
+				aMethod = (ch.ehi.umleditor.application.MetaNamePanelListener.class)
 						.getMethod("pnlEditSimpleEditPanel_txaEditKey_keyReleased", aParameterTypes);
 			} catch (java.lang.Throwable exception) {
 				/* Since getMethod failed, call findMethod. */
 				handleException(exception);
-				aMethod = findMethod((ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class),
+				aMethod = findMethod((ch.ehi.umleditor.application.MetaNamePanelListener.class),
 						"pnlEditSimpleEditPanel_txaEditKey_keyReleased", 1);
 			}
 			;
@@ -432,7 +409,7 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	 * @return java.lang.Class
 	 */
 	public static Class getBeanClass() {
-		return ch.ehi.umleditor.application.MetaAttrbEnumPanel.class;
+		return ch.ehi.umleditor.application.MetaNamePanel.class;
 	}
 
 	/**
@@ -441,16 +418,16 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	 * @return java.lang.String
 	 */
 	public static java.lang.String getBeanClassName() {
-		return "ch.ehi.umleditor.application.MetaAttrbEnumPanel";
+		return "ch.ehi.umleditor.application.MetaNamePanel";
 	}
 
 	public java.beans.BeanDescriptor getBeanDescriptor() {
 		java.beans.BeanDescriptor aDescriptor = null;
 		try {
 			/*
-			 * Create and return the MetaAttrbEnumPanelBeanInfo bean descriptor.
+			 * Create and return the MetaNamePanelBeanInfo bean descriptor.
 			 */
-			aDescriptor = new java.beans.BeanDescriptor(ch.ehi.umleditor.application.MetaAttrbEnumPanel.class);
+			aDescriptor = new java.beans.BeanDescriptor(ch.ehi.umleditor.application.MetaNamePanel.class);
 			/* aDescriptor.setExpert(false); */
 			/* aDescriptor.setHidden(false); */
 			/* aDescriptor.setValue("hidden-state", Boolean.FALSE); */
@@ -467,7 +444,7 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	 */
 	public java.beans.EventSetDescriptor[] getEventSetDescriptors() {
 		try {
-			java.beans.EventSetDescriptor aDescriptorList[] = { metaAttrbEnumPanelEventSetDescriptor() };
+			java.beans.EventSetDescriptor aDescriptorList[] = { metaNamePanelEventSetDescriptor() };
 			return aDescriptorList;
 		} catch (java.lang.Throwable exception) {
 			handleException(exception);
@@ -484,9 +461,9 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	public java.beans.MethodDescriptor[] getMethodDescriptors() {
 		try {
 			java.beans.MethodDescriptor aDescriptorList[] = {
-					addMetaAttrbEnumPanelListener_chehiumleditorapplicationMetaAttrbEnumPanelListenerMethodDescriptor(),
+					addMetaNamePanelListener_chehiumleditorapplicationMetaNamePanelListenerMethodDescriptor(),
 					main_javalangString__MethodDescriptor(),
-					removeMetaAttrbEnumPanelListener_chehiumleditorapplicationMetaAttrbEnumPanelListenerMethodDescriptor() };
+					removeMetaNamePanelListener_chehiumleditorapplicationMetaNameEnumPanelListenerMethodDescriptor() };
 			return aDescriptorList;
 		} catch (java.lang.Throwable exception) {
 			handleException(exception);
@@ -607,12 +584,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 				 * types.
 				 */
 				java.lang.Class aParameterTypes[] = { java.util.EventObject.class };
-				aMethod = (ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class)
+				aMethod = (ch.ehi.umleditor.application.MetaNamePanelListener.class)
 						.getMethod("pnlEditSimpleEditPanel_txaEditKey_keyReleased", aParameterTypes);
 			} catch (java.lang.Throwable exception) {
 				/* Since getMethod failed, call findMethod. */
 				handleException(exception);
-				aMethod = findMethod((ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class),
+				aMethod = findMethod((ch.ehi.umleditor.application.MetaNamePanelListener.class),
 						"pnlEditSimpleEditPanel_txaEditKey_keyReleased", 1);
 			}
 			;
@@ -637,7 +614,7 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 			;
 			aDescriptor.setDisplayName("pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)");
 			/*
-			 * aDescriptor.setShortMetaAttrbEnum(
+			 * aDescriptor.setShortMetaName(
 			 * "pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)"
 			 * );
 			 */
@@ -655,18 +632,18 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 
 	/**
 	 * Gets the
-	 * removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
+	 * removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor
 	 */
-	public java.beans.MethodDescriptor removeMetaAttrbEnumPanelListener_chehiumleditorapplicationMetaAttrbEnumPanelListenerMethodDescriptor() {
+	public java.beans.MethodDescriptor removeMetaNamePanelListener_chehiumleditorapplicationMetaNameEnumPanelListenerMethodDescriptor() {
 		java.beans.MethodDescriptor aDescriptor = null;
 		try {
 			/*
 			 * Create and return the
-			 * removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.
-			 * MetaAttrbEnumPanelListener) method descriptor.
+			 * removeMetaNamePanelListener(ch.ehi.umleditor.application.
+			 * MetaNamePanelListener) method descriptor.
 			 */
 			java.lang.reflect.Method aMethod = null;
 			try {
@@ -674,12 +651,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 				 * Attempt to find the method using getMethod with parameter
 				 * types.
 				 */
-				java.lang.Class aParameterTypes[] = { ch.ehi.umleditor.application.MetaAttrbEnumPanelListener.class };
-				aMethod = getBeanClass().getMethod("removeMetaAttrbEnumPanelListener", aParameterTypes);
+				java.lang.Class aParameterTypes[] = { ch.ehi.umleditor.application.MetaNamePanelListener.class };
+				aMethod = getBeanClass().getMethod("removeMetaNamePanelListener", aParameterTypes);
 			} catch (java.lang.Throwable exception) {
 				/* Since getMethod failed, call findMethod. */
 				handleException(exception);
-				aMethod = findMethod(getBeanClass(), "removeMetaAttrbEnumPanelListener", 1);
+				aMethod = findMethod(getBeanClass(), "removeMetaNamePanelListener", 1);
 			}
 			;
 			try {
@@ -703,12 +680,12 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 			;
 			/*
 			 * aDescriptor.setDisplayName(
-			 * "removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)"
+			 * "removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)"
 			 * );
 			 */
 			/*
-			 * aDescriptor.setShortMetaAttrbEnum(
-			 * "removeMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)"
+			 * aDescriptor.setShortMetaName(
+			 * "removeMetaNamePanelListener(ch.ehi.umleditor.application.MetaNamePanelListener)"
 			 * );
 			 */
 			/* aDescriptor.setExpert(false); */
@@ -722,5 +699,6 @@ public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 		;
 		return aDescriptor;
 	}
+
 
 }
