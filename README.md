@@ -6,7 +6,7 @@ Una versión gratuita del kit de desarrollo de software de Java (JDK) está disp
 También se requiere la herramienta de compilación Ant. Descárguelo de http://Ant.apache.org e instálelo como se documenta allí.
 
 ## Desarrollo
-Configurar el IDE con UTF-8 como formato de codificación de caracteres en su IDE preferido
+Configurar el IDE con UTF-8 como formato de codificación de caracteres
 
 ## ¿Cómo compilar el proyecto?
 Para compilar el editor UML, cambie al directorio recién creado e introduzca el siguiente comando en el prompt comandos:
