@@ -3,7 +3,7 @@
 ## License
 The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
 
-##Status
+## Status
 umleditor branch master is in stable state.
 
 ## System Requirements
