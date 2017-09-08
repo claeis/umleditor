@@ -1,28 +1,36 @@
-# UML-Editor - El editor de UML/INTERLIS 
+# UML-Editor - The UML/INTERLIS Editor
 
-## Configuración del sistema
-Con el fin de compilar el editor UML, se debe instalar en su sistema un kit de desarrollo de software Java (JDK) versión 1,6 o una versión más reciente.
-Una versión gratuita del kit de desarrollo de software de Java (JDK) está disponible en el sitio web http://Java.sun.com/J2SE/.
-También se requiere la herramienta de compilación Ant. Descárguelo de http://Ant.apache.org e instálelo como se documenta allí.
+## License
+The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
 
-## Desarrollo
-Configurar el IDE con UTF-8 como formato de codificación de caracteres
+##Status
+umleditor branch master is in stable state.
 
-## ¿Cómo compilar el proyecto?
-Para compilar el editor UML, cambie al directorio recién creado e introduzca el siguiente comando en el prompt comandos:
+## System Requirements
+For the current version of UML editor, you will need a JAVA software development kit (JDK) version 1.6 or a more recent version must be installed on your system.
+A free version of the JAVA software development kit (JDK) is available 
+[here](http://www.oracle.com/technetwork/java/javase/downloads/index.html "Download Java Development Kit") .
+Also required is the build tool ant. [Download](http://ant.apache.org "Download Apache Ant") and install it as documented there.
+
+## Installation
+In order to install the UML Editor, [Download](https://github.com/AgenciaImplementacion/umleditor/releases/download/v3.6.3/umleditor-3.6.3.zip "Download UML/Editor") choose a directory and extract the ZIP file.
+
+## Development
+Configure the IDE with UTF-8 as character encoding format to resolve possible errors when the project is opened
+
+## How to compile it?
+To compile the UML Editor, change to the newly created directory and enter the following command at the commandline prompt:
 
 ~~~
 ant clean compile jar run
 ~~~
 
-Para crear una distribución binaria, utilice
+To build a binary distribution, use:
 ~~~
 ant bindist
 ~~~
 
-## Instalación
-Para instalar el editor UML, [Descargue](https://github.com/AgenciaImplementacion/umleditor/releases/download/v3.6.3/umleditor-3.6.3.zip "UML/Editor") y extraiga el archivo zip en un nuevo directorio.
 
-## Licencia
-The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
+
+
 
