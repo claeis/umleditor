@@ -417,9 +417,23 @@ public class IliImport extends AbstractDependency implements Permission, java.io
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
+	public NlsString getMetaName() {
+		return super.getMetaName();
+	}
+
+	public void setMetaName(NlsString value) {
+		super.setMetaName(value);
+	}
+	public NlsString getMetaMsg() {
+		return super.getMetaMsg();
+	}
+
+	public void setMetaMsg(NlsString value) {
+		super.setMetaMsg(value);
+	}
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 3940AEA40090 detail_end "IliImport"

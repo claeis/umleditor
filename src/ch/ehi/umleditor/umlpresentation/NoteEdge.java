@@ -24,6 +24,7 @@ package ch.ehi.umleditor.umlpresentation;
 import ch.ehi.umleditor.umlpresentation.PresentationEdge;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D4AB587020E autoimport "NoteEdge"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -74,6 +75,30 @@ public class NoteEdge extends PresentationEdge {
 		java.util.Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA217036E body3D4AB587020E "enumerateChildren"
+	}
+
+	@Override
+	public NlsString getMetaName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// declare/define something only in the code

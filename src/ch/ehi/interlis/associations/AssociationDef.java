@@ -149,7 +149,6 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		clearImportedBy();
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
-		setMetaAttrb(null);
 		clearOwnedElement();
 		clearDiagram();
 		setDocumentation(null);
@@ -186,7 +185,6 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		it = iteratorOwnedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -1694,14 +1692,6 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		connection.set(i1, connection2);
 		ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
 				.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "swapConnection"));
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// -end- 3C178E4F0366 detail_end "AssociationDef"

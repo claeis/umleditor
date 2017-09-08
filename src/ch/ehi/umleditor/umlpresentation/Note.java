@@ -116,6 +116,30 @@ public class Note extends PresentationNode implements java.io.Serializable {
 		// -end- 3C6CF3E50019 set_body3C69420701C1 "content"
 	}
 
+	@Override
+	public NlsString getMetaName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 3C69420701C1 detail_end "Note"

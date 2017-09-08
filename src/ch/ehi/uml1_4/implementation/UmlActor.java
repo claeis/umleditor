@@ -105,6 +105,8 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
 		setMetaAttrb(null);
+		setMetaName(null);
+		setMetaMsg(null);
 		setDocumentation(null);
 		super.unlinkAll();
 		// -end- 4551A85800F6 body4551A5A200BB "unlinkAll"
@@ -142,6 +144,8 @@ public class UmlActor extends AbstractNamespace implements Actor {
 			visitor.visit(it.next());
 		visitor.visit(getName());
 		visitor.visit(getMetaAttrb());
+		visitor.visit(getMetaName());
+		visitor.visit(getMetaMsg());
 		visitor.visit(getDocumentation());
 		super.enumerateChildren(visitor);
 		// -end- 4551A85C008D body4551A5A200BB "enumerateChildren"
@@ -2244,9 +2248,27 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
+	public NlsString getMetaName() {
+		return super.getMetaName();
+	}
+
+	public void setMetaName(NlsString value) {
+		super.setMetaName(value);
+	}
+
+	public NlsString getMetaMsg() {
+		return super.getMetaMsg();
+	}
+	
+	public void setMetaMsg(NlsString value) {
+		super.setMetaMsg(value);
+	}
+	
+
+	
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 4551A5A200BB detail_end "UmlActor"

@@ -768,7 +768,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

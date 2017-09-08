@@ -81,4 +81,5 @@ public void setMetaName(NlsString value);
 
 public NlsString getMetaMsg();
 public void setMetaMsg(NlsString value);
+
 }

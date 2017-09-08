@@ -168,7 +168,6 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		clearImportedBy();
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setDocumentation(null);
-		setMetaAttrb(null);
 		super.unlinkAll();
 		// -end- 3D4FA219021C body358A5DB202C5 "unlinkAll"
 	}
@@ -195,7 +194,6 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getIssuerURI());
 		visitor.visit(getVersion());
 		visitor.visit(getVersionComment());
@@ -2355,15 +2353,6 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		}
 		return imps.iterator();
 	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
-	}
-
 	// -end- 358A5DB202C5 detail_end "ModelDef"
 
 }

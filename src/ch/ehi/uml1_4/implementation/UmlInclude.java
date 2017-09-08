@@ -355,7 +355,7 @@ public class UmlInclude extends AbstractModelElement implements Include {
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 
 	}
 

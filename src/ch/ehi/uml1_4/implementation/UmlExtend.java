@@ -611,7 +611,7 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

@@ -1016,7 +1016,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

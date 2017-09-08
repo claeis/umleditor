@@ -1171,7 +1171,7 @@ public class DomainDefDialog extends BaseDialog {
 			// user code end
 			setName("DomainDefDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(690, 657);
+			setSize(690, 557);
 			setTitle(getResourceString("CTDialog"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

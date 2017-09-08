@@ -92,7 +92,6 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 		detachProjectionAttributes();
 		clearConstraintDef();
 		setName(null);
-		setMetaAttrb(null);
 		setCompositionAttr(null);
 		// Role AttributePath: AttributePath object(s) may point to this
 		// Role RenamedViewableRef: RenamedViewableRef object(s) may point to
@@ -159,7 +158,6 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getCompositionAttr());
 		visitor.visit(getSyntax());
 		it = iteratorBehavior();
@@ -1370,14 +1368,6 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3940EF380079 "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

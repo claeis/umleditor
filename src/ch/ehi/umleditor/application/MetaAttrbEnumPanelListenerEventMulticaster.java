@@ -18,7 +18,7 @@ package ch.ehi.umleditor.application;
  */
 /**
  * This is the event multicaster class to support the
- * ch.ehi.umleditor.application.MetaAttrbEnumPanelListener
+ * ch.ehi.umleditor.application.DescriptionPanelListenerEventMulticaster
  * interface.
  */
 public class MetaAttrbEnumPanelListenerEventMulticaster extends java.awt.AWTEventMulticaster

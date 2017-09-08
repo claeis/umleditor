@@ -384,7 +384,7 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 				constraintsLblElementDescription.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsLblElementDescription.ipadx = 140;
 				constraintsLblElementDescription.ipady = 14;
-				constraintsLblElementDescription.insets = new java.awt.Insets(7, 7, 2, 12);
+				constraintsLblElementDescription.insets = new java.awt.Insets(7, 7, 2, 120);
 				getJPanel1().add(getLblElementDescription(), constraintsLblElementDescription);
 
 				java.awt.GridBagConstraints constraintsPnlDescription = new java.awt.GridBagConstraints();
@@ -429,7 +429,7 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 				constraintsLblMetaAttrbEnum.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsLblMetaAttrbEnum.ipadx = 140;
 				constraintsLblMetaAttrbEnum.ipady = 14;
-				constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 7, 2, 12);
+				constraintsLblMetaAttrbEnum.insets = new java.awt.Insets(7, 7, 2, 120);
 				getJPanel2().add(getLblMetaAttrbEnum(), constraintsLblMetaAttrbEnum);
 
 				java.awt.GridBagConstraints constraintsPnlMetaAttrbEnum = new java.awt.GridBagConstraints();
@@ -993,7 +993,7 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 			constraintsScpTree.weighty = 1.0;
 			constraintsScpTree.ipadx = 142;
 			constraintsScpTree.ipady = 78;
-			constraintsScpTree.insets = new java.awt.Insets(2, 10, 7, 15);
+			constraintsScpTree.insets = new java.awt.Insets(2, 10, 7, 9);
 			add(getScpTree(), constraintsScpTree);
 
 			java.awt.GridBagConstraints constraintsLblElements = new java.awt.GridBagConstraints();
@@ -1014,7 +1014,7 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 			constraintsPnlKind.weighty = 1.0;
 			constraintsPnlKind.ipadx = 392;
 			constraintsPnlKind.ipady = 86;
-			constraintsPnlKind.insets = new java.awt.Insets(6, 6, 0, 6);
+			constraintsPnlKind.insets = new java.awt.Insets(6, 6, 0, 69);
 			add(getPnlKind(), constraintsPnlKind);
 
 			java.awt.GridBagConstraints constraintsJPanel1 = new java.awt.GridBagConstraints();
@@ -1036,7 +1036,7 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 			constraintsJPanel2.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsJPanel2.weightx = 1.0;
 			constraintsJPanel2.weighty = 1.0;
-			constraintsJPanel2.insets = new java.awt.Insets(1, 4, 6, 6);
+			constraintsJPanel2.insets = new java.awt.Insets(1, 10, 6, 6);
 			add(getJPanel2(), constraintsJPanel2);
 
 			initConnections();

@@ -89,7 +89,6 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 		clearSignAttribute();
 		detachExtended();
 		setName(null);
-		setMetaAttrb(null);
 		clearBehavior();
 		clearPartition();
 		clearCollaboration();
@@ -142,7 +141,6 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -939,14 +937,6 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3940F1F903B2 "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

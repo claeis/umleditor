@@ -1325,7 +1325,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

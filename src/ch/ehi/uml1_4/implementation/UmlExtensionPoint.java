@@ -443,7 +443,7 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

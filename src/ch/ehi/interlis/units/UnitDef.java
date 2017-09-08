@@ -74,7 +74,6 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 		// Role NumericConst: NumericConst object(s) may point to this
 		// Role StructUnitConst: StructUnitConst object(s) may point to this
 		setName(null);
-		setMetaAttrb(null);
 		setDescName(null);
 		clearBehavior();
 		clearPartition();
@@ -126,7 +125,6 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 		if (containsStructuredUnit())
 			visitor.visit(getStructuredUnit());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getDescName());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -844,14 +842,6 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 		// -beg- preserve=no 3949DF3B00EA set_body3940EC1D0094 "name"
 		super.setName(value1);
 		// -end- 3949DF3B00EA set_body3940EC1D0094 "name"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// -beg- preserve=no 3949DF400029 var3940EC1D0094 "descName"

@@ -84,7 +84,6 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
 		detachLineForm();
 		detachStructure();
 		setName(null);
-		setMetaAttrb(null);
 		setExplanation(null);
 		clearBehavior();
 		clearPartition();
@@ -128,7 +127,6 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
 		// -beg- preserve=no 3D4FA21B036A body3940ECC60372 "enumerateChildren"
 		java.util.Iterator it = null;
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getExplanation());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -654,14 +652,6 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3940ECC60372 "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

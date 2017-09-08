@@ -121,7 +121,7 @@ public class UmlUsage extends AbstractDependency implements Usage, java.io.Seria
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

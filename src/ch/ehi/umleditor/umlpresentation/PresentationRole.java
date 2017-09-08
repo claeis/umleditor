@@ -573,6 +573,30 @@ public class PresentationRole extends PresentationEdge {
 		super.setMetaAttrb(value);
 	}
 
+	@Override
+	public NlsString getMetaName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 3D4652270282 detail_end "PresentationRole"

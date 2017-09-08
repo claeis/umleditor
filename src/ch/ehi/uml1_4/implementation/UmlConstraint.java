@@ -517,7 +517,7 @@ public class UmlConstraint extends AbstractModelElement implements Constraint {
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
 	}
 
 	// declare/define something only in the code

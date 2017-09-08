@@ -25,6 +25,7 @@ import ch.ehi.umleditor.umlpresentation.PresentationAbstractClass;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3C2C36CC011F autoimport "Class"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -212,6 +213,30 @@ public class Class extends PresentationAbstractClass implements java.io.Serializ
 	}
 	// -end- 362409A803C0 _unlink_body3C2C36CC011F
 	// "PresentationElement::_unlinkSubject"
+
+	@Override
+	public NlsString getMetaName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	// declare/define something only in the code
 	// please fill in/modify the following section

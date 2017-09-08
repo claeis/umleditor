@@ -96,7 +96,6 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		clearRestriction();
 		clearXorParticipant();
 		setName(null);
-		setMetaAttrb(null);
 		clearAssociationEndRole();
 		clearLinkEnd();
 		detachAssociation();
@@ -150,7 +149,6 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		it = iteratorQualifier();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -2254,14 +2252,6 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setVisibility"));
 		}
 		// -end- 3611BCE602DA set_body3C1DAD070376 "visibility"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

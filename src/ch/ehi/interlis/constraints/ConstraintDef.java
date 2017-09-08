@@ -108,9 +108,6 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 		clearImportedBy();
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
-		setMetaAttrb(null);
-		setMetaName(null);
-		setMetaMsg(null);
 		setDocumentation(null);
 		super.unlinkAll();
 		// -end- 3D4FA218015C body3941018702C7 "unlinkAll"
@@ -139,9 +136,6 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
-		visitor.visit(getMetaName());
-		visitor.visit(getMetaMsg());
 		visitor.visit(getDocumentation());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA2180170 body3941018702C7 "enumerateChildren"
@@ -536,29 +530,6 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setBody"));
 		}
 		// -end- 32866F630244 set_body3941018702C7 "body"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMetaAttrb(value);
-	}
-	
-	public NlsString getMetaName() {
-		return super.getMetaName();
-	}
-	
-	public void setMetaName(NlsString value) {
-		super.setMetaName(value);
-	}
-	public NlsString getMetaMsg() {
-		return super.getMetaMsg();
-	}
-	
-	public void setMetaMsg(NlsString value) {
-		super.setMetaMsg(value);
 	}
 
 	// declare/define something only in the code

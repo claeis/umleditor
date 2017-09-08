@@ -26,7 +26,7 @@ import java.lang.Class;
 public class MetaAttrbEnumPanelBeanInfo extends java.beans.SimpleBeanInfo {
 	/**
 	 * Gets the
-	 * addMetaAttrbEnumPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
+	 * addMetaAttrEnumbPanelListener(ch.ehi.umleditor.application.MetaAttrbEnumPanelListener)
 	 * method descriptor.
 	 * 
 	 * @return java.beans.MethodDescriptor

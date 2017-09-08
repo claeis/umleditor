@@ -1,7 +1,5 @@
 package ch.ehi.umleditor.application;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -43,6 +41,7 @@ import ch.softenvironment.util.DeveloperException;
 import ch.softenvironment.view.CommonUserAccess;
 import ch.softenvironment.view.ListMenuChoice;
 
+
 /**
  * Panel to represent an INTERLIS UmlModel as a Tree.
  *
@@ -66,7 +65,6 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	private javax.swing.JMenuItem ivjMniOpenSpecification = null;
 	private javax.swing.JMenuItem ivjMniRename = null;
 	private javax.swing.JPopupMenu ivjMnpTreeActions = null;
-	private javax.swing.JPopupMenu ivjMnpMultiTreeActions = null;
 	private javax.swing.JTree ivjTreNavigation = null;
 	private javax.swing.JMenuItem ivjMniMetaDataUseDef = null;
 	private javax.swing.JMenuItem ivjMniClassDef = null;
@@ -166,7 +164,6 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		public void mouseExited(java.awt.event.MouseEvent e) {
 		};
 
-		
 		public void mousePressed(java.awt.event.MouseEvent e) {
 			if(SwingUtilities.isRightMouseButton(e)){
 		         
@@ -183,13 +180,10 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		         }
 		         if(ivjTreNavigation.getSelectionCount()>1){
 		        	 ivjTreNavigation.getSelectionPaths();
-		        	 connEtoC31(e);
+		        	 connEtoC30(e);
 		         }
 		         	
 		     }
-		     /*if (e.getSource() == NavigationView.this.getTreNavigation())
-					connEtoC30(e);*/
-			
 		};
 
 		public void mouseReleased(java.awt.event.MouseEvent e) {
@@ -200,9 +194,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		public void valueChanged(javax.swing.event.TreeSelectionEvent e) {
 			if (e.getSource() == NavigationView.this.getTreNavigation())
 				connEtoC8(e);
-		}
-
-		
+		};
 	};
 
 	/**
@@ -865,8 +857,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		try {
 			// user code begin {1}
 			// user code end
-
-				 this.genericPopupDisplay(arg1, getMnpTreeActions());
+			this.genericPopupDisplay(arg1, getMnpTreeActions());
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -876,29 +867,6 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		}
 	}
 	
-	/**
-	 * connEtoC31: (TreNavigation.mouse.mousePressed(java.awt.event.MouseEvent)
-	 * -->
-	 * NavigationView.genericPopupDisplay(Ljava.awt.event.MouseEvent;Ljavax.swing.JPopupMenu;)V)
-	 * 
-	 * @param arg1
-	 *            java.awt.event.MouseEvent
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private void connEtoC31(java.awt.event.MouseEvent arg) {
-		try {
-			// user code begin {1}
-			// user code end
-				System.out.println("se supone que abro un menu de dos items");
-				 this.genericPopupDisplay(arg, getMnpMultiTreeActions());
-			// user code begin {2}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {3}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
 
 	/**
 	 * connEtoC4: (MniRename.action.actionPerformed(java.awt.event.ActionEvent)
@@ -1808,30 +1776,6 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		}
 		return ivjMnpTreeActions;
 	}
-	
-	/**
-	 * Return the MnpTreeActions property value.
-	 * 
-	 * @return javax.swing.JPopupMenu
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JPopupMenu getMnpMultiTreeActions() {
-		if (ivjMnpMultiTreeActions == null) {
-			try {
-				ivjMnpMultiTreeActions = new javax.swing.JPopupMenu();
-				ivjMnpMultiTreeActions.setName("MnpMultiTreeActions");
-				ivjMnpMultiTreeActions.add(getMniRemove());
-				
-				// user code begin {1}
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjMnpMultiTreeActions;
-	}
 
 	/**
 	 * Return the MnuNewUmlDiagrams property value.
@@ -2109,7 +2053,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getTreNavigation().setRowHeight(-1);
 		getTreNavigation().setRootVisible(true);
 
-		// set Single Row selection model (at multiple selection don't works right click for remove or move element)
+		// set Single Row selection model
 		DefaultTreeSelectionModel selectionModel = new DefaultTreeSelectionModel();
 		selectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		getTreNavigation().setSelectionModel(selectionModel);

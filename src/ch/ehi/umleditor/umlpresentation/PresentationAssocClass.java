@@ -25,6 +25,7 @@ import ch.ehi.umleditor.umlpresentation.PresentationAbstractClass;
 import ch.ehi.umleditor.umlpresentation.Association;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D47AB4300A6 autoimport "PresentationAssocClass"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -575,5 +576,29 @@ public class PresentationAssocClass extends PresentationAbstractClass {
 				(int) rect.getY() + (int) (rect.getHeight() / 2.0));
 	}
 	// -end- 3D47AB4300A6 detail_end "PresentationAssocClass"
+
+	@Override
+	public NlsString getMetaName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NlsString getMetaMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMetaMsg(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

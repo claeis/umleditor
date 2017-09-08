@@ -1986,7 +1986,21 @@ public class AttributeDef extends AbstractModelElement implements Attribute, jav
 	}
 
 	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
+		super.setMetaAttrb(value);
+	}
+	public NlsString getMetaName() {
+		return super.getMetaName();
+	}
+
+	public void setMetaName(NlsString value) {
+		super.setMetaName(value);
+	}
+	public NlsString getMetaMsg() {
+		return super.getMetaMsg();
+	}
+
+	public void setMetaMsg(NlsString value) {
+		super.setMetaMsg(value);
 	}
 
 	// -end- 358A5F6F01B7 detail_end "AttributeDef"

@@ -25,7 +25,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -3854,7 +3853,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		if (saveCurrentChanges()) {
 			FileChooser openDialog = new FileChooser(getSettings().getWorkingDirectory());
 			openDialog.setDialogTitle(CommonUserAccess.getTitleFileOpen());
-			//openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
 			openDialog.setFileFilter(createUmlInterlisEditorFilter());
 
 			if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -3951,13 +3949,13 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		tool().deactivate();
 
 		FileChooser saveDialog = new FileChooser(getSettings().getWorkingDirectory());
-		//saveDialog.setDialogTitle(CommonUserAccess.getMniFileSaveAsText());
+		saveDialog.setDialogTitle(CommonUserAccess.getMniFileSaveAsText());
 		saveDialog.setFileFilter(createUmlInterlisEditorFilter());
-		
+
 		if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
-				saveFile(saveDialog.getSelectedFile().getAbsoluteFile());
+				saveFile(saveDialog.getSelectedFile());
 			} catch (java.io.IOException e) {
 				handleException(e, "filesaveas", e.getMessage());
 			} catch (Throwable e) {

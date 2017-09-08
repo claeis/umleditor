@@ -298,7 +298,34 @@ public class IntersectionDef extends AbstractEditorElement implements Element, j
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
 		}
 	}
+	
+	private NlsString metaName = null;
 
+	public NlsString getMetaName() {
+		return metaName;
+	}
+
+	public void setMetaName(NlsString value) {
+		if (metaName != value && (metaName == null || !metaName.equals(value))) {
+			metaName = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaName"));
+		}
+	}
+
+	private NlsString metaMsg = null;
+
+	public NlsString getMetaMsg() {
+		return metaMsg;
+	}
+
+	public void setMetaMsg(NlsString value) {
+		if (metaMsg != value && (metaMsg == null || !metaMsg.equals(value))) {
+			metaMsg = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
+		}
+	}
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 35B872AB0146 detail_end "IntersectionDef"

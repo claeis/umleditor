@@ -1495,12 +1495,12 @@ void setName(NlsString value1)
  * @see #setMetaAttrb()
  */
 NlsString getMetaAttrb();
-
 /**
- * set current value of meta attribute
+ * set current value of meta attrubute
  * @see #getMetaAttrb()
  */
 void setMetaAttrb(NlsString value);
+
 
 /**
  * get current value of meta name

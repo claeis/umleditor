@@ -83,7 +83,6 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
 		detachDomainAttribute();
 		detachNamespace();
 		setName(null);
-		setMetaAttrb(null);
 		clearBehavior();
 		clearPartition();
 		clearCollaboration();
@@ -128,7 +127,6 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
 		if (containsDomainAttribute())
 			visitor.visit(getDomainAttribute());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -460,14 +458,6 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3947A91501AA "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

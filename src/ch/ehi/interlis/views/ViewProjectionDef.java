@@ -87,7 +87,6 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 		detachProjectionAttributes();
 		clearConstraintDef();
 		setName(null);
-		setMetaAttrb(null);
 		// Role AttributePath: AttributePath object(s) may point to this
 		// Role RenamedViewableRef: RenamedViewableRef object(s) may point to
 		// this
@@ -143,7 +142,6 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getSyntax());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -969,14 +967,6 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3940F0250373 "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

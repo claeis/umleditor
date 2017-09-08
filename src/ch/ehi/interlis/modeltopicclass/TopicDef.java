@@ -148,7 +148,6 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		detachBasketoid();
 		clearBasketType();
 		setName(null);
-		setMetaAttrb(null);
 		clearImportedElement();
 		clearPresentation();
 		clearDiagram();
@@ -193,7 +192,6 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		while (it.hasNext())
 			visitor.visit(it.next());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		it = iteratorImportedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -2276,14 +2274,6 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setLeaf"));
 		}
 		// -end- 327A877E006E set_body358A5E3B0132 "isLeaf"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

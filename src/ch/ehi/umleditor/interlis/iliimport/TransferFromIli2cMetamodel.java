@@ -241,7 +241,6 @@ public class TransferFromIli2cMetamodel {
 	private ch.ehi.interlis.modeltopicclass.ClassDef visitClassDef(Table tdef) {
 		ch.ehi.interlis.modeltopicclass.ClassDef classdef = findClassDef(tdef);
 		classdef.setName(new NlsString(modelLanguage, tdef.getName()));
-		classdef.setMetaAttrb(new NlsString(modelLanguage, tdef.getMetaValue("ili2db.dispName")));
 
 		// documentation
 		String ilidoc = tdef.getDocumentation();
@@ -399,7 +398,6 @@ public class TransferFromIli2cMetamodel {
 	private ch.ehi.interlis.metaobjects.MetaDataUseDef visitMetaDataUseDef(MetaDataUseDef mu) {
 		ch.ehi.interlis.metaobjects.MetaDataUseDef mdef = new ch.ehi.interlis.metaobjects.MetaDataUseDef();
 		mdef.setName(new NlsString(modelLanguage, mu.getName()));
-		mdef.setMetaAttrb(new NlsString(modelLanguage, mu.getMetaValue("ili2db.dispName")));
 
 		// documentation
 		String ilidoc = mu.getDocumentation();
@@ -543,7 +541,6 @@ public class TransferFromIli2cMetamodel {
 
 		ch.ehi.interlis.attributes.AttributeDef attrdef = new ch.ehi.interlis.attributes.AttributeDef();
 		attrdef.setName(new NlsString(modelLanguage, attrib.getName()));
-		attrdef.setMetaAttrb(new NlsString(modelLanguage, attrib.getMetaValue("ili2db.dispName")));
 		attrdef.setAbstract(attrib.isAbstract());
 		attrdef.setPropFinal(attrib.isFinal());
 		attrdef.setPropExtended(attrib.getExtending() != null);
@@ -908,7 +905,6 @@ public class TransferFromIli2cMetamodel {
 	private ch.ehi.interlis.domainsandconstants.DomainDef visitDomainDef(Domain dd) {
 		ch.ehi.interlis.domainsandconstants.DomainDef domaindef = findDomainDef(dd);
 		domaindef.setName(new NlsString(modelLanguage, dd.getName()));
-		domaindef.setMetaAttrb(new NlsString(modelLanguage, dd.getMetaValue("ili2db.dispName")));
 
 		// documentation
 		String ilidoc = dd.getDocumentation();
@@ -1182,7 +1178,6 @@ public class TransferFromIli2cMetamodel {
 			ch.interlis.ili2c.metamodel.Enumeration.Element ee) {
 		ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret = new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
 		ret.setName(new NlsString(modelLanguage, ee.getName()));
-		ret.setMetaAttrb(new NlsString(modelLanguage, ee.getMetaValues().getValue("ili2db.dispName")));
 
 		// documentation
 		String ilidoc = ee.getDocumentation();

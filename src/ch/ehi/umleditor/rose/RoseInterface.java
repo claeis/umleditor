@@ -41,7 +41,6 @@ public class RoseInterface {
 		// -beg- preserve=yes 3E0DAFB203CB body3E0DAF43019B "importXmi"
 		FileChooser importDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 		importDialog.setDialogTitle(rsrc.getString("CTfileSelector"));
-		//importDialog.addChoosableFileFilter(LauncherView.createXmlFilter());
 		importDialog.setFileFilter(LauncherView.createXmlFilter());
 		
 

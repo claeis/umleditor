@@ -84,7 +84,6 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 		detachResult();
 		detachNamespace();
 		setName(null);
-		setMetaAttrb(null);
 		setExplanation(null);
 		clearBehavior();
 		clearPartition();
@@ -133,7 +132,6 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 		if (containsResult())
 			visitor.visit(getResult());
 		visitor.visit(getName());
-		visitor.visit(getMetaAttrb());
 		visitor.visit(getExplanation());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -622,14 +620,6 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setSyntax"));
 		}
 		// -end- 3C8F5ABE022D set_body3960AFB50130 "syntax"
-	}
-
-	public NlsString getMetaAttrb() {
-		return super.getMetaAttrb();
-	}
-
-	public void setMetaAttrb(NlsString value) {
-		super.setMettaAttrb(value);
 	}
 
 	// declare/define something only in the code

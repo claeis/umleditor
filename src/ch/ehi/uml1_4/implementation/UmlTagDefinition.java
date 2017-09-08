@@ -3972,80 +3972,40 @@ public class UmlTagDefinition implements TagDefinition {
 		// -end- 3C1DF92B0234 set_body448D24EA007C "documentation"
 	}
 
-private NlsString metaAttrb = null;
-	
-	/**
-	 * get current value of meta attribute
-	 * 
-	 * @see #setMetaAttrb
-	 */
-	public NlsString getMetaAttrb() {		
-		return metaAttrb;
+	@Override
+	public NlsString getMetaAttrb() {
+		return null;
 	}
 
-	/**
-	 * set current value of meta attribute
-	 * 
-	 * @see #getMetaAttrb
-	 */
-	public void setMetaAttrb(NlsString value1) {
-		if (metaAttrb != value1 && (metaAttrb == null || !metaAttrb.equals(value1))) {
-			metaAttrb = value1;
-			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
-					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
-		}
+	@Override
+	public void setMetaAttrb(NlsString value) {
+		// TODO Auto-generated method stub
+
 	}
 
-	private NlsString metaName = null;
-	
-	/**
-	 * get current value of meta name
-	 * 
-	 * @see #setMetaName
-	 */
+	@Override
 	public NlsString getMetaName() {
-		return metaName;
-	}
-	
-	/**
-	 * set current value of meta name
-	 * 
-	 * @see #getMetaName
-	 */
-	public void setMetaName(NlsString value) {
-		if (metaName != value && (metaName == null || !metaName.equals(value))) {
-			metaName = value;
-			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
-					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaName"));
-		}
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	private NlsString metaMsg = null;
-	
-	/**
-	 * get current value of meta message
-	 * 
-	 * @see #setMetaMsg
-	 */
+	@Override
+	public void setMetaName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public NlsString getMetaMsg() {
 		// TODO Auto-generated method stub
-		return metaMsg;
+		return null;
 	}
 
-	/**
-	 * set current value of meta message
-	 * 
-	 * @see #getMetaMsg
-	 */
+	@Override
 	public void setMetaMsg(NlsString value) {
 		// TODO Auto-generated method stub
-		if (metaMsg != value && (metaMsg == null || !metaMsg.equals(value))) {
-			metaMsg = value;
-			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
-					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
-		}
+		
 	}
-
 
 	// declare/define something only in the code
 	// please fill in/modify the following section
