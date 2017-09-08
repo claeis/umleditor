@@ -45,6 +45,8 @@ public class UniquenessConstraint extends AbstractEditorElement implements java.
 
 	// -end- 394A2D1100D0 detail_begin "UniquenessConstraint"
 
+	private static final long serialVersionUID = -4685447814249650467L;
+
 	// -beg- preserve=no 3D4FA21801AC head394A2D1100D0 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21801AC head394A2D1100D0 "unlinkAll"

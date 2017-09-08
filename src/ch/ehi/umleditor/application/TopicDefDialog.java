@@ -30,6 +30,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
 public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
+	
+	private static final long serialVersionUID = 7159933891060976398L;
 	// ModelElement
 	private static java.util.ResourceBundle resTopicDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/TopicDefDialog"); //$NON-NLS-1$

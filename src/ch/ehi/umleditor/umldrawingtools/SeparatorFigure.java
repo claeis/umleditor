@@ -28,6 +28,8 @@ import CH.ifa.draw.figures.*;
  * @version $Revision: 1.2 $ $Date: 2003-12-30 22:07:47 $
  */
 class SeparatorFigure extends LineFigure {
+	
+	private static final long serialVersionUID = -4892704216485792823L;
 	private boolean lineVisible = true;
 
 	// static final long serialVersionUID = 7110919055213080660L;

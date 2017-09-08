@@ -63,6 +63,8 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 
 	// -end- 3E42404202F6 detail_begin "AbstractDependency"
 
+	private static final long serialVersionUID = -3492473053374185782L;
+
 	// -beg- preserve=no 3E42412A026D head3E42404202F6 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3E42412A026D head3E42404202F6 "unlinkAll"

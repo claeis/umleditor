@@ -31,6 +31,8 @@ public class MetaDataUseDefKind implements java.io.Serializable {
 
 	// -end- 3CBDA5160017 detail_begin "MetaDataUseDefKind"
 
+	private static final long serialVersionUID = -284990346286641930L;
+
 	/**
 	 * used to declare a basket containing metaobjects for use in GraohicDefs
 	 */

@@ -45,6 +45,8 @@ public class StructDec extends AbstractEditorElement implements java.io.Serializ
 
 	// -end- 39488BFE0396 detail_begin "StructDec"
 
+	private static final long serialVersionUID = -2505196302956071954L;
+
 	// -beg- preserve=no 3CCBFEA203B7 head39488BFE0396 "toString"
 	public String toString()
 	// -end- 3CCBFEA203B7 head39488BFE0396 "toString"

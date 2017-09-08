@@ -43,6 +43,8 @@ public abstract class AttrType extends AbstractEditorElement implements java.io.
 
 	// -end- 3C1784E100B2 detail_begin "AttrType"
 
+	private static final long serialVersionUID = 273282772216886205L;
+
 	// -beg- preserve=no 3D4FA21A02B4 head3C1784E100B2 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A02B4 head3C1784E100B2 "unlinkAll"

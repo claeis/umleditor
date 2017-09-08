@@ -45,6 +45,8 @@ public class DateTimeType extends BaseType {
 
 	// -end- 448985D7008E detail_begin "DateTimeType"
 
+	private static final long serialVersionUID = -537012496578251582L;
+
 	// -beg- preserve=no 448E7BB201E0 head448985D7008E "unlinkAll"
 	public void unlinkAll()
 	// -end- 448E7BB201E0 head448985D7008E "unlinkAll"

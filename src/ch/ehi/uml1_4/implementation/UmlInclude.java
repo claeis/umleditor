@@ -44,6 +44,8 @@ public class UmlInclude extends AbstractModelElement implements Include {
 
 	// -end- 4551A7840119 detail_begin "UmlInclude"
 
+	private static final long serialVersionUID = -7682929500181108943L;
+
 	// -beg- preserve=no 4551A8880145 head4551A7840119 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551A8880145 head4551A7840119 "unlinkAll"

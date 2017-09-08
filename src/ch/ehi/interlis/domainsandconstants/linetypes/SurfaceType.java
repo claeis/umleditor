@@ -46,6 +46,8 @@ public abstract class SurfaceType extends LineType implements java.io.Serializab
 
 	// -end- 358A65100028 detail_begin "SurfaceType"
 
+	private static final long serialVersionUID = 1327845910021716604L;
+
 	// -beg- preserve=no 3D4FA21B02E7 head358A65100028 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B02E7 head358A65100028 "unlinkAll"

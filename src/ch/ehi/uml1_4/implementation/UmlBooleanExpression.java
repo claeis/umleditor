@@ -32,6 +32,8 @@ public class UmlBooleanExpression extends AbstractEditorElement implements Boole
 
 	// -end- 4551E9FD0298 detail_begin "UmlBooleanExpression"
 
+	private static final long serialVersionUID = -5912069856914673781L;
+
 	// -beg- preserve=no 4551EC7902F7 head4551E9FD0298 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551EC7902F7 head4551E9FD0298 "unlinkAll"

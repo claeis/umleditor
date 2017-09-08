@@ -69,6 +69,8 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 
 	// -end- 3940F1F903B2 detail_begin "GraphicDef"
 
+	private static final long serialVersionUID = -8190089131056234471L;
+
 	// -beg- preserve=no 3D4FA219001D head3940F1F903B2 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA219001D head3940F1F903B2 "unlinkAll"

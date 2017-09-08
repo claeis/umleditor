@@ -56,6 +56,8 @@ import ch.ehi.uml1_4.implementation.AbstractNamespace;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:55 $
  */
 public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io.Serializable {
+	
+	private static final long serialVersionUID = -629940655283639682L;
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 358A5F0B0113 detail_begin "INTERLIS2Def"

@@ -71,6 +71,8 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 
 	// -end- 3940EF380079 detail_begin "ViewDef"
 
+	private static final long serialVersionUID = 7026020785719684595L;
+
 	// -beg- preserve=no 3D4FA21802D9 head3940EF380079 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21802D9 head3940EF380079 "unlinkAll"

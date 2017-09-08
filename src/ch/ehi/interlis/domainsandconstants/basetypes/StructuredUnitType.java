@@ -45,6 +45,8 @@ public class StructuredUnitType extends NumericalType implements java.io.Seriali
 
 	// -end- 394885320023 detail_begin "StructuredUnitType"
 
+	private static final long serialVersionUID = -135337519112344499L;
+
 	// -beg- preserve=no 3D4FA21B00E8 head394885320023 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00E8 head394885320023 "unlinkAll"

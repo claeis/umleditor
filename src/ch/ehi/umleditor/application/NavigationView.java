@@ -50,6 +50,8 @@ import ch.softenvironment.view.ListMenuChoice;
  */
 public class NavigationView extends ch.softenvironment.view.BasePanel
 		implements ch.ehi.umleditor.umldrawingtools.ModelElementUI, ListMenuChoice {
+	
+	private static final long serialVersionUID = -8317894440211483401L;
 	// private TreeDragSource ds;
 	// private TreeDropTarget dt;
 	private NavigationTreeModel modelAdapter = null;

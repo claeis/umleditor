@@ -33,6 +33,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.6 $ $Date: 2007-03-12 18:30:46 $
  */
 public class NoteAnchorLineConnection extends EdgeFigure {
+	
+	private static final long serialVersionUID = 8639890097091485825L;
 	private static java.util.ResourceBundle resNoteAnchorLineConnection = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/umldrawingtools/resources/NoteAnchorLineConnection"); //$NON-NLS-1$
 

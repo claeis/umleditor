@@ -45,6 +45,8 @@ public class DerivedUnit extends AbstractEditorElement implements java.io.Serial
 
 	// -end- 3949E16F0308 detail_begin "DerivedUnit"
 
+	private static final long serialVersionUID = -3146424151973735614L;
+
 	// -beg- preserve=no 3D4FA21800B2 head3949E16F0308 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21800B2 head3949E16F0308 "unlinkAll"

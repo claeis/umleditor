@@ -43,6 +43,8 @@ public class Metaobject extends AbstractEditorElement implements java.io.Seriali
 
 	// -end- 3C17874F0020 detail_begin "Metaobject"
 
+	private static final long serialVersionUID = 3091475781192100788L;
+
 	// -beg- preserve=no 3D4FA21B03AF head3C17874F0020 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B03AF head3C17874F0020 "unlinkAll"

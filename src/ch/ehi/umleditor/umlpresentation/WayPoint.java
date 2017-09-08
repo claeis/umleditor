@@ -45,6 +45,8 @@ public class WayPoint extends AbstractEditorElement implements java.io.Serializa
 
 	// -end- 3C2C4A39022E detail_begin "WayPoint"
 
+	private static final long serialVersionUID = -7064309195143602886L;
+
 	// -beg- preserve=no 3D4FA2170287 head3C2C4A39022E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170287 head3C2C4A39022E "unlinkAll"

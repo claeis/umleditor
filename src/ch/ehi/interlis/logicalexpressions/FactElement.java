@@ -49,6 +49,8 @@ public class FactElement extends AbstractEditorElement implements java.io.Serial
 
 	// -end- 39609BAB0260 detail_begin "FactElement"
 
+	private static final long serialVersionUID = 6061295615432976990L;
+
 	// -beg- preserve=no 3D4FA2180239 head39609BAB0260 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180239 head39609BAB0260 "unlinkAll"

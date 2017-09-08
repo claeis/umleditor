@@ -46,6 +46,8 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 
 	// -end- 4551A78D0108 detail_begin "UmlExtend"
 
+	private static final long serialVersionUID = 7750219903278800224L;
+
 	// -beg- preserve=no 4551A89A0367 head4551A78D0108 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551A89A0367 head4551A78D0108 "unlinkAll"

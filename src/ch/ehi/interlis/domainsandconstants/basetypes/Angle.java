@@ -46,6 +46,8 @@ public class Angle extends BaseType implements java.io.Serializable {
 
 	// -end- 358A66E4034C detail_begin "Angle"
 
+	private static final long serialVersionUID = 7247894787746309411L;
+
 	// -beg- preserve=no 3D4FA21B0053 head358A66E4034C "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0053 head358A66E4034C "unlinkAll"

@@ -68,6 +68,8 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
 
 	// -end- 3940ECC60372 detail_begin "LineFormTypeDef"
 
+	private static final long serialVersionUID = -5474693283805900968L;
+
 	// -beg- preserve=no 3D4FA21B0369 head3940ECC60372 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0369 head3940ECC60372 "unlinkAll"

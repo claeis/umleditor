@@ -27,6 +27,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * @version $Revision: 1.4 $ $Date: 2004-04-28 19:29:04 $
  */
 public class IliBaseTypeAlignmentPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -1172532465323782310L;
 	private javax.swing.JLabel ivjLblKind = null;
 	private javax.swing.JRadioButton ivjRbtHAlignment = null;
 	private javax.swing.JRadioButton ivjRbtVertical = null;

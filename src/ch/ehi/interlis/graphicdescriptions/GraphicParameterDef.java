@@ -67,6 +67,8 @@ public class GraphicParameterDef extends AbstractModelElement implements ModelEl
 
 	// -end- 3947A91501AA detail_begin "GraphicParameterDef"
 
+	private static final long serialVersionUID = 5957412107165331513L;
+
 	// -beg- preserve=no 3D4FA219004F head3947A91501AA "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA219004F head3947A91501AA "unlinkAll"

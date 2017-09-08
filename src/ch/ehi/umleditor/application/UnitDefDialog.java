@@ -26,6 +26,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:04 $
  */
 public class UnitDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -3837117613548331845L;
 	// ModelElement
 	private static java.util.ResourceBundle resUnitDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/UnitDefDialog"); //$NON-NLS-1$

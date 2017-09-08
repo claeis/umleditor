@@ -31,6 +31,8 @@ import ch.softenvironment.view.*;
  * @author: Peter Hirzel
  */
 public class InterlisSyntaxPanel extends BasePanel implements DataPanel, DataSelectorPanelListener {
+	
+	private static final long serialVersionUID = -8686574965600767067L;
 	private SimpleEditorPanel ivjPnlEditor = null;
 	private ModelElement modelElement = null;
 	private IliSyntax iliSyntax = null;

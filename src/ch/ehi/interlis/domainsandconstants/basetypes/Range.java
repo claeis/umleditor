@@ -45,6 +45,8 @@ public class Range extends BaseType implements java.io.Serializable {
 
 	// -end- 358A670101A0 detail_begin "Range"
 
+	private static final long serialVersionUID = -2365993710641189145L;
+
 	// -beg- preserve=no 3D4FA21B007A head358A670101A0 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B007A head358A670101A0 "unlinkAll"

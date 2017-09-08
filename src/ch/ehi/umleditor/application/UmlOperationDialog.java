@@ -35,6 +35,8 @@ import ch.softenvironment.view.ListMenuChoice;
  * @version $Revision: 1.6 $ $Date: 2005-11-20 16:43:58 $
  */
 public class UmlOperationDialog extends ch.softenvironment.view.BaseDialog implements ListMenuChoice {
+	
+	private static final long serialVersionUID = -5121859118251377024L;
 	private static java.util.ResourceBundle resources = ResourceBundle.getBundle(UmlOperationDialog.class);
 	private ch.ehi.uml1_4.implementation.UmlOperation operation = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;

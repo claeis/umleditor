@@ -29,6 +29,8 @@ public class BasketKind implements java.io.Serializable {
 
 	// -end- 3CC0010600E0 detail_begin "BasketKind"
 
+	private static final long serialVersionUID = -6897556153466424674L;
+
 	// -beg- preserve=no 3CC0012C0329 var3CC0010600E0 "DATA"
 	public static final int DATA = 1;
 	// -end- 3CC0012C0329 var3CC0010600E0 "DATA"

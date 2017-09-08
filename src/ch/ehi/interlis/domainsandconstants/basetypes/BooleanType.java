@@ -44,6 +44,8 @@ public class BooleanType extends BaseType implements java.io.Serializable {
 
 	// -end- 39488609013A detail_begin "BooleanType"
 
+	private static final long serialVersionUID = -4876795509575607499L;
+
 	// -beg- preserve=no 3D4FA21B00FC head39488609013A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00FC head39488609013A "unlinkAll"

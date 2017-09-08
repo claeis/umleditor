@@ -44,6 +44,8 @@ public class Package extends PresentationNode implements java.io.Serializable {
 
 	// -end- 3C2C36BE03A0 detail_begin "Package"
 
+	private static final long serialVersionUID = -965832961009776275L;
+
 	// -beg- preserve=no 3D4FA2170223 head3C2C36BE03A0 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170223 head3C2C36BE03A0 "unlinkAll"

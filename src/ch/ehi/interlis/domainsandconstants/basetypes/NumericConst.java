@@ -46,6 +46,8 @@ public class NumericConst extends Constant implements java.io.Serializable {
 
 	// -end- 39488ABC022B detail_begin "NumericConst"
 
+	private static final long serialVersionUID = -700903317400965608L;
+
 	// -beg- preserve=no 3D4FA21B0156 head39488ABC022B "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0156 head39488ABC022B "unlinkAll"

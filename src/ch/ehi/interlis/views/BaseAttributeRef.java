@@ -45,6 +45,8 @@ public class BaseAttributeRef extends AbstractEditorElement implements java.io.S
 
 	// -end- 3961A82A0142 detail_begin "BaseAttributeRef"
 
+	private static final long serialVersionUID = -4801895422615118656L;
+
 	// -beg- preserve=no 3D4FA218038E head3961A82A0142 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218038E head3961A82A0142 "unlinkAll"

@@ -65,6 +65,8 @@ public class UmlStereotype implements Stereotype {
 
 	// -end- 448D24D90367 detail_begin "UmlStereotype"
 
+	private static final long serialVersionUID = -5259732147353166340L;
+
 	// -beg- preserve=no 448D3645021F head448D24D90367 "unlinkAll"
 	public void unlinkAll()
 	// -end- 448D3645021F head448D24D90367 "unlinkAll"

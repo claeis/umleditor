@@ -44,6 +44,8 @@ public class HorizAlignment extends BaseType implements java.io.Serializable {
 
 	// -end- 358A674F007F detail_begin "HorizAlignment"
 
+	private static final long serialVersionUID = -1221748386928895005L;
+
 	// -beg- preserve=no 3D4FA21B0084 head358A674F007F "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0084 head358A674F007F "unlinkAll"

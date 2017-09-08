@@ -48,6 +48,8 @@ public abstract class PresentationComposite extends AbstractEditorElement
 
 	// -end- 3C346EED0276 detail_begin "PresentationComposite"
 
+	private static final long serialVersionUID = -5857210959807888171L;
+
 	// -beg- preserve=no 3D4FA21702E2 head3C346EED0276 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21702E2 head3C346EED0276 "unlinkAll"

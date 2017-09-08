@@ -32,6 +32,8 @@ public class UmlMultiplicity extends AbstractEditorElement implements Multiplici
 
 	// -end- 3C8F927A014D detail_begin "UmlMultiplicity"
 
+	private static final long serialVersionUID = -6730854170798641637L;
+
 	// -beg- preserve=no 3D4FA218004E head3C8F927A014D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218004E head3C8F927A014D "unlinkAll"

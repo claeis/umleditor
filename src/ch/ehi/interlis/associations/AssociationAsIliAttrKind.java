@@ -25,6 +25,8 @@ package ch.ehi.interlis.associations;
  * @version $Revision: 1.2 $ $Date: 2005-01-17 11:23:04 $
  */
 public class AssociationAsIliAttrKind implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1332062590315422022L;
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 3D46C0510377 detail_begin "AssociationAsIliAttrKind"

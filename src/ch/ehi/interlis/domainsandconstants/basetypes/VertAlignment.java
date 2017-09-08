@@ -44,6 +44,8 @@ public class VertAlignment extends BaseType implements java.io.Serializable {
 
 	// -end- 358A675900CA detail_begin "VertAlignment"
 
+	private static final long serialVersionUID = -824541645736599273L;
+
 	// -beg- preserve=no 3D4FA21B008E head358A675900CA "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B008E head358A675900CA "unlinkAll"

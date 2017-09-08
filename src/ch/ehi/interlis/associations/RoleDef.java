@@ -78,6 +78,8 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 
 	// -end- 3C1DAD070376 detail_begin "RoleDef"
 
+	private static final long serialVersionUID = -6351436005642320153L;
+
 	// -beg- preserve=no 3D4FA21C007C head3C1DAD070376 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21C007C head3C1DAD070376 "unlinkAll"

@@ -29,6 +29,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = 7257697583267907080L;
 	// private int oldDim = 0;
 	// private int newDim = 0;
 	private boolean secondEvent = false;

@@ -28,6 +28,8 @@ import javax.swing.*;
  * @version $Revision: 1.3 $ $Date: 2005-02-23 16:40:03 $
  */
 public class IliDimPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = 8471130079984763957L;
 	private JTextField ivjTxtValue = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 

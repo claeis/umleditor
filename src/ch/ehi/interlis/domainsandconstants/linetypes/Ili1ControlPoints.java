@@ -47,6 +47,8 @@ public class Ili1ControlPoints extends AbstractEditorElement implements java.io.
 
 	// -end- 358A6CDF004B detail_begin "Ili1ControlPoints"
 
+	private static final long serialVersionUID = -7793191168531002866L;
+
 	// -beg- preserve=no 3D4FA21B0319 head358A6CDF004B "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0319 head358A6CDF004B "unlinkAll"

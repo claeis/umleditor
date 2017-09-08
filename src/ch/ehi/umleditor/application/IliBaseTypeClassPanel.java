@@ -37,6 +37,8 @@ import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
  * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeClassPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = 761574934420486530L;
 	private GridBagLayout gridBagLayout1 = new GridBagLayout();
 	private JRadioButton rbClass = new JRadioButton();
 	private JRadioButton rbStruct = new JRadioButton();

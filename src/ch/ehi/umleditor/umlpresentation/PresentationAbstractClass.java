@@ -42,6 +42,8 @@ public abstract class PresentationAbstractClass extends PresentationNode {
 
 	// -end- 3D47AB2F01F2 detail_begin "PresentationAbstractClass"
 
+	private static final long serialVersionUID = -1437358344807936437L;
+
 	// -beg- preserve=no 3D4FA217033B head3D47AB2F01F2 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA217033B head3D47AB2F01F2 "unlinkAll"

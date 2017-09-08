@@ -44,6 +44,8 @@ public abstract class Type extends AbstractEditorElement implements java.io.Seri
 
 	// -end- 358A651D03B6 detail_begin "Type"
 
+	private static final long serialVersionUID = 5284714366879273536L;
+
 	// -beg- preserve=no 3D4FA21A03B8 head358A651D03B6 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A03B8 head358A651D03B6 "unlinkAll"

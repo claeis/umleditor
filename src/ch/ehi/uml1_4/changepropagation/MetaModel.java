@@ -23,8 +23,7 @@ import ch.ehi.basics.logging.EhiLogger;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.5 $ $Date: 2005-02-21 15:55:35 $
  */
-public class MetaModel
-{
+public class MetaModel {
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=yes 3C454ADA00E4 detail_begin "MetaModel"

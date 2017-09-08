@@ -48,6 +48,8 @@ public class ClassDef extends AbstractClassDef {
 
 	// -end- 3D21C62B03BA detail_begin "ClassDef"
 
+	private static final long serialVersionUID = -8391048549578950255L;
+
 	// -beg- preserve=no 3D4FA21A01B9 head3D21C62B03BA "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A01B9 head3D21C62B03BA "unlinkAll"

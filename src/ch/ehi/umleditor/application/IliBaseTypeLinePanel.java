@@ -34,6 +34,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.7 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMenuChoice {
+	
+	private static final long serialVersionUID = -5387939810398130728L;
 	// private LineType lineType = null;
 	private java.lang.Class lineTypeClass = null;
 	private ModelElement parent = null;

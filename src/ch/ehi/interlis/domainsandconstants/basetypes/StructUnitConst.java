@@ -46,6 +46,8 @@ public class StructUnitConst extends Constant implements java.io.Serializable {
 
 	// -end- 3948D4320116 detail_begin "StructUnitConst"
 
+	private static final long serialVersionUID = -9000825711911864443L;
+
 	// -beg- preserve=no 3D4FA21B01CF head3948D4320116 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B01CF head3948D4320116 "unlinkAll"

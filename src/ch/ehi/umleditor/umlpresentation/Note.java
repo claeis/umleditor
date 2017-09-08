@@ -46,6 +46,8 @@ public class Note extends PresentationNode implements java.io.Serializable {
 
 	// -end- 3C69420701C1 detail_begin "Note"
 
+	private static final long serialVersionUID = 8640941083704181573L;
+
 	// -beg- preserve=no 3D4FA2170309 head3C69420701C1 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170309 head3C69420701C1 "unlinkAll"

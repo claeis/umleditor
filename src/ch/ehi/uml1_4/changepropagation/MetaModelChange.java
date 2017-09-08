@@ -22,8 +22,8 @@ import java.util.EventObject;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.3 $ $Date: 2004-01-04 10:54:05 $
  */
-public class MetaModelChange extends EventObject
-{
+public class MetaModelChange extends EventObject {
+	private static final long serialVersionUID = -6459181213720745286L;
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=yes 3C454DFD0284 detail_begin "MetaModelChange"

@@ -45,6 +45,8 @@ public class NumericType extends NumericalType implements java.io.Serializable {
 
 	// -end- 394882EB009D detail_begin "NumericType"
 
+	private static final long serialVersionUID = -2019663222586147721L;
+
 	// -beg- preserve=no 3D4FA21B00D4 head394882EB009D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00D4 head394882EB009D "unlinkAll"

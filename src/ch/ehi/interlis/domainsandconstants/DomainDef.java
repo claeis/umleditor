@@ -81,6 +81,8 @@ public class DomainDef extends AbstractNamespace implements DataType, java.io.Se
 
 	// -end- 358A5E2403D8 detail_begin "DomainDef"
 
+	private static final long serialVersionUID = 4608040961542218631L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

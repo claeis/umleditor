@@ -27,6 +27,9 @@ import java.awt.Component;
  * @version $Revision: 1.2 $ $Date: 2004-09-20 19:09:29 $
  */
 public class NavigationTreeCellRenderer extends javax.swing.tree.DefaultTreeCellRenderer {
+	
+	private static final long serialVersionUID = 1431388905561201064L;
+
 	/**
 	 * This is messaged from JTree whenever it needs to get the size of the
 	 * component or it wants to draw it. This attempts to set the font based on

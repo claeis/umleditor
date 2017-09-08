@@ -81,6 +81,8 @@ public class AttributeDef extends AbstractModelElement implements Attribute, jav
 
 	// -end- 358A5F6F01B7 detail_begin "AttributeDef"
 
+	private static final long serialVersionUID = -1937154760396973712L;
+
 	// -beg- preserve=no 3D4FA21A0213 head358A5F6F01B7 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0213 head358A5F6F01B7 "unlinkAll"

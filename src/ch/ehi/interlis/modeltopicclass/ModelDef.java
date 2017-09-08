@@ -72,6 +72,8 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 
 	// -end- 358A5DB202C5 detail_begin "ModelDef"
 
+	private static final long serialVersionUID = -5189150316884136849L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

@@ -44,6 +44,8 @@ public class Dependency extends PresentationEdge implements java.io.Serializable
 
 	// -end- 3C2C37440059 detail_begin "Dependency"
 
+	private static final long serialVersionUID = -3224362662587956908L;
+
 	// -beg- preserve=no 3D4FA2170255 head3C2C37440059 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170255 head3C2C37440059 "unlinkAll"

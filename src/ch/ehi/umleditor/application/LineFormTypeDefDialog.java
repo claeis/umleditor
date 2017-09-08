@@ -29,6 +29,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.2 $ $Date: 2004-04-27 09:20:44 $
  */
 public class LineFormTypeDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -5290164142478410306L;
 	// ModelElement
 	private LineFormTypeDef modelElement = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;

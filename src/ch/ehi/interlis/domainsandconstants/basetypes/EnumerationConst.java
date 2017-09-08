@@ -45,6 +45,8 @@ public class EnumerationConst extends Constant implements java.io.Serializable {
 
 	// -end- 39488D6A0105 detail_begin "EnumerationConst"
 
+	private static final long serialVersionUID = -3264954063236574470L;
+
 	// -beg- preserve=no 3D4FA21B016B head39488D6A0105 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B016B head39488D6A0105 "unlinkAll"

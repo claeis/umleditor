@@ -51,6 +51,8 @@ import ch.softenvironment.util.*;
  */
 public class LauncherView extends BaseFrame implements MetaModelListener, DrawingEditor, PaletteListener,
 		javax.swing.event.InternalFrameListener, FileHistoryListener {
+	
+	private static final long serialVersionUID = -9077248453329296465L;
 	// Constants
 	private static String version = null;
 	public static final String IMAGE_PATH = "/ch/ehi/umleditor/images/"; //$NON-NLS-1$

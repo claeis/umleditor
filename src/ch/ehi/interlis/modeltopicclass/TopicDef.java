@@ -55,6 +55,8 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 
 	// -end- 358A5E3B0132 detail_begin "TopicDef"
 
+	private static final long serialVersionUID = 1687236771092373011L;
+
 	// -beg- preserve=no 3CC7B10A01C3 head358A5E3B0132 "getBaseTopicDef"
 	public TopicDef getBaseTopicDef()
 	// -end- 3CC7B10A01C3 head358A5E3B0132 "getBaseTopicDef"

@@ -44,6 +44,8 @@ public class IliPolyline extends LineType implements java.io.Serializable {
 
 	// -end- 3948E1A4012A detail_begin "IliPolyline"
 
+	private static final long serialVersionUID = 1241601844835397918L;
+
 	// -beg- preserve=no 3D4FA21B0306 head3948E1A4012A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0306 head3948E1A4012A "unlinkAll"

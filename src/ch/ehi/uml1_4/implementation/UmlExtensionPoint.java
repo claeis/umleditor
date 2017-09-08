@@ -46,6 +46,8 @@ public class UmlExtensionPoint extends AbstractModelElement implements Extension
 
 	// -end- 4551A7D50075 detail_begin "UmlExtensionPoint"
 
+	private static final long serialVersionUID = -3049497002357298368L;
+
 	// -beg- preserve=no 4551A8B0030F head4551A7D50075 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551A8B0030F head4551A7D50075 "unlinkAll"

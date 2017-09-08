@@ -45,6 +45,8 @@ public class AreaMeasurement extends BaseType implements java.io.Serializable {
 
 	// -end- 358A66DF006A detail_begin "AreaMeasurement"
 
+	private static final long serialVersionUID = 7157162786303073100L;
+
 	// -beg- preserve=no 3D4FA21B004A head358A66DF006A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B004A head358A66DF006A "unlinkAll"

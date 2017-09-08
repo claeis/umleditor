@@ -66,6 +66,8 @@ public class EnumElement extends AbstractModelElement implements ModelElement, j
 
 	// -end- 358A69810091 detail_begin "EnumElement"
 
+	private static final long serialVersionUID = 6879932099811682238L;
+
 	// -beg- preserve=no 3D4FA21B00C0 head358A69810091 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00C0 head358A69810091 "unlinkAll"

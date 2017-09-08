@@ -44,6 +44,8 @@ public class Artifact extends PresentationNode implements java.io.Serializable {
 
 	// -end- 3C2C37AA03E5 detail_begin "Artifact"
 
+	private static final long serialVersionUID = 3346326865014865861L;
+
 	// -beg- preserve=no 3D4FA2170006 head3C2C37AA03E5 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170006 head3C2C37AA03E5 "unlinkAll"

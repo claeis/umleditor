@@ -43,6 +43,8 @@ public class UmlUsage extends AbstractDependency implements Usage, java.io.Seria
 
 	// -end- 3C68EC6E02C0 detail_begin "UmlUsage"
 
+	private static final long serialVersionUID = 4300005052925198104L;
+
 	// -beg- preserve=no 3D4FA218003A head3C68EC6E02C0 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218003A head3C68EC6E02C0 "unlinkAll"

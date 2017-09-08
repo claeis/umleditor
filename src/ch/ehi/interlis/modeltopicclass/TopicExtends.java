@@ -44,6 +44,8 @@ public class TopicExtends extends AbstractGeneralization implements Generalizati
 
 	// -end- 3C17718D0099 detail_begin "TopicExtends"
 
+	private static final long serialVersionUID = -5608412978169676904L;
+
 	// -beg- preserve=no 3D4FA21A0051 head3C17718D0099 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0051 head3C17718D0099 "unlinkAll"

@@ -37,6 +37,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.5 $ $Date: 2005-02-23 16:46:01 $
  */
 public class GeneralizationLineConnection extends EdgeFigure {
+	
+	private static final long serialVersionUID = -1688714642415616186L;
 	private boolean showDrawing = true;
 
 	/**

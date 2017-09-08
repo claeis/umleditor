@@ -62,6 +62,8 @@ public class UmlTaggedValue implements TaggedValue {
 
 	// -end- 448D24F502DB detail_begin "UmlTaggedValue"
 
+	private static final long serialVersionUID = 2314362268776052071L;
+
 	// -beg- preserve=no 448D366F02B6 head448D24F502DB "unlinkAll"
 	public void unlinkAll()
 	// -end- 448D366F02B6 head448D24F502DB "unlinkAll"

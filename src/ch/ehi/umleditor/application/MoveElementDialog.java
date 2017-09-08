@@ -9,6 +9,7 @@ import javax.swing.tree.MutableTreeNode;
 
 public class MoveElementDialog extends ch.softenvironment.view.BaseDialog {
 
+	private static final long serialVersionUID = -7350756085547042932L;
 	private javax.swing.JTree tree;
 	private Namespace selectedPackage = null;
 

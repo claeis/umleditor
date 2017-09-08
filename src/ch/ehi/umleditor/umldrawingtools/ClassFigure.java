@@ -57,6 +57,8 @@ import ch.ehi.umleditor.application.*;
  * @version $Revision: 1.12 $ $Date: 2008-04-08 09:58:25 $
  */
 public class ClassFigure extends NodeFigure implements ActionListener {
+	
+	private static final long serialVersionUID = -5008935800898510297L;
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/umldrawingtools/resources/ClassFigure"); //$NON-NLS-1$
 	private GraphicalCompositeFigure nameFigure;

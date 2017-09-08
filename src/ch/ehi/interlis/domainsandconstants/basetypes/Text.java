@@ -44,6 +44,8 @@ public class Text extends BaseType implements java.io.Serializable {
 	// -beg- preserve=no 358A670D0143 detail_begin "Text"
 
 	// -end- 358A670D0143 detail_begin "Text"
+	
+	private static final long serialVersionUID = -6629686525237441100L;
 
 	// -beg- preserve=no 3D4FA21B0066 head358A670D0143 "unlinkAll"
 	public void unlinkAll()

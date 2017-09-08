@@ -47,6 +47,8 @@ public class SignAttribute extends AbstractEditorElement implements java.io.Seri
 
 	// -end- 3961F2DF02E2 detail_begin "SignAttribute"
 
+	private static final long serialVersionUID = 3184223824443998331L;
+
 	// -beg- preserve=no 3D4FA2190077 head3961F2DF02E2 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190077 head3961F2DF02E2 "unlinkAll"

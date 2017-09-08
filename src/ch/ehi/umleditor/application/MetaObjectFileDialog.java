@@ -28,6 +28,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:31 $
  */
 public class MetaObjectFileDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -1947208396836873685L;
 	// ModelElement
 	private static java.util.ResourceBundle resMetaObjectFileDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/MetaObjectFileDialog"); //$NON-NLS-1$

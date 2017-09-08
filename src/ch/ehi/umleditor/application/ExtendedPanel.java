@@ -30,6 +30,8 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
 public class ExtendedPanel extends javax.swing.JPanel {
+	
+	private static final long serialVersionUID = -1880617033214026331L;
 	private static java.util.ResourceBundle resExtendedPanel = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/ExtendedPanel");
 	private Generalization currentGeneralization = null;

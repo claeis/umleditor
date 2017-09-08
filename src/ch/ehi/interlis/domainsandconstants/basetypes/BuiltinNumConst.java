@@ -41,6 +41,8 @@ public class BuiltinNumConst implements java.io.Serializable {
 
 	// -end- 3C1EFD64002A detail_begin "BuiltinNumConst"
 
+	private static final long serialVersionUID = -2730107315934804365L;
+
 	// -beg- preserve=no 3C1EFD84013E var3C1EFD64002A "USER"
 	public static final int USER = 1;
 	// -end- 3C1EFD84013E var3C1EFD64002A "USER"

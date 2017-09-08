@@ -50,6 +50,8 @@ public abstract class PresentationNode extends AbstractEditorElement
 
 	// -end- 3C2C47C102EE detail_begin "PresentationNode"
 
+	private static final long serialVersionUID = -6479560532871187729L;
+
 	// -beg- preserve=no 3D4659B6037E head3C2C47C102EE "isMoveable"
 	public boolean isMoveable()
 	// -end- 3D4659B6037E head3C2C47C102EE "isMoveable"

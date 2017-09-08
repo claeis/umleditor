@@ -46,6 +46,8 @@ public class DomainAttribute extends AttrType implements java.io.Serializable {
 
 	// -end- 358A641F019E detail_begin "DomainAttribute"
 
+	private static final long serialVersionUID = -574768101313830461L;
+
 	// -beg- preserve=no 3D4FA21A01C4 head358A641F019E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A01C4 head358A641F019E "unlinkAll"

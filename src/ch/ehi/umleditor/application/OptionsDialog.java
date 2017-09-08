@@ -27,6 +27,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.2 $ $Date: 2006-06-29 22:08:56 $
  */
 public class OptionsDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = 7564670125240534467L;
 	private static java.util.ResourceBundle resOptionsDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/OptionsDialog"); //$NON-NLS-1$
 	private UserSettings settings = null;

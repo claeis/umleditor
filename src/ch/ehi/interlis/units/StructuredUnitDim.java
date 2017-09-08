@@ -46,6 +46,8 @@ public class StructuredUnitDim extends AbstractEditorElement implements java.io.
 
 	// -end- 394A241103A8 detail_begin "StructuredUnitDim"
 
+	private static final long serialVersionUID = 7096786104007394603L;
+
 	// -beg- preserve=no 3D4FA21800C6 head394A241103A8 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21800C6 head394A241103A8 "unlinkAll"

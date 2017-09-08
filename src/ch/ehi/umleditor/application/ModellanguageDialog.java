@@ -20,6 +20,9 @@ import ch.ehi.umleditor.objectcatalog.ObjectCatalog;
 import javax.swing.tree.MutableTreeNode;
 
 public class ModellanguageDialog extends ch.softenvironment.view.BaseDialog {
+	
+	private static final long serialVersionUID = 8499920223849928325L;
+
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ModellanguageDialog.class);
 
 	private String selectedLanguage = null;

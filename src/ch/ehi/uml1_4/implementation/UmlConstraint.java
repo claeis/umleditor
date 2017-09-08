@@ -46,6 +46,8 @@ public class UmlConstraint extends AbstractModelElement implements Constraint {
 
 	// -end- 4551E98A02BB detail_begin "UmlConstraint"
 
+	private static final long serialVersionUID = 6319373738174341338L;
+
 	// -beg- preserve=no 4551E9BF00CC head4551E98A02BB "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551E9BF00CC head4551E98A02BB "unlinkAll"

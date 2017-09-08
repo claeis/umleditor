@@ -56,6 +56,8 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 
 	// -end- 4551A5AD02B6 detail_begin "UmlUseCase"
 
+	private static final long serialVersionUID = -3559650822423910376L;
+
 	// -beg- preserve=no 4551A8750007 head4551A5AD02B6 "enumerateChildren"
 	public void enumerateChildren(AbstractVisitor visitor)
 	// -end- 4551A8750007 head4551A5AD02B6 "enumerateChildren"

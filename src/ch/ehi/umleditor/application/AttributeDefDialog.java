@@ -34,6 +34,8 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.8 $ $Date: 2007-01-14 08:17:17 $
  */
 public class AttributeDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -2138604375092289444L;
 	// ModelElement
 	private static java.util.ResourceBundle resAttributeDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/AttributeDefDialog");

@@ -46,6 +46,8 @@ public class EnumAssignment extends AbstractEditorElement implements java.io.Ser
 
 	// -end- 3961FCE30307 detail_begin "EnumAssignment"
 
+	private static final long serialVersionUID = -2417323324634604111L;
+
 	// -beg- preserve=no 3D4FA21900A9 head3961FCE30307 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21900A9 head3961FCE30307 "unlinkAll"

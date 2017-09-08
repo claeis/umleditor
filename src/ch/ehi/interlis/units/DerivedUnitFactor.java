@@ -44,6 +44,8 @@ public class DerivedUnitFactor extends AbstractEditorElement implements java.io.
 
 	// -end- 3949E75A01EE detail_begin "DerivedUnitFactor"
 
+	private static final long serialVersionUID = -131113107821361535L;
+
 	// -beg- preserve=no 3D4FA21800E4 head3949E75A01EE "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21800E4 head3949E75A01EE "unlinkAll"

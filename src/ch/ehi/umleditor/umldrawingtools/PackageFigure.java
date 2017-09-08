@@ -32,6 +32,8 @@ import CH.ifa.draw.contrib.*;
  * @version $Revision: 1.3 $ $Date: 2007-01-30 18:44:35 $
  */
 public class PackageFigure extends NodeFigure {
+	
+	private static final long serialVersionUID = 8752419447084366759L;
 	// Composites
 	private TextFigure packageNameFigure;
 	private TextFigure packagePathFigure;

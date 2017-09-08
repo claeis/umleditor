@@ -62,6 +62,8 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 
 	// -end- 3CE225AB0092 detail_begin "AbstractModelElement"
 
+	private static final long serialVersionUID = 5240903651796245407L;
+
 	// -beg- preserve=no 3D4FA03E02C3 head3CE225AB0092 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA03E02C3 head3CE225AB0092 "unlinkAll"

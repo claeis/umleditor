@@ -41,6 +41,8 @@ public class TextKind implements java.io.Serializable {
 
 	// -end- 3C1EF8DE0043 detail_begin "TextKind"
 
+	private static final long serialVersionUID = -3335661790002725618L;
+
 	// -beg- preserve=no 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"
 	public static final int UNDEFINED = 1;
 	// -end- 3C1EF8F20132 var3C1EF8DE0043 "UNDEFINED"

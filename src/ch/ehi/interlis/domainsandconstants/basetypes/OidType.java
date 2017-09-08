@@ -43,6 +43,8 @@ public class OidType extends BaseType {
 
 	// -end- 3FDC48C9003D detail_begin "OidType"
 
+	private static final long serialVersionUID = 1788648932573119010L;
+
 	// -beg- preserve=no 3FDC4C1A0106 head3FDC48C9003D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3FDC4C1A0106 head3FDC48C9003D "unlinkAll"

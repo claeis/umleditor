@@ -44,6 +44,8 @@ public class ClassType extends BaseType {
 
 	// -end- 3FDC4924008E detail_begin "ClassType"
 
+	private static final long serialVersionUID = 688007193073908818L;
+
 	// -beg- preserve=no 3FDC4C300342 head3FDC4924008E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3FDC4C300342 head3FDC4924008E "unlinkAll"

@@ -65,6 +65,8 @@ public class DomainExtends extends AbstractGeneralization implements Generalizat
 
 	// -end- 3C1DD59D0109 detail_begin "DomainExtends"
 
+	private static final long serialVersionUID = 5251067338775899112L;
+
 	// -beg- preserve=no 3D4FA21B0016 head3C1DD59D0109 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0016 head3C1DD59D0109 "unlinkAll"

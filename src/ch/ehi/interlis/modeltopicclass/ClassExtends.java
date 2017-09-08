@@ -45,6 +45,8 @@ public class ClassExtends extends AbstractGeneralization implements Generalizati
 
 	// -end- 3C1DABC0011D detail_begin "ClassExtends"
 
+	private static final long serialVersionUID = 3232212005984710460L;
+
 	// -beg- preserve=no 3D4FA21A006F head3C1DABC0011D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A006F head3C1DABC0011D "unlinkAll"

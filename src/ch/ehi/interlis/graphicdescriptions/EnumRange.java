@@ -45,6 +45,8 @@ public class EnumRange extends AbstractEditorElement implements java.io.Serializ
 
 	// -end- 3961FDB101A5 detail_begin "EnumRange"
 
+	private static final long serialVersionUID = 2556545015589753043L;
+
 	// -beg- preserve=no 3D4FA21900B4 head3961FDB101A5 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21900B4 head3961FDB101A5 "unlinkAll"

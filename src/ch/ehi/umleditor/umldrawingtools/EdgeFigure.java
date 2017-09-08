@@ -41,6 +41,8 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.16 $ $Date: 2007-03-12 18:30:46 $
  */
 abstract class EdgeFigure extends LineConnection implements ModelElementUI {
+	
+	private static final long serialVersionUID = -798733329947009889L;
 	// keep reference to real model's presentation
 	private ClassDiagramView classDiagram = null;
 	protected PresentationEdge edge = null;

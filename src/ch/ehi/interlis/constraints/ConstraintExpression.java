@@ -48,6 +48,8 @@ public class ConstraintExpression extends AbstractEditorElement
 
 	// -end- 3C178A0A03B5 detail_begin "ConstraintExpression"
 
+	private static final long serialVersionUID = 2860865096640633239L;
+
 	// -beg- preserve=no 3D4FA21801C0 head3C178A0A03B5 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21801C0 head3C178A0A03B5 "unlinkAll"

@@ -28,6 +28,8 @@ import ch.ehi.uml1_4.foundation.core.*;
  * Edit a Participants restrictions.
  */
 public class ParticipantDialog extends ch.softenvironment.view.BaseDialog {
+	
+	private static final long serialVersionUID = 7543349135193182912L;
 	private static java.util.ResourceBundle resModelElementSelectionDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/ParticipantDialog"); //$NON-NLS-1$
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;

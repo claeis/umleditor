@@ -42,6 +42,8 @@ import ch.softenvironment.view.*;
  * @see DelegationSelectionTool#handleMousePopupMenu(..)
  */
 public class ClassDiagramView extends CH.ifa.draw.contrib.zoom.ZoomDrawingView {
+	
+	private static final long serialVersionUID = -5203373926724413046L;
 	private ch.ehi.umleditor.umlpresentation.Diagram diagram = null;
 	private Element parentElement = null;
 	// Menu Checkboxes

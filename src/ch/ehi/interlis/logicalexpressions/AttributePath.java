@@ -46,6 +46,8 @@ public class AttributePath extends AbstractEditorElement implements java.io.Seri
 
 	// -end- 39609BF90168 detail_begin "AttributePath"
 
+	private static final long serialVersionUID = 7913010795662679808L;
+
 	// -beg- preserve=no 3D4FA2180257 head39609BF90168 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180257 head39609BF90168 "unlinkAll"

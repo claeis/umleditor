@@ -41,6 +41,8 @@ public class EnumKind implements java.io.Serializable {
 
 	// -end- 3C1EF95602B2 detail_begin "EnumKind"
 
+	private static final long serialVersionUID = 7723543805602793015L;
+
 	// -beg- preserve=no 3C1EF96E0267 var3C1EF95602B2 "UNDEFINED"
 	public static final int UNDEFINED = 1;
 	// -end- 3C1EF96E0267 var3C1EF95602B2 "UNDEFINED"

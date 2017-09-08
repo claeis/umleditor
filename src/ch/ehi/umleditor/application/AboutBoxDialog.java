@@ -27,6 +27,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.3 $ $Date: 2006-08-23 12:31:59 $
  */
 public class AboutBoxDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = 7068424518964585732L;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private JLabel ivjLblContractor = null;
 	private JLabel ivjLblCopyright = null;

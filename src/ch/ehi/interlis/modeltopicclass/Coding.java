@@ -46,6 +46,8 @@ public class Coding extends AbstractEditorElement implements java.io.Serializabl
 
 	// -end- 358A5FF400A0 detail_begin "Coding"
 
+	private static final long serialVersionUID = -4977061049242893197L;
+
 	// -beg- preserve=no 3D4FA21A000C head358A5FF400A0 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A000C head358A5FF400A0 "unlinkAll"

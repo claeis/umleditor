@@ -49,6 +49,8 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax, jav
 
 	// -end- 3940EE310270 detail_begin "ParameterDef"
 
+	private static final long serialVersionUID = 2960840922196102207L;
+
 	// -beg- preserve=no 3D4FA21B0391 head3940EE310270 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0391 head3940EE310270 "unlinkAll"

@@ -36,6 +36,8 @@ import ch.ehi.umleditor.umlpresentation.*;
  * @version $Revision: 1.4 $ $Date: 2007-01-30 18:44:35 $
  */
 public class NoteFigure extends NodeFigure {
+	
+	private static final long serialVersionUID = 8521145121813117060L;
 	// Composites
 	private TextFigure textFigure;
 

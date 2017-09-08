@@ -49,6 +49,8 @@ public class SigAssignment extends AbstractEditorElement implements java.io.Seri
 
 	// -end- 3961F95C036D detail_begin "SigAssignment"
 
+	private static final long serialVersionUID = 1399965919171068475L;
+
 	// -beg- preserve=no 3D4FA2190095 head3961F95C036D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190095 head3961F95C036D "unlinkAll"

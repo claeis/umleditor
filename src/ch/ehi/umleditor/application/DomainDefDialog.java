@@ -31,6 +31,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.7 $ $Date: 2006-07-03 15:48:44 $
  */
 public class DomainDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -6885313875126193385L;
 	// ModelElement
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
 	private BasePanel currentDataPanel = null;

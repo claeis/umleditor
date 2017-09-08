@@ -34,6 +34,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * @version $Revision: 1.13 $ $Date: 2006-08-08 08:12:35 $
  */
 public class LogView extends BasePanel implements HyperlinkListener, ListMenuChoice {
+	
+	private static final long serialVersionUID = -2190982301526055581L;
+
 	// private static final String ID_TEXT = "ID:";//$NON-NLS-1$
 	private StringBuffer body = new StringBuffer();
 

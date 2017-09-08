@@ -30,6 +30,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.5 $ $Date: 2007-12-27 17:00:27 $
  */
 public class RoleDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = 116050217017024292L;
 	// ModelElement
 	private static java.util.ResourceBundle resRoleDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/RoleDefDialog"); //$NON-NLS-1$

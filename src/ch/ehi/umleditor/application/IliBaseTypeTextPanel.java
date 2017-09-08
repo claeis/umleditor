@@ -28,6 +28,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeTextPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -6498902551757534811L;
 	private static java.util.ResourceBundle resIliBaseTypeTextPanel = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeTextPanel"); //$NON-NLS-1$
 	private javax.swing.JRadioButton ivjRbtMultiLine = null;

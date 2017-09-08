@@ -27,6 +27,8 @@ import ch.softenvironment.client.ApplicationOptions;
  * @version $Revision: 1.5 $ $Date: 2005-02-03 14:31:37 $
  */
 public class UserSettings extends ApplicationOptions implements ch.softenvironment.client.UserSettings {
+	
+	private static final long serialVersionUID = -8354627375069216873L;
 	// Property Keys (non-NLS)
 	// @see getKeySet()
 	private final static String DIAGRAM_HEIGHT = "DIAGRAM_HEIGHT";

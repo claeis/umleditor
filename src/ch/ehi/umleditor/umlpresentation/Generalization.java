@@ -47,6 +47,8 @@ public class Generalization extends PresentationEdge implements java.io.Serializ
 
 	// -end- 3C2C382C0193 detail_begin "Generalization"
 
+	private static final long serialVersionUID = -8774830061585704689L;
+
 	// -beg- preserve=no 3D4FA2170269 head3C2C382C0193 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170269 head3C2C382C0193 "unlinkAll"

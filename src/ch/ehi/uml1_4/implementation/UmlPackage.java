@@ -66,6 +66,8 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 
 	// -end- 3C68E11703C1 detail_begin "UmlPackage"
 
+	private static final long serialVersionUID = 5618682144705320463L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

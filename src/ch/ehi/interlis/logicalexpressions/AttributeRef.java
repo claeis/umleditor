@@ -46,6 +46,8 @@ public class AttributeRef extends AbstractEditorElement implements java.io.Seria
 
 	// -end- 3960A740025A detail_begin "AttributeRef"
 
+	private static final long serialVersionUID = 1954208701386047379L;
+
 	// -beg- preserve=no 3D4FA21802BB head3960A740025A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21802BB head3960A740025A "unlinkAll"

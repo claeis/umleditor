@@ -46,6 +46,8 @@ public class Term extends AbstractEditorElement implements java.io.Serializable 
 
 	// -end- 394A41DB0213 detail_begin "Term"
 
+	private static final long serialVersionUID = -6749949094647976038L;
+
 	// -beg- preserve=no 3D4FA21801CA head394A41DB0213 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21801CA head394A41DB0213 "unlinkAll"

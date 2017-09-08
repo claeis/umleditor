@@ -48,6 +48,8 @@ public class ProjectionAttributeDef extends AbstractEditorElement implements jav
 
 	// -end- 3961A31B0231 detail_begin "ProjectionAttributeDef"
 
+	private static final long serialVersionUID = 5387784697455529008L;
+
 	// -beg- preserve=no 3D4FA2180383 head3961A31B0231 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180383 head3961A31B0231 "unlinkAll"

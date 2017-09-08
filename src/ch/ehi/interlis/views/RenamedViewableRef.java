@@ -46,6 +46,8 @@ public class RenamedViewableRef extends AbstractEditorElement implements java.io
 
 	// -end- 39619211022E detail_begin "RenamedViewableRef"
 
+	private static final long serialVersionUID = 3777242256935144863L;
+
 	// -beg- preserve=no 3D4FA218030B head39619211022E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218030B head39619211022E "unlinkAll"

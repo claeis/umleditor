@@ -47,6 +47,8 @@ public abstract class NumericalType extends BaseType implements java.io.Serializ
 
 	// -end- 3948DB550222 detail_begin "NumericalType"
 
+	private static final long serialVersionUID = -8692739755542805807L;
+
 	// -beg- preserve=no 3D4FA21B01E3 head3948DB550222 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B01E3 head3948DB550222 "unlinkAll"

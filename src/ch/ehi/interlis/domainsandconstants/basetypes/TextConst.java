@@ -43,6 +43,8 @@ public class TextConst extends Constant implements java.io.Serializable {
 
 	// -end- 3C1EFD040126 detail_begin "TextConst"
 
+	private static final long serialVersionUID = 2319074051533876975L;
+
 	// -beg- preserve=no 3D4FA21B0283 head3C1EFD040126 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0283 head3C1EFD040126 "unlinkAll"

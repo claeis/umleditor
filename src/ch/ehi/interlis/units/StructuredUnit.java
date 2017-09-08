@@ -45,6 +45,8 @@ public class StructuredUnit extends AbstractEditorElement implements java.io.Ser
 
 	// -end- 3949E1890160 detail_begin "StructuredUnit"
 
+	private static final long serialVersionUID = -7081724208216366418L;
+
 	// -beg- preserve=no 3D4FA21800F8 head3949E1890160 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21800F8 head3949E1890160 "unlinkAll"

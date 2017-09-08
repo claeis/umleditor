@@ -44,6 +44,8 @@ public class IliDim extends AbstractEditorElement implements java.io.Serializabl
 
 	// -end- 38F1E1320160 detail_begin "IliDim"
 
+	private static final long serialVersionUID = 2644951509040459442L;
+
 	// -beg- preserve=no 3D4FA21B02A1 head38F1E1320160 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B02A1 head38F1E1320160 "unlinkAll"

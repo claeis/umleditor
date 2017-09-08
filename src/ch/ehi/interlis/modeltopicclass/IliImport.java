@@ -47,6 +47,8 @@ public class IliImport extends AbstractDependency implements Permission, java.io
 
 	// -end- 3940AEA40090 detail_begin "IliImport"
 
+	private static final long serialVersionUID = -7010110701430357810L;
+
 	// -beg- preserve=no 3D4FA219037A head3940AEA40090 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA219037A head3940AEA40090 "unlinkAll"

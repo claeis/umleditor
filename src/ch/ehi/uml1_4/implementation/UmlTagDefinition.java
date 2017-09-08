@@ -63,6 +63,8 @@ public class UmlTagDefinition implements TagDefinition {
 
 	// -end- 448D24EA007C detail_begin "UmlTagDefinition"
 
+	private static final long serialVersionUID = -1854976400642858378L;
+
 	// -beg- preserve=no 448D365F003C head448D24EA007C "unlinkAll"
 	public void unlinkAll()
 	// -end- 448D365F003C head448D24EA007C "unlinkAll"

@@ -46,6 +46,8 @@ public class BasketType extends BaseType implements java.io.Serializable {
 
 	// -end- 394887020189 detail_begin "BasketType"
 
+	private static final long serialVersionUID = -591529193121633639L;
+
 	// -beg- preserve=no 3D4FA21B0110 head394887020189 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0110 head394887020189 "unlinkAll"

@@ -46,6 +46,8 @@ public class CoordinateType extends BaseType implements java.io.Serializable {
 
 	// -end- 394886B10363 detail_begin "CoordinateType"
 
+	private static final long serialVersionUID = -4081833193808407003L;
+
 	// -beg- preserve=no 3D4FA21B0106 head394886B10363 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0106 head394886B10363 "unlinkAll"

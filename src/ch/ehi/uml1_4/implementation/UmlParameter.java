@@ -56,6 +56,8 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 
 	// -end- 40432B0300AE detail_begin "UmlParameter"
 
+	private static final long serialVersionUID = -1080672431982648753L;
+
 	// -beg- preserve=no 40432E440097 head40432B0300AE "unlinkAll"
 	public void unlinkAll()
 	// -end- 40432E440097 head40432B0300AE "unlinkAll"

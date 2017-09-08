@@ -44,6 +44,8 @@ public class Class extends PresentationAbstractClass implements java.io.Serializ
 
 	// -end- 3C2C36CC011F detail_begin "Class"
 
+	private static final long serialVersionUID = 6088297736977862726L;
+
 	// -beg- preserve=no 3D4FA2170038 head3C2C36CC011F "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170038 head3C2C36CC011F "unlinkAll"

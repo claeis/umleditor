@@ -47,6 +47,8 @@ public class UnknownType extends Type implements IliSyntax {
 
 	// -end- 3E6037DF010F detail_begin "UnknownType"
 
+	private static final long serialVersionUID = 6153422696337475753L;
+
 	// -beg- preserve=no 3E6038280088 head3E6037DF010F "unlinkAll"
 	public void unlinkAll()
 	// -end- 3E6038280088 head3E6037DF010F "unlinkAll"

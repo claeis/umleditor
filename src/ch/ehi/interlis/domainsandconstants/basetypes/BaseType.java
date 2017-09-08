@@ -44,6 +44,8 @@ public abstract class BaseType extends Type implements java.io.Serializable {
 
 	// -end- 358A64F7038A detail_begin "BaseType"
 
+	private static final long serialVersionUID = 3167433454308701005L;
+
 	// -beg- preserve=no 3D4FA21B0215 head358A64F7038A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0215 head358A64F7038A "unlinkAll"

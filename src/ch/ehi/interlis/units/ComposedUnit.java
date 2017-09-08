@@ -45,6 +45,8 @@ public class ComposedUnit extends AbstractEditorElement implements java.io.Seria
 
 	// -end- 3949E17C0356 detail_begin "ComposedUnit"
 
+	private static final long serialVersionUID = 1183795915110838698L;
+
 	// -beg- preserve=no 3D4FA2180103 head3949E17C0356 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180103 head3949E17C0356 "unlinkAll"

@@ -45,6 +45,8 @@ public class NoteEdge extends PresentationEdge {
 
 	// -end- 3D4AB587020E detail_begin "NoteEdge"
 
+	private static final long serialVersionUID = -4435579244417685885L;
+
 	// -beg- preserve=no 3D4FA2170366 head3D4AB587020E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170366 head3D4AB587020E "unlinkAll"

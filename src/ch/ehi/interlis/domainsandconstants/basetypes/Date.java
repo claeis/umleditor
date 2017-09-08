@@ -44,6 +44,8 @@ public class Date extends BaseType implements java.io.Serializable {
 
 	// -end- 358A671700BB detail_begin "Date"
 
+	private static final long serialVersionUID = -9061886475044563880L;
+
 	// -beg- preserve=no 3D4FA21B00B6 head358A671700BB "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00B6 head358A671700BB "unlinkAll"

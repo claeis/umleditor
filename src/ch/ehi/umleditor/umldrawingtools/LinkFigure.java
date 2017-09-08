@@ -38,6 +38,8 @@ import ch.softenvironment.view.CommonUserAccess;
  * @version $Revision: 1.9 $ $Date: 2007-03-06 16:14:00 $
  */
 class LinkFigure extends NodeFigure {
+	
+	private static final long serialVersionUID = -5684800811843022269L;
 	// shape dimensions (should be dividable by 2)
 	public final static int SIZE_MIN = 6;
 	public final static int SIZE_MAX = 12;

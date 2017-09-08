@@ -27,6 +27,8 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.3 $ $Date: 2007-01-14 08:17:16 $
  */
 public class MetaDataUseDefDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -351882692096969451L;
 	// ModelElement
 	private static java.util.ResourceBundle resMetaDataUseDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/MetaDataUseDefDialog"); //$NON-NLS-1$

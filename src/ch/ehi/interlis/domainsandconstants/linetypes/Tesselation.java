@@ -44,6 +44,8 @@ public class Tesselation extends SurfaceType implements java.io.Serializable {
 
 	// -end- 36D5626603E5 detail_begin "Tesselation"
 
+	private static final long serialVersionUID = 7170026451373485272L;
+
 	// -beg- preserve=no 3D4FA21B034C head36D5626603E5 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B034C head36D5626603E5 "unlinkAll"

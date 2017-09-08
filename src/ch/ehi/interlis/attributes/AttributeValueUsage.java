@@ -45,6 +45,8 @@ public class AttributeValueUsage extends AbstractEditorElement implements IliSyn
 
 	// -end- 3C1DD2F70046 detail_begin "AttributeValueUsage"
 
+	private static final long serialVersionUID = -3460363908487109729L;
+
 	// -beg- preserve=no 3D4FA21A02DC head3C1DD2F70046 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A02DC head3C1DD2F70046 "unlinkAll"

@@ -66,6 +66,8 @@ public class ConstraintDef extends AbstractModelElement implements Constraint, j
 
 	// -end- 3941018702C7 detail_begin "ConstraintDef"
 
+	private static final long serialVersionUID = -3745171397136169541L;
+
 	// -beg- preserve=no 3D4FA218015C head3941018702C7 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218015C head3941018702C7 "unlinkAll"

@@ -49,6 +49,8 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 
 	// -end- 3940EC1D0094 detail_begin "UnitDef"
 
+	private static final long serialVersionUID = 3542673017173585628L;
+
 	// -beg- preserve=no 3D4FA2180116 head3940EC1D0094 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180116 head3940EC1D0094 "unlinkAll"

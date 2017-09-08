@@ -45,6 +45,8 @@ public class TransferID extends AbstractEditorElement implements java.io.Seriali
 
 	// -end- 36026D4200D1 detail_begin "TransferID"
 
+	private static final long serialVersionUID = -3097865878695271189L;
+
 	// -beg- preserve=no 3D4FA21A0016 head36026D4200D1 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0016 head36026D4200D1 "unlinkAll"

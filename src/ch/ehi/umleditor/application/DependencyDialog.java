@@ -26,6 +26,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:39 $
  */
 public class DependencyDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = 8011917386355148125L;
 	// keep ModelElement
 	private static java.util.ResourceBundle resDependencyDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/DependencyDialog");

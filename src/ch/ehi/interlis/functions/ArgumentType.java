@@ -45,6 +45,8 @@ public class ArgumentType extends AbstractEditorElement implements java.io.Seria
 
 	// -end- 3960B11E02DE detail_begin "ArgumentType"
 
+	private static final long serialVersionUID = -4472857472189490199L;
+
 	// -beg- preserve=no 3D4FA2190009 head3960B11E02DE "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190009 head3960B11E02DE "unlinkAll"

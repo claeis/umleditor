@@ -47,6 +47,8 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 
 	// -end- 35FB9EC803B9 detail_begin "LineForm"
 
+	private static final long serialVersionUID = 6464159716403419650L;
+
 	// -beg- preserve=no 3D4FA21B0323 head35FB9EC803B9 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0323 head35FB9EC803B9 "unlinkAll"

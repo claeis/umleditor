@@ -45,6 +45,8 @@ public class TopicDepends extends AbstractDependency implements Usage, java.io.S
 
 	// -end- 3C17712203B7 detail_begin "TopicDepends"
 
+	private static final long serialVersionUID = -4716114090042329397L;
+
 	// -beg- preserve=no 3D4FA21A0029 head3C17712203B7 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0029 head3C17712203B7 "unlinkAll"

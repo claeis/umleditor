@@ -27,6 +27,8 @@ import ch.ehi.uml1_4.foundation.core.*;
  * @version $Revision: 1.2 $ $Date: 2007-03-06 12:49:02 $
  */
 public class ReferencableComboBox extends javax.swing.JComboBox {
+	
+	private static final long serialVersionUID = 926656151651613572L;
 	// private static java.util.ResourceBundle resReferencableComboBox =
 	// java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/ReferencableComboBox");
 	// //$NON-NLS-1$

@@ -43,6 +43,8 @@ public class EnumTreeValueType extends BaseType {
 
 	// -end- 44897CE302B9 detail_begin "EnumTreeValueType"
 
+	private static final long serialVersionUID = -1498211426763351441L;
+
 	// -beg- preserve=no 448D3D1F0023 head44897CE302B9 "unlinkAll"
 	public void unlinkAll()
 	// -end- 448D3D1F0023 head44897CE302B9 "unlinkAll"

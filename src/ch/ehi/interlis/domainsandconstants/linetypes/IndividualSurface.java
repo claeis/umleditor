@@ -44,6 +44,8 @@ public class IndividualSurface extends SurfaceType implements java.io.Serializab
 
 	// -end- 36D5626F01E9 detail_begin "IndividualSurface"
 
+	private static final long serialVersionUID = -1153634459539997006L;
+
 	// -beg- preserve=no 3D4FA21B0357 head36D5626F01E9 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0357 head36D5626F01E9 "unlinkAll"

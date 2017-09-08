@@ -46,6 +46,8 @@ public class Arrangements extends AbstractEditorElement implements java.io.Seria
 
 	// -end- 358A5FEA022C detail_begin "Arrangements"
 
+	private static final long serialVersionUID = -6440627736310782488L;
+
 	// -beg- preserve=no 3D4FA21803B5 head358A5FEA022C "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21803B5 head358A5FEA022C "unlinkAll"

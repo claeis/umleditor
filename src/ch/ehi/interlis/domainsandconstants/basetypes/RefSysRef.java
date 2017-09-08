@@ -46,6 +46,8 @@ public class RefSysRef extends AbstractEditorElement implements java.io.Serializ
 
 	// -end- 39489AFF0050 detail_begin "RefSysRef"
 
+	private static final long serialVersionUID = -7214748338134760452L;
+
 	// -beg- preserve=no 3D4FA21B0189 head39489AFF0050 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0189 head39489AFF0050 "unlinkAll"

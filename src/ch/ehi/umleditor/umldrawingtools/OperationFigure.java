@@ -29,6 +29,8 @@ import ch.ehi.uml1_4.implementation.UmlOperation;
  * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
  */
 class OperationFigure extends TextFigure {
+	
+	private static final long serialVersionUID = -7919281029920103105L;
 	private UmlOperation operation = null;
 	private ClassDiagramView classDiagram = null;
 

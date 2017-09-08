@@ -53,6 +53,8 @@ public class UmlActor extends AbstractNamespace implements Actor {
 
 	// -end- 4551A5A200BB detail_begin "UmlActor"
 
+	private static final long serialVersionUID = -4119387238425414775L;
+
 	// -beg- preserve=no 4551A85800F6 head4551A5A200BB "unlinkAll"
 	public void unlinkAll()
 	// -end- 4551A85800F6 head4551A5A200BB "unlinkAll"

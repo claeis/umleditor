@@ -32,6 +32,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.5 $ $Date: 2005-11-05 20:06:09 $
  */
 public class AssociationDefDialog extends BaseDialog implements ListMenuChoice {
+	
+	private static final long serialVersionUID = -6617228112298656787L;
 	// keep ModelElement
 	private ch.ehi.interlis.associations.AssociationDef associationDef = null;
 	private AssociationDefDerived currentViewRef = null;

@@ -61,6 +61,8 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 
 	// -end- 3D6248EA02E3 detail_begin "MetaObjectFile"
 
+	private static final long serialVersionUID = -2460144507208261915L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

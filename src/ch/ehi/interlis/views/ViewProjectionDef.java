@@ -68,6 +68,8 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 
 	// -end- 3940F0250373 detail_begin "ViewProjectionDef"
 
+	private static final long serialVersionUID = -5084344701322594968L;
+
 	// -beg- preserve=no 3D4FA2180347 head3940F0250373 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180347 head3940F0250373 "unlinkAll"

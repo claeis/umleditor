@@ -41,6 +41,8 @@ public class RotationKind implements java.io.Serializable {
 
 	// -end- 3C1EFA180207 detail_begin "RotationKind"
 
+	private static final long serialVersionUID = 8067695602970487231L;
+
 	// -beg- preserve=no 3C1EFA30011B var3C1EFA180207 "UNDEFINED"
 	public static final int UNDEFINED = 1;
 	// -end- 3C1EFA30011B var3C1EFA180207 "UNDEFINED"

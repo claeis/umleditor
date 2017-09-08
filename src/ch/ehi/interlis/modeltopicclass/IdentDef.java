@@ -45,6 +45,8 @@ public class IdentDef extends AbstractEditorElement implements java.io.Serializa
 
 	// -end- 358A5F2B0354 detail_begin "IdentDef"
 
+	private static final long serialVersionUID = 7529076831156601850L;
+
 	// -beg- preserve=no 3D4FA2190370 head358A5F2B0354 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190370 head358A5F2B0354 "unlinkAll"

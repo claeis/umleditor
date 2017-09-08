@@ -45,6 +45,8 @@ public class Association extends PresentationComposite implements java.io.Serial
 
 	// -end- 3C2C43470264 detail_begin "Association"
 
+	private static final long serialVersionUID = 8506281005972281979L;
+
 	/**
 	 * The visiblility and moveablity of the node representing the link of the
 	 * association is case dependendent.

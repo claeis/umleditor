@@ -34,6 +34,8 @@ import java.awt.*;
  * @version $Revision: 1.3 $ $Date: 2005-09-16 09:50:06 $
  */
 class AssociationAttributeFigure extends ClassFigure {
+	
+	private static final long serialVersionUID = 7959822419713745249L;
 	private LinkFigure linkFigure = null;
 	private boolean linkNodeVisible = true;
 

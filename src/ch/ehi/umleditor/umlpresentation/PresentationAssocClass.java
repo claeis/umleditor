@@ -46,6 +46,8 @@ public class PresentationAssocClass extends PresentationAbstractClass {
 
 	// -end- 3D47AB4300A6 detail_begin "PresentationAssocClass"
 
+	private static final long serialVersionUID = 4263132520412076505L;
+
 	// -beg- preserve=no 3D4FA217034F head3D47AB4300A6 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA217034F head3D47AB4300A6 "unlinkAll"

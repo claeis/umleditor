@@ -26,6 +26,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:50 $
  */
 public class PrintDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = -5786826025151659343L;
 	private static java.util.ResourceBundle resPrintDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/PrintDialog"); //$NON-NLS-1$
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;

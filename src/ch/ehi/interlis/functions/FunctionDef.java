@@ -67,6 +67,8 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 
 	// -end- 3960AFB50130 detail_begin "FunctionDef"
 
+	private static final long serialVersionUID = -8303614986273876299L;
+
 	// -beg- preserve=no 3D4FA21803C0 head3960AFB50130 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21803C0 head3960AFB50130 "unlinkAll"

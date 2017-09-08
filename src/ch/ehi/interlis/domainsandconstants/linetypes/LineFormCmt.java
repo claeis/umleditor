@@ -46,6 +46,8 @@ public class LineFormCmt extends AbstractEditorElement implements java.io.Serial
 
 	// -end- 35B870B60005 detail_begin "LineFormCmt"
 
+	private static final long serialVersionUID = 3118157958735277549L;
+
 	// -beg- preserve=no 3D4FA21B0341 head35B870B60005 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0341 head35B870B60005 "unlinkAll"

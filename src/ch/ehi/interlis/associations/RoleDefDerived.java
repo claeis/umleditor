@@ -67,6 +67,8 @@ public class RoleDefDerived extends AbstractDependency implements IliSyntax, Abs
 
 	// -end- 3C1DB6CB0118 detail_begin "RoleDefDerived"
 
+	private static final long serialVersionUID = -5951839009912476760L;
+
 	// -beg- preserve=no 3D4FA21C00EA head3C1DB6CB0118 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21C00EA head3C1DB6CB0118 "unlinkAll"

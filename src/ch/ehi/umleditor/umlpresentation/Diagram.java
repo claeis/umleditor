@@ -47,6 +47,8 @@ public class Diagram extends AbstractEditorElement implements Element, java.io.S
 
 	// -end- 3C2C4C8D0362 detail_begin "Diagram"
 
+	private static final long serialVersionUID = 9061396977769068019L;
+
 	// -beg- preserve=no 3D4FA21700F7 head3C2C4C8D0362 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21700F7 head3C2C4C8D0362 "unlinkAll"

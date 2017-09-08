@@ -43,6 +43,8 @@ public class StructAttrType extends BaseType {
 
 	// -end- 4EF997C80202 detail_begin "StructAttrType"
 
+	private static final long serialVersionUID = -2913481790493454393L;
+
 	// -beg- preserve=no 4EF999970066 head4EF997C80202 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4EF999970066 head4EF997C80202 "unlinkAll"

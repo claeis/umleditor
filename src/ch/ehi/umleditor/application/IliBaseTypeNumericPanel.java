@@ -30,6 +30,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeNumericPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -6277857692669521896L;
 	private JRadioButton ivjRbtUnspecified = null;
 	private ReferencableComboBox ivjCbxUnitDef = null;
 	private JCheckBox ivjChxCircular = null;

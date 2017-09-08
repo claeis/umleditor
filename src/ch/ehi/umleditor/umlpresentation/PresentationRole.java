@@ -45,6 +45,8 @@ public class PresentationRole extends PresentationEdge {
 
 	// -end- 3D4652270282 detail_begin "PresentationRole"
 
+	private static final long serialVersionUID = -3223872746312701576L;
+
 	// -beg- preserve=no 3D4FA2170327 head3D4652270282 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2170327 head3D4652270282 "unlinkAll"

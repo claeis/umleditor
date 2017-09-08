@@ -47,6 +47,8 @@ public class Contract extends AbstractEditorElement implements Element, java.io.
 
 	// -end- 3940AD20009C detail_begin "Contract"
 
+	private static final long serialVersionUID = -3526286452732258443L;
+
 	// -beg- preserve=no 3D4FA2190352 head3940AD20009C "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190352 head3940AD20009C "unlinkAll"

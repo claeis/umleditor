@@ -36,6 +36,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
  * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeOidPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -7217419279531745887L;
 	private GridBagLayout gridBagLayout1 = new GridBagLayout();
 	private JRadioButton rbAny = new JRadioButton();
 	private JRadioButton rbText = new JRadioButton();

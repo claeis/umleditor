@@ -48,6 +48,8 @@ public class FunctionCall extends AbstractEditorElement implements IliSyntax, ja
 
 	// -end- 394744420142 detail_begin "FunctionCall"
 
+	private static final long serialVersionUID = 5285882786864949643L;
+
 	// -beg- preserve=no 3D4FA218027F head394744420142 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218027F head394744420142 "unlinkAll"

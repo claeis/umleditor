@@ -6,6 +6,8 @@ package ch.ehi.umleditor.application;
 //    dt = new TreeDropTarget(getTreNavigation());
 
 public class AutoScrollingJTree extends javax.swing.JTree implements java.awt.dnd.Autoscroll {
+	
+	private static final long serialVersionUID = 7077925119595161649L;
 	private int margin = 12;
 
 	public AutoScrollingJTree() {

@@ -60,6 +60,8 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 
 	// -end- 40432AE50263 detail_begin "UmlOperation"
 
+	private static final long serialVersionUID = 6787529774750264289L;
+
 	// -beg- preserve=no 40432E3302E2 head40432AE50263 "unlinkAll"
 	public void unlinkAll()
 	// -end- 40432E3302E2 head40432AE50263 "unlinkAll"

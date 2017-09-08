@@ -25,6 +25,8 @@ import ch.ehi.basics.tools.AbstractVisitor;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:50 $
  */
 public abstract class AbstractEditorElement implements Visitable, java.io.Serializable {
+	
+	private static final long serialVersionUID = -2986614596937323514L;
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=yes 3D746BAC0281 detail_begin "AbstractEditorElement"

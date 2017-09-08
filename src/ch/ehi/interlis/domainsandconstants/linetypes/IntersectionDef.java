@@ -48,6 +48,8 @@ public class IntersectionDef extends AbstractEditorElement implements Element, j
 
 	// -end- 35B872AB0146 detail_begin "IntersectionDef"
 
+	private static final long serialVersionUID = 4693490390228639838L;
+
 	// -beg- preserve=no 3D4FA21B02FB head35B872AB0146 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B02FB head35B872AB0146 "unlinkAll"

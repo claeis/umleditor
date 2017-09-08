@@ -42,6 +42,8 @@ public class ObjectPath extends AbstractEditorElement implements java.io.Seriali
 
 	// -end- 3C1DB12E01F8 detail_begin "ObjectPath"
 
+	private static final long serialVersionUID = 2183975390331043217L;
+
 	// -beg- preserve=no 3D4FA21802C6 head3C1DB12E01F8 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21802C6 head3C1DB12E01F8 "unlinkAll"

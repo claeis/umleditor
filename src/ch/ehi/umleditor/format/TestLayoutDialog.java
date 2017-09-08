@@ -22,6 +22,8 @@ import ch.ehi.basics.logging.EhiLogger;
 // -end- 3C7395A70208 import "SubDialog"
 
 public class TestLayoutDialog extends JDialog {
+	
+	private static final long serialVersionUID = -3767058949928870014L;
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=yes 3C7395A70208 detail_begin "SubDialog"

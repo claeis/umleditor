@@ -48,6 +48,8 @@ public abstract class LineType extends Type implements java.io.Serializable {
 
 	// -end- 358A65070007 detail_begin "LineType"
 
+	private static final long serialVersionUID = 5938632687112531417L;
+
 	// -beg- preserve=no 3D4FA21B02D3 head358A65070007 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B02D3 head358A65070007 "unlinkAll"

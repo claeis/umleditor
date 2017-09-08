@@ -26,6 +26,9 @@ import javax.swing.*;
  * @version $Revision: 1.1 $ $Date: 2006-07-03 09:01:42 $
  */
 public class IliDateTimeValuePanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -2869513677823436490L;
+
 	private static java.util.ResourceBundle res = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/IliDateTimeValuePanel"); //$NON-NLS-1$
 

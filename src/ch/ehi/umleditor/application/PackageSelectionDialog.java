@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.Namespace;
  */
 public class PackageSelectionDialog extends ch.softenvironment.view.BaseDialog {
 
+	private static final long serialVersionUID = -1131346410342608890L;
 	private javax.swing.JTree tree;
 	private Namespace selectedPackage = null;
 

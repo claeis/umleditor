@@ -30,6 +30,8 @@ import ch.softenvironment.view.CommonUserAccess;
  */
 public class IliBaseTypeDomainDefPanel extends ch.softenvironment.view.BasePanel
 		implements ch.softenvironment.view.DataPanel {
+	
+	private static final long serialVersionUID = 8901279736965352473L;
 	private ch.ehi.interlis.domainsandconstants.DomainDef domainDef = null;
 	private javax.swing.JButton ivjBtnChangeDomainDef = null;
 	private java.awt.Dialog ownerDialog = null;

@@ -41,6 +41,8 @@ public class ModelDefKind implements java.io.Serializable {
 
 	// -end- 3C1DBC4F00E6 detail_begin "ModelDefKind"
 
+	private static final long serialVersionUID = -2227072964012464546L;
+
 	// -beg- preserve=no 3C1DBCCC026C var3C1DBC4F00E6 "DATA"
 	public static final int DATA = 1;
 	// -end- 3C1DBCCC026C var3C1DBC4F00E6 "DATA"

@@ -26,6 +26,8 @@ public class TestLayoutPane extends JPanel implements javax.swing.event.ChangeLi
 
 	// -end- 3CD943D700CE usrattr "TestLayout"
 
+	private static final long serialVersionUID = -3527571267426396043L;
+
 	// -beg- preserve=no 3CD943D700CE var3CD943D700CE "TestLayout"
 	private Layout thismodel = null;
 	// -end- 3CD943D700CE var3CD943D700CE "TestLayout"

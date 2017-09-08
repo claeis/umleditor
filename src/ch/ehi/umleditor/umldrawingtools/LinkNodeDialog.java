@@ -48,6 +48,8 @@ import javax.swing.JComboBox;
  * @version $Revision: 1.2 $ $Date: 2008-04-08 09:59:17 $
  */
 public class LinkNodeDialog extends BaseDialog implements Evaluator {
+	
+	private static final long serialVersionUID = 6152453762848517925L;
 	private JPanel pnlMain = null;
 	private JPanel jPanel = null;
 	private JPanel pnlSouth = null;

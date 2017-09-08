@@ -45,6 +45,8 @@ public class Coord2 extends BaseType implements java.io.Serializable {
 
 	// -end- 358A66CE00D4 detail_begin "Coord2"
 
+	private static final long serialVersionUID = -8458670763061050922L;
+
 	// -beg- preserve=no 3D4FA21B0034 head358A66CE00D4 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0034 head358A66CE00D4 "unlinkAll"

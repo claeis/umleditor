@@ -48,6 +48,8 @@ import ch.softenvironment.util.*;
  * @see #handleConnect(Figure, Figure)
  */
 public class AssociationLineConnection extends EdgeFigure {
+	
+	private static final long serialVersionUID = -5837730310516707453L;
 	private boolean showDrawing = true;
 
 	/**

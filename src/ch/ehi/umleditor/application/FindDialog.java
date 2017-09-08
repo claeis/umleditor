@@ -29,6 +29,8 @@ import ch.ehi.umleditor.umlpresentation.Diagram;
  * @version $Revision: 1.2 $ $Date: 2006-01-02 16:16:48 $
  */
 public class FindDialog extends ch.softenvironment.view.BaseDialog {
+	
+	private static final long serialVersionUID = 8519321718174149161L;
 	private static java.util.ResourceBundle resources = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/FindDialog");
 	private java.util.Set results = null;

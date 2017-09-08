@@ -38,6 +38,8 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.13 $ $Date: 2007-12-27 10:32:08 $
  */
 public class EditorTableModel extends javax.swing.table.DefaultTableModel {
+	
+	private static final long serialVersionUID = -2330952924997510386L;
 	private static java.util.ResourceBundle resEditorTableModel = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/EditorTableModel");
 	// ??? ce 2003-08-21 Warum ein eigenes Attribut elementVector und nicht

@@ -44,6 +44,8 @@ public class RotationDef extends AbstractEditorElement implements java.io.Serial
 
 	// -end- 3948DE860321 detail_begin "RotationDef"
 
+	private static final long serialVersionUID = -5163766943259978500L;
+
 	// -beg- preserve=no 3D4FA21B0201 head3948DE860321 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0201 head3948DE860321 "unlinkAll"

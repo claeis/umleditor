@@ -65,6 +65,8 @@ public class AssociationDefDerived extends AbstractDependency implements Abstrac
 
 	// -end- 3C1DB4C00011 detail_begin "AssociationDefDerived"
 
+	private static final long serialVersionUID = 7665825754253139269L;
+
 	// -beg- preserve=no 3D4FA21C00D6 head3C1DB4C00011 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21C00D6 head3C1DB4C00011 "unlinkAll"

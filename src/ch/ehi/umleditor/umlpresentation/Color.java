@@ -42,6 +42,8 @@ public class Color extends AbstractEditorElement implements java.io.Serializable
 
 	// -end- 3C34369E0397 detail_begin "Color"
 
+	private static final long serialVersionUID = -5560034442668137951L;
+
 	// -beg- preserve=no 3D4FA21702D7 head3C34369E0397 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21702D7 head3C34369E0397 "unlinkAll"

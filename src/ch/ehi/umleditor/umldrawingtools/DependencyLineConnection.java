@@ -41,6 +41,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.7 $ $Date: 2006-06-29 22:16:01 $
  */
 public class DependencyLineConnection extends EdgeFigure {
+	
+	private static final long serialVersionUID = 3847449774030806188L;
 	private static java.util.ResourceBundle resDependencyLineConnection = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/umldrawingtools/resources/DependencyLineConnection"); //$NON-NLS-1$
 

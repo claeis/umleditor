@@ -41,6 +41,9 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.15 $ $Date: 2007-01-30 18:44:35 $
  */
 abstract class NodeFigure extends GraphicalCompositeFigure implements ModelElementUI {
+	
+	private static final long serialVersionUID = 6628208261547927457L;
+
 	protected java.util.Vector handles = null;
 
 	// keep reference to real model's presentation

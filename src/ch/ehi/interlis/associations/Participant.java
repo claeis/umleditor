@@ -45,9 +45,6 @@ public class Participant extends AbstractModelElement {
 
 	// -end- 448933B703CF detail_begin "Participant"
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 3562951267695748062L;
 
 	// -beg- preserve=no 448D37E501EC head448933B703CF "unlinkAll"

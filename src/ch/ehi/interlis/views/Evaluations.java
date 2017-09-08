@@ -46,6 +46,8 @@ public class Evaluations extends AbstractEditorElement implements java.io.Serial
 
 	// -end- 358A5FCC0283 detail_begin "Evaluations"
 
+	private static final long serialVersionUID = 4177607637386860231L;
+
 	// -beg- preserve=no 3D4FA21803A1 head358A5FCC0283 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21803A1 head358A5FCC0283 "unlinkAll"

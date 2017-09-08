@@ -76,6 +76,8 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 
 	// -end- 3C178E4F0366 detail_begin "AssociationDef"
 
+	private static final long serialVersionUID = -8857272248092650028L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

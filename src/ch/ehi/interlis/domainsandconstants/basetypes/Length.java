@@ -45,6 +45,8 @@ public class Length extends BaseType implements java.io.Serializable {
 
 	// -end- 358A66D90315 detail_begin "Length"
 
+	private static final long serialVersionUID = 7279310015588473320L;
+
 	// -beg- preserve=no 3D4FA21B0040 head358A66D90315 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B0040 head358A66D90315 "unlinkAll"

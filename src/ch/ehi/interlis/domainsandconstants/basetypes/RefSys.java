@@ -48,6 +48,8 @@ public class RefSys extends AbstractEditorElement implements IliSyntax, java.io.
 
 	// -end- 3948A1BC012D detail_begin "RefSys"
 
+	private static final long serialVersionUID = -6955775453735259723L;
+
 	// -beg- preserve=no 3D4FA21B019D head3948A1BC012D "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B019D head3948A1BC012D "unlinkAll"

@@ -46,6 +46,8 @@ public class PlausibilityConstraint extends AbstractEditorElement implements jav
 
 	// -end- 394A2CF303A7 detail_begin "PlausibilityConstraint"
 
+	private static final long serialVersionUID = 1874728003834150448L;
+
 	// -beg- preserve=no 3D4FA2180198 head394A2CF303A7 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2180198 head394A2CF303A7 "unlinkAll"

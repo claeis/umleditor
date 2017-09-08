@@ -84,6 +84,8 @@ public abstract class AbstractClassDef extends AbstractNamespace
 
 	// -end- 358A5E62016A detail_begin "AbstractClassDef"
 
+	private static final long serialVersionUID = 8946488508792942414L;
+
 	// -beg- preserve=no 3CC7AFEE037D head358A5E62016A "getParentTopicDef"
 	public TopicDef getParentTopicDef()
 	// -end- 3CC7AFEE037D head358A5E62016A "getParentTopicDef"

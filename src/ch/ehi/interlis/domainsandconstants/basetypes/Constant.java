@@ -46,6 +46,8 @@ public class Constant extends AbstractEditorElement implements IliSyntax, java.i
 
 	// -end- 394888E60120 detail_begin "Constant"
 
+	private static final long serialVersionUID = -1877629691011769365L;
+
 	// -beg- preserve=no 3D4FA21B011B head394888E60120 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B011B head394888E60120 "unlinkAll"

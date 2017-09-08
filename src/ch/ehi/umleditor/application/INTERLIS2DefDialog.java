@@ -33,6 +33,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.5 $ $Date: 2008-04-08 08:05:02 $
  */
 public class INTERLIS2DefDialog extends BaseDialog implements ListMenuChoice {
+	
+	private static final long serialVersionUID = 481900096164066742L;
 	// ModelElement
 	private static java.util.ResourceBundle resINTERLIS2DefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/INTERLIS2DefDialog"); //$NON-NLS-1$

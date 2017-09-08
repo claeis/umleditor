@@ -29,6 +29,8 @@ import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
  * @version $Revision: 1.2 $ $Date: 2003-12-30 22:06:14 $
  */
 class AssociationLineDecoration extends AbstractLineDecoration {
+	
+	private static final long serialVersionUID = -2667285354298562373L;
 	// Size of the diamond (measured as a diagonal line)
 	private int mySize;
 

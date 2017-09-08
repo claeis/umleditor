@@ -35,6 +35,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
  * @version $Revision: 1.1 $ $Date: 2007-12-27 17:00:24 $
  */
 public class ParticipantsPanel extends BasePanel implements ch.softenvironment.view.DataPanel {
+	
+	private static final long serialVersionUID = -6631380805540174738L;
+
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ParticipantsPanel.class);
 
 	private JScrollPane scpRestricted = new JScrollPane();

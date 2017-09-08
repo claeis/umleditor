@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 class RepositoriesDialog extends JDialog {
+	
+	private static final long serialVersionUID = -4895755701568979945L;
 	public final static int OK_OPTION = 1;
 	public final static int CANCEL_OPTION = 2;
 	private int pressedButton = CANCEL_OPTION;

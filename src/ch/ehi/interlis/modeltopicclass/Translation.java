@@ -47,6 +47,8 @@ public class Translation extends AbstractEditorElement implements Element, java.
 
 	// -end- 3C1DC4060258 detail_begin "Translation"
 
+	private static final long serialVersionUID = -2977207102920199573L;
+
 	// -beg- preserve=no 3D4FA21A0110 head3C1DC4060258 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0110 head3C1DC4060258 "unlinkAll"

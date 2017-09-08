@@ -27,6 +27,8 @@ import ch.softenvironment.view.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:00 $
  */
 public class TranslationDialog extends BaseDialog {
+	
+	private static final long serialVersionUID = 8079485588584930261L;
 	// ModelElement
 	private static java.util.ResourceBundle resTranslationDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/TranslationDialog"); //$NON-NLS-1$

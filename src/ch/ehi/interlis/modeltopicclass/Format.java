@@ -45,6 +45,8 @@ public class Format extends AbstractEditorElement implements java.io.Serializabl
 
 	// -end- 358A5FEF0337 detail_begin "Format"
 
+	private static final long serialVersionUID = 1058224552011470946L;
+
 	// -beg- preserve=no 3D4FA21A0001 head358A5FEF0337 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21A0001 head358A5FEF0337 "unlinkAll"

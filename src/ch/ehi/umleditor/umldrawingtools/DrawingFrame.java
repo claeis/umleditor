@@ -27,6 +27,9 @@ import CH.ifa.draw.contrib.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:54 $
  */
 public class DrawingFrame extends MDI_InternalFrame implements ch.ehi.uml1_4.changepropagation.MetaModelListener {
+	
+	private static final long serialVersionUID = 6560387221488920990L;
+
 	/**
 	 * DrawingFrame constructor comment.
 	 * 

@@ -42,6 +42,8 @@ import CH.ifa.draw.figures.*;
  * @version $Revision: 1.12 $ $Date: 2007-12-28 10:27:16 $
  */
 class RoleDefFigure extends NodeFigure {
+	
+	private static final long serialVersionUID = -1550975491620331213L;
 	private PresentationRoleFigure edgeFigure = null;
 	private LinkFigure linkFigure = null;
 

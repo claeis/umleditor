@@ -65,6 +65,8 @@ public class MetaDataUseDef extends AbstractModelElement implements ModelElement
 
 	// -end- 3C1DC6BA03C6 detail_begin "MetaDataUseDef"
 
+	private static final long serialVersionUID = -2285409121113308588L;
+
 	// -beg- preserve=no 3D4FA21B03BA head3C1DC6BA03C6 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B03BA head3C1DC6BA03C6 "unlinkAll"

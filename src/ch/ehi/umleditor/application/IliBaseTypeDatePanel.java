@@ -43,6 +43,9 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.2 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeDatePanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -7613455741977464499L;
+
 	private static java.util.ResourceBundle res = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/IliBaseTypeDatePanel"); //$NON-NLS-1$
 

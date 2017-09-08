@@ -45,6 +45,8 @@ public class BlackboxType extends BaseType {
 
 	// -end- 4489813700A9 detail_begin "BlackboxType"
 
+	private static final long serialVersionUID = -5458999423495980283L;
+
 	// -beg- preserve=no 448D3D1201FB head4489813700A9 "unlinkAll"
 	public void unlinkAll()
 	// -end- 448D3D1201FB head4489813700A9 "unlinkAll"

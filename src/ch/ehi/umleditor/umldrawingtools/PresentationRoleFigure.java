@@ -40,6 +40,8 @@ import ch.softenvironment.view.CommonUserAccess;
  * @version $Revision: 1.13 $ $Date: 2008-04-08 09:58:25 $
  */
 public class PresentationRoleFigure extends EdgeFigure implements java.awt.event.ActionListener {
+	
+	private static final long serialVersionUID = -774037525765738176L;
 	// NLS Constants
 	private static java.util.ResourceBundle resPresentationRoleFigure = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/umldrawingtools/resources/PresentationRoleFigure"); //$NON-NLS-1$

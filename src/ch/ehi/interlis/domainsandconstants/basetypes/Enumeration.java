@@ -46,6 +46,8 @@ public class Enumeration extends BaseType implements java.io.Serializable {
 
 	// -end- 358A671C0162 detail_begin "Enumeration"
 
+	private static final long serialVersionUID = 2258417326457695550L;
+
 	// -beg- preserve=no 3D4FA21B00A2 head358A671C0162 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA21B00A2 head358A671C0162 "unlinkAll"

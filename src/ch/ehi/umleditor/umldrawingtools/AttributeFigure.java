@@ -29,6 +29,8 @@ import ch.ehi.umleditor.application.*;
  * @version $Revision: 1.2 $ $Date: 2004-03-05 17:26:42 $
  */
 class AttributeFigure extends TextFigure {
+	
+	private static final long serialVersionUID = 7805538465170416848L;
 	private AttributeDef attributeDef = null;
 	private ClassDiagramView classDiagram = null;
 

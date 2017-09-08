@@ -65,6 +65,8 @@ public abstract class AbstractGeneralization extends AbstractModelElement implem
 
 	// -end- 3E4241810290 detail_begin "AbstractGeneralization"
 
+	private static final long serialVersionUID = -8110826414876848582L;
+
 	// -beg- preserve=no 3E4241A4007E head3E4241810290 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3E4241A4007E head3E4241810290 "unlinkAll"

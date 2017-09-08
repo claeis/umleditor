@@ -46,6 +46,8 @@ public class CondSigParamAss extends AbstractEditorElement implements java.io.Se
 
 	// -end- 3961F7DF017A detail_begin "CondSigParamAss"
 
+	private static final long serialVersionUID = -2165901436504194871L;
+
 	// -beg- preserve=no 3D4FA2190081 head3961F7DF017A "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA2190081 head3961F7DF017A "unlinkAll"

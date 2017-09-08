@@ -30,6 +30,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.*;
  * @version $Revision: 1.5 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeBasketPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = 2538992113290827067L;
 	private ReferencableComboBox ivjCbxTopicDef = null;
 	private javax.swing.JLabel ivjLblAccordingTo = null;
 	private javax.swing.JLabel ivjLblKind = null;

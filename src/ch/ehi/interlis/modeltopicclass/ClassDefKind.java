@@ -41,6 +41,8 @@ public class ClassDefKind implements java.io.Serializable {
 
 	// -end- 3C1DBA36021A detail_begin "ClassDefKind"
 
+	private static final long serialVersionUID = 112747718088554282L;
+
 	// -beg- preserve=no 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
 	public static final int CLASS = 1;
 	// -end- 3C1DBA4E02C9 var3C1DBA36021A "CLASS"

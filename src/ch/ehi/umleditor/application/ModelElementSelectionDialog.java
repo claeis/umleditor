@@ -31,6 +31,8 @@ import ch.ehi.uml1_4.foundation.core.*;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:39:38 $
  */
 public class ModelElementSelectionDialog extends ch.softenvironment.view.BaseDialog {
+	
+	private static final long serialVersionUID = 3350906284109498834L;
 	private static java.util.ResourceBundle resModelElementSelectionDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/ModelElementSelectionDialog"); //$NON-NLS-1$
 	private java.util.Iterator iterator = null;

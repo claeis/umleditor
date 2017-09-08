@@ -28,6 +28,8 @@ import ch.ehi.uml1_4.implementation.*;
  * @see UmlOperation
  */
 public class UmlParameterDialog extends ch.softenvironment.view.BaseDialog {
+	
+	private static final long serialVersionUID = -5696611965125147639L;
 	private ch.ehi.uml1_4.implementation.UmlParameter parameter = null;
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JButton ivjBtnApply = null;

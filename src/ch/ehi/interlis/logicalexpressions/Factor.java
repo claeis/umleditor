@@ -50,6 +50,8 @@ public class Factor extends AbstractEditorElement implements java.io.Serializabl
 
 	// -end- 394A41E30033 detail_begin "Factor"
 
+	private static final long serialVersionUID = -7129342915142328742L;
+
 	// -beg- preserve=no 3D4FA218021A head394A41E30033 "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218021A head394A41E30033 "unlinkAll"

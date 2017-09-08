@@ -45,6 +45,8 @@ public class TimeType extends BaseType {
 
 	// -end- 448985E10132 detail_begin "TimeType"
 
+	private static final long serialVersionUID = -5847293140924440979L;
+
 	// -beg- preserve=no 448E7B8A03E2 head448985E10132 "unlinkAll"
 	public void unlinkAll()
 	// -end- 448E7B8A03E2 head448985E10132 "unlinkAll"

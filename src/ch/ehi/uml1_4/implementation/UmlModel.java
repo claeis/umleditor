@@ -48,6 +48,8 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 
 	// -end- 3C4FDE4A01DE detail_begin "UmlModel"
 
+	private static final long serialVersionUID = 544012135998658087L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

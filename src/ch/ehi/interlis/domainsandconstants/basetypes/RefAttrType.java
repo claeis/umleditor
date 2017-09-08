@@ -43,6 +43,8 @@ public class RefAttrType extends BaseType {
 
 	// -end- 4EF997E40008 detail_begin "RefAttrType"
 
+	private static final long serialVersionUID = -8978708147907292899L;
+
 	// -beg- preserve=no 4EF999F2009D head4EF997E40008 "unlinkAll"
 	public void unlinkAll()
 	// -end- 4EF999F2009D head4EF997E40008 "unlinkAll"

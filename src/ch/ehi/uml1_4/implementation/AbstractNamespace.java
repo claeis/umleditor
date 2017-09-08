@@ -43,6 +43,8 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 
 	// -end- 3CE225CF036F detail_begin "AbstractNamespace"
 
+	private static final long serialVersionUID = -825157730641354139L;
+
 	/**
 	 * return the list of valid owned elements for this namespace.
 	 */

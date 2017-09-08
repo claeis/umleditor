@@ -37,6 +37,8 @@ import ch.ehi.interlis.modeltopicclass.ClassDefKind;
  * @version $Revision: 1.4 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeRefAttrPanel extends BasePanel implements DataPanel {
+	
+	private static final long serialVersionUID = -1797284953754545154L;
 	private static java.util.ResourceBundle resRoleDefDialog = java.util.ResourceBundle
 			.getBundle("ch/ehi/umleditor/application/resources/RoleDefDialog"); //$NON-NLS-1$ ;
 	private GridBagLayout gridBagLayout1 = new GridBagLayout();

@@ -29,6 +29,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:38:49 $
  */
 public class EnumTreeCellRenderer extends javax.swing.tree.DefaultTreeCellRenderer {
+	
+	private static final long serialVersionUID = 3797620607106674379L;
 	private static Icon icon = null;
 
 	/**

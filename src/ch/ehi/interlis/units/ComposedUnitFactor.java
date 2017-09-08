@@ -46,6 +46,8 @@ public class ComposedUnitFactor extends AbstractEditorElement implements java.io
 
 // -end- 394A20F3001B detail_begin "ComposedUnitFactor"
 
+	private static final long serialVersionUID = -7919952340466471596L;
+
 // -beg- preserve=no 3D4FA21800D0 head394A20F3001B "unlinkAll"
 public void unlinkAll()
 // -end- 3D4FA21800D0 head394A20F3001B "unlinkAll"

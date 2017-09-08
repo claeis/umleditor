@@ -32,6 +32,8 @@ public class UmlMultiplicityRange extends AbstractEditorElement implements Multi
 
 	// -end- 3C8F9377022E detail_begin "UmlMultiplicityRange"
 
+	private static final long serialVersionUID = 3780463231493381560L;
+
 	// -beg- preserve=no 3D4FA218005A head3C8F9377022E "unlinkAll"
 	public void unlinkAll()
 	// -end- 3D4FA218005A head3C8F9377022E "unlinkAll"
