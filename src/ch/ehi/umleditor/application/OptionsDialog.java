@@ -576,7 +576,7 @@ public class OptionsDialog extends BaseDialog {
 			try {
 				ivjTxtDiagramHeight = new javax.swing.JTextField();
 				ivjTxtDiagramHeight.setName("TxtDiagramHeight");
-				ivjTxtDiagramHeight.setBounds(153, 48, 90, 20);
+				ivjTxtDiagramHeight.setBounds(153, 48, 90, 25);
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -599,7 +599,7 @@ public class OptionsDialog extends BaseDialog {
 			try {
 				ivjTxtDiagramWidth = new javax.swing.JTextField();
 				ivjTxtDiagramWidth.setName("TxtDiagramWidth");
-				ivjTxtDiagramWidth.setBounds(153, 18, 90, 20);
+				ivjTxtDiagramWidth.setBounds(153, 18, 90, 25);
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -691,7 +691,7 @@ public class OptionsDialog extends BaseDialog {
 			// user code end
 			setName("OptionsDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(560, 188);
+			setSize(560, 200);
 			setTitle(resOptionsDialog.getString("OptionsDialog_title"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

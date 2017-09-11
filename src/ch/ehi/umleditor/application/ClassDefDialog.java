@@ -32,9 +32,7 @@ import ch.softenvironment.util.*;
  * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
 public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
-	/**
-	 *
-	 */
+		
 	private static final long serialVersionUID = -702437324945597770L;
 	// keep ModelElement
 	private static java.util.ResourceBundle resClassDefDialog = java.util.ResourceBundle
@@ -472,10 +470,10 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				constraintsLblMetaAttrb.gridx = 1;
 				constraintsLblMetaAttrb.gridy = 1;
 				constraintsLblMetaAttrb.ipadx = 104;
-				constraintsLblMetaAttrb.insets = new java.awt.Insets(80, 11, 10, 6);
+				constraintsLblMetaAttrb.insets = new java.awt.Insets(80, 50, 10, 6);
 				getBaseDialogContentPane().add(getLblMetaAttrb(), constraintsLblMetaAttrb);
 
-				// show textfield metaAttrb in panel
+				// show text field metaAttrb in panel
 				java.awt.GridBagConstraints constraintsTxtMetaAttrb = new java.awt.GridBagConstraints();
 				constraintsTxtMetaAttrb.gridx = 2;
 				constraintsTxtMetaAttrb.gridy = 1;
@@ -483,7 +481,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				constraintsTxtMetaAttrb.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtMetaAttrb.weightx = 1.0;
 				constraintsTxtMetaAttrb.ipadx = 315;
-				constraintsTxtMetaAttrb.insets = new java.awt.Insets(78, 11, 7, 15);
+				constraintsTxtMetaAttrb.insets = new java.awt.Insets(78, 6, 7, 15);
 				getBaseDialogContentPane().add(getTxtMetaAttrb(), constraintsTxtMetaAttrb);
 
 				java.awt.GridBagConstraints constraintsTbpGeneral = new java.awt.GridBagConstraints();

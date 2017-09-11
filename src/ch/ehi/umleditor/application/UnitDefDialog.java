@@ -555,7 +555,7 @@ public class UnitDefDialog extends BaseDialog {
 			// user code end
 			setName("UnitDefSpecificationDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(426, 285);
+			setSize(426, 385);
 			setTitle(resUnitDefDialog.getString("UnitDefSpecificationDialog_title"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

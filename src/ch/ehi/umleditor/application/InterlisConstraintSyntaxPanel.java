@@ -407,28 +407,32 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				java.awt.GridBagConstraints constraintsLblMetaName = new java.awt.GridBagConstraints();
 				constraintsLblMetaName.gridx = 1;
 				constraintsLblMetaName.gridy = 1;
-				constraintsLblMetaName.ipadx = 104;
-				//constraintsLblMetaName.insets = new java.awt.Insets(1, 11, 10, 6);
+				constraintsLblMetaName.ipadx = 10;
+				
+				constraintsLblMetaName.insets = new java.awt.Insets(22, 11, 10, 6);
 				getPnlMetaValues().add(getLblMetaName(), constraintsLblMetaName);
 				
 				// show ilivalid name at panel
 				java.awt.GridBagConstraints constraintsPnlMetaName = new java.awt.GridBagConstraints();
-				constraintsPnlMetaName.gridx = 1;
-				constraintsPnlMetaName.gridy = 2;
+				constraintsPnlMetaName.gridx = 2;
+				constraintsPnlMetaName.gridy = 1;
 				constraintsPnlMetaName.fill = java.awt.GridBagConstraints.BOTH;
 				constraintsPnlMetaName.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsPnlMetaName.weightx = 1.0;
 				constraintsPnlMetaName.weighty = 1.0;
-				constraintsPnlMetaName.ipadx = 243;
-				constraintsPnlMetaName.ipady = 69;
+				constraintsPnlMetaName.ipadx = 220;
+				constraintsPnlMetaName.ipady = 30;
+				
+				constraintsLblMetaName.insets = new java.awt.Insets(19, 11, 10, 6);
 				getPnlMetaValues().add(getPnlMetaName(), constraintsPnlMetaName);
 
 				// show label metaMsg at panel
 				java.awt.GridBagConstraints constraintsLblMetaMsg = new java.awt.GridBagConstraints();
-				constraintsLblMetaMsg.gridx = 2;
-				constraintsLblMetaMsg.gridy = 1;
-				constraintsLblMetaMsg.ipadx = 104;
-				//constraintsLblMetaMsg.insets = new java.awt.Insets(2, 11, 7, 6);
+				constraintsLblMetaMsg.gridx = 1;
+				constraintsLblMetaMsg.gridy = 2;
+				constraintsLblMetaMsg.ipadx = 10;
+				
+				constraintsLblMetaMsg.insets = new java.awt.Insets(22, 11, 10, 6);
 				getPnlMetaValues().add(getLblMetaMsg(), constraintsLblMetaMsg);
 
 				// show ilivalid msg at panel
@@ -439,8 +443,10 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				constraintsPnlMetaMsg.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsPnlMetaMsg.weightx = 1.0;
 				constraintsPnlMetaMsg.weighty = 1.0;
-				constraintsPnlMetaMsg.ipadx = 243;
-				constraintsPnlMetaMsg.ipady = 69;
+				constraintsPnlMetaMsg.ipadx = 220;
+				constraintsPnlMetaMsg.ipady = 30;
+
+				constraintsLblMetaMsg.insets = new java.awt.Insets(88, 11, 7, 6);
 				getPnlMetaValues().add(getPnlMetaMsg(), constraintsPnlMetaMsg);
 				
 			} catch (java.lang.Throwable ivjExc) {
@@ -604,6 +610,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		} else {
 			getPnlEditor()
 					.setText(ElementUtils.mapNlsString(((ConstraintExpression) constraint.getBody()).getSyntax()));
+
 		}
 		//
 		

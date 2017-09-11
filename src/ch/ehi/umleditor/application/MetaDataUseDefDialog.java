@@ -682,7 +682,7 @@ public class MetaDataUseDefDialog extends BaseDialog {
 		}
 		// user code begin {2}
 		setTitle(resMetaDataUseDefDialog.getString("CTDialog"));
-		setSize(560, 285);
+		setSize(660, 385);
 		javax.swing.ButtonGroup buttonGroup = new javax.swing.ButtonGroup();
 		buttonGroup.add(getRbtSign());
 		buttonGroup.add(getRbtRefSystem());

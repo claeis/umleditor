@@ -524,7 +524,7 @@ public class LineFormTypeDefDialog extends BaseDialog {
 			// user code end
 			setName("CommonSpecificationDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(426, 261);
+			setSize(426, 385);
 			setTitle("<Generic>(Spezifikation)");
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

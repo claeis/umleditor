@@ -533,7 +533,7 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 			// user code end
 			setName("FindDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(426, 302);
+			setSize(426, 402);
 			setTitle("Suchen");
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

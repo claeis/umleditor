@@ -1935,7 +1935,7 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 			// user code end
 			setName("ModelDefSpecificationDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(426, 357);
+			setSize(526, 570);
 			setTitle(resModelDefDialog.getString("ModelDefSpecificationDialog_title"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

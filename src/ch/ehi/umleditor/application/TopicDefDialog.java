@@ -1183,7 +1183,7 @@ public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
 			// user code end
 			setName("TopicDefDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(490, 306);
+			setSize(490, 406);
 			setTitle(resTopicDefDialog.getString("CTDialog"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();

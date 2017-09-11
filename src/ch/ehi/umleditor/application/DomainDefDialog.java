@@ -356,7 +356,7 @@ public class DomainDefDialog extends BaseDialog {
 				constraintsLblMetaAttrbDom.gridx = 1;
 				constraintsLblMetaAttrbDom.gridy = 1;
 				constraintsLblMetaAttrbDom.ipadx = 104;
-				constraintsLblMetaAttrbDom.insets = new java.awt.Insets(80, 10, 4, 5);
+				constraintsLblMetaAttrbDom.insets = new java.awt.Insets(80, 53, 4, 5);
 				getBaseDialogContentPane().add(getLblMetaAttrbDom(), constraintsLblMetaAttrbDom);
 
 				// show textfield for MetaAttrb
@@ -1173,7 +1173,7 @@ public class DomainDefDialog extends BaseDialog {
 			// user code end
 			setName("DomainDefDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(690, 557);
+			setSize(690, 665);
 			setTitle(getResourceString("CTDialog"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();
