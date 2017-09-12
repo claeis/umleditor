@@ -2077,11 +2077,11 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 				ElementUtils.changeNlsString(modelDef.getVersionComment(), getTxtVersionComment().getText()));
 		// ch.interlis.ilirepository.MakeIliModelsXml don't works at new version
 		// of ili2c
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
 				getTxtTechnicalContact().getText());
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
 				getTxtFurtherInformation().getText());
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
 				getTxtIDGeoIV().getText());
 		// any ili2.2 items?
 		if (modelDef.sizeContract() > 0) {
@@ -2133,11 +2133,11 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 		getTxtVersion().setText(ElementUtils.mapNlsString(modelDef.getVersion()));
 		getTxtVersionComment().setText(ElementUtils.mapNlsString(modelDef.getVersionComment()));
 		getTxtTechnicalContact().setText(ElementUtils.getIliTaggedValue(modelDef,
-				ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT));
+				ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
 		getTxtFurtherInformation().setText(ElementUtils.getIliTaggedValue(modelDef,
-				ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION));
+				ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
 		getTxtIDGeoIV().setText(
-				ElementUtils.getIliTaggedValue(modelDef, ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV));
+				ElementUtils.getIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
 		// any ili2.2 items?
 		if (modelDef.sizeContract() > 0) {
 			// migrate them to ili2.3

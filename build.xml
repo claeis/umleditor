@@ -21,7 +21,9 @@
       <arg value="-debug"/>
       <classpath>
         <pathelement location="${projectjar}"/>
-        <pathelement location="${basedir}/lib/ili2c.jar"/>
+      	<pathelement location="${basedir}/lib/ili2c.jar"/>
+        <pathelement location="${basedir}/lib/ili2c-core.jar"/>
+        <pathelement location="${basedir}/lib/ili2c-tool.jar"/>
         <pathelement location="${basedir}/lib/jh.jar"/>
       </classpath>
     </java>
@@ -35,6 +37,8 @@
         <pathelement location="lib/jhotdraw53.jar"/>
         <pathelement location="lib/sebase.jar"/>
         <pathelement location="lib/ili2c.jar"/>
+        <pathelement location="lib/ili2c-core.jar"/>
+        <pathelement location="lib/ili2c-tool.jar"/>
         <pathelement location="lib/XMIFramework.jar"/>
         <pathelement location="lib/jh.jar"/>
         <pathelement location="lib/freehep-base.jar"/>
