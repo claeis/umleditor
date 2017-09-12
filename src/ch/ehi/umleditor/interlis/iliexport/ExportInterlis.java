@@ -18,6 +18,7 @@
 package ch.ehi.umleditor.interlis.iliexport;
 
 import ch.ehi.umleditor.application.LauncherView;
+import ch.ehi.umleditor.interlis.modelcheck.CheckModel;
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.view.GenericFileFilter;
 import java.io.File;
@@ -35,6 +36,8 @@ public class ExportInterlis {
 			java.util.List fileList = writer
 					.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
 			if (checkFiles(fileList, writer.getFuncDesc())) {
+				// show possible errors 
+				checkModels(fileList);
 				// write the files
 				writer.writeIliFiles(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
 			}
@@ -116,6 +119,12 @@ public class ExportInterlis {
 		return;
 	}
 
+	/**
+	 * Check if files exist to replace or not 
+	 * @param filev
+	 * @param funcdesc
+	 * @return
+	 */
 	private static boolean checkFiles(java.util.List filev, String funcdesc) {
 		java.util.List apprv = new java.util.ArrayList();
 		java.util.Iterator filei = filev.iterator();
@@ -146,4 +155,33 @@ public class ExportInterlis {
 		}
 		return false;
 	}
+	
+	private static void checkModels(java.util.List file){
+ 		
+  		java.util.List apprv = new java.util.ArrayList();		  		
+  		java.util.Iterator filei = file.iterator();
+  				  		
+  		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
+ 				  		
+  		try{
+ 				ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+ 				Configuration ili2cConfig = new Configuration();
+  				
+ 				while(filei.hasNext()){
+ 					File selectedFile = (File) filei.next();
+ 					ili2cConfig.addFileEntry(new ch.interlis.ili2c.config.FileEntry(selectedFile.getAbsolutePath(), ch.interlis.ili2c.config.FileEntryKind.ILIMODELFILE));
+ 					}
+ 				
+ 				ili2cConfig.setGenerateWarnings(false);
+ 				ili2cConfig.setOutputKind(GenerateOutputKind.NOOUTPUT);
+ 				ili2cConfig.setAutoCompleteModelList(true);
+ 				 	
+ 				writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(),ili2cConfig, settings);
+ 				 			
+ 				 			  
+ 			} catch(java.io.IOException ex){
+ 		 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+ 		 			JOptionPane.showMessageDialog(null,","+writer.getFuncDesc()+" "+ex.getLocalizedMessage());
+ 			}
+		}
 }
