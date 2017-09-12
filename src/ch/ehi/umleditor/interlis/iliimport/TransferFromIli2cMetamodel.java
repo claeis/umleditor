@@ -241,6 +241,12 @@ public class TransferFromIli2cMetamodel {
 	private ch.ehi.interlis.modeltopicclass.ClassDef visitClassDef(Table tdef) {
 		ch.ehi.interlis.modeltopicclass.ClassDef classdef = findClassDef(tdef);
 		classdef.setName(new NlsString(modelLanguage, tdef.getName()));
+		
+		//MetaAttrb Disp.Name
+		String dispName = tdef.getMetaValue("ili2db.dispName");
+		if(dispName != null) {
+			classdef.setMetaAttrb(new NlsString(modelLanguage, dispName));
+		}
 
 		// documentation
 		String ilidoc = tdef.getDocumentation();
@@ -422,6 +428,19 @@ public class TransferFromIli2cMetamodel {
 		makeSyntax.printConstraint(constr);
 		expr.setSyntax(new NlsString(modelLanguage, getSyntax()));
 		cdef.setBody(expr);
+		
+		//MetaAttrb ilivalid.name
+		String iliName = constr.getMetaValue("@ name");
+		if(iliName != null) {
+			cdef.setMetaAttrb(new NlsString(modelLanguage, iliName));
+		}
+		
+		//MetaAttrb ilivalid.msg
+		String iliMsg = constr.getMetaValue("ilivalid.msg");
+		if(iliMsg != null) {
+			cdef.setMetaAttrb(new NlsString(modelLanguage, iliMsg));
+		}
+		
 		// documentation
 		String ilidoc = constr.getDocumentation();
 		if (ilidoc != null) {
@@ -546,6 +565,12 @@ public class TransferFromIli2cMetamodel {
 		attrdef.setPropExtended(attrib.getExtending() != null);
 		attrdef.setPropTransient(attrib.isTransient());
 
+		//MetaAttrb Disp.Name
+		String dispNameAttrb = attrib.getMetaValue("ili2db.dispName");
+		if(dispNameAttrb != null) {
+			attrdef.setMetaAttrb(new NlsString(modelLanguage, dispNameAttrb));
+		}
+		
 		// documentation
 		String ilidoc = attrib.getDocumentation();
 		if (ilidoc != null) {
@@ -906,6 +931,11 @@ public class TransferFromIli2cMetamodel {
 		ch.ehi.interlis.domainsandconstants.DomainDef domaindef = findDomainDef(dd);
 		domaindef.setName(new NlsString(modelLanguage, dd.getName()));
 
+		//MetaAttrb Disp.Name
+				String dispNameDomain = dd.getMetaValue("ili2db.dispName");
+				if(dispNameDomain != null) {
+					domaindef.setMetaAttrb(new NlsString(modelLanguage, dispNameDomain));
+				}
 		// documentation
 		String ilidoc = dd.getDocumentation();
 		if (ilidoc != null) {
@@ -1179,6 +1209,14 @@ public class TransferFromIli2cMetamodel {
 		ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret = new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
 		ret.setName(new NlsString(modelLanguage, ee.getName()));
 
+
+		//MetaAttrb Disp.Name falta verificar cuando es nulo
+		
+		String dispNameEnumEl = ee.getMetaValues().getValue("ili2db.dispName");
+		if(dispNameEnumEl != null) {
+			ret.setMetaAttrb(new NlsString(modelLanguage, dispNameEnumEl));
+		}
+		
 		// documentation
 		String ilidoc = ee.getDocumentation();
 		if (ilidoc != null) {
