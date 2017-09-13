@@ -51,11 +51,11 @@ implements ch.ehi.umleditor.application.MetaMsgPanelListener {
 	 * @param newEvent
 	 *            java.util.EventObject
 	 */
-	public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject newEvent) {
+	public void pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(java.util.EventObject newEvent) {
 		((ch.ehi.umleditor.application.MetaMsgPanelListener) a)
-				.pnlEditSimpleEditPanel_txaEditKey_keyReleased(newEvent);
+				.pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(newEvent);
 		((ch.ehi.umleditor.application.MetaMsgPanelListener) b)
-				.pnlEditSimpleEditPanel_txaEditKey_keyReleased(newEvent);
+				.pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(newEvent);
 	}
 
 	/**

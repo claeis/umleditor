@@ -36,24 +36,22 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	private javax.swing.JLabel ivjLblMetaName = null;
 	private javax.swing.JPanel ivjPnlMetaValues = null;
 	
-	IvjEventHandlerMsg ivjEventHandlerMsg = new IvjEventHandlerMsg();
 	private javax.swing.JLabel ivjLblMetaMsg = null;
 	private MetaMsgPanel ivjPnlMetaMsg = null; 
 	
 	
-	class IvjEventHandler implements ch.ehi.umleditor.application.MetaNamePanelListener{
+	class IvjEventHandler implements ch.ehi.umleditor.application.MetaNamePanelListener, ch.ehi.umleditor.application.MetaMsgPanelListener{
 		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
 			if (newEvent.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaName())
 				connEtoC9(newEvent);
-		};
+			};	
+			public void pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(EventObject Event) {
+				if (Event.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaMsg())
+					connEtoC10(Event);
+			};
+		
 	};
 
-	class IvjEventHandlerMsg implements ch.ehi.umleditor.application.MetaMsgPanelListener{
-		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
-			if (newEvent.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaMsg())
-				connEtoC10(newEvent);
-		};
-	};
 
 	/**
 	 * InterlisConstraintSyntaxPanel constructor comment.
@@ -105,9 +103,15 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 
 		if ((syntax != null) && (syntax.length() > 0)) {
 			// replace current value
+			
 			if (((ConstraintExpression) constraint.getBody()).getSyntax() == null) {
 				return new ch.ehi.basics.types.NlsString(syntax);
 			} else {
+				getPnlMetaName().setEnabled(true);
+				getPnlMetaName().setObject(constraint);
+				
+				getPnlMetaMsg().setEnabled(true);
+				getPnlMetaMsg().setObject(constraint);
 				return new ch.ehi.basics.types.NlsString(((ConstraintExpression) constraint.getBody()).getSyntax(),
 						syntax);
 			}
@@ -532,9 +536,9 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	}
 
 	private void initConnections() throws java.lang.Exception {
-		//
+		//getPnlEditor().addAncestorListener(ivjEventHandler);
 		getPnlMetaName().addMetaNamePanelListener(ivjEventHandler);
-		getPnlMetaMsg().addMetaMsgPanelListener(ivjEventHandlerMsg);
+		getPnlMetaMsg().addMetaMsgPanelListener(ivjEventHandler);
 	}
 	/**
 	 * Initialize the class.

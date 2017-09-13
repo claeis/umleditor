@@ -1080,9 +1080,10 @@ public class TransferFromUmlMetamodel {
 	public void visitConstraintDef(ConstraintDef def) throws java.io.IOException {
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
-		visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression) def.getBody());
 		visitMetaName(def.getMetaName());
 		visitMetaMsg(def.getMetaMsg());
+		visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression) def.getBody());
+		
 		return;
 	}
 

@@ -69,7 +69,7 @@ public class MetaMsgPanel extends BasePanel implements DataPanel{
 		try {
 			// user code begin {1}
 			// user code end
-			this.firePnlEditSimpleEditPanel_txaEditKey_keyReleased(new java.util.EventObject(this));
+			this.firePnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(new java.util.EventObject(this));
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -85,12 +85,12 @@ public class MetaMsgPanel extends BasePanel implements DataPanel{
 	 * @param newEvent
 	 *            java.util.EventObject
 	 */
-	protected void firePnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject newEvent) {
+	protected void firePnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(java.util.EventObject newEvent) {
 		if (fieldMetaMsgPanelListenerEventMulticaster == null) {
 			return;
 		}
 		;
-		fieldMetaMsgPanelListenerEventMulticaster.pnlEditSimpleEditPanel_txaEditKey_keyReleased(newEvent);
+		fieldMetaMsgPanelListenerEventMulticaster.pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(newEvent);
 	}
 
 	/**
