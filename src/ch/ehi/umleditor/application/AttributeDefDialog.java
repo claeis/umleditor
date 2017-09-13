@@ -374,7 +374,7 @@ public class AttributeDefDialog extends BaseDialog {
 				constraintsLblMetaAttrbAt.gridx = 0;
 				constraintsLblMetaAttrbAt.gridy = 0;
 				constraintsLblMetaAttrbAt.ipadx = 104;
-				constraintsLblMetaAttrbAt.insets = new java.awt.Insets(80, 19, 8, 3);
+				constraintsLblMetaAttrbAt.insets = new java.awt.Insets(80, 63, 8, 3);
 				getBaseDialogContentPane().add(getLblMetaAttrbAt(), constraintsLblMetaAttrbAt);
 
 				java.awt.GridBagConstraints constraintsTxtMetaAttrbAt = new java.awt.GridBagConstraints();
@@ -402,7 +402,7 @@ public class AttributeDefDialog extends BaseDialog {
 				constraintsLblType.gridx = 0;
 				constraintsLblType.gridy = 1;
 				constraintsLblType.ipadx = 117;
-				constraintsLblType.insets = new java.awt.Insets(9, 19, 8, 3);
+				constraintsLblType.insets = new java.awt.Insets(9, 22, 8, 3);
 				getBaseDialogContentPane().add(getLblType(), constraintsLblType);
 
 				java.awt.GridBagConstraints constraintsCbxType = new java.awt.GridBagConstraints();
