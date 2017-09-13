@@ -1,4 +1,15 @@
 # UML-Editor - The UML/INTERLIS Editor
+UML Editor is an open source software application whose purpose is to help you create, develop, view and manipulate schemas. It is able to read and write INTERLIS syntax and GML schemas.
+
+You can print or save the diagrams to UML file format, export image diagrams to JPEG, SVG or WMF file format, import INTERLIS model files (ILI file format), as well as add information from XML files.
+
+* languages supported:
+..* (DE) German
+..* (ES) Spanish
+..* (FR) French
+..* (IT)  Italian
+
+Based on: [JHotDraw](https://sourceforge.net/p/jhotdraw/git/ci/master/tree/ "JHotDraw is a framework for structured drawing editors")
 
 ## License
 The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
@@ -14,6 +25,14 @@ Also required is the build tool ant. [Download](http://ant.apache.org "Download 
 
 ## Installation
 In order to install the UML Editor, [Download](https://github.com/AgenciaImplementacion/umleditor/releases/download/v3.6.3/umleditor-3.6.3.zip "Download UML/Editor") choose a directory and extract the ZIP file.
+
+## How to run it?
+To start the UML Editor, enter the following command at the commandline prompt
+
+~~~
+java -jar umleditor.jar [options]
+java -Duser.language=FR -jar umleditor.jar
+~~~
 
 ## Development
 Configure the IDE with UTF-8 as character encoding format to resolve possible errors when the project is opened
