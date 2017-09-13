@@ -4,10 +4,10 @@ UML Editor is an open source software application whose purpose is to help you c
 You can print or save the diagrams to UML file format, export image diagrams to JPEG, SVG or WMF file format, import INTERLIS model files (ILI file format), as well as add information from XML files.
 
 * languages supported:
-..* (DE) German
-..* (ES) Spanish
-..* (FR) French
-..* (IT)  Italian
+  - (DE) German
+  - (ES) Spanish
+  - (FR) French
+  - (IT) Italian
 
 Based on: [JHotDraw](https://sourceforge.net/p/jhotdraw/git/ci/master/tree/ "JHotDraw is a framework for structured drawing editors")
 
