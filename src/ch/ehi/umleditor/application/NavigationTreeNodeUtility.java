@@ -40,15 +40,15 @@ public class NavigationTreeNodeUtility {
 		if (node instanceof ch.ehi.umleditor.umlpresentation.Diagram) {
 			fileName = "classDiagram.gif";//$NON-NLS-1$
 		} else if (node instanceof ch.ehi.uml1_4.implementation.UmlModel) {
-			return getPackageLeafIcon(expanded);
+			fileName = "ili2ModelSet.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def) {
-			return getPackageLeafIcon(expanded);
+			fileName = "INTERLIS2Def.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.ModelDef) {
-			return getPackageLeafIcon(expanded);
+			fileName = "modelDef.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
-			return getPackageLeafIcon(expanded);
+			fileName = "TopicDef.gif";
 		} else if (node instanceof ch.ehi.uml1_4.implementation.UmlPackage) {
-			return getPackageLeafIcon(expanded);
+			fileName = "ili2PackageSet.gif";
 		} else {
 			// all other types are standard
 			fileName = ch.softenvironment.util.StringUtils.getPureClassName(node) + ".gif";
@@ -119,6 +119,13 @@ public class NavigationTreeNodeUtility {
 	static public boolean isClassDef(Element node) {
 		return node instanceof ch.ehi.interlis.modeltopicclass.ClassDef;
 	}
+	
+	/**
+	 * Return whether TreeElement is a INTERLIS2Def or not
+	 */
+	static public boolean isINTERLIS2Def(Object node) {
+		return node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+	}
 
 	/**
 	 * Return whether TreeElement is a Diagram or not.
@@ -168,7 +175,10 @@ public class NavigationTreeNodeUtility {
 	 * Sets the string to display for this object.
 	 */
 	static public void setName(Object node, String newName) {
-		if (isModelElement(node)) {
+		if(isINTERLIS2Def(node)) {//aqui hice cambios extraños
+			((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
+					((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).getName(), newName+".ili"));
+		}else if (isModelElement(node)) {
 			((ModelElement) node).setName(new ch.ehi.basics.types.NlsString(((ModelElement) node).getName(), newName));
 		} else if (isClassDiagram(node)) {
 			((ch.ehi.umleditor.umlpresentation.Diagram) node).setName(new ch.ehi.basics.types.NlsString(
