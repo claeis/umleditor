@@ -3444,6 +3444,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			setSize(783, 573);
 			setTitle("UML/INTERLIS-Editor");
 			setContentPane(getFrcContents());
+			setIconImage(new ImageIcon(getClass().getResource(IMAGE_PATH+"umlicon.gif")).getImage());
 			initConnections();
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);
