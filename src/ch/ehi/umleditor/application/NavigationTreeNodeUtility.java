@@ -42,7 +42,7 @@ public class NavigationTreeNodeUtility {
 		} else if (node instanceof ch.ehi.uml1_4.implementation.UmlModel) {
 			fileName = "ili2ModelSet.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def) {
-			fileName = "INTERLIS2Def.gif";
+			fileName = "interlis2Def.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.ModelDef) {
 			fileName = "modelDef.gif";
 		} else if (node instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
