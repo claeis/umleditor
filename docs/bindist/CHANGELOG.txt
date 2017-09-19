@@ -1,3 +1,14 @@
+UML-Editor 3.6.3.1 (2017-09-19)
+----------------------------------
+- Support to ilivalid attributes "name and msg" on constraints.
+- Umleditor do check the model before export an interlis file.
+- Meta attributes can be imported and exported without problems.
+- Icons added to navigation view.
+- Icon added to project.
+- Umleditor show graphical hidden options.
+- extension file .ili added to navigation view.
+- ili2c-4.7.3
+
 UML-Editor 3.6.3 (2017-08-03)
 ----------------------------------
 - Support to "display name" from ili2db at Class, Attributes, Domains and Attributes type enumeration.

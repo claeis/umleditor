@@ -12,7 +12,7 @@ You can print or save the diagrams to UML file format, export image diagrams to 
 Based on: [JHotDraw](https://sourceforge.net/p/jhotdraw/git/ci/master/tree/ "JHotDraw is a framework for structured drawing editors")
 
 ## License
-The UML-Editor is licensed under the LGPL (Lesser GNU Public License).
+The UML-Editor is licensed under the [LGPL](https://github.com/AgenciaImplementacion/umleditor/blob/master/other/LICENSE.lgpl "Lesser GNU Public License") (Lesser GNU Public License).
 
 ## Status
 umleditor branch master is in stable state.
@@ -24,7 +24,7 @@ A free version of the JAVA software development kit (JDK) is available
 Also required is the build tool ant. [Download](http://ant.apache.org "Download Apache Ant") and install it as documented there.
 
 ## Installation
-In order to install the UML Editor, [Download](https://github.com/AgenciaImplementacion/umleditor/releases/download/v3.6.3/umleditor-3.6.3.zip "Download UML/Editor") choose a directory and extract the ZIP file.
+In order to install the UML Editor, [Download](https://github.com/AgenciaImplementacion/umleditor/releases/latest "Download UML/Editor") choose a directory and extract the ZIP file.
 
 ## How to run it?
 To start the UML Editor, enter the following command at the commandline prompt

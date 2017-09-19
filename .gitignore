@@ -1,10 +1,8 @@
 ### Code-Java ###
-# Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
 
 .project
 factoryConfiguration.json
 
-### Java ###
 # Compiled class file
 *.class
 
@@ -30,10 +28,12 @@ hs_err_pid*
 # Apache-Ant
 build/*
 !build/build.xml
+dist/*
 
-#Eclipse
+# Eclipse
 .project
 .metadata
+.classpath
 bin/**
 tmp/**
 tmp/**/*
