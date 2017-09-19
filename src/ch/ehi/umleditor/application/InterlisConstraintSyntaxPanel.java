@@ -40,7 +40,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	private MetaMsgPanel ivjPnlMetaMsg = null; 
 	
 	
-	class IvjEventHandler implements ch.ehi.umleditor.application.MetaNamePanelListener, ch.ehi.umleditor.application.MetaMsgPanelListener{
+	class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListener, ch.ehi.umleditor.application.MetaNamePanelListener, ch.ehi.umleditor.application.MetaMsgPanelListener{
 		public void pnlEditSimpleEditPanel_txaEditKey_keyReleased(EventObject newEvent) {
 			if (newEvent.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaName())
 				connEtoC9(newEvent);
@@ -48,6 +48,11 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			public void pnlEditSimpleEditPanel_txaMsgEditKey_keyReleased(EventObject Event) {
 				if (Event.getSource() == InterlisConstraintSyntaxPanel.this.getPnlMetaMsg())
 					connEtoC10(Event);
+			};
+			
+			public void txaEditorKey_keyReleased(EventObject arg0) {
+				if (arg0.getSource() == InterlisConstraintSyntaxPanel.this.getPnlEditor())
+					connEtoC11(arg0);
 			};
 		
 	};
@@ -199,6 +204,28 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 			// user code begin {1}
 			// user code end
 			this.saveMetaMsg();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	/**
+	 * connEtoC9:
+	 * (PnlMetaMsg.MetaMsgPanel.pnlEditSimpleEditPanel_txaEditKey_keyReleased(java.util.EventObject)
+	 * 
+	 * @param arg1
+	 *            java.util.EventObject
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC11(java.util.EventObject arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			this.saveChanges(new NlsString(arg1.toString()));
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -391,6 +418,10 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		getPnlMetaMsg().getObject();
 	}
 	
+	private void saveCC() {
+		getPnlEditor().getClass();
+	}
+	
 	/**
 	 * Return the PnlUsage property value.
 	 * 
@@ -536,7 +567,7 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 	}
 
 	private void initConnections() throws java.lang.Exception {
-		//getPnlEditor().addAncestorListener(ivjEventHandler);
+		getPnlEditor().addSimpleEditorPanelListener(ivjEventHandler);
 		getPnlMetaName().addMetaNamePanelListener(ivjEventHandler);
 		getPnlMetaMsg().addMetaMsgPanelListener(ivjEventHandler);
 	}
@@ -614,6 +645,8 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 		} else {
 			getPnlEditor()
 					.setText(ElementUtils.mapNlsString(((ConstraintExpression) constraint.getBody()).getSyntax()));
+			getPnlMetaName().setObject(constraint);
+			getPnlMetaMsg().setObject(constraint);
 
 		}
 		//

@@ -2406,7 +2406,7 @@ public class TransferFromUmlMetamodel {
 			return;
 		String beg = "!!@ name = ";
 
-		out.write(getIndent() + beg + doc);
+		out.write(getIndent() + beg +'"'+ doc +'"');
 		newline();
 	}
 
