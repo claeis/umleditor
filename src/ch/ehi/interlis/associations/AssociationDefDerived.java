@@ -20,33 +20,15 @@
 package ch.ehi.interlis.associations;
 // -end- 3C1DB4C00011 package "AssociationDefDerived"
 
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import java.util.Iterator;
+// -end- 3C1DB4C00011 autoimport "AssociationDefDerived"
 // -beg- preserve=no 3C1DB4C00011 autoimport "AssociationDefDerived"
 import ch.ehi.uml1_4.foundation.core.Abstraction;
-import ch.ehi.uml1_4.implementation.AbstractDependency;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.foundation.datatypes.MappingExpression;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.basics.types.NlsString;
-// -end- 3C1DB4C00011 autoimport "AssociationDefDerived"
+import ch.ehi.uml1_4.implementation.AbstractDependency;
 
 // import declarations
 // please fill in/modify the following section
@@ -124,7 +106,7 @@ public class AssociationDefDerived extends AbstractDependency implements Abstrac
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21C00D7 body3C1DB4C00011 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMapping());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -204,7 +186,7 @@ public class AssociationDefDerived extends AbstractDependency implements Abstrac
 	 */
 	// -beg- preserve=no 33FFE57B03B3 get_all_head3C1DB4C00011
 	// "Dependency::iteratorClient"
-	public java.util.Iterator iteratorClient()
+	public Iterator<?> iteratorClient()
 	// -end- 33FFE57B03B3 get_all_head3C1DB4C00011 "Dependency::iteratorClient"
 	{
 		// -beg- preserve=no 33FFE57B03B3 get_all_body3C1DB4C00011
@@ -332,7 +314,7 @@ public class AssociationDefDerived extends AbstractDependency implements Abstrac
 	 */
 	// -beg- preserve=no 335C0D7A02E4 get_all_head3C1DB4C00011
 	// "Dependency::iteratorSupplier"
-	public java.util.Iterator iteratorSupplier()
+	public Iterator<?> iteratorSupplier()
 	// -end- 335C0D7A02E4 get_all_head3C1DB4C00011
 	// "Dependency::iteratorSupplier"
 	{

@@ -20,46 +20,27 @@
 package ch.ehi.interlis.associations;
 // -end- 3C1DAD070376 package "RoleDef"
 
-// -beg- preserve=no 3C1DAD070376 autoimport "RoleDef"
-import ch.ehi.uml1_4.foundation.core.AssociationEnd;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.uml1_4.foundation.core.Classifier;
-import ch.ehi.interlis.associations.RoleDefDerived;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.interlis.associations.Participant;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
-import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
-import ch.ehi.interlis.associations.AssociationAsIliAttrKind;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+
 import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationEndRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.LinkEnd;
 import ch.ehi.uml1_4.foundation.core.Association;
+// -beg- preserve=no 3C1DAD070376 autoimport "RoleDef"
+import ch.ehi.uml1_4.foundation.core.AssociationEnd;
 import ch.ehi.uml1_4.foundation.core.Attribute;
+import ch.ehi.uml1_4.foundation.core.Classifier;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
+import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
-import ch.ehi.uml1_4.foundation.datatypes.ChangeableKind;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3C1DAD070376 autoimport "RoleDef"
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -144,7 +125,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21C0090 body3C1DAD070376 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsRoleDefDerived())
 			visitor.visit(getRoleDefDerived());
 		it = iteratorXorParticipant();
@@ -417,7 +398,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	}
 
 	// -beg- preserve=no 3D4A37EC02CC code3C1DAD070376 "restriction"
-	private java.util.Set restriction = new java.util.HashSet();
+	private Set<AbstractClassDef> restriction = new HashSet<AbstractClassDef>();
 	// -end- 3D4A37EC02CC code3C1DAD070376 "restriction"
 
 	/**
@@ -494,7 +475,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 3D4A37EC02CC get_all_head3C1DAD070376
 	// "RoleDef::iteratorRestriction"
-	public java.util.Iterator iteratorRestriction()
+	public Iterator<AbstractClassDef> iteratorRestriction()
 	// -end- 3D4A37EC02CC get_all_head3C1DAD070376
 	// "RoleDef::iteratorRestriction"
 	{
@@ -519,7 +500,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 3D4A37EC02CC remove_all_body3C1DAD070376
 		// "RoleDef::clearRestriction"
 		if (sizeRestriction() > 0) {
-			for (java.util.Iterator p = restriction.iterator(); p.hasNext();) {
+			for (Iterator<AbstractClassDef> p = restriction.iterator(); p.hasNext();) {
 				((AbstractClassDef) p.next())._unlinkRestrictedAssociation(this);
 			}
 			restriction.clear();
@@ -573,7 +554,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	// -end- 3D4A37EC02CC _unlink_body3C1DAD070376 "RoleDef::_unlinkRestriction"
 
 	// -beg- preserve=no 4489342E01A2 code3C1DAD070376 "xorParticipant"
-	private java.util.Set xorParticipant = new java.util.HashSet();
+	private Set<ModelElement> xorParticipant = new HashSet<ModelElement>();
 	// -end- 4489342E01A2 code3C1DAD070376 "xorParticipant"
 
 	/**
@@ -652,7 +633,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 4489342E01A2 get_all_head3C1DAD070376
 	// "RoleDef::iteratorXorParticipant"
-	public java.util.Iterator iteratorXorParticipant()
+	public Iterator<ModelElement> iteratorXorParticipant()
 	// -end- 4489342E01A2 get_all_head3C1DAD070376
 	// "RoleDef::iteratorXorParticipant"
 	{
@@ -677,7 +658,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 4489342E01A2 remove_all_body3C1DAD070376
 		// "RoleDef::clearXorParticipant"
 		if (sizeXorParticipant() > 0) {
-			for (java.util.Iterator p = xorParticipant.iterator(); p.hasNext();) {
+			for (Iterator<ModelElement> p = xorParticipant.iterator(); p.hasNext();) {
 				((Participant) p.next())._unlinkAssociation(this);
 			}
 			xorParticipant.clear();
@@ -1097,7 +1078,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	}
 
 	// -beg- preserve=no 33CD50F90302 code3C1DAD070376 "associationEndRole"
-	private java.util.Set associationEndRole = new java.util.HashSet();
+	private Set<AssociationEndRole> associationEndRole = new HashSet<AssociationEndRole>();
 	// -end- 33CD50F90302 code3C1DAD070376 "associationEndRole"
 
 	/**
@@ -1178,7 +1159,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 33CD50F90302 get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorAssociationEndRole"
-	public java.util.Iterator iteratorAssociationEndRole()
+	public Iterator<AssociationEndRole> iteratorAssociationEndRole()
 	// -end- 33CD50F90302 get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorAssociationEndRole"
 	{
@@ -1203,7 +1184,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 33CD50F90302 remove_all_body3C1DAD070376
 		// "AssociationEnd::clearAssociationEndRole"
 		if (sizeAssociationEndRole() > 0) {
-			for (java.util.Iterator p = associationEndRole.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEndRole> p = associationEndRole.iterator(); p.hasNext();) {
 				((AssociationEndRole) p.next())._unlinkBase(this);
 			}
 			associationEndRole.clear();
@@ -1261,7 +1242,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	// "AssociationEnd::_unlinkAssociationEndRole"
 
 	// -beg- preserve=no 328A5C1F029E code3C1DAD070376 "linkEnd"
-	private java.util.Set linkEnd = new java.util.HashSet();
+	private Set<LinkEnd> linkEnd = new HashSet<LinkEnd>();
 	// -end- 328A5C1F029E code3C1DAD070376 "linkEnd"
 
 	/**
@@ -1340,7 +1321,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 328A5C1F029E get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorLinkEnd"
-	public java.util.Iterator iteratorLinkEnd()
+	public Iterator<LinkEnd> iteratorLinkEnd()
 	// -end- 328A5C1F029E get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorLinkEnd"
 	{
@@ -1365,7 +1346,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 328A5C1F029E remove_all_body3C1DAD070376
 		// "AssociationEnd::clearLinkEnd"
 		if (sizeLinkEnd() > 0) {
-			for (java.util.Iterator p = linkEnd.iterator(); p.hasNext();) {
+			for (Iterator<LinkEnd> p = linkEnd.iterator(); p.hasNext();) {
 				((LinkEnd) p.next())._unlinkAssociationEnd(this);
 			}
 			linkEnd.clear();
@@ -1547,7 +1528,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	// "AssociationEnd::_unlinkAssociation"
 
 	// -beg- preserve=no 33DBE50B001F code3C1DAD070376 "qualifier"
-	private java.util.List qualifier = new java.util.ArrayList();
+	private List<Attribute> qualifier = new ArrayList<Attribute>();
 	// -end- 33DBE50B001F code3C1DAD070376 "qualifier"
 
 	/**
@@ -1689,7 +1670,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 33DBE50B001F get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorQualifier"
-	public java.util.Iterator iteratorQualifier()
+	public Iterator<Attribute> iteratorQualifier()
 	// -end- 33DBE50B001F get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorQualifier"
 	{
@@ -1714,7 +1695,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 33DBE50B001F remove_all_body3C1DAD070376
 		// "AssociationEnd::clearQualifier"
 		if (sizeQualifier() > 0) {
-			for (java.util.Iterator p = qualifier.iterator(); p.hasNext();) {
+			for (Iterator<Attribute> p = qualifier.iterator(); p.hasNext();) {
 				((Attribute) p.next())._unlinkAssociationEnd(this);
 			}
 			qualifier.clear();
@@ -1771,7 +1752,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	// "AssociationEnd::_unlinkQualifier"
 
 	// -beg- preserve=no 33F0EFAD00AA code3C1DAD070376 "specification"
-	private java.util.Set specification = new java.util.HashSet();
+	private Set<Classifier> specification = new HashSet<Classifier>();
 	// -end- 33F0EFAD00AA code3C1DAD070376 "specification"
 
 	/**
@@ -1852,7 +1833,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 33F0EFAD00AA get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorSpecification"
-	public java.util.Iterator iteratorSpecification()
+	public Iterator<Classifier> iteratorSpecification()
 	// -end- 33F0EFAD00AA get_all_head3C1DAD070376
 	// "AssociationEnd::iteratorSpecification"
 	{
@@ -1877,7 +1858,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 		// -beg- preserve=no 33F0EFAD00AA remove_all_body3C1DAD070376
 		// "AssociationEnd::clearSpecification"
 		if (sizeSpecification() > 0) {
-			for (java.util.Iterator p = specification.iterator(); p.hasNext();) {
+			for (Iterator<Classifier> p = specification.iterator(); p.hasNext();) {
 				((Classifier) p.next())._unlinkSpecifiedEnd(this);
 			}
 			specification.clear();
@@ -2002,7 +1983,7 @@ public class RoleDef extends AbstractModelElement implements AssociationEnd, jav
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3C1DAD070376
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3C1DAD070376
 	// "ModelElement::iteratorPresentation"
 	{

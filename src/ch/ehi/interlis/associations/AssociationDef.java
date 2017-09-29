@@ -20,50 +20,29 @@
 package ch.ehi.interlis.associations;
 // -end- 3C178E4F0366 package "AssociationDef"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import ch.ehi.basics.tools.AbstractVisitor;
 // -beg- preserve=no 3C178E4F0366 autoimport "AssociationDef"
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.uml1_4.foundation.core.AssociationClass;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.AssociationEnd;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
-import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
-import ch.ehi.uml1_4.behaviour.activitygraphs.ClassifierInState;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
-import ch.ehi.uml1_4.behaviour.commonbehavior.CreateAction;
-import ch.ehi.uml1_4.foundation.core.Feature;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.umleditor.umlpresentation.Diagram;
-// -end- 3C178E4F0366 autoimport "AssociationDef"
-
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=yes 3C178E4F0366 import "AssociationDef"
 import ch.ehi.interlis.tools.RoleDefUtility;
 // -end- 3C178E4F0366 import "AssociationDef"
+import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
+import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
+import ch.ehi.uml1_4.foundation.core.AssociationClass;
+import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
 
 /**
  * @author Claude Eisenhut
@@ -169,7 +148,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21C0040 body3C178E4F0366 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorConnection();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -213,7 +192,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3D6F993E0352 body3C178E4F0366
 		// "isStructureAttribute"
-		java.util.Iterator rolei = iteratorConnection();
+		Iterator<?> rolei = iteratorConnection();
 		while (rolei.hasNext()) {
 			RoleDef role = (RoleDef) rolei.next();
 			if (RoleDefUtility.isIliStructAttr(role)) {
@@ -239,7 +218,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3D6F9951007E body3C178E4F0366
 		// "isReferenceAttribute"
-		java.util.Iterator rolei = iteratorConnection();
+		Iterator<?> rolei = iteratorConnection();
 		while (rolei.hasNext()) {
 			RoleDef role = (RoleDef) rolei.next();
 			if (RoleDefUtility.isIliRefAttr(role)) {
@@ -423,7 +402,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 32A2A510017A code3C178E4F0366 "connection"
-	private java.util.List connection = new java.util.ArrayList();
+	private java.util.List<AssociationEnd> connection = new ArrayList<AssociationEnd>();
 	// -end- 32A2A510017A code3C178E4F0366 "connection"
 
 	/**
@@ -563,7 +542,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 32A2A510017A get_all_head3C178E4F0366
 	// "Association::iteratorConnection"
-	public java.util.Iterator iteratorConnection()
+	public java.util.Iterator<AssociationEnd> iteratorConnection()
 	// -end- 32A2A510017A get_all_head3C178E4F0366
 	// "Association::iteratorConnection"
 	{
@@ -588,7 +567,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		// -beg- preserve=no 32A2A510017A remove_all_body3C178E4F0366
 		// "Association::clearConnection"
 		if (sizeConnection() > 0) {
-			for (java.util.Iterator p = connection.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = connection.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkAssociation(this);
 			}
 			connection.clear();
@@ -712,7 +691,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head3C178E4F0366
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<?> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head3C178E4F0366
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -854,7 +833,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	}
 
 	// -beg- preserve=no 33CD51170096 code3C178E4F0366 "associationRole"
-	private java.util.Set associationRole = new java.util.HashSet();
+	private Set<AssociationRole> associationRole = new HashSet<AssociationRole>();
 	// -end- 33CD51170096 code3C178E4F0366 "associationRole"
 
 	/**
@@ -934,7 +913,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 33CD51170096 get_all_head3C178E4F0366
 	// "Association::iteratorAssociationRole"
-	public java.util.Iterator iteratorAssociationRole()
+	public Iterator<AssociationRole> iteratorAssociationRole()
 	// -end- 33CD51170096 get_all_head3C178E4F0366
 	// "Association::iteratorAssociationRole"
 	{
@@ -959,7 +938,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		// -beg- preserve=no 33CD51170096 remove_all_body3C178E4F0366
 		// "Association::clearAssociationRole"
 		if (sizeAssociationRole() > 0) {
-			for (java.util.Iterator p = associationRole.iterator(); p.hasNext();) {
+			for (Iterator<AssociationRole> p = associationRole.iterator(); p.hasNext();) {
 				((AssociationRole) p.next())._unlinkBase(this);
 			}
 			associationRole.clear();
@@ -1017,7 +996,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	// "Association::_unlinkAssociationRole"
 
 	// -beg- preserve=no 328A5BB3023A code3C178E4F0366 "link"
-	private java.util.Set link = new java.util.HashSet();
+	private java.util.Set<Link> link = new HashSet<Link>();
 	// -end- 328A5BB3023A code3C178E4F0366 "link"
 
 	/**
@@ -1092,7 +1071,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 328A5BB3023A get_all_head3C178E4F0366
 	// "Association::iteratorLink"
-	public java.util.Iterator iteratorLink()
+	public Iterator<Link> iteratorLink()
 	// -end- 328A5BB3023A get_all_head3C178E4F0366 "Association::iteratorLink"
 	{
 		// -beg- preserve=no 328A5BB3023A get_all_body3C178E4F0366
@@ -1115,7 +1094,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		// -beg- preserve=no 328A5BB3023A remove_all_body3C178E4F0366
 		// "Association::clearLink"
 		if (sizeLink() > 0) {
-			for (java.util.Iterator p = link.iterator(); p.hasNext();) {
+			for (Iterator<Link> p = link.iterator(); p.hasNext();) {
 				((Link) p.next())._unlinkAssociation(this);
 			}
 			link.clear();
@@ -1236,7 +1215,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3C178E4F0366
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3C178E4F0366
 	// "ModelElement::iteratorPresentation"
 	{
@@ -1373,7 +1352,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head3C178E4F0366
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head3C178E4F0366
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -1511,7 +1490,7 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head3C178E4F0366
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head3C178E4F0366
 	// "GeneralizableElement::iteratorSpecialization"
 	{

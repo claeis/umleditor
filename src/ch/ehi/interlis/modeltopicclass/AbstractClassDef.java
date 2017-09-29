@@ -21,47 +21,40 @@ package ch.ehi.interlis.modeltopicclass;
 // -end- 358A5E62016A package "AbstractClassDef"
 
 // -beg- preserve=no 358A5E62016A autoimport "AbstractClassDef"
-import ch.ehi.interlis.views.ViewableDef;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.HashSet;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.DefinitionProxy;
-import ch.ehi.uml1_4.foundation.core.Class;
-import ch.ehi.uml1_4.implementation.AbstractNamespace;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Feature;
-import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.interlis.associations.Participant;
+import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
 import ch.ehi.interlis.domainsandconstants.basetypes.RefAttrType;
-import ch.ehi.uml1_4.foundation.core.AssociationEnd;
-import ch.ehi.interlis.associations.RoleDef;
-import ch.ehi.interlis.associations.Participant;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.modeltopicclass.TopicDef;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
+import ch.ehi.interlis.views.ViewableDef;
 import ch.ehi.uml1_4.behaviour.activitygraphs.ClassifierInState;
-import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
+import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
 import ch.ehi.uml1_4.behaviour.commonbehavior.CreateAction;
+import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
+import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
+import ch.ehi.uml1_4.foundation.core.Constraint;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Feature;
+import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.umleditor.umlpresentation.Diagram;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.implementation.AbstractNamespace;
 // -end- 358A5E62016A autoimport "AbstractClassDef"
 
 // import declarations
@@ -236,7 +229,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190118 body358A5E62016A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorFeature();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -267,7 +260,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 3E410E720307 head358A5E62016A
 	// "getConsolidatedAttributes"
-	public java.util.List getConsolidatedAttributes()
+	public List<AttributeDef> getConsolidatedAttributes()
 	// -end- 3E410E720307 head358A5E62016A "getConsolidatedAttributes"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -280,11 +273,11 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=yes 3E410E720307 body358A5E62016A
 		// "getConsolidatedAttributes"
 		// TODO correct ordering of returned elements
-		java.util.List result = new java.util.LinkedList();
-		java.util.Set attrNameSet = new java.util.HashSet();
+		List<AttributeDef> result = new LinkedList<AttributeDef>();
+		Set<String> attrNameSet = new HashSet<String>();
 		AbstractClassDef currentClass = this;
 		while (currentClass != null) {
-			java.util.Iterator attri = currentClass.iteratorFeature();
+			Iterator<?> attri = currentClass.iteratorFeature();
 			while (attri.hasNext()) {
 				ch.ehi.interlis.attributes.AttributeDef attr = (ch.ehi.interlis.attributes.AttributeDef) attri.next();
 				if (!attrNameSet.contains(attr.getDefLangName())) {
@@ -293,7 +286,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 				}
 			}
 			// get base class if any
-			java.util.Iterator geni = currentClass.iteratorGeneralization();
+			Iterator<Generalization> geni = currentClass.iteratorGeneralization();
 			currentClass = null;
 			if (geni.hasNext()) {
 				Generalization gen = (Generalization) geni.next();
@@ -371,7 +364,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33EA67BB010E get_all_head358A5E62016A
 	// "ModelElement::iteratorConstraint"
-	public java.util.Iterator iteratorConstraint()
+	public Iterator<?> iteratorConstraint()
 	// -end- 33EA67BB010E get_all_head358A5E62016A
 	// "ModelElement::iteratorConstraint"
 	{
@@ -593,7 +586,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 32B5D7EF03D3 code358A5E62016A "feature"
-	private java.util.List feature = new java.util.ArrayList();
+	private java.util.List<Feature> feature = new ArrayList<Feature>();
 	// -end- 32B5D7EF03D3 code358A5E62016A "feature"
 
 	/**
@@ -729,7 +722,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 32B5D7EF03D3 get_all_head358A5E62016A
 	// "Classifier::iteratorFeature"
-	public java.util.Iterator iteratorFeature()
+	public Iterator<Feature> iteratorFeature()
 	// -end- 32B5D7EF03D3 get_all_head358A5E62016A "Classifier::iteratorFeature"
 	{
 		// -beg- preserve=no 32B5D7EF03D3 get_all_body358A5E62016A
@@ -752,7 +745,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 32B5D7EF03D3 remove_all_body358A5E62016A
 		// "Classifier::clearFeature"
 		if (sizeFeature() > 0) {
-			for (java.util.Iterator p = feature.iterator(); p.hasNext();) {
+			for (Iterator<Feature> p = feature.iterator(); p.hasNext();) {
 				((Feature) p.next())._unlinkOwner(this);
 			}
 			feature.clear();
@@ -806,7 +799,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// -end- 32B5D7EF03D3 _unlink_body358A5E62016A "Classifier::_unlinkFeature"
 
 	// -beg- preserve=no 335C14A5019A code358A5E62016A "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private java.util.Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code358A5E62016A "generalization"
 
 	/**
@@ -887,7 +880,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head358A5E62016A
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public java.util.Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head358A5E62016A
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -912,7 +905,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 335C14A5019A remove_all_body358A5E62016A
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -970,7 +963,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code358A5E62016A "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code358A5E62016A "specialization"
 
 	/**
@@ -1051,7 +1044,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head358A5E62016A
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head358A5E62016A
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -1076,7 +1069,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 335C146B01D6 remove_all_body358A5E62016A
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -1260,7 +1253,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "AbstractClassDef::_unlinkOiddomain"
 
 	// -beg- preserve=no 3FDC4A7B0396 code358A5E62016A "classType"
-	private java.util.Set classType = new java.util.HashSet();
+	private Set<ClassType> classType = new HashSet<ClassType>();
 	// -end- 3FDC4A7B0396 code358A5E62016A "classType"
 
 	/**
@@ -1340,7 +1333,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 3FDC4A7B0396 get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorClassType"
-	public java.util.Iterator iteratorClassType()
+	public Iterator<ClassType> iteratorClassType()
 	// -end- 3FDC4A7B0396 get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorClassType"
 	{
@@ -1365,7 +1358,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 3FDC4A7B0396 remove_all_body358A5E62016A
 		// "AbstractClassDef::clearClassType"
 		if (sizeClassType() > 0) {
-			for (java.util.Iterator p = classType.iterator(); p.hasNext();) {
+			for (Iterator<ClassType> p = classType.iterator(); p.hasNext();) {
 				((ClassType) p.next())._unlinkRestrictedTo(this);
 			}
 			classType.clear();
@@ -1423,7 +1416,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "AbstractClassDef::_unlinkClassType"
 
 	// -beg- preserve=no 4EF99D22001E code358A5E62016A "restrictedRefAttrType"
-	private java.util.Set restrictedRefAttrType = new java.util.HashSet();
+	private Set<RefAttrType> restrictedRefAttrType = new HashSet<RefAttrType>();
 	// -end- 4EF99D22001E code358A5E62016A "restrictedRefAttrType"
 
 	/**
@@ -1504,7 +1497,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 4EF99D22001E get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRestrictedRefAttrType"
-	public java.util.Iterator iteratorRestrictedRefAttrType()
+	public Iterator<RefAttrType> iteratorRestrictedRefAttrType()
 	// -end- 4EF99D22001E get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRestrictedRefAttrType"
 	{
@@ -1529,7 +1522,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 4EF99D22001E remove_all_body358A5E62016A
 		// "AbstractClassDef::clearRestrictedRefAttrType"
 		if (sizeRestrictedRefAttrType() > 0) {
-			for (java.util.Iterator p = restrictedRefAttrType.iterator(); p.hasNext();) {
+			for (Iterator<RefAttrType> p = restrictedRefAttrType.iterator(); p.hasNext();) {
 				((RefAttrType) p.next())._unlinkRestrictedTo(this);
 			}
 			restrictedRefAttrType.clear();
@@ -1587,7 +1580,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "AbstractClassDef::_unlinkRestrictedRefAttrType"
 
 	// -beg- preserve=no 4EF99D2B006A code358A5E62016A "refAttrType"
-	private java.util.Set refAttrType = new java.util.HashSet();
+	private Set<RefAttrType> refAttrType = new HashSet<RefAttrType>();
 	// -end- 4EF99D2B006A code358A5E62016A "refAttrType"
 
 	/**
@@ -1668,7 +1661,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 4EF99D2B006A get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRefAttrType"
-	public java.util.Iterator iteratorRefAttrType()
+	public Iterator<RefAttrType> iteratorRefAttrType()
 	// -end- 4EF99D2B006A get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRefAttrType"
 	{
@@ -1693,7 +1686,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 4EF99D2B006A remove_all_body358A5E62016A
 		// "AbstractClassDef::clearRefAttrType"
 		if (sizeRefAttrType() > 0) {
-			for (java.util.Iterator p = refAttrType.iterator(); p.hasNext();) {
+			for (Iterator<RefAttrType> p = refAttrType.iterator(); p.hasNext();) {
 				((RefAttrType) p.next())._unlinkParticipant(this);
 			}
 			refAttrType.clear();
@@ -1751,7 +1744,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "AbstractClassDef::_unlinkRefAttrType"
 
 	// -beg- preserve=no 33E265070353 code358A5E62016A "association"
-	private java.util.Set association = new java.util.HashSet();
+	private Set<AssociationEnd> association = new HashSet<AssociationEnd>();
 	// -end- 33E265070353 code358A5E62016A "association"
 
 	/**
@@ -1830,7 +1823,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33E265070353 get_all_head358A5E62016A
 	// "Classifier::iteratorAssociation"
-	public java.util.Iterator iteratorAssociation()
+	public Iterator<AssociationEnd> iteratorAssociation()
 	// -end- 33E265070353 get_all_head358A5E62016A
 	// "Classifier::iteratorAssociation"
 	{
@@ -1855,7 +1848,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33E265070353 remove_all_body358A5E62016A
 		// "Classifier::clearAssociation"
 		if (sizeAssociation() > 0) {
-			for (java.util.Iterator p = association.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = association.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkParticipant(this);
 			}
 			association.clear();
@@ -1911,7 +1904,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "Classifier::_unlinkAssociation"
 
 	// -beg- preserve=no 3D4A37EC0272 code358A5E62016A "restrictedAssociation"
-	private java.util.Set restrictedAssociation = new java.util.HashSet();
+	private Set<RoleDef> restrictedAssociation = new HashSet<RoleDef>();
 	// -end- 3D4A37EC0272 code358A5E62016A "restrictedAssociation"
 
 	/**
@@ -1992,7 +1985,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 3D4A37EC0272 get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRestrictedAssociation"
-	public java.util.Iterator iteratorRestrictedAssociation()
+	public Iterator<RoleDef> iteratorRestrictedAssociation()
 	// -end- 3D4A37EC0272 get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorRestrictedAssociation"
 	{
@@ -2017,7 +2010,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 3D4A37EC0272 remove_all_body358A5E62016A
 		// "AbstractClassDef::clearRestrictedAssociation"
 		if (sizeRestrictedAssociation() > 0) {
-			for (java.util.Iterator p = restrictedAssociation.iterator(); p.hasNext();) {
+			for (Iterator<RoleDef> p = restrictedAssociation.iterator(); p.hasNext();) {
 				((RoleDef) p.next())._unlinkRestriction(this);
 			}
 			restrictedAssociation.clear();
@@ -2075,7 +2068,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "AbstractClassDef::_unlinkRestrictedAssociation"
 
 	// -beg- preserve=no 4489350902DB code358A5E62016A "xorAssociation"
-	private java.util.Set xorAssociation = new java.util.HashSet();
+	private Set<Participant> xorAssociation = new HashSet<Participant>();
 	// -end- 4489350902DB code358A5E62016A "xorAssociation"
 
 	/**
@@ -2156,7 +2149,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 4489350902DB get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorXorAssociation"
-	public java.util.Iterator iteratorXorAssociation()
+	public Iterator<Participant> iteratorXorAssociation()
 	// -end- 4489350902DB get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorXorAssociation"
 	{
@@ -2181,7 +2174,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 4489350902DB remove_all_body358A5E62016A
 		// "AbstractClassDef::clearXorAssociation"
 		if (sizeXorAssociation() > 0) {
-			for (java.util.Iterator p = xorAssociation.iterator(); p.hasNext();) {
+			for (Iterator<Participant> p = xorAssociation.iterator(); p.hasNext();) {
 				((Participant) p.next())._unlinkParticipant(this);
 			}
 			xorAssociation.clear();
@@ -2240,7 +2233,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 
 	// -beg- preserve=no 4489358A007E code358A5E62016A
 	// "xorRestrictedAssociation"
-	private java.util.Set xorRestrictedAssociation = new java.util.HashSet();
+	private Set<Participant> xorRestrictedAssociation = new HashSet<Participant>();
 	// -end- 4489358A007E code358A5E62016A "xorRestrictedAssociation"
 
 	/**
@@ -2321,7 +2314,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 4489358A007E get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorXorRestrictedAssociation"
-	public java.util.Iterator iteratorXorRestrictedAssociation()
+	public Iterator<Participant> iteratorXorRestrictedAssociation()
 	// -end- 4489358A007E get_all_head358A5E62016A
 	// "AbstractClassDef::iteratorXorRestrictedAssociation"
 	{
@@ -2346,7 +2339,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 4489358A007E remove_all_body358A5E62016A
 		// "AbstractClassDef::clearXorRestrictedAssociation"
 		if (sizeXorRestrictedAssociation() > 0) {
-			for (java.util.Iterator p = xorRestrictedAssociation.iterator(); p.hasNext();) {
+			for (Iterator<Participant> p = xorRestrictedAssociation.iterator(); p.hasNext();) {
 				((Participant) p.next())._unlinkRestriction(this);
 			}
 			xorRestrictedAssociation.clear();
@@ -2648,7 +2641,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head358A5E62016A
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head358A5E62016A
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -2822,7 +2815,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head358A5E62016A
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head358A5E62016A
 	// "ModelElement::iteratorPresentation"
 	{
@@ -2940,7 +2933,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CB2C64E0374 body358A5E62016A "containsFeature"
-		java.util.Iterator it = iteratorFeature();
+		Iterator<?> it = iteratorFeature();
 		while (it.hasNext()) {
 			ModelElement ele = (ModelElement) it.next();
 			if (ele.getDefLangName().equals(name)) {
@@ -2952,7 +2945,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	}
 
 	// -beg- preserve=no 33CF9EFC006E code358A5E62016A "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 33CF9EFC006E code358A5E62016A "objectFlowState"
 
 	/**
@@ -3032,7 +3025,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33CF9EFC006E get_all_head358A5E62016A
 	// "Classifier::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<ObjectFlowState> iteratorObjectFlowState()
 	// -end- 33CF9EFC006E get_all_head358A5E62016A
 	// "Classifier::iteratorObjectFlowState"
 	{
@@ -3057,7 +3050,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33CF9EFC006E remove_all_body358A5E62016A
 		// "Classifier::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<ObjectFlowState> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkType(this);
 			}
 			objectFlowState.clear();
@@ -3115,7 +3108,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "Classifier::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 33CF9F1602BC code358A5E62016A "classifierInState"
-	private java.util.Set classifierInState = new java.util.HashSet();
+	private Set<ClassifierInState> classifierInState = new HashSet<ClassifierInState>();
 	// -end- 33CF9F1602BC code358A5E62016A "classifierInState"
 
 	/**
@@ -3196,7 +3189,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33CF9F1602BC get_all_head358A5E62016A
 	// "Classifier::iteratorClassifierInState"
-	public java.util.Iterator iteratorClassifierInState()
+	public Iterator<ClassifierInState> iteratorClassifierInState()
 	// -end- 33CF9F1602BC get_all_head358A5E62016A
 	// "Classifier::iteratorClassifierInState"
 	{
@@ -3221,7 +3214,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33CF9F1602BC remove_all_body358A5E62016A
 		// "Classifier::clearClassifierInState"
 		if (sizeClassifierInState() > 0) {
-			for (java.util.Iterator p = classifierInState.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierInState> p = classifierInState.iterator(); p.hasNext();) {
 				((ClassifierInState) p.next())._unlinkType(this);
 			}
 			classifierInState.clear();
@@ -3346,7 +3339,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head358A5E62016A
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<?> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head358A5E62016A
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -3483,7 +3476,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head358A5E62016A
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<?> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head358A5E62016A
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -3553,7 +3546,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 33CAD7E900AB code358A5E62016A "instance"
-	private java.util.Set instance = new java.util.HashSet();
+	private java.util.Set<Instance> instance = new HashSet<Instance>();
 	// -end- 33CAD7E900AB code358A5E62016A "instance"
 
 	/**
@@ -3630,7 +3623,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33CAD7E900AB get_all_head358A5E62016A
 	// "Classifier::iteratorInstance"
-	public java.util.Iterator iteratorInstance()
+	public Iterator<Instance> iteratorInstance()
 	// -end- 33CAD7E900AB get_all_head358A5E62016A
 	// "Classifier::iteratorInstance"
 	{
@@ -3655,7 +3648,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33CAD7E900AB remove_all_body358A5E62016A
 		// "Classifier::clearInstance"
 		if (sizeInstance() > 0) {
-			for (java.util.Iterator p = instance.iterator(); p.hasNext();) {
+			for (Iterator<Instance> p = instance.iterator(); p.hasNext();) {
 				((Instance) p.next())._unlinkClassifier(this);
 			}
 			instance.clear();
@@ -3709,7 +3702,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// -end- 33CAD7E900AB _unlink_body358A5E62016A "Classifier::_unlinkInstance"
 
 	// -beg- preserve=no 33CFD0A701A4 code358A5E62016A "createAction"
-	private java.util.Set createAction = new java.util.HashSet();
+	private java.util.Set<CreateAction> createAction = new HashSet<CreateAction>();
 	// -end- 33CFD0A701A4 code358A5E62016A "createAction"
 
 	/**
@@ -3788,7 +3781,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33CFD0A701A4 get_all_head358A5E62016A
 	// "Classifier::iteratorCreateAction"
-	public java.util.Iterator iteratorCreateAction()
+	public Iterator<CreateAction> iteratorCreateAction()
 	// -end- 33CFD0A701A4 get_all_head358A5E62016A
 	// "Classifier::iteratorCreateAction"
 	{
@@ -3813,7 +3806,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33CFD0A701A4 remove_all_body358A5E62016A
 		// "Classifier::clearCreateAction"
 		if (sizeCreateAction() > 0) {
-			for (java.util.Iterator p = createAction.iterator(); p.hasNext();) {
+			for (Iterator<CreateAction> p = createAction.iterator(); p.hasNext();) {
 				((CreateAction) p.next())._unlinkInstantiation(this);
 			}
 			createAction.clear();
@@ -3869,7 +3862,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 33F0EFAD00AB code358A5E62016A "specifiedEnd"
-	private java.util.Set specifiedEnd = new java.util.HashSet();
+	private java.util.Set<AssociationEnd> specifiedEnd = new HashSet<AssociationEnd>();
 	// -end- 33F0EFAD00AB code358A5E62016A "specifiedEnd"
 
 	/**
@@ -3948,7 +3941,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33F0EFAD00AB get_all_head358A5E62016A
 	// "Classifier::iteratorSpecifiedEnd"
-	public java.util.Iterator iteratorSpecifiedEnd()
+	public Iterator<AssociationEnd> iteratorSpecifiedEnd()
 	// -end- 33F0EFAD00AB get_all_head358A5E62016A
 	// "Classifier::iteratorSpecifiedEnd"
 	{
@@ -3973,7 +3966,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 33F0EFAD00AB remove_all_body358A5E62016A
 		// "Classifier::clearSpecifiedEnd"
 		if (sizeSpecifiedEnd() > 0) {
-			for (java.util.Iterator p = specifiedEnd.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = specifiedEnd.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkSpecification(this);
 			}
 			specifiedEnd.clear();
@@ -4029,7 +4022,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	// "Classifier::_unlinkSpecifiedEnd"
 
 	// -beg- preserve=no 36E96A87033E code358A5E62016A "powertypeRange"
-	private java.util.Set powertypeRange = new java.util.HashSet();
+	private java.util.Set<Generalization> powertypeRange = new HashSet<Generalization>();
 	// -end- 36E96A87033E code358A5E62016A "powertypeRange"
 
 	/**
@@ -4109,7 +4102,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 36E96A87033E get_all_head358A5E62016A
 	// "Classifier::iteratorPowertypeRange"
-	public java.util.Iterator iteratorPowertypeRange()
+	public Iterator<Generalization> iteratorPowertypeRange()
 	// -end- 36E96A87033E get_all_head358A5E62016A
 	// "Classifier::iteratorPowertypeRange"
 	{
@@ -4134,7 +4127,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		// -beg- preserve=no 36E96A87033E remove_all_body358A5E62016A
 		// "Classifier::clearPowertypeRange"
 		if (sizePowertypeRange() > 0) {
-			for (java.util.Iterator p = powertypeRange.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = powertypeRange.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkPowertype(this);
 			}
 			powertypeRange.clear();

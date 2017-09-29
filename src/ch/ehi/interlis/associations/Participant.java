@@ -21,6 +21,10 @@ package ch.ehi.interlis.associations;
 // -end- 448933B703CF package "Participant"
 
 // -beg- preserve=no 448933B703CF autoimport "Participant"
+import java.util.Iterator;
+import java.util.Set;
+import java.util.HashSet;
+
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
@@ -77,7 +81,7 @@ public class Participant extends AbstractModelElement {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448D37E50200 body448933B703CF "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 448D37E50200 body448933B703CF "enumerateChildren"
 	}
@@ -331,7 +335,7 @@ public class Participant extends AbstractModelElement {
 	// "Participant::_unlinkParticipant"
 
 	// -beg- preserve=no 4489358A00CE code448933B703CF "restriction"
-	private java.util.Set restriction = new java.util.HashSet();
+	private Set<AbstractClassDef> restriction = new HashSet<AbstractClassDef>();
 	// -end- 4489358A00CE code448933B703CF "restriction"
 
 	/**
@@ -410,7 +414,7 @@ public class Participant extends AbstractModelElement {
 	 */
 	// -beg- preserve=no 4489358A00CE get_all_head448933B703CF
 	// "Participant::iteratorRestriction"
-	public java.util.Iterator iteratorRestriction()
+	public Iterator<AbstractClassDef> iteratorRestriction()
 	// -end- 4489358A00CE get_all_head448933B703CF
 	// "Participant::iteratorRestriction"
 	{
@@ -435,7 +439,7 @@ public class Participant extends AbstractModelElement {
 		// -beg- preserve=no 4489358A00CE remove_all_body448933B703CF
 		// "Participant::clearRestriction"
 		if (sizeRestriction() > 0) {
-			for (java.util.Iterator p = restriction.iterator(); p.hasNext();) {
+			for (Iterator<AbstractClassDef> p = restriction.iterator(); p.hasNext();) {
 				((AbstractClassDef) p.next())._unlinkXorRestrictedAssociation(this);
 			}
 			restriction.clear();

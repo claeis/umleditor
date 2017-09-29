@@ -21,10 +21,16 @@ import ch.ehi.basics.view.*;
 import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.basics.types.NlsString;
 import java.util.*;
+import java.util.Enumeration;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import javax.swing.event.InternalFrameListener;
+import java.lang.Class;
+import java.lang.reflect.Constructor;
+import ch.ehi.interlis.associations.Participant;
+import java.io.FileFilter;
 
 import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.framework.*;
@@ -35,6 +41,7 @@ import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.uml1_4.changepropagation.*;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 import ch.ehi.umleditor.xmiuml.*;
 import ch.ehi.umleditor.umlpresentation.*;
 import ch.ehi.interlis.modeltopicclass.*;
@@ -68,7 +75,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private DrawingFrame currentFrame = null;
 	private Diagram initialDiagram = null;
 	// List of listeners which adhere to the InternalFrameListener interface
-	private Vector mdiListeners = new Vector();
+	private Vector<InternalFrameListener> mdiListeners = new Vector<InternalFrameListener>();
 	// manage Documentation of an element
 	private ch.ehi.uml1_4.foundation.core.Element currentElement = null;
 	// manage persistency
@@ -474,7 +481,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		internalFrame.getContentPane().add(sp);
 
 		// all registered listeners to the new internal frame
-		java.util.Enumeration enumeration = mdiListeners.elements();
+		Enumeration<InternalFrameListener> enumeration = mdiListeners.elements();
 		while (enumeration.hasMoreElements()) {
 			internalFrame.addInternalFrameListener((javax.swing.event.InternalFrameListener) enumeration.nextElement());
 		}
@@ -1595,7 +1602,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	/**
 	 * Create File Filter for UML-Model's.
 	 */
-	private java.io.FileFilter getFileFilter() {
+	private FileFilter getFileFilter() {
 		return new java.io.FileFilter() {
 			public boolean accept(java.io.File checkFile) {
 				// still display directories for navigation
@@ -3456,11 +3463,15 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		mnuFileHistory = new FileHistoryMenu(this, 10, getSettings().getLastFiles());
 		getMnuFile().insert((javax.swing.JMenuItem) mnuFileHistory, 2 /* second */);
 		getMnuReports().add(new AbstractAction(getResourceString("MniObjectCataloWoSecNr_text")) { //$NON-NLS-1$
+			
+			private static final long serialVersionUID = -7853467463750106876L;
 			public void actionPerformed(ActionEvent event) {
 				mniObjectCatalogWoChNr();
 			}
 		});
 		getMnuInterlisTools().add(new AbstractAction(getResourceString("MniGmlExport_text")) { //$NON-NLS-1$
+			
+			private static final long serialVersionUID = 6190285306782980479L;
 			public void actionPerformed(ActionEvent event) {
 				mniGmlExport();
 			}
@@ -3508,7 +3519,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		createLookAndFeelMenu(getMnuLookAndFeel());
 
 		// initialize Drawing Area
-		mdiListeners = new Vector();
+		mdiListeners = new Vector<InternalFrameListener>();
 		addInternalFrameListener(this);
 
 		// used by adaptTools()
@@ -4345,7 +4356,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 
 	private void setModellingLanguage(String lang) {
 		TaggedValue defLangTag = null;
-		Iterator defLangIt = this.model.iteratorTaggedValue();
+		Iterator<?> defLangIt = this.model.iteratorTaggedValue();
 		while (defLangIt.hasNext()) {
 			defLangTag = (TaggedValue) defLangIt.next();
 			if (defLangTag.getName().equals(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE)) {
@@ -4423,7 +4434,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 
 		String deflang = null;
-		Iterator defLangIt = this.model.iteratorTaggedValue();
+		Iterator<?> defLangIt = this.model.iteratorTaggedValue();
 		while (defLangIt.hasNext()) {
 			TaggedValue defLangTag = (TaggedValue) defLangIt.next();
 			if (defLangTag.getName().equals(TAGGEDVALUE_CONFIG_DEFAULTMODELLINGLANGUAGE)) {
@@ -4433,12 +4444,12 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		if (deflang == null) {
 			// get any language
-			Iterator eleIt = model.iteratorOwnedElement();
+			Iterator<?> eleIt = model.iteratorOwnedElement();
 			while (eleIt.hasNext()) {
 				ModelElement ele = (ModelElement) eleIt.next();
 				NlsString name = ele.getName();
-				Map nameLst = name.getAllValues();
-				Iterator langIt = nameLst.keySet().iterator();
+				Map<?, ?> nameLst = name.getAllValues();
+				Iterator<?> langIt = nameLst.keySet().iterator();
 				while (langIt.hasNext()) {
 					deflang = ch.ehi.basics.tools.StringUtility.purge((String) langIt.next());
 					if (deflang != null) {
@@ -4500,7 +4511,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		if (model != null) {
 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
-					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(model, "setName"));
+					.notifyChange(new MetaModelChange(model, "setName"));
 		}
 	}
 
@@ -4509,13 +4520,13 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	 * presented generically according to the User Selection.
 	 */
 	public void showSpecification(Element element) {
-		if (element instanceof ch.ehi.interlis.associations.Participant) {
-			element = ((ch.ehi.interlis.associations.Participant) element).getAssociation();
+		if (element instanceof Participant) {
+			element = ((Participant) element).getAssociation();
 		}
 		try {
-			java.lang.Class types[] = { java.awt.Frame.class, Element.class };
+			Class<?> types[] = { java.awt.Frame.class, Element.class };
 			Object args[] = { this, element };
-			java.lang.reflect.Constructor constructor = ElementUtils.getElementDialog(element).getConstructor(types);
+			Constructor<?> constructor = ElementUtils.getElementDialog(element).getConstructor(types);
 			constructor.newInstance(args);
 		} catch (Throwable e) {
 			// Dialog error
@@ -4644,7 +4655,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 
 		pluginLoader.startAllPlugins();
 
-		Iterator it = pluginLoader.getAllPlugins().iterator();
+		Iterator<?> it = pluginLoader.getAllPlugins().iterator();
 		for (; it.hasNext();) {
 			ch.ehi.umleditor.plugin.AbstractPlugin p = (ch.ehi.umleditor.plugin.AbstractPlugin) it.next();
 			p.addMenuItems(getWindowJMenuBar());
