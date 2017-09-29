@@ -17,6 +17,9 @@ package ch.ehi.umleditor.objectcatalog;
 // -beg- preserve=yes 3CD78E5B00EB import "ObjectCatalog"
 import ch.ehi.umleditor.application.LauncherView;
 import java.io.*;
+
+import javax.imageio.ImageIO;
+
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.i18n.MessageFormat;
 import ch.ehi.basics.view.GenericFileFilter;
@@ -103,10 +106,12 @@ public class ObjectCatalog {
 		FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 		saveDialog.setDialogTitle(rsrc.getString("CTdiagFileSelector"));
 		GenericFileFilter jpegFilter = new GenericFileFilter("JPEG File Interchange Format (*.jpeg)", "jpeg");
+		GenericFileFilter pngFilter = new GenericFileFilter("Portable Network Graphics (*.png)", "png");
 		GenericFileFilter svgFilter = new GenericFileFilter("Scalable Vector Graphics (*.svg)", "svg");
 		GenericFileFilter emfFilter = new GenericFileFilter("Windows Meta File Format (*.wmf)", "wmf");
 		saveDialog.addChoosableFileFilter(jpegFilter);
-		saveDialog.addChoosableFileFilter(svgFilter);
+		saveDialog.addChoosableFileFilter(pngFilter);
+		//saveDialog.addChoosableFileFilter(svgFilter);
 		saveDialog.addChoosableFileFilter(emfFilter);
 		saveDialog.setSelectedFile(new File(diagName));
 		if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
@@ -138,16 +143,17 @@ public class ObjectCatalog {
 					java.awt.Graphics2D g = img.createGraphics();
 					diag.printAll(g);
 					FileOutputStream os = new FileOutputStream(filename);
-					// com.sun.image.codec.jpeg.JPEGImageEncoder ie =
-					// com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
-					// javax.imageio.ImageIO.write(img, "JPEG", os);
-					// com.sun.image.codec.jpeg.JPEGEncodeParam param =
-					// ie.getDefaultJPEGEncodeParam(img);
-
-					// Lossless, please
-					// param.setQuality(1.0f, false);
-					// ie.setJPEGEncodeParam(param);
-					// ie.encode(img);
+					ImageIO.write(img, "jpeg", os);
+					// com.sun.image.codec.jpeg.JPEGImageEncoder
+					os.close();
+				} else if (pngFilter.accept(saveDialog.getSelectedFile())) {
+					java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diagDim.width, diagDim.height,
+							java.awt.image.BufferedImage.TYPE_INT_BGR);
+					java.awt.Graphics2D g = img.createGraphics();
+					diag.printAll(g);
+					FileOutputStream os = new FileOutputStream(filename);
+					ImageIO.write(img, "png", os);
+					// com.sun.image.codec.jpeg.JPEGImageEncoder
 					os.close();
 				}
 			} catch (IOException ex) {
