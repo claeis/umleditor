@@ -20,15 +20,14 @@
 package ch.ehi.interlis.logicalexpressions;
 // -end- 39609BAB0260 package "FactElement"
 
-// -beg- preserve=no 39609BAB0260 autoimport "FactElement"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.logicalexpressions.AttributePath;
-import ch.ehi.interlis.logicalexpressions.FunctionCall;
-import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
-import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
-import ch.ehi.interlis.logicalexpressions.FactElementKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39609BAB0260 autoimport "FactElement"
+import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+// -beg- preserve=no 39609BAB0260 autoimport "FactElement"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -83,7 +82,7 @@ public class FactElement extends AbstractEditorElement implements java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180243 body39609BAB0260 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsAttributePath())
 			visitor.visit(getAttributePath());
 		if (containsFunctionCall())

@@ -8,6 +8,9 @@
 package ch.ehi.interlis.tools;
 // -end- 3CAD862601FC package "ChildCollector"
 
+import java.util.ArrayList;
+import java.util.List;
+
 // -beg- preserve=no 3CAD862601FC autoimport "ChildCollector"
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3CAD862601FC autoimport "ChildCollector"
@@ -26,11 +29,11 @@ public class ChildCollector extends AbstractVisitor {
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=yes 3CAD862601FC detail_begin "ChildCollector"
-	private transient java.util.List children = null;
+	private transient List<Object> children = null;
 	// -end- 3CAD862601FC detail_begin "ChildCollector"
 
 	// -beg- preserve=no 3CAD89ED03DE head3CAD862601FC "getChildren"
-	public java.util.List getChildren()
+	public List<Object> getChildren()
 	// -end- 3CAD89ED03DE head3CAD862601FC "getChildren"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -55,7 +58,7 @@ public class ChildCollector extends AbstractVisitor {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC00D170087 body3CAD862601FC "ChildCollector"
-		children = new java.util.ArrayList();
+		children = new ArrayList<Object>();
 		// -end- 3CC00D170087 body3CAD862601FC "ChildCollector"
 	}
 

@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -beg- preserve=no 358A671700BB autoimport "Date"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A671700BB autoimport "Date"
 
@@ -73,7 +76,7 @@ public class Date extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B00B7 body358A671700BB "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B00B7 body358A671700BB "enumerateChildren"
 	}

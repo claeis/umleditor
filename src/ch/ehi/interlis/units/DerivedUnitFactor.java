@@ -20,6 +20,8 @@
 package ch.ehi.interlis.units;
 // -end- 3949E75A01EE package "DerivedUnitFactor"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3949E75A01EE autoimport "DerivedUnitFactor"
 // -beg- preserve=no 3949E75A01EE autoimport "DerivedUnitFactor"
@@ -74,7 +76,7 @@ public class DerivedUnitFactor extends AbstractEditorElement implements java.io.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21800EE body3949E75A01EE "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21800EE body3949E75A01EE "enumerateChildren"
 	}

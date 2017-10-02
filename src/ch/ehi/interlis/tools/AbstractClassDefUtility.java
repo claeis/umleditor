@@ -18,12 +18,15 @@
 package ch.ehi.interlis.tools;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 /**
  * @author ce
@@ -32,16 +35,16 @@ public class AbstractClassDefUtility {
 	private AbstractClassDefUtility() {
 	}
 
-	static public List getIliAttributes(AbstractClassDef aclass) {
-		Iterator it = aclass.iteratorFeature();
-		ArrayList attrlist = new ArrayList();
+	static public List<AbstractModelElement> getIliAttributes(AbstractClassDef aclass) {
+		Iterator<?> it = aclass.iteratorFeature();
+		ArrayList<AbstractModelElement> attrlist = new ArrayList<AbstractModelElement>();
 		while ((it != null) && (it.hasNext())) {
 			Object feature = it.next();
 			if (feature instanceof AttributeDef) {
 				attrlist.add((AttributeDef) feature);
 			}
 		}
-		ArrayList rolesSorted = new ArrayList();
+		ArrayList<RoleDef> rolesSorted = new ArrayList<RoleDef>();
 		it = aclass.iteratorAssociation();
 		while (it.hasNext()) {
 			Object obj = it.next();
@@ -52,7 +55,7 @@ public class AbstractClassDefUtility {
 			}
 		}
 
-		java.util.Collections.sort(rolesSorted, new java.util.Comparator() {
+		Collections.sort(rolesSorted, new Comparator<Object>() {
 			public int compare(Object o1, Object o2) {
 				int idx1 = ((RoleDef) o1).getIliAttributeIdx();
 				int idx2 = ((RoleDef) o2).getIliAttributeIdx();

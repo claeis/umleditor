@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
 // -beg- preserve=no 36D5626603E5 autoimport "Tesselation"
 import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 36D5626603E5 autoimport "Tesselation"
 
@@ -73,7 +76,7 @@ public class Tesselation extends SurfaceType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0355 body36D5626603E5 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0355 body36D5626603E5 "enumerateChildren"
 	}

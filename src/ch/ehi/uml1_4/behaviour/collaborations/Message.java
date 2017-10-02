@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.collaborations.Interaction;
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Action;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Stimulus;
@@ -302,7 +305,7 @@ public boolean containsConformingStimulus(Stimulus conformingStimulus1)
  *  @see #addConformingStimulus
  */
 // -beg- preserve=no 39E8FF690196 get_all_head33DBAE5E005A "Message::iteratorConformingStimulus"
-public java.util.Iterator iteratorConformingStimulus()
+public Iterator<?> iteratorConformingStimulus()
 // -end- 39E8FF690196 get_all_head33DBAE5E005A "Message::iteratorConformingStimulus"
 ;     // empty
 

@@ -20,12 +20,14 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 3FDC4924008E package "ClassType"
 
-// -beg- preserve=no 3FDC4924008E autoimport "ClassType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.interlis.modeltopicclass.ClassDefKind;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3FDC4924008E autoimport "ClassType"
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 
 // import declarations
 // please fill in/modify the following section
@@ -74,13 +76,13 @@ public class ClassType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3FDC4C300356 body3FDC4924008E "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3FDC4C300356 body3FDC4924008E "enumerateChildren"
 	}
 
 	// -beg- preserve=no 3FDC4A7B0394 code3FDC4924008E "restrictedTo"
-	private java.util.Set restrictedTo = new java.util.HashSet();
+	private Set<AbstractClassDef> restrictedTo = new HashSet<AbstractClassDef>();
 	// -end- 3FDC4A7B0394 code3FDC4924008E "restrictedTo"
 
 	/**
@@ -159,7 +161,7 @@ public class ClassType extends BaseType {
 	 */
 	// -beg- preserve=no 3FDC4A7B0394 get_all_head3FDC4924008E
 	// "ClassType::iteratorRestrictedTo"
-	public java.util.Iterator iteratorRestrictedTo()
+	public Iterator<AbstractClassDef> iteratorRestrictedTo()
 	// -end- 3FDC4A7B0394 get_all_head3FDC4924008E
 	// "ClassType::iteratorRestrictedTo"
 	{
@@ -184,7 +186,7 @@ public class ClassType extends BaseType {
 		// -beg- preserve=no 3FDC4A7B0394 remove_all_body3FDC4924008E
 		// "ClassType::clearRestrictedTo"
 		if (sizeRestrictedTo() > 0) {
-			for (java.util.Iterator p = restrictedTo.iterator(); p.hasNext();) {
+			for (Iterator<AbstractClassDef> p = restrictedTo.iterator(); p.hasNext();) {
 				((AbstractClassDef) p.next())._unlinkClassType(this);
 			}
 			restrictedTo.clear();

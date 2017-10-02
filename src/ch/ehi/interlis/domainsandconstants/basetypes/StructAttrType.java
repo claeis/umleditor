@@ -20,11 +20,13 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 4EF997C80202 package "StructAttrType"
 
-// -beg- preserve=no 4EF997C80202 autoimport "StructAttrType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.modeltopicclass.ClassDef;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 4EF997C80202 autoimport "StructAttrType"
+import ch.ehi.interlis.modeltopicclass.ClassDef;
 
 // import declarations
 // please fill in/modify the following section
@@ -74,13 +76,13 @@ public class StructAttrType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4EF9999D0084 body4EF997C80202 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 4EF9999D0084 body4EF997C80202 "enumerateChildren"
 	}
 
 	// -beg- preserve=no 4EF99B6B02F8 code4EF997C80202 "restrictedTo"
-	private java.util.Set restrictedTo = new java.util.HashSet();
+	private Set<ClassDef> restrictedTo = new HashSet<ClassDef>();
 	// -end- 4EF99B6B02F8 code4EF997C80202 "restrictedTo"
 
 	/**
@@ -160,7 +162,7 @@ public class StructAttrType extends BaseType {
 	 */
 	// -beg- preserve=no 4EF99B6B02F8 get_all_head4EF997C80202
 	// "StructAttrType::iteratorRestrictedTo"
-	public java.util.Iterator iteratorRestrictedTo()
+	public Iterator<ClassDef> iteratorRestrictedTo()
 	// -end- 4EF99B6B02F8 get_all_head4EF997C80202
 	// "StructAttrType::iteratorRestrictedTo"
 	{
@@ -185,7 +187,7 @@ public class StructAttrType extends BaseType {
 		// -beg- preserve=no 4EF99B6B02F8 remove_all_body4EF997C80202
 		// "StructAttrType::clearRestrictedTo"
 		if (sizeRestrictedTo() > 0) {
-			for (java.util.Iterator p = restrictedTo.iterator(); p.hasNext();) {
+			for (Iterator<ClassDef> p = restrictedTo.iterator(); p.hasNext();) {
 				((ClassDef) p.next())._unlinkRestrictedStructAttrType(this);
 			}
 			restrictedTo.clear();

@@ -13,6 +13,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 import ch.ehi.uml1_4.behaviour.collaborations.Message;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
 import ch.ehi.uml1_4.behaviour.collaborations.InteractionInstanceSet;
 // -end- 328830A500E6 autoimport "Interaction"
@@ -67,7 +70,7 @@ public boolean containsLink(Link link1)
  *  @see #addLink
  */
 // -beg- preserve=no 328A58B402F8 get_all_head328830A500E6 "Interaction::iteratorLink"
-public java.util.Iterator iteratorLink()
+public Iterator<?> iteratorLink()
 // -end- 328A58B402F8 get_all_head328830A500E6 "Interaction::iteratorLink"
 ;     // empty
 
@@ -132,7 +135,7 @@ public boolean containsInstance(Instance instance1)
  *  @see #addInstance
  */
 // -beg- preserve=no 328A5B570050 get_all_head328830A500E6 "Interaction::iteratorInstance"
-public java.util.Iterator iteratorInstance()
+public Iterator<?> iteratorInstance()
 // -end- 328A5B570050 get_all_head328830A500E6 "Interaction::iteratorInstance"
 ;     // empty
 
@@ -197,7 +200,7 @@ public boolean containsMessage(Message message1)
  *  @see #addMessage
  */
 // -beg- preserve=no 3388DD5D0000 get_all_head328830A500E6 "Interaction::iteratorMessage"
-public java.util.Iterator iteratorMessage()
+public Iterator<?> iteratorMessage()
 // -end- 3388DD5D0000 get_all_head328830A500E6 "Interaction::iteratorMessage"
 ;     // empty
 
@@ -309,7 +312,7 @@ public boolean containsInteractionInstanceSet(InteractionInstanceSet interaction
  *  @see #addInteractionInstanceSet
  */
 // -beg- preserve=no 39E8FF7600DA get_all_head328830A500E6 "Interaction::iteratorInteractionInstanceSet"
-public java.util.Iterator iteratorInteractionInstanceSet()
+public Iterator<?> iteratorInteractionInstanceSet()
 // -end- 39E8FF7600DA get_all_head328830A500E6 "Interaction::iteratorInteractionInstanceSet"
 ;     // empty
 

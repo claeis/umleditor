@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 448985E10132 autoimport "TimeType"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeValue;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 448985E10132 autoimport "TimeType"
 
@@ -76,7 +79,7 @@ public class TimeType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448E7B8E00F8 body448985E10132 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMin());
 		visitor.visit(getMax());
 		super.enumerateChildren(visitor);

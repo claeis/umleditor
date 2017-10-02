@@ -24,6 +24,11 @@ package ch.ehi.interlis.graphicdescriptions;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.logicalexpressions.Term;
 import ch.ehi.interlis.graphicdescriptions.SigAssignment;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961F7DF017A autoimport "CondSigParamAss"
 
@@ -78,7 +83,7 @@ public class CondSigParamAss extends AbstractEditorElement implements java.io.Se
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA219008B body3961F7DF017A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsWhere())
 			visitor.visit(getWhere());
 		it = iteratorSigAssignment();
@@ -179,7 +184,7 @@ public class CondSigParamAss extends AbstractEditorElement implements java.io.Se
 	}
 
 	// -beg- preserve=no 3961F97801E8 code3961F7DF017A "sigAssignment"
-	private java.util.Set sigAssignment = new java.util.HashSet();
+	private Set<SigAssignment> sigAssignment = new HashSet<SigAssignment>();
 	// -end- 3961F97801E8 code3961F7DF017A "sigAssignment"
 
 	/**
@@ -258,7 +263,7 @@ public class CondSigParamAss extends AbstractEditorElement implements java.io.Se
 	 */
 	// -beg- preserve=no 3961F97801E8 get_all_head3961F7DF017A
 	// "CondSigParamAss::iteratorSigAssignment"
-	public java.util.Iterator iteratorSigAssignment()
+	public Iterator<SigAssignment> iteratorSigAssignment()
 	// -end- 3961F97801E8 get_all_head3961F7DF017A
 	// "CondSigParamAss::iteratorSigAssignment"
 	{

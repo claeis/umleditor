@@ -20,15 +20,17 @@
 package ch.ehi.interlis.graphicdescriptions;
 // -end- 3961F95C036D package "SigAssignment"
 
-// -beg- preserve=no 3961F95C036D autoimport "SigAssignment"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
-import ch.ehi.interlis.graphicdescriptions.EnumAssignment;
-import ch.ehi.interlis.logicalexpressions.AttributePath;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.graphicdescriptions.SigAssignmentKind;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961F95C036D autoimport "SigAssignment"
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
+import ch.ehi.interlis.logicalexpressions.AttributePath;
+// -beg- preserve=no 3961F95C036D autoimport "SigAssignment"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -83,7 +85,7 @@ public class SigAssignment extends AbstractEditorElement implements java.io.Seri
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA219009F body3961F95C036D "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsConstant())
 			visitor.visit(getConstant());
 		it = iteratorEnumAssignment();
@@ -190,7 +192,7 @@ public class SigAssignment extends AbstractEditorElement implements java.io.Seri
 	}
 
 	// -beg- preserve=no 3961FCF30242 code3961F95C036D "enumAssignment"
-	private java.util.Set enumAssignment = new java.util.HashSet();
+	private Set<EnumAssignment> enumAssignment = new HashSet<EnumAssignment>();
 	// -end- 3961FCF30242 code3961F95C036D "enumAssignment"
 
 	/**
@@ -269,7 +271,7 @@ public class SigAssignment extends AbstractEditorElement implements java.io.Seri
 	 */
 	// -beg- preserve=no 3961FCF30242 get_all_head3961F95C036D
 	// "SigAssignment::iteratorEnumAssignment"
-	public java.util.Iterator iteratorEnumAssignment()
+	public Iterator<?> iteratorEnumAssignment()
 	// -end- 3961FCF30242 get_all_head3961F95C036D
 	// "SigAssignment::iteratorEnumAssignment"
 	{

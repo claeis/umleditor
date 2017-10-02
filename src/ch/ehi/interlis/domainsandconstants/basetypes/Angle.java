@@ -20,10 +20,8 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 358A66E4034C package "Angle"
 
-// -beg- preserve=no 358A66E4034C autoimport "Angle"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.domainsandconstants.basetypes.AngleKind;
-import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A66E4034C autoimport "Angle"
 
@@ -77,7 +75,7 @@ public class Angle extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0054 body358A66E4034C "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		visitor.visit(getMini());
 		visitor.visit(getMaxi());
 		super.enumerateChildren(visitor);

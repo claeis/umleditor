@@ -23,6 +23,11 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 4EF997E40008 autoimport "RefAttrType"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 4EF997E40008 autoimport "RefAttrType"
 
@@ -74,13 +79,13 @@ public class RefAttrType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4EF999F7005E body4EF997E40008 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 4EF999F7005E body4EF997E40008 "enumerateChildren"
 	}
 
 	// -beg- preserve=no 4EF99D22005C code4EF997E40008 "restrictedTo"
-	private java.util.Set restrictedTo = new java.util.HashSet();
+	private Set<AbstractClassDef> restrictedTo = new HashSet<AbstractClassDef>();
 	// -end- 4EF99D22005C code4EF997E40008 "restrictedTo"
 
 	/**
@@ -160,7 +165,7 @@ public class RefAttrType extends BaseType {
 	 */
 	// -beg- preserve=no 4EF99D22005C get_all_head4EF997E40008
 	// "RefAttrType::iteratorRestrictedTo"
-	public java.util.Iterator iteratorRestrictedTo()
+	public Iterator<AbstractClassDef> iteratorRestrictedTo()
 	// -end- 4EF99D22005C get_all_head4EF997E40008
 	// "RefAttrType::iteratorRestrictedTo"
 	{
@@ -185,7 +190,7 @@ public class RefAttrType extends BaseType {
 		// -beg- preserve=no 4EF99D22005C remove_all_body4EF997E40008
 		// "RefAttrType::clearRestrictedTo"
 		if (sizeRestrictedTo() > 0) {
-			for (java.util.Iterator p = restrictedTo.iterator(); p.hasNext();) {
+			for (Iterator<AbstractClassDef> p = restrictedTo.iterator(); p.hasNext();) {
 				((AbstractClassDef) p.next())._unlinkRestrictedRefAttrType(this);
 			}
 			restrictedTo.clear();

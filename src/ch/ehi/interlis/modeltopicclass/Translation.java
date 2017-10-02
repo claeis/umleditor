@@ -24,6 +24,9 @@ package ch.ehi.interlis.modeltopicclass;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 3C1DC4060258 autoimport "Translation"
@@ -79,7 +82,7 @@ public class Translation extends AbstractEditorElement implements Element, java.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A012D body3C1DC4060258 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMetaAttrb());
 		visitor.visit(getDocumentation());
 		super.enumerateChildren(visitor);

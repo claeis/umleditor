@@ -27,6 +27,9 @@ import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.metaobjects.Metaobject;
 import ch.ehi.interlis.attributes.AttrType;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3940EE310270 autoimport "ParameterDef"
 
@@ -84,7 +87,7 @@ public class ParameterDef extends AbstractModelElement implements IliSyntax, jav
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0392 body3940EE310270 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsMetaobject())
 			visitor.visit(getMetaobject());
 		if (containsAttrType())

@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 
 // -beg- preserve=no 337A47370316 autoimport "ClassifierRole"
 import ch.ehi.uml1_4.foundation.core.Classifier;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationEndRole;
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
 import ch.ehi.uml1_4.foundation.core.Feature;
@@ -69,7 +72,7 @@ public boolean containsBase(Classifier base1)
  *  @see #addBase
  */
 // -beg- preserve=no 33CD4F090208 get_all_head337A47370316 "ClassifierRole::iteratorBase"
-public java.util.Iterator iteratorBase()
+public Iterator<?> iteratorBase()
 // -end- 33CD4F090208 get_all_head337A47370316 "ClassifierRole::iteratorBase"
 ;     // empty
 
@@ -134,7 +137,7 @@ public boolean containsAssociationEndRole(AssociationEndRole associationEndRole1
  *  @see #addAssociationEndRole
  */
 // -beg- preserve=no 33CD4F7101EA get_all_head337A47370316 "ClassifierRole::iteratorAssociationEndRole"
-public java.util.Iterator iteratorAssociationEndRole()
+public Iterator<?> iteratorAssociationEndRole()
 // -end- 33CD4F7101EA get_all_head337A47370316 "ClassifierRole::iteratorAssociationEndRole"
 ;     // empty
 
@@ -199,7 +202,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head337A47370316 "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head337A47370316 "ModelElement::iteratorCollaboration"
 ;     // empty
 
@@ -264,7 +267,7 @@ public boolean containsAvailableFeature(Feature availableFeature1)
  *  @see #addAvailableFeature
  */
 // -beg- preserve=no 33CD57D3021C get_all_head337A47370316 "ClassifierRole::iteratorAvailableFeature"
-public java.util.Iterator iteratorAvailableFeature()
+public Iterator<?> iteratorAvailableFeature()
 // -end- 33CD57D3021C get_all_head337A47370316 "ClassifierRole::iteratorAvailableFeature"
 ;     // empty
 
@@ -329,7 +332,7 @@ public boolean containsMessage(Message message1)
  *  @see #addMessage
  */
 // -beg- preserve=no 33DBBB2B03DF get_all_head337A47370316 "ClassifierRole::iteratorMessage"
-public java.util.Iterator iteratorMessage()
+public Iterator<?> iteratorMessage()
 // -end- 33DBBB2B03DF get_all_head337A47370316 "ClassifierRole::iteratorMessage"
 ;     // empty
 
@@ -394,7 +397,7 @@ public boolean containsAvailableContents(ModelElement availableContents1)
  *  @see #addAvailableContents
  */
 // -beg- preserve=no 36008FB700E6 get_all_head337A47370316 "ClassifierRole::iteratorAvailableContents"
-public java.util.Iterator iteratorAvailableContents()
+public Iterator<?> iteratorAvailableContents()
 // -end- 36008FB700E6 get_all_head337A47370316 "ClassifierRole::iteratorAvailableContents"
 ;     // empty
 
@@ -459,7 +462,7 @@ public boolean containsConformingInstance(Instance conformingInstance1)
  *  @see #addConformingInstance
  */
 // -beg- preserve=no 39E8FF920242 get_all_head337A47370316 "ClassifierRole::iteratorConformingInstance"
-public java.util.Iterator iteratorConformingInstance()
+public Iterator<?> iteratorConformingInstance()
 // -end- 39E8FF920242 get_all_head337A47370316 "ClassifierRole::iteratorConformingInstance"
 ;     // empty
 

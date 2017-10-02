@@ -23,6 +23,9 @@ package ch.ehi.interlis.metaobjects;
 // -beg- preserve=no 3C17874F0020 autoimport "Metaobject"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3C17874F0020 autoimport "Metaobject"
 
@@ -74,7 +77,7 @@ public class Metaobject extends AbstractEditorElement implements java.io.Seriali
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B03B0 body3C17874F0020 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B03B0 body3C17874F0020 "enumerateChildren"
 	}

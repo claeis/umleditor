@@ -25,6 +25,11 @@ import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormCmt;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 35FB9EC803B9 autoimport "LineForm"
 
@@ -79,7 +84,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B032D body35FB9EC803B9 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorLineFormCmt();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -88,7 +93,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 	}
 
 	// -beg- preserve=no 35B870CB0074 code35FB9EC803B9 "lineFormCmt"
-	private java.util.Set lineFormCmt = new java.util.HashSet();
+	private Set<LineFormCmt> lineFormCmt = new HashSet<LineFormCmt>();
 	// -end- 35B870CB0074 code35FB9EC803B9 "lineFormCmt"
 
 	/**
@@ -165,7 +170,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 	 */
 	// -beg- preserve=no 35B870CB0074 get_all_head35FB9EC803B9
 	// "LineForm::iteratorLineFormCmt"
-	public java.util.Iterator iteratorLineFormCmt()
+	public Iterator<?> iteratorLineFormCmt()
 	// -end- 35B870CB0074 get_all_head35FB9EC803B9
 	// "LineForm::iteratorLineFormCmt"
 	{
@@ -190,7 +195,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 		// -beg- preserve=no 35B870CB0074 remove_all_body35FB9EC803B9
 		// "LineForm::clearLineFormCmt"
 		if (sizeLineFormCmt() > 0) {
-			for (java.util.Iterator p = lineFormCmt.iterator(); p.hasNext();) {
+			for (Iterator<?> p = lineFormCmt.iterator(); p.hasNext();) {
 				((LineFormCmt) p.next())._unlinkLineForm(this);
 			}
 			lineFormCmt.clear();
@@ -362,7 +367,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 	// -end- 35FB9EE500F4 _unlink_body35FB9EC803B9 "LineForm::_unlinkLineType"
 
 	// -beg- preserve=no 3948EB9801CF code35FB9EC803B9 "lineFormTypeDef"
-	private java.util.Set lineFormTypeDef = new java.util.HashSet();
+	private Set<LineFormTypeDef> lineFormTypeDef = new HashSet<LineFormTypeDef>();
 	// -end- 3948EB9801CF code35FB9EC803B9 "lineFormTypeDef"
 
 	/**
@@ -442,7 +447,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 	 */
 	// -beg- preserve=no 3948EB9801CF get_all_head35FB9EC803B9
 	// "LineForm::iteratorLineFormTypeDef"
-	public java.util.Iterator iteratorLineFormTypeDef()
+	public Iterator<LineFormTypeDef> iteratorLineFormTypeDef()
 	// -end- 3948EB9801CF get_all_head35FB9EC803B9
 	// "LineForm::iteratorLineFormTypeDef"
 	{
@@ -467,7 +472,7 @@ public class LineForm extends AbstractEditorElement implements java.io.Serializa
 		// -beg- preserve=no 3948EB9801CF remove_all_body35FB9EC803B9
 		// "LineForm::clearLineFormTypeDef"
 		if (sizeLineFormTypeDef() > 0) {
-			for (java.util.Iterator p = lineFormTypeDef.iterator(); p.hasNext();) {
+			for (Iterator<LineFormTypeDef> p = lineFormTypeDef.iterator(); p.hasNext();) {
 				((LineFormTypeDef) p.next())._unlinkLineForm(this);
 			}
 			lineFormTypeDef.clear();

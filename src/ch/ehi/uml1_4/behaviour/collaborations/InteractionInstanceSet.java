@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 
 // -beg- preserve=no 39E8FB5A005D autoimport "InteractionInstanceSet"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Stimulus;
 import ch.ehi.uml1_4.behaviour.collaborations.Interaction;
@@ -112,7 +115,7 @@ public boolean containsParticipatingStimulus(Stimulus participatingStimulus1)
  *  @see #addParticipatingStimulus
  */
 // -beg- preserve=no 39E8FCBA03D8 get_all_head39E8FB5A005D "InteractionInstanceSet::iteratorParticipatingStimulus"
-public java.util.Iterator iteratorParticipatingStimulus()
+public Iterator<?> iteratorParticipatingStimulus()
 // -end- 39E8FCBA03D8 get_all_head39E8FB5A005D "InteractionInstanceSet::iteratorParticipatingStimulus"
 ;     // empty
 

@@ -20,6 +20,8 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3C17718D0099 package "TopicExtends"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
@@ -104,7 +106,7 @@ public class TopicExtends extends AbstractGeneralization implements Generalizati
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A0052 body3C17718D0099 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getDiscriminator());
 		it = iteratorBehavior();
 		while (it.hasNext())

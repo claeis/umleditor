@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
 // -beg- preserve=no 3948E1A4012A autoimport "IliPolyline"
 import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3948E1A4012A autoimport "IliPolyline"
 
@@ -73,7 +76,7 @@ public class IliPolyline extends LineType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B030F body3948E1A4012A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B030F body3948E1A4012A "enumerateChildren"
 	}

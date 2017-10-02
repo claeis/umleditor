@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -beg- preserve=no 358A674F007F autoimport "HorizAlignment"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A674F007F autoimport "HorizAlignment"
 
@@ -73,7 +76,7 @@ public class HorizAlignment extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0085 body358A674F007F "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0085 body358A674F007F "enumerateChildren"
 	}

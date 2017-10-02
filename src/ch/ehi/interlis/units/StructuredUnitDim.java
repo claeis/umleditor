@@ -24,6 +24,9 @@ package ch.ehi.interlis.units;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394A241103A8 autoimport "StructuredUnitDim"
 
@@ -79,7 +82,7 @@ public class StructuredUnitDim extends AbstractEditorElement implements java.io.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21800C7 body394A241103A8 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsUnitDef())
 			visitor.visit(getUnitDef());
 		visitor.visit(getFrom());

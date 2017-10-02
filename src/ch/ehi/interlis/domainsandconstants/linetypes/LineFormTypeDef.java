@@ -20,34 +20,17 @@
 package ch.ehi.interlis.domainsandconstants.linetypes;
 // -end- 3940ECC60372 package "LineFormTypeDef"
 
+import java.util.Iterator;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 // -beg- preserve=no 3940ECC60372 autoimport "LineFormTypeDef"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.interlis.domainsandconstants.linetypes.LineForm;
-import ch.ehi.interlis.modeltopicclass.ClassDef;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3940ECC60372 autoimport "LineFormTypeDef"
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -127,7 +110,7 @@ public class LineFormTypeDef extends AbstractModelElement implements ModelElemen
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B036A body3940ECC60372 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getName());
 		visitor.visit(getExplanation());
 		it = iteratorBehavior();

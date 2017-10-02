@@ -24,6 +24,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3948D4320116 autoimport "StructUnitConst"
 
@@ -77,7 +80,7 @@ public class StructUnitConst extends Constant implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B01D9 body3948D4320116 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getStructDec());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B01D9 body3948D4320116 "enumerateChildren"

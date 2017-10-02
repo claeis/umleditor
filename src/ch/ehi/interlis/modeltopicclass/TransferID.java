@@ -20,6 +20,8 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 36026D4200D1 package "TransferID"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 36026D4200D1 autoimport "TransferID"
 import ch.ehi.basics.types.NlsString;
@@ -76,7 +78,7 @@ public class TransferID extends AbstractEditorElement implements java.io.Seriali
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A001F body36026D4200D1 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getExplanation());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21A001F body36026D4200D1 "enumerateChildren"

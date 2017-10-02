@@ -24,6 +24,9 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A65100028 autoimport "SurfaceType"
 
@@ -77,7 +80,7 @@ public abstract class SurfaceType extends LineType implements java.io.Serializab
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B02F1 body358A65100028 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsLinattrDef())
 			visitor.visit(getLinattrDef());
 		super.enumerateChildren(visitor);

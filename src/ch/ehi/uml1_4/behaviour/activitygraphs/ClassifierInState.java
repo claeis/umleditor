@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.activitygraphs;
 
 // -beg- preserve=no 33CF9AB00262 autoimport "ClassifierInState"
 import ch.ehi.uml1_4.foundation.core.Classifier;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.statemachines.State;
 // -end- 33CF9AB00262 autoimport "ClassifierInState"
 
@@ -63,7 +66,7 @@ public boolean containsInState(State inState1)
  *  @see #addInState
  */
 // -beg- preserve=no 33CF9AE0026C get_all_head33CF9AB00262 "ClassifierInState::iteratorInState"
-public java.util.Iterator iteratorInState()
+public Iterator<?> iteratorInState()
 // -end- 33CF9AE0026C get_all_head33CF9AB00262 "ClassifierInState::iteratorInState"
 ;     // empty
 

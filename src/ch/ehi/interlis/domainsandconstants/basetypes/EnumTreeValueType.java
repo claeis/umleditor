@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 44897CE302B9 autoimport "EnumTreeValueType"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 44897CE302B9 autoimport "EnumTreeValueType"
 
@@ -73,7 +76,7 @@ public class EnumTreeValueType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448D3D1F0037 body44897CE302B9 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 448D3D1F0037 body44897CE302B9 "enumerateChildren"
 	}

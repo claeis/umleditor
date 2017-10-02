@@ -22,6 +22,9 @@ package ch.ehi.interlis.logicalexpressions;
 
 // -beg- preserve=no 3C1DB12E01F8 autoimport "ObjectPath"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3C1DB12E01F8 autoimport "ObjectPath"
 
@@ -72,7 +75,7 @@ public class ObjectPath extends AbstractEditorElement implements java.io.Seriali
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21802CF body3C1DB12E01F8 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21802CF body3C1DB12E01F8 "enumerateChildren"
 	}

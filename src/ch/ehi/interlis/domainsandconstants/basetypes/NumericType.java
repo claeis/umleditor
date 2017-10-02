@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 394882EB009D autoimport "NumericType"
 import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
 import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394882EB009D autoimport "NumericType"
 
@@ -76,7 +79,7 @@ public class NumericType extends NumericalType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B00DE body394882EB009D "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMinDec());
 		visitor.visit(getMaxDec());
 		super.enumerateChildren(visitor);

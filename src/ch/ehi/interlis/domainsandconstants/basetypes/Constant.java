@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 394888E60120 autoimport "Constant"
 import ch.ehi.interlis.IliSyntax;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 394888E60120 autoimport "Constant"
@@ -80,7 +83,7 @@ public class Constant extends AbstractEditorElement implements IliSyntax, java.i
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B012E body394888E60120 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getSyntax());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B012E body394888E60120 "enumerateChildren"

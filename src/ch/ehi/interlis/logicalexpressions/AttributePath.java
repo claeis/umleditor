@@ -24,6 +24,11 @@ package ch.ehi.interlis.logicalexpressions;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.views.ViewableDef;
 import ch.ehi.interlis.logicalexpressions.AttributeRef;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39609BF90168 autoimport "AttributePath"
 
@@ -82,7 +87,7 @@ public class AttributePath extends AbstractEditorElement implements java.io.Seri
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180261 body39609BF90168 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsViewableDef())
 			visitor.visit(getViewableDef());
 		it = iteratorAttributeRef();
@@ -187,7 +192,7 @@ public class AttributePath extends AbstractEditorElement implements java.io.Seri
 	}
 
 	// -beg- preserve=no 3960A74B0378 code39609BF90168 "attributeRef"
-	private java.util.Set attributeRef = new java.util.HashSet();
+	private Set<AttributeRef> attributeRef = new HashSet<AttributeRef>();
 	// -end- 3960A74B0378 code39609BF90168 "attributeRef"
 
 	/**
@@ -265,7 +270,7 @@ public class AttributePath extends AbstractEditorElement implements java.io.Seri
 	 */
 	// -beg- preserve=no 3960A74B0378 get_all_head39609BF90168
 	// "AttributePath::iteratorAttributeRef"
-	public java.util.Iterator iteratorAttributeRef()
+	public Iterator<AttributeRef> iteratorAttributeRef()
 	// -end- 3960A74B0378 get_all_head39609BF90168
 	// "AttributePath::iteratorAttributeRef"
 	{

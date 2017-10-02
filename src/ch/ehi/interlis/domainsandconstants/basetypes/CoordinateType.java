@@ -20,10 +20,10 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 394886B10363 package "CoordinateType"
 
-// -beg- preserve=no 394886B10363 autoimport "CoordinateType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.domainsandconstants.basetypes.RotationDef;
-import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394886B10363 autoimport "CoordinateType"
 
@@ -77,7 +77,7 @@ public class CoordinateType extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0107 body394886B10363 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsRotationDef())
 			visitor.visit(getRotationDef());
 		it = iteratorDim();
@@ -183,7 +183,7 @@ public class CoordinateType extends BaseType implements java.io.Serializable {
 	}
 
 	// -beg- preserve=no 39EEB6C10061 code394886B10363 "dim"
-	private java.util.List dim = new java.util.ArrayList();
+	private List<NumericalType> dim = new ArrayList<NumericalType>();
 	// -end- 39EEB6C10061 code394886B10363 "dim"
 
 	/**
@@ -313,7 +313,7 @@ public class CoordinateType extends BaseType implements java.io.Serializable {
 	 */
 	// -beg- preserve=no 39EEB6C10061 get_all_head394886B10363
 	// "CoordinateType::iteratorDim"
-	public java.util.Iterator iteratorDim()
+	public Iterator<?> iteratorDim()
 	// -end- 39EEB6C10061 get_all_head394886B10363 "CoordinateType::iteratorDim"
 	{
 		// -beg- preserve=no 39EEB6C10061 get_all_body394886B10363

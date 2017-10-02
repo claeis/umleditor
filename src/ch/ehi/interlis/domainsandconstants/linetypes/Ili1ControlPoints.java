@@ -25,6 +25,9 @@ import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A6CDF004B autoimport "Ili1ControlPoints"
 
@@ -79,7 +82,7 @@ public class Ili1ControlPoints extends AbstractEditorElement implements java.io.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B031A body358A6CDF004B "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsCoord())
 			visitor.visit(getCoord());
 		visitor.visit(getConstraints());

@@ -8,6 +8,11 @@
 package ch.ehi.interlis.tools;
 // -end- 3CC66649011E package "ModelElementUtility"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.interlis.modeltopicclass.IliImport;
 // -end- 3CC66649011E import "ModelElementUtility"
 import ch.ehi.interlis.modeltopicclass.ModelDef;
@@ -27,7 +32,7 @@ public class ModelElementUtility {
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=yes 3CC66649011E detail_begin "ModelElementUtility"
-	static private java.util.ArrayList ordering = null;
+	static private ArrayList<Class<?>> ordering = null;
 
 	// -end- 3CC66649011E detail_begin "ModelElementUtility"
 
@@ -35,7 +40,7 @@ public class ModelElementUtility {
 	 * returns the set of referencable Elements.
 	 */
 	// -beg- preserve=no 3CB2F1BB01F2 head3CC66649011E "getReferencableElements"
-	public static java.util.Set getReferencableElements(ModelElement athis, java.lang.Class aclass)
+	public static Set<Object> getReferencableElements(ModelElement athis, Class<?> aclass)
 	// -end- 3CB2F1BB01F2 head3CC66649011E "getReferencableElements"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -52,8 +57,8 @@ public class ModelElementUtility {
 		while (!(root instanceof ModelDef) && root.containsNamespace()) {
 			root = root.getNamespace();
 		}
-		java.util.HashSet referencables = new java.util.HashSet();
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		HashSet<Object> referencables = new HashSet<Object>();
+		ArrayList<Object> todo = new ArrayList<Object>(); // collection of
 																// containers
 																// not yet
 																// visited
@@ -63,12 +68,12 @@ public class ModelElementUtility {
 			// add root to todo-list; so it is processed as a first element
 			todo.add(root);
 			// add imported models also to todo-list
-			java.util.Iterator impRelIt = root.iteratorClientDependency();
+			Iterator<?> impRelIt = root.iteratorClientDependency();
 			while (impRelIt.hasNext()) {
 				Object obj = impRelIt.next();
 				if (obj instanceof IliImport) {
 					IliImport impRel = (IliImport) obj;
-					java.util.Iterator supplierIt = impRel.iteratorSupplier();
+					Iterator<?> supplierIt = impRel.iteratorSupplier();
 					while (supplierIt.hasNext()) {
 						ModelDef supplier = (ModelDef) supplierIt.next();
 						todo.add(supplier);
@@ -100,7 +105,7 @@ public class ModelElementUtility {
 		// process todo-list
 		while (!todo.isEmpty()) {
 			Namespace current = (Namespace) todo.get(0);
-			java.util.Iterator iterator = current.iteratorOwnedElement();
+			Iterator<?> iterator = current.iteratorOwnedElement();
 			while (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (obj != athis && aclass.isAssignableFrom(obj.getClass())) {
@@ -139,7 +144,7 @@ public class ModelElementUtility {
 	 * returns the set of Interlis peer elements.
 	 */
 	// -beg- preserve=no 3D58C7300021 head3CC66649011E "getPeerElements"
-	public static java.util.Set getPeerElements(ModelElement athis, java.lang.Class aclass)
+	public static Set<Object> getPeerElements(ModelElement athis, Class<?> aclass)
 	// -end- 3D58C7300021 head3CC66649011E "getPeerElements"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -155,7 +160,7 @@ public class ModelElementUtility {
 				&& root.containsNamespace()) {
 			root = root.getNamespace();
 		}
-		java.util.Set peers = getChildElements(root, aclass);
+		Set<Object> peers = getChildElements(root, aclass);
 		peers.remove(athis);
 		return peers;
 		// -end- 3D58C7300021 body3CC66649011E "getPeerElements"
@@ -165,7 +170,7 @@ public class ModelElementUtility {
 	 * returns the set of Interlis children.
 	 */
 	// -beg- preserve=no 3D59359D019F head3CC66649011E "getChildElements"
-	public static java.util.Set getChildElements(Namespace container, java.lang.Class aclass)
+	public static Set<Object> getChildElements(Namespace container, Class<?> aclass)
 	// -end- 3D59359D019F head3CC66649011E "getChildElements"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -175,8 +180,8 @@ public class ModelElementUtility {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3D59359D019F body3CC66649011E "getChildElements"
-		java.util.HashSet children = new java.util.HashSet();
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		HashSet<Object> children = new HashSet<Object>();
+		ArrayList<Object> todo = new ArrayList<Object>(); // collection of
 																// containers
 																// not yet
 																// visited
@@ -190,7 +195,7 @@ public class ModelElementUtility {
 		// process todo-list
 		while (!todo.isEmpty()) {
 			Namespace current = (Namespace) todo.get(0);
-			java.util.Iterator iterator = current.iteratorOwnedElement();
+			Iterator<?> iterator = current.iteratorOwnedElement();
 			while (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (aclass == null || aclass.isAssignableFrom(obj.getClass())) {
@@ -316,7 +321,7 @@ public class ModelElementUtility {
 	 * defines the standard ordering of INTERLIS definitions.
 	 */
 	// -beg- preserve=no 3E64146D02FB head3CC66649011E "compareDefinition"
-	public static int compareDefinition(java.lang.Class c1, java.lang.Class c2)
+	public static int compareDefinition(Class<?> c1, Class<?> c2)
 	// -end- 3E64146D02FB head3CC66649011E "compareDefinition"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -333,7 +338,7 @@ public class ModelElementUtility {
 		 * INTERLIS2Def
 		 */
 		if (ordering == null) {
-			ordering = new java.util.ArrayList();
+			ordering = new ArrayList<Class<?>>();
 			ordering.add(ch.ehi.interlis.metaobjects.MetaDataUseDef.class);
 			ordering.add(ch.ehi.interlis.units.UnitDef.class);
 			ordering.add(ch.ehi.interlis.functions.FunctionDef.class);

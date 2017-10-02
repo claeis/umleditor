@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.activitygraphs;
 
 // -beg- preserve=no 337D8EF301C2 autoimport "ActivityGraph"
 import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
 // -end- 337D8EF301C2 autoimport "ActivityGraph"
 
@@ -63,7 +66,7 @@ public boolean containsPartition(Partition partition1)
  *  @see #addPartition
  */
 // -beg- preserve=no 337DA56101D6 get_all_head337D8EF301C2 "ActivityGraph::iteratorPartition"
-public java.util.Iterator iteratorPartition()
+public Iterator<?> iteratorPartition()
 // -end- 337DA56101D6 get_all_head337D8EF301C2 "ActivityGraph::iteratorPartition"
 ;     // empty
 

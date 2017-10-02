@@ -24,6 +24,11 @@ package ch.ehi.interlis.logicalexpressions;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.logicalexpressions.Factor;
 import ch.ehi.interlis.logicalexpressions.TermKind;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394A41DB0213 autoimport "Term"
 
@@ -85,7 +90,7 @@ public class Term extends AbstractEditorElement implements java.io.Serializable 
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21801DE body394A41DB0213 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorRight();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -98,7 +103,7 @@ public class Term extends AbstractEditorElement implements java.io.Serializable 
 	}
 
 	// -beg- preserve=no 394A4203015D code394A41DB0213 "right"
-	private java.util.Set right = new java.util.HashSet();
+	private Set<Term> right = new HashSet<Term>();
 	// -end- 394A4203015D code394A41DB0213 "right"
 
 	/**
@@ -169,7 +174,7 @@ public class Term extends AbstractEditorElement implements java.io.Serializable 
 	 */
 	// -beg- preserve=no 394A4203015D get_all_head394A41DB0213
 	// "Term::iteratorRight"
-	public java.util.Iterator iteratorRight()
+	public Iterator<Term> iteratorRight()
 	// -end- 394A4203015D get_all_head394A41DB0213 "Term::iteratorRight"
 	{
 		// -beg- preserve=no 394A4203015D get_all_body394A41DB0213

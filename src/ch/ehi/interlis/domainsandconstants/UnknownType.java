@@ -20,6 +20,7 @@
 package ch.ehi.interlis.domainsandconstants;
 // -end- 3E6037DF010F package "UnknownType"
 
+import java.util.Iterator;
 // -beg- preserve=no 3E6037DF010F autoimport "UnknownType"
 import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.IliSyntax;
@@ -77,7 +78,7 @@ public class UnknownType extends Type implements IliSyntax {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3E60382B030D body3E6037DF010F "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		visitor.visit(getSyntax());
 		super.enumerateChildren(visitor);
 		// -end- 3E60382B030D body3E6037DF010F "enumerateChildren"

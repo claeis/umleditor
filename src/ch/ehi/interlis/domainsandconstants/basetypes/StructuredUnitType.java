@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 394885320023 autoimport "StructuredUnitType"
 import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
 import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394885320023 autoimport "StructuredUnitType"
 
@@ -76,7 +79,7 @@ public class StructuredUnitType extends NumericalType implements java.io.Seriali
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B00E9 body394885320023 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMinStruc());
 		visitor.visit(getMaxStruc());
 		super.enumerateChildren(visitor);

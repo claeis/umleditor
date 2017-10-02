@@ -23,6 +23,9 @@ package ch.ehi.interlis.views;
 // -beg- preserve=no 358A5FCC0283 autoimport "Evaluations"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A5FCC0283 autoimport "Evaluations"
 
@@ -76,7 +79,7 @@ public class Evaluations extends AbstractEditorElement implements java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21803A2 body358A5FCC0283 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21803A2 body358A5FCC0283 "enumerateChildren"
 	}

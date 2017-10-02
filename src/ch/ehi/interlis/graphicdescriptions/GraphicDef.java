@@ -20,35 +20,21 @@
 package ch.ehi.interlis.graphicdescriptions;
 // -end- 3940F1F903B2 package "GraphicDef"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.interlis.logicalexpressions.Term;
+import ch.ehi.interlis.views.ViewableDef;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 // -beg- preserve=no 3940F1F903B2 autoimport "GraphicDef"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.interlis.views.ViewableDef;
-import ch.ehi.interlis.logicalexpressions.Term;
-import ch.ehi.interlis.graphicdescriptions.SignAttribute;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3940F1F903B2 autoimport "GraphicDef"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -131,7 +117,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190027 body3940F1F903B2 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (contains_extends())
 			visitor.visit(get_extends());
 		if (containsBasedon())
@@ -493,7 +479,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 	}
 
 	// -beg- preserve=no 3961F2380238 code3940F1F903B2 "selection"
-	private java.util.Set selection = new java.util.HashSet();
+	private Set<AbstractEditorElement> selection = new HashSet<AbstractEditorElement>();
 	// -end- 3961F2380238 code3940F1F903B2 "selection"
 
 	/**
@@ -568,7 +554,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 	 */
 	// -beg- preserve=no 3961F2380238 get_all_head3940F1F903B2
 	// "GraphicDef::iteratorSelection"
-	public java.util.Iterator iteratorSelection()
+	public Iterator<AbstractEditorElement> iteratorSelection()
 	// -end- 3961F2380238 get_all_head3940F1F903B2
 	// "GraphicDef::iteratorSelection"
 	{
@@ -618,7 +604,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 	}
 
 	// -beg- preserve=no 3961F2EC00ED code3940F1F903B2 "signAttribute"
-	private java.util.Set signAttribute = new java.util.HashSet();
+	private Set<AbstractEditorElement> signAttribute = new HashSet<AbstractEditorElement>();
 	// -end- 3961F2EC00ED code3940F1F903B2 "signAttribute"
 
 	/**
@@ -696,7 +682,7 @@ public class GraphicDef extends AbstractModelElement implements ModelElement, Il
 	 */
 	// -beg- preserve=no 3961F2EC00ED get_all_head3940F1F903B2
 	// "GraphicDef::iteratorSignAttribute"
-	public java.util.Iterator iteratorSignAttribute()
+	public Iterator<AbstractEditorElement> iteratorSignAttribute()
 	// -end- 3961F2EC00ED get_all_head3940F1F903B2
 	// "GraphicDef::iteratorSignAttribute"
 	{

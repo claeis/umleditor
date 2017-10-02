@@ -25,6 +25,9 @@ import ch.ehi.interlis.IliSyntax;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.RefSysRef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 3948A1BC012D autoimport "RefSys"
@@ -81,7 +84,7 @@ public class RefSys extends AbstractEditorElement implements IliSyntax, java.io.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B01A7 body3948A1BC012D "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsDomainDef())
 			visitor.visit(getDomainDef());
 		if (containsRefSysRef())

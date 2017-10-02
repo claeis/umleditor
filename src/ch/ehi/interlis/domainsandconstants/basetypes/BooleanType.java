@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -beg- preserve=no 39488609013A autoimport "BooleanType"
 import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39488609013A autoimport "BooleanType"
 
@@ -73,7 +76,7 @@ public class BooleanType extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B00FD body39488609013A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B00FD body39488609013A "enumerateChildren"
 	}

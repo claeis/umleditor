@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 
 // -beg- preserve=no 3384B14F035C autoimport "AssociationEndRole"
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
 import ch.ehi.uml1_4.foundation.core.Attribute;
@@ -207,7 +210,7 @@ public boolean containsAvailableQualifier(Attribute availableQualifier1)
  *  @see #addAvailableQualifier
  */
 // -beg- preserve=no 3650E6BE005A get_all_head3384B14F035C "AssociationEndRole::iteratorAvailableQualifier"
-public java.util.Iterator iteratorAvailableQualifier()
+public Iterator<?> iteratorAvailableQualifier()
 // -end- 3650E6BE005A get_all_head3384B14F035C "AssociationEndRole::iteratorAvailableQualifier"
 ;     // empty
 

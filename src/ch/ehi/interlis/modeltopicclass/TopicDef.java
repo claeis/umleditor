@@ -20,6 +20,10 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 358A5E3B0132 package "TopicDef"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.DefinitionProxy;
@@ -68,7 +72,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC7B10A01C3 body358A5E3B0132 "getBaseTopicDef"
-		java.util.Iterator it = iteratorGeneralization();
+		Iterator<Generalization> it = iteratorGeneralization();
 		while (it.hasNext()) {
 			Object topicextends = it.next();
 			if (topicextends instanceof TopicExtends) {
@@ -91,7 +95,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC7B11801CD body358A5E3B0132
 		// "containsBaseTopicDef"
-		java.util.Iterator it = iteratorGeneralization();
+		Iterator<?> it = iteratorGeneralization();
 		while (it.hasNext()) {
 			Object topicextends = it.next();
 			if (topicextends instanceof TopicExtends) {
@@ -189,7 +193,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21902DA body358A5E3B0132 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorOwnedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -283,7 +287,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head358A5E3B0132
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<?> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head358A5E3B0132
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -486,7 +490,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33598CAA030D get_all_head358A5E3B0132
 	// "Namespace::iteratorOwnedElement"
-	public java.util.Iterator iteratorOwnedElement()
+	public Iterator<?> iteratorOwnedElement()
 	// -end- 33598CAA030D get_all_head358A5E3B0132
 	// "Namespace::iteratorOwnedElement"
 	{
@@ -539,7 +543,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33598CAA030D itlink_head358A5E3B0132
 	// "Namespace::getOwnedElementLink"
-	public java.util.Iterator iteratorOwnedElementLink()
+	public Iterator<?> iteratorOwnedElementLink()
 	// -end- 33598CAA030D itlink_head358A5E3B0132
 	// "Namespace::getOwnedElementLink"
 	{
@@ -608,7 +612,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	// "Namespace::_unlinkOwnedElement"
 
 	// -beg- preserve=no 335C146B01D6 code358A5E3B0132 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code358A5E3B0132 "specialization"
 
 	/**
@@ -689,7 +693,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head358A5E3B0132
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head358A5E3B0132
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -714,7 +718,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 335C146B01D6 remove_all_body358A5E3B0132
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -994,7 +998,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head358A5E3B0132
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head358A5E3B0132
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -1064,7 +1068,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	// "ModelElement::_unlinkSupplierDependency"
 
 	// -beg- preserve=no 335C14A5019A code358A5E3B0132 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code358A5E3B0132 "generalization"
 
 	/**
@@ -1145,7 +1149,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head358A5E3B0132
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head358A5E3B0132
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -1170,7 +1174,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 335C14A5019A remove_all_body358A5E3B0132
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -1468,7 +1472,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	// -end- 44891FCB0324 _unlink_body358A5E3B0132 "TopicDef::_unlinkBasketoid"
 
 	// -beg- preserve=no 3CC001F302B7 code358A5E3B0132 "basketType"
-	private java.util.Set basketType = new java.util.HashSet();
+	private Set<BasketType> basketType = new HashSet<BasketType>();
 	// -end- 3CC001F302B7 code358A5E3B0132 "basketType"
 
 	/**
@@ -1545,7 +1549,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 3CC001F302B7 get_all_head358A5E3B0132
 	// "TopicDef::iteratorBasketType"
-	public java.util.Iterator iteratorBasketType()
+	public Iterator<BasketType> iteratorBasketType()
 	// -end- 3CC001F302B7 get_all_head358A5E3B0132
 	// "TopicDef::iteratorBasketType"
 	{
@@ -1570,7 +1574,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 3CC001F302B7 remove_all_body358A5E3B0132
 		// "TopicDef::clearBasketType"
 		if (sizeBasketType() > 0) {
-			for (java.util.Iterator p = basketType.iterator(); p.hasNext();) {
+			for (Iterator<BasketType> p = basketType.iterator(); p.hasNext();) {
 				((BasketType) p.next())._unlinkBasketSchema(this);
 			}
 			basketType.clear();
@@ -1766,7 +1770,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	}
 
 	// -beg- preserve=no 33CD739B02DA code358A5E3B0132 "importedElement"
-	private java.util.Set importedElement = new java.util.HashSet();
+	private Set<ElementImport> importedElement = new HashSet<ElementImport>();
 	// -end- 33CD739B02DA code358A5E3B0132 "importedElement"
 
 	/**
@@ -1875,14 +1879,14 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33CD739B02DA get_all_head358A5E3B0132
 	// "Package::iteratorImportedElement"
-	public java.util.Iterator iteratorImportedElement()
+	public Iterator<?> iteratorImportedElement()
 	// -end- 33CD739B02DA get_all_head358A5E3B0132
 	// "Package::iteratorImportedElement"
 	{
 		// -beg- preserve=no 33CD739B02DA get_all_body358A5E3B0132
 		// "Package::iteratorImportedElement"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedElement.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedElement.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -1915,7 +1919,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 33CD739B02DA remove_all_body358A5E3B0132
 		// "Package::clearImportedElement"
 		if (sizeImportedElement() > 0) {
-			for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedElement()._unlinkImportedBy(linkobj);
 			}
@@ -1951,7 +1955,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33CD739B02DA itlink_head358A5E3B0132
 	// "Package::getImportedElementLink"
-	public java.util.Iterator iteratorImportedElementLink()
+	public Iterator<ElementImport> iteratorImportedElementLink()
 	// -end- 33CD739B02DA itlink_head358A5E3B0132
 	// "Package::getImportedElementLink"
 	{
@@ -1996,7 +2000,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 		// "Package::findImportedElementLink"
 		if (importedElement1 == null)
 			return null;
-		for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+		for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedElement() == importedElement1)
 				return linkobj;
@@ -2101,7 +2105,7 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head358A5E3B0132
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head358A5E3B0132
 	// "ModelElement::iteratorPresentation"
 	{

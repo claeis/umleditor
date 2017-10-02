@@ -24,6 +24,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39489AFF0050 autoimport "RefSysRef"
 
@@ -81,7 +84,7 @@ public class RefSysRef extends AbstractEditorElement implements java.io.Serializ
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0193 body39489AFF0050 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getModelName());
 		visitor.visit(getTopicName());
 		visitor.visit(getClassName());

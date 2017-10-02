@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.collaborations.InteractionInstanceSet;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 // -end- 39E8FB800232 autoimport "CollaborationInstanceSet"
@@ -66,7 +69,7 @@ public boolean containsInteractionInstance(InteractionInstanceSet interactionIns
  *  @see #addInteractionInstance
  */
 // -beg- preserve=no 39E8FB9602FD get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorInteractionInstance"
-public java.util.Iterator iteratorInteractionInstance()
+public Iterator<?> iteratorInteractionInstance()
 // -end- 39E8FB9602FD get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorInteractionInstance"
 ;     // empty
 
@@ -131,7 +134,7 @@ public boolean containsParticipatingInstance(Instance participatingInstance1)
  *  @see #addParticipatingInstance
  */
 // -beg- preserve=no 39E8FC61002E get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorParticipatingInstance"
-public java.util.Iterator iteratorParticipatingInstance()
+public Iterator<?> iteratorParticipatingInstance()
 // -end- 39E8FC61002E get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorParticipatingInstance"
 ;     // empty
 
@@ -243,7 +246,7 @@ public boolean containsConstrainingElement(ModelElement constrainingElement1)
  *  @see #addConstrainingElement
  */
 // -beg- preserve=no 39E9065C0222 get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorConstrainingElement"
-public java.util.Iterator iteratorConstrainingElement()
+public Iterator<?> iteratorConstrainingElement()
 // -end- 39E9065C0222 get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorConstrainingElement"
 ;     // empty
 
@@ -308,7 +311,7 @@ public boolean containsParticipatingLink(Link participatingLink1)
  *  @see #addParticipatingLink
  */
 // -beg- preserve=no 39E9069600EA get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorParticipatingLink"
-public java.util.Iterator iteratorParticipatingLink()
+public Iterator<?> iteratorParticipatingLink()
 // -end- 39E9069600EA get_all_head39E8FB800232 "CollaborationInstanceSet::iteratorParticipatingLink"
 ;     // empty
 

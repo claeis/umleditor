@@ -20,12 +20,13 @@
 package ch.ehi.interlis.logicalexpressions;
 // -end- 3960A740025A package "AttributeRef"
 
-// -beg- preserve=no 3960A740025A autoimport "AttributeRef"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.logicalexpressions.AttributeRefKind;
-import ch.ehi.basics.types.NlsString;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3960A740025A autoimport "AttributeRef"
+import ch.ehi.basics.types.NlsString;
+// -beg- preserve=no 3960A740025A autoimport "AttributeRef"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -77,7 +78,7 @@ public class AttributeRef extends AbstractEditorElement implements java.io.Seria
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21802BC body3960A740025A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getAttribute());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21802BC body3960A740025A "enumerateChildren"

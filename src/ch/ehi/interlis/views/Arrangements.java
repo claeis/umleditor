@@ -23,6 +23,9 @@ package ch.ehi.interlis.views;
 // -beg- preserve=no 358A5FEA022C autoimport "Arrangements"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A5FEA022C autoimport "Arrangements"
 
@@ -76,7 +79,7 @@ public class Arrangements extends AbstractEditorElement implements java.io.Seria
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21803B6 body358A5FEA022C "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21803B6 body358A5FEA022C "enumerateChildren"
 	}

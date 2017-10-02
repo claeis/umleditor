@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.behaviour.activitygraphs;
 // -end- 337D8F5A01EA package "ObjectFlowState"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 337D8F5A01EA autoimport "ObjectFlowState"
 import ch.ehi.uml1_4.behaviour.statemachines.SimpleState;
 import ch.ehi.uml1_4.foundation.core.Parameter;
@@ -158,7 +160,7 @@ public boolean containsParameter(Parameter parameter1)
  *  @see #addParameter
  */
 // -beg- preserve=no 36462DDF008D get_all_head337D8F5A01EA "ObjectFlowState::iteratorParameter"
-public java.util.Iterator iteratorParameter()
+public Iterator<?> iteratorParameter()
 // -end- 36462DDF008D get_all_head337D8F5A01EA "ObjectFlowState::iteratorParameter"
 ;     // empty
 

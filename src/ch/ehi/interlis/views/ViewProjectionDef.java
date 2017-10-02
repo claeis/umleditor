@@ -20,34 +20,18 @@
 package ch.ehi.interlis.views;
 // -end- 3940F0250373 package "ViewProjectionDef"
 
-// -beg- preserve=no 3940F0250373 autoimport "ViewProjectionDef"
-import ch.ehi.interlis.views.ViewableDef;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.interlis.views.ProjectionAttributes;
-import ch.ehi.interlis.constraints.ConstraintDef;
-import ch.ehi.basics.types.NlsString;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3940F0250373 autoimport "ViewProjectionDef"
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -133,7 +117,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180351 body3940F0250373 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (contains_extends())
 			visitor.visit(get_extends());
 		if (containsBasedon())
@@ -597,7 +581,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 	}
 
 	// -beg- preserve=no 3961A09D0279 code3940F0250373 "constraintDef"
-	private java.util.Set constraintDef = new java.util.HashSet();
+	private Set<ConstraintDef> constraintDef = new HashSet<ConstraintDef>();
 	// -end- 3961A09D0279 code3940F0250373 "constraintDef"
 
 	/**
@@ -676,7 +660,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 	 */
 	// -beg- preserve=no 3961A09D0279 get_all_head3940F0250373
 	// "ViewProjectionDef::iteratorConstraintDef"
-	public java.util.Iterator iteratorConstraintDef()
+	public Iterator<?> iteratorConstraintDef()
 	// -end- 3961A09D0279 get_all_head3940F0250373
 	// "ViewProjectionDef::iteratorConstraintDef"
 	{
@@ -865,7 +849,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head3940F0250373
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head3940F0250373
 	// "ModelElement::iteratorSupplierDependency"
 	{

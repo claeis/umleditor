@@ -16,6 +16,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Operation;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
 // -end- 337A47290078 autoimport "Collaboration"
 
@@ -69,7 +72,7 @@ public boolean containsInteraction(Interaction interaction1)
  *  @see #addInteraction
  */
 // -beg- preserve=no 3388DE790122 get_all_head337A47290078 "Collaboration::iteratorInteraction"
-public java.util.Iterator iteratorInteraction()
+public Iterator<?> iteratorInteraction()
 // -end- 3388DE790122 get_all_head337A47290078 "Collaboration::iteratorInteraction"
 ;     // empty
 
@@ -166,7 +169,7 @@ public boolean containsOwnedElement(ModelElement ownedElement1)
  *  @see #addOwnedElement
  */
 // -beg- preserve=no 33598CAA030D get_all_head337A47290078 "Namespace::iteratorOwnedElement"
-public java.util.Iterator iteratorOwnedElement()
+public Iterator<?> iteratorOwnedElement()
 // -end- 33598CAA030D get_all_head337A47290078 "Namespace::iteratorOwnedElement"
 ;     // empty
 
@@ -190,7 +193,7 @@ public int sizeOwnedElement()
  *  @see #addOwnedElement
  */
 // -beg- preserve=no 33598CAA030D itlink_head337A47290078 "Namespace::getOwnedElementLink"
-public java.util.Iterator iteratorOwnedElementLink()
+public Iterator<?> iteratorOwnedElementLink()
 // -end- 33598CAA030D itlink_head337A47290078 "Namespace::getOwnedElementLink"
 ;     // empty
 
@@ -255,7 +258,7 @@ public boolean containsConstrainingElement(ModelElement constrainingElement1)
  *  @see #addConstrainingElement
  */
 // -beg- preserve=no 33D1394E029E get_all_head337A47290078 "Collaboration::iteratorConstrainingElement"
-public java.util.Iterator iteratorConstrainingElement()
+public Iterator<?> iteratorConstrainingElement()
 // -end- 33D1394E029E get_all_head337A47290078 "Collaboration::iteratorConstrainingElement"
 ;     // empty
 
@@ -414,7 +417,7 @@ public boolean containsCollaborationInstanceSet(CollaborationInstanceSet collabo
  *  @see #addCollaborationInstanceSet
  */
 // -beg- preserve=no 39E9065C0186 get_all_head337A47290078 "ModelElement::iteratorCollaborationInstanceSet"
-public java.util.Iterator iteratorCollaborationInstanceSet()
+public Iterator<?> iteratorCollaborationInstanceSet()
 // -end- 39E9065C0186 get_all_head337A47290078 "ModelElement::iteratorCollaborationInstanceSet"
 ;     // empty
 
@@ -479,7 +482,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head337A47290078 "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head337A47290078 "ModelElement::iteratorCollaboration"
 ;     // empty
 

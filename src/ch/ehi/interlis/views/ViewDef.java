@@ -20,37 +20,19 @@
 package ch.ehi.interlis.views;
 // -end- 3940EF380079 package "ViewDef"
 
-// -beg- preserve=no 3940EF380079 autoimport "ViewDef"
-import ch.ehi.interlis.views.ViewableDef;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.interlis.views.RenamedViewableRef;
-import ch.ehi.interlis.logicalexpressions.Term;
-import ch.ehi.interlis.views.ProjectionAttributes;
-import ch.ehi.interlis.constraints.ConstraintDef;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.views.ViewDefKind;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.interlis.constraints.ConstraintDef;
+import ch.ehi.interlis.logicalexpressions.Term;
 import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3940EF380079 autoimport "ViewDef"
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -140,7 +122,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21802E3 body3940EF380079 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsSelectionview())
 			visitor.visit(getSelectionview());
 		it = iteratorJoin();
@@ -421,7 +403,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	}
 
 	// -beg- preserve=no 396193160049 code3940EF380079 "join"
-	private java.util.Set join = new java.util.HashSet();
+	private Set<RenamedViewableRef> join = new HashSet<RenamedViewableRef>();
 	// -end- 396193160049 code3940EF380079 "join"
 
 	/**
@@ -493,7 +475,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	 */
 	// -beg- preserve=no 396193160049 get_all_head3940EF380079
 	// "ViewDef::iteratorJoin"
-	public java.util.Iterator iteratorJoin()
+	public Iterator<?> iteratorJoin()
 	// -end- 396193160049 get_all_head3940EF380079 "ViewDef::iteratorJoin"
 	{
 		// -beg- preserve=no 396193160049 get_all_body3940EF380079
@@ -538,7 +520,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	}
 
 	// -beg- preserve=no 3961937303DC code3940EF380079 "iliunion"
-	private java.util.Set iliunion = new java.util.HashSet();
+	private Set<RenamedViewableRef> iliunion = new HashSet<RenamedViewableRef>();
 	// -end- 3961937303DC code3940EF380079 "iliunion"
 
 	/**
@@ -611,7 +593,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	 */
 	// -beg- preserve=no 3961937303DC get_all_head3940EF380079
 	// "ViewDef::iteratorIliunion"
-	public java.util.Iterator iteratorIliunion()
+	public Iterator<?> iteratorIliunion()
 	// -end- 3961937303DC get_all_head3940EF380079 "ViewDef::iteratorIliunion"
 	{
 		// -beg- preserve=no 3961937303DC get_all_body3940EF380079
@@ -749,7 +731,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	}
 
 	// -beg- preserve=no 3961971202BD code3940EF380079 "selection"
-	private java.util.Set selection = new java.util.HashSet();
+	private Set<Term> selection = new HashSet<Term>();
 	// -end- 3961971202BD code3940EF380079 "selection"
 
 	/**
@@ -822,7 +804,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	 */
 	// -beg- preserve=no 3961971202BD get_all_head3940EF380079
 	// "ViewDef::iteratorSelection"
-	public java.util.Iterator iteratorSelection()
+	public Iterator<?> iteratorSelection()
 	// -end- 3961971202BD get_all_head3940EF380079 "ViewDef::iteratorSelection"
 	{
 		// -beg- preserve=no 3961971202BD get_all_body3940EF380079
@@ -965,7 +947,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	}
 
 	// -beg- preserve=no 3961986F0304 code3940EF380079 "constraintDef"
-	private java.util.Set constraintDef = new java.util.HashSet();
+	private Set<ConstraintDef> constraintDef = new HashSet<ConstraintDef>();
 	// -end- 3961986F0304 code3940EF380079 "constraintDef"
 
 	/**
@@ -1040,7 +1022,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	 */
 	// -beg- preserve=no 3961986F0304 get_all_head3940EF380079
 	// "ViewDef::iteratorConstraintDef"
-	public java.util.Iterator iteratorConstraintDef()
+	public Iterator<?> iteratorConstraintDef()
 	// -end- 3961986F0304 get_all_head3940EF380079
 	// "ViewDef::iteratorConstraintDef"
 	{
@@ -1266,7 +1248,7 @@ public class ViewDef extends AbstractModelElement implements ViewableDef, IliSyn
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head3940EF380079
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head3940EF380079
 	// "ModelElement::iteratorSupplierDependency"
 	{

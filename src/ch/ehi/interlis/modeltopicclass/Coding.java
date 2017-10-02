@@ -24,6 +24,9 @@ package ch.ehi.interlis.modeltopicclass;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.TransferID;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A5FF400A0 autoimport "Coding"
 
@@ -77,7 +80,7 @@ public class Coding extends AbstractEditorElement implements java.io.Serializabl
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A000D body358A5FF400A0 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsTransferID())
 			visitor.visit(getTransferID());
 		super.enumerateChildren(visitor);

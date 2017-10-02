@@ -20,10 +20,10 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 358A671C0162 package "Enumeration"
 
-// -beg- preserve=no 358A671C0162 autoimport "Enumeration"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
-import ch.ehi.interlis.domainsandconstants.basetypes.EnumKind;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A671C0162 autoimport "Enumeration"
 
@@ -77,7 +77,7 @@ public class Enumeration extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B00A3 body358A671C0162 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorEnumElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -86,7 +86,7 @@ public class Enumeration extends BaseType implements java.io.Serializable {
 	}
 
 	// -beg- preserve=no 358A699B028E code358A671C0162 "enumElement"
-	private java.util.List enumElement = new java.util.ArrayList();
+	private List<EnumElement> enumElement = new ArrayList<EnumElement>();
 	// -end- 358A699B028E code358A671C0162 "enumElement"
 
 	/**
@@ -226,7 +226,7 @@ public class Enumeration extends BaseType implements java.io.Serializable {
 	 */
 	// -beg- preserve=no 358A699B028E get_all_head358A671C0162
 	// "Enumeration::iteratorEnumElement"
-	public java.util.Iterator iteratorEnumElement()
+	public Iterator<?> iteratorEnumElement()
 	// -end- 358A699B028E get_all_head358A671C0162
 	// "Enumeration::iteratorEnumElement"
 	{
@@ -251,7 +251,7 @@ public class Enumeration extends BaseType implements java.io.Serializable {
 		// -beg- preserve=no 358A699B028E remove_all_body358A671C0162
 		// "Enumeration::clearEnumElement"
 		if (sizeEnumElement() > 0) {
-			for (java.util.Iterator p = enumElement.iterator(); p.hasNext();) {
+			for (Iterator<?> p = enumElement.iterator(); p.hasNext();) {
 				((EnumElement) p.next())._unlinkEnumeration(this);
 			}
 			enumElement.clear();

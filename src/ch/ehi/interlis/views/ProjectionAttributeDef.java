@@ -26,6 +26,11 @@ import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.logicalexpressions.FunctionCall;
 import ch.ehi.interlis.views.BaseAttributeRef;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961A31B0231 autoimport "ProjectionAttributeDef"
 
@@ -83,7 +88,7 @@ public class ProjectionAttributeDef extends AbstractEditorElement implements jav
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180384 body3961A31B0231 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsDomainAttribute())
 			visitor.visit(getDomainAttribute());
 		if (containsFunctionCall())
@@ -287,7 +292,7 @@ public class ProjectionAttributeDef extends AbstractEditorElement implements jav
 	}
 
 	// -beg- preserve=no 3961A83901A8 code3961A31B0231 "baseAttributeRef"
-	private java.util.Set baseAttributeRef = new java.util.HashSet();
+	private Set<BaseAttributeRef> baseAttributeRef = new HashSet<BaseAttributeRef>();
 	// -end- 3961A83901A8 code3961A31B0231 "baseAttributeRef"
 
 	/**
@@ -366,7 +371,7 @@ public class ProjectionAttributeDef extends AbstractEditorElement implements jav
 	 */
 	// -beg- preserve=no 3961A83901A8 get_all_head3961A31B0231
 	// "ProjectionAttributeDef::iteratorBaseAttributeRef"
-	public java.util.Iterator iteratorBaseAttributeRef()
+	public Iterator<?> iteratorBaseAttributeRef()
 	// -end- 3961A83901A8 get_all_head3961A31B0231
 	// "ProjectionAttributeDef::iteratorBaseAttributeRef"
 	{

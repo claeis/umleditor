@@ -22,6 +22,9 @@ package ch.ehi.interlis.views;
 
 // -beg- preserve=no 396ED2D20204 autoimport "ViewableDef"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.Dependency;
 // -end- 396ED2D20204 autoimport "ViewableDef"
 
@@ -91,7 +94,7 @@ public interface ViewableDef extends ModelElement, java.io.Serializable {
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head396ED2D20204
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head396ED2D20204
 	// "ModelElement::iteratorSupplierDependency"
 	; // empty

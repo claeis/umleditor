@@ -20,11 +20,14 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 39488BFE0396 package "StructDec"
 
-// -beg- preserve=no 39488BFE0396 autoimport "StructDec"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import java.lang.Integer;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39488BFE0396 autoimport "StructDec"
+// -beg- preserve=no 39488BFE0396 autoimport "StructDec"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -61,7 +64,7 @@ public class StructDec extends AbstractEditorElement implements java.io.Serializ
 		// {NUMBER}(:{POSNUMBER})+(\.{POSNUMBER})?
 		StringBuffer ret = new StringBuffer();
 		ret.append(Long.toString(getFront()));
-		java.util.Iterator subIt = iteratorSubPart();
+		Iterator<Integer> subIt = iteratorSubPart();
 		while (subIt.hasNext()) {
 			ret.append(":");
 			ret.append(((Integer) (subIt.next())).toString());
@@ -176,13 +179,13 @@ public class StructDec extends AbstractEditorElement implements java.io.Serializ
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B01C5 body39488BFE0396 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B01C5 body39488BFE0396 "enumerateChildren"
 	}
 
 	// -beg- preserve=no 3CCBFE340228 code39488BFE0396 "subPart"
-	private java.util.List subPart = new java.util.ArrayList();
+	private List<Integer> subPart = new ArrayList<Integer>();
 	// -end- 3CCBFE340228 code39488BFE0396 "subPart"
 
 	/**
@@ -310,7 +313,7 @@ public class StructDec extends AbstractEditorElement implements java.io.Serializ
 	 */
 	// -beg- preserve=no 3CCBFE340228 get_all_head39488BFE0396
 	// "StructDec::iteratorSubPart"
-	public java.util.Iterator iteratorSubPart()
+	public java.util.Iterator<Integer> iteratorSubPart()
 	// -end- 3CCBFE340228 get_all_head39488BFE0396 "StructDec::iteratorSubPart"
 	{
 		// -beg- preserve=no 3CCBFE340228 get_all_body39488BFE0396

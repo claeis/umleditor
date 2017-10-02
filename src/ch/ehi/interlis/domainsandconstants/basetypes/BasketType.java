@@ -20,12 +20,11 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 394887020189 package "BasketType"
 
-// -beg- preserve=no 394887020189 autoimport "BasketType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.modeltopicclass.TopicDef;
-import ch.ehi.interlis.domainsandconstants.basetypes.BasketKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394887020189 autoimport "BasketType"
+import ch.ehi.interlis.modeltopicclass.TopicDef;
 
 // import declarations
 // please fill in/modify the following section
@@ -76,7 +75,7 @@ public class BasketType extends BaseType implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0111 body394887020189 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0111 body394887020189 "enumerateChildren"
 	}

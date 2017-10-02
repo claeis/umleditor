@@ -20,33 +20,18 @@
 package ch.ehi.interlis.functions;
 // -end- 3960AFB50130 package "FunctionDef"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 // -beg- preserve=no 3960AFB50130 autoimport "FunctionDef"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.interlis.functions.ArgumentType;
 import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 3960AFB50130 autoimport "FunctionDef"
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -127,7 +112,7 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21803C9 body3960AFB50130 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorArgument();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -151,7 +136,7 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 	}
 
 	// -beg- preserve=no 3960B129038F code3960AFB50130 "argument"
-	private java.util.Set argument = new java.util.HashSet();
+	private Set<ArgumentType> argument = new HashSet<ArgumentType>();
 	// -end- 3960B129038F code3960AFB50130 "argument"
 
 	/**
@@ -226,7 +211,7 @@ public class FunctionDef extends AbstractModelElement implements ModelElement, I
 	 */
 	// -beg- preserve=no 3960B129038F get_all_head3960AFB50130
 	// "FunctionDef::iteratorArgument"
-	public java.util.Iterator iteratorArgument()
+	public Iterator<?> iteratorArgument()
 	// -end- 3960B129038F get_all_head3960AFB50130
 	// "FunctionDef::iteratorArgument"
 	{

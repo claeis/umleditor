@@ -26,6 +26,9 @@ import ch.ehi.interlis.domainsandconstants.linetypes.Ili1ControlPoints;
 import ch.ehi.interlis.domainsandconstants.linetypes.IntersectionDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineForm;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A65070007 autoimport "LineType"
 
@@ -81,7 +84,7 @@ public abstract class LineType extends Type implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B02D4 body358A65070007 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsIli1ControlPoints())
 			visitor.visit(getIli1ControlPoints());
 		if (containsIntersectionDef())

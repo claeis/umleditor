@@ -20,6 +20,7 @@
 package ch.ehi.interlis.domainsandconstants;
 // -end- 358A651D03B6 package "Type"
 
+import java.util.Iterator;
 // -beg- preserve=no 358A651D03B6 autoimport "Type"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.basics.tools.AbstractVisitor;
@@ -75,7 +76,7 @@ public abstract class Type extends AbstractEditorElement implements java.io.Seri
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A03CC body358A651D03B6 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21A03CC body358A651D03B6 "enumerateChildren"
 	}

@@ -20,6 +20,10 @@
 package ch.ehi.interlis.units;
 // -end- 3949E16F0308 package "DerivedUnit"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3949E16F0308 autoimport "DerivedUnit"
 import ch.ehi.basics.types.NlsString;
@@ -77,7 +81,7 @@ public class DerivedUnit extends AbstractEditorElement implements java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21800B3 body3949E16F0308 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorDerivedUnitFactor();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -87,7 +91,7 @@ public class DerivedUnit extends AbstractEditorElement implements java.io.Serial
 	}
 
 	// -beg- preserve=no 3949E7A200ED code3949E16F0308 "derivedUnitFactor"
-	private java.util.Set derivedUnitFactor = new java.util.HashSet();
+	private Set<DerivedUnitFactor> derivedUnitFactor = new HashSet<DerivedUnitFactor>();
 	// -end- 3949E7A200ED code3949E16F0308 "derivedUnitFactor"
 
 	/**
@@ -166,7 +170,7 @@ public class DerivedUnit extends AbstractEditorElement implements java.io.Serial
 	 */
 	// -beg- preserve=no 3949E7A200ED get_all_head3949E16F0308
 	// "DerivedUnit::iteratorDerivedUnitFactor"
-	public java.util.Iterator iteratorDerivedUnitFactor()
+	public Iterator<?> iteratorDerivedUnitFactor()
 	// -end- 3949E7A200ED get_all_head3949E16F0308
 	// "DerivedUnit::iteratorDerivedUnitFactor"
 	{

@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 3C1EFD040126 autoimport "TextConst"
 import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3C1EFD040126 autoimport "TextConst"
 
@@ -73,7 +76,7 @@ public class TextConst extends Constant implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0284 body3C1EFD040126 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getText());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0284 body3C1EFD040126 "enumerateChildren"

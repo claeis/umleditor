@@ -24,6 +24,9 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineForm;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 35B870B60005 autoimport "LineFormCmt"
 
@@ -77,7 +80,7 @@ public class LineFormCmt extends AbstractEditorElement implements java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0342 body35B870B60005 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getExplanation());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0342 body35B870B60005 "enumerateChildren"

@@ -26,6 +26,11 @@ import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.logicalexpressions.Term;
 import ch.ehi.interlis.functions.FunctionDef;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394744420142 autoimport "FunctionCall"
 
@@ -86,7 +91,7 @@ public class FunctionCall extends AbstractEditorElement implements IliSyntax, ja
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180289 body394744420142 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorArgument();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -98,7 +103,7 @@ public class FunctionCall extends AbstractEditorElement implements IliSyntax, ja
 	}
 
 	// -beg- preserve=no 3960AE5B0006 code394744420142 "argument"
-	private java.util.Set argument = new java.util.HashSet();
+	private Set<Term> argument = new HashSet<Term>();
 	// -end- 3960AE5B0006 code394744420142 "argument"
 
 	/**
@@ -173,7 +178,7 @@ public class FunctionCall extends AbstractEditorElement implements IliSyntax, ja
 	 */
 	// -beg- preserve=no 3960AE5B0006 get_all_head394744420142
 	// "FunctionCall::iteratorArgument"
-	public java.util.Iterator iteratorArgument()
+	public Iterator<Term> iteratorArgument()
 	// -end- 3960AE5B0006 get_all_head394744420142
 	// "FunctionCall::iteratorArgument"
 	{

@@ -20,16 +20,19 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3D21C62B03BA package "ClassDef"
 
-// -beg- preserve=no 3D21C62B03BA autoimport "ClassDef"
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.interlis.metaobjects.ParameterDef;
-import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
-import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
-import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
-import ch.ehi.interlis.modeltopicclass.ClassDefKind;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D21C62B03BA autoimport "ClassDef"
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
+import ch.ehi.interlis.metaobjects.ParameterDef;
 
 // import declarations
 // please fill in/modify the following section
@@ -82,7 +85,7 @@ public class ClassDef extends AbstractClassDef {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A01BA body3D21C62B03BA "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorParameterDef();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -91,7 +94,7 @@ public class ClassDef extends AbstractClassDef {
 	}
 
 	// -beg- preserve=no 3941016100B0 code3D21C62B03BA "parameterDef"
-	private java.util.List parameterDef = new java.util.ArrayList();
+	private List parameterDef = new ArrayList();
 	// -end- 3941016100B0 code3D21C62B03BA "parameterDef"
 
 	/**
@@ -228,7 +231,7 @@ public class ClassDef extends AbstractClassDef {
 	 */
 	// -beg- preserve=no 3941016100B0 get_all_head3D21C62B03BA
 	// "ClassDef::iteratorParameterDef"
-	public java.util.Iterator iteratorParameterDef()
+	public Iterator<?> iteratorParameterDef()
 	// -end- 3941016100B0 get_all_head3D21C62B03BA
 	// "ClassDef::iteratorParameterDef"
 	{
@@ -253,7 +256,7 @@ public class ClassDef extends AbstractClassDef {
 		// -beg- preserve=no 3941016100B0 remove_all_body3D21C62B03BA
 		// "ClassDef::clearParameterDef"
 		if (sizeParameterDef() > 0) {
-			for (java.util.Iterator p = parameterDef.iterator(); p.hasNext();) {
+			for (Iterator<?> p = parameterDef.iterator(); p.hasNext();) {
 				((ParameterDef) p.next())._unlinkClassDef(this);
 			}
 			parameterDef.clear();
@@ -309,7 +312,7 @@ public class ClassDef extends AbstractClassDef {
 
 	// -beg- preserve=no 4EF99B6B02E9 code3D21C62B03BA
 	// "restrictedStructAttrType"
-	private java.util.Set restrictedStructAttrType = new java.util.HashSet();
+	private Set<StructAttrType> restrictedStructAttrType = new HashSet<StructAttrType>();
 	// -end- 4EF99B6B02E9 code3D21C62B03BA "restrictedStructAttrType"
 
 	/**
@@ -390,7 +393,7 @@ public class ClassDef extends AbstractClassDef {
 	 */
 	// -beg- preserve=no 4EF99B6B02E9 get_all_head3D21C62B03BA
 	// "ClassDef::iteratorRestrictedStructAttrType"
-	public java.util.Iterator iteratorRestrictedStructAttrType()
+	public Iterator<StructAttrType> iteratorRestrictedStructAttrType()
 	// -end- 4EF99B6B02E9 get_all_head3D21C62B03BA
 	// "ClassDef::iteratorRestrictedStructAttrType"
 	{
@@ -415,7 +418,7 @@ public class ClassDef extends AbstractClassDef {
 		// -beg- preserve=no 4EF99B6B02E9 remove_all_body3D21C62B03BA
 		// "ClassDef::clearRestrictedStructAttrType"
 		if (sizeRestrictedStructAttrType() > 0) {
-			for (java.util.Iterator p = restrictedStructAttrType.iterator(); p.hasNext();) {
+			for (Iterator<StructAttrType> p = restrictedStructAttrType.iterator(); p.hasNext();) {
 				((StructAttrType) p.next())._unlinkRestrictedTo(this);
 			}
 			restrictedStructAttrType.clear();
@@ -473,7 +476,7 @@ public class ClassDef extends AbstractClassDef {
 	// "ClassDef::_unlinkRestrictedStructAttrType"
 
 	// -beg- preserve=no 4EF99B7901BD code3D21C62B03BA "structAttrType"
-	private java.util.Set structAttrType = new java.util.HashSet();
+	private Set<StructAttrType> structAttrType = new HashSet<StructAttrType>();
 	// -end- 4EF99B7901BD code3D21C62B03BA "structAttrType"
 
 	/**
@@ -552,7 +555,7 @@ public class ClassDef extends AbstractClassDef {
 	 */
 	// -beg- preserve=no 4EF99B7901BD get_all_head3D21C62B03BA
 	// "ClassDef::iteratorStructAttrType"
-	public java.util.Iterator iteratorStructAttrType()
+	public Iterator<StructAttrType> iteratorStructAttrType()
 	// -end- 4EF99B7901BD get_all_head3D21C62B03BA
 	// "ClassDef::iteratorStructAttrType"
 	{
@@ -577,7 +580,7 @@ public class ClassDef extends AbstractClassDef {
 		// -beg- preserve=no 4EF99B7901BD remove_all_body3D21C62B03BA
 		// "ClassDef::clearStructAttrType"
 		if (sizeStructAttrType() > 0) {
-			for (java.util.Iterator p = structAttrType.iterator(); p.hasNext();) {
+			for (Iterator<StructAttrType> p = structAttrType.iterator(); p.hasNext();) {
 				((StructAttrType) p.next())._unlinkParticipant(this);
 			}
 			structAttrType.clear();
@@ -754,7 +757,7 @@ public class ClassDef extends AbstractClassDef {
 	// "ClassDef::_unlinkSurfaceType"
 
 	// -beg- preserve=no 3FE5C65E00BD code3D21C62B03BA "lineFormTypeDef"
-	private java.util.Set lineFormTypeDef = new java.util.HashSet();
+	private Set<LineFormTypeDef> lineFormTypeDef = new HashSet<LineFormTypeDef>();
 	// -end- 3FE5C65E00BD code3D21C62B03BA "lineFormTypeDef"
 
 	/**
@@ -834,7 +837,7 @@ public class ClassDef extends AbstractClassDef {
 	 */
 	// -beg- preserve=no 3FE5C65E00BD get_all_head3D21C62B03BA
 	// "ClassDef::iteratorLineFormTypeDef"
-	public java.util.Iterator iteratorLineFormTypeDef()
+	public Iterator<LineFormTypeDef> iteratorLineFormTypeDef()
 	// -end- 3FE5C65E00BD get_all_head3D21C62B03BA
 	// "ClassDef::iteratorLineFormTypeDef"
 	{
@@ -859,7 +862,7 @@ public class ClassDef extends AbstractClassDef {
 		// -beg- preserve=no 3FE5C65E00BD remove_all_body3D21C62B03BA
 		// "ClassDef::clearLineFormTypeDef"
 		if (sizeLineFormTypeDef() > 0) {
-			for (java.util.Iterator p = lineFormTypeDef.iterator(); p.hasNext();) {
+			for (Iterator<LineFormTypeDef> p = lineFormTypeDef.iterator(); p.hasNext();) {
 				((LineFormTypeDef) p.next())._unlinkStructure(this);
 			}
 			lineFormTypeDef.clear();

@@ -25,6 +25,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.RefSys;
 import ch.ehi.interlis.domainsandconstants.basetypes.RotationKind;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3948DB550222 autoimport "NumericalType"
 
@@ -79,7 +82,7 @@ public abstract class NumericalType extends BaseType implements java.io.Serializ
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B01ED body3948DB550222 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsRefSys())
 			visitor.visit(getRefSys());
 		super.enumerateChildren(visitor);

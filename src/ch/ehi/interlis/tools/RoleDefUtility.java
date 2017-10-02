@@ -17,6 +17,8 @@
  */
 package ch.ehi.interlis.tools;
 
+import java.util.Iterator;
+
 import ch.ehi.interlis.associations.*;
 import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
@@ -101,7 +103,7 @@ public class RoleDefUtility {
 	 */
 	static public RoleDef getOppEnd(RoleDef athis) {
 		AssociationDef assoc = (AssociationDef) athis.getAssociation();
-		java.util.Iterator rolei = assoc.iteratorConnection();
+		Iterator<?> rolei = assoc.iteratorConnection();
 		while (rolei.hasNext()) {
 			RoleDef obj = (RoleDef) rolei.next();
 			if (obj != athis) {

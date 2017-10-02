@@ -25,6 +25,9 @@ import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3940AD20009C autoimport "Contract"
 
@@ -80,7 +83,7 @@ public class Contract extends AbstractEditorElement implements Element, java.io.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA219035C body3940AD20009C "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getIssuer());
 		visitor.visit(getMetaAttrb());
 		visitor.visit(getDocumentation());

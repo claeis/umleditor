@@ -20,6 +20,10 @@
 package ch.ehi.interlis.units;
 // -end- 3940EC1D0094 package "UnitDef"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.IliSyntax;
@@ -117,7 +121,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180120 body3940EC1D0094 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (contains_extends())
 			visitor.visit(get_extends());
 		if (containsDerivedUnit())
@@ -658,7 +662,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 	}
 
 	// -beg- preserve=no 3948A0C1035D code3940EC1D0094 "numericalType"
-	private java.util.Set numericalType = new java.util.HashSet();
+	private Set<NumericalType> numericalType = new HashSet<NumericalType>();
 	// -end- 3948A0C1035D code3940EC1D0094 "numericalType"
 
 	/**
@@ -735,7 +739,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 	 */
 	// -beg- preserve=no 3948A0C1035D get_all_head3940EC1D0094
 	// "UnitDef::iteratorNumericalType"
-	public java.util.Iterator iteratorNumericalType()
+	public Iterator<NumericalType> iteratorNumericalType()
 	// -end- 3948A0C1035D get_all_head3940EC1D0094
 	// "UnitDef::iteratorNumericalType"
 	{
@@ -760,7 +764,7 @@ public class UnitDef extends AbstractModelElement implements ModelElement, IliSy
 		// -beg- preserve=no 3948A0C1035D remove_all_body3940EC1D0094
 		// "UnitDef::clearNumericalType"
 		if (sizeNumericalType() > 0) {
-			for (java.util.Iterator p = numericalType.iterator(); p.hasNext();) {
+			for (Iterator<NumericalType> p = numericalType.iterator(); p.hasNext();) {
 				((NumericalType) p.next())._unlinkUnitDef(this);
 			}
 			numericalType.clear();

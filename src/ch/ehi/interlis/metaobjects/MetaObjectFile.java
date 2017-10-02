@@ -8,41 +8,29 @@
 package ch.ehi.interlis.metaobjects;
 // -end- 3D6248EA02E3 package "MetaObjectFile"
 
-// -beg- preserve=no 3D6248EA02E3 autoimport "MetaObjectFile"
-import ch.ehi.uml1_4.foundation.core.Artifact;
-import ch.ehi.uml1_4.implementation.AbstractNamespace;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.uml1_4.behaviour.activitygraphs.ClassifierInState;
+import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 import ch.ehi.uml1_4.behaviour.commonbehavior.CreateAction;
-import ch.ehi.uml1_4.foundation.core.Feature;
+import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
+// -beg- preserve=no 3D6248EA02E3 autoimport "MetaObjectFile"
+import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Component;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.umleditor.umlpresentation.Diagram;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.basics.tools.AbstractVisitor;
-// -end- 3D6248EA02E3 autoimport "MetaObjectFile"
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.implementation.AbstractNamespace;
 
 // import declarations
 // please fill in/modify the following section
@@ -237,7 +225,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 3A018E150193 code3D6248EA02E3 "implementationLocation"
-	private java.util.Set implementationLocation = new java.util.HashSet();
+	private Set<Component> implementationLocation = new HashSet<Component>();
 	// -end- 3A018E150193 code3D6248EA02E3 "implementationLocation"
 
 	/**
@@ -317,7 +305,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 3A018E150193 get_all_head3D6248EA02E3
 	// "Artifact::iteratorImplementationLocation"
-	public java.util.Iterator iteratorImplementationLocation()
+	public Iterator<Component> iteratorImplementationLocation()
 	// -end- 3A018E150193 get_all_head3D6248EA02E3
 	// "Artifact::iteratorImplementationLocation"
 	{
@@ -342,7 +330,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 3A018E150193 remove_all_body3D6248EA02E3
 		// "Artifact::clearImplementationLocation"
 		if (sizeImplementationLocation() > 0) {
-			for (java.util.Iterator p = implementationLocation.iterator(); p.hasNext();) {
+			for (Iterator<Component> p = implementationLocation.iterator(); p.hasNext();) {
 				((Component) p.next())._unlinkImplementation(this);
 			}
 			implementationLocation.clear();
@@ -464,7 +452,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3D6248EA02E3
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3D6248EA02E3
 	// "ModelElement::iteratorPresentation"
 	{
@@ -551,7 +539,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	}
 
 	// -beg- preserve=no 33CF9EFC006E code3D6248EA02E3 "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 33CF9EFC006E code3D6248EA02E3 "objectFlowState"
 
 	/**
@@ -629,7 +617,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33CF9EFC006E get_all_head3D6248EA02E3
 	// "Classifier::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<ObjectFlowState> iteratorObjectFlowState()
 	// -end- 33CF9EFC006E get_all_head3D6248EA02E3
 	// "Classifier::iteratorObjectFlowState"
 	{
@@ -654,7 +642,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33CF9EFC006E remove_all_body3D6248EA02E3
 		// "Classifier::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<ObjectFlowState> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkType(this);
 			}
 			objectFlowState.clear();
@@ -709,7 +697,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "Classifier::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 33CF9F1602BC code3D6248EA02E3 "classifierInState"
-	private java.util.Set classifierInState = new java.util.HashSet();
+	private Set<ClassifierInState> classifierInState = new HashSet<ClassifierInState>();
 	// -end- 33CF9F1602BC code3D6248EA02E3 "classifierInState"
 
 	/**
@@ -788,7 +776,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33CF9F1602BC get_all_head3D6248EA02E3
 	// "Classifier::iteratorClassifierInState"
-	public java.util.Iterator iteratorClassifierInState()
+	public Iterator<ClassifierInState> iteratorClassifierInState()
 	// -end- 33CF9F1602BC get_all_head3D6248EA02E3
 	// "Classifier::iteratorClassifierInState"
 	{
@@ -813,7 +801,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33CF9F1602BC remove_all_body3D6248EA02E3
 		// "Classifier::clearClassifierInState"
 		if (sizeClassifierInState() > 0) {
-			for (java.util.Iterator p = classifierInState.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierInState> p = classifierInState.iterator(); p.hasNext();) {
 				((ClassifierInState) p.next())._unlinkType(this);
 			}
 			classifierInState.clear();
@@ -935,7 +923,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head3D6248EA02E3
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<?> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head3D6248EA02E3
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -1072,7 +1060,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head3D6248EA02E3
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<?> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head3D6248EA02E3
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -1142,7 +1130,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 33CAD7E900AB code3D6248EA02E3 "instance"
-	private java.util.Set instance = new java.util.HashSet();
+	private Set<Instance> instance = new HashSet<Instance>();
 	// -end- 33CAD7E900AB code3D6248EA02E3 "instance"
 
 	/**
@@ -1217,7 +1205,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33CAD7E900AB get_all_head3D6248EA02E3
 	// "Classifier::iteratorInstance"
-	public java.util.Iterator iteratorInstance()
+	public Iterator<Instance> iteratorInstance()
 	// -end- 33CAD7E900AB get_all_head3D6248EA02E3
 	// "Classifier::iteratorInstance"
 	{
@@ -1242,7 +1230,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33CAD7E900AB remove_all_body3D6248EA02E3
 		// "Classifier::clearInstance"
 		if (sizeInstance() > 0) {
-			for (java.util.Iterator p = instance.iterator(); p.hasNext();) {
+			for (Iterator<Instance> p = instance.iterator(); p.hasNext();) {
 				((Instance) p.next())._unlinkClassifier(this);
 			}
 			instance.clear();
@@ -1293,7 +1281,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// -end- 33CAD7E900AB _unlink_body3D6248EA02E3 "Classifier::_unlinkInstance"
 
 	// -beg- preserve=no 33CFD0A701A4 code3D6248EA02E3 "createAction"
-	private java.util.Set createAction = new java.util.HashSet();
+	private Set<CreateAction> createAction = new HashSet<CreateAction>();
 	// -end- 33CFD0A701A4 code3D6248EA02E3 "createAction"
 
 	/**
@@ -1370,7 +1358,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33CFD0A701A4 get_all_head3D6248EA02E3
 	// "Classifier::iteratorCreateAction"
-	public java.util.Iterator iteratorCreateAction()
+	public Iterator<CreateAction> iteratorCreateAction()
 	// -end- 33CFD0A701A4 get_all_head3D6248EA02E3
 	// "Classifier::iteratorCreateAction"
 	{
@@ -1395,7 +1383,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33CFD0A701A4 remove_all_body3D6248EA02E3
 		// "Classifier::clearCreateAction"
 		if (sizeCreateAction() > 0) {
-			for (java.util.Iterator p = createAction.iterator(); p.hasNext();) {
+			for (Iterator<CreateAction> p = createAction.iterator(); p.hasNext();) {
 				((CreateAction) p.next())._unlinkInstantiation(this);
 			}
 			createAction.clear();
@@ -1448,7 +1436,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 32B5D7EF03D3 code3D6248EA02E3 "feature"
-	private java.util.List feature = new java.util.ArrayList();
+	private List<Feature> feature = new ArrayList<Feature>();
 	// -end- 32B5D7EF03D3 code3D6248EA02E3 "feature"
 
 	/**
@@ -1579,7 +1567,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 32B5D7EF03D3 get_all_head3D6248EA02E3
 	// "Classifier::iteratorFeature"
-	public java.util.Iterator iteratorFeature()
+	public Iterator<Feature> iteratorFeature()
 	// -end- 32B5D7EF03D3 get_all_head3D6248EA02E3 "Classifier::iteratorFeature"
 	{
 		// -beg- preserve=no 32B5D7EF03D3 get_all_body3D6248EA02E3
@@ -1602,7 +1590,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 32B5D7EF03D3 remove_all_body3D6248EA02E3
 		// "Classifier::clearFeature"
 		if (sizeFeature() > 0) {
-			for (java.util.Iterator p = feature.iterator(); p.hasNext();) {
+			for (Iterator<Feature> p = feature.iterator(); p.hasNext();) {
 				((Feature) p.next())._unlinkOwner(this);
 			}
 			feature.clear();
@@ -1653,7 +1641,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// -end- 32B5D7EF03D3 _unlink_body3D6248EA02E3 "Classifier::_unlinkFeature"
 
 	// -beg- preserve=no 33E265070353 code3D6248EA02E3 "association"
-	private java.util.Set association = new java.util.HashSet();
+	private Set<AssociationEnd> association = new HashSet<AssociationEnd>();
 	// -end- 33E265070353 code3D6248EA02E3 "association"
 
 	/**
@@ -1730,7 +1718,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33E265070353 get_all_head3D6248EA02E3
 	// "Classifier::iteratorAssociation"
-	public java.util.Iterator iteratorAssociation()
+	public Iterator<AssociationEnd> iteratorAssociation()
 	// -end- 33E265070353 get_all_head3D6248EA02E3
 	// "Classifier::iteratorAssociation"
 	{
@@ -1755,7 +1743,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33E265070353 remove_all_body3D6248EA02E3
 		// "Classifier::clearAssociation"
 		if (sizeAssociation() > 0) {
-			for (java.util.Iterator p = association.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = association.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkParticipant(this);
 			}
 			association.clear();
@@ -1808,7 +1796,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "Classifier::_unlinkAssociation"
 
 	// -beg- preserve=no 33F0EFAD00AB code3D6248EA02E3 "specifiedEnd"
-	private java.util.Set specifiedEnd = new java.util.HashSet();
+	private Set<AssociationEnd> specifiedEnd = new HashSet<AssociationEnd>();
 	// -end- 33F0EFAD00AB code3D6248EA02E3 "specifiedEnd"
 
 	/**
@@ -1885,7 +1873,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33F0EFAD00AB get_all_head3D6248EA02E3
 	// "Classifier::iteratorSpecifiedEnd"
-	public java.util.Iterator iteratorSpecifiedEnd()
+	public Iterator<AssociationEnd> iteratorSpecifiedEnd()
 	// -end- 33F0EFAD00AB get_all_head3D6248EA02E3
 	// "Classifier::iteratorSpecifiedEnd"
 	{
@@ -1910,7 +1898,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 33F0EFAD00AB remove_all_body3D6248EA02E3
 		// "Classifier::clearSpecifiedEnd"
 		if (sizeSpecifiedEnd() > 0) {
-			for (java.util.Iterator p = specifiedEnd.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = specifiedEnd.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkSpecification(this);
 			}
 			specifiedEnd.clear();
@@ -1963,7 +1951,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "Classifier::_unlinkSpecifiedEnd"
 
 	// -beg- preserve=no 36E96A87033E code3D6248EA02E3 "powertypeRange"
-	private java.util.Set powertypeRange = new java.util.HashSet();
+	private Set<Generalization> powertypeRange = new HashSet<Generalization>();
 	// -end- 36E96A87033E code3D6248EA02E3 "powertypeRange"
 
 	/**
@@ -2041,7 +2029,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 36E96A87033E get_all_head3D6248EA02E3
 	// "Classifier::iteratorPowertypeRange"
-	public java.util.Iterator iteratorPowertypeRange()
+	public Iterator<Generalization> iteratorPowertypeRange()
 	// -end- 36E96A87033E get_all_head3D6248EA02E3
 	// "Classifier::iteratorPowertypeRange"
 	{
@@ -2066,7 +2054,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 36E96A87033E remove_all_body3D6248EA02E3
 		// "Classifier::clearPowertypeRange"
 		if (sizePowertypeRange() > 0) {
-			for (java.util.Iterator p = powertypeRange.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = powertypeRange.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkPowertype(this);
 			}
 			powertypeRange.clear();
@@ -2120,7 +2108,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "Classifier::_unlinkPowertypeRange"
 
 	// -beg- preserve=no 335C14A5019A code3D6248EA02E3 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code3D6248EA02E3 "generalization"
 
 	/**
@@ -2199,7 +2187,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head3D6248EA02E3
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head3D6248EA02E3
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -2224,7 +2212,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 335C14A5019A remove_all_body3D6248EA02E3
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -2279,7 +2267,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code3D6248EA02E3 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code3D6248EA02E3 "specialization"
 
 	/**
@@ -2358,7 +2346,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head3D6248EA02E3
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head3D6248EA02E3
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -2383,7 +2371,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 		// -beg- preserve=no 335C146B01D6 remove_all_body3D6248EA02E3
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();

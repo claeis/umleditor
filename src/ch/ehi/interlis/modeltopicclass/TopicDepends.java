@@ -20,6 +20,8 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3C17712203B7 package "TopicDepends"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 3C17712203B7 autoimport "TopicDepends"
@@ -104,7 +106,7 @@ public class TopicDepends extends AbstractDependency implements Usage, java.io.S
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A0033 body3C17712203B7 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -306,7 +308,7 @@ public class TopicDepends extends AbstractDependency implements Usage, java.io.S
 	 */
 	// -beg- preserve=no 335C0D7A02E4 get_all_head3C17712203B7
 	// "Dependency::iteratorSupplier"
-	public java.util.Iterator iteratorSupplier()
+	public Iterator<?> iteratorSupplier()
 	// -end- 335C0D7A02E4 get_all_head3C17712203B7
 	// "Dependency::iteratorSupplier"
 	{

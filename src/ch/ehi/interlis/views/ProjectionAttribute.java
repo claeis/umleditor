@@ -20,13 +20,13 @@
 package ch.ehi.interlis.views;
 // -end- 3961A2D50316 package "ProjectionAttribute"
 
-// -beg- preserve=no 3961A2D50316 autoimport "ProjectionAttribute"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.views.ProjectionAttributeDef;
-import ch.ehi.interlis.views.ProjectionAttributeKind;
-import ch.ehi.basics.types.NlsString;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961A2D50316 autoimport "ProjectionAttribute"
+import ch.ehi.basics.types.NlsString;
+// -beg- preserve=no 3961A2D50316 autoimport "ProjectionAttribute"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -81,7 +81,7 @@ public class ProjectionAttribute extends AbstractEditorElement implements java.i
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180370 body3961A2D50316 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsAttrdef())
 			visitor.visit(getAttrdef());
 		visitor.visit(getBaseName());

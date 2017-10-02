@@ -25,6 +25,11 @@ import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.graphicdescriptions.CondSigParamAss;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961F2DF02E2 autoimport "SignAttribute"
 
@@ -80,7 +85,7 @@ public class SignAttribute extends AbstractEditorElement implements java.io.Seri
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190078 body3961F2DF02E2 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsSign())
 			visitor.visit(getSign());
 		it = iteratorCondSigParamAss();
@@ -182,7 +187,7 @@ public class SignAttribute extends AbstractEditorElement implements java.io.Seri
 	}
 
 	// -beg- preserve=no 3961F7E8020A code3961F2DF02E2 "condSigParamAss"
-	private java.util.Set condSigParamAss = new java.util.HashSet();
+	private Set<CondSigParamAss> condSigParamAss = new HashSet<CondSigParamAss>();
 	// -end- 3961F7E8020A code3961F2DF02E2 "condSigParamAss"
 
 	/**
@@ -261,7 +266,7 @@ public class SignAttribute extends AbstractEditorElement implements java.io.Seri
 	 */
 	// -beg- preserve=no 3961F7E8020A get_all_head3961F2DF02E2
 	// "SignAttribute::iteratorCondSigParamAss"
-	public java.util.Iterator iteratorCondSigParamAss()
+	public Iterator<CondSigParamAss> iteratorCondSigParamAss()
 	// -end- 3961F7E8020A get_all_head3961F2DF02E2
 	// "SignAttribute::iteratorCondSigParamAss"
 	{

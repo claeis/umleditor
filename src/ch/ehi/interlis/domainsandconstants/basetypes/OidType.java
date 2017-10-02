@@ -20,9 +20,8 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 3FDC48C9003D package "OidType"
 
-// -beg- preserve=no 3FDC48C9003D autoimport "OidType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.domainsandconstants.basetypes.OidKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3FDC48C9003D autoimport "OidType"
 
@@ -73,7 +72,7 @@ public class OidType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3FDC4C1A0138 body3FDC48C9003D "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3FDC4C1A0138 body3FDC48C9003D "enumerateChildren"
 	}

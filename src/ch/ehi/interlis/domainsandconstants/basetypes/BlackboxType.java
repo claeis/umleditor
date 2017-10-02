@@ -20,9 +20,8 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 4489813700A9 package "BlackboxType"
 
-// -beg- preserve=no 4489813700A9 autoimport "BlackboxType"
-import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
-import ch.ehi.interlis.domainsandconstants.basetypes.BlackboxKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 4489813700A9 autoimport "BlackboxType"
 
@@ -74,7 +73,7 @@ public class BlackboxType extends BaseType {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448D3D120219 body4489813700A9 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 448D3D120219 body4489813700A9 "enumerateChildren"
 	}

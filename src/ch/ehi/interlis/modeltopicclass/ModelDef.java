@@ -20,38 +20,25 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 358A5DB202C5 package "ModelDef"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.DefinitionProxy;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.uml1_4.implementation.AbstractNamespace;
+import ch.ehi.uml1_4.modelmanagement.ElementImport;
 // -beg- preserve=no 358A5DB202C5 autoimport "ModelDef"
 import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.interlis.DefinitionProxy;
-import ch.ehi.uml1_4.implementation.AbstractNamespace;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.interlis.modeltopicclass.Contract;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.interlis.modeltopicclass.Translation;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.modeltopicclass.ModelDefKind;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.umleditor.umlpresentation.Diagram;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-// -end- 358A5DB202C5 autoimport "ModelDef"
 
 // import declarations
 // please fill in/modify the following section
@@ -100,7 +87,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	}
 
 	// -beg- preserve=no 3CFE209C0280 head358A5DB202C5 "getValidSecondLanguages"
-	public java.util.Set getValidSecondLanguages()
+	public Set<String> getValidSecondLanguages()
 	// -end- 3CFE209C0280 head358A5DB202C5 "getValidSecondLanguages"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -112,8 +99,8 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CFE209C0280 body358A5DB202C5
 		// "getValidSecondLanguages"
-		java.util.HashSet ret = new java.util.HashSet();
-		java.util.Iterator langi = iteratorTranslation();
+		HashSet<String> ret = new HashSet<String>();
+		Iterator<AbstractEditorElement> langi = iteratorTranslation();
 		while (langi.hasNext()) {
 			Translation lang = (Translation) langi.next();
 			ret.add(lang.getLanguage());
@@ -185,7 +172,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190244 body358A5DB202C5 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorContract();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -374,7 +361,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 3940AD300137 code358A5DB202C5 "contract"
-	private java.util.Set contract = new java.util.HashSet();
+	private Set<Contract> contract = new HashSet<Contract>();
 	// -end- 3940AD300137 code358A5DB202C5 "contract"
 
 	/**
@@ -449,7 +436,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 3940AD300137 get_all_head358A5DB202C5
 	// "ModelDef::iteratorContract"
-	public java.util.Iterator iteratorContract()
+	public Iterator<Contract> iteratorContract()
 	// -end- 3940AD300137 get_all_head358A5DB202C5 "ModelDef::iteratorContract"
 	{
 		// -beg- preserve=no 3940AD300137 get_all_body358A5DB202C5
@@ -472,7 +459,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 3940AD300137 remove_all_body358A5DB202C5
 		// "ModelDef::clearContract"
 		if (sizeContract() > 0) {
-			for (java.util.Iterator p = contract.iterator(); p.hasNext();) {
+			for (Iterator<Contract> p = contract.iterator(); p.hasNext();) {
 				((Contract) p.next())._unlinkModelDef(this);
 			}
 			contract.clear();
@@ -594,7 +581,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head358A5DB202C5
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<?> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head358A5DB202C5
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -797,7 +784,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33598CAA030D get_all_head358A5DB202C5
 	// "Namespace::iteratorOwnedElement"
-	public java.util.Iterator iteratorOwnedElement()
+	public Iterator<?> iteratorOwnedElement()
 	// -end- 33598CAA030D get_all_head358A5DB202C5
 	// "Namespace::iteratorOwnedElement"
 	{
@@ -850,7 +837,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33598CAA030D itlink_head358A5DB202C5
 	// "Namespace::getOwnedElementLink"
-	public java.util.Iterator iteratorOwnedElementLink()
+	public Iterator<?> iteratorOwnedElementLink()
 	// -end- 33598CAA030D itlink_head358A5DB202C5
 	// "Namespace::getOwnedElementLink"
 	{
@@ -987,7 +974,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head358A5DB202C5
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head358A5DB202C5
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -1057,7 +1044,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	// "ModelElement::_unlinkSupplierDependency"
 
 	// -beg- preserve=no 3C1DC4150216 code358A5DB202C5 "translation"
-	private java.util.Set translation = new java.util.HashSet();
+	private Set<AbstractEditorElement> translation = new HashSet<AbstractEditorElement>();
 	// -end- 3C1DC4150216 code358A5DB202C5 "translation"
 
 	/**
@@ -1134,7 +1121,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 3C1DC4150216 get_all_head358A5DB202C5
 	// "ModelDef::iteratorTranslation"
-	public java.util.Iterator iteratorTranslation()
+	public java.util.Iterator<AbstractEditorElement> iteratorTranslation()
 	// -end- 3C1DC4150216 get_all_head358A5DB202C5
 	// "ModelDef::iteratorTranslation"
 	{
@@ -1159,7 +1146,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 3C1DC4150216 remove_all_body358A5DB202C5
 		// "ModelDef::clearTranslation"
 		if (sizeTranslation() > 0) {
-			for (java.util.Iterator p = translation.iterator(); p.hasNext();) {
+			for (Iterator<AbstractEditorElement> p = translation.iterator(); p.hasNext();) {
 				((Translation) p.next())._unlinkModelDef(this);
 			}
 			translation.clear();
@@ -1465,7 +1452,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	}
 
 	// -beg- preserve=no 33CD739B02DA code358A5DB202C5 "importedElement"
-	private java.util.Set importedElement = new java.util.HashSet();
+	private Set<ElementImport> importedElement = new HashSet<ElementImport>();
 	// -end- 33CD739B02DA code358A5DB202C5 "importedElement"
 
 	/**
@@ -1574,14 +1561,14 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33CD739B02DA get_all_head358A5DB202C5
 	// "Package::iteratorImportedElement"
-	public java.util.Iterator iteratorImportedElement()
+	public Iterator<?> iteratorImportedElement()
 	// -end- 33CD739B02DA get_all_head358A5DB202C5
 	// "Package::iteratorImportedElement"
 	{
 		// -beg- preserve=no 33CD739B02DA get_all_body358A5DB202C5
 		// "Package::iteratorImportedElement"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedElement.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedElement.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -1614,7 +1601,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 33CD739B02DA remove_all_body358A5DB202C5
 		// "Package::clearImportedElement"
 		if (sizeImportedElement() > 0) {
-			for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedElement()._unlinkImportedBy(linkobj);
 			}
@@ -1650,7 +1637,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 33CD739B02DA itlink_head358A5DB202C5
 	// "Package::getImportedElementLink"
-	public java.util.Iterator iteratorImportedElementLink()
+	public Iterator<ElementImport> iteratorImportedElementLink()
 	// -end- 33CD739B02DA itlink_head358A5DB202C5
 	// "Package::getImportedElementLink"
 	{
@@ -1695,7 +1682,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// "Package::findImportedElementLink"
 		if (importedElement1 == null)
 			return null;
-		for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+		for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedElement() == importedElement1)
 				return linkobj;
@@ -1800,7 +1787,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head358A5DB202C5
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head358A5DB202C5
 	// "ModelElement::iteratorPresentation"
 	{
@@ -1906,7 +1893,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	}
 
 	// -beg- preserve=no 335C14A5019A code358A5DB202C5 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code358A5DB202C5 "generalization"
 
 	/**
@@ -1987,7 +1974,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head358A5DB202C5
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head358A5DB202C5
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -2012,7 +1999,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 335C14A5019A remove_all_body358A5DB202C5
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -2070,7 +2057,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code358A5DB202C5 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code358A5DB202C5 "specialization"
 
 	/**
@@ -2151,7 +2138,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head358A5DB202C5
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head358A5DB202C5
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -2176,7 +2163,7 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		// -beg- preserve=no 335C146B01D6 remove_all_body358A5DB202C5
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -2344,9 +2331,9 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 358A5DB202C5 detail_end "ModelDef"
-	public java.util.Iterator iteratorIliImport() {
-		java.util.Iterator impi = super.iteratorClientDependency();
-		java.util.ArrayList imps = new java.util.ArrayList();
+	public Iterator<Dependency> iteratorIliImport() {
+		Iterator<?> impi = super.iteratorClientDependency();
+		ArrayList<Dependency> imps = new ArrayList<Dependency>();
 		while (impi.hasNext()) {
 			Dependency dep = (Dependency) impi.next();
 			if (dep instanceof IliImport) {

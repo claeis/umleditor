@@ -20,11 +20,14 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 358A64F7038A package "BaseType"
 
-// -beg- preserve=no 358A64F7038A autoimport "BaseType"
-import ch.ehi.interlis.domainsandconstants.Type;
-import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A64F7038A autoimport "BaseType"
+// -beg- preserve=no 358A64F7038A autoimport "BaseType"
+import ch.ehi.interlis.domainsandconstants.Type;
 
 // import declarations
 // please fill in/modify the following section
@@ -74,13 +77,13 @@ public abstract class BaseType extends Type implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B021F body358A64F7038A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B021F body358A64F7038A "enumerateChildren"
 	}
 
 	// -beg- preserve=no 3FDC4BA900E5 code358A64F7038A "oidType"
-	private java.util.Set oidType = new java.util.HashSet();
+	private Set<OidType> oidType = new HashSet<OidType>();
 	// -end- 3FDC4BA900E5 code358A64F7038A "oidType"
 
 	/**
@@ -155,7 +158,7 @@ public abstract class BaseType extends Type implements java.io.Serializable {
 	 */
 	// -beg- preserve=no 3FDC4BA900E5 get_all_head358A64F7038A
 	// "BaseType::iteratorOidType"
-	public java.util.Iterator iteratorOidType()
+	public Iterator<OidType> iteratorOidType()
 	// -end- 3FDC4BA900E5 get_all_head358A64F7038A "BaseType::iteratorOidType"
 	{
 		// -beg- preserve=no 3FDC4BA900E5 get_all_body358A64F7038A
@@ -178,7 +181,7 @@ public abstract class BaseType extends Type implements java.io.Serializable {
 		// -beg- preserve=no 3FDC4BA900E5 remove_all_body358A64F7038A
 		// "BaseType::clearOidType"
 		if (sizeOidType() > 0) {
-			for (java.util.Iterator p = oidType.iterator(); p.hasNext();) {
+			for (Iterator<OidType> p = oidType.iterator(); p.hasNext();) {
 				((OidType) p.next())._unlinkOiddomain(this);
 			}
 			oidType.clear();

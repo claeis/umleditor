@@ -23,6 +23,9 @@ package ch.ehi.interlis.views;
 // -beg- preserve=no 3961A82A0142 autoimport "BaseAttributeRef"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961A82A0142 autoimport "BaseAttributeRef"
 
@@ -78,7 +81,7 @@ public class BaseAttributeRef extends AbstractEditorElement implements java.io.S
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180397 body3961A82A0142 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getBaseName());
 		visitor.visit(getAttributes());
 		super.enumerateChildren(visitor);

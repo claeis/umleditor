@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
 // -beg- preserve=no 36D5626F01E9 autoimport "IndividualSurface"
 import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 36D5626F01E9 autoimport "IndividualSurface"
 
@@ -73,7 +76,7 @@ public class IndividualSurface extends SurfaceType implements java.io.Serializab
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B035F body36D5626F01E9 "enumerateChildren"
 	}

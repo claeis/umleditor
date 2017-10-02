@@ -22,6 +22,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -beg- preserve=no 3948DE860321 autoimport "RotationDef"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3948DE860321 autoimport "RotationDef"
 
@@ -74,7 +77,7 @@ public class RotationDef extends AbstractEditorElement implements java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B020B body3948DE860321 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B020B body3948DE860321 "enumerateChildren"
 	}

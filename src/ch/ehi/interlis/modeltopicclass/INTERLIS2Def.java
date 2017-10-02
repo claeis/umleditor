@@ -20,6 +20,12 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 358A5F0B0113 package "INTERLIS2Def"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.views.Arrangements;
@@ -159,7 +165,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21903AC body358A5F0B0113 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorOwnedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -328,7 +334,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33598CAA030D get_all_head358A5F0B0113
 	// "Namespace::iteratorOwnedElement"
-	public java.util.Iterator iteratorOwnedElement()
+	public Iterator<?> iteratorOwnedElement()
 	// -end- 33598CAA030D get_all_head358A5F0B0113
 	// "Namespace::iteratorOwnedElement"
 	{
@@ -381,7 +387,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33598CAA030D itlink_head358A5F0B0113
 	// "Namespace::getOwnedElementLink"
-	public java.util.Iterator iteratorOwnedElementLink()
+	public Iterator<?> iteratorOwnedElementLink()
 	// -end- 33598CAA030D itlink_head358A5F0B0113
 	// "Namespace::getOwnedElementLink"
 	{
@@ -1205,7 +1211,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	}
 
 	// -beg- preserve=no 3A018E150193 code358A5F0B0113 "implementationLocation"
-	private java.util.Set implementationLocation = new java.util.HashSet();
+	private Set<Component> implementationLocation = new HashSet<Component>();
 	// -end- 3A018E150193 code358A5F0B0113 "implementationLocation"
 
 	/**
@@ -1287,7 +1293,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 3A018E150193 get_all_head358A5F0B0113
 	// "Artifact::iteratorImplementationLocation"
-	public java.util.Iterator iteratorImplementationLocation()
+	public Iterator<Component> iteratorImplementationLocation()
 	// -end- 3A018E150193 get_all_head358A5F0B0113
 	// "Artifact::iteratorImplementationLocation"
 	{
@@ -1312,7 +1318,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 3A018E150193 remove_all_body358A5F0B0113
 		// "Artifact::clearImplementationLocation"
 		if (sizeImplementationLocation() > 0) {
-			for (java.util.Iterator p = implementationLocation.iterator(); p.hasNext();) {
+			for (Iterator<Component> p = implementationLocation.iterator(); p.hasNext();) {
 				((Component) p.next())._unlinkImplementation(this);
 			}
 			implementationLocation.clear();
@@ -1437,7 +1443,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head358A5F0B0113
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head358A5F0B0113
 	// "ModelElement::iteratorPresentation"
 	{
@@ -1519,7 +1525,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CB2C64E0374 body358A5F0B0113 "containsFeature"
-		java.util.Iterator it = iteratorFeature();
+		Iterator<?> it = iteratorFeature();
 		while (it.hasNext()) {
 			ModelElement ele = (ModelElement) it.next();
 			if (ele.getName().equals(name)) {
@@ -1531,7 +1537,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	}
 
 	// -beg- preserve=no 33CF9EFC006E code358A5F0B0113 "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 33CF9EFC006E code358A5F0B0113 "objectFlowState"
 
 	/**
@@ -1611,7 +1617,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33CF9EFC006E get_all_head358A5F0B0113
 	// "Classifier::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<ObjectFlowState> iteratorObjectFlowState()
 	// -end- 33CF9EFC006E get_all_head358A5F0B0113
 	// "Classifier::iteratorObjectFlowState"
 	{
@@ -1636,7 +1642,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33CF9EFC006E remove_all_body358A5F0B0113
 		// "Classifier::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<ObjectFlowState> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkType(this);
 			}
 			objectFlowState.clear();
@@ -1694,7 +1700,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 33CF9F1602BC code358A5F0B0113 "classifierInState"
-	private java.util.Set classifierInState = new java.util.HashSet();
+	private Set<ClassifierInState> classifierInState = new HashSet<ClassifierInState>();
 	// -end- 33CF9F1602BC code358A5F0B0113 "classifierInState"
 
 	/**
@@ -1775,7 +1781,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33CF9F1602BC get_all_head358A5F0B0113
 	// "Classifier::iteratorClassifierInState"
-	public java.util.Iterator iteratorClassifierInState()
+	public Iterator<ClassifierInState> iteratorClassifierInState()
 	// -end- 33CF9F1602BC get_all_head358A5F0B0113
 	// "Classifier::iteratorClassifierInState"
 	{
@@ -1800,7 +1806,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33CF9F1602BC remove_all_body358A5F0B0113
 		// "Classifier::clearClassifierInState"
 		if (sizeClassifierInState() > 0) {
-			for (java.util.Iterator p = classifierInState.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierInState> p = classifierInState.iterator(); p.hasNext();) {
 				((ClassifierInState) p.next())._unlinkType(this);
 			}
 			classifierInState.clear();
@@ -1925,7 +1931,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head358A5F0B0113
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<?> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head358A5F0B0113
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -2062,7 +2068,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head358A5F0B0113
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<?> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head358A5F0B0113
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -2132,7 +2138,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 33CAD7E900AB code358A5F0B0113 "instance"
-	private java.util.Set instance = new java.util.HashSet();
+	private Set<Instance> instance = new HashSet<Instance>();
 	// -end- 33CAD7E900AB code358A5F0B0113 "instance"
 
 	/**
@@ -2209,7 +2215,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33CAD7E900AB get_all_head358A5F0B0113
 	// "Classifier::iteratorInstance"
-	public java.util.Iterator iteratorInstance()
+	public Iterator<Instance> iteratorInstance()
 	// -end- 33CAD7E900AB get_all_head358A5F0B0113
 	// "Classifier::iteratorInstance"
 	{
@@ -2234,7 +2240,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33CAD7E900AB remove_all_body358A5F0B0113
 		// "Classifier::clearInstance"
 		if (sizeInstance() > 0) {
-			for (java.util.Iterator p = instance.iterator(); p.hasNext();) {
+			for (Iterator<Instance> p = instance.iterator(); p.hasNext();) {
 				((Instance) p.next())._unlinkClassifier(this);
 			}
 			instance.clear();
@@ -2288,7 +2294,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// -end- 33CAD7E900AB _unlink_body358A5F0B0113 "Classifier::_unlinkInstance"
 
 	// -beg- preserve=no 33CFD0A701A4 code358A5F0B0113 "createAction"
-	private java.util.Set createAction = new java.util.HashSet();
+	private Set<CreateAction> createAction = new HashSet<CreateAction>();
 	// -end- 33CFD0A701A4 code358A5F0B0113 "createAction"
 
 	/**
@@ -2367,7 +2373,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33CFD0A701A4 get_all_head358A5F0B0113
 	// "Classifier::iteratorCreateAction"
-	public java.util.Iterator iteratorCreateAction()
+	public Iterator<CreateAction> iteratorCreateAction()
 	// -end- 33CFD0A701A4 get_all_head358A5F0B0113
 	// "Classifier::iteratorCreateAction"
 	{
@@ -2392,7 +2398,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33CFD0A701A4 remove_all_body358A5F0B0113
 		// "Classifier::clearCreateAction"
 		if (sizeCreateAction() > 0) {
-			for (java.util.Iterator p = createAction.iterator(); p.hasNext();) {
+			for (Iterator<CreateAction> p = createAction.iterator(); p.hasNext();) {
 				((CreateAction) p.next())._unlinkInstantiation(this);
 			}
 			createAction.clear();
@@ -2448,7 +2454,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 32B5D7EF03D3 code358A5F0B0113 "feature"
-	private java.util.List feature = new java.util.ArrayList();
+	private List feature = new ArrayList();
 	// -end- 32B5D7EF03D3 code358A5F0B0113 "feature"
 
 	/**
@@ -2584,7 +2590,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 32B5D7EF03D3 get_all_head358A5F0B0113
 	// "Classifier::iteratorFeature"
-	public java.util.Iterator iteratorFeature()
+	public Iterator<?> iteratorFeature()
 	// -end- 32B5D7EF03D3 get_all_head358A5F0B0113 "Classifier::iteratorFeature"
 	{
 		// -beg- preserve=no 32B5D7EF03D3 get_all_body358A5F0B0113
@@ -2607,7 +2613,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 32B5D7EF03D3 remove_all_body358A5F0B0113
 		// "Classifier::clearFeature"
 		if (sizeFeature() > 0) {
-			for (java.util.Iterator p = feature.iterator(); p.hasNext();) {
+			for (Iterator<?> p = feature.iterator(); p.hasNext();) {
 				((Feature) p.next())._unlinkOwner(this);
 			}
 			feature.clear();
@@ -2661,7 +2667,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// -end- 32B5D7EF03D3 _unlink_body358A5F0B0113 "Classifier::_unlinkFeature"
 
 	// -beg- preserve=no 33E265070353 code358A5F0B0113 "association"
-	private java.util.Set association = new java.util.HashSet();
+	private Set<AssociationEnd> association = new HashSet<AssociationEnd>();
 	// -end- 33E265070353 code358A5F0B0113 "association"
 
 	/**
@@ -2740,7 +2746,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33E265070353 get_all_head358A5F0B0113
 	// "Classifier::iteratorAssociation"
-	public java.util.Iterator iteratorAssociation()
+	public Iterator<AssociationEnd> iteratorAssociation()
 	// -end- 33E265070353 get_all_head358A5F0B0113
 	// "Classifier::iteratorAssociation"
 	{
@@ -2765,7 +2771,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33E265070353 remove_all_body358A5F0B0113
 		// "Classifier::clearAssociation"
 		if (sizeAssociation() > 0) {
-			for (java.util.Iterator p = association.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = association.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkParticipant(this);
 			}
 			association.clear();
@@ -2821,7 +2827,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkAssociation"
 
 	// -beg- preserve=no 33F0EFAD00AB code358A5F0B0113 "specifiedEnd"
-	private java.util.Set specifiedEnd = new java.util.HashSet();
+	private Set<AssociationEnd> specifiedEnd = new HashSet<AssociationEnd>();
 	// -end- 33F0EFAD00AB code358A5F0B0113 "specifiedEnd"
 
 	/**
@@ -2900,7 +2906,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33F0EFAD00AB get_all_head358A5F0B0113
 	// "Classifier::iteratorSpecifiedEnd"
-	public java.util.Iterator iteratorSpecifiedEnd()
+	public Iterator<AssociationEnd> iteratorSpecifiedEnd()
 	// -end- 33F0EFAD00AB get_all_head358A5F0B0113
 	// "Classifier::iteratorSpecifiedEnd"
 	{
@@ -2925,7 +2931,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 33F0EFAD00AB remove_all_body358A5F0B0113
 		// "Classifier::clearSpecifiedEnd"
 		if (sizeSpecifiedEnd() > 0) {
-			for (java.util.Iterator p = specifiedEnd.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = specifiedEnd.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkSpecification(this);
 			}
 			specifiedEnd.clear();
@@ -2981,7 +2987,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkSpecifiedEnd"
 
 	// -beg- preserve=no 36E96A87033E code358A5F0B0113 "powertypeRange"
-	private java.util.Set powertypeRange = new java.util.HashSet();
+	private Set<Generalization> powertypeRange = new HashSet<Generalization>();
 	// -end- 36E96A87033E code358A5F0B0113 "powertypeRange"
 
 	/**
@@ -3061,7 +3067,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 36E96A87033E get_all_head358A5F0B0113
 	// "Classifier::iteratorPowertypeRange"
-	public java.util.Iterator iteratorPowertypeRange()
+	public Iterator<Generalization> iteratorPowertypeRange()
 	// -end- 36E96A87033E get_all_head358A5F0B0113
 	// "Classifier::iteratorPowertypeRange"
 	{
@@ -3086,7 +3092,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 36E96A87033E remove_all_body358A5F0B0113
 		// "Classifier::clearPowertypeRange"
 		if (sizePowertypeRange() > 0) {
-			for (java.util.Iterator p = powertypeRange.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = powertypeRange.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkPowertype(this);
 			}
 			powertypeRange.clear();
@@ -3143,7 +3149,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkPowertypeRange"
 
 	// -beg- preserve=no 335C14A5019A code358A5F0B0113 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code358A5F0B0113 "generalization"
 
 	/**
@@ -3224,7 +3230,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head358A5F0B0113
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head358A5F0B0113
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -3249,7 +3255,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 335C14A5019A remove_all_body358A5F0B0113
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -3307,7 +3313,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code358A5F0B0113 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code358A5F0B0113 "specialization"
 
 	/**
@@ -3388,7 +3394,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head358A5F0B0113
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head358A5F0B0113
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -3413,7 +3419,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 		// -beg- preserve=no 335C146B01D6 remove_all_body358A5F0B0113
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();

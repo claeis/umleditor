@@ -23,6 +23,9 @@ package ch.ehi.interlis.modeltopicclass;
 // -beg- preserve=no 358A5FEF0337 autoimport "Format"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A5FEF0337 autoimport "Format"
 
@@ -75,7 +78,7 @@ public class Format extends AbstractEditorElement implements java.io.Serializabl
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21A0002 body358A5FEF0337 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21A0002 body358A5FEF0337 "enumerateChildren"
 	}

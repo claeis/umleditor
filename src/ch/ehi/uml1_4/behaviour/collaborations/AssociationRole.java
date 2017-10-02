@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.behaviour.collaborations;
 // -beg- preserve=no 337A480F01E0 autoimport "AssociationRole"
 import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
 import ch.ehi.uml1_4.behaviour.collaborations.Message;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
@@ -88,7 +91,7 @@ public boolean containsConnection(AssociationEnd connection1)
  *  @see #addConnection
  */
 // -beg- preserve=no 32A2A510017A get_all_head337A480F01E0 "Association::iteratorConnection"
-public java.util.Iterator iteratorConnection()
+public Iterator<?> iteratorConnection()
 // -end- 32A2A510017A get_all_head337A480F01E0 "Association::iteratorConnection"
 ;     // empty
 
@@ -200,7 +203,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head337A480F01E0 "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head337A480F01E0 "ModelElement::iteratorCollaboration"
 ;     // empty
 
@@ -265,7 +268,7 @@ public boolean containsMessage(Message message1)
  *  @see #addMessage
  */
 // -beg- preserve=no 35FEAB5F01C3 get_all_head337A480F01E0 "AssociationRole::iteratorMessage"
-public java.util.Iterator iteratorMessage()
+public Iterator<?> iteratorMessage()
 // -end- 35FEAB5F01C3 get_all_head337A480F01E0 "AssociationRole::iteratorMessage"
 ;     // empty
 
@@ -330,7 +333,7 @@ public boolean containsConformingLink(Link conformingLink1)
  *  @see #addConformingLink
  */
 // -beg- preserve=no 39E8FECB009C get_all_head337A480F01E0 "AssociationRole::iteratorConformingLink"
-public java.util.Iterator iteratorConformingLink()
+public Iterator<?> iteratorConformingLink()
 // -end- 39E8FECB009C get_all_head337A480F01E0 "AssociationRole::iteratorConformingLink"
 ;     // empty
 

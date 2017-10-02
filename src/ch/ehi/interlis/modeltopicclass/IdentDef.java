@@ -23,6 +23,11 @@ package ch.ehi.interlis.modeltopicclass;
 // -beg- preserve=no 358A5F2B0354 autoimport "IdentDef"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.attributes.AttributeDef;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 358A5F2B0354 autoimport "IdentDef"
 
@@ -75,13 +80,13 @@ public class IdentDef extends AbstractEditorElement implements java.io.Serializa
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190371 body358A5F2B0354 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA2190371 body358A5F2B0354 "enumerateChildren"
 	}
 
 	// -beg- preserve=no 358A62100395 code358A5F2B0354 "attributeDef"
-	private java.util.List attributeDef = new java.util.ArrayList();
+	private List<AttributeDef> attributeDef = new ArrayList<AttributeDef>();
 	// -end- 358A62100395 code358A5F2B0354 "attributeDef"
 
 	/**
@@ -218,7 +223,7 @@ public class IdentDef extends AbstractEditorElement implements java.io.Serializa
 	 */
 	// -beg- preserve=no 358A62100395 get_all_head358A5F2B0354
 	// "IdentDef::iteratorAttributeDef"
-	public java.util.Iterator iteratorAttributeDef()
+	public Iterator<AttributeDef> iteratorAttributeDef()
 	// -end- 358A62100395 get_all_head358A5F2B0354
 	// "IdentDef::iteratorAttributeDef"
 	{
@@ -243,7 +248,7 @@ public class IdentDef extends AbstractEditorElement implements java.io.Serializa
 		// -beg- preserve=no 358A62100395 remove_all_body358A5F2B0354
 		// "IdentDef::clearAttributeDef"
 		if (sizeAttributeDef() > 0) {
-			for (java.util.Iterator p = attributeDef.iterator(); p.hasNext();) {
+			for (Iterator<AttributeDef> p = attributeDef.iterator(); p.hasNext();) {
 				((AttributeDef) p.next())._unlinkIdentDef(this);
 			}
 			attributeDef.clear();

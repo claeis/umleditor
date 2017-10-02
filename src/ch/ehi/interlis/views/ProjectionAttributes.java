@@ -23,6 +23,11 @@ package ch.ehi.interlis.views;
 // -beg- preserve=no 396197B2014A autoimport "ProjectionAttributes"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.views.ProjectionAttribute;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 396197B2014A autoimport "ProjectionAttributes"
 
@@ -77,7 +82,7 @@ public class ProjectionAttributes extends AbstractEditorElement implements java.
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180333 body396197B2014A "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorAttr();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -86,7 +91,7 @@ public class ProjectionAttributes extends AbstractEditorElement implements java.
 	}
 
 	// -beg- preserve=no 3961A32E0008 code396197B2014A "attr"
-	private java.util.Set attr = new java.util.HashSet();
+	private Set<ProjectionAttribute> attr = new HashSet<ProjectionAttribute>();
 	// -end- 3961A32E0008 code396197B2014A "attr"
 
 	/**
@@ -164,7 +169,7 @@ public class ProjectionAttributes extends AbstractEditorElement implements java.
 	 */
 	// -beg- preserve=no 3961A32E0008 get_all_head396197B2014A
 	// "ProjectionAttributes::iteratorAttr"
-	public java.util.Iterator iteratorAttr()
+	public Iterator<?> iteratorAttr()
 	// -end- 3961A32E0008 get_all_head396197B2014A
 	// "ProjectionAttributes::iteratorAttr"
 	{

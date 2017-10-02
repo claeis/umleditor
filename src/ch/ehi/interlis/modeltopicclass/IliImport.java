@@ -20,6 +20,8 @@
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3940AEA40090 package "IliImport"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -105,7 +107,7 @@ public class IliImport extends AbstractDependency implements Permission, java.io
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2190384 body3940AEA40090 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -185,7 +187,7 @@ public class IliImport extends AbstractDependency implements Permission, java.io
 	 */
 	// -beg- preserve=no 33FFE57B03B3 get_all_head3940AEA40090
 	// "Dependency::iteratorClient"
-	public java.util.Iterator iteratorClient()
+	public Iterator<?> iteratorClient()
 	// -end- 33FFE57B03B3 get_all_head3940AEA40090 "Dependency::iteratorClient"
 	{
 		// -beg- preserve=no 33FFE57B03B3 get_all_body3940AEA40090
@@ -313,7 +315,7 @@ public class IliImport extends AbstractDependency implements Permission, java.io
 	 */
 	// -beg- preserve=no 335C0D7A02E4 get_all_head3940AEA40090
 	// "Dependency::iteratorSupplier"
-	public java.util.Iterator iteratorSupplier()
+	public Iterator<?> iteratorSupplier()
 	// -end- 335C0D7A02E4 get_all_head3940AEA40090
 	// "Dependency::iteratorSupplier"
 	{

@@ -25,6 +25,9 @@ import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineType;
 import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 35B872AB0146 autoimport "IntersectionDef"
@@ -81,7 +84,7 @@ public class IntersectionDef extends AbstractEditorElement implements Element, j
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B02FC body35B872AB0146 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getMaxi());
 		visitor.visit(getMetaAttrb());
 		visitor.visit(getDocumentation());

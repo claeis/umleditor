@@ -20,16 +20,16 @@
 package ch.ehi.interlis.logicalexpressions;
 // -end- 394A41E30033 package "Factor"
 
-// -beg- preserve=no 394A41E30033 autoimport "Factor"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.logicalexpressions.FactElement;
-import ch.ehi.interlis.logicalexpressions.Term;
-import ch.ehi.interlis.logicalexpressions.AttributePath;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.interlis.logicalexpressions.FactorKind;
-import ch.ehi.basics.types.NlsString;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394A41E30033 autoimport "Factor"
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+// -beg- preserve=no 394A41E30033 autoimport "Factor"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -85,7 +85,7 @@ public class Factor extends AbstractEditorElement implements java.io.Serializabl
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180224 body394A41E30033 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsElement())
 			visitor.visit(getElement());
 		if (containsSubterm())
@@ -273,7 +273,7 @@ public class Factor extends AbstractEditorElement implements java.io.Serializabl
 	}
 
 	// -beg- preserve=no 39609C040364 code394A41E30033 "existsin"
-	private java.util.Set existsin = new java.util.HashSet();
+	private Set<AttributePath> existsin = new HashSet<AttributePath>();
 	// -end- 39609C040364 code394A41E30033 "existsin"
 
 	/**
@@ -345,7 +345,7 @@ public class Factor extends AbstractEditorElement implements java.io.Serializabl
 	 */
 	// -beg- preserve=no 39609C040364 get_all_head394A41E30033
 	// "Factor::iteratorExistsin"
-	public java.util.Iterator iteratorExistsin()
+	public Iterator<AttributePath> iteratorExistsin()
 	// -end- 39609C040364 get_all_head394A41E30033 "Factor::iteratorExistsin"
 	{
 		// -beg- preserve=no 39609C040364 get_all_body394A41E30033

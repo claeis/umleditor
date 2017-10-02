@@ -23,6 +23,9 @@ package ch.ehi.interlis.functions;
 // -beg- preserve=no 3960B11E02DE autoimport "ArgumentType"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.attributes.DomainAttribute;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3960B11E02DE autoimport "ArgumentType"
 
@@ -76,7 +79,7 @@ public class ArgumentType extends AbstractEditorElement implements java.io.Seria
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA219000A body3960B11E02DE "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsDomainAttribute())
 			visitor.visit(getDomainAttribute());
 		super.enumerateChildren(visitor);

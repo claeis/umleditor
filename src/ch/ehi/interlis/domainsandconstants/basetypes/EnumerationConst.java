@@ -23,6 +23,9 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 // -beg- preserve=no 39488D6A0105 autoimport "EnumerationConst"
 import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39488D6A0105 autoimport "EnumerationConst"
 
@@ -76,7 +79,7 @@ public class EnumerationConst extends Constant implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B016C body39488D6A0105 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getNameList());
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B016C body39488D6A0105 "enumerateChildren"

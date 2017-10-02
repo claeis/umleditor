@@ -21,12 +21,12 @@
 package ch.ehi.interlis.units;
 // -end- 394A20F3001B package "ComposedUnitFactor"
 
-// -beg- preserve=no 394A20F3001B autoimport "ComposedUnitFactor"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.interlis.units.UnitDef;
-import ch.ehi.interlis.units.UnitFactorKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 394A20F3001B autoimport "ComposedUnitFactor"
+// -beg- preserve=no 394A20F3001B autoimport "ComposedUnitFactor"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -77,7 +77,7 @@ public void enumerateChildren(AbstractVisitor visitor)
 {
         // please fill in/modify the following section
         // -beg- preserve=no 3D4FA21800DA body394A20F3001B "enumerateChildren"
-        java.util.Iterator it=null;
+        Iterator<?> it=null;
         if(containsUnitDef()) visitor.visit(getUnitDef());
         super.enumerateChildren(visitor);
         // -end- 3D4FA21800DA body394A20F3001B "enumerateChildren"

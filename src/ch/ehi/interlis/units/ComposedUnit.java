@@ -23,6 +23,11 @@ package ch.ehi.interlis.units;
 // -beg- preserve=no 3949E17C0356 autoimport "ComposedUnit"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.units.ComposedUnitFactor;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3949E17C0356 autoimport "ComposedUnit"
 
@@ -76,7 +81,7 @@ public class ComposedUnit extends AbstractEditorElement implements java.io.Seria
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA218010C body3949E17C0356 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorComposedUnitFactor();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -85,7 +90,7 @@ public class ComposedUnit extends AbstractEditorElement implements java.io.Seria
 	}
 
 	// -beg- preserve=no 394A21150129 code3949E17C0356 "composedUnitFactor"
-	private java.util.Set composedUnitFactor = new java.util.HashSet();
+	private Set<ComposedUnitFactor> composedUnitFactor = new HashSet<ComposedUnitFactor>();
 	// -end- 394A21150129 code3949E17C0356 "composedUnitFactor"
 
 	/**
@@ -164,7 +169,7 @@ public class ComposedUnit extends AbstractEditorElement implements java.io.Seria
 	 */
 	// -beg- preserve=no 394A21150129 get_all_head3949E17C0356
 	// "ComposedUnit::iteratorComposedUnitFactor"
-	public java.util.Iterator iteratorComposedUnitFactor()
+	public Iterator<?> iteratorComposedUnitFactor()
 	// -end- 394A21150129 get_all_head3949E17C0356
 	// "ComposedUnit::iteratorComposedUnitFactor"
 	{

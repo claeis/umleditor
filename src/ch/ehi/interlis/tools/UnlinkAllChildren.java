@@ -26,6 +26,10 @@ import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.umleditor.umlpresentation.Note;
+
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 // -end- 3CBD9E92024A autoimport "UnlinkAllChildren"
 
@@ -60,8 +64,8 @@ public class UnlinkAllChildren extends ChildCollector {
 		// unlink each child from rest of model
 		// ch.softenvironment.util.Tracer.getInstance().debug(this,
 		// "unlinkThem()", "{{{start");
-		java.util.List childv = getChildren();
-		java.util.Iterator it = childv.iterator();
+		List<?> childv = getChildren();
+		Iterator<?> it = childv.iterator();
 		while (it.hasNext()) {
 			Object obj = it.next();
 			if (obj instanceof ch.ehi.uml1_4.foundation.core.Element) {
@@ -96,7 +100,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC66E0502DE body3CBD9E92024A "visitModelDef"
 		defaultVisit(modeldef);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add IliImport, Translation
 		it = modeldef.iteratorClientDependency();
 		while (it.hasNext()) {
@@ -125,7 +129,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC66EAD034E body3CBD9E92024A "visitTopicDef"
 		defaultVisit(topicdef);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add TopicDepends
 		it = topicdef.iteratorClientDependency();
 		while (it.hasNext()) {
@@ -162,7 +166,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// -beg- preserve=yes 3CC66FC50093 body3CBD9E92024A
 		// "visitAbstractClassDef"
 		defaultVisit(classdef);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add ClassExtends
 		it = classdef.iteratorGeneralization();
 		while (it.hasNext()) {
@@ -191,7 +195,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		while (it.hasNext()) {
 			Object child = it.next();
 			if (child instanceof ch.ehi.interlis.associations.RoleDef) {
-				java.util.Iterator pri = ((ch.ehi.interlis.associations.RoleDef) child).iteratorPresentation();
+				Iterator<?> pri = ((ch.ehi.interlis.associations.RoleDef) child).iteratorPresentation();
 				while (pri.hasNext()) {
 					visit(pri.next());
 				}
@@ -213,7 +217,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC67E4702CF body3CBD9E92024A "defaultVisit"
 		super.defaultVisit(object);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add presentation
 		if (object instanceof ch.ehi.uml1_4.foundation.core.ModelElement) {
 			it = ((ch.ehi.uml1_4.foundation.core.ModelElement) object).iteratorPresentation();
@@ -224,7 +228,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		}
 		if (object instanceof ch.ehi.uml1_4.foundation.core.PresentationElement) {
 			ch.ehi.uml1_4.foundation.core.PresentationElement node = (ch.ehi.uml1_4.foundation.core.PresentationElement) object;
-			java.util.Iterator edgei = node.iteratorPresentationEdge();
+			Iterator<?> edgei = node.iteratorPresentationEdge();
 			while (edgei.hasNext()) {
 				Object child = edgei.next();
 				visit(child);
@@ -246,7 +250,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3D4FDCA3003A body3CBD9E92024A "visitNote"
 		defaultVisit(note);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add NoteEdge
 		it = note.iteratorPresentationEdge();
 		while (it.hasNext()) {
@@ -274,7 +278,7 @@ public class UnlinkAllChildren extends ChildCollector {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3D58C34402F9 body3CBD9E92024A "visitDomainDef"
 		defaultVisit(classdef);
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		// add DomainExtends
 		it = classdef.iteratorGeneralization();
 		while (it.hasNext()) {

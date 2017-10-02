@@ -20,12 +20,11 @@
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 39488ABC022B package "NumericConst"
 
-// -beg- preserve=no 39488ABC022B autoimport "NumericConst"
-import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
-import ch.ehi.interlis.units.UnitDef;
-import ch.ehi.interlis.domainsandconstants.basetypes.BuiltinNumConst;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39488ABC022B autoimport "NumericConst"
+import ch.ehi.interlis.units.UnitDef;
 
 // import declarations
 // please fill in/modify the following section
@@ -76,7 +75,7 @@ public class NumericConst extends Constant implements java.io.Serializable {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21B0157 body39488ABC022B "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA21B0157 body39488ABC022B "enumerateChildren"
 	}

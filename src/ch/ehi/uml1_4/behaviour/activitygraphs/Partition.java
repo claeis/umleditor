@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.activitygraphs;
 
 // -beg- preserve=no 337DA4DE0212 autoimport "Partition"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.activitygraphs.ActivityGraph;
 // -end- 337DA4DE0212 autoimport "Partition"
 
@@ -110,7 +113,7 @@ public boolean containsContents(ModelElement contents1)
  *  @see #addContents
  */
 // -beg- preserve=no 33CF9A030258 get_all_head337DA4DE0212 "Partition::iteratorContents"
-public java.util.Iterator iteratorContents()
+public Iterator<?> iteratorContents()
 // -end- 33CF9A030258 get_all_head337DA4DE0212 "Partition::iteratorContents"
 ;     // empty
 

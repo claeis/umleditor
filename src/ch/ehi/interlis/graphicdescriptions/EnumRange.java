@@ -23,6 +23,9 @@ package ch.ehi.interlis.graphicdescriptions;
 // -beg- preserve=no 3961FDB101A5 autoimport "EnumRange"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumerationConst;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961FDB101A5 autoimport "EnumRange"
 
@@ -77,7 +80,7 @@ public class EnumRange extends AbstractEditorElement implements java.io.Serializ
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21900BD body3961FDB101A5 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsFrom())
 			visitor.visit(getFrom());
 		if (containsTo())

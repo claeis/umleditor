@@ -24,6 +24,9 @@ package ch.ehi.interlis.graphicdescriptions;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Constant;
 import ch.ehi.interlis.graphicdescriptions.EnumRange;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3961FCE30307 autoimport "EnumAssignment"
 
@@ -78,7 +81,7 @@ public class EnumAssignment extends AbstractEditorElement implements java.io.Ser
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21900AA body3961FCE30307 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsConstant())
 			visitor.visit(getConstant());
 		if (containsEnumRange())

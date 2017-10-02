@@ -23,6 +23,11 @@ package ch.ehi.interlis.units;
 // -beg- preserve=no 3949E1890160 autoimport "StructuredUnit"
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.units.StructuredUnitDim;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3949E1890160 autoimport "StructuredUnit"
 
@@ -76,7 +81,7 @@ public class StructuredUnit extends AbstractEditorElement implements java.io.Ser
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21800F9 body3949E1890160 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorDim();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -85,7 +90,7 @@ public class StructuredUnit extends AbstractEditorElement implements java.io.Ser
 	}
 
 	// -beg- preserve=no 394A243A0299 code3949E1890160 "dim"
-	private java.util.Set dim = new java.util.HashSet();
+	private Set<StructuredUnitDim> dim = new HashSet<StructuredUnitDim>();
 	// -end- 394A243A0299 code3949E1890160 "dim"
 
 	/**
@@ -160,7 +165,7 @@ public class StructuredUnit extends AbstractEditorElement implements java.io.Ser
 	 */
 	// -beg- preserve=no 394A243A0299 get_all_head3949E1890160
 	// "StructuredUnit::iteratorDim"
-	public java.util.Iterator iteratorDim()
+	public Iterator<?> iteratorDim()
 	// -end- 394A243A0299 get_all_head3949E1890160 "StructuredUnit::iteratorDim"
 	{
 		// -beg- preserve=no 394A243A0299 get_all_body3949E1890160

@@ -24,6 +24,9 @@ package ch.ehi.interlis.views;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.interlis.views.ViewableDef;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 39619211022E autoimport "RenamedViewableRef"
 
@@ -78,7 +81,7 @@ public class RenamedViewableRef extends AbstractEditorElement implements java.io
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180315 body39619211022E "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		if (containsViewableDef())
 			visitor.visit(getViewableDef());
 		visitor.visit(getLocalBase());
