@@ -8,13 +8,9 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 32989F9700FE package "Feature"
 
-// -beg- preserve=no 32989F9700FE autoimport "Feature"
-import ch.ehi.uml1_4.foundation.core.ModelElement;
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.foundation.core.Classifier;
-import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
-// -end- 32989F9700FE autoimport "Feature"
 
 // import declarations
 // please fill in/modify the following section
@@ -67,7 +63,7 @@ public boolean containsClassifierRole(ClassifierRole classifierRole1)
  *  @see #addClassifierRole
  */
 // -beg- preserve=no 36008FB700E7 get_all_head32989F9700FE "ModelElement::iteratorClassifierRole"
-public java.util.Iterator iteratorClassifierRole()
+public Iterator<?> iteratorClassifierRole()
 // -end- 36008FB700E7 get_all_head32989F9700FE "ModelElement::iteratorClassifierRole"
 ;     // empty
 

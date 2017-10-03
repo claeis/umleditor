@@ -20,6 +20,10 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 4551A78D0108 package "UmlExtend"
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 4551A78D0108 autoimport "UmlExtend"
@@ -106,7 +110,7 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4551A89D027B body4551A78D0108 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getCondition());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -356,7 +360,7 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 	// -end- 35FDD86C0141 _unlink_body4551A78D0108 "Extend::_unlinkExtension"
 
 	// -beg- preserve=no 3626B0E203DF code4551A78D0108 "extensionPoint"
-	private java.util.List extensionPoint = new java.util.ArrayList();
+	private List<ExtensionPoint> extensionPoint = new ArrayList<ExtensionPoint>();
 	// -end- 3626B0E203DF code4551A78D0108 "extensionPoint"
 
 	/**
@@ -493,7 +497,7 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 	 */
 	// -beg- preserve=no 3626B0E203DF get_all_head4551A78D0108
 	// "Extend::iteratorExtensionPoint"
-	public java.util.Iterator iteratorExtensionPoint()
+	public Iterator<?> iteratorExtensionPoint()
 	// -end- 3626B0E203DF get_all_head4551A78D0108
 	// "Extend::iteratorExtensionPoint"
 	{
@@ -518,7 +522,7 @@ public class UmlExtend extends AbstractModelElement implements Extend {
 		// -beg- preserve=no 3626B0E203DF remove_all_body4551A78D0108
 		// "Extend::clearExtensionPoint"
 		if (sizeExtensionPoint() > 0) {
-			for (java.util.Iterator p = extensionPoint.iterator(); p.hasNext();) {
+			for (Iterator<?> p = extensionPoint.iterator(); p.hasNext();) {
 				((ExtensionPoint) p.next())._unlinkExtend(this);
 			}
 			extensionPoint.clear();

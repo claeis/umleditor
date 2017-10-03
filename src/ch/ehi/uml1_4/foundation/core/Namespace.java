@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 32B69F3A0118 autoimport "Namespace"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
@@ -72,7 +75,7 @@ public boolean containsOwnedElement(String name)
 /** checks if a ModelElement exists in this Namespace and all its Sub-Namespaces
  */
 // -beg- preserve=no 3CC7B8D10067 head32B69F3A0118 "deepContainsOwnedElement"
-public boolean deepContainsOwnedElement(java.lang.Class aclass, String name)
+public boolean deepContainsOwnedElement(Class aclass, String name)
 // -end- 3CC7B8D10067 head32B69F3A0118 "deepContainsOwnedElement"
 // declare any checked exceptions
 // please fill in/modify the following section
@@ -84,7 +87,7 @@ public boolean deepContainsOwnedElement(java.lang.Class aclass, String name)
 /** finds a ModelElement in this Namespace or all its Sub-Namespaces
  */
 // -beg- preserve=no 3CC7B8E5034B head32B69F3A0118 "deepGetOwnedElement"
-public ModelElement deepGetOwnedElement(java.lang.Class aclass, String name)
+public ModelElement deepGetOwnedElement(Class aclass, String name)
 // -end- 3CC7B8E5034B head32B69F3A0118 "deepGetOwnedElement"
 // declare any checked exceptions
 // please fill in/modify the following section
@@ -182,7 +185,7 @@ public boolean containsOwnedElement(ModelElement ownedElement1)
  *  @see #addOwnedElement
  */
 // -beg- preserve=no 33598CAA030D get_all_head32B69F3A0118 "Namespace::iteratorOwnedElement"
-public java.util.Iterator iteratorOwnedElement()
+public Iterator<?> iteratorOwnedElement()
 // -end- 33598CAA030D get_all_head32B69F3A0118 "Namespace::iteratorOwnedElement"
 ;     // empty
 
@@ -206,7 +209,7 @@ public int sizeOwnedElement()
  *  @see #addOwnedElement
  */
 // -beg- preserve=no 33598CAA030D itlink_head32B69F3A0118 "Namespace::getOwnedElementLink"
-public java.util.Iterator iteratorOwnedElementLink()
+public Iterator<?> iteratorOwnedElementLink()
 // -end- 33598CAA030D itlink_head32B69F3A0118 "Namespace::getOwnedElementLink"
 ;     // empty
 
@@ -271,7 +274,7 @@ public boolean containsDiagram(Diagram diagram1)
  *  @see #addDiagram
  */
 // -beg- preserve=no 3C2C4E4F0248 get_all_head32B69F3A0118 "Namespace::iteratorDiagram"
-public java.util.Iterator iteratorDiagram()
+public Iterator<?> iteratorDiagram()
 // -end- 3C2C4E4F0248 get_all_head32B69F3A0118 "Namespace::iteratorDiagram"
 ;     // empty
 

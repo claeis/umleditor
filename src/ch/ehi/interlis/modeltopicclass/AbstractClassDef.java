@@ -3339,7 +3339,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head358A5E62016A
 	// "ModelElement::iteratorClassifierRole"
-	public Iterator<?> iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head358A5E62016A
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -3476,7 +3476,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head358A5E62016A
 	// "ModelElement::iteratorCollaboration"
-	public Iterator<?> iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head358A5E62016A
 	// "ModelElement::iteratorCollaboration"
 	{

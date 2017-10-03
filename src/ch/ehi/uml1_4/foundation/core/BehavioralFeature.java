@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 3298BCF00260 autoimport "BehavioralFeature"
 import ch.ehi.uml1_4.foundation.core.Feature;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.commonbehavior.Signal;
 import ch.ehi.uml1_4.foundation.core.Parameter;
 // -end- 3298BCF00260 autoimport "BehavioralFeature"
@@ -65,7 +68,7 @@ public boolean containsRaisedSignal(Signal raisedSignal1)
  *  @see #addRaisedSignal
  */
 // -beg- preserve=no 33FFD98400B6 get_all_head3298BCF00260 "BehavioralFeature::iteratorRaisedSignal"
-public java.util.Iterator iteratorRaisedSignal()
+public Iterator<?> iteratorRaisedSignal()
 // -end- 33FFD98400B6 get_all_head3298BCF00260 "BehavioralFeature::iteratorRaisedSignal"
 ;     // empty
 
@@ -151,7 +154,7 @@ public boolean containsParameter(Parameter parameter1)
  *  @see #addParameter
  */
 // -beg- preserve=no 33599464017C get_all_head3298BCF00260 "BehavioralFeature::iteratorParameter"
-public java.util.Iterator iteratorParameter()
+public Iterator<?> iteratorParameter()
 // -end- 33599464017C get_all_head3298BCF00260 "BehavioralFeature::iteratorParameter"
 ;     // empty
 

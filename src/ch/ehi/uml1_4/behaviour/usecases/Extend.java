@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.behaviour.usecases;
 // -beg- preserve=no 35FDD683021C autoimport "Extend"
 import ch.ehi.uml1_4.foundation.core.Relationship;
 import ch.ehi.uml1_4.behaviour.usecases.UseCase;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.usecases.ExtensionPoint;
 import ch.ehi.uml1_4.foundation.datatypes.BooleanExpression;
 // -end- 35FDD683021C autoimport "Extend"
@@ -180,7 +183,7 @@ public boolean containsExtensionPoint(ExtensionPoint extensionPoint1)
  *  @see #addExtensionPoint
  */
 // -beg- preserve=no 3626B0E203DF get_all_head35FDD683021C "Extend::iteratorExtensionPoint"
-public java.util.Iterator iteratorExtensionPoint()
+public Iterator<?> iteratorExtensionPoint()
 // -end- 3626B0E203DF get_all_head35FDD683021C "Extend::iteratorExtensionPoint"
 ;     // empty
 

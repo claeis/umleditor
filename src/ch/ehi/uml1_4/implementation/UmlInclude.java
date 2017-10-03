@@ -20,6 +20,8 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 4551A7840119 package "UmlInclude"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 4551A7840119 autoimport "UmlInclude"
@@ -102,7 +104,7 @@ public class UmlInclude extends AbstractModelElement implements Include {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4551A88B03DE body4551A7840119 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());

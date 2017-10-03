@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.foundation.core;
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.activitygraphs.ClassifierInState;
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
 import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
@@ -85,7 +88,7 @@ public boolean containsObjectFlowState(ObjectFlowState objectFlowState1)
  *  @see #addObjectFlowState
  */
 // -beg- preserve=no 33CF9EFC006E get_all_head32989FB2023D "Classifier::iteratorObjectFlowState"
-public java.util.Iterator iteratorObjectFlowState()
+public Iterator<?> iteratorObjectFlowState()
 // -end- 33CF9EFC006E get_all_head32989FB2023D "Classifier::iteratorObjectFlowState"
 ;     // empty
 
@@ -150,7 +153,7 @@ public boolean containsClassifierInState(ClassifierInState classifierInState1)
  *  @see #addClassifierInState
  */
 // -beg- preserve=no 33CF9F1602BC get_all_head32989FB2023D "Classifier::iteratorClassifierInState"
-public java.util.Iterator iteratorClassifierInState()
+public Iterator<?> iteratorClassifierInState()
 // -end- 33CF9F1602BC get_all_head32989FB2023D "Classifier::iteratorClassifierInState"
 ;     // empty
 
@@ -215,7 +218,7 @@ public boolean containsClassifierRole(ClassifierRole classifierRole1)
  *  @see #addClassifierRole
  */
 // -beg- preserve=no 36008FB700E7 get_all_head32989FB2023D "ModelElement::iteratorClassifierRole"
-public java.util.Iterator iteratorClassifierRole()
+public Iterator<?> iteratorClassifierRole()
 // -end- 36008FB700E7 get_all_head32989FB2023D "ModelElement::iteratorClassifierRole"
 ;     // empty
 
@@ -280,7 +283,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head32989FB2023D "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head32989FB2023D "ModelElement::iteratorCollaboration"
 ;     // empty
 
@@ -345,7 +348,7 @@ public boolean containsInstance(Instance instance1)
  *  @see #addInstance
  */
 // -beg- preserve=no 33CAD7E900AB get_all_head32989FB2023D "Classifier::iteratorInstance"
-public java.util.Iterator iteratorInstance()
+public Iterator<?> iteratorInstance()
 // -end- 33CAD7E900AB get_all_head32989FB2023D "Classifier::iteratorInstance"
 ;     // empty
 
@@ -410,7 +413,7 @@ public boolean containsCreateAction(CreateAction createAction1)
  *  @see #addCreateAction
  */
 // -beg- preserve=no 33CFD0A701A4 get_all_head32989FB2023D "Classifier::iteratorCreateAction"
-public java.util.Iterator iteratorCreateAction()
+public Iterator<?> iteratorCreateAction()
 // -end- 33CFD0A701A4 get_all_head32989FB2023D "Classifier::iteratorCreateAction"
 ;     // empty
 
@@ -496,7 +499,7 @@ public boolean containsFeature(Feature feature1)
  *  @see #addFeature
  */
 // -beg- preserve=no 32B5D7EF03D3 get_all_head32989FB2023D "Classifier::iteratorFeature"
-public java.util.Iterator iteratorFeature()
+public Iterator<?> iteratorFeature()
 // -end- 32B5D7EF03D3 get_all_head32989FB2023D "Classifier::iteratorFeature"
 ;     // empty
 
@@ -561,7 +564,7 @@ public boolean containsAssociation(AssociationEnd association1)
  *  @see #addAssociation
  */
 // -beg- preserve=no 33E265070353 get_all_head32989FB2023D "Classifier::iteratorAssociation"
-public java.util.Iterator iteratorAssociation()
+public Iterator<?> iteratorAssociation()
 // -end- 33E265070353 get_all_head32989FB2023D "Classifier::iteratorAssociation"
 ;     // empty
 
@@ -626,7 +629,7 @@ public boolean containsSpecifiedEnd(AssociationEnd specifiedEnd1)
  *  @see #addSpecifiedEnd
  */
 // -beg- preserve=no 33F0EFAD00AB get_all_head32989FB2023D "Classifier::iteratorSpecifiedEnd"
-public java.util.Iterator iteratorSpecifiedEnd()
+public Iterator<?> iteratorSpecifiedEnd()
 // -end- 33F0EFAD00AB get_all_head32989FB2023D "Classifier::iteratorSpecifiedEnd"
 ;     // empty
 
@@ -691,7 +694,7 @@ public boolean containsPowertypeRange(Generalization powertypeRange1)
  *  @see #addPowertypeRange
  */
 // -beg- preserve=no 36E96A87033E get_all_head32989FB2023D "Classifier::iteratorPowertypeRange"
-public java.util.Iterator iteratorPowertypeRange()
+public Iterator<?> iteratorPowertypeRange()
 // -end- 36E96A87033E get_all_head32989FB2023D "Classifier::iteratorPowertypeRange"
 ;     // empty
 

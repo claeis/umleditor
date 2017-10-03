@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.usecases;
 
 // -beg- preserve=no 32ABA35D0230 autoimport "UseCase"
 import ch.ehi.uml1_4.foundation.core.Classifier;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.usecases.Extend;
 import ch.ehi.uml1_4.behaviour.usecases.Include;
 import ch.ehi.uml1_4.behaviour.usecases.ExtensionPoint;
@@ -65,7 +68,7 @@ public boolean containsBaseExtend(Extend baseExtend1)
  *  @see #addBaseExtend
  */
 // -beg- preserve=no 35FDD865000A get_all_head32ABA35D0230 "UseCase::iteratorBaseExtend"
-public java.util.Iterator iteratorBaseExtend()
+public Iterator<?> iteratorBaseExtend()
 // -end- 35FDD865000A get_all_head32ABA35D0230 "UseCase::iteratorBaseExtend"
 ;     // empty
 
@@ -130,7 +133,7 @@ public boolean containsExtensionExtend(Extend extensionExtend1)
  *  @see #addExtensionExtend
  */
 // -beg- preserve=no 35FDD86C0140 get_all_head32ABA35D0230 "UseCase::iteratorExtensionExtend"
-public java.util.Iterator iteratorExtensionExtend()
+public Iterator<?> iteratorExtensionExtend()
 // -end- 35FDD86C0140 get_all_head32ABA35D0230 "UseCase::iteratorExtensionExtend"
 ;     // empty
 
@@ -195,7 +198,7 @@ public boolean containsBaseInclude(Include baseInclude1)
  *  @see #addBaseInclude
  */
 // -beg- preserve=no 35FDD995038F get_all_head32ABA35D0230 "UseCase::iteratorBaseInclude"
-public java.util.Iterator iteratorBaseInclude()
+public Iterator<?> iteratorBaseInclude()
 // -end- 35FDD995038F get_all_head32ABA35D0230 "UseCase::iteratorBaseInclude"
 ;     // empty
 
@@ -260,7 +263,7 @@ public boolean containsAdditionInclude(Include additionInclude1)
  *  @see #addAdditionInclude
  */
 // -beg- preserve=no 35FDD9A50047 get_all_head32ABA35D0230 "UseCase::iteratorAdditionInclude"
-public java.util.Iterator iteratorAdditionInclude()
+public Iterator<?> iteratorAdditionInclude()
 // -end- 35FDD9A50047 get_all_head32ABA35D0230 "UseCase::iteratorAdditionInclude"
 ;     // empty
 
@@ -325,7 +328,7 @@ public boolean containsExtensionPoint(ExtensionPoint extensionPoint1)
  *  @see #addExtensionPoint
  */
 // -beg- preserve=no 362661DB015F get_all_head32ABA35D0230 "UseCase::iteratorExtensionPoint"
-public java.util.Iterator iteratorExtensionPoint()
+public Iterator<?> iteratorExtensionPoint()
 // -end- 362661DB015F get_all_head32ABA35D0230 "UseCase::iteratorExtensionPoint"
 ;     // empty
 

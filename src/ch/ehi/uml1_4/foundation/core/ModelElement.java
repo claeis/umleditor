@@ -8,34 +8,19 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 327A5C7301CC package "ModelElement"
 
-// -beg- preserve=no 327A5C7301CC autoimport "ModelElement"
-import ch.ehi.uml1_4.foundation.core.Element;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import java.util.Iterator;
+
 import ch.ehi.basics.types.NlsString;
 // -end- 327A5C7301CC autoimport "ModelElement"
-
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 327A5C7301CC import "ModelElement"
+import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
+import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import ch.ehi.uml1_4.modelmanagement.Package;
 
 // -end- 327A5C7301CC import "ModelElement"
 
@@ -104,7 +89,7 @@ public boolean containsBehavior(StateMachine behavior1)
  *  @see #addBehavior
  */
 // -beg- preserve=no 33CF8BD500F1 get_all_head327A5C7301CC "ModelElement::iteratorBehavior"
-public java.util.Iterator iteratorBehavior()
+public Iterator<?> iteratorBehavior()
 // -end- 33CF8BD500F1 get_all_head327A5C7301CC "ModelElement::iteratorBehavior"
 ;     // empty
 
@@ -169,7 +154,7 @@ public boolean containsPartition(Partition partition1)
  *  @see #addPartition
  */
 // -beg- preserve=no 33CF9A030140 get_all_head327A5C7301CC "ModelElement::iteratorPartition"
-public java.util.Iterator iteratorPartition()
+public Iterator<?> iteratorPartition()
 // -end- 33CF9A030140 get_all_head327A5C7301CC "ModelElement::iteratorPartition"
 ;     // empty
 
@@ -234,7 +219,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head327A5C7301CC "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head327A5C7301CC "ModelElement::iteratorCollaboration"
 ;     // empty
 
@@ -299,7 +284,7 @@ public boolean containsClassifierRole(ClassifierRole classifierRole1)
  *  @see #addClassifierRole
  */
 // -beg- preserve=no 36008FB700E7 get_all_head327A5C7301CC "ModelElement::iteratorClassifierRole"
-public java.util.Iterator iteratorClassifierRole()
+public Iterator<?> iteratorClassifierRole()
 // -end- 36008FB700E7 get_all_head327A5C7301CC "ModelElement::iteratorClassifierRole"
 ;     // empty
 
@@ -364,7 +349,7 @@ public boolean containsCollaborationInstanceSet(CollaborationInstanceSet collabo
  *  @see #addCollaborationInstanceSet
  */
 // -beg- preserve=no 39E9065C0186 get_all_head327A5C7301CC "ModelElement::iteratorCollaborationInstanceSet"
-public java.util.Iterator iteratorCollaborationInstanceSet()
+public Iterator<?> iteratorCollaborationInstanceSet()
 // -end- 39E9065C0186 get_all_head327A5C7301CC "ModelElement::iteratorCollaborationInstanceSet"
 ;     // empty
 
@@ -502,7 +487,7 @@ public boolean containsClientDependency(Dependency clientDependency1)
  *  @see #addClientDependency
  */
 // -beg- preserve=no 33FFE57B0395 get_all_head327A5C7301CC "ModelElement::iteratorClientDependency"
-public java.util.Iterator iteratorClientDependency()
+public Iterator<?> iteratorClientDependency()
 // -end- 33FFE57B0395 get_all_head327A5C7301CC "ModelElement::iteratorClientDependency"
 ;     // empty
 
@@ -567,7 +552,7 @@ public boolean containsTaggedValue(TaggedValue taggedValue1)
  *  @see #addTaggedValue
  */
 // -beg- preserve=no 33E901E003D4 get_all_head327A5C7301CC "ModelElement::iteratorTaggedValue"
-public java.util.Iterator iteratorTaggedValue()
+public Iterator<?> iteratorTaggedValue()
 // -end- 33E901E003D4 get_all_head327A5C7301CC "ModelElement::iteratorTaggedValue"
 ;     // empty
 
@@ -632,7 +617,7 @@ public boolean containsConstraint(Constraint constraint1)
  *  @see #addConstraint
  */
 // -beg- preserve=no 33EA67BB010E get_all_head327A5C7301CC "ModelElement::iteratorConstraint"
-public java.util.Iterator iteratorConstraint()
+public Iterator<?> iteratorConstraint()
 // -end- 33EA67BB010E get_all_head327A5C7301CC "ModelElement::iteratorConstraint"
 ;     // empty
 
@@ -697,7 +682,7 @@ public boolean containsSupplierDependency(Dependency supplierDependency1)
  *  @see #addSupplierDependency
  */
 // -beg- preserve=no 335C0D7A02A8 get_all_head327A5C7301CC "ModelElement::iteratorSupplierDependency"
-public java.util.Iterator iteratorSupplierDependency()
+public Iterator<?> iteratorSupplierDependency()
 // -end- 335C0D7A02A8 get_all_head327A5C7301CC "ModelElement::iteratorSupplierDependency"
 ;     // empty
 
@@ -762,7 +747,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head327A5C7301CC "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head327A5C7301CC "ModelElement::iteratorPresentation"
 ;     // empty
 
@@ -838,7 +823,7 @@ public boolean containsContainer(Component container1)
  *  @see #addContainer
  */
 // -beg- preserve=no 36240CA4024E get_all_head327A5C7301CC "ModelElement::iteratorContainer"
-public java.util.Iterator iteratorContainer()
+public Iterator<?> iteratorContainer()
 // -end- 36240CA4024E get_all_head327A5C7301CC "ModelElement::iteratorContainer"
 ;     // empty
 
@@ -862,7 +847,7 @@ public int sizeContainer()
  *  @see #addContainer
  */
 // -beg- preserve=no 36240CA4024E itlink_head327A5C7301CC "ModelElement::getContainerLink"
-public java.util.Iterator iteratorContainerLink()
+public Iterator<?> iteratorContainerLink()
 // -end- 36240CA4024E itlink_head327A5C7301CC "ModelElement::getContainerLink"
 ;     // empty
 
@@ -948,7 +933,7 @@ public boolean containsTemplateParameter(TemplateParameter templateParameter1)
  *  @see #addTemplateParameter
  */
 // -beg- preserve=no 36240F380050 get_all_head327A5C7301CC "ModelElement::iteratorTemplateParameter"
-public java.util.Iterator iteratorTemplateParameter()
+public Iterator<?> iteratorTemplateParameter()
 // -end- 36240F380050 get_all_head327A5C7301CC "ModelElement::iteratorTemplateParameter"
 ;     // empty
 
@@ -1013,7 +998,7 @@ public boolean containsTargetFlow(Flow targetFlow1)
  *  @see #addTargetFlow
  */
 // -beg- preserve=no 3627D5E9010F get_all_head327A5C7301CC "ModelElement::iteratorTargetFlow"
-public java.util.Iterator iteratorTargetFlow()
+public Iterator<?> iteratorTargetFlow()
 // -end- 3627D5E9010F get_all_head327A5C7301CC "ModelElement::iteratorTargetFlow"
 ;     // empty
 
@@ -1078,7 +1063,7 @@ public boolean containsSourceFlow(Flow sourceFlow1)
  *  @see #addSourceFlow
  */
 // -beg- preserve=no 3627D60F03DF get_all_head327A5C7301CC "ModelElement::iteratorSourceFlow"
-public java.util.Iterator iteratorSourceFlow()
+public Iterator<?> iteratorSourceFlow()
 // -end- 3627D60F03DF get_all_head327A5C7301CC "ModelElement::iteratorSourceFlow"
 ;     // empty
 
@@ -1143,7 +1128,7 @@ public boolean containsDefaultParameter(TemplateParameter defaultParameter1)
  *  @see #addDefaultParameter
  */
 // -beg- preserve=no 365EEE82035C get_all_head327A5C7301CC "ModelElement::iteratorDefaultParameter"
-public java.util.Iterator iteratorDefaultParameter()
+public Iterator<?> iteratorDefaultParameter()
 // -end- 365EEE82035C get_all_head327A5C7301CC "ModelElement::iteratorDefaultParameter"
 ;     // empty
 
@@ -1208,7 +1193,7 @@ public boolean containsComment(Comment comment1)
  *  @see #addComment
  */
 // -beg- preserve=no 370E7E3C02DE get_all_head327A5C7301CC "ModelElement::iteratorComment"
-public java.util.Iterator iteratorComment()
+public Iterator<?> iteratorComment()
 // -end- 370E7E3C02DE get_all_head327A5C7301CC "ModelElement::iteratorComment"
 ;     // empty
 
@@ -1273,7 +1258,7 @@ public boolean containsStereotype(Stereotype stereotype1)
  *  @see #addStereotype
  */
 // -beg- preserve=no 338613A4007B get_all_head327A5C7301CC "ModelElement::iteratorStereotype"
-public java.util.Iterator iteratorStereotype()
+public Iterator<?> iteratorStereotype()
 // -end- 338613A4007B get_all_head327A5C7301CC "ModelElement::iteratorStereotype"
 ;     // empty
 
@@ -1338,7 +1323,7 @@ public boolean containsReferenceTag(TaggedValue referenceTag1)
  *  @see #addReferenceTag
  */
 // -beg- preserve=no 39B9B0F703C8 get_all_head327A5C7301CC "ModelElement::iteratorReferenceTag"
-public java.util.Iterator iteratorReferenceTag()
+public Iterator<?> iteratorReferenceTag()
 // -end- 39B9B0F703C8 get_all_head327A5C7301CC "ModelElement::iteratorReferenceTag"
 ;     // empty
 
@@ -1414,7 +1399,7 @@ public boolean containsImportedBy(Package importedBy1)
  *  @see #addImportedBy
  */
 // -beg- preserve=no 33CD739B0316 get_all_head327A5C7301CC "ModelElement::iteratorImportedBy"
-public java.util.Iterator iteratorImportedBy()
+public Iterator<?> iteratorImportedBy()
 // -end- 33CD739B0316 get_all_head327A5C7301CC "ModelElement::iteratorImportedBy"
 ;     // empty
 
@@ -1438,7 +1423,7 @@ public int sizeImportedBy()
  *  @see #addImportedBy
  */
 // -beg- preserve=no 33CD739B0316 itlink_head327A5C7301CC "ModelElement::getImportedByLink"
-public java.util.Iterator iteratorImportedByLink()
+public Iterator<?> iteratorImportedByLink()
 // -end- 33CD739B0316 itlink_head327A5C7301CC "ModelElement::getImportedByLink"
 ;     // empty
 

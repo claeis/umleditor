@@ -20,8 +20,13 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3C4FDE4A01DE package "UmlModel"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.uml1_4.foundation.core.Class;
 // -end- 3C4FDE4A01DE autoimport "UmlModel"
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Generalization;
@@ -129,7 +134,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA21703BE body3C4FDE4A01DE "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorOwnedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -289,7 +294,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 33598CAA030D get_all_head3C4FDE4A01DE
 	// "Namespace::iteratorOwnedElement"
-	public java.util.Iterator iteratorOwnedElement()
+	public Iterator<?> iteratorOwnedElement()
 	// -end- 33598CAA030D get_all_head3C4FDE4A01DE
 	// "Namespace::iteratorOwnedElement"
 	{
@@ -342,7 +347,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 33598CAA030D itlink_head3C4FDE4A01DE
 	// "Namespace::getOwnedElementLink"
-	public java.util.Iterator iteratorOwnedElementLink()
+	public Iterator<?> iteratorOwnedElementLink()
 	// -end- 33598CAA030D itlink_head3C4FDE4A01DE
 	// "Namespace::getOwnedElementLink"
 	{
@@ -483,7 +488,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	}
 
 	// -beg- preserve=no 33CD739B02DA code3C4FDE4A01DE "importedElement"
-	private java.util.Set importedElement = new java.util.HashSet();
+	private Set<ElementImport> importedElement = new HashSet<ElementImport>();
 	// -end- 33CD739B02DA code3C4FDE4A01DE "importedElement"
 
 	/**
@@ -592,14 +597,14 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 33CD739B02DA get_all_head3C4FDE4A01DE
 	// "Package::iteratorImportedElement"
-	public java.util.Iterator iteratorImportedElement()
+	public Iterator<?> iteratorImportedElement()
 	// -end- 33CD739B02DA get_all_head3C4FDE4A01DE
 	// "Package::iteratorImportedElement"
 	{
 		// -beg- preserve=no 33CD739B02DA get_all_body3C4FDE4A01DE
 		// "Package::iteratorImportedElement"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedElement.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedElement.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -632,7 +637,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 		// -beg- preserve=no 33CD739B02DA remove_all_body3C4FDE4A01DE
 		// "Package::clearImportedElement"
 		if (sizeImportedElement() > 0) {
-			for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedElement()._unlinkImportedBy(linkobj);
 			}
@@ -668,7 +673,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 33CD739B02DA itlink_head3C4FDE4A01DE
 	// "Package::getImportedElementLink"
-	public java.util.Iterator iteratorImportedElementLink()
+	public Iterator<ElementImport> iteratorImportedElementLink()
 	// -end- 33CD739B02DA itlink_head3C4FDE4A01DE
 	// "Package::getImportedElementLink"
 	{
@@ -713,7 +718,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 		// "Package::findImportedElementLink"
 		if (importedElement1 == null)
 			return null;
-		for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+		for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedElement() == importedElement1)
 				return linkobj;
@@ -818,7 +823,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3C4FDE4A01DE
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3C4FDE4A01DE
 	// "ModelElement::iteratorPresentation"
 	{
@@ -887,7 +892,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	// "ModelElement::_unlinkPresentation"
 
 	// -beg- preserve=no 335C14A5019A code3C4FDE4A01DE "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code3C4FDE4A01DE "generalization"
 
 	/**
@@ -968,7 +973,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head3C4FDE4A01DE
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<?> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head3C4FDE4A01DE
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -993,7 +998,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 		// -beg- preserve=no 335C14A5019A remove_all_body3C4FDE4A01DE
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<?> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -1051,7 +1056,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code3C4FDE4A01DE "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code3C4FDE4A01DE "specialization"
 
 	/**
@@ -1132,7 +1137,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head3C4FDE4A01DE
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<?> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head3C4FDE4A01DE
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -1157,7 +1162,7 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 		// -beg- preserve=no 335C146B01D6 remove_all_body3C4FDE4A01DE
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -1328,6 +1333,18 @@ public class UmlModel extends AbstractNamespace implements Model, java.io.Serial
 
 	public void setMetaAttrb(NlsString value) {
 		super.setMetaAttrb(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

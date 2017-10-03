@@ -39,6 +39,7 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 // -beg- preserve=no 358A5F0B0113 autoimport "INTERLIS2Def"
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Component;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Feature;
@@ -1931,7 +1932,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head358A5F0B0113
 	// "ModelElement::iteratorClassifierRole"
-	public Iterator<?> iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head358A5F0B0113
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -2068,7 +2069,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head358A5F0B0113
 	// "ModelElement::iteratorCollaboration"
-	public Iterator<?> iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head358A5F0B0113
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -2454,7 +2455,7 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 32B5D7EF03D3 code358A5F0B0113 "feature"
-	private List feature = new ArrayList();
+	private List<Feature> feature = new ArrayList<Feature>();
 	// -end- 32B5D7EF03D3 code358A5F0B0113 "feature"
 
 	/**
@@ -3609,6 +3610,18 @@ public class INTERLIS2Def extends AbstractNamespace implements Artifact, java.io
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 358A5F0B0113 detail_end "INTERLIS2Def"
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// -end- 358A5F0B0113 detail_end "INTERLIS2Def"
 

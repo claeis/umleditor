@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.implementation;
 // -beg- preserve=no 4551E9FD0298 autoimport "UmlBooleanExpression"
 import ch.ehi.uml1_4.foundation.datatypes.BooleanExpression;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 4551E9FD0298 autoimport "UmlBooleanExpression"
@@ -62,7 +65,7 @@ public class UmlBooleanExpression extends AbstractEditorElement implements Boole
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4551EC79030B body4551E9FD0298 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getBody());
 		super.enumerateChildren(visitor);
 		// -end- 4551EC79030B body4551E9FD0298 "enumerateChildren"

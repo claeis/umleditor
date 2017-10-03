@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.statemachines.State;
 import ch.ehi.uml1_4.behaviour.statemachines.Transition;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.Message;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Argument;
 import ch.ehi.uml1_4.behaviour.commonbehavior.ActionSequence;
@@ -165,7 +168,7 @@ public boolean containsMessage(Message message1)
  *  @see #addMessage
  */
 // -beg- preserve=no 36265CF90050 get_all_head328AAE8E0028 "Action::iteratorMessage"
-public java.util.Iterator iteratorMessage()
+public Iterator<?> iteratorMessage()
 // -end- 36265CF90050 get_all_head328AAE8E0028 "Action::iteratorMessage"
 ;     // empty
 
@@ -251,7 +254,7 @@ public boolean containsActualArgument(Argument actualArgument1)
  *  @see #addActualArgument
  */
 // -beg- preserve=no 33CFA4B90281 get_all_head328AAE8E0028 "Action::iteratorActualArgument"
-public java.util.Iterator iteratorActualArgument()
+public Iterator<?> iteratorActualArgument()
 // -end- 33CFA4B90281 get_all_head328AAE8E0028 "Action::iteratorActualArgument"
 ;     // empty
 
@@ -363,7 +366,7 @@ public boolean containsStimulus(Stimulus stimulus1)
  *  @see #addStimulus
  */
 // -beg- preserve=no 3650F0CD0294 get_all_head328AAE8E0028 "Action::iteratorStimulus"
-public java.util.Iterator iteratorStimulus()
+public Iterator<?> iteratorStimulus()
 // -end- 3650F0CD0294 get_all_head328AAE8E0028 "Action::iteratorStimulus"
 ;     // empty
 

@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.behaviour.statemachines;
 // -end- 3288D88401A4 package "CompositeState"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 3288D88401A4 autoimport "CompositeState"
 import ch.ehi.uml1_4.behaviour.statemachines.State;
 import ch.ehi.uml1_4.behaviour.statemachines.StateVertex;
@@ -63,7 +65,7 @@ public boolean containsSubvertex(StateVertex subvertex1)
  *  @see #addSubvertex
  */
 // -beg- preserve=no 3288D8C70172 get_all_head3288D88401A4 "CompositeState::iteratorSubvertex"
-public java.util.Iterator iteratorSubvertex()
+public Iterator<?> iteratorSubvertex()
 // -end- 3288D8C70172 get_all_head3288D88401A4 "CompositeState::iteratorSubvertex"
 ;     // empty
 

@@ -8,21 +8,11 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 3340359400BD package "AssociationEnd"
 
-// -beg- preserve=no 3340359400BD autoimport "AssociationEnd"
-import ch.ehi.uml1_4.foundation.core.ModelElement;
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationEndRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.LinkEnd;
-import ch.ehi.uml1_4.foundation.core.Association;
-import ch.ehi.uml1_4.foundation.core.Attribute;
-import ch.ehi.uml1_4.foundation.core.Classifier;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
-import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
-import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
-import ch.ehi.uml1_4.foundation.datatypes.ChangeableKind;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
-// -end- 3340359400BD autoimport "AssociationEnd"
 
 // import declarations
 // please fill in/modify the following section
@@ -75,7 +65,7 @@ public boolean containsAssociationEndRole(AssociationEndRole associationEndRole1
  *  @see #addAssociationEndRole
  */
 // -beg- preserve=no 33CD50F90302 get_all_head3340359400BD "AssociationEnd::iteratorAssociationEndRole"
-public java.util.Iterator iteratorAssociationEndRole()
+public Iterator<?> iteratorAssociationEndRole()
 // -end- 33CD50F90302 get_all_head3340359400BD "AssociationEnd::iteratorAssociationEndRole"
 ;     // empty
 
@@ -140,7 +130,7 @@ public boolean containsLinkEnd(LinkEnd linkEnd1)
  *  @see #addLinkEnd
  */
 // -beg- preserve=no 328A5C1F029E get_all_head3340359400BD "AssociationEnd::iteratorLinkEnd"
-public java.util.Iterator iteratorLinkEnd()
+public Iterator<?> iteratorLinkEnd()
 // -end- 328A5C1F029E get_all_head3340359400BD "AssociationEnd::iteratorLinkEnd"
 ;     // empty
 
@@ -273,7 +263,7 @@ public boolean containsQualifier(Attribute qualifier1)
  *  @see #addQualifier
  */
 // -beg- preserve=no 33DBE50B001F get_all_head3340359400BD "AssociationEnd::iteratorQualifier"
-public java.util.Iterator iteratorQualifier()
+public Iterator<?> iteratorQualifier()
 // -end- 33DBE50B001F get_all_head3340359400BD "AssociationEnd::iteratorQualifier"
 ;     // empty
 
@@ -385,7 +375,7 @@ public boolean containsSpecification(Classifier specification1)
  *  @see #addSpecification
  */
 // -beg- preserve=no 33F0EFAD00AA get_all_head3340359400BD "AssociationEnd::iteratorSpecification"
-public java.util.Iterator iteratorSpecification()
+public Iterator<?> iteratorSpecification()
 // -end- 33F0EFAD00AA get_all_head3340359400BD "AssociationEnd::iteratorSpecification"
 ;     // empty
 
@@ -450,7 +440,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head3340359400BD "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head3340359400BD "ModelElement::iteratorPresentation"
 ;     // empty
 

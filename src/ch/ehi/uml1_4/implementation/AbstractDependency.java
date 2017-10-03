@@ -20,31 +20,14 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3E42404202F6 package "AbstractDependency"
 
-// -beg- preserve=no 3E42404202F6 autoimport "AbstractDependency"
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.uml1_4.foundation.core.Dependency;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.basics.types.NlsString;
-// -end- 3E42404202F6 autoimport "AbstractDependency"
 
 // import declarations
 // please fill in/modify the following section
@@ -121,7 +104,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3E42412D01B3 body3E42404202F6 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -187,7 +170,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	}
 
 	// -beg- preserve=no 33FFE57B03B3 code3E42404202F6 "client"
-	private java.util.Set client = new java.util.HashSet();
+	private Set<ModelElement> client = new HashSet<ModelElement>();
 	// -end- 33FFE57B03B3 code3E42404202F6 "client"
 
 	/**
@@ -262,7 +245,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	 */
 	// -beg- preserve=no 33FFE57B03B3 get_all_head3E42404202F6
 	// "Dependency::iteratorClient"
-	public java.util.Iterator iteratorClient()
+	public Iterator<?> iteratorClient()
 	// -end- 33FFE57B03B3 get_all_head3E42404202F6 "Dependency::iteratorClient"
 	{
 		// -beg- preserve=no 33FFE57B03B3 get_all_body3E42404202F6
@@ -285,7 +268,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 		// -beg- preserve=no 33FFE57B03B3 remove_all_body3E42404202F6
 		// "Dependency::clearClient"
 		if (sizeClient() > 0) {
-			for (java.util.Iterator p = client.iterator(); p.hasNext();) {
+			for (Iterator<?> p = client.iterator(); p.hasNext();) {
 				((ModelElement) p.next())._unlinkClientDependency(this);
 			}
 			client.clear();
@@ -339,7 +322,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	// -end- 33FFE57B03B3 _unlink_body3E42404202F6 "Dependency::_unlinkClient"
 
 	// -beg- preserve=no 335C0D7A02E4 code3E42404202F6 "supplier"
-	private java.util.Set supplier = new java.util.HashSet();
+	private Set<ModelElement> supplier = new HashSet<ModelElement>();
 	// -end- 335C0D7A02E4 code3E42404202F6 "supplier"
 
 	/**
@@ -416,7 +399,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	 */
 	// -beg- preserve=no 335C0D7A02E4 get_all_head3E42404202F6
 	// "Dependency::iteratorSupplier"
-	public java.util.Iterator iteratorSupplier()
+	public Iterator<?> iteratorSupplier()
 	// -end- 335C0D7A02E4 get_all_head3E42404202F6
 	// "Dependency::iteratorSupplier"
 	{
@@ -441,7 +424,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 		// -beg- preserve=no 335C0D7A02E4 remove_all_body3E42404202F6
 		// "Dependency::clearSupplier"
 		if (sizeSupplier() > 0) {
-			for (java.util.Iterator p = supplier.iterator(); p.hasNext();) {
+			for (Iterator<?> p = supplier.iterator(); p.hasNext();) {
 				((ModelElement) p.next())._unlinkSupplierDependency(this);
 			}
 			supplier.clear();
@@ -562,7 +545,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3E42404202F6
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3E42404202F6
 	// "ModelElement::iteratorPresentation"
 	{

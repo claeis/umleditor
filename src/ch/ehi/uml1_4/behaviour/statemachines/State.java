@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.behaviour.statemachines;
 // -beg- preserve=no 3287F81C0136 autoimport "State"
 import ch.ehi.uml1_4.behaviour.statemachines.StateVertex;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Action;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.activitygraphs.ClassifierInState;
 import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
 import ch.ehi.uml1_4.behaviour.statemachines.Event;
@@ -161,7 +164,7 @@ public boolean containsClassifierInState(ClassifierInState classifierInState1)
  *  @see #addClassifierInState
  */
 // -beg- preserve=no 33CF9AE0026D get_all_head3287F81C0136 "State::iteratorClassifierInState"
-public java.util.Iterator iteratorClassifierInState()
+public Iterator<?> iteratorClassifierInState()
 // -end- 33CF9AE0026D get_all_head3287F81C0136 "State::iteratorClassifierInState"
 ;     // empty
 
@@ -273,7 +276,7 @@ public boolean containsDeferrableEvent(Event deferrableEvent1)
  *  @see #addDeferrableEvent
  */
 // -beg- preserve=no 33FA3AC103D4 get_all_head3287F81C0136 "State::iteratorDeferrableEvent"
-public java.util.Iterator iteratorDeferrableEvent()
+public Iterator<?> iteratorDeferrableEvent()
 // -end- 33FA3AC103D4 get_all_head3287F81C0136 "State::iteratorDeferrableEvent"
 ;     // empty
 
@@ -338,7 +341,7 @@ public boolean containsInternalTransition(Transition internalTransition1)
  *  @see #addInternalTransition
  */
 // -beg- preserve=no 328902D3029E get_all_head3287F81C0136 "State::iteratorInternalTransition"
-public java.util.Iterator iteratorInternalTransition()
+public Iterator<?> iteratorInternalTransition()
 // -end- 328902D3029E get_all_head3287F81C0136 "State::iteratorInternalTransition"
 ;     // empty
 

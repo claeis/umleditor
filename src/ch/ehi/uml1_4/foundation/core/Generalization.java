@@ -13,6 +13,9 @@ import ch.ehi.uml1_4.foundation.core.Relationship;
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.types.NlsString;
 // -end- 327A8080035C autoimport "Generalization"
 
@@ -228,7 +231,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head327A8080035C "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head327A8080035C "ModelElement::iteratorPresentation"
 ;     // empty
 

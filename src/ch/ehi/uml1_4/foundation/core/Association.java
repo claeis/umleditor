@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.foundation.core;
 // -beg- preserve=no 3298AE8300D9 autoimport "Association"
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
 import ch.ehi.uml1_4.foundation.core.Relationship;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
@@ -78,7 +81,7 @@ public boolean containsAssociationRole(AssociationRole associationRole1)
  *  @see #addAssociationRole
  */
 // -beg- preserve=no 33CD51170096 get_all_head3298AE8300D9 "Association::iteratorAssociationRole"
-public java.util.Iterator iteratorAssociationRole()
+public Iterator<?> iteratorAssociationRole()
 // -end- 33CD51170096 get_all_head3298AE8300D9 "Association::iteratorAssociationRole"
 ;     // empty
 
@@ -143,7 +146,7 @@ public boolean containsLink(Link link1)
  *  @see #addLink
  */
 // -beg- preserve=no 328A5BB3023A get_all_head3298AE8300D9 "Association::iteratorLink"
-public java.util.Iterator iteratorLink()
+public Iterator<?> iteratorLink()
 // -end- 328A5BB3023A get_all_head3298AE8300D9 "Association::iteratorLink"
 ;     // empty
 
@@ -229,7 +232,7 @@ public boolean containsConnection(AssociationEnd connection1)
  *  @see #addConnection
  */
 // -beg- preserve=no 32A2A510017A get_all_head3298AE8300D9 "Association::iteratorConnection"
-public java.util.Iterator iteratorConnection()
+public Iterator<?> iteratorConnection()
 // -end- 32A2A510017A get_all_head3298AE8300D9 "Association::iteratorConnection"
 ;     // empty
 
@@ -294,7 +297,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head3298AE8300D9 "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head3298AE8300D9 "ModelElement::iteratorPresentation"
 ;     // empty
 

@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 3298A02900FE package "Class"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 3298A02900FE autoimport "Class"
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
@@ -64,7 +66,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head3298A02900FE "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head3298A02900FE "ModelElement::iteratorPresentation"
 ;     // empty
 

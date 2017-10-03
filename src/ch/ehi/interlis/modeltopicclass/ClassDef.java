@@ -33,6 +33,8 @@ import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType;
 import ch.ehi.interlis.metaobjects.ParameterDef;
+import ch.ehi.uml1_4.foundation.core.Class;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -978,6 +980,18 @@ public class ClassDef extends AbstractClassDef {
 
 	public void setMetaMsg(NlsString value) {
 		super.setMetaMsg(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

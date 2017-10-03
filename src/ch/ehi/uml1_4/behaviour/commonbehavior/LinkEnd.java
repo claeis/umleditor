@@ -13,6 +13,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.commonbehavior.AttributeLink;
 // -end- 33F2803D0320 autoimport "LinkEnd"
 
@@ -228,7 +231,7 @@ public boolean containsQualifierValue(AttributeLink qualifierValue1)
  *  @see #addQualifierValue
  */
 // -beg- preserve=no 3742033D01F4 get_all_head33F2803D0320 "LinkEnd::iteratorQualifierValue"
-public java.util.Iterator iteratorQualifierValue()
+public Iterator<?> iteratorQualifierValue()
 // -end- 3742033D01F4 get_all_head33F2803D0320 "LinkEnd::iteratorQualifierValue"
 ;     // empty
 

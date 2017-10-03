@@ -8,12 +8,6 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 3648B41E0082 package "ElementResidence"
 
-// -beg- preserve=no 3648B41E0082 autoimport "ElementResidence"
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
-// -end- 3648B41E0082 autoimport "ElementResidence"
-
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=no 3648B41E0082 import "ElementResidence"

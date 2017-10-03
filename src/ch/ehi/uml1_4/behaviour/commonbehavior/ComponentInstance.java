@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.behaviour.commonbehavior;
 // -end- 364B657E03CA package "ComponentInstance"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 364B657E03CA autoimport "ComponentInstance"
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 import ch.ehi.uml1_4.behaviour.commonbehavior.NodeInstance;
@@ -110,7 +112,7 @@ public boolean containsResident(Instance resident1)
  *  @see #addResident
  */
 // -beg- preserve=no 364B65EA0155 get_all_head364B657E03CA "ComponentInstance::iteratorResident"
-public java.util.Iterator iteratorResident()
+public Iterator<?> iteratorResident()
 // -end- 364B65EA0155 get_all_head364B657E03CA "ComponentInstance::iteratorResident"
 ;     // empty
 

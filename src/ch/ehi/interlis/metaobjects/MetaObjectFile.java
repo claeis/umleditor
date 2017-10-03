@@ -24,10 +24,12 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 // -beg- preserve=no 3D6248EA02E3 autoimport "MetaObjectFile"
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Component;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
 import ch.ehi.uml1_4.implementation.AbstractNamespace;
@@ -923,7 +925,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head3D6248EA02E3
 	// "ModelElement::iteratorClassifierRole"
-	public Iterator<?> iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head3D6248EA02E3
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -1060,7 +1062,7 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head3D6248EA02E3
 	// "ModelElement::iteratorCollaboration"
-	public Iterator<?> iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head3D6248EA02E3
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -2550,6 +2552,18 @@ public class MetaObjectFile extends AbstractNamespace implements Artifact {
 
 	public void setMetaMsg(NlsString value) {
 		super.setMetaMsg(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

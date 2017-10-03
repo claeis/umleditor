@@ -8,40 +8,24 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 40432AE50263 package "UmlOperation"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import ch.ehi.basics.tools.AbstractVisitor;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.commonbehavior.CallAction;
+import ch.ehi.uml1_4.behaviour.commonbehavior.Signal;
+import ch.ehi.uml1_4.behaviour.statemachines.CallEvent;
+import ch.ehi.uml1_4.foundation.core.Classifier;
+import ch.ehi.uml1_4.foundation.core.Method;
 // -beg- preserve=no 40432AE50263 autoimport "UmlOperation"
 import ch.ehi.uml1_4.foundation.core.Operation;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.commonbehavior.CallAction;
-import ch.ehi.uml1_4.behaviour.statemachines.CallEvent;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.foundation.core.Method;
-import ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.uml1_4.behaviour.commonbehavior.Signal;
 import ch.ehi.uml1_4.foundation.core.Parameter;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.foundation.core.Classifier;
-import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-// -end- 40432AE50263 autoimport "UmlOperation"
 
 // import declarations
 // please fill in/modify the following section
@@ -123,7 +107,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 40432E380194 body40432AE50263 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getSpecification());
 		it = iteratorParameter();
 		while (it.hasNext())
@@ -145,7 +129,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	}
 
 	// -beg- preserve=no 336991630064 code40432AE50263 "callAction"
-	private java.util.Set callAction = new java.util.HashSet();
+	private Set<CallAction> callAction = new HashSet<CallAction>();
 	// -end- 336991630064 code40432AE50263 "callAction"
 
 	/**
@@ -222,7 +206,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 336991630064 get_all_head40432AE50263
 	// "Operation::iteratorCallAction"
-	public java.util.Iterator iteratorCallAction()
+	public Iterator<?> iteratorCallAction()
 	// -end- 336991630064 get_all_head40432AE50263
 	// "Operation::iteratorCallAction"
 	{
@@ -247,7 +231,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 		// -beg- preserve=no 336991630064 remove_all_body40432AE50263
 		// "Operation::clearCallAction"
 		if (sizeCallAction() > 0) {
-			for (java.util.Iterator p = callAction.iterator(); p.hasNext();) {
+			for (Iterator<?> p = callAction.iterator(); p.hasNext();) {
 				((CallAction) p.next())._unlinkCalled(this);
 			}
 			callAction.clear();
@@ -302,7 +286,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	// "Operation::_unlinkCallAction"
 
 	// -beg- preserve=no 32B598450001 code40432AE50263 "occurrence"
-	private java.util.Set occurrence = new java.util.HashSet();
+	private Set<CallEvent> occurrence = new HashSet<CallEvent>();
 	// -end- 32B598450001 code40432AE50263 "occurrence"
 
 	/**
@@ -379,7 +363,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 32B598450001 get_all_head40432AE50263
 	// "Operation::iteratorOccurrence"
-	public java.util.Iterator iteratorOccurrence()
+	public Iterator<?> iteratorOccurrence()
 	// -end- 32B598450001 get_all_head40432AE50263
 	// "Operation::iteratorOccurrence"
 	{
@@ -404,7 +388,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 		// -beg- preserve=no 32B598450001 remove_all_body40432AE50263
 		// "Operation::clearOccurrence"
 		if (sizeOccurrence() > 0) {
-			for (java.util.Iterator p = occurrence.iterator(); p.hasNext();) {
+			for (Iterator<?> p = occurrence.iterator(); p.hasNext();) {
 				((CallEvent) p.next())._unlinkOperation(this);
 			}
 			occurrence.clear();
@@ -526,7 +510,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head40432AE50263
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head40432AE50263
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -596,7 +580,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 32B6D9BE00C8 code40432AE50263 "method"
-	private java.util.Set method = new java.util.HashSet();
+	private Set<Method> method = new HashSet<Method>();
 	// -end- 32B6D9BE00C8 code40432AE50263 "method"
 
 	/**
@@ -671,7 +655,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 32B6D9BE00C8 get_all_head40432AE50263
 	// "Operation::iteratorMethod"
-	public java.util.Iterator iteratorMethod()
+	public Iterator<?> iteratorMethod()
 	// -end- 32B6D9BE00C8 get_all_head40432AE50263 "Operation::iteratorMethod"
 	{
 		// -beg- preserve=no 32B6D9BE00C8 get_all_body40432AE50263
@@ -694,7 +678,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 		// -beg- preserve=no 32B6D9BE00C8 remove_all_body40432AE50263
 		// "Operation::clearMethod"
 		if (sizeMethod() > 0) {
-			for (java.util.Iterator p = method.iterator(); p.hasNext();) {
+			for (Iterator<Method> p = method.iterator(); p.hasNext();) {
 				((Method) p.next())._unlinkSpecification(this);
 			}
 			method.clear();
@@ -930,7 +914,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	}
 
 	// -beg- preserve=no 33FFD98400B6 code40432AE50263 "raisedSignal"
-	private java.util.Set raisedSignal = new java.util.HashSet();
+	private Set<Signal> raisedSignal = new HashSet<Signal>();
 	// -end- 33FFD98400B6 code40432AE50263 "raisedSignal"
 
 	/**
@@ -1011,7 +995,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 33FFD98400B6 get_all_head40432AE50263
 	// "BehavioralFeature::iteratorRaisedSignal"
-	public java.util.Iterator iteratorRaisedSignal()
+	public Iterator<?> iteratorRaisedSignal()
 	// -end- 33FFD98400B6 get_all_head40432AE50263
 	// "BehavioralFeature::iteratorRaisedSignal"
 	{
@@ -1036,7 +1020,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 		// -beg- preserve=no 33FFD98400B6 remove_all_body40432AE50263
 		// "BehavioralFeature::clearRaisedSignal"
 		if (sizeRaisedSignal() > 0) {
-			for (java.util.Iterator p = raisedSignal.iterator(); p.hasNext();) {
+			for (Iterator<Signal> p = raisedSignal.iterator(); p.hasNext();) {
 				((Signal) p.next())._unlinkContext(this);
 			}
 			raisedSignal.clear();
@@ -1094,7 +1078,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	// "BehavioralFeature::_unlinkRaisedSignal"
 
 	// -beg- preserve=no 33599464017C code40432AE50263 "parameter"
-	private java.util.List parameter = new java.util.ArrayList();
+	private List<Parameter> parameter = new ArrayList<Parameter>();
 	// -end- 33599464017C code40432AE50263 "parameter"
 
 	/**
@@ -1237,7 +1221,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 33599464017C get_all_head40432AE50263
 	// "BehavioralFeature::iteratorParameter"
-	public java.util.Iterator iteratorParameter()
+	public Iterator<?> iteratorParameter()
 	// -end- 33599464017C get_all_head40432AE50263
 	// "BehavioralFeature::iteratorParameter"
 	{
@@ -1262,7 +1246,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 		// -beg- preserve=no 33599464017C remove_all_body40432AE50263
 		// "BehavioralFeature::clearParameter"
 		if (sizeParameter() > 0) {
-			for (java.util.Iterator p = parameter.iterator(); p.hasNext();) {
+			for (Iterator<?> p = parameter.iterator(); p.hasNext();) {
 				((Parameter) p.next())._unlinkBehavioralFeature(this);
 			}
 			parameter.clear();
@@ -1423,7 +1407,7 @@ public class UmlOperation extends AbstractModelElement implements Operation {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head40432AE50263
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head40432AE50263
 	// "ModelElement::iteratorClassifierRole"
 	{

@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 327A810D03C0 autoimport "GeneralizableElement"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.Generalization;
 // -end- 327A810D03C0 autoimport "GeneralizableElement"
 
@@ -64,7 +67,7 @@ public boolean containsGeneralization(Generalization generalization1)
  *  @see #addGeneralization
  */
 // -beg- preserve=no 335C14A5019A get_all_head327A810D03C0 "GeneralizableElement::iteratorGeneralization"
-public java.util.Iterator iteratorGeneralization()
+public Iterator<?> iteratorGeneralization()
 // -end- 335C14A5019A get_all_head327A810D03C0 "GeneralizableElement::iteratorGeneralization"
 ;     // empty
 
@@ -129,7 +132,7 @@ public boolean containsSpecialization(Generalization specialization1)
  *  @see #addSpecialization
  */
 // -beg- preserve=no 335C146B01D6 get_all_head327A810D03C0 "GeneralizableElement::iteratorSpecialization"
-public java.util.Iterator iteratorSpecialization()
+public Iterator<?> iteratorSpecialization()
 // -end- 335C146B01D6 get_all_head327A810D03C0 "GeneralizableElement::iteratorSpecialization"
 ;     // empty
 

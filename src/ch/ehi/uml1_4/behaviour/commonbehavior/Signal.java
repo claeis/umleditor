@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.behaviour.commonbehavior.SendAction;
 import ch.ehi.uml1_4.behaviour.statemachines.SignalEvent;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.commonbehavior.Reception;
 import ch.ehi.uml1_4.foundation.core.BehavioralFeature;
 // -end- 3389030B00E6 autoimport "Signal"
@@ -66,7 +69,7 @@ public boolean containsSendAction(SendAction sendAction1)
  *  @see #addSendAction
  */
 // -beg- preserve=no 33699121012C get_all_head3389030B00E6 "Signal::iteratorSendAction"
-public java.util.Iterator iteratorSendAction()
+public Iterator<?> iteratorSendAction()
 // -end- 33699121012C get_all_head3389030B00E6 "Signal::iteratorSendAction"
 ;     // empty
 
@@ -131,7 +134,7 @@ public boolean containsOccurrence(SignalEvent occurrence1)
  *  @see #addOccurrence
  */
 // -beg- preserve=no 336A39BE038E get_all_head3389030B00E6 "Signal::iteratorOccurrence"
-public java.util.Iterator iteratorOccurrence()
+public Iterator<?> iteratorOccurrence()
 // -end- 336A39BE038E get_all_head3389030B00E6 "Signal::iteratorOccurrence"
 ;     // empty
 
@@ -196,7 +199,7 @@ public boolean containsReception(Reception reception1)
  *  @see #addReception
  */
 // -beg- preserve=no 33FA370702F8 get_all_head3389030B00E6 "Signal::iteratorReception"
-public java.util.Iterator iteratorReception()
+public Iterator<?> iteratorReception()
 // -end- 33FA370702F8 get_all_head3389030B00E6 "Signal::iteratorReception"
 ;     // empty
 
@@ -261,7 +264,7 @@ public boolean containsContext(BehavioralFeature context1)
  *  @see #addContext
  */
 // -beg- preserve=no 33FFD98400B7 get_all_head3389030B00E6 "Signal::iteratorContext"
-public java.util.Iterator iteratorContext()
+public Iterator<?> iteratorContext()
 // -end- 33FFD98400B7 get_all_head3389030B00E6 "Signal::iteratorContext"
 ;     // empty
 

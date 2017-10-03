@@ -10,12 +10,11 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 33D120EF019A autoimport "ElementOwnership"
 import java.io.Serializable;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 33D120EF019A autoimport "ElementOwnership"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // import declarations
 // please fill in/modify the following section
@@ -29,6 +28,7 @@ import ch.ehi.basics.tools.AbstractVisitor;
  */
 public class ElementOwnership extends AbstractEditorElement implements Serializable
 {
+	private static final long serialVersionUID = 5681315811383362785L;
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 33D120EF019A detail_begin "ElementOwnership"
@@ -122,7 +122,7 @@ public void enumerateChildren(AbstractVisitor visitor)
 {
         // please fill in/modify the following section
         // -beg- preserve=no 3D4FA2170382 body33D120EF019A "enumerateChildren"
-        java.util.Iterator it=null;
+        Iterator<?> it=null;
         super.enumerateChildren(visitor);
         // -end- 3D4FA2170382 body33D120EF019A "enumerateChildren"
 }

@@ -28,6 +28,7 @@ import java.util.Set;
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.DefinitionProxy;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Generalization;
@@ -2343,5 +2344,17 @@ public class ModelDef extends AbstractNamespace implements Package, DefinitionPr
 		return imps.iterator();
 	}
 	// -end- 358A5DB202C5 detail_end "ModelDef"
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

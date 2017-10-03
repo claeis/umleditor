@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
 // -beg- preserve=no 33F275E20000 autoimport "Link"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.collaborations.Interaction;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
 import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
 import ch.ehi.uml1_4.foundation.core.Association;
@@ -116,7 +119,7 @@ public boolean containsPlayedRole(AssociationRole playedRole1)
  *  @see #addPlayedRole
  */
 // -beg- preserve=no 39E8FECB009D get_all_head33F275E20000 "Link::iteratorPlayedRole"
-public java.util.Iterator iteratorPlayedRole()
+public Iterator<?> iteratorPlayedRole()
 // -end- 39E8FECB009D get_all_head33F275E20000 "Link::iteratorPlayedRole"
 ;     // empty
 
@@ -181,7 +184,7 @@ public boolean containsCollaborationInstanceSet(CollaborationInstanceSet collabo
  *  @see #addCollaborationInstanceSet
  */
 // -beg- preserve=no 39E9065C0186 get_all_head33F275E20000 "ModelElement::iteratorCollaborationInstanceSet"
-public java.util.Iterator iteratorCollaborationInstanceSet()
+public Iterator<?> iteratorCollaborationInstanceSet()
 // -end- 39E9065C0186 get_all_head33F275E20000 "ModelElement::iteratorCollaborationInstanceSet"
 ;     // empty
 
@@ -293,7 +296,7 @@ public boolean containsConnection(LinkEnd connection1)
  *  @see #addConnection
  */
 // -beg- preserve=no 328A598B0352 get_all_head33F275E20000 "Link::iteratorConnection"
-public java.util.Iterator iteratorConnection()
+public Iterator<?> iteratorConnection()
 // -end- 328A598B0352 get_all_head33F275E20000 "Link::iteratorConnection"
 ;     // empty
 
@@ -358,7 +361,7 @@ public boolean containsStimulus(Stimulus stimulus1)
  *  @see #addStimulus
  */
 // -beg- preserve=no 3650EE690083 get_all_head33F275E20000 "Link::iteratorStimulus"
-public java.util.Iterator iteratorStimulus()
+public Iterator<?> iteratorStimulus()
 // -end- 3650EE690083 get_all_head33F275E20000 "Link::iteratorStimulus"
 ;     // empty
 

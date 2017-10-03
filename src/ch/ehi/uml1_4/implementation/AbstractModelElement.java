@@ -20,6 +20,12 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3CE225AB0092 package "AbstractModelElement"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 3CE225AB0092 autoimport "AbstractModelElement"
@@ -121,7 +127,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA03E0309 body3CE225AB0092 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -237,7 +243,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	}
 
 	// -beg- preserve=no 33CF8BD500F1 code3CE225AB0092 "behavior"
-	private java.util.Set behavior = new java.util.HashSet();
+	private Set<StateMachine> behavior = new HashSet<StateMachine>();
 	// -end- 33CF8BD500F1 code3CE225AB0092 "behavior"
 
 	/**
@@ -314,7 +320,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33CF8BD500F1 get_all_head3CE225AB0092
 	// "ModelElement::iteratorBehavior"
-	public java.util.Iterator iteratorBehavior()
+	public Iterator<?> iteratorBehavior()
 	// -end- 33CF8BD500F1 get_all_head3CE225AB0092
 	// "ModelElement::iteratorBehavior"
 	{
@@ -339,7 +345,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33CF8BD500F1 remove_all_body3CE225AB0092
 		// "ModelElement::clearBehavior"
 		if (sizeBehavior() > 0) {
-			for (java.util.Iterator p = behavior.iterator(); p.hasNext();) {
+			for (Iterator<?> p = behavior.iterator(); p.hasNext();) {
 				((StateMachine) p.next())._unlinkContext(this);
 			}
 			behavior.clear();
@@ -394,7 +400,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkBehavior"
 
 	// -beg- preserve=no 33CF9A030140 code3CE225AB0092 "partition"
-	private java.util.Set partition = new java.util.HashSet();
+	private Set<Partition> partition = new HashSet<Partition>();
 	// -end- 33CF9A030140 code3CE225AB0092 "partition"
 
 	/**
@@ -473,7 +479,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33CF9A030140 get_all_head3CE225AB0092
 	// "ModelElement::iteratorPartition"
-	public java.util.Iterator iteratorPartition()
+	public Iterator<?> iteratorPartition()
 	// -end- 33CF9A030140 get_all_head3CE225AB0092
 	// "ModelElement::iteratorPartition"
 	{
@@ -498,7 +504,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33CF9A030140 remove_all_body3CE225AB0092
 		// "ModelElement::clearPartition"
 		if (sizePartition() > 0) {
-			for (java.util.Iterator p = partition.iterator(); p.hasNext();) {
+			for (Iterator<?> p = partition.iterator(); p.hasNext();) {
 				((Partition) p.next())._unlinkContents(this);
 			}
 			partition.clear();
@@ -554,7 +560,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkPartition"
 
 	// -beg- preserve=no 33D1394E029F code3CE225AB0092 "collaboration"
-	private java.util.Set collaboration = new java.util.HashSet();
+	private Set<Collaboration> collaboration = new HashSet<Collaboration>();
 	// -end- 33D1394E029F code3CE225AB0092 "collaboration"
 
 	/**
@@ -634,7 +640,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head3CE225AB0092
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head3CE225AB0092
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -659,7 +665,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33D1394E029F remove_all_body3CE225AB0092
 		// "ModelElement::clearCollaboration"
 		if (sizeCollaboration() > 0) {
-			for (java.util.Iterator p = collaboration.iterator(); p.hasNext();) {
+			for (Iterator<Collaboration> p = collaboration.iterator(); p.hasNext();) {
 				((Collaboration) p.next())._unlinkConstrainingElement(this);
 			}
 			collaboration.clear();
@@ -717,7 +723,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 36008FB700E7 code3CE225AB0092 "classifierRole"
-	private java.util.Set classifierRole = new java.util.HashSet();
+	private Set<ClassifierRole> classifierRole = new HashSet<ClassifierRole>();
 	// -end- 36008FB700E7 code3CE225AB0092 "classifierRole"
 
 	/**
@@ -797,7 +803,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head3CE225AB0092
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head3CE225AB0092
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -822,7 +828,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 36008FB700E7 remove_all_body3CE225AB0092
 		// "ModelElement::clearClassifierRole"
 		if (sizeClassifierRole() > 0) {
-			for (java.util.Iterator p = classifierRole.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierRole> p = classifierRole.iterator(); p.hasNext();) {
 				((ClassifierRole) p.next())._unlinkAvailableContents(this);
 			}
 			classifierRole.clear();
@@ -881,7 +887,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 
 	// -beg- preserve=no 39E9065C0186 code3CE225AB0092
 	// "collaborationInstanceSet"
-	private java.util.Set collaborationInstanceSet = new java.util.HashSet();
+	private Set<CollaborationInstanceSet> collaborationInstanceSet = new HashSet<CollaborationInstanceSet>();
 	// -end- 39E9065C0186 code3CE225AB0092 "collaborationInstanceSet"
 
 	/**
@@ -962,7 +968,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 39E9065C0186 get_all_head3CE225AB0092
 	// "ModelElement::iteratorCollaborationInstanceSet"
-	public java.util.Iterator iteratorCollaborationInstanceSet()
+	public Iterator<CollaborationInstanceSet> iteratorCollaborationInstanceSet()
 	// -end- 39E9065C0186 get_all_head3CE225AB0092
 	// "ModelElement::iteratorCollaborationInstanceSet"
 	{
@@ -987,7 +993,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 39E9065C0186 remove_all_body3CE225AB0092
 		// "ModelElement::clearCollaborationInstanceSet"
 		if (sizeCollaborationInstanceSet() > 0) {
-			for (java.util.Iterator p = collaborationInstanceSet.iterator(); p.hasNext();) {
+			for (Iterator<CollaborationInstanceSet> p = collaborationInstanceSet.iterator(); p.hasNext();) {
 				((CollaborationInstanceSet) p.next())._unlinkConstrainingElement(this);
 			}
 			collaborationInstanceSet.clear();
@@ -1238,7 +1244,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=yes 33FFE57B0395 code3CE225AB0092 "clientDependency"
-	private java.util.List clientDependency = new java.util.ArrayList();
+	private List<Dependency> clientDependency = new ArrayList<Dependency>();
 	// -end- 33FFE57B0395 code3CE225AB0092 "clientDependency"
 
 	/**
@@ -1321,7 +1327,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head3CE225AB0092
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<?> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head3CE225AB0092
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -1346,7 +1352,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33FFE57B0395 remove_all_body3CE225AB0092
 		// "ModelElement::clearClientDependency"
 		if (sizeClientDependency() > 0) {
-			for (java.util.Iterator p = clientDependency.iterator(); p.hasNext();) {
+			for (Iterator<?> p = clientDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkClient(this);
 			}
 			clientDependency.clear();
@@ -1406,7 +1412,9 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkClientDependency"
 
 	// -beg- preserve=yes 33E901E003D4 code3CE225AB0092 "taggedValue"
-	private java.util.List<TaggedValue> taggedValue = new java.util.ArrayList<TaggedValue>() {
+	private List<TaggedValue> taggedValue = new ArrayList<TaggedValue>() {
+
+		private static final long serialVersionUID = 1L;
 
 		@Override
 		public boolean add(TaggedValue arg0) {
@@ -1540,7 +1548,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33E901E003D4 get_all_head3CE225AB0092
 	// "ModelElement::iteratorTaggedValue"
-	public java.util.Iterator iteratorTaggedValue()
+	public Iterator<?> iteratorTaggedValue()
 	// -end- 33E901E003D4 get_all_head3CE225AB0092
 	// "ModelElement::iteratorTaggedValue"
 	{
@@ -1565,7 +1573,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33E901E003D4 remove_all_body3CE225AB0092
 		// "ModelElement::clearTaggedValue"
 		if (sizeTaggedValue() > 0) {
-			for (java.util.Iterator p = taggedValue.iterator(); p.hasNext();) {
+			for (Iterator<?> p = taggedValue.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkModelElement(this);
 			}
 			taggedValue.clear();
@@ -1622,7 +1630,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkTaggedValue"
 
 	// -beg- preserve=yes 33EA67BB010E code3CE225AB0092 "constraint"
-	private java.util.List constraint = new java.util.ArrayList();
+	private List<Constraint> constraint = new ArrayList<Constraint>();
 	// -end- 33EA67BB010E code3CE225AB0092 "constraint"
 
 	/**
@@ -1703,7 +1711,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33EA67BB010E get_all_head3CE225AB0092
 	// "ModelElement::iteratorConstraint"
-	public java.util.Iterator iteratorConstraint()
+	public Iterator<?> iteratorConstraint()
 	// -end- 33EA67BB010E get_all_head3CE225AB0092
 	// "ModelElement::iteratorConstraint"
 	{
@@ -1728,7 +1736,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33EA67BB010E remove_all_body3CE225AB0092
 		// "ModelElement::clearConstraint"
 		if (sizeConstraint() > 0) {
-			for (java.util.Iterator p = constraint.iterator(); p.hasNext();) {
+			for (Iterator<?> p = constraint.iterator(); p.hasNext();) {
 				((Constraint) p.next())._unlinkConstrainedElement(this);
 			}
 			constraint.clear();
@@ -1786,7 +1794,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkConstraint"
 
 	// -beg- preserve=no 335C0D7A02A8 code3CE225AB0092 "supplierDependency"
-	private java.util.Set supplierDependency = new java.util.HashSet();
+	private Set<Dependency> supplierDependency = new HashSet<Dependency>();
 	// -end- 335C0D7A02A8 code3CE225AB0092 "supplierDependency"
 
 	/**
@@ -1867,7 +1875,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head3CE225AB0092
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<?> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head3CE225AB0092
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -1892,7 +1900,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 335C0D7A02A8 remove_all_body3CE225AB0092
 		// "ModelElement::clearSupplierDependency"
 		if (sizeSupplierDependency() > 0) {
-			for (java.util.Iterator p = supplierDependency.iterator(); p.hasNext();) {
+			for (Iterator<?> p = supplierDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkSupplier(this);
 			}
 			supplierDependency.clear();
@@ -1950,7 +1958,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkSupplierDependency"
 
 	// -beg- preserve=no 362409A9000A code3CE225AB0092 "presentation"
-	private java.util.Set presentation = new java.util.HashSet();
+	private Set<PresentationElement> presentation = new HashSet<PresentationElement>();
 	// -end- 362409A9000A code3CE225AB0092 "presentation"
 
 	/**
@@ -2030,7 +2038,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3CE225AB0092
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3CE225AB0092
 	// "ModelElement::iteratorPresentation"
 	{
@@ -2055,7 +2063,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 362409A9000A remove_all_body3CE225AB0092
 		// "ModelElement::clearPresentation"
 		if (sizePresentation() > 0) {
-			for (java.util.Iterator p = presentation.iterator(); p.hasNext();) {
+			for (Iterator<?> p = presentation.iterator(); p.hasNext();) {
 				((PresentationElement) p.next())._unlinkSubject(this);
 			}
 			presentation.clear();
@@ -2112,7 +2120,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkPresentation"
 
 	// -beg- preserve=no 36240CA4024E code3CE225AB0092 "container"
-	private java.util.Set container = new java.util.HashSet();
+	private Set<ElementResidence> container = new HashSet<ElementResidence>();
 	// -end- 36240CA4024E code3CE225AB0092 "container"
 
 	/**
@@ -2220,14 +2228,14 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 36240CA4024E get_all_head3CE225AB0092
 	// "ModelElement::iteratorContainer"
-	public java.util.Iterator iteratorContainer()
+	public Iterator<?> iteratorContainer()
 	// -end- 36240CA4024E get_all_head3CE225AB0092
 	// "ModelElement::iteratorContainer"
 	{
 		// -beg- preserve=no 36240CA4024E get_all_body3CE225AB0092
 		// "ModelElement::iteratorContainer"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = container.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementResidence> i = container.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -2260,7 +2268,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 36240CA4024E remove_all_body3CE225AB0092
 		// "ModelElement::clearContainer"
 		if (sizeContainer() > 0) {
-			for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+			for (Iterator<ElementResidence> p = container.iterator(); p.hasNext();) {
 				ElementResidence linkobj = (ElementResidence) p.next();
 				linkobj.getContainer()._unlinkResident(linkobj);
 			}
@@ -2296,7 +2304,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 36240CA4024E itlink_head3CE225AB0092
 	// "ModelElement::getContainerLink"
-	public java.util.Iterator iteratorContainerLink()
+	public Iterator<?> iteratorContainerLink()
 	// -end- 36240CA4024E itlink_head3CE225AB0092
 	// "ModelElement::getContainerLink"
 	{
@@ -2341,7 +2349,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// "ModelElement::findContainerLink"
 		if (container1 == null)
 			return null;
-		for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+		for (Iterator<?> p = container.iterator(); p.hasNext();) {
 			ElementResidence linkobj = (ElementResidence) p.next();
 			if (linkobj.getContainer() == container1)
 				return linkobj;
@@ -2379,7 +2387,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkContainer"
 
 	// -beg- preserve=no 36240F380050 code3CE225AB0092 "templateParameter"
-	private java.util.List templateParameter = new java.util.ArrayList();
+	private List<TemplateParameter> templateParameter = new ArrayList<TemplateParameter>();
 	// -end- 36240F380050 code3CE225AB0092 "templateParameter"
 
 	/**
@@ -2524,7 +2532,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 36240F380050 get_all_head3CE225AB0092
 	// "ModelElement::iteratorTemplateParameter"
-	public java.util.Iterator iteratorTemplateParameter()
+	public Iterator<?> iteratorTemplateParameter()
 	// -end- 36240F380050 get_all_head3CE225AB0092
 	// "ModelElement::iteratorTemplateParameter"
 	{
@@ -2549,7 +2557,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 36240F380050 remove_all_body3CE225AB0092
 		// "ModelElement::clearTemplateParameter"
 		if (sizeTemplateParameter() > 0) {
-			for (java.util.Iterator p = templateParameter.iterator(); p.hasNext();) {
+			for (Iterator<?> p = templateParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkTemplate(this);
 			}
 			templateParameter.clear();
@@ -2607,7 +2615,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkTemplateParameter"
 
 	// -beg- preserve=no 3627D5E9010F code3CE225AB0092 "targetFlow"
-	private java.util.Set targetFlow = new java.util.HashSet();
+	private Set<Flow> targetFlow = new HashSet<Flow>();
 	// -end- 3627D5E9010F code3CE225AB0092 "targetFlow"
 
 	/**
@@ -2686,7 +2694,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 3627D5E9010F get_all_head3CE225AB0092
 	// "ModelElement::iteratorTargetFlow"
-	public java.util.Iterator iteratorTargetFlow()
+	public Iterator<?> iteratorTargetFlow()
 	// -end- 3627D5E9010F get_all_head3CE225AB0092
 	// "ModelElement::iteratorTargetFlow"
 	{
@@ -2711,7 +2719,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 3627D5E9010F remove_all_body3CE225AB0092
 		// "ModelElement::clearTargetFlow"
 		if (sizeTargetFlow() > 0) {
-			for (java.util.Iterator p = targetFlow.iterator(); p.hasNext();) {
+			for (Iterator<?> p = targetFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkTarget(this);
 			}
 			targetFlow.clear();
@@ -2767,7 +2775,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkTargetFlow"
 
 	// -beg- preserve=no 3627D60F03DF code3CE225AB0092 "sourceFlow"
-	private java.util.Set sourceFlow = new java.util.HashSet();
+	private Set<Flow> sourceFlow = new HashSet<Flow>();
 	// -end- 3627D60F03DF code3CE225AB0092 "sourceFlow"
 
 	/**
@@ -2846,7 +2854,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 3627D60F03DF get_all_head3CE225AB0092
 	// "ModelElement::iteratorSourceFlow"
-	public java.util.Iterator iteratorSourceFlow()
+	public Iterator<?> iteratorSourceFlow()
 	// -end- 3627D60F03DF get_all_head3CE225AB0092
 	// "ModelElement::iteratorSourceFlow"
 	{
@@ -2871,7 +2879,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 3627D60F03DF remove_all_body3CE225AB0092
 		// "ModelElement::clearSourceFlow"
 		if (sizeSourceFlow() > 0) {
-			for (java.util.Iterator p = sourceFlow.iterator(); p.hasNext();) {
+			for (Iterator<?> p = sourceFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkSource(this);
 			}
 			sourceFlow.clear();
@@ -2927,7 +2935,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkSourceFlow"
 
 	// -beg- preserve=no 365EEE82035C code3CE225AB0092 "defaultParameter"
-	private java.util.Set defaultParameter = new java.util.HashSet();
+	private Set<TemplateParameter> defaultParameter = new HashSet<TemplateParameter>();
 	// -end- 365EEE82035C code3CE225AB0092 "defaultParameter"
 
 	/**
@@ -3008,7 +3016,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 365EEE82035C get_all_head3CE225AB0092
 	// "ModelElement::iteratorDefaultParameter"
-	public java.util.Iterator iteratorDefaultParameter()
+	public Iterator<?> iteratorDefaultParameter()
 	// -end- 365EEE82035C get_all_head3CE225AB0092
 	// "ModelElement::iteratorDefaultParameter"
 	{
@@ -3033,7 +3041,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 365EEE82035C remove_all_body3CE225AB0092
 		// "ModelElement::clearDefaultParameter"
 		if (sizeDefaultParameter() > 0) {
-			for (java.util.Iterator p = defaultParameter.iterator(); p.hasNext();) {
+			for (Iterator<?> p = defaultParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkDefaultElement(this);
 			}
 			defaultParameter.clear();
@@ -3091,7 +3099,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkDefaultParameter"
 
 	// -beg- preserve=no 370E7E3C02DE code3CE225AB0092 "comment"
-	private java.util.Set comment = new java.util.HashSet();
+	private Set<Comment> comment = new HashSet<Comment>();
 	// -end- 370E7E3C02DE code3CE225AB0092 "comment"
 
 	/**
@@ -3168,7 +3176,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 370E7E3C02DE get_all_head3CE225AB0092
 	// "ModelElement::iteratorComment"
-	public java.util.Iterator iteratorComment()
+	public Iterator<?> iteratorComment()
 	// -end- 370E7E3C02DE get_all_head3CE225AB0092
 	// "ModelElement::iteratorComment"
 	{
@@ -3193,7 +3201,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 370E7E3C02DE remove_all_body3CE225AB0092
 		// "ModelElement::clearComment"
 		if (sizeComment() > 0) {
-			for (java.util.Iterator p = comment.iterator(); p.hasNext();) {
+			for (Iterator<?> p = comment.iterator(); p.hasNext();) {
 				((Comment) p.next())._unlinkAnnotatedElement(this);
 			}
 			comment.clear();
@@ -3248,7 +3256,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkComment"
 
 	// -beg- preserve=no 338613A4007B code3CE225AB0092 "stereotype"
-	private java.util.Set stereotype = new java.util.HashSet();
+	private Set<Stereotype> stereotype = new HashSet<Stereotype>();
 	// -end- 338613A4007B code3CE225AB0092 "stereotype"
 
 	/**
@@ -3327,7 +3335,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 338613A4007B get_all_head3CE225AB0092
 	// "ModelElement::iteratorStereotype"
-	public java.util.Iterator iteratorStereotype()
+	public Iterator<Stereotype> iteratorStereotype()
 	// -end- 338613A4007B get_all_head3CE225AB0092
 	// "ModelElement::iteratorStereotype"
 	{
@@ -3352,7 +3360,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 338613A4007B remove_all_body3CE225AB0092
 		// "ModelElement::clearStereotype"
 		if (sizeStereotype() > 0) {
-			for (java.util.Iterator p = stereotype.iterator(); p.hasNext();) {
+			for (Iterator<Stereotype> p = stereotype.iterator(); p.hasNext();) {
 				((Stereotype) p.next())._unlinkExtendedElement(this);
 			}
 			stereotype.clear();
@@ -3408,7 +3416,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkStereotype"
 
 	// -beg- preserve=no 39B9B0F703C8 code3CE225AB0092 "referenceTag"
-	private java.util.Set referenceTag = new java.util.HashSet();
+	private Set<TaggedValue> referenceTag = new HashSet<TaggedValue>();
 	// -end- 39B9B0F703C8 code3CE225AB0092 "referenceTag"
 
 	/**
@@ -3488,7 +3496,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 39B9B0F703C8 get_all_head3CE225AB0092
 	// "ModelElement::iteratorReferenceTag"
-	public java.util.Iterator iteratorReferenceTag()
+	public Iterator<?> iteratorReferenceTag()
 	// -end- 39B9B0F703C8 get_all_head3CE225AB0092
 	// "ModelElement::iteratorReferenceTag"
 	{
@@ -3513,7 +3521,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 39B9B0F703C8 remove_all_body3CE225AB0092
 		// "ModelElement::clearReferenceTag"
 		if (sizeReferenceTag() > 0) {
-			for (java.util.Iterator p = referenceTag.iterator(); p.hasNext();) {
+			for (Iterator<?> p = referenceTag.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkReferenceValue(this);
 			}
 			referenceTag.clear();
@@ -3570,7 +3578,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	// "ModelElement::_unlinkReferenceTag"
 
 	// -beg- preserve=no 33CD739B0316 code3CE225AB0092 "importedBy"
-	private java.util.Set importedBy = new java.util.HashSet();
+	private Set<ElementImport> importedBy = new HashSet<ElementImport>();
 	// -end- 33CD739B0316 code3CE225AB0092 "importedBy"
 
 	/**
@@ -3678,14 +3686,14 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33CD739B0316 get_all_head3CE225AB0092
 	// "ModelElement::iteratorImportedBy"
-	public java.util.Iterator iteratorImportedBy()
+	public Iterator<?> iteratorImportedBy()
 	// -end- 33CD739B0316 get_all_head3CE225AB0092
 	// "ModelElement::iteratorImportedBy"
 	{
 		// -beg- preserve=no 33CD739B0316 get_all_body3CE225AB0092
 		// "ModelElement::iteratorImportedBy"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedBy.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedBy.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -3718,7 +3726,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// -beg- preserve=no 33CD739B0316 remove_all_body3CE225AB0092
 		// "ModelElement::clearImportedBy"
 		if (sizeImportedBy() > 0) {
-			for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedBy.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedBy()._unlinkImportedElement(linkobj);
 			}
@@ -3754,7 +3762,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 	 */
 	// -beg- preserve=no 33CD739B0316 itlink_head3CE225AB0092
 	// "ModelElement::getImportedByLink"
-	public java.util.Iterator iteratorImportedByLink()
+	public Iterator<?> iteratorImportedByLink()
 	// -end- 33CD739B0316 itlink_head3CE225AB0092
 	// "ModelElement::getImportedByLink"
 	{
@@ -3799,7 +3807,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		// "ModelElement::findImportedByLink"
 		if (importedBy1 == null)
 			return null;
-		for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+		for (Iterator<?> p = importedBy.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedBy() == importedBy1)
 				return linkobj;

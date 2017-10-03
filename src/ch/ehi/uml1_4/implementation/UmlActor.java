@@ -20,6 +20,12 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 4551A5A200BB package "UmlActor"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 4551A5A200BB autoimport "UmlActor"
@@ -32,6 +38,7 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 // -beg- preserve=no 4551A5A200BB autoimport "UmlActor"
 import ch.ehi.uml1_4.behaviour.usecases.Actor;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -125,7 +132,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4551A85C008D body4551A5A200BB "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorFeature();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -186,7 +193,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CB2C64E0374 body4551A5A200BB "containsFeature"
-		java.util.Iterator it = iteratorFeature();
+		Iterator<?> it = iteratorFeature();
 		while (it.hasNext()) {
 			ModelElement ele = (ModelElement) it.next();
 			if (ele.getDefLangName().equals(name)) {
@@ -198,7 +205,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	}
 
 	// -beg- preserve=no 33CF9EFC006E code4551A5A200BB "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 33CF9EFC006E code4551A5A200BB "objectFlowState"
 
 	/**
@@ -278,7 +285,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33CF9EFC006E get_all_head4551A5A200BB
 	// "Classifier::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<?> iteratorObjectFlowState()
 	// -end- 33CF9EFC006E get_all_head4551A5A200BB
 	// "Classifier::iteratorObjectFlowState"
 	{
@@ -303,7 +310,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33CF9EFC006E remove_all_body4551A5A200BB
 		// "Classifier::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<?> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkType(this);
 			}
 			objectFlowState.clear();
@@ -361,7 +368,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "Classifier::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 33CF9F1602BC code4551A5A200BB "classifierInState"
-	private java.util.Set classifierInState = new java.util.HashSet();
+	private Set<ClassifierInState> classifierInState = new HashSet<ClassifierInState>();
 	// -end- 33CF9F1602BC code4551A5A200BB "classifierInState"
 
 	/**
@@ -442,7 +449,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33CF9F1602BC get_all_head4551A5A200BB
 	// "Classifier::iteratorClassifierInState"
-	public java.util.Iterator iteratorClassifierInState()
+	public Iterator<?> iteratorClassifierInState()
 	// -end- 33CF9F1602BC get_all_head4551A5A200BB
 	// "Classifier::iteratorClassifierInState"
 	{
@@ -467,7 +474,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33CF9F1602BC remove_all_body4551A5A200BB
 		// "Classifier::clearClassifierInState"
 		if (sizeClassifierInState() > 0) {
-			for (java.util.Iterator p = classifierInState.iterator(); p.hasNext();) {
+			for (Iterator<?> p = classifierInState.iterator(); p.hasNext();) {
 				((ClassifierInState) p.next())._unlinkType(this);
 			}
 			classifierInState.clear();
@@ -592,7 +599,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head4551A5A200BB
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head4551A5A200BB
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -729,7 +736,8 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head4551A5A200BB
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	
+	public Iterator iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head4551A5A200BB
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -799,7 +807,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 33CAD7E900AB code4551A5A200BB "instance"
-	private java.util.Set instance = new java.util.HashSet();
+	private Set<Instance> instance = new HashSet<Instance>();
 	// -end- 33CAD7E900AB code4551A5A200BB "instance"
 
 	/**
@@ -876,7 +884,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33CAD7E900AB get_all_head4551A5A200BB
 	// "Classifier::iteratorInstance"
-	public java.util.Iterator iteratorInstance()
+	public Iterator<?> iteratorInstance()
 	// -end- 33CAD7E900AB get_all_head4551A5A200BB
 	// "Classifier::iteratorInstance"
 	{
@@ -901,7 +909,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33CAD7E900AB remove_all_body4551A5A200BB
 		// "Classifier::clearInstance"
 		if (sizeInstance() > 0) {
-			for (java.util.Iterator p = instance.iterator(); p.hasNext();) {
+			for (Iterator<?> p = instance.iterator(); p.hasNext();) {
 				((Instance) p.next())._unlinkClassifier(this);
 			}
 			instance.clear();
@@ -955,7 +963,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// -end- 33CAD7E900AB _unlink_body4551A5A200BB "Classifier::_unlinkInstance"
 
 	// -beg- preserve=no 33CFD0A701A4 code4551A5A200BB "createAction"
-	private java.util.Set createAction = new java.util.HashSet();
+	private Set<CreateAction> createAction = new HashSet<CreateAction>();
 	// -end- 33CFD0A701A4 code4551A5A200BB "createAction"
 
 	/**
@@ -1034,7 +1042,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33CFD0A701A4 get_all_head4551A5A200BB
 	// "Classifier::iteratorCreateAction"
-	public java.util.Iterator iteratorCreateAction()
+	public Iterator<?> iteratorCreateAction()
 	// -end- 33CFD0A701A4 get_all_head4551A5A200BB
 	// "Classifier::iteratorCreateAction"
 	{
@@ -1059,7 +1067,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33CFD0A701A4 remove_all_body4551A5A200BB
 		// "Classifier::clearCreateAction"
 		if (sizeCreateAction() > 0) {
-			for (java.util.Iterator p = createAction.iterator(); p.hasNext();) {
+			for (Iterator<?> p = createAction.iterator(); p.hasNext();) {
 				((CreateAction) p.next())._unlinkInstantiation(this);
 			}
 			createAction.clear();
@@ -1115,7 +1123,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 32B5D7EF03D3 code4551A5A200BB "feature"
-	private java.util.List feature = new java.util.ArrayList();
+	private List<Feature> feature = new ArrayList<Feature>();
 	// -end- 32B5D7EF03D3 code4551A5A200BB "feature"
 
 	/**
@@ -1251,7 +1259,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 32B5D7EF03D3 get_all_head4551A5A200BB
 	// "Classifier::iteratorFeature"
-	public java.util.Iterator iteratorFeature()
+	public Iterator<?> iteratorFeature()
 	// -end- 32B5D7EF03D3 get_all_head4551A5A200BB "Classifier::iteratorFeature"
 	{
 		// -beg- preserve=no 32B5D7EF03D3 get_all_body4551A5A200BB
@@ -1274,7 +1282,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 32B5D7EF03D3 remove_all_body4551A5A200BB
 		// "Classifier::clearFeature"
 		if (sizeFeature() > 0) {
-			for (java.util.Iterator p = feature.iterator(); p.hasNext();) {
+			for (Iterator<?> p = feature.iterator(); p.hasNext();) {
 				((Feature) p.next())._unlinkOwner(this);
 			}
 			feature.clear();
@@ -1328,7 +1336,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// -end- 32B5D7EF03D3 _unlink_body4551A5A200BB "Classifier::_unlinkFeature"
 
 	// -beg- preserve=no 33E265070353 code4551A5A200BB "association"
-	private java.util.Set association = new java.util.HashSet();
+	private Set<AssociationEnd> association = new HashSet<AssociationEnd>();
 	// -end- 33E265070353 code4551A5A200BB "association"
 
 	/**
@@ -1407,7 +1415,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33E265070353 get_all_head4551A5A200BB
 	// "Classifier::iteratorAssociation"
-	public java.util.Iterator iteratorAssociation()
+	public Iterator<?> iteratorAssociation()
 	// -end- 33E265070353 get_all_head4551A5A200BB
 	// "Classifier::iteratorAssociation"
 	{
@@ -1432,7 +1440,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33E265070353 remove_all_body4551A5A200BB
 		// "Classifier::clearAssociation"
 		if (sizeAssociation() > 0) {
-			for (java.util.Iterator p = association.iterator(); p.hasNext();) {
+			for (Iterator<?> p = association.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkParticipant(this);
 			}
 			association.clear();
@@ -1488,7 +1496,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "Classifier::_unlinkAssociation"
 
 	// -beg- preserve=no 33F0EFAD00AB code4551A5A200BB "specifiedEnd"
-	private java.util.Set specifiedEnd = new java.util.HashSet();
+	private Set<AssociationEnd> specifiedEnd = new HashSet<AssociationEnd>();
 	// -end- 33F0EFAD00AB code4551A5A200BB "specifiedEnd"
 
 	/**
@@ -1567,7 +1575,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 33F0EFAD00AB get_all_head4551A5A200BB
 	// "Classifier::iteratorSpecifiedEnd"
-	public java.util.Iterator iteratorSpecifiedEnd()
+	public Iterator<?> iteratorSpecifiedEnd()
 	// -end- 33F0EFAD00AB get_all_head4551A5A200BB
 	// "Classifier::iteratorSpecifiedEnd"
 	{
@@ -1592,7 +1600,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 33F0EFAD00AB remove_all_body4551A5A200BB
 		// "Classifier::clearSpecifiedEnd"
 		if (sizeSpecifiedEnd() > 0) {
-			for (java.util.Iterator p = specifiedEnd.iterator(); p.hasNext();) {
+			for (Iterator<?> p = specifiedEnd.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkSpecification(this);
 			}
 			specifiedEnd.clear();
@@ -1648,7 +1656,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "Classifier::_unlinkSpecifiedEnd"
 
 	// -beg- preserve=no 36E96A87033E code4551A5A200BB "powertypeRange"
-	private java.util.Set powertypeRange = new java.util.HashSet();
+	private Set<Generalization> powertypeRange = new HashSet<Generalization>();
 	// -end- 36E96A87033E code4551A5A200BB "powertypeRange"
 
 	/**
@@ -1728,7 +1736,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 36E96A87033E get_all_head4551A5A200BB
 	// "Classifier::iteratorPowertypeRange"
-	public java.util.Iterator iteratorPowertypeRange()
+	public Iterator<?> iteratorPowertypeRange()
 	// -end- 36E96A87033E get_all_head4551A5A200BB
 	// "Classifier::iteratorPowertypeRange"
 	{
@@ -1753,7 +1761,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 36E96A87033E remove_all_body4551A5A200BB
 		// "Classifier::clearPowertypeRange"
 		if (sizePowertypeRange() > 0) {
-			for (java.util.Iterator p = powertypeRange.iterator(); p.hasNext();) {
+			for (Iterator<?> p = powertypeRange.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkPowertype(this);
 			}
 			powertypeRange.clear();
@@ -1810,7 +1818,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "Classifier::_unlinkPowertypeRange"
 
 	// -beg- preserve=no 335C14A5019A code4551A5A200BB "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code4551A5A200BB "generalization"
 
 	/**
@@ -1891,7 +1899,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head4551A5A200BB
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<?> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head4551A5A200BB
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -1916,7 +1924,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 335C14A5019A remove_all_body4551A5A200BB
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<?> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -1974,7 +1982,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code4551A5A200BB "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code4551A5A200BB "specialization"
 
 	/**
@@ -2055,7 +2063,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head4551A5A200BB
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<?> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head4551A5A200BB
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -2080,7 +2088,7 @@ public class UmlActor extends AbstractNamespace implements Actor {
 		// -beg- preserve=no 335C146B01D6 remove_all_body4551A5A200BB
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -2267,6 +2275,18 @@ public class UmlActor extends AbstractNamespace implements Actor {
 	
 	public void setMetaMsg(NlsString value) {
 		super.setMetaMsg(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

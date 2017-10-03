@@ -29,6 +29,7 @@ import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.DefinitionProxy;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.BasketType;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Generalization;
@@ -2280,6 +2281,18 @@ public class TopicDef extends AbstractNamespace implements Package, DefinitionPr
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setLeaf"));
 		}
 		// -end- 327A877E006E set_body358A5E3B0132 "isLeaf"
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

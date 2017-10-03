@@ -8,36 +8,19 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 40432B0300AE package "UmlParameter"
 
-// -beg- preserve=no 40432B0300AE autoimport "UmlParameter"
-import ch.ehi.uml1_4.foundation.core.Parameter;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.behaviour.statemachines.Event;
-import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
-import ch.ehi.uml1_4.foundation.core.BehavioralFeature;
-import ch.ehi.uml1_4.foundation.datatypes.Expression;
-import ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
 import ch.ehi.basics.types.NlsString;
 // -end- 40432B0300AE autoimport "UmlParameter"
+import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
+import ch.ehi.uml1_4.behaviour.statemachines.Event;
+import ch.ehi.uml1_4.foundation.core.BehavioralFeature;
+// -beg- preserve=no 40432B0300AE autoimport "UmlParameter"
+import ch.ehi.uml1_4.foundation.core.Parameter;
+import ch.ehi.uml1_4.foundation.datatypes.Expression;
 
 // import declarations
 // please fill in/modify the following section
@@ -118,7 +101,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 40432E4701E6 body40432B0300AE "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getDefaultValue());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -253,7 +236,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	// -end- 3337AF9D028B _unlink_body40432B0300AE "Parameter::_unlinkEvent"
 
 	// -beg- preserve=no 337D935E0213 code40432B0300AE "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 337D935E0213 code40432B0300AE "objectFlowState"
 
 	/**
@@ -333,7 +316,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	 */
 	// -beg- preserve=no 337D935E0213 get_all_head40432B0300AE
 	// "Parameter::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<ObjectFlowState> iteratorObjectFlowState()
 	// -end- 337D935E0213 get_all_head40432B0300AE
 	// "Parameter::iteratorObjectFlowState"
 	{
@@ -358,7 +341,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 		// -beg- preserve=no 337D935E0213 remove_all_body40432B0300AE
 		// "Parameter::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<ObjectFlowState> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkAvailable(this);
 			}
 			objectFlowState.clear();
@@ -415,7 +398,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	// "Parameter::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 36462DDF008C code40432B0300AE "state"
-	private java.util.Set state = new java.util.HashSet();
+	private Set<ObjectFlowState> state = new HashSet<ObjectFlowState>();
 	// -end- 36462DDF008C code40432B0300AE "state"
 
 	/**
@@ -489,7 +472,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 	 */
 	// -beg- preserve=no 36462DDF008C get_all_head40432B0300AE
 	// "Parameter::iteratorState"
-	public java.util.Iterator iteratorState()
+	public Iterator<ObjectFlowState> iteratorState()
 	// -end- 36462DDF008C get_all_head40432B0300AE "Parameter::iteratorState"
 	{
 		// -beg- preserve=no 36462DDF008C get_all_body40432B0300AE
@@ -512,7 +495,7 @@ public class UmlParameter extends AbstractModelElement implements Parameter {
 		// -beg- preserve=no 36462DDF008C remove_all_body40432B0300AE
 		// "Parameter::clearState"
 		if (sizeState() > 0) {
-			for (java.util.Iterator p = state.iterator(); p.hasNext();) {
+			for (Iterator<ObjectFlowState> p = state.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkParameter(this);
 			}
 			state.clear();

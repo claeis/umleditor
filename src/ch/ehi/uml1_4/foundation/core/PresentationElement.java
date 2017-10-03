@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 327A5C8800A0 package "PresentationElement"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 327A5C8800A0 autoimport "PresentationElement"
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -66,7 +68,7 @@ public boolean containsSubject(ModelElement subject1)
  *  @see #addSubject
  */
 // -beg- preserve=no 362409A803C0 get_all_head327A5C8800A0 "PresentationElement::iteratorSubject"
-public java.util.Iterator iteratorSubject()
+public Iterator<?> iteratorSubject()
 // -end- 362409A803C0 get_all_head327A5C8800A0 "PresentationElement::iteratorSubject"
 ;     // empty
 
@@ -178,7 +180,7 @@ public boolean containsPresentationEdge(PresentationEdge presentationEdge1)
  *  @see #addPresentationEdge
  */
 // -beg- preserve=no 3C2C49E3019E get_all_head327A5C8800A0 "PresentationElement::iteratorPresentationEdge"
-public java.util.Iterator iteratorPresentationEdge()
+public Iterator<?> iteratorPresentationEdge()
 // -end- 3C2C49E3019E get_all_head327A5C8800A0 "PresentationElement::iteratorPresentationEdge"
 ;     // empty
 

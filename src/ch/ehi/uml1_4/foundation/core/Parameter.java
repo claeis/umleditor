@@ -8,14 +8,11 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 327BBB9F02B2 package "Parameter"
 
-// -beg- preserve=no 327BBB9F02B2 autoimport "Parameter"
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.behaviour.statemachines.Event;
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.activitygraphs.ObjectFlowState;
-import ch.ehi.uml1_4.foundation.core.BehavioralFeature;
+import ch.ehi.uml1_4.behaviour.statemachines.Event;
 import ch.ehi.uml1_4.foundation.datatypes.Expression;
-import ch.ehi.uml1_4.foundation.datatypes.ParameterDirectionKind;
-// -end- 327BBB9F02B2 autoimport "Parameter"
 
 // import declarations
 // please fill in/modify the following section
@@ -114,7 +111,7 @@ public boolean containsObjectFlowState(ObjectFlowState objectFlowState1)
  *  @see #addObjectFlowState
  */
 // -beg- preserve=no 337D935E0213 get_all_head327BBB9F02B2 "Parameter::iteratorObjectFlowState"
-public java.util.Iterator iteratorObjectFlowState()
+public Iterator<?> iteratorObjectFlowState()
 // -end- 337D935E0213 get_all_head327BBB9F02B2 "Parameter::iteratorObjectFlowState"
 ;     // empty
 
@@ -179,7 +176,7 @@ public boolean containsState(ObjectFlowState state1)
  *  @see #addState
  */
 // -beg- preserve=no 36462DDF008C get_all_head327BBB9F02B2 "Parameter::iteratorState"
-public java.util.Iterator iteratorState()
+public Iterator<?> iteratorState()
 // -end- 36462DDF008C get_all_head327BBB9F02B2 "Parameter::iteratorState"
 ;     // empty
 

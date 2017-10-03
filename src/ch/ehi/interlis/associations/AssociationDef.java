@@ -37,9 +37,11 @@ import ch.ehi.uml1_4.behaviour.collaborations.AssociationRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 import ch.ehi.uml1_4.foundation.core.AssociationClass;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
@@ -1673,6 +1675,18 @@ public class AssociationDef extends AbstractClassDef implements AssociationClass
 		connection.set(i1, connection2);
 		ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
 				.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "swapConnection"));
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// -end- 3C178E4F0366 detail_end "AssociationDef"

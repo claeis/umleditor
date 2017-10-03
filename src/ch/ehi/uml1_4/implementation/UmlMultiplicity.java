@@ -11,6 +11,11 @@ package ch.ehi.uml1_4.implementation;
 // -beg- preserve=no 3C8F927A014D autoimport "UmlMultiplicity"
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 // -end- 3C8F927A014D autoimport "UmlMultiplicity"
@@ -62,7 +67,7 @@ public class UmlMultiplicity extends AbstractEditorElement implements Multiplici
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180058 body3C8F927A014D "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorRange();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -71,7 +76,7 @@ public class UmlMultiplicity extends AbstractEditorElement implements Multiplici
 	}
 
 	// -beg- preserve=no 33FF95B90300 code3C8F927A014D "range"
-	private java.util.Set range = new java.util.HashSet();
+	private Set<MultiplicityRange> range = new HashSet<MultiplicityRange>();
 	// -end- 33FF95B90300 code3C8F927A014D "range"
 
 	/**
@@ -146,7 +151,7 @@ public class UmlMultiplicity extends AbstractEditorElement implements Multiplici
 	 */
 	// -beg- preserve=no 33FF95B90300 get_all_head3C8F927A014D
 	// "Multiplicity::iteratorRange"
-	public java.util.Iterator iteratorRange()
+	public Iterator<?> iteratorRange()
 	// -end- 33FF95B90300 get_all_head3C8F927A014D "Multiplicity::iteratorRange"
 	{
 		// -beg- preserve=no 33FF95B90300 get_all_body3C8F927A014D
@@ -169,7 +174,7 @@ public class UmlMultiplicity extends AbstractEditorElement implements Multiplici
 		// -beg- preserve=no 33FF95B90300 remove_all_body3C8F927A014D
 		// "Multiplicity::clearRange"
 		if (sizeRange() > 0) {
-			for (java.util.Iterator p = range.iterator(); p.hasNext();) {
+			for (Iterator<?> p = range.iterator(); p.hasNext();) {
 				((MultiplicityRange) p.next())._unlinkMultiplicity(this);
 			}
 			range.clear();

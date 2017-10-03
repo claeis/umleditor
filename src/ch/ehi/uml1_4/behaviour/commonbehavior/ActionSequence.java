@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.behaviour.commonbehavior;
 // -end- 3288E55B03DE package "ActionSequence"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 3288E55B03DE autoimport "ActionSequence"
 import ch.ehi.uml1_4.behaviour.commonbehavior.Action;
 // -end- 3288E55B03DE autoimport "ActionSequence"
@@ -83,7 +85,7 @@ public boolean containsAction(Action action1)
  *  @see #addAction
  */
 // -beg- preserve=no 363555210064 get_all_head3288E55B03DE "ActionSequence::iteratorAction"
-public java.util.Iterator iteratorAction()
+public Iterator<?> iteratorAction()
 // -end- 363555210064 get_all_head3288E55B03DE "ActionSequence::iteratorAction"
 ;     // empty
 

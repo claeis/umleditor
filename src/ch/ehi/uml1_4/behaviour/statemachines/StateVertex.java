@@ -8,18 +8,12 @@
 package ch.ehi.uml1_4.behaviour.statemachines;
 // -end- 328A484303D4 package "StateVertex"
 
-// -beg- preserve=no 328A484303D4 autoimport "StateVertex"
-import ch.ehi.uml1_4.foundation.core.ModelElement;
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.Component;
 import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.behaviour.statemachines.Transition;
-// -end- 328A484303D4 autoimport "StateVertex"
-
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 328A484303D4 import "StateVertex"
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-// -end- 328A484303D4 import "StateVertex"
+// -beg- preserve=no 328A484303D4 autoimport "StateVertex"
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:11 $
@@ -76,7 +70,7 @@ public boolean containsContainer(Component container1)
  *  @see #addContainer
  */
 // -beg- preserve=no 36240CA4024E get_all_head328A484303D4 "ModelElement::iteratorContainer"
-public java.util.Iterator iteratorContainer()
+public Iterator<?> iteratorContainer()
 // -end- 36240CA4024E get_all_head328A484303D4 "ModelElement::iteratorContainer"
 ;     // empty
 
@@ -100,7 +94,7 @@ public int sizeContainer()
  *  @see #addContainer
  */
 // -beg- preserve=no 36240CA4024E itlink_head328A484303D4 "ModelElement::getContainerLink"
-public java.util.Iterator iteratorContainerLink()
+public Iterator<?> iteratorContainerLink()
 // -end- 36240CA4024E itlink_head328A484303D4 "ModelElement::getContainerLink"
 ;     // empty
 
@@ -165,7 +159,7 @@ public boolean containsOutgoing(Transition outgoing1)
  *  @see #addOutgoing
  */
 // -beg- preserve=no 3289028300D2 get_all_head328A484303D4 "StateVertex::iteratorOutgoing"
-public java.util.Iterator iteratorOutgoing()
+public Iterator<?> iteratorOutgoing()
 // -end- 3289028300D2 get_all_head328A484303D4 "StateVertex::iteratorOutgoing"
 ;     // empty
 
@@ -230,7 +224,7 @@ public boolean containsIncoming(Transition incoming1)
  *  @see #addIncoming
  */
 // -beg- preserve=no 3289028D035C get_all_head328A484303D4 "StateVertex::iteratorIncoming"
-public java.util.Iterator iteratorIncoming()
+public Iterator<?> iteratorIncoming()
 // -end- 3289028D035C get_all_head328A484303D4 "StateVertex::iteratorIncoming"
 ;     // empty
 

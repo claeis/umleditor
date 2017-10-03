@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 3A018D9500DA package "Artifact"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 3A018D9500DA autoimport "Artifact"
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Component;
@@ -65,7 +67,7 @@ public boolean containsImplementationLocation(Component implementationLocation1)
  *  @see #addImplementationLocation
  */
 // -beg- preserve=no 3A018E150193 get_all_head3A018D9500DA "Artifact::iteratorImplementationLocation"
-public java.util.Iterator iteratorImplementationLocation()
+public Iterator<?> iteratorImplementationLocation()
 // -end- 3A018E150193 get_all_head3A018D9500DA "Artifact::iteratorImplementationLocation"
 ;     // empty
 
@@ -130,7 +132,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head3A018D9500DA "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head3A018D9500DA "ModelElement::iteratorPresentation"
 ;     // empty
 

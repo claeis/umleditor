@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 39CB960D02BF package "Enumeration"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 39CB960D02BF autoimport "Enumeration"
 import ch.ehi.uml1_4.foundation.core.DataType;
 import ch.ehi.uml1_4.foundation.core.EnumerationLiteral;
@@ -85,7 +87,7 @@ public boolean containsLiteral(EnumerationLiteral literal1)
  *  @see #addLiteral
  */
 // -beg- preserve=no 39CB96F1001F get_all_head39CB960D02BF "Enumeration::iteratorLiteral"
-public java.util.Iterator iteratorLiteral()
+public Iterator<?> iteratorLiteral()
 // -end- 39CB96F1001F get_all_head39CB960D02BF "Enumeration::iteratorLiteral"
 ;     // empty
 

@@ -13,6 +13,9 @@ import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Node;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.ElementResidence;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.Artifact;
 // -end- 33F59891028A autoimport "Component"
 
@@ -67,7 +70,7 @@ public boolean containsDeploymentLocation(Node deploymentLocation1)
  *  @see #addDeploymentLocation
  */
 // -beg- preserve=no 36240BF10399 get_all_head33F59891028A "Component::iteratorDeploymentLocation"
-public java.util.Iterator iteratorDeploymentLocation()
+public Iterator<?> iteratorDeploymentLocation()
 // -end- 36240BF10399 get_all_head33F59891028A "Component::iteratorDeploymentLocation"
 ;     // empty
 
@@ -143,7 +146,7 @@ public boolean containsResident(ModelElement resident1)
  *  @see #addResident
  */
 // -beg- preserve=no 36240CA40212 get_all_head33F59891028A "Component::iteratorResident"
-public java.util.Iterator iteratorResident()
+public Iterator<?> iteratorResident()
 // -end- 36240CA40212 get_all_head33F59891028A "Component::iteratorResident"
 ;     // empty
 
@@ -167,7 +170,7 @@ public int sizeResident()
  *  @see #addResident
  */
 // -beg- preserve=no 36240CA40212 itlink_head33F59891028A "Component::getResidentLink"
-public java.util.Iterator iteratorResidentLink()
+public Iterator<?> iteratorResidentLink()
 // -end- 36240CA40212 itlink_head33F59891028A "Component::getResidentLink"
 ;     // empty
 
@@ -232,7 +235,7 @@ public boolean containsImplementation(Artifact implementation1)
  *  @see #addImplementation
  */
 // -beg- preserve=no 3A018E150194 get_all_head33F59891028A "Component::iteratorImplementation"
-public java.util.Iterator iteratorImplementation()
+public Iterator<?> iteratorImplementation()
 // -end- 3A018E150194 get_all_head33F59891028A "Component::iteratorImplementation"
 ;     // empty
 

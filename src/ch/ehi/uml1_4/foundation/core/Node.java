@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 33F5989A02F8 package "Node"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 33F5989A02F8 autoimport "Node"
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
@@ -65,7 +67,7 @@ public boolean containsDeployedComponent(Component deployedComponent1)
  *  @see #addDeployedComponent
  */
 // -beg- preserve=no 36240BF10398 get_all_head33F5989A02F8 "Node::iteratorDeployedComponent"
-public java.util.Iterator iteratorDeployedComponent()
+public Iterator<?> iteratorDeployedComponent()
 // -end- 36240BF10398 get_all_head33F5989A02F8 "Node::iteratorDeployedComponent"
 ;     // empty
 

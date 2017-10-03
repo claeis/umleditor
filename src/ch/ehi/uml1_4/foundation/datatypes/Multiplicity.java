@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.datatypes;
 // -end- 33DD6FC5001E package "Multiplicity"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 33DD6FC5001E autoimport "Multiplicity"
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 // -end- 33DD6FC5001E autoimport "Multiplicity"
@@ -62,7 +64,7 @@ public boolean containsRange(MultiplicityRange range1)
  *  @see #addRange
  */
 // -beg- preserve=no 33FF95B90300 get_all_head33DD6FC5001E "Multiplicity::iteratorRange"
-public java.util.Iterator iteratorRange()
+public Iterator<?> iteratorRange()
 // -end- 33FF95B90300 get_all_head33DD6FC5001E "Multiplicity::iteratorRange"
 ;     // empty
 

@@ -13,6 +13,10 @@ import ch.ehi.uml1_4.changepropagation.MetaModelListener;
 import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 // -end- 3C454ADA00E4 autoimport "MetaModel"
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=yes 3C454ADA00E4 import "MetaModel"
@@ -85,7 +89,7 @@ public void notifyChange(MetaModelChange change)
                 EhiLogger.traceState(change.toString());
         }
         // notify change
-        java.util.Iterator it=iteratorMetaModelListener();
+        Iterator<MetaModelListener> it=iteratorMetaModelListener();
         while(it.hasNext()) {
                 MetaModelListener listener=(MetaModelListener)it.next();
                 listener.metaModelChanged(change);
@@ -95,7 +99,7 @@ public void notifyChange(MetaModelChange change)
 }
 
 // -beg- preserve=no 3C454D7C030A code3C454ADA00E4 "metaModelListener"
-private java.util.Set metaModelListener = new java.util.HashSet();
+private Set<MetaModelListener> metaModelListener = new HashSet<MetaModelListener>();
 // -end- 3C454D7C030A code3C454ADA00E4 "metaModelListener"
 
 /** add a MetaModelListener.
@@ -152,7 +156,7 @@ public boolean containsMetaModelListener(MetaModelListener metaModelListener1)
  *  @see #addMetaModelListener
  */
 // -beg- preserve=no 3C454D7C030A get_all_head3C454ADA00E4 "MetaModel::iteratorMetaModelListener"
-public java.util.Iterator iteratorMetaModelListener()
+public Iterator<MetaModelListener> iteratorMetaModelListener()
 // -end- 3C454D7C030A get_all_head3C454ADA00E4 "MetaModel::iteratorMetaModelListener"
 {
         // -beg- preserve=no 3C454D7C030A get_all_body3C454ADA00E4 "MetaModel::iteratorMetaModelListener"

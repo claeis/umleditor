@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.behaviour.statemachines;
 // -beg- preserve=no 3288E51203DE autoimport "Event"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Parameter;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.statemachines.State;
 import ch.ehi.uml1_4.behaviour.statemachines.Transition;
 // -end- 3288E51203DE autoimport "Event"
@@ -86,7 +89,7 @@ public boolean containsParameter(Parameter parameter1)
  *  @see #addParameter
  */
 // -beg- preserve=no 3337AF9D028A get_all_head3288E51203DE "Event::iteratorParameter"
-public java.util.Iterator iteratorParameter()
+public Iterator<?> iteratorParameter()
 // -end- 3337AF9D028A get_all_head3288E51203DE "Event::iteratorParameter"
 ;     // empty
 
@@ -151,7 +154,7 @@ public boolean containsState(State state1)
  *  @see #addState
  */
 // -beg- preserve=no 33FA3AC2001E get_all_head3288E51203DE "Event::iteratorState"
-public java.util.Iterator iteratorState()
+public Iterator<?> iteratorState()
 // -end- 33FA3AC2001E get_all_head3288E51203DE "Event::iteratorState"
 ;     // empty
 
@@ -216,7 +219,7 @@ public boolean containsTransition(Transition transition1)
  *  @see #addTransition
  */
 // -beg- preserve=no 3288E53A0172 get_all_head3288E51203DE "Event::iteratorTransition"
-public java.util.Iterator iteratorTransition()
+public Iterator<?> iteratorTransition()
 // -end- 3288E53A0172 get_all_head3288E51203DE "Event::iteratorTransition"
 ;     // empty
 

@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 33F675820370 autoimport "Comment"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.types.NlsString;
 // -end- 33F675820370 autoimport "Comment"
 
@@ -64,7 +67,7 @@ public boolean containsAnnotatedElement(ModelElement annotatedElement1)
  *  @see #addAnnotatedElement
  */
 // -beg- preserve=no 370E7E3C02CE get_all_head33F675820370 "Comment::iteratorAnnotatedElement"
-public java.util.Iterator iteratorAnnotatedElement()
+public Iterator<?> iteratorAnnotatedElement()
 // -end- 370E7E3C02CE get_all_head33F675820370 "Comment::iteratorAnnotatedElement"
 ;     // empty
 

@@ -13,6 +13,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.behaviour.collaborations.Interaction;
 import ch.ehi.uml1_4.behaviour.commonbehavior.ActionInstance;
 import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
 import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.behaviour.commonbehavior.AttributeLink;
@@ -119,7 +122,7 @@ public boolean containsActionInstance(ActionInstance actionInstance1)
  *  @see #addActionInstance
  */
 // -beg- preserve=no 32B59CAB00FB get_all_head327BC77C038E "Instance::iteratorActionInstance"
-public java.util.Iterator iteratorActionInstance()
+public Iterator<?> iteratorActionInstance()
 // -end- 32B59CAB00FB get_all_head327BC77C038E "Instance::iteratorActionInstance"
 ;     // empty
 
@@ -184,7 +187,7 @@ public boolean containsCollaborationInstanceSet(CollaborationInstanceSet collabo
  *  @see #addCollaborationInstanceSet
  */
 // -beg- preserve=no 39E9065C0186 get_all_head327BC77C038E "ModelElement::iteratorCollaborationInstanceSet"
-public java.util.Iterator iteratorCollaborationInstanceSet()
+public Iterator<?> iteratorCollaborationInstanceSet()
 // -end- 39E9065C0186 get_all_head327BC77C038E "ModelElement::iteratorCollaborationInstanceSet"
 ;     // empty
 
@@ -249,7 +252,7 @@ public boolean containsPlayedRole(ClassifierRole playedRole1)
  *  @see #addPlayedRole
  */
 // -beg- preserve=no 39E8FF920251 get_all_head327BC77C038E "Instance::iteratorPlayedRole"
-public java.util.Iterator iteratorPlayedRole()
+public Iterator<?> iteratorPlayedRole()
 // -end- 39E8FF920251 get_all_head327BC77C038E "Instance::iteratorPlayedRole"
 ;     // empty
 
@@ -314,7 +317,7 @@ public boolean containsClassifier(Classifier classifier1)
  *  @see #addClassifier
  */
 // -beg- preserve=no 33CAD7E900AA get_all_head327BC77C038E "Instance::iteratorClassifier"
-public java.util.Iterator iteratorClassifier()
+public Iterator<?> iteratorClassifier()
 // -end- 33CAD7E900AA get_all_head327BC77C038E "Instance::iteratorClassifier"
 ;     // empty
 
@@ -379,7 +382,7 @@ public boolean containsAttributeLink(AttributeLink attributeLink1)
  *  @see #addAttributeLink
  */
 // -beg- preserve=no 33DBC1A401EB get_all_head327BC77C038E "Instance::iteratorAttributeLink"
-public java.util.Iterator iteratorAttributeLink()
+public Iterator<?> iteratorAttributeLink()
 // -end- 33DBC1A401EB get_all_head327BC77C038E "Instance::iteratorAttributeLink"
 ;     // empty
 
@@ -444,7 +447,7 @@ public boolean containsLinkEnd(LinkEnd linkEnd1)
  *  @see #addLinkEnd
  */
 // -beg- preserve=no 33DBC1DC01FE get_all_head327BC77C038E "Instance::iteratorLinkEnd"
-public java.util.Iterator iteratorLinkEnd()
+public Iterator<?> iteratorLinkEnd()
 // -end- 33DBC1DC01FE get_all_head327BC77C038E "Instance::iteratorLinkEnd"
 ;     // empty
 
@@ -509,7 +512,7 @@ public boolean containsSlot(AttributeLink slot1)
  *  @see #addSlot
  */
 // -beg- preserve=no 33FF4EFA0137 get_all_head327BC77C038E "Instance::iteratorSlot"
-public java.util.Iterator iteratorSlot()
+public Iterator<?> iteratorSlot()
 // -end- 33FF4EFA0137 get_all_head327BC77C038E "Instance::iteratorSlot"
 ;     // empty
 
@@ -574,7 +577,7 @@ public boolean containsStimulus(Stimulus stimulus1)
  *  @see #addStimulus
  */
 // -beg- preserve=no 33FF558C015E get_all_head327BC77C038E "Instance::iteratorStimulus"
-public java.util.Iterator iteratorStimulus()
+public Iterator<?> iteratorStimulus()
 // -end- 33FF558C015E get_all_head327BC77C038E "Instance::iteratorStimulus"
 ;     // empty
 
@@ -733,7 +736,7 @@ public boolean containsOwnedInstance(Instance ownedInstance1)
  *  @see #addOwnedInstance
  */
 // -beg- preserve=no 3973156F0259 get_all_head327BC77C038E "Instance::iteratorOwnedInstance"
-public java.util.Iterator iteratorOwnedInstance()
+public Iterator<?> iteratorOwnedInstance()
 // -end- 3973156F0259 get_all_head327BC77C038E "Instance::iteratorOwnedInstance"
 ;     // empty
 
@@ -798,7 +801,7 @@ public boolean containsOwnedLink(Link ownedLink1)
  *  @see #addOwnedLink
  */
 // -beg- preserve=no 397316B00106 get_all_head327BC77C038E "Instance::iteratorOwnedLink"
-public java.util.Iterator iteratorOwnedLink()
+public Iterator<?> iteratorOwnedLink()
 // -end- 397316B00106 get_all_head327BC77C038E "Instance::iteratorOwnedLink"
 ;     // empty
 

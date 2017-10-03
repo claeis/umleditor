@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.extensionmechanisms;
 // -end- 337A4EF7002C package "TaggedValue"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 337A4EF7002C autoimport "TaggedValue"
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -146,7 +148,7 @@ public interface TaggedValue extends Element, ModelElement, java.io.Serializable
 	 */
 	// -beg- preserve=no 39B9B0F80000 get_all_head337A4EF7002C
 	// "TaggedValue::iteratorReferenceValue"
-	public java.util.Iterator iteratorReferenceValue()
+	public Iterator<?> iteratorReferenceValue()
 	// -end- 39B9B0F80000 get_all_head337A4EF7002C
 	// "TaggedValue::iteratorReferenceValue"
 	; // empty

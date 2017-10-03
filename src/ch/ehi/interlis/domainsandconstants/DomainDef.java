@@ -42,6 +42,7 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
 import ch.ehi.uml1_4.behaviour.commonbehavior.CreateAction;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.umleditor.umlpresentation.Diagram;
@@ -3405,6 +3406,18 @@ public class DomainDef extends AbstractNamespace implements DataType, java.io.Se
 
 	public void setMetaMsg(NlsString value) {
 		super.setMetaMsg(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

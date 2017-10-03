@@ -8,11 +8,6 @@
 package ch.ehi.uml1_4.behaviour.statemachines;
 // -end- 328A47F10064 package "Pseudostate"
 
-// -beg- preserve=no 328A47F10064 autoimport "Pseudostate"
-import ch.ehi.uml1_4.behaviour.statemachines.StateVertex;
-import ch.ehi.uml1_4.foundation.datatypes.PseudostateKind;
-// -end- 328A47F10064 autoimport "Pseudostate"
-
 // import declarations
 // please fill in/modify the following section
 // -beg- preserve=no 328A47F10064 import "Pseudostate"

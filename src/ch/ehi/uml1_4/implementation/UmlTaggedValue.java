@@ -22,6 +22,13 @@ package ch.ehi.uml1_4.implementation;
 
 // -beg- preserve=no 448D24F502DB autoimport "UmlTaggedValue"
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.basics.types.NlsString;
@@ -121,7 +128,7 @@ public class UmlTaggedValue implements TaggedValue {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448D366F02C0 body448D24F502DB "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		visitor.visit(getDocumentation());
 		it = iteratorBehavior();
 		while (it.hasNext())
@@ -264,7 +271,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "TaggedValue::_unlinkModelElement"
 
 	// -beg- preserve=no 39B9B0F80000 code448D24F502DB "referenceValue"
-	private java.util.Set referenceValue = new java.util.HashSet();
+	private Set<ModelElement> referenceValue = new HashSet<ModelElement>();
 	// -end- 39B9B0F80000 code448D24F502DB "referenceValue"
 
 	/**
@@ -344,7 +351,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 39B9B0F80000 get_all_head448D24F502DB
 	// "TaggedValue::iteratorReferenceValue"
-	public java.util.Iterator iteratorReferenceValue()
+	public Iterator<ModelElement> iteratorReferenceValue()
 	// -end- 39B9B0F80000 get_all_head448D24F502DB
 	// "TaggedValue::iteratorReferenceValue"
 	{
@@ -369,7 +376,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 39B9B0F80000 remove_all_body448D24F502DB
 		// "TaggedValue::clearReferenceValue"
 		if (sizeReferenceValue() > 0) {
-			for (java.util.Iterator p = referenceValue.iterator(); p.hasNext();) {
+			for (Iterator<ModelElement> p = referenceValue.iterator(); p.hasNext();) {
 				((ModelElement) p.next())._unlinkReferenceTag(this);
 			}
 			referenceValue.clear();
@@ -530,7 +537,7 @@ public class UmlTaggedValue implements TaggedValue {
 	}
 
 	// -beg- preserve=no 33CF8BD500F1 code448D24F502DB "behavior"
-	private java.util.Set behavior = new java.util.HashSet();
+	private Set<StateMachine> behavior = new HashSet<StateMachine>();
 	// -end- 33CF8BD500F1 code448D24F502DB "behavior"
 
 	/**
@@ -607,7 +614,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33CF8BD500F1 get_all_head448D24F502DB
 	// "ModelElement::iteratorBehavior"
-	public java.util.Iterator iteratorBehavior()
+	public Iterator<StateMachine> iteratorBehavior()
 	// -end- 33CF8BD500F1 get_all_head448D24F502DB
 	// "ModelElement::iteratorBehavior"
 	{
@@ -632,7 +639,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33CF8BD500F1 remove_all_body448D24F502DB
 		// "ModelElement::clearBehavior"
 		if (sizeBehavior() > 0) {
-			for (java.util.Iterator p = behavior.iterator(); p.hasNext();) {
+			for (Iterator<StateMachine> p = behavior.iterator(); p.hasNext();) {
 				((StateMachine) p.next())._unlinkContext(this);
 			}
 			behavior.clear();
@@ -687,7 +694,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkBehavior"
 
 	// -beg- preserve=no 33CF9A030140 code448D24F502DB "partition"
-	private java.util.Set partition = new java.util.HashSet();
+	private Set<Partition> partition = new HashSet<Partition>();
 	// -end- 33CF9A030140 code448D24F502DB "partition"
 
 	/**
@@ -766,7 +773,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33CF9A030140 get_all_head448D24F502DB
 	// "ModelElement::iteratorPartition"
-	public java.util.Iterator iteratorPartition()
+	public Iterator<Partition> iteratorPartition()
 	// -end- 33CF9A030140 get_all_head448D24F502DB
 	// "ModelElement::iteratorPartition"
 	{
@@ -791,7 +798,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33CF9A030140 remove_all_body448D24F502DB
 		// "ModelElement::clearPartition"
 		if (sizePartition() > 0) {
-			for (java.util.Iterator p = partition.iterator(); p.hasNext();) {
+			for (Iterator<Partition> p = partition.iterator(); p.hasNext();) {
 				((Partition) p.next())._unlinkContents(this);
 			}
 			partition.clear();
@@ -847,7 +854,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkPartition"
 
 	// -beg- preserve=no 33D1394E029F code448D24F502DB "collaboration"
-	private java.util.Set collaboration = new java.util.HashSet();
+	private Set<Collaboration> collaboration = new HashSet<Collaboration>();
 	// -end- 33D1394E029F code448D24F502DB "collaboration"
 
 	/**
@@ -927,7 +934,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head448D24F502DB
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head448D24F502DB
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -952,7 +959,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33D1394E029F remove_all_body448D24F502DB
 		// "ModelElement::clearCollaboration"
 		if (sizeCollaboration() > 0) {
-			for (java.util.Iterator p = collaboration.iterator(); p.hasNext();) {
+			for (Iterator<Collaboration> p = collaboration.iterator(); p.hasNext();) {
 				((Collaboration) p.next())._unlinkConstrainingElement(this);
 			}
 			collaboration.clear();
@@ -1010,7 +1017,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 36008FB700E7 code448D24F502DB "classifierRole"
-	private java.util.Set classifierRole = new java.util.HashSet();
+	private Set<ClassifierRole> classifierRole = new HashSet<ClassifierRole>();
 	// -end- 36008FB700E7 code448D24F502DB "classifierRole"
 
 	/**
@@ -1090,7 +1097,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head448D24F502DB
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head448D24F502DB
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -1115,7 +1122,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 36008FB700E7 remove_all_body448D24F502DB
 		// "ModelElement::clearClassifierRole"
 		if (sizeClassifierRole() > 0) {
-			for (java.util.Iterator p = classifierRole.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierRole> p = classifierRole.iterator(); p.hasNext();) {
 				((ClassifierRole) p.next())._unlinkAvailableContents(this);
 			}
 			classifierRole.clear();
@@ -1174,7 +1181,7 @@ public class UmlTaggedValue implements TaggedValue {
 
 	// -beg- preserve=no 39E9065C0186 code448D24F502DB
 	// "collaborationInstanceSet"
-	private java.util.Set collaborationInstanceSet = new java.util.HashSet();
+	private Set<CollaborationInstanceSet> collaborationInstanceSet = new HashSet<CollaborationInstanceSet>();
 	// -end- 39E9065C0186 code448D24F502DB "collaborationInstanceSet"
 
 	/**
@@ -1255,7 +1262,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 39E9065C0186 get_all_head448D24F502DB
 	// "ModelElement::iteratorCollaborationInstanceSet"
-	public java.util.Iterator iteratorCollaborationInstanceSet()
+	public Iterator<CollaborationInstanceSet> iteratorCollaborationInstanceSet()
 	// -end- 39E9065C0186 get_all_head448D24F502DB
 	// "ModelElement::iteratorCollaborationInstanceSet"
 	{
@@ -1280,7 +1287,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 39E9065C0186 remove_all_body448D24F502DB
 		// "ModelElement::clearCollaborationInstanceSet"
 		if (sizeCollaborationInstanceSet() > 0) {
-			for (java.util.Iterator p = collaborationInstanceSet.iterator(); p.hasNext();) {
+			for (Iterator<CollaborationInstanceSet> p = collaborationInstanceSet.iterator(); p.hasNext();) {
 				((CollaborationInstanceSet) p.next())._unlinkConstrainingElement(this);
 			}
 			collaborationInstanceSet.clear();
@@ -1531,7 +1538,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 33FFE57B0395 code448D24F502DB "clientDependency"
-	private java.util.Set clientDependency = new java.util.HashSet();
+	private Set<Dependency> clientDependency = new HashSet<Dependency>();
 	// -end- 33FFE57B0395 code448D24F502DB "clientDependency"
 
 	/**
@@ -1612,7 +1619,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head448D24F502DB
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<Dependency> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head448D24F502DB
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -1637,7 +1644,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33FFE57B0395 remove_all_body448D24F502DB
 		// "ModelElement::clearClientDependency"
 		if (sizeClientDependency() > 0) {
-			for (java.util.Iterator p = clientDependency.iterator(); p.hasNext();) {
+			for (Iterator<Dependency> p = clientDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkClient(this);
 			}
 			clientDependency.clear();
@@ -1695,7 +1702,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkClientDependency"
 
 	// -beg- preserve=no 33E901E003D4 code448D24F502DB "taggedValue"
-	private java.util.Set taggedValue = new java.util.HashSet();
+	private Set<TaggedValue> taggedValue = new HashSet<TaggedValue>();
 	// -end- 33E901E003D4 code448D24F502DB "taggedValue"
 
 	/**
@@ -1775,7 +1782,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33E901E003D4 get_all_head448D24F502DB
 	// "ModelElement::iteratorTaggedValue"
-	public java.util.Iterator iteratorTaggedValue()
+	public Iterator<TaggedValue> iteratorTaggedValue()
 	// -end- 33E901E003D4 get_all_head448D24F502DB
 	// "ModelElement::iteratorTaggedValue"
 	{
@@ -1800,7 +1807,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33E901E003D4 remove_all_body448D24F502DB
 		// "ModelElement::clearTaggedValue"
 		if (sizeTaggedValue() > 0) {
-			for (java.util.Iterator p = taggedValue.iterator(); p.hasNext();) {
+			for (Iterator<TaggedValue> p = taggedValue.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkModelElement(this);
 			}
 			taggedValue.clear();
@@ -1857,7 +1864,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkTaggedValue"
 
 	// -beg- preserve=no 33EA67BB010E code448D24F502DB "constraint"
-	private java.util.Set constraint = new java.util.HashSet();
+	private Set<Constraint> constraint = new HashSet<Constraint>();
 	// -end- 33EA67BB010E code448D24F502DB "constraint"
 
 	/**
@@ -1936,7 +1943,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33EA67BB010E get_all_head448D24F502DB
 	// "ModelElement::iteratorConstraint"
-	public java.util.Iterator iteratorConstraint()
+	public Iterator<Constraint> iteratorConstraint()
 	// -end- 33EA67BB010E get_all_head448D24F502DB
 	// "ModelElement::iteratorConstraint"
 	{
@@ -1961,7 +1968,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33EA67BB010E remove_all_body448D24F502DB
 		// "ModelElement::clearConstraint"
 		if (sizeConstraint() > 0) {
-			for (java.util.Iterator p = constraint.iterator(); p.hasNext();) {
+			for (Iterator<Constraint> p = constraint.iterator(); p.hasNext();) {
 				((Constraint) p.next())._unlinkConstrainedElement(this);
 			}
 			constraint.clear();
@@ -2017,7 +2024,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkConstraint"
 
 	// -beg- preserve=no 335C0D7A02A8 code448D24F502DB "supplierDependency"
-	private java.util.Set supplierDependency = new java.util.HashSet();
+	private Set<Dependency> supplierDependency = new HashSet<Dependency>();
 	// -end- 335C0D7A02A8 code448D24F502DB "supplierDependency"
 
 	/**
@@ -2098,7 +2105,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head448D24F502DB
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<Dependency> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head448D24F502DB
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -2123,7 +2130,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 335C0D7A02A8 remove_all_body448D24F502DB
 		// "ModelElement::clearSupplierDependency"
 		if (sizeSupplierDependency() > 0) {
-			for (java.util.Iterator p = supplierDependency.iterator(); p.hasNext();) {
+			for (Iterator<Dependency> p = supplierDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkSupplier(this);
 			}
 			supplierDependency.clear();
@@ -2181,7 +2188,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkSupplierDependency"
 
 	// -beg- preserve=no 362409A9000A code448D24F502DB "presentation"
-	private java.util.Set presentation = new java.util.HashSet();
+	private Set<PresentationElement> presentation = new HashSet<PresentationElement>();
 	// -end- 362409A9000A code448D24F502DB "presentation"
 
 	/**
@@ -2261,7 +2268,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head448D24F502DB
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<PresentationElement> iteratorPresentation()
 	// -end- 362409A9000A get_all_head448D24F502DB
 	// "ModelElement::iteratorPresentation"
 	{
@@ -2286,7 +2293,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 362409A9000A remove_all_body448D24F502DB
 		// "ModelElement::clearPresentation"
 		if (sizePresentation() > 0) {
-			for (java.util.Iterator p = presentation.iterator(); p.hasNext();) {
+			for (Iterator<PresentationElement> p = presentation.iterator(); p.hasNext();) {
 				((PresentationElement) p.next())._unlinkSubject(this);
 			}
 			presentation.clear();
@@ -2343,7 +2350,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkPresentation"
 
 	// -beg- preserve=no 36240CA4024E code448D24F502DB "container"
-	private java.util.Set container = new java.util.HashSet();
+	private Set<ElementResidence> container = new HashSet<ElementResidence>();
 	// -end- 36240CA4024E code448D24F502DB "container"
 
 	/**
@@ -2451,14 +2458,14 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 36240CA4024E get_all_head448D24F502DB
 	// "ModelElement::iteratorContainer"
-	public java.util.Iterator iteratorContainer()
+	public Iterator<?> iteratorContainer()
 	// -end- 36240CA4024E get_all_head448D24F502DB
 	// "ModelElement::iteratorContainer"
 	{
 		// -beg- preserve=no 36240CA4024E get_all_body448D24F502DB
 		// "ModelElement::iteratorContainer"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = container.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementResidence> i = container.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -2491,7 +2498,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 36240CA4024E remove_all_body448D24F502DB
 		// "ModelElement::clearContainer"
 		if (sizeContainer() > 0) {
-			for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+			for (Iterator<ElementResidence> p = container.iterator(); p.hasNext();) {
 				ElementResidence linkobj = (ElementResidence) p.next();
 				linkobj.getContainer()._unlinkResident(linkobj);
 			}
@@ -2527,7 +2534,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 36240CA4024E itlink_head448D24F502DB
 	// "ModelElement::getContainerLink"
-	public java.util.Iterator iteratorContainerLink()
+	public Iterator<?> iteratorContainerLink()
 	// -end- 36240CA4024E itlink_head448D24F502DB
 	// "ModelElement::getContainerLink"
 	{
@@ -2572,7 +2579,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// "ModelElement::findContainerLink"
 		if (container1 == null)
 			return null;
-		for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+		for (Iterator<?> p = container.iterator(); p.hasNext();) {
 			ElementResidence linkobj = (ElementResidence) p.next();
 			if (linkobj.getContainer() == container1)
 				return linkobj;
@@ -2610,7 +2617,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkContainer"
 
 	// -beg- preserve=no 36240F380050 code448D24F502DB "templateParameter"
-	private java.util.List templateParameter = new java.util.ArrayList();
+	private List<TemplateParameter> templateParameter = new ArrayList<TemplateParameter>();
 	// -end- 36240F380050 code448D24F502DB "templateParameter"
 
 	/**
@@ -2755,7 +2762,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 36240F380050 get_all_head448D24F502DB
 	// "ModelElement::iteratorTemplateParameter"
-	public java.util.Iterator iteratorTemplateParameter()
+	public Iterator<TemplateParameter> iteratorTemplateParameter()
 	// -end- 36240F380050 get_all_head448D24F502DB
 	// "ModelElement::iteratorTemplateParameter"
 	{
@@ -2780,7 +2787,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 36240F380050 remove_all_body448D24F502DB
 		// "ModelElement::clearTemplateParameter"
 		if (sizeTemplateParameter() > 0) {
-			for (java.util.Iterator p = templateParameter.iterator(); p.hasNext();) {
+			for (Iterator<TemplateParameter> p = templateParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkTemplate(this);
 			}
 			templateParameter.clear();
@@ -2838,7 +2845,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkTemplateParameter"
 
 	// -beg- preserve=no 3627D5E9010F code448D24F502DB "targetFlow"
-	private java.util.Set targetFlow = new java.util.HashSet();
+	private Set<Flow> targetFlow = new HashSet<Flow>();
 	// -end- 3627D5E9010F code448D24F502DB "targetFlow"
 
 	/**
@@ -2917,7 +2924,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 3627D5E9010F get_all_head448D24F502DB
 	// "ModelElement::iteratorTargetFlow"
-	public java.util.Iterator iteratorTargetFlow()
+	public Iterator<Flow> iteratorTargetFlow()
 	// -end- 3627D5E9010F get_all_head448D24F502DB
 	// "ModelElement::iteratorTargetFlow"
 	{
@@ -2942,7 +2949,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 3627D5E9010F remove_all_body448D24F502DB
 		// "ModelElement::clearTargetFlow"
 		if (sizeTargetFlow() > 0) {
-			for (java.util.Iterator p = targetFlow.iterator(); p.hasNext();) {
+			for (Iterator<Flow> p = targetFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkTarget(this);
 			}
 			targetFlow.clear();
@@ -2998,7 +3005,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkTargetFlow"
 
 	// -beg- preserve=no 3627D60F03DF code448D24F502DB "sourceFlow"
-	private java.util.Set sourceFlow = new java.util.HashSet();
+	private Set<Flow> sourceFlow = new HashSet<Flow>();
 	// -end- 3627D60F03DF code448D24F502DB "sourceFlow"
 
 	/**
@@ -3077,7 +3084,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 3627D60F03DF get_all_head448D24F502DB
 	// "ModelElement::iteratorSourceFlow"
-	public java.util.Iterator iteratorSourceFlow()
+	public Iterator<Flow> iteratorSourceFlow()
 	// -end- 3627D60F03DF get_all_head448D24F502DB
 	// "ModelElement::iteratorSourceFlow"
 	{
@@ -3102,7 +3109,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 3627D60F03DF remove_all_body448D24F502DB
 		// "ModelElement::clearSourceFlow"
 		if (sizeSourceFlow() > 0) {
-			for (java.util.Iterator p = sourceFlow.iterator(); p.hasNext();) {
+			for (Iterator<Flow> p = sourceFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkSource(this);
 			}
 			sourceFlow.clear();
@@ -3158,7 +3165,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkSourceFlow"
 
 	// -beg- preserve=no 365EEE82035C code448D24F502DB "defaultParameter"
-	private java.util.Set defaultParameter = new java.util.HashSet();
+	private Set<TemplateParameter> defaultParameter = new HashSet<TemplateParameter>();
 	// -end- 365EEE82035C code448D24F502DB "defaultParameter"
 
 	/**
@@ -3239,7 +3246,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 365EEE82035C get_all_head448D24F502DB
 	// "ModelElement::iteratorDefaultParameter"
-	public java.util.Iterator iteratorDefaultParameter()
+	public Iterator<TemplateParameter> iteratorDefaultParameter()
 	// -end- 365EEE82035C get_all_head448D24F502DB
 	// "ModelElement::iteratorDefaultParameter"
 	{
@@ -3264,7 +3271,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 365EEE82035C remove_all_body448D24F502DB
 		// "ModelElement::clearDefaultParameter"
 		if (sizeDefaultParameter() > 0) {
-			for (java.util.Iterator p = defaultParameter.iterator(); p.hasNext();) {
+			for (Iterator<TemplateParameter> p = defaultParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkDefaultElement(this);
 			}
 			defaultParameter.clear();
@@ -3322,7 +3329,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkDefaultParameter"
 
 	// -beg- preserve=no 370E7E3C02DE code448D24F502DB "comment"
-	private java.util.Set comment = new java.util.HashSet();
+	private Set<Comment> comment = new HashSet<Comment>();
 	// -end- 370E7E3C02DE code448D24F502DB "comment"
 
 	/**
@@ -3399,7 +3406,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 370E7E3C02DE get_all_head448D24F502DB
 	// "ModelElement::iteratorComment"
-	public java.util.Iterator iteratorComment()
+	public Iterator<Comment> iteratorComment()
 	// -end- 370E7E3C02DE get_all_head448D24F502DB
 	// "ModelElement::iteratorComment"
 	{
@@ -3424,7 +3431,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 370E7E3C02DE remove_all_body448D24F502DB
 		// "ModelElement::clearComment"
 		if (sizeComment() > 0) {
-			for (java.util.Iterator p = comment.iterator(); p.hasNext();) {
+			for (Iterator<Comment> p = comment.iterator(); p.hasNext();) {
 				((Comment) p.next())._unlinkAnnotatedElement(this);
 			}
 			comment.clear();
@@ -3479,7 +3486,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkComment"
 
 	// -beg- preserve=no 338613A4007B code448D24F502DB "stereotype"
-	private java.util.Set stereotype = new java.util.HashSet();
+	private Set<Stereotype> stereotype = new HashSet<Stereotype>();
 	// -end- 338613A4007B code448D24F502DB "stereotype"
 
 	/**
@@ -3558,7 +3565,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 338613A4007B get_all_head448D24F502DB
 	// "ModelElement::iteratorStereotype"
-	public java.util.Iterator iteratorStereotype()
+	public Iterator<Stereotype> iteratorStereotype()
 	// -end- 338613A4007B get_all_head448D24F502DB
 	// "ModelElement::iteratorStereotype"
 	{
@@ -3583,7 +3590,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 338613A4007B remove_all_body448D24F502DB
 		// "ModelElement::clearStereotype"
 		if (sizeStereotype() > 0) {
-			for (java.util.Iterator p = stereotype.iterator(); p.hasNext();) {
+			for (Iterator<Stereotype> p = stereotype.iterator(); p.hasNext();) {
 				((Stereotype) p.next())._unlinkExtendedElement(this);
 			}
 			stereotype.clear();
@@ -3639,7 +3646,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkStereotype"
 
 	// -beg- preserve=no 39B9B0F703C8 code448D24F502DB "referenceTag"
-	private java.util.Set referenceTag = new java.util.HashSet();
+	private Set<TaggedValue> referenceTag = new HashSet<TaggedValue>();
 	// -end- 39B9B0F703C8 code448D24F502DB "referenceTag"
 
 	/**
@@ -3719,7 +3726,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 39B9B0F703C8 get_all_head448D24F502DB
 	// "ModelElement::iteratorReferenceTag"
-	public java.util.Iterator iteratorReferenceTag()
+	public Iterator<TaggedValue> iteratorReferenceTag()
 	// -end- 39B9B0F703C8 get_all_head448D24F502DB
 	// "ModelElement::iteratorReferenceTag"
 	{
@@ -3744,7 +3751,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 39B9B0F703C8 remove_all_body448D24F502DB
 		// "ModelElement::clearReferenceTag"
 		if (sizeReferenceTag() > 0) {
-			for (java.util.Iterator p = referenceTag.iterator(); p.hasNext();) {
+			for (Iterator<TaggedValue> p = referenceTag.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkReferenceValue(this);
 			}
 			referenceTag.clear();
@@ -3801,7 +3808,7 @@ public class UmlTaggedValue implements TaggedValue {
 	// "ModelElement::_unlinkReferenceTag"
 
 	// -beg- preserve=no 33CD739B0316 code448D24F502DB "importedBy"
-	private java.util.Set importedBy = new java.util.HashSet();
+	private Set<ElementImport> importedBy = new HashSet<ElementImport>();
 	// -end- 33CD739B0316 code448D24F502DB "importedBy"
 
 	/**
@@ -3909,14 +3916,14 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33CD739B0316 get_all_head448D24F502DB
 	// "ModelElement::iteratorImportedBy"
-	public java.util.Iterator iteratorImportedBy()
+	public Iterator<?> iteratorImportedBy()
 	// -end- 33CD739B0316 get_all_head448D24F502DB
 	// "ModelElement::iteratorImportedBy"
 	{
 		// -beg- preserve=no 33CD739B0316 get_all_body448D24F502DB
 		// "ModelElement::iteratorImportedBy"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedBy.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedBy.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -3949,7 +3956,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// -beg- preserve=no 33CD739B0316 remove_all_body448D24F502DB
 		// "ModelElement::clearImportedBy"
 		if (sizeImportedBy() > 0) {
-			for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedBy.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedBy()._unlinkImportedElement(linkobj);
 			}
@@ -3985,7 +3992,7 @@ public class UmlTaggedValue implements TaggedValue {
 	 */
 	// -beg- preserve=no 33CD739B0316 itlink_head448D24F502DB
 	// "ModelElement::getImportedByLink"
-	public java.util.Iterator iteratorImportedByLink()
+	public Iterator<?> iteratorImportedByLink()
 	// -end- 33CD739B0316 itlink_head448D24F502DB
 	// "ModelElement::getImportedByLink"
 	{
@@ -4030,7 +4037,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// "ModelElement::findImportedByLink"
 		if (importedBy1 == null)
 			return null;
-		for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+		for (Iterator<ElementImport> p = importedBy.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedBy() == importedBy1)
 				return linkobj;

@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.implementation;
 // -beg- preserve=no 3D746BAC0281 autoimport "AbstractEditorElement"
 import ch.ehi.basics.tools.Visitable;
 import ch.ehi.basics.types.NlsString;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D746BAC0281 autoimport "AbstractEditorElement"
 
@@ -94,7 +97,7 @@ public abstract class AbstractEditorElement implements Visitable, java.io.Serial
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D747A600157 body3D746BAC0281 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 
 		// -end- 3D747A600157 body3D746BAC0281 "enumerateChildren"
 	}

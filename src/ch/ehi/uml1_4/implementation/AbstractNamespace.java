@@ -20,6 +20,12 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3CE225CF036F package "AbstractNamespace"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.foundation.core.ElementOwnership;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -114,7 +120,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180076 body3CE225CF036F "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorOwnedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -174,7 +180,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3C8F964B01C0 body3CE225CF036F
 		// "containsOwnedElement"
-		java.util.Iterator it = iteratorOwnedElement();
+		Iterator<?> it = iteratorOwnedElement();
 		while (it.hasNext()) {
 			ModelElement ele = (ModelElement) it.next();
 			if (name.equals(ele.getDefLangName())) {
@@ -191,7 +197,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	 */
 	// -beg- preserve=no 3CC7B8D10067 head3CE225CF036F
 	// "deepContainsOwnedElement"
-	public boolean deepContainsOwnedElement(java.lang.Class aclass, String name)
+	public boolean deepContainsOwnedElement(Class<?> aclass, String name)
 	// -end- 3CC7B8D10067 head3CE225CF036F "deepContainsOwnedElement"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -211,7 +217,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	 * finds a ModelElement in this Namespace or all its Sub-Namespaces
 	 */
 	// -beg- preserve=no 3CC7B8E5034B head3CE225CF036F "deepGetOwnedElement"
-	public ModelElement deepGetOwnedElement(java.lang.Class aclass, String name)
+	public ModelElement deepGetOwnedElement(Class<?> aclass, String name)
 	// -end- 3CC7B8E5034B head3CE225CF036F "deepGetOwnedElement"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -266,7 +272,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	}
 
 	// -beg- preserve=no 33598CAA030D code3CE225CF036F "ownedElement"
-	private java.util.List ownedElement = new java.util.ArrayList();
+	private List<ElementOwnership> ownedElement = new ArrayList<ElementOwnership>();
 	// -end- 33598CAA030D code3CE225CF036F "ownedElement"
 
 	/**
@@ -442,14 +448,14 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	 */
 	// -beg- preserve=no 33598CAA030D get_all_head3CE225CF036F
 	// "Namespace::iteratorOwnedElement"
-	public java.util.Iterator iteratorOwnedElement()
+	public Iterator<?> iteratorOwnedElement()
 	// -end- 33598CAA030D get_all_head3CE225CF036F
 	// "Namespace::iteratorOwnedElement"
 	{
 		// -beg- preserve=no 33598CAA030D get_all_body3CE225CF036F
 		// "Namespace::iteratorOwnedElement"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = ownedElement.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementOwnership> i = ownedElement.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -482,7 +488,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 		// -beg- preserve=no 33598CAA030D remove_all_body3CE225CF036F
 		// "Namespace::clearOwnedElement"
 		if (sizeOwnedElement() > 0) {
-			for (java.util.Iterator p = ownedElement.iterator(); p.hasNext();) {
+			for (Iterator<ElementOwnership> p = ownedElement.iterator(); p.hasNext();) {
 				ElementOwnership linkobj = (ElementOwnership) p.next();
 				linkobj.getOwnedElement()._unlinkNamespace(linkobj);
 			}
@@ -518,7 +524,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	 */
 	// -beg- preserve=no 33598CAA030D itlink_head3CE225CF036F
 	// "Namespace::getOwnedElementLink"
-	public java.util.Iterator iteratorOwnedElementLink()
+	public Iterator<?> iteratorOwnedElementLink()
 	// -end- 33598CAA030D itlink_head3CE225CF036F
 	// "Namespace::getOwnedElementLink"
 	{
@@ -562,7 +568,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 		// "Namespace::findOwnedElementLink"
 		if (ownedElement1 == null)
 			return null;
-		for (java.util.Iterator p = ownedElement.iterator(); p.hasNext();) {
+		for (Iterator<?> p = ownedElement.iterator(); p.hasNext();) {
 			ElementOwnership linkobj = (ElementOwnership) p.next();
 			if (linkobj.getOwnedElement() == ownedElement1)
 				return linkobj;
@@ -600,7 +606,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	// "Namespace::_unlinkOwnedElement"
 
 	// -beg- preserve=no 3C2C4E4F0248 code3CE225CF036F "diagram"
-	private java.util.Set diagram = new java.util.HashSet();
+	private Set<Diagram> diagram = new HashSet<Diagram>();
 	// -end- 3C2C4E4F0248 code3CE225CF036F "diagram"
 
 	/**
@@ -675,7 +681,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 	 */
 	// -beg- preserve=no 3C2C4E4F0248 get_all_head3CE225CF036F
 	// "Namespace::iteratorDiagram"
-	public java.util.Iterator iteratorDiagram()
+	public Iterator<?> iteratorDiagram()
 	// -end- 3C2C4E4F0248 get_all_head3CE225CF036F "Namespace::iteratorDiagram"
 	{
 		// -beg- preserve=no 3C2C4E4F0248 get_all_body3CE225CF036F
@@ -698,7 +704,7 @@ public abstract class AbstractNamespace extends AbstractModelElement implements 
 		// -beg- preserve=no 3C2C4E4F0248 remove_all_body3CE225CF036F
 		// "Namespace::clearDiagram"
 		if (sizeDiagram() > 0) {
-			for (java.util.Iterator p = diagram.iterator(); p.hasNext();) {
+			for (Iterator<?> p = diagram.iterator(); p.hasNext();) {
 				((Diagram) p.next())._unlinkNamespace(this);
 			}
 			diagram.clear();

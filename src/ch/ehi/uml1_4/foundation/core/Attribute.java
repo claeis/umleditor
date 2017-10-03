@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 327BA5E802E4 autoimport "Attribute"
 import ch.ehi.uml1_4.foundation.core.StructuralFeature;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.AssociationEndRole;
 import ch.ehi.uml1_4.behaviour.commonbehavior.AttributeLink;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
@@ -67,7 +70,7 @@ public boolean containsAssociationEndRole(AssociationEndRole associationEndRole1
  *  @see #addAssociationEndRole
  */
 // -beg- preserve=no 3650E6BE0096 get_all_head327BA5E802E4 "Attribute::iteratorAssociationEndRole"
-public java.util.Iterator iteratorAssociationEndRole()
+public Iterator<?> iteratorAssociationEndRole()
 // -end- 3650E6BE0096 get_all_head327BA5E802E4 "Attribute::iteratorAssociationEndRole"
 ;     // empty
 
@@ -132,7 +135,7 @@ public boolean containsAttributeLink(AttributeLink attributeLink1)
  *  @see #addAttributeLink
  */
 // -beg- preserve=no 33DBC16F0028 get_all_head327BA5E802E4 "Attribute::iteratorAttributeLink"
-public java.util.Iterator iteratorAttributeLink()
+public Iterator<?> iteratorAttributeLink()
 // -end- 33DBC16F0028 get_all_head327BA5E802E4 "Attribute::iteratorAttributeLink"
 ;     // empty
 

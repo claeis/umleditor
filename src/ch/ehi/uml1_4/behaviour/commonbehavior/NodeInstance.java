@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
 
 // -beg- preserve=no 364B6592023A autoimport "NodeInstance"
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.commonbehavior.ComponentInstance;
 // -end- 364B6592023A autoimport "NodeInstance"
 
@@ -63,7 +66,7 @@ public boolean containsResident(ComponentInstance resident1)
  *  @see #addResident
  */
 // -beg- preserve=no 364B65E50123 get_all_head364B6592023A "NodeInstance::iteratorResident"
-public java.util.Iterator iteratorResident()
+public Iterator<?> iteratorResident()
 // -end- 364B65E50123 get_all_head364B6592023A "NodeInstance::iteratorResident"
 ;     // empty
 

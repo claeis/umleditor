@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 3624012E0352 autoimport "Flow"
 import ch.ehi.uml1_4.foundation.core.Relationship;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 // -end- 3624012E0352 autoimport "Flow"
 
@@ -64,7 +67,7 @@ public boolean containsTarget(ModelElement target1)
  *  @see #addTarget
  */
 // -beg- preserve=no 3627D5E9010E get_all_head3624012E0352 "Flow::iteratorTarget"
-public java.util.Iterator iteratorTarget()
+public Iterator<?> iteratorTarget()
 // -end- 3627D5E9010E get_all_head3624012E0352 "Flow::iteratorTarget"
 ;     // empty
 
@@ -129,7 +132,7 @@ public boolean containsSource(ModelElement source1)
  *  @see #addSource
  */
 // -beg- preserve=no 3627D60F03DE get_all_head3624012E0352 "Flow::iteratorSource"
-public java.util.Iterator iteratorSource()
+public Iterator<?> iteratorSource()
 // -end- 3627D60F03DE get_all_head3624012E0352 "Flow::iteratorSource"
 ;     // empty
 

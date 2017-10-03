@@ -20,34 +20,20 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3C68E11703C1 package "UmlPackage"
 
-// -beg- preserve=no 3C68E11703C1 autoimport "UmlPackage"
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.implementation.AbstractNamespace;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.umleditor.umlpresentation.Diagram;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
 import ch.ehi.basics.types.NlsString;
 // -end- 3C68E11703C1 autoimport "UmlPackage"
+import ch.ehi.uml1_4.foundation.core.Class;
+import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.modelmanagement.ElementImport;
+// -beg- preserve=no 3C68E11703C1 autoimport "UmlPackage"
+import ch.ehi.uml1_4.modelmanagement.Package;
 
 // import declarations
 // please fill in/modify the following section
@@ -147,7 +133,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180026 body3C68E11703C1 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorImportedElement();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -174,7 +160,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	}
 
 	// -beg- preserve=no 33CD739B02DA code3C68E11703C1 "importedElement"
-	private java.util.Set importedElement = new java.util.HashSet();
+	private Set<ElementImport> importedElement = new HashSet<ElementImport>();
 	// -end- 33CD739B02DA code3C68E11703C1 "importedElement"
 
 	/**
@@ -283,14 +269,14 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	 */
 	// -beg- preserve=no 33CD739B02DA get_all_head3C68E11703C1
 	// "Package::iteratorImportedElement"
-	public java.util.Iterator iteratorImportedElement()
+	public Iterator<?> iteratorImportedElement()
 	// -end- 33CD739B02DA get_all_head3C68E11703C1
 	// "Package::iteratorImportedElement"
 	{
 		// -beg- preserve=no 33CD739B02DA get_all_body3C68E11703C1
 		// "Package::iteratorImportedElement"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedElement.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedElement.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -323,7 +309,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 		// -beg- preserve=no 33CD739B02DA remove_all_body3C68E11703C1
 		// "Package::clearImportedElement"
 		if (sizeImportedElement() > 0) {
-			for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedElement()._unlinkImportedBy(linkobj);
 			}
@@ -359,7 +345,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	 */
 	// -beg- preserve=no 33CD739B02DA itlink_head3C68E11703C1
 	// "Package::getImportedElementLink"
-	public java.util.Iterator iteratorImportedElementLink()
+	public Iterator<ElementImport> iteratorImportedElementLink()
 	// -end- 33CD739B02DA itlink_head3C68E11703C1
 	// "Package::getImportedElementLink"
 	{
@@ -404,7 +390,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 		// "Package::findImportedElementLink"
 		if (importedElement1 == null)
 			return null;
-		for (java.util.Iterator p = importedElement.iterator(); p.hasNext();) {
+		for (Iterator<ElementImport> p = importedElement.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedElement() == importedElement1)
 				return linkobj;
@@ -509,7 +495,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head3C68E11703C1
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<?> iteratorPresentation()
 	// -end- 362409A9000A get_all_head3C68E11703C1
 	// "ModelElement::iteratorPresentation"
 	{
@@ -578,7 +564,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	// "ModelElement::_unlinkPresentation"
 
 	// -beg- preserve=no 335C14A5019A code3C68E11703C1 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code3C68E11703C1 "generalization"
 
 	/**
@@ -659,7 +645,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head3C68E11703C1
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head3C68E11703C1
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -684,7 +670,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 		// -beg- preserve=no 335C14A5019A remove_all_body3C68E11703C1
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -742,7 +728,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code3C68E11703C1 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code3C68E11703C1 "specialization"
 
 	/**
@@ -823,7 +809,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head3C68E11703C1
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head3C68E11703C1
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -848,7 +834,7 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 		// -beg- preserve=no 335C146B01D6 remove_all_body3C68E11703C1
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -1019,6 +1005,18 @@ public class UmlPackage extends AbstractNamespace implements Package, java.io.Se
 
 	public void setMetaAttrb(NlsString value) {
 		super.setMetaAttrb(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

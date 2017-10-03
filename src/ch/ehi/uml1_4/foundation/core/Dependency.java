@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.foundation.core;
 
 // -beg- preserve=no 327A646F00E6 autoimport "Dependency"
 import ch.ehi.uml1_4.foundation.core.Relationship;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
 // -end- 327A646F00E6 autoimport "Dependency"
@@ -85,7 +88,7 @@ public boolean containsClient(ModelElement client1)
  *  @see #addClient
  */
 // -beg- preserve=no 33FFE57B03B3 get_all_head327A646F00E6 "Dependency::iteratorClient"
-public java.util.Iterator iteratorClient()
+public Iterator<?> iteratorClient()
 // -end- 33FFE57B03B3 get_all_head327A646F00E6 "Dependency::iteratorClient"
 ;     // empty
 
@@ -150,7 +153,7 @@ public boolean containsSupplier(ModelElement supplier1)
  *  @see #addSupplier
  */
 // -beg- preserve=no 335C0D7A02E4 get_all_head327A646F00E6 "Dependency::iteratorSupplier"
-public java.util.Iterator iteratorSupplier()
+public Iterator<?> iteratorSupplier()
 // -end- 335C0D7A02E4 get_all_head327A646F00E6 "Dependency::iteratorSupplier"
 ;     // empty
 
@@ -215,7 +218,7 @@ public boolean containsPresentation(PresentationElement presentation1)
  *  @see #addPresentation
  */
 // -beg- preserve=no 362409A9000A get_all_head327A646F00E6 "ModelElement::iteratorPresentation"
-public java.util.Iterator iteratorPresentation()
+public Iterator<?> iteratorPresentation()
 // -end- 362409A9000A get_all_head327A646F00E6 "ModelElement::iteratorPresentation"
 ;     // empty
 

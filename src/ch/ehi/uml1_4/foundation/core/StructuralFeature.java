@@ -8,13 +8,7 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 3298F1A403BF package "StructuralFeature"
 
-// -beg- preserve=no 3298F1A403BF autoimport "StructuralFeature"
-import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
-import ch.ehi.uml1_4.foundation.datatypes.ChangeableKind;
-import ch.ehi.uml1_4.foundation.datatypes.ScopeKind;
-import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
-// -end- 3298F1A403BF autoimport "StructuralFeature"
 
 // import declarations
 // please fill in/modify the following section

@@ -20,33 +20,39 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 448D24D90367 package "UmlStereotype"
 
-// -beg- preserve=no 448D24D90367 autoimport "UmlStereotype"
-import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TagDefinition;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.foundation.core.Constraint;
-import ch.ehi.uml1_4.foundation.datatypes.Geometry;
-import ch.ehi.uml1_4.foundation.core.Generalization;
-import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
-import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
-import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ElementOwnership;
-import ch.ehi.uml1_4.foundation.core.Dependency;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.foundation.core.PresentationElement;
-import ch.ehi.uml1_4.foundation.core.Component;
-import ch.ehi.uml1_4.foundation.core.ElementResidence;
-import ch.ehi.uml1_4.foundation.core.TemplateParameter;
-import ch.ehi.uml1_4.foundation.core.Flow;
-import ch.ehi.uml1_4.foundation.core.Comment;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
 import ch.ehi.basics.types.NlsString;
 // -end- 448D24D90367 autoimport "UmlStereotype"
+import ch.ehi.uml1_4.behaviour.activitygraphs.Partition;
+import ch.ehi.uml1_4.behaviour.collaborations.ClassifierRole;
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.collaborations.CollaborationInstanceSet;
+import ch.ehi.uml1_4.behaviour.statemachines.StateMachine;
+import ch.ehi.uml1_4.foundation.core.Comment;
+import ch.ehi.uml1_4.foundation.core.Component;
+import ch.ehi.uml1_4.foundation.core.Constraint;
+import ch.ehi.uml1_4.foundation.core.Dependency;
+import ch.ehi.uml1_4.foundation.core.ElementOwnership;
+import ch.ehi.uml1_4.foundation.core.ElementResidence;
+import ch.ehi.uml1_4.foundation.core.Flow;
+import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.core.PresentationElement;
+import ch.ehi.uml1_4.foundation.core.TemplateParameter;
+import ch.ehi.uml1_4.foundation.datatypes.Geometry;
+// -beg- preserve=no 448D24D90367 autoimport "UmlStereotype"
+import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TagDefinition;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import ch.ehi.uml1_4.modelmanagement.Package;
 
 // import declarations
 // please fill in/modify the following section
@@ -130,7 +136,7 @@ public class UmlStereotype implements Stereotype {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 448D364A028B body448D24D90367 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorDefinedTag();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -155,7 +161,7 @@ public class UmlStereotype implements Stereotype {
 	}
 
 	// -beg- preserve=no 3386129C0040 code448D24D90367 "definedTag"
-	private java.util.Set definedTag = new java.util.HashSet();
+	private Set<TagDefinition> definedTag = new HashSet<TagDefinition>();
 	// -end- 3386129C0040 code448D24D90367 "definedTag"
 
 	/**
@@ -232,7 +238,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 3386129C0040 get_all_head448D24D90367
 	// "Stereotype::iteratorDefinedTag"
-	public java.util.Iterator iteratorDefinedTag()
+	public Iterator<?> iteratorDefinedTag()
 	// -end- 3386129C0040 get_all_head448D24D90367
 	// "Stereotype::iteratorDefinedTag"
 	{
@@ -257,7 +263,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 3386129C0040 remove_all_body448D24D90367
 		// "Stereotype::clearDefinedTag"
 		if (sizeDefinedTag() > 0) {
-			for (java.util.Iterator p = definedTag.iterator(); p.hasNext();) {
+			for (Iterator<?> p = definedTag.iterator(); p.hasNext();) {
 				((TagDefinition) p.next())._unlinkOwner(this);
 			}
 			definedTag.clear();
@@ -312,7 +318,7 @@ public class UmlStereotype implements Stereotype {
 	// "Stereotype::_unlinkDefinedTag"
 
 	// -beg- preserve=no 338613A4007A code448D24D90367 "extendedElement"
-	private java.util.Set extendedElement = new java.util.HashSet();
+	private Set<ModelElement> extendedElement = new HashSet<ModelElement>();
 	// -end- 338613A4007A code448D24D90367 "extendedElement"
 
 	/**
@@ -392,7 +398,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 338613A4007A get_all_head448D24D90367
 	// "Stereotype::iteratorExtendedElement"
-	public java.util.Iterator iteratorExtendedElement()
+	public Iterator<ModelElement> iteratorExtendedElement()
 	// -end- 338613A4007A get_all_head448D24D90367
 	// "Stereotype::iteratorExtendedElement"
 	{
@@ -417,7 +423,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 338613A4007A remove_all_body448D24D90367
 		// "Stereotype::clearExtendedElement"
 		if (sizeExtendedElement() > 0) {
-			for (java.util.Iterator p = extendedElement.iterator(); p.hasNext();) {
+			for (Iterator<ModelElement> p = extendedElement.iterator(); p.hasNext();) {
 				((ModelElement) p.next())._unlinkStereotype(this);
 			}
 			extendedElement.clear();
@@ -475,7 +481,7 @@ public class UmlStereotype implements Stereotype {
 	// "Stereotype::_unlinkExtendedElement"
 
 	// -beg- preserve=no 364B66900258 code448D24D90367 "stereotypeConstraint"
-	private java.util.Set stereotypeConstraint = new java.util.HashSet();
+	private Set<Constraint> stereotypeConstraint = new HashSet<Constraint>();
 	// -end- 364B66900258 code448D24D90367 "stereotypeConstraint"
 
 	/**
@@ -556,7 +562,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 364B66900258 get_all_head448D24D90367
 	// "Stereotype::iteratorStereotypeConstraint"
-	public java.util.Iterator iteratorStereotypeConstraint()
+	public Iterator<?> iteratorStereotypeConstraint()
 	// -end- 364B66900258 get_all_head448D24D90367
 	// "Stereotype::iteratorStereotypeConstraint"
 	{
@@ -581,7 +587,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 364B66900258 remove_all_body448D24D90367
 		// "Stereotype::clearStereotypeConstraint"
 		if (sizeStereotypeConstraint() > 0) {
-			for (java.util.Iterator p = stereotypeConstraint.iterator(); p.hasNext();) {
+			for (Iterator<?> p = stereotypeConstraint.iterator(); p.hasNext();) {
 				((Constraint) p.next())._unlinkConstrainedStereotype(this);
 			}
 			stereotypeConstraint.clear();
@@ -714,7 +720,7 @@ public class UmlStereotype implements Stereotype {
 	}
 
 	// -beg- preserve=no 335C14A5019A code448D24D90367 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code448D24D90367 "generalization"
 
 	/**
@@ -795,7 +801,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head448D24D90367
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator<Generalization> iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head448D24D90367
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -820,7 +826,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 335C14A5019A remove_all_body448D24D90367
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -878,7 +884,7 @@ public class UmlStereotype implements Stereotype {
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code448D24D90367 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code448D24D90367 "specialization"
 
 	/**
@@ -959,7 +965,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head448D24D90367
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator<Generalization> iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head448D24D90367
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -984,7 +990,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 335C146B01D6 remove_all_body448D24D90367
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();
@@ -1180,7 +1186,7 @@ public class UmlStereotype implements Stereotype {
 	}
 
 	// -beg- preserve=no 33CF8BD500F1 code448D24D90367 "behavior"
-	private java.util.Set behavior = new java.util.HashSet();
+	private Set<StateMachine> behavior = new HashSet<StateMachine>();
 	// -end- 33CF8BD500F1 code448D24D90367 "behavior"
 
 	/**
@@ -1257,7 +1263,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33CF8BD500F1 get_all_head448D24D90367
 	// "ModelElement::iteratorBehavior"
-	public java.util.Iterator iteratorBehavior()
+	public Iterator<?> iteratorBehavior()
 	// -end- 33CF8BD500F1 get_all_head448D24D90367
 	// "ModelElement::iteratorBehavior"
 	{
@@ -1282,7 +1288,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33CF8BD500F1 remove_all_body448D24D90367
 		// "ModelElement::clearBehavior"
 		if (sizeBehavior() > 0) {
-			for (java.util.Iterator p = behavior.iterator(); p.hasNext();) {
+			for (Iterator<?> p = behavior.iterator(); p.hasNext();) {
 				((StateMachine) p.next())._unlinkContext(this);
 			}
 			behavior.clear();
@@ -1337,7 +1343,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkBehavior"
 
 	// -beg- preserve=no 33CF9A030140 code448D24D90367 "partition"
-	private java.util.Set partition = new java.util.HashSet();
+	private Set<Partition> partition = new HashSet<Partition>();
 	// -end- 33CF9A030140 code448D24D90367 "partition"
 
 	/**
@@ -1416,7 +1422,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33CF9A030140 get_all_head448D24D90367
 	// "ModelElement::iteratorPartition"
-	public java.util.Iterator iteratorPartition()
+	public Iterator<Partition> iteratorPartition()
 	// -end- 33CF9A030140 get_all_head448D24D90367
 	// "ModelElement::iteratorPartition"
 	{
@@ -1441,7 +1447,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33CF9A030140 remove_all_body448D24D90367
 		// "ModelElement::clearPartition"
 		if (sizePartition() > 0) {
-			for (java.util.Iterator p = partition.iterator(); p.hasNext();) {
+			for (Iterator<Partition> p = partition.iterator(); p.hasNext();) {
 				((Partition) p.next())._unlinkContents(this);
 			}
 			partition.clear();
@@ -1497,7 +1503,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkPartition"
 
 	// -beg- preserve=no 33D1394E029F code448D24D90367 "collaboration"
-	private java.util.Set collaboration = new java.util.HashSet();
+	private Set<Collaboration> collaboration = new HashSet<Collaboration>();
 	// -end- 33D1394E029F code448D24D90367 "collaboration"
 
 	/**
@@ -1577,7 +1583,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head448D24D90367
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator<Collaboration> iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head448D24D90367
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -1602,7 +1608,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33D1394E029F remove_all_body448D24D90367
 		// "ModelElement::clearCollaboration"
 		if (sizeCollaboration() > 0) {
-			for (java.util.Iterator p = collaboration.iterator(); p.hasNext();) {
+			for (Iterator<Collaboration> p = collaboration.iterator(); p.hasNext();) {
 				((Collaboration) p.next())._unlinkConstrainingElement(this);
 			}
 			collaboration.clear();
@@ -1660,7 +1666,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 36008FB700E7 code448D24D90367 "classifierRole"
-	private java.util.Set classifierRole = new java.util.HashSet();
+	private Set<ClassifierRole> classifierRole = new HashSet<ClassifierRole>();
 	// -end- 36008FB700E7 code448D24D90367 "classifierRole"
 
 	/**
@@ -1740,7 +1746,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head448D24D90367
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator<ClassifierRole> iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head448D24D90367
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -1765,7 +1771,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 36008FB700E7 remove_all_body448D24D90367
 		// "ModelElement::clearClassifierRole"
 		if (sizeClassifierRole() > 0) {
-			for (java.util.Iterator p = classifierRole.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierRole> p = classifierRole.iterator(); p.hasNext();) {
 				((ClassifierRole) p.next())._unlinkAvailableContents(this);
 			}
 			classifierRole.clear();
@@ -1824,7 +1830,7 @@ public class UmlStereotype implements Stereotype {
 
 	// -beg- preserve=no 39E9065C0186 code448D24D90367
 	// "collaborationInstanceSet"
-	private java.util.Set collaborationInstanceSet = new java.util.HashSet();
+	private Set<CollaborationInstanceSet> collaborationInstanceSet = new HashSet<CollaborationInstanceSet>();
 	// -end- 39E9065C0186 code448D24D90367 "collaborationInstanceSet"
 
 	/**
@@ -1905,7 +1911,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 39E9065C0186 get_all_head448D24D90367
 	// "ModelElement::iteratorCollaborationInstanceSet"
-	public java.util.Iterator iteratorCollaborationInstanceSet()
+	public Iterator<CollaborationInstanceSet> iteratorCollaborationInstanceSet()
 	// -end- 39E9065C0186 get_all_head448D24D90367
 	// "ModelElement::iteratorCollaborationInstanceSet"
 	{
@@ -1930,7 +1936,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 39E9065C0186 remove_all_body448D24D90367
 		// "ModelElement::clearCollaborationInstanceSet"
 		if (sizeCollaborationInstanceSet() > 0) {
-			for (java.util.Iterator p = collaborationInstanceSet.iterator(); p.hasNext();) {
+			for (Iterator<CollaborationInstanceSet> p = collaborationInstanceSet.iterator(); p.hasNext();) {
 				((CollaborationInstanceSet) p.next())._unlinkConstrainingElement(this);
 			}
 			collaborationInstanceSet.clear();
@@ -2181,7 +2187,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkNamespace"
 
 	// -beg- preserve=no 33FFE57B0395 code448D24D90367 "clientDependency"
-	private java.util.Set clientDependency = new java.util.HashSet();
+	private Set<Dependency> clientDependency = new HashSet<Dependency>();
 	// -end- 33FFE57B0395 code448D24D90367 "clientDependency"
 
 	/**
@@ -2262,7 +2268,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33FFE57B0395 get_all_head448D24D90367
 	// "ModelElement::iteratorClientDependency"
-	public java.util.Iterator iteratorClientDependency()
+	public Iterator<Dependency> iteratorClientDependency()
 	// -end- 33FFE57B0395 get_all_head448D24D90367
 	// "ModelElement::iteratorClientDependency"
 	{
@@ -2287,7 +2293,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33FFE57B0395 remove_all_body448D24D90367
 		// "ModelElement::clearClientDependency"
 		if (sizeClientDependency() > 0) {
-			for (java.util.Iterator p = clientDependency.iterator(); p.hasNext();) {
+			for (Iterator<Dependency> p = clientDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkClient(this);
 			}
 			clientDependency.clear();
@@ -2345,7 +2351,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkClientDependency"
 
 	// -beg- preserve=no 33E901E003D4 code448D24D90367 "taggedValue"
-	private java.util.Set taggedValue = new java.util.HashSet();
+	private Set<TaggedValue> taggedValue = new HashSet<TaggedValue>();
 	// -end- 33E901E003D4 code448D24D90367 "taggedValue"
 
 	/**
@@ -2425,7 +2431,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33E901E003D4 get_all_head448D24D90367
 	// "ModelElement::iteratorTaggedValue"
-	public java.util.Iterator iteratorTaggedValue()
+	public Iterator<TaggedValue> iteratorTaggedValue()
 	// -end- 33E901E003D4 get_all_head448D24D90367
 	// "ModelElement::iteratorTaggedValue"
 	{
@@ -2450,7 +2456,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33E901E003D4 remove_all_body448D24D90367
 		// "ModelElement::clearTaggedValue"
 		if (sizeTaggedValue() > 0) {
-			for (java.util.Iterator p = taggedValue.iterator(); p.hasNext();) {
+			for (Iterator<TaggedValue> p = taggedValue.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkModelElement(this);
 			}
 			taggedValue.clear();
@@ -2507,7 +2513,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkTaggedValue"
 
 	// -beg- preserve=no 33EA67BB010E code448D24D90367 "constraint"
-	private java.util.Set constraint = new java.util.HashSet();
+	private Set<Constraint> constraint = new HashSet<Constraint>();
 	// -end- 33EA67BB010E code448D24D90367 "constraint"
 
 	/**
@@ -2586,7 +2592,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33EA67BB010E get_all_head448D24D90367
 	// "ModelElement::iteratorConstraint"
-	public java.util.Iterator iteratorConstraint()
+	public Iterator<Constraint> iteratorConstraint()
 	// -end- 33EA67BB010E get_all_head448D24D90367
 	// "ModelElement::iteratorConstraint"
 	{
@@ -2611,7 +2617,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33EA67BB010E remove_all_body448D24D90367
 		// "ModelElement::clearConstraint"
 		if (sizeConstraint() > 0) {
-			for (java.util.Iterator p = constraint.iterator(); p.hasNext();) {
+			for (Iterator<?> p = constraint.iterator(); p.hasNext();) {
 				((Constraint) p.next())._unlinkConstrainedElement(this);
 			}
 			constraint.clear();
@@ -2667,7 +2673,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkConstraint"
 
 	// -beg- preserve=no 335C0D7A02A8 code448D24D90367 "supplierDependency"
-	private java.util.Set supplierDependency = new java.util.HashSet();
+	private Set<Dependency> supplierDependency = new HashSet<Dependency>();
 	// -end- 335C0D7A02A8 code448D24D90367 "supplierDependency"
 
 	/**
@@ -2748,7 +2754,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 335C0D7A02A8 get_all_head448D24D90367
 	// "ModelElement::iteratorSupplierDependency"
-	public java.util.Iterator iteratorSupplierDependency()
+	public Iterator<Dependency> iteratorSupplierDependency()
 	// -end- 335C0D7A02A8 get_all_head448D24D90367
 	// "ModelElement::iteratorSupplierDependency"
 	{
@@ -2773,7 +2779,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 335C0D7A02A8 remove_all_body448D24D90367
 		// "ModelElement::clearSupplierDependency"
 		if (sizeSupplierDependency() > 0) {
-			for (java.util.Iterator p = supplierDependency.iterator(); p.hasNext();) {
+			for (Iterator<Dependency> p = supplierDependency.iterator(); p.hasNext();) {
 				((Dependency) p.next())._unlinkSupplier(this);
 			}
 			supplierDependency.clear();
@@ -2831,7 +2837,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkSupplierDependency"
 
 	// -beg- preserve=no 362409A9000A code448D24D90367 "presentation"
-	private java.util.Set presentation = new java.util.HashSet();
+	private Set<PresentationElement> presentation = new HashSet<PresentationElement>();
 	// -end- 362409A9000A code448D24D90367 "presentation"
 
 	/**
@@ -2911,7 +2917,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head448D24D90367
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator<PresentationElement> iteratorPresentation()
 	// -end- 362409A9000A get_all_head448D24D90367
 	// "ModelElement::iteratorPresentation"
 	{
@@ -2936,7 +2942,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 362409A9000A remove_all_body448D24D90367
 		// "ModelElement::clearPresentation"
 		if (sizePresentation() > 0) {
-			for (java.util.Iterator p = presentation.iterator(); p.hasNext();) {
+			for (Iterator<PresentationElement> p = presentation.iterator(); p.hasNext();) {
 				((PresentationElement) p.next())._unlinkSubject(this);
 			}
 			presentation.clear();
@@ -2993,7 +2999,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkPresentation"
 
 	// -beg- preserve=no 36240CA4024E code448D24D90367 "container"
-	private java.util.Set container = new java.util.HashSet();
+	private Set<ElementResidence> container = new HashSet<ElementResidence>();
 	// -end- 36240CA4024E code448D24D90367 "container"
 
 	/**
@@ -3101,14 +3107,14 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 36240CA4024E get_all_head448D24D90367
 	// "ModelElement::iteratorContainer"
-	public java.util.Iterator iteratorContainer()
+	public Iterator<?> iteratorContainer()
 	// -end- 36240CA4024E get_all_head448D24D90367
 	// "ModelElement::iteratorContainer"
 	{
 		// -beg- preserve=no 36240CA4024E get_all_body448D24D90367
 		// "ModelElement::iteratorContainer"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = container.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementResidence> i = container.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -3141,7 +3147,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 36240CA4024E remove_all_body448D24D90367
 		// "ModelElement::clearContainer"
 		if (sizeContainer() > 0) {
-			for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+			for (Iterator<ElementResidence> p = container.iterator(); p.hasNext();) {
 				ElementResidence linkobj = (ElementResidence) p.next();
 				linkobj.getContainer()._unlinkResident(linkobj);
 			}
@@ -3177,7 +3183,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 36240CA4024E itlink_head448D24D90367
 	// "ModelElement::getContainerLink"
-	public java.util.Iterator iteratorContainerLink()
+	public Iterator<?> iteratorContainerLink()
 	// -end- 36240CA4024E itlink_head448D24D90367
 	// "ModelElement::getContainerLink"
 	{
@@ -3222,7 +3228,7 @@ public class UmlStereotype implements Stereotype {
 		// "ModelElement::findContainerLink"
 		if (container1 == null)
 			return null;
-		for (java.util.Iterator p = container.iterator(); p.hasNext();) {
+		for (Iterator<?> p = container.iterator(); p.hasNext();) {
 			ElementResidence linkobj = (ElementResidence) p.next();
 			if (linkobj.getContainer() == container1)
 				return linkobj;
@@ -3260,7 +3266,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkContainer"
 
 	// -beg- preserve=no 36240F380050 code448D24D90367 "templateParameter"
-	private java.util.List templateParameter = new java.util.ArrayList();
+	private List<TemplateParameter> templateParameter = new ArrayList<TemplateParameter>();
 	// -end- 36240F380050 code448D24D90367 "templateParameter"
 
 	/**
@@ -3405,7 +3411,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 36240F380050 get_all_head448D24D90367
 	// "ModelElement::iteratorTemplateParameter"
-	public java.util.Iterator iteratorTemplateParameter()
+	public Iterator<TemplateParameter> iteratorTemplateParameter()
 	// -end- 36240F380050 get_all_head448D24D90367
 	// "ModelElement::iteratorTemplateParameter"
 	{
@@ -3430,7 +3436,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 36240F380050 remove_all_body448D24D90367
 		// "ModelElement::clearTemplateParameter"
 		if (sizeTemplateParameter() > 0) {
-			for (java.util.Iterator p = templateParameter.iterator(); p.hasNext();) {
+			for (Iterator<TemplateParameter> p = templateParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkTemplate(this);
 			}
 			templateParameter.clear();
@@ -3488,7 +3494,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkTemplateParameter"
 
 	// -beg- preserve=no 3627D5E9010F code448D24D90367 "targetFlow"
-	private java.util.Set targetFlow = new java.util.HashSet();
+	private Set<Flow> targetFlow = new HashSet<Flow>();
 	// -end- 3627D5E9010F code448D24D90367 "targetFlow"
 
 	/**
@@ -3567,7 +3573,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 3627D5E9010F get_all_head448D24D90367
 	// "ModelElement::iteratorTargetFlow"
-	public java.util.Iterator iteratorTargetFlow()
+	public Iterator<Flow> iteratorTargetFlow()
 	// -end- 3627D5E9010F get_all_head448D24D90367
 	// "ModelElement::iteratorTargetFlow"
 	{
@@ -3592,7 +3598,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 3627D5E9010F remove_all_body448D24D90367
 		// "ModelElement::clearTargetFlow"
 		if (sizeTargetFlow() > 0) {
-			for (java.util.Iterator p = targetFlow.iterator(); p.hasNext();) {
+			for (Iterator<Flow> p = targetFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkTarget(this);
 			}
 			targetFlow.clear();
@@ -3648,7 +3654,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkTargetFlow"
 
 	// -beg- preserve=no 3627D60F03DF code448D24D90367 "sourceFlow"
-	private java.util.Set sourceFlow = new java.util.HashSet();
+	private Set<Flow> sourceFlow = new HashSet<Flow>();
 	// -end- 3627D60F03DF code448D24D90367 "sourceFlow"
 
 	/**
@@ -3727,7 +3733,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 3627D60F03DF get_all_head448D24D90367
 	// "ModelElement::iteratorSourceFlow"
-	public java.util.Iterator iteratorSourceFlow()
+	public Iterator<Flow> iteratorSourceFlow()
 	// -end- 3627D60F03DF get_all_head448D24D90367
 	// "ModelElement::iteratorSourceFlow"
 	{
@@ -3752,7 +3758,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 3627D60F03DF remove_all_body448D24D90367
 		// "ModelElement::clearSourceFlow"
 		if (sizeSourceFlow() > 0) {
-			for (java.util.Iterator p = sourceFlow.iterator(); p.hasNext();) {
+			for (Iterator<Flow> p = sourceFlow.iterator(); p.hasNext();) {
 				((Flow) p.next())._unlinkSource(this);
 			}
 			sourceFlow.clear();
@@ -3808,7 +3814,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkSourceFlow"
 
 	// -beg- preserve=no 365EEE82035C code448D24D90367 "defaultParameter"
-	private java.util.Set defaultParameter = new java.util.HashSet();
+	private Set<TemplateParameter> defaultParameter = new HashSet<TemplateParameter>();
 	// -end- 365EEE82035C code448D24D90367 "defaultParameter"
 
 	/**
@@ -3889,7 +3895,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 365EEE82035C get_all_head448D24D90367
 	// "ModelElement::iteratorDefaultParameter"
-	public java.util.Iterator iteratorDefaultParameter()
+	public Iterator<TemplateParameter> iteratorDefaultParameter()
 	// -end- 365EEE82035C get_all_head448D24D90367
 	// "ModelElement::iteratorDefaultParameter"
 	{
@@ -3914,7 +3920,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 365EEE82035C remove_all_body448D24D90367
 		// "ModelElement::clearDefaultParameter"
 		if (sizeDefaultParameter() > 0) {
-			for (java.util.Iterator p = defaultParameter.iterator(); p.hasNext();) {
+			for (Iterator<TemplateParameter> p = defaultParameter.iterator(); p.hasNext();) {
 				((TemplateParameter) p.next())._unlinkDefaultElement(this);
 			}
 			defaultParameter.clear();
@@ -3972,7 +3978,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkDefaultParameter"
 
 	// -beg- preserve=no 370E7E3C02DE code448D24D90367 "comment"
-	private java.util.Set comment = new java.util.HashSet();
+	private Set<Comment> comment = new HashSet<Comment>();
 	// -end- 370E7E3C02DE code448D24D90367 "comment"
 
 	/**
@@ -4049,7 +4055,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 370E7E3C02DE get_all_head448D24D90367
 	// "ModelElement::iteratorComment"
-	public java.util.Iterator iteratorComment()
+	public Iterator<Comment> iteratorComment()
 	// -end- 370E7E3C02DE get_all_head448D24D90367
 	// "ModelElement::iteratorComment"
 	{
@@ -4074,7 +4080,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 370E7E3C02DE remove_all_body448D24D90367
 		// "ModelElement::clearComment"
 		if (sizeComment() > 0) {
-			for (java.util.Iterator p = comment.iterator(); p.hasNext();) {
+			for (Iterator<Comment> p = comment.iterator(); p.hasNext();) {
 				((Comment) p.next())._unlinkAnnotatedElement(this);
 			}
 			comment.clear();
@@ -4129,7 +4135,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkComment"
 
 	// -beg- preserve=no 338613A4007B code448D24D90367 "stereotype"
-	private java.util.Set stereotype = new java.util.HashSet();
+	private Set<Stereotype> stereotype = new HashSet<Stereotype>();
 	// -end- 338613A4007B code448D24D90367 "stereotype"
 
 	/**
@@ -4208,7 +4214,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 338613A4007B get_all_head448D24D90367
 	// "ModelElement::iteratorStereotype"
-	public java.util.Iterator iteratorStereotype()
+	public Iterator<Stereotype> iteratorStereotype()
 	// -end- 338613A4007B get_all_head448D24D90367
 	// "ModelElement::iteratorStereotype"
 	{
@@ -4233,7 +4239,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 338613A4007B remove_all_body448D24D90367
 		// "ModelElement::clearStereotype"
 		if (sizeStereotype() > 0) {
-			for (java.util.Iterator p = stereotype.iterator(); p.hasNext();) {
+			for (Iterator<Stereotype> p = stereotype.iterator(); p.hasNext();) {
 				((Stereotype) p.next())._unlinkExtendedElement(this);
 			}
 			stereotype.clear();
@@ -4289,7 +4295,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkStereotype"
 
 	// -beg- preserve=no 39B9B0F703C8 code448D24D90367 "referenceTag"
-	private java.util.Set referenceTag = new java.util.HashSet();
+	private Set<TaggedValue> referenceTag = new HashSet<TaggedValue>();
 	// -end- 39B9B0F703C8 code448D24D90367 "referenceTag"
 
 	/**
@@ -4369,7 +4375,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 39B9B0F703C8 get_all_head448D24D90367
 	// "ModelElement::iteratorReferenceTag"
-	public java.util.Iterator iteratorReferenceTag()
+	public Iterator<TaggedValue> iteratorReferenceTag()
 	// -end- 39B9B0F703C8 get_all_head448D24D90367
 	// "ModelElement::iteratorReferenceTag"
 	{
@@ -4394,7 +4400,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 39B9B0F703C8 remove_all_body448D24D90367
 		// "ModelElement::clearReferenceTag"
 		if (sizeReferenceTag() > 0) {
-			for (java.util.Iterator p = referenceTag.iterator(); p.hasNext();) {
+			for (Iterator<TaggedValue> p = referenceTag.iterator(); p.hasNext();) {
 				((TaggedValue) p.next())._unlinkReferenceValue(this);
 			}
 			referenceTag.clear();
@@ -4451,7 +4457,7 @@ public class UmlStereotype implements Stereotype {
 	// "ModelElement::_unlinkReferenceTag"
 
 	// -beg- preserve=no 33CD739B0316 code448D24D90367 "importedBy"
-	private java.util.Set importedBy = new java.util.HashSet();
+	private Set<ElementImport> importedBy = new HashSet<ElementImport>();
 	// -end- 33CD739B0316 code448D24D90367 "importedBy"
 
 	/**
@@ -4559,14 +4565,14 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33CD739B0316 get_all_head448D24D90367
 	// "ModelElement::iteratorImportedBy"
-	public java.util.Iterator iteratorImportedBy()
+	public Iterator<?> iteratorImportedBy()
 	// -end- 33CD739B0316 get_all_head448D24D90367
 	// "ModelElement::iteratorImportedBy"
 	{
 		// -beg- preserve=no 33CD739B0316 get_all_body448D24D90367
 		// "ModelElement::iteratorImportedBy"
-		return new java.util.Iterator() {
-			private java.util.Iterator i = importedBy.iterator();
+		return new Iterator<Object>() {
+			private Iterator<ElementImport> i = importedBy.iterator();
 
 			public boolean hasNext() {
 				return i.hasNext();
@@ -4599,7 +4605,7 @@ public class UmlStereotype implements Stereotype {
 		// -beg- preserve=no 33CD739B0316 remove_all_body448D24D90367
 		// "ModelElement::clearImportedBy"
 		if (sizeImportedBy() > 0) {
-			for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+			for (Iterator<ElementImport> p = importedBy.iterator(); p.hasNext();) {
 				ElementImport linkobj = (ElementImport) p.next();
 				linkobj.getImportedBy()._unlinkImportedElement(linkobj);
 			}
@@ -4635,7 +4641,7 @@ public class UmlStereotype implements Stereotype {
 	 */
 	// -beg- preserve=no 33CD739B0316 itlink_head448D24D90367
 	// "ModelElement::getImportedByLink"
-	public java.util.Iterator iteratorImportedByLink()
+	public Iterator<?> iteratorImportedByLink()
 	// -end- 33CD739B0316 itlink_head448D24D90367
 	// "ModelElement::getImportedByLink"
 	{
@@ -4680,7 +4686,7 @@ public class UmlStereotype implements Stereotype {
 		// "ModelElement::findImportedByLink"
 		if (importedBy1 == null)
 			return null;
-		for (java.util.Iterator p = importedBy.iterator(); p.hasNext();) {
+		for (Iterator<?> p = importedBy.iterator(); p.hasNext();) {
 			ElementImport linkobj = (ElementImport) p.next();
 			if (linkobj.getImportedBy() == importedBy1)
 				return linkobj;

@@ -12,6 +12,9 @@ package ch.ehi.uml1_4.foundation.extensionmechanisms;
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TagDefinition;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.foundation.core.Constraint;
 import ch.ehi.uml1_4.foundation.datatypes.Geometry;
 // -end- 3372549100E5 autoimport "Stereotype"
@@ -81,7 +84,7 @@ public interface Stereotype extends GeneralizableElement, java.io.Serializable {
 	 */
 	// -beg- preserve=no 3386129C0040 get_all_head3372549100E5
 	// "Stereotype::iteratorDefinedTag"
-	public java.util.Iterator iteratorDefinedTag()
+	public Iterator<?> iteratorDefinedTag()
 	// -end- 3386129C0040 get_all_head3372549100E5
 	// "Stereotype::iteratorDefinedTag"
 	; // empty
@@ -172,7 +175,7 @@ public interface Stereotype extends GeneralizableElement, java.io.Serializable {
 	 */
 	// -beg- preserve=no 338613A4007A get_all_head3372549100E5
 	// "Stereotype::iteratorExtendedElement"
-	public java.util.Iterator iteratorExtendedElement()
+	public Iterator<?> iteratorExtendedElement()
 	// -end- 338613A4007A get_all_head3372549100E5
 	// "Stereotype::iteratorExtendedElement"
 	; // empty
@@ -266,7 +269,7 @@ public interface Stereotype extends GeneralizableElement, java.io.Serializable {
 	 */
 	// -beg- preserve=no 364B66900258 get_all_head3372549100E5
 	// "Stereotype::iteratorStereotypeConstraint"
-	public java.util.Iterator iteratorStereotypeConstraint()
+	public Iterator<?> iteratorStereotypeConstraint()
 	// -end- 364B66900258 get_all_head3372549100E5
 	// "Stereotype::iteratorStereotypeConstraint"
 	; // empty

@@ -8,6 +8,8 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 327A649B000A package "Constraint"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 327A649B000A autoimport "Constraint"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.Stereotype;
@@ -86,7 +88,7 @@ public boolean containsConstrainedElement(ModelElement constrainedElement1)
  *  @see #addConstrainedElement
  */
 // -beg- preserve=no 33EA67BB010F get_all_head327A649B000A "Constraint::iteratorConstrainedElement"
-public java.util.Iterator iteratorConstrainedElement()
+public Iterator<?> iteratorConstrainedElement()
 // -end- 33EA67BB010F get_all_head327A649B000A "Constraint::iteratorConstrainedElement"
 ;     // empty
 

@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.statemachines;
 
 // -beg- preserve=no 327D9E410186 autoimport "StateMachine"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.statemachines.State;
 import ch.ehi.uml1_4.behaviour.statemachines.Transition;
 import ch.ehi.uml1_4.behaviour.statemachines.SubmachineState;
@@ -159,7 +162,7 @@ public boolean containsTransitions(Transition transitions1)
  *  @see #addTransitions
  */
 // -beg- preserve=no 3288D72700C8 get_all_head327D9E410186 "StateMachine::iteratorTransitions"
-public java.util.Iterator iteratorTransitions()
+public Iterator<?> iteratorTransitions()
 // -end- 3288D72700C8 get_all_head327D9E410186 "StateMachine::iteratorTransitions"
 ;     // empty
 
@@ -224,7 +227,7 @@ public boolean containsSubmachineState(SubmachineState submachineState1)
  *  @see #addSubmachineState
  */
 // -beg- preserve=no 3403125E03A3 get_all_head327D9E410186 "StateMachine::iteratorSubmachineState"
-public java.util.Iterator iteratorSubmachineState()
+public Iterator<?> iteratorSubmachineState()
 // -end- 3403125E03A3 get_all_head327D9E410186 "StateMachine::iteratorSubmachineState"
 ;     // empty
 

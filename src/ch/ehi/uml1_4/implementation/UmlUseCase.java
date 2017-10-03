@@ -35,6 +35,7 @@ import ch.ehi.uml1_4.behaviour.usecases.Include;
 // -beg- preserve=no 4551A5AD02B6 autoimport "UmlUseCase"
 import ch.ehi.uml1_4.behaviour.usecases.UseCase;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Class;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -3045,6 +3046,18 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 
 	public void setMetaAttrb(NlsString value) {
 		super.setMetaAttrb(value);
+	}
+
+	@Override
+	public boolean deepContainsOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ModelElement deepGetOwnedElement(Class aclass, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// declare/define something only in the code

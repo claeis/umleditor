@@ -8,15 +8,13 @@
 package ch.ehi.uml1_4.foundation.core;
 // -end- 327BB68C0398 package "Operation"
 
-// -beg- preserve=no 327BB68C0398 autoimport "Operation"
-import ch.ehi.uml1_4.foundation.core.BehavioralFeature;
-import ch.ehi.uml1_4.behaviour.commonbehavior.CallAction;
-import ch.ehi.uml1_4.behaviour.statemachines.CallEvent;
-import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
-import ch.ehi.uml1_4.foundation.core.Method;
-import ch.ehi.uml1_4.foundation.datatypes.CallConcurrencyKind;
+import java.util.Iterator;
+
 import ch.ehi.basics.types.NlsString;
 // -end- 327BB68C0398 autoimport "Operation"
+import ch.ehi.uml1_4.behaviour.collaborations.Collaboration;
+import ch.ehi.uml1_4.behaviour.commonbehavior.CallAction;
+import ch.ehi.uml1_4.behaviour.statemachines.CallEvent;
 
 // import declarations
 // please fill in/modify the following section
@@ -68,7 +66,7 @@ public boolean containsCallAction(CallAction callAction1)
  *  @see #addCallAction
  */
 // -beg- preserve=no 336991630064 get_all_head327BB68C0398 "Operation::iteratorCallAction"
-public java.util.Iterator iteratorCallAction()
+public Iterator<?> iteratorCallAction()
 // -end- 336991630064 get_all_head327BB68C0398 "Operation::iteratorCallAction"
 ;     // empty
 
@@ -133,7 +131,7 @@ public boolean containsOccurrence(CallEvent occurrence1)
  *  @see #addOccurrence
  */
 // -beg- preserve=no 32B598450001 get_all_head327BB68C0398 "Operation::iteratorOccurrence"
-public java.util.Iterator iteratorOccurrence()
+public Iterator<?> iteratorOccurrence()
 // -end- 32B598450001 get_all_head327BB68C0398 "Operation::iteratorOccurrence"
 ;     // empty
 
@@ -198,7 +196,7 @@ public boolean containsCollaboration(Collaboration collaboration1)
  *  @see #addCollaboration
  */
 // -beg- preserve=no 33D1394E029F get_all_head327BB68C0398 "ModelElement::iteratorCollaboration"
-public java.util.Iterator iteratorCollaboration()
+public Iterator<?> iteratorCollaboration()
 // -end- 33D1394E029F get_all_head327BB68C0398 "ModelElement::iteratorCollaboration"
 ;     // empty
 
@@ -263,7 +261,7 @@ public boolean containsMethod(Method method1)
  *  @see #addMethod
  */
 // -beg- preserve=no 32B6D9BE00C8 get_all_head327BB68C0398 "Operation::iteratorMethod"
-public java.util.Iterator iteratorMethod()
+public Iterator<?> iteratorMethod()
 // -end- 32B6D9BE00C8 get_all_head327BB68C0398 "Operation::iteratorMethod"
 ;     // empty
 

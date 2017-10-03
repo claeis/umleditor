@@ -11,6 +11,9 @@ package ch.ehi.uml1_4.implementation;
 // -beg- preserve=no 3C8F9377022E autoimport "UmlMultiplicityRange"
 import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
 import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
 // -end- 3C8F9377022E autoimport "UmlMultiplicityRange"
@@ -62,7 +65,7 @@ public class UmlMultiplicityRange extends AbstractEditorElement implements Multi
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180062 body3C8F9377022E "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		super.enumerateChildren(visitor);
 		// -end- 3D4FA2180062 body3C8F9377022E "enumerateChildren"
 	}

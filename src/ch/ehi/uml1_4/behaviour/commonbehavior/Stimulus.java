@@ -10,6 +10,9 @@ package ch.ehi.uml1_4.behaviour.commonbehavior;
 
 // -beg- preserve=no 33FEEA66033E autoimport "Stimulus"
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+
+import java.util.Iterator;
+
 import ch.ehi.uml1_4.behaviour.collaborations.InteractionInstanceSet;
 import ch.ehi.uml1_4.behaviour.collaborations.Message;
 import ch.ehi.uml1_4.behaviour.commonbehavior.Instance;
@@ -67,7 +70,7 @@ public boolean containsInteractionInstanceSet(InteractionInstanceSet interaction
  *  @see #addInteractionInstanceSet
  */
 // -beg- preserve=no 39E8FCBA03D9 get_all_head33FEEA66033E "Stimulus::iteratorInteractionInstanceSet"
-public java.util.Iterator iteratorInteractionInstanceSet()
+public Iterator<?> iteratorInteractionInstanceSet()
 // -end- 39E8FCBA03D9 get_all_head33FEEA66033E "Stimulus::iteratorInteractionInstanceSet"
 ;     // empty
 
@@ -132,7 +135,7 @@ public boolean containsPlayedRole(Message playedRole1)
  *  @see #addPlayedRole
  */
 // -beg- preserve=no 39E8FF690197 get_all_head33FEEA66033E "Stimulus::iteratorPlayedRole"
-public java.util.Iterator iteratorPlayedRole()
+public Iterator<?> iteratorPlayedRole()
 // -end- 39E8FF690197 get_all_head33FEEA66033E "Stimulus::iteratorPlayedRole"
 ;     // empty
 
@@ -197,7 +200,7 @@ public boolean containsArgument(Instance argument1)
  *  @see #addArgument
  */
 // -beg- preserve=no 33FF558C0190 get_all_head33FEEA66033E "Stimulus::iteratorArgument"
-public java.util.Iterator iteratorArgument()
+public Iterator<?> iteratorArgument()
 // -end- 33FF558C0190 get_all_head33FEEA66033E "Stimulus::iteratorArgument"
 ;     // empty
 

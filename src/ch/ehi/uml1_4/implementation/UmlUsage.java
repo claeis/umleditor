@@ -20,6 +20,8 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 3C68EC6E02C0 package "UmlUsage"
 
+import java.util.Iterator;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 3C68EC6E02C0 autoimport "UmlUsage"
@@ -101,7 +103,7 @@ public class UmlUsage extends AbstractDependency implements Usage, java.io.Seria
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 3D4FA2180044 body3C68EC6E02C0 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());
