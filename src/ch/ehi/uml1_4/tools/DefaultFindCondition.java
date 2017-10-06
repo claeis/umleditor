@@ -8,15 +8,8 @@
 package ch.ehi.uml1_4.tools;
 // -end- 3E410507036E package "DefaultFindCondition"
 
-// -beg- preserve=no 3E410507036E autoimport "DefaultFindCondition"
-import ch.ehi.uml1_4.tools.FindCondition;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 // -end- 3E410507036E autoimport "DefaultFindCondition"
-
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 3E410507036E import "DefaultFindCondition"
-import ch.ehi.basics.types.NlsString;
 
 // -end- 3E410507036E import "DefaultFindCondition"
 

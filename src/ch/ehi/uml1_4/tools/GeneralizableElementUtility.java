@@ -8,6 +8,10 @@
 package ch.ehi.uml1_4.tools;
 // -end- 3CC03F43036B package "GeneralizableElementUtility"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+
 // -beg- preserve=no 3CC03F43036B autoimport "GeneralizableElementUtility"
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
 // -end- 3CC03F43036B autoimport "GeneralizableElementUtility"
@@ -47,18 +51,20 @@ public class GeneralizableElementUtility {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC03F830345 body3CC03F43036B
 		// "deepContainsGeneralizationParent"
-		java.util.HashSet parents = new java.util.HashSet(); // collection of
+		HashSet<GeneralizableElement> parents = new HashSet<GeneralizableElement>(); 
+																// collection of
 																// all parents
 																// visited so
 																// far
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		ArrayList<GeneralizableElement> todo = new ArrayList<GeneralizableElement>(); 
+																// collection of
 																// parents not
 																// yet visited
 		// add give child to todo-list; so it is processed as a first element
 		todo.add(child);
 		while (!todo.isEmpty()) {
 			GeneralizableElement current = (GeneralizableElement) todo.get(0);
-			java.util.Iterator relIt = current.iteratorGeneralization();
+			Iterator relIt = current.iteratorGeneralization();
 			while (relIt.hasNext()) {
 				Generalization rel = (Generalization) relIt.next();
 				if (rel.containsParent()) {
@@ -97,7 +103,7 @@ public class GeneralizableElementUtility {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3F8CFC370371 body3CC03F43036B "getBase"
-		java.util.Iterator extendsi = node.iteratorGeneralization();
+		Iterator extendsi = node.iteratorGeneralization();
 		while (extendsi.hasNext()) {
 			Generalization obj = (Generalization) extendsi.next();
 			if (obj.containsParent()) {

@@ -8,21 +8,19 @@
 package ch.ehi.uml1_4.tools;
 // -end- 3CC7BC920362 package "NamespaceUtility"
 
-// -beg- preserve=no 3CC7BC920362 autoimport "NamespaceUtility"
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.uml1_4.tools.FindCondition;
-// -end- 3CC7BC920362 autoimport "NamespaceUtility"
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
-// import declarations
-// please fill in/modify the following section
-// -beg- preserve=yes 3CC7BC920362 import "NamespaceUtility"
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.uml1_4.foundation.core.Classifier;
-import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Classifier;
+import ch.ehi.uml1_4.foundation.core.Feature;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+// -beg- preserve=no 3CC7BC920362 autoimport "NamespaceUtility"
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 
 // -end- 3CC7BC920362 import "NamespaceUtility"
 
@@ -43,7 +41,7 @@ public class NamespaceUtility {
 	 */
 	// -beg- preserve=no 3CC7BCC002FA head3CC7BC920362
 	// "deepContainsOwnedElement"
-	public static boolean deepContainsOwnedElement(Namespace namespace, java.lang.Class aclass, String name)
+	public static boolean deepContainsOwnedElement(Namespace namespace, Class aclass, String name)
 	// -end- 3CC7BCC002FA head3CC7BC920362 "deepContainsOwnedElement"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -55,7 +53,8 @@ public class NamespaceUtility {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CC7BCC002FA body3CC7BC920362
 		// "deepContainsOwnedElement"
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		ArrayList<ModelElement> todo = new ArrayList<ModelElement>();
+																// collection of
 																// containers
 																// not yet
 																// visited
@@ -65,7 +64,7 @@ public class NamespaceUtility {
 		// process todo-list
 		while (!todo.isEmpty()) {
 			Namespace current = (Namespace) todo.get(0);
-			java.util.Iterator it = current.iteratorOwnedElement();
+			Iterator it = current.iteratorOwnedElement();
 			while (it.hasNext()) {
 				ModelElement ele = (ModelElement) it.next();
 				if (name.equals(ele.getDefLangName()) && aclass.isAssignableFrom(ele.getClass())) {
@@ -88,7 +87,7 @@ public class NamespaceUtility {
 	 * finds a ModelElement in this Namespace or all its Sub-Namespaces
 	 */
 	// -beg- preserve=no 3CC7BCC30114 head3CC7BC920362 "deepGetOwnedElement"
-	public static ModelElement deepGetOwnedElement(Namespace namespace, java.lang.Class aclass, String name)
+	public static ModelElement deepGetOwnedElement(Namespace namespace, Class aclass, String name)
 	// -end- 3CC7BCC30114 head3CC7BC920362 "deepGetOwnedElement"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -100,7 +99,7 @@ public class NamespaceUtility {
 		// -beg- preserve=yes 3CC7BCC30114 body3CC7BC920362
 		// "deepGetOwnedElement"
 
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		ArrayList<ModelElement> todo = new ArrayList<ModelElement>(); // collection of
 																// containers
 																// not yet
 																// visited
@@ -110,7 +109,7 @@ public class NamespaceUtility {
 		// process todo-list
 		while (!todo.isEmpty()) {
 			Namespace current = (Namespace) todo.get(0);
-			java.util.Iterator it = current.iteratorOwnedElement();
+			Iterator it = current.iteratorOwnedElement();
 			while (it.hasNext()) {
 				ModelElement ele = (ModelElement) it.next();
 				if (name.equals(ele.getDefLangName()) && aclass.isAssignableFrom(ele.getClass())) {
@@ -176,7 +175,7 @@ public class NamespaceUtility {
 	 * finds all ModelElement in this Namespace or all its Sub-Namespaces
 	 */
 	// -beg- preserve=no 3E4104730235 head3CC7BC920362 "deepFindOwnedElements"
-	public static java.util.Set deepFindOwnedElements(Namespace namespace, FindCondition condition)
+	public static Set<ModelElement> deepFindOwnedElements(Namespace namespace, FindCondition condition)
 	// -end- 3E4104730235 head3CC7BC920362 "deepFindOwnedElements"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -187,8 +186,8 @@ public class NamespaceUtility {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3E4104730235 body3CC7BC920362
 		// "deepFindOwnedElements"
-		java.util.Set foundElements = new java.util.HashSet();
-		java.util.ArrayList todo = new java.util.ArrayList(); // collection of
+		Set<ModelElement> foundElements = new HashSet<ModelElement>();
+		ArrayList<ModelElement> todo = new ArrayList<ModelElement>(); // collection of
 																// containers
 																// not yet
 																// visited
@@ -198,7 +197,7 @@ public class NamespaceUtility {
 		// process todo-list
 		while (!todo.isEmpty()) {
 			Namespace current = (Namespace) todo.get(0);
-			java.util.Iterator it = current.iteratorOwnedElement();
+			Iterator it = current.iteratorOwnedElement();
 			while (it.hasNext()) {
 				ModelElement ele = (ModelElement) it.next();
 				if (condition.testModelElement(ele)) {

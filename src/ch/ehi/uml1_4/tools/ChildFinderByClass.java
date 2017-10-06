@@ -8,6 +8,9 @@
 package ch.ehi.uml1_4.tools;
 // -end- 3D9D5EA30035 package "ChildFinderByClass"
 
+import java.util.HashSet;
+import java.util.Set;
+
 // -beg- preserve=no 3D9D5EA30035 autoimport "ChildFinderByClass"
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3D9D5EA30035 autoimport "ChildFinderByClass"
@@ -27,7 +30,7 @@ public class ChildFinderByClass extends AbstractVisitor {
 	// please fill in/modify the following section
 	// -beg- preserve=yes 3D9D5EA30035 detail_begin "ChildFinderByClass"
 	Class aclass = null;
-	java.util.Set foundElements = new java.util.HashSet();
+	Set<Object> foundElements = new HashSet<Object>();
 
 	// -end- 3D9D5EA30035 detail_begin "ChildFinderByClass"
 
@@ -50,7 +53,7 @@ public class ChildFinderByClass extends AbstractVisitor {
 	}
 
 	// -beg- preserve=no 3D9D5ECB00BE head3D9D5EA30035 "ChildFinderByClass"
-	public ChildFinderByClass(java.lang.Class aclass)
+	public ChildFinderByClass(Class aclass)
 	// -end- 3D9D5ECB00BE head3D9D5EA30035 "ChildFinderByClass"
 	// declare any checked exceptions
 	// please fill in/modify the following section
@@ -66,7 +69,7 @@ public class ChildFinderByClass extends AbstractVisitor {
 	}
 
 	// -beg- preserve=no 3D9D5ED502AD head3D9D5EA30035 "getElements"
-	public java.util.Set getElements()
+	public Set<Object> getElements()
 	// -end- 3D9D5ED502AD head3D9D5EA30035 "getElements"
 	// declare any checked exceptions
 	// please fill in/modify the following section

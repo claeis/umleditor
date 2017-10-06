@@ -17,70 +17,69 @@
  */
 package ch.ehi.umleditor.interlis.iliexport;
 
-import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
-import ch.ehi.interlis.modeltopicclass.ModelDef;
-import ch.ehi.interlis.modeltopicclass.TopicDef;
-import ch.ehi.interlis.metaobjects.MetaDataUseDef;
-import ch.ehi.interlis.units.UnitDef;
-import ch.ehi.interlis.functions.FunctionDef;
-import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
-import ch.ehi.interlis.domainsandconstants.DomainDef;
-import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
-import ch.ehi.interlis.modeltopicclass.ClassDef;
-import ch.ehi.interlis.associations.AssociationDef;
-import ch.ehi.interlis.associations.Participant;
-import ch.ehi.interlis.constraints.ConstraintDef;
-import ch.ehi.interlis.views.ViewDef;
-import ch.ehi.interlis.views.ViewProjectionDef;
-import ch.ehi.interlis.graphicdescriptions.GraphicDef;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.interlis.IliSyntax;
-import ch.ehi.interlis.attributes.AttributeDef;
-import ch.ehi.interlis.associations.RoleDef;
-import ch.ehi.interlis.domainsandconstants.Type;
-import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
-import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
-import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
-import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
-import ch.ehi.basics.logging.EhiLogger;
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.modeltopicclass.ModelDefKind;
-import ch.ehi.interlis.modeltopicclass.Translation;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
-import ch.ehi.interlis.modeltopicclass.Contract;
-import ch.ehi.interlis.metaobjects.ParameterDef;
-import ch.ehi.interlis.attributes.DomainAttribute;
-import ch.ehi.interlis.domainsandconstants.basetypes.Text;
-import ch.ehi.interlis.domainsandconstants.basetypes.TextKind;
-import ch.ehi.interlis.domainsandconstants.basetypes.BooleanType;
-import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
-import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
-import ch.ehi.interlis.domainsandconstants.basetypes.RotationKind;
-import ch.ehi.interlis.associations.AssociationAsIliAttrKind;
-import ch.ehi.interlis.views.ViewableDef;
-import ch.ehi.interlis.tools.AbstractClassDefUtility;
-import ch.ehi.interlis.tools.RoleDefUtility;
-import ch.ehi.uml1_4.foundation.core.Artifact;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
-import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
-import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
-import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-import ch.ehi.uml1_4.implementation.AbstractModelElement;
-import ch.ehi.umleditor.application.ElementUtils;
-import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import ch.ehi.basics.tools.TopoSort;
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.IliSyntax;
+import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.associations.Participant;
+import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.attributes.DomainAttribute;
+import ch.ehi.interlis.constraints.ConstraintDef;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.basetypes.BooleanType;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
+import ch.ehi.interlis.domainsandconstants.basetypes.IliDim;
+import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
+import ch.ehi.interlis.domainsandconstants.basetypes.RotationKind;
+import ch.ehi.interlis.domainsandconstants.basetypes.StructDec;
+import ch.ehi.interlis.domainsandconstants.basetypes.Text;
+import ch.ehi.interlis.domainsandconstants.basetypes.TextKind;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+import ch.ehi.interlis.metaobjects.MetaDataUseDef;
+import ch.ehi.interlis.metaobjects.ParameterDef;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.ModelDefKind;
+import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.modeltopicclass.Translation;
+import ch.ehi.interlis.tools.AbstractClassDefUtility;
+import ch.ehi.interlis.tools.RoleDefUtility;
+import ch.ehi.interlis.units.UnitDef;
+import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.views.ViewProjectionDef;
+import ch.ehi.interlis.views.ViewableDef;
+import ch.ehi.uml1_4.foundation.core.Artifact;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.datatypes.AggregationKind;
+import ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange;
+import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.interlis.ili2c.config.Configuration;
-import ch.interlis.ili2c.config.GenerateOutputKind;
 
 public class TransferFromUmlMetamodel {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(TransferFromUmlMetamodel.class);
@@ -132,21 +131,21 @@ public class TransferFromUmlMetamodel {
 
 		public File file;
 		// list<ModelElementEntry>
-		public java.util.List modelElements;
+		public List modelElements;
 	};
 
 	/**
 	 * list of files, that where generated. This is only defined, if
 	 * runIli2c==true. list<FileListEntry iliFile>
 	 */
-	transient private java.util.List tempFiles = null;
+	transient private List<Object> tempFiles = null;
 	transient private FileListEntry currentFile = null;
 	/**
 	 * map from a modelname to a FileListEntry in tempFiles. This is only
 	 * defined, if runIli2c==true. map<String modelName,FileListEntry file>
 	 */
-	transient private java.util.Map model2file = null;
-	transient private java.util.Set filedep = null;
+	transient private Map model2file = null;
+	transient private Set filedep = null;
 
 	private class IliFileCond {
 		public String before;
@@ -166,9 +165,9 @@ public class TransferFromUmlMetamodel {
 	private void visitNamespace(Namespace ns, Configuration config, ch.ehi.basics.settings.Settings settings)
 			throws java.io.IOException {
 		if (runIli2c) {
-			tempFiles = new java.util.ArrayList();
-			model2file = new java.util.HashMap();
-			filedep = new java.util.HashSet();
+			tempFiles = new ArrayList<Object>();
+			model2file = new HashMap();
+			filedep = new HashSet();
 		}
 		// clear error counter
 		errc = 0;
@@ -912,7 +911,7 @@ public class TransferFromUmlMetamodel {
 		inc_ind();
 
 		// {AttributeDef}
-		java.util.Iterator childi = AbstractClassDefUtility.getIliAttributes(def).iterator();
+		Iterator childi = AbstractClassDefUtility.getIliAttributes(def).iterator();
 		while (childi.hasNext()) {
 			Object obj = childi.next();
 			if (obj instanceof AttributeDef) {
@@ -1031,7 +1030,7 @@ public class TransferFromUmlMetamodel {
 		inc_ind();
 
 		// {RoleDef}
-		java.util.Iterator childi = def.iteratorConnection();
+		Iterator childi = def.iteratorConnection();
 		while (childi.hasNext()) {
 			Object obj = childi.next();
 			if (obj instanceof RoleDef) {
@@ -2032,7 +2031,7 @@ public class TransferFromUmlMetamodel {
 				}
 			});
 			// copy objects from list of pairs back to result list
-			objv = new java.util.ArrayList();
+			objv = new ArrayList();
 			for (Iterator pairi = pairv.iterator(); pairi.hasNext();) {
 				objv.add(((Pair) pairi.next()).object);
 			}
@@ -2048,10 +2047,10 @@ public class TransferFromUmlMetamodel {
 			sep = "->";
 		}
 		logErrorMsg("loop in definitions: " + loopele.toString());
-		return new java.util.LinkedList(children);
+		return new LinkedList(children);
 	}
 
-	private void addSimpleEleCond(java.util.Set children, ch.ehi.basics.tools.TopoSort ts, ModelElement defDef,
+	private void addSimpleEleCond(Set children, ch.ehi.basics.tools.TopoSort ts, ModelElement defDef,
 			ModelElement defEle) {
 		// consider explicit dependencies
 		Iterator i = defEle.iteratorClientDependency();
@@ -2654,8 +2653,8 @@ public class TransferFromUmlMetamodel {
 		return fileList;
 	}
 
-	private java.util.ArrayList flushedDomainStructs = new java.util.ArrayList();
-	private java.util.ArrayList domainStructs = new java.util.ArrayList();
+	private ArrayList flushedDomainStructs = new ArrayList();
+	private ArrayList<DomainDef> domainStructs = new ArrayList();
 
 	private void flushDomainStructs() throws java.io.IOException {
 		if (useMultiValueStructAttrs) {

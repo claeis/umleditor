@@ -8,12 +8,9 @@
 package ch.ehi.uml1_4.modelmanagement;
 // -end- 33CD73FB0168 package "ElementImport"
 
-// -beg- preserve=no 33CD73FB0168 autoimport "ElementImport"
-import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.basics.types.NlsString;
 // -end- 33CD73FB0168 autoimport "ElementImport"
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 
 // import declarations
 // please fill in/modify the following section

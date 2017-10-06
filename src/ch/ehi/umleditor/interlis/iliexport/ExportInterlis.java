@@ -17,12 +17,16 @@
  */
 package ch.ehi.umleditor.interlis.iliexport;
 
-import ch.ehi.umleditor.application.LauncherView;
-import ch.ehi.umleditor.interlis.modelcheck.CheckModel;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.view.GenericFileFilter;
-import java.io.File;
-import javax.swing.JOptionPane;
+import ch.ehi.umleditor.application.LauncherView;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
 
@@ -33,7 +37,7 @@ public class ExportInterlis {
 		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
 		try {
 			// get list of files, that will be created
-			java.util.List fileList = writer
+			List fileList = writer
 					.getFileList(ch.ehi.umleditor.application.LauncherView.getInstance().getModel());
 			if (checkFiles(fileList, writer.getFuncDesc())) {
 				// show possible errors 
@@ -125,9 +129,9 @@ public class ExportInterlis {
 	 * @param funcdesc
 	 * @return
 	 */
-	private static boolean checkFiles(java.util.List filev, String funcdesc) {
-		java.util.List apprv = new java.util.ArrayList();
-		java.util.Iterator filei = filev.iterator();
+	private static boolean checkFiles(List filev, String funcdesc) {
+		List apprv = new ArrayList();
+		Iterator filei = filev.iterator();
 		while (filei.hasNext()) {
 			File selectedFile = (File) filei.next();
 			// file already exists?
@@ -156,10 +160,10 @@ public class ExportInterlis {
 		return false;
 	}
 	
-	private static void checkModels(java.util.List file){
+	private static void checkModels(List file){
  		
-  		java.util.List apprv = new java.util.ArrayList();		  		
-  		java.util.Iterator filei = file.iterator();
+  		List apprv = new ArrayList();		  		
+  		Iterator filei = file.iterator();
   				  		
   		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
  				  		

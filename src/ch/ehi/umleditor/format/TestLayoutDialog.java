@@ -16,6 +16,8 @@ import javax.swing.JDialog;
 // please fill in/modify the following section
 // -beg- preserve=yes 3C7395A70208 import "SubDialog"
 import java.awt.Frame;
+import java.util.Iterator;
+import java.util.Vector;
 import java.awt.Dimension;
 import javax.swing.*;
 import ch.ehi.basics.logging.EhiLogger;
@@ -110,15 +112,15 @@ public class TestLayoutDialog extends JDialog {
 		// -beg- preserve=yes 3C74DD9D0359 body3C7395A70208 "onOk"
 		view.updateModel();
 		// run it
-		java.util.Vector edgev = new java.util.Vector(30);
-		java.util.Vector nodev = new java.util.Vector(30);
+		Vector<Object> edgev = new Vector<Object>(30);
+		Vector<Object> nodev = new Vector<Object>(30);
 		// collect nodes and edges from current diagram
 		ch.ehi.umleditor.umldrawingtools.ClassDiagramView diagView = ch.ehi.umleditor.application.LauncherView
 				.getInstance().getCurrentClassDiagram();
 		if (diagView != null) {
 			EhiLogger.traceState("current ClassDiagramView found");
 			ch.ehi.umleditor.umlpresentation.Diagram diag = diagView.getDiagram();
-			java.util.Iterator elei = diag.iteratorPresentationElement();
+			Iterator elei = diag.iteratorPresentationElement();
 			while (elei.hasNext()) {
 				Object obj = elei.next();
 				if (obj instanceof ch.ehi.umleditor.umlpresentation.PresentationEdge) {

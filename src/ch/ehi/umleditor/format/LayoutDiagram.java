@@ -6,6 +6,10 @@
 
 // -beg- preserve=no 3CDA3DA10173 package "LayoutDiagram"
 package ch.ehi.umleditor.format;
+
+import java.util.Iterator;
+import java.util.Vector;
+
 // -end- 3CDA3DA10173 package "LayoutDiagram"
 
 // -beg- preserve=no 3CDA3DA10173 autoimport "LayoutDiagram"
@@ -42,8 +46,8 @@ public class LayoutDiagram {
 		// TestLayoutDialog(ch.ehi.umleditor.application.LauncherView.getInstance());
 		// dlg.showDialog();
 		// run it
-		java.util.Vector edgev = new java.util.Vector(30);
-		java.util.Vector nodev = new java.util.Vector(30);
+		Vector<Object> edgev = new Vector<Object>(30);
+		Vector<Object> nodev = new Vector<Object>(30);
 		// collect nodes and edges from current diagram
 		ch.ehi.umleditor.umldrawingtools.ClassDiagramView diagView = ch.ehi.umleditor.application.LauncherView
 				.getInstance().getCurrentClassDiagram();
@@ -52,7 +56,7 @@ public class LayoutDiagram {
 			// ClassDiagramView found");
 			diagView.ignoreMetaModelChanges(true);
 			ch.ehi.umleditor.umlpresentation.Diagram diag = diagView.getDiagram();
-			java.util.Iterator elei = diag.iteratorPresentationElement();
+			Iterator elei = diag.iteratorPresentationElement();
 			while (elei.hasNext()) {
 				Object obj = elei.next();
 				if (obj instanceof ch.ehi.umleditor.umlpresentation.PresentationEdge) {

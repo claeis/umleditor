@@ -20,6 +20,12 @@
 package ch.ehi.uml1_4.implementation;
 // -end- 4551A5AD02B6 package "UmlUseCase"
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import ch.ehi.basics.tools.AbstractVisitor;
 import ch.ehi.basics.types.NlsString;
 // -end- 4551A5AD02B6 autoimport "UmlUseCase"
@@ -70,7 +76,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=no 4551A8750007 body4551A5AD02B6 "enumerateChildren"
-		java.util.Iterator it = null;
+		Iterator<?> it = null;
 		it = iteratorFeature();
 		while (it.hasNext())
 			visitor.visit(it.next());
@@ -178,7 +184,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	}
 
 	// -beg- preserve=no 35FDD865000A code4551A5AD02B6 "baseExtend"
-	private java.util.Set baseExtend = new java.util.HashSet();
+	private Set<Extend> baseExtend = new HashSet<Extend>();
 	// -end- 35FDD865000A code4551A5AD02B6 "baseExtend"
 
 	/**
@@ -255,7 +261,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 35FDD865000A get_all_head4551A5AD02B6
 	// "UseCase::iteratorBaseExtend"
-	public java.util.Iterator iteratorBaseExtend()
+	public Iterator<?> iteratorBaseExtend()
 	// -end- 35FDD865000A get_all_head4551A5AD02B6 "UseCase::iteratorBaseExtend"
 	{
 		// -beg- preserve=no 35FDD865000A get_all_body4551A5AD02B6
@@ -278,7 +284,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 35FDD865000A remove_all_body4551A5AD02B6
 		// "UseCase::clearBaseExtend"
 		if (sizeBaseExtend() > 0) {
-			for (java.util.Iterator p = baseExtend.iterator(); p.hasNext();) {
+			for (Iterator<?> p = baseExtend.iterator(); p.hasNext();) {
 				((Extend) p.next())._unlinkBase(this);
 			}
 			baseExtend.clear();
@@ -332,7 +338,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// -end- 35FDD865000A _unlink_body4551A5AD02B6 "UseCase::_unlinkBaseExtend"
 
 	// -beg- preserve=no 35FDD86C0140 code4551A5AD02B6 "extensionExtend"
-	private java.util.Set extensionExtend = new java.util.HashSet();
+	private Set<Extend> extensionExtend = new HashSet<Extend>();
 	// -end- 35FDD86C0140 code4551A5AD02B6 "extensionExtend"
 
 	/**
@@ -411,7 +417,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 35FDD86C0140 get_all_head4551A5AD02B6
 	// "UseCase::iteratorExtensionExtend"
-	public java.util.Iterator iteratorExtensionExtend()
+	public Iterator<?> iteratorExtensionExtend()
 	// -end- 35FDD86C0140 get_all_head4551A5AD02B6
 	// "UseCase::iteratorExtensionExtend"
 	{
@@ -436,7 +442,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 35FDD86C0140 remove_all_body4551A5AD02B6
 		// "UseCase::clearExtensionExtend"
 		if (sizeExtensionExtend() > 0) {
-			for (java.util.Iterator p = extensionExtend.iterator(); p.hasNext();) {
+			for (Iterator<?> p = extensionExtend.iterator(); p.hasNext();) {
 				((Extend) p.next())._unlinkExtension(this);
 			}
 			extensionExtend.clear();
@@ -492,7 +498,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "UseCase::_unlinkExtensionExtend"
 
 	// -beg- preserve=no 35FDD995038F code4551A5AD02B6 "baseInclude"
-	private java.util.Set baseInclude = new java.util.HashSet();
+	private Set<Include> baseInclude = new HashSet<Include>();
 	// -end- 35FDD995038F code4551A5AD02B6 "baseInclude"
 
 	/**
@@ -569,7 +575,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 35FDD995038F get_all_head4551A5AD02B6
 	// "UseCase::iteratorBaseInclude"
-	public java.util.Iterator iteratorBaseInclude()
+	public Iterator<?> iteratorBaseInclude()
 	// -end- 35FDD995038F get_all_head4551A5AD02B6
 	// "UseCase::iteratorBaseInclude"
 	{
@@ -594,7 +600,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 35FDD995038F remove_all_body4551A5AD02B6
 		// "UseCase::clearBaseInclude"
 		if (sizeBaseInclude() > 0) {
-			for (java.util.Iterator p = baseInclude.iterator(); p.hasNext();) {
+			for (Iterator<Include> p = baseInclude.iterator(); p.hasNext();) {
 				((Include) p.next())._unlinkAddition(this);
 			}
 			baseInclude.clear();
@@ -648,7 +654,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// -end- 35FDD995038F _unlink_body4551A5AD02B6 "UseCase::_unlinkBaseInclude"
 
 	// -beg- preserve=no 35FDD9A50047 code4551A5AD02B6 "additionInclude"
-	private java.util.Set additionInclude = new java.util.HashSet();
+	private Set<Include> additionInclude = new HashSet<Include>();
 	// -end- 35FDD9A50047 code4551A5AD02B6 "additionInclude"
 
 	/**
@@ -727,7 +733,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 35FDD9A50047 get_all_head4551A5AD02B6
 	// "UseCase::iteratorAdditionInclude"
-	public java.util.Iterator iteratorAdditionInclude()
+	public Iterator<?> iteratorAdditionInclude()
 	// -end- 35FDD9A50047 get_all_head4551A5AD02B6
 	// "UseCase::iteratorAdditionInclude"
 	{
@@ -752,7 +758,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 35FDD9A50047 remove_all_body4551A5AD02B6
 		// "UseCase::clearAdditionInclude"
 		if (sizeAdditionInclude() > 0) {
-			for (java.util.Iterator p = additionInclude.iterator(); p.hasNext();) {
+			for (Iterator<?> p = additionInclude.iterator(); p.hasNext();) {
 				((Include) p.next())._unlinkBase(this);
 			}
 			additionInclude.clear();
@@ -808,7 +814,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "UseCase::_unlinkAdditionInclude"
 
 	// -beg- preserve=no 362661DB015F code4551A5AD02B6 "extensionPoint"
-	private java.util.Set extensionPoint = new java.util.HashSet();
+	private Set<ExtensionPoint> extensionPoint = new HashSet<ExtensionPoint>();
 	// -end- 362661DB015F code4551A5AD02B6 "extensionPoint"
 
 	/**
@@ -887,7 +893,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 362661DB015F get_all_head4551A5AD02B6
 	// "UseCase::iteratorExtensionPoint"
-	public java.util.Iterator iteratorExtensionPoint()
+	public Iterator<?> iteratorExtensionPoint()
 	// -end- 362661DB015F get_all_head4551A5AD02B6
 	// "UseCase::iteratorExtensionPoint"
 	{
@@ -912,7 +918,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 362661DB015F remove_all_body4551A5AD02B6
 		// "UseCase::clearExtensionPoint"
 		if (sizeExtensionPoint() > 0) {
-			for (java.util.Iterator p = extensionPoint.iterator(); p.hasNext();) {
+			for (Iterator<ExtensionPoint> p = extensionPoint.iterator(); p.hasNext();) {
 				((ExtensionPoint) p.next())._unlinkUseCase(this);
 			}
 			extensionPoint.clear();
@@ -981,7 +987,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CB2C64E0374 body4551A5AD02B6 "containsFeature"
-		java.util.Iterator it = iteratorFeature();
+		Iterator<?> it = iteratorFeature();
 		while (it.hasNext()) {
 			ModelElement ele = (ModelElement) it.next();
 			if (ele.getDefLangName().equals(name)) {
@@ -993,7 +999,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	}
 
 	// -beg- preserve=no 33CF9EFC006E code4551A5AD02B6 "objectFlowState"
-	private java.util.Set objectFlowState = new java.util.HashSet();
+	private Set<ObjectFlowState> objectFlowState = new HashSet<ObjectFlowState>();
 	// -end- 33CF9EFC006E code4551A5AD02B6 "objectFlowState"
 
 	/**
@@ -1073,7 +1079,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33CF9EFC006E get_all_head4551A5AD02B6
 	// "Classifier::iteratorObjectFlowState"
-	public java.util.Iterator iteratorObjectFlowState()
+	public Iterator<?> iteratorObjectFlowState()
 	// -end- 33CF9EFC006E get_all_head4551A5AD02B6
 	// "Classifier::iteratorObjectFlowState"
 	{
@@ -1098,7 +1104,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33CF9EFC006E remove_all_body4551A5AD02B6
 		// "Classifier::clearObjectFlowState"
 		if (sizeObjectFlowState() > 0) {
-			for (java.util.Iterator p = objectFlowState.iterator(); p.hasNext();) {
+			for (Iterator<?> p = objectFlowState.iterator(); p.hasNext();) {
 				((ObjectFlowState) p.next())._unlinkType(this);
 			}
 			objectFlowState.clear();
@@ -1156,7 +1162,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "Classifier::_unlinkObjectFlowState"
 
 	// -beg- preserve=no 33CF9F1602BC code4551A5AD02B6 "classifierInState"
-	private java.util.Set classifierInState = new java.util.HashSet();
+	private Set<ClassifierInState> classifierInState = new HashSet<ClassifierInState>();
 	// -end- 33CF9F1602BC code4551A5AD02B6 "classifierInState"
 
 	/**
@@ -1237,7 +1243,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33CF9F1602BC get_all_head4551A5AD02B6
 	// "Classifier::iteratorClassifierInState"
-	public java.util.Iterator iteratorClassifierInState()
+	public Iterator<?> iteratorClassifierInState()
 	// -end- 33CF9F1602BC get_all_head4551A5AD02B6
 	// "Classifier::iteratorClassifierInState"
 	{
@@ -1262,7 +1268,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33CF9F1602BC remove_all_body4551A5AD02B6
 		// "Classifier::clearClassifierInState"
 		if (sizeClassifierInState() > 0) {
-			for (java.util.Iterator p = classifierInState.iterator(); p.hasNext();) {
+			for (Iterator<ClassifierInState> p = classifierInState.iterator(); p.hasNext();) {
 				((ClassifierInState) p.next())._unlinkType(this);
 			}
 			classifierInState.clear();
@@ -1387,7 +1393,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 36008FB700E7 get_all_head4551A5AD02B6
 	// "ModelElement::iteratorClassifierRole"
-	public java.util.Iterator iteratorClassifierRole()
+	public Iterator iteratorClassifierRole()
 	// -end- 36008FB700E7 get_all_head4551A5AD02B6
 	// "ModelElement::iteratorClassifierRole"
 	{
@@ -1524,7 +1530,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33D1394E029F get_all_head4551A5AD02B6
 	// "ModelElement::iteratorCollaboration"
-	public java.util.Iterator iteratorCollaboration()
+	public Iterator iteratorCollaboration()
 	// -end- 33D1394E029F get_all_head4551A5AD02B6
 	// "ModelElement::iteratorCollaboration"
 	{
@@ -1594,7 +1600,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "ModelElement::_unlinkCollaboration"
 
 	// -beg- preserve=no 33CAD7E900AB code4551A5AD02B6 "instance"
-	private java.util.Set instance = new java.util.HashSet();
+	private Set<Instance> instance = new HashSet<Instance>();
 	// -end- 33CAD7E900AB code4551A5AD02B6 "instance"
 
 	/**
@@ -1671,7 +1677,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33CAD7E900AB get_all_head4551A5AD02B6
 	// "Classifier::iteratorInstance"
-	public java.util.Iterator iteratorInstance()
+	public Iterator iteratorInstance()
 	// -end- 33CAD7E900AB get_all_head4551A5AD02B6
 	// "Classifier::iteratorInstance"
 	{
@@ -1696,7 +1702,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33CAD7E900AB remove_all_body4551A5AD02B6
 		// "Classifier::clearInstance"
 		if (sizeInstance() > 0) {
-			for (java.util.Iterator p = instance.iterator(); p.hasNext();) {
+			for (Iterator<Instance> p = instance.iterator(); p.hasNext();) {
 				((Instance) p.next())._unlinkClassifier(this);
 			}
 			instance.clear();
@@ -1750,7 +1756,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// -end- 33CAD7E900AB _unlink_body4551A5AD02B6 "Classifier::_unlinkInstance"
 
 	// -beg- preserve=no 33CFD0A701A4 code4551A5AD02B6 "createAction"
-	private java.util.Set createAction = new java.util.HashSet();
+	private Set<CreateAction> createAction = new HashSet<CreateAction>();
 	// -end- 33CFD0A701A4 code4551A5AD02B6 "createAction"
 
 	/**
@@ -1829,7 +1835,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33CFD0A701A4 get_all_head4551A5AD02B6
 	// "Classifier::iteratorCreateAction"
-	public java.util.Iterator iteratorCreateAction()
+	public Iterator iteratorCreateAction()
 	// -end- 33CFD0A701A4 get_all_head4551A5AD02B6
 	// "Classifier::iteratorCreateAction"
 	{
@@ -1854,7 +1860,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33CFD0A701A4 remove_all_body4551A5AD02B6
 		// "Classifier::clearCreateAction"
 		if (sizeCreateAction() > 0) {
-			for (java.util.Iterator p = createAction.iterator(); p.hasNext();) {
+			for (Iterator<CreateAction> p = createAction.iterator(); p.hasNext();) {
 				((CreateAction) p.next())._unlinkInstantiation(this);
 			}
 			createAction.clear();
@@ -1910,7 +1916,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "Classifier::_unlinkCreateAction"
 
 	// -beg- preserve=no 32B5D7EF03D3 code4551A5AD02B6 "feature"
-	private java.util.List feature = new java.util.ArrayList();
+	private List<Feature> feature = new ArrayList<Feature>();
 	// -end- 32B5D7EF03D3 code4551A5AD02B6 "feature"
 
 	/**
@@ -2069,7 +2075,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 32B5D7EF03D3 remove_all_body4551A5AD02B6
 		// "Classifier::clearFeature"
 		if (sizeFeature() > 0) {
-			for (java.util.Iterator p = feature.iterator(); p.hasNext();) {
+			for (Iterator p = feature.iterator(); p.hasNext();) {
 				((Feature) p.next())._unlinkOwner(this);
 			}
 			feature.clear();
@@ -2123,7 +2129,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// -end- 32B5D7EF03D3 _unlink_body4551A5AD02B6 "Classifier::_unlinkFeature"
 
 	// -beg- preserve=no 33E265070353 code4551A5AD02B6 "association"
-	private java.util.Set association = new java.util.HashSet();
+	private Set<AssociationEnd> association = new HashSet<AssociationEnd>();
 	// -end- 33E265070353 code4551A5AD02B6 "association"
 
 	/**
@@ -2202,7 +2208,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 33E265070353 get_all_head4551A5AD02B6
 	// "Classifier::iteratorAssociation"
-	public java.util.Iterator iteratorAssociation()
+	public Iterator iteratorAssociation()
 	// -end- 33E265070353 get_all_head4551A5AD02B6
 	// "Classifier::iteratorAssociation"
 	{
@@ -2227,7 +2233,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33E265070353 remove_all_body4551A5AD02B6
 		// "Classifier::clearAssociation"
 		if (sizeAssociation() > 0) {
-			for (java.util.Iterator p = association.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = association.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkParticipant(this);
 			}
 			association.clear();
@@ -2283,7 +2289,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "Classifier::_unlinkAssociation"
 
 	// -beg- preserve=no 33F0EFAD00AB code4551A5AD02B6 "specifiedEnd"
-	private java.util.Set specifiedEnd = new java.util.HashSet();
+	private Set<AssociationEnd> specifiedEnd = new HashSet<AssociationEnd>();
 	// -end- 33F0EFAD00AB code4551A5AD02B6 "specifiedEnd"
 
 	/**
@@ -2387,7 +2393,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 33F0EFAD00AB remove_all_body4551A5AD02B6
 		// "Classifier::clearSpecifiedEnd"
 		if (sizeSpecifiedEnd() > 0) {
-			for (java.util.Iterator p = specifiedEnd.iterator(); p.hasNext();) {
+			for (Iterator<AssociationEnd> p = specifiedEnd.iterator(); p.hasNext();) {
 				((AssociationEnd) p.next())._unlinkSpecification(this);
 			}
 			specifiedEnd.clear();
@@ -2443,7 +2449,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "Classifier::_unlinkSpecifiedEnd"
 
 	// -beg- preserve=no 36E96A87033E code4551A5AD02B6 "powertypeRange"
-	private java.util.Set powertypeRange = new java.util.HashSet();
+	private Set<Generalization> powertypeRange = new HashSet<Generalization>();
 	// -end- 36E96A87033E code4551A5AD02B6 "powertypeRange"
 
 	/**
@@ -2523,7 +2529,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 36E96A87033E get_all_head4551A5AD02B6
 	// "Classifier::iteratorPowertypeRange"
-	public java.util.Iterator iteratorPowertypeRange()
+	public Iterator iteratorPowertypeRange()
 	// -end- 36E96A87033E get_all_head4551A5AD02B6
 	// "Classifier::iteratorPowertypeRange"
 	{
@@ -2548,7 +2554,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 36E96A87033E remove_all_body4551A5AD02B6
 		// "Classifier::clearPowertypeRange"
 		if (sizePowertypeRange() > 0) {
-			for (java.util.Iterator p = powertypeRange.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = powertypeRange.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkPowertype(this);
 			}
 			powertypeRange.clear();
@@ -2605,7 +2611,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "Classifier::_unlinkPowertypeRange"
 
 	// -beg- preserve=no 335C14A5019A code4551A5AD02B6 "generalization"
-	private java.util.Set generalization = new java.util.HashSet();
+	private Set<Generalization> generalization = new HashSet<Generalization>();
 	// -end- 335C14A5019A code4551A5AD02B6 "generalization"
 
 	/**
@@ -2686,7 +2692,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 335C14A5019A get_all_head4551A5AD02B6
 	// "GeneralizableElement::iteratorGeneralization"
-	public java.util.Iterator iteratorGeneralization()
+	public Iterator iteratorGeneralization()
 	// -end- 335C14A5019A get_all_head4551A5AD02B6
 	// "GeneralizableElement::iteratorGeneralization"
 	{
@@ -2711,7 +2717,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 335C14A5019A remove_all_body4551A5AD02B6
 		// "GeneralizableElement::clearGeneralization"
 		if (sizeGeneralization() > 0) {
-			for (java.util.Iterator p = generalization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = generalization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkChild(this);
 			}
 			generalization.clear();
@@ -2769,7 +2775,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	// "GeneralizableElement::_unlinkGeneralization"
 
 	// -beg- preserve=no 335C146B01D6 code4551A5AD02B6 "specialization"
-	private java.util.Set specialization = new java.util.HashSet();
+	private Set<Generalization> specialization = new HashSet<Generalization>();
 	// -end- 335C146B01D6 code4551A5AD02B6 "specialization"
 
 	/**
@@ -2850,7 +2856,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 	 */
 	// -beg- preserve=no 335C146B01D6 get_all_head4551A5AD02B6
 	// "GeneralizableElement::iteratorSpecialization"
-	public java.util.Iterator iteratorSpecialization()
+	public Iterator iteratorSpecialization()
 	// -end- 335C146B01D6 get_all_head4551A5AD02B6
 	// "GeneralizableElement::iteratorSpecialization"
 	{
@@ -2875,7 +2881,7 @@ public class UmlUseCase extends AbstractNamespace implements UseCase {
 		// -beg- preserve=no 335C146B01D6 remove_all_body4551A5AD02B6
 		// "GeneralizableElement::clearSpecialization"
 		if (sizeSpecialization() > 0) {
-			for (java.util.Iterator p = specialization.iterator(); p.hasNext();) {
+			for (Iterator<Generalization> p = specialization.iterator(); p.hasNext();) {
 				((Generalization) p.next())._unlinkParent(this);
 			}
 			specialization.clear();

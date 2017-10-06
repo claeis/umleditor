@@ -8,11 +8,12 @@
 package ch.ehi.uml1_4.modelmanagement;
 // -end- 327A5D19033E package "Package"
 
+import java.util.Iterator;
+
 // -beg- preserve=no 327A5D19033E autoimport "Package"
 import ch.ehi.uml1_4.foundation.core.GeneralizableElement;
-import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.modelmanagement.ElementImport;
+import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.PresentationElement;
 // -end- 327A5D19033E autoimport "Package"
 
@@ -97,7 +98,7 @@ public interface Package extends GeneralizableElement, Namespace, java.io.Serial
 	 */
 	// -beg- preserve=no 33CD739B02DA get_all_head327A5D19033E
 	// "Package::iteratorImportedElement"
-	public java.util.Iterator iteratorImportedElement()
+	public Iterator iteratorImportedElement()
 	// -end- 33CD739B02DA get_all_head327A5D19033E
 	// "Package::iteratorImportedElement"
 	; // empty
@@ -132,7 +133,7 @@ public interface Package extends GeneralizableElement, Namespace, java.io.Serial
 	 */
 	// -beg- preserve=no 33CD739B02DA itlink_head327A5D19033E
 	// "Package::getImportedElementLink"
-	public java.util.Iterator iteratorImportedElementLink()
+	public Iterator iteratorImportedElementLink()
 	// -end- 33CD739B02DA itlink_head327A5D19033E
 	// "Package::getImportedElementLink"
 	; // empty
@@ -224,7 +225,7 @@ public interface Package extends GeneralizableElement, Namespace, java.io.Serial
 	 */
 	// -beg- preserve=no 362409A9000A get_all_head327A5D19033E
 	// "ModelElement::iteratorPresentation"
-	public java.util.Iterator iteratorPresentation()
+	public Iterator iteratorPresentation()
 	// -end- 362409A9000A get_all_head327A5D19033E
 	// "ModelElement::iteratorPresentation"
 	; // empty

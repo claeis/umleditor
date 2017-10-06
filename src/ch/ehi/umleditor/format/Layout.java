@@ -3,6 +3,8 @@ package ch.ehi.umleditor.format;
 import ch.ehi.umleditor.umlpresentation.PresentationEdge;
 import ch.ehi.umleditor.umlpresentation.PresentationNode;
 import java.lang.Math;
+import java.util.Iterator;
+import java.util.List;
 
 public class Layout {
 	public static double delta1 = 1.0; // node_distribution
@@ -17,13 +19,13 @@ public class Layout {
 	private double min_y;
 	private double max_y;
 	private double maxdist;
-	private java.util.List nodev;
-	private java.util.List edgev;
+	private List nodev;
+	private List edgev;
 	private int oldpos_i;
 	private double oldpos_x;
 	private double oldpos_y;
 
-	static public void layout(java.util.List nodev, java.util.List edgev, double min_x1, double min_y1, double max_x1,
+	static public void layout(List nodev, List edgev, double min_x1, double min_y1, double max_x1,
 			double max_y1) {
 		Layout utility = new Layout();
 		utility.nodev = nodev;
@@ -338,20 +340,20 @@ public class Layout {
 
 	private PresentationNode getBeginNode(int edgeIdx) {
 		PresentationEdge edge = getEdge(edgeIdx);
-		java.util.Iterator it = edge.iteratorEndpoint();
+		Iterator<?> it = edge.iteratorEndpoint();
 		return (PresentationNode) it.next();
 	}
 
 	private PresentationNode getEndNode(int edgeIdx) {
 		PresentationEdge edge = getEdge(edgeIdx);
-		java.util.Iterator it = edge.iteratorEndpoint();
+		Iterator<?> it = edge.iteratorEndpoint();
 		it.next(); // skip begin node
 		return (PresentationNode) it.next();
 	}
 
 	private String dumpNodes() {
 		StringBuffer ret = new StringBuffer();
-		java.util.Iterator it = nodev.iterator();
+		Iterator<?> it = nodev.iterator();
 		while (it.hasNext()) {
 			PresentationNode node = (PresentationNode) it.next();
 			ret.append("(");
