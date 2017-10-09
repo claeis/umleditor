@@ -492,8 +492,14 @@ public class HtmlWriter {
 				newline();
 				out.write("<COL>");
 				newline();
+				out.write("<COL>"); //mine
+				newline();//mine
+				
 				out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
 						+ rsrc.getString("CTtabName") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+						+ rsrc.getString("CTtabMetaAttrb") + "</font></TD>");//mine
 				newline();
 				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
 						+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
@@ -601,8 +607,10 @@ public class HtmlWriter {
 				clsFile.indent();
 				clsFile.println(attr.getDefLangName());
 			}
-			out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName()) + "</TD><TD " + style + ">"
-					+ mapMultiplicity(attr.getMultiplicity()) + "</TD><TD " + style + ">" + encodeString(typeLabel)
+			out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+					+ "</TD><TD " + style + ">" + (attr.getMetaAttrb().getValue())//mine
+					+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
+					+ "</TD><TD " + style + ">" + encodeString(typeLabel)
 					+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 					+ "</TD></TR>");
 			newline();
@@ -624,7 +632,7 @@ public class HtmlWriter {
 
 						if (clsFile != null)
 							clsFile.println(eleName);
-						out.write("<TR><TD " + style + ">" + "</TD><TD " + style + ">" + "</TD><TD " + style + ">"
+						out.write("<TR><TD " + style + ">" + "</TD><TD " + style + ">" + "</TD><TD " + style + ">"+ "</TD><TD " + style + ">"
 								+ encodeString(eleName) + "</TD><TD " + style + ">"
 								+ encodeDescription(mapNlsString(ele.getDocumentation())) + "</TD></TR>");
 						newline();
