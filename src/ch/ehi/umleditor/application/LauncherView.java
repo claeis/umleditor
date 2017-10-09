@@ -121,7 +121,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniUndo = null;
 	private JMenu ivjMnuExtras = null;
 	private JSeparator ivjJSeparator5 = null;
-	private JMenu ivjMnuLookAndFeel = null;
 	private ToolBar ivjTlbStandard = null;
 	private JToolBar ivjTlbUmlTools = null;
 	private JPanel ivjPnlMain = null;
@@ -2776,29 +2775,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		return ivjMnuInterlisTools;
 	}
 
-	/**
-	 * Return the MnuLookAndFeel property value.
-	 * 
-	 * @return javax.swing.JMenu
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JMenu getMnuLookAndFeel() {
-		if (ivjMnuLookAndFeel == null) {
-			try {
-				ivjMnuLookAndFeel = new javax.swing.JMenu();
-				ivjMnuLookAndFeel.setName("MnuLookAndFeel");
-				ivjMnuLookAndFeel.setText("Look & Feel");
-				// user code begin {1}
-				ivjMnuLookAndFeel.setText(CommonUserAccess.getMnuViewLookAndFeelText());
-				// user code end
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjMnuLookAndFeel;
-	}
 
 	/**
 	 * Return the JMenu3 property value.
@@ -2889,7 +2865,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				ivjMnuView = new javax.swing.JMenu();
 				ivjMnuView.setName("MnuView");
 				ivjMnuView.setText("Ansicht");
-				ivjMnuView.add(getMnuLookAndFeel());
 				ivjMnuView.add(getMnuSymbollists());
 				ivjMnuView.add(getMncStatusbar());
 				// user code begin {1}
@@ -3516,7 +3491,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		});
 
 		// initialize LauncherMenu
-		createLookAndFeelMenu(getMnuLookAndFeel());
+		//createLookAndFeelMenu(getMnuLookAndFeel());
 
 		// initialize Drawing Area
 		mdiListeners = new Vector<InternalFrameListener>();
@@ -4345,13 +4320,13 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	}
 
 	/**
-	 * Overwrites
+	 * Set a theme by default (try modernizing look and feel)
 	 */
 	protected void setLookAndFeel(String style) {
-		super.setLookAndFeel(style);
-
+		super.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+		  
 		// keep Settings in Profile
-		getSettings().setLookAndFeel(style);
+		getSettings().setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 	}
 
 	private void setModellingLanguage(String lang) {
