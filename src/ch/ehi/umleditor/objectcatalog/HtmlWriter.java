@@ -743,7 +743,8 @@ public class HtmlWriter {
 				type = attrType.getDirect();
 			}
 			if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Text) {
-				ret = rsrc.getString("CTtypeTEXT");
+				
+				ret = rsrc.getString("CTtypeTEXT")+"("+((ch.ehi.interlis.domainsandconstants.basetypes.Text) type).getMaxLength()+")";
 			} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType) {
 				ch.ehi.interlis.domainsandconstants.basetypes.NumericType num = (ch.ehi.interlis.domainsandconstants.basetypes.NumericType) type;
 				if (num.getMinDec() != null && num.getMaxDec() != null) {
