@@ -1,3 +1,11 @@
+UML-Editor 3.6.3.2 (2017-10-10)
+----------------------------------
+- Html report module now uses meta attributes from Class and attributes.
+- Show maximum length of String attribute type to html reports module.
+- 40% code refactoring
+- Update Look and Feel and delete old styles
+- Fix Jtree to select first package by default
+
 UML-Editor 3.6.3.1 (2017-09-19)
 ----------------------------------
 - Support to ilivalid attributes "name and msg" on constraints.
