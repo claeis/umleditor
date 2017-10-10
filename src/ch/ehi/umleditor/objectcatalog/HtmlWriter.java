@@ -422,7 +422,7 @@ public class HtmlWriter {
 			return;
 		}
 		String classDefName = encodeString(aclass.getDefLangName());
-
+		
 		if (pass == CONTENTS) {
 			int sectionNumbers[] = new int[2];
 			sectionNumbers[0] = numeration;
@@ -436,7 +436,7 @@ public class HtmlWriter {
 			int numerationId[] = (int[]) indexMap.get((ModelElement) aclass);
 			String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
 			// f�r den Link innerhalb der HTML-Datei
-			aName = numeration + "_" + classDefName;
+				aName = numeration + "_" + classDefName;
 			// concatedValue, dass geschrieben wird sp�ter
 			if (suppressChNr) {
 				value = classDefName;
@@ -450,8 +450,9 @@ public class HtmlWriter {
 		if (pass == BODY) {
 			out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
 			newline();
-			if (clsFile != null)
+			if (clsFile != null) {
 				clsFile.println(aclass.getDefLangName());
+				}	
 		}
 
 		if (pass == CONTENTS) {
@@ -477,6 +478,12 @@ public class HtmlWriter {
 		iddP++;
 
 		if (pass == BODY) {
+			String classDispName = aclass.getMetaAttrb().getValue();
+			if(classDispName != null) {
+				out.write("<i>"+classDispName+"</i>");
+				newline();
+			}
+			
 			out.write(encodeDescription(mapNlsString(aclass.getDocumentation())));
 			newline();
 			if (aclass.iteratorFeature().hasNext() || aclass.iteratorAssociation().hasNext()
