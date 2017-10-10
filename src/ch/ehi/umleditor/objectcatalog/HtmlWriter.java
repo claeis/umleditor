@@ -422,7 +422,7 @@ public class HtmlWriter {
 			return;
 		}
 		String classDefName = encodeString(aclass.getDefLangName());
-
+		
 		if (pass == CONTENTS) {
 			int sectionNumbers[] = new int[2];
 			sectionNumbers[0] = numeration;
@@ -436,7 +436,7 @@ public class HtmlWriter {
 			int numerationId[] = (int[]) indexMap.get((ModelElement) aclass);
 			String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
 			// f�r den Link innerhalb der HTML-Datei
-			aName = numeration + "_" + classDefName;
+				aName = numeration + "_" + classDefName;
 			// concatedValue, dass geschrieben wird sp�ter
 			if (suppressChNr) {
 				value = classDefName;
@@ -450,8 +450,9 @@ public class HtmlWriter {
 		if (pass == BODY) {
 			out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
 			newline();
-			if (clsFile != null)
+			if (clsFile != null) {
 				clsFile.println(aclass.getDefLangName());
+				}	
 		}
 
 		if (pass == CONTENTS) {
@@ -477,6 +478,12 @@ public class HtmlWriter {
 		iddP++;
 
 		if (pass == BODY) {
+			String classDispName = aclass.getMetaAttrb().getValue();
+			if(classDispName != null) {
+				out.write("<i>"+classDispName+"</i>");
+				newline();
+			}
+			
 			out.write(encodeDescription(mapNlsString(aclass.getDocumentation())));
 			newline();
 			if (aclass.iteratorFeature().hasNext() || aclass.iteratorAssociation().hasNext()
@@ -492,8 +499,14 @@ public class HtmlWriter {
 				newline();
 				out.write("<COL>");
 				newline();
+				out.write("<COL>"); //mine
+				newline();//mine
+				
 				out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
 						+ rsrc.getString("CTtabName") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+						+ rsrc.getString("CTtabMetaAttrb") + "</font></TD>");//mine
 				newline();
 				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
 						+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
@@ -601,8 +614,10 @@ public class HtmlWriter {
 				clsFile.indent();
 				clsFile.println(attr.getDefLangName());
 			}
-			out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName()) + "</TD><TD " + style + ">"
-					+ mapMultiplicity(attr.getMultiplicity()) + "</TD><TD " + style + ">" + encodeString(typeLabel)
+			out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+					+ "</TD><TD " + style + ">" + (attr.getMetaAttrb().getValue())//mine
+					+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
+					+ "</TD><TD " + style + ">" + encodeString(typeLabel)
 					+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 					+ "</TD></TR>");
 			newline();
@@ -624,7 +639,7 @@ public class HtmlWriter {
 
 						if (clsFile != null)
 							clsFile.println(eleName);
-						out.write("<TR><TD " + style + ">" + "</TD><TD " + style + ">" + "</TD><TD " + style + ">"
+						out.write("<TR><TD " + style + ">" + "</TD><TD " + style + ">" + "</TD><TD " + style + ">"+ "</TD><TD " + style + ">"
 								+ encodeString(eleName) + "</TD><TD " + style + ">"
 								+ encodeDescription(mapNlsString(ele.getDocumentation())) + "</TD></TR>");
 						newline();
@@ -728,7 +743,8 @@ public class HtmlWriter {
 				type = attrType.getDirect();
 			}
 			if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Text) {
-				ret = rsrc.getString("CTtypeTEXT");
+				
+				ret = rsrc.getString("CTtypeTEXT")+"("+((ch.ehi.interlis.domainsandconstants.basetypes.Text) type).getMaxLength()+")";
 			} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType) {
 				ch.ehi.interlis.domainsandconstants.basetypes.NumericType num = (ch.ehi.interlis.domainsandconstants.basetypes.NumericType) type;
 				if (num.getMinDec() != null && num.getMaxDec() != null) {

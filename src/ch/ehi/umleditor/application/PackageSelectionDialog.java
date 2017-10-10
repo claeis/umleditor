@@ -341,6 +341,7 @@ public class PackageSelectionDialog extends ch.softenvironment.view.BaseDialog {
 		DefaultTreeSelectionModel selectionModel = new DefaultTreeSelectionModel();
 		selectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		getTreTree().setSelectionModel(selectionModel);
+		selectionModel.setSelectionPath(new TreePath(getTreTree().getModel().getRoot()));
 
 		// Enable tool tips for the tree
 		javax.swing.ToolTipManager.sharedInstance().registerComponent(getTreTree());

@@ -19,6 +19,7 @@ import ch.ehi.umleditor.application.LauncherView;
 import java.io.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.i18n.MessageFormat;
@@ -167,6 +168,7 @@ public class ObjectCatalog {
 		ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
 				LauncherView.getInstance(), rsrc.getString("CTPackageSelector"), true,
 				LauncherView.getInstance().getModel());
+		
 		if (packageDialog.isSaved()) {
 			ch.ehi.uml1_4.foundation.core.Namespace apackage = packageDialog.getSelectedPackage();
 			if (apackage == null) {
