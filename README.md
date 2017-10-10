@@ -1,4 +1,4 @@
-# UML-Editor - The UML/INTERLIS Editor
+# UML-Editor - The UML/INTERLIS Editor <img src="https://github.com/AgenciaImplementacion/umleditor/blob/master/src/ch/ehi/umleditor/images/umlicon.gif" height="30" width="30">
 UML Editor is an open source software application whose purpose is to help you create, develop, view and manipulate schemas. It is able to read and write INTERLIS syntax and GML schemas.
 
 You can print or save the diagrams to UML file format, export image diagrams to JPEG, SVG or WMF file format, import INTERLIS model files (ILI file format), as well as add information from XML files.
