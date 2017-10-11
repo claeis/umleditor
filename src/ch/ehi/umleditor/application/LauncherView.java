@@ -1,5 +1,51 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.PrintJob;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.FileFilter;
+import java.lang.reflect.Constructor;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.event.InternalFrameListener;
+
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+
+import CH.ifa.draw.contrib.MDIDesktopPane;
+import CH.ifa.draw.framework.Drawing;
+import CH.ifa.draw.framework.DrawingEditor;
+import CH.ifa.draw.framework.DrawingView;
+import CH.ifa.draw.framework.Tool;
+import CH.ifa.draw.standard.ConnectionTool;
+import CH.ifa.draw.standard.CreationTool;
+import CH.ifa.draw.standard.ToolButton;
+import CH.ifa.draw.util.Iconkit;
+import CH.ifa.draw.util.PaletteButton;
+import CH.ifa.draw.util.PaletteListener;
+import CH.ifa.draw.util.UndoManager;
+import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.basics.types.NlsString;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -17,37 +63,45 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ch.ehi.basics.view.*;
-import ch.ehi.basics.logging.EhiLogger;
-import ch.ehi.basics.types.NlsString;
-import java.util.*;
-import java.util.Enumeration;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import javax.swing.*;
-import javax.swing.event.InternalFrameListener;
-import java.lang.Class;
-import java.lang.reflect.Constructor;
+import ch.ehi.basics.view.FileChooser;
+import ch.ehi.basics.view.GenericFileFilter;
 import ch.ehi.interlis.associations.Participant;
-import java.io.FileFilter;
-
-import CH.ifa.draw.contrib.*;
-import CH.ifa.draw.framework.*;
-import CH.ifa.draw.standard.*;
-import CH.ifa.draw.util.*;
-import ch.ehi.umleditor.umldrawingtools.*;
-import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.uml1_4.changepropagation.MetaModel;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
+import ch.ehi.uml1_4.changepropagation.MetaModelListener;
+import ch.ehi.uml1_4.foundation.core.Element;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.modelmanagement.Model;
-import ch.ehi.uml1_4.changepropagation.*;
-import ch.ehi.uml1_4.changepropagation.MetaModelChange;
-import ch.ehi.umleditor.xmiuml.*;
-import ch.ehi.umleditor.umlpresentation.*;
-import ch.ehi.interlis.modeltopicclass.*;
-import ch.softenvironment.view.*;
+import ch.ehi.umleditor.format.LayoutDiagram;
+import ch.ehi.umleditor.umldrawingtools.AssociationLineConnection;
+import ch.ehi.umleditor.umldrawingtools.ClassDiagramView;
+import ch.ehi.umleditor.umldrawingtools.ClassFigure;
+import ch.ehi.umleditor.umldrawingtools.ClassFigureSelectionTool;
+import ch.ehi.umleditor.umldrawingtools.DelegationSelectionTool;
+import ch.ehi.umleditor.umldrawingtools.DependencyLineConnection;
+import ch.ehi.umleditor.umldrawingtools.DrawingFrame;
+import ch.ehi.umleditor.umldrawingtools.GeneralizationLineConnection;
+import ch.ehi.umleditor.umldrawingtools.NoteAnchorLineConnection;
+import ch.ehi.umleditor.umldrawingtools.NoteFigure;
+import ch.ehi.umleditor.umldrawingtools.PackageFigure;
+import ch.ehi.umleditor.umldrawingtools.ZoomTool;
+import ch.ehi.umleditor.umlpresentation.Diagram;
+import ch.ehi.umleditor.xmiuml.PersistenceService;
 import ch.softenvironment.client.ResourceManager;
-import ch.softenvironment.util.*;
+import ch.softenvironment.util.NlsUtils;
+import ch.softenvironment.util.Tracer;
+import ch.softenvironment.view.BaseDialog;
+import ch.softenvironment.view.BaseFrame;
+import ch.softenvironment.view.CommonUserAccess;
+import ch.softenvironment.view.FileHistoryListener;
+import ch.softenvironment.view.FileHistoryMenu;
+import ch.softenvironment.view.SimpleEditorPanel;
+import ch.softenvironment.view.StatusBar;
+import ch.softenvironment.view.ToolBar;
 
 /**
  * Application start-up (main) of UML-Editor. This GUI manages all SubPanels
@@ -4324,7 +4378,10 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	 */
 	protected void setLookAndFeel(String style) {
 		super.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-		  
+		Properties props = new Properties();
+        
+        props.put("logoString", "*");//mine
+        AcrylLookAndFeel.setCurrentTheme(props);//mine
 		// keep Settings in Profile
 		getSettings().setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 	}
