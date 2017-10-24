@@ -675,9 +675,11 @@ public class HtmlWriter {
 
 						if (clsFile != null)
 							clsFile.println(eleName);
-						out.write("<TR><TD " + style + ">" + "</TD><TD " + style + ">" + "</TD><TD " + style + ">"+ "</TD><TD " + style + ">"
-								+ encodeString(eleName) + "</TD><TD " + style + ">"
-								+ encodeDescription(mapNlsString(ele.getDocumentation())) + "</TD></TR>");
+						out.write("<TR><TD " + style + ">" 
+								+ "</TD><TD " + style + ">"
+								+ "</TD><TD " + style + ">"
+								+ "</TD><TD " + style + ">"	+ encodeString(eleName) 
+								+ "</TD><TD " + style + ">"	+ encodeDescription(mapNlsString(ele.getDocumentation())) + "</TD></TR>");
 						newline();
 					}
 					if (clsFile != null)
@@ -710,8 +712,10 @@ public class HtmlWriter {
 			if (createSeperator) {
 				style = " STYLE=\"border-top: solid black; border-top-width: 2px\"";
 			}
-			out.write("<TR><TD" + style + ">" + encodeString(role.getDefLangName()) + "</TD><TD" + style + ">"
-					+ mapMultiplicity(role.getMultiplicity()) + "</TD><TD" + style + ">" + encodeString(type)
+			out.write("<TR><TD" + style + ">" + encodeString(role.getDefLangName())
+					+ "</TD><TD" + style + ">"
+					+ "</TD><TD" + style + ">" + mapMultiplicity(role.getMultiplicity())
+					+ "</TD><TD" + style + ">" + encodeString(type)
 					+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(role.getDocumentation()))
 					+ "</TD></TR>");
 			newline();
@@ -1309,8 +1313,9 @@ public class HtmlWriter {
 					 * ; }
 					 */
 					String eleName = getEnumEleName(ele);
-					out.write("<TR><TD" + style + ">" + encodeString(eleName) + "</TD><TD" + style + ">"
-							+ encodeDescription(mapNlsString(ele.getDocumentation())) + "</TD></TR>");
+					out.write("<TR><TD" + style + ">" + encodeString(eleName)
+						+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
+						+ "</TD></TR>");
 					newline();
 					if (clsFile != null)
 						clsFile.println(eleName);
