@@ -36,6 +36,7 @@ import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.AssociationAsIliAttrKind;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
@@ -478,9 +479,17 @@ public class HtmlWriter {
 		iddP++;
 
 		if (pass == BODY) {
-			String classDispName = aclass.getMetaAttrb().getValue();
+			NlsString classDispName = aclass.getMetaAttrb();
 			if(classDispName != null) {
-				out.write("<i>"+classDispName+"</i>");
+				String metaDispName = classDispName.getValue();
+				if(metaDispName != null) {
+					out.write("<i>"+metaDispName+"</i>");
+					newline();
+				}
+				else {
+					System.out.println("Cosas nulas");
+				}
+			}else {
 				newline();
 			}
 			
@@ -614,13 +623,40 @@ public class HtmlWriter {
 				clsFile.indent();
 				clsFile.println(attr.getDefLangName());
 			}
-			out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-					+ "</TD><TD " + style + ">" + (attr.getMetaAttrb().getValue())//mine
-					+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
+			NlsString dispName = attr.getMetaAttrb();
+			
+			if(dispName != null){
+				String metaDispName = dispName.getValue();
+				
+				if(metaDispName != null) {
+						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+						+ "</TD><TD " + style + ">" + encodeString(metaDispName)//mine
+						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
+						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+						+ "</TD></TR>");
+					newline();
+				}
+				else {
+					out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+					+ "</TD><TD " + style + ">" + encodeString("-")//mine
+					+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())						
 					+ "</TD><TD " + style + ">" + encodeString(typeLabel)
 					+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 					+ "</TD></TR>");
 			newline();
+				}
+				
+			}
+			else {
+				out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+						+ "</TD><TD " + style + ">" + encodeString("-")//mine
+						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())						
+						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+						+ "</TD></TR>");
+				newline();
+			}
 			ch.ehi.interlis.domainsandconstants.Type type = null;
 			ch.ehi.interlis.attributes.DomainAttribute attrType = (ch.ehi.interlis.attributes.DomainAttribute) ((AttributeDef) attr)
 					.getAttrType();

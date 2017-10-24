@@ -110,7 +110,7 @@ public class ObjectCatalog {
 		GenericFileFilter pngFilter = new GenericFileFilter("Portable Network Graphics (*.png)", "png");
 		GenericFileFilter svgFilter = new GenericFileFilter("Scalable Vector Graphics (*.svg)", "svg");
 		GenericFileFilter emfFilter = new GenericFileFilter("Windows Meta File Format (*.wmf)", "wmf");
-		saveDialog.addChoosableFileFilter(jpegFilter);
+		saveDialog.setFileFilter(jpegFilter);
 		saveDialog.addChoosableFileFilter(pngFilter);
 		//saveDialog.addChoosableFileFilter(svgFilter);
 		saveDialog.addChoosableFileFilter(emfFilter);
