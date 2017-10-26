@@ -1,3 +1,8 @@
+UML-Editor 3.6.3.4 (2017-10-11)
+----------------------------------
+- Fix report module null meta-attributes
+- Umleditor now use meta-attribute mapping!
+
 UML-Editor 3.6.3.3 (2017-10-11)
 ----------------------------------
 - Fix Jmenu with Look and Feel.
