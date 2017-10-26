@@ -73,6 +73,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JRadioButton ivjRbtClass = null;
 	private javax.swing.JRadioButton ivjRbtStructure = null;
 	private javax.swing.JPanel ivjPnlClassKind = null;
+	private javax.swing.JLabel ivjLblMapping = null;
 	private javax.swing.JComboBox ivjCbxMapping = null;
 	
 	public static final String METAATTR_MAPPING_MULTISURFACE="MultiSurface"; 
@@ -757,6 +758,29 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 		return ivjLblName;
 	}
+	/**
+	 * Return the JLabel2 property value.
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JLabel getLblMetaMapping() {
+		if (ivjLblMapping == null) {
+			try {
+				ivjLblMapping = new javax.swing.JLabel();
+				ivjLblMapping.setName("LblMapping");
+				ivjLblMapping.setText("Mapping:");
+				// user code begin {1}
+				ivjLblMapping.setText(resClassDefDialog.getString("LblMapping_text"));
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjLblMapping;
+	}
 
 	/**
 	 * Return the JLabel2 property value.
@@ -949,38 +973,41 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjPnlClassKind = new javax.swing.JPanel();
 				ivjPnlClassKind.setName("PnlClassKind");
 				
-				ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
+				ivjPnlClassKind.setLayout(new java.awt.GridBagLayout());
 
 				java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
 				constraintsLblKind.gridx = 1;
 				constraintsLblKind.gridy = 1;
-				constraintsLblKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsLblKind.ipadx = 8;
-				constraintsLblKind.insets = new java.awt.Insets(5, 20, 5, 2);
+				constraintsLblKind.insets = new java.awt.Insets(0, 0, 2, 5);
 				getPnlClassKind().add(getLblKind(), constraintsLblKind);
 				
 				java.awt.GridBagConstraints constraintsRbtClass = new java.awt.GridBagConstraints();
-				constraintsRbtClass.gridx = 1;
+				constraintsRbtClass.gridx = 2;
 				constraintsRbtClass.gridy = 1;
-				constraintsRbtClass.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsRbtClass.ipadx = 8;
-				constraintsRbtClass.insets = new java.awt.Insets(30, 75, 5, 2);
+				constraintsRbtClass.insets = new java.awt.Insets(5, 5, 5, 5);
 				getPnlClassKind().add(getRbtClass(), constraintsRbtClass);
 				
 				java.awt.GridBagConstraints constraintsRbtStructure = new java.awt.GridBagConstraints();
-				constraintsRbtStructure.gridx = 1;
-				constraintsRbtStructure.gridy = 1;
-				constraintsRbtStructure.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsRbtStructure.gridx = 2;
+				constraintsRbtStructure.gridy = 2;
 				constraintsRbtStructure.ipadx = 8;
-				constraintsRbtStructure.insets = new java.awt.Insets(30, 75, 5, 2);
+				constraintsRbtStructure.insets = new java.awt.Insets(5, 5, 5, 5);
 				getPnlClassKind().add(getRbtStructure(), constraintsRbtStructure);
 				
+				java.awt.GridBagConstraints constraintsLblMapping = new java.awt.GridBagConstraints();
+				constraintsLblMapping.gridx = 4;
+				constraintsLblMapping.gridy = 1;
+				constraintsLblMapping.ipadx = 8;
+				constraintsLblMapping.insets = new java.awt.Insets(5, 55, 2, 5);
+				getPnlClassKind().add(getLblMetaMapping(), constraintsLblMapping);
+				
 				java.awt.GridBagConstraints constraintsCbxMetaMapping = new java.awt.GridBagConstraints();
-				constraintsCbxMetaMapping.gridx = 1;
+				constraintsCbxMetaMapping.gridx = 5;
 				constraintsCbxMetaMapping.gridy = 1;
-				constraintsCbxMetaMapping.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsCbxMetaMapping.ipadx = 8;
-				constraintsCbxMetaMapping.insets = new java.awt.Insets(5, 320, 5, 2);
+				constraintsCbxMetaMapping.insets = new java.awt.Insets(5, 10, 2, 5);
 				getPnlClassKind().add(getCbxMetaMapping(), constraintsCbxMetaMapping);	
 				// user code begin {1}
 				// user code end
@@ -1071,12 +1098,13 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjPnlDetail = new javax.swing.JPanel();
 				ivjPnlDetail.setName("PnlDetail");
 				ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
+				
 
 				java.awt.GridBagConstraints constraintsChxAbstract = new java.awt.GridBagConstraints();
 				constraintsChxAbstract.gridx = 1;
 				constraintsChxAbstract.gridy = 1;
 				constraintsChxAbstract.anchor = java.awt.GridBagConstraints.NORTHWEST;
-				constraintsChxAbstract.ipadx = 119;
+				constraintsChxAbstract.ipadx = 15;
 				constraintsChxAbstract.insets = new java.awt.Insets(12, 10, 1, 343);
 				getPnlDetail().add(getChxAbstract(), constraintsChxAbstract);
 
@@ -1084,7 +1112,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				constraintsChxFinal.gridx = 1;
 				constraintsChxFinal.gridy = 2;
 				constraintsChxFinal.anchor = java.awt.GridBagConstraints.NORTHWEST;
-				constraintsChxFinal.ipadx = 119;
+				constraintsChxFinal.ipadx = 10;
 				constraintsChxFinal.insets = new java.awt.Insets(1, 10, 3, 343);
 				getPnlDetail().add(getChxFinal(), constraintsChxFinal);
 
@@ -1097,18 +1125,18 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				constraintsPnlExtended.weighty = 1.0;
 				constraintsPnlExtended.ipadx = 15;
 				constraintsPnlExtended.ipady = 7;
-				constraintsPnlExtended.insets = new java.awt.Insets(4, 10, 6, 18);
+				constraintsPnlExtended.insets = new java.awt.Insets(20, 10, 1, 43);
 				getPnlDetail().add(getPnlExtended(), constraintsPnlExtended);
 
 				java.awt.GridBagConstraints constraintsPnlClassKind = new java.awt.GridBagConstraints();
 				constraintsPnlClassKind.gridx = 1;
-				constraintsPnlClassKind.gridy = 4;
+				constraintsPnlClassKind.gridy = 4;				
 				constraintsPnlClassKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsPnlClassKind.weightx = 1.0;
 				constraintsPnlClassKind.weighty = 1.0;
-				constraintsPnlClassKind.ipadx = 320;
-				constraintsPnlClassKind.ipady = 83;
-				constraintsPnlClassKind.insets = new java.awt.Insets(6, 6, 58, 45);
+				constraintsPnlClassKind.ipadx = 25;
+				constraintsPnlClassKind.ipady = 19;
+				constraintsPnlClassKind.insets = new java.awt.Insets(4, 10, 6, 18);
 				getPnlDetail().add(getPnlClassKind(), constraintsPnlClassKind);
 				// user code begin {1}
 				// user code end
@@ -1178,7 +1206,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjRbtClass = new javax.swing.JRadioButton();
 				ivjRbtClass.setName("RbtClass");
 				ivjRbtClass.setText("Klasse");
-				ivjRbtClass.setBounds(155, 11, 239, 21);
+				//ivjRbtClass.setBounds(155, 11, 239, 21);
 				// user code begin {1}
 				ivjRbtClass.setText(resClassDefDialog.getString("RbtClass_text"));
 				// user code end
@@ -1203,7 +1231,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				ivjRbtStructure = new javax.swing.JRadioButton();
 				ivjRbtStructure.setName("RbtStructure");
 				ivjRbtStructure.setText("Struktur");
-				ivjRbtStructure.setBounds(155, 41, 239, 21);
+				//ivjRbtStructure.setBounds(155, 41, 239, 21);
 				// user code begin {1}
 				ivjRbtStructure.setText(resClassDefDialog.getString("RbtStructure_text"));
 				// user code end
@@ -1465,7 +1493,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		getCbxMetaMapping().insertItemAt(METAATTR_MAPPING_MULTILINE, 1);
 		getCbxMetaMapping().insertItemAt(METAATTR_MAPPING_MULTISURFACE, 2);
 		//try something
-		//getCbxMetaMapping().setEnabled(false);
+		getCbxMetaMapping().setEnabled(false);
 		
 		getMnuAttributes().add(mniMoveDownAttribute);
 
