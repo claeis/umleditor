@@ -863,6 +863,7 @@ public class TransferFromUmlMetamodel {
 		out.write(getIndent());
 		if (def.getKind() == ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE) {
 			visitMetaMapping(def.getMetaMapping());
+			out.write(getIndent());
 			out.write("STRUCTURE ");
 		} else {
 			out.write("CLASS ");
@@ -2406,7 +2407,7 @@ public class TransferFromUmlMetamodel {
 			return;
 		String beg = "!!@ ili2db.mapping = ";
 
-		out.write(getIndent() + beg + '"' + val + '"');
+		out.write(beg + '"' + val + '"');
 		newline();
 	}
 

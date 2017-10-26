@@ -19,6 +19,7 @@ package ch.ehi.umleditor.application;
  */
 import java.util.EventObject;
 
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.attributes.*;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
@@ -72,9 +73,13 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JRadioButton ivjRbtClass = null;
 	private javax.swing.JRadioButton ivjRbtStructure = null;
 	private javax.swing.JPanel ivjPnlClassKind = null;
+	private javax.swing.JComboBox ivjCbxMapping = null;
+	
+	public static final String METAATTR_MAPPING_MULTISURFACE="MultiSurface"; 
+	public static final String METAATTR_MAPPING_MULTILINE="MultiLine"; 
 
 	class IvjEventHandler
-			implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
+			implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener, java.awt.event.ItemListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			if (e.getSource() == ClassDefDialog.this.getBtnOk())
 				connEtoC1(e);
@@ -121,6 +126,10 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				connEtoC7(e);
 			if (e.getSource() == ClassDefDialog.this.getScpAttributes())
 				connEtoC8(e);
+		};
+		public void itemStateChanged(java.awt.event.ItemEvent e) {
+			if (e.getSource() == ClassDefDialog.this.getRbtStructure())
+				connEtoC11(e);
 		};
 	};
 
@@ -209,6 +218,34 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		}
 	}
 
+	/**
+	 * 
+	 *
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC11(java.awt.event.ItemEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			this.rbntStructureSelected(arg1);
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	/**
+	 * Check radiobuttom for show meta-attribute mapping
+	 */
+	private void rbntStructureSelected(java.util.EventObject itemEvent) {
+		if (getRbtStructure().isSelected()) {
+			// reset extension
+			getCbxMetaMapping().setEnabled(true);
+		} else {
+			getCbxMetaMapping().setEnabled(false);
+		}
+}
 	/**
 	 * connEtoC2: (BtnCancel.action.actionPerformed(java.awt.event.ActionEvent)
 	 * --> ClassDefDialog.cancelPressed()V)
@@ -911,10 +948,40 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 			try {
 				ivjPnlClassKind = new javax.swing.JPanel();
 				ivjPnlClassKind.setName("PnlClassKind");
-				ivjPnlClassKind.setLayout(null);
-				getPnlClassKind().add(getLblKind(), getLblKind().getName());
-				getPnlClassKind().add(getRbtClass(), getRbtClass().getName());
-				getPnlClassKind().add(getRbtStructure(), getRbtStructure().getName());
+				
+				ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
+
+				java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
+				constraintsLblKind.gridx = 1;
+				constraintsLblKind.gridy = 1;
+				constraintsLblKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsLblKind.ipadx = 8;
+				constraintsLblKind.insets = new java.awt.Insets(5, 20, 5, 2);
+				getPnlClassKind().add(getLblKind(), constraintsLblKind);
+				
+				java.awt.GridBagConstraints constraintsRbtClass = new java.awt.GridBagConstraints();
+				constraintsRbtClass.gridx = 1;
+				constraintsRbtClass.gridy = 1;
+				constraintsRbtClass.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsRbtClass.ipadx = 8;
+				constraintsRbtClass.insets = new java.awt.Insets(30, 75, 5, 2);
+				getPnlClassKind().add(getRbtClass(), constraintsRbtClass);
+				
+				java.awt.GridBagConstraints constraintsRbtStructure = new java.awt.GridBagConstraints();
+				constraintsRbtStructure.gridx = 1;
+				constraintsRbtStructure.gridy = 1;
+				constraintsRbtStructure.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsRbtStructure.ipadx = 8;
+				constraintsRbtStructure.insets = new java.awt.Insets(30, 75, 5, 2);
+				getPnlClassKind().add(getRbtStructure(), constraintsRbtStructure);
+				
+				java.awt.GridBagConstraints constraintsCbxMetaMapping = new java.awt.GridBagConstraints();
+				constraintsCbxMetaMapping.gridx = 1;
+				constraintsCbxMetaMapping.gridy = 1;
+				constraintsCbxMetaMapping.anchor = java.awt.GridBagConstraints.NORTHWEST;
+				constraintsCbxMetaMapping.ipadx = 8;
+				constraintsCbxMetaMapping.insets = new java.awt.Insets(5, 320, 5, 2);
+				getPnlClassKind().add(getCbxMetaMapping(), constraintsCbxMetaMapping);	
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -924,6 +991,28 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 			}
 		}
 		return ivjPnlClassKind;
+	}
+	
+	/**
+	 * Return the CbxMapping property value.
+	 * 
+	 * @return javax.swing.JComboBox
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JComboBox getCbxMetaMapping() {
+		if (ivjCbxMapping == null) {
+			try {
+				ivjCbxMapping = new javax.swing.JComboBox();
+				ivjCbxMapping.setName("CbxType");
+				// user code begin {1}
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjCbxMapping;
 	}
 
 	/**
@@ -1017,7 +1106,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				constraintsPnlClassKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
 				constraintsPnlClassKind.weightx = 1.0;
 				constraintsPnlClassKind.weighty = 1.0;
-				constraintsPnlClassKind.ipadx = 442;
+				constraintsPnlClassKind.ipadx = 320;
 				constraintsPnlClassKind.ipady = 83;
 				constraintsPnlClassKind.insets = new java.awt.Insets(6, 6, 58, 45);
 				getPnlDetail().add(getPnlClassKind(), constraintsPnlClassKind);
@@ -1338,6 +1427,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		getMniOpenAttributeSpecication().addActionListener(ivjEventHandler);
 		getTxtName().addFocusListener(ivjEventHandler);
 		getTxtMetaAttrb().addFocusListener(ivjEventHandler);
+		getRbtStructure().addItemListener(ivjEventHandler);
 	}
 
 	/**
@@ -1371,11 +1461,34 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 				mniMoveDownAttribute();
 			}
 		});
+		getCbxMetaMapping().insertItemAt(null, 0);
+		getCbxMetaMapping().insertItemAt(METAATTR_MAPPING_MULTILINE, 1);
+		getCbxMetaMapping().insertItemAt(METAATTR_MAPPING_MULTISURFACE, 2);
+		//try something
+		//getCbxMetaMapping().setEnabled(false);
+		
 		getMnuAttributes().add(mniMoveDownAttribute);
 
 		// user code end
 	}
 
+	/**
+	 * Config Cmbx
+	 * @param element
+	 */
+	public void setMapping(NlsString metaMapping) {
+		if(metaMapping != null) {
+				if(metaMapping.getValue().contains(METAATTR_MAPPING_MULTILINE)) {
+					getCbxMetaMapping().setSelectedIndex(1);//setSelectedItem=?
+				}
+				if(metaMapping.getValue().contains(METAATTR_MAPPING_MULTISURFACE)) {
+					getCbxMetaMapping().setSelectedIndex(2);
+				}
+		}else {
+			getCbxMetaMapping().setSelectedIndex(0);
+		}
+}
+	
 	/**
 	 * @deprecated
 	 */
@@ -1426,6 +1539,15 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		if (getRbtClass().isSelected()) {
 			classDef.setKind(ClassDefKind.CLASS);
 		} else if (getRbtStructure().isSelected()) {
+			if(getCbxMetaMapping().getSelectedIndex() != 0) {
+				int mapping = getCbxMetaMapping().getSelectedIndex();
+				if(mapping == 1) {
+					classDef.setMetaMapping(new NlsString(METAATTR_MAPPING_MULTILINE));
+				}
+				if(mapping == 2) {
+					classDef.setMetaMapping(new NlsString(METAATTR_MAPPING_MULTISURFACE));
+				}
+			}
 			classDef.setKind(ClassDefKind.STRUCTURE);
 		} else {
 			Tracer.getInstance().developerWarning("ClassDef.kind not properly initialized");// $NON-NLS-2$//$NON-NLS-1$
@@ -1470,6 +1592,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 			break;
 		}
 		case ClassDefKind.STRUCTURE: {
+			getCbxMetaMapping().setSelectedItem(classDef.getMetaMapping().getValue());
 			getRbtStructure().setSelected(true);
 			break;
 		}
