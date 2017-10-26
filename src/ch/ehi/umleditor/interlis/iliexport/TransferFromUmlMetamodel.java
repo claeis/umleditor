@@ -862,6 +862,7 @@ public class TransferFromUmlMetamodel {
 		visitTaggedValues(def);
 		out.write(getIndent());
 		if (def.getKind() == ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE) {
+			visitMetaMapping(def.getMetaMapping());
 			out.write("STRUCTURE ");
 		} else {
 			out.write("CLASS ");
@@ -2389,6 +2390,21 @@ public class TransferFromUmlMetamodel {
 		if (val.length() == 0)
 			return;
 		String beg = "!!@ ili2db.dispName = ";
+
+		out.write(getIndent() + beg + '"' + val + '"');
+		newline();
+	}
+	
+	/**
+	 * Write the meta-attribute "ili2db.mapping" from ili2db
+	 */
+	public void visitMetaMapping(NlsString nlsmapping) throws java.io.IOException {
+		if (nlsmapping == null)
+			return;
+		String val = nlsmapping.getValue(language).trim();
+		if (val.length() == 0)
+			return;
+		String beg = "!!@ ili2db.mapping = ";
 
 		out.write(getIndent() + beg + '"' + val + '"');
 		newline();

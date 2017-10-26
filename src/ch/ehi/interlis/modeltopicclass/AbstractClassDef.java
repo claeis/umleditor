@@ -176,6 +176,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 		clearXorRestrictedAssociation();
 		setName(null);
 		setMetaAttrb(null);
+		setMetaMapping(null);
 		// Role AttributePath: AttributePath object(s) may point to this
 		// Role RenamedViewableRef: RenamedViewableRef object(s) may point to
 		// this
@@ -235,6 +236,7 @@ public abstract class AbstractClassDef extends AbstractNamespace
 			visitor.visit(it.next());
 		visitor.visit(getName());
 		visitor.visit(getMetaAttrb());
+		visitor.visit(getMetaMapping());
 		it = iteratorBehavior();
 		while (it.hasNext())
 			visitor.visit(it.next());

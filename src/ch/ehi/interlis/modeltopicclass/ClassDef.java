@@ -966,6 +966,14 @@ public class ClassDef extends AbstractClassDef {
 		super.setMetaAttrb(value);
 	}
 	
+	public NlsString getMetaMapping() {
+		return super.getMetaMapping();
+	}
+
+	public void setMetaMapping(NlsString value) {
+		super.setMetaMapping(value);
+	}
+	
 	public NlsString getMetaName() {
 		return super.getMetaName();
 	}

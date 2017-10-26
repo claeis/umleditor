@@ -3927,7 +3927,21 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		if (metaAttrb != value && (metaAttrb == null || !metaAttrb.equals(value))) {
 			metaAttrb = value;
 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
-					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMettaAttrb"));
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
+		}
+	}
+	
+	private NlsString metaMapping = null;
+
+	public NlsString getMetaMapping() {
+		return metaMapping;
+	}
+
+	public void setMetaMapping(NlsString value) {
+		if (metaMapping != value && (metaMapping == null || !metaMapping.equals(value))) {
+			metaMapping = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMapping"));
 		}
 	}
 	
