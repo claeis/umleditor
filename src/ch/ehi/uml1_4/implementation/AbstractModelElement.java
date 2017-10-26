@@ -203,6 +203,29 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		}
 		return;
 	}
+
+	/**
+	 * This method prevents the umleditor from trying to read null meta-attribute from interlis file
+	 * @return NlsString with value of Meta-attribute Mapping
+	 */
+	public String getDefLangMetaMapping() {
+		NlsString metaMapping = getMetaMapping();
+		return metaMapping != null ? metaMapping.getValue() : null;
+	}
+
+	public void setDefLangMetaMapping() {
+		NlsString oldMetaMapping = getMetaMapping();
+		if (oldMetaMapping == null) {
+			setMetaAttrb(new NlsString(metaMapping));
+		} else if (oldMetaMapping.getValue() == null) {
+			if (metaMapping != null) {
+				setMetaAttrb(new NlsString(oldMetaMapping, metaMapping.toString()));
+			}
+		} else if (!oldMetaMapping.getValue().equals(metaMapping)) {
+			setMetaAttrb(new NlsString(oldMetaMapping, metaMapping.toString()));
+		}
+		return;
+	}
 	
 	public String getDefLangMetaName() {
 		NlsString metaName = getMetaName();

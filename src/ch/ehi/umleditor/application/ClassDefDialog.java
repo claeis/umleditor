@@ -1620,7 +1620,8 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 			break;
 		}
 		case ClassDefKind.STRUCTURE: {
-			getCbxMetaMapping().setSelectedItem(classDef.getMetaMapping().getValue());
+		
+			getCbxMetaMapping().setSelectedItem(classDef.getDefLangMetaMapping());
 			getRbtStructure().setSelected(true);
 			break;
 		}
