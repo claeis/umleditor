@@ -1486,6 +1486,18 @@ NlsString getMetaAttrb();
  */
 void setMetaAttrb(NlsString value);
 
+/**
+ * get current value of meta mapping
+ * @see #setMetaMapping()
+ */
+NlsString getMetaMapping();
+/**
+ * set current value of meta mapping
+ * @see #getMetaAttrb()
+ */
+void setMetaMapping(NlsString value);
+
+
 
 /**
  * get current value of meta name

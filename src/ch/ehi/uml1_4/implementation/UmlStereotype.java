@@ -117,6 +117,7 @@ public class UmlStereotype implements Stereotype {
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
 		setMetaAttrb(null);
+		setMetaMapping(null);
 		setDocumentation(null);
 		
 		setMetaName(null);
@@ -4816,6 +4817,30 @@ public class UmlStereotype implements Stereotype {
  			metaAttrb = value1;
  			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
  					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
+ 		}
+ 	}
+ 	
+ 	private NlsString metaMapping = null;
+
+	/**
+ 	 * get current value of meta mapping
+ 	 * 
+ 	 * @see #setMetaMapping
+ 	 */
+ 	public NlsString getMetaMapping() {		
+ 		return metaMapping;
+ 	}
+ 	
+ 	/**
+ 	 * set current value of meta attribute
+ 	 * 
+ 	 * @see #getMetaMapping
+ 	 */
+ 	public void setMetaMapping(NlsString value1) {
+ 		if (metaMapping != value1 && (metaMapping == null || !metaMapping.equals(value1))) {
+ 			metaMapping = value1;
+ 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+ 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMapping"));
  		}
  	}
  

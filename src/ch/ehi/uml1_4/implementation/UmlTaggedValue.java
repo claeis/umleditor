@@ -113,6 +113,7 @@ public class UmlTaggedValue implements TaggedValue {
 		// Role EditorTreeElement: EditorTreeElement object(s) may point to this
 		setName(null);
 		setMetaAttrb(null);
+		setMetaMapping(null);
 
 		// -end- 448D366F02B6 body448D24F502DB "unlinkAll"
 	}
@@ -4110,40 +4111,70 @@ public class UmlTaggedValue implements TaggedValue {
 		// -end- 335D4BA70064 set_body448D24F502DB "name"
 	}
 
-	@Override
+	private NlsString metaAttrb = null;
+	
 	public NlsString getMetaAttrb() {
 		// TODO Auto-generated method stub
-		return null;
+		return metaAttrb;
 	}
 
-	@Override
 	public void setMetaAttrb(NlsString value) {
 		// TODO Auto-generated method stub
+		if (metaAttrb != value && (metaAttrb == null || !metaAttrb.equals(value))) {
+			metaAttrb = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
+		}
+
+	}
+	
+	private NlsString metaMapping = null;
+	
+	public NlsString getMetaMapping() {
+		// TODO Auto-generated method stub
+		return metaMapping;
+	}
+
+	public void setMetaMapping(NlsString value) {
+		// TODO Auto-generated method stub
+		if (metaMapping != value && (metaMapping == null || !metaMapping.equals(value))) {
+			metaMapping = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMapping"));
+		}
 
 	}
 
-	@Override
+	private NlsString metaName = null;
+	
 	public NlsString getMetaName() {
 		// TODO Auto-generated method stub
-		return null;
+		return metaName;
 	}
 
-	@Override
 	public void setMetaName(NlsString value) {
 		// TODO Auto-generated method stub
-		
+		if (metaName != value && (metaName == null || !metaName.equals(value))) {
+			metaName = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaName"));
+		}
 	}
 
-	@Override
+	private NlsString metaMsg = null;
+	
 	public NlsString getMetaMsg() {
 		// TODO Auto-generated method stub
-		return null;
+		return metaMsg;
 	}
-
-	@Override
+	
 	public void setMetaMsg(NlsString value) {
 		// TODO Auto-generated method stub
-		
+		if (metaMsg != value && (metaMsg == null || !metaMsg.equals(value))) {
+			metaMsg = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
+		}
 	}
 
 	// declare/define something only in the code

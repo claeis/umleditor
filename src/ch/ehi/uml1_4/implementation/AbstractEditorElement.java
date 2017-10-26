@@ -120,4 +120,17 @@ public abstract class AbstractEditorElement implements Visitable, java.io.Serial
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaAttrb"));
 		}
 	}
+	private NlsString metaMapping = null;
+
+	public NlsString getMetaMapping() {
+		return metaMapping;
+	}
+
+	public void setMetaMapping(NlsString value) {
+		if (metaMapping != value && (metaMapping == null || !metaMapping.equals(value))) {
+			metaMapping = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMapping"));
+		}
+	}
 }

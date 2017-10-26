@@ -248,6 +248,11 @@ public class TransferFromIli2cMetamodel {
 			classdef.setMetaAttrb(new NlsString(modelLanguage, dispName));
 		}
 
+		// MetaMapping
+		String metaMapping = tdef.getMetaValue("ili2db.mapping");
+		if(metaMapping != null) {
+			classdef.setMetaMapping(new NlsString(modelLanguage, metaMapping));
+		}
 		// documentation
 		String ilidoc = tdef.getDocumentation();
 		if (ilidoc != null) {
