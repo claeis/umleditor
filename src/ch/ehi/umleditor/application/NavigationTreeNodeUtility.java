@@ -176,8 +176,15 @@ public class NavigationTreeNodeUtility {
 	 */
 	static public void setName(Object node, String newName) {
 		if(isINTERLIS2Def(node)) {//aqui hice cambios extraños
-			((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
+			ch.ehi.interlis.modeltopicclass.INTERLIS2Def obj = (ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node;
+			//si el nodo ya tiene la extencion ili
+			if(obj.getName().getValue().endsWith(".ili")) {
+				((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
+						((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).getName(), newName));
+			}else {
+				((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
 					((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).getName(), newName+".ili"));
+				}
 		}else if (isModelElement(node)) {
 			((ModelElement) node).setName(new ch.ehi.basics.types.NlsString(((ModelElement) node).getName(), newName));
 		} else if (isClassDiagram(node)) {
