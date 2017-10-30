@@ -20,6 +20,7 @@ package ch.ehi.umleditor.application;
 import java.util.EventObject;
 import java.util.Iterator;
 
+import javax.swing.DropMode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
@@ -1905,6 +1906,10 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 			try {
 				ivjTreNavigation = new AutoScrollingJTree();
 				ivjTreNavigation.setName("TreNavigation");
+				ivjTreNavigation.setDragEnabled(true);
+				ivjTreNavigation.setDropMode(DropMode.ON_OR_INSERT);
+				ivjTreNavigation.setTransferHandler(new TreeTransferHandler());
+				ivjTreNavigation.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
 				ivjTreNavigation.setVisibleRowCount(50);
 				ivjTreNavigation.setBounds(0, 0, 78, 72);
 				ivjTreNavigation.setEditable(true);
