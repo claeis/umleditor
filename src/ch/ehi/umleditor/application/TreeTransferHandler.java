@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JTree;
 import javax.swing.TransferHandler;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import ch.ehi.uml1_4.foundation.core.Element;
@@ -27,7 +26,7 @@ class TreeTransferHandler extends TransferHandler {
         try {
             String mimeType = DataFlavor.javaJVMLocalObjectMimeType +
                               ";class=\"" +
-                Element[].class.getName() +
+                Namespace.class.getName() +
                               "\"";
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
@@ -41,24 +40,12 @@ class TreeTransferHandler extends TransferHandler {
      */
     public boolean canImport(TransferHandler.TransferSupport support) {
         if(!support.isDrop()) {
-        	System.out.println("NO SOPORTADO :::::::::::::::::::::::");
             return false;
         }
         support.setShowDropLocation(true);
         if(!support.isDataFlavorSupported(nodesFlavor)) {
             return false;
         }
-        // Do not allow a drop on the drag source selections.
-        JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
-        JTree tree = (JTree)support.getComponent();
-        int dropRow = tree.getRowForPath(dl.getPath());
-        int[] selRows = tree.getSelectionRows();
-        for(int i = 0; i < selRows.length; i++) {
-            if(selRows[i] == dropRow) {
-                return false;
-            }
-        }
-        
         return true;
     }
 
@@ -70,94 +57,68 @@ class TreeTransferHandler extends TransferHandler {
             // Make up a node array of copies for transfer and
             // another for/of the nodes that will be removed in
             // exportDone after a successful drop.
-            List<Element> copies = new ArrayList<Element>();
-            List<Element> toRemove = new ArrayList<Element>();
-            Element node = (Element)paths[0].getLastPathComponent();
-            Element copy = node;
+            List<Namespace> copies = new ArrayList<Namespace>();
+            List<Namespace> toRemove = new ArrayList<Namespace>();
+            Namespace node = (Namespace)paths[0].getLastPathComponent();
+            Namespace copy = node;
             copies.add(copy);
             toRemove.add(node);
-            for(int i = 1; i < paths.length; i++) {
-            	Element next =
-                    (Element)paths[i].getLastPathComponent();
-            }
-            Element[] nodes = copies.toArray(new Element[copies.size()]);
-            nodesToRemove = toRemove.toArray(new Element[toRemove.size()]);
+           
+            Namespace[] nodes = copies.toArray(new Namespace[copies.size()]);
+            nodesToRemove = toRemove.toArray(new Namespace[toRemove.size()]);
             return new NodesTransferable(nodes);
         }
         return null;
     }
 
-   
-    protected void exportDone(JComponent source, Transferable data, int action) {
-        if((action & MOVE) == MOVE) {
-            JTree tree = (JTree)source;
-            //Element model = (Element)tree.getModel();
-            Namespace apackage = (Namespace)tree.getSelectionPath().getLastPathComponent();
-            
-            //selected node
-            TreePath selPath = tree.getSelectionPath();
-            
-            if(selPath != null) {
-            	Element node = (Element) selPath.getLastPathComponent();
-            	
-            	// Remove nodes saved in nodesToRemove in createTransferable.
-                if (node instanceof ModelElement) {
-    				ModelElement ele = (ModelElement) node;
-    				ele.detachNamespace();
-    				ele.attachNamespace(apackage);
-    			} else {
-    				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) node;
-    				diag.detachNamespace();
-    				diag.attachNamespace(apackage);
-    			}
-            }
-            
-            
-        }
-    }
 
     public int getSourceActions(JComponent c) {
         return COPY_OR_MOVE;
     }
 
+    /*
+     * Drop
+     * @see javax.swing.TransferHandler#importData(javax.swing.TransferHandler.TransferSupport)
+     */
     public boolean importData(TransferHandler.TransferSupport support) {
         if(!canImport(support)) {
             return false;
         }
+        // Get drop location info.
+        JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
+        TreePath dest = dl.getPath();
+        Namespace parent = (Namespace)dest.getLastPathComponent();
+        
         // Extract transfer data.
-        Namespace[] nodes = null;
+        Transferable t = support.getTransferable();
+        Namespace node;
         try {
-            Transferable t = support.getTransferable();
-            nodes = (Namespace[])t.getTransferData(nodesFlavor);
+           
+            node = (Namespace) t.getTransferData(nodesFlavor);
+
+            if (parent != null) {
+                if(node instanceof ModelElement) {
+                	ModelElement ele = (ModelElement) node;
+    				ele.detachNamespace();
+    				ele.attachNamespace(parent);
+                }else {
+    				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) parent;
+    				diag.detachNamespace();
+    				diag.attachNamespace(parent);
+    			}
+                return true;
+            } else {
+            	return false;
+            }  
         } catch(UnsupportedFlavorException ufe) {
             System.out.println("UnsupportedFlavor: " + ufe.getMessage());
         } catch(java.io.IOException ioe) {
             System.out.println("I/O error: " + ioe.getMessage());
         }
-        // Get drop location info.
-        JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
-        int childIndex = dl.getChildIndex();
-        TreePath dest = dl.getPath();
-        Namespace parent = (Namespace)dest.getLastPathComponent();
-        JTree tree = (JTree)support.getComponent();
-        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
-        // Configure for drop mode.
-     // Configure for drop mode.
-        Element elebase = parent;
-        if(elebase != null) {
-        	if (elebase instanceof ModelElement) {
-				ModelElement ele = (ModelElement) elebase;
-				ele.detachNamespace();
-				ele.attachNamespace(parent);
-			} else {
-				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) elebase;
-				diag.detachNamespace();
-				diag.attachNamespace(parent);
-			}
-        	return true;
-        } else {
-        	return false;
-        }
+		return false;
+        
+        //Namespace[] values = node.
+          
     }
 
     public String toString() {
@@ -165,9 +126,9 @@ class TreeTransferHandler extends TransferHandler {
     }
 
     public class NodesTransferable implements Transferable {
-        Element[] nodes;
+        Namespace[] nodes;
 
-        public NodesTransferable(Element[] nodes2) {
+        public NodesTransferable(Namespace[] nodes2) {
             this.nodes = nodes2;
          }
 

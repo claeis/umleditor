@@ -2148,7 +2148,9 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 					true, LauncherView.getInstance().getModel());
 			if (moveDialog.isSaved()) {
 				ch.ehi.uml1_4.foundation.core.Namespace apackage = moveDialog.getSelectedPackage();
+				System.out.println("------------------- Paquete destino Seleccionado: "+apackage.getName().getValue());
 				Element elebase = getSelectedNode();
+				System.out.println("--------------------- Elemento a pasar : "+elebase);
 				if (elebase instanceof ModelElement) {
 					ModelElement ele = (ModelElement) elebase;
 					ele.detachNamespace();
