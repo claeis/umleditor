@@ -82,42 +82,42 @@ class TreeTransferHandler extends TransferHandler {
      */
     public boolean importData(TransferHandler.TransferSupport support) {
         if(!canImport(support)) {
+        	System.out.println("No se puede importar el nodo");
             return false;
         }
-        // Get drop location info.
-        JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
-        TreePath dest = dl.getPath();
-        Namespace parent = (Namespace)dest.getLastPathComponent();
-        
-        // Extract transfer data.
-        Transferable t = support.getTransferable();
-        Namespace node;
+       
         try {
-           
-            node = (Namespace) t.getTransferData(nodesFlavor);
-
-            if (parent != null) {
-                if(node instanceof ModelElement) {
-                	ModelElement ele = (ModelElement) node;
-    				ele.detachNamespace();
-    				ele.attachNamespace(parent);
-                }else {
-    				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) parent;
-    				diag.detachNamespace();
-    				diag.attachNamespace(parent);
-    			}
-                return true;
-            } else {
-            	return false;
-            }  
+        	 // Get drop location info.
+            JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
+            TreePath dest = dl.getPath();
+            Namespace parent = (Namespace)dest.getLastPathComponent();
+            //System.out.println("Nodo Destino ---------"+parent.toString());
+            // Extract transfer data.
+            Transferable t = support.getTransferable();
+            //Namespace node;
+            Namespace[] node = null;
+            node = (Namespace[]) t.getTransferData(nodesFlavor);
+            //System.out.println("Nodo a mover ......"+node[0]);
+            if(node[0] instanceof ModelElement) {
+				ModelElement ele = (ModelElement) node[0];
+				ele.detachNamespace();
+				ele.attachNamespace(parent);
+			}else {
+				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) parent;
+				diag.detachNamespace();
+				diag.attachNamespace(parent);
+			}
+			return true;  
         } catch(UnsupportedFlavorException ufe) {
             System.out.println("UnsupportedFlavor: " + ufe.getMessage());
         } catch(java.io.IOException ioe) {
             System.out.println("I/O error: " + ioe.getMessage());
         }
+        
+        
 		return false;
         
-        //Namespace[] values = node.
+       
           
     }
 
