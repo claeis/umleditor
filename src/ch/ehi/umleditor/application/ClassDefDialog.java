@@ -1,11 +1,7 @@
 package ch.ehi.umleditor.application;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
-import java.awt.event.ContainerEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -25,17 +21,19 @@ import java.awt.event.KeyListener;
  */
 import java.util.EventObject;
 
-import ch.ehi.basics.types.NlsString;
-import ch.ehi.interlis.attributes.*;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.table.*;
-import ch.ehi.interlis.modeltopicclass.*;
-import ch.softenvironment.view.*;
-import ch.softenvironment.util.*;
+import javax.swing.table.TableColumn;
+
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
+import ch.softenvironment.util.Tracer;
+import ch.softenvironment.view.BaseDialog;
+import ch.softenvironment.view.ListMenuChoice;
 
 /**
  * User Interface for a ClassDef.

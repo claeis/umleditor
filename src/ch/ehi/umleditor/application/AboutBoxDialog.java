@@ -1,5 +1,8 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -70,10 +73,29 @@ public class AboutBoxDialog extends BaseDialog {
 	 */
 	public AboutBoxDialog(java.awt.Frame owner) {
 		super(owner, true);
+		addEscapeKey();
 		initialize();
 		setRelativeLocation(owner);
 		show();
 	}
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 4377851053733343440L;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 
 	/**
 	 * Constructor
