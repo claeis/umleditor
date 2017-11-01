@@ -7,17 +7,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.TransferHandler;
 import javax.swing.tree.TreePath;
 
+import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+import ch.ehi.interlis.metaobjects.MetaDataUseDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.units.UnitDef;
+import ch.ehi.interlis.views.ViewDef;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.implementation.UmlPackage;
 
 class TreeTransferHandler extends TransferHandler {
     
 	private static final long serialVersionUID = -780714214950735708L;
+	private static java.util.ResourceBundle resTreeTransferHandler = java.util.ResourceBundle
+			.getBundle("ch/ehi/umleditor/application/resources/TreeTransferHandler");
 	DataFlavor nodesFlavor;
     DataFlavor[] flavors = new DataFlavor[1];
     Element[] nodesToRemove;
@@ -57,15 +73,15 @@ class TreeTransferHandler extends TransferHandler {
             // Make up a node array of copies for transfer and
             // another for/of the nodes that will be removed in
             // exportDone after a successful drop.
-            List<Namespace> copies = new ArrayList<Namespace>();
-            List<Namespace> toRemove = new ArrayList<Namespace>();
-            Namespace node = (Namespace)paths[0].getLastPathComponent();
-            Namespace copy = node;
+            List<Element> copies = new ArrayList<Element>();
+            List<Element> toRemove = new ArrayList<Element>();
+            Element node = (Element)paths[0].getLastPathComponent();
+            Element copy = node;
             copies.add(copy);
             toRemove.add(node);
            
-            Namespace[] nodes = copies.toArray(new Namespace[copies.size()]);
-            nodesToRemove = toRemove.toArray(new Namespace[toRemove.size()]);
+            Element[] nodes = copies.toArray(new Element[copies.size()]);
+            nodesToRemove = toRemove.toArray(new Element[toRemove.size()]);
             return new NodesTransferable(nodes);
         }
         return null;
@@ -94,15 +110,86 @@ class TreeTransferHandler extends TransferHandler {
             //System.out.println("Nodo Destino ---------"+parent.toString());
             // Extract transfer data.
             Transferable t = support.getTransferable();
-            //Namespace node;
-            Namespace[] node = null;
-            node = (Namespace[]) t.getTransferData(nodesFlavor);
+            Element[] node = null;
+            node = (Element[]) t.getTransferData(nodesFlavor);
             //System.out.println("Nodo a mover ......"+node[0]);
             if(node[0] instanceof ModelElement) {
-				ModelElement ele = (ModelElement) node[0];
-				ele.detachNamespace();
-				ele.attachNamespace(parent);
-			}else {
+            	//Just move a InterlisModel inside a umlpackage
+            	if(node[0] instanceof INTERLIS2Def && parent instanceof UmlPackage) {
+            		INTERLIS2Def element = (INTERLIS2Def) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a ModelDef inside a InterlisModel
+            	else if(node[0] instanceof ModelDef && parent instanceof INTERLIS2Def) {
+            		ModelDef element = (ModelDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	} 
+            	//Just move a ClassDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof ClassDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		ClassDef element = (ClassDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a UnitDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof UnitDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		UnitDef element = (UnitDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a Relationship(AssociationDef) inside a ModelDef or TopicDef
+            	else if(node[0] instanceof AssociationDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		AssociationDef element = (AssociationDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a DomainDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof DomainDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		DomainDef element = (DomainDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a FunctionDef inside a ModelDef
+            	else if(node[0] instanceof FunctionDef && (parent instanceof ModelDef)){
+            		FunctionDef element = (FunctionDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a Run time Parameter(GraphicParameterDef) inside a ModelDef
+            	else if(node[0] instanceof GraphicParameterDef && (parent instanceof ModelDef)){
+            		GraphicParameterDef element = (GraphicParameterDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a LineFormTypeDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof LineFormTypeDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		LineFormTypeDef element = (LineFormTypeDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a MetaDataUseDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof MetaDataUseDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
+            		MetaDataUseDef element = (MetaDataUseDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a TopicDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof TopicDef && parent instanceof ModelDef){
+            		TopicDef element = (TopicDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	//Just move a ViewDef inside a ModelDef or TopicDef
+            	else if(node[0] instanceof ViewDef && parent instanceof TopicDef){
+            		ViewDef element = (ViewDef) node[0];
+            		element.detachNamespace();
+            		element.attachNamespace(parent);
+            	}
+            	else {
+            		JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"), resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
+            	}
+			} else {
 				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) parent;
 				diag.detachNamespace();
 				diag.attachNamespace(parent);
@@ -114,11 +201,7 @@ class TreeTransferHandler extends TransferHandler {
             System.out.println("I/O error: " + ioe.getMessage());
         }
         
-        
-		return false;
-        
-       
-          
+        return false;
     }
 
     public String toString() {
@@ -126,9 +209,9 @@ class TreeTransferHandler extends TransferHandler {
     }
 
     public class NodesTransferable implements Transferable {
-        Namespace[] nodes;
+    	Element[] nodes;
 
-        public NodesTransferable(Namespace[] nodes2) {
+        public NodesTransferable(Element[] nodes2) {
             this.nodes = nodes2;
          }
 
