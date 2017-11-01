@@ -1,5 +1,11 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ContainerEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -21,6 +27,11 @@ import java.util.EventObject;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.attributes.*;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.softenvironment.view.*;
@@ -32,7 +43,7 @@ import ch.softenvironment.util.*;
  * @author Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.5 $ $Date: 2007-01-14 08:17:16 $
  */
-public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
+public class ClassDefDialog extends BaseDialog implements ListMenuChoice{
 		
 	private static final long serialVersionUID = -702437324945597770L;
 	// keep ModelElement
@@ -131,7 +142,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
 			if (e.getSource() == ClassDefDialog.this.getRbtStructure())
 				connEtoC11(e);
-		};
+		}
 	};
 
 	/**
@@ -139,11 +150,32 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	 */
 	public ClassDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 		super(owner, true);
+		addEscapeKey();
 		initialize();
 		setRelativeLocation(owner);
 		setElement(element);
 		show();
 	}
+	
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 4377851053733343440L;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				connEtoC1(arg0);
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 
 	/**
 	 * Constructor
@@ -221,7 +253,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 
 	/**
 	 * 
-	 *
+	 * C11
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
 	private void connEtoC11(java.awt.event.ItemEvent arg1) {
 		try {
@@ -246,7 +278,24 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 		} else {
 			getCbxMetaMapping().setEnabled(false);
 		}
-}
+	}
+	/**
+	 * C12
+	 *
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC12(KeyEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			ClassDefDialog.this.dispose();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
 	/**
 	 * connEtoC2: (BtnCancel.action.actionPerformed(java.awt.event.ActionEvent)
 	 * --> ClassDefDialog.cancelPressed()V)
@@ -1685,4 +1734,5 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	public void removeObjects(Object source) {
 		((EditorTableModel) getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
 	}
+
 }
