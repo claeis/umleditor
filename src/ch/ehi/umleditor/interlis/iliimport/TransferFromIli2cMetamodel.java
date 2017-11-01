@@ -14,6 +14,10 @@ import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 
+/**
+ * This class reads interlis files and assign an instance to every element inside the model
+ *
+ */
 public class TransferFromIli2cMetamodel {
 	public static final String TAGGEDVALUE_ILI_PREFIX = "ili:";
 	private final boolean unwrapMultiValueStructAttrs = true;
@@ -38,6 +42,12 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap fileMap = new java.util.HashMap();
 
+	/**
+	 * This method assign the file as Interlis component
+	 * @param language Language that the file was written
+	 * @param filename Route of the file
+	 * @return instance of Interlis2Def class
+	 */
 	private ch.ehi.interlis.modeltopicclass.INTERLIS2Def findINTERLIS2Def(String language, String filename) {
 		if (fileMap.containsKey(filename)) {
 			return (ch.ehi.interlis.modeltopicclass.INTERLIS2Def) fileMap.get(filename);
@@ -49,8 +59,13 @@ public class TransferFromIli2cMetamodel {
 		return ili2Def;
 	}
 
+	
 	private java.util.HashMap modelMap = new java.util.HashMap();
-
+	/**
+	 * This method find the models component of interlis file
+	 * @param model possible model to instance
+	 * @return instance of ModelDef class
+	 */
 	private ch.ehi.interlis.modeltopicclass.ModelDef findModelDef(Model model) {
 		if (modelMap.containsKey(model)) {
 			return (ch.ehi.interlis.modeltopicclass.ModelDef) modelMap.get(model);
@@ -62,6 +77,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap topicMap = new java.util.HashMap();
 
+	/**
+	 * This method find the topic component of interlis file
+	 * @param topic possible topic to instance
+	 * @return instance of TopicDef class
+	 */
 	private ch.ehi.interlis.modeltopicclass.TopicDef findTopicDef(Topic topic) {
 		if (topicMap.containsKey(topic)) {
 			return (ch.ehi.interlis.modeltopicclass.TopicDef) topicMap.get(topic);
@@ -92,6 +112,11 @@ public class TransferFromIli2cMetamodel {
 		throw new IllegalStateException("this Viewbale not yet seen");
 	}
 
+	/**
+	 * This method find the class component of interlis file
+	 * @param table possible class to instance
+	 * @return instance of ClassDef class
+	 */
 	private ch.ehi.interlis.modeltopicclass.ClassDef findClassDef(Table table) {
 		if (viewableMap.containsKey(table)) {
 			return (ch.ehi.interlis.modeltopicclass.ClassDef) viewableMap.get(table);
@@ -101,6 +126,11 @@ public class TransferFromIli2cMetamodel {
 		return classDef;
 	}
 
+	/**
+	 * This method find the association component of interlis file
+	 * @param assoc possible association to instance
+	 * @return instance of AssociationDef class
+	 */
 	private ch.ehi.interlis.associations.AssociationDef findAssociationDef(AssociationDef assoc) {
 		if (viewableMap.containsKey(assoc)) {
 			return (ch.ehi.interlis.associations.AssociationDef) viewableMap.get(assoc);
@@ -110,6 +140,11 @@ public class TransferFromIli2cMetamodel {
 		return assocDef;
 	}
 
+	/**
+	 * This method find the view component of interlis file
+	 * @param view possible view to instance
+	 * @return instance of ViewDef class
+	 */
 	private ch.ehi.interlis.views.ViewDef findViewDef(View view) {
 		if (viewableMap.containsKey(view)) {
 			return (ch.ehi.interlis.views.ViewDef) viewableMap.get(view);
@@ -130,6 +165,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap domainMap = new java.util.HashMap();
 
+	/**
+	 * This method find the domain component of interlis file
+	 * @param domain possible domain to instance
+	 * @return instance of DomainDef class
+	 */
 	private ch.ehi.interlis.domainsandconstants.DomainDef findDomainDef(Domain domain) {
 		if (domainMap.containsKey(domain)) {
 			return (ch.ehi.interlis.domainsandconstants.DomainDef) domainMap.get(domain);
@@ -141,6 +181,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap lineFormTypeMap = new java.util.HashMap();
 
+	/**
+	 * This method find the lineForm component of interlis file
+	 * @param lineFormType possible lineForm to instance
+	 * @return instance of lineFormTypeDef class
+	 */
 	private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef findLineFormTypeDef(LineForm lineFormType) {
 		if (lineFormTypeMap.containsKey(lineFormType)) {
 			return (ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef) lineFormTypeMap.get(lineFormType);
@@ -152,6 +197,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap unitMap = new java.util.HashMap();
 
+	/**
+	 * This method find the Unit component of interlis file
+	 * @param unit possible Unit to instance
+	 * @return instance of UnitDef class
+	 */
 	private ch.ehi.interlis.units.UnitDef findUnitDef(Unit unit) {
 		if (unitMap.containsKey(unit)) {
 			return (ch.ehi.interlis.units.UnitDef) unitMap.get(unit);
@@ -163,6 +213,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap functionMap = new java.util.HashMap();
 
+	/**
+	 * This method find the Function component of interlis file
+	 * @param f possible Function to instance
+	 * @return instance of FunctionDef class
+	 */
 	private ch.ehi.interlis.functions.FunctionDef findFunctionDef(Function f) {
 		if (functionMap.containsKey(f)) {
 			return (ch.ehi.interlis.functions.FunctionDef) functionMap.get(f);
@@ -174,6 +229,11 @@ public class TransferFromIli2cMetamodel {
 
 	private java.util.HashMap gfxMap = new java.util.HashMap();
 
+	/**
+	 * This method find the Graphic component of interlis file
+	 * @param g possible Graphic to instance 
+	 * @return instance of GraphicDef class
+	 */
 	private ch.ehi.interlis.graphicdescriptions.GraphicDef findGraphicDef(Graphic g) {
 		if (gfxMap.containsKey(g)) {
 			return (ch.ehi.interlis.graphicdescriptions.GraphicDef) gfxMap.get(g);
@@ -183,6 +243,11 @@ public class TransferFromIli2cMetamodel {
 		return gfxDef;
 	}
 
+	/**
+	 * This method reads all components of TopicDef and assigns to uml-editor components
+	 * @param topic Topic to read
+	 * @return instance of TopicDef class with all attributes and methods
+	 */
 	private ch.ehi.interlis.modeltopicclass.TopicDef visitTopicDef(Topic topic) {
 		if (topic == null)
 			return null;
@@ -237,7 +302,12 @@ public class TransferFromIli2cMetamodel {
 		removeNamespace();
 		return topicdef;
 	}
-
+	
+	/**
+	 * This method reads all components of ClassDef and assigns to uml-editor components
+	 * @param tdef
+	 * @return instance of TopicDef class with all attributes, meta-attributes and methods
+	 */
 	private ch.ehi.interlis.modeltopicclass.ClassDef visitClassDef(Table tdef) {
 		ch.ehi.interlis.modeltopicclass.ClassDef classdef = findClassDef(tdef);
 		classdef.setName(new NlsString(modelLanguage, tdef.getName()));
@@ -287,6 +357,11 @@ public class TransferFromIli2cMetamodel {
 		return classdef;
 	}
 
+	/**
+	 * This method reads all components of AssociationDef and assigns to uml-editor components
+	 * @param assoc Association to read
+	 * @return instance of AssociationDef with all attributes 
+	 */
 	private ch.ehi.interlis.associations.AssociationDef visitAssociationDef(AssociationDef assoc) {
 		ch.ehi.interlis.associations.AssociationDef assocdef = findAssociationDef(assoc);
 		assocdef.setName(new NlsString(modelLanguage, assoc.getName()));
@@ -323,6 +398,11 @@ public class TransferFromIli2cMetamodel {
 		return assocdef;
 	}
 
+	/**
+	 * This method reads all components of ViewDef and assigns to uml-editor components
+	 * @param view ViewDef to read
+	 * @return instance of ViewDef class
+	 */
 	private ch.ehi.interlis.views.ViewDef visitView(View view) {
 		ch.ehi.interlis.views.ViewDef viewdef = findViewDef(view);
 		viewdef.setName(new NlsString(modelLanguage, view.getName()));
@@ -355,6 +435,11 @@ public class TransferFromIli2cMetamodel {
 		return gfxdef;
 	}
 
+	/**
+	 * This method reads all components of UnitDef and assigns to uml-editor components
+	 * @param u UnitDef to read
+	 * @return instance of UnitDef class
+	 */
 	private ch.ehi.interlis.units.UnitDef visitUnit(Unit u) {
 		ch.ehi.interlis.units.UnitDef unitdef = findUnitDef(u);
 		unitdef.setName(new NlsString(modelLanguage, u.getName()));
@@ -427,6 +512,10 @@ public class TransferFromIli2cMetamodel {
 		return mdef;
 	}
 
+	/**
+	 * This method reads all components of Constraint and assigns to uml-editor components
+	 * @param constr ConstraintDef to read
+	 */
 	private void visitConstraint(Constraint constr) {
 		ch.ehi.interlis.constraints.ConstraintDef cdef = new ch.ehi.interlis.constraints.ConstraintDef();
 		ch.ehi.interlis.constraints.ConstraintExpression expr = new ch.ehi.interlis.constraints.ConstraintExpression();
@@ -466,6 +555,11 @@ public class TransferFromIli2cMetamodel {
 		return m;
 	}
 
+	/**
+	 * This method reads all components of Attributes and assigns to uml-editor components
+	 * @param attrib
+	 * @param attrIdx
+	 */
 	private void visitAttribute(AttributeDef attrib, int attrIdx) {
 		Type btype = attrib.getDomain();
 		boolean isMultiValueAttr = false;
@@ -709,6 +803,10 @@ public class TransferFromIli2cMetamodel {
 		return true;
 	}
 
+	/**
+	 * This method reads all components of RoleDef and assigns to uml-editor components
+	 * @param role
+	 */
 	private void visitRoleDef(RoleDef role) {
 
 		ch.ehi.interlis.associations.RoleDef roledef = new ch.ehi.interlis.associations.RoleDef();
@@ -932,6 +1030,11 @@ public class TransferFromIli2cMetamodel {
 		}
 	}
 
+	/**
+	 * This method reads all components of DomainDef and assigns to uml-editor components
+	 * @param dd
+	 * @return
+	 */
 	private ch.ehi.interlis.domainsandconstants.DomainDef visitDomainDef(Domain dd) {
 		ch.ehi.interlis.domainsandconstants.DomainDef domaindef = findDomainDef(dd);
 		domaindef.setName(new NlsString(modelLanguage, dd.getName()));
@@ -1257,6 +1360,11 @@ public class TransferFromIli2cMetamodel {
 
 	}
 
+	/**
+	 * This method reads all components of Function and assigns to uml-editor components
+	 * @param f
+	 * @return
+	 */
 	private ch.ehi.interlis.functions.FunctionDef visitFunctionDeclaration(Function f) {
 		ch.ehi.interlis.functions.FunctionDef funcdef = findFunctionDef(f);
 		funcdef.setName(new NlsString(modelLanguage, f.getName()));

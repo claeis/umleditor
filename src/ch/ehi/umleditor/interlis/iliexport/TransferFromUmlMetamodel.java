@@ -81,6 +81,10 @@ import ch.ehi.uml1_4.modelmanagement.Package;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.interlis.ili2c.config.Configuration;
 
+/**
+ *  This class writes interlis files with instance every element inside the model
+ *
+ */
 public class TransferFromUmlMetamodel {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(TransferFromUmlMetamodel.class);
 
@@ -271,6 +275,11 @@ public class TransferFromUmlMetamodel {
 		this.language = language;
 	}
 
+	/**
+	 * This method obtains Interlis2 configurations and write own elements
+	 * @param def Interlis2Def class
+	 * @throws java.io.IOException
+	 */
 	public void visitINTERLIS2Def(INTERLIS2Def def) throws java.io.IOException {
 		if (def.getDefLangName().startsWith("<")) {
 			return;
@@ -380,6 +389,12 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
+	/**
+	 * This method obtains Interlis2 configurations and write own elements
+	 * @param def Interlis2Def class
+	 * @param language Language that was written the model
+	 * @throws java.io.IOException
+	 */
 	public void visitINTERLIS2Def(INTERLIS2Def def, String language) throws java.io.IOException {
 		this.language = language;
 
@@ -419,6 +434,11 @@ public class TransferFromUmlMetamodel {
 		}
 	}
 
+	/**
+	 * This method obtains ModelDef configurations and write own elements
+	 * @param def ModelDef class
+	 * @throws java.io.IOException
+	 */
 	public void visitModelDef(ModelDef def) throws java.io.IOException {
 		// check if ModelDef defines current language
 		String baseLanguage = def.getBaseLanguage();
@@ -569,6 +589,11 @@ public class TransferFromUmlMetamodel {
 		return null;
 	}
 
+	/**
+	 * This method obtains TopicDef configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
 	public void visitTopicDef(TopicDef def) throws java.io.IOException {
 
 		newline();
@@ -689,9 +714,7 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
-	public void visitMetaDataUseDef(MetaDataUseDef def) throws java.io.IOException
-
-	{
+	public void visitMetaDataUseDef(MetaDataUseDef def) throws java.io.IOException {
 		newline();
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
@@ -699,9 +722,12 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
-	public void visitUnitDef(UnitDef def) throws java.io.IOException
-
-	{
+	/**
+	 * This method obtains UnitDef configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
+	public void visitUnitDef(UnitDef def) throws java.io.IOException {
 		newline();
 		if (!(lastModelElement instanceof UnitDef)) {
 			out.write(getIndent() + "UNIT");
@@ -718,9 +744,12 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
-	public void visitFunctionDef(FunctionDef def) throws java.io.IOException
-
-	{
+	/**
+	 * This method obtains FunctionDef configurations and write own elements
+	 * @param def instance of FunctionDef class
+	 * @throws java.io.IOException
+	 */
+	public void visitFunctionDef(FunctionDef def) throws java.io.IOException {
 		newline();
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
@@ -728,9 +757,12 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
-	public void visitLineFormTypeDef(LineFormTypeDef def) throws java.io.IOException
-
-	{
+	/**
+	 * This method obtains LineForm configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
+	public void visitLineFormTypeDef(LineFormTypeDef def) throws java.io.IOException {
 		newline();
 		if (!(lastModelElement instanceof LineFormTypeDef)) {
 			out.write(getIndent() + "LINE FORM");
@@ -752,6 +784,11 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
+	/**
+	 * This method obtains DomainDef configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
 	public void visitDomainDef(DomainDef def) throws java.io.IOException {
 		newline();
 		if (!(lastModelElement instanceof DomainDef)) {
@@ -962,6 +999,11 @@ public class TransferFromUmlMetamodel {
 		return;
 	}
 
+	/**
+	 * This method obtains AssociationDef configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
 	public void visitAssociationDef(AssociationDef def) throws java.io.IOException {
 		if (def.isStructureAttribute() || def.isReferenceAttribute()) {
 			return;
@@ -1156,6 +1198,11 @@ public class TransferFromUmlMetamodel {
 		return modelElementRef(source, ref, null);
 	}
 
+	/**
+	 * This method obtains AttributeDef configurations and write own elements
+	 * @param def
+	 * @throws java.io.IOException
+	 */
 	public void visitAttributeDef(AttributeDef def) throws java.io.IOException {
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
@@ -1643,6 +1690,12 @@ public class TransferFromUmlMetamodel {
 		return modelElementRef(source, ref, null);
 	}
 
+	/**
+	 * This method obtains EnumElement configurations and write own elements
+	 * @param owner
+	 * @param def
+	 * @throws java.io.IOException
+	 */
 	public void visitEnumeration(AbstractModelElement owner, Enumeration def) throws java.io.IOException {
 		out.write("(");
 		newline();
