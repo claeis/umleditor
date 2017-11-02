@@ -21,6 +21,15 @@ import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
 import ch.softenvironment.util.Tracer;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 import ch.ehi.basics.logging.EhiLogger;
 import ch.softenvironment.view.*;
 
@@ -101,11 +110,32 @@ public class DomainDefDialog extends BaseDialog {
 	public DomainDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 		super(owner, true);
 		initialize();
+		addEscapeKey();
 		setRelativeLocation(owner);
 		setElement(element);
 		show();
 	}
 
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = -8162918271597948933L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 	/**
 	 * Constructor
 	 * 

@@ -164,6 +164,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice{
 		 Action escapeAction = new AbstractAction() {
 			
 			private static final long serialVersionUID = 4377851053733343440L;
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -277,23 +278,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice{
 			getCbxMetaMapping().setEnabled(false);
 		}
 	}
-	/**
-	 * C12
-	 *
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private void connEtoC12(KeyEvent arg1) {
-		try {
-			// user code begin {1}
-			// user code end
-			ClassDefDialog.this.dispose();
-			// user code begin {2}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {3}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
+	
 	/**
 	 * connEtoC2: (BtnCancel.action.actionPerformed(java.awt.event.ActionEvent)
 	 * --> ClassDefDialog.cancelPressed()V)

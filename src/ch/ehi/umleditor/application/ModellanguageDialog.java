@@ -1,11 +1,17 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.tree.*;
 
 import ch.ehi.basics.types.NlsString;
@@ -46,11 +52,33 @@ public class ModellanguageDialog extends ch.softenvironment.view.BaseDialog {
 	public ModellanguageDialog(java.awt.Dialog owner, String title, boolean modal) {
 		super(owner, title, modal);
 		initialize();
+		addEscapeKey();
 		if (title != null) {
 			setTitle(title);
 		}
 		show();
 	}
+
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 6312824452107769015L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 
 	public ModellanguageDialog(java.awt.Frame owner, String title, boolean modal) {
 		super(owner, title, modal);

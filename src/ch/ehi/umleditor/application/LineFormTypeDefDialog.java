@@ -1,5 +1,11 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -18,6 +24,8 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.softenvironment.view.*;
@@ -71,11 +79,31 @@ public class LineFormTypeDefDialog extends BaseDialog {
 	public LineFormTypeDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 		super(owner, true);
 		initialize();
-
+		addEscapeKey();
 		setRelativeLocation(owner);
 		setElement(element);
 		show();
 	}
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 1596889083747329566L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 
 	/**
 	 * connEtoC1: (BtnOk.action.actionPerformed(java.awt.event.ActionEvent) -->

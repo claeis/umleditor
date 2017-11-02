@@ -1,5 +1,13 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -74,11 +82,32 @@ public class UmlParameterDialog extends ch.softenvironment.view.BaseDialog {
 	public UmlParameterDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 		super(owner, true);
 		initialize();
+		addEscapeKey();
 		setRelativeLocation(owner);
 		setElement(element);
 		show();
 	}
 
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 8829495523917981954L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 	/**
 	 * Comment
 	 */
