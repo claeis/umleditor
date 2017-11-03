@@ -24,34 +24,6 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface OrderingKind extends java.io.Serializable
 {
-<<<<<<< HEAD
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 36619BC301D6 detail_begin "OrderingKind"
-
-  // -end- 36619BC301D6 detail_begin "OrderingKind"
-
-  /** The elements of the set have no inherent ordering.
-   */
-  // -beg- preserve=no 3C716787013D var36619BC301D6 "UNORDERED"
-  public static final int UNORDERED = 1;
-  // -end- 3C716787013D var36619BC301D6 "UNORDERED"
-
-  /** The elements of the set have a sequential ordering.
-   */
-  // -beg- preserve=no 3C71679200FC var36619BC301D6 "ORDERED"
-  public static final int ORDERED = 2;
-  // -end- 3C71679200FC var36619BC301D6 "ORDERED"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 36619BC301D6 detail_end "OrderingKind"
-
-  // -end- 36619BC301D6 detail_end "OrderingKind"
-
-}
-
-=======
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 36619BC301D6 detail_begin "OrderingKind"
@@ -77,4 +49,3 @@ public static final int ORDERED = 2;
 // -end- 36619BC301D6 detail_end "OrderingKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

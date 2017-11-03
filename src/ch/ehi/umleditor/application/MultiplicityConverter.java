@@ -1,12 +1,7 @@
 package ch.ehi.umleditor.application;
 
-<<<<<<< HEAD
-/* 
- *This file is part of the UML/INTERLIS-Editor.
-=======
 /*
  * This file is part of the UML/INTERLIS-Editor.
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
  * For more information, please see <http://www.umleditor.org/>.
  *
  * This library is free software; you can redistribute it and/or
@@ -26,20 +21,12 @@ package ch.ehi.umleditor.application;
 import ch.ehi.uml1_4.foundation.datatypes.*;
 import ch.ehi.uml1_4.implementation.*;
 import ch.softenvironment.util.*;
-<<<<<<< HEAD
-/**
- * Convert Multiplicity into Strings and vice versa.
- * Manage different Cardinality's.
- *
- * @author Peter Hirzel <i>soft</i>Environment 
-=======
 
 /**
  * Convert Multiplicity into Strings and vice versa. Manage different
  * Cardinality's.
  *
  * @author Peter Hirzel <i>soft</i>Environment
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
  * @version $Revision: 1.3 $ $Date: 2006-06-29 22:08:56 $
  */
 public abstract class MultiplicityConverter {
@@ -50,169 +37,6 @@ public abstract class MultiplicityConverter {
 	private final static String RANGE_ONE = "1";
 	private final static String INFINITE_RANGE = "*";
 	private final static String MULTIPLE_RANGES_SEPARATOR = ",";
-<<<<<<< HEAD
-/**
- * Convert String-Cardinality into long-Cardinality.
- */
-private static long convertString(String rangeValue) {
-	if (rangeValue.indexOf(INFINITE_RANGE) >= 0) {
-		// contains "*"
-		return Long.MAX_VALUE;
-	} else {
-		return ((new Long(rangeValue.trim())).longValue());
-	}
-}
-/**
- * Convert char-Cardinality into int-Cardinality.
- * Assumes from-literal with length <= 1 Character.
- */
-private static String convertValue(long value) {
-	if (value == Long.MAX_VALUE) {
-		return INFINITE_RANGE;
-	} else {
-		return (new Long(value)).toString();
-	}
-}
-/**
- * Create a mulitplicity instance.
- * @see getCardinalities()
- * @param range String (for e.g. "1..*" or "0" or "0,1,5..*")
- */
-public static Multiplicity createMultiplicity(String range) {
-	if ((range == null) || (range.trim().length() == 0)) {
-		// no range
-		return null;
-	} else {
-		try {
-			Multiplicity multiplicity = new UmlMultiplicity();
-			int index = 0;
-			while (index < range.length()) {
-				int endOfRange = range.indexOf(MULTIPLE_RANGES_SEPARATOR, index);
-				String subRange = null;
-				if (endOfRange > 0) {
-					// comma separated multi-range
-					subRange = range.substring(index, endOfRange);
-					index = endOfRange + 1;
-				} else {
-					// single range
-					subRange = range.substring(index, range.length());
-					index = range.length();
-				}
-
-				multiplicity.addRange(parseRange(subRange));
-			}		
-			return multiplicity;
-		} catch(NumberFormatException e) {
-			throw new DeveloperException("Gültige Formatbeispiele:\n- 0\n- 4..*\n- 1,5..9,27..*", "Eingabefehler", e);
-		}
-	}
-}
-/**
- * Return a set of Cardinality-Ranges.
- */
-public static Multiplicity get0toN() {
-	MultiplicityRange multiplicityRange = new UmlMultiplicityRange();
-	multiplicityRange.setLower(0);
-	multiplicityRange.setUpper(Long.MAX_VALUE);
-	Multiplicity multiplicity = new UmlMultiplicity();
-	multiplicity.addRange(multiplicityRange);
-	return multiplicity;
-}
-/**
- * Return a set of Cardinality-Ranges.
- */
-public static java.util.Vector getDefaultCardinalities() {
-	java.util.Vector cardinalities = new java.util.Vector(7);
-
-	cardinalities.add(EMPTY_RANGE);
-	cardinalities.add(RANGE_ZERO);
-	cardinalities.add(RANGE_ONE);
-	cardinalities.add(RANGE_ZERO + RANGE_SEPARATOR + INFINITE_RANGE);
-	cardinalities.add(RANGE_ONE + RANGE_SEPARATOR + INFINITE_RANGE);
-	cardinalities.add(RANGE_ZERO + RANGE_SEPARATOR + RANGE_ONE);
-	cardinalities.add(INFINITE_RANGE);
-
-	return cardinalities;
-}
-/**
- * Return multiplicity Range as String.
- */
-public static String getRange(Multiplicity multiplicity) {
-	if (multiplicity == null) {
-		// empty Range
-		return EMPTY_RANGE;
-	} else {
-		java.util.Iterator iterator = multiplicity.iteratorRange();
-		String range = EMPTY_RANGE;
-		while (iterator.hasNext()) {
-			MultiplicityRange multiplicityRange = (UmlMultiplicityRange)iterator.next();
-			long from = multiplicityRange.getLower();
-			long to = multiplicityRange.getUpper();
-			if (range.length() > 0) {
-				// create multi range "1..3, 7..8"
-				range = range + MULTIPLE_RANGES_SEPARATOR;
-			}
-			if (from == to) {
-				range = range + convertValue(from);
-			} else {
-				range = range + convertValue(from) + RANGE_SEPARATOR + convertValue(to);
-			}
-		}
-		return range;
-	}
-}
-/**
- * @return whether Cardinality is 1 or greater than 1 is given.
- */
-public static boolean isMandatory(Multiplicity m) {
-	String range = getRange(m);
-	return ((range.indexOf(RANGE_ZERO) < 0) && 
-		(!range.equals(EMPTY_RANGE)) &&
-		(!range.equals(INFINITE_RANGE)));
-}
-/**
- * @return comparison of two Multiplicities.
- */
-public static boolean isSame(Multiplicity m1, Multiplicity m2) {
-	if ((m1 == null) && (m2 == null)) {
-		return true;
-	}
-	return getRange(m1).equals(getRange(m2));
-}
-/**
- * Parse a single Range.
- * @param range (for e.g. "0" or "1..*" or "0,3..5,19..*")
- */
-private static MultiplicityRange parseRange(String range) {
-	// create Range	
-	MultiplicityRange multiplicityRange = new UmlMultiplicityRange();
-
-	int separatorIndex = range.indexOf(RANGE_SEPARATOR);
-	if (separatorIndex < 0) {
-		// no range => lower == to
-		if(range.equals(INFINITE_RANGE)){
-			multiplicityRange.setLower(0);
-			multiplicityRange.setUpper(Long.MAX_VALUE);
-		}else{
-			multiplicityRange.setLower(convertString(range));
-			multiplicityRange.setUpper(multiplicityRange.getLower());
-		}
-	} else {
-		// range lower..upper
-		long lower = convertString(range.substring(0, separatorIndex));
-		long upper = convertString(range.substring(range.lastIndexOf(RANGE_SEPARATOR) + RANGE_SEPARATOR.length(), range.length()));
-		if (upper < lower) {
-			multiplicityRange.setLower(upper);
-			multiplicityRange.setUpper(lower);
-		} else {
-			multiplicityRange.setLower(lower);
-			multiplicityRange.setUpper(upper);
-		}
-	}
-
-	return multiplicityRange;
-}
-=======
 
 	/**
 	 * Convert String-Cardinality into long-Cardinality.
@@ -387,5 +211,4 @@ private static MultiplicityRange parseRange(String range) {
 
 		return multiplicityRange;
 	}
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

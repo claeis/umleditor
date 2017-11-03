@@ -21,24 +21,6 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Action;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:06 $
  */
-<<<<<<< HEAD
-public interface UninterpretedAction extends Action , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CAD6860352 detail_begin "UninterpretedAction"
-
-  // -end- 33CAD6860352 detail_begin "UninterpretedAction"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CAD6860352 detail_end "UninterpretedAction"
-
-  // -end- 33CAD6860352 detail_end "UninterpretedAction"
-
-}
-
-=======
 public interface UninterpretedAction extends Action, java.io.Serializable
 {
 // declare/define something only in the code
@@ -54,4 +36,3 @@ public interface UninterpretedAction extends Action, java.io.Serializable
 // -end- 33CAD6860352 detail_end "UninterpretedAction"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

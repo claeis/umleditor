@@ -16,50 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-<<<<<<< HEAD
-
-              // -beg- preserve=no 3C1DBA36021A package "ClassDefKind"
-package ch.ehi.interlis.modeltopicclass;
-              // -end- 3C1DBA36021A package "ClassDefKind"
-
-              // -beg- preserve=no 3C1DBA36021A autoimport "ClassDefKind"
-
-              // -end- 3C1DBA36021A autoimport "ClassDefKind"
-
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 3C1DBA36021A import "ClassDefKind"
-
-              // -end- 3C1DBA36021A import "ClassDefKind"
-
-              /** @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:34 $
-               */
-public class ClassDefKind implements java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBA36021A detail_begin "ClassDefKind"
-
-                // -end- 3C1DBA36021A detail_begin "ClassDefKind"
-
-                // -beg- preserve=no 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
-                public static final int CLASS = 1;
-                // -end- 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
-
-                // -beg- preserve=no 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
-                public static final int STRUCTURE = 2;
-                // -end- 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
-
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBA36021A detail_end "ClassDefKind"
-
-                // -end- 3C1DBA36021A detail_end "ClassDefKind"
-
-              }
-
-=======
 // -beg- preserve=no 3C1DBA36021A package "ClassDefKind"
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3C1DBA36021A package "ClassDefKind"
@@ -102,4 +58,3 @@ public class ClassDefKind implements java.io.Serializable {
 	// -end- 3C1DBA36021A detail_end "ClassDefKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

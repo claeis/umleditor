@@ -23,22 +23,6 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface ChangeableKind extends java.io.Serializable
 {
-<<<<<<< HEAD
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD6F820208 detail_begin "ChangeableKind"
-
-  // -end- 33DD6F820208 detail_begin "ChangeableKind"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD6F820208 detail_end "ChangeableKind"
-
-  // -end- 33DD6F820208 detail_end "ChangeableKind"
-
-}
-
-=======
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 33DD6F820208 detail_begin "ChangeableKind"
@@ -52,4 +36,3 @@ public interface ChangeableKind extends java.io.Serializable
 // -end- 33DD6F820208 detail_end "ChangeableKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

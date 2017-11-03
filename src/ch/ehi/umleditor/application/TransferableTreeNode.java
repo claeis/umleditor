@@ -10,34 +10,6 @@ import javax.swing.tree.*;
 
 public class TransferableTreeNode implements Transferable {
 
-<<<<<<< HEAD
-  public static DataFlavor TREE_PATH_FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType,
-							     "Tree Path");
-  DataFlavor flavors[] = { TREE_PATH_FLAVOR };
-  TreePath path;
-
-  public TransferableTreeNode(TreePath tp) {
-    path = tp;
-  }
-
-  public synchronized DataFlavor[] getTransferDataFlavors() {
-    return flavors;
-  }
-
-  public boolean isDataFlavorSupported(DataFlavor flavor) {
-    //return (flavor.getRepresentationClass() == TreePath.class);
-    return true;
-  }
-
-  public synchronized Object getTransferData(DataFlavor flavor)
-    throws UnsupportedFlavorException, IOException {
-    if (isDataFlavorSupported(flavor)) {
-      return (Object)path;
-    } else {
-      throw new UnsupportedFlavorException(flavor);
-    }
-  }
-=======
 	public static DataFlavor TREE_PATH_FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, "Tree Path");
 	DataFlavor flavors[] = { TREE_PATH_FLAVOR };
 	TreePath path;
@@ -62,5 +34,4 @@ public class TransferableTreeNode implements Transferable {
 			throw new UnsupportedFlavorException(flavor);
 		}
 	}
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

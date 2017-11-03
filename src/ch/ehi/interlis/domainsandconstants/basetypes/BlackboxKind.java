@@ -16,10 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 // -beg- preserve=no 448981CF022E package "BlackboxKind"
 package ch.ehi.interlis.domainsandconstants.basetypes;
 // -end- 448981CF022E package "BlackboxKind"
@@ -34,35 +30,6 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
 // -end- 448981CF022E import "BlackboxKind"
 
-<<<<<<< HEAD
-/** @author Claude Eisenhut
- *  @version $Revision: 1.1 $ $Date: 2006-06-13 14:26:18 $
- */
-public class BlackboxKind
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448981CF022E detail_begin "BlackboxKind"
-
-  // -end- 448981CF022E detail_begin "BlackboxKind"
-
-  // -beg- preserve=no 448981E102B6 var448981CF022E "XML"
-  public static final int XML = 1;
-  // -end- 448981E102B6 var448981CF022E "XML"
-
-  // -beg- preserve=no 448981ED01A5 var448981CF022E "BINARY"
-  public static final int BINARY = 2;
-  // -end- 448981ED01A5 var448981CF022E "BINARY"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 448981CF022E detail_end "BlackboxKind"
-
-  // -end- 448981CF022E detail_end "BlackboxKind"
-
-}
-
-=======
 /**
  * @author Claude Eisenhut
  * @version $Revision: 1.1 $ $Date: 2006-06-13 14:26:18 $
@@ -89,4 +56,3 @@ public class BlackboxKind {
 	// -end- 448981CF022E detail_end "BlackboxKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

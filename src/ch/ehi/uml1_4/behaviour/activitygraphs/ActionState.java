@@ -23,66 +23,6 @@ import ch.ehi.uml1_4.foundation.datatypes.Multiplicity;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:40 $
  */
-<<<<<<< HEAD
-public interface ActionState extends SimpleState , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3288E51A0316 detail_begin "ActionState"
-
-  // -end- 3288E51A0316 detail_begin "ActionState"
-
-  /** get current value of isDynamic
-   *  @see #setDynamic
-   */
-  // -beg- preserve=no 36462B9902EE get_head3288E51A0316 "isDynamic"
-   boolean isDynamic()
-  // -end- 36462B9902EE get_head3288E51A0316 "isDynamic"
-    ; // empty
-  /** set current value of isDynamic
-   *  @see #isDynamic
-   */
-  // -beg- preserve=no 36462B9902EE set_head3288E51A0316 "isDynamic"
-   void setDynamic(boolean value1)
-  // -end- 36462B9902EE set_head3288E51A0316 "isDynamic"
-    ; // empty
-  /** get current value of dynamicArguments
-   *  @see #setDynamicArguments
-   */
-  // -beg- preserve=no 36462D0E0398 get_head3288E51A0316 "dynamicArguments"
-   ArgListsExpression getDynamicArguments()
-  // -end- 36462D0E0398 get_head3288E51A0316 "dynamicArguments"
-    ; // empty
-  /** set current value of dynamicArguments
-   *  @see #getDynamicArguments
-   */
-  // -beg- preserve=no 36462D0E0398 set_head3288E51A0316 "dynamicArguments"
-   void setDynamicArguments(ArgListsExpression value1)
-  // -end- 36462D0E0398 set_head3288E51A0316 "dynamicArguments"
-    ; // empty
-  /** get current value of dynamicMultiplicity
-   *  @see #setDynamicMultiplicity
-   */
-  // -beg- preserve=no 36A4EC7D019A get_head3288E51A0316 "dynamicMultiplicity"
-   Multiplicity getDynamicMultiplicity()
-  // -end- 36A4EC7D019A get_head3288E51A0316 "dynamicMultiplicity"
-    ; // empty
-  /** set current value of dynamicMultiplicity
-   *  @see #getDynamicMultiplicity
-   */
-  // -beg- preserve=no 36A4EC7D019A set_head3288E51A0316 "dynamicMultiplicity"
-   void setDynamicMultiplicity(Multiplicity value1)
-  // -end- 36A4EC7D019A set_head3288E51A0316 "dynamicMultiplicity"
-    ; // empty
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3288E51A0316 detail_end "ActionState"
-
-  // -end- 3288E51A0316 detail_end "ActionState"
-
-}
-
-=======
 public interface ActionState extends SimpleState, java.io.Serializable
 {
 // declare/define something only in the code
@@ -140,4 +80,3 @@ void setDynamicMultiplicity(Multiplicity value1)
 // -end- 3288E51A0316 detail_end "ActionState"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

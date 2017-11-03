@@ -21,24 +21,6 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Action;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:57 $
  */
-<<<<<<< HEAD
-public interface DestroyAction extends Action , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CAD67C00FA detail_begin "DestroyAction"
-
-  // -end- 33CAD67C00FA detail_begin "DestroyAction"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CAD67C00FA detail_end "DestroyAction"
-
-  // -end- 33CAD67C00FA detail_end "DestroyAction"
-
-}
-
-=======
 public interface DestroyAction extends Action, java.io.Serializable
 {
 // declare/define something only in the code
@@ -54,4 +36,3 @@ public interface DestroyAction extends Action, java.io.Serializable
 // -end- 33CAD67C00FA detail_end "DestroyAction"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

@@ -23,22 +23,6 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface UnlimitedInteger extends java.io.Serializable
 {
-<<<<<<< HEAD
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3635582D03D4 detail_begin "UnlimitedInteger"
-
-  // -end- 3635582D03D4 detail_begin "UnlimitedInteger"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3635582D03D4 detail_end "UnlimitedInteger"
-
-  // -end- 3635582D03D4 detail_end "UnlimitedInteger"
-
-}
-
-=======
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 3635582D03D4 detail_begin "UnlimitedInteger"
@@ -52,4 +36,3 @@ public interface UnlimitedInteger extends java.io.Serializable
 // -end- 3635582D03D4 detail_end "UnlimitedInteger"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

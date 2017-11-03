@@ -21,24 +21,6 @@ import ch.ehi.uml1_4.foundation.datatypes.Expression;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:46 $
  */
-<<<<<<< HEAD
-public interface TypeExpression extends Expression , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3611C2150230 detail_begin "TypeExpression"
-
-  // -end- 3611C2150230 detail_begin "TypeExpression"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3611C2150230 detail_end "TypeExpression"
-
-  // -end- 3611C2150230 detail_end "TypeExpression"
-
-}
-
-=======
 public interface TypeExpression extends Expression, java.io.Serializable
 {
 // declare/define something only in the code
@@ -54,4 +36,3 @@ public interface TypeExpression extends Expression, java.io.Serializable
 // -end- 3611C2150230 detail_end "TypeExpression"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

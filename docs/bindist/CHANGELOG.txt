@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 UML-Editor 3.6.3.5 (2017-11-02)
 ----------------------------------
 - Fix multiple .ili on node and filename
@@ -39,7 +37,6 @@ UML-Editor 3.6.3 (2017-08-03)
 - Support to "display name" from ili2db at Class, Attributes, Domains and Attributes type enumeration.
 - fix unused imports.
 
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 UML-Editor 3.6.2 (2015-12-23) 
 ----------------------------------
 - improved label "Language of model presentation"

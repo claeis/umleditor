@@ -16,42 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-<<<<<<< HEAD
-
-              // -beg- preserve=no 3C3F128001E1 package "TransferIdKind"
-package ch.ehi.interlis.modeltopicclass;
-              // -end- 3C3F128001E1 package "TransferIdKind"
-
-              // -beg- preserve=no 3C3F128001E1 autoimport "TransferIdKind"
-
-              // -end- 3C3F128001E1 autoimport "TransferIdKind"
-
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 3C3F128001E1 import "TransferIdKind"
-
-              // -end- 3C3F128001E1 import "TransferIdKind"
-
-              /** @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:13 $
-               */
-public interface TransferIdKind extends java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C3F128001E1 detail_begin "TransferIdKind"
-
-                // -end- 3C3F128001E1 detail_begin "TransferIdKind"
-
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C3F128001E1 detail_end "TransferIdKind"
-
-                // -end- 3C3F128001E1 detail_end "TransferIdKind"
-
-              }
-
-=======
 // -beg- preserve=no 3C3F128001E1 package "TransferIdKind"
 package ch.ehi.interlis.modeltopicclass;
 // -end- 3C3F128001E1 package "TransferIdKind"
@@ -84,4 +48,3 @@ public interface TransferIdKind extends java.io.Serializable {
 	// -end- 3C3F128001E1 detail_end "TransferIdKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

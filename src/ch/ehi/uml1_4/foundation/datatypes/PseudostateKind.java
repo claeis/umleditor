@@ -23,22 +23,6 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface PseudostateKind extends java.io.Serializable
 {
-<<<<<<< HEAD
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33E139AE01C2 detail_begin "PseudostateKind"
-
-  // -end- 33E139AE01C2 detail_begin "PseudostateKind"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33E139AE01C2 detail_end "PseudostateKind"
-
-  // -end- 33E139AE01C2 detail_end "PseudostateKind"
-
-}
-
-=======
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 33E139AE01C2 detail_begin "PseudostateKind"
@@ -52,4 +36,3 @@ public interface PseudostateKind extends java.io.Serializable
 // -end- 33E139AE01C2 detail_end "PseudostateKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

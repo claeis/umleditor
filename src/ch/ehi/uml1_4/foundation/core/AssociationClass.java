@@ -23,24 +23,6 @@ import ch.ehi.uml1_4.foundation.core.Class;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:19 $
  */
-<<<<<<< HEAD
-public interface AssociationClass extends Association , Class , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33657990026C detail_begin "AssociationClass"
-
-  // -end- 33657990026C detail_begin "AssociationClass"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33657990026C detail_end "AssociationClass"
-
-  // -end- 33657990026C detail_end "AssociationClass"
-
-}
-
-=======
 public interface AssociationClass extends Association, Class, java.io.Serializable
 {
 // declare/define something only in the code
@@ -56,4 +38,3 @@ public interface AssociationClass extends Association, Class, java.io.Serializab
 // -end- 33657990026C detail_end "AssociationClass"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

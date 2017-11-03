@@ -18,18 +18,10 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 public interface DescriptionPanelListener extends java.util.EventListener {
-<<<<<<< HEAD
-/**
- * 
- * @param newEvent java.util.EventObject
- */
-void pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(java.util.EventObject newEvent);
-=======
 	/**
 	 *
 	 * @param newEvent
 	 *            java.util.EventObject
 	 */
 	void pnlEditorSimpleEditorPanel_txaEditorKey_keyReleased(java.util.EventObject newEvent);
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

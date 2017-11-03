@@ -23,22 +23,6 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface Geometry extends java.io.Serializable
 {
-<<<<<<< HEAD
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3A5E835501D4 detail_begin "Geometry"
-
-  // -end- 3A5E835501D4 detail_begin "Geometry"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3A5E835501D4 detail_end "Geometry"
-
-  // -end- 3A5E835501D4 detail_end "Geometry"
-
-}
-
-=======
 // declare/define something only in the code
 // please fill in/modify the following section
 // -beg- preserve=no 3A5E835501D4 detail_begin "Geometry"
@@ -52,4 +36,3 @@ public interface Geometry extends java.io.Serializable
 // -end- 3A5E835501D4 detail_end "Geometry"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

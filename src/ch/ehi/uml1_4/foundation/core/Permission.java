@@ -22,24 +22,6 @@ import ch.ehi.uml1_4.foundation.core.Dependency;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:41 $
  */
-<<<<<<< HEAD
-public interface Permission extends Dependency , java.io.Serializable
-{
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33F5A6AA03CA detail_begin "Permission"
-
-  // -end- 33F5A6AA03CA detail_begin "Permission"
-
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33F5A6AA03CA detail_end "Permission"
-
-  // -end- 33F5A6AA03CA detail_end "Permission"
-
-}
-
-=======
 public interface Permission extends Dependency, java.io.Serializable
 {
 // declare/define something only in the code
@@ -55,4 +37,3 @@ public interface Permission extends Dependency, java.io.Serializable
 // -end- 33F5A6AA03CA detail_end "Permission"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

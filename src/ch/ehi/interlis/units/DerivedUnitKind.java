@@ -16,42 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-<<<<<<< HEAD
-
-          // -beg- preserve=no 3C3F0FC90174 package "DerivedUnitKind"
-package ch.ehi.interlis.units;
-          // -end- 3C3F0FC90174 package "DerivedUnitKind"
-
-          // -beg- preserve=no 3C3F0FC90174 autoimport "DerivedUnitKind"
-
-          // -end- 3C3F0FC90174 autoimport "DerivedUnitKind"
-
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 3C3F0FC90174 import "DerivedUnitKind"
-
-          // -end- 3C3F0FC90174 import "DerivedUnitKind"
-
-          /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:20 $
-           */
-public interface DerivedUnitKind extends java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F0FC90174 detail_begin "DerivedUnitKind"
-
-            // -end- 3C3F0FC90174 detail_begin "DerivedUnitKind"
-
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F0FC90174 detail_end "DerivedUnitKind"
-
-            // -end- 3C3F0FC90174 detail_end "DerivedUnitKind"
-
-          }
-
-=======
 // -beg- preserve=no 3C3F0FC90174 package "DerivedUnitKind"
 package ch.ehi.interlis.units;
 // -end- 3C3F0FC90174 package "DerivedUnitKind"
@@ -84,4 +48,3 @@ public interface DerivedUnitKind extends java.io.Serializable {
 	// -end- 3C3F0FC90174 detail_end "DerivedUnitKind"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

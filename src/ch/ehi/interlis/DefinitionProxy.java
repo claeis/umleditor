@@ -16,57 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-<<<<<<< HEAD
-
-          // -beg- preserve=no 3C1641110379 package "DefinitionProxy"
-package ch.ehi.interlis;
-          // -end- 3C1641110379 package "DefinitionProxy"
-
-          // -beg- preserve=no 3C1641110379 autoimport "DefinitionProxy"
-
-          // -end- 3C1641110379 autoimport "DefinitionProxy"
-
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 3C1641110379 import "DefinitionProxy"
-
-          // -end- 3C1641110379 import "DefinitionProxy"
-
-          /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:33:24 $
-           */
-public interface DefinitionProxy extends java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C1641110379 detail_begin "DefinitionProxy"
-
-            // -end- 3C1641110379 detail_begin "DefinitionProxy"
-
-            /** get current value of isProxy
-             *  true if this is not an actual definition, but a placeholder, so that references can point to something
-             *  @see #setProxy
-             */
-            // -beg- preserve=no 3C16416801D0 get_head3C1641110379 "isProxy"
-             boolean isProxy()
-            // -end- 3C16416801D0 get_head3C1641110379 "isProxy"
-              ; // empty
-            /** set current value of isProxy
-             *  @see #isProxy
-             */
-            // -beg- preserve=no 3C16416801D0 set_head3C1641110379 "isProxy"
-             void setProxy(boolean value1)
-            // -end- 3C16416801D0 set_head3C1641110379 "isProxy"
-              ; // empty
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C1641110379 detail_end "DefinitionProxy"
-
-            // -end- 3C1641110379 detail_end "DefinitionProxy"
-
-          }
-
-=======
 // -beg- preserve=no 3C1641110379 package "DefinitionProxy"
 package ch.ehi.interlis;
 // -end- 3C1641110379 package "DefinitionProxy"
@@ -119,4 +68,3 @@ public interface DefinitionProxy extends java.io.Serializable {
 	// -end- 3C1641110379 detail_end "DefinitionProxy"
 
 }
->>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
