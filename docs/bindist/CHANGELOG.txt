@@ -1,3 +1,45 @@
+<<<<<<< HEAD
+=======
+UML-Editor 3.6.3.5 (2017-11-02)
+----------------------------------
+- Fix multiple .ili on node and filename
+- Drag and drop in NavigationView!
+- Handle escape key to close all Dialogs
+
+UML-Editor 3.6.3.4 (2017-10-11)
+----------------------------------
+- Fix report module null meta-attributes
+- Umleditor now use meta-attribute mapping!
+
+UML-Editor 3.6.3.3 (2017-10-11)
+----------------------------------
+- Fix Jmenu with Look and Feel.
+
+UML-Editor 3.6.3.2 (2017-10-10)
+----------------------------------
+- Html report module now uses meta attributes from Class and attributes.
+- Show maximum length of String attribute type to html reports module.
+- 40% code refactoring.
+- Update Look and Feel and delete old styles.
+- Fix Jtree to select first package by default.
+
+UML-Editor 3.6.3.1 (2017-09-19)
+----------------------------------
+- Support to ilivalid attributes "name and msg" on constraints.
+- Umleditor do check the model before export an interlis file.
+- Meta attributes can be imported and exported without problems.
+- Icons added to navigation view.
+- Icon added to project.
+- Umleditor show graphical hidden options.
+- extension file .ili added to navigation view.
+- ili2c-4.7.3
+
+UML-Editor 3.6.3 (2017-08-03)
+----------------------------------
+- Support to "display name" from ili2db at Class, Attributes, Domains and Attributes type enumeration.
+- fix unused imports.
+
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 UML-Editor 3.6.2 (2015-12-23) 
 ----------------------------------
 - improved label "Language of model presentation"

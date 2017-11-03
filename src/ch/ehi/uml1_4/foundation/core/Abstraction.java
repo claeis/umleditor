@@ -23,6 +23,7 @@ import ch.ehi.uml1_4.foundation.datatypes.MappingExpression;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:17 $
  */
+<<<<<<< HEAD
 public interface Abstraction extends Dependency , java.io.Serializable
 {
   // declare/define something only in the code
@@ -53,3 +54,34 @@ public interface Abstraction extends Dependency , java.io.Serializable
 
 }
 
+=======
+public interface Abstraction extends Dependency, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3388FE7D006E detail_begin "Abstraction"
+
+// -end- 3388FE7D006E detail_begin "Abstraction"
+
+/** get current value of mapping
+ *  @see #setMapping
+ */
+// -beg- preserve=no 33EB8A4500B4 get_head3388FE7D006E "mapping"
+MappingExpression getMapping()
+// -end- 33EB8A4500B4 get_head3388FE7D006E "mapping"
+;     // empty
+/** set current value of mapping
+ *  @see #getMapping
+ */
+// -beg- preserve=no 33EB8A4500B4 set_head3388FE7D006E "mapping"
+void setMapping(MappingExpression value1)
+// -end- 33EB8A4500B4 set_head3388FE7D006E "mapping"
+;     // empty
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3388FE7D006E detail_end "Abstraction"
+
+// -end- 3388FE7D006E detail_end "Abstraction"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

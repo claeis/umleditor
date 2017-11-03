@@ -21,6 +21,7 @@ import ch.ehi.uml1_4.foundation.datatypes.Expression;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:44 $
  */
+<<<<<<< HEAD
 public interface IterationExpression extends Expression , java.io.Serializable
 {
   // declare/define something only in the code
@@ -37,3 +38,20 @@ public interface IterationExpression extends Expression , java.io.Serializable
 
 }
 
+=======
+public interface IterationExpression extends Expression, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3611C1DE02B2 detail_begin "IterationExpression"
+
+// -end- 3611C1DE02B2 detail_begin "IterationExpression"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3611C1DE02B2 detail_end "IterationExpression"
+
+// -end- 3611C1DE02B2 detail_end "IterationExpression"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

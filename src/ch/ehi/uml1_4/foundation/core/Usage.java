@@ -22,6 +22,7 @@ import ch.ehi.uml1_4.foundation.core.Dependency;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:43 $
  */
+<<<<<<< HEAD
 public interface Usage extends Dependency , java.io.Serializable
 {
   // declare/define something only in the code
@@ -38,3 +39,20 @@ public interface Usage extends Dependency , java.io.Serializable
 
 }
 
+=======
+public interface Usage extends Dependency, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33E8FEF701E0 detail_begin "Usage"
+
+// -end- 33E8FEF701E0 detail_begin "Usage"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33E8FEF701E0 detail_end "Usage"
+
+// -end- 33E8FEF701E0 detail_end "Usage"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

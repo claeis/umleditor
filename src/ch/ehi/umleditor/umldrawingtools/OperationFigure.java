@@ -1,4 +1,8 @@
 package ch.ehi.umleditor.umldrawingtools;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -21,12 +25,24 @@ import ch.ehi.uml1_4.foundation.datatypes.VisibilityKind;
 import ch.ehi.uml1_4.implementation.UmlOperation;
 
 /**
+<<<<<<< HEAD
  * Figure for displaying a single UmlOperation within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author Peter Hirzel <i>soft</i>Environment 
  * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
  */
 class OperationFigure extends TextFigure {
+=======
+ * Figure for displaying a single UmlOperation within a ClassFigure or
+ * AssociationAttributeFigure compartment.
+ *
+ * @author Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.4 $ $Date: 2005-09-16 09:50:06 $
+ */
+class OperationFigure extends TextFigure {
+	
+	private static final long serialVersionUID = -7919281029920103105L;
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 	private UmlOperation operation = null;
 	private ClassDiagramView classDiagram = null;
 
@@ -38,6 +54,7 @@ class OperationFigure extends TextFigure {
 	private final char VISIBILITY_PROTECTED = '#';
 	private final char VISIBILITY_PRIVATE = '-';
 	private final char VISIBILITY_PACKAGE = '~';
+<<<<<<< HEAD
 	
 /**
  * Constructor comment.
@@ -94,4 +111,67 @@ public void updateModel() {
 	text = prefix + text + PARAMETER_BEGIN + PARAMETER_END;
 	super.setText(text);
 }
+=======
+
+	/**
+	 * Constructor comment.
+	 */
+	public OperationFigure(UmlOperation operation, ClassDiagramView classDiagram) {
+		super();
+		this.operation = operation;
+		this.classDiagram = classDiagram;
+	}
+
+	/**
+	 * Format the Attribute Representation.
+	 * 
+	 * @see ClassDef#createAttributeFigure(AttributeDef)
+	 */
+	public String getPureOperationName(String name) {
+		String realName = name;
+		int index = name.indexOf(PARAMETER_BEGIN);
+		if (index > 0) {
+			realName = name.substring(1 /* skip visibility */, index);
+		} else {
+			// TODO NYI: skip <visibility return type>
+			realName = name;
+		}
+
+		return realName.trim();
+	}
+
+	/**
+	 * Format the Operation Representation.
+	 * 
+	 * @see ClassDef#createOperationFigure(..)
+	 */
+	public void updateModel() {
+		String text = operation.getDefLangName();
+		/*
+		 * if (classDiagram.isShowAttributeMultiplicity()) { text = text +
+		 * BEGIN_MULTIPLICITY +
+		 * MultiplicityConverter.getRange(attributeDef.getMultiplicity()) +
+		 * END_MULTIPLICITY; } if (classDiagram.isShowAttributeTypes() &&
+		 * attributeDef.containsAttrType()) { text = text + " " + TYPE_SEPARATOR
+		 * + " " + IliBaseTypeKind.getTypeName(attributeDef,false); }
+		 */
+		char prefix = ' ';
+		switch (operation.getVisibility()) {
+		case VisibilityKind.PUBLIC:
+			prefix = VISIBILITY_PUBLIC;
+			break;
+		case VisibilityKind.PROTECTED:
+			prefix = VISIBILITY_PROTECTED;
+			break;
+		case VisibilityKind.PRIVATE:
+			prefix = VISIBILITY_PRIVATE;
+			break;
+		case VisibilityKind.PACKAGE:
+			prefix = VISIBILITY_PACKAGE;
+			break;
+		}
+		text = prefix + text + PARAMETER_BEGIN + PARAMETER_END;
+		super.setText(text);
+	}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

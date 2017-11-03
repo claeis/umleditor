@@ -19,8 +19,13 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 /**
  * Constants used by JHotDraw but not yet defined by JHotDraw.
+<<<<<<< HEAD
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
+=======
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:56 $
  * @see ColorMap
  * @see AttributeFigure.drawFrame(Graphics)
@@ -33,8 +38,13 @@ public abstract class JHotDrawConstants {
 	// @see AttributeFigure.drawFrame(Graphics)
 	public final static String TEXT_COLOR = "TextColor";
 	// @see TextFigure.getAttribute(String)
+<<<<<<< HEAD
 //	public final static String FONT_SIZE = "FontSize";
 //	public final static String FONT_STYLE = "FontStyle";
+=======
+	// public final static String FONT_SIZE = "FontSize";
+	// public final static String FONT_STYLE = "FontStyle";
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 	public final static String FONT_NAME = "FontName";
 	// @see AttributeFigure.getFrame/FillColor()
 	public final static String FILL_COLOR = "FillColor";

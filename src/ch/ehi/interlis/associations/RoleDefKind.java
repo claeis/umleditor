@@ -18,6 +18,7 @@ package ch.ehi.interlis.associations;
 
 // -end- 3C1DB2DC00AB import "RoleDefKind"
 
+<<<<<<< HEAD
 public class RoleDefKind
 {
   // declare/define something only in the code
@@ -46,3 +47,31 @@ public class RoleDefKind
 
 }
 
+=======
+public class RoleDefKind {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DB2DC00AB detail_begin "RoleDefKind"
+
+	// -end- 3C1DB2DC00AB detail_begin "RoleDefKind"
+
+	// -beg- preserve=no 3C1DB2FE01FF var3C1DB2DC00AB "NONE"
+	public static final int NONE = 1;
+	// -end- 3C1DB2FE01FF var3C1DB2DC00AB "NONE"
+
+	// -beg- preserve=no 3C1DB3120095 var3C1DB2DC00AB "AGGREGATE"
+	public static final int AGGREGATE = 2;
+	// -end- 3C1DB3120095 var3C1DB2DC00AB "AGGREGATE"
+
+	// -beg- preserve=no 3C1DB31702CD var3C1DB2DC00AB "COMPOSITE"
+	public static final int COMPOSITE = 3;
+	// -end- 3C1DB31702CD var3C1DB2DC00AB "COMPOSITE"
+
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DB2DC00AB detail_end "RoleDefKind"
+
+	// -end- 3C1DB2DC00AB detail_end "RoleDefKind"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

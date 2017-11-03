@@ -49,10 +49,17 @@ public class HtmlWriter
   //SortedMap <Werte, numeration>
   private SortedMap sortedMap = new TreeMap();
 
+<<<<<<< HEAD
   // für die Nummerierung vom TopicDef, ModelDef und Interlis2Def
   int numeration = 0;
 
   //wird benötigt für Stellen nach dem Komma: Package, Class, classDef
+=======
+  // fÃ¼r die Nummerierung vom TopicDef, ModelDef und Interlis2Def
+  int numeration = 0;
+
+  //wird benÃ¶tigt fÃ¼r Stellen nach dem Komma: Package, Class, classDef
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
   int iddP;
 
   //used in pass STRUCTURE, changed in walkTreeRecursive()
@@ -60,12 +67,20 @@ public class HtmlWriter
 
 
 
+<<<<<<< HEAD
   //Variable für den Durchgang
+=======
+  //Variable fÃ¼r den Durchgang
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
   //man vergleicht nachher im doWerte ob pass==<eine der Konstanten>
   //und setzt die Reihenfolge, wie das HTML niedergeschrieben wird
   int pass;
 
+<<<<<<< HEAD
   //???Sringwert für die die Leerschläge, bzw. Abstände in der Struktur
+=======
+  //???Sringwert fÃ¼r die die LeerschlÃ¤ge, bzw. AbstÃ¤nde in der Struktur
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
   String b = " ";
 
   double textIdent = 0.5;
@@ -134,12 +149,17 @@ public class HtmlWriter
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CEE8B46037F body3CEE891B03C7 "visitPackage"
+<<<<<<< HEAD
     //wird für sectionNumber benötigt
+=======
+    //wird fÃ¼r sectionNumber benÃ¶tigt
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
     numeration = numeration+1;
 
     //Wert es aktuellen Objekts
     String defLangName = encodeString(apackage.getDefLangName());
 
+<<<<<<< HEAD
     //aName - wird für die Angabe vom Link innerhalb der HTML - Datei benötigt
     //bsp: <a name="aName....">
     String aName = numeration+"_"+defLangName;
@@ -149,6 +169,17 @@ public class HtmlWriter
 
 
     //damit nur einmal die indexMap gefüllt wird!
+=======
+    //aName - wird fÃ¼r die Angabe vom Link innerhalb der HTML - Datei benÃ¶tigt
+    //bsp: <a name="aName....">
+    String aName = numeration+"_"+defLangName;
+
+    //??concated value fÃ¼r die Angabe der Werte+serialNumber, bzw. index vom Value
+    String value = numeration+" "+defLangName;
+
+
+    //damit nur einmal die indexMap gefÃ¼llt wird!
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
     if(pass==CONTENTS)
     {
       int sectionNumbers [] = new int[1];
@@ -164,7 +195,11 @@ public class HtmlWriter
       //concatedValue: numerationId+deflangName
       concatedValue = Integer.toString(numerationId[0])+" "+defLangName;
 
+<<<<<<< HEAD
       //concatedValue für den Link innerhalb der HTML-Datei
+=======
+      //concatedValue fÃ¼r den Link innerhalb der HTML-Datei
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
       aNameStructure = Integer.toString(numerationId[0])+"_"+defLangName;
     }else{
       concatedValue = defLangName;
@@ -248,7 +283,11 @@ public class HtmlWriter
               }
               hasHeader=true;
 
+<<<<<<< HEAD
               //iddP für Package wird erhöht
+=======
+              //iddP fÃ¼r Package wird erhÃ¶ht
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
               iddP++;
             }
             String defLangModelElement = encodeString(((ch.ehi.uml1_4.foundation.core.ModelElement)obj).getDefLangName());
@@ -304,7 +343,11 @@ public class HtmlWriter
 
             hasHeader=true;
 
+<<<<<<< HEAD
             //der Wert für die Kommastellen wird hier erhöht
+=======
+            //der Wert fÃ¼r die Kommastellen wird hier erhÃ¶ht
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
             iddP++;
           }
           String defLangClass = encodeString(((Class)obj).getDefLangName());
@@ -362,9 +405,15 @@ public class HtmlWriter
     if(linkElements){
       int numerationId[] = (int[])indexMap.get((ModelElement)aclass);
       String numeration = Integer.toString(numerationId[0])+"."+Integer.toString(numerationId[1]);
+<<<<<<< HEAD
       //für den Link innerhalb der HTML-Datei
       aName = numeration+"_"+classDefName;
       //concatedValue, dass geschrieben wird später
+=======
+      //fÃ¼r den Link innerhalb der HTML-Datei
+      aName = numeration+"_"+classDefName;
+      //concatedValue, dass geschrieben wird spÃ¤ter
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
       value = numeration+" "+classDefName;
     }else{
       value = classDefName;
@@ -389,7 +438,11 @@ public class HtmlWriter
       }
     }
 
+<<<<<<< HEAD
     //Hier wird der Werte für die Kommastellen auch erhöht
+=======
+    //Hier wird der Werte fÃ¼r die Kommastellen auch erhÃ¶ht
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
     //damit kommt man in eine neue Ebene, bzw. neuer Einzug
     iddP++;
 
@@ -688,6 +741,7 @@ public class HtmlWriter
                     str.append("&quot;");
                     break;
                 }
+<<<<<<< HEAD
                 case 'ä': {
                     str.append("&auml;");
                     break;
@@ -697,6 +751,17 @@ public class HtmlWriter
                     break;
                 }
                 case 'ü': {
+=======
+                case 'Ã¤': {
+                    str.append("&auml;");
+                    break;
+                }
+                case 'Ã¶': {
+                    str.append("&ouml;");
+                    break;
+                }
+                case 'Ã¼': {
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
                     str.append("&uuml;");
                     break;
                 }
@@ -724,8 +789,13 @@ public class HtmlWriter
     return ch.ehi.basics.i18n.MessageFormat.format(rsrc,resourceName,param0);
   }
   /**
+<<<<<<< HEAD
    * Geht über die ganze Struktur.
    * Die einzelnen Überschriften des HTML-Files werden auch hier geschrieben
+=======
+   * Geht Ã¼ber die ganze Struktur.
+   * Die einzelnen Ãœberschriften des HTML-Files werden auch hier geschrieben
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
    * @param apackage Package <das aktuelle Objekt>, das durchgemacht werden soll
    * @throws IOException wirft ev. Exception im Writer
    */
@@ -847,7 +917,11 @@ public class HtmlWriter
       boolean check = false;
       for(int a = 0;a<sortedModelElements.size();a++)
       {
+<<<<<<< HEAD
         //value: Object, bzw. String auf der list, dass dann in HTML geschrieben wird später
+=======
+        //value: Object, bzw. String auf der list, dass dann in HTML geschrieben wird spÃ¤ter
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
         ModelElement modelElement = (ModelElement)sortedModelElements.get(a);
         String name=modelElement.getDefLangName();if(name==null)name="";
 
@@ -894,7 +968,11 @@ public class HtmlWriter
 
       out.write("</font>");newline();
     }
+<<<<<<< HEAD
     //Counters werden zu ihrem Ursprungswert zurückgesetzt
+=======
+    //Counters werden zu ihrem Ursprungswert zurÃ¼ckgesetzt
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
     resetCounters();
   }
   class CompareByNameAndIdx implements java.util.Comparator
@@ -942,8 +1020,13 @@ public class HtmlWriter
     }
   }
   /**
+<<<<<<< HEAD
    * die INT - Werte, die für die ID's der Element gebraucht werden (Nummerierung der Element), werden wieder
    * auf ihren Ursprungswert zurückgesetzt.
+=======
+   * die INT - Werte, die fÃ¼r die ID's der Element gebraucht werden (Nummerierung der Element), werden wieder
+   * auf ihren Ursprungswert zurÃ¼ckgesetzt.
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
    */
   private void resetCounters()
   {

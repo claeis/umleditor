@@ -22,12 +22,24 @@ import CH.ifa.draw.figures.*;
 import ch.ehi.umleditor.application.*;
 
 /**
+<<<<<<< HEAD
  * Figure for displaying a single Attribute within a ClassFigure or AssociationAttributeFigure compartment.
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
  * @version $Revision: 1.2 $ $Date: 2004-03-05 17:26:42 $
  */
 class AttributeFigure extends TextFigure {
+=======
+ * Figure for displaying a single Attribute within a ClassFigure or
+ * AssociationAttributeFigure compartment.
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.2 $ $Date: 2004-03-05 17:26:42 $
+ */
+class AttributeFigure extends TextFigure {
+	
+	private static final long serialVersionUID = 7805538465170416848L;
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 	private AttributeDef attributeDef = null;
 	private ClassDiagramView classDiagram = null;
 
@@ -35,6 +47,7 @@ class AttributeFigure extends TextFigure {
 	protected final char BEGIN_MULTIPLICITY = '[';
 	protected final char END_MULTIPLICITY = ']';
 	protected final char TYPE_SEPARATOR = ':';
+<<<<<<< HEAD
 /**
  * AttributeFigure constructor comment.
  */
@@ -75,4 +88,52 @@ public void updateModel() {
 	}
 	super.setText(text);
 }
+=======
+
+	/**
+	 * AttributeFigure constructor comment.
+	 */
+	public AttributeFigure(AttributeDef attributeDef, ClassDiagramView classDiagram) {
+		super();
+		this.attributeDef = attributeDef;
+		this.classDiagram = classDiagram;
+	}
+
+	/**
+	 * Format the Attribute Representation.
+	 * 
+	 * @see ClassDef#createAttributeFigure(AttributeDef)
+	 */
+	public String getPureAttributeName(String name) {
+		String realName = name;
+		int index = name.indexOf(BEGIN_MULTIPLICITY);
+		if (index > 0) {
+			realName = name.substring(0, index);
+		} else {
+			index = name.indexOf(TYPE_SEPARATOR);
+			if (index > 0) {
+				realName = name.substring(0, index);
+			}
+		}
+
+		return realName.trim();
+	}
+
+	/**
+	 * Format the Attribute Representation.
+	 * 
+	 * @see ClassDef#createAttributeFigure(AttributeDef)
+	 */
+	public void updateModel() {
+		String text = attributeDef.getDefLangName();
+		if (classDiagram.isShowAttributeMultiplicity()) {
+			text = text + BEGIN_MULTIPLICITY + MultiplicityConverter.getRange(attributeDef.getMultiplicity())
+					+ END_MULTIPLICITY;
+		}
+		if (classDiagram.isShowAttributeTypes() && attributeDef.containsAttrType()) {
+			text = text + " " + TYPE_SEPARATOR + " " + IliBaseTypeKind.getTypeName(attributeDef, false);
+		}
+		super.setText(text);
+	}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

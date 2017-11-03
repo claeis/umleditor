@@ -19,6 +19,7 @@ package ch.ehi.umleditor.umldrawingtools;
  */
 
 /**
+<<<<<<< HEAD
  * Special tool to create a recursive Association (from a selected class to itself).
  * 
  * @author: Peter Hirzel <i>soft</i>Environment 
@@ -42,4 +43,33 @@ protected void handleMouseClick(java.awt.event.MouseEvent e, int x, int y) {
 		ch.ehi.umleditor.application.LauncherView.getInstance().toolDone();
 	}	
 }
+=======
+ * Special tool to create a recursive Association (from a selected class to
+ * itself).
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:40:51 $
+ */
+public class ClassFigureSelectionTool extends CH.ifa.draw.contrib.CustomSelectionTool {
+	/**
+	 * ClassFigureSelectionTool constructor comment.
+	 * 
+	 * @param editor
+	 *            CH.ifa.draw.framework.DrawingEditor
+	 */
+	public ClassFigureSelectionTool(CH.ifa.draw.framework.DrawingEditor editor) {
+		super(editor);
+	}
+
+	/**
+	 * Overwrites.
+	 */
+	protected void handleMouseClick(java.awt.event.MouseEvent e, int x, int y) {
+		ClassFigure classFigure = ((ClassDiagramView) view()).findClassFigure(x, y);
+		if (classFigure != null) {
+			new AssociationLineConnection(classFigure);
+			ch.ehi.umleditor.application.LauncherView.getInstance().toolDone();
+		}
+	}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
 }

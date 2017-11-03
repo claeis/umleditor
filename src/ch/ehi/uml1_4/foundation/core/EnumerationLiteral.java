@@ -23,6 +23,7 @@ import ch.ehi.uml1_4.foundation.core.Enumeration;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:29 $
  */
+<<<<<<< HEAD
 public interface EnumerationLiteral extends ModelElement , java.io.Serializable
 {
   // declare/define something only in the code
@@ -86,3 +87,67 @@ public interface EnumerationLiteral extends ModelElement , java.io.Serializable
 
 }
 
+=======
+public interface EnumerationLiteral extends ModelElement, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 39CB961F030D detail_begin "EnumerationLiteral"
+
+// -end- 39CB961F030D detail_begin "EnumerationLiteral"
+
+/** attaches a Enumeration.
+ *
+ *  @see #detachEnumeration
+ *  @see #getEnumeration
+ *  @see #containsEnumeration
+ */
+// -beg- preserve=no 39CB96F10020 attach_head39CB961F030D "EnumerationLiteral::attachEnumeration"
+public void attachEnumeration(Enumeration enumeration1)
+// -end- 39CB96F10020 attach_head39CB961F030D "EnumerationLiteral::attachEnumeration"
+;     // empty
+
+/** disconnect the currently attached Enumeration.
+ *  @see #attachEnumeration
+ */
+// -beg- preserve=no 39CB96F10020 detach_head39CB961F030D "EnumerationLiteral::detachEnumeration"
+public Enumeration detachEnumeration()
+// -end- 39CB96F10020 detach_head39CB961F030D "EnumerationLiteral::detachEnumeration"
+;     // empty
+
+/** get the currently attached Enumeration.
+ *  @see #attachEnumeration
+ */
+// -beg- preserve=no 39CB96F10020 get_head39CB961F030D "EnumerationLiteral::getEnumeration"
+public Enumeration getEnumeration()
+// -end- 39CB96F10020 get_head39CB961F030D "EnumerationLiteral::getEnumeration"
+;     // empty
+
+/** tests if there is a Enumeration attached.
+ *  @see #attachEnumeration
+ */
+// -beg- preserve=no 39CB96F10020 test_head39CB961F030D "EnumerationLiteral::containsEnumeration"
+public boolean containsEnumeration()
+// -end- 39CB96F10020 test_head39CB961F030D "EnumerationLiteral::containsEnumeration"
+;     // empty
+
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 39CB96F10020 _link_body39CB961F030D "EnumerationLiteral::_linkEnumeration"
+public void _linkEnumeration(Enumeration enumeration1);
+// -end- 39CB96F10020 _link_body39CB961F030D "EnumerationLiteral::_linkEnumeration"
+
+/** DONT USE; link management internal
+ */
+// -beg- preserve=no 39CB96F10020 _unlink_body39CB961F030D "EnumerationLiteral::_unlinkEnumeration"
+public void _unlinkEnumeration(Enumeration enumeration1);
+// -end- 39CB96F10020 _unlink_body39CB961F030D "EnumerationLiteral::_unlinkEnumeration"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 39CB961F030D detail_end "EnumerationLiteral"
+
+// -end- 39CB961F030D detail_end "EnumerationLiteral"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

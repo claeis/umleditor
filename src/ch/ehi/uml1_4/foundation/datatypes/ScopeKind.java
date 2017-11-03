@@ -24,6 +24,7 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface ScopeKind extends java.io.Serializable
 {
+<<<<<<< HEAD
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 33DD7020032A detail_begin "ScopeKind"
@@ -50,3 +51,30 @@ public interface ScopeKind extends java.io.Serializable
 
 }
 
+=======
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD7020032A detail_begin "ScopeKind"
+
+// -end- 33DD7020032A detail_begin "ScopeKind"
+
+/** The feature pertains to Instances of a Classifier.
+ */
+// -beg- preserve=no 40458FEF00B4 var33DD7020032A "INSTANCE"
+public static final int INSTANCE = 1;
+// -end- 40458FEF00B4 var33DD7020032A "INSTANCE"
+
+/** The feature pertains to an entire Classifier.
+ */
+// -beg- preserve=no 40458FF40346 var33DD7020032A "CLASSIFIER"
+public static final int CLASSIFIER = 2;
+// -end- 40458FF40346 var33DD7020032A "CLASSIFIER"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD7020032A detail_end "ScopeKind"
+
+// -end- 33DD7020032A detail_end "ScopeKind"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

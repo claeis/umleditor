@@ -23,6 +23,7 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface LocationReference extends java.io.Serializable
 {
+<<<<<<< HEAD
   // declare/define something only in the code
   // please fill in/modify the following section
   // -beg- preserve=no 363559250136 detail_begin "LocationReference"
@@ -37,3 +38,18 @@ public interface LocationReference extends java.io.Serializable
 
 }
 
+=======
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 363559250136 detail_begin "LocationReference"
+
+// -end- 363559250136 detail_begin "LocationReference"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 363559250136 detail_end "LocationReference"
+
+// -end- 363559250136 detail_end "LocationReference"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

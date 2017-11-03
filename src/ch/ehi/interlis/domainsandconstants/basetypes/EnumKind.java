@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+<<<<<<< HEAD
 
               // -beg- preserve=no 3C1EF95602B2 package "EnumKind"
 package ch.ehi.interlis.domainsandconstants.basetypes;
@@ -62,3 +63,51 @@ public class EnumKind implements java.io.Serializable
 
               }
 
+=======
+// -beg- preserve=no 3C1EF95602B2 package "EnumKind"
+package ch.ehi.interlis.domainsandconstants.basetypes;
+// -end- 3C1EF95602B2 package "EnumKind"
+
+// -beg- preserve=no 3C1EF95602B2 autoimport "EnumKind"
+
+// -end- 3C1EF95602B2 autoimport "EnumKind"
+
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C1EF95602B2 import "EnumKind"
+
+// -end- 3C1EF95602B2 import "EnumKind"
+
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:20 $
+ */
+public class EnumKind implements java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1EF95602B2 detail_begin "EnumKind"
+
+	// -end- 3C1EF95602B2 detail_begin "EnumKind"
+
+	private static final long serialVersionUID = 7723543805602793015L;
+
+	// -beg- preserve=no 3C1EF96E0267 var3C1EF95602B2 "UNDEFINED"
+	public static final int UNDEFINED = 1;
+	// -end- 3C1EF96E0267 var3C1EF95602B2 "UNDEFINED"
+
+	// -beg- preserve=no 3C1EF9720140 var3C1EF95602B2 "ORDERED"
+	public static final int ORDERED = 2;
+	// -end- 3C1EF9720140 var3C1EF95602B2 "ORDERED"
+
+	// -beg- preserve=no 3C1EF975032F var3C1EF95602B2 "CIRCULAR"
+	public static final int CIRCULAR = 3;
+	// -end- 3C1EF975032F var3C1EF95602B2 "CIRCULAR"
+
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1EF95602B2 detail_end "EnumKind"
+
+	// -end- 3C1EF95602B2 detail_end "EnumKind"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

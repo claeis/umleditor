@@ -22,6 +22,7 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Link;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:02 $
  */
+<<<<<<< HEAD
 public interface LinkObject extends Object , Link , java.io.Serializable
 {
   // declare/define something only in the code
@@ -38,3 +39,20 @@ public interface LinkObject extends Object , Link , java.io.Serializable
 
 }
 
+=======
+public interface LinkObject extends Object, Link, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33BC9AB9033E detail_begin "LinkObject"
+
+// -end- 33BC9AB9033E detail_begin "LinkObject"
+
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33BC9AB9033E detail_end "LinkObject"
+
+// -end- 33BC9AB9033E detail_end "LinkObject"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9

@@ -22,6 +22,7 @@ import ch.ehi.basics.types.NlsString;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:11 $
  */
+<<<<<<< HEAD
 public interface StubState extends StateVertex , java.io.Serializable
 {
   // declare/define something only in the code
@@ -52,3 +53,34 @@ public interface StubState extends StateVertex , java.io.Serializable
 
 }
 
+=======
+public interface StubState extends StateVertex, java.io.Serializable
+{
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 361AFBD10172 detail_begin "StubState"
+
+// -end- 361AFBD10172 detail_begin "StubState"
+
+/** get current value of referenceState
+ *  @see #setReferenceState
+ */
+// -beg- preserve=no 361AFBED01B8 get_head361AFBD10172 "referenceState"
+NlsString getReferenceState()
+// -end- 361AFBED01B8 get_head361AFBD10172 "referenceState"
+;     // empty
+/** set current value of referenceState
+ *  @see #getReferenceState
+ */
+// -beg- preserve=no 361AFBED01B8 set_head361AFBD10172 "referenceState"
+void setReferenceState(NlsString value1)
+// -end- 361AFBED01B8 set_head361AFBD10172 "referenceState"
+;     // empty
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 361AFBD10172 detail_end "StubState"
+
+// -end- 361AFBD10172 detail_end "StubState"
+
+}
+>>>>>>> 803fe805af2eebe1581931014fa25d7f5559e1e9
