@@ -900,7 +900,7 @@ public class TransferFromUmlMetamodel {
 		out.write(getIndent());
 		if (def.getKind() == ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE) {
 			visitMetaMapping(def.getMetaMapping());
-			out.write(getIndent());
+			//out.write(getIndent());
 			out.write("STRUCTURE ");
 		} else {
 			out.write("CLASS ");
@@ -2732,6 +2732,8 @@ public class TransferFromUmlMetamodel {
 			while (defi.hasNext()) {
 				DomainDef def = (DomainDef) defi.next();
 				String name = def.getName().getValue(language);
+				//con modelfed System.out.println("STRUCTURA___"+def.getNamespaceLink().getNamespace().getDefLangName()+" "+name+"___");
+				//System.out.println("STRUCTURA___"+def.getNamespaceLink().getNamespace().getName()+" "+name+"___");
 				out.write(getIndent() + "STRUCTURE " + name + "_ ");
 				// if base and base in list of domainstructs?
 				// generate EXTENDS
