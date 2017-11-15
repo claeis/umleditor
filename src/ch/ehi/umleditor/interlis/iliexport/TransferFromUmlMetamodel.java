@@ -20,6 +20,7 @@ package ch.ehi.umleditor.interlis.iliexport;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,6 +29,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 import ch.ehi.basics.tools.TopoSort;
 import ch.ehi.basics.types.NlsString;
@@ -112,6 +115,8 @@ public class TransferFromUmlMetamodel {
 	public final static String VALUE_ATTR = "value";
 
 	private boolean useMultiValueStructAttrs = false;
+	
+	public Map<String, String> refClassMultiValueStructAttrs = new HashMap<String, String>();
 
 	class ModelElementEntry {
 		public ModelElementEntry(int line, AbstractEditorElement def) {
@@ -1248,8 +1253,15 @@ public class TransferFromUmlMetamodel {
 		}
 
 		if (def.containsAttrType()) {
+			
 			DomainAttribute attrType = (DomainAttribute) def.getAttrType();
+			
 			if (attrType.containsDomainDef()) {
+				// Fill the map with DomainType and Class
+				String DomainType = attrType.getDomainDef().getName().getValue();
+				String Class = def.getOwner().getName().getValue();
+				System.out.println("Add.. "+DomainType+ " y "+Class);
+				refClassMultiValueStructAttrs.put(DomainType,Class);
 				if (isMultiValue) {
 					if (def.getOrdering() == OrderingKind.ORDERED) {
 						out.write("LIST ");
@@ -1263,6 +1275,8 @@ public class TransferFromUmlMetamodel {
 				out.write(domainRef(def.getOwner(), attrType.getDomainDef()));
 				if (isMultiValue && useMultiValueStructAttrs) {
 					// reference to STRUCTURE and not DomainDef
+					//System.out.println( "la clase "+def.getOwner().getName().getValue()+ " del tipo "+ attrType.getDomainDef().getName().getValue());
+					
 					out.write("_");
 				}
 			} else if (attrType.containsDirect()) {
@@ -2723,18 +2737,31 @@ public class TransferFromUmlMetamodel {
 		return fileList;
 	}
 
+	
 	private ArrayList flushedDomainStructs = new ArrayList();
 	private ArrayList<DomainDef> domainStructs = new ArrayList();
 
 	private void flushDomainStructs() throws java.io.IOException {
 		if (useMultiValueStructAttrs) {
 			Iterator defi = domainStructs.iterator();
+			
 			while (defi.hasNext()) {
 				DomainDef def = (DomainDef) defi.next();
 				String name = def.getName().getValue(language);
-				//con modelfed System.out.println("STRUCTURA___"+def.getNamespaceLink().getNamespace().getDefLangName()+" "+name+"___");
-				//System.out.println("STRUCTURA___"+def.getNamespaceLink().getNamespace().getName()+" "+name+"___");
-				out.write(getIndent() + "STRUCTURE " + name + "_ ");
+				
+				Set set = refClassMultiValueStructAttrs.entrySet();
+			      Iterator iterator = set.iterator();
+			      while(iterator.hasNext()) {
+			         Map.Entry mentry = (Map.Entry)iterator.next();
+			         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+			         System.out.println(mentry.getValue());
+			         System.out.println("Busco "+name);
+			         if(name.toString().equals(mentry.getKey().toString())) {
+			        	 System.out.println("Aleluya!");
+			         }
+			      }
+			      
+				out.write(getIndent() + "STRUCTURE "+ name + "_ ");
 				// if base and base in list of domainstructs?
 				// generate EXTENDS
 				boolean extended = false;
