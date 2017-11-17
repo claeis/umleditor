@@ -116,6 +116,9 @@ public class TransferFromUmlMetamodel {
 
 	private boolean useMultiValueStructAttrs = false;
 	
+	/**
+	 * referenciando el dominio y el nombre del atributo?
+	 */
 	public Map<String, String> refClassMultiValueStructAttrs = new HashMap<String, String>();
 
 	class ModelElementEntry {
@@ -547,7 +550,7 @@ public class TransferFromUmlMetamodel {
 		while (childi.hasNext()) {
 			Object obj = childi.next();
 			if (domainStructs.size() > 0 && !(obj instanceof DomainDef)) {
-				flushDomainStructs();
+				flushDomainStructs(def);
 			}
 			if (obj instanceof MetaDataUseDef) {
 				visitMetaDataUseDef((MetaDataUseDef) obj);
@@ -576,7 +579,7 @@ public class TransferFromUmlMetamodel {
 			lastModelElement = (ModelElement) obj;
 		}
 		if (domainStructs.size() > 0) {
-			flushDomainStructs();
+			flushDomainStructs(def);
 		}
 		lastModelElement = def;
 		dec_ind();
@@ -683,7 +686,7 @@ public class TransferFromUmlMetamodel {
 		while (childi.hasNext()) {
 			Object obj = childi.next();
 			if (domainStructs.size() > 0 && !(obj instanceof DomainDef)) {
-				flushDomainStructs();
+				flushDomainStructs(null);
 			}
 			if (obj instanceof MetaDataUseDef) {
 				visitMetaDataUseDef((MetaDataUseDef) obj);
@@ -707,7 +710,7 @@ public class TransferFromUmlMetamodel {
 			lastModelElement = (ModelElement) obj;
 		}
 		if (domainStructs.size() > 0) {
-			flushDomainStructs();
+			flushDomainStructs(null);
 		}
 
 		dec_ind();
@@ -788,7 +791,8 @@ public class TransferFromUmlMetamodel {
 		dec_ind();
 		return;
 	}
-
+	
+	
 	/**
 	 * This method obtains DomainDef configurations and write own elements
 	 * @param def
@@ -849,6 +853,9 @@ public class TransferFromUmlMetamodel {
 		// if one of this DomainDef's use has multiplicity > 1, issue also a
 		// STRUCTURE with a similar name
 		boolean createStruct = false;
+		String attrName = null;
+		//String nombredelaclase = null;
+		
 		java.util.Set superfluousDAs = new java.util.HashSet();
 		Iterator usei = def.iteratorDomainAttribute();
 		while (usei.hasNext()) {
@@ -859,6 +866,10 @@ public class TransferFromUmlMetamodel {
 			} else {
 				AttributeDef use = da.getAttributeDef();
 				ch.ehi.uml1_4.foundation.datatypes.Multiplicity m = use.getMultiplicity();
+				
+				//nombredelaclase = use.getOwner().getName().getValue();
+				attrName = use.getName().getValue();
+				 
 				Iterator mri = m.iteratorRange();
 				while (mri.hasNext()) {
 					ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange mr = (ch.ehi.uml1_4.foundation.datatypes.MultiplicityRange) mri
@@ -871,6 +882,8 @@ public class TransferFromUmlMetamodel {
 		}
 		if (createStruct) {
 			domainStructs.add(def);
+			// Add reference to Attribute name with Domain Attribute (Multiplicity)
+			refClassMultiValueStructAttrs.put(def.getName().getValue(),attrName);
 		}
 		if (superfluousDAs.size() > 0) {
 			Iterator dai = superfluousDAs.iterator();
@@ -1260,8 +1273,7 @@ public class TransferFromUmlMetamodel {
 				// Fill the map with DomainType and Class
 				String DomainType = attrType.getDomainDef().getName().getValue();
 				String Class = def.getOwner().getName().getValue();
-				System.out.println("Add.. "+DomainType+ " y "+Class);
-				refClassMultiValueStructAttrs.put(DomainType,Class);
+				
 				if (isMultiValue) {
 					if (def.getOrdering() == OrderingKind.ORDERED) {
 						out.write("LIST ");
@@ -1275,9 +1287,9 @@ public class TransferFromUmlMetamodel {
 				out.write(domainRef(def.getOwner(), attrType.getDomainDef()));
 				if (isMultiValue && useMultiValueStructAttrs) {
 					// reference to STRUCTURE and not DomainDef
-					//System.out.println( "la clase "+def.getOwner().getName().getValue()+ " del tipo "+ attrType.getDomainDef().getName().getValue());
-					
-					out.write("_");
+					System.out.println("Agregando.. "+DomainType+ " y "+Class);
+					//out.write("_test"+Class+def.getName().getValue());
+					out.write("_Attr"+def.getName().getValue());
 				}
 			} else if (attrType.containsDirect()) {
 				if (!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)) {
@@ -2737,52 +2749,64 @@ public class TransferFromUmlMetamodel {
 		return fileList;
 	}
 
+	/*private void searchClass(String key) {
+		Set set = refClassMultiValueStructAttrs.entrySet();
+	      Iterator iterator = set.iterator();
+	      while(iterator.hasNext()) {
+	         Map.Entry mentry = (Map.Entry)iterator.next();
+	         System.out.println("Busco "+key);
+	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+	         System.out.println(mentry.getValue());
+	        
+	         if(key.toString().equals(mentry.getKey().toString())) {
+	        	 System.out.println("Aleluya!");
+	        	 break;
+	         }
+	      }
+	}*/
 	
 	private ArrayList flushedDomainStructs = new ArrayList();
 	private ArrayList<DomainDef> domainStructs = new ArrayList();
 
-	private void flushDomainStructs() throws java.io.IOException {
+	private void flushDomainStructs(ModelDef defM) throws java.io.IOException {
 		if (useMultiValueStructAttrs) {
 			Iterator defi = domainStructs.iterator();
 			
 			while (defi.hasNext()) {
 				DomainDef def = (DomainDef) defi.next();
 				String name = def.getName().getValue(language);
+				String nomAtributo = null;
 				
-				Set set = refClassMultiValueStructAttrs.entrySet();
-			      Iterator iterator = set.iterator();
-			      while(iterator.hasNext()) {
-			         Map.Entry mentry = (Map.Entry)iterator.next();
-			         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
-			         System.out.println(mentry.getValue());
-			         System.out.println("Busco "+name);
-			         if(name.toString().equals(mentry.getKey().toString())) {
-			        	 System.out.println("Aleluya!");
-			         }
-			      }
-			      
-				out.write(getIndent() + "STRUCTURE "+ name + "_ ");
-				// if base and base in list of domainstructs?
-				// generate EXTENDS
-				boolean extended = false;
-				Iterator extendsi = def.iteratorGeneralization();
-				while (extendsi.hasNext()) {
-					Object obj = extendsi.next();
-					if (obj instanceof ch.ehi.interlis.domainsandconstants.DomainExtends) {
-						ch.ehi.interlis.domainsandconstants.DomainExtends extend = (ch.ehi.interlis.domainsandconstants.DomainExtends) obj;
-						if (extend.containsParent()) {
-							DomainDef supplier = (DomainDef) extend.getParent();
-							if (flushedDomainStructs.contains(supplier)) {
-								out.write("EXTENDS " + domainRef(def, supplier) + "_ ");
-								extended = true;
-							}
-							break;
+			      for (Map.Entry<String, String> entry : refClassMultiValueStructAttrs.entrySet()) {
+						//System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+						if(name.contains(entry.getKey())) {
+							nomAtributo = entry.getValue();
+							System.out.println("buscando "+name+" encontre "+entry.getKey()+" con el atributo "+nomAtributo);
 						}
 					}
-				}
-				out.write("= " + VALUE_ATTR + " " + (extended ? "(EXTENDED)" : "") + ": MANDATORY " + name + "; END "
-						+ name + "_;");
-				newline();
+			    out.write(getIndent() + "STRUCTURE "+ name + "_Attr"+nomAtributo+" ");
+			    
+			   // if base and base in list of domainstructs?
+			   // generate EXTENDS
+					boolean extended = false;
+					Iterator extendsi = def.iteratorGeneralization();
+					while (extendsi.hasNext()) {
+						Object obj = extendsi.next();
+						if (obj instanceof ch.ehi.interlis.domainsandconstants.DomainExtends) {
+							ch.ehi.interlis.domainsandconstants.DomainExtends extend = (ch.ehi.interlis.domainsandconstants.DomainExtends) obj;
+							if (extend.containsParent()) {
+								DomainDef supplier = (DomainDef) extend.getParent();
+								if (flushedDomainStructs.contains(supplier)) {
+									out.write("EXTENDS " + domainRef(def, supplier) + "_ ");
+									extended = true;
+								}
+								break;
+							}
+						}
+					}
+					out.write("= " + VALUE_ATTR + " " + (extended ? "(EXTENDED)" : "") + ": MANDATORY " + name + "; END "
+							+ name + "_Attr"+nomAtributo+";");
+					newline();
 			}
 		}
 		flushedDomainStructs.addAll(domainStructs);
