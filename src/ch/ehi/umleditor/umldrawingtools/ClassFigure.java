@@ -27,6 +27,7 @@ import ch.ehi.interlis.metaobjects.MetaDataUseDefKind;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.associations.Participant;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.*;
@@ -517,7 +518,23 @@ public class ClassFigure extends NodeFigure implements ActionListener {
 		} else if (element instanceof GraphicDef) {
 			attributeSeparator.setLineVisible(false);
 			stereotypName = "ILIGRAPHIC";
-		}
+		} else if (element instanceof ClassDef) {
+			attributeSeparator.setLineVisible(false);
+			ClassDef clss = (ClassDef) element;
+			Iterator extendsi = clss.iteratorGeneralization();
+			
+			while (extendsi.hasNext()) {
+				Object obj = extendsi.next();
+				if (obj instanceof ch.ehi.interlis.modeltopicclass.ClassExtends) {
+					ch.ehi.interlis.modeltopicclass.ClassExtends extend = (ch.ehi.interlis.modeltopicclass.ClassExtends) obj;
+					if (extend.containsParent() && !extend.isExtended()) {
+						ClassDef supplier = (ClassDef) extend.getParent();
+						stereotypName = supplier.getName().getValue();
+						break;
+					}
+				}
+			}
+		} 
 		if (stereotypName != null) {
 			TextFigure stereotypeFigure = new TextFigure();
 			stereotypeFigure.setFont(getFont());
