@@ -43,6 +43,8 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JTabbedPane ivjTbpGeneral = null;
 	private javax.swing.JLabel ivjLblName = null;
 	private javax.swing.JTextField ivjTxtName = null;
+	private javax.swing.JLabel ivjLblDispName = null;
+	private javax.swing.JTextField ivjTxtDispName = null;
 	private javax.swing.JButton ivjBtnApply = null;
 	private javax.swing.JCheckBox ivjChxAbstract = null;
 	private javax.swing.JCheckBox ivjChxFinal = null;
@@ -85,6 +87,8 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 		public void focusGained(java.awt.event.FocusEvent e) {
 			if (e.getSource() == ClassDefDialog.this.getTxtName())
 				connEtoM1(e);
+			if (e.getSource() == ClassDefDialog.this.getTxtDispName())
+				connEtoM2(e);
 		};
 		public void focusLost(java.awt.event.FocusEvent e) {};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
@@ -334,6 +338,25 @@ private void connEtoM1(java.awt.event.FocusEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+
+/**
+ * connEtoM2:  (TxtMetaAttrb.focus.focusGained(java.awt.event.FocusEvent) --> TxtMetaAttrb.selectAll()V)
+ * @param arg1 java.awt.event.FocusEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoM2(java.awt.event.FocusEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		getTxtDispName().selectAll();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
 /**
  * Return the BaseDialogContentPane property value.
  * @return javax.swing.JPanel
@@ -360,6 +383,25 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			constraintsTxtName.ipadx = 315;
 			constraintsTxtName.insets = new java.awt.Insets(19, 6, 7, 15);
 			getBaseDialogContentPane().add(getTxtName(), constraintsTxtName);
+			
+			//show label DispName at panel
+			java.awt.GridBagConstraints constraintsLblDispName = new java.awt.GridBagConstraints();
+			constraintsLblDispName.gridx = 1; 
+			constraintsLblDispName.gridy = 1;
+			constraintsLblDispName.ipadx = 104;
+			constraintsLblDispName.insets = new java.awt.Insets(80, 50, 10, 6);
+			getBaseDialogContentPane().add(getLblDispName(), constraintsLblDispName);
+			
+			//show textfield DispName in panel
+			java.awt.GridBagConstraints constraintsTxtDispName = new java.awt.GridBagConstraints();
+			constraintsTxtDispName.gridx = 2; 
+			constraintsTxtDispName.gridy = 1;
+			constraintsTxtDispName.gridwidth = 2;
+			constraintsTxtDispName.fill = java.awt.GridBagConstraints.HORIZONTAL;
+			constraintsTxtDispName.weightx = 1.0;
+			constraintsTxtDispName.ipadx = 315;
+			constraintsTxtDispName.insets = new java.awt.Insets(78, 6, 7, 15);
+			getBaseDialogContentPane().add(getTxtDispName(), constraintsTxtDispName);
 
 			java.awt.GridBagConstraints constraintsTbpGeneral = new java.awt.GridBagConstraints();
 			constraintsTbpGeneral.gridx = 1; constraintsTbpGeneral.gridy = 2;
@@ -575,6 +617,28 @@ private javax.swing.JLabel getLblName() {
 		}
 	}
 	return ivjLblName;
+}
+
+/**
+ * Return the JLabel2 property value.
+ * @return javax.swing.JLabel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblDispName() {
+	if (ivjLblDispName == null) {
+		try {
+			ivjLblDispName = new javax.swing.JLabel();
+			ivjLblDispName.setName("LblMetaAttrb");
+			ivjLblDispName.setText("Display name:");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblDispName;
 }
 /**
  * Return the LocalColumnModelDefaultListSelectionModel property value.
@@ -1065,6 +1129,27 @@ private javax.swing.JTextField getTxtName() {
 	}
 	return ivjTxtName;
 }
+
+/**
+ * Return the JTextField2 property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JTextField getTxtDispName() {
+	if (ivjTxtDispName == null) {
+		try {
+			ivjTxtDispName = new javax.swing.JTextField();
+			ivjTxtDispName.setName("TxtMetaAttrb");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTxtDispName;
+}
 /**
  * Called whenever the part throws an exception.
  * @param exception java.lang.Throwable
@@ -1089,6 +1174,7 @@ private void initConnections() throws java.lang.Exception {
 	getTblAttributes().addMouseListener(ivjEventHandler);
 	getMniOpenAttributeSpecication().addActionListener(ivjEventHandler);
 	getTxtName().addFocusListener(ivjEventHandler);
+	getTxtDispName().addFocusListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -1100,7 +1186,7 @@ private void initialize() {
 		// user code end
 		setName("ClassDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(527, 404);
+		setSize(627, 504);
 		setTitle("Klasse");
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
