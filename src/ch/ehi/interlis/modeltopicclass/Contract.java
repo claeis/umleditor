@@ -237,6 +237,24 @@ public class Contract extends AbstractEditorElement implements Element , java.io
                   // -end- 3C1DF92B0234 set_body3940AD20009C "documentation"
                 }
 
+                private NlsString dispName = null;
+
+				@Override
+				public NlsString getDispName() {
+					// TODO Auto-generated method stub
+					return dispName;
+				}
+
+				@Override
+				public void setDispName(NlsString value) {
+					// TODO Auto-generated method stub
+					if (dispName != value && (dispName == null || !dispName.equals(value))) {
+						dispName = value;
+            			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+            					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+            		}
+				}
+
                 // declare/define something only in the code
                 // please fill in/modify the following section
                 // -beg- preserve=no 3940AD20009C detail_end "Contract"

@@ -108,6 +108,7 @@ public class UmlStereotype implements Stereotype
     clearImportedBy();
     // Role EditorTreeElement: EditorTreeElement object(s) may point to this
     setName(null);
+    setDispName(null);
     setDocumentation(null);
     
     // -end- 448D3645021F body448D24D90367 "unlinkAll"
@@ -3599,6 +3600,35 @@ public class UmlStereotype implements Stereotype
         }
         // -end- 3C1DF92B0234 set_body448D24D90367 "documentation"
       }
+
+      
+      private NlsString dispName = null;
+
+  	/**
+   	 * get current value of meta attribute
+   	 * 
+   	 * @see #setMetaAttrb
+   	 */
+      @Override
+  	public NlsString getDispName() {
+  		// TODO Auto-generated method stub
+  		return dispName;
+  	}
+   	
+   	/**
+   	 * set current value of meta attribute
+   	 * 
+   	 * @see #getMetaAttrb
+   	 */
+   	@Override
+	public void setDispName(NlsString value) {
+		// TODO Auto-generated method stub
+		if (dispName != value && (dispName == null || !dispName.equals(value))) {
+			dispName = value;
+   			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+   					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+   		}
+	}
 
       // declare/define something only in the code
       // please fill in/modify the following section

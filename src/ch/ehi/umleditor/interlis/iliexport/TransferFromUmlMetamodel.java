@@ -838,6 +838,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitDispName(def.getDispName());
     visitTaggedValues(def);
     out.write(getIndent());
     if(def.getKind()==ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE){
@@ -2351,6 +2352,20 @@ private void addSimpleEleCond(java.util.Set children,
       out.write(getIndent()+" */");newline();
     }
 
+  	/**
+	 * Write the meta-attribute "display name" from ili2db
+	 */
+	public void visitDispName(NlsString nlsmdisplayname) throws java.io.IOException {
+		if (nlsmdisplayname == null)
+			return;
+		String val = nlsmdisplayname.getValue(language).trim();
+		if (val.length() == 0)
+			return;
+		String beg = "!!@ ili2db.dispName = ";
+
+		out.write(getIndent() + beg + '"' + val + '"');
+		newline();
+}
   public void visitExplanation(NlsString nlsdoc)
     throws java.io.IOException
     {

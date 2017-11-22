@@ -26,6 +26,7 @@ package ch.ehi.umleditor.umlpresentation;
           import ch.ehi.uml1_4.foundation.core.ModelElement;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3C2C37AA03E5 autoimport "Artifact"
+import ch.ehi.basics.types.NlsString;
 
           // import declarations
           // please fill in/modify the following section
@@ -175,6 +176,18 @@ public class Artifact extends PresentationNode implements java.io.Serializable
               super._unlinkSubject(subject1);
             }
             // -end- 362409A803C0 _unlink_body3C2C37AA03E5 "PresentationElement::_unlinkSubject"
+
+			@Override
+			public NlsString getDispName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void setDispName(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
 
             // declare/define something only in the code
             // please fill in/modify the following section

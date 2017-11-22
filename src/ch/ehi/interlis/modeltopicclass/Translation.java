@@ -60,6 +60,7 @@ public class Translation extends AbstractEditorElement implements Element , java
                   // -beg- preserve=no 3D4FA21A0110 body3C1DC4060258 "unlinkAll"
                   
                   detachModelDef();
+                  setDispName(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21A0110 body3C1DC4060258 "unlinkAll"
@@ -265,6 +266,27 @@ public class Translation extends AbstractEditorElement implements Element , java
                   }
                   // -end- 3C1DF92B0234 set_body3C1DC4060258 "documentation"
                 }
+
+                private NlsString dispName = null;
+
+            	public void setMetaAttrb(NlsString value) {
+            		
+            }
+				@Override
+				public NlsString getDispName() {
+					// TODO Auto-generated method stub
+					return dispName;
+				}
+
+				@Override
+				public void setDispName(NlsString value) {
+					// TODO Auto-generated method stub
+					if (dispName != value && (dispName == null || !dispName.equals(value))) {
+						dispName = value;
+            			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+            					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setdispName"));
+            		}
+				}
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

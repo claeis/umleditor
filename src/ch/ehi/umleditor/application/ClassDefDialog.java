@@ -1251,6 +1251,9 @@ protected boolean save() {
 	if (!ElementUtils.trySetName(classDef, getTxtName().getText())) {
 		return false;
 	}
+	if (!ElementUtils.trySetDispName(classDef, getTxtDispName().getText())) {
+		return false;
+	}
 	if (getRbtClass().isSelected()) {
 		classDef.setKind(ClassDefKind.CLASS);
 	} else if (getRbtStructure().isSelected()) {
@@ -1285,6 +1288,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// general & page Description
 	getTxtName().setText(classDef.getDefLangName());
+	getTxtDispName().setText(classDef.getDefLangDispName());
 	getPnlDescription().setObject(element);
 	switch (classDef.getKind()) {
 		case ClassDefKind.CLASS: {

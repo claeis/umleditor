@@ -28,8 +28,8 @@ package ch.ehi.umleditor.umlpresentation;
           import ch.ehi.uml1_4.foundation.core.ModelElement;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3C2C43470264 autoimport "Association"
-
-          // import declarations
+import ch.ehi.basics.types.NlsString;
+// import declarations
           // please fill in/modify the following section
           // -beg- preserve=yes 3C2C43470264 import "Association"
 import ch.ehi.uml1_4.foundation.core.AssociationClass;
@@ -470,6 +470,18 @@ public class Association extends PresentationComposite implements java.io.Serial
      if(assoc.sizeFeature()>0)return true;
      return false;
      }
+
+	@Override
+	public NlsString getDispName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void setDispName(NlsString value) {
+		// TODO Auto-generated method stub
+		
+	}
 
             // -end- 3C2C43470264 detail_end "Association"
 

@@ -25,6 +25,7 @@ package ch.ehi.umleditor.umlpresentation;
           import ch.ehi.umleditor.umlpresentation.PresentationEdge;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3D4AB587020E autoimport "NoteEdge"
+import ch.ehi.basics.types.NlsString;
 
           // import declarations
           // please fill in/modify the following section
@@ -75,6 +76,18 @@ public class NoteEdge extends PresentationEdge
               super.enumerateChildren(visitor);
               // -end- 3D4FA217036E body3D4AB587020E "enumerateChildren"
               }
+
+			@Override
+			public NlsString getDispName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void setDispName(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
 
             // declare/define something only in the code
             // please fill in/modify the following section

@@ -103,6 +103,7 @@ public class UmlTagDefinition implements TagDefinition
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setDispName(null);
         setDocumentation(null);
         
         // -end- 448D365F003C body448D24EA007C "unlinkAll"
@@ -2988,6 +2989,37 @@ public class UmlTagDefinition implements TagDefinition
             }
             // -end- 3C1DF92B0234 set_body448D24EA007C "documentation"
           }
+
+          private NlsString dispName = null;
+
+      	/**
+       	 * get current value of meta attribute
+       	 * 
+       	 * @see #setDispName
+       	 */
+        @Override
+  		public NlsString getDispName() {
+  			// TODO Auto-generated method stub
+  			return dispName;
+  		}
+       	
+       	/**
+       	 * set current value of meta attribute
+       	 * 
+       	 * @see #getDispName
+       	 */
+        @Override
+		public void setDispName(NlsString value) {
+			// TODO Auto-generated method stub
+        	if (dispName != value && (dispName == null || !dispName.equals(value))) {
+        		dispName = value;
+       			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+       					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+       		}
+		}
+		
+
+		
 
           // declare/define something only in the code
           // please fill in/modify the following section

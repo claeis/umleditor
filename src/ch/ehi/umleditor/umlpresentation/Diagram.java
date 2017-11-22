@@ -591,5 +591,17 @@ public class Diagram extends AbstractEditorElement implements Element , java.io.
 			}
   // -end- 3C2C4C8D0362 detail_end "Diagram"
 
+			@Override
+			public NlsString getDispName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void setDispName(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
+
 }
 

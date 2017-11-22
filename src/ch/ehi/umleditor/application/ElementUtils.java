@@ -264,6 +264,20 @@ public static boolean trySetName(ModelElement modelElement, String newName, Stri
 	}
 	return true;
 }
+
+/**
+ * Set the ModelElement meta-attribute ili2db.DispName
+ */
+public static Boolean trySetDispName(ModelElement modelElement, String newMetaAttrb) {
+	String language = ch.ehi.basics.types.NlsString.getDefaultLanguage();
+	if ((modelElement != null) && (!newMetaAttrb.equals(mapNlsString(modelElement.getDispName(), language)))) {
+		modelElement.setDispName(
+				new ch.ehi.basics.types.NlsString(modelElement.getDispName(), language, newMetaAttrb));
+	}
+
+	return true;
+}
+
 public static UnknownType convertType(ch.ehi.interlis.domainsandconstants.Type type)
 {
 	java.io.StringWriter iliout=new java.io.StringWriter();

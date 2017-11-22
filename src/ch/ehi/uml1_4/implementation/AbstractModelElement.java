@@ -101,6 +101,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
         clearImportedBy();
         // Role EditorTreeElement: EditorTreeElement object(s) may point to this
         setName(null);
+        setDispName(null);
         setDocumentation(null);
         super.unlinkAll();
         // -end- 3D4FA03E02C3 body3CE225AB0092 "unlinkAll"
@@ -122,6 +123,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
         it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
         it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
         visitor.visit(getName());
+        visitor.visit(getDispName());
         visitor.visit(getDocumentation());
         super.enumerateChildren(visitor);
         // -end- 3D4FA03E0309 body3CE225AB0092 "enumerateChildren"
@@ -168,6 +170,24 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
         // -end- 3CE222250149 body3CE225AB0092 "setDefLangName"
         }
 
+      public String getDefLangDispName() {
+  		NlsString dispName = getDispName();
+  		return dispName != null ? dispName.getValue() : null;
+  	}
+
+  	public void setDefLangMetaAttrb() {
+  		NlsString oldMetaAttrb = getDispName();
+  		if (oldMetaAttrb == null) {
+  			setDispName(new NlsString(dispName));
+  		} else if (oldMetaAttrb.getValue() == null) {
+  			if (dispName != null) {
+  				setDispName(new NlsString(oldMetaAttrb, dispName.toString()));
+  			}
+  		} else if (!oldMetaAttrb.getValue().equals(dispName)) {
+  			setDispName(new NlsString(oldMetaAttrb, dispName.toString()));
+  		}
+  		return;
+  }
       // -beg- preserve=no 33CF8BD500F1 code3CE225AB0092 "behavior"
       private java.util.Set behavior = new java.util.HashSet();
       // -end- 33CF8BD500F1 code3CE225AB0092 "behavior"
@@ -2872,6 +2892,20 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
             // -end- 335D4BA70064 set_body3CE225AB0092 "name"
           }
 
+       // add meta attributes to project
+      	private NlsString dispName = null;
+
+      	public NlsString getDispName() {
+      		return dispName;
+      	}
+
+      	public void setDispName(NlsString value) {
+      		if (dispName != value && (dispName == null || !dispName.equals(value))) {
+      			dispName = value;
+      			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+      					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+      		}
+      }
           // -beg- preserve=no 3C1DF92B0234 var3CE225AB0092 "documentation"
           private NlsString documentation = null;
           // -end- 3C1DF92B0234 var3CE225AB0092 "documentation"

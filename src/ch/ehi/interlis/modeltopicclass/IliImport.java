@@ -104,6 +104,7 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   clearImportedBy();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
+                  setDispName(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA219037A body3940AEA40090 "unlinkAll"
@@ -125,6 +126,7 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
+                  visitor.visit(getDispName());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
                   // -end- 3D4FA2190384 body3940AEA40090 "enumerateChildren"
@@ -359,6 +361,18 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   }
                   // -end- 3CE1360202DA set_body3940AEA40090 "language"
                 }
+
+				@Override
+				public NlsString getDispName() {
+					// TODO Auto-generated method stub
+					return super.getDispName();
+				}
+
+				@Override
+				public void setDispName(NlsString value) {
+					// TODO Auto-generated method stub
+					super.setDispName(value);
+				}
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

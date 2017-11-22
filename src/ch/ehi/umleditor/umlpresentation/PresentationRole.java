@@ -27,6 +27,7 @@ package ch.ehi.umleditor.umlpresentation;
           import ch.ehi.uml1_4.foundation.core.ModelElement;
           import ch.ehi.basics.tools.AbstractVisitor;
           // -end- 3D4652270282 autoimport "PresentationRole"
+import ch.ehi.basics.types.NlsString;
 
           // import declarations
           // please fill in/modify the following section
@@ -453,6 +454,18 @@ public class PresentationRole extends PresentationEdge
               }
               // -end- 3D61FD7C01B1 set_body3D4652270282 "multiplicityVisible"
             }
+
+			@Override
+			public NlsString getDispName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void setDispName(NlsString value) {
+				// TODO Auto-generated method stub
+				
+			}
 
             // declare/define something only in the code
             // please fill in/modify the following section

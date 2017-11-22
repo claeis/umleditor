@@ -103,6 +103,7 @@ public class UmlTaggedValue implements TaggedValue
             clearImportedBy();
             // Role EditorTreeElement: EditorTreeElement object(s) may point to this
             setName(null);
+            setDispName(null);
             
             // -end- 448D366F02B6 body448D24F502DB "unlinkAll"
             }
@@ -3075,6 +3076,28 @@ public class UmlTaggedValue implements TaggedValue
                 }
                 // -end- 335D4BA70064 set_body448D24F502DB "name"
               }
+
+            private NlsString dispName = null;
+          	
+			@Override
+			public NlsString getDispName() {
+				// TODO Auto-generated method stub
+				return dispName;
+			}
+
+
+            /*
+             * set current value of meta-attribute dispname  
+             */
+			@Override
+			public void setDispName(NlsString value) {
+				// TODO Auto-generated method stub
+				if (dispName != value && (dispName == null || !dispName.equals(value))) {
+					dispName = value;
+          			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+          					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+          		}
+			}
 
               // declare/define something only in the code
               // please fill in/modify the following section

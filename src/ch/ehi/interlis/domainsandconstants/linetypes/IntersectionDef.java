@@ -62,6 +62,7 @@ public class IntersectionDef extends AbstractEditorElement implements Element , 
                   
                   detachLineType();
                   setMaxi(null);
+                  setDispName(null);
                   setDocumentation(null);
                   super.unlinkAll();
                   // -end- 3D4FA21B02FB body35B872AB0146 "unlinkAll"
@@ -237,6 +238,24 @@ public class IntersectionDef extends AbstractEditorElement implements Element , 
                   }
                   // -end- 3C1DF92B0234 set_body35B872AB0146 "documentation"
                 }
+
+                private NlsString dispName = null;
+
+				@Override
+				public NlsString getDispName() {
+					// TODO Auto-generated method stub
+					return dispName;
+				}
+
+				@Override
+				public void setDispName(NlsString value) {
+					// TODO Auto-generated method stub
+					if (dispName != value && (dispName == null || !dispName.equals(value))) {
+						dispName = value;
+            			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+            					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setDispName"));
+            		}
+				}
 
                 // declare/define something only in the code
                 // please fill in/modify the following section

@@ -26,6 +26,7 @@ import ch.ehi.umleditor.umlpresentation.PresentationNode;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.basics.tools.AbstractVisitor;
 // -end- 3C2C36BE03A0 autoimport "Package"
+import ch.ehi.basics.types.NlsString;
 
 // import declarations
 // please fill in/modify the following section
@@ -206,6 +207,18 @@ public class Package extends PresentationNode implements java.io.Serializable
     }
     // -end- 448D2E13010A set_body3C2C36BE03A0 "showNamePrefix"
   }
+
+@Override
+public NlsString getDispName() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void setDispName(NlsString value) {
+	// TODO Auto-generated method stub
+	
+}
 
   // declare/define something only in the code
   // please fill in/modify the following section

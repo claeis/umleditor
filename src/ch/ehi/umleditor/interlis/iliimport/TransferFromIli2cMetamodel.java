@@ -254,6 +254,12 @@ public class TransferFromIli2cMetamodel
 		classdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
 	}
 	
+	//MetaAttrb Disp.Name
+			String dispName = tdef.getMetaValue("ili2db.dispName");
+			if(dispName != null) {
+				classdef.setDispName(new NlsString(modelLanguage, dispName));
+	}
+	
 	// meta values
 	visitMetaValues(classdef,tdef.getMetaValues());
 
