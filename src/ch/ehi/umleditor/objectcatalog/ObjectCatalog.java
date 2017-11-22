@@ -17,6 +17,7 @@ package ch.ehi.umleditor.objectcatalog;
 // -beg- preserve=yes 3CD78E5B00EB import "ObjectCatalog"
 import ch.ehi.umleditor.application.LauncherView;
 import java.io.*;
+import javax.imageio.ImageIO;
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.i18n.MessageFormat;
 import ch.ehi.basics.view.GenericFileFilter;
@@ -136,12 +137,7 @@ public class ObjectCatalog
                         java.awt.Graphics2D g=img.createGraphics();
                         diag.printAll(g);
                         FileOutputStream os = new FileOutputStream(filename);
-                        com.sun.image.codec.jpeg.JPEGImageEncoder ie = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(os);
-                        com.sun.image.codec.jpeg.JPEGEncodeParam param = ie.getDefaultJPEGEncodeParam(img);
-                        // Lossless, please
-                        param.setQuality(1.0f, false);
-                        ie.setJPEGEncodeParam(param);
-                        ie.encode(img);
+                        ImageIO.write(img, "jpeg", os);
                         os.close();
                       }
                     }catch(IOException ex){
