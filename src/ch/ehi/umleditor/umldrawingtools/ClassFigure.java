@@ -522,15 +522,15 @@ public class ClassFigure extends NodeFigure implements ActionListener {
 			attributeSeparator.setLineVisible(false);
 			ClassDef clss = (ClassDef) element;
 			Iterator extendsi = clss.iteratorGeneralization();
-			
-			while (extendsi.hasNext()) {
+			int band = 0;
+			while (extendsi.hasNext() && band == 0) {
 				Object obj = extendsi.next();
 				if (obj instanceof ch.ehi.interlis.modeltopicclass.ClassExtends) {
 					ch.ehi.interlis.modeltopicclass.ClassExtends extend = (ch.ehi.interlis.modeltopicclass.ClassExtends) obj;
 					if (extend.containsParent() && !extend.isExtended()) {
 						ClassDef supplier = (ClassDef) extend.getParent();
 						stereotypName = supplier.getName().getValue();
-						break;
+						band = 1;
 					}
 				}
 			}
