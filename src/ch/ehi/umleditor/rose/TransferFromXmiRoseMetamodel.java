@@ -436,14 +436,14 @@ public class TransferFromXmiRoseMetamodel {
 			ch.ehi.uml1_4.foundation.core.ModelElement ele;
 			ele = (ch.ehi.uml1_4.foundation.core.ModelElement) xmi2imp.get(child);
 			if (!(ele instanceof ch.ehi.interlis.modeltopicclass.ClassDef)) {
-				log(java.text.MessageFormat.format(rsrc.getString("CIerrGenIgnored"), new String[] {
+				log(java.text.MessageFormat.format(rsrc.getString("CIerrGenIgnored"), (Object[]) new String[] {
 						(String) parent.getXMIValueOfValue("name"), (String) child.getXMIValueOfValue("name") }));
 				return null;
 			}
 			ch.ehi.interlis.modeltopicclass.ClassDef impchild = (ch.ehi.interlis.modeltopicclass.ClassDef) ele;
 			ele = (ch.ehi.uml1_4.foundation.core.ModelElement) xmi2imp.get(parent);
 			if (!(ele instanceof ch.ehi.interlis.modeltopicclass.ClassDef)) {
-				log(java.text.MessageFormat.format(rsrc.getString("CIerrGenIgnored"), new String[] {
+				log(java.text.MessageFormat.format(rsrc.getString("CIerrGenIgnored"),(Object[]) new String[] {
 						(String) parent.getXMIValueOfValue("name"), (String) child.getXMIValueOfValue("name") }));
 				return null;
 			}
