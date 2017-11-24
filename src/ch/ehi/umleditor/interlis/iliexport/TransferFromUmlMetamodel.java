@@ -885,7 +885,7 @@ public class TransferFromUmlMetamodel {
 		if (createStruct) {
 			domainStructs.add(def);
 			// Add reference to Attribute name with Domain Attribute (Multiplicity)
-			refClassMultiValueStructAttrs.put(def.getName().getValue(),className+"-"+attrName);
+			refClassMultiValueStructAttrs.put(def.getName().getValue(),className+"_"+attrName);
 		}
 		if (superfluousDAs.size() > 0) {
 			Iterator dai = superfluousDAs.iterator();
@@ -1290,7 +1290,7 @@ public class TransferFromUmlMetamodel {
 				if (isMultiValue && useMultiValueStructAttrs) {
 					// reference to STRUCTURE and not DomainDef
 					System.out.println("Agregando.. "+DomainType+ " y "+Class);
-					out.write("_"+Class+"-"+def.getName().getValue());
+					out.write("_"+Class+"_"+def.getName().getValue());
 				}
 			} else if (attrType.containsDirect()) {
 				if (!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)) {
@@ -2749,22 +2749,6 @@ public class TransferFromUmlMetamodel {
 		}
 		return fileList;
 	}
-
-	/*private void searchClass(String key) {
-		Set set = refClassMultiValueStructAttrs.entrySet();
-	      Iterator iterator = set.iterator();
-	      while(iterator.hasNext()) {
-	         Map.Entry mentry = (Map.Entry)iterator.next();
-	         System.out.println("Busco "+key);
-	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
-	         System.out.println(mentry.getValue());
-	        
-	         if(key.toString().equals(mentry.getKey().toString())) {
-	        	 System.out.println("Aleluya!");
-	        	 break;
-	         }
-	      }
-	}*/
 	
 	private ArrayList flushedDomainStructs = new ArrayList();
 	private ArrayList<DomainDef> domainStructs = new ArrayList();
