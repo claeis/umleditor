@@ -497,9 +497,9 @@ public class AttributeDef extends AbstractModelElement implements Attribute, jav
 	{
 		// -beg- preserve=no 32B5D7EF03DD get_body358A5F6F01B7
 		// "Feature::getOwner"
-		if (owner == null) {
+		/*if (owner == null) {
 			throw new java.lang.IllegalStateException("no owner attached");
-		}
+		}*/
 		return owner;
 		// -end- 32B5D7EF03DD get_body358A5F6F01B7 "Feature::getOwner"
 	}
