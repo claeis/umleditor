@@ -854,7 +854,7 @@ public class TransferFromUmlMetamodel {
 		// STRUCTURE with a similar name
 		boolean createStruct = false;
 		String attrName = null;
-		//String nombredelaclase = null;
+		String className = null;
 		
 		java.util.Set superfluousDAs = new java.util.HashSet();
 		Iterator usei = def.iteratorDomainAttribute();
@@ -866,8 +866,10 @@ public class TransferFromUmlMetamodel {
 			} else {
 				AttributeDef use = da.getAttributeDef();
 				ch.ehi.uml1_4.foundation.datatypes.Multiplicity m = use.getMultiplicity();
+				if(use.getOwner()!= null) {
+					className = use.getOwner().getName().getValue();
+				}
 				
-				//nombredelaclase = use.getOwner().getName().getValue();
 				attrName = use.getName().getValue();
 				 
 				Iterator mri = m.iteratorRange();
@@ -883,7 +885,7 @@ public class TransferFromUmlMetamodel {
 		if (createStruct) {
 			domainStructs.add(def);
 			// Add reference to Attribute name with Domain Attribute (Multiplicity)
-			refClassMultiValueStructAttrs.put(def.getName().getValue(),attrName);
+			refClassMultiValueStructAttrs.put(def.getName().getValue(),className+"-"+attrName);
 		}
 		if (superfluousDAs.size() > 0) {
 			Iterator dai = superfluousDAs.iterator();
@@ -1288,8 +1290,7 @@ public class TransferFromUmlMetamodel {
 				if (isMultiValue && useMultiValueStructAttrs) {
 					// reference to STRUCTURE and not DomainDef
 					System.out.println("Agregando.. "+DomainType+ " y "+Class);
-					//out.write("_test"+Class+def.getName().getValue());
-					out.write("_Attr"+def.getName().getValue());
+					out.write("_"+Class+"-"+def.getName().getValue());
 				}
 			} else if (attrType.containsDirect()) {
 				if (!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)) {
@@ -2775,16 +2776,15 @@ public class TransferFromUmlMetamodel {
 			while (defi.hasNext()) {
 				DomainDef def = (DomainDef) defi.next();
 				String name = def.getName().getValue(language);
-				String nomAtributo = null;
+				String refAtributo = null;
 				
 			      for (Map.Entry<String, String> entry : refClassMultiValueStructAttrs.entrySet()) {
 						//System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
 						if(name.contains(entry.getKey())) {
-							nomAtributo = entry.getValue();
-							System.out.println("buscando "+name+" encontre "+entry.getKey()+" con el atributo "+nomAtributo);
+							refAtributo = entry.getValue();
 						}
 					}
-			    out.write(getIndent() + "STRUCTURE "+ name + "_Attr"+nomAtributo+" ");
+			    out.write(getIndent() + "STRUCTURE "+ name + "_"+refAtributo+" ");
 			    
 			   // if base and base in list of domainstructs?
 			   // generate EXTENDS
@@ -2805,7 +2805,7 @@ public class TransferFromUmlMetamodel {
 						}
 					}
 					out.write("= " + VALUE_ATTR + " " + (extended ? "(EXTENDED)" : "") + ": MANDATORY " + name + "; END "
-							+ name + "_Attr"+nomAtributo+";");
+							+ name + "_"+refAtributo+";");
 					newline();
 			}
 		}
