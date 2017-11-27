@@ -1289,7 +1289,6 @@ public class TransferFromUmlMetamodel {
 				out.write(domainRef(def.getOwner(), attrType.getDomainDef()));
 				if (isMultiValue && useMultiValueStructAttrs) {
 					// reference to STRUCTURE and not DomainDef
-					System.out.println("Agregando.. "+DomainType+ " y "+Class);
 					out.write("_"+Class+"_"+def.getName().getValue());
 				}
 			} else if (attrType.containsDirect()) {
@@ -2740,6 +2739,7 @@ public class TransferFromUmlMetamodel {
 	private java.util.List fileList = null;
 
 	public java.util.List getFileList(Namespace ns) throws java.io.IOException {
+		ch.ehi.umleditor.application.LauncherView.getInstance().log(getFuncDesc(), "Loading...");
 		try {
 			createFileList = true;
 			fileList = new java.util.ArrayList();

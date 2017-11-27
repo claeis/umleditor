@@ -1,3 +1,10 @@
+UML-Editor 3.6.3.6 (2017-11-27)
+----------------------------------
+- edit STRUCTURE to show classes and his respective attributes. 
+* example (Domain_Class_Attribute)
+- Visual references of father class in the diagram
+- minor fixes in ant file to debug
+
 UML-Editor 3.6.3.5 (2017-11-02)
 ----------------------------------
 - Fix multiple .ili on node and filename
