@@ -52,6 +52,8 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
+	private javax.swing.JLabel ivjLblEPSG = null;
+	private javax.swing.JTextField ivjTxtEPSG = null;
 
 	class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -316,6 +318,50 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			}
 		}
 		return ivjLblDimensions;
+	}
+	
+	/**
+	 * Return the LblEPSG property value.
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JLabel getLblEPSG() {
+		if (ivjLblEPSG == null) {
+			try {
+				ivjLblEPSG = new javax.swing.JLabel();
+				ivjLblEPSG.setName("LblEPSG");
+				ivjLblEPSG.setText("EPSG:");
+				// user code begin {1}
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjLblEPSG;
+	}
+	/**
+	 * Return the txtEPSG property value.
+	 * 
+	 * @return javax.swing.JTextField
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JTextField getTxtEPSG() {
+		if (ivjTxtEPSG == null) {
+			try {
+				ivjTxtEPSG = new javax.swing.JTextField();
+				ivjTxtEPSG.setName("TxtEPSG");
+				// user code begin {1}
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjTxtEPSG;
 	}
 
 	/**
@@ -643,7 +689,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			setName("IliBaseTypeTextPanel");
 			setToolTipText("INTERLIS Basistyp <COORD>");
 			setLayout(new java.awt.GridBagLayout());
-			setSize(526, 390);
+			setSize(535, 390);
 
 			java.awt.GridBagConstraints constraintsRbt1D = new java.awt.GridBagConstraints();
 			constraintsRbt1D.gridx = 2;
@@ -658,7 +704,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			constraintsRbt3D.gridy = 1;
 			constraintsRbt3D.ipadx = 1;
 			constraintsRbt3D.ipady = -2;
-			constraintsRbt3D.insets = new java.awt.Insets(14, 4, 5, 10);
+			constraintsRbt3D.insets = new java.awt.Insets(14, 4, 5, 90);
 			add(getRbt3D(), constraintsRbt3D);
 
 			java.awt.GridBagConstraints constraintsRbt2D = new java.awt.GridBagConstraints();
@@ -687,6 +733,22 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			constraintsLblDimensions.ipadx = 63;
 			constraintsLblDimensions.insets = new java.awt.Insets(18, 11, 7, 3);
 			add(getLblDimensions(), constraintsLblDimensions);
+			
+			java.awt.GridBagConstraints constraintsLblEPSG = new java.awt.GridBagConstraints();
+			constraintsLblEPSG.gridx = 1;
+			constraintsLblEPSG.gridy = 1;
+			constraintsLblEPSG.ipadx = 63;
+			constraintsLblEPSG.insets = new java.awt.Insets(55, 8, 8, 35);
+			add(getLblEPSG(), constraintsLblEPSG);
+			
+			java.awt.GridBagConstraints constraintsTxtEPSG = new java.awt.GridBagConstraints();
+			constraintsTxtEPSG.gridx = 2;
+			constraintsTxtEPSG.gridy = 1;
+			constraintsTxtEPSG.gridwidth = 3;
+			constraintsTxtEPSG.weightx = 1.0;
+			constraintsTxtEPSG.ipadx = 104;
+			constraintsTxtEPSG.insets = new java.awt.Insets(55, 5, 2, 144);
+			add(getTxtEPSG(), constraintsTxtEPSG);
 
 			java.awt.GridBagConstraints constraintsTxtZeroAxis = new java.awt.GridBagConstraints();
 			constraintsTxtZeroAxis.gridx = 5;
