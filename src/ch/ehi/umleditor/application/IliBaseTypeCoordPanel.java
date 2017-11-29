@@ -52,8 +52,8 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
-	private javax.swing.JLabel ivjLblEPSG = null;
-	private javax.swing.JTextField ivjTxtEPSG = null;
+	private javax.swing.JLabel ivjLblRefSys = null;
+	private javax.swing.JTextField ivjTxtRefSys = null;
 
 	class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -321,17 +321,17 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	}
 	
 	/**
-	 * Return the LblEPSG property value.
+	 * Return the LblRefSys property value.
 	 * 
 	 * @return javax.swing.JLabel
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JLabel getLblEPSG() {
-		if (ivjLblEPSG == null) {
+	private javax.swing.JLabel getLblRefSys() {
+		if (ivjLblRefSys == null) {
 			try {
-				ivjLblEPSG = new javax.swing.JLabel();
-				ivjLblEPSG.setName("LblEPSG");
-				ivjLblEPSG.setText("EPSG:");
+				ivjLblRefSys = new javax.swing.JLabel();
+				ivjLblRefSys.setName("LblRefSys");
+				ivjLblRefSys.setText("Reference System:");
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -340,19 +340,19 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 				handleException(ivjExc);
 			}
 		}
-		return ivjLblEPSG;
+		return ivjLblRefSys;
 	}
 	/**
-	 * Return the txtEPSG property value.
+	 * Return the txtRefSys property value.
 	 * 
 	 * @return javax.swing.JTextField
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTextField getTxtEPSG() {
-		if (ivjTxtEPSG == null) {
+	private javax.swing.JTextField getTxtRefSys() {
+		if (ivjTxtRefSys == null) {
 			try {
-				ivjTxtEPSG = new javax.swing.JTextField();
-				ivjTxtEPSG.setName("TxtEPSG");
+				ivjTxtRefSys = new javax.swing.JTextField();
+				ivjTxtRefSys.setName("TxtRefSys");
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -361,7 +361,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 				handleException(ivjExc);
 			}
 		}
-		return ivjTxtEPSG;
+		return ivjTxtRefSys;
 	}
 
 	/**
@@ -696,24 +696,24 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			constraintsRbt1D.gridy = 1;
 			constraintsRbt1D.ipadx = 1;
 			constraintsRbt1D.ipady = -2;
-			constraintsRbt1D.insets = new java.awt.Insets(14, 7, 5, 5);
+			constraintsRbt1D.insets = new java.awt.Insets(14, 5, 5, 15);
 			add(getRbt1D(), constraintsRbt1D);
-
-			java.awt.GridBagConstraints constraintsRbt3D = new java.awt.GridBagConstraints();
-			constraintsRbt3D.gridx = 4;
-			constraintsRbt3D.gridy = 1;
-			constraintsRbt3D.ipadx = 1;
-			constraintsRbt3D.ipady = -2;
-			constraintsRbt3D.insets = new java.awt.Insets(14, 4, 5, 90);
-			add(getRbt3D(), constraintsRbt3D);
 
 			java.awt.GridBagConstraints constraintsRbt2D = new java.awt.GridBagConstraints();
 			constraintsRbt2D.gridx = 3;
 			constraintsRbt2D.gridy = 1;
 			constraintsRbt2D.ipadx = 1;
 			constraintsRbt2D.ipady = -2;
-			constraintsRbt2D.insets = new java.awt.Insets(14, 5, 5, 4);
+			constraintsRbt2D.insets = new java.awt.Insets(14, 5, 5, 25);
 			add(getRbt2D(), constraintsRbt2D);
+
+			java.awt.GridBagConstraints constraintsRbt3D = new java.awt.GridBagConstraints();
+			constraintsRbt3D.gridx = 4;
+			constraintsRbt3D.gridy = 1;
+			constraintsRbt3D.ipadx = 1;
+			constraintsRbt3D.ipady = -2;
+			constraintsRbt3D.insets = new java.awt.Insets(14, 5, 5, 25);
+			add(getRbt3D(), constraintsRbt3D);
 
 			java.awt.GridBagConstraints constraintsTbpNumericTypes = new java.awt.GridBagConstraints();
 			constraintsTbpNumericTypes.gridx = 1;
@@ -731,24 +731,24 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 			constraintsLblDimensions.gridx = 1;
 			constraintsLblDimensions.gridy = 1;
 			constraintsLblDimensions.ipadx = 63;
-			constraintsLblDimensions.insets = new java.awt.Insets(18, 11, 7, 3);
+			constraintsLblDimensions.insets = new java.awt.Insets(18, 11, 7, 72);
 			add(getLblDimensions(), constraintsLblDimensions);
 			
-			java.awt.GridBagConstraints constraintsLblEPSG = new java.awt.GridBagConstraints();
-			constraintsLblEPSG.gridx = 1;
-			constraintsLblEPSG.gridy = 1;
-			constraintsLblEPSG.ipadx = 63;
-			constraintsLblEPSG.insets = new java.awt.Insets(55, 8, 8, 35);
-			add(getLblEPSG(), constraintsLblEPSG);
+			java.awt.GridBagConstraints constraintsLblRefSys = new java.awt.GridBagConstraints();
+			constraintsLblRefSys.gridx = 1;
+			constraintsLblRefSys.gridy = 1;
+			constraintsLblRefSys.ipadx = 63;
+			constraintsLblRefSys.insets = new java.awt.Insets(55, 8, 8, 35);
+			add(getLblRefSys(), constraintsLblRefSys);
 			
-			java.awt.GridBagConstraints constraintsTxtEPSG = new java.awt.GridBagConstraints();
-			constraintsTxtEPSG.gridx = 2;
-			constraintsTxtEPSG.gridy = 1;
-			constraintsTxtEPSG.gridwidth = 3;
-			constraintsTxtEPSG.weightx = 1.0;
-			constraintsTxtEPSG.ipadx = 104;
-			constraintsTxtEPSG.insets = new java.awt.Insets(55, 5, 2, 144);
-			add(getTxtEPSG(), constraintsTxtEPSG);
+			java.awt.GridBagConstraints constraintsTxtRefSys = new java.awt.GridBagConstraints();
+			constraintsTxtRefSys.gridx = 2;
+			constraintsTxtRefSys.gridy = 1;
+			constraintsTxtRefSys.gridwidth = 3;
+			constraintsTxtRefSys.weightx = 1.0;
+			constraintsTxtRefSys.ipadx = 104;
+			constraintsTxtRefSys.insets = new java.awt.Insets(55, 5, 2, 144);
+			add(getTxtRefSys(), constraintsTxtRefSys);
 
 			java.awt.GridBagConstraints constraintsTxtZeroAxis = new java.awt.GridBagConstraints();
 			constraintsTxtZeroAxis.gridx = 5;
