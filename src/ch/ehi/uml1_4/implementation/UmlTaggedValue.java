@@ -114,6 +114,8 @@ public class UmlTaggedValue implements TaggedValue {
 		setName(null);
 		setMetaAttrb(null);
 		setMetaMapping(null);
+		
+		setCrs(null);
 
 		// -end- 448D366F02B6 body448D24F502DB "unlinkAll"
 	}
@@ -4174,6 +4176,23 @@ public class UmlTaggedValue implements TaggedValue {
 			metaMsg = value;
 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMetaMsg"));
+		}
+	}
+	
+	
+	private NlsString crs = null;
+	
+	public NlsString getCrs() {
+		// TODO Auto-generated method stub
+		return crs;
+	}
+	
+	public void setCrs(NlsString value) {
+		// TODO Auto-generated method stub
+		if (crs != value && (crs == null || !crs.equals(value))) {
+			crs = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setCrs"));
 		}
 	}
 

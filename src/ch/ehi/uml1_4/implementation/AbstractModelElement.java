@@ -112,6 +112,7 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 		
 		setMetaName(null);
 		setMetaMsg(null);
+		setCrs(null);
 		super.unlinkAll();
 		// -end- 3D4FA03E02C3 body3CE225AB0092 "unlinkAll"
 	}
@@ -261,6 +262,25 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 			}
 		} else if (!oldMetaMsg.getValue().equals(metaMsg)) {
 			setMetaName(new NlsString(oldMetaMsg, metaMsg.toString()));
+		}
+		return;
+	}
+	
+	public String getDefLangCrs() {
+		NlsString crs = getCrs();
+		return crs != null ? crs.getValue() : null;
+	}
+
+	public void setDefLangCrs() {
+		NlsString oldcrs = getCrs();
+		if (oldcrs == null) {
+			setCrs(new NlsString(crs));
+		} else if (oldcrs.getValue() == null) {
+			if (crs != null) {
+				setCrs(new NlsString(oldcrs, crs.toString()));
+			}
+		} else if (!oldcrs.getValue().equals(crs)) {
+			setCrs(new NlsString(oldcrs, crs.toString()));
 		}
 		return;
 	}
@@ -3993,6 +4013,20 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 			metaMsg = value;
 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMettaMsg"));
+		}
+	}
+	
+	private NlsString crs = null;
+
+	public NlsString getCrs() {
+		return crs;
+	}
+
+	public void setCrs(NlsString value) {
+		if (crs != value && (crs == null || !crs.equals(value))) {
+			crs = value;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setCrs"));
 		}
 	}
 	

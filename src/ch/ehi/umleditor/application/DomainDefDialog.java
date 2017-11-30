@@ -31,6 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.basics.types.NlsString;
 import ch.softenvironment.view.*;
 
 /**
@@ -858,7 +859,7 @@ public class DomainDefDialog extends BaseDialog {
 	 * @return ch.ehi.umleditor.application.IliBaseTypeCoordPanel
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private IliBaseTypeCoordPanel getPnlTypeCoord() {
+	public IliBaseTypeCoordPanel getPnlTypeCoord() {
 		if (ivjPnlTypeCoord == null) {
 			try {
 				ivjPnlTypeCoord = new ch.ehi.umleditor.application.IliBaseTypeCoordPanel();
@@ -1255,7 +1256,7 @@ public class DomainDefDialog extends BaseDialog {
 		if (!getPnlExtended().getExtension()) {
 			return false;
 		}
-
+		domainDef.setCrs(new NlsString(getPnlTypeCoord().getTxtRefSys().getText()));
 		// page specific type
 		if (domainDef.containsType()) {
 			domainDef.detachType();
@@ -1319,6 +1320,9 @@ public class DomainDefDialog extends BaseDialog {
 				getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 				getPnlTypeUnknown().setSyntax(convertedType);
 			} else if (type instanceof CoordinateType) {
+				if (domainDef.getCrs() != null) {
+					getPnlTypeCoord().getTxtRefSys().setText(domainDef.getCrs().getValue());
+				}
 				CoordinateType ct = (CoordinateType) type;
 				java.util.Iterator dimi = ct.iteratorDim();
 				boolean isIli22 = false;

@@ -3407,7 +3407,15 @@ public class DomainDef extends AbstractNamespace implements DataType, java.io.Se
 	public void setMetaMsg(NlsString value) {
 		super.setMetaMsg(value);
 	}
+	public NlsString getCrs() {
+		return super.getCrs();
+	}
 
+	public void setCrs(NlsString value) {
+		super.setCrs(value);
+	}
+
+	
 	@Override
 	public boolean deepContainsOwnedElement(Class aclass, String name) {
 		// TODO Auto-generated method stub

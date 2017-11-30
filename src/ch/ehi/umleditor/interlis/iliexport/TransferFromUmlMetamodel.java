@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 import ch.ehi.basics.tools.TopoSort;
 import ch.ehi.basics.types.NlsString;
@@ -811,10 +810,10 @@ public class TransferFromUmlMetamodel {
 		defineLinkToModelElement(def);
 		visitDocumentation(def.getDocumentation());
 		visitMetaAttrb(def.getMetaAttrb());
+		visitCrs(def.getCrs());
 		visitTaggedValues(def);
 		String name = def.getName().getValue(language);
 		out.write(getIndent() + visitIliName(def, name));
-
 		int propc = 0;
 		if (def.isAbstract()) {
 			out.write((propc == 0 ? " (" : ",") + "ABSTRACT");
@@ -2517,6 +2516,20 @@ public class TransferFromUmlMetamodel {
 		String beg = "!!@ ilivalid.msg = ";
 
 		out.write(getIndent() + beg + '"' + doc + '"');
+		newline();
+	}
+	/**
+	 * Write the meta attribute "Crs" from ili2db
+	 */
+	public void visitCrs(NlsString nlscrs) throws java.io.IOException {
+		if (nlscrs == null)
+			return;
+		String doc = nlscrs.getValue(language).trim();
+		if (doc.length() == 0)
+			return;
+		String beg = "!!@CRS";
+
+		out.write(getIndent() + beg + "=" + doc +"");
 		newline();
 	}
 	

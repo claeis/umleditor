@@ -1040,10 +1040,10 @@ public class TransferFromIli2cMetamodel {
 		domaindef.setName(new NlsString(modelLanguage, dd.getName()));
 
 		//MetaAttrb Disp.Name
-				String dispNameDomain = dd.getMetaValue("ili2db.dispName");
-				if(dispNameDomain != null) {
-					domaindef.setMetaAttrb(new NlsString(modelLanguage, dispNameDomain));
-				}
+		String dispNameDomain = dd.getMetaValue("ili2db.dispName");
+		if(dispNameDomain != null) {
+			domaindef.setMetaAttrb(new NlsString(modelLanguage, dispNameDomain));
+		}
 		// documentation
 		String ilidoc = dd.getDocumentation();
 		if (ilidoc != null) {
@@ -1069,6 +1069,13 @@ public class TransferFromIli2cMetamodel {
 		// BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as
 		// TypeAlias in ili2c
 		// resolve them first
+		
+		//meta-attribute @CRS
+		String crs = dd.getMetaValue("CRS");
+		if(crs != null) {
+			domaindef.setCrs(new NlsString(modelLanguage, crs));
+		}
+		
 		Type btype = dd.getType();
 		if (btype instanceof TypeAlias) {
 			Type predefinedBaseType = btype.resolveAliases();

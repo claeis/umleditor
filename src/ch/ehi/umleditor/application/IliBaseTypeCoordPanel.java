@@ -53,7 +53,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
 	private javax.swing.JLabel ivjLblRefSys = null;
-	private javax.swing.JTextField ivjTxtRefSys = null;
+	public javax.swing.JTextField ivjTxtRefSys = null;
 
 	class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -348,7 +348,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	 * @return javax.swing.JTextField
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTextField getTxtRefSys() {
+	public javax.swing.JTextField getTxtRefSys() {
 		if (ivjTxtRefSys == null) {
 			try {
 				ivjTxtRefSys = new javax.swing.JTextField();
@@ -673,6 +673,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 		getRbt1D().addItemListener(ivjEventHandler);
 		getRbt2D().addItemListener(ivjEventHandler);
 		getRbt3D().addItemListener(ivjEventHandler);
+		getTxtRefSys().addFocusListener(ivjEventHandler);
 		getTxtZeroAxis().addFocusListener(ivjEventHandler);
 		getTxtPiHalfAxis().addFocusListener(ivjEventHandler);
 		getChxRotationDef().addItemListener(ivjEventHandler);
@@ -822,10 +823,11 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 		getPnlNumeric1D().setObject(ElementFactory.createNumericType(), modelElement);
 		getPnlNumeric2D().setObject(ElementFactory.createNumericType(), modelElement);
 		getPnlNumeric3D().setObject(ElementFactory.createNumericType(), modelElement);
-
+		/*if(modelElement.getCrs() != null) {
+			getTxtRefSys().setText(modelElement.getCrs().getValue());
+		}*/
 		if (object != null) {
 			CoordinateType type = (CoordinateType) object;
-
 			if (type.containsRotationDef()) {
 				getChxRotationDef().setSelected(true);
 				getTxtZeroAxis().setText(((new Long(type.getRotationDef().getNullAxis())).toString()));

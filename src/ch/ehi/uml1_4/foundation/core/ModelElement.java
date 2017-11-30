@@ -1522,4 +1522,16 @@ NlsString getMetaMsg();
  * @see #getMetaMsg()
  */
 void setMetaMsg(NlsString value);
+
+/**
+ * get current value of meta message
+ * @see #setCrs()
+ */
+NlsString getCrs();
+
+/**
+ * set current value of meta message
+ * @see #getCrs()
+ */
+void setCrs(NlsString value);
 }

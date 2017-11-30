@@ -113,7 +113,7 @@ public class UmlTagDefinition implements TagDefinition {
 		setName(null);
 		setMetaAttrb(null);
 		setDocumentation(null);
-
+		setCrs(null);
 		// -end- 448D365F003C body448D24EA007C "unlinkAll"
 	}
 
@@ -4078,6 +4078,31 @@ public class UmlTagDefinition implements TagDefinition {
  		}
  	}
 
+ 	private NlsString crs = null;
+ 	
+ 	/**
+ 	 * get current value of Crs
+ 	 * 
+ 	 * @see #setCrs
+ 	 */
+ 	public NlsString getCrs() {
+  		// TODO Auto-generated method stub		  		
+ 		return crs;
+ 	}
+  		  
+ 	/**
+ 	 * set current value of Crs
+ 	 * 
+ 	 * @see #getCrs
+ 	 */
+ 	public void setCrs(NlsString value) {
+ 		// TODO Auto-generated method stub
+ 		if (crs != value && (crs == null || !crs.equals(value))) {
+ 			crs = value;
+ 			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+ 					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setCrs"));
+ 		}
+ 	}
 	// declare/define something only in the code
 	// please fill in/modify the following section
 	// -beg- preserve=no 448D24EA007C detail_end "UmlTagDefinition"
