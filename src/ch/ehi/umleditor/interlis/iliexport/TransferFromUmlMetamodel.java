@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import ch.ehi.basics.tools.TopoSort;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.IliSyntax;
