@@ -168,7 +168,7 @@ public class XMLInterlisEncoder {
 					// kein Wert definiert; nichts schreiben
 				} else {
 					// Wert bestimmen (getXX() ausfuehren)
-					value = method.invoke(obj,(Object) null);
+					value = method.invoke(obj, null);
 					if (value != null && !object2Id.containsKey(value)) {
 						addPendingObject(value);
 					}
@@ -180,7 +180,7 @@ public class XMLInterlisEncoder {
 		it = iteratorList.iterator();
 		while (it.hasNext()) {
 			method = (Method) it.next();
-			value = method.invoke(obj,(Object) null);
+			value = method.invoke(obj, null);
 			Iterator thisit = (Iterator) value;
 			while (thisit.hasNext()) {
 				value = (Object) thisit.next();
@@ -240,7 +240,7 @@ public class XMLInterlisEncoder {
 				// kein Wert definiert; nichts schreiben
 			} else {
 				// Wert bestimmen (getXX() ausfuehren)
-				value = method.invoke(obj,(Object) null);
+				value = method.invoke(obj, null);
 				if (value != null) {
 					// Wert schreiben
 					if (isReturnTypeCodeList(method)) {
@@ -262,7 +262,7 @@ public class XMLInterlisEncoder {
 		it = iteratorList.iterator();
 		while (it.hasNext()) {
 			method = (Method) it.next();
-			value = method.invoke(obj, (Object) null);
+			value = method.invoke(obj, null);
 			Iterator thisit = (Iterator) value;
 			while (thisit.hasNext()) {
 				value = (Object) thisit.next();
@@ -397,7 +397,7 @@ public class XMLInterlisEncoder {
 	// holt den Wert aus dieser CodeListe
 	private Object getCodeListValue(Object obj) throws InvocationTargetException, IllegalAccessException {
 		Method method = (Method) codelists.get(obj.getClass());
-		Object codeValue = method.invoke(obj, (Object) null);
+		Object codeValue = method.invoke(obj, null);
 		return codeValue;
 	}
 
@@ -413,7 +413,7 @@ public class XMLInterlisEncoder {
 	private boolean executeContains(Object obj, Method containsMethod)
 			throws IllegalAccessException, InvocationTargetException {
 		// containsXX() ausfuehren
-		Object containsValue = containsMethod.invoke(obj, (Object) null);
+		Object containsValue = containsMethod.invoke(obj, null);
 		if (containsValue.toString() == "true") {
 			return true;
 		} else {
