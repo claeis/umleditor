@@ -53,7 +53,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
 	private javax.swing.JLabel ivjLblRefSys = null;
-	public javax.swing.JTextField ivjTxtRefSys = null;
+	public JCTextField ivjcTxtRefSys = null;
 
 	class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -348,11 +348,12 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	 * @return javax.swing.JTextField
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	public javax.swing.JTextField getTxtRefSys() {
-		if (ivjTxtRefSys == null) {
+	public JCTextField getTxtRefSys() {
+		if (ivjcTxtRefSys == null) {
 			try {
-				ivjTxtRefSys = new javax.swing.JTextField();
-				ivjTxtRefSys.setName("TxtRefSys");
+				ivjcTxtRefSys = new JCTextField();
+				ivjcTxtRefSys.setName("TxtRefSys");
+				ivjcTxtRefSys.setPlaceholder("EPSG:3116");
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -361,7 +362,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 				handleException(ivjExc);
 			}
 		}
-		return ivjTxtRefSys;
+		return ivjcTxtRefSys;
 	}
 
 	/**
