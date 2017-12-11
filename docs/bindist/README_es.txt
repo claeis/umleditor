@@ -1,18 +1,18 @@
 UML-Editor - Editor de UML / INTERLIS
 
 Licencia
-Uml-Editor está licenciado bajo la LGPL (Lesser GNU Public License).
+Uml-Editor estÃ¡ licenciado bajo la LGPL (Lesser GNU Public License).
 
 
-Configuración del sistema
-Para ejecutar el Editor de UML, debe instalarse en su sistema el entorno de ejecución JAVA (JRE) versión 1.6 o una versión más reciente.
-Una versión gratuita del entorno de tiempo de ejecución JAVA (JRE) está disponible en el sitio web http://www.java.com/.
+ConfiguraciÃ³n del sistema
+Para ejecutar el Editor de UML, debe instalarse en su sistema el entorno de ejecuciÃ³n JAVA (JRE) versiÃ³n 1.6 o una versiÃ³n mÃ¡s reciente.
+Una versiÃ³n gratuita del entorno de tiempo de ejecuciÃ³n JAVA (JRE) estÃ¡ disponible en el sitio web http://www.java.com/.
 
-Instalación
+InstalaciÃ³n
 Para instalar el editor UML, extraiga el archivo ZIP en un nuevo directorio.
 
-¿Cómo ejecutarlo?
-Para iniciar Uml-Editor, escriba el siguiente comando en el indicador de línea  de comandos
+Â¿CÃ³mo ejecutarlo?
+Para iniciar Uml-Editor, escriba el siguiente comando en el indicador de lÃ­nea  de comandos
 
 java -jar umleditor.jar
 
