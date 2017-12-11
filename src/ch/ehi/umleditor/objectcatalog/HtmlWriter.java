@@ -156,7 +156,7 @@ public class HtmlWriter {
 	{
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CEE8B46037F body3CEE891B03C7 "visitPackage"
-		// wird f�r sectionNumber ben�tigt
+		// wird für section Number benötigt
 		numeration = numeration + 1;
 
 		// Wert es aktuellen Objekts
@@ -195,7 +195,7 @@ public class HtmlWriter {
 				concatedValue = Integer.toString(numerationId[0]) + " " + defLangName;
 			}
 
-			// concatedValue f�r den Link innerhalb der HTML-Datei
+			// concatedValue für den Link innerhalb der HTML-Datei
 			aNameStructure = Integer.toString(numerationId[0]) + "_" + defLangName;
 		} else {
 			concatedValue = defLangName;
@@ -308,7 +308,7 @@ public class HtmlWriter {
 				}
 				hasHeader = true;
 
-				// iddP f�r Package wird erh�ht
+				// iddP für Package wird erhöht
 				iddP++;
 			}
 			String defLangModelElement = encodeString(

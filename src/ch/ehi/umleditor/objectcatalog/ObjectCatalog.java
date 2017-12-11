@@ -108,7 +108,7 @@ public class ObjectCatalog {
 		saveDialog.setDialogTitle(rsrc.getString("CTdiagFileSelector"));
 		GenericFileFilter jpegFilter = new GenericFileFilter("JPEG File Interchange Format (*.jpeg)", "jpeg");
 		GenericFileFilter pngFilter = new GenericFileFilter("Portable Network Graphics (*.png)", "png");
-		GenericFileFilter svgFilter = new GenericFileFilter("Scalable Vector Graphics (*.svg)", "svg");
+		//GenericFileFilter svgFilter = new GenericFileFilter("Scalable Vector Graphics (*.svg)", "svg");
 		GenericFileFilter emfFilter = new GenericFileFilter("Windows Meta File Format (*.wmf)", "wmf");
 		saveDialog.setFileFilter(jpegFilter);
 		saveDialog.addChoosableFileFilter(pngFilter);
@@ -132,12 +132,6 @@ public class ObjectCatalog {
 					g.startExport();
 					diag.printAll(g);
 					g.endExport();
-				} else if (svgFilter.accept(saveDialog.getSelectedFile())) {
-					org.freehep.graphics2d.VectorGraphics g = new org.freehep.graphicsio.svg.SVGGraphics2D(
-							new File(filename), diagDim);
-					g.startExport();
-					diag.printAll(g);
-					g.endExport();
 				} else if (jpegFilter.accept(saveDialog.getSelectedFile())) {
 					java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diagDim.width, diagDim.height,
 							java.awt.image.BufferedImage.TYPE_INT_BGR);
@@ -145,7 +139,7 @@ public class ObjectCatalog {
 					diag.printAll(g);
 					FileOutputStream os = new FileOutputStream(filename);
 					ImageIO.write(img, "jpeg", os);
-					// com.sun.image.codec.jpeg.JPEGImageEncoder
+					
 					os.close();
 				} else if (pngFilter.accept(saveDialog.getSelectedFile())) {
 					java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(diagDim.width, diagDim.height,
