@@ -30,6 +30,8 @@ import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.UmlModel;
+
+import java.io.IOException;
 import java.util.*;
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.interlis.attributes.AttributeDef;
@@ -60,21 +62,21 @@ public class HtmlWriter {
 	// SortedMap <Werte, numeration>
 	private SortedMap sortedMap = new TreeMap();
 
-	// f�r die Nummerierung vom TopicDef, ModelDef und Interlis2Def
+	// for the numbering of TopicDef, ModelDef and Interlis2Def
 	int numeration = 0;
 
-	// wird ben�tigt f�r Stellen nach dem Komma: Package, Class, classDef
+	// is required for decimal places: Package, Class, classDef
 	int iddP;
 
 	// used in pass STRUCTURE, changed in walkTreeRecursive()
 	double level = 0.0;
 
-	// Variable f�r den Durchgang
-	// man vergleicht nachher im doWerte ob pass==<eine der Konstanten>
-	// und setzt die Reihenfolge, wie das HTML niedergeschrieben wird
+	// variable for the pass
+	// compare afterwards in the doValue if pass == <one of the constants> 
+	// and set the order in which the HTML is written down
 	int pass;
 
-	// ???Sringwert f�r die die Leerschl�ge, bzw. Abst�nde in der Struktur
+	// ??? Sringwert for the spaces, or Abs end in the structure
 	String b = " ";
 
 	double textIdent = 0.5;
@@ -402,6 +404,85 @@ public class HtmlWriter {
 		// -end- 3CEE8B46037F body3CEE891B03C7 "visitPackage"
 	}
 
+	public void visitAssociationDef(AssociationDef adef) throws IOException {
+		String associationDefName = encodeString(adef.getDefLangName());
+		
+		if (pass == CONTENTS) {
+			int sectionNumbers[] = new int[2];
+			sectionNumbers[0] = numeration;
+			sectionNumbers[1] = iddP;
+			indexMap.put((ModelElement) adef, sectionNumbers);
+		}
+		
+		String value = "";
+		String aName = "";
+		if (linkElements) {
+			int numerationId[] = (int[]) indexMap.get((ModelElement) adef);
+			String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
+			// for the link within the HTML file
+				aName = numeration + "_" + associationDefName;
+			// concat value that will be written later
+			if (suppressChNr) {
+				value = associationDefName;
+			} else {
+				value = numeration + " " + associationDefName;
+			}
+		} else {
+			value = associationDefName;
+		}
+		
+		if (pass == BODY) {
+			out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
+			newline();
+		}
+
+		if (pass == CONTENTS) {
+			out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">"
+					+ value + "</a></P>");
+			newline();
+			if (clsFile != null)
+				clsFile.println(adef.getDefLangName());
+		}
+		
+		if (pass == STRUCTURE) {
+			if (linkElements) {
+				out.write("<p style=\"text-indent:" + Double.toString(level)
+						+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
+				newline();
+			} else {
+				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
+						+ value + "</p>");
+				newline();
+			}
+		}
+		// Here the values for the decimal places are also increased 
+		// this brings you to a new level or new entry
+		iddP++;
+
+		if (pass == BODY) {
+			if (clsFile != null)
+				clsFile.println(adef.getDefLangName());
+			if (linkElements) {
+				out.write("<p style=\"text-indent:" + Double.toString(level)
+						+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
+				newline();
+			} else {
+				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
+						+ value + "</p>");
+				newline();
+			}
+			out.write(encodeDescription(mapNlsString(adef.getDocumentation())));
+			newline();
+			
+			out.write(" algo aqui va bien!");
+		
+			newline();
+			
+		}
+		return;
+		
+	}
+	
 	// -beg- preserve=no 3CEE8B57008A head3CEE891B03C7 "visitClass"
 	public void visitClass(Class aclass)
 			// -end- 3CEE8B57008A head3CEE891B03C7 "visitClass"
@@ -436,9 +517,9 @@ public class HtmlWriter {
 		if (linkElements) {
 			int numerationId[] = (int[]) indexMap.get((ModelElement) aclass);
 			String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
-			// f�r den Link innerhalb der HTML-Datei
+			// for the link within the HTML file
 				aName = numeration + "_" + classDefName;
-			// concatedValue, dass geschrieben wird sp�ter
+			// concat value that will be written later
 			if (suppressChNr) {
 				value = classDefName;
 			} else {
@@ -474,8 +555,8 @@ public class HtmlWriter {
 			}
 		}
 
-		// Hier wird der Werte f�r die Kommastellen auch erh�ht
-		// damit kommt man in eine neue Ebene, bzw. neuer Einzug
+		// Here the values for the decimal places are also increased 
+		// this brings you to a new level or new entry
 		iddP++;
 
 		if (pass == BODY) {
@@ -966,9 +1047,13 @@ public class HtmlWriter {
 			while (!todo.isEmpty()) {
 				Namespace current = (Namespace) todo.get(0);
 				if (!current.getDefLangName().startsWith("<")) {
-					if (current instanceof Class) {
+					if (current instanceof Class && current instanceof AssociationDef) {
+						visitAssociationDef((AssociationDef) current);
+					}
+					else if(current instanceof Class) {
 						visitClass((Class) current);
-					} else if (isEnumDomainDef(current)) {
+					}
+					else if (isEnumDomainDef(current)) {
 						visitEnumDomainDef((DomainDef) current);
 					} else {
 						visitPackage(current);
@@ -1199,11 +1284,13 @@ public class HtmlWriter {
 				level = level + 0.5;
 				walkTreeRecursiv((Namespace) obj);
 				level = level - 0.5;
-			}
-
-			else if (obj instanceof Class) {
+			} else if (obj instanceof Class) {
 				level = level + 0.5;
 				visitClass((Class) obj);
+				level = level - 0.5;
+			} else if (obj instanceof AssociationDef) {
+				level = level + 0.5;
+				visitAssociationDef((AssociationDef) obj);
 				level = level - 0.5;
 			} else if (isEnumDomainDef(obj)) {
 				level = level + 0.5;
