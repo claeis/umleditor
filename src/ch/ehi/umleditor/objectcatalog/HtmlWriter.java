@@ -329,6 +329,71 @@ public class HtmlWriter {
 			}
 		}
 
+		// list of association
+		elev.clear();
+		classi = apackage.iteratorOwnedElement();
+		while (classi.hasNext()) {
+			Object obj = classi.next();
+			if (obj instanceof AssociationDef) {
+				elev.add(obj);				
+			}
+		}
+		java.util.Collections.sort(elev, new CompareByName());
+		classi = elev.iterator();
+		hasHeader = false;
+		//iddP = 1;
+		while (classi.hasNext()) {
+			Object obj = classi.next();
+			if (!hasHeader) {
+				if (pass == BODY) {
+					if (suppressChNr) {
+						out.write("<H2><a name=\"" + numeration + "\">" + rsrc.getString("CTassociations") + "</a></H2>");
+						newline();
+					} else {
+						out.write("<H2><a name=\"" + numeration + "\">" + numeration + "." + iddP + " "
+								+ rsrc.getString("CTassociations") + "</a></H2>");
+						newline();
+					}
+					out.write("<UL>");
+					newline();
+				}
+
+				if (pass == CONTENTS) {
+				    int associationSectionNo[] = new int[2];
+					associationSectionNo[0] = numeration;
+					associationSectionNo[1] = iddP;
+					indexMap.put("Associations", associationSectionNo);
+					if (suppressChNr) {
+						out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
+								+ numeration + "." +iddP+ "\">" + rsrc.getString("CTassociations") + "</a></p>");
+						newline();
+					} else {
+						out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
+								+ numeration +"."+iddP+ "\">" + numeration + "." + iddP + " " + rsrc.getString("CTassociations")
+								+ "</a></p>");
+						newline();
+					}
+				}
+				hasHeader = true;
+
+				// iddP für Package wird erhöht
+				iddP++;
+			}
+			String defLangAssociation = encodeString(
+					((AssociationDef) obj).getDefLangName());
+			if (pass == BODY) {
+				int objNumerationId[] = (int[]) indexMap.get(obj);
+				out.write("<LI><a href=\"#" + objNumerationId[0] + "_" + defLangAssociation + "\">"
+						+ defLangAssociation + "</a></LI>");
+				newline();
+			}
+		}
+		if (hasHeader) {
+			if (pass == BODY) {
+				out.write("</UL>");
+				newline();
+			}
+		}
 		// list of classes
 		elev.clear();
 		classi = apackage.iteratorOwnedElement();
@@ -464,10 +529,10 @@ public class HtmlWriter {
 				clsFile.println(adef.getDefLangName());
 			if (linkElements) {
 				out.write("<p style=\"text-indent:" + Double.toString(level)
-						+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
+						+ "cm; line-height: 15%; margin-left: 0;font-style: italic;\"><a href=\"#" + aName + "\">" + value + "</a></p>");
 				newline();
 			} else {
-				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
+				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0;font-style: italic;\">"
 						+ value + "</p>");
 				newline();
 			}
@@ -1024,13 +1089,12 @@ public class HtmlWriter {
 	}
 
 	/**
-	 * Geht �ber die ganze Struktur. Die einzelnen �berschriften des HTML-Files
-	 * werden auch hier geschrieben
-	 *
+	 * Go over the whole structure. The individual headings of the HTML file
+	 * are also written here
 	 * @param apackage
-	 *            Package <das aktuelle Objekt>, das durchgemacht werden soll
+	 * Package <the current object> to be gone through
 	 * @throws IOException
-	 *             wirft ev. Exception im Writer
+	 *  throws ev. Exception in the writer
 	 */
 	private void walkTree(Namespace apackage) throws java.io.IOException {
 		if (pass == CONTENTS || pass == BODY) {
@@ -1050,7 +1114,7 @@ public class HtmlWriter {
 					if (current instanceof Class && current instanceof AssociationDef) {
 						visitAssociationDef((AssociationDef) current);
 					}
-					else if(current instanceof Class) {
+					else if(current instanceof Class && !(current instanceof AssociationDef)) {
 						visitClass((Class) current);
 					}
 					else if (isEnumDomainDef(current)) {
@@ -1068,7 +1132,7 @@ public class HtmlWriter {
 						if (obj instanceof Package || obj instanceof Artifact) {
 							packv.add(obj);
 						}
-
+						//Dominio aqui???
 						else if (obj instanceof Class) {
 							classv.add(obj);
 						} else if (isEnumDomainDef(obj)) {
