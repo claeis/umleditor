@@ -12,6 +12,7 @@ package ch.ehi.umleditor.objectcatalog;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.foundation.core.Attribute;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.interlis.associations.RoleDef;
 // -end- 3CEE891B03C7 autoimport "HtmlWriter"
 
 // import declarations
@@ -469,85 +470,173 @@ public class HtmlWriter {
 		// -end- 3CEE8B46037F body3CEE891B03C7 "visitPackage"
 	}
 
-	public void visitAssociationDef(AssociationDef adef) throws IOException {
-		String associationDefName = encodeString(adef.getDefLangName());
-		
-		if (pass == CONTENTS) {
-			int sectionNumbers[] = new int[2];
-			sectionNumbers[0] = numeration;
-			sectionNumbers[1] = iddP;
-			indexMap.put((ModelElement) adef, sectionNumbers);
-		}
-		
-		String value = "";
-		String aName = "";
-		if (linkElements) {
-			int numerationId[] = (int[]) indexMap.get((ModelElement) adef);
-			String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
-			// for the link within the HTML file
-				aName = numeration + "_" + associationDefName;
-			// concat value that will be written later
-			if (suppressChNr) {
-				value = associationDefName;
-			} else {
-				value = numeration + " " + associationDefName;
-			}
-		} else {
-			value = associationDefName;
-		}
-		
-		if (pass == BODY) {
-			out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
-			newline();
-		}
 
-		if (pass == CONTENTS) {
-			out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">"
-					+ value + "</a></P>");
-			newline();
-			if (clsFile != null)
-				clsFile.println(adef.getDefLangName());
-		}
-		
-		if (pass == STRUCTURE) {
-			if (linkElements) {
-				out.write("<p style=\"text-indent:" + Double.toString(level)
-						+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
-				newline();
-			} else {
-				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
-						+ value + "</p>");
-				newline();
-			}
-		}
-		// Here the values for the decimal places are also increased 
-		// this brings you to a new level or new entry
-		iddP++;
-
-		if (pass == BODY) {
-			if (clsFile != null)
-				clsFile.println(adef.getDefLangName());
-			if (linkElements) {
-				out.write("<p style=\"text-indent:" + Double.toString(level)
-						+ "cm; line-height: 15%; margin-left: 0;font-style: italic;\"><a href=\"#" + aName + "\">" + value + "</a></p>");
-				newline();
-			} else {
-				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0;font-style: italic;\">"
-						+ value + "</p>");
-				newline();
-			}
-			out.write(encodeDescription(mapNlsString(adef.getDocumentation())));
-			newline();
-			
-			out.write(" algo aqui va bien!");
-		
-			newline();
-			
-		}
-		return;
-		
+	public void visitAssociationDef(AssociationDef adef) throws java.io.IOException {
+	
+	String associationDefName = encodeString(adef.getDefLangName());
+	
+	if (pass == CONTENTS) {
+		int sectionNumbers[] = new int[2];
+		sectionNumbers[0] = numeration;
+		sectionNumbers[1] = iddP;
+		indexMap.put((ModelElement) adef, sectionNumbers);
 	}
 	
+	String value = "";
+	String aName = "";
+	if (linkElements) {
+		int numerationId[] = (int[]) indexMap.get((ModelElement) adef);
+		String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
+		// for the link within the HTML file
+			aName = numeration + "_" + associationDefName;
+		// concat value that will be written later
+		if (suppressChNr) {
+			value = associationDefName;
+		} else {
+			value = numeration + " " + associationDefName;
+		}
+	} else {
+		value = associationDefName;
+	}
+	
+	if (pass == BODY) {
+		out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
+		newline();
+		if (clsFile != null) {
+			clsFile.println(adef.getDefLangName());
+			}	
+	}
+	
+	if (pass == CONTENTS) {
+		out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">"
+				+ value + "</a></P>");
+		newline();
+	}
+	
+	if (pass == STRUCTURE) {
+		if (linkElements) {
+			out.write("<p style=\"text-indent:" + Double.toString(level)
+					+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value +"esto es asosciation def papu"+ "</a></p>");
+			newline();
+		} else {
+			out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
+					+ value + "</p>");
+			newline();
+		}
+	}
+	
+	// Here the values for the decimal places are also increased 
+	// this brings you to a new level or new entry
+	iddP++;
+	
+	if (pass == BODY) {
+		
+		out.write(encodeDescription(mapNlsString(adef.getDocumentation())));
+		newline();
+		if (adef.iteratorFeature().hasNext() || adef.iteratorAssociation().hasNext()
+				|| (adef instanceof Association && ((Association) adef).iteratorConnection().hasNext())) {
+			out.write(
+					"<TABLE border=\"0\" frame=hsides roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
+			newline();
+			out.write("<COL>");
+			newline();
+			out.write("<COL>");
+			newline();
+			out.write("<COL>");
+			newline();
+			out.write("<COL>");
+			newline();
+			out.write("<COL>");
+			newline();
+			
+			out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					+ rsrc.getString("CTtabName") + "</font></TD>");
+			newline();
+			out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					+ rsrc.getString("CTtabKind") + "</font></TD>");//mine
+			newline();
+			out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
+			newline();
+			out.write("<TD width=\"111\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					+ rsrc.getString("CTtabType") + "</font></TD>");
+			newline();
+			out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
+			newline();
+			boolean createSeperator = true;
+			java.util.ArrayList elev = new java.util.ArrayList();
+			if (adef instanceof Association) {
+				// enumerate roles
+				java.util.Iterator rolei = ((Association) adef).iteratorConnection();
+				while (rolei.hasNext()) {
+					Object obj = rolei.next();
+					if (obj instanceof AssociationEnd) {
+						elev.add(obj);
+					}
+				}
+				java.util.Collections.sort(elev, new CompareByName());
+				rolei = elev.iterator();
+				while (rolei.hasNext()) {
+					Object obj = rolei.next();
+					visitRole((AssociationEnd) obj, createSeperator);
+					createSeperator = false;
+				}
+			}
+			// enumerate attributes
+			elev.clear();
+			createSeperator = true;
+			java.util.Iterator attri = adef.iteratorFeature();
+			while (attri.hasNext()) {
+				Object obj = attri.next();
+				if (obj instanceof Attribute) {
+					elev.add(obj);
+				}
+			}
+			// do not sort list of attributes
+			// java.util.Collections.sort(elev,new CompareByName());
+			attri = elev.iterator();
+			while (attri.hasNext()) {
+				Object obj = attri.next();
+				visitAttribute((Attribute) obj, createSeperator);
+				createSeperator = false;
+			}
+			// enumerate roles
+			elev.clear();
+			createSeperator = true;
+			java.util.Iterator rolei = adef.iteratorAssociation();
+			while (rolei.hasNext()) {
+				Object obj = rolei.next();
+				// enumerate opposite ends
+				Association assoc = ((AssociationEnd) obj).getAssociation();
+				java.util.Iterator opprolei = assoc.iteratorConnection();
+				while (opprolei.hasNext()) {
+					AssociationEnd opprole = (AssociationEnd) opprolei.next();
+					// role associated with other class?
+					if (opprole != obj) {
+						if (assoc instanceof AssociationDef && ((AssociationDef) assoc).isStructureAttribute()
+								&& ((RoleDef) opprole)
+										.getIliAttributeKind() == AssociationAsIliAttrKind.STRUCTURE) {
+							continue;
+						}
+						elev.add(opprole);
+					}
+				}
+			}
+			java.util.Collections.sort(elev, new CompareByName());
+			rolei = elev.iterator();
+			while (rolei.hasNext()) {
+				Object obj = rolei.next();
+				visitRole((RoleDef) obj, createSeperator);
+				createSeperator = false;
+			}
+			out.write("</TABLE>");
+			newline();
+		}
+	}
+	return;
+	// -end- 3CEE8B57008A body3CEE891B03C7 "visitClass"
+	}	
 	// -beg- preserve=no 3CEE8B57008A head3CEE891B03C7 "visitClass"
 	public void visitClass(Class aclass)
 			// -end- 3CEE8B57008A head3CEE891B03C7 "visitClass"
@@ -654,8 +743,8 @@ public class HtmlWriter {
 				newline();
 				out.write("<COL>");
 				newline();
-				out.write("<COL>"); //mine
-				newline();//mine
+				out.write("<COL>");
+				newline();
 				
 				out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
 						+ rsrc.getString("CTtabName") + "</font></TD>");
@@ -853,13 +942,25 @@ public class HtmlWriter {
 		// please fill in/modify the following section
 		// -beg- preserve=yes 3CEE8BA20395 body3CEE891B03C7 "visitRole"
 		String type = role.getParticipant().getDefLangName();
+		String kind = "";
+		if (role instanceof RoleDef) {
+			int t = ((RoleDef) role).getAggregation();
+			if(t == 2) {
+				kind = "Aggregation";
+			} else if(t == 3) {
+				kind = "Composition";
+			} else {
+				kind = "Association";
+			}
+			
+		}
 		if (pass == BODY) {
 			String style = "";
 			if (createSeperator) {
 				style = " STYLE=\"border-top: solid black; border-top-width: 2px\"";
 			}
 			out.write("<TR><TD" + style + ">" + encodeString(role.getDefLangName())
-					+ "</TD><TD" + style + ">"
+					+ "</TD><TD" + style + ">" + encodeString(kind)
 					+ "</TD><TD" + style + ">" + mapMultiplicity(role.getMultiplicity())
 					+ "</TD><TD" + style + ">" + encodeString(type)
 					+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(role.getDocumentation()))
@@ -1111,11 +1212,11 @@ public class HtmlWriter {
 			while (!todo.isEmpty()) {
 				Namespace current = (Namespace) todo.get(0);
 				if (!current.getDefLangName().startsWith("<")) {
-					if (current instanceof Class && current instanceof AssociationDef) {
-						visitAssociationDef((AssociationDef) current);
-					}
-					else if(current instanceof Class && !(current instanceof AssociationDef)) {
+					if (current instanceof Class && !(current instanceof AssociationDef)) {
 						visitClass((Class) current);
+					}
+					else if(current instanceof Class && current instanceof AssociationDef) {
+						visitAssociationDef((AssociationDef) current);
 					}
 					else if (isEnumDomainDef(current)) {
 						visitEnumDomainDef((DomainDef) current);
@@ -1126,19 +1227,23 @@ public class HtmlWriter {
 					// tree by level
 					java.util.Iterator childi = current.iteratorOwnedElement();
 					java.util.ArrayList classv = new java.util.ArrayList();
+					java.util.ArrayList assov = new java.util.ArrayList();
 					java.util.ArrayList packv = new java.util.ArrayList();
 					while (childi.hasNext()) {
 						Object obj = childi.next();
 						if (obj instanceof Package || obj instanceof Artifact) {
 							packv.add(obj);
-						}
-						//Dominio aqui???
-						else if (obj instanceof Class) {
+						} else if ((obj instanceof Class) && !(obj instanceof AssociationDef)) {
 							classv.add(obj);
+						} else if ((obj instanceof Class) && (obj instanceof AssociationDef)) {
+							assov.add(obj);
 						} else if (isEnumDomainDef(obj)) {
 							classv.add(obj);
 						}
 					}
+					// add associations sorted
+					java.util.Collections.sort(assov, new CompareByName());
+					todo.addAll(1, assov);
 					// add classes sorted
 					java.util.Collections.sort(classv, new CompareByName());
 					todo.addAll(1, classv);
@@ -1348,13 +1453,13 @@ public class HtmlWriter {
 				level = level + 0.5;
 				walkTreeRecursiv((Namespace) obj);
 				level = level - 0.5;
-			} else if (obj instanceof Class) {
-				level = level + 0.5;
-				visitClass((Class) obj);
-				level = level - 0.5;
-			} else if (obj instanceof AssociationDef) {
+			} else if (obj instanceof Class && (obj instanceof AssociationDef)) {
 				level = level + 0.5;
 				visitAssociationDef((AssociationDef) obj);
+				level = level - 0.5;
+			} else if (obj instanceof Class && !(obj instanceof AssociationDef)) {
+				level = level + 0.5;
+				visitClass((Class) obj);
 				level = level - 0.5;
 			} else if (isEnumDomainDef(obj)) {
 				level = level + 0.5;
