@@ -330,71 +330,7 @@ public class HtmlWriter {
 			}
 		}
 
-		// list of association
-		elev.clear();
-		classi = apackage.iteratorOwnedElement();
-		while (classi.hasNext()) {
-			Object obj = classi.next();
-			if (obj instanceof AssociationDef) {
-				elev.add(obj);				
-			}
-		}
-		java.util.Collections.sort(elev, new CompareByName());
-		classi = elev.iterator();
-		hasHeader = false;
-		//iddP = 1;
-		while (classi.hasNext()) {
-			Object obj = classi.next();
-			if (!hasHeader) {
-				if (pass == BODY) {
-					if (suppressChNr) {
-						out.write("<H2><a name=\"" + numeration + "\">" + rsrc.getString("CTassociations") + "</a></H2>");
-						newline();
-					} else {
-						out.write("<H2><a name=\"" + numeration + "\">" + numeration + "." + iddP + " "
-								+ rsrc.getString("CTassociations") + "</a></H2>");
-						newline();
-					}
-					out.write("<UL>");
-					newline();
-				}
-
-				if (pass == CONTENTS) {
-				    int associationSectionNo[] = new int[2];
-					associationSectionNo[0] = numeration;
-					associationSectionNo[1] = iddP;
-					indexMap.put("Associations", associationSectionNo);
-					if (suppressChNr) {
-						out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
-								+ numeration + "." +iddP+ "\">" + rsrc.getString("CTassociations") + "</a></p>");
-						newline();
-					} else {
-						out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
-								+ numeration +"."+iddP+ "\">" + numeration + "." + iddP + " " + rsrc.getString("CTassociations")
-								+ "</a></p>");
-						newline();
-					}
-				}
-				hasHeader = true;
-
-				// iddP für Package wird erhöht
-				iddP++;
-			}
-			String defLangAssociation = encodeString(
-					((AssociationDef) obj).getDefLangName());
-			if (pass == BODY) {
-				int objNumerationId[] = (int[]) indexMap.get(obj);
-				out.write("<LI><a href=\"#" + objNumerationId[0] + "_" + defLangAssociation + "\">"
-						+ defLangAssociation + "</a></LI>");
-				newline();
-			}
-		}
-		if (hasHeader) {
-			if (pass == BODY) {
-				out.write("</UL>");
-				newline();
-			}
-		}
+		
 		// list of classes
 		elev.clear();
 		classi = apackage.iteratorOwnedElement();
@@ -412,7 +348,7 @@ public class HtmlWriter {
 		java.util.Collections.sort(elev, new CompareByName());
 		classi = elev.iterator();
 		hasHeader = false;
-		while (classi.hasNext()) {
+		while (classi.hasNext() && !(classi instanceof AssociationDef)) {
 			Object obj = classi.next();
 			if (!hasHeader) {
 				if (pass == BODY) {
@@ -465,6 +401,71 @@ public class HtmlWriter {
 				newline();
 			}
 		}
+		
+		// list of association
+		/*	elev.clear();
+			classi = apackage.iteratorOwnedElement();
+			while (classi.hasNext()) {
+				Object obj = classi.next();
+				if (obj instanceof AssociationDef) {
+					elev.add(obj);				
+				}
+			}
+			java.util.Collections.sort(elev, new CompareByName());
+			classi = elev.iterator();
+			hasHeader = false;
+			while (classi.hasNext()) {
+				Object obj = classi.next();
+				if (!hasHeader) {
+					if (pass == BODY) {
+						if (suppressChNr) {
+							out.write("<H2><a name=\"" + numeration + "\">" + rsrc.getString("CTassociations") + "</a></H2>");
+							newline();
+						} else {
+							out.write("<H2><a name=\"" + numeration + "\">" + numeration + "." + iddP + " "
+									+ rsrc.getString("CTassociations") + "</a></H2>");
+							newline();
+						}
+						out.write("<UL>");
+						newline();
+					}
+
+					if (pass == CONTENTS) {
+					    int associationSectionNo[] = new int[2];
+						associationSectionNo[0] = numeration;
+						associationSectionNo[1] = iddP;
+						indexMap.put("Associations", associationSectionNo);
+						if (suppressChNr) {
+							out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
+									+ numeration + "." +iddP+ "\">" + rsrc.getString("CTassociations") + "</a></p>");
+							newline();
+						} else {
+							out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#"
+									+ numeration +"."+iddP+ "\">" + numeration + "." + iddP + " " + rsrc.getString("CTassociations")
+									+ "</a></p>");
+							newline();
+						}
+					}
+					hasHeader = true;
+
+					// iddP für Package wird erhöht
+					iddP++;
+				}
+				String defLangAssociation = encodeString(
+						((AssociationDef) obj).getDefLangName());
+				if (pass == BODY) {
+					int objNumerationId[] = (int[]) indexMap.get(obj);
+					out.write("<LI><a href=\"#" + objNumerationId[0] + "_" + defLangAssociation + "\">"
+							+ defLangAssociation + "</a></LI>");
+					newline();
+				}
+			}
+			if (hasHeader) {
+				if (pass == BODY) {
+					out.write("</UL>");
+					newline();
+				}
+			}*/
 
 		return;
 		// -end- 3CEE8B46037F body3CEE891B03C7 "visitPackage"
