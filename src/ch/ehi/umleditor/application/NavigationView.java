@@ -21,12 +21,14 @@ import java.util.EventObject;
 import java.util.Iterator;
 
 import javax.swing.DropMode;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
 import ch.ehi.uml1_4.foundation.core.Attribute;
@@ -840,9 +842,18 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		try {
 			// user code begin {1}
 			// user code end
-			System.out.println("It works!");
+			
 			// here obtain the namespace of interlis file selected
 			// maybe would be easy obtain the other interlis with the same name and compare things
+			ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
+					LauncherView.getInstance(), getResourceString("CTInterlisSelector"), true,
+					LauncherView.getInstance().getModel());
+			if(packageDialog.getSelectedPackage() instanceof INTERLIS2Def) {
+				System.out.println("It works!");
+			} else {
+				 JOptionPane.showMessageDialog(null, "Can't update INTERLIS file with "+packageDialog.getSelectedPackage().getName()+"", getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
+			}
+			
 			
 			// user code begin {2}
 			// user code end
