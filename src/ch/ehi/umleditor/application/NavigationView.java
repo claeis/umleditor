@@ -850,8 +850,11 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 					LauncherView.getInstance().getModel());
 			if(packageDialog.getSelectedPackage() instanceof INTERLIS2Def) {
 				System.out.println("It works!");
-			} else {
+			} 
+			else {
+				if(packageDialog.getSelectedPackage()!= null) {
 				 JOptionPane.showMessageDialog(null, "Can't update INTERLIS file with "+packageDialog.getSelectedPackage().getName()+"", getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 			
