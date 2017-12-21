@@ -98,6 +98,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	private javax.swing.JRadioButtonMenuItem ivjMniSortbyKindName = null;
 	private javax.swing.JRadioButtonMenuItem ivjMniSortbyName = null;
 	private javax.swing.JMenu ivjMnuSort = null;
+	private javax.swing.JMenuItem ivjMniUpdateIli = null;
 
 	class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener,
 			javax.swing.event.TreeSelectionListener {
@@ -156,6 +157,9 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 				connEtoC26(e);
 			if (e.getSource() == NavigationView.this.getMniSortbyKindName())
 				connEtoC27(e);
+			if (e.getSource() == NavigationView.this.getMniUpdateIli())
+				connEtoC30(e);
+			
 		};
 
 		public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -222,7 +226,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getMniRename().setEnabled(selected && NavigationTreeNodeUtility.isNodeEditable(treeNode));
 		getMniAddToDiagram().setEnabled(selected && (LauncherView.getInstance().getCurrentClassDiagram() != null)
 				&& LauncherView.getInstance().getCurrentClassDiagram().isAddable(treeNode));
-
+		getMniUpdateIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
 		// build "New-Menu" dynamically
 		getMnuNew().setEnabled(false);
 		getMnuNew().removeAll();
@@ -823,6 +827,31 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 			handleException(ivjExc);
 		}
 	}
+	
+	/**
+	 * connEtoC30: (Mni.action.actionPerformed(java.awt.event.ActionEvent)
+	 * --> NavigationView.mniPrint()V)
+	 * 
+	 * @param arg1
+	 *            java.awt.event.ActionEvent
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC30(java.awt.event.ActionEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			System.out.println("It works!");
+			// here obtain the namespace of interlis file selected
+			// maybe would be easy obtain the other interlis with the same name and compare things
+			
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
 
 	/**
 	 * connEtoC3:
@@ -1330,6 +1359,30 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	}
 
 	/**
+	 * Return the MniNewInterlisFile property value.
+	 * 
+	 * @return javax.swing.JMenuItem
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JMenuItem getMniUpdateIli() {
+		if (ivjMniUpdateIli == null) {
+			try {
+				ivjMniUpdateIli = new javax.swing.JMenuItem();
+				ivjMniUpdateIli.setName("MniUpdateIli");
+				ivjMniUpdateIli.setText("Update");
+				// user code begin {1}
+				ivjMniUpdateIli.setText(getResourceString("MniUpdateIli_text"));
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjMniUpdateIli;
+	}
+	
+	/**
 	 * Return the JMenuItem4 property value.
 	 * 
 	 * @return javax.swing.JMenuItem
@@ -1769,6 +1822,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 				ivjMnpTreeActions.add(getMniRename());
 				ivjMnpTreeActions.add(getJSeparator1());
 				ivjMnpTreeActions.add(getMniAddToDiagram());
+				ivjMnpTreeActions.add(getMniUpdateIli());
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -1950,6 +2004,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getMniRename().addActionListener(ivjEventHandler);
 		getMniClassDiagram().addActionListener(ivjEventHandler);
 		getMniInterlis2Def().addActionListener(ivjEventHandler);
+		getMniUpdateIli().addActionListener(ivjEventHandler);
 		getMniModelDef().addActionListener(ivjEventHandler);
 		getMniMetaDataUseDef().addActionListener(ivjEventHandler);
 		getMniTopicDef().addActionListener(ivjEventHandler);
