@@ -1,6 +1,7 @@
-﻿UML-Editor 3.6.3.7 (2017-12-11)
+﻿UML-Editor 3.6.3.7 (2017-12-21)
 ----------------------------------
 - Update ili2c 4.7.6
+- Associations added to object catalog
 
 UML-Editor 3.6.3.7 (2017-12-01)
 ----------------------------------

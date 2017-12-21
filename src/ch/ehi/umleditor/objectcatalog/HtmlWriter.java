@@ -403,7 +403,7 @@ public class HtmlWriter {
 		}
 		
 		// list of association
-		/*	elev.clear();
+			elev.clear();
 			classi = apackage.iteratorOwnedElement();
 			while (classi.hasNext()) {
 				Object obj = classi.next();
@@ -416,13 +416,14 @@ public class HtmlWriter {
 			hasHeader = false;
 			while (classi.hasNext()) {
 				Object obj = classi.next();
-				if (!hasHeader) {
+				if (!hasHeader && obj instanceof AssociationDef) {
 					if (pass == BODY) {
 						if (suppressChNr) {
-							out.write("<H2><a name=\"" + numeration + "\">" + rsrc.getString("CTassociations") + "</a></H2>");
+							out.write("<H2><a name=\"" + numeration +"."+iddP+ "\">" + rsrc.getString("CTassociations") + "</a></H2>");
+							System.out.println("la num:"+numeration+" lasec:"+iddP);
 							newline();
 						} else {
-							out.write("<H2><a name=\"" + numeration + "\">" + numeration + "." + iddP + " "
+							out.write("<H2><a name=\"" + numeration +"."+iddP+ "\">" + numeration + "." + iddP + " "
 									+ rsrc.getString("CTassociations") + "</a></H2>");
 							newline();
 						}
@@ -455,7 +456,7 @@ public class HtmlWriter {
 						((AssociationDef) obj).getDefLangName());
 				if (pass == BODY) {
 					int objNumerationId[] = (int[]) indexMap.get(obj);
-					out.write("<LI><a href=\"#" + objNumerationId[0] + "_" + defLangAssociation + "\">"
+					out.write("<LI><a href=\"#" + objNumerationId[0] + "." + objNumerationId[1] + "_" + defLangAssociation + "\">"
 							+ defLangAssociation + "</a></LI>");
 					newline();
 				}
@@ -465,7 +466,7 @@ public class HtmlWriter {
 					out.write("</UL>");
 					newline();
 				}
-			}*/
+			}
 
 		return;
 		// -end- 3CEE8B46037F body3CEE891B03C7 "visitPackage"
