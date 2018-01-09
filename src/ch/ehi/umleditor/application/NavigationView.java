@@ -849,11 +849,21 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 					LauncherView.getInstance(), getResourceString("CTInterlisSelector"), true,
 					LauncherView.getInstance().getModel());
 			if(packageDialog.getSelectedPackage() instanceof INTERLIS2Def) {
-				System.out.println("It works!");
+				INTERLIS2Def update = (INTERLIS2Def)getSelectedNode();
+				INTERLIS2Def compare = (INTERLIS2Def)packageDialog.getSelectedPackage();
+				if(!update.equals(compare)) {
+					if(update.getName().getValue().equals( compare.getName().getValue() )) {
+						System.out.println("Start the comparison");
+					} else {
+						JOptionPane.showMessageDialog(null, getResourceString("CTInterlisSelectorMsg"), getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, getResourceString("CTInterlisSameMsg"), getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
+				}
 			} 
 			else {
 				if(packageDialog.getSelectedPackage()!= null) {
-				 JOptionPane.showMessageDialog(null, "Can't update INTERLIS file with "+packageDialog.getSelectedPackage().getName()+"", getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
+				 JOptionPane.showMessageDialog(null, getResourceString("CTInterlisSelectorMsg"), getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			
