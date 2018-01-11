@@ -849,11 +849,16 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 					LauncherView.getInstance(), getResourceString("CTInterlisSelector"), true,
 					LauncherView.getInstance().getModel());
 			if(packageDialog.getSelectedPackage() instanceof INTERLIS2Def) {
-				INTERLIS2Def update = (INTERLIS2Def)getSelectedNode();
-				INTERLIS2Def compare = (INTERLIS2Def)packageDialog.getSelectedPackage();
+				INTERLIS2Def update = (INTERLIS2Def)getSelectedNode();//old
+				INTERLIS2Def compare = (INTERLIS2Def)packageDialog.getSelectedPackage();//new
 				if(!update.equals(compare)) {
 					if(update.getName().getValue().equals( compare.getName().getValue() )) {
-						System.out.println("Start the comparison");
+						System.out.println("Iniciando la comparación.....");
+						//compareINTERLIS(update,compare);
+						CompareInterlis2Def objCompare = new CompareInterlis2Def();
+						objCompare.setOldInterlis(update);
+						objCompare.setNewInterlis(compare);
+						objCompare.compareINTERLIS();
 					} else {
 						JOptionPane.showMessageDialog(null, getResourceString("CTInterlisSelectorMsg"), getResourceString("CTInterlisSelector"),JOptionPane.ERROR_MESSAGE);
 					}
@@ -2696,7 +2701,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 				((ModelElement) getSelectedNode()).getDefLangName() + "->"
 						+ getResourceString("mniDiagramReferences_text"));
 	}
-
+	
 	public NavigationTreeModel getModelAdapter() {
 		return modelAdapter;
 	}

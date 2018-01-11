@@ -2032,7 +2032,7 @@ public class TransferFromUmlMetamodel {
 		logErrorMsg("loop in ili-files: " + loopele.toString());
 	}
 
-	private java.util.List sortIliDefs(java.util.Set children) {
+	public java.util.List sortIliDefs(java.util.Set children) {
 		ch.ehi.basics.tools.TopoSort ts = new ch.ehi.basics.tools.TopoSort();
 		Iterator defi = children.iterator();
 		while (defi.hasNext()) {
