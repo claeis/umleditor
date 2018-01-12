@@ -62,26 +62,35 @@ public class CompareInterlis2Def {
 	public void compareChilds(List oldchilds, List newchilds) {
 
 	    //empezamos a comparar
-	    for(int ol=0; ol<oldchilds.size(); ol++) {
-	    	for(int as=0; as<newchilds.size(); as++) {
-	    		 if (newchilds.get(as) instanceof ClassDef && oldchilds.get(ol) instanceof ClassDef) {
-					   ClassDef clasenueva = (ClassDef)newchilds.get(as);
-					   ClassDef clasevieja = (ClassDef)oldchilds.get(ol);
-					   System.out.println(as+"Clase nueva: "+clasenueva.getName().getValue());
-					   System.out.println(ol+"Clase vieja: "+clasevieja.getName().getValue());
+	    int i=0;
+	    int j=0;
+	    while(i<newchilds.size()) {
+	    	if(j<oldchilds.size() && i==j) {
+	    		if (newchilds.get(i) instanceof ClassDef && oldchilds.get(j) instanceof ClassDef) {
+					   ClassDef clasenueva = (ClassDef)newchilds.get(i);
+					   ClassDef clasevieja = (ClassDef)oldchilds.get(j);
+					   System.out.println(i+"Clase nueva: "+clasenueva.getName().getValue());
+					   System.out.println(i+"Clase vieja: "+clasevieja.getName().getValue());
+					   i++;
+					   j++;
 				   }
-				   else if(newchilds.get(as) instanceof DomainDef && oldchilds.get(ol) instanceof DomainDef) {
-					   DomainDef dominionuevo = (DomainDef)newchilds.get(as);
-					   DomainDef dominioviejo = (DomainDef)oldchilds.get(ol);
+				   else if(newchilds.get(i) instanceof DomainDef && oldchilds.get(j) instanceof DomainDef) {
+					   DomainDef dominionuevo = (DomainDef)newchilds.get(i);
+					   DomainDef dominioviejo = (DomainDef)oldchilds.get(j);
 					   
-					   System.out.println(as+"Domino nuevo: "+dominionuevo.getName().getValue());
-					   System.out.println(ol+"Domino viejo: "+dominioviejo.getName().getValue());
+					   System.out.println(i+"Domino nuevo: "+dominionuevo.getName().getValue());
+					   System.out.println(i+"Domino viejo: "+dominioviejo.getName().getValue());
+					   i++;
+					   j++;
 				   }
 				   else {
-					   System.out.println(as+"Cosas no identificadas nuevo:"+ newchilds.getClass().getName());
-					   System.out.println(ol+"Cosas no identificadas viejo:"+ newchilds.getClass().getName() );
+					   System.out.println(i+"Cosas no identificadas nuevo:"+ newchilds.getClass().getName());
+					   System.out.println(i+"Cosas no identificadas viejo:"+ newchilds.getClass().getName() );
+					   i++;
+					   j++;
 				   }
-	    	}	   
+	    	}
+	    	 
 	    }
 	}
 	
