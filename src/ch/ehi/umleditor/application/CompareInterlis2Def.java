@@ -2,11 +2,18 @@ package ch.ehi.umleditor.application;
 
 import java.util.List;
 
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
+import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
+import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.tools.ModelElementUtility;
+import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 
@@ -71,6 +78,10 @@ public class CompareInterlis2Def {
 					   ClassDef clasevieja = (ClassDef)oldchilds.get(j);
 					   System.out.println(i+"Clase nueva: "+clasenueva.getName().getValue());
 					   System.out.println(i+"Clase vieja: "+clasevieja.getName().getValue());
+					   if(clasenueva.getName().getValue().equals(clasevieja.getName().getValue())) {
+						   System.out.println("Let's start to compare papu!");
+						   clasevieja.setMetaAttrb(new NlsString("Probando cosas nuevas!"));
+					   }
 					   i++;
 					   j++;
 				   }
@@ -80,6 +91,60 @@ public class CompareInterlis2Def {
 					   
 					   System.out.println(i+"Domino nuevo: "+dominionuevo.getName().getValue());
 					   System.out.println(i+"Domino viejo: "+dominioviejo.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof FunctionDef && oldchilds.get(j) instanceof FunctionDef) {
+					   FunctionDef fncnueva = (FunctionDef)newchilds.get(i);
+					   FunctionDef fncvieja = (FunctionDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"Funcion nuevo: "+fncnueva.getName().getValue());
+					   System.out.println(i+"Funcion viejo: "+fncvieja.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof GraphicParameterDef && oldchilds.get(j) instanceof GraphicParameterDef) {
+					   GraphicParameterDef gpdnueva = (GraphicParameterDef)newchilds.get(i);
+					   GraphicParameterDef gpdvieja = (GraphicParameterDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"grafica nuevo: "+gpdnueva.getName().getValue());
+					   System.out.println(i+"grafica viejo: "+gpdvieja.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof LineFormTypeDef && oldchilds.get(j) instanceof LineFormTypeDef) {
+					   LineFormTypeDef lftnueva = (LineFormTypeDef)newchilds.get(i);
+					   LineFormTypeDef lftvieja = (LineFormTypeDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"linea nuevo: "+lftnueva.getName().getValue());
+					   System.out.println(i+"linea viejo: "+lftvieja.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof MetaDataUseDef && oldchilds.get(j) instanceof MetaDataUseDef) {
+					   MetaDataUseDef lftnueva = (MetaDataUseDef)newchilds.get(i);
+					   MetaDataUseDef lftvieja = (MetaDataUseDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"metadata nuevo: "+lftnueva.getName().getValue());
+					   System.out.println(i+"metadata viejo: "+lftvieja.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof TopicDef && oldchilds.get(j) instanceof TopicDef) {
+					   TopicDef topicnueva = (TopicDef)newchilds.get(i);
+					   TopicDef topicvieja = (TopicDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"topic nuevo: "+topicnueva.getName().getValue());
+					   System.out.println(i+"topic viejo: "+topicvieja.getName().getValue());
+					   i++;
+					   j++;
+				   }
+				   else if(newchilds.get(i) instanceof UnitDef && oldchilds.get(j) instanceof UnitDef) {
+					   UnitDef unitnueva = (UnitDef)newchilds.get(i);
+					   UnitDef unitvieja = (UnitDef)oldchilds.get(j);
+					   
+					   System.out.println(i+"unit nuevo: "+unitnueva.getName().getValue());
+					   System.out.println(i+"unit viejo: "+unitvieja.getName().getValue());
 					   i++;
 					   j++;
 				   }
