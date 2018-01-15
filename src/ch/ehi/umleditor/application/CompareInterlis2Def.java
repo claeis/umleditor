@@ -1,6 +1,7 @@
 package ch.ehi.umleditor.application;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
@@ -18,6 +19,8 @@ import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 
 public class CompareInterlis2Def {
+	static ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(CompareInterlis2Def.class);
+	
 	public INTERLIS2Def oldInterlis;
 	public INTERLIS2Def newInterlis;
 	
@@ -76,23 +79,48 @@ public class CompareInterlis2Def {
 	    		if (newchilds.get(i) instanceof ClassDef && oldchilds.get(j) instanceof ClassDef) {
 					   ClassDef clasenueva = (ClassDef)newchilds.get(i);
 					   ClassDef clasevieja = (ClassDef)oldchilds.get(j);
-					   System.out.println(i+"Clase nueva: "+clasenueva.getName().getValue());
-					   System.out.println(i+"Clase vieja: "+clasevieja.getName().getValue());
 					   if(clasenueva.getName().getValue().equals(clasevieja.getName().getValue())) {
-						   System.out.println("Let's start to compare papu!");
-						   clasevieja.setMetaAttrb(new NlsString("Probando cosas nuevas!"));
+						   clasevieja.setMetaAttrb(clasenueva.getMetaAttrb());
+						   clasevieja.setDocumentation(clasenueva.getDocumentation());
+						   clasevieja.setAbstract(clasenueva.isAbstract());
+						   clasevieja.setPropFinal(clasenueva.isPropFinal());
+						   //value extended omitted (to discuss)
+						   clasevieja.setKind(clasenueva.getKind());
+						   clasevieja.setMetaMapping(clasenueva.getMetaMapping());
+						   /*******************
+						    * - see how to add attributes
+						    * - by now parameter and constraints can't be uploaded
+						    * */
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new class? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
 					   }
-					   i++;
-					   j++;
+					   
 				   }
 				   else if(newchilds.get(i) instanceof DomainDef && oldchilds.get(j) instanceof DomainDef) {
 					   DomainDef dominionuevo = (DomainDef)newchilds.get(i);
 					   DomainDef dominioviejo = (DomainDef)oldchilds.get(j);
-					   
-					   System.out.println(i+"Domino nuevo: "+dominionuevo.getName().getValue());
-					   System.out.println(i+"Domino viejo: "+dominioviejo.getName().getValue());
-					   i++;
-					   j++;
+					   					   
+					   if(dominionuevo.getName().getValue().equals(dominioviejo.getName().getValue())){
+						   dominioviejo.setMetaAttrb(dominionuevo.getMetaAttrb());
+						   //can't access to type of domain (to do later)
+						   dominioviejo.setDocumentation(dominionuevo.getDocumentation());
+						   dominioviejo.setAbstract(dominionuevo.isAbstract());
+						   dominioviejo.setPropFinal(dominionuevo.isPropFinal());
+						   dominioviejo.setMandatory(dominionuevo.isMandatory());
+						   //can't access to Specialized (to do later)
+						   //can't access to kind (to do)
+						   i++;
+						   j++;
+						   
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
 				   }
 				   else if(newchilds.get(i) instanceof FunctionDef && oldchilds.get(j) instanceof FunctionDef) {
 					   FunctionDef fncnueva = (FunctionDef)newchilds.get(i);
@@ -100,53 +128,112 @@ public class CompareInterlis2Def {
 					   
 					   System.out.println(i+"Funcion nuevo: "+fncnueva.getName().getValue());
 					   System.out.println(i+"Funcion viejo: "+fncvieja.getName().getValue());
-					   i++;
-					   j++;
+					   
+					   if(fncnueva.getName().getValue().equals(fncvieja.getName().getValue())) {
+						   fncvieja.setDocumentation(fncnueva.getDocumentation());
+						   // depends on cant access
+						   // text cant access
+
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
+					   
 				   }
 				   else if(newchilds.get(i) instanceof GraphicParameterDef && oldchilds.get(j) instanceof GraphicParameterDef) {
 					   GraphicParameterDef gpdnueva = (GraphicParameterDef)newchilds.get(i);
 					   GraphicParameterDef gpdvieja = (GraphicParameterDef)oldchilds.get(j);
 					   
-					   System.out.println(i+"grafica nuevo: "+gpdnueva.getName().getValue());
-					   System.out.println(i+"grafica viejo: "+gpdvieja.getName().getValue());
-					   i++;
-					   j++;
+					   if(gpdnueva.getName().getValue().equals(gpdvieja.getName().getValue())) {
+						   gpdvieja.setDocumentation(gpdnueva.getDocumentation());
+						   // depends on cant access
+						   // text cant access
+
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
 				   }
 				   else if(newchilds.get(i) instanceof LineFormTypeDef && oldchilds.get(j) instanceof LineFormTypeDef) {
 					   LineFormTypeDef lftnueva = (LineFormTypeDef)newchilds.get(i);
 					   LineFormTypeDef lftvieja = (LineFormTypeDef)oldchilds.get(j);
 					   
-					   System.out.println(i+"linea nuevo: "+lftnueva.getName().getValue());
-					   System.out.println(i+"linea viejo: "+lftvieja.getName().getValue());
-					   i++;
-					   j++;
+					   if(lftnueva.getName().getValue().equals(lftvieja.getName().getValue())) {
+						   lftvieja.setDocumentation(lftnueva.getDocumentation());
+						   lftvieja.setSyntax(lftnueva.getSyntax()); //structure?? check later
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
+					   
 				   }
 				   else if(newchilds.get(i) instanceof MetaDataUseDef && oldchilds.get(j) instanceof MetaDataUseDef) {
-					   MetaDataUseDef lftnueva = (MetaDataUseDef)newchilds.get(i);
-					   MetaDataUseDef lftvieja = (MetaDataUseDef)oldchilds.get(j);
+					   MetaDataUseDef metadatanueva = (MetaDataUseDef)newchilds.get(i);
+					   MetaDataUseDef metadatavieja = (MetaDataUseDef)oldchilds.get(j);
+					   if(metadatanueva.getName().getValue().equals(metadatavieja.getName().getValue())) {
+						   metadatavieja.setBasketOid(metadatavieja.getBasketOid());
+						   metadatavieja.setKind(metadatanueva.getKind());
+						   metadatavieja.setDocumentation(metadatanueva.getDocumentation());
+						   metadatavieja.setSyntax(metadatanueva.getSyntax()); //Definition?? check later
+						   
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
 					   
-					   System.out.println(i+"metadata nuevo: "+lftnueva.getName().getValue());
-					   System.out.println(i+"metadata viejo: "+lftvieja.getName().getValue());
-					   i++;
-					   j++;
 				   }
 				   else if(newchilds.get(i) instanceof TopicDef && oldchilds.get(j) instanceof TopicDef) {
 					   TopicDef topicnueva = (TopicDef)newchilds.get(i);
 					   TopicDef topicvieja = (TopicDef)oldchilds.get(j);
 					   
-					   System.out.println(i+"topic nuevo: "+topicnueva.getName().getValue());
-					   System.out.println(i+"topic viejo: "+topicvieja.getName().getValue());
-					   i++;
-					   j++;
+					   if(topicnueva.getName().getValue().equals(topicvieja.getName().getValue())) {
+						   
+						   //cant access to type 
+						   topicvieja.setDocumentation(topicnueva.getDocumentation());
+						   topicvieja.setAbstract(topicnueva.isAbstract());
+						   topicvieja.setPropFinal(topicnueva.isPropFinal());
+						   topicvieja._setOid(topicnueva.getOid());
+						   //extends cant be access
+						   //see later how to add dependencies
+						   
+						   i++;
+						   j++;
+						   
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
 				   }
 				   else if(newchilds.get(i) instanceof UnitDef && oldchilds.get(j) instanceof UnitDef) {
 					   UnitDef unitnueva = (UnitDef)newchilds.get(i);
 					   UnitDef unitvieja = (UnitDef)oldchilds.get(j);
 					   
-					   System.out.println(i+"unit nuevo: "+unitnueva.getName().getValue());
-					   System.out.println(i+"unit viejo: "+unitvieja.getName().getValue());
-					   i++;
-					   j++;
+					   if(unitnueva.getName().getValue().equals(unitvieja.getName().getValue())) {
+						   unitvieja.setDescName(unitnueva.getDescName());
+						   unitvieja.setDocumentation(unitnueva.getDocumentation());
+						   unitvieja.setSyntax(unitnueva.getSyntax());
+						   //cant access to depend on
+						   i++;
+						   j++;
+					   } else {
+						   // maybe just can create a new domain? or check next child? :/
+						   LauncherView.getInstance().log(rsrc.getString("IFuncDesc"), rsrc.getString("CIFail"));
+						   break;
+					   }
+					   
 				   }
 				   else {
 					   System.out.println(i+"Cosas no identificadas nuevo:"+ newchilds.getClass().getName());
