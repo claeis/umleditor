@@ -1,22 +1,31 @@
 package ch.ehi.umleditor.application;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
+import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
-import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.views.ViewProjectionDef;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
+import ch.ehi.umleditor.umlpresentation.Diagram;
 
 public class CompareInterlis2Def {
 	static ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(CompareInterlis2Def.class);
@@ -60,22 +69,34 @@ public class CompareInterlis2Def {
 		    	ModelDef modnew = (ModelDef)listnew.get(j);
 		    	System.out.println(modnew.getName().getValue());
 			    //System.out.println(modnew.getName().getValue());
-			    List newchilds = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); //hijos del modelo nuevo
-			    List oldchilds = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); // hijos del viejo modelo
+		    	if(modnew.getName().getValue().equals(modold.getName().getValue())) {
+		    		List newchilds = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); //hijos del modelo nuevo
+				    List oldchilds = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); // hijos del viejo modelo
+				    
+				    compareModelChilds(oldchilds, newchilds);
+		    	} else {
+		    		System.out.println("Se supone que crearé el modelo "+modnew.getName().getValue());
+		    		
+		    	}
 			    
-			    compareChilds(oldchilds, newchilds);
 			   
 		    } 
 		} 
 	}
 	
-	public void compareChilds(List oldchilds, List newchilds) {
+	public void compareModelChilds(List oldchilds, List newchilds) {
 
+		TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
 	    //empezamos a comparar
 	    int i=0;
 	    int j=0;
 	    while(i<newchilds.size()) {
 	    	if(j<oldchilds.size() && i==j) {
+	    		if(newchilds.get(i) instanceof Diagram && oldchilds.get(j) instanceof Diagram) {
+	    			System.out.println("Diagrama detectado");
+	    			i++;
+	    			j++;
+	    		}
 	    		if (newchilds.get(i) instanceof ClassDef && oldchilds.get(j) instanceof ClassDef) {
 					   ClassDef clasenueva = (ClassDef)newchilds.get(i);
 					   ClassDef clasevieja = (ClassDef)oldchilds.get(j);
@@ -88,9 +109,12 @@ public class CompareInterlis2Def {
 						   clasevieja.setKind(clasenueva.getKind());
 						   clasevieja.setMetaMapping(clasenueva.getMetaMapping());
 						   /*******************
-						    * - see how to add attributes
 						    * - by now parameter and constraints can't be uploaded
 						    * */
+						   
+						   compareClassChilds(clasevieja,clasenueva);
+						  
+						   
 						   i++;
 						   j++;
 					   } else {
@@ -208,6 +232,8 @@ public class CompareInterlis2Def {
 						   //extends cant be access
 						   //see later how to add dependencies
 						   
+						   compareTopicChilds(topicvieja,topicnueva);
+						   
 						   i++;
 						   j++;
 						   
@@ -244,6 +270,93 @@ public class CompareInterlis2Def {
 	    	}
 	    	 
 	    }
+	}
+	
+	public void compareClassChilds(ClassDef classOld, ClassDef classNew) {
+		//empezamos a comparar
+	    System.out.println("Comparando atributos");
+	    
+	    // {AttributeDef}
+		Iterator childAttrNew = AbstractClassDefUtility.getIliAttributes(classNew).iterator();
+		Iterator childAttrOld = AbstractClassDefUtility.getIliAttributes(classOld).iterator();
+		
+		while (childAttrNew.hasNext()) {
+			
+			while(childAttrOld.hasNext()) {
+				Object objOld = childAttrOld.next();
+				Object objNew = childAttrNew.next();
+				if (objNew instanceof AttributeDef && objOld instanceof AttributeDef) {
+					AttributeDef atrbnew = (AttributeDef) objNew;
+					AttributeDef atrbold = (AttributeDef) objOld;
+					if(atrbnew.getName().getValue().equals(atrbold.getName().getValue())) {
+						atrbold.setMetaAttrb(atrbnew.getMetaAttrb());
+						//Type cant access
+						atrbold.setDocumentation(atrbnew.getDocumentation());
+						atrbold.setAbstract(atrbnew.isAbstract());
+						atrbold.setPropFinal(atrbnew.isPropFinal());
+						//Cant access to specialized
+						atrbold.setPropTransient(atrbnew.isPropTransient());
+						//Cant access to ordered
+						//Cant access to cardinality
+					}
+				} else if (objNew instanceof RoleDef) {
+					// see later
+				} else {
+					// ignore others; should not have others
+				}
+			}
+	
+			// {ConstraintDef}
+		}
+	}
+	
+	public void compareTopicChilds(TopicDef oldtopic, TopicDef newtopic) {
+		System.out.println("Comparando topics");
+		TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
+		// sort children
+		List oldtopchildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldtopic, null));
+		List newtopchildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldtopic, null));
+		
+		// visit children
+		Iterator oldchildi = oldtopchildren.iterator();
+		Iterator newchildi = oldtopchildren.iterator();
+		while (newchildi.hasNext()) {
+			while(oldchildi.hasNext()) {
+				Object objOld = oldchildi.next();
+				Object objNew = newchildi.next();
+				
+
+				/*if (objNew instanceof MetaDataUseDef && objOld instanceof MetaDataUseDef) {
+					updateMetaDataUseDef((MetaDataUseDef) objOld, (MetaDataUseDef) objNew);
+				} else if (objNew instanceof UnitDef && objOld instanceof UnitDef) {
+					updateUnitDef((UnitDef) objOld, (UnitDef) objNew);
+				} else if (objNew instanceof DomainDef && objOld instanceof DomainDef) {
+					updateDomainDef((DomainDef) objOld, (DomainDef) objNew);
+				} else if ((objNew instanceof ClassDef && !(objNew instanceof AssociationDef)) && (objOld instanceof ClassDef && !(objOld instanceof AssociationDef)) ) {
+					updataeClassDef((ClassDef) objOld, (ClassDef) objNew);
+				} else if (objNew instanceof AssociationDef) {
+					updateAssociationDef((AssociationDef) objOld, (AssociationDef) objNew);
+				} else if (objNew instanceof ViewDef && objOld instanceof ViewDef) {
+					updateViewDef((ViewDef) objOld, (ViewDef) objNew);
+				} else if (objNew instanceof ViewProjectionDef && ObjOld instanceof ViewProjectionDef) {
+					updateViewProjectionDef((ViewProjectionDef) objOld, (ViewProjectionDef)objNew);
+				} else if (objNew instanceof GraphicDef && objOld instanceof GraphicDef) {
+					updateGraphicDef((GraphicDef) objOld,(GraphicDef) objNew);
+				} else {
+					// ignore others; should not have others
+				}*/
+			}
+		}
+	}
+	
+	/**
+	 * Called whenever the part throws an exception.
+	 * 
+	 * @param exception
+	 *            java.lang.Throwable
+	 */
+	protected void handleException(java.lang.Throwable exception) {
+		LauncherView.getInstance().handleException(exception);
 	}
 	
 }
