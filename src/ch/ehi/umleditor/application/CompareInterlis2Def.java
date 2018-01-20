@@ -1,5 +1,6 @@
 package ch.ehi.umleditor.application;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 /**
@@ -93,10 +95,14 @@ public class CompareInterlis2Def {
 				System.out.println("Modelo nuevo: "+modnew.getName().getValue());
 				System.out.println("Modelo viejo: "+modold.getName().getValue());
 				if (modnew.getName().getValue().equals(modold.getName().getValue())) {
+					updateModelDef(modold,modnew);
 					//list with sorted child from Model
 					List newchild = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); 
 					List oldchild = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
-					compareModelChild(oldchild, newchild);
+					
+					System.out.println("actualizando "+modold.getName().getValue());
+					cleanOldchild(oldchild, newchild); //actualiza elementos y elimina los que no encuentra
+					
 				} else {
 					//Create model
 					System.out.println("Se supone que crearé el modelo " + modnew.getName().getValue());
@@ -105,28 +111,36 @@ public class CompareInterlis2Def {
 
 			}
 		}
+		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), oldInterlis.getName().getValue()+" Updated!");
 	}
 
-	/**
-	 * Compare child models between INTERLIS files
-	 * @param oldchild 
-	 * @param newchild
-	 */
-	public void compareModelChild(List oldchild, List newchild) {
-		System.out.println("---> Comparando modelos <---");
-		TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
-		int i = 0;
-		int j = 0;
-		while (i < newchild.size()) {
-			if (j < oldchild.size() && i == j) {
-				if (newchild.get(i) instanceof Diagram && oldchild.get(j) instanceof Diagram) {
+	public void cleanOldchild(List oldChild, List newChild) {
+		List<String> check = new ArrayList();
+		int i=0;
+		
+		while(i < newChild.size()) {
+			//search
+			ModelElement newElement = (ModelElement) newChild.get(i);
+			
+			if (searchIn(newElement, oldChild) == null) { // remove element
+				ModelElement something = (ModelElement) oldChild.get(i);
+				System.out.println("Eliminando "+something.getName().getValue());
+				//ElementFactory.removeElement((Element) oldChild.get(i));
+				i++;
+				
+			} 
+			else { // add element
+
+				ModelElement oldElement = searchIn(newElement, oldChild);
+				check.add(oldElement.getName().getValue());
+				
+				if(oldElement instanceof Diagram && newElement instanceof Diagram) {
+					//nothing to do :/
 					System.out.println("Diagram");
-					i++;
-					j++;
 				}
-				if (newchild.get(i) instanceof ClassDef && oldchild.get(j) instanceof ClassDef) {
-					ClassDef newClass = (ClassDef) newchild.get(i);
-					ClassDef oldClass = (ClassDef) oldchild.get(j);
+				else if (oldElement instanceof ClassDef && newElement instanceof ClassDef) {
+					ClassDef newClass = (ClassDef) newElement;
+					ClassDef oldClass = (ClassDef) oldElement;
 					System.out.println("Clase nueva: "+newClass.getName().getValue());
 					System.out.println("Clase vieja: "+oldClass.getName().getValue());
 
@@ -134,16 +148,12 @@ public class CompareInterlis2Def {
 						updateClassDef(oldClass, newClass);
 						compareClassChilds(oldClass, newClass); //see attributes
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new class? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
+					} 
 
-				} else if (newchild.get(i) instanceof DomainDef && oldchild.get(j) instanceof DomainDef) {
-					DomainDef newDom = (DomainDef) newchild.get(i);
-					DomainDef oldDom = (DomainDef) oldchild.get(j);
+				}
+				else if (oldElement instanceof DomainDef && newElement instanceof DomainDef) {
+					DomainDef newDom = (DomainDef) newElement;
+					DomainDef oldDom = (DomainDef) oldElement;
 					System.out.println("Dominio nuevo: "+newDom.getName().getValue());
 					System.out.println("Dominio viejo: "+oldDom.getName().getValue());
 
@@ -151,16 +161,11 @@ public class CompareInterlis2Def {
 
 						updateDomainDef(oldDom, newDom);
 						i++;
-						j++;
 
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
-				} else if (newchild.get(i) instanceof FunctionDef && oldchild.get(j) instanceof FunctionDef) {
-					FunctionDef newFnc = (FunctionDef) newchild.get(i);
-					FunctionDef oldFnc = (FunctionDef) oldchild.get(j);
+					} 
+				} else if (oldElement instanceof FunctionDef && newElement instanceof FunctionDef) {
+					FunctionDef newFnc = (FunctionDef) newElement;
+					FunctionDef oldFnc = (FunctionDef) oldElement;
 					System.out.println("Funcion nueva: "+newFnc.getName().getValue());
 					System.out.println("Funcion vieja: "+oldFnc.getName().getValue());
 					
@@ -169,19 +174,13 @@ public class CompareInterlis2Def {
 						System.out.println("Actualizando funcion: "+oldFnc.getName().getValue());
 						// depends on cant access
 						// text cant access
-
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
+					} 
 
-				} else if (newchild.get(i) instanceof GraphicParameterDef
-						&& oldchild.get(j) instanceof GraphicParameterDef) {
-					GraphicParameterDef newGpd = (GraphicParameterDef) newchild.get(i);
-					GraphicParameterDef oldGpd = (GraphicParameterDef) oldchild.get(j);
+				} else if (oldElement instanceof GraphicParameterDef
+						&& newElement instanceof GraphicParameterDef) {
+					GraphicParameterDef newGpd = (GraphicParameterDef) newElement;
+					GraphicParameterDef oldGpd = (GraphicParameterDef) oldElement;
 					System.out.println("Parametro grafico nuevo: "+newGpd.getName().getValue());
 					System.out.println("Parametro grafico viejo: "+oldGpd.getName().getValue());
 
@@ -190,17 +189,12 @@ public class CompareInterlis2Def {
 						oldGpd.setDocumentation(newGpd.getDocumentation());
 						// depends on cant access
 						// text cant access
-
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
-				} else if (newchild.get(i) instanceof LineFormTypeDef && oldchild.get(j) instanceof LineFormTypeDef) {
-					LineFormTypeDef newLft = (LineFormTypeDef) newchild.get(i);
-					LineFormTypeDef oldLft = (LineFormTypeDef) oldchild.get(j);
+
+					} 
+				} else if (oldElement instanceof LineFormTypeDef && newElement instanceof LineFormTypeDef) {
+					LineFormTypeDef newLft = (LineFormTypeDef) newElement;
+					LineFormTypeDef oldLft = (LineFormTypeDef) oldElement;
 					System.out.println("Linea nueva: "+newLft.getName().getValue());
 					System.out.println("Linea vieja: "+oldLft.getName().getValue());
 
@@ -209,33 +203,22 @@ public class CompareInterlis2Def {
 						oldLft.setDocumentation(newLft.getDocumentation());
 						oldLft.setSyntax(newLft.getSyntax()); // structure?? check later
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
+					} 
 
-				} else if (newchild.get(i) instanceof MetaDataUseDef && oldchild.get(j) instanceof MetaDataUseDef) {
-					MetaDataUseDef newMetadata = (MetaDataUseDef) newchild.get(i);
-					MetaDataUseDef oldMetadata = (MetaDataUseDef) oldchild.get(j);
+				} else if (oldElement instanceof MetaDataUseDef && newElement instanceof MetaDataUseDef) {
+					MetaDataUseDef newMetadata = (MetaDataUseDef) newElement;
+					MetaDataUseDef oldMetadata = (MetaDataUseDef) oldElement;
 					System.out.println("Metadato nuevo: "+newMetadata.getName().getValue());
 					System.out.println("Metadato viejo: "+oldMetadata.getName().getValue());
 					if (newMetadata.getName().getValue().equals(oldMetadata.getName().getValue())) {
 						
 						updateMetaDataUseDef(oldMetadata, newMetadata);
-
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
+					} 
 
-				} else if (newchild.get(i) instanceof TopicDef && oldchild.get(j) instanceof TopicDef) {
-					TopicDef newTopic = (TopicDef) newchild.get(i);
-					TopicDef oldTopic = (TopicDef) oldchild.get(j);
+				} else if (oldElement instanceof TopicDef && newElement instanceof TopicDef) {
+					TopicDef newTopic = (TopicDef) newElement;
+					TopicDef oldTopic = (TopicDef) oldElement;
 					System.out.println("Tema nuevo: "+newTopic.getName().getValue());
 					System.out.println("Tema viejo: "+oldTopic.getName().getValue());
 
@@ -250,18 +233,12 @@ public class CompareInterlis2Def {
 						// see later how to add dependencies
 
 						compareTopicChilds(oldTopic, newTopic);
-
 						i++;
-						j++;
 
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
-				} else if (newchild.get(i) instanceof UnitDef && oldchild.get(j) instanceof UnitDef) {
-					UnitDef newUnit = (UnitDef) newchild.get(i);
-					UnitDef oldUnit = (UnitDef) oldchild.get(j);
+					} 
+				} else if (oldElement instanceof UnitDef && newElement instanceof UnitDef) {
+					UnitDef newUnit = (UnitDef) newElement;
+					UnitDef oldUnit = (UnitDef) oldElement;
 					System.out.println("Unidad nueva: "+newUnit.getName().getValue());
 					System.out.println("Unidad vieja: "+oldUnit.getName().getValue());
 
@@ -269,23 +246,42 @@ public class CompareInterlis2Def {
 						
 						updateUnitDef(oldUnit, newUnit);
 						i++;
-						j++;
-					} else {
-						// maybe just can create a new domain? or check next child? :/
-						LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), rsrc.getString("CIFail"));
-						break;
-					}
+					} 
 
-				} else {
-					System.out.println(i + "Cosas no identificadas nuevo:" + newchild.getClass().getName());
-					System.out.println(i + "Cosas no identificadas viejo:" + newchild.getClass().getName());
-					i++;
-					j++;
 				}
 			}
-
+		}
+		addNewChild(check,oldChild,newChild);
+	}
+	
+	public ModelElement searchIn(ModelElement elementToSearch, List placeToSearch) {
+		int i=0;
+		while(i<placeToSearch.size()) {
+			ModelElement actual = (ModelElement) placeToSearch.get(i);
+			if(actual.getName().getValue().equals(elementToSearch.getName().getValue())) {
+				return actual;
+			}
+			else {
+				i++;
+			}
+		}
+		return null;
+	}
+	
+	public void addNewChild(List oldModelclean,List modold,List newchild) {
+		int i =0;
+		while(i < newchild.size()) {
+			ModelElement newElement = (ModelElement) newchild.get(i);
+			if(oldModelclean.contains(newElement.getName().getValue())) {
+				i++; //nothing to do has been updated
+			} else {
+				//create element :)
+				System.out.println("se supone que crearé "+newElement.getName().getValue());
+				i++;
+			}
 		}
 	}
+
 
 	public void compareClassChilds(ClassDef classOld, ClassDef classNew) {
 		// empezamos a comparar
@@ -365,6 +361,19 @@ public class CompareInterlis2Def {
 				}
 			}
 		}
+	}
+	
+	// Update model
+	public void updateModelDef(ModelDef mdlold, ModelDef mdlnew) {
+		System.out.println("Actualizando modelo "+mdlold.getName().getValue());
+		mdlold.setKind(mdlnew.getKind());
+		mdlold.setDocumentation(mdlnew.getDocumentation());
+		mdlold.setIssuerURI(mdlnew.getIssuerURI());
+		mdlold.setVersion(mdlnew.getVersion());
+		mdlold.setVersionComment(mdlnew.getVersionComment());
+		mdlold.setContracted(mdlnew.isContracted());
+		mdlold.setBaseLanguage(mdlnew.getBaseLanguage());
+		
 	}
 
 	// Update elements
