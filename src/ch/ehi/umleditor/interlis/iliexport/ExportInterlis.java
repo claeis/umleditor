@@ -29,6 +29,7 @@ import ch.ehi.basics.view.GenericFileFilter;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
+import ch.softenvironment.client.ResourceManager;
 
 public class ExportInterlis {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(ExportInterlis.class);
@@ -75,6 +76,33 @@ public class ExportInterlis {
 		}
 		return;
 	}
+	
+
+	public static void writeXmi() {
+		FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+		saveDialog.setDialogTitle("xmi export ...");
+		saveDialog.setFileFilter(createXmiFilter());
+		
+		if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+			LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+			
+			String xmiFileName = saveDialog.getSelectedFile().getAbsolutePath();
+			TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
+			try {
+				ch.ehi.basics.settings.Settings settings = ch.ehi.umleditor.application.LauncherView.getIli2cSettings();
+				Configuration ili2cConfig = new Configuration();
+				ili2cConfig.setAutoCompleteModelList(true);
+				ili2cConfig.setOutputKind(GenerateOutputKind.UML21);
+				ili2cConfig.setOutputFile(xmiFileName);
+				writer.runCompiler(ch.ehi.umleditor.application.LauncherView.getInstance().getModel(), ili2cConfig,
+						settings);
+			} catch(java.io.IOException ex) {
+				ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(),
+						ex.getLocalizedMessage());
+			}
+		}
+		return;
+	}
 
 	public static void writeGML() {
 		FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
@@ -97,6 +125,7 @@ public class ExportInterlis {
 		}
 		return;
 	}
+	
 
 	public static void writeIli1Fmt() {
 		FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
@@ -188,4 +217,11 @@ public class ExportInterlis {
  		 			JOptionPane.showMessageDialog(null,","+writer.getFuncDesc()+" "+ex.getLocalizedMessage());
  			}
 		}
+	
+	/**
+	 * @return specific File-Filter
+	 */
+	public static GenericFileFilter createXmiFilter() {
+		return new GenericFileFilter("Xmi format (*.xmi)", "xmi");
+	}
 }

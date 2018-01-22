@@ -1259,8 +1259,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		try {
 			// user code begin {1}
 			// user code end
-			//this.mniXmiExport();
-			System.out.println("Export xmi");
+			this.mniXmiExport();
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -3861,6 +3860,12 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		ch.ehi.basics.view.BrowserControl.displayURL(umlEditorHome + "/doc/index.html");//$NON-NLS-1$
 
+		tool().activate();
+	}
+	
+	private void mniXmiExport() {
+		tool().deactivate();
+		ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeXmi();
 		tool().activate();
 	}
 
