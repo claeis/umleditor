@@ -18,6 +18,7 @@ import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.modeltopicclass.Translation;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
@@ -118,25 +119,26 @@ public class CompareInterlis2Def {
 		List<String> check = new ArrayList();
 		int i=0;
 		
-		while(i < newChild.size()) {
+		while(i < oldChild.size()) {
 			//search
-			ModelElement newElement = (ModelElement) newChild.get(i);
-			
-			if (searchIn(newElement, oldChild) == null) { // remove element
-				ModelElement something = (ModelElement) oldChild.get(i);
-				System.out.println("Eliminando "+something.getName().getValue());
-				//ElementFactory.removeElement((Element) oldChild.get(i));
+			ModelElement oldElement = (ModelElement) oldChild.get(i);
+			int ind = searchIn(oldElement, newChild); //search old element in new list
+			System.out.println("--> "+ind);
+			if (ind == -1) { // remove element
+				System.out.println("Eliminando "+oldElement.getName().getValue());
+				//ElementFactory.removeElement((Element) newChild.get(i));
 				i++;
 				
 			} 
-			else { // add element
+			else { // update element
 
-				ModelElement oldElement = searchIn(newElement, oldChild);
-				check.add(oldElement.getName().getValue());
+				ModelElement newElement =(ModelElement) newChild.get(ind);
+				check.add(newElement.getName().getValue());
 				
 				if(oldElement instanceof Diagram && newElement instanceof Diagram) {
 					//nothing to do :/
 					System.out.println("Diagram");
+					i++;
 				}
 				else if (oldElement instanceof ClassDef && newElement instanceof ClassDef) {
 					ClassDef newClass = (ClassDef) newElement;
@@ -254,18 +256,17 @@ public class CompareInterlis2Def {
 		addNewChild(check,oldChild,newChild);
 	}
 	
-	public ModelElement searchIn(ModelElement elementToSearch, List placeToSearch) {
+	public int searchIn(ModelElement elementToSearch, List placeToSearch) {
 		int i=0;
 		while(i<placeToSearch.size()) {
 			ModelElement actual = (ModelElement) placeToSearch.get(i);
+						
 			if(actual.getName().getValue().equals(elementToSearch.getName().getValue())) {
-				return actual;
+				return i;
 			}
-			else {
-				i++;
-			}
+			i++;
 		}
-		return null;
+		return -1;
 	}
 	
 	public void addNewChild(List oldModelclean,List modold,List newchild) {
@@ -365,7 +366,6 @@ public class CompareInterlis2Def {
 	
 	// Update model
 	public void updateModelDef(ModelDef mdlold, ModelDef mdlnew) {
-		System.out.println("Actualizando modelo "+mdlold.getName().getValue());
 		mdlold.setKind(mdlnew.getKind());
 		mdlold.setDocumentation(mdlnew.getDocumentation());
 		mdlold.setIssuerURI(mdlnew.getIssuerURI());
@@ -373,6 +373,27 @@ public class CompareInterlis2Def {
 		mdlold.setVersionComment(mdlnew.getVersionComment());
 		mdlold.setContracted(mdlnew.isContracted());
 		mdlold.setBaseLanguage(mdlnew.getBaseLanguage());
+		
+		// Translations
+		Iterator oldtranslationi = mdlold.iteratorTranslation();
+		Iterator newtranslationi = mdlnew.iteratorTranslation();
+		
+		while (newtranslationi.hasNext()) {
+			Translation oldtranslation = (Translation) oldtranslationi.next();
+			Translation newtranslation = (Translation) newtranslationi.next();
+			
+			oldtranslation.setLanguage(newtranslation.getLanguage());
+		}
+		
+		// Imports
+		Iterator oldimportsi = mdlold.iteratorClientDependency();
+		while (oldimportsi.hasNext()) {
+			Object obj = oldimportsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.IliImport) {
+				ch.ehi.interlis.modeltopicclass.IliImport oldiliimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
+				Iterator oldsupplieri = oldiliimport.iteratorSupplier();
+			}
+		}
 		
 	}
 
