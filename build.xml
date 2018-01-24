@@ -19,6 +19,11 @@
   <target depends="init" name="run">
     <java classname="ch.ehi.umleditor.application.LauncherView" fork="true">
       <arg value="-debug"/>
+      <!-- https://web.liferay.com/es/community/wiki/-/wiki/Main/Debugging+ant+java+tasks -->
+      <!-- https://www.ibm.com/developerworks/library/os-eclipse-javadebug/ -->
+      <!-- https://stackoverflow.com/questions/2406825/how-to-debug-java-code-when-using-ant-script-in-eclipse/2406928 -->
+      <jvmarg value="-Xdebug" />
+      <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8700" />
       <classpath>
         <pathelement location="${projectjar}"/>
       	<pathelement location="${basedir}/lib/ili2c.jar"/>

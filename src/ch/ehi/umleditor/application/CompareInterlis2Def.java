@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
@@ -15,6 +16,7 @@ import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.Contract;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
@@ -91,28 +93,70 @@ public class CompareInterlis2Def {
 		// visit all ModelDef
 		for (int i = 0; i < listold.size(); i++) {
 			ModelDef modold = (ModelDef) listold.get(i);
-			for (int j = 0; j < listnew.size(); j++) {
-				ModelDef modnew = (ModelDef) listnew.get(j);
-				System.out.println("Modelo nuevo: "+modnew.getName().getValue());
-				System.out.println("Modelo viejo: "+modold.getName().getValue());
-				if (modnew.getName().getValue().equals(modold.getName().getValue())) {
-					updateModelDef(modold,modnew);
-					//list with sorted child from Model
-					List newchild = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); 
-					List oldchild = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
-					
-					System.out.println("actualizando "+modold.getName().getValue());
-					cleanOldchild(oldchild, newchild); //actualiza elementos y elimina los que no encuentra
-					
-				} else {
-					//Create model
-					System.out.println("Se supone que crearé el modelo " + modnew.getName().getValue());
-
-				}
-
-			}
+			String oldName = modold.getName().getValue();		
+			int newIndex = findIndexInListByName(oldName, listnew);
+			if (newIndex == -1) {
+				System.out.println("No encontre actualización del modelo, debería elminar?");
+			} else {
+				ModelDef modnew = (ModelDef) listold.get(newIndex);
+				System.out.println("Modelo viejo: " + modold.getName().getValue());
+				System.out.println("Modelo nuevo: " + modnew.getName().getValue());
+				Iterator<?> it = modnew.iteratorOwnedElement();
+			    while(it.hasNext()) {
+			    	Object ownedEle = it.next();
+			    	System.out.println(ownedEle);
+			    	if(ownedEle instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
+			    		TopicDef newTopic = (TopicDef) ownedEle;
+			    		String topicName = newTopic.getName().getValue();
+			    		TopicDef oldTopic = (TopicDef)findOwnedElementByName(topicName, modold);
+			    		System.out.println("oldTopic:" + oldTopic.getName().getValue());
+			    		System.out.println("newTopic:" + newTopic.getName().getValue());
+			    	} else if(ownedEle instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
+			    		DomainDef newDomain = (DomainDef) ownedEle;
+			    		String domainName = newDomain.getName().getValue();
+			    		DomainDef oldDomain = (DomainDef)findOwnedElementByName(domainName, modold);
+			    		System.out.println("oldTopic:" + oldDomain.getName().getValue());
+			    		System.out.println("newTopic:" + oldDomain.getName().getValue());
+			    	} else {
+			    		System.out.println(ownedEle.getClass());
+			    	}
+			    }
+			    System.out.println("bye");
+				
+			}			
 		}
 		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), oldInterlis.getName().getValue()+" Updated!");
+	}
+	
+	public int findIndexInListByName(String oldName, List listnew) {
+		for (int i = 0; i < listnew.size(); i++) {
+			ModelDef modnew = (ModelDef) listnew.get(i);
+			String newName = modnew.getName().getValue();	
+			if (newName.equals(oldName)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public Object findOwnedElementByName(String findname, ModelDef model) {
+		Iterator<?> it = model.iteratorOwnedElement();
+	    while(it.hasNext()) {
+	    	Object ownedEle = it.next();
+	    	System.out.println(ownedEle);
+	    	String name = "";
+	    	if(ownedEle instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
+	    		TopicDef topic = (TopicDef) ownedEle;
+	    		name = topic.getName().getValue();
+	    	} else if(ownedEle instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
+	    		DomainDef domain = (DomainDef) ownedEle;
+	    		name = domain.getName().getValue();
+	    	}
+	    	if (name.equals(findname)) {
+	    		return ownedEle;
+	    	}
+	    }
+		return null;
 	}
 
 	public void cleanOldchild(List oldChild, List newChild) {
