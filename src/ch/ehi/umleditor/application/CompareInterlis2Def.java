@@ -1,6 +1,7 @@
 package ch.ehi.umleditor.application;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.Contract;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.IliImport;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.modeltopicclass.Translation;
@@ -90,6 +92,12 @@ public class CompareInterlis2Def {
 		// List with sorted models from InterlisFile
 		List listold = obj.sortIliDefs(ModelElementUtility.getChildElements(oldInterlis, ModelDef.class));
 		List listnew = obj.sortIliDefs(ModelElementUtility.getChildElements(newInterlis, ModelDef.class));
+		
+		// recorrer interlisDef nuevo si hay modelos nuevos, se copian en el interlisDef viejo
+		addNewModels(oldInterlis, listold, listnew);
+		
+		removeAndUpdateOldModels(newInterlis, listold, listnew);
+		
 		// visit all ModelDef
 		for (int i = 0; i < listold.size(); i++) {
 			ModelDef modold = (ModelDef) listold.get(i);
@@ -157,6 +165,50 @@ public class CompareInterlis2Def {
 	    	}
 	    }
 		return null;
+	}
+	
+	public void addNewModels(INTERLIS2Def oldInterlis, List listold, List listnew) {
+		
+		for (int i = 0; i < listnew.size(); i++) {
+			ModelDef modnew = (ModelDef) listnew.get(i);
+			String newName = modnew.getName().getValue();		
+			int oldIndex = findIndexInListByName(newName, listold);
+			if (oldIndex == -1) {
+				System.out.println("No encontre el modelo " + newName + " en la lista vieja.");
+				if (modnew instanceof ModelDef) {
+					oldInterlis.addOwnedElement(modnew);
+				} else {
+					System.out.println("Agrega un caso para agregar la clase no registrada:");
+					System.out.println(modnew.getClass());
+				}
+				
+			} else {
+			
+			}
+		}
+	}
+	
+	public void removeAndUpdateOldModels(INTERLIS2Def newInterlis, List listold, List listnew) {
+		
+		for (int i = 0; i < listold.size(); i++) {
+			ModelDef modold = (ModelDef) listold.get(i);
+			String oldName = modold.getName().getValue();		
+			int newIndex = findIndexInListByName(oldName, listnew);
+			if (newIndex == -1) {
+				System.out.println("No encontre el modelo " + oldName + " en la lista nueva.");
+				if (modold instanceof ModelDef) {
+					oldInterlis.removeOwnedElement(modold);
+				} else {
+					System.out.println("Agrega un caso para eliminar la clase no registrada:");
+					System.out.println(modold.getClass());
+				}
+				
+			} else {
+				// como se que ya existe el modelo en ambas listas, voy a actualizar
+				ModelDef modnew = (ModelDef) listnew.get(newIndex);
+				updateModelDef(modold, modnew);
+			}
+		}
 	}
 
 	public void cleanOldchild(List oldChild, List newChild) {
@@ -409,35 +461,87 @@ public class CompareInterlis2Def {
 	}
 	
 	// Update model
-	public void updateModelDef(ModelDef mdlold, ModelDef mdlnew) {
-		mdlold.setKind(mdlnew.getKind());
-		mdlold.setDocumentation(mdlnew.getDocumentation());
-		mdlold.setIssuerURI(mdlnew.getIssuerURI());
-		mdlold.setVersion(mdlnew.getVersion());
-		mdlold.setVersionComment(mdlnew.getVersionComment());
-		mdlold.setContracted(mdlnew.isContracted());
-		mdlold.setBaseLanguage(mdlnew.getBaseLanguage());
+	public void updateModelDef(ModelDef modold, ModelDef modnew) {
+		updateAtributesOfModelDef(modold, modnew);
+		updateImportsOfModelDef(modold, modnew);
+		updateTranslationsOfModelDef(modold, modnew);
 		
-		// Translations
-		Iterator oldtranslationi = mdlold.iteratorTranslation();
-		Iterator newtranslationi = mdlnew.iteratorTranslation();
-		
+	}
+
+	private void updateTranslationsOfModelDef(ModelDef modold, ModelDef modnew) {
+		Iterator oldtranslationi = modold.iteratorTranslation();
+		Iterator newtranslationi = modnew.iteratorTranslation();
 		while (newtranslationi.hasNext()) {
 			Translation oldtranslation = (Translation) oldtranslationi.next();
 			Translation newtranslation = (Translation) newtranslationi.next();
 			
 			oldtranslation.setLanguage(newtranslation.getLanguage());
 		}
-		
-		// Imports
-		Iterator oldimportsi = mdlold.iteratorClientDependency();
+	}
+	private void updateImportsOfModelDef(ModelDef modold, ModelDef modnew) {
+		Iterator oldimportsi = modold.iteratorIliImport();
 		while (oldimportsi.hasNext()) {
 			Object obj = oldimportsi.next();
-			if (obj instanceof ch.ehi.interlis.modeltopicclass.IliImport) {
-				ch.ehi.interlis.modeltopicclass.IliImport oldiliimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
-				Iterator oldsupplieri = oldiliimport.iteratorSupplier();
+			ch.ehi.interlis.modeltopicclass.IliImport oldimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
+			System.out.println("Size supplier: " + oldimport.sizeSupplier());
+			// POR FAVOR, validar el supplier
+			ModelElement supplier = (ModelElement)oldimport.iteratorSupplier().next();
+			String oldName = supplier.getName().getValue();
+			IliImport newimport = findImportByName(oldName, modnew);
+			if (newimport == null) {
+				// si el import viejo no existe en la nueva lista lo elimina
+				modold.removeClientDependency(oldimport);
+			} else {
+				// si existe, lo reemplaza? o si ya existe, déjelo
+				//modold.removeClientDependency(oldimport);
+				//modold.addClientDependency(newimport);
 			}
 		}
+		
+		Iterator newimportsi = modnew.iteratorIliImport();
+		while (newimportsi.hasNext()) {
+			Object obj = newimportsi.next();
+			ch.ehi.interlis.modeltopicclass.IliImport newimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
+			System.out.println("Size supplier: " + newimport.sizeSupplier());
+			ModelElement supplier = (ModelElement)newimport.iteratorSupplier().next();
+			String newName = supplier.getName().getValue();
+			IliImport oldimport = findImportByName(newName, modold);
+			if (oldimport == null) {
+				// si no existe lo agrega
+				modold.addClientDependency(newimport);
+			} else {
+				// si existe
+			}
+		}
+	}
+
+	private IliImport findImportByName(String findname, ModelDef modnew) {
+		Iterator it = modnew.iteratorClientDependency();
+		while (it.hasNext()) {
+			Object obj = it.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.IliImport) {				
+				ch.ehi.interlis.modeltopicclass.IliImport _import = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
+				System.out.println("Size supplier: " + _import.sizeSupplier());
+				ModelElement supplier = (ModelElement)_import.iteratorSupplier().next();
+				String name = supplier.getName().getValue();				
+				if (name.equals(findname)) {
+					return _import;
+				}
+			} else {
+				// do something with class
+			}
+		}
+		return null;
+	}
+
+	private void updateAtributesOfModelDef(ModelDef modold, ModelDef modnew) {
+		modold.setKind(modnew.getKind()); // tipo
+		modold.setDocumentation(modnew.getDocumentation()); // description
+		modold.setIssuerURI(modnew.getIssuerURI()); // issuer URI
+		modold.setVersion(modnew.getVersion());
+		modold.setVersionComment(modnew.getVersionComment());
+		modold.setContracted(modnew.isContracted());
+		modold.setBaseLanguage(modnew.getBaseLanguage()); // Languaje
 		
 	}
 

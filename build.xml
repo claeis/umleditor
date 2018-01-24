@@ -23,7 +23,7 @@
       <!-- https://www.ibm.com/developerworks/library/os-eclipse-javadebug/ -->
       <!-- https://stackoverflow.com/questions/2406825/how-to-debug-java-code-when-using-ant-script-in-eclipse/2406928 -->
       <jvmarg value="-Xdebug" />
-      <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8700" />
+      <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8800" />
       <classpath>
         <pathelement location="${projectjar}"/>
       	<pathelement location="${basedir}/lib/ili2c.jar"/>
