@@ -27,6 +27,7 @@ import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
 import ch.ehi.umleditor.umlpresentation.Diagram;
@@ -50,6 +51,7 @@ public class CompareInterlis2Def {
 	 */
 	public INTERLIS2Def newInterlis;
 
+	TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
 	/**
 	 * Get the INTERLIS model value to update
 	 * @return model to update
@@ -89,6 +91,9 @@ public class CompareInterlis2Def {
 		// enumerate and sort all ModelDef
 		TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
 
+		// Update attributes of InterlisDef
+		updateINTERLIS2Def(oldInterlis, newInterlis);
+		
 		// List with sorted models from InterlisFile
 		List listold = obj.sortIliDefs(ModelElementUtility.getChildElements(oldInterlis, ModelDef.class));
 		List listnew = obj.sortIliDefs(ModelElementUtility.getChildElements(newInterlis, ModelDef.class));
@@ -119,12 +124,42 @@ public class CompareInterlis2Def {
 			    		TopicDef oldTopic = (TopicDef)findOwnedElementByName(topicName, modold);
 			    		System.out.println("oldTopic:" + oldTopic.getName().getValue());
 			    		System.out.println("newTopic:" + newTopic.getName().getValue());
+			    		updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
 			    	} else if(ownedEle instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
 			    		DomainDef newDomain = (DomainDef) ownedEle;
 			    		String domainName = newDomain.getName().getValue();
 			    		DomainDef oldDomain = (DomainDef)findOwnedElementByName(domainName, modold);
-			    		System.out.println("oldTopic:" + oldDomain.getName().getValue());
-			    		System.out.println("newTopic:" + oldDomain.getName().getValue());
+			    		System.out.println("oldDomain:" + oldDomain.getName().getValue());
+			    		System.out.println("newDomain:" + oldDomain.getName().getValue());
+			    		updateDomainDef(oldDomain, newDomain);
+			    	} else if(ownedEle instanceof ClassDef){
+			    		ClassDef newClass = (ClassDef) ownedEle;
+			    		String className = newClass.getName().getValue();
+			    		ClassDef oldClass = (ClassDef)findOwnedElementByName(className, modold);
+			    		System.out.println("oldClass:" + oldClass.getName().getValue());
+			    		System.out.println("newClass:" + newClass.getName().getValue());
+			    		updateClassDef(oldClass, newClass);
+			    	} else if(ownedEle instanceof GraphicParameterDef){
+			    		GraphicParameterDef newGraphic = (GraphicParameterDef) ownedEle;
+			    		String genName = newGraphic.getName().getValue();
+			    		GraphicParameterDef oldGraphic = (GraphicParameterDef)findOwnedElementByName(genName, modold);
+			    		System.out.println("oldGraphic:" + oldGraphic.getName().getValue());
+			    		System.out.println("newGraphic:" + newGraphic.getName().getValue());
+			    		updateGraphicParameterDef(oldGraphic, newGraphic);
+			    	} else if(ownedEle instanceof MetaDataUseDef){
+			    		MetaDataUseDef newMetadata = (MetaDataUseDef) ownedEle;
+			    		String metadataName = newMetadata.getName().getValue();
+			    		MetaDataUseDef oldMetadata = (MetaDataUseDef)findOwnedElementByName(metadataName, modold);
+			    		System.out.println("oldMetadata:" + oldMetadata.getName().getValue());
+			    		System.out.println("newMetadata:" + newMetadata.getName().getValue());
+			    		updateMetadataUseDef(oldMetadata, newMetadata);
+			    	}  else if(ownedEle instanceof FunctionDef){
+			    		FunctionDef newFunction = (FunctionDef) ownedEle;
+			    		String functionName = newFunction.getName().getValue();
+			    		FunctionDef oldFunction = (FunctionDef)findOwnedElementByName(functionName, modold);
+			    		System.out.println("oldFunction:" + oldFunction.getName().getValue());
+			    		System.out.println("newFunction:" + newFunction.getName().getValue());
+			    		updateFunctionDef(oldFunction, newFunction);
 			    	} else {
 			    		System.out.println(ownedEle.getClass());
 			    	}
@@ -136,6 +171,40 @@ public class CompareInterlis2Def {
 		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), oldInterlis.getName().getValue()+" Updated!");
 	}
 	
+	private void updateMetadataUseDef(MetaDataUseDef oldMetadata, MetaDataUseDef newMetadata) {
+		oldMetadata.setBasketOid(newMetadata.getBasketOid());
+		oldMetadata.setKind(newMetadata.getKind());
+		oldMetadata.setDocumentation(newMetadata.getDocumentation());
+		//
+		oldMetadata.setSyntax(newMetadata.getSyntax());
+		
+	}
+
+	private void updateGraphicParameterDef(GraphicParameterDef oldGraphic, GraphicParameterDef newGraphic) {
+		oldGraphic.setDocumentation(newGraphic.getDocumentation());
+		//depends on missed
+		oldGraphic.setSyntax(newGraphic.getSyntax());
+		
+	}
+
+	private void updateFunctionDef(FunctionDef oldFunction, FunctionDef newFunction) {
+		oldFunction.setDocumentation(newFunction.getDocumentation());
+		//depends on missed
+		oldFunction.setSyntax(newFunction.getSyntax());
+		
+	}
+
+	private void updateTopicDef(TopicDef oldTopic, TopicDef newTopic) {
+		oldTopic.setKind(newTopic.getKind());
+		oldTopic.setDocumentation(newTopic.getDocumentation());
+		oldTopic.setAbstract(newTopic.isAbstract());
+		oldTopic.setPropFinal(newTopic.isPropFinal());
+		// Extends
+		// Oid
+		// Dependency
+		//updateChildTopic(oldTopic, newTopic);
+	}
+
 	public int findIndexInListByName(String oldName, List listnew) {
 		for (int i = 0; i < listnew.size(); i++) {
 			ModelDef modnew = (ModelDef) listnew.get(i);
@@ -159,6 +228,18 @@ public class CompareInterlis2Def {
 	    	} else if(ownedEle instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
 	    		DomainDef domain = (DomainDef) ownedEle;
 	    		name = domain.getName().getValue();
+	    	} else if(ownedEle instanceof ClassDef){
+	    		ClassDef classd = (ClassDef) ownedEle;
+	    		name = classd.getName().getValue();
+	    	} else if(ownedEle instanceof GraphicParameterDef){
+	    		GraphicParameterDef graphic = (GraphicParameterDef) ownedEle;
+	    		name = graphic.getName().getValue();
+	    	} else if(ownedEle instanceof MetaDataUseDef){
+	    		MetaDataUseDef metadata = (MetaDataUseDef) ownedEle;
+	    		name = metadata.getName().getValue();
+	    	} else if(ownedEle instanceof FunctionDef){
+	    		FunctionDef function = (FunctionDef) ownedEle;
+	    		name = function.getName().getValue();
 	    	}
 	    	if (name.equals(findname)) {
 	    		return ownedEle;
@@ -186,6 +267,11 @@ public class CompareInterlis2Def {
 			
 			}
 		}
+	}
+	
+	public void updateINTERLIS2Def(INTERLIS2Def oldInterlis, INTERLIS2Def newInterlis) {
+		oldInterlis.setVersion(newInterlis.getVersion());
+		oldInterlis.setDocumentation(newInterlis.getDocumentation());
 	}
 	
 	public void removeAndUpdateOldModels(INTERLIS2Def newInterlis, List listold, List listnew) {
@@ -423,7 +509,6 @@ public class CompareInterlis2Def {
 
 	public void compareTopicChilds(TopicDef oldtopic, TopicDef newtopic) {
 		System.out.println("Comparando topics");
-		TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
 		// sort children
 		List oldtopchildren = obj
 				.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldtopic, null));
@@ -464,20 +549,39 @@ public class CompareInterlis2Def {
 	public void updateModelDef(ModelDef modold, ModelDef modnew) {
 		updateAtributesOfModelDef(modold, modnew);
 		updateImportsOfModelDef(modold, modnew);
-		updateTranslationsOfModelDef(modold, modnew);
+		//updateTranslationsOfModelDef(modold, modnew);
+		
+		// hijos del modelo 
+		List newChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); 
+		List oldChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
+		
+		// recorrer interlisDef nuevo si hay hijos de modelo nuevos, se copian en el interlisDef viejo ¿no sería modeldef viejo? <--- verificar
+		addNewChildModels(oldInterlis, oldChildModel, newChildModel);
+		
+		// removeAndUpdateOldChildModelDef(modnew, oldModelchild, newModelchild);
+	}
+
+	private void addNewChildModels(INTERLIS2Def oldInterlis2, List oldChildModel, List newChildModel) {
+		for (int i = 0; i < newChildModel.size(); i++) {
+			ModelElement modElNew = (ModelElement) newChildModel.get(i);
+			String newName = modElNew.getName().getValue();		
+			int oldIndex = findIndexInListByName(newName, oldChildModel);
+			if (oldIndex == -1) {
+				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				if (modElNew instanceof ModelDef) {
+					oldInterlis.addOwnedElement(modElNew);
+				} else {
+					System.out.println("Agrega un caso para agregar la clase no registrada:");
+					System.out.println(modElNew.getClass());
+				}
+				
+			} else {
+			
+			}
+		}
 		
 	}
 
-	private void updateTranslationsOfModelDef(ModelDef modold, ModelDef modnew) {
-		Iterator oldtranslationi = modold.iteratorTranslation();
-		Iterator newtranslationi = modnew.iteratorTranslation();
-		while (newtranslationi.hasNext()) {
-			Translation oldtranslation = (Translation) oldtranslationi.next();
-			Translation newtranslation = (Translation) newtranslationi.next();
-			
-			oldtranslation.setLanguage(newtranslation.getLanguage());
-		}
-	}
 	private void updateImportsOfModelDef(ModelDef modold, ModelDef modnew) {
 		Iterator oldimportsi = modold.iteratorIliImport();
 		while (oldimportsi.hasNext()) {
@@ -557,17 +661,18 @@ public class CompareInterlis2Def {
 		clsOld.setMetaMapping(clsNew.getMetaMapping());
 		/*******************
 		 * - by now parameter and constraints can't be uploaded
+		 * - see later attributes y esas cosas
 		 */
 	}
 
-	public void updateDomainDef(DomainDef domOld, DomainDef domNew) {
-		System.out.println("Actualizando dominio: "+domOld.getName().getValue());
-		domOld.setMetaAttrb(domNew.getMetaAttrb());
-		// can't access to type of domain (to do later)
-		domOld.setDocumentation(domNew.getDocumentation());
-		domOld.setAbstract(domNew.isAbstract());
-		domOld.setPropFinal(domNew.isPropFinal());
-		domOld.setMandatory(domNew.isMandatory());
+	public void updateDomainDef(DomainDef oldDomain, DomainDef newDomain) {
+		System.out.println("Actualizando dominio: "+oldDomain.getName().getValue());
+		oldDomain.setMetaAttrb(newDomain.getMetaAttrb());
+		// can't access to type of domain (to do later) ¿newDomain.getType()?
+		oldDomain.setDocumentation(newDomain.getDocumentation());
+		oldDomain.setAbstract(newDomain.isAbstract());
+		oldDomain.setPropFinal(newDomain.isPropFinal());
+		oldDomain.setMandatory(newDomain.isMandatory());
 		// can't access to Specialized (to do later)
 		// can't access to kind (to do)
 
