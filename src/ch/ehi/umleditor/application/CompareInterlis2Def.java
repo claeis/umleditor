@@ -109,7 +109,8 @@ public class CompareInterlis2Def {
 			String oldName = modold.getName().getValue();		
 			int newIndex = findIndexInListByName(oldName, listnew);
 			if (newIndex == -1) {
-				System.out.println("No encontre actualización del modelo, debería elminar?");
+				System.out.println("No encontre actualización del elemento en el nuevo modelo, debería elminar?");
+				oldInterlis.removeOwnedElement(modold);
 			} else {
 				ModelDef modnew = (ModelDef) listold.get(newIndex);
 				System.out.println("Modelo viejo: " + modold.getName().getValue());
@@ -122,9 +123,16 @@ public class CompareInterlis2Def {
 			    		TopicDef newTopic = (TopicDef) ownedEle;
 			    		String topicName = newTopic.getName().getValue();
 			    		TopicDef oldTopic = (TopicDef)findOwnedElementByName(topicName, modold);
-			    		System.out.println("oldTopic:" + oldTopic.getName().getValue());
-			    		System.out.println("newTopic:" + newTopic.getName().getValue());
-			    		updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
+			    		if(oldTopic != null) {
+			    			System.out.println("oldTopic:" + oldTopic.getName().getValue());
+				    		System.out.println("newTopic:" + newTopic.getName().getValue());
+				    		updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
+			    		}
+			    		else {
+			    			System.out.println("Debería crear un nuevo topic");
+			    			newInterlis.addOwnedElement(newTopic);
+			    		}
+			    		
 			    	} else if(ownedEle instanceof ch.ehi.interlis.domainsandconstants.DomainDef){
 			    		DomainDef newDomain = (DomainDef) ownedEle;
 			    		String domainName = newDomain.getName().getValue();
@@ -207,11 +215,24 @@ public class CompareInterlis2Def {
 
 	public int findIndexInListByName(String oldName, List listnew) {
 		for (int i = 0; i < listnew.size(); i++) {
-			ModelDef modnew = (ModelDef) listnew.get(i);
-			String newName = modnew.getName().getValue();	
+			String newName = "";
+			if (listnew.get(i) instanceof ModelDef) {
+				ModelDef modnew = (ModelDef) listnew.get(i);
+				newName = modnew.getName().getValue();		
+			}
+			else if(listnew.get(i) instanceof DomainDef) {
+				DomainDef domnew = (DomainDef) listnew.get(i);
+				newName = domnew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof TopicDef) {
+				TopicDef topicnew = (TopicDef) listnew.get(i);
+				newName = topicnew.getName().getValue();
+			}
+			// compara los nombres encontrados
 			if (newName.equals(oldName)) {
 				return i;
 			}
+			
 		}
 		return -1;
 	}
@@ -258,10 +279,7 @@ public class CompareInterlis2Def {
 				System.out.println("No encontre el modelo " + newName + " en la lista vieja.");
 				if (modnew instanceof ModelDef) {
 					oldInterlis.addOwnedElement(modnew);
-				} else {
-					System.out.println("Agrega un caso para agregar la clase no registrada:");
-					System.out.println(modnew.getClass());
-				}
+				} 
 				
 			} else {
 			
@@ -556,23 +574,48 @@ public class CompareInterlis2Def {
 		List oldChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
 		
 		// recorrer interlisDef nuevo si hay hijos de modelo nuevos, se copian en el interlisDef viejo ¿no sería modeldef viejo? <--- verificar
-		addNewChildModels(oldInterlis, oldChildModel, newChildModel);
+		addNewChildModels(modold, oldChildModel, newChildModel);
 		
 		// removeAndUpdateOldChildModelDef(modnew, oldModelchild, newModelchild);
 	}
 
-	private void addNewChildModels(INTERLIS2Def oldInterlis2, List oldChildModel, List newChildModel) {
+	private void addNewChildModels(ModelDef modold, List oldChildModel, List newChildModel) {
 		for (int i = 0; i < newChildModel.size(); i++) {
-			ModelElement modElNew = (ModelElement) newChildModel.get(i);
-			String newName = modElNew.getName().getValue();		
+			ModelElement modElementNew = (ModelElement) newChildModel.get(i);
+			String newName = modElementNew.getName().getValue();		
 			int oldIndex = findIndexInListByName(newName, oldChildModel);
 			if (oldIndex == -1) {
 				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
-				if (modElNew instanceof ModelDef) {
-					oldInterlis.addOwnedElement(modElNew);
-				} else {
-					System.out.println("Agrega un caso para agregar la clase no registrada:");
-					System.out.println(modElNew.getClass());
+				if (modElementNew instanceof ModelDef) {
+					oldInterlis.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof DomainDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof ClassDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof FunctionDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof ch.interlis.ili2c.metamodel.GraphicParameterDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof MetaDataUseDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof TopicDef) {
+					System.out.println("Agregando Topic: "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else {
+					System.out.println("Clases por agregar:");
+					System.out.println(modElementNew.getClass());
 				}
 				
 			} else {
@@ -589,17 +632,21 @@ public class CompareInterlis2Def {
 			ch.ehi.interlis.modeltopicclass.IliImport oldimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
 			System.out.println("Size supplier: " + oldimport.sizeSupplier());
 			// POR FAVOR, validar el supplier
-			ModelElement supplier = (ModelElement)oldimport.iteratorSupplier().next();
-			String oldName = supplier.getName().getValue();
-			IliImport newimport = findImportByName(oldName, modnew);
-			if (newimport == null) {
-				// si el import viejo no existe en la nueva lista lo elimina
-				modold.removeClientDependency(oldimport);
-			} else {
-				// si existe, lo reemplaza? o si ya existe, déjelo
-				//modold.removeClientDependency(oldimport);
-				//modold.addClientDependency(newimport);
-			}
+			if(oldimport.sizeSupplier() != 0) {
+				ModelElement supplier = (ModelElement)oldimport.iteratorSupplier().next();
+				String oldName = supplier.getName().getValue();
+				IliImport newimport = findImportByName(oldName, modnew);
+				if (newimport == null) {
+					// si el import viejo no existe en la nueva lista lo elimina
+					modold.removeClientDependency(oldimport);
+				} else {
+					//si ya existe, déjelo
+					//modold.removeClientDependency(oldimport);
+					//modold.addClientDependency(newimport);
+					}
+			}//si no tiene nada el viejo se añade uno nuevo? 
+			
+			
 		}
 		
 		Iterator newimportsi = modnew.iteratorIliImport();
@@ -626,11 +673,17 @@ public class CompareInterlis2Def {
 			if (obj instanceof ch.ehi.interlis.modeltopicclass.IliImport) {				
 				ch.ehi.interlis.modeltopicclass.IliImport _import = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
 				System.out.println("Size supplier: " + _import.sizeSupplier());
-				ModelElement supplier = (ModelElement)_import.iteratorSupplier().next();
-				String name = supplier.getName().getValue();				
-				if (name.equals(findname)) {
-					return _import;
+				if (_import.sizeSupplier() != 0) {
+					ModelElement supplier = (ModelElement)_import.iteratorSupplier().next();
+					String name = supplier.getName().getValue();				
+					if (name.equals(findname)) {
+						return _import;
+					}
 				}
+				else {
+					return null; // no hay supplier
+				}
+				
 			} else {
 				// do something with class
 			}
