@@ -573,10 +573,83 @@ public class CompareInterlis2Def {
 		List newChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); 
 		List oldChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
 		
-		// recorrer interlisDef nuevo si hay hijos de modelo nuevos, se copian en el interlisDef viejo ¿no sería modeldef viejo? <--- verificar
+		// recorrer modelDef nuevo si hay hijos de modelo nuevos, se copian en el modelDef viejo
 		addNewChildModels(modold, oldChildModel, newChildModel);
+		removeAndUpdateOldChildModelDef(modold, oldChildModel, newChildModel);
+	}
+
+	private void removeAndUpdateOldChildModelDef(ModelDef modold, List oldChildModel, List newChildModel) {
+		for (int i = 0; i < oldChildModel.size(); i++) {
+			ModelElement modElementOld = (ModelElement) oldChildModel.get(i);
+			String oldName = modElementOld.getName().getValue();		
+			int newIndex = findIndexInListByName(oldName, newChildModel);
+			if (newIndex == -1) {
+				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				if (modElementOld instanceof ClassDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);
+				} 
+				else if(modElementOld instanceof DomainDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);					
+				}
+				else if(modElementOld instanceof FunctionDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);					
+				}
+				else if(modElementOld instanceof GraphicParameterDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);
+				}
+				else if(modElementOld instanceof MetaDataUseDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);
+				}
+				else if(modElementOld instanceof TopicDef) {
+					System.out.println("Eliminando " +oldName);
+					modold.removeOwnedElement(modElementOld);
+				}
+				else {
+					System.out.println("Agrega un caso para eliminar la clase no registrada:");
+					System.out.println(modold.getClass());
+				}
+				
+			} else {
+				// como se que ya existe el elemento en ambos modelos, voy a actualizar
+				if (modElementOld instanceof ClassDef) {
+					ClassDef clsNew = (ClassDef) newChildModel.get(newIndex);
+					ClassDef clsOld = (ClassDef) modElementOld;
+					updateClassDef(clsOld, clsNew);
+				} 
+				else if(modElementOld instanceof DomainDef) {
+					DomainDef newDomain = (DomainDef) newChildModel.get(newIndex);
+					DomainDef oldDomain = (DomainDef) modElementOld;
+					updateDomainDef(oldDomain, newDomain); 					
+				}
+				else if(modElementOld instanceof FunctionDef) {
+					FunctionDef newFunction = (FunctionDef) newChildModel.get(newIndex);
+					FunctionDef oldFunction = (FunctionDef) modElementOld;
+					updateFunctionDef(oldFunction, newFunction);
+				}
+				else if(modElementOld instanceof GraphicParameterDef) {
+					GraphicParameterDef newGraphic = (GraphicParameterDef) newChildModel.get(newIndex);
+					GraphicParameterDef oldGraphic = (GraphicParameterDef) modElementOld;
+					updateGraphicParameterDef(oldGraphic, newGraphic);
+				}
+				else if(modElementOld instanceof MetaDataUseDef) {
+					MetaDataUseDef mtdNew = (MetaDataUseDef) newChildModel.get(newIndex);
+					MetaDataUseDef mtdOld = (MetaDataUseDef) modElementOld;
+					updateMetaDataUseDef(mtdOld, mtdNew);
+				}
+				else if(modElementOld instanceof TopicDef) {
+					TopicDef newTopic = (TopicDef) newChildModel.get(newIndex);
+					TopicDef oldTopic = (TopicDef) modElementOld;
+					updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
+				}
+				
+			}
+		}
 		
-		// removeAndUpdateOldChildModelDef(modnew, oldModelchild, newModelchild);
 	}
 
 	private void addNewChildModels(ModelDef modold, List oldChildModel, List newChildModel) {
@@ -584,7 +657,7 @@ public class CompareInterlis2Def {
 			ModelElement modElementNew = (ModelElement) newChildModel.get(i);
 			String newName = modElementNew.getName().getValue();		
 			int oldIndex = findIndexInListByName(newName, oldChildModel);
-			if (oldIndex == -1) {
+			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
 				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
 				if (modElementNew instanceof ModelDef) {
 					oldInterlis.addOwnedElement(modElementNew);
@@ -619,7 +692,7 @@ public class CompareInterlis2Def {
 				}
 				
 			} else {
-			
+				
 			}
 		}
 		
@@ -731,12 +804,12 @@ public class CompareInterlis2Def {
 
 	}
 	
-	public void updateMetaDataUseDef(MetaDataUseDef mtdOld, MetaDataUseDef mdtNew) {
+	public void updateMetaDataUseDef(MetaDataUseDef mtdOld, MetaDataUseDef mtdNew) {
 		System.out.println("Actualizando metadato: "+mtdOld.getName().getValue());
-		mtdOld.setBasketOid(mdtNew.getBasketOid());
-		mtdOld.setKind(mdtNew.getKind());
-		mtdOld.setDocumentation(mdtNew.getDocumentation());
-		mtdOld.setSyntax(mdtNew.getSyntax()); // Definition?? check later
+		mtdOld.setBasketOid(mtdNew.getBasketOid());
+		mtdOld.setKind(mtdNew.getKind());
+		mtdOld.setDocumentation(mtdNew.getDocumentation());
+		mtdOld.setSyntax(mtdNew.getSyntax()); // Definition?? check later
 	}
 	
 	public void updateUnitDef(UnitDef untOld, UnitDef untNew) {
