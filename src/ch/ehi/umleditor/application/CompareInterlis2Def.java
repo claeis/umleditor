@@ -210,7 +210,63 @@ public class CompareInterlis2Def {
 		// Extends
 		// Oid
 		// Dependency
-		//updateChildTopic(oldTopic, newTopic);
+		// sort children
+		List oldTopicChildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldTopic, null));
+		List newTopicChildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(newTopic, null));
+		// actualizando hijos :P
+		addNewChildTopics(oldTopic, oldTopicChildren, newTopicChildren);
+		removeAndUpdateOldChildTopic(oldTopic, oldTopicChildren, newTopicChildren);
+	}
+
+	private void addNewChildTopics(TopicDef oldTopic, List oldTopicChildren, List newTopicChildren) {
+		for (int i = 0; i < newTopicChildren.size(); i++) {
+			ModelElement modElementNew = (ModelElement) newTopicChildren.get(i);
+			String newName = modElementNew.getName().getValue();		
+			int oldIndex = findIndexInListByName(newName, oldTopicChildren);
+			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
+				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				
+				if (modElementNew instanceof DomainDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof ClassDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof FunctionDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof GraphicDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof MetaDataUseDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof AssociationDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof UnitDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof ViewDef) {
+					System.out.println("Agregando "+modElementNew.getName().getValue());
+					oldTopic.addOwnedElement(modElementNew);
+				}
+				else {
+					System.out.println("Clases por agregar:");
+					System.out.println(modElementNew.getClass());
+				}
+				
+			} else {
+				
+			}
+		}
 	}
 
 	public int findIndexInListByName(String oldName, List listnew) {
@@ -227,6 +283,34 @@ public class CompareInterlis2Def {
 			else if(listnew.get(i) instanceof TopicDef) {
 				TopicDef topicnew = (TopicDef) listnew.get(i);
 				newName = topicnew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof ClassDef) {
+				ClassDef classnew = (ClassDef) listnew.get(i);
+				newName = classnew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof UnitDef) {
+				UnitDef unitnew = (UnitDef) listnew.get(i);
+				newName = unitnew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof ViewDef) {
+				ViewDef unitnew = (ViewDef) listnew.get(i);
+				newName = unitnew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof AssociationDef) {
+				AssociationDef asonew = (AssociationDef) listnew.get(i);
+				newName = asonew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof GraphicDef) {
+				GraphicDef asonew = (GraphicDef) listnew.get(i);
+				newName = asonew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof MetaDataUseDef) {
+				MetaDataUseDef asonew = (MetaDataUseDef) listnew.get(i);
+				newName = asonew.getName().getValue();
+			}
+			else if(listnew.get(i) instanceof LineFormTypeDef) {
+				LineFormTypeDef asonew = (LineFormTypeDef) listnew.get(i);
+				newName = asonew.getName().getValue();
 			}
 			// compara los nombres encontrados
 			if (newName.equals(oldName)) {
@@ -315,254 +399,145 @@ public class CompareInterlis2Def {
 		}
 	}
 
-	public void cleanOldchild(List oldChild, List newChild) {
-		List<String> check = new ArrayList();
-		int i=0;
+	
+
+	public void removeAndUpdateOldChildTopic(TopicDef oldTopic, List oldTopicChildren, List newTopicChildren) {
+		System.out.println("Comparando hijos de topics");
 		
-		while(i < oldChild.size()) {
-			//search
-			ModelElement oldElement = (ModelElement) oldChild.get(i);
-			int ind = searchIn(oldElement, newChild); //search old element in new list
-			System.out.println("--> "+ind);
-			if (ind == -1) { // remove element
-				System.out.println("Eliminando "+oldElement.getName().getValue());
-				//ElementFactory.removeElement((Element) newChild.get(i));
-				i++;
-				
-			} 
-			else { // update element
-
-				ModelElement newElement =(ModelElement) newChild.get(ind);
-				check.add(newElement.getName().getValue());
-				
-				if(oldElement instanceof Diagram && newElement instanceof Diagram) {
-					//nothing to do :/
-					System.out.println("Diagram");
-					i++;
+		for (int i = 0; i < oldTopicChildren.size(); i++) {
+			ModelElement oldTopicElement = (ModelElement) oldTopicChildren.get(i);
+			String oldName = oldTopicElement.getName().getValue();
+			int newIndex = findTopicElementIndexInListByName(oldName, newTopicChildren); //search old element in new list
+			System.out.println("--> "+newIndex);
+			if (newIndex == -1) { // elimina viejo elemento porque no la encuentra en la nueva lista
+				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				if (oldTopicElement instanceof ClassDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				} 
+				else if(oldTopicElement instanceof DomainDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);					
 				}
-				else if (oldElement instanceof ClassDef && newElement instanceof ClassDef) {
-					ClassDef newClass = (ClassDef) newElement;
-					ClassDef oldClass = (ClassDef) oldElement;
-					System.out.println("Clase nueva: "+newClass.getName().getValue());
-					System.out.println("Clase vieja: "+oldClass.getName().getValue());
-
-					if (newClass.getName().getValue().equals(oldClass.getName().getValue())) {
-						updateClassDef(oldClass, newClass);
-						compareClassChilds(oldClass, newClass); //see attributes
-						i++;
-					} 
-
+				else if(oldTopicElement instanceof FunctionDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);					
 				}
-				else if (oldElement instanceof DomainDef && newElement instanceof DomainDef) {
-					DomainDef newDom = (DomainDef) newElement;
-					DomainDef oldDom = (DomainDef) oldElement;
+				else if(oldTopicElement instanceof GraphicDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else if(oldTopicElement instanceof MetaDataUseDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else if(oldTopicElement instanceof TopicDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else if(oldTopicElement instanceof AssociationDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else if(oldTopicElement instanceof UnitDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else if(oldTopicElement instanceof ViewDef) {
+					System.out.println("Eliminando " +oldName);
+					oldTopic.removeOwnedElement(oldTopicElement);
+				}
+				else {
+					System.out.println("Agrega un caso para eliminar la clase no registrada:");
+					System.out.println(oldTopic.getClass());
+				}
+				
+			}
+			else {// como se que ya existe el topic en ambas listas, voy a actualizar
+				
+				if (oldTopicElement instanceof ClassDef) {
+					ClassDef oldClass = (ClassDef) oldTopicElement;
+					ClassDef newClass = (ClassDef) newTopicChildren.get(newIndex);
+					updateClassDef(oldClass, newClass);
+				}
+				else if (oldTopicElement instanceof DomainDef) {
+					DomainDef newDom = (DomainDef) newTopicChildren.get(newIndex);
+					DomainDef oldDom = (DomainDef) oldTopicElement;
 					System.out.println("Dominio nuevo: "+newDom.getName().getValue());
 					System.out.println("Dominio viejo: "+oldDom.getName().getValue());
-
-					if (newDom.getName().getValue().equals(oldDom.getName().getValue())) {
-
-						updateDomainDef(oldDom, newDom);
-						i++;
-
-					} 
-				} else if (oldElement instanceof FunctionDef && newElement instanceof FunctionDef) {
-					FunctionDef newFnc = (FunctionDef) newElement;
-					FunctionDef oldFnc = (FunctionDef) oldElement;
+					
+					updateDomainDef(oldDom, newDom);
+ 
+				} else if (oldTopicElement instanceof FunctionDef) {
+					FunctionDef newFnc = (FunctionDef) newTopicChildren.get(newIndex);
+					FunctionDef oldFnc = (FunctionDef) oldTopicElement;
 					System.out.println("Funcion nueva: "+newFnc.getName().getValue());
 					System.out.println("Funcion vieja: "+oldFnc.getName().getValue());
 					
-					if (newFnc.getName().getValue().equals(oldFnc.getName().getValue())) {
-						oldFnc.setDocumentation(newFnc.getDocumentation());
-						System.out.println("Actualizando funcion: "+oldFnc.getName().getValue());
-						// depends on cant access
-						// text cant access
-						i++;
-					} 
+					updateFunctionDef(oldFnc, newFnc);
 
-				} else if (oldElement instanceof GraphicParameterDef
-						&& newElement instanceof GraphicParameterDef) {
-					GraphicParameterDef newGpd = (GraphicParameterDef) newElement;
-					GraphicParameterDef oldGpd = (GraphicParameterDef) oldElement;
-					System.out.println("Parametro grafico nuevo: "+newGpd.getName().getValue());
-					System.out.println("Parametro grafico viejo: "+oldGpd.getName().getValue());
-
-					if (newGpd.getName().getValue().equals(oldGpd.getName().getValue())) {
-						System.out.println("Actualizando parametro grafico: "+oldGpd.getName().getValue());
-						oldGpd.setDocumentation(newGpd.getDocumentation());
-						// depends on cant access
-						// text cant access
-						i++;
-
-					} 
-				} else if (oldElement instanceof LineFormTypeDef && newElement instanceof LineFormTypeDef) {
-					LineFormTypeDef newLft = (LineFormTypeDef) newElement;
-					LineFormTypeDef oldLft = (LineFormTypeDef) oldElement;
+				} else if (oldTopicElement instanceof GraphicDef) {
+					GraphicDef graphNew = (GraphicDef) newTopicChildren.get(newIndex);
+					GraphicDef graphOld = (GraphicDef) oldTopicElement;
+					System.out.println("Parametro grafico nuevo: "+graphNew.getName().getValue());
+					System.out.println("Parametro grafico viejo: "+graphOld.getName().getValue());
+					
+					updateGraphicDef(graphOld, graphNew);
+ 
+				} else if (oldTopicElement instanceof LineFormTypeDef ) {
+					LineFormTypeDef newLft = (LineFormTypeDef) newTopicChildren.get(newIndex);
+					LineFormTypeDef oldLft = (LineFormTypeDef) oldTopicElement;
 					System.out.println("Linea nueva: "+newLft.getName().getValue());
 					System.out.println("Linea vieja: "+oldLft.getName().getValue());
+					
+					updateLineFormTypeDef(oldLft, newLft); 
 
-					if (newLft.getName().getValue().equals(oldLft.getName().getValue())) {
-						System.out.println("Actualizando linea: "+oldLft.getName().getValue());
-						oldLft.setDocumentation(newLft.getDocumentation());
-						oldLft.setSyntax(newLft.getSyntax()); // structure?? check later
-						i++;
-					} 
-
-				} else if (oldElement instanceof MetaDataUseDef && newElement instanceof MetaDataUseDef) {
-					MetaDataUseDef newMetadata = (MetaDataUseDef) newElement;
-					MetaDataUseDef oldMetadata = (MetaDataUseDef) oldElement;
+				} else if (oldTopicElement instanceof MetaDataUseDef) {
+					MetaDataUseDef newMetadata = (MetaDataUseDef) newTopicChildren.get(newIndex);
+					MetaDataUseDef oldMetadata = (MetaDataUseDef) oldTopicElement;
 					System.out.println("Metadato nuevo: "+newMetadata.getName().getValue());
 					System.out.println("Metadato viejo: "+oldMetadata.getName().getValue());
-					if (newMetadata.getName().getValue().equals(oldMetadata.getName().getValue())) {
-						
-						updateMetaDataUseDef(oldMetadata, newMetadata);
-						i++;
-					} 
+					
+					updateMetadataUseDef(oldMetadata, newMetadata);	
 
-				} else if (oldElement instanceof TopicDef && newElement instanceof TopicDef) {
-					TopicDef newTopic = (TopicDef) newElement;
-					TopicDef oldTopic = (TopicDef) oldElement;
-					System.out.println("Tema nuevo: "+newTopic.getName().getValue());
-					System.out.println("Tema viejo: "+oldTopic.getName().getValue());
+				} else if (oldTopicElement instanceof AssociationDef ) {
+					AssociationDef newAssociation = (AssociationDef) newTopicChildren.get(newIndex);
+					AssociationDef oldAssociation = (AssociationDef) oldTopicElement;
+					System.out.println("Asociacion nueva: "+newAssociation.getName().getValue());
+					System.out.println("Asociacion vieja: "+oldAssociation.getName().getValue());
+					
+					updateAssociationDef(oldAssociation, newAssociation); 
 
-					if (newTopic.getName().getValue().equals(oldTopic.getName().getValue())) {
-						System.out.println("Actualizando tema: "+oldTopic.getName().getValue());
-						// cant access to type
-						oldTopic.setDocumentation(newTopic.getDocumentation());
-						oldTopic.setAbstract(newTopic.isAbstract());
-						oldTopic.setPropFinal(newTopic.isPropFinal());
-						oldTopic._setOid(newTopic.getOid());
-						// extends cant be access
-						// see later how to add dependencies
-
-						compareTopicChilds(oldTopic, newTopic);
-						i++;
-
-					} 
-				} else if (oldElement instanceof UnitDef && newElement instanceof UnitDef) {
-					UnitDef newUnit = (UnitDef) newElement;
-					UnitDef oldUnit = (UnitDef) oldElement;
+				} else if (oldTopicElement instanceof UnitDef) {
+					UnitDef newUnit = (UnitDef) newTopicChildren.get(newIndex);
+					UnitDef oldUnit = (UnitDef) oldTopicElement;
 					System.out.println("Unidad nueva: "+newUnit.getName().getValue());
 					System.out.println("Unidad vieja: "+oldUnit.getName().getValue());
 
-					if (newUnit.getName().getValue().equals(oldUnit.getName().getValue())) {
-						
-						updateUnitDef(oldUnit, newUnit);
-						i++;
-					} 
-
+					updateUnitDef(oldUnit, newUnit);
+					 
 				}
 			}
-		}
-		addNewChild(check,oldChild,newChild);
+				}
 	}
 	
-	public int searchIn(ModelElement elementToSearch, List placeToSearch) {
-		int i=0;
-		while(i<placeToSearch.size()) {
-			ModelElement actual = (ModelElement) placeToSearch.get(i);
-						
-			if(actual.getName().getValue().equals(elementToSearch.getName().getValue())) {
+	private void updateLineFormTypeDef(LineFormTypeDef oldLft, LineFormTypeDef newLft) {
+		oldLft.setDocumentation(newLft.getDocumentation());
+		
+	}
+
+	private int findTopicElementIndexInListByName(String oldName, List newTopicChildren) {
+		for (int i = 0; i < newTopicChildren.size(); i++) {
+			ModelElement modnew = (ModelElement) newTopicChildren.get(i);
+			String newName = modnew.getName().getValue();	
+			if (newName.equals(oldName)) {
 				return i;
 			}
-			i++;
 		}
 		return -1;
 	}
-	
-	public void addNewChild(List oldModelclean,List modold,List newchild) {
-		int i =0;
-		while(i < newchild.size()) {
-			ModelElement newElement = (ModelElement) newchild.get(i);
-			if(oldModelclean.contains(newElement.getName().getValue())) {
-				i++; //nothing to do has been updated
-			} else {
-				//create element :)
-				System.out.println("se supone que crearé "+newElement.getName().getValue());
-				i++;
-			}
-		}
-	}
 
-
-	public void compareClassChilds(ClassDef classOld, ClassDef classNew) {
-		// empezamos a comparar
-		System.out.println("---> Comparando atributos <---");
-
-		// {AttributeDef}
-		Iterator childAttrNew = AbstractClassDefUtility.getIliAttributes(classNew).iterator();
-		Iterator childAttrOld = AbstractClassDefUtility.getIliAttributes(classOld).iterator();
-
-		while (childAttrNew.hasNext()) {
-
-			while (childAttrOld.hasNext()) {
-				Object objOld = childAttrOld.next();
-				Object objNew = childAttrNew.next();
-				if (objNew instanceof AttributeDef && objOld instanceof AttributeDef) {
-					AttributeDef atrbnew = (AttributeDef) objNew;
-					AttributeDef atrbold = (AttributeDef) objOld;
-					System.out.println("Atributo nuevo :"+atrbnew.getName().getValue());
-					System.out.println("Atributo viejo :"+atrbold.getName().getValue());
-					if (atrbnew.getName().getValue().equals(atrbold.getName().getValue())) {
-						System.out.println("Actualizando atributo: "+atrbold.getName().getValue());
-						atrbold.setMetaAttrb(atrbnew.getMetaAttrb());
-						// Type cant access
-						atrbold.setDocumentation(atrbnew.getDocumentation());
-						atrbold.setAbstract(atrbnew.isAbstract());
-						atrbold.setPropFinal(atrbnew.isPropFinal());
-						// Cant access to specialized
-						atrbold.setPropTransient(atrbnew.isPropTransient());
-						// Cant access to ordered
-						// Cant access to cardinality
-					}
-				} else if (objNew instanceof RoleDef) {
-					// see later
-				} else {
-					// ignore others; should not have others
-				}
-			}
-
-			// {ConstraintDef}
-		}
-	}
-
-	public void compareTopicChilds(TopicDef oldtopic, TopicDef newtopic) {
-		System.out.println("Comparando topics");
-		// sort children
-		List oldtopchildren = obj
-				.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldtopic, null));
-		List newtopchildren = obj
-				.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(newtopic, null));
-
-		// visit children
-		Iterator oldchildi = oldtopchildren.iterator();
-		Iterator newchildi = newtopchildren.iterator();
-		while (newchildi.hasNext()) {
-			while (oldchildi.hasNext()) {
-				Object objOld = oldchildi.next();
-				Object objNew = newchildi.next();
-
-				if (objNew instanceof MetaDataUseDef && objOld instanceof MetaDataUseDef) {
-					updateMetaDataUseDef((MetaDataUseDef) objOld, (MetaDataUseDef) objNew);
-				} else if (objNew instanceof UnitDef && objOld instanceof UnitDef) {
-					updateUnitDef((UnitDef) objOld, (UnitDef) objNew);
-				} else if (objNew instanceof DomainDef && objOld instanceof DomainDef) {
-					updateDomainDef((DomainDef) objOld, (DomainDef) objNew);
-				} else if ((objNew instanceof ClassDef && !(objNew instanceof AssociationDef))
-						&& (objOld instanceof ClassDef && !(objOld instanceof AssociationDef))) {
-					updateClassDef((ClassDef) objOld, (ClassDef) objNew);
-				} else if (objNew instanceof AssociationDef) {
-					updateAssociationDef((AssociationDef) objOld, (AssociationDef) objNew);
-				} else if (objNew instanceof ViewDef && objOld instanceof ViewDef) {
-					updateViewDef((ViewDef) objOld, (ViewDef) objNew);
-				} else if (objNew instanceof GraphicDef && objOld instanceof GraphicDef) {
-					updateGraphicDef((GraphicDef) objOld, (GraphicDef) objNew);
-				} else {
-					// ignore others; should not have others
-				}
-			}
-		}
-	}
-	
 	// Update model
 	public void updateModelDef(ModelDef modold, ModelDef modnew) {
 		updateAtributesOfModelDef(modold, modnew);
