@@ -1,11 +1,8 @@
 package ch.ehi.umleditor.application;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
@@ -17,20 +14,19 @@ import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
-import ch.ehi.interlis.modeltopicclass.Contract;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
-import ch.ehi.interlis.modeltopicclass.Translation;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
-import ch.ehi.uml1_4.foundation.core.Generalization;
+import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
-import ch.ehi.umleditor.umlpresentation.Diagram;
+
 /**
  * This class compare two interlis models and update a given model
  * @author alelizzt
@@ -52,6 +48,7 @@ public class CompareInterlis2Def {
 	public INTERLIS2Def newInterlis;
 
 	TransferFromUmlMetamodel obj = new TransferFromUmlMetamodel();
+	
 	/**
 	 * Get the INTERLIS model value to update
 	 * @return model to update
@@ -312,6 +309,14 @@ public class CompareInterlis2Def {
 				LineFormTypeDef asonew = (LineFormTypeDef) listnew.get(i);
 				newName = asonew.getName().getValue();
 			}
+			else if(listnew.get(i) instanceof AttributeDef) {
+				AttributeDef asonew = (AttributeDef) listnew.get(i);
+				newName = asonew.getName().getValue(); 
+			}
+			else if(listnew.get(i) instanceof RoleDef) {
+				RoleDef asonew = (RoleDef) listnew.get(i);
+				newName = asonew.getName().getValue(); 
+			}
 			// compara los nombres encontrados
 			if (newName.equals(oldName)) {
 				return i;
@@ -415,6 +420,7 @@ public class CompareInterlis2Def {
 				if (oldTopicElement instanceof ClassDef) {
 					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
+					
 				} 
 				else if(oldTopicElement instanceof DomainDef) {
 					System.out.println("Eliminando " +oldName);
@@ -764,6 +770,101 @@ public class CompareInterlis2Def {
 		 * - by now parameter and constraints can't be uploaded
 		 * - see later attributes y esas cosas
 		 */
+		// {AttributeDef}
+		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(clsOld);
+		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(clsNew);
+		addNewAttributes(clsOld, oldAttributechildi, newAttributechildi);
+		removeAndUpdateOldAttributes(clsOld, oldAttributechildi, newAttributechildi);
+	}
+
+	private void removeAndUpdateOldAttributes(ClassDef clsOld, List oldAttributechildi, List newAttributechildi) {
+		for (int i = 0; i < oldAttributechildi.size(); i++) {
+			AbstractModelElement oldAttribute = (AbstractModelElement) oldAttributechildi.get(i);
+			String oldName = oldAttribute.getName().getValue();
+			int newIndex = findAttributeIndexInListByName(oldName, newAttributechildi); //search old attribute in new list
+			if(newIndex == -1) { //elimina atributo porque no encuentra en la nueva lista
+				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				if(oldAttribute instanceof AttributeDef) {
+					System.out.println("Eliminando "+oldName);
+					//oldAttributechildi.remove(oldAttribute);
+					clsOld.removeFeature((Feature) oldAttribute);
+				}
+				else if(oldAttribute instanceof RoleDef) {
+					System.out.println("Eliminando "+oldName);
+					oldAttributechildi.remove(oldAttribute);
+				}
+				
+			}
+			else {// como se que ya existe el atributo en ambas listas, voy a actualizar
+				if(oldAttribute instanceof AttributeDef) {
+					AttributeDef oldAttr = (AttributeDef) oldAttribute;
+					AttributeDef newAttr = (AttributeDef) newAttributechildi.get(newIndex);
+					updateAttributeDef(oldAttr, newAttr);
+				}
+				else if(oldAttribute instanceof RoleDef) {
+					RoleDef oldRole = (RoleDef) oldAttribute;
+					RoleDef newRole = (RoleDef) newAttributechildi.get(newIndex);
+					updateAttributeDef(oldRole, newRole);
+				}
+			}
+			
+		}
+		
+	}
+
+	private void updateAttributeDef(RoleDef oldRole, RoleDef newRole) {
+		oldRole.setIliAttributeKind(newRole.getIliAttributeKind());
+		oldRole.setDocumentation(newRole.getDocumentation());
+		oldRole.setAbstract(newRole.isAbstract());
+		oldRole.setPropFinal(newRole.isPropFinal());
+		oldRole.setOrdering(newRole.getOrdering());
+		oldRole.setPropExternal(newRole.isPropExternal());
+		oldRole.setNavigable(newRole.isNavigable());
+		// revisar lo demás
+	}
+
+	private void updateAttributeDef(AttributeDef oldAttr, AttributeDef newAttr) {
+		oldAttr.setMetaAttrb(newAttr.getMetaAttrb());
+		//Type not found
+		oldAttr.setDocumentation(newAttr.getDocumentation());
+		oldAttr.setAbstract(newAttr.isAbstract());
+		oldAttr.setPropFinal(newAttr.isPropFinal());
+		oldAttr.setPropTransient(newAttr.isPropTransient());
+		oldAttr.setPropExtended(newAttr.isPropExtended());
+		oldAttr.setOrdering(newAttr.getOrdering());
+		oldAttr.setMultiplicity(newAttr.getMultiplicity());
+		//revisar lo demás
+	}
+
+	private int findAttributeIndexInListByName(String oldName, List newAttributechildi) {
+		for (int i = 0; i < newAttributechildi.size(); i++) {
+			AbstractModelElement modnew = (AbstractModelElement) newAttributechildi.get(i);
+			String newName = modnew.getName().getValue();	
+			if (newName.equals(oldName)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private void addNewAttributes(ClassDef clsOld, List oldAttributechildi, List newAttributechildi) {
+		
+		for (int i = 0; i < newAttributechildi.size(); i++) {
+			ModelElement attributeNew = (ModelElement) newAttributechildi.get(i);
+			String newName = attributeNew.getName().getValue();		
+			int oldIndex = findIndexInListByName(newName, oldAttributechildi);
+			
+			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
+				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				if (attributeNew instanceof AttributeDef) {
+					//clsOld.addOwnedElement(attributeNew);
+					clsOld.addFeature((Feature) attributeNew);	
+				}
+				else {
+					
+				}
+			}
+		}		
 	}
 
 	public void updateDomainDef(DomainDef oldDomain, DomainDef newDomain) {
