@@ -26,6 +26,7 @@ import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
+import ch.interlis.ili2c.metamodel.Topic;
 
 /**
  * This class compare two interlis models and update a given model
@@ -544,21 +545,30 @@ public class CompareInterlis2Def {
 		return -1;
 	}
 
-	// Update model
+	/**
+	 * Update model definitions
+	 * @param modold
+	 * @param modnew
+	 */
 	public void updateModelDef(ModelDef modold, ModelDef modnew) {
 		updateAtributesOfModelDef(modold, modnew);
 		updateImportsOfModelDef(modold, modnew);
 		//updateTranslationsOfModelDef(modold, modnew);
-		
-		// hijos del modelo 
+		 
 		List newChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modnew, null)); 
 		List oldChildModel = obj.sortIliDefs(ModelElementUtility.getChildElements(modold, null)); 
 		
-		// recorrer modelDef nuevo si hay hijos de modelo nuevos, se copian en el modelDef viejo
+		// Goes through new modelDef if there are new model children, they are copied into the old modelDef
 		addNewChildModels(modold, oldChildModel, newChildModel);
 		removeAndUpdateOldChildModelDef(modold, oldChildModel, newChildModel);
 	}
 
+	/**
+	 * Delete and update old model definitions
+	 * @param modold
+	 * @param oldChildModel
+	 * @param newChildModel
+	 */
 	private void removeAndUpdateOldChildModelDef(ModelDef modold, List oldChildModel, List newChildModel) {
 		for (int i = 0; i < oldChildModel.size(); i++) {
 			ModelElement modElementOld = (ModelElement) oldChildModel.get(i);
@@ -596,7 +606,7 @@ public class CompareInterlis2Def {
 				}
 				
 			} else {
-				// como se que ya existe el elemento en ambos modelos, voy a actualizar
+				// As the element already exists in both models, I'm going to update
 				if (modElementOld instanceof ClassDef) {
 					ClassDef clsNew = (ClassDef) newChildModel.get(newIndex);
 					ClassDef clsOld = (ClassDef) modElementOld;
@@ -625,7 +635,7 @@ public class CompareInterlis2Def {
 				else if(modElementOld instanceof TopicDef) {
 					TopicDef newTopic = (TopicDef) newChildModel.get(newIndex);
 					TopicDef oldTopic = (TopicDef) modElementOld;
-					updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
+					updateTopicDef(oldTopic, newTopic);
 				}
 				
 			}
@@ -633,6 +643,12 @@ public class CompareInterlis2Def {
 		
 	}
 
+	/**
+	 * Add new child (Topic, Domain, Class...) to old model
+	 * @param modold
+	 * @param oldChildModel
+	 * @param newChildModel
+	 */
 	private void addNewChildModels(ModelDef modold, List oldChildModel, List newChildModel) {
 		for (int i = 0; i < newChildModel.size(); i++) {
 			ModelElement modElementNew = (ModelElement) newChildModel.get(i);
@@ -679,22 +695,26 @@ public class CompareInterlis2Def {
 		
 	}
 
+	/**
+	 * Add imports to old model definitions
+	 * @param modold
+	 * @param modnew
+	 */
 	private void updateImportsOfModelDef(ModelDef modold, ModelDef modnew) {
 		Iterator oldimportsi = modold.iteratorIliImport();
 		while (oldimportsi.hasNext()) {
 			Object obj = oldimportsi.next();
 			ch.ehi.interlis.modeltopicclass.IliImport oldimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
 			System.out.println("Size supplier: " + oldimport.sizeSupplier());
-			// POR FAVOR, validar el supplier
 			if(oldimport.sizeSupplier() != 0) {
 				ModelElement supplier = (ModelElement)oldimport.iteratorSupplier().next();
 				String oldName = supplier.getName().getValue();
 				IliImport newimport = findImportByName(oldName, modnew);
 				if (newimport == null) {
-					// si el import viejo no existe en la nueva lista lo elimina
+					// If the old import does not exist in the new list, it eliminates it
 					modold.removeClientDependency(oldimport);
 				} else {
-					//si ya existe, déjelo
+					// If it already exists, leave it
 					//modold.removeClientDependency(oldimport);
 					//modold.addClientDependency(newimport);
 					}
@@ -712,7 +732,7 @@ public class CompareInterlis2Def {
 			String newName = supplier.getName().getValue();
 			IliImport oldimport = findImportByName(newName, modold);
 			if (oldimport == null) {
-				// si no existe lo agrega
+				// If doesn't exist add
 				modold.addClientDependency(newimport);
 			} else {
 				// si existe
@@ -720,6 +740,12 @@ public class CompareInterlis2Def {
 		}
 	}
 
+	/**
+	 * Search IliImport in a given model
+	 * @param findname
+	 * @param modnew
+	 * @return
+	 */
 	private IliImport findImportByName(String findname, ModelDef modnew) {
 		Iterator it = modnew.iteratorClientDependency();
 		while (it.hasNext()) {
@@ -745,6 +771,11 @@ public class CompareInterlis2Def {
 		return null;
 	}
 
+	/**
+	 * Update parameters or attributes from Model definition
+	 * @param modold
+	 * @param modnew
+	 */
 	private void updateAtributesOfModelDef(ModelDef modold, ModelDef modnew) {
 		modold.setKind(modnew.getKind()); // tipo
 		modold.setDocumentation(modnew.getDocumentation()); // description
@@ -753,10 +784,17 @@ public class CompareInterlis2Def {
 		modold.setVersionComment(modnew.getVersionComment());
 		modold.setContracted(modnew.isContracted());
 		modold.setBaseLanguage(modnew.getBaseLanguage()); // Languaje
+		//Technical contact
+		//GeoIV Identificator
+		//Further Documentation
 		
 	}
 
-	// Update elements
+	/**
+	 * Update Class definitions 
+	 * @param clsOld
+	 * @param clsNew
+	 */
 	public void updateClassDef(ClassDef clsOld, ClassDef clsNew) {
 		System.out.println("Actualizando clase: "+clsOld.getName().getValue());
 		clsOld.setMetaAttrb(clsNew.getMetaAttrb());
@@ -766,17 +804,20 @@ public class CompareInterlis2Def {
 		// value extended omitted (to discuss)
 		clsOld.setKind(clsNew.getKind());
 		clsOld.setMetaMapping(clsNew.getMetaMapping());
-		/*******************
-		 * - by now parameter and constraints can't be uploaded
-		 * - see later attributes y esas cosas
-		 */
-		// {AttributeDef}
+		//- by now parameter and constraints can't be uploaded
+		
 		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(clsOld);
 		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(clsNew);
 		addNewAttributes(clsOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributes(clsOld, oldAttributechildi, newAttributechildi);
 	}
 
+	/**
+	 * Delete and update old attribute definitions
+	 * @param clsOld
+	 * @param oldAttributechildi
+	 * @param newAttributechildi
+	 */
 	private void removeAndUpdateOldAttributes(ClassDef clsOld, List oldAttributechildi, List newAttributechildi) {
 		for (int i = 0; i < oldAttributechildi.size(); i++) {
 			AbstractModelElement oldAttribute = (AbstractModelElement) oldAttributechildi.get(i);
@@ -804,7 +845,7 @@ public class CompareInterlis2Def {
 				else if(oldAttribute instanceof RoleDef) {
 					RoleDef oldRole = (RoleDef) oldAttribute;
 					RoleDef newRole = (RoleDef) newAttributechildi.get(newIndex);
-					updateAttributeDef(oldRole, newRole);
+					updateRoleDef(oldRole, newRole);
 				}
 			}
 			
@@ -812,7 +853,12 @@ public class CompareInterlis2Def {
 		
 	}
 
-	private void updateAttributeDef(RoleDef oldRole, RoleDef newRole) {
+	/**
+	 * Update parameters from role definitions
+	 * @param oldRole
+	 * @param newRole
+	 */
+	private void updateRoleDef(RoleDef oldRole, RoleDef newRole) {
 		oldRole.setIliAttributeKind(newRole.getIliAttributeKind());
 		oldRole.setDocumentation(newRole.getDocumentation());
 		oldRole.setAbstract(newRole.isAbstract());
@@ -823,6 +869,11 @@ public class CompareInterlis2Def {
 		// revisar lo demás
 	}
 
+	/**
+	 * Update parameters from attribute definitions
+	 * @param oldAttr
+	 * @param newAttr
+	 */
 	private void updateAttributeDef(AttributeDef oldAttr, AttributeDef newAttr) {
 		oldAttr.setMetaAttrb(newAttr.getMetaAttrb());
 		//Type not found
@@ -836,6 +887,12 @@ public class CompareInterlis2Def {
 		//revisar lo demás
 	}
 
+	/**
+	 * Search attribute definition index in a given list with name parameter
+	 * @param oldName
+	 * @param newAttributechildi
+	 * @return
+	 */
 	private int findAttributeIndexInListByName(String oldName, List newAttributechildi) {
 		for (int i = 0; i < newAttributechildi.size(); i++) {
 			AbstractModelElement modnew = (AbstractModelElement) newAttributechildi.get(i);
@@ -847,6 +904,12 @@ public class CompareInterlis2Def {
 		return -1;
 	}
 
+	/**
+	 * Add new attribute definitions to old class
+	 * @param clsOld
+	 * @param oldAttributechildi
+	 * @param newAttributechildi
+	 */
 	private void addNewAttributes(ClassDef clsOld, List oldAttributechildi, List newAttributechildi) {
 		
 		for (int i = 0; i < newAttributechildi.size(); i++) {
@@ -857,7 +920,6 @@ public class CompareInterlis2Def {
 			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
 				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
 				if (attributeNew instanceof AttributeDef) {
-					//clsOld.addOwnedElement(attributeNew);
 					clsOld.addFeature((Feature) attributeNew);	
 				}
 				else {
@@ -867,6 +929,11 @@ public class CompareInterlis2Def {
 		}		
 	}
 
+	/**
+	 * Update parameters of domain definitions
+	 * @param oldDomain
+	 * @param newDomain
+	 */
 	public void updateDomainDef(DomainDef oldDomain, DomainDef newDomain) {
 		System.out.println("Actualizando dominio: "+oldDomain.getName().getValue());
 		oldDomain.setMetaAttrb(newDomain.getMetaAttrb());
@@ -880,6 +947,11 @@ public class CompareInterlis2Def {
 
 	}
 	
+	/**
+	 * Update parameters of MetadataUse definitions
+	 * @param mtdOld
+	 * @param mtdNew
+	 */
 	public void updateMetaDataUseDef(MetaDataUseDef mtdOld, MetaDataUseDef mtdNew) {
 		System.out.println("Actualizando metadato: "+mtdOld.getName().getValue());
 		mtdOld.setBasketOid(mtdNew.getBasketOid());
@@ -888,6 +960,11 @@ public class CompareInterlis2Def {
 		mtdOld.setSyntax(mtdNew.getSyntax()); // Definition?? check later
 	}
 	
+	/**
+	 * Update parameters of Unit definitions 
+	 * @param untOld
+	 * @param untNew
+	 */
 	public void updateUnitDef(UnitDef untOld, UnitDef untNew) {
 		System.out.println("Actualizando unidad: "+untOld.getName().getValue());
 		untOld.setDescName(untNew.getDescName());
@@ -896,6 +973,11 @@ public class CompareInterlis2Def {
 		// cant access to depend on
 	}
 
+	/**
+	 * Update parameters of Association definitions
+	 * @param asoOld
+	 * @param asoNew
+	 */
 	public void updateAssociationDef(AssociationDef asoOld, AssociationDef asoNew) {
 		System.out.println("Actualizando asociacion: "+asoOld.getName().getValue());
 		asoOld.setDocumentation(asoNew.getDocumentation());
@@ -913,6 +995,11 @@ public class CompareInterlis2Def {
 		// restrictions
 	}
 	
+	/**
+	 * Update parameters of View definitions
+	 * @param viewOld
+	 * @param viewNew
+	 */
 	public void updateViewDef(ViewDef viewOld, ViewDef viewNew) {
 		System.out.println("Actualizando vista: "+viewOld.getName().getValue());
 		viewOld.setDocumentation(viewNew.getDocumentation());
@@ -920,13 +1007,18 @@ public class CompareInterlis2Def {
 		// Depends on 
 	}
 	
-	
+	/**
+	 * Update parameters of graphic definitions
+	 * @param graphOld
+	 * @param graphNew
+	 */
 	public void updateGraphicDef(GraphicDef graphOld, GraphicDef graphNew){
 		System.out.println("Actualizando grafico: "+graphOld.getName().getValue());
 		graphOld.setDocumentation(graphNew.getDocumentation());
 		graphOld.setSyntax(graphNew.getSyntax());
 		// Depends on 
 	}
+	
 	/**
 	 * Called whenever the part throws an exception.
 	 * 
