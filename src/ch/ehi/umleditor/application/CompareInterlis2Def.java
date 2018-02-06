@@ -209,7 +209,7 @@ public class CompareInterlis2Def {
 		oldTopic.setAbstract(newTopic.isAbstract());
 		oldTopic.setPropFinal(newTopic.isPropFinal());
 		// Extends
-		// Oid
+		oldTopic.attachOiddomain(newTopic.detachOiddomain());
 		// Dependency
 		// sort children
 		List oldTopicChildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldTopic, null));
@@ -1007,9 +1007,6 @@ public class CompareInterlis2Def {
 		//specialized
 		//detived from
 		/*
-		 * Check attributes from associationdef
-		 */
-		/*
 		 * Check roles from associationdef
 		 */
 		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(asoOld);
@@ -1026,7 +1023,6 @@ public class CompareInterlis2Def {
 	private void updateDerivedFrom(AssociationDef asoOld, AssociationDef asoNew) {
 		Iterator oldderivedi = asoOld.iteratorClientDependency();
 		Iterator newderivedi = asoNew.iteratorClientDependency();
-		
 		
 	}
 
