@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
@@ -22,11 +23,11 @@ import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
+import ch.ehi.interlis.views.ViewableDef;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
-import ch.interlis.ili2c.metamodel.Topic;
 
 /**
  * This class compare two interlis models and update a given model
@@ -866,7 +867,16 @@ public class CompareInterlis2Def {
 		oldRole.setOrdering(newRole.getOrdering());
 		oldRole.setPropExternal(newRole.isPropExternal());
 		oldRole.setNavigable(newRole.isNavigable());
-		// revisar lo demás
+		
+		oldRole.setMultiplicity(newRole.getMultiplicity());
+		oldRole.changeParticipant(newRole.getParticipant());// Clases implicadas
+		
+		// page DerivedFrom RoleDef has 0/1 RoleDefDerived
+		if (newRole.containsRoleDefDerived()) {
+			oldRole.getRoleDefDerived().setSyntax(newRole.getRoleDefDerived().getSyntax()); // TODO check this
+		} else {
+		
+		}
 	}
 
 	/**
@@ -992,9 +1002,82 @@ public class CompareInterlis2Def {
 		/*
 		 * Check roles from associationdef
 		 */
+		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(asoOld);
+		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(asoNew);
+		addNewAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
+		removeAndUpdateOldAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
+		
+		// DERIVED FROM
+		updateDerivedFrom(asoOld,asoNew);
+				
 		// restrictions
 	}
 	
+	private void updateDerivedFrom(AssociationDef asoOld, AssociationDef asoNew) {
+		Iterator oldderivedi = asoOld.iteratorClientDependency();
+		Iterator newderivedi = asoNew.iteratorClientDependency();
+		
+		
+	}
+
+	private void removeAndUpdateOldAttributesInAssociation(AssociationDef asoOld, List oldAttributechildi,
+			List newAttributechildi) {
+		for (int i = 0; i < oldAttributechildi.size(); i++) {
+			AbstractModelElement oldAttribute = (AbstractModelElement) oldAttributechildi.get(i);
+			String oldName = oldAttribute.getName().getValue();
+			int newIndex = findAttributeIndexInListByName(oldName, newAttributechildi); //search old attribute in new list
+			if(newIndex == -1) { //elimina atributo porque no encuentra en la nueva lista
+				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				if(oldAttribute instanceof AttributeDef) {
+					System.out.println("Eliminando "+oldName);
+					//oldAttributechildi.remove(oldAttribute);
+					asoOld.removeFeature((Feature) oldAttribute);
+				}
+				else if(oldAttribute instanceof RoleDef) {
+					System.out.println("Eliminando "+oldName);
+					asoOld.removeFeature((Feature)oldAttribute);
+				}
+				
+			}
+			else {// como se que ya existe el atributo en ambas listas, voy a actualizar
+				if(oldAttribute instanceof AttributeDef) {
+					AttributeDef oldAttr = (AttributeDef) oldAttribute;
+					AttributeDef newAttr = (AttributeDef) newAttributechildi.get(newIndex);
+					updateAttributeDef(oldAttr, newAttr);
+				}
+				else if(oldAttribute instanceof RoleDef) {
+					RoleDef oldRole = (RoleDef) oldAttribute;
+					RoleDef newRole = (RoleDef) newAttributechildi.get(newIndex);
+					updateRoleDef(oldRole, newRole);//revisar
+				}
+			}
+			
+}
+	}
+
+	private void addNewAttributesInAssociation(AssociationDef asoOld, List oldAttributechildi,
+			List newAttributechildi) {
+		for (int i = 0; i < newAttributechildi.size(); i++) {
+			ModelElement attributeNew = (ModelElement) newAttributechildi.get(i);
+			String newName = attributeNew.getName().getValue();		
+			int oldIndex = findIndexInListByName(newName, oldAttributechildi);
+			
+			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
+				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				if (attributeNew instanceof AttributeDef) {
+					//clsOld.addOwnedElement(attributeNew);
+					asoOld.addFeature((Feature) attributeNew);	
+				}
+				else if(attributeNew instanceof RoleDef) {
+					asoOld.addFeature((Feature) attributeNew);
+				}
+				else {
+					
+				}
+			}
+} 
+	}
+
 	/**
 	 * Update parameters of View definitions
 	 * @param viewOld
