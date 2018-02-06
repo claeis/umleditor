@@ -191,6 +191,8 @@ public class CompareInterlis2Def {
 		oldGraphic.setDocumentation(newGraphic.getDocumentation());
 		//depends on missed
 		oldGraphic.setSyntax(newGraphic.getSyntax());
+		Iterator old = oldGraphic.iteratorClientDependency();
+		Iterator newold = newGraphic.iteratorClientDependency();
 		
 	}
 
@@ -680,8 +682,16 @@ public class CompareInterlis2Def {
 					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
+				else if(modElementNew instanceof LineFormTypeDef) {
+					System.out.println("Agregando Linea: "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
 				else if(modElementNew instanceof TopicDef) {
 					System.out.println("Agregando Topic: "+modElementNew.getName().getValue());
+					modold.addOwnedElement(modElementNew);
+				}
+				else if(modElementNew instanceof UnitDef) {
+					System.out.println("Agregando Unit: "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else {
@@ -980,7 +990,7 @@ public class CompareInterlis2Def {
 		untOld.setDescName(untNew.getDescName());
 		untOld.setDocumentation(untNew.getDocumentation());
 		untOld.setSyntax(untNew.getSyntax());
-		// cant access to depend on
+		// cant access to depend on (umleditor hace esto automaticamente)
 	}
 
 	/**
