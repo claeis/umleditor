@@ -898,7 +898,8 @@ public class CompareInterlis2Def {
 		clsOld.setDocumentation(clsNew.getDocumentation());
 		clsOld.setAbstract(clsNew.isAbstract());
 		clsOld.setPropFinal(clsNew.isPropFinal());
-		// value extended omitted (to discuss)
+		
+		updateExtendsOfClassDef(clsOld, clsNew);
 		clsOld.setKind(clsNew.getKind());
 		clsOld.setMetaMapping(clsNew.getMetaMapping());
 		//- by now parameter and constraints can't be uploaded
@@ -907,6 +908,20 @@ public class CompareInterlis2Def {
 		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(clsNew);
 		addNewAttributes(clsOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributes(clsOld, oldAttributechildi, newAttributechildi);
+	}
+
+	private void updateExtendsOfClassDef(ClassDef clsOld, ClassDef clsNew) {
+		Iterator extendsi = clsNew.iteratorGeneralization();
+		while (extendsi.hasNext()) {
+			Object obj = extendsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.ClassExtends) {
+				ch.ehi.interlis.modeltopicclass.ClassExtends extend = (ch.ehi.interlis.modeltopicclass.ClassExtends) obj;
+				if (extend.containsParent()) {
+					clsOld.clearGeneralization();
+					clsOld.addGeneralization(extend);
+				}
+			}
+		}
 	}
 
 	/**
