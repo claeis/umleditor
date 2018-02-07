@@ -19,12 +19,15 @@ import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.modeltopicclass.TopicDepends;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
 import ch.ehi.interlis.views.ViewableDef;
+import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.Feature;
+import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
@@ -208,15 +211,95 @@ public class CompareInterlis2Def {
 		oldTopic.setDocumentation(newTopic.getDocumentation());
 		oldTopic.setAbstract(newTopic.isAbstract());
 		oldTopic.setPropFinal(newTopic.isPropFinal());
-		// Extends
-		oldTopic.attachOiddomain(newTopic.detachOiddomain());
+		updateExtendsOfTopicDef(oldTopic,newTopic);
+		if(newTopic.containsOiddomain()) {
+			oldTopic.attachOiddomain(newTopic.detachOiddomain());
+		}
 		// Dependency
-		// sort children
+		updateDependencyOfTopicDef(oldTopic,newTopic);
 		List oldTopicChildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(oldTopic, null));
 		List newTopicChildren = obj.sortIliDefs(ch.ehi.interlis.tools.ModelElementUtility.getChildElements(newTopic, null));
 		// actualizando hijos :P
 		addNewChildTopics(oldTopic, oldTopicChildren, newTopicChildren);
 		removeAndUpdateOldChildTopic(oldTopic, oldTopicChildren, newTopicChildren);
+	}
+
+	private void updateDependencyOfTopicDef(TopicDef oldTopic, TopicDef newTopic) {
+		Iterator dependsi = oldTopic.iteratorClientDependency();
+		int i = 0;
+		while (dependsi.hasNext()) {
+			Object obj = dependsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.TopicDepends) {
+				ch.ehi.interlis.modeltopicclass.TopicDepends depends = (ch.ehi.interlis.modeltopicclass.TopicDepends) obj;
+				Iterator supplieri = depends.iteratorSupplier();
+				if (supplieri.hasNext()) {
+					TopicDef supplier = (TopicDef) supplieri.next();
+					String oldName = supplier.getName().getValue();
+					ch.ehi.interlis.modeltopicclass.TopicDepends newdepend = findDependByName(oldName, newTopic);
+					if(newdepend == null) {
+						oldTopic.removeClientDependency(depends);
+					}
+					
+				}
+			} else {
+				// ignore other kind of Dependency
+			}
+		}
+		
+		Iterator newdependsi = newTopic.iteratorClientDependency();//clientdependency?
+		while (newdependsi.hasNext()) {
+			Object obj = newdependsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.TopicDepends) {
+				ch.ehi.interlis.modeltopicclass.TopicDepends newdepend = (ch.ehi.interlis.modeltopicclass.TopicDepends) obj;
+				ModelElement supplier = (ModelElement)newdepend.iteratorSupplier().next();
+				String newName = supplier.getName().getValue();
+				ch.ehi.interlis.modeltopicclass.TopicDepends oldimport = findDependByName(newName, oldTopic);
+				if (oldimport == null) {
+					// si no existe lo agrega
+					oldTopic.addClientDependency(newdepend);
+				} else {
+					// si existe
+				}
+			} else {
+				//nothing to do
+			}
+			
+		}
+	}
+
+	private TopicDepends findDependByName(String findname, TopicDef newTopic) {
+		Iterator it = newTopic.iteratorClientDependency();
+		while (it.hasNext()) {
+			Object obj = it.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.TopicDepends) {				
+				ch.ehi.interlis.modeltopicclass.TopicDepends depends = (ch.ehi.interlis.modeltopicclass.TopicDepends) obj;
+				
+				TopicDef supplier = (TopicDef)depends.iteratorSupplier().next();
+				String name = supplier.getName().getValue();				
+				if (name.equals(findname)) {
+					return depends;
+				}
+			} else {
+				// nothing to do 
+ 			}
+ 		}
+		return null;
+	}
+
+	private void updateExtendsOfTopicDef(TopicDef oldTopic, TopicDef newTopic) {
+		Iterator extendsi = newTopic.iteratorGeneralization();
+		while (extendsi.hasNext()) {
+			Object obj = extendsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.TopicExtends) {
+				ch.ehi.interlis.modeltopicclass.TopicExtends extend = (ch.ehi.interlis.modeltopicclass.TopicExtends) obj;
+				if (extend.containsParent()) {
+					TopicDef supplier = (TopicDef) extend.getParent();
+					System.out.println(newTopic.getName().getValue()+" hereda de "+supplier.getName().getValue());
+					oldTopic.clearGeneralization();
+					oldTopic.addGeneralization(extend);
+				}
+			}
+		}
 	}
 
 	private void addNewChildTopics(TopicDef oldTopic, List oldTopicChildren, List newTopicChildren) {
