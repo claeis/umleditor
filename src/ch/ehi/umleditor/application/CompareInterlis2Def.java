@@ -1126,7 +1126,8 @@ public class CompareInterlis2Def {
 		asoOld.setAbstract(asoNew.isAbstract());
 		asoOld.setPropFinal(asoNew.isPropFinal());
 		//extended
-		//specialized
+		updateExtendsOfAssociationDef(asoOld, asoNew);
+		updateDerivedFrom(asoOld, asoNew);
 		//detived from
 		/*
 		 * Check roles from associationdef
@@ -1136,15 +1137,38 @@ public class CompareInterlis2Def {
 		addNewAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
 		
-		// DERIVED FROM
-		updateDerivedFrom(asoOld,asoNew);
 				
 		// restrictions
 	}
 	
+	private void updateExtendsOfAssociationDef(AssociationDef asoOld, AssociationDef asoNew) {
+		Iterator extendsi = asoNew.iteratorGeneralization();
+		while (extendsi.hasNext()) {
+			Object obj = extendsi.next();
+			if (obj instanceof ch.ehi.interlis.modeltopicclass.ClassExtends) {
+				ch.ehi.interlis.modeltopicclass.ClassExtends extend = (ch.ehi.interlis.modeltopicclass.ClassExtends) obj;
+				if (extend.containsParent()) {
+					asoOld.clearGeneralization();
+					asoOld.addGeneralization(extend);
+				}
+			}
+		}
+		
+	}
+
 	private void updateDerivedFrom(AssociationDef asoOld, AssociationDef asoNew) {
-		Iterator oldderivedi = asoOld.iteratorClientDependency();
-		Iterator newderivedi = asoNew.iteratorClientDependency();
+		Iterator derivedi = asoNew.iteratorClientDependency();
+		while (derivedi.hasNext()) {
+			Object obj = derivedi.next();
+			if (obj instanceof ch.ehi.interlis.associations.AssociationDefDerived) {
+				ch.ehi.interlis.associations.AssociationDefDerived derived = (ch.ehi.interlis.associations.AssociationDefDerived) obj;
+				if (derived.sizeSupplier() > 0) {
+					ViewableDef supplier = (ViewableDef) derived.iteratorSupplier().next();
+					asoOld.clearClientDependency();
+					asoOld.addClientDependency(derived);
+				}
+			}
+		}
 		
 	}
 
