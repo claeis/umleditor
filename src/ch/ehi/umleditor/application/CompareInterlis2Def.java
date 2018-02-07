@@ -617,6 +617,9 @@ public class CompareInterlis2Def {
 	
 	private void updateLineFormTypeDef(LineFormTypeDef oldLft, LineFormTypeDef newLft) {
 		oldLft.setDocumentation(newLft.getDocumentation());
+		if(newLft.containsStructure()) {
+			oldLft.attachStructure(newLft.detachStructure());
+		}
 		
 	}
 
