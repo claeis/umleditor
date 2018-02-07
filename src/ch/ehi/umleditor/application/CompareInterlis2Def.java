@@ -8,6 +8,7 @@ import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
@@ -902,13 +903,33 @@ public class CompareInterlis2Def {
 		updateExtendsOfClassDef(clsOld, clsNew);
 		clsOld.setKind(clsNew.getKind());
 		clsOld.setMetaMapping(clsNew.getMetaMapping());
-		//- by now parameter and constraints can't be uploaded
+		//- by now parameter
 		
+		updateConstraintDef(clsOld,clsNew);
 		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(clsOld);
 		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(clsNew);
 		addNewAttributes(clsOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributes(clsOld, oldAttributechildi, newAttributechildi);
 	}
+
+	private void updateConstraintDef(ClassDef clsOld, ClassDef clsNew) {
+		Iterator oldchildi = clsNew.iteratorConstraint();
+		while (oldchildi.hasNext()) {
+			Object obj = oldchildi.next();
+			if (obj instanceof ConstraintDef) {
+				ConstraintDef restriccion = (ConstraintDef) obj;
+				// clsOld.clearConstraint();
+				
+				restriccion.setMetaName(restriccion.getMetaName());
+				restriccion.setMetaMsg(restriccion.getMetaMsg());
+				clsOld.addConstraint(restriccion);
+			} else {
+				// ignore others; should not have others
+			}
+		}
+		
+	}
+
 
 	private void updateExtendsOfClassDef(ClassDef clsOld, ClassDef clsNew) {
 		Iterator extendsi = clsNew.iteratorGeneralization();
