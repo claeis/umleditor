@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.associations.RoleDefDerived;
@@ -15,6 +16,7 @@ import ch.ehi.interlis.functions.FunctionDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
+import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -904,12 +906,68 @@ public class CompareInterlis2Def {
 		clsOld.setKind(clsNew.getKind());
 		clsOld.setMetaMapping(clsNew.getMetaMapping());
 		//- by now parameter
+		updateParemeterDef(clsOld,clsNew);
 		
 		updateConstraintDef(clsOld,clsNew);
 		List oldAttributechildi = AbstractClassDefUtility.getIliAttributes(clsOld);
 		List newAttributechildi = AbstractClassDefUtility.getIliAttributes(clsNew);
 		addNewAttributes(clsOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributes(clsOld, oldAttributechildi, newAttributechildi);
+	}
+
+	private void updateParemeterDef(ClassDef clsOld, ClassDef clsNew) {
+		//clsOld.clearParameterDef();
+		Iterator iterator = clsOld.iteratorParameterDef();
+		while (iterator.hasNext()) {
+			Object obj = iterator.next();
+			
+			if(obj instanceof ParameterDef) {
+				ParameterDef oldparameter = (ParameterDef) obj;
+				String oldSyntax = oldparameter.getSyntax().getValue();
+				ParameterDef newparameter = findParameterBySyntax(oldSyntax, clsNew);
+				if (newparameter == null) {
+					
+					clsOld.removeParameterDef(oldparameter);
+				} else {
+				}
+				
+			} else {
+				// nothing to do
+			}
+		}
+		Iterator newparamsi = clsNew.iteratorParameterDef();
+				while (newparamsi.hasNext()) {
+				Object obj = newparamsi.next();
+				ParameterDef newparam = (ParameterDef) obj;
+				
+				
+				String newSyntax = newparam.getSyntax().getValue();
+				ParameterDef oldparam = findParameterBySyntax(newSyntax, clsOld);
+				if (oldparam == null) {
+					// si no existe lo agrega
+					clsOld.addParameterDef(newparam);	
+				} else {
+						// si existe
+					}
+				}
+	}
+
+	private ParameterDef findParameterBySyntax(String findSyntax, ClassDef clsNew) {
+		Iterator it = clsNew.iteratorParameterDef();
+		while (it.hasNext()) {
+			Object obj = it.next();
+			if (obj instanceof ParameterDef) {				
+				ParameterDef param = (ParameterDef) obj;
+				
+				String name = param.getSyntax().getValue();				
+				if (name.equals(findSyntax)) {
+					return param;
+				}
+			} else {
+				// nothing to do
+ 			}
+ 		}
+		return null;
 	}
 
 	private void updateConstraintDef(ClassDef clsOld, ClassDef clsNew) {
