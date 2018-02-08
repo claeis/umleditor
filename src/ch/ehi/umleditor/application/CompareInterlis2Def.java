@@ -1059,12 +1059,10 @@ public class CompareInterlis2Def {
 		oldRole.setPropExtended(newRole.isPropExtended());
 		oldRole.setMultiplicity(newRole.getMultiplicity());
 		
-		//oldRole.detachParticipant();
-		//oldRole.attachParticipant(newRole.getParticipant());// Clases implicadas
 		if(newRole.containsParticipant() && (oldRole.containsParticipant() == false)) {
-			oldRole.attachParticipant(newRole.detachParticipant());
+			oldRole.attachParticipant(newRole.detachParticipant()); //clases implicadas
 		}
-		// page DerivedFrom RoleDef has 0/1 RoleDefDerived
+		// DerivedFrom 
 		if (newRole.containsRoleDefDerived()) {
 			oldRole.attachRoleDefDerived(newRole.detachRoleDefDerived());
 		} else {
@@ -1087,7 +1085,25 @@ public class CompareInterlis2Def {
 		oldAttr.setPropExtended(newAttr.isPropExtended());
 		oldAttr.setOrdering(newAttr.getOrdering());
 		oldAttr.setMultiplicity(newAttr.getMultiplicity());
+		updateConstraintDef(oldAttr,newAttr);
 		//revisar lo demás
+	}
+
+	private void updateConstraintDef(AttributeDef oldAttr, AttributeDef newAttr) {
+		Iterator oldchildi = newAttr.iteratorConstraint();
+		while (oldchildi.hasNext()) {
+			Object obj = oldchildi.next();
+			if (obj instanceof ConstraintDef) {
+				ConstraintDef restriccion = (ConstraintDef) obj;
+				// clsOld.clearConstraint();
+				
+				restriccion.setMetaName(restriccion.getMetaName());
+				restriccion.setMetaMsg(restriccion.getMetaMsg());
+				oldAttr.addConstraint(restriccion);
+			} else {
+				// ignore others; should not have others
+			}
+		}
 	}
 
 	/**
