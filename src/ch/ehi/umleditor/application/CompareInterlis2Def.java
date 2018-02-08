@@ -1056,13 +1056,17 @@ public class CompareInterlis2Def {
 		oldRole.setOrdering(newRole.getOrdering());
 		oldRole.setPropExternal(newRole.isPropExternal());
 		oldRole.setNavigable(newRole.isNavigable());
-		
+		oldRole.setPropExtended(newRole.isPropExtended());
 		oldRole.setMultiplicity(newRole.getMultiplicity());
-		oldRole.changeParticipant(newRole.getParticipant());// Clases implicadas
 		
+		//oldRole.detachParticipant();
+		//oldRole.attachParticipant(newRole.getParticipant());// Clases implicadas
+		if(newRole.containsParticipant() && (oldRole.containsParticipant() == false)) {
+			oldRole.attachParticipant(newRole.detachParticipant());
+		}
 		// page DerivedFrom RoleDef has 0/1 RoleDefDerived
 		if (newRole.containsRoleDefDerived()) {
-			oldRole.getRoleDefDerived().setSyntax(newRole.getRoleDefDerived().getSyntax()); // TODO check this
+			oldRole.attachRoleDefDerived(newRole.detachRoleDefDerived());
 		} else {
 		
 		}
@@ -1186,6 +1190,7 @@ public class CompareInterlis2Def {
 		updateExtendsOfAssociationDef(asoOld, asoNew);
 		updateDerivedFrom(asoOld, asoNew);
 	
+		updateAssociationRoles(asoOld,asoNew);
 		/*
 		 * Check roles from associationdef
 		 */
@@ -1197,6 +1202,60 @@ public class CompareInterlis2Def {
 		updateConstraintDef(asoOld, asoNew);
 	}
 	
+	private void updateAssociationRoles(AssociationDef asoOld, AssociationDef asoNew) {
+		
+		Iterator childi = asoOld.iteratorConnection();
+		while (childi.hasNext()) {
+			Object obj = childi.next();
+			if (obj instanceof RoleDef) {
+				RoleDef oldrole = (RoleDef) obj;
+				String oldname = oldrole.getName().getValue();
+				RoleDef newrole = findRoleByName(oldname, asoNew);
+				
+				if(newrole == null) {
+					asoOld.removeConnection(oldrole);
+				} else {
+					updateRoleDef(oldrole, newrole);
+				}
+			} else {
+				// ignore others; should not have others
+			}
+		}
+		
+		Iterator newrolesi = asoNew.iteratorConnection();
+		while (newrolesi.hasNext()) {
+			Object obj = newrolesi.next();
+			RoleDef newrole = (RoleDef) obj;
+			
+			String newName = newrole.getName().getValue();
+			RoleDef oldrole = findRoleByName(newName, asoOld);
+			if (oldrole == null) {
+				// si no existe lo agrega
+				asoOld.addConnection(newrole);
+			} else {
+				// si existe
+			}
+		}
+	}
+
+	private RoleDef findRoleByName(String oldname, AssociationDef asoNew) {
+		Iterator it = asoNew.iteratorConnection();
+		while (it.hasNext()) {
+			Object obj = it.next();
+			if (obj instanceof RoleDef) {				
+				RoleDef rol = (RoleDef) obj;
+				
+				String name = rol.getName().getValue();				
+				if (name.equals(oldname)) {
+					return rol;
+				}
+			} else {
+				// nothing to do
+ 			}
+ 		}
+		return null;
+	}
+
 	private void updateConstraintDef(AssociationDef asoOld, AssociationDef asoNew) {
 		Iterator oldchildi = asoNew.iteratorConstraint();
 		while (oldchildi.hasNext()) {
