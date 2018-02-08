@@ -988,7 +988,6 @@ public class CompareInterlis2Def {
 		
 	}
 
-
 	private void updateExtendsOfClassDef(ClassDef clsOld, ClassDef clsNew) {
 		Iterator extendsi = clsNew.iteratorGeneralization();
 		while (extendsi.hasNext()) {
@@ -1183,10 +1182,10 @@ public class CompareInterlis2Def {
 		asoOld.setDocumentation(asoNew.getDocumentation());
 		asoOld.setAbstract(asoNew.isAbstract());
 		asoOld.setPropFinal(asoNew.isPropFinal());
-		//extended
+
 		updateExtendsOfAssociationDef(asoOld, asoNew);
 		updateDerivedFrom(asoOld, asoNew);
-		//detived from
+	
 		/*
 		 * Check roles from associationdef
 		 */
@@ -1195,10 +1194,26 @@ public class CompareInterlis2Def {
 		addNewAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
 		removeAndUpdateOldAttributesInAssociation(asoOld, oldAttributechildi, newAttributechildi);
 		
-				
-		// restrictions
+		updateConstraintDef(asoOld, asoNew);
 	}
 	
+	private void updateConstraintDef(AssociationDef asoOld, AssociationDef asoNew) {
+		Iterator oldchildi = asoNew.iteratorConstraint();
+		while (oldchildi.hasNext()) {
+			Object obj = oldchildi.next();
+			if (obj instanceof ConstraintDef) {
+				ConstraintDef restriccion = (ConstraintDef) obj;
+				// clsOld.clearConstraint();
+				
+				restriccion.setMetaName(restriccion.getMetaName());
+				restriccion.setMetaMsg(restriccion.getMetaMsg());
+				asoOld.addConstraint(restriccion);
+			} else {
+				// ignore others; should not have others
+			}
+		}
+	}
+
 	private void updateExtendsOfAssociationDef(AssociationDef asoOld, AssociationDef asoNew) {
 		Iterator extendsi = asoNew.iteratorGeneralization();
 		while (extendsi.hasNext()) {
