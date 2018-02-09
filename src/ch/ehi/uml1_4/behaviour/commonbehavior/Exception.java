@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.behaviour.commonbehavior.Signal;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:57 $
  */
-public interface Exception extends Signal , java.io.Serializable
+public interface Exception extends Signal, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33FFD974028A detail_begin "Exception"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33FFD974028A detail_begin "Exception"
 
-  // -end- 33FFD974028A detail_begin "Exception"
+// -end- 33FFD974028A detail_begin "Exception"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33FFD974028A detail_end "Exception"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33FFD974028A detail_end "Exception"
 
-  // -end- 33FFD974028A detail_end "Exception"
+// -end- 33FFD974028A detail_end "Exception"
 
 }
-

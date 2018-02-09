@@ -20,43 +20,53 @@ package ch.ehi.umleditor.umldrawingtools;
 
 /**
  * ZoomTool for separating Zoom-Out/in functions.
- * 
- * @author: Peter Hirzel <i>soft</i>Environment 
+ *
+ * @author: Peter Hirzel <i>soft</i>Environment
  * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:41:04 $
  */
 public class ZoomTool extends CH.ifa.draw.standard.AbstractTool {
 	private double zoomFactor = 1.2;
 	private boolean zoomIn = false;
-/**
- * ZoomTool constructor comment.
- * @param editor CH.ifa.draw.framework.DrawingEditor
- * @param out true->zoomOut; false->zoomIn
- */
-public ZoomTool(CH.ifa.draw.framework.DrawingEditor editor, boolean zoomIn) {
-	super(editor);
-	this.zoomIn = zoomIn;
-}
-/**
- * ZoomTool constructor comment.
- * @param editor CH.ifa.draw.framework.DrawingEditor
- * @param out true->zoomOut; false->zoomIn
- * @param zoomFactor scaling Factor to be used by ZoomTool
- */
-public ZoomTool(CH.ifa.draw.framework.DrawingEditor editor, boolean zoomIn, double zoomFactor) {
-	this(editor, zoomIn);
-	this.zoomFactor = zoomFactor;
-}
-/**
- * Overwrites.
- */
-public void activate() {
-	super.activate();
 
-	if (zoomIn) {
-   		((ClassDiagramView)view()).deZoom(zoomFactor, 0, 0);
-	} else {
-  		((ClassDiagramView)view()).zoomOut(zoomFactor, 0, 0);
+	/**
+	 * ZoomTool constructor comment.
+	 * 
+	 * @param editor
+	 *            CH.ifa.draw.framework.DrawingEditor
+	 * @param out
+	 *            true->zoomOut; false->zoomIn
+	 */
+	public ZoomTool(CH.ifa.draw.framework.DrawingEditor editor, boolean zoomIn) {
+		super(editor);
+		this.zoomIn = zoomIn;
 	}
-	ch.ehi.umleditor.application.LauncherView.getInstance().toolDone();
-}
+
+	/**
+	 * ZoomTool constructor comment.
+	 * 
+	 * @param editor
+	 *            CH.ifa.draw.framework.DrawingEditor
+	 * @param out
+	 *            true->zoomOut; false->zoomIn
+	 * @param zoomFactor
+	 *            scaling Factor to be used by ZoomTool
+	 */
+	public ZoomTool(CH.ifa.draw.framework.DrawingEditor editor, boolean zoomIn, double zoomFactor) {
+		this(editor, zoomIn);
+		this.zoomFactor = zoomFactor;
+	}
+
+	/**
+	 * Overwrites.
+	 */
+	public void activate() {
+		super.activate();
+
+		if (zoomIn) {
+			((ClassDiagramView) view()).deZoom(zoomFactor, 0, 0);
+		} else {
+			((ClassDiagramView) view()).zoomOut(zoomFactor, 0, 0);
+		}
+		ch.ehi.umleditor.application.LauncherView.getInstance().toolDone();
+	}
 }

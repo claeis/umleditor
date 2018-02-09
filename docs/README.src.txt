@@ -14,7 +14,7 @@ In order to install the UML Editor, extract the ZIP file into a new directory.
 How to compile it?
 To compile the UML Editor, change to the newly created directory and enter the following command at the commandline prompt
 
-ant jar
+ant compile jar run
 
 To build a binary distribution, use
 

@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.foundation.datatypes.Expression;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:45 $
  */
-public interface ObjectSetExpression extends Expression , java.io.Serializable
+public interface ObjectSetExpression extends Expression, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 337EFDBA0302 detail_begin "ObjectSetExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 337EFDBA0302 detail_begin "ObjectSetExpression"
 
-  // -end- 337EFDBA0302 detail_begin "ObjectSetExpression"
+// -end- 337EFDBA0302 detail_begin "ObjectSetExpression"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 337EFDBA0302 detail_end "ObjectSetExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 337EFDBA0302 detail_end "ObjectSetExpression"
 
-  // -end- 337EFDBA0302 detail_end "ObjectSetExpression"
+// -end- 337EFDBA0302 detail_end "ObjectSetExpression"
 
 }
-

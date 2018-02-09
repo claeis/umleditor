@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.foundation.datatypes.Expression;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:45 $
  */
-public interface ProcedureExpression extends Expression , java.io.Serializable
+public interface ProcedureExpression extends Expression, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 363559050190 detail_begin "ProcedureExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 363559050190 detail_begin "ProcedureExpression"
 
-  // -end- 363559050190 detail_begin "ProcedureExpression"
+// -end- 363559050190 detail_begin "ProcedureExpression"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 363559050190 detail_end "ProcedureExpression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 363559050190 detail_end "ProcedureExpression"
 
-  // -end- 363559050190 detail_end "ProcedureExpression"
+// -end- 363559050190 detail_end "ProcedureExpression"
 
 }
-

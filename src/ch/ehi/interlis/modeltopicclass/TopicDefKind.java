@@ -16,45 +16,48 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-              // -beg- preserve=no 3C1DBC750311 package "TopicDefKind"
+// -beg- preserve=no 3C1DBC750311 package "TopicDefKind"
 package ch.ehi.interlis.modeltopicclass;
-              // -end- 3C1DBC750311 package "TopicDefKind"
+// -end- 3C1DBC750311 package "TopicDefKind"
 
-              // -beg- preserve=no 3C1DBC750311 autoimport "TopicDefKind"
+// -beg- preserve=no 3C1DBC750311 autoimport "TopicDefKind"
 
-              // -end- 3C1DBC750311 autoimport "TopicDefKind"
+// -end- 3C1DBC750311 autoimport "TopicDefKind"
 
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 3C1DBC750311 import "TopicDefKind"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C1DBC750311 import "TopicDefKind"
 
-              // -end- 3C1DBC750311 import "TopicDefKind"
+// -end- 3C1DBC750311 import "TopicDefKind"
 
-              /** @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:09 $
-               */
-public class TopicDefKind implements java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBC750311 detail_begin "TopicDefKind"
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:09 $
+ */
+public class TopicDefKind implements java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DBC750311 detail_begin "TopicDefKind"
 
-                // -end- 3C1DBC750311 detail_begin "TopicDefKind"
+	// -end- 3C1DBC750311 detail_begin "TopicDefKind"
 
-                // -beg- preserve=no 3C1DBC8300D7 var3C1DBC750311 "DATA"
-                public static final int DATA = 1;
-                // -end- 3C1DBC8300D7 var3C1DBC750311 "DATA"
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1343155464300998846L;
 
-                // -beg- preserve=no 3C1DBC87038F var3C1DBC750311 "VIEW"
-                public static final int VIEW = 2;
-                // -end- 3C1DBC87038F var3C1DBC750311 "VIEW"
+	// -beg- preserve=no 3C1DBC8300D7 var3C1DBC750311 "DATA"
+	public static final int DATA = 1;
+	// -end- 3C1DBC8300D7 var3C1DBC750311 "DATA"
 
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBC750311 detail_end "TopicDefKind"
+	// -beg- preserve=no 3C1DBC87038F var3C1DBC750311 "VIEW"
+	public static final int VIEW = 2;
+	// -end- 3C1DBC87038F var3C1DBC750311 "VIEW"
 
-                // -end- 3C1DBC750311 detail_end "TopicDefKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DBC750311 detail_end "TopicDefKind"
 
-              }
+	// -end- 3C1DBC750311 detail_end "TopicDefKind"
 
+}

@@ -16,174 +16,215 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-          // -beg- preserve=no 39619211022E package "RenamedViewableRef"
+// -beg- preserve=no 39619211022E package "RenamedViewableRef"
 package ch.ehi.interlis.views;
-          // -end- 39619211022E package "RenamedViewableRef"
+// -end- 39619211022E package "RenamedViewableRef"
 
-          // -beg- preserve=no 39619211022E autoimport "RenamedViewableRef"
-          import ch.ehi.uml1_4.implementation.AbstractEditorElement;
-          import ch.ehi.interlis.views.ViewableDef;
-          import ch.ehi.basics.types.NlsString;
-          import ch.ehi.basics.tools.AbstractVisitor;
-          // -end- 39619211022E autoimport "RenamedViewableRef"
+// -beg- preserve=no 39619211022E autoimport "RenamedViewableRef"
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
+import ch.ehi.interlis.views.ViewableDef;
+import ch.ehi.basics.types.NlsString;
 
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 39619211022E import "RenamedViewableRef"
+import java.util.Iterator;
 
-          // -end- 39619211022E import "RenamedViewableRef"
+import ch.ehi.basics.tools.AbstractVisitor;
+// -end- 39619211022E autoimport "RenamedViewableRef"
 
-          /** Definiert einen Namen für eine Sicht.
-           *  @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:32 $
-           */
-public class RenamedViewableRef extends AbstractEditorElement implements java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 39619211022E detail_begin "RenamedViewableRef"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 39619211022E import "RenamedViewableRef"
 
-            // -end- 39619211022E detail_begin "RenamedViewableRef"
+// -end- 39619211022E import "RenamedViewableRef"
 
-            // -beg- preserve=no 3D4FA218030B head39619211022E "unlinkAll"
-            public void unlinkAll()
-            // -end- 3D4FA218030B head39619211022E "unlinkAll"
-              // declare any checked exceptions
-              // please fill in/modify the following section
-              // -beg- preserve=no 3D4FA218030B throws39619211022E "unlinkAll"
+/**
+ * Definiert einen Namen fÃ¼r eine Sicht.
+ * 
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:32 $
+ */
+public class RenamedViewableRef extends AbstractEditorElement implements java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 39619211022E detail_begin "RenamedViewableRef"
 
-              // -end- 3D4FA218030B throws39619211022E "unlinkAll"
-              {
-              // please fill in/modify the following section
-              // -beg- preserve=no 3D4FA218030B body39619211022E "unlinkAll"
-              
-              // Role ViewDef: ViewDef object(s) may point to this
-              detachViewableDef();
-              setLocalBase(null);
-              super.unlinkAll();
-              // -end- 3D4FA218030B body39619211022E "unlinkAll"
-              }
+	// -end- 39619211022E detail_begin "RenamedViewableRef"
 
-            // -beg- preserve=no 3D4FA2180315 head39619211022E "enumerateChildren"
-            public void enumerateChildren(AbstractVisitor visitor)
-            // -end- 3D4FA2180315 head39619211022E "enumerateChildren"
-              // declare any checked exceptions
-              // please fill in/modify the following section
-              // -beg- preserve=no 3D4FA2180315 throws39619211022E "enumerateChildren"
+	private static final long serialVersionUID = 3777242256935144863L;
 
-              // -end- 3D4FA2180315 throws39619211022E "enumerateChildren"
-              {
-              // please fill in/modify the following section
-              // -beg- preserve=no 3D4FA2180315 body39619211022E "enumerateChildren"
-              java.util.Iterator it=null;
-              if(containsViewableDef())visitor.visit(getViewableDef());
-              visitor.visit(getLocalBase());
-              super.enumerateChildren(visitor);
-              // -end- 3D4FA2180315 body39619211022E "enumerateChildren"
-              }
+	// -beg- preserve=no 3D4FA218030B head39619211022E "unlinkAll"
+	public void unlinkAll()
+	// -end- 3D4FA218030B head39619211022E "unlinkAll"
+	// declare any checked exceptions
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4FA218030B throws39619211022E "unlinkAll"
 
-            // -beg- preserve=no 39619B7502A3 code39619211022E "viewableDef"
-            private ViewableDef viewableDef;
-            // -end- 39619B7502A3 code39619211022E "viewableDef"
+	// -end- 3D4FA218030B throws39619211022E "unlinkAll"
+	{
+		// please fill in/modify the following section
+		// -beg- preserve=no 3D4FA218030B body39619211022E "unlinkAll"
 
-            /** attaches a ViewableDef.
-             *  
-             *  @see #detachViewableDef
-             *  @see #getViewableDef
-             *  @see #containsViewableDef
-             */
-            // -beg- preserve=no 39619B7502A3 attach_head39619211022E "RenamedViewableRef::attachViewableDef"
-            public void attachViewableDef(ViewableDef viewableDef1)
-            // -end- 39619B7502A3 attach_head39619211022E "RenamedViewableRef::attachViewableDef"
-            {
-              // -beg- preserve=no 39619B7502A3 attach_body39619211022E "RenamedViewableRef::attachViewableDef"
-              if(viewableDef!=null) {throw new java.lang.IllegalStateException("already a viewableDef attached");}
-              if(viewableDef1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as viewableDef");}
-              viewableDef = viewableDef1;
-              ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"attachViewableDef"));
-              return;
-              // -end- 39619B7502A3 attach_body39619211022E "RenamedViewableRef::attachViewableDef"
-            }
+		// Role ViewDef: ViewDef object(s) may point to this
+		detachViewableDef();
+		setLocalBase(null);
+		super.unlinkAll();
+		// -end- 3D4FA218030B body39619211022E "unlinkAll"
+	}
 
-            /** disconnect the currently attached ViewableDef.
-             *  @see #attachViewableDef
-             */
-            // -beg- preserve=no 39619B7502A3 detach_head39619211022E "RenamedViewableRef::detachViewableDef"
-            public ViewableDef detachViewableDef()
-            // -end- 39619B7502A3 detach_head39619211022E "RenamedViewableRef::detachViewableDef"
-            {
-              // -beg- preserve=no 39619B7502A3 detach_body39619211022E "RenamedViewableRef::detachViewableDef"
-              ViewableDef ret = null;
-              ret = viewableDef;
-              viewableDef = null;
-              ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"detachViewableDef"));
-              return ret;
-              // -end- 39619B7502A3 detach_body39619211022E "RenamedViewableRef::detachViewableDef"
-            }
+	// -beg- preserve=no 3D4FA2180315 head39619211022E "enumerateChildren"
+	public void enumerateChildren(AbstractVisitor visitor)
+	// -end- 3D4FA2180315 head39619211022E "enumerateChildren"
+	// declare any checked exceptions
+	// please fill in/modify the following section
+	// -beg- preserve=no 3D4FA2180315 throws39619211022E "enumerateChildren"
 
-            /** get the currently attached ViewableDef.
-             *  @see #attachViewableDef
-             */
-            // -beg- preserve=no 39619B7502A3 get_head39619211022E "RenamedViewableRef::getViewableDef"
-            public ViewableDef getViewableDef()
-            // -end- 39619B7502A3 get_head39619211022E "RenamedViewableRef::getViewableDef"
-            {
-              // -beg- preserve=no 39619B7502A3 get_body39619211022E "RenamedViewableRef::getViewableDef"
-              if(viewableDef==null) {throw new java.lang.IllegalStateException("no viewableDef attached");}
-              return viewableDef;
-              // -end- 39619B7502A3 get_body39619211022E "RenamedViewableRef::getViewableDef"
-            }
+	// -end- 3D4FA2180315 throws39619211022E "enumerateChildren"
+	{
+		// please fill in/modify the following section
+		// -beg- preserve=no 3D4FA2180315 body39619211022E "enumerateChildren"
+		Iterator<?> it = null;
+		if (containsViewableDef())
+			visitor.visit(getViewableDef());
+		visitor.visit(getLocalBase());
+		super.enumerateChildren(visitor);
+		// -end- 3D4FA2180315 body39619211022E "enumerateChildren"
+	}
 
-            /** tests if there is a ViewableDef attached.
-             *  @see #attachViewableDef
-             */
-            // -beg- preserve=no 39619B7502A3 test_head39619211022E "RenamedViewableRef::containsViewableDef"
-            public boolean containsViewableDef()
-            // -end- 39619B7502A3 test_head39619211022E "RenamedViewableRef::containsViewableDef"
-            {
-              // -beg- preserve=no 39619B7502A3 test_body39619211022E "RenamedViewableRef::containsViewableDef"
-              return viewableDef!=null;
-              // -end- 39619B7502A3 test_body39619211022E "RenamedViewableRef::containsViewableDef"
-            }
+	// -beg- preserve=no 39619B7502A3 code39619211022E "viewableDef"
+	private ViewableDef viewableDef;
+	// -end- 39619B7502A3 code39619211022E "viewableDef"
 
-            // -beg- preserve=no 39619B1A020C var39619211022E "localBase"
-            private NlsString localBase = null;
-            // -end- 39619B1A020C var39619211022E "localBase"
+	/**
+	 * attaches a ViewableDef.
+	 *
+	 * @see #detachViewableDef
+	 * @see #getViewableDef
+	 * @see #containsViewableDef
+	 */
+	// -beg- preserve=no 39619B7502A3 attach_head39619211022E
+	// "RenamedViewableRef::attachViewableDef"
+	public void attachViewableDef(ViewableDef viewableDef1)
+	// -end- 39619B7502A3 attach_head39619211022E
+	// "RenamedViewableRef::attachViewableDef"
+	{
+		// -beg- preserve=no 39619B7502A3 attach_body39619211022E
+		// "RenamedViewableRef::attachViewableDef"
+		if (viewableDef != null) {
+			throw new java.lang.IllegalStateException("already a viewableDef attached");
+		}
+		if (viewableDef1 == null) {
+			throw new java.lang.IllegalArgumentException("null may not be attached as viewableDef");
+		}
+		viewableDef = viewableDef1;
+		ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+				.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "attachViewableDef"));
+		return;
+		// -end- 39619B7502A3 attach_body39619211022E
+		// "RenamedViewableRef::attachViewableDef"
+	}
 
-            /** get current value of localBase
-             *  Lokal gültiger Name für die referenzierte Klasse, Sicht oder Projektion.
-             *  @see #setLocalBase
-             */
-            // -beg- preserve=no 39619B1A020C get_head39619211022E "localBase"
-            public  NlsString getLocalBase()
-            // -end- 39619B1A020C get_head39619211022E "localBase"
-            {
-              // -beg- preserve=no 39619B1A020C get_body39619211022E "localBase"
-              return localBase;
-              // -end- 39619B1A020C get_body39619211022E "localBase"
-            }
+	/**
+	 * disconnect the currently attached ViewableDef.
+	 * 
+	 * @see #attachViewableDef
+	 */
+	// -beg- preserve=no 39619B7502A3 detach_head39619211022E
+	// "RenamedViewableRef::detachViewableDef"
+	public ViewableDef detachViewableDef()
+	// -end- 39619B7502A3 detach_head39619211022E
+	// "RenamedViewableRef::detachViewableDef"
+	{
+		// -beg- preserve=no 39619B7502A3 detach_body39619211022E
+		// "RenamedViewableRef::detachViewableDef"
+		ViewableDef ret = null;
+		ret = viewableDef;
+		viewableDef = null;
+		ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+				.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "detachViewableDef"));
+		return ret;
+		// -end- 39619B7502A3 detach_body39619211022E
+		// "RenamedViewableRef::detachViewableDef"
+	}
 
-            /** set current value of localBase
-             *  @see #getLocalBase
-             */
-            // -beg- preserve=no 39619B1A020C set_head39619211022E "localBase"
-            public  void setLocalBase(NlsString value1)
-            // -end- 39619B1A020C set_head39619211022E "localBase"
-            {
-              // -beg- preserve=no 39619B1A020C set_body39619211022E "localBase"
-              if(localBase!=value1 && (localBase==null || !localBase.equals(value1))){
-                localBase = value1;
-                ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setLocalBase"));
-              }
-              // -end- 39619B1A020C set_body39619211022E "localBase"
-            }
+	/**
+	 * get the currently attached ViewableDef.
+	 * 
+	 * @see #attachViewableDef
+	 */
+	// -beg- preserve=no 39619B7502A3 get_head39619211022E
+	// "RenamedViewableRef::getViewableDef"
+	public ViewableDef getViewableDef()
+	// -end- 39619B7502A3 get_head39619211022E
+	// "RenamedViewableRef::getViewableDef"
+	{
+		// -beg- preserve=no 39619B7502A3 get_body39619211022E
+		// "RenamedViewableRef::getViewableDef"
+		if (viewableDef == null) {
+			throw new java.lang.IllegalStateException("no viewableDef attached");
+		}
+		return viewableDef;
+		// -end- 39619B7502A3 get_body39619211022E
+		// "RenamedViewableRef::getViewableDef"
+	}
 
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 39619211022E detail_end "RenamedViewableRef"
+	/**
+	 * tests if there is a ViewableDef attached.
+	 * 
+	 * @see #attachViewableDef
+	 */
+	// -beg- preserve=no 39619B7502A3 test_head39619211022E
+	// "RenamedViewableRef::containsViewableDef"
+	public boolean containsViewableDef()
+	// -end- 39619B7502A3 test_head39619211022E
+	// "RenamedViewableRef::containsViewableDef"
+	{
+		// -beg- preserve=no 39619B7502A3 test_body39619211022E
+		// "RenamedViewableRef::containsViewableDef"
+		return viewableDef != null;
+		// -end- 39619B7502A3 test_body39619211022E
+		// "RenamedViewableRef::containsViewableDef"
+	}
 
-            // -end- 39619211022E detail_end "RenamedViewableRef"
+	// -beg- preserve=no 39619B1A020C var39619211022E "localBase"
+	private NlsString localBase = null;
+	// -end- 39619B1A020C var39619211022E "localBase"
 
-          }
+	/**
+	 * get current value of localBase Lokal gÃ¼ltiger Name fÃ¼r die referenzierte
+	 * Klasse, Sicht oder Projektion.
+	 * 
+	 * @see #setLocalBase
+	 */
+	// -beg- preserve=no 39619B1A020C get_head39619211022E "localBase"
+	public NlsString getLocalBase()
+	// -end- 39619B1A020C get_head39619211022E "localBase"
+	{
+		// -beg- preserve=no 39619B1A020C get_body39619211022E "localBase"
+		return localBase;
+		// -end- 39619B1A020C get_body39619211022E "localBase"
+	}
 
+	/**
+	 * set current value of localBase
+	 * 
+	 * @see #getLocalBase
+	 */
+	// -beg- preserve=no 39619B1A020C set_head39619211022E "localBase"
+	public void setLocalBase(NlsString value1)
+	// -end- 39619B1A020C set_head39619211022E "localBase"
+	{
+		// -beg- preserve=no 39619B1A020C set_body39619211022E "localBase"
+		if (localBase != value1 && (localBase == null || !localBase.equals(value1))) {
+			localBase = value1;
+			ch.ehi.uml1_4.changepropagation.MetaModel.getInstance()
+					.notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setLocalBase"));
+		}
+		// -end- 39619B1A020C set_body39619211022E "localBase"
+	}
+
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 39619211022E detail_end "RenamedViewableRef"
+
+	// -end- 39619211022E detail_end "RenamedViewableRef"
+
+}

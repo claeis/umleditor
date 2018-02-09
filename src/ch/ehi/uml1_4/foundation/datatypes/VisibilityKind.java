@@ -24,41 +24,40 @@ package ch.ehi.uml1_4.foundation.datatypes;
  */
 public interface VisibilityKind extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD704201E0 detail_begin "VisibilityKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD704201E0 detail_begin "VisibilityKind"
 
-  // -end- 33DD704201E0 detail_begin "VisibilityKind"
+// -end- 33DD704201E0 detail_begin "VisibilityKind"
 
-  /** Other elements may see and use the target element.
-   */
-  // -beg- preserve=no 40459046038A var33DD704201E0 "PUBLIC"
-  public static final int PUBLIC = 1;
-  // -end- 40459046038A var33DD704201E0 "PUBLIC"
+/** Other elements may see and use the target element.
+ */
+// -beg- preserve=no 40459046038A var33DD704201E0 "PUBLIC"
+public static final int PUBLIC = 1;
+// -end- 40459046038A var33DD704201E0 "PUBLIC"
 
-  /** Descendants of the source element may see and use the targetelement.
-   */
-  // -beg- preserve=no 4045904C0324 var33DD704201E0 "PROTECTED"
-  public static final int PROTECTED = 2;
-  // -end- 4045904C0324 var33DD704201E0 "PROTECTED"
+/** Descendants of the source element may see and use the targetelement.
+ */
+// -beg- preserve=no 4045904C0324 var33DD704201E0 "PROTECTED"
+public static final int PROTECTED = 2;
+// -end- 4045904C0324 var33DD704201E0 "PROTECTED"
 
-  /** Only the source element may see and use the target element.
-   */
-  // -beg- preserve=no 404590530310 var33DD704201E0 "PRIVATE"
-  public static final int PRIVATE = 3;
-  // -end- 404590530310 var33DD704201E0 "PRIVATE"
+/** Only the source element may see and use the target element.
+ */
+// -beg- preserve=no 404590530310 var33DD704201E0 "PRIVATE"
+public static final int PRIVATE = 3;
+// -end- 404590530310 var33DD704201E0 "PRIVATE"
 
-  /** Elements declared in the same package as the target element maysee and use the target element.
-   */
-  // -beg- preserve=no 404590590355 var33DD704201E0 "PACKAGE"
-  public static final int PACKAGE = 4;
-  // -end- 404590590355 var33DD704201E0 "PACKAGE"
+/** Elements declared in the same package as the target element maysee and use the target element.
+ */
+// -beg- preserve=no 404590590355 var33DD704201E0 "PACKAGE"
+public static final int PACKAGE = 4;
+// -end- 404590590355 var33DD704201E0 "PACKAGE"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33DD704201E0 detail_end "VisibilityKind"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33DD704201E0 detail_end "VisibilityKind"
 
-  // -end- 33DD704201E0 detail_end "VisibilityKind"
+// -end- 33DD704201E0 detail_end "VisibilityKind"
 
 }
-

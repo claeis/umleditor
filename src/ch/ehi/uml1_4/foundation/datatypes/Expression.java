@@ -23,45 +23,44 @@ import ch.ehi.basics.types.NlsString;
  */
 public interface Expression extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CFA00203A2 detail_begin "Expression"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33CFA00203A2 detail_begin "Expression"
 
-  // -end- 33CFA00203A2 detail_begin "Expression"
+// -end- 33CFA00203A2 detail_begin "Expression"
 
-  /** get current value of language
-   *  @see #setLanguage
-   */
-  // -beg- preserve=no 33E12E5F01CA get_head33CFA00203A2 "language"
-   String getLanguage()
-  // -end- 33E12E5F01CA get_head33CFA00203A2 "language"
-    ; // empty
-  /** set current value of language
-   *  @see #getLanguage
-   */
-  // -beg- preserve=no 33E12E5F01CA set_head33CFA00203A2 "language"
-   void setLanguage(String value1)
-  // -end- 33E12E5F01CA set_head33CFA00203A2 "language"
-    ; // empty
-  /** get current value of body
-   *  @see #setBody
-   */
-  // -beg- preserve=no 33E12E870203 get_head33CFA00203A2 "body"
-   NlsString getBody()
-  // -end- 33E12E870203 get_head33CFA00203A2 "body"
-    ; // empty
-  /** set current value of body
-   *  @see #getBody
-   */
-  // -beg- preserve=no 33E12E870203 set_head33CFA00203A2 "body"
-   void setBody(NlsString value1)
-  // -end- 33E12E870203 set_head33CFA00203A2 "body"
-    ; // empty
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33CFA00203A2 detail_end "Expression"
+/** get current value of language
+ *  @see #setLanguage
+ */
+// -beg- preserve=no 33E12E5F01CA get_head33CFA00203A2 "language"
+String getLanguage()
+// -end- 33E12E5F01CA get_head33CFA00203A2 "language"
+;     // empty
+/** set current value of language
+ *  @see #getLanguage
+ */
+// -beg- preserve=no 33E12E5F01CA set_head33CFA00203A2 "language"
+void setLanguage(String value1)
+// -end- 33E12E5F01CA set_head33CFA00203A2 "language"
+;     // empty
+/** get current value of body
+ *  @see #setBody
+ */
+// -beg- preserve=no 33E12E870203 get_head33CFA00203A2 "body"
+NlsString getBody()
+// -end- 33E12E870203 get_head33CFA00203A2 "body"
+;     // empty
+/** set current value of body
+ *  @see #getBody
+ */
+// -beg- preserve=no 33E12E870203 set_head33CFA00203A2 "body"
+void setBody(NlsString value1)
+// -end- 33E12E870203 set_head33CFA00203A2 "body"
+;     // empty
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33CFA00203A2 detail_end "Expression"
 
-  // -end- 33CFA00203A2 detail_end "Expression"
+// -end- 33CFA00203A2 detail_end "Expression"
 
 }
-

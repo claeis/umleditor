@@ -24,29 +24,28 @@ import ch.ehi.uml1_4.changepropagation.MetaModelChange;
  */
 public interface MetaModelListener
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3C454D4A02A4 detail_begin "MetaModelListener"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C454D4A02A4 detail_begin "MetaModelListener"
 
-  // -end- 3C454D4A02A4 detail_begin "MetaModelListener"
+// -end- 3C454D4A02A4 detail_begin "MetaModelListener"
 
-  /** This function gets called after a change to a metamodel object occured.
-   */
-  // -beg- preserve=no 3C454D9201D5 head3C454D4A02A4 "metaModelChanged"
-  public void metaModelChanged(MetaModelChange event)
-  // -end- 3C454D9201D5 head3C454D4A02A4 "metaModelChanged"
-    // declare any checked exceptions
-    // please fill in/modify the following section
-    // -beg- preserve=no 3C454D9201D5 throws3C454D4A02A4 "metaModelChanged"
+/** This function gets called after a change to a metamodel object occured.
+ */
+// -beg- preserve=no 3C454D9201D5 head3C454D4A02A4 "metaModelChanged"
+public void metaModelChanged(MetaModelChange event)
+// -end- 3C454D9201D5 head3C454D4A02A4 "metaModelChanged"
+// declare any checked exceptions
+// please fill in/modify the following section
+// -beg- preserve=no 3C454D9201D5 throws3C454D4A02A4 "metaModelChanged"
 
-    // -end- 3C454D9201D5 throws3C454D4A02A4 "metaModelChanged"
-    ; // empty
+// -end- 3C454D9201D5 throws3C454D4A02A4 "metaModelChanged"
+;     // empty
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3C454D4A02A4 detail_end "MetaModelListener"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3C454D4A02A4 detail_end "MetaModelListener"
 
-  // -end- 3C454D4A02A4 detail_end "MetaModelListener"
+// -end- 3C454D4A02A4 detail_end "MetaModelListener"
 
 }
-

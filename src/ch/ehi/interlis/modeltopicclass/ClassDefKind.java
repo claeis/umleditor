@@ -16,45 +16,45 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-              // -beg- preserve=no 3C1DBA36021A package "ClassDefKind"
+// -beg- preserve=no 3C1DBA36021A package "ClassDefKind"
 package ch.ehi.interlis.modeltopicclass;
-              // -end- 3C1DBA36021A package "ClassDefKind"
+// -end- 3C1DBA36021A package "ClassDefKind"
 
-              // -beg- preserve=no 3C1DBA36021A autoimport "ClassDefKind"
+// -beg- preserve=no 3C1DBA36021A autoimport "ClassDefKind"
 
-              // -end- 3C1DBA36021A autoimport "ClassDefKind"
+// -end- 3C1DBA36021A autoimport "ClassDefKind"
 
-              // import declarations
-              // please fill in/modify the following section
-              // -beg- preserve=no 3C1DBA36021A import "ClassDefKind"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C1DBA36021A import "ClassDefKind"
 
-              // -end- 3C1DBA36021A import "ClassDefKind"
+// -end- 3C1DBA36021A import "ClassDefKind"
 
-              /** @author Claude Eisenhut
-               *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:34 $
-               */
-public class ClassDefKind implements java.io.Serializable
-              {
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBA36021A detail_begin "ClassDefKind"
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:34 $
+ */
+public class ClassDefKind implements java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DBA36021A detail_begin "ClassDefKind"
 
-                // -end- 3C1DBA36021A detail_begin "ClassDefKind"
+	// -end- 3C1DBA36021A detail_begin "ClassDefKind"
 
-                // -beg- preserve=no 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
-                public static final int CLASS = 1;
-                // -end- 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
+	private static final long serialVersionUID = 112747718088554282L;
 
-                // -beg- preserve=no 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
-                public static final int STRUCTURE = 2;
-                // -end- 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
+	// -beg- preserve=no 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
+	public static final int CLASS = 1;
+	// -end- 3C1DBA4E02C9 var3C1DBA36021A "CLASS"
 
-                // declare/define something only in the code
-                // please fill in/modify the following section
-                // -beg- preserve=no 3C1DBA36021A detail_end "ClassDefKind"
+	// -beg- preserve=no 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
+	public static final int STRUCTURE = 2;
+	// -end- 3C1DBA5B0354 var3C1DBA36021A "STRUCTURE"
 
-                // -end- 3C1DBA36021A detail_end "ClassDefKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C1DBA36021A detail_end "ClassDefKind"
 
-              }
+	// -end- 3C1DBA36021A detail_end "ClassDefKind"
 
+}

@@ -21,7 +21,9 @@
       <arg value="-debug"/>
       <classpath>
         <pathelement location="${projectjar}"/>
-        <pathelement location="${basedir}/lib/ili2c.jar"/>
+      	<pathelement location="${basedir}/lib/ili2c.jar"/>
+        <pathelement location="${basedir}/lib/ili2c-core.jar"/>
+        <pathelement location="${basedir}/lib/ili2c-tool.jar"/>
         <pathelement location="${basedir}/lib/jh.jar"/>
       </classpath>
     </java>
@@ -30,11 +32,13 @@
   <target depends="init" name="compile">
     <!-- Compile the java code from ${src} into ${build}/classes -->
     <mkdir dir="${build}/classes"/>
-    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java" debug="on"  source="1.6" target="1.6">
+    <javac destdir="${build}/classes" includes="**/*.java" excludes="**/bak~/*.java" debug="true" debuglevel="lines,vars,source" includeantruntime="true" source="1.6" target="1.6" encoding="UTF-8" >
       <classpath>
         <pathelement location="lib/jhotdraw53.jar"/>
         <pathelement location="lib/sebase.jar"/>
         <pathelement location="lib/ili2c.jar"/>
+        <pathelement location="lib/ili2c-core.jar"/>
+        <pathelement location="lib/ili2c-tool.jar"/>
         <pathelement location="lib/XMIFramework.jar"/>
         <pathelement location="lib/jh.jar"/>
         <pathelement location="lib/freehep-base.jar"/>
@@ -43,6 +47,7 @@
         <pathelement location="lib/freehep-graphicsio-emf.jar"/>
         <pathelement location="lib/freehep-graphicsio-svg.jar"/>
         <pathelement location="lib/usrdocjh.jar"/>
+      	<pathelement location="lib/JTattoo-1.6.11.jar"/>
       </classpath>
     	<src path="${src}" />
     	<!-- <src path="${build}/src"/> -->
@@ -82,6 +87,7 @@
         <zipfileset src="lib/freehep-graphicsio-emf.jar"/>
         <zipfileset src="lib/freehep-graphicsio-svg.jar"/>
         <zipfileset src="lib/usrdocjh.jar"/>
+    	<zipfileset src="lib/JTattoo-1.6.11.jar"/>
     	<!-- <fileset dir="lib" excludes="antlr-2.6.1/**/*"/> -->
     </jar>
   </target>

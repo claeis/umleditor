@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.behaviour.statemachines.State;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:07 $
  */
-public interface FinalState extends State , java.io.Serializable
+public interface FinalState extends State, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 364986DD01F4 detail_begin "FinalState"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 364986DD01F4 detail_begin "FinalState"
 
-  // -end- 364986DD01F4 detail_begin "FinalState"
+// -end- 364986DD01F4 detail_begin "FinalState"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 364986DD01F4 detail_end "FinalState"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 364986DD01F4 detail_end "FinalState"
 
-  // -end- 364986DD01F4 detail_end "FinalState"
+// -end- 364986DD01F4 detail_end "FinalState"
 
 }
-

@@ -358,7 +358,7 @@ private javax.swing.JLabel getLblSoftwareBy() {
 		try {
 			ivjLblSoftwareBy = new javax.swing.JLabel();
 			ivjLblSoftwareBy.setName("LblSoftwareBy");
-			ivjLblSoftwareBy.setText("Dieses Produkt enth‰lt Software, die entwickelt wurde durch:");
+			ivjLblSoftwareBy.setText("Dieses Produkt enth√§lt Software, die entwickelt wurde durch:");
 			ivjLblSoftwareBy.setBounds(20, 333, 371, 14);
 			// user code begin {1}
 			ivjLblSoftwareBy.setText(resAboutBoxDialog.getString("LblSoftwareBy_text"));

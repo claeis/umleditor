@@ -23,31 +23,30 @@ import ch.ehi.basics.types.NlsString;
  */
 public interface Mapping extends java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33FFFA1400A9 detail_begin "Mapping"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33FFFA1400A9 detail_begin "Mapping"
 
-  // -end- 33FFFA1400A9 detail_begin "Mapping"
+// -end- 33FFFA1400A9 detail_begin "Mapping"
 
-  /** get current value of body
-   *  @see #setBody
-   */
-  // -beg- preserve=no 3405756203DE get_head33FFFA1400A9 "body"
-   NlsString getBody()
-  // -end- 3405756203DE get_head33FFFA1400A9 "body"
-    ; // empty
-  /** set current value of body
-   *  @see #getBody
-   */
-  // -beg- preserve=no 3405756203DE set_head33FFFA1400A9 "body"
-   void setBody(NlsString value1)
-  // -end- 3405756203DE set_head33FFFA1400A9 "body"
-    ; // empty
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 33FFFA1400A9 detail_end "Mapping"
+/** get current value of body
+ *  @see #setBody
+ */
+// -beg- preserve=no 3405756203DE get_head33FFFA1400A9 "body"
+NlsString getBody()
+// -end- 3405756203DE get_head33FFFA1400A9 "body"
+;     // empty
+/** set current value of body
+ *  @see #getBody
+ */
+// -beg- preserve=no 3405756203DE set_head33FFFA1400A9 "body"
+void setBody(NlsString value1)
+// -end- 3405756203DE set_head33FFFA1400A9 "body"
+;     // empty
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 33FFFA1400A9 detail_end "Mapping"
 
-  // -end- 33FFFA1400A9 detail_end "Mapping"
+// -end- 33FFFA1400A9 detail_end "Mapping"
 
 }
-

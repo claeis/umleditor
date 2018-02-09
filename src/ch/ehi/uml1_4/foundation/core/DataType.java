@@ -22,19 +22,18 @@ import ch.ehi.uml1_4.foundation.core.Classifier;
  *  @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:37:27 $
  */
-public interface DataType extends Classifier , java.io.Serializable
+public interface DataType extends Classifier, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3298A036025B detail_begin "DataType"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3298A036025B detail_begin "DataType"
 
-  // -end- 3298A036025B detail_begin "DataType"
+// -end- 3298A036025B detail_begin "DataType"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 3298A036025B detail_end "DataType"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 3298A036025B detail_end "DataType"
 
-  // -end- 3298A036025B detail_end "DataType"
+// -end- 3298A036025B detail_end "DataType"
 
 }
-

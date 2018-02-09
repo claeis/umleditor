@@ -16,37 +16,35 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-          // -beg- preserve=no 3C3F11160245 package "FactElementKind"
+// -beg- preserve=no 3C3F11160245 package "FactElementKind"
 package ch.ehi.interlis.logicalexpressions;
-          // -end- 3C3F11160245 package "FactElementKind"
+// -end- 3C3F11160245 package "FactElementKind"
 
-          // -beg- preserve=no 3C3F11160245 autoimport "FactElementKind"
+// -beg- preserve=no 3C3F11160245 autoimport "FactElementKind"
 
-          // -end- 3C3F11160245 autoimport "FactElementKind"
+// -end- 3C3F11160245 autoimport "FactElementKind"
 
-          // import declarations
-          // please fill in/modify the following section
-          // -beg- preserve=no 3C3F11160245 import "FactElementKind"
+// import declarations
+// please fill in/modify the following section
+// -beg- preserve=no 3C3F11160245 import "FactElementKind"
 
-          // -end- 3C3F11160245 import "FactElementKind"
+// -end- 3C3F11160245 import "FactElementKind"
 
-          /** @author Claude Eisenhut
-           *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:03 $
-           */
-public interface FactElementKind extends java.io.Serializable
-          {
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F11160245 detail_begin "FactElementKind"
+/**
+ * @author Claude Eisenhut
+ * @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:35:03 $
+ */
+public interface FactElementKind extends java.io.Serializable {
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C3F11160245 detail_begin "FactElementKind"
 
-            // -end- 3C3F11160245 detail_begin "FactElementKind"
+	// -end- 3C3F11160245 detail_begin "FactElementKind"
 
-            // declare/define something only in the code
-            // please fill in/modify the following section
-            // -beg- preserve=no 3C3F11160245 detail_end "FactElementKind"
+	// declare/define something only in the code
+	// please fill in/modify the following section
+	// -beg- preserve=no 3C3F11160245 detail_end "FactElementKind"
 
-            // -end- 3C3F11160245 detail_end "FactElementKind"
+	// -end- 3C3F11160245 detail_end "FactElementKind"
 
-          }
-
+}

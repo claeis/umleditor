@@ -21,19 +21,18 @@ import ch.ehi.uml1_4.behaviour.activitygraphs.ActionState;
 /** @author Claude Eisenhut
  *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:41 $
  */
-public interface CallState extends ActionState , java.io.Serializable
+public interface CallState extends ActionState, java.io.Serializable
 {
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 36462D560096 detail_begin "CallState"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 36462D560096 detail_begin "CallState"
 
-  // -end- 36462D560096 detail_begin "CallState"
+// -end- 36462D560096 detail_begin "CallState"
 
-  // declare/define something only in the code
-  // please fill in/modify the following section
-  // -beg- preserve=no 36462D560096 detail_end "CallState"
+// declare/define something only in the code
+// please fill in/modify the following section
+// -beg- preserve=no 36462D560096 detail_end "CallState"
 
-  // -end- 36462D560096 detail_end "CallState"
+// -end- 36462D560096 detail_end "CallState"
 
 }
-
