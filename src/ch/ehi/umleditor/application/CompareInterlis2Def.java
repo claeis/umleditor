@@ -1085,26 +1085,15 @@ public class CompareInterlis2Def {
 		oldAttr.setPropExtended(newAttr.isPropExtended());
 		oldAttr.setOrdering(newAttr.getOrdering());
 		oldAttr.setMultiplicity(newAttr.getMultiplicity());
-		updateConstraintDef(oldAttr,newAttr);
+		
+		if(newAttr.containsAttributeValueUsage()) {
+			oldAttr.attachAttributeValueUsage(newAttr.detachAttributeValueUsage()); // actualiza sólo si el viejo atributo no tiene este valor
+		} else {
+			
+		}
 		//revisar lo demás
 	}
 
-	private void updateConstraintDef(AttributeDef oldAttr, AttributeDef newAttr) {
-		Iterator oldchildi = newAttr.iteratorConstraint();
-		while (oldchildi.hasNext()) {
-			Object obj = oldchildi.next();
-			if (obj instanceof ConstraintDef) {
-				ConstraintDef restriccion = (ConstraintDef) obj;
-				// clsOld.clearConstraint();
-				
-				restriccion.setMetaName(restriccion.getMetaName());
-				restriccion.setMetaMsg(restriccion.getMetaMsg());
-				oldAttr.addConstraint(restriccion);
-			} else {
-				// ignore others; should not have others
-			}
-		}
-	}
 
 	/**
 	 * Search attribute definition index in a given list with name parameter
