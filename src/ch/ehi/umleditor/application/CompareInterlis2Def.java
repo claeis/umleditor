@@ -9,6 +9,7 @@ import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
@@ -1086,6 +1087,12 @@ public class CompareInterlis2Def {
 	private void updateAttributeDef(AttributeDef oldAttr, AttributeDef newAttr) {
 		oldAttr.setMetaAttrb(newAttr.getMetaAttrb());
 		//Type not found
+		DomainAttribute attrType = updateDomainAtr(oldAttr, newAttr);
+		if(attrType != null) {
+			oldAttr.detachAttrType();
+			oldAttr.attachAttrType(attrType);
+		}
+		
 		oldAttr.setDocumentation(newAttr.getDocumentation());
 		oldAttr.setAbstract(newAttr.isAbstract());
 		oldAttr.setPropFinal(newAttr.isPropFinal());
@@ -1099,9 +1106,16 @@ public class CompareInterlis2Def {
 		} else {
 			
 		}
-		//revisar lo demás
 	}
 
+
+	private DomainAttribute updateDomainAtr(AttributeDef oldAttr, AttributeDef newAttr) {
+		if(newAttr.containsAttrType()) {			
+			DomainAttribute attrType = (DomainAttribute) newAttr.getAttrType();
+			return attrType;
+		}
+		return null;
+	}
 
 	/**
 	 * Search attribute definition index in a given list with name parameter
@@ -1154,8 +1168,6 @@ public class CompareInterlis2Def {
 		System.out.println("Actualizando dominio: "+oldDomain.getName().getValue());
 		oldDomain.setMetaAttrb(newDomain.getMetaAttrb());
 		
-		// can't access to type of domain (to do later) ¿newDomain.getType()?
-		
 		Type type = updateType(oldDomain,newDomain);
 		if(type != null) {
 			oldDomain.detachType();
@@ -1167,7 +1179,6 @@ public class CompareInterlis2Def {
 		oldDomain.setMandatory(newDomain.isMandatory());
 		
 		updateSpecialized(oldDomain, newDomain);
-		// can't access to kind (to do)
 
 	}
 	
