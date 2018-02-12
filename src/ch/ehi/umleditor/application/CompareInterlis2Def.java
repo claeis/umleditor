@@ -9,6 +9,7 @@ import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.attributes.AttributeDef;
+import ch.ehi.interlis.attributes.AttributeValueUsage;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
@@ -1101,13 +1102,21 @@ public class CompareInterlis2Def {
 		oldAttr.setOrdering(newAttr.getOrdering());
 		oldAttr.setMultiplicity(newAttr.getMultiplicity());
 		
-		if(newAttr.containsAttributeValueUsage()) {
-			oldAttr.attachAttributeValueUsage(newAttr.detachAttributeValueUsage()); // actualiza sólo si el viejo atributo no tiene este valor
-		} else {
-			
+		AttributeValueUsage attributeValue = updateAttributeValueUsage(oldAttr, newAttr);
+		if(attributeValue != null) {
+			oldAttr.detachAttributeValueUsage();
+			oldAttr.attachAttributeValueUsage(attributeValue);
 		}
 	}
 
+
+	private AttributeValueUsage updateAttributeValueUsage(AttributeDef oldAttr, AttributeDef newAttr) {
+		if(newAttr.containsAttributeValueUsage()) {			
+			AttributeValueUsage attrType = (AttributeValueUsage) newAttr.getAttributeValueUsage();
+			return attrType;
+		}
+		return null;
+	}
 
 	private DomainAttribute updateDomainAtr(AttributeDef oldAttr, AttributeDef newAttr) {
 		if(newAttr.containsAttrType()) {			
