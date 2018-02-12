@@ -17,6 +17,7 @@ import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.metaobjects.ParameterDef;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -32,8 +33,15 @@ import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
+import ch.interlis.ili2c.metamodel.TypeAlias;
+import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.UnknownType;
+import ch.ehi.interlis.domainsandconstants.basetypes.BooleanType;
+import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
+import ch.ehi.interlis.domainsandconstants.basetypes.Text;
 
 /**
  * This class compare two interlis models and update a given model
@@ -1145,7 +1153,14 @@ public class CompareInterlis2Def {
 	public void updateDomainDef(DomainDef oldDomain, DomainDef newDomain) {
 		System.out.println("Actualizando dominio: "+oldDomain.getName().getValue());
 		oldDomain.setMetaAttrb(newDomain.getMetaAttrb());
+		
 		// can't access to type of domain (to do later) ¿newDomain.getType()?
+		
+		Type type = updateType(oldDomain,newDomain);
+		if(type != null) {
+			oldDomain.detachType();
+			oldDomain.attachType(type);
+		}
 		oldDomain.setDocumentation(newDomain.getDocumentation());
 		oldDomain.setAbstract(newDomain.isAbstract());
 		oldDomain.setPropFinal(newDomain.isPropFinal());
@@ -1156,6 +1171,17 @@ public class CompareInterlis2Def {
 
 	}
 	
+	private Type updateType(DomainDef oldDomain, DomainDef newDomain) {
+
+		if(newDomain.containsType()) {
+			
+			Type actual = newDomain.getType();
+			return actual;
+		}
+		
+		return null;
+	}
+
 	private void updateSpecialized(DomainDef oldDomain, DomainDef newDomain) {
 		Iterator extendsi = newDomain.iteratorGeneralization();
 		while (extendsi.hasNext()) {
