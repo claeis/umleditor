@@ -1,4 +1,15 @@
-﻿UML-Editor 3.6.3.7 (2017-12-21)
+﻿
+UML-Editor 3.6.3.9 (2018-02-12)
+----------------------------------
+- Update ili2c 4.7.8
+- "Update" interlis file option 
+known issues of "update interlis":
+	- Can't update translated models
+	- Can't modify role definitions
+	- Random problems after apply two times upload
+	- Some documentation of Inderlis2Def can't have access 
+
+UML-Editor 3.6.3.8 (2017-12-21)
 ----------------------------------
 - Update ili2c 4.7.6
 - Associations added to object catalog
