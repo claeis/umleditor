@@ -1150,11 +1150,28 @@ public class CompareInterlis2Def {
 		oldDomain.setAbstract(newDomain.isAbstract());
 		oldDomain.setPropFinal(newDomain.isPropFinal());
 		oldDomain.setMandatory(newDomain.isMandatory());
-		// can't access to Specialized (to do later)
+		
+		updateSpecialized(oldDomain, newDomain);
 		// can't access to kind (to do)
 
 	}
 	
+	private void updateSpecialized(DomainDef oldDomain, DomainDef newDomain) {
+		Iterator extendsi = newDomain.iteratorGeneralization();
+		while (extendsi.hasNext()) {
+			Object obj = extendsi.next();
+			if (obj instanceof ch.ehi.interlis.domainsandconstants.DomainExtends) {
+				ch.ehi.interlis.domainsandconstants.DomainExtends extend = (ch.ehi.interlis.domainsandconstants.DomainExtends) obj;
+				if (extend.containsParent()) {
+					DomainDef supplier = (DomainDef) extend.getParent();
+					oldDomain.clearGeneralization();
+					oldDomain.addGeneralization(extend);
+				}
+			}
+		}
+		
+	}
+
 	/**
 	 * Update parameters of MetadataUse definitions
 	 * @param mtdOld
