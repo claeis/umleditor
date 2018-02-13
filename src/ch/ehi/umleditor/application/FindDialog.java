@@ -1,5 +1,7 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 /* This file is part of the UML/INTERLIS-Editor.
  * For more information, please see <http://www.umleditor.org/>.
  *
@@ -18,6 +20,18 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.util.Set;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.umlpresentation.Diagram;
@@ -80,6 +94,9 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 	public FindDialog(java.awt.Frame owner, boolean modal, Set results, String title) {
 		super(owner, modal);
 		initialize();
+		addEscapeKey();
+		addUndoRedo(getTxtName());
+		
 		java.awt.Point parentOrigin = owner.getLocation();
 		setLocation((int) parentOrigin.getX() + 250, (int) parentOrigin.getY() + 40);
 
@@ -95,6 +112,78 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 		show();
 	}
 
+	/**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = 1576953903002792718L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
+	 
+	 /**
+	  * Handle Ctrl+z and Ctrl+y to Undo/Redo text
+	  * @param textcomp
+	  */
+	 private void addUndoRedo(JTextComponent... textcomp) {
+		
+		 for(int i=0;i<textcomp.length;i++){
+			 final UndoManager undo = new UndoManager();
+				 Document doc = textcomp[i].getDocument();
+			    
+			   // Listen for undo and redo events
+			   doc.addUndoableEditListener(new UndoableEditListener() {
+			       public void undoableEditHappened(UndoableEditEvent evt) {
+			           undo.addEdit(evt.getEdit());
+			       }
+			   });
+			    
+			   // Create an undo action and add it to the text component
+			   textcomp[i].getActionMap().put("Undo",
+			       new AbstractAction("Undo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canUndo()) {
+			                       undo.undo();
+			                   }
+			               } catch (CannotUndoException e) {
+			               }
+			           }
+			      });
+			    
+			   // Bind the undo action to ctl-Z
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+			    
+			   // Create a redo action and add it to the text component
+			   textcomp[i].getActionMap().put("Redo",
+			       new AbstractAction("Redo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canRedo()) {
+			                       undo.redo();
+			                   }
+			               } catch (CannotRedoException e) {
+			               }
+			           }
+			       });
+			    
+			   // Bind the redo action to ctl-Y
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
+		 }
+	 }
+	
 	/**
 	 * connEtoC1: (BtnSearch.action.actionPerformed(java.awt.event.ActionEvent)
 	 * --> FindDialog.search()V)

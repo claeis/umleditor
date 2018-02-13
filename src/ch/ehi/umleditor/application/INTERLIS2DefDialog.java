@@ -133,7 +133,7 @@ public class INTERLIS2DefDialog extends BaseDialog implements ListMenuChoice {
 		super(owner, true);
 		initialize();
 		addEscapeKey();
-		addUndoRedo(ivjTxtFilename,ivjTxtINTERLISLanguageVersion);//here undo redo ivjTxtLanguage,
+		addUndoRedo(getTxtFilename(),getTxtINTERLISLanguageVersion());
 		setRelativeLocation(owner);
 		setElement(element);
 		show();

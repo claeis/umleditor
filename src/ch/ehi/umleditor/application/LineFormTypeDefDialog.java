@@ -25,6 +25,13 @@ import javax.swing.JComponent;
  */
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
@@ -80,6 +87,7 @@ public class LineFormTypeDefDialog extends BaseDialog {
 		super(owner, true);
 		initialize();
 		addEscapeKey();
+		addUndoRedo(getTxtName());
 		setRelativeLocation(owner);
 		setElement(element);
 		show();
@@ -103,6 +111,57 @@ public class LineFormTypeDefDialog extends BaseDialog {
 		 };
 		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
 		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
+	 
+	 /**
+	  * Handle Ctrl+z and Ctrl+y to Undo/Redo text
+	  * @param textcomp
+	  */
+	 private void addUndoRedo(JTextComponent... textcomp) {
+		
+		 for(int i=0;i<textcomp.length;i++){
+			 final UndoManager undo = new UndoManager();
+				 Document doc = textcomp[i].getDocument();
+			    
+			   // Listen for undo and redo events
+			   doc.addUndoableEditListener(new UndoableEditListener() {
+			       public void undoableEditHappened(UndoableEditEvent evt) {
+			           undo.addEdit(evt.getEdit());
+			       }
+			   });
+			    
+			   // Create an undo action and add it to the text component
+			   textcomp[i].getActionMap().put("Undo",
+			       new AbstractAction("Undo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canUndo()) {
+			                       undo.undo();
+			                   }
+			               } catch (CannotUndoException e) {
+			               }
+			           }
+			      });
+			    
+			   // Bind the undo action to ctl-Z
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+			    
+			   // Create a redo action and add it to the text component
+			   textcomp[i].getActionMap().put("Redo",
+			       new AbstractAction("Redo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canRedo()) {
+			                       undo.redo();
+			                   }
+			               } catch (CannotRedoException e) {
+			               }
+			           }
+			       });
+			    
+			   // Bind the redo action to ctl-Y
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
+		 }
 	 }
 
 	/**
