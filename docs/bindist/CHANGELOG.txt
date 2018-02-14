@@ -1,8 +1,14 @@
-﻿
+﻿UML-Editor 3.6.4 (2018-02-14)
+----------------------------------
+- Undo/Redo JtextComponents
+- Update icon and splash screen
+
+
 UML-Editor 3.6.3.9 (2018-02-12)
 ----------------------------------
 - Update ili2c 4.7.8
 - "Update" interlis file option 
+- Export xmi file
 known issues of "update interlis":
 	- Can't update translated models
 	- Can't modify role definitions
