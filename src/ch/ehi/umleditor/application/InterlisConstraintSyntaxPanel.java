@@ -702,7 +702,10 @@ public class InterlisConstraintSyntaxPanel extends BasePanel implements DataPane
 				
 			} else {
 				getPnlEditor().setText(ElementUtils.mapNlsString(((ch.ehi.basics.types.NlsString) syntax)));
+				getPnlMetaName().setEnabled(false);
 				getPnlMetaName().setObject(null);
+				
+				getPnlMetaMsg().setEnabled(false);
 				getPnlMetaMsg().setObject(null);
 				//Maybe here can solve the issue that don't save the current object
 			}
