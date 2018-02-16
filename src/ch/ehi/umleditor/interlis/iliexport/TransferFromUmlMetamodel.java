@@ -2746,6 +2746,10 @@ public class TransferFromUmlMetamodel {
 	public void writeIliFiles(Namespace ns) throws java.io.IOException {
 		visitNamespace(ns, null, null);
 	}
+	
+	public void writeIliFile(INTERLIS2Def exportili) throws java.io.IOException {
+		visitINTERLIS2Def(exportili);
+	}
 
 	private boolean createFileList = false;
 	private java.util.List fileList = null;

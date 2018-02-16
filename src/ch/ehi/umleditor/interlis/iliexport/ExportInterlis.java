@@ -56,11 +56,11 @@ public class ExportInterlis {
 	public static void writeIli(INTERLIS2Def exportili) {
 		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
 		try {
-			exportili.getNamespace();
-			writer.writeIliFiles(exportili.getNamespace());
+			writer.getFileList(exportili.getNamespace());
+			writer.writeIliFile(exportili);
 		}catch (java.io.IOException ex) {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log("Export interlis file", "Fail when try write the interlis file");
-			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+			//ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
 		}
 	}
 
