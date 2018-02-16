@@ -101,6 +101,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	private javax.swing.JRadioButtonMenuItem ivjMniSortbyName = null;
 	private javax.swing.JMenu ivjMnuSort = null;
 	private javax.swing.JMenuItem ivjMniUpdateIli = null;
+	private javax.swing.JMenuItem ivjMniExportIli = null;
 
 	class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener,
 			javax.swing.event.TreeSelectionListener {
@@ -161,7 +162,8 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 				connEtoC27(e);
 			if (e.getSource() == NavigationView.this.getMniUpdateIli())
 				connEtoC30(e);
-			
+			if (e.getSource() == NavigationView.this.getMniExportIli())
+				connEtoC31(e);
 		};
 
 		public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -881,6 +883,35 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 			handleException(ivjExc);
 		}
 	}
+	
+	/**
+	 * connEtoC31: (Mni.action.actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @param arg1
+	 *            java.awt.event.ActionEvent
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC31(java.awt.event.ActionEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			
+				INTERLIS2Def exportili = (INTERLIS2Def)getSelectedNode();
+				this.mniIliExport(exportili);
+			
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+
+	private void mniIliExport(INTERLIS2Def exportili) {
+		// TODO Auto-generated method stub
+		ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeIli(exportili);
+	}
 
 	/**
 	 * connEtoC3:
@@ -1388,7 +1419,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	}
 
 	/**
-	 * Return the MniNewInterlisFile property value.
+	 * Return the MniNewUpdateInterlisFile property value.
 	 * 
 	 * @return javax.swing.JMenuItem
 	 */
@@ -1409,6 +1440,30 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 			}
 		}
 		return ivjMniUpdateIli;
+	}
+	
+	/**
+	 * Return the MniExportInterlisFile property value.
+	 * 
+	 * @return javax.swing.JMenuItem
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JMenuItem getMniExportIli() {
+		if (ivjMniExportIli == null) {
+			try {
+				ivjMniExportIli = new javax.swing.JMenuItem();
+				ivjMniExportIli.setName("MniExportIli");
+				ivjMniExportIli.setText("Export");
+				// user code begin {1}
+				ivjMniExportIli.setText(getResourceString("MniExportIli_text"));
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjMniExportIli;
 	}
 	
 	/**
@@ -1852,6 +1907,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 				ivjMnpTreeActions.add(getJSeparator1());
 				ivjMnpTreeActions.add(getMniAddToDiagram());
 				ivjMnpTreeActions.add(getMniUpdateIli());
+				ivjMnpTreeActions.add(getMniExportIli());
 				// user code begin {1}
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
@@ -2034,6 +2090,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getMniClassDiagram().addActionListener(ivjEventHandler);
 		getMniInterlis2Def().addActionListener(ivjEventHandler);
 		getMniUpdateIli().addActionListener(ivjEventHandler);
+		getMniExportIli().addActionListener(ivjEventHandler);
 		getMniModelDef().addActionListener(ivjEventHandler);
 		getMniMetaDataUseDef().addActionListener(ivjEventHandler);
 		getMniTopicDef().addActionListener(ivjEventHandler);

@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.view.GenericFileFilter;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.config.GenerateOutputKind;
@@ -50,6 +51,17 @@ public class ExportInterlis {
 			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
 		}
 		return;
+	}
+	
+	public static void writeIli(INTERLIS2Def exportili) {
+		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
+		try {
+			exportili.getNamespace();
+			writer.writeIliFiles(exportili.getNamespace());
+		}catch (java.io.IOException ex) {
+			ch.ehi.umleditor.application.LauncherView.getInstance().log("Export interlis file", "Fail when try write the interlis file");
+			ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+		}
 	}
 
 	public static void writeXSD() {
