@@ -124,27 +124,23 @@ public class CompareInterlis2Def {
 			String oldName = modold.getName().getValue();		
 			int newIndex = findIndexInListByName(oldName, listnew);
 			if (newIndex == -1) {
-				System.out.println("No encontre actualización del elemento en el nuevo modelo, debería elminar?");
-				oldInterlis.removeOwnedElement(modold);
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), oldName+" Deleted");
 			} else {
 				ModelDef modnew = (ModelDef) listold.get(newIndex);
-				System.out.println("Modelo viejo: " + modold.getName().getValue());
-				System.out.println("Modelo nuevo: " + modnew.getName().getValue());
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ modold.getName().getValue()+" ...");
 				Iterator<?> it = modnew.iteratorOwnedElement();
 			    while(it.hasNext()) {
 			    	Object ownedEle = it.next();
-			    	System.out.println(ownedEle);
 			    	if(ownedEle instanceof ch.ehi.interlis.modeltopicclass.TopicDef) {
 			    		TopicDef newTopic = (TopicDef) ownedEle;
 			    		String topicName = newTopic.getName().getValue();
 			    		TopicDef oldTopic = (TopicDef)findOwnedElementByName(topicName, modold);
 			    		if(oldTopic != null) {
-			    			System.out.println("oldTopic:" + oldTopic.getName().getValue());
-				    		System.out.println("newTopic:" + newTopic.getName().getValue());
-				    		updateTopicDef(oldTopic, newTopic); // actualiza topic, REVISAR hijos luego
+				    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldTopic.getName().getValue()+" ...");
+				    		updateTopicDef(oldTopic, newTopic); 
 			    		}
 			    		else {
-			    			System.out.println("Debería crear un nuevo topic");
+			    			LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+ newTopic.getName().getValue()+" ...");
 			    			newInterlis.addOwnedElement(newTopic);
 			    		}
 			    		
@@ -152,36 +148,31 @@ public class CompareInterlis2Def {
 			    		DomainDef newDomain = (DomainDef) ownedEle;
 			    		String domainName = newDomain.getName().getValue();
 			    		DomainDef oldDomain = (DomainDef)findOwnedElementByName(domainName, modold);
-			    		System.out.println("oldDomain:" + oldDomain.getName().getValue());
-			    		System.out.println("newDomain:" + oldDomain.getName().getValue());
+			    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldDomain.getName().getValue()+" ...");
 			    		updateDomainDef(oldDomain, newDomain);
 			    	} else if(ownedEle instanceof ClassDef){
 			    		ClassDef newClass = (ClassDef) ownedEle;
 			    		String className = newClass.getName().getValue();
 			    		ClassDef oldClass = (ClassDef)findOwnedElementByName(className, modold);
-			    		System.out.println("oldClass:" + oldClass.getName().getValue());
-			    		System.out.println("newClass:" + newClass.getName().getValue());
+			    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldClass.getName().getValue()+" ...");
 			    		updateClassDef(oldClass, newClass);
 			    	} else if(ownedEle instanceof GraphicParameterDef){
 			    		GraphicParameterDef newGraphic = (GraphicParameterDef) ownedEle;
 			    		String genName = newGraphic.getName().getValue();
 			    		GraphicParameterDef oldGraphic = (GraphicParameterDef)findOwnedElementByName(genName, modold);
-			    		System.out.println("oldGraphic:" + oldGraphic.getName().getValue());
-			    		System.out.println("newGraphic:" + newGraphic.getName().getValue());
+			    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldGraphic.getName().getValue()+" ...");
 			    		updateGraphicParameterDef(oldGraphic, newGraphic);
 			    	} else if(ownedEle instanceof MetaDataUseDef){
 			    		MetaDataUseDef newMetadata = (MetaDataUseDef) ownedEle;
 			    		String metadataName = newMetadata.getName().getValue();
 			    		MetaDataUseDef oldMetadata = (MetaDataUseDef)findOwnedElementByName(metadataName, modold);
-			    		System.out.println("oldMetadata:" + oldMetadata.getName().getValue());
-			    		System.out.println("newMetadata:" + newMetadata.getName().getValue());
+			    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldMetadata.getName().getValue()+" ...");
 			    		updateMetadataUseDef(oldMetadata, newMetadata);
 			    	}  else if(ownedEle instanceof FunctionDef){
 			    		FunctionDef newFunction = (FunctionDef) ownedEle;
 			    		String functionName = newFunction.getName().getValue();
 			    		FunctionDef oldFunction = (FunctionDef)findOwnedElementByName(functionName, modold);
-			    		System.out.println("oldFunction:" + oldFunction.getName().getValue());
-			    		System.out.println("newFunction:" + newFunction.getName().getValue());
+			    		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldFunction.getName().getValue()+" ...");
 			    		updateFunctionDef(oldFunction, newFunction);
 			    	} else {
 			    		System.out.println(ownedEle.getClass());
@@ -321,38 +312,29 @@ public class CompareInterlis2Def {
 			String newName = modElementNew.getName().getValue();		
 			int oldIndex = findIndexInListByName(newName, oldTopicChildren);
 			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
-				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
-				
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+newName+" ...");
 				if (modElementNew instanceof DomainDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof ClassDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof FunctionDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof GraphicDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof MetaDataUseDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof AssociationDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof UnitDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof ViewDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					oldTopic.addOwnedElement(modElementNew);
 				}
 				else {
@@ -465,7 +447,7 @@ public class CompareInterlis2Def {
 			String newName = modnew.getName().getValue();		
 			int oldIndex = findIndexInListByName(newName, listold);
 			if (oldIndex == -1) {
-				System.out.println("No encontre el modelo " + newName + " en la lista vieja.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+newName+" ...");
 				if (modnew instanceof ModelDef) {
 					oldInterlis.addOwnedElement(modnew);
 				} 
@@ -488,7 +470,7 @@ public class CompareInterlis2Def {
 			String oldName = modold.getName().getValue();		
 			int newIndex = findIndexInListByName(oldName, listnew);
 			if (newIndex == -1) {
-				System.out.println("No encontre el modelo " + oldName + " en la lista nueva.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Deleting "+ oldName+" ...");
 				if (modold instanceof ModelDef) {
 					oldInterlis.removeOwnedElement(modold);
 				} else {
@@ -507,51 +489,38 @@ public class CompareInterlis2Def {
 	
 
 	public void removeAndUpdateOldChildTopic(TopicDef oldTopic, List oldTopicChildren, List newTopicChildren) {
-		System.out.println("Comparando hijos de topics");
-		
+
 		for (int i = 0; i < oldTopicChildren.size(); i++) {
 			ModelElement oldTopicElement = (ModelElement) oldTopicChildren.get(i);
 			String oldName = oldTopicElement.getName().getValue();
 			int newIndex = findTopicElementIndexInListByName(oldName, newTopicChildren); //search old element in new list
-			System.out.println("--> "+newIndex);
 			if (newIndex == -1) { // elimina viejo elemento porque no la encuentra en la nueva lista
-				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
-				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Deleting "+oldName+" ...");
 				if (oldTopicElement instanceof ClassDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
-					
 				} 
 				else if(oldTopicElement instanceof DomainDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);					
 				}
 				else if(oldTopicElement instanceof FunctionDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);					
 				}
 				else if(oldTopicElement instanceof GraphicDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else if(oldTopicElement instanceof MetaDataUseDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else if(oldTopicElement instanceof TopicDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else if(oldTopicElement instanceof AssociationDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else if(oldTopicElement instanceof UnitDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else if(oldTopicElement instanceof ViewDef) {
-					System.out.println("Eliminando " +oldName);
 					oldTopic.removeOwnedElement(oldTopicElement);
 				}
 				else {
@@ -570,57 +539,43 @@ public class CompareInterlis2Def {
 				else if (oldTopicElement instanceof DomainDef) {
 					DomainDef newDom = (DomainDef) newTopicChildren.get(newIndex);
 					DomainDef oldDom = (DomainDef) oldTopicElement;
-					System.out.println("Dominio nuevo: "+newDom.getName().getValue());
-					System.out.println("Dominio viejo: "+oldDom.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldDom.getName().getValue()+" ...");
 					updateDomainDef(oldDom, newDom);
  
 				} else if (oldTopicElement instanceof FunctionDef) {
 					FunctionDef newFnc = (FunctionDef) newTopicChildren.get(newIndex);
 					FunctionDef oldFnc = (FunctionDef) oldTopicElement;
-					System.out.println("Funcion nueva: "+newFnc.getName().getValue());
-					System.out.println("Funcion vieja: "+oldFnc.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldFnc.getName().getValue()+" ...");
 					updateFunctionDef(oldFnc, newFnc);
 
 				} else if (oldTopicElement instanceof GraphicDef) {
 					GraphicDef graphNew = (GraphicDef) newTopicChildren.get(newIndex);
 					GraphicDef graphOld = (GraphicDef) oldTopicElement;
-					System.out.println("Parametro grafico nuevo: "+graphNew.getName().getValue());
-					System.out.println("Parametro grafico viejo: "+graphOld.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+graphOld.getName().getValue()+" ...");
 					updateGraphicDef(graphOld, graphNew);
  
 				} else if (oldTopicElement instanceof LineFormTypeDef ) {
 					LineFormTypeDef newLft = (LineFormTypeDef) newTopicChildren.get(newIndex);
 					LineFormTypeDef oldLft = (LineFormTypeDef) oldTopicElement;
-					System.out.println("Linea nueva: "+newLft.getName().getValue());
-					System.out.println("Linea vieja: "+oldLft.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldLft.getName().getValue()+" ...");
 					updateLineFormTypeDef(oldLft, newLft); 
 
 				} else if (oldTopicElement instanceof MetaDataUseDef) {
 					MetaDataUseDef newMetadata = (MetaDataUseDef) newTopicChildren.get(newIndex);
 					MetaDataUseDef oldMetadata = (MetaDataUseDef) oldTopicElement;
-					System.out.println("Metadato nuevo: "+newMetadata.getName().getValue());
-					System.out.println("Metadato viejo: "+oldMetadata.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldMetadata.getName().getValue()+" ...");
 					updateMetadataUseDef(oldMetadata, newMetadata);	
 
 				} else if (oldTopicElement instanceof AssociationDef ) {
 					AssociationDef newAssociation = (AssociationDef) newTopicChildren.get(newIndex);
 					AssociationDef oldAssociation = (AssociationDef) oldTopicElement;
-					System.out.println("Asociacion nueva: "+newAssociation.getName().getValue());
-					System.out.println("Asociacion vieja: "+oldAssociation.getName().getValue());
-					
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldAssociation.getName().getValue()+" ...");
 					updateAssociationDef(oldAssociation, newAssociation); 
 
 				} else if (oldTopicElement instanceof UnitDef) {
 					UnitDef newUnit = (UnitDef) newTopicChildren.get(newIndex);
 					UnitDef oldUnit = (UnitDef) oldTopicElement;
-					System.out.println("Unidad nueva: "+newUnit.getName().getValue());
-					System.out.println("Unidad vieja: "+oldUnit.getName().getValue());
-
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldUnit.getName().getValue()+" ...");
 					updateUnitDef(oldUnit, newUnit);
 					 
 				}
@@ -677,29 +632,23 @@ public class CompareInterlis2Def {
 			String oldName = modElementOld.getName().getValue();		
 			int newIndex = findIndexInListByName(oldName, newChildModel);
 			if (newIndex == -1) {
-				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Deleting "+ oldName+" ...");
 				if (modElementOld instanceof ClassDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);
 				} 
 				else if(modElementOld instanceof DomainDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);					
 				}
 				else if(modElementOld instanceof FunctionDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);					
 				}
 				else if(modElementOld instanceof GraphicParameterDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);
 				}
 				else if(modElementOld instanceof MetaDataUseDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);
 				}
 				else if(modElementOld instanceof TopicDef) {
-					System.out.println("Eliminando " +oldName);
 					modold.removeOwnedElement(modElementOld);
 				}
 				else {
@@ -757,40 +706,32 @@ public class CompareInterlis2Def {
 			String newName = modElementNew.getName().getValue();		
 			int oldIndex = findIndexInListByName(newName, oldChildModel);
 			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
-				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+newName+" ...");
 				if (modElementNew instanceof ModelDef) {
 					oldInterlis.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof DomainDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof ClassDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof FunctionDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof ch.interlis.ili2c.metamodel.GraphicParameterDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof MetaDataUseDef) {
-					System.out.println("Agregando "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof LineFormTypeDef) {
-					System.out.println("Agregando Linea: "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof TopicDef) {
-					System.out.println("Agregando Topic: "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else if(modElementNew instanceof UnitDef) {
-					System.out.println("Agregando Unit: "+modElementNew.getName().getValue());
 					modold.addOwnedElement(modElementNew);
 				}
 				else {
@@ -815,7 +756,6 @@ public class CompareInterlis2Def {
 		while (oldimportsi.hasNext()) {
 			Object obj = oldimportsi.next();
 			ch.ehi.interlis.modeltopicclass.IliImport oldimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
-			System.out.println("Size supplier: " + oldimport.sizeSupplier());
 			if(oldimport.sizeSupplier() != 0) {
 				ModelElement supplier = (ModelElement)oldimport.iteratorSupplier().next();
 				String oldName = supplier.getName().getValue();
@@ -837,7 +777,6 @@ public class CompareInterlis2Def {
 		while (newimportsi.hasNext()) {
 			Object obj = newimportsi.next();
 			ch.ehi.interlis.modeltopicclass.IliImport newimport = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
-			System.out.println("Size supplier: " + newimport.sizeSupplier());
 			ModelElement supplier = (ModelElement)newimport.iteratorSupplier().next();
 			String newName = supplier.getName().getValue();
 			IliImport oldimport = findImportByName(newName, modold);
@@ -862,7 +801,6 @@ public class CompareInterlis2Def {
 			Object obj = it.next();
 			if (obj instanceof ch.ehi.interlis.modeltopicclass.IliImport) {				
 				ch.ehi.interlis.modeltopicclass.IliImport _import = (ch.ehi.interlis.modeltopicclass.IliImport) obj;
-				System.out.println("Size supplier: " + _import.sizeSupplier());
 				if (_import.sizeSupplier() != 0) {
 					ModelElement supplier = (ModelElement)_import.iteratorSupplier().next();
 					String name = supplier.getName().getValue();				
@@ -906,7 +844,6 @@ public class CompareInterlis2Def {
 	 * @param clsNew
 	 */
 	public void updateClassDef(ClassDef clsOld, ClassDef clsNew) {
-		System.out.println("Actualizando clase: "+clsOld.getName().getValue());
 		clsOld.setMetaAttrb(clsNew.getMetaAttrb());
 		clsOld.setDocumentation(clsNew.getDocumentation());
 		clsOld.setAbstract(clsNew.isAbstract());
@@ -1024,14 +961,12 @@ public class CompareInterlis2Def {
 			String oldName = oldAttribute.getName().getValue();
 			int newIndex = findAttributeIndexInListByName(oldName, newAttributechildi); //search old attribute in new list
 			if(newIndex == -1) { //elimina atributo porque no encuentra en la nueva lista
-				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Deleting "+oldName+" ...");
 				if(oldAttribute instanceof AttributeDef) {
-					System.out.println("Eliminando "+oldName);
 					//oldAttributechildi.remove(oldAttribute);
 					clsOld.removeFeature((Feature) oldAttribute);
 				}
 				else if(oldAttribute instanceof RoleDef) {
-					System.out.println("Eliminando "+oldName);
 					oldAttributechildi.remove(oldAttribute);
 				}
 				
@@ -1157,7 +1092,7 @@ public class CompareInterlis2Def {
 			int oldIndex = findIndexInListByName(newName, oldAttributechildi);
 			
 			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
-				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+newName+" ...");
 				if (attributeNew instanceof AttributeDef) {
 					clsOld.addFeature((Feature) attributeNew);	
 				}
@@ -1174,7 +1109,6 @@ public class CompareInterlis2Def {
 	 * @param newDomain
 	 */
 	public void updateDomainDef(DomainDef oldDomain, DomainDef newDomain) {
-		System.out.println("Actualizando dominio: "+oldDomain.getName().getValue());
 		oldDomain.setMetaAttrb(newDomain.getMetaAttrb());
 		
 		Type type = updateType(oldDomain,newDomain);
@@ -1224,7 +1158,6 @@ public class CompareInterlis2Def {
 	 * @param mtdNew
 	 */
 	public void updateMetaDataUseDef(MetaDataUseDef mtdOld, MetaDataUseDef mtdNew) {
-		System.out.println("Actualizando metadato: "+mtdOld.getName().getValue());
 		mtdOld.setBasketOid(mtdNew.getBasketOid());
 		mtdOld.setKind(mtdNew.getKind());
 		mtdOld.setDocumentation(mtdNew.getDocumentation());
@@ -1237,7 +1170,6 @@ public class CompareInterlis2Def {
 	 * @param untNew
 	 */
 	public void updateUnitDef(UnitDef untOld, UnitDef untNew) {
-		System.out.println("Actualizando unidad: "+untOld.getName().getValue());
 		untOld.setDescName(untNew.getDescName());
 		untOld.setDocumentation(untNew.getDocumentation());
 		untOld.setSyntax(untNew.getSyntax());
@@ -1250,7 +1182,6 @@ public class CompareInterlis2Def {
 	 * @param asoNew
 	 */
 	public void updateAssociationDef(AssociationDef asoOld, AssociationDef asoNew) {
-		System.out.println("Actualizando asociacion: "+asoOld.getName().getValue());
 		asoOld.setDocumentation(asoNew.getDocumentation());
 		asoOld.setAbstract(asoNew.isAbstract());
 		asoOld.setPropFinal(asoNew.isPropFinal());
@@ -1379,14 +1310,12 @@ public class CompareInterlis2Def {
 			String oldName = oldAttribute.getName().getValue();
 			int newIndex = findAttributeIndexInListByName(oldName, newAttributechildi); //search old attribute in new list
 			if(newIndex == -1) { //elimina atributo porque no encuentra en la nueva lista
-				System.out.println("No encontre el elemento " + oldName + " en la lista nueva.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Deleting "+ oldName+" ...");
 				if(oldAttribute instanceof AttributeDef) {
-					System.out.println("Eliminando "+oldName);
 					//oldAttributechildi.remove(oldAttribute);
 					asoOld.removeFeature((Feature) oldAttribute);
 				}
 				else if(oldAttribute instanceof RoleDef) {
-					System.out.println("Eliminando "+oldName);
 					asoOld.removeFeature((Feature)oldAttribute);
 				}
 				
@@ -1395,12 +1324,14 @@ public class CompareInterlis2Def {
 				if(oldAttribute instanceof AttributeDef) {
 					AttributeDef oldAttr = (AttributeDef) oldAttribute;
 					AttributeDef newAttr = (AttributeDef) newAttributechildi.get(newIndex);
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldAttr.getName().getValue()+" ...");
 					updateAttributeDef(oldAttr, newAttr);
 				}
 				else if(oldAttribute instanceof RoleDef) {
 					RoleDef oldRole = (RoleDef) oldAttribute;
 					RoleDef newRole = (RoleDef) newAttributechildi.get(newIndex);
-					updateRoleDef(oldRole, newRole);//revisar
+					LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Updating "+ oldRole.getName().getValue()+" ...");
+					updateRoleDef(oldRole, newRole);
 				}
 			}
 			
@@ -1415,7 +1346,7 @@ public class CompareInterlis2Def {
 			int oldIndex = findIndexInListByName(newName, oldAttributechildi);
 			
 			if (oldIndex == -1) { // si no esta en la lista vieja se agrega
-				System.out.println("No encontre el elemento " + newName + " en la lista vieja.");
+				LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"),"Creating "+newName+" ...");
 				if (attributeNew instanceof AttributeDef) {
 					//clsOld.addOwnedElement(attributeNew);
 					asoOld.addFeature((Feature) attributeNew);	
@@ -1436,7 +1367,6 @@ public class CompareInterlis2Def {
 	 * @param viewNew
 	 */
 	public void updateViewDef(ViewDef viewOld, ViewDef viewNew) {
-		System.out.println("Actualizando vista: "+viewOld.getName().getValue());
 		viewOld.setDocumentation(viewNew.getDocumentation());
 		viewOld.setSyntax(viewNew.getSyntax());
 		// Depends on 
@@ -1448,7 +1378,6 @@ public class CompareInterlis2Def {
 	 * @param graphNew
 	 */
 	public void updateGraphicDef(GraphicDef graphOld, GraphicDef graphNew){
-		System.out.println("Actualizando grafico: "+graphOld.getName().getValue());
 		graphOld.setDocumentation(graphNew.getDocumentation());
 		graphOld.setSyntax(graphNew.getSyntax());
 		// Depends on 
