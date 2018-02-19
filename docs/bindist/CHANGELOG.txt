@@ -1,8 +1,13 @@
-﻿UML-Editor 3.6.4 (2018-02-14)
+﻿UML-Editor 3.6.4.1 (2018-02-19)
+----------------------------------
+- Fix null syntax on ConstraintDef 
+- Fix current meta name and meta msg
+- Export single INTERLIS file 
+
+UML-Editor 3.6.4 (2018-02-14)
 ----------------------------------
 - Undo/Redo JtextComponents
 - Update icon and splash screen
-
 
 UML-Editor 3.6.3.9 (2018-02-12)
 ----------------------------------
