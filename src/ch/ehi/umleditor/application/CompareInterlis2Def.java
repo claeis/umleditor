@@ -4,22 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
-import ch.ehi.interlis.associations.RoleDefDerived;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.AttributeValueUsage;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.metaobjects.ParameterDef;
-import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -31,19 +29,10 @@ import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.interlis.views.ViewDef;
 import ch.ehi.interlis.views.ViewableDef;
-import ch.ehi.uml1_4.foundation.core.Dependency;
 import ch.ehi.uml1_4.foundation.core.Feature;
-import ch.ehi.uml1_4.foundation.core.Generalization;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
-import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
-import ch.interlis.ili2c.metamodel.TypeAlias;
-import ch.ehi.interlis.domainsandconstants.Type;
-import ch.ehi.interlis.domainsandconstants.UnknownType;
-import ch.ehi.interlis.domainsandconstants.basetypes.BooleanType;
-import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
-import ch.ehi.interlis.domainsandconstants.basetypes.Text;
 
 /**
  * This class compare two interlis models and update a given model
@@ -179,7 +168,9 @@ public class CompareInterlis2Def {
 			    	}
 			    }
 			    System.out.println("bye");
-				
+			    LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), "Old "+newInterlis.getName().getValue()+" Deleted!");
+			    ElementFactory.removeElement(newInterlis);
+			   
 			}			
 		}
 		LauncherView.getInstance().log(rsrc.getString("CIFuncDesc"), oldInterlis.getName().getValue()+" Updated!");
