@@ -1574,6 +1574,14 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	}
 
 	/**
+	 * @return specific File-Filter.
+	 * @deprecated
+	 */
+	public static GenericFileFilter createXmiFilter() {
+		return new GenericFileFilter(ResourceManager.getResource(LauncherView.class, "CIXmiFilter"), "xmi");
+	}
+	
+	/**
 	 * Deactivate the current internal frame and adapt corresponding tools.
 	 */
 	private void deActivateFrame(DrawingFrame frame) {
