@@ -48,7 +48,8 @@ public class RoseInterface {
 		if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setWorkingDirectory(importDialog.getCurrentDirectory().getAbsolutePath());
 			String xmiFileName = importDialog.getSelectedFile().getAbsolutePath();
-			TransferFromXmiRoseMetamodel reader = new TransferFromXmiRoseMetamodel();
+			//TransferFromXmiRoseMetamodel reader = new TransferFromXmiRoseMetamodel();
+			TransferFromXmi reader = new TransferFromXmi();
 			reader.doXmiFile(xmiFileName);
 		}
 		return;
