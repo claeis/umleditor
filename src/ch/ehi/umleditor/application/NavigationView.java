@@ -2041,7 +2041,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	 * @return javax.swing.JTree
 	 */
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JTree getTreNavigation() {
+	public javax.swing.JTree getTreNavigation() {
 		if (ivjTreNavigation == null) {
 			try {
 				ivjTreNavigation = new AutoScrollingJTree();

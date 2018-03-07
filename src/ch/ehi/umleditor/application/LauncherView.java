@@ -4791,4 +4791,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			handleException(e);
 		}
 	}
+	
+	public NavigationView getIvjPnlNavigation () {
+		return ivjPnlNavigation;
+	}
 }
