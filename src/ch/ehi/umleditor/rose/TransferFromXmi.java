@@ -8,6 +8,8 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.NavigationView;
@@ -33,20 +35,29 @@ public class TransferFromXmi {
 	        	 if(root instanceof UmlModel) {
 		        	  UmlModel firstNode = (UmlModel) root;
 		        	  System.out.println(firstNode.getName().getValue());
+		        	  //firstNode.addOwnedElement(index, ownedElement1);
+		        	  for (int j=0; j<l.getLength(); ++j) {
+		                     Node prop = l.item(j);
+		                     NamedNodeMap attr = prop.getAttributes();
+		                     if (null != attr) {
+		                    	 Node type = attr.getNamedItem("xmi:type");
+		                    	 if(type.getNodeValue().equals("uml:Package") && !attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
+		                    		 navigator.selectElement(firstNode);
+		                    		 System.out.println("ES UML..."+navigator.getTreNavigation().getSelectionPath());
+		                    		 INTERLIS2Def interlis = new INTERLIS2Def();
+		                    		 // interlis.setName(new NlsString(attr.getNamedItem("xmi:id").toString()));
+		                    		 interlis.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()));
+		                    		 interlis.setVersion(2.3);
+		                    		 interlis.setDocumentation(new NlsString("Extracted from xmi"));
+		                    		 firstNode.addOwnedElement(interlis);
+		                    	 }
+		                         Node p = attr.getNamedItem("xmi:id");
+		                         System.out.println("leyendo ... "+p.getNodeValue());
+		                     }
+		                 }
 	        	 }
 	        	 
-                 for (int j=0; j<l.getLength(); ++j) {
-                     Node prop = l.item(j);
-                     NamedNodeMap attr = prop.getAttributes();
-                     if (null != attr) {
-                    	 Node type = attr.getNamedItem("xmi:type");
-                    	 if(type.getNodeValue() == "uml:Package") {
-                    		 
-                    	 }
-                         Node p = attr.getNamedItem("xmi:id");
-                         System.out.println("leyendo ... "+p.getNodeValue());
-                     }
-                 }
+                 
             	
             } else {
             	System.out.println("NO PUEDO LEER ESTO!!!!!!!");
