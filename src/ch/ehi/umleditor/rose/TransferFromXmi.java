@@ -9,12 +9,17 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.NavigationView;
 
 public class TransferFromXmi {
+	public INTERLIS2Def interlis = null;
+	public ModelDef modelo = null;
+	public ClassDef clase = null;
 	public void doXmiFile(String filename) {
 		try {
 			// Reading xmi file
@@ -27,7 +32,6 @@ public class TransferFromXmi {
             String version = doc.getDocumentElement().getAttribute("xmi:version") ;
             if(version.equals("2.1")) {
             	 NodeList l = doc.getElementsByTagName("packagedElement");
-            	 System.out.println("necesito aqui a a navigation view");
 	        	 LauncherView launcherview = LauncherView.getInstance();
 	        	 NavigationView navigator = launcherview.getIvjPnlNavigation();
 	        	 Object root = navigator.getTreNavigation().getModel().getRoot();
@@ -41,15 +45,32 @@ public class TransferFromXmi {
 		                     NamedNodeMap attr = prop.getAttributes();
 		                     if (null != attr) {
 		                    	 Node type = attr.getNamedItem("xmi:type");
-		                    	 if(type.getNodeValue().equals("uml:Package") && !attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
+		                    	 if(!attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
 		                    		 navigator.selectElement(firstNode);
-		                    		 System.out.println("ES UML..."+navigator.getTreNavigation().getSelectionPath());
-		                    		 INTERLIS2Def interlis = new INTERLIS2Def();
-		                    		 // interlis.setName(new NlsString(attr.getNamedItem("xmi:id").toString()));
-		                    		 interlis.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()));
-		                    		 interlis.setVersion(2.3);
-		                    		 interlis.setDocumentation(new NlsString("Extracted from xmi"));
-		                    		 firstNode.addOwnedElement(interlis);
+		                    		
+		                    		 if(type.getNodeValue().equals("uml:Package")){
+		                    			 interlis = new INTERLIS2Def();
+		                    			 interlis.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()+".ili"));
+			                    		 interlis.setVersion(2.3);
+			                    		 interlis.setDocumentation(new NlsString("Extracted from xmi"));
+			                    		 firstNode.addOwnedElement(interlis);
+			                    		 
+			                    		 modelo = new ModelDef();
+			                    		 modelo.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()));
+			                    		 modelo.setDocumentation(new NlsString("Extracted from xmi"));
+			                    		 interlis.addOwnedElement(modelo);
+		                    		 }
+		                    		 
+		                    		 /*if(type.getNodeValue().equals("uml:Class")) {
+		                    			 clase = new ClassDef();
+		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 interlis.addOwnedElement(clase);
+		                    		 }*/
+		                    		 
+		                    		 
+		                    		 
+		                    		 
+		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
 		                         System.out.println("leyendo ... "+p.getNodeValue());
