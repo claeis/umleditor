@@ -1,12 +1,17 @@
 package ch.ehi.umleditor.rose;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
@@ -20,6 +25,8 @@ public class TransferFromXmi {
 	public INTERLIS2Def interlis = null;
 	public ModelDef modelo = null;
 	public ClassDef clase = null;
+	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	public Date date = new Date();
 	public void doXmiFile(String filename) {
 		try {
 			// Reading xmi file
@@ -47,7 +54,7 @@ public class TransferFromXmi {
 		                    	 Node type = attr.getNamedItem("xmi:type");
 		                    	 if(!attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
 		                    		 navigator.selectElement(firstNode);
-		                    		
+		                    		// attr.getNamedItem("xmi:id").getNodeValue().contains("^[a-zA-Z].*")
 		                    		 if(type.getNodeValue().equals("uml:Package")){
 		                    			 interlis = new INTERLIS2Def();
 		                    			 interlis.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()+".ili"));
@@ -57,19 +64,11 @@ public class TransferFromXmi {
 			                    		 
 			                    		 modelo = new ModelDef();
 			                    		 modelo.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()));
+			                    		 modelo.setVersion(new NlsString(dateFormat.format(date)));
+			                    		 modelo.setIssuerURI(new NlsString("mailto:vmbp@localhost"));
 			                    		 modelo.setDocumentation(new NlsString("Extracted from xmi"));
 			                    		 interlis.addOwnedElement(modelo);
 		                    		 }
-		                    		 
-		                    		 /*if(type.getNodeValue().equals("uml:Class")) {
-		                    			 clase = new ClassDef();
-		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
-		                    			 interlis.addOwnedElement(clase);
-		                    		 }*/
-		                    		 
-		                    		 
-		                    		 
-		                    		 
 		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
