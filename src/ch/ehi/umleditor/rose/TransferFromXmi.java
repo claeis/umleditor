@@ -17,6 +17,7 @@ import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.umleditor.application.LauncherView;
@@ -26,6 +27,7 @@ public class TransferFromXmi {
 	public UmlPackage umlPackage = null;
 	public INTERLIS2Def interlis = null;
 	public ModelDef modelo = null;
+	public TopicDef topic = null;
 	public ClassDef clase = null;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	public Date date = new Date();
@@ -46,6 +48,8 @@ public class TransferFromXmi {
 	        	 Object root = navigator.getTreNavigation().getModel().getRoot();
 	        	 Node nextProp = null;
 	        	 NamedNodeMap nextAttr = null;
+	        	 Node lastProp = null;
+	        	 NamedNodeMap lastAttr = null;
 	        	 if(root instanceof UmlModel) {
 		        	  UmlModel firstNode = (UmlModel) root;
 		        	  System.out.println(firstNode.getName().getValue());
@@ -57,9 +61,15 @@ public class TransferFromXmi {
 		                    	 nextProp = l.item(j+1);
 		                    	 nextAttr = nextProp.getAttributes();
 		                     }
+		                     
+		                     if(j+2<=l.getLength()) {
+		                    	 lastProp = l.item(j+2);
+		                    	 lastAttr = lastProp.getAttributes();
+		                     }
 		                     if (null != attr) {
 		                    	 Node type = attr.getNamedItem("xmi:type");
 		                    	 Node nextType = nextAttr.getNamedItem("xmi:id");
+		                    	 Node lastType = lastAttr.getNamedItem("xmi:id");
 		                    	 if(!attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
 		                    		 navigator.selectElement(firstNode);
 		                    		// attr.getNamedItem("xmi:id").getNodeValue().contains("^[a-zA-Z].*")
@@ -88,6 +98,13 @@ public class TransferFromXmi {
 			                    		 modelo.setIssuerURI(new NlsString("mailto:vmbp@localhost"));
 			                    		 modelo.setDocumentation(new NlsString("Extracted from xmi"));
 			                    		 interlis.addOwnedElement(modelo);
+			                    		 
+			                    		
+		                    		 }
+		                    		 if(type.getNodeValue().equals("uml:Package") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
+		                    			 topic = new TopicDef();
+		                    			 topic.setName(new NlsString(lastAttr.getNamedItem("name").getNodeValue()));
+		                    			 modelo.addOwnedElement(topic);
 		                    		 }
 		                    		 if(type.getNodeValue().equals("uml:Class")) {
 		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
