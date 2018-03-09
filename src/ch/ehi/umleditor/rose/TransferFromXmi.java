@@ -18,10 +18,12 @@ import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.uml1_4.implementation.UmlModel;
+import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.NavigationView;
 
 public class TransferFromXmi {
+	public UmlPackage umlPackage = null;
 	public INTERLIS2Def interlis = null;
 	public ModelDef modelo = null;
 	public ClassDef clase = null;
@@ -42,7 +44,8 @@ public class TransferFromXmi {
 	        	 LauncherView launcherview = LauncherView.getInstance();
 	        	 NavigationView navigator = launcherview.getIvjPnlNavigation();
 	        	 Object root = navigator.getTreNavigation().getModel().getRoot();
-	        	 
+	        	 Node nextProp = null;
+	        	 NamedNodeMap nextAttr = null;
 	        	 if(root instanceof UmlModel) {
 		        	  UmlModel firstNode = (UmlModel) root;
 		        	  System.out.println(firstNode.getName().getValue());
@@ -50,24 +53,47 @@ public class TransferFromXmi {
 		        	  for (int j=0; j<l.getLength(); ++j) {
 		                     Node prop = l.item(j);
 		                     NamedNodeMap attr = prop.getAttributes();
+		                     if(j+1<=l.getLength()) {
+		                    	 nextProp = l.item(j+1);
+		                    	 nextAttr = nextProp.getAttributes();
+		                     }
 		                     if (null != attr) {
 		                    	 Node type = attr.getNamedItem("xmi:type");
+		                    	 Node nextType = nextAttr.getNamedItem("xmi:id");
 		                    	 if(!attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
 		                    		 navigator.selectElement(firstNode);
 		                    		// attr.getNamedItem("xmi:id").getNodeValue().contains("^[a-zA-Z].*")
-		                    		 if(type.getNodeValue().equals("uml:Package")){
+		                    		 if(type.getNodeValue().equals("uml:Package") && !nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())){
+		                    			 umlPackage = new UmlPackage();
+		                    			 umlPackage.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 firstNode.addOwnedElement(umlPackage);
+		                       		 } 
+		                    		 else if(type.getNodeValue().equals("uml:Package")){
+		                    			 
+		                    			 
 		                    			 interlis = new INTERLIS2Def();
-		                    			 interlis.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()+".ili"));
+		                    			 interlis.setName(new NlsString(attr.getNamedItem("name").getNodeValue()+".ili"));
 			                    		 interlis.setVersion(2.3);
 			                    		 interlis.setDocumentation(new NlsString("Extracted from xmi"));
-			                    		 firstNode.addOwnedElement(interlis);
+			                    		 if(umlPackage != null) {
+			                    			 umlPackage.addOwnedElement(interlis);
+			                    		 } else {
+			                    			 firstNode.addOwnedElement(interlis);
+			                    		 }
+			                    		 
 			                    		 
 			                    		 modelo = new ModelDef();
-			                    		 modelo.setName(new NlsString(attr.getNamedItem("xmi:id").getNodeValue()));
+			                    		 modelo.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
 			                    		 modelo.setVersion(new NlsString(dateFormat.format(date)));
 			                    		 modelo.setIssuerURI(new NlsString("mailto:vmbp@localhost"));
 			                    		 modelo.setDocumentation(new NlsString("Extracted from xmi"));
 			                    		 interlis.addOwnedElement(modelo);
+		                    		 }
+		                    		 if(type.getNodeValue().equals("uml:Class")) {
+		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
+		                    			 clase = new ClassDef();
+			                    		 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+			                    		 modelo.addOwnedElement(clase);
 		                    		 }
 		                    		 
 		                    	 }
