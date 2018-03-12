@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -21,8 +22,13 @@ import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
+import ch.ehi.umleditor.application.IliBaseTypeKind;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.NavigationView;
+
+import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
 
 public class TransferFromXmi {
 	public UmlPackage umlPackage = null;
@@ -108,6 +114,35 @@ public class TransferFromXmi {
 			                    		 interlis.addOwnedElement(modelo);
 			                    		 
 		                    		 }
+		                    		 // Creating DomainDef - enumeration type
+		                    		 if(type.getNodeValue().equals("uml:Enumeration") &&
+		                    				 attr.getNamedItem("xmi:id").getNodeValue().startsWith(modelo.getName().getValue())) {
+		                    			 dominio = new DomainDef();
+		                    			 dominio.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 Enumeration element = new Enumeration();
+		                    			 element.setKind(1);
+		                    			 // Get childs of actual packagedElement
+		                    			 if(prop instanceof Element) {
+		                    				 Element docElement = (Element)prop;
+		                    				 NodeList enumElements = docElement.getElementsByTagName("ownedLiteral");
+		                    				 for (int e=0; e<enumElements.getLength(); ++e) {
+		                    					 Node actualEnumNode = enumElements.item(e);
+		            		                     NamedNodeMap attrEnumNode = actualEnumNode.getAttributes();
+		            		                     
+		            		                     EnumElement actualEnumElement = new EnumElement();
+		            		                     actualEnumElement.setName(new NlsString(attrEnumNode.getNamedItem("name").getNodeValue()));
+		            		                     element.addEnumElement(actualEnumElement);
+		                    				 }
+		                    				  
+		                    			 }
+		                    			Type typeE = (Type)element;
+		                    			 dominio.detachType();
+		                    			 
+		                    			 dominio.attachType(typeE);
+		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
+		                    			 modelo.addOwnedElement(dominio);
+		                    		 }
+		                    		 
 		                    		 // Creating TopicDef
 		                    		 if(type.getNodeValue().equals("uml:Package") &&
 		                    				 nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue()) &&
