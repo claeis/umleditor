@@ -41,9 +41,11 @@ public class TransferFromXmi {
             Document doc = dBuilder.parse(new File(filename));
             doc.getDocumentElement().normalize();
             
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            // Documentation xmi
             String version = doc.getDocumentElement().getAttribute("xmi:version") ;
             Node exporter = doc.getElementsByTagName("xmi:Documentation").item(0).getAttributes().item(0);
+            
+            // Validating 
             if(version.equals("2.1") && exporter.getNodeValue().equals("ili2c")) {
             	 NodeList l = doc.getElementsByTagName("packagedElement");
 	        	 LauncherView launcherview = LauncherView.getInstance();
@@ -106,6 +108,15 @@ public class TransferFromXmi {
 			                    		 interlis.addOwnedElement(modelo);
 			                    		 
 		                    		 }
+		                    		 // Creating TopicDef
+		                    		 if(type.getNodeValue().equals("uml:Package") &&
+		                    				 nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue()) &&
+		                    				 isTopicDef(attr) 
+		                    				) {
+		                    			 topic = new TopicDef();
+		                    			 topic.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 modelo.addOwnedElement(topic);
+		                    		 }
 		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
@@ -126,7 +137,15 @@ public class TransferFromXmi {
 			e.printStackTrace();
 		}
 	}
-    private static boolean isNumeric(String cadena){
+    private boolean isTopicDef(NamedNodeMap attr) {
+		String id = attr.getNamedItem("xmi:id").getNodeValue();
+		String [] elements = id.split("[.]");
+		if(elements.length == 2) {
+			return true;
+		}
+		return false;
+	}
+	private static boolean isNumeric(String cadena){
     	try {
     		Integer.parseInt(cadena);
     		return true;
