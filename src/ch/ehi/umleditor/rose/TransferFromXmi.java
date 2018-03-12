@@ -43,10 +43,7 @@ public class TransferFromXmi {
             
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             String version = doc.getDocumentElement().getAttribute("xmi:version") ;
-            NodeList document = doc.getElementsByTagName("xmi:Documentation");
-            NamedNodeMap documentAttr = document.item(0).getAttributes();
-            Node exporter = documentAttr.item(0);
-            System.out.println("NODO DOCUMENTACION: "+exporter.getNodeValue());
+            Node exporter = doc.getElementsByTagName("xmi:Documentation").item(0).getAttributes().item(0);
             if(version.equals("2.1") && exporter.getNodeValue().equals("ili2c")) {
             	 NodeList l = doc.getElementsByTagName("packagedElement");
 	        	 LauncherView launcherview = LauncherView.getInstance();
