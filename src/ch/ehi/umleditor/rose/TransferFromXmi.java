@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
@@ -28,6 +29,7 @@ public class TransferFromXmi {
 	public INTERLIS2Def interlis = null;
 	public ModelDef modelo = null;
 	public TopicDef topic = null;
+	public DomainDef dominio = null;
 	public ClassDef clase = null;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	public Date date = new Date();
@@ -41,7 +43,11 @@ public class TransferFromXmi {
             
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             String version = doc.getDocumentElement().getAttribute("xmi:version") ;
-            if(version.equals("2.1")) {
+            NodeList document = doc.getElementsByTagName("xmi:Documentation");
+            NamedNodeMap documentAttr = document.item(0).getAttributes();
+            Node exporter = documentAttr.item(0);
+            System.out.println("NODO DOCUMENTACION: "+exporter.getNodeValue());
+            if(version.equals("2.1") && exporter.getNodeValue().equals("ili2c")) {
             	 NodeList l = doc.getElementsByTagName("packagedElement");
 	        	 LauncherView launcherview = LauncherView.getInstance();
 	        	 NavigationView navigator = launcherview.getIvjPnlNavigation();
@@ -57,12 +63,12 @@ public class TransferFromXmi {
 		        	  for (int j=0; j<l.getLength(); ++j) {
 		                     Node prop = l.item(j);
 		                     NamedNodeMap attr = prop.getAttributes();
-		                     if(j+1<=l.getLength()) {
+		                     if(j+1<=l.getLength()-1) {
 		                    	 nextProp = l.item(j+1);
 		                    	 nextAttr = nextProp.getAttributes();
 		                     }
 		                     
-		                     if(j+2<=l.getLength()) {
+		                     if(j+2<=l.getLength()-2) {
 		                    	 lastProp = l.item(j+2);
 		                    	 lastAttr = lastProp.getAttributes();
 		                     }
@@ -106,12 +112,28 @@ public class TransferFromXmi {
 		                    			 topic.setName(new NlsString(lastAttr.getNamedItem("name").getNodeValue()));
 		                    			 modelo.addOwnedElement(topic);
 		                    		 }
+		                    		 
+		                    		 if(type.getNodeValue().equals("uml:PrimitiveType") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
+		                    			 dominio = new DomainDef();
+		                    			 dominio.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
+		                    			 modelo.addOwnedElement(dominio);
+		                    		 }
+		                    		 
 		                    		 if(type.getNodeValue().equals("uml:Class")) {
 		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
 		                    			 clase = new ClassDef();
 			                    		 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
 			                    		 modelo.addOwnedElement(clase);
 		                    		 }
+		                    		 
+		                    		 if(type.getNodeValue().equals("uml:Class") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
+		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
+		                    			 clase = new ClassDef();
+			                    		 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+			                    		 topic.addOwnedElement(clase);
+		                    		 }
+		                    		 
 		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
