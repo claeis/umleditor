@@ -74,26 +74,29 @@ public class TransferFromXmi {
 		                    	 Node nextType = nextAttr.getNamedItem("xmi:id");
 		                    	 Node lastType = lastAttr.getNamedItem("xmi:id");
 		                    	 if(!attr.getNamedItem("xmi:id").getNodeValue().contains("INTERLIS")) {
-		                    		 navigator.selectElement(firstNode);
-		                    		// attr.getNamedItem("xmi:id").getNodeValue().contains("^[a-zA-Z].*")
-		                    		 if(type.getNodeValue().equals("uml:Package") && !nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())){
+		                    		 // Creating UmlPackage imported
+		                    		 if(type.getNodeValue().equals("uml:Package") && 
+		                    				 (!nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue()) && 
+		                    						 !lastType.getNodeValue().startsWith(nextAttr.getNamedItem("xmi:id").getNodeValue())
+		                    				)
+		                    			){
 		                    			 umlPackage = new UmlPackage();
 		                    			 umlPackage.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
 		                    			 firstNode.addOwnedElement(umlPackage);
-		                       		 } 
-		                    		 else if(type.getNodeValue().equals("uml:Package")){
-		                    			 
+		                       		 }
+		                    		 // Creating INTERLIS and modelDef, adding to umlPackage created
+		                    		 if(type.getNodeValue().equals("uml:Package") && isINTERLIS2Def(attr)){
 		                    			 
 		                    			 interlis = new INTERLIS2Def();
 		                    			 interlis.setName(new NlsString(attr.getNamedItem("name").getNodeValue()+".ili"));
 			                    		 interlis.setVersion(2.3);
 			                    		 interlis.setDocumentation(new NlsString("Extracted from xmi"));
+			                    		 
 			                    		 if(umlPackage != null) {
 			                    			 umlPackage.addOwnedElement(interlis);
 			                    		 } else {
 			                    			 firstNode.addOwnedElement(interlis);
 			                    		 }
-			                    		 
 			                    		 
 			                    		 modelo = new ModelDef();
 			                    		 modelo.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
@@ -102,35 +105,7 @@ public class TransferFromXmi {
 			                    		 modelo.setDocumentation(new NlsString("Extracted from xmi"));
 			                    		 interlis.addOwnedElement(modelo);
 			                    		 
-			                    		
 		                    		 }
-		                    		 if(type.getNodeValue().equals("uml:Package") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
-		                    			 topic = new TopicDef();
-		                    			 topic.setName(new NlsString(lastAttr.getNamedItem("name").getNodeValue()));
-		                    			 modelo.addOwnedElement(topic);
-		                    		 }
-		                    		 
-		                    		 if(type.getNodeValue().equals("uml:PrimitiveType") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
-		                    			 dominio = new DomainDef();
-		                    			 dominio.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
-		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
-		                    			 modelo.addOwnedElement(dominio);
-		                    		 }
-		                    		 
-		                    		 if(type.getNodeValue().equals("uml:Class")) {
-		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
-		                    			 clase = new ClassDef();
-			                    		 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
-			                    		 modelo.addOwnedElement(clase);
-		                    		 }
-		                    		 
-		                    		 if(type.getNodeValue().equals("uml:Class") && lastType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue())) {
-		                    			 System.out.println("Holi "+navigator.getTreNavigation().getSelectionPath()); 
-		                    			 clase = new ClassDef();
-			                    		 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
-			                    		 topic.addOwnedElement(clase);
-		                    		 }
-		                    		 
 		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
@@ -151,4 +126,20 @@ public class TransferFromXmi {
 			e.printStackTrace();
 		}
 	}
+    private static boolean isNumeric(String cadena){
+    	try {
+    		Integer.parseInt(cadena);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
+    }
+	private boolean isINTERLIS2Def(NamedNodeMap attr) {
+		String id = attr.getNamedItem("xmi:id").getNodeValue();
+		if(id.contains(".") || isNumeric(id)) {
+			return false;
+		}
+		return true;
+	}
+	
 }
