@@ -21,6 +21,7 @@ import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
@@ -131,7 +132,7 @@ public class TransferFromXmi {
 			                    		 interlis.addOwnedElement(modelo);
 			                    		 
 		                    		 }
-		                    		 // Creating DomainDef - enumeration type
+		                    		 // Creating DomainDef - enumeration type to ModelDef
 		                    		 if(type.getNodeValue().equals("uml:Enumeration") &&
 		                    				 attr.getNamedItem("xmi:id").getNodeValue().contains(modelo.getName().getValue()+"."+
 		                    		 attr.getNamedItem("name").getNodeValue()) ) {
@@ -160,11 +161,13 @@ public class TransferFromXmi {
 		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
 		                    			 modelo.addOwnedElement(dominio);
 		                    		 }
-		                    		 // Creating ClassDef
+		                    		 // Creating ClassDef (STRUCTURE type) to ModelDef
 		                    		 if(type.getNodeValue().equals("uml:DataType") &&
-		                    				 attr.getNamedItem("xmi:id").getNodeValue().startsWith(modelo.getName().getValue())){
+		                    				 attr.getNamedItem("xmi:id").getNodeValue().contentEquals(modelo.getName().getValue()+"."+
+		                    		attr.getNamedItem("name").getNodeValue())){
 		                    			 clase = new ClassDef();
 		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 clase.setKind(ClassDefKind.STRUCTURE);
 		                    			 DomainAttribute prueba = new DomainAttribute();
 		                    			 Enumeration elemento = new Enumeration();
 		                    			 if(prop instanceof Element) {
