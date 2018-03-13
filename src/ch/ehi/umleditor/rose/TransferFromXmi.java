@@ -25,6 +25,7 @@ import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+import ch.ehi.interlis.units.UnitDef;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
@@ -54,6 +55,7 @@ public class TransferFromXmi {
 	public ModelDef modelo = null;
 	public TopicDef topic = null;
 	public DomainDef dominio = null;
+	public UnitDef unidad = null;
 	public ClassDef clase = null;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	public Date date = new Date();
@@ -161,6 +163,7 @@ public class TransferFromXmi {
 		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
 		                    			 modelo.addOwnedElement(dominio);
 		                    		 }
+		                    		 
 		                    		 // Creating ClassDef (STRUCTURE type) to ModelDef
 		                    		 if(type.getNodeValue().equals("uml:DataType") &&
 		                    				 attr.getNamedItem("xmi:id").getNodeValue().contentEquals(modelo.getName().getValue()+"."+
@@ -199,6 +202,19 @@ public class TransferFromXmi {
 		                    			 
 		                    			 modelo.addOwnedElement(clase);
 		                    		 }
+		                    		 
+		                    		 // Creating UnitDef to ModelDef
+		                    		 NodeList units = doc.getElementsByTagName("ili:UnitDef");
+		                    		 if(type.getNodeValue().equals("uml:Class") &&
+		                    				 attr.getNamedItem("xmi:id").getNodeValue().contentEquals(modelo.getName().getValue()+"."+
+		                    		attr.getNamedItem("name").getNodeValue()) &&
+		                    				 isUnitDef(attr, units)){
+		                    			 unidad = new UnitDef();
+		                    			 unidad.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 unidad.setDocumentation(new NlsString("Extracted from xmi"));
+		                    			 modelo.addOwnedElement(unidad);
+		                    		 }
+		                    		 
 		                    		 // Creating TopicDef
 		                    		 if(type.getNodeValue().equals("uml:Package") &&
 		                    				 nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue()) &&
@@ -228,7 +244,8 @@ public class TransferFromXmi {
 			e.printStackTrace();
 		}
 	}
-    private Object findTypeAttribute(String nodeValue) {
+    
+	private Object findTypeAttribute(String nodeValue) {
     	String idTextType="C16095C6-1D80-49ab-9A0B-5847A355489B"; // Verschiedene Arten von Text
     	String idEnumerationType="279A049B-2BCC-4fb5-9C8F-3B22EF3EE0ED"; // Verschiedene Arten von Aufzaehlungen
     	String idEnumTreeValueType="064231DE-6F7D-43bb-A0B9-B4C37906E012"; // Weitere Art von Aufzaehlung
@@ -305,6 +322,17 @@ public class TransferFromXmi {
     		return hor;
     	}
     	return null;
+	}
+	private boolean isUnitDef(NamedNodeMap attr, NodeList units) {
+		String idClass = attr.getNamedItem("xmi:id").getNodeValue();
+		  for (int j=0; j<units.getLength(); ++j) {
+			  Node propUnit = units.item(j);
+              NamedNodeMap attrUnit = propUnit.getAttributes();
+			  if(attrUnit.getNamedItem("base_Class").getNodeValue().equals(idClass)) {
+				  return true;
+			  }
+		  }
+		return false;
 	}
 	private boolean isTopicDef(NamedNodeMap attr) {
 		String id = attr.getNamedItem("xmi:id").getNodeValue();
