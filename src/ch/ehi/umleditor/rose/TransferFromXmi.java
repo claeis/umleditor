@@ -41,6 +41,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.DateType;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
 import ch.ehi.interlis.domainsandconstants.basetypes.HorizAlignment;
+import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
 import ch.ehi.interlis.domainsandconstants.basetypes.Text;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeType;
@@ -172,7 +173,7 @@ public class TransferFromXmi {
 		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
 		                    			 clase.setKind(ClassDefKind.STRUCTURE);
 		                    			 DomainAttribute prueba = new DomainAttribute();
-		                    			 Enumeration elemento = new Enumeration();
+		                    			
 		                    			 if(prop instanceof Element) {
 		                    				 Element docAtributo = (Element) prop;
 		                    				 NodeList atributos = docAtributo.getElementsByTagName("ownedAttribute");
@@ -180,21 +181,19 @@ public class TransferFromXmi {
 		                    					 Node actualAtributo = atributos.item(x);
 		                    					 NamedNodeMap attrAtributo = actualAtributo.getAttributes();
 		                    					 
-		                    					 
-		                    					 findTypeAttribute(attrAtributo.getNamedItem("type").getNodeValue());
-		                    					 
 		                    					 AttributeDef atributo = new AttributeDef();
-		                    					 /* atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
-		                    					 elemento.addEnumElement(enumElement1);
-		                    					 Type typeAt = (Type) elemento;
-		                    					 prueba.attachDirect(typeAt);
-		                    					 AttrType typeAttr = (AttrType) prueba;
-		                    					 atributo.detachAttrType();
-		                    					 atributo.attachAttrType(typeAttr);
-		                    					
-		                    					 */
-		                    							 
-		                    					
+		                    					 atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
+		                    					 
+		                    					 /*Type typeAt = (Type) findTypeAttribute(attrAtributo.getNamedItem("type").getNodeValue());
+		                    					 
+		                    					 if(typeAt != null) {
+		                    						 prueba.detachDirect();
+		                    						 prueba.attachDirect(typeAt);
+			                    					 AttrType typeAttr = (AttrType) prueba;
+			                    					 atributo.detachAttrType();
+			                    					 atributo.attachAttrType(typeAttr);
+		                    					 }*/
+		                    					 
 		                    					 atributo.setDocumentation(new NlsString("Extracted from xmi"));
 		                    					 clase.addFeature((Feature) atributo);
 		                    				 }
@@ -234,22 +233,17 @@ public class TransferFromXmi {
 		                    					 Node actualAtributo = atributos.item(x);
 		                    					 NamedNodeMap attrAtributo = actualAtributo.getAttributes();
 		                    					 
-		                    					 
 		                    					 findTypeAttribute(attrAtributo.getNamedItem("type").getNodeValue());
-		                    					 
 		                    					 AttributeDef atributo = new AttributeDef();
-		                    					 /* atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
-		                    					 elemento.addEnumElement(enumElement1);
+		                    					 atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
+		                    					 /*elemento.addEnumElement(enumElement1);
 		                    					 Type typeAt = (Type) elemento;
 		                    					 prueba.attachDirect(typeAt);
 		                    					 AttrType typeAttr = (AttrType) prueba;
 		                    					 atributo.detachAttrType();
 		                    					 atributo.attachAttrType(typeAttr);
-		                    					
 		                    					 */
-		                    							 
-		                    					
-		                    					 atributo.setDocumentation(new NlsString("Extracted from xmi"));
+		                    					atributo.setDocumentation(new NlsString("Extracted from xmi"));
 		                    					 clase.addFeature((Feature) atributo);
 		                    				 }
 		                    			 }
@@ -286,7 +280,7 @@ public class TransferFromXmi {
 		}
 	}
     
-	private Object findTypeAttribute(String nodeValue) {
+	private Type findTypeAttribute(String nodeValue) {
     	String idTextType="C16095C6-1D80-49ab-9A0B-5847A355489B"; // Verschiedene Arten von Text
     	String idEnumerationType="279A049B-2BCC-4fb5-9C8F-3B22EF3EE0ED"; // Verschiedene Arten von Aufzaehlungen
     	String idEnumTreeValueType="064231DE-6F7D-43bb-A0B9-B4C37906E012"; // Weitere Art von Aufzaehlung
@@ -319,8 +313,11 @@ public class TransferFromXmi {
     		return enumas;
     	}
     	if(nodeValue.equals(idNumericType)) {
-    		NumericType num = new NumericType();
-    		return num;
+    		ch.ehi.interlis.domainsandconstants.basetypes.NumericalType numret = new NumericalType() {
+			};
+    		//NumericType num = new NumericType();
+    	
+    		return numret;
     	}
     	if(nodeValue.equals(idCoordinateType)) {
     		CoordinateType coor = new CoordinateType();
