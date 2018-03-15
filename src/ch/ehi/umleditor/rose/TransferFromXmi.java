@@ -164,6 +164,20 @@ public class TransferFromXmi {
 		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
 		                    			 modelo.addOwnedElement(dominio);
 		                    		 }
+		                    		 // Creating DomainDef to ModelDef
+		                    		
+		                    		 if((type.getNodeValue().equals("uml:PrimitiveType"))) {
+		                    			 if(modelo != null &&
+		                    		attr.getNamedItem("xmi:id").getNodeValue().contains(modelo.getName().getValue()+"."+
+		                    		 attr.getNamedItem("name").getNodeValue())) {
+		                    				 dominio = new DomainDef();
+			                    			 dominio.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+			                    			 
+			                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
+			                    			 modelo.addOwnedElement(dominio);
+		                    			 }
+		                    			 
+		                    		 }
 		                    		 
 		                    		 // Creating ClassDef (STRUCTURE type) to ModelDef
 		                    		 if(type.getNodeValue().equals("uml:DataType") &&
@@ -288,6 +302,21 @@ public class TransferFromXmi {
 		                    			 dominio.attachType(typeE);
 		                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
 		                    			 topic.addOwnedElement(dominio);
+		                    		 }
+		                    		 
+		                    		 // Creating DomainDef to ModelDef
+			                    		
+		                    		 if((type.getNodeValue().equals("uml:PrimitiveType"))) {
+		                    			 if(topic != null &&
+		                    		attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
+		                    		 attr.getNamedItem("name").getNodeValue())) {
+		                    				 dominio = new DomainDef();
+			                    			 dominio.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+			                    			 
+			                    			 dominio.setDocumentation(new NlsString("Extracted from xmi"));
+			                    			 topic.addOwnedElement(dominio);
+		                    			 }
+		                    			 
 		                    		 }
 		                    		 
 		                    		 
