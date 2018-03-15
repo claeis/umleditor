@@ -16,6 +16,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.AttrType;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.DomainAttribute;
@@ -58,6 +60,7 @@ public class TransferFromXmi {
 	public DomainDef dominio = null;
 	public UnitDef unidad = null;
 	public ClassDef clase = null;
+	public AssociationDef asociacion = null;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	public Date date = new Date();
 	public void doXmiFile(String filename) {
@@ -405,6 +408,29 @@ public class TransferFromXmi {
 		                    			 }
 		                    			 topic.addOwnedElement(clase);
 		                    		   }
+		                    		 }
+		                    		 
+		                    		 if(type.getNodeValue().equals("uml:Association")) {
+		                    			 if(topic != null && attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
+		     		                    		attr.getNamedItem("name").getNodeValue())) {
+		                    				 asociacion = new AssociationDef();
+		                    				 asociacion.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    				 
+			                    			 if(prop instanceof Element) {
+			                    				 Element docAso = (Element) prop;
+			                    				 NodeList roles = docAso.getElementsByTagName("ownedEnd");
+			                    				 for(int x=0; x<roles.getLength(); ++x) {
+			                    					 Node actualAso = roles.item(x);
+			                    					 NamedNodeMap attrAsociacion = actualAso.getAttributes();
+			                    					 
+			                    					 findTypeAttribute(attrAsociacion.getNamedItem("type").getNodeValue());
+			                    					 RoleDef rol = new RoleDef();
+			                    					 rol.setName(new NlsString(attrAsociacion.getNamedItem("name").getNodeValue()));
+			                    					// asociacion.addFeature((Feature) rol);
+			                    				 }
+			                    			 }
+		                    				 topic.addOwnedElement(asociacion);
+		                    			 }
 		                    		 }
 		                    		 
 		                    	 }
