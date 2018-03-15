@@ -267,6 +267,33 @@ public class TransferFromXmi {
 		                    			 modelo.addOwnedElement(clase);
 		                    		 }
 		                    		 
+		                    		// Creating AssociationDef to ModelDef
+		                    		 if(type.getNodeValue().equals("uml:Association")) {
+		                    			 if(modelo != null && attr.getNamedItem("xmi:id").getNodeValue().contains(modelo.getName().getValue()+"."+
+		     		                    		attr.getNamedItem("name").getNodeValue())) {
+		                    				 asociacion = new AssociationDef();
+		                    				 asociacion.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    				 asociacion.setDocumentation(new NlsString("Extracted from xmi"));
+			                    			 if(prop instanceof Element) {
+			                    				 Element docAso = (Element) prop;
+			                    				 NodeList roles = docAso.getElementsByTagName("ownedEnd");
+			                    				 for(int x=0; x<roles.getLength(); ++x) {
+			                    					 Node actualAso = roles.item(x);
+			                    					 NamedNodeMap attrAsociacion = actualAso.getAttributes();
+			                    					 
+			                    					 findTypeAttribute(attrAsociacion.getNamedItem("type").getNodeValue());
+			                    					 RoleDef rol = new RoleDef();
+			                    					 rol.setName(new NlsString(attrAsociacion.getNamedItem("name").getNodeValue()));
+			                    					 rol.setDocumentation(new NlsString("Extracted from xmi"));
+			                    					 rol.setIliAttributeKind(0);
+			                    					
+			                    					// asociacion.addFeature((Feature) rol);
+			                    				 }
+			                    			 }
+			                    			 modelo.addOwnedElement(asociacion);
+		                    			 }
+		                    		 }
+		                    		 
 		                    		 // Creating TopicDef
 		                    		 if(type.getNodeValue().equals("uml:Package") &&
 		                    				 nextType.getNodeValue().startsWith(attr.getNamedItem("xmi:id").getNodeValue()) &&
@@ -410,12 +437,13 @@ public class TransferFromXmi {
 		                    		   }
 		                    		 }
 		                    		 
+		                    		 // Creating AssociationDef to TopicDef
 		                    		 if(type.getNodeValue().equals("uml:Association")) {
 		                    			 if(topic != null && attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
 		     		                    		attr.getNamedItem("name").getNodeValue())) {
 		                    				 asociacion = new AssociationDef();
 		                    				 asociacion.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
-		                    				 
+		                    				 asociacion.setDocumentation(new NlsString("Extracted from xmi"));
 			                    			 if(prop instanceof Element) {
 			                    				 Element docAso = (Element) prop;
 			                    				 NodeList roles = docAso.getElementsByTagName("ownedEnd");
@@ -426,6 +454,9 @@ public class TransferFromXmi {
 			                    					 findTypeAttribute(attrAsociacion.getNamedItem("type").getNodeValue());
 			                    					 RoleDef rol = new RoleDef();
 			                    					 rol.setName(new NlsString(attrAsociacion.getNamedItem("name").getNodeValue()));
+			                    					 rol.setDocumentation(new NlsString("Extracted from xmi"));
+			                    					 rol.setIliAttributeKind(0);
+			                    					
 			                    					// asociacion.addFeature((Feature) rol);
 			                    				 }
 			                    			 }
