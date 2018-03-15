@@ -304,7 +304,7 @@ public class TransferFromXmi {
 		                    			 topic.addOwnedElement(dominio);
 		                    		 }
 		                    		 
-		                    		 // Creating DomainDef to ModelDef
+		                    		 // Creating DomainDef to TopicDef
 			                    		
 		                    		 if((type.getNodeValue().equals("uml:PrimitiveType"))) {
 		                    			 if(topic != null &&
@@ -319,6 +319,93 @@ public class TransferFromXmi {
 		                    			 
 		                    		 }
 		                    		 
+		                    		 // Creating ClassDef (STRUCTURE type) to TopicDef
+		                    		 if(type.getNodeValue().equals("uml:DataType")) {
+		                    			 if( topic != null &&
+		                    				 attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
+		                    		attr.getNamedItem("name").getNodeValue())){
+		                    			 clase = new ClassDef();
+		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 clase.setKind(ClassDefKind.STRUCTURE);
+		                    			 DomainAttribute prueba = new DomainAttribute();
+		                    			
+		                    			 if(prop instanceof Element) {
+		                    				 Element docAtributo = (Element) prop;
+		                    				 NodeList atributos = docAtributo.getElementsByTagName("ownedAttribute");
+		                    				 for(int x=0; x<atributos.getLength(); ++x) {
+		                    					 Node actualAtributo = atributos.item(x);
+		                    					 NamedNodeMap attrAtributo = actualAtributo.getAttributes();
+		                    					 
+		                    					 AttributeDef atributo = new AttributeDef();
+		                    					 atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
+		                    					 
+		                    					 /*Type typeAt = (Type) findTypeAttribute(attrAtributo.getNamedItem("type").getNodeValue());
+		                    					 
+		                    					 if(typeAt != null) {
+		                    						 prueba.detachDirect();
+		                    						 prueba.attachDirect(typeAt);
+			                    					 AttrType typeAttr = (AttrType) prueba;
+			                    					 atributo.detachAttrType();
+			                    					 atributo.attachAttrType(typeAttr);
+		                    					 }*/
+		                    					 
+		                    					 atributo.setDocumentation(new NlsString("Extracted from xmi"));
+		                    					 clase.addFeature((Feature) atributo);
+		                    				 }
+		                    			 }
+		                    			 
+		                    			 topic.addOwnedElement(clase);
+		                    		 	}
+		                    		 }
+		                    		 
+		                    		// Creating UnitDef to TopicDef
+		                    		 if(type.getNodeValue().equals("uml:Class")) {
+		                    			 if(topic != null && attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
+		                    		attr.getNamedItem("name").getNodeValue()) &&
+		                    				 isUnitDef(attr, units)){
+		                    			 unidad = new UnitDef();
+		                    			 unidad.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 unidad.setDocumentation(new NlsString("Extracted from xmi"));
+		                    			 topic.addOwnedElement(unidad);
+		                    		 	}
+		                    		 }
+		                    		 
+		                    		// Creating ClassDef to TopicDef
+		                    		 if(type.getNodeValue().equals("uml:Class")) {
+		                    			if(topic != null && attr.getNamedItem("xmi:id").getNodeValue().contains(topic.getName().getValue()+"."+
+		                    		attr.getNamedItem("name").getNodeValue()) &&
+		                    				 !isUnitDef(attr, units)){
+		                    			 clase = new ClassDef();
+		                    			 clase.setKind(ClassDefKind.CLASS);
+		                    			 clase.setAbstract(true);
+		                    			 clase.setName(new NlsString(attr.getNamedItem("name").getNodeValue()));
+		                    			 clase.setDocumentation(new NlsString("Extracted from xmi"));
+		                    			 DomainAttribute prueba = new DomainAttribute();
+		                    			 Enumeration elemento = new Enumeration();
+		                    			 if(prop instanceof Element) {
+		                    				 Element docAtributo = (Element) prop;
+		                    				 NodeList atributos = docAtributo.getElementsByTagName("ownedAttribute");
+		                    				 for(int x=0; x<atributos.getLength(); ++x) {
+		                    					 Node actualAtributo = atributos.item(x);
+		                    					 NamedNodeMap attrAtributo = actualAtributo.getAttributes();
+		                    					 
+		                    					 findTypeAttribute(attrAtributo.getNamedItem("type").getNodeValue());
+		                    					 AttributeDef atributo = new AttributeDef();
+		                    					 atributo.setName(new NlsString(attrAtributo.getNamedItem("name").getNodeValue()));
+		                    					 /*elemento.addEnumElement(enumElement1);
+		                    					 Type typeAt = (Type) elemento;
+		                    					 prueba.attachDirect(typeAt);
+		                    					 AttrType typeAttr = (AttrType) prueba;
+		                    					 atributo.detachAttrType();
+		                    					 atributo.attachAttrType(typeAttr);
+		                    					 */
+		                    					atributo.setDocumentation(new NlsString("Extracted from xmi"));
+		                    					 clase.addFeature((Feature) atributo);
+		                    				 }
+		                    			 }
+		                    			 topic.addOwnedElement(clase);
+		                    		   }
+		                    		 }
 		                    		 
 		                    	 }
 		                         Node p = attr.getNamedItem("xmi:id");
