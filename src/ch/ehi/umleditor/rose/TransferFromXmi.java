@@ -286,8 +286,8 @@ public class TransferFromXmi {
 			                    					 rol.setName(new NlsString(attrAsociacion.getNamedItem("name").getNodeValue()));
 			                    					 rol.setDocumentation(new NlsString("Extracted from xmi"));
 			                    					 rol.setIliAttributeKind(0);
-			                    					
-			                    					// asociacion.addFeature((Feature) rol);
+			                    					 
+			                    					 asociacion.addConnection(rol);
 			                    				 }
 			                    			 }
 			                    			 modelo.addOwnedElement(asociacion);
@@ -456,8 +456,8 @@ public class TransferFromXmi {
 			                    					 rol.setName(new NlsString(attrAsociacion.getNamedItem("name").getNodeValue()));
 			                    					 rol.setDocumentation(new NlsString("Extracted from xmi"));
 			                    					 rol.setIliAttributeKind(0);
-			                    					
-			                    					// asociacion.addFeature((Feature) rol);
+			                    					 
+			                    					 asociacion.addConnection(rol);
 			                    				 }
 			                    			 }
 		                    				 topic.addOwnedElement(asociacion);
