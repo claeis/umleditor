@@ -480,24 +480,29 @@ public class TransferFromXmi {
 		
 		Node node = (Node) elem;
 		NodeList atributos = node.getChildNodes();
-		for (int x = 0; x < atributos.getLength(); ++x) {
+		for (int x=0; x<atributos.getLength(); ++x) {
 			Node ownedAttribute = atributos.item(x);
 			if (ownedAttribute.getNodeType() == Node.ELEMENT_NODE) {
 				Element ownedAttributeElement = (Element) ownedAttribute;
 				//findTypeAttribute(ownedAttributeElement.getAttribute("type"));
 				
-				DomainAttribute attrType = new DomainAttribute();
-				ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
-				text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
-				text.setMaxLength(20);
-				attrType.attachDirect(text);
-				
-				AttributeDef atributo = new AttributeDef();
-				atributo.setName(new NlsString(ownedAttributeElement.getAttribute("name")));
-				atributo.setDocumentation(new NlsString("Extracted from xmi"));
-				atributo.attachAttrType(attrType);
-				
-				clase.addFeature((Feature) atributo);
+				if (ownedAttributeElement.getNodeName().equals("generalization")) {
+					continue;
+				} else {
+					DomainAttribute attrType = new DomainAttribute();
+					ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
+					text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
+					text.setMaxLength(20);
+					attrType.attachDirect(text);
+					
+					String nombreAtributo = ownedAttributeElement.getAttribute("name");
+					AttributeDef atributo = new AttributeDef();
+					atributo.setName(new NlsString(nombreAtributo));
+					atributo.setDocumentation(new NlsString("Extracted from xmi"));
+					atributo.attachAttrType(attrType);
+					
+					clase.addFeature((Feature) atributo);
+				}
 			}
 		}
 		if (modelo instanceof ModelDef) {
