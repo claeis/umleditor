@@ -3,7 +3,9 @@ package ch.ehi.umleditor.rose;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,15 +23,20 @@ import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.Type;
+import ch.ehi.interlis.domainsandconstants.basetypes.BaseType;
 import ch.ehi.interlis.domainsandconstants.basetypes.BooleanType;
 import ch.ehi.interlis.domainsandconstants.basetypes.ClassType;
 import ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType;
 import ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType;
 import ch.ehi.interlis.domainsandconstants.basetypes.DateType;
+import ch.ehi.interlis.domainsandconstants.basetypes.DateValue;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumTreeValueType;
 import ch.ehi.interlis.domainsandconstants.basetypes.HorizAlignment;
+import ch.ehi.interlis.domainsandconstants.basetypes.NumericType;
 import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
+import ch.ehi.interlis.domainsandconstants.basetypes.OidKind;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
 import ch.ehi.interlis.domainsandconstants.basetypes.Text;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeType;
@@ -42,12 +49,19 @@ import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.units.UnitDef;
+import ch.ehi.uml1_4.foundation.core.Association;
+import ch.ehi.uml1_4.foundation.core.AssociationEnd;
+import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.NavigationView;
+import ch.interlis.ili2c.metamodel.AttributePathType;
+import ch.interlis.ili2c.metamodel.BlackboxType;
+import ch.interlis.ili2c.metamodel.FormattedType;
 
 public class TransferFromXmi {
 	public UmlPackage umlPackage = null;
@@ -61,6 +75,8 @@ public class TransferFromXmi {
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	public Date date = new Date();
 	private Document doc = null;
+	private UmlModel firstNodeModel = null;
+	private UmlModel lastModel = null;
 
 	public void doXmiFile(String filename) {
 		try {
@@ -83,7 +99,7 @@ public class TransferFromXmi {
 				Object root = navigator.getTreNavigation().getModel().getRoot();
 				
 				if (root instanceof UmlModel) {
-					UmlModel firstNode = (UmlModel) root;
+					firstNodeModel = (UmlModel) root;
 					Node uml2 = doc.getFirstChild();
 					NodeList childNodes = uml2.getChildNodes();
 					for (int i = 0; i < childNodes.getLength(); i++) {
@@ -117,7 +133,7 @@ public class TransferFromXmi {
 										if (umlPackage != null) {
 											umlPackage.addOwnedElement(interlis);
 										} else {
-											firstNode.addOwnedElement(interlis);
+											firstNodeModel.addOwnedElement(interlis);
 										}
 
 										modelo = new ModelDef();
@@ -160,7 +176,9 @@ public class TransferFromXmi {
 		}
 	}
 
-	private Type findTypeAttribute(String nodeValue) {
+	private BaseType findTypeAttribute(String nodeValue) {
+		
+		
 		String idTextType = "C16095C6-1D80-49ab-9A0B-5847A355489B"; // Verschiedene Arten von Text
 		String idEnumerationType = "279A049B-2BCC-4fb5-9C8F-3B22EF3EE0ED"; // Verschiedene Arten von Aufzaehlungen
 		String idEnumTreeValueType = "064231DE-6F7D-43bb-A0B9-B4C37906E012"; // Weitere Art von Aufzaehlung
@@ -191,62 +209,83 @@ public class TransferFromXmi {
 
 		if (nodeValue.equals(idBooleanType)) {
 			BooleanType bool = new BooleanType();
-			return bool;
+			return (BaseType)bool;
 		}
 		if (nodeValue.equals(idTextType)) {
 			Text texto = new Text();
-			return texto;
+			texto.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
+			texto.setMaxLength(20);
+			return (BaseType)texto;
 		}
 		if (nodeValue.equals(idEnumerationType)) {
 			Enumeration enumas = new Enumeration();
-			return enumas;
+			return (BaseType)enumas;
 		}
+		if (nodeValue.equals(idEnumTreeValueType)) {
+			BaseType enumTreeVal = new EnumTreeValueType();
+			return (BaseType)enumTreeVal;
+		}
+//		if(nodeValue.equals(idBlackboxType)) {
+//			BlackboxType black = new BlackboxType();
+//			return (BaseType) black;
+//		}
+//		if (nodeValue.equals(idFormattedType)) {
+//			FormattedType formato = new FormattedType();
+//			return (BaseType) formato;
+//			
+//		}
+//		if (nodeValue.equals(idAttributePathType)) {
+//			AttributePathType pathAttribute = new AttributePathType();
+//			return (BaseType) pathAttribute;	
+//		}
 		if (nodeValue.equals(idNumericType)) {
-			ch.ehi.interlis.domainsandconstants.basetypes.NumericalType numret = new NumericalType() {
-			};
-			// NumericType num = new NumericType();
-
-			return numret;
+			 NumericType num = new NumericType();
+			 num.setRangeDefined(false);
+			return (BaseType)num;
 		}
 		if (nodeValue.equals(idCoordinateType)) {
 			CoordinateType coor = new CoordinateType();
-			return coor;
+			coor.setGeneric(true);
+			return (BaseType)coor;
 		}
-		if (nodeValue.equals(idPolylineType)) {
-			IliPolyline poli = new IliPolyline();
-			return poli;
-		}
-		if (nodeValue.equals(idSurfaceType)) {
-			IndividualSurface surf = new IndividualSurface();
-			return surf;
-		}
-		if (nodeValue.equals(idAreaType)) {
-			Tesselation area = new Tesselation();
-			return area;
-		}
+//		if (nodeValue.equals(idPolylineType)) {
+//			IliPolyline poli = new IliPolyline();
+//			poli.setDirected(false);
+//			return poli;
+//		}
+//		if (nodeValue.equals(idSurfaceType)) {
+//			IndividualSurface surf = new IndividualSurface();
+//			return surf;
+//		}
+//		if (nodeValue.equals(idAreaType)) {
+//			Tesselation area = new Tesselation();
+//			return area;
+//		}
 		if (nodeValue.equals(idDateType)) {
 			DateType date = new DateType();
-			return date;
+			return (BaseType)date;
 		}
 		if (nodeValue.equals(idDateTimeType)) {
 			DateTimeType dateTime = new DateTimeType();
-			return dateTime;
+			return (BaseType)dateTime;
 		}
 		if (nodeValue.equals(idTimeType)) {
 			TimeType time = new TimeType();
-			return time;
+			return (BaseType)time;
 		}
 		if (nodeValue.equals(idOIDType)) {
 			OidType oid = new OidType();
-			return oid;
+			oid.setKind(OidKind.ANY);
+			return (BaseType)oid;
 		}
 		if (nodeValue.equals(idClassType)) {
-			ClassType clas = new ClassType();
-			return clas;
+			ClassType clasType = new ClassType();
+			clasType.setKind(ClassDefKind.CLASS);
+			return (BaseType)clasType;
 		}
 		if (nodeValue.equals(idAlignmentType)) { // Assign Horizontal by default
 			HorizAlignment hor = new HorizAlignment();
-			return hor;
+			return (BaseType)hor;
 		}
 		return null;
 	}
@@ -366,7 +405,7 @@ public class TransferFromXmi {
 				RoleDef rol = new RoleDef(); rol.setName(new NlsString(ownedEndName));
 				rol.setDocumentation(new NlsString("Extracted from xmi"));
 				rol.setIliAttributeKind(0);
-						  
+//				rol.attachParticipant(participant1); //////////////OJO; hay que hacer algo ahí
 				asociacion.addConnection(rol);
 				
 			}
@@ -430,6 +469,7 @@ public class TransferFromXmi {
 			_modelo.addOwnedElement(dominio);
 		}
 	}
+	
 
 	private void addStructureToModel(Element elem, ModelElement modelo) {
 		clase = new ClassDef();
@@ -447,11 +487,23 @@ public class TransferFromXmi {
 				Element ownedAttributeElement = (Element) ownedAttribute;
 				//findTypeAttribute(ownedAttributeElement.getAttribute("type"));
 				
+				String typeAttr = ownedAttributeElement.getAttribute("type");
+				String[] modelLocation = typeAttr.split("\\.");
+				Namespace namespace = modelo.getNamespace();
+				
+				ModelElement modelElement = findRecursiveModelElement(0, modelLocation, namespace);
+				
 				DomainAttribute attrType = new DomainAttribute();
-				ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
-				text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
-				text.setMaxLength(20);
-				attrType.attachDirect(text);
+//				ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
+//				text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
+//				text.setMaxLength(20);
+				//DomainAttribute attrType = (DomainAttribute) hola;
+				//attrType.attachDirect(domain);
+				if (modelElement instanceof DomainDef) {
+					DomainDef domainDef = (DomainDef) modelElement;
+					attrType.attachDomainDef(domainDef);
+				}
+				
 				
 				AttributeDef atributo = new AttributeDef();
 				atributo.setName(new NlsString(ownedAttributeElement.getAttribute("name")));
@@ -471,6 +523,24 @@ public class TransferFromXmi {
 		
 	}
 
+	private ModelElement findRecursiveModelElement(int level, String[] modelLocation, Namespace currentNamespace) {
+		Iterator it = currentNamespace.iteratorOwnedElement();
+		while (it.hasNext()) {
+			ModelElement ele = (ModelElement) it.next();
+			String name = ele.getName().getValue();
+			String levelName = modelLocation[level];
+			if (name.indexOf(levelName) > -1) {
+				if (modelLocation.length - 1 == level) {
+					return ele;
+				} else {
+					level++;
+					return findRecursiveModelElement(level, modelLocation, (Namespace)ele);
+				}				
+			}
+		}
+		return null;
+	}
+
 	public void addClassToModel (Element elem, ModelElement modelo) {
 		clase = new ClassDef();
 		clase.setKind(ClassDefKind.CLASS);
@@ -484,11 +554,12 @@ public class TransferFromXmi {
 			Node ownedAttribute = atributos.item(x);
 			if (ownedAttribute.getNodeType() == Node.ELEMENT_NODE) {
 				Element ownedAttributeElement = (Element) ownedAttribute;
-				//findTypeAttribute(ownedAttributeElement.getAttribute("type"));
 				
 				if (ownedAttributeElement.getNodeName().equals("generalization")) {
 					continue;
 				} else {
+					
+					//Type tipoAtributo = findTypeAttribute(ownedAttributeElement.getAttribute("type"));
 					DomainAttribute attrType = new DomainAttribute();
 					ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
 					text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
