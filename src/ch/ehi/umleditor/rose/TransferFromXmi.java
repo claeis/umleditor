@@ -58,6 +58,7 @@ import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.umleditor.application.LauncherView;
+import ch.ehi.umleditor.application.MultiplicityConverter;
 import ch.ehi.umleditor.application.NavigationView;
 import ch.interlis.ili2c.metamodel.AttributePathType;
 import ch.interlis.ili2c.metamodel.BlackboxType;
@@ -406,6 +407,7 @@ public class TransferFromXmi {
 				rol.setDocumentation(new NlsString("Extracted from xmi"));
 				rol.setIliAttributeKind(0);
 //				rol.attachParticipant(participant1); //////////////OJO; hay que hacer algo ahí
+				addCardinality(rol, ownedEndElement);
 				asociacion.addConnection(rol);
 				
 			}
@@ -419,6 +421,56 @@ public class TransferFromXmi {
 		}
 		
 	}
+	
+	private void addCardinality(RoleDef rol, Node ownedEnd) {
+        Node lowerUpper = (Node) ownedEnd;
+        NodeList cardinalidad = lowerUpper.getChildNodes();
+        for(int i=0; i<cardinalidad.getLength(); ++i) {
+            Node childOwnedEndElement = cardinalidad.item(i);
+            String range = null;
+            String lower = null;
+            String upper = null;
+            if(childOwnedEndElement.getNodeType() == Node.ELEMENT_NODE) {
+                Element lowerOrUpper = (Element) childOwnedEndElement;
+                String typeCardinal = lowerOrUpper.getTagName();
+                /*
+                
+                if(typeCardinal.equals("lowerValue")) {
+                    lower = lowerOrUpper.getAttribute("value");
+                    
+                } else if(typeCardinal.equals("upperValue")) {
+                    upper = lowerOrUpper.getAttribute("value");
+                }
+                
+                if(lower.equals(upper)) {
+                    range = lower;
+                } else{
+                    range = lower+".."+upper;
+                }
+                
+                rol.setMultiplicity(MultiplicityConverter.createMultiplicity(range));*/
+                
+                // another mode
+                
+                /*
+                ch.ehi.uml1_4.implementation.UmlMultiplicityRange r = new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+                if(typeCardinal.equals("lowerValue")) {
+                	lower = lowerOrUpper.getAttribute("value");
+                	r.setLower(Long.parseLong(lower));
+                } else if(typeCardinal.equals("upperValue")) {
+                	upper = lowerOrUpper.getAttribute("value");
+                	r.setUpper(Long.parseLong(upper));
+                }
+				
+				
+				ch.ehi.uml1_4.implementation.UmlMultiplicity m = new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+				m.addRange(r);
+				rol.setMultiplicity(m);*/
+                
+            }
+        }
+    }
+
 
 	private void addStructureEnumTypeToModel(Element elem, ModelElement modelo) {
 		dominio = new DomainDef();
