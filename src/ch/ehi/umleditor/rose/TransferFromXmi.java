@@ -413,10 +413,20 @@ public class TransferFromXmi {
 			if (ownedEnd.getNodeType() == Node.ELEMENT_NODE) {
 				Element ownedEndElement = (Element) ownedEnd;
 				String ownedEndName = ownedEndElement.getAttribute("name");
+				String ownedEndType = ownedEndElement.getAttribute("type");
+				
+				
+				
 				RoleDef rol = new RoleDef(); rol.setName(new NlsString(ownedEndName));
 				rol.setDocumentation(new NlsString("Extracted from xmi"));
 				rol.setIliAttributeKind(0);
 //				rol.attachParticipant(participant1); //////////////OJO; hay que hacer algo ahí
+				
+				String[] modelLocation = ownedEndType.split("\\.");
+				ModelElement modelElement = findRecursiveInterlis2Def(modelLocation);
+				if(modelElement instanceof ClassDef) {
+					rol.attachParticipant((ClassDef) modelElement);
+				}
 				addCardinality(rol, ownedEndElement);
 				asociacion.addConnection(rol);
 				
