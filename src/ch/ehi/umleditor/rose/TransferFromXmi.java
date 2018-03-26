@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -19,6 +20,7 @@ import org.w3c.dom.NodeList;
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.attributes.AttrType;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.DomainAttribute;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
@@ -38,11 +40,13 @@ import ch.ehi.interlis.domainsandconstants.basetypes.NumericType;
 import ch.ehi.interlis.domainsandconstants.basetypes.NumericalType;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidKind;
 import ch.ehi.interlis.domainsandconstants.basetypes.OidType;
+import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
 import ch.ehi.interlis.domainsandconstants.basetypes.Text;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeType;
 import ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline;
 import ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface;
 import ch.ehi.interlis.domainsandconstants.linetypes.Tesselation;
+import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
@@ -55,14 +59,19 @@ import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Feature;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
+import ch.ehi.umleditor.application.IliBaseTypeStructAttrPanel;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.MultiplicityConverter;
 import ch.ehi.umleditor.application.NavigationView;
 import ch.interlis.ili2c.metamodel.AttributePathType;
 import ch.interlis.ili2c.metamodel.BlackboxType;
+import ch.interlis.ili2c.metamodel.CompositionType;
 import ch.interlis.ili2c.metamodel.FormattedType;
+import ch.interlis.ili2c.metamodel.PredefinedModel;
+import ch.interlis.ili2c.metamodel.Table;
 
 public class TransferFromXmi {
 	public UmlPackage umlPackage = null;
@@ -77,7 +86,8 @@ public class TransferFromXmi {
 	public Date date = new Date();
 	private Document doc = null;
 	private UmlModel firstNodeModel = null;
-	private UmlModel lastModel = null;
+	
+	private PredefinedModel ilibase;
 
 	public void doXmiFile(String filename) {
 		try {
@@ -541,9 +551,9 @@ public class TransferFromXmi {
 				
 				String typeAttr = ownedAttributeElement.getAttribute("type");
 				String[] modelLocation = typeAttr.split("\\.");
-				Namespace namespace = modelo.getNamespace();
+				Namespace namespace = (Namespace)firstNodeModel;
 				
-				ModelElement modelElement = findRecursiveModelElement(0, modelLocation, namespace);
+				ModelElement modelElement = findRecursiveInterlis2Def(modelLocation);
 				
 				DomainAttribute attrType = new DomainAttribute();
 //				ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
@@ -581,13 +591,27 @@ public class TransferFromXmi {
 			ModelElement ele = (ModelElement) it.next();
 			String name = ele.getName().getValue();
 			String levelName = modelLocation[level];
-			if (name.indexOf(levelName) > -1) {
+			if (name.equals(levelName)) {
 				if (modelLocation.length - 1 == level) {
 					return ele;
 				} else {
 					level++;
 					return findRecursiveModelElement(level, modelLocation, (Namespace)ele);
 				}				
+			}
+		}
+		return null;
+	}
+	
+	private ModelElement findRecursiveInterlis2Def(String[] modelLocation) {
+		Namespace _firstNodeModel = (Namespace) firstNodeModel;
+		Iterator it = _firstNodeModel.iteratorOwnedElement();
+		while (it.hasNext()) {
+			ModelElement ele = (ModelElement) it.next();
+			String name = ele.getName().getValue();
+			ModelElement result = findRecursiveModelElement(0, modelLocation, (Namespace)ele);
+			if (result != null) {
+				return result;
 			}
 		}
 		return null;
@@ -612,19 +636,49 @@ public class TransferFromXmi {
 				} else {
 					
 					//Type tipoAtributo = findTypeAttribute(ownedAttributeElement.getAttribute("type"));
-					DomainAttribute attrType = new DomainAttribute();
-					ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
-					text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
-					text.setMaxLength(20);
-					attrType.attachDirect(text);
+					//ch.ehi.interlis.domainsandconstants.basetypes.Text text = new ch.ehi.interlis.domainsandconstants.basetypes.Text();
+					//text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
+					//text.setMaxLength(20);
+					//attrType.attachDirect(text);
 					
 					String nombreAtributo = ownedAttributeElement.getAttribute("name");
 					AttributeDef atributo = new AttributeDef();
 					atributo.setName(new NlsString(nombreAtributo));
 					atributo.setDocumentation(new NlsString("Extracted from xmi"));
-					atributo.attachAttrType(attrType);
 					
-					clase.addFeature((Feature) atributo);
+					String typeAttr = ownedAttributeElement.getAttribute("type");
+					String[] modelLocation = typeAttr.split("\\.");
+					/*if (typeAttr.equals("LADM_COL_V1_1.LADM_Nucleo.DQ_Element")) {
+						JOptionPane.showMessageDialog(null, "Cosas Nulas, type:" + typeAttr);
+					}*/
+					ModelElement modelElement = findRecursiveInterlis2Def(modelLocation);
+					if (modelElement == null) {
+						//JOptionPane.showMessageDialog(null, "Cosas Nulas, type:"+typeAttr);
+						String nothing = firstNodeModel.getName().getValue();
+						nothing.equals("");
+					}
+					if (modelElement instanceof DomainDef) {
+						DomainAttribute attrType = new DomainAttribute();
+						DomainDef domainDef = (DomainDef) modelElement;
+						attrType.attachDomainDef(domainDef);
+						atributo.attachAttrType(attrType);
+					}
+					
+					if (modelElement instanceof ClassDef) {
+												
+						/*
+						DomainAttribute attrType = new DomainAttribute();
+						StructAttrType structAttrType = new StructAttrType();
+						
+						ClassDef participant = (ClassDef) modelElement;
+						structAttrType.attachParticipant(participant);
+						attrType.detachDirect();
+						attrType.attachDirect(structAttrType);
+						atributo.detachAttrType();
+						atributo.attachAttrType(attrType);
+						
+						*/
+					}
 				}
 			}
 		}
@@ -637,5 +691,6 @@ public class TransferFromXmi {
 			_modelo.addOwnedElement(clase);
 		}
 	}
+
 
 }
