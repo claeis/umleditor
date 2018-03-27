@@ -53,6 +53,7 @@
         <pathelement location="lib/freehep-graphicsio-svg.jar"/>
         <pathelement location="lib/usrdocjh.jar"/>
       	<pathelement location="lib/JTattoo-1.6.11.jar"/>
+      	<pathelement location="lib/gson-2.8.2.jar"/>
       </classpath>
     	<src path="${src}" />
     	<!-- <src path="${build}/src"/> -->
@@ -93,6 +94,7 @@
         <zipfileset src="lib/freehep-graphicsio-svg.jar"/>
         <zipfileset src="lib/usrdocjh.jar"/>
     	<zipfileset src="lib/JTattoo-1.6.11.jar"/>
+    	<zipfileset src="lib/gson-2.8.2.jar"/>
     	<!-- <fileset dir="lib" excludes="antlr-2.6.1/**/*"/> -->
     </jar>
   </target>
