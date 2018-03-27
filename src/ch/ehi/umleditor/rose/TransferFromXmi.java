@@ -408,6 +408,7 @@ public class TransferFromXmi {
 		
 		Node node = (Node) elem;
 		NodeList roles = node.getChildNodes();
+		RoleDef rol = null;;
 		for (int x = 0; x < roles.getLength(); ++x) {
 			Node ownedEnd = roles.item(x);
 			if (ownedEnd.getNodeType() == Node.ELEMENT_NODE) {
@@ -415,20 +416,25 @@ public class TransferFromXmi {
 				String ownedEndName = ownedEndElement.getAttribute("name");
 				String ownedEndType = ownedEndElement.getAttribute("type");
 				
-				
-				
-				RoleDef rol = new RoleDef(); rol.setName(new NlsString(ownedEndName));
+				rol = new RoleDef(); rol.setName(new NlsString(ownedEndName));
 				rol.setDocumentation(new NlsString("Extracted from xmi"));
 				rol.setIliAttributeKind(0);
-//				rol.attachParticipant(participant1); //////////////OJO; hay que hacer algo ahí
 				
 				String[] modelLocation = ownedEndType.split("\\.");
 				ModelElement modelElement = findRecursiveInterlis2Def(modelLocation);
 				if(modelElement instanceof ClassDef) {
-					rol.attachParticipant((ClassDef) modelElement);
+					//ClassDef cla = (ClassDef)modelElement;
+					//cla.addClassifierRole(rol); addOwnedElement(rol);
+					addCardinality(rol, ownedEndElement);
+					
+					//rol.attachParticipant((ClassDef) modelElement);
+					
+					//rol.attachNamespace(modelElement.getNamespace());
 				}
-				addCardinality(rol, ownedEndElement);
+				//
+				
 				asociacion.addConnection(rol);
+				//
 				
 			}
 		}
@@ -442,19 +448,20 @@ public class TransferFromXmi {
 		
 	}
 	
-	private void addCardinality(RoleDef rol, Node ownedEnd) {
+	private void addCardinality(ModelElement modElement, Node ownedEnd) {
         Node lowerUpper = (Node) ownedEnd;
         NodeList cardinalidad = lowerUpper.getChildNodes();
+        String range = null;
+        String lower = null;
+        String upper = null;
         for(int i=0; i<cardinalidad.getLength(); ++i) {
             Node childOwnedEndElement = cardinalidad.item(i);
-            String range = null;
-            String lower = null;
-            String upper = null;
+            
             if(childOwnedEndElement.getNodeType() == Node.ELEMENT_NODE) {
                 Element lowerOrUpper = (Element) childOwnedEndElement;
                 String typeCardinal = lowerOrUpper.getTagName();
-                /*
                 
+                // "string type" mode
                 if(typeCardinal.equals("lowerValue")) {
                     lower = lowerOrUpper.getAttribute("value");
                     
@@ -462,30 +469,42 @@ public class TransferFromXmi {
                     upper = lowerOrUpper.getAttribute("value");
                 }
                 
-                if(lower.equals(upper)) {
-                    range = lower;
-                } else{
-                    range = lower+".."+upper;
+                if(lower != null && upper != null ) {
+                	if(lower.equals(upper)) {
+                        range = lower;
+                    } else{
+                        range = lower+".."+upper;
+                    }
                 }
-                
-                rol.setMultiplicity(MultiplicityConverter.createMultiplicity(range));*/
-                
-                // another mode
-                
+               
                 /*
+                // another mode
                 ch.ehi.uml1_4.implementation.UmlMultiplicityRange r = new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
                 if(typeCardinal.equals("lowerValue")) {
                 	lower = lowerOrUpper.getAttribute("value");
                 	r.setLower(Long.parseLong(lower));
                 } else if(typeCardinal.equals("upperValue")) {
                 	upper = lowerOrUpper.getAttribute("value");
-                	r.setUpper(Long.parseLong(upper));
+                	if(upper.equals("*")) {
+                		r.setUpper(Long.MAX_VALUE);
+                	} else {
+                		r.setUpper(Long.parseLong(upper));
+                	}
+                	
                 }
-				
 				
 				ch.ehi.uml1_4.implementation.UmlMultiplicity m = new ch.ehi.uml1_4.implementation.UmlMultiplicity();
 				m.addRange(r);
-				rol.setMultiplicity(m);*/
+				
+				*/
+				if (modElement instanceof RoleDef) {
+					//((RoleDef)modElement).setMultiplicity(m);
+					((RoleDef)modElement).setMultiplicity(MultiplicityConverter.createMultiplicity(range));
+				} else if(modElement instanceof AttributeDef) {
+					//((AttributeDef)modElement).setMultiplicity(m);
+					((AttributeDef)modElement).setMultiplicity(MultiplicityConverter.createMultiplicity(range));
+				}
+				
                 
             }
         }
@@ -582,6 +601,7 @@ public class TransferFromXmi {
 				atributo.setDocumentation(new NlsString("Extracted from xmi"));
 				atributo.attachAttrType(attrType);
 				
+				addCardinality(atributo, ownedAttribute);
 				clase.addFeature((Feature) atributo);
 			}
 		}
