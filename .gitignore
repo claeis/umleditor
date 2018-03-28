@@ -44,8 +44,12 @@ tmp/**/*
 local.properties
 .loadpath
 .settings/
+
 # External tool builders
 .externalToolBuilders/
+
+# IntelliJ IDEA
+.idea/*
 
 ### Linux ###
 *~
