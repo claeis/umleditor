@@ -524,15 +524,15 @@ public class TransferFromIli2cMetamodel {
 		cdef.setBody(expr);
 		
 		//MetaAttrb ilivalid.name
-		String iliName = constr.getMetaValue("@ name");
+		String iliName = constr.getMetaValue("name");
 		if(iliName != null) {
-			cdef.setMetaAttrb(new NlsString(modelLanguage, iliName));
+			cdef.setMetaName(new NlsString(modelLanguage, iliName));
 		}
 		
 		//MetaAttrb ilivalid.msg
 		String iliMsg = constr.getMetaValue("ilivalid.msg");
 		if(iliMsg != null) {
-			cdef.setMetaAttrb(new NlsString(modelLanguage, iliMsg));
+			cdef.setMetaMsg(new NlsString(modelLanguage, iliMsg));
 		}
 		
 		// documentation
