@@ -231,7 +231,16 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getMniAddToDiagram().setEnabled(selected && (LauncherView.getInstance().getCurrentClassDiagram() != null)
 				&& LauncherView.getInstance().getCurrentClassDiagram().isAddable(treeNode));
 		getMniUpdateIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
-		getMniExportIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
+		if(NavigationTreeNodeUtility.isINTERLIS2Def(treeNode)) {
+			INTERLIS2Def foo = (INTERLIS2Def) treeNode;
+			if (foo.getName().getValue().startsWith("<") || foo.getName().getValue().endsWith(">")) {
+				getMniExportIli().setEnabled(false);
+			}else {
+				getMniExportIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
+			}
+			
+		}
+		
 		// build "New-Menu" dynamically
 		getMnuNew().setEnabled(false);
 		getMnuNew().removeAll();
