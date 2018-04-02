@@ -365,7 +365,7 @@ public class TransferFromXmi {
 	}
 	
 	// soy el recursivo
-	private void addPackageToModel(Element elem, ModelElement modelo) {
+	public void addPackageToModel(Element elem, ModelElement modelo) {
 		String packagedElementType = elem.getAttribute("xmi:type");
 		String elemName = elem.getAttribute("name");
 		if (packagedElementType.equals("uml:PrimitiveType")) {
