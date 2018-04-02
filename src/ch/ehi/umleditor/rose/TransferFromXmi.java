@@ -101,7 +101,7 @@ public class TransferFromXmi {
 			// Documentation xmi
 			String version = doc.getDocumentElement().getAttribute("xmi:version");
 			Node exporter = doc.getElementsByTagName("xmi:Documentation").item(0).getAttributes().item(0);
-
+			
 			// Validating
 			if (version.equals("2.1") && exporter.getNodeValue().equals("ili2c")) {
 				// NodeList l = doc.getElementsByTagName("packagedElement");
@@ -177,13 +177,18 @@ public class TransferFromXmi {
 						}
 					}
 				}
-
+				
+				LauncherView.getInstance().log("Xmi import", "Done!");
+			} else if(version.equals("2.1") && exporter.getNodeValue().equals("Enterprise Architect")) {
+				TransferFromEAXmi enterpriseReader = new TransferFromEAXmi();
+				enterpriseReader.doXmiFile(filename);
 			} else {
-				System.out.println("NO PUEDO LEER ESTO!!!!!!!");
+				LauncherView.getInstance().log("Xmi import", filename+" Cannot be read");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			LauncherView.getInstance().log("Xmi import", filename+" Cannot be read");
 		}
 	}
 
