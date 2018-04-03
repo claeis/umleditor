@@ -321,7 +321,7 @@ public class TransferFromEAXmi {
 		}
 	}
 
-	public void addClassToModel(Element elem, ModelElement modelo) {
+	public void addClassToModel(Element elem, ModelElement modelo) { // estructure tiene atributos Class no 
 		clase = new ClassDef();
 		clase.setKind(ClassDefKind.CLASS);
 		String className = elem.getAttribute("name");
@@ -352,7 +352,8 @@ public class TransferFromEAXmi {
 					atributo.setName(new NlsString(nombreAtributo));
 					atributo.setDocumentation(new NlsString("Extracted from xmi"));
 
-					String typeAttr = ownedAttributeElement.getAttribute("type");
+					addCardinality(atributo, ownedAttribute);
+					clase.addFeature((Feature) atributo);
 
 				}
 			}
