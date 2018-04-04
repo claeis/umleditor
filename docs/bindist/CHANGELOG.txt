@@ -1,4 +1,14 @@
-﻿UML-Editor 3.6.4.1 (2018-02-19)
+﻿UML-Editor 3.6.4.2 (2018-04-04)
+----------------------------------
+- Now uml editor check updates
+- Fix some issues from update INTERLIS module
+- Can read xmi (ili2c and Enterprise Architect)
+known issues from this module and update module:
+	- Can´t create rol definitions to Class and Association definitions at same time
+	- Can't add type of attribute or rol
+
+
+UML-Editor 3.6.4.1 (2018-02-19)
 ----------------------------------
 - Fix null syntax on ConstraintDef 
 - Fix current meta name and meta msg
