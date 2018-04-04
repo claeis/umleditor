@@ -317,6 +317,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		};
 
 		public void tbbFindAction_actionPerformed(java.util.EventObject newEvent) {
+			if (newEvent.getSource() == LauncherView.this.getTlbStandard())
+				connEtoC40(newEvent);
 		};
 
 		public void tbbNewAction_actionPerformed(java.util.EventObject newEvent) {
@@ -1244,6 +1246,29 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			// user code begin {1}
 			// user code end
 			this.mniXmlSchemeExport();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	/**
+	 * connEtoC40:
+	 * (TlbStandard.toolBar.tbbDeleteAction_actionPerformed(java.util.EventObject)
+	 * --> LauncherView.mniRemove()V)
+	 * 
+	 * @param arg1
+	 *            java.util.EventObject
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC40(java.util.EventObject arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			this.mniFindReplace();
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -4221,6 +4246,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		getTlbStandard().setTbbNewEnabled(true);
 		getTlbStandard().setTbbOpenEnabled(true);
 		getTlbStandard().setTbbPrintEnabled(true);
+		getTlbStandard().setTbbFindEnabled(true);
 	}
 
 	/**
