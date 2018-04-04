@@ -63,6 +63,8 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 
 	class IvjEventHandler implements java.awt.event.ActionListener, javax.swing.event.ListSelectionListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
+			if (e.getSource() == FindDialog.this.getTxtName())
+				connEtoC1(e);
 			if (e.getSource() == FindDialog.this.getBtnSearch())
 				connEtoC1(e);
 			if (e.getSource() == FindDialog.this.getBtnCancel())
@@ -111,7 +113,8 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 		showResults(results);
 		show();
 	}
-
+	
+	
 	/**
 	 * Handle escape key to close the dialog
 	 */
@@ -607,6 +610,7 @@ public class FindDialog extends ch.softenvironment.view.BaseDialog {
 	private void initConnections() throws java.lang.Exception {
 		// user code begin {1}
 		// user code end
+		getTxtName().addActionListener(ivjEventHandler);
 		getBtnSearch().addActionListener(ivjEventHandler);
 		getBtnCancel().addActionListener(ivjEventHandler);
 		getLstSearchList().addListSelectionListener(ivjEventHandler);
