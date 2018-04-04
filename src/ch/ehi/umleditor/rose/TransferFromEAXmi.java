@@ -340,7 +340,7 @@ public class TransferFromEAXmi {
 				} else {
 
 					// Type tipoAtributo =
-					// findTypeAttribute(ownedAttributeElement.getAttribute("type"));
+					
 					// ch.ehi.interlis.domainsandconstants.basetypes.Text text = new
 					// ch.ehi.interlis.domainsandconstants.basetypes.Text();
 					// text.setKind(ch.ehi.interlis.domainsandconstants.basetypes.TextKind.MAXLEN);
@@ -435,6 +435,17 @@ public class TransferFromEAXmi {
 				String typeCardinal = lowerOrUpper.getTagName();
 
 				// "string type" mode
+				if(typeCardinal.equals("type")) {
+					String ref = lowerOrUpper.getAttribute("xmi:idref");
+					ModelElement some = searchpackagedElementById(ref);
+					if (modElement instanceof AttributeDef && some instanceof DomainDef) {
+						DomainAttribute attrType = new DomainAttribute();
+						attrType.attachDomainDef((DomainDef)some);
+						((AttributeDef) modElement).attachAttrType(attrType);
+					}
+				}
+				
+				// cardinals
 				if (typeCardinal.equals("lowerValue")) {
 					lower = lowerOrUpper.getAttribute("value");
 
@@ -450,31 +461,30 @@ public class TransferFromEAXmi {
 					}
 				}
 
-				/*
-				 * // another mode ch.ehi.uml1_4.implementation.UmlMultiplicityRange r = new
-				 * ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-				 * if(typeCardinal.equals("lowerValue")) { lower =
-				 * lowerOrUpper.getAttribute("value"); r.setLower(Long.parseLong(lower)); } else
-				 * if(typeCardinal.equals("upperValue")) { upper =
-				 * lowerOrUpper.getAttribute("value"); if(upper.equals("*")) {
-				 * r.setUpper(Long.MAX_VALUE); } else { r.setUpper(Long.parseLong(upper)); }
-				 * 
-				 * }
-				 * 
-				 * ch.ehi.uml1_4.implementation.UmlMultiplicity m = new
-				 * ch.ehi.uml1_4.implementation.UmlMultiplicity(); m.addRange(r);
-				 * 
-				 */
 				if (modElement instanceof RoleDef) {
-					// ((RoleDef)modElement).setMultiplicity(m);
 					((RoleDef) modElement).setMultiplicity(MultiplicityConverter.createMultiplicity(range));
 				} else if (modElement instanceof AttributeDef) {
-					// ((AttributeDef)modElement).setMultiplicity(m);
 					((AttributeDef) modElement).setMultiplicity(MultiplicityConverter.createMultiplicity(range));
 				}
 
 			}
 		}
+	}
+
+	private ModelElement searchpackagedElementById(String ref) {
+		NodeList packagedElement = doc.getElementsByTagName("packagedElement");
+		
+		for (int j = 0; j < packagedElement.getLength(); ++j) {
+			Node propPackage = packagedElement.item(j);
+			NamedNodeMap attrPackage = propPackage.getAttributes();
+			if (attrPackage.getNamedItem("xmi:id").getNodeValue().equals(ref)) {
+				attrPackage.getNamedItem("name").getNodeValue();
+				//econtre el id, ahora a buscar en el modelo y retornarlo :D
+				//findRecursiveModelElement(1, modelLocation, currentNamespace)
+				return null;
+			}
+		}
+		return null;
 	}
 
 	private ModelElement findRecursiveModelElement(int level, String[] modelLocation, Namespace currentNamespace) {

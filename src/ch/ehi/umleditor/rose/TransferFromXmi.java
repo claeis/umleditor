@@ -89,6 +89,10 @@ public class TransferFromXmi {
 	
 	private PredefinedModel ilibase;
 
+	/**
+	 * xmi to INTERLIS
+	 * @param filename
+	 */
 	public void doXmiFile(String filename) {
 		try {
 			// Reading xmi file
@@ -192,9 +196,14 @@ public class TransferFromXmi {
 		}
 	}
 
+	
+	/**
+	 * Try find Type of attribute
+	 * @param nodeValue
+	 * @return
+	 */
 	private BaseType findTypeAttribute(String nodeValue) {
-		
-		
+			
 		String idTextType = "C16095C6-1D80-49ab-9A0B-5847A355489B"; // Verschiedene Arten von Text
 		String idEnumerationType = "279A049B-2BCC-4fb5-9C8F-3B22EF3EE0ED"; // Verschiedene Arten von Aufzaehlungen
 		String idEnumTreeValueType = "064231DE-6F7D-43bb-A0B9-B4C37906E012"; // Weitere Art von Aufzaehlung
@@ -306,6 +315,11 @@ public class TransferFromXmi {
 		return null;
 	}
 
+	/**
+	 * Check unitdef tag uml to difference between a classdef
+	 * @param elem
+	 * @return
+	 */
 	private boolean isUnitDef(Element elem) {
 		NodeList units = doc.getElementsByTagName("ili:UnitDef");
 		String idClass = elem.getAttribute("xmi:id");
@@ -319,6 +333,11 @@ public class TransferFromXmi {
 		return false;
 	}
 
+	/**
+	 * Check topic definition
+	 * @param attr
+	 * @return
+	 */
 	private boolean isTopicDef(NamedNodeMap attr) {
 		String id = attr.getNamedItem("xmi:id").getNodeValue();
 		String[] elements = id.split("[.]");
@@ -328,6 +347,11 @@ public class TransferFromXmi {
 		return false;
 	}
 
+	/**
+	 * Check numeric parameter
+	 * @param cadena
+	 * @return
+	 */
 	private static boolean isNumeric(String cadena) {
 		try {
 			Integer.parseInt(cadena);
@@ -337,6 +361,9 @@ public class TransferFromXmi {
 		}
 	}
 
+	/**
+	 * Try check INTERLIS definitions
+	 */
 	private boolean isINTERLIS2Def(NamedNodeMap attr) {
 		String id = attr.getNamedItem("xmi:id").getNodeValue();
 		if (id.contains(".") || isNumeric(id)) {
@@ -345,6 +372,9 @@ public class TransferFromXmi {
 		return true;
 	}
 	
+	/**
+	 * Create new topic definition
+	 */
 	private void addTopicToModel(Element elem, ModelDef modelo) {
 		topic = new TopicDef();
 		String topicName = elem.getAttribute("name");
@@ -365,6 +395,11 @@ public class TransferFromXmi {
 	}
 	
 	// soy el recursivo
+	/**
+	 * Create new model elements 
+	 * @param elem
+	 * @param modelo
+	 */
 	public void addPackageToModel(Element elem, ModelElement modelo) {
 		String packagedElementType = elem.getAttribute("xmi:type");
 		String elemName = elem.getAttribute("name");
@@ -406,6 +441,11 @@ public class TransferFromXmi {
 		} 
 	}
 	
+	/**
+	 * Create new Association definition
+	 * @param elem
+	 * @param modelo
+	 */
 	private void addAssociationToModel(Element elem, ModelElement modelo) {
 		asociacion = new AssociationDef();
 		asociacion.setName(new NlsString(elem.getAttribute("name")));
@@ -453,6 +493,11 @@ public class TransferFromXmi {
 		
 	}
 	
+	/**
+	 * Search Cardinality on a given model element
+	 * @param modElement
+	 * @param ownedEnd
+	 */
 	private void addCardinality(ModelElement modElement, Node ownedEnd) {
         Node lowerUpper = (Node) ownedEnd;
         NodeList cardinalidad = lowerUpper.getChildNodes();
@@ -515,7 +560,11 @@ public class TransferFromXmi {
         }
     }
 
-
+	/**
+	 * Create a Domain definition with Structure type Enumeration
+	 * @param elem
+	 * @param modelo
+	 */
 	private void addStructureEnumTypeToModel(Element elem, ModelElement modelo) {
 		dominio = new DomainDef();
 		String structureEnumName = elem.getAttribute("name");
@@ -552,6 +601,11 @@ public class TransferFromXmi {
 		
 	}
 
+	/**
+	 * Create Domain definition 
+	 * @param elem
+	 * @param modelo
+	 */
 	private void addDomainToModel(Element elem, ModelElement modelo) {
 		dominio = new DomainDef();
 		String domainName = elem.getAttribute("name");
@@ -566,7 +620,11 @@ public class TransferFromXmi {
 		}
 	}
 	
-
+	/**
+	 * Create a Class definition with Structure type
+	 * @param elem
+	 * @param modelo
+	 */
 	private void addStructureToModel(Element elem, ModelElement modelo) {
 		clase = new ClassDef();
 		String className = elem.getAttribute("name");
@@ -620,6 +678,13 @@ public class TransferFromXmi {
 		
 	}
 
+	/**
+	 * Search a model element
+	 * @param level
+	 * @param modelLocation
+	 * @param currentNamespace
+	 * @return
+	 */
 	private ModelElement findRecursiveModelElement(int level, String[] modelLocation, Namespace currentNamespace) {
 		Iterator it = currentNamespace.iteratorOwnedElement();
 		while (it.hasNext()) {
@@ -638,6 +703,11 @@ public class TransferFromXmi {
 		return null;
 	}
 	
+	/**
+	 * Find INTERLIS definitions at jtree model
+	 * @param modelLocation
+	 * @return
+	 */
 	private ModelElement findRecursiveInterlis2Def(String[] modelLocation) {
 		Namespace _firstNodeModel = (Namespace) firstNodeModel;
 		Iterator it = _firstNodeModel.iteratorOwnedElement();
@@ -652,6 +722,11 @@ public class TransferFromXmi {
 		return null;
 	}
 
+	/**
+	 * Create Class definition to model
+	 * @param elem
+	 * @param modelo
+	 */
 	public void addClassToModel (Element elem, ModelElement modelo) {
 		clase = new ClassDef();
 		clase.setKind(ClassDefKind.CLASS);
