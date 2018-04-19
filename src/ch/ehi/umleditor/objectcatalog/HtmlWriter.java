@@ -518,7 +518,7 @@ public class HtmlWriter {
 	if (pass == STRUCTURE) {
 		if (linkElements) {
 			out.write("<p style=\"text-indent:" + Double.toString(level)
-					+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value +"esto es asosciation def papu"+ "</a></p>");
+					+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
 			newline();
 		} else {
 			out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
