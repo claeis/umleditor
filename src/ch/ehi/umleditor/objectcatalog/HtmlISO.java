@@ -27,11 +27,9 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
-import ch.ehi.umleditor.objectcatalog.HtmlWriter.CompareByName;
-import ch.ehi.umleditor.objectcatalog.HtmlWriter.CompareByNameAndIdx;
 
 public class HtmlISO {
-	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlWriter.class);
+	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlISO.class);
 
 	// used in STRUCTURE pass to suppress links to element definitions
 	private boolean linkElements;
@@ -521,19 +519,19 @@ public class HtmlISO {
 				out.write("<COL>");
 				newline();
 				
-				out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabName") + "</font></TD>");
 				newline();
-				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabKind") + "</font></TD>");//mine
 				newline();
-				out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\" >"
 						+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
 				newline();
-				out.write("<TD width=\"111\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TD width=\"111\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabType") + "</font></TD>");
 				newline();
-				out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TD widht=\"135\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
 				newline();
 				boolean createSeperator = true;
@@ -705,7 +703,7 @@ public class HtmlISO {
 				if (aclass.iteratorFeature().hasNext() || aclass.iteratorAssociation().hasNext()
 						|| (aclass instanceof Association && ((Association) aclass).iteratorConnection().hasNext())) {
 					out.write(
-							"<TABLE border=\"0\" frame=hsides roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
+							"<TABLE border=\"0\" roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
 					newline();
 					out.write("<COL>");
 					newline();
@@ -718,20 +716,29 @@ public class HtmlISO {
 					out.write("<COL>");
 					newline();
 					
-					out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
 							+ rsrc.getString("CTtabName") + "</font></TD>");
 					newline();
-					out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
-							+ rsrc.getString("CTtabMetaAttrb") + "</font></TD>");//mine
+					out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
 					newline();
-					out.write("<TD width=\"125\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
-							+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
+					out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabCode") + "</font></TD>");
 					newline();
-					out.write("<TD width=\"111\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+					out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabDescription") + "</font></TD>");
+					newline();
+					out.write("<TD width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
 							+ rsrc.getString("CTtabType") + "</font></TD>");
 					newline();
-					out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
-							+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
+					out.write("<TD width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabUnitMed") + "</font></TD>");
+					newline();
+					out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
+					newline();
+					out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabDomain") + "</font></TD></TR>");
 					newline();
 					boolean createSeperator = true;
 					java.util.ArrayList elev = new java.util.ArrayList();
@@ -824,7 +831,7 @@ public class HtmlISO {
 			if (pass == BODY) {
 				String style = "";
 				if (createSeperator) {
-					style = " STYLE=\"border-top: solid black; border-top-width: 2px\"";
+					style = " STYLE=\"border-top: solid gray; border-top-width: 2px\"";
 				}
 				if (clsFile != null) {
 					clsFile.indent();
@@ -838,18 +845,24 @@ public class HtmlISO {
 					if(metaDispName != null) {
 							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 							+ "</TD><TD " + style + ">" + encodeString(metaDispName)//mine
-							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
-							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+							+ "</TD><TD " + style + ">" + encodeString(" ")//mine
 							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
+							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 							+ "</TD></TR>");
 						newline();
 					}
 					else {
 						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-						+ "</TD><TD " + style + ">" + encodeString("-")//mine
-						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())						
-						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+						+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+						+ "</TD><TD " + style + ">" + encodeString(" ")//code
 						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+						+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+						+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 						+ "</TD></TR>");
 				newline();
 					}
@@ -857,10 +870,13 @@ public class HtmlISO {
 				}
 				else {
 					out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-							+ "</TD><TD " + style + ">" + encodeString("-")//mine
-							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())						
-							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+							+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+							+ "</TD><TD " + style + ">" + encodeString(" ")//code
 							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 							+ "</TD></TR>");
 					newline();
 				}
@@ -1520,10 +1536,10 @@ public class HtmlISO {
 				newline();
 				out.write("<COL>");
 				newline();
-				out.write("<TR><TD width=\"85\" bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabName") + "</font></TD>");
 				newline();
-				out.write("<TD widht=\"135\"bgcolor=\"#C0C0C0\" align=\"left\"><font face=\"Arial\">"
+				out.write("<TD widht=\"135\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
 				newline();
 				boolean createSeperator = true;
