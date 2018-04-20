@@ -202,6 +202,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JPanel ivjFrcContents = null;
 	private JMenuItem ivjMniObjectCatalog = null;
 	private JMenuItem ivjMniStructure = null;
+	private JMenuItem ivjMniISO = null;
 	private JMenuItem ivjMniImportXmiRose = null;
 	private JMenuItem ivjMniExportXmi = null;
 	private JMenu ivjMnuXMI_Rose = null;
@@ -263,6 +264,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				connEtoC2(e);
 			if (e.getSource() == LauncherView.this.getMniStructure())
 				connEtoC35(e);
+			if (e.getSource() == LauncherView.this.getMniISO())
+				connEtoC43(e);
 			if (e.getSource() == LauncherView.this.getMniXmlExport())
 				connEtoC36(e);
 			if (e.getSource() == LauncherView.this.getMniImportXmiRose())
@@ -1290,6 +1293,27 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			// user code begin {1}
 			// user code end
 			this.mniXmiExport();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	/**
+	 * connEtoC43:
+	 * 
+	 * @param arg1
+	 *            java.awt.event.ActionEvent
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private void connEtoC43(java.awt.event.ActionEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			this.mniISO();
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -2714,6 +2738,28 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		return ivjMniStructure;
 	}
+	
+	/**
+	 * Return the MniISO (ISO 19110) property value.
+	 * 
+	 * @return javax.swing.JMenuItem
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JMenuItem getMniISO() {
+		if (ivjMniISO == null) {
+			try {
+				ivjMniISO = new javax.swing.JMenuItem();
+				ivjMniISO.setName("MniISO");
+				ivjMniISO.setText("ISO 19110");
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjMniISO;
+	}
 
 	/**
 	 * Return the MniTileWindows property value.
@@ -2981,6 +3027,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				ivjMnuReports.setText("Berichte");
 				ivjMnuReports.add(getMniObjectCatalog());
 				ivjMnuReports.add(getMniStructure());
+				ivjMnuReports.add(getMniISO());
 				// user code begin {1}
 				ivjMnuReports.setText(CommonUserAccess.getMnuReportsText());
 				// user code end
@@ -3594,6 +3641,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		getMniSaveAs().addActionListener(ivjEventHandler);
 		this.addWindowListener(ivjEventHandler);
 		getMniStructure().addActionListener(ivjEventHandler);
+		getMniISO().addActionListener(ivjEventHandler);
 		getTlbStandard().addToolBarListener(ivjEventHandler);
 		getMniXmlExport().addActionListener(ivjEventHandler);
 		getMniImportXmiRose().addActionListener(ivjEventHandler);
@@ -4188,6 +4236,15 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	protected void mniStructure() {
 		tool().deactivate();
 		ch.ehi.umleditor.objectcatalog.ObjectCatalog.writeStructureHtml();
+		tool().activate();
+	}
+	
+	/**
+	 * Structure-Report.
+	 */
+	protected void mniISO() {
+		tool().deactivate();
+		ch.ehi.umleditor.objectcatalog.ObjectCatalog.writeISOHtml();
 		tool().activate();
 	}
 

@@ -157,6 +157,44 @@ public class ObjectCatalog {
 		}
 		return;
 	}
+	
+	public static void writeISOHtml() {
+		ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
+				LauncherView.getInstance(), rsrc.getString("CTPackageSelector"), true,
+				LauncherView.getInstance().getModel());
+		if (packageDialog.isSaved()) {
+			ch.ehi.uml1_4.foundation.core.Namespace apackage = packageDialog.getSelectedPackage();
+			if (apackage == null) {
+				apackage = LauncherView.getInstance().getModel();
+			}
+			FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
+			saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
+			saveDialog.setFileFilter(GenericFileFilter.createHtmlFilter());
+
+			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
+				String filename = saveDialog.getSelectedFile().getAbsolutePath();
+
+				BufferedWriter out = null;
+				try {
+					out = new BufferedWriter(new FileWriter(filename));
+				} catch (IOException ex) {
+					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"), ex.getLocalizedMessage());
+					return;
+				}
+				try {
+					HtmlISO writer = new HtmlISO();
+					writer.doObjectCatalog(apackage, out);
+					out.close();
+					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),
+							MessageFormat.format(rsrc, "CTobjcatDone", filename));
+				} catch (IOException ex) {
+					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"), ex.getLocalizedMessage());
+				}
+			}
+		}
+		return;
+	}
 
 	public static void writeAllHtml(boolean includeChapterNr) {
 		ch.ehi.umleditor.application.PackageSelectionDialog packageDialog = new ch.ehi.umleditor.application.PackageSelectionDialog(
