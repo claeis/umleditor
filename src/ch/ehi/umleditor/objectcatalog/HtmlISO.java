@@ -544,7 +544,6 @@ public class HtmlISO {
 				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabNav") + "</font></TD></TR>");
 				
-				//aqui
 				newline();
 				boolean createSeperator = true;
 				java.util.ArrayList elev = new java.util.ArrayList();
@@ -1481,6 +1480,7 @@ public class HtmlISO {
 
 		private void visitEnumDomainDef(DomainDef domdef) throws java.io.IOException {
 			String domDefName = encodeString(domdef.getDefLangName());
+			String domDoc = encodeString((domdef.getDocumentation() != null)?domdef.getDocumentation().getValue(): " ");
 			ch.ehi.interlis.domainsandconstants.basetypes.Enumeration def = (ch.ehi.interlis.domainsandconstants.basetypes.Enumeration) domdef
 					.getType();
 
@@ -1551,9 +1551,33 @@ public class HtmlISO {
 				out.write("<COL>");
 				newline();
 				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabName") + "</font></TD>");
+						+ rsrc.getString("CTtabDomain") + "</font></TD>");
 				newline();
-				out.write("<TD widht=\"135\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCode") + "</font></TD>");
+				newline();
+				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabDescription") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCode") + "</font></TD>");
+				newline();
+				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabDescription") + "</font></TD>");
+				newline();
+				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCode") + "</font></TD>");
+				newline();
+				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
 				newline();
 				boolean createSeperator = true;
@@ -1570,13 +1594,80 @@ public class HtmlISO {
 						 * style=" STYLE=\"border-top: solid black; border-top-width: 2px\""
 						 * ; }
 						 */
+					
 						String eleName = getEnumEleName(ele);
-						out.write("<TR><TD" + style + ">" + encodeString(eleName)
+						String[] etiqueta = eleName.split("\\.");
+						
+						if(etiqueta.length == 1) {
+							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
+							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
+							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ") //Documentacion del padre	//+ "</TD><TD" + style + ">" + encodeString(mapNlsString(ele.getMetaAttrb()))
+							+ "</TD><TD" + style + ">" + encodeString(" ")//eTerciaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD></TR>");
+							newline();
+						} else if(etiqueta.length == 2) {
+							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
+							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
+							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
+							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")//domDoc
+							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation())) //Documentacion del padre	//+ "</TD><TD" + style + ">" + encodeString(mapNlsString(ele.getMetaAttrb()))
+							+ "</TD><TD" + style + ">" + encodeString(" ")//eTerciaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD></TR>");
+							newline();
+						} else if(etiqueta.length == 3) {
+							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
+							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
+							String eTerciaria = (etiqueta[2] != null)?etiqueta[2]:" ";
+							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
+							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")//encodeString(domDoc)
+							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(eTerciaria)//eTerciaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
 							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
 							+ "</TD></TR>");
-						newline();
+							newline();
+						}
+							else {
+							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
+							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
+							String eTerciaria = (etiqueta[2] != null)?etiqueta[2]:" ";
+							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
+							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(domDoc)
+							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation())) //Documentacion del padre	
+							+ "</TD><TD" + style + ">" + encodeString(mapNlsString(ele.getMetaAttrb()))//eTerciaria)
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD><TD" + style + ">" + encodeString(" ")
+							+ "</TD></TR>");
+							newline();
+						}
+						
+						
 						if (clsFile != null)
 							clsFile.println(eleName);
+						
+						
+						
 					}
 
 				}
