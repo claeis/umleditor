@@ -854,6 +854,18 @@ public class HtmlISO {
 					String metaDispName = dispName.getValue();
 					
 					if(metaDispName != null) {
+						if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
+								|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
+								|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
+								|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
+								|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
+								|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
+								|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
+								|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
+								|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
+								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
+								|| typeLabel.equals("Integer")
+								) {
 							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 							+ "</TD><TD " + style + ">" + encodeString(metaDispName)//mine
 							+ "</TD><TD " + style + ">" + encodeString(" ")//mine
@@ -863,9 +875,62 @@ public class HtmlISO {
 							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
 							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 							+ "</TD></TR>");
-						newline();
+							newline();
+						
+						} 
+													
 					}
 					else {
+						if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
+								|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
+								|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
+								|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
+								|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
+								|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
+								|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
+								|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
+								|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
+								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
+								|| typeLabel.equals("Integer")
+								) {
+									out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+									+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+									+ "</TD><TD " + style + ">" + encodeString(" ")//code
+									+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+									+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+									+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+									+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+									+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
+									+ "</TD></TR>");
+									newline();
+						} else {
+							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+							+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+							+ "</TD><TD " + style + ">" + encodeString(" ")//code
+							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+							+ "</TD><TD " + style + ">" + encodeString("Domain")//code
+							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+							+ "</TD></TR>");
+							newline();
+						}
+					}
+					
+				}
+				else { //DispName null
+					if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
+							|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
+							|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
+							|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
+							|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
+							|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
+							|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
+							|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
+							|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
+							|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
+							|| typeLabel.equals("Integer")
+							) {
 						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//disp
 						+ "</TD><TD " + style + ">" + encodeString(" ")//code
@@ -875,21 +940,20 @@ public class HtmlISO {
 						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 						+ "</TD></TR>");
-				newline();
+						newline();
+					} else {
+						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+						+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+						+ "</TD><TD " + style + ">" + encodeString(" ")//code
+						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+						+ "</TD><TD " + style + ">" + encodeString("Domain")//code
+						+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+						+ "</TD></TR>");
+						newline();
 					}
 					
-				}
-				else {
-					out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-							+ "</TD><TD " + style + ">" + encodeString(" ")//disp
-							+ "</TD><TD " + style + ">" + encodeString(" ")//code
-							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
-							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
-							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
-							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
-							+ "</TD></TR>");
-					newline();
 				}
 				ch.ehi.interlis.domainsandconstants.Type type = null;
 				ch.ehi.interlis.attributes.DomainAttribute attrType = (ch.ehi.interlis.attributes.DomainAttribute) ((AttributeDef) attr)
