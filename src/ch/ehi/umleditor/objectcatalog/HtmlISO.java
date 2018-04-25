@@ -86,7 +86,7 @@ public class HtmlISO {
 				// css damit man den Link nicht sieht und dass der Rahmen unten
 				// angezeigt wird
 				out.write("<STYLE TYPE='text/css'>A {text-decoration: none }"
-						+ "TD{border-bottom: solid black; border-bottom-width: 1px}</STYLE>");
+						+ "TD{border: solid gray; border-width: 1px}</STYLE>");
 				out.write("</HEAD>");
 				newline();
 				out.write("<body link=\"#000000\"" + " vlink=\"#000000\"" + " alink=\"#000000\">");
@@ -202,19 +202,19 @@ public class HtmlISO {
 					out.write("<table border=\"0\">");
 					out.write("<tr>");
 					newline();
-					out.write("<td style=\"border-bottom: none\"><i>" + rsrc.getString("CTauthor") + "</i></td>");
+					out.write("<td><i>" + rsrc.getString("CTauthor") + "</i></td>");
 					newline();
 					out.write(
-							"<td style=\"border-bottom: none\"><font face=\"Arial\" size=\"3\">" + author + "</font></td>");
+							"<td><font face=\"Arial\" size=\"3\">" + author + "</font></td>");
 					newline();
 					out.write("</tr>");
 					newline();
 
 					out.write("<tr>");
 					newline();
-					out.write("<td style=\"border-bottom: none\"><i>" + rsrc.getString("CTversion") + "</i></td>");
+					out.write("<td><i>" + rsrc.getString("CTversion") + "</i></td>");
 					newline();
-					out.write("<td style=\"border-bottom: none\"><font face=\"Arial\" size=\"3\">" + version
+					out.write("<td><font face=\"Arial\" size=\"3\">" + version
 							+ "</font></td>");
 					newline();
 					out.write("</tr>");
@@ -506,7 +506,7 @@ public class HtmlISO {
 			if (adef.iteratorFeature().hasNext() || adef.iteratorAssociation().hasNext()
 					|| (adef instanceof Association && ((Association) adef).iteratorConnection().hasNext())) {
 				out.write(
-						"<TABLE border=\"0\" frame=hsides roles=rows cellspacing=\"0\" cellpadding=\"7\" height=\"1\">");
+						"<TABLE border=\"1\" frame=void roles=rows cellspacing=\"0\" cellpadding=\"7\" height=\"1\">");
 				newline();
 				out.write("<COL>");
 				newline();
@@ -714,7 +714,7 @@ public class HtmlISO {
 				if (aclass.iteratorFeature().hasNext() || aclass.iteratorAssociation().hasNext()
 						|| (aclass instanceof Association && ((Association) aclass).iteratorConnection().hasNext())) {
 					out.write(
-							"<TABLE border=\"0\" roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
+							"<TABLE border=\"1\" roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
 					newline();
 					out.write("<COL>");
 					newline();
@@ -811,12 +811,12 @@ public class HtmlISO {
 						}
 					}
 					java.util.Collections.sort(elev, new CompareByName());
-					rolei = elev.iterator();
+					/*rolei = elev.iterator();
 					while (rolei.hasNext()) {
 						Object obj = rolei.next();
 						visitRole((RoleDef) obj, createSeperator);
 						createSeperator = false;
-					}
+					}*/
 					out.write("</TABLE>");
 					newline();
 				}
@@ -956,7 +956,7 @@ public class HtmlISO {
 			if (pass == BODY) {
 				String style = "";
 				if (createSeperator) {
-					style = " STYLE=\"border-top: solid black; border-top-width: 2px\"";
+					style = " STYLE=\"border-top: solid gray; border-top-width: 2px\"";
 				}
 				out.write("<TR><TD" + style + ">" + encodeString(role.getDefLangName())
 						+ "</TD><TD" + style + ">" + encodeString(" ")
@@ -1540,7 +1540,7 @@ public class HtmlISO {
 			if (pass == BODY) {
 				out.write(encodeDescription(mapNlsString(domdef.getDocumentation())));
 				newline();
-				out.write("<TABLE border=\"0\" frame=hsides roles=rows cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
+				out.write("<TABLE border=\"1\" frame=void cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
 				newline();
 				out.write("<COL>");
 				newline();
