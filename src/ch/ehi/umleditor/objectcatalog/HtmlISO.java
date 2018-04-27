@@ -77,6 +77,8 @@ public class HtmlISO {
 				// add given package to todo-list; so it is processed as a first element
 				// todo.add(apackage);
 
+				out.write("<!DOCTYPE html>");
+				newline();
 				out.write("<HTML>");
 				newline();
 				out.write("<HEAD>");
@@ -1648,6 +1650,12 @@ public class HtmlISO {
 				Iterator elei = getEnumEleIterator(def);
 				if (clsFile != null)
 					clsFile.indent();
+//				int i = 0;
+//				while(elei.hasNext()) {
+//				    i++;
+//				    elei.next();
+//				}
+				out.write("<TR><TD ROWSPAN=\""+ 0 + "\"> "+ encodeString(domDefName)+"</TD>");
 				while (elei.hasNext()) {
 					ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
 							.next();
@@ -1664,8 +1672,8 @@ public class HtmlISO {
 						
 						if(etiqueta.length == 1) {
 							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
-							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
-							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							out.write(
+							 "<TD" + style + ">" + encodeString(ePrincipal)
 							+ "</TD><TD" + style + ">" + encodeString(" ")
 							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
 							+ "</TD><TD" + style + ">" + encodeString(" ")
@@ -1679,8 +1687,8 @@ public class HtmlISO {
 						} else if(etiqueta.length == 2) {
 							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
 							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
-							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
-							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							out.write(
+							"<TD" + style + ">" + encodeString(ePrincipal)
 							+ "</TD><TD" + style + ">" + encodeString(" ")
 							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getEnumeration().getParent().getDocumentation()))
 							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
@@ -1695,8 +1703,8 @@ public class HtmlISO {
 							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
 							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
 							String eTerciaria = (etiqueta[2] != null)?etiqueta[2]:" ";
-							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
-							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
+							out.write(
+							"<TD" + style + ">" + encodeString(ePrincipal)
 							+ "</TD><TD" + style + ">" + encodeString(" ")
 							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getEnumeration().getParent().getEnumeration().getParent().getDocumentation()))
 							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
