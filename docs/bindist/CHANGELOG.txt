@@ -1,4 +1,10 @@
-﻿UML-Editor 3.6.4.2 (2018-04-04)
+﻿UML-Editor 3.6.4.3 (2018-04-30)
+----------------------------------
+- Enable search button
+- Table template for ISO19110
+- Check update at start umleditor
+
+UML-Editor 3.6.4.2 (2018-04-04)
 ----------------------------------
 - Now uml editor check updates
 - Fix some issues from update INTERLIS module
