@@ -63,7 +63,6 @@ public class HtmlISO {
 	double textIdent = 0.5;
 
 	private static final int CONTENTS = 1;
-	private static final int STRUCTURE = 2;
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
@@ -95,9 +94,6 @@ public class HtmlISO {
 				newline();
 
 				pass = CONTENTS;
-				walkTree(apackage);
-
-				pass = STRUCTURE;
 				walkTree(apackage);
 
 				pass = BODY;
@@ -172,19 +168,6 @@ public class HtmlISO {
 				aNameStructure = Integer.toString(numerationId[0]) + "_" + defLangName;
 			} else {
 				concatedValue = defLangName;
-			}
-
-			if (pass == STRUCTURE) {
-				if (linkElements) {
-					out.write("<p style=\"text-indent:" + Double.toString(level)
-							+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aNameStructure + "\">" + concatedValue
-							+ "</a></p>");
-					newline();
-				} else {
-					out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
-							+ concatedValue + "</p>");
-					newline();
-				}
 			}
 
 			if (pass == CONTENTS) {
@@ -484,19 +467,7 @@ public class HtmlISO {
 					+ value + "</a></P>");
 			newline();
 		}
-		
-		if (pass == STRUCTURE) {
-			if (linkElements) {
-				out.write("<p style=\"text-indent:" + Double.toString(level)
-						+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
-				newline();
-			} else {
-				out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
-						+ value + "</p>");
-				newline();
-			}
-		}
-		
+	
 		// Here the values for the decimal places are also increased 
 		// this brings you to a new level or new entry
 		iddP++;
@@ -678,18 +649,6 @@ public class HtmlISO {
 				out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">"
 						+ value + "</a></P>");
 				newline();
-			}
-
-			if (pass == STRUCTURE) {
-				if (linkElements) {
-					out.write("<p style=\"text-indent:" + Double.toString(level)
-							+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
-					newline();
-				} else {
-					out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
-							+ value + "</p>");
-					newline();
-				}
 			}
 
 			// Here the values for the decimal places are also increased 
@@ -1043,42 +1002,6 @@ public class HtmlISO {
 			// -end- 3CEE8BA20395 body3CEE891B03C7 "visitRole"
 		}
 
-		// -beg- preserve=no 3E611C74008D head3CEE891B03C7 "doStruct"
-		public void doStruct(Namespace apackage, java.io.Writer out)
-				// -end- 3E611C74008D head3CEE891B03C7 "doStruct"
-				// declare any checked exceptions
-				// please fill in/modify the following section
-				// -beg- preserve=yes 3E611C74008D throws3CEE891B03C7 "doStruct"
-				throws java.io.IOException
-
-		// -end- 3E611C74008D throws3CEE891B03C7 "doStruct"
-		{
-			// please fill in/modify the following section
-			// -beg- preserve=yes 3E611C74008D body3CEE891B03C7 "doStruct"
-			this.out = out;
-			linkElements = false;
-
-			out.write("<HTML>");
-			newline();
-			out.write("<HEAD>");
-			newline();
-			out.write("<TITLE>" + formatText("CTstructTitle", encodeString(apackage.getDefLangName())) + "</TITLE>");
-			newline();
-			out.write("</HEAD>");
-			newline();
-			out.write("<body link=\"#000000\"" + " vlink=\"#000000\"" + " alink=\"#000000\">");
-			newline();
-
-			pass = STRUCTURE;
-			walkTree(apackage);
-
-			out.write("</BODY>");
-			newline();
-			out.write("</HTML>");
-			newline();
-			return;
-			// -end- 3E611C74008D body3CEE891B03C7 "doStruct"
-		}
 
 		// declare/define something only in the code
 		// please fill in/modify the following section
@@ -1425,17 +1348,6 @@ public class HtmlISO {
 				newline();
 			}
 
-			if (pass == STRUCTURE) {
-				out.write("<font face=\"Arial\">");
-				newline();
-				out.write("<H1>" + rsrc.getString("CTStructure") + "</H1>");
-				newline();
-
-				walkTreeRecursiv(apackage);
-
-				out.write("</font>");
-				newline();
-			}
 			// Counters werden zu ihrem Ursprungswert zur�ckgesetzt
 			resetCounters();
 		}
@@ -1585,18 +1497,6 @@ public class HtmlISO {
 				newline();
 				if (clsFile != null)
 					clsFile.println(domdef.getDefLangName());
-			}
-
-			if (pass == STRUCTURE) {
-				if (linkElements) {
-					out.write("<p style=\"text-indent:" + Double.toString(level)
-							+ "cm; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">" + value + "</a></p>");
-					newline();
-				} else {
-					out.write("<p style=\"text-indent:" + Double.toString(level) + "cm; line-height: 15%; margin-left: 0\">"
-							+ value + "</p>");
-					newline();
-				}
 			}
 
 			// Hier wird der Werte f�r die Kommastellen auch erh�ht

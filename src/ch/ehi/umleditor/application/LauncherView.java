@@ -2750,7 +2750,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			try {
 				ivjMniISO = new javax.swing.JMenuItem();
 				ivjMniISO.setName("MniISO");
-				ivjMniISO.setText("ISO 19110");
+				ivjMniISO.setText("ISO 19110 template");
 				// user code end
 			} catch (java.lang.Throwable ivjExc) {
 				// user code begin {2}
