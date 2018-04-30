@@ -22,6 +22,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -1575,7 +1576,21 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 
 	private void mniCheckUpdate() {
 		objCheckUpdate = new CheckUpdate("https://api.github.com/repos/AgenciaImplementacion/umleditor/releases/latest");
-		objCheckUpdate.parseAndCheckJson();
+		if (objCheckUpdate.parseAndCheckJson()) {
+			JOptionPane.showMessageDialog(null, "Already updated!");
+		} else {
+			JOptionPane.showMessageDialog(null, new MessageWithLink("New update available "+objCheckUpdate.obj+"! <a href=\"https://github.com/AgenciaImplementacion/umleditor/releases\">Download</a>"), "New update!", JOptionPane.INFORMATION_MESSAGE );
+		}
+	}
+	
+	private void mniCheckUpdate(Boolean value) {
+		if (value) {
+			objCheckUpdate = new CheckUpdate("https://api.github.com/repos/AgenciaImplementacion/umleditor/releases/latest");
+			if (!objCheckUpdate.parseAndCheckJson()) {
+				JOptionPane.showMessageDialog(null, new MessageWithLink("New update available "+objCheckUpdate.obj+"! <a href=\"https://github.com/AgenciaImplementacion/umleditor/releases\">Download</a>"), "New update!", JOptionPane.INFORMATION_MESSAGE );
+			}
+		}
+		
 	}
 
 
@@ -3669,6 +3684,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			setTitle("UML/INTERLIS-Editor");
 			setContentPane(getFrcContents());
 			setIconImage(new ImageIcon(getClass().getResource(IMAGE_PATH+"umlicon.gif")).getImage());
+			mniCheckUpdate(true);
 			initConnections();
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);

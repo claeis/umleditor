@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 public class CheckUpdate {
 	String url = null;
+	DataObject obj = null;
 	
 	public String getUrl() {
 		return url;
@@ -31,11 +32,11 @@ public class CheckUpdate {
             return tag_name;
         }
     }
-	public void parseAndCheckJson(){
+	public boolean parseAndCheckJson(){
         try{
             Reader reader = new InputStreamReader(new URL(url).openStream()); //Read the json output
             Gson gson = new GsonBuilder().create();
-            DataObject obj = gson.fromJson(reader, DataObject.class);
+            obj = gson.fromJson(reader, DataObject.class);
             
             String[] actualVersion = LauncherView.getVersion().split("\\.");
             String[] serverVersion = obj.toString().split("\\.");
@@ -43,16 +44,15 @@ public class CheckUpdate {
             //3.4.4.1
             if( (serverVersion[0].contains(actualVersion[0])) && (serverVersion[1].equals(actualVersion[1]))&& (serverVersion[2].equals(actualVersion[2])) && (actualVersion[3].startsWith(serverVersion[3])) ){
             	
-            				JOptionPane.showMessageDialog(null, "Already updated!");
-            		
+            		return true; 		
             } else {
-				JOptionPane.showMessageDialog(null, new MessageWithLink("New update available "+obj+"! <a href=\"https://github.com/AgenciaImplementacion/umleditor/releases\">Download</a>"), "New update!", JOptionPane.INFORMATION_MESSAGE );
+				return false;
 			}
-            
-            System.out.println(obj);
+           
         }catch(Exception e){
             System.out.println(e);
         }
+		return false;
     }
 	
 }

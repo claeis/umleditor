@@ -1550,11 +1550,6 @@ public class HtmlISO {
 				Iterator elei = getEnumEleIterator(def);
 				if (clsFile != null)
 					clsFile.indent();
-//				int i = 0;
-//				while(elei.hasNext()) {
-//				    i++;
-//				    elei.next();
-//				}
 				out.write("<TR><TD ROWSPAN=\""+ 0 + "\"> "+ encodeString(domDefName)+"</TD>");
 				while (elei.hasNext()) {
 					ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
@@ -1633,14 +1628,10 @@ public class HtmlISO {
 							+ "</TD></TR>");
 							newline();
 						}
-						
-						
+												
 						if (clsFile != null)
 							clsFile.println(eleName);
-						
-						
-						
-					}
+						}
 
 				}
 				if (clsFile != null)
