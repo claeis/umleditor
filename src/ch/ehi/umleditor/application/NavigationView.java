@@ -219,7 +219,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 	public void adaptUserAction(EventObject event, Object control) {
 		Element treeNode = getSelectedNode();
 		boolean selected = (treeNode != null);
-
+		boolean check = false;
 		// treat "Main-Menu"
 		getMniOpenSpecification()
 				.setEnabled(selected && (!(treeNode instanceof ch.ehi.umleditor.umlpresentation.Diagram))
@@ -230,16 +230,19 @@ public class NavigationView extends ch.softenvironment.view.BasePanel
 		getMniRename().setEnabled(selected && NavigationTreeNodeUtility.isNodeEditable(treeNode));
 		getMniAddToDiagram().setEnabled(selected && (LauncherView.getInstance().getCurrentClassDiagram() != null)
 				&& LauncherView.getInstance().getCurrentClassDiagram().isAddable(treeNode));
-		getMniUpdateIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
+		
 		if(NavigationTreeNodeUtility.isINTERLIS2Def(treeNode)) {
 			INTERLIS2Def foo = (INTERLIS2Def) treeNode;
 			if (foo.getName().getValue().startsWith("<") || foo.getName().getValue().endsWith(">")) {
-				getMniExportIli().setEnabled(false);
+				check=false;
 			}else {
-				getMniExportIli().setEnabled(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode));//mine
+				check=true;
 			}
 			
 		}
+		//check =(selected && NavigationTreeNodeUtility.isINTERLIS2Def(treeNode)? :d;
+		getMniUpdateIli().setEnabled(check);//mine
+		getMniExportIli().setEnabled(check);
 		
 		// build "New-Menu" dynamically
 		getMnuNew().setEnabled(false);
