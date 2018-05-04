@@ -856,14 +856,21 @@ public class HtmlISO {
 								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
 								|| typeLabel.equals("Integer")
 								|| typeLabel.equals("XMLDate") 
+								|| typeLabel.equals("XMLDateTime") 
 								|| typeLabel.equals("GM_Surface2D")
 								) {
 									out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 									+ "</TD><TD " + style + ">" + encodeString(" ")//disp
 									+ "</TD><TD " + style + ">" + encodeString(" ")//code
-									+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
-									+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-									+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
+									+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation())));
+									if(typeLabel.equals("XMLDate")) {
+										out.write( "</TD><TD " + style + ">" + encodeString("Date"));
+									} else if(typeLabel.equals("XMLDateTime")) {
+										out.write( "</TD><TD " + style + ">" + encodeString("Date Time"));
+									} else {
+										out.write( "</TD><TD " + style + ">" + encodeString(typeLabel));
+									}
+									out.write("</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 									+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 									+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 									+ "</TD></TR>");
@@ -895,15 +902,22 @@ public class HtmlISO {
 							|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
 							|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
 							|| typeLabel.equals("Integer")
-							|| typeLabel.equals("XMLDate") 
+							|| typeLabel.equals("XMLDate")
+							|| typeLabel.equals("XMLDateTime") 
 							|| typeLabel.equals("GM_Surface2D")
 							) {
 						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//disp
 						+ "</TD><TD " + style + ">" + encodeString(" ")//code
-						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
-						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-						+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
+						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation())));
+						if(typeLabel.equals("XMLDate")) {
+							out.write( "</TD><TD " + style + ">" + encodeString("Date"));
+						} else if(typeLabel.equals("XMLDateTime")) {
+							out.write( "</TD><TD " + style + ">" + encodeString("Date Time"));
+						} else {
+							out.write( "</TD><TD " + style + ">" + encodeString(typeLabel));
+						}
+						out.write("</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 						+ "</TD></TR>");
