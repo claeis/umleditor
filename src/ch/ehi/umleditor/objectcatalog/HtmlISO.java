@@ -17,6 +17,7 @@ import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.Association;
 import ch.ehi.uml1_4.foundation.core.AssociationEnd;
@@ -27,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.umleditor.application.IliBaseTypeKind;
 
 public class HtmlISO {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlISO.class);
@@ -1066,6 +1068,9 @@ public class HtmlISO {
 					ret = rsrc.getString("CTtypeAREA");
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline) {
 					ret = rsrc.getString("CTtypePOLYLINE");
+				} else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType) {
+					ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType fool = (ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType) type;
+					ret = fool.getParticipant().getName().getValue(); //Dominio de tipo Structure
 				}
 			}
 			return ret;

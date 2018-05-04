@@ -1066,6 +1066,9 @@ public class HtmlWriter {
 				ret = rsrc.getString("CTtypeAREA");
 			} else if (type instanceof ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline) {
 				ret = rsrc.getString("CTtypePOLYLINE");
+			} else if(type instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType) {
+				ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType fool = (ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType) type;
+				ret = fool.getParticipant().getName().getValue(); //Dominio de tipo Structure
 			}
 		}
 		return ret;
