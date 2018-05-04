@@ -800,6 +800,7 @@ public class HtmlISO {
 			// please fill in/modify the following section
 			// -beg- preserve=yes 3CEE8B8A003D body3CEE891B03C7 "visitAttribute"
 			String typeLabel = getAttrType(attr);
+			String typeUnit = getUnit(attr);
 			if (pass == BODY) {
 				String style = "";
 				if (createSeperator) {
@@ -831,7 +832,7 @@ public class HtmlISO {
 							+ "</TD><TD " + style + ">" + encodeString(" ")//mine
 							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+							+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity()) 
 							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 							+ "</TD></TR>");
@@ -858,7 +859,7 @@ public class HtmlISO {
 									+ "</TD><TD " + style + ">" + encodeString(" ")//code
 									+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 									+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-									+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+									+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 									+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 									+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 									+ "</TD></TR>");
@@ -869,7 +870,7 @@ public class HtmlISO {
 							+ "</TD><TD " + style + ">" + encodeString(" ")//code
 							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 							+ "</TD><TD " + style + ">" + encodeString("Domain")//code
-							+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+							+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
 							+ "</TD></TR>");
@@ -896,7 +897,7 @@ public class HtmlISO {
 						+ "</TD><TD " + style + ">" + encodeString(" ")//code
 						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-						+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+						+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 						+ "</TD></TR>");
@@ -907,7 +908,7 @@ public class HtmlISO {
 						+ "</TD><TD " + style + ">" + encodeString(" ")//code
 						+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
 						+ "</TD><TD " + style + ">" + encodeString("Domain")//code
-						+ "</TD><TD " + style + ">" + encodeString(" ")//unitMed
+						+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
 						+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
 						+ "</TD><TD " + style + ">" + encodeString(typeLabel)
 						+ "</TD></TR>");
@@ -1001,6 +1002,26 @@ public class HtmlISO {
 			// -end- 3CEE8BA20395 body3CEE891B03C7 "visitRole"
 		}
 
+		public static String getUnit(Attribute attr) {
+			String ret = "";
+			if ((attr instanceof AttributeDef) && ((AttributeDef) attr).containsAttrType()) {
+				ch.ehi.interlis.domainsandconstants.Type type = null;
+				ch.ehi.interlis.attributes.DomainAttribute attrType = (ch.ehi.interlis.attributes.DomainAttribute) ((AttributeDef) attr)
+						.getAttrType();
+				if (attrType.containsDirect()) {
+					type = attrType.getDirect();
+				}
+				if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType) {
+					ch.ehi.interlis.domainsandconstants.basetypes.NumericType num = (ch.ehi.interlis.domainsandconstants.basetypes.NumericType) type;
+					if (num.containsUnitDef()) {
+						ret = num.getUnitDef().getDefLangName(); //tipo de medida
+						return ret;
+					}
+				}
+				
+			}
+			return " ";
+		}
 
 		// declare/define something only in the code
 		// please fill in/modify the following section
@@ -1022,14 +1043,7 @@ public class HtmlISO {
 					ret = rsrc.getString("CTtypeTEXT");
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType) {
 					ch.ehi.interlis.domainsandconstants.basetypes.NumericType num = (ch.ehi.interlis.domainsandconstants.basetypes.NumericType) type;
-					if (num.getMinDec() != null && num.getMaxDec() != null) {
-						ret = num.getMinDec().toString() + ".." + num.getMaxDec().toString();
-					} else {
 						ret = rsrc.getString("CTtypeNUMERIC");
-					}
-					if (num.containsUnitDef()) {
-						ret = ret + "[" + num.getUnitDef().getDefLangName() + "]";
-					}
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericalType) {
 					ret = rsrc.getString("CTtypeNUMERIC");
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.BooleanType) {
