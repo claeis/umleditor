@@ -855,6 +855,8 @@ public class HtmlISO {
 								|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
 								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
 								|| typeLabel.equals("Integer")
+								|| typeLabel.equals("XMLDate") 
+								|| typeLabel.equals("GM_Surface2D")
 								) {
 									out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 									+ "</TD><TD " + style + ">" + encodeString(" ")//disp
@@ -893,6 +895,8 @@ public class HtmlISO {
 							|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
 							|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
 							|| typeLabel.equals("Integer")
+							|| typeLabel.equals("XMLDate") 
+							|| typeLabel.equals("GM_Surface2D")
 							) {
 						out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 						+ "</TD><TD " + style + ">" + encodeString(" ")//disp
