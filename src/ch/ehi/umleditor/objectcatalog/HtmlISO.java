@@ -815,16 +815,15 @@ public class HtmlISO {
 					String metaDispName = dispName.getValue();
 					
 					if(metaDispName != null) {
-						if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
-								|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
-								|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
-								|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
-								|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
-								|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
-								|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
-								|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
-								|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
-								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
+						if(typeLabel.equals("String") 
+								|| typeLabel.equals("Numeric")
+								|| typeLabel.equals("Boolean")
+								|| typeLabel.equals("Text orientation")
+								|| typeLabel.equals("Enumeration")
+								|| typeLabel.equals("Coordinate")
+								|| typeLabel.equals("Surface")
+								|| typeLabel.equals("Area tessellation")
+								|| typeLabel.equals("Polyline")
 								|| typeLabel.equals("Integer")
 								) {
 							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
@@ -1020,8 +1019,7 @@ public class HtmlISO {
 					type = attrType.getDirect();
 				}
 				if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.Text) {
-					
-					ret = rsrc.getString("CTtypeTEXT")+"("+((ch.ehi.interlis.domainsandconstants.basetypes.Text) type).getMaxLength()+")";
+					ret = rsrc.getString("CTtypeTEXT");
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.basetypes.NumericType) {
 					ch.ehi.interlis.domainsandconstants.basetypes.NumericType num = (ch.ehi.interlis.domainsandconstants.basetypes.NumericType) type;
 					if (num.getMinDec() != null && num.getMaxDec() != null) {
