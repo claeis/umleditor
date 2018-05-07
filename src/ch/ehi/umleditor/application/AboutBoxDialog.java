@@ -58,6 +58,7 @@ public class AboutBoxDialog extends BaseDialog {
 	private JLabel ivjLblSoftwareBy = null;
 	private JLabel ivjLblSupportedBy = null;
 	private JLabel ivjLblSoftEnvironmentLogo = null;
+	private JLabel ivjLblSECOLogo = null;
 	private JLabel ivjLblInterlisCompilerVersion = null;
 	private JLabel ivjLblVersionInterlisCompiler = null;
 
@@ -169,7 +170,7 @@ public class AboutBoxDialog extends BaseDialog {
 				ivjLblApache = new javax.swing.JLabel();
 				ivjLblApache.setName("LblApache");
 				ivjLblApache.setText("- Apache Software Foundation  (http://www.apache.org/)");
-				ivjLblApache.setBounds(25, 525, 353, 14);
+				ivjLblApache.setBounds(25, 715, 353, 14);
 				// user code begin {1}
 				ivjLblApache.setText(getResourceString("LblApache_text"));
 				// user code end
@@ -459,6 +460,33 @@ public class AboutBoxDialog extends BaseDialog {
 		}
 		return ivjLblSoftEnvironmentLogo;
 	}
+	
+	/**
+	 * Return the LblSECOLogo property value.
+	 * 
+	 * @return javax.swing.JLabel
+	 */
+	/* WARNING: THIS METHOD WILL BE REGENERATED. */
+	private javax.swing.JLabel getLblSECOLogo() {
+		if (ivjLblSECOLogo == null) {
+			try {
+				ivjLblSECOLogo = new javax.swing.JLabel();
+				ivjLblSECOLogo.setName("LblSECOLogo");
+				ivjLblSECOLogo.setIcon(new javax.swing.ImageIcon(
+						getClass().getResource("/ch/ehi/umleditor/images/logoSecoProject.gif")));
+				ivjLblSECOLogo.setToolTipText("https://www.seco.admin.ch/seco/de/home.html");
+				ivjLblSECOLogo.setText("JLabelx");
+				ivjLblSECOLogo.setBounds(160, 500, 264, 185);
+				// user code begin {1}
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjLblSECOLogo;
+	}
 
 	/**
 	 * Return the LblSoftwareBy property value.
@@ -472,7 +500,7 @@ public class AboutBoxDialog extends BaseDialog {
 				ivjLblSoftwareBy = new javax.swing.JLabel();
 				ivjLblSoftwareBy.setName("LblSoftwareBy");
 				ivjLblSoftwareBy.setText("Dieses Produkt enthält Software, die entwickelt wurde durch:");
-				ivjLblSoftwareBy.setBounds(21, 505, 371, 14);
+				ivjLblSoftwareBy.setBounds(21, 690, 371, 14);
 				// user code begin {1}
 				ivjLblSoftwareBy.setText(getResourceString("LblSoftwareBy_text"));
 				// user code end
@@ -813,6 +841,7 @@ public class AboutBoxDialog extends BaseDialog {
 				getTxpInfo().add(getLblApache(), getLblApache().getName());
 				getTxpInfo().add(getLblSupportedBy(), getLblSupportedBy().getName());
 				getTxpInfo().add(getLblSoftEnvironmentLogo(), getLblSoftEnvironmentLogo().getName());
+				getTxpInfo().add(getLblSECOLogo(), getLblSECOLogo().getName());
 				getTxpInfo().add(getLblVersionInterlisCompiler(), getLblVersionInterlisCompiler().getName());
 				getTxpInfo().add(getLblInterlisCompilerVersion(), getLblInterlisCompilerVersion().getName());
 				// user code begin {1}
@@ -863,7 +892,7 @@ public class AboutBoxDialog extends BaseDialog {
 			// user code end
 			setName("DlgAboutBox");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(554, 648);
+			setSize(570, 828);
 			setTitle("Info zum UML/INTERLIS-Editor");
 			setContentPane(getPnlContents());
 			initConnections();
