@@ -1,4 +1,7 @@
-﻿UML-Editor 3.6.4.4 (2018-05-18)
+﻿UML-Editor 3.6.4.5 (2018-05-19)
+----------------------------------
+- fix html5 compatibility object Catalog
+UML-Editor 3.6.4.4 (2018-05-18)
 ----------------------------------
 - fix Object Catalog (Structure based attributes)
 - ICDE profile Object Catalog (ISO 19110)

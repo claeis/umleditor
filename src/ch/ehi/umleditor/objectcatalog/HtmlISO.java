@@ -1585,7 +1585,8 @@ public class HtmlISO {
 				Iterator elei = getEnumEleIterator(def);
 				if (clsFile != null)
 					clsFile.indent();
-				out.write("<TR><TD ROWSPAN=\""+ 0 + "\"> "+ encodeString(domDefName)+"</TD>");
+				
+				out.write("<TR><TD ROWSPAN=\""+ def.sizeEnumElement() + "\"> "+ encodeString(domDefName)+"</TD>");
 				while (elei.hasNext()) {
 					ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
 							.next();
@@ -1676,6 +1677,15 @@ public class HtmlISO {
 			}
 			return;
 
+		}
+
+		private int getNumberOfElements(Iterator elei) {
+			int i = 0;
+			while(elei.hasNext()) {
+			    i++;
+			    elei.next();
+			}
+			return i;
 		}
 
 		private String getEnumEleName(EnumElement ele) {
