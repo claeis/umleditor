@@ -16,6 +16,8 @@ package ch.ehi.umleditor.objectcatalog;
 // please fill in/modify the following section
 // -beg- preserve=yes 3CD78E5B00EB import "ObjectCatalog"
 import ch.ehi.umleditor.application.LauncherView;
+import ch.ehi.umleditor.application.OrganizationDialog;
+
 import java.io.*;
 
 import javax.imageio.ImageIO;
@@ -172,6 +174,9 @@ public class ObjectCatalog {
 			saveDialog.setFileFilter(GenericFileFilter.createHtmlFilter());
 
 			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+				//setting organization information
+				OrganizationDialog orgDialog = new OrganizationDialog(LauncherView.getInstance(), "Organization",true);
+				//write file
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 				String filename = saveDialog.getSelectedFile().getAbsolutePath();
 
