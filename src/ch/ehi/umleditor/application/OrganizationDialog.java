@@ -18,21 +18,21 @@ public class OrganizationDialog extends BaseDialog  {
 	
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JLabel ivjLblOrganization = null;
-	private javax.swing.JTextField ivjTxtOrganization = null;
+	public javax.swing.JTextField ivjTxtOrganization = null;
 	private javax.swing.JLabel ivjLblPosition = null;
-	private javax.swing.JTextField ivjTxtPosition = null;
+	public javax.swing.JTextField ivjTxtPosition = null;
 	private javax.swing.JLabel ivjLblKind = null;
-	private javax.swing.JTextField ivjTxtKind = null;
+	public javax.swing.JTextField ivjTxtKind = null;
 	private javax.swing.JLabel ivjLblAddress = null;
-	private javax.swing.JTextField ivjTxtAddress = null;
+	public javax.swing.JTextField ivjTxtAddress = null;
 	private javax.swing.JLabel ivjLblCity = null;
-	private javax.swing.JTextField ivjTxtCity = null;
+	public javax.swing.JTextField ivjTxtCity = null;
 	private javax.swing.JLabel ivjLblState = null;
-	private javax.swing.JTextField ivjTxtState = null;
+	public javax.swing.JTextField ivjTxtState = null;
 	private javax.swing.JLabel ivjLblCountry = null;
-	private javax.swing.JTextField ivjTxtCountry = null;
+	public javax.swing.JTextField ivjTxtCountry = null;
 	private javax.swing.JLabel ivjLblPhone = null;
-	private javax.swing.JTextField ivjTxtPhone = null;
+	public javax.swing.JTextField ivjTxtPhone = null;
 	
 		 
 	private javax.swing.JButton ivjBtnCancel = null;
@@ -92,7 +92,7 @@ public class OrganizationDialog extends BaseDialog  {
 			// user code end
 			setName("OrganizationDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(426, 240);
+			setSize(627, 504);
 			setTitle("Organization");
 			setContentPane(getBaseDialogContentPane());
 			initConnections();
@@ -129,7 +129,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblOrganization;
 	}
 	
-	private javax.swing.JTextField getTxtOrganization() {
+	public javax.swing.JTextField getTxtOrganization() {
 		if (ivjTxtOrganization == null) {
 			try {
 				ivjTxtOrganization = new javax.swing.JTextField();
@@ -156,7 +156,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblPosition;
 	}
 	
-	private javax.swing.JTextField getTxtPosition() {
+	public javax.swing.JTextField getTxtPosition() {
 		if (ivjTxtPosition == null) {
 			try {
 				ivjTxtPosition = new javax.swing.JTextField();
@@ -183,7 +183,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblKind;
 	}
 	
-	private javax.swing.JTextField getTxtKind() {
+	public javax.swing.JTextField getTxtKind() {
 		if (ivjTxtKind == null) {
 			try {
 				ivjTxtKind = new javax.swing.JTextField();
@@ -210,7 +210,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblAddress;
 	}
 	
-	private javax.swing.JTextField getTxtAddress() {
+	public javax.swing.JTextField getTxtAddress() {
 		if (ivjTxtAddress == null) {
 			try {
 				ivjTxtAddress = new javax.swing.JTextField();
@@ -237,7 +237,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblCity;
 	}
 	
-	private javax.swing.JTextField getTxtCity() {
+	public javax.swing.JTextField getTxtCity() {
 		if (ivjTxtCity == null) {
 			try {
 				ivjTxtCity = new javax.swing.JTextField();
@@ -264,7 +264,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblState;
 	}
 	
-	private javax.swing.JTextField getTxtState() {
+	public javax.swing.JTextField getTxtState() {
 		if (ivjTxtState == null) {
 			try {
 				ivjTxtState = new javax.swing.JTextField();
@@ -291,7 +291,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblCountry;
 	}
 	
-	private javax.swing.JTextField getTxtCountry() {
+	public javax.swing.JTextField getTxtCountry() {
 		if (ivjTxtCountry == null) {
 			try {
 				ivjTxtCountry = new javax.swing.JTextField();
@@ -318,7 +318,7 @@ public class OrganizationDialog extends BaseDialog  {
 		return ivjLblPhone;
 	}
 	
-	private javax.swing.JTextField getTxtPhone() {
+	public javax.swing.JTextField getTxtPhone() {
 		if (ivjTxtPhone == null) {
 			try {
 				ivjTxtPhone = new javax.swing.JTextField();
@@ -488,7 +488,7 @@ public class OrganizationDialog extends BaseDialog  {
 				java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
 				constraintsBtnCancel.gridx = 2;
 				constraintsBtnCancel.gridy = 3;
-				constraintsBtnCancel.ipadx = 18;
+				constraintsBtnCancel.ipadx = 64;
 				constraintsBtnCancel.insets = new java.awt.Insets(6, 33, 12, 15);
 				getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
 

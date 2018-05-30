@@ -176,6 +176,7 @@ public class ObjectCatalog {
 			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 				//setting organization information
 				OrganizationDialog orgDialog = new OrganizationDialog(LauncherView.getInstance(), "Organization",true);
+				
 				//write file
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 				String filename = saveDialog.getSelectedFile().getAbsolutePath();
@@ -189,7 +190,7 @@ public class ObjectCatalog {
 				}
 				try {
 					HtmlISO writer = new HtmlISO();
-					writer.doObjectCatalog(apackage, out);
+					writer.doObjectCatalog(apackage, out, orgDialog);
 					out.close();
 					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),
 							MessageFormat.format(rsrc, "CTobjcatDone", filename));

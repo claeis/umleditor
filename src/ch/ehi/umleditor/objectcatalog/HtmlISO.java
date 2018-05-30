@@ -29,6 +29,7 @@ import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
+import ch.ehi.umleditor.application.OrganizationDialog;
 
 public class HtmlISO {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlISO.class);
@@ -36,6 +37,7 @@ public class HtmlISO {
 	// used in STRUCTURE pass to suppress links to element definitions
 	private boolean linkElements;
 
+	private OrganizationDialog organization = null;
 	private ch.ehi.basics.io.IndentPrintWriter clsFile = null;
 	private java.io.Writer out = null;
 	// hashmap<object, string>
@@ -68,10 +70,11 @@ public class HtmlISO {
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
+				this.organization = foo;
 				linkElements = true;
 				// java.util.ArrayList todo=new java.util.ArrayList(); // collection of
 				// packages not yet visited
@@ -644,13 +647,14 @@ public class HtmlISO {
 				newline();
 				if (clsFile != null) {
 					clsFile.println(aclass.getDefLangName());
-					}	
+					}				
 			}
 
 			if (pass == CONTENTS) {
 				out.write("<p style=\"text-indent: 0; line-height: 15%; margin-left: 0\"><a href=\"#" + aName + "\">"
 						+ value + "</a></P>");
 				newline();
+				
 			}
 
 			// Here the values for the decimal places are also increased 
@@ -661,19 +665,132 @@ public class HtmlISO {
 				NlsString classDispName = aclass.getMetaAttrb();
 				if(classDispName != null) {
 					String metaDispName = classDispName.getValue();
-					if(metaDispName != null) {
-						out.write("<i>"+metaDispName+"</i>");
+						out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
 						newline();
-					}
-					else {
-						System.out.println("Cosas nulas");
-					}
+						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabName") + "</font></TD>");
+						newline();
+						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ classDefName + "</font></TD> </TR>");
+						newline();
+						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabCode") + "</font></TD>");
+						newline();
+						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ " " + "</font></TD> </TR>");
+						newline();
+						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabDescription") + "</font></TD>");
+						newline();
+						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ encodeDescription(mapNlsString(aclass.getDocumentation()))  + "</font></TD> </TR>");
+						newline();
+						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
+						newline();
+						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ metaDispName + "</font></TD> </TR>");
+						newline();
+						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabSubType") + "</font></TD>");
+						newline();
+						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ " " + "</font></TD> </TR> </TABLE> </BR>");
+						newline();		
+					
 				}else {
+					out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
+					newline();
+					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabName") + "</font></TD>");
+					newline();
+					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+							+ classDefName + "</font></TD> </TR>");
+					newline();
+					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabCode") + "</font></TD>");
+					newline();
+					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+							+ " " + "</font></TD> </TR>");
+					newline();
+					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabDescription") + "</font></TD>");
+					newline();
+					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+							+ encodeDescription(mapNlsString(aclass.getDocumentation()))  + "</font></TD> </TR>");
+					newline();
+					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
+					newline();
+					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+							+ " " + "</font></TD> </TR>");
+					newline();
+					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabSubType") + "</font></TD>");
+					newline();
+					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
+							+ " " + "</font></TD> </TR> </TABLE> </BR>");
 					newline();
 				}
 				
-				out.write(encodeDescription(mapNlsString(aclass.getDocumentation())));
+				// Organization Dialog
+				
+				String style = " STYLE=\"border-top: solid gray; border-top-width: 2px\"";
+				out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
 				newline();
+				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabOrganization") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtOrganization().getText() + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCity")  + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtCity().getText() + "</font></TD></TR>");
+				newline();
+				
+				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabPosition") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtPosition().getText() + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabState")  + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtState().getText() + "</font></TD></TR>");
+				newline();
+				
+				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabKindRol") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtKind().getText() + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCountry")  + "</font></TD>");
+				newline();
+				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtCountry().getText() + "</font></TD></TR>");
+				newline();
+				
+				
+				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabAddress") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtAddress().getText() + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabPhone")  + "</font></TD>");
+				newline();
+				out.write("<TD width=\"185\" align=\"left\"><font face=\"Arial\" size=\"3\">"
+						+ organization.getTxtPhone().getText() + "</font></TD></TR> </TABLE> </BR>");
+				newline();
+
 				if (aclass.iteratorFeature().hasNext() || aclass.iteratorAssociation().hasNext()
 						|| (aclass instanceof Association && ((Association) aclass).iteratorConnection().hasNext())) {
 					out.write(
