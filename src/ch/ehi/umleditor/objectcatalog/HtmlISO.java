@@ -49,7 +49,7 @@ public class HtmlISO {
 
 	// for the numbering of TopicDef, ModelDef and Interlis2Def
 	int numeration = 0;
-
+	String subnumeration = "";
 	// is required for decimal places: Package, Class, classDef
 	int iddP;
 
@@ -630,13 +630,14 @@ public class HtmlISO {
 			if (linkElements) {
 				int numerationId[] = (int[]) indexMap.get((ModelElement) aclass);
 				String numeration = Integer.toString(numerationId[0]) + "." + Integer.toString(numerationId[1]);
+				subnumeration = numeration;
 				// for the link within the HTML file
 					aName = numeration + "_" + classDefName;
 				// concat value that will be written later
 				if (suppressChNr) {
 					value = classDefName;
 				} else {
-					value = numeration + " " + classDefName;
+					value = numeration + " "+  rsrc.getString("CTtabObject") +": " + classDefName;
 				}
 			} else {
 				value = classDefName;
@@ -662,6 +663,7 @@ public class HtmlISO {
 			iddP++;
 
 			if (pass == BODY) {
+				
 				NlsString classDispName = aclass.getMetaAttrb();
 				if(classDispName != null) {
 					String metaDispName = classDispName.getValue();
@@ -734,6 +736,7 @@ public class HtmlISO {
 				}
 				
 				// Organization Dialog
+				out.write("<b>"+ subnumeration +".1 " + rsrc.getString("CTtabProducer") +"</b> <br> <br>");
 				
 				String style = " STYLE=\"border-top: solid gray; border-top-width: 2px\"";
 				out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
@@ -863,6 +866,7 @@ public class HtmlISO {
 					// do not sort list of attributes
 					// java.util.Collections.sort(elev,new CompareByName());
 					attri = elev.iterator();
+					out.write("<b>"+ subnumeration +".2 " + rsrc.getString("CTtabAttributes") +"</b> <br> <br>");
 					while (attri.hasNext()) {
 						Object obj = attri.next();
 						visitAttribute((Attribute) obj, createSeperator);
@@ -1125,7 +1129,7 @@ public class HtmlISO {
 						+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(role.getDocumentation()))
 						+ "</TD><TD" + style + ">" + encodeString(kind)
 						+ "</TD><TD" + style + ">" + mapMultiplicity(role.getMultiplicity())
-						+ "</TD><TD" + style + ">" + encodeString(type)
+						+ "</TD><TD" + style + ">" + encodeString(" ")
 						+ "</TD><TD" + style + ">" + encodeString(" ")
 						+ "</TD></TR>");
 				newline();
@@ -1632,14 +1636,14 @@ public class HtmlISO {
 				if (suppressChNr) {
 					value = domDefName;
 				} else {
-					value = numeration + " " + domDefName;
+					value = numeration + " "+rsrc.getString("CTtabDomain")+": " + domDefName;
 				}
 			} else {
 				value = domDefName;
 			}
 
 			if (pass == BODY) {
-				out.write("<H2><a name=\"" + aName + "\">" + value + "</a></H2>");
+				out.write("<H2> <a name=\"" + aName + "\">" + value + "</a></H2>");
 				newline();
 			}
 
