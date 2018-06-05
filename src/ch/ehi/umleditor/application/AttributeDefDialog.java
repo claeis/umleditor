@@ -1419,7 +1419,7 @@ public class AttributeDefDialog extends BaseDialog {
 			// user code end
 			setName("UMLClassSpecificationDialog");
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(690, 568);
+			setSize(690, 677);
 			setTitle(resAttributeDefDialog.getString("CTDialogTitle"));
 			setContentPane(getBaseDialogContentPane());
 			initConnections();
