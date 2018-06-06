@@ -1819,9 +1819,9 @@ protected boolean save() {
 	modelDef.setIssuerURI( ElementUtils.changeNlsString(modelDef.getIssuerURI(),getTxtIssuerURI().getText()));
 	modelDef.setVersion(ElementUtils.changeNlsString(modelDef.getVersion(),getTxtVersion().getText()));
 	modelDef.setVersionComment(ElementUtils.changeNlsString(modelDef.getVersionComment(),getTxtVersionComment().getText()));
-	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT,getTxtTechnicalContact().getText());
-	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION,getTxtFurtherInformation().getText());
-	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV,getTxtIDGeoIV().getText());
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_TECHNICAL_CONTACT,getTxtTechnicalContact().getText());
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_FURTHER_INFORMATION,getTxtFurtherInformation().getText());
+	ElementUtils.setIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_ID_GEO_IV,getTxtIDGeoIV().getText());
 	// any ili2.2 items?
 	if(modelDef.sizeContract()>0){
 		// remove ili2.2 items
@@ -1870,9 +1870,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getTxtIssuerURI().setText(ElementUtils.mapNlsString(modelDef.getIssuerURI()));
 	getTxtVersion().setText(ElementUtils.mapNlsString(modelDef.getVersion()));
 	getTxtVersionComment().setText(ElementUtils.mapNlsString(modelDef.getVersionComment()));
-	getTxtTechnicalContact().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_TECHNICAL_CONTACT));
-	getTxtFurtherInformation().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_FURTHER_INFORMATION));
-	getTxtIDGeoIV().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ilirepository.MakeIliModelsXml.META_ID_GEO_IV));
+	getTxtTechnicalContact().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_TECHNICAL_CONTACT));
+	getTxtFurtherInformation().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_FURTHER_INFORMATION));
+	getTxtIDGeoIV().setText(ElementUtils.getIliTaggedValue(modelDef,ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_ID_GEO_IV));
 	// any ili2.2 items?
 	if(modelDef.sizeContract()>0){
 		// migrate them to ili2.3 
