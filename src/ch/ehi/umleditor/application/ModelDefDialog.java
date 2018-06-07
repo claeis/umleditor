@@ -2163,13 +2163,11 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 		modelDef.setVersion(ElementUtils.changeNlsString(modelDef.getVersion(), getTxtVersion().getText()));
 		modelDef.setVersionComment(
 				ElementUtils.changeNlsString(modelDef.getVersionComment(), getTxtVersionComment().getText()));
-		// ch.interlis.ilirepository.MakeIliModelsXml don't works at new version
-		// of ili2c
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_TECHNICAL_CONTACT,
 				getTxtTechnicalContact().getText());
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_FURTHER_INFORMATION,
 				getTxtFurtherInformation().getText());
-		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML,
+		ElementUtils.setIliTaggedValue(modelDef, ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_ID_GEO_IV,
 				getTxtIDGeoIV().getText());
 		// any ili2.2 items?
 		if (modelDef.sizeContract() > 0) {
@@ -2221,11 +2219,11 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 		getTxtVersion().setText(ElementUtils.mapNlsString(modelDef.getVersion()));
 		getTxtVersionComment().setText(ElementUtils.mapNlsString(modelDef.getVersionComment()));
 		getTxtTechnicalContact().setText(ElementUtils.getIliTaggedValue(modelDef,
-				ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
+				ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_TECHNICAL_CONTACT));
 		getTxtFurtherInformation().setText(ElementUtils.getIliTaggedValue(modelDef,
-				ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
+				ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_FURTHER_INFORMATION));
 		getTxtIDGeoIV().setText(
-				ElementUtils.getIliTaggedValue(modelDef, ch.interlis.ilirepository.IliManager.ILIMODELS_XML));
+				ElementUtils.getIliTaggedValue(modelDef, ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_ID_GEO_IV));
 		// any ili2.2 items?
 		if (modelDef.sizeContract() > 0) {
 			// migrate them to ili2.3
