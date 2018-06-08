@@ -1,6 +1,13 @@
-﻿UML-Editor 3.6.4.5 (2018-05-19)
+﻿UML-Editor 3.6.4.6 (2018-06-08)
+----------------------------------
+- Delete check update with github api
+- Fix modeldep documentation
+- Add version control table to ISO 19110 catalog
+
+UML-Editor 3.6.4.5 (2018-05-19)
 ----------------------------------
 - fix html5 compatibility object Catalog
+
 UML-Editor 3.6.4.4 (2018-05-18)
 ----------------------------------
 - fix Object Catalog (Structure based attributes)
