@@ -8,6 +8,13 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 import ch.softenvironment.view.BaseDialog;
 
@@ -45,12 +52,37 @@ public class OrganizationDialog extends BaseDialog  {
 			if (e.getSource() == OrganizationDialog.this.getBtnOk())
 				connEtoC2(e);
 		};
+		
+		public void focusGained(java.awt.event.FocusEvent e) {
+			if (e.getSource() == OrganizationDialog.this.getTxtAddress())
+				connEtoM1(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtCity())
+				connEtoM2(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtCountry())
+				connEtoM3(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtKind())
+				connEtoM4(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtOrganization())
+				connEtoM5(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtPhone())
+				connEtoM6(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtPosition())
+				connEtoM7(e);
+			if (e.getSource() == OrganizationDialog.this.getTxtState())
+				connEtoM8(e);
+		};
+		
+		public void focusLost(java.awt.event.FocusEvent e) {
+		};
+		
 	};
 
 	protected OrganizationDialog(Component owner, boolean modal) {
 		super(owner, modal);
 		initialize();
 		addEscapeKey();
+		addUndoRedo(getTxtAddress(), getTxtCity(), getTxtCountry(), getTxtKind(), getTxtOrganization(), getTxtPhone(), getTxtPosition(), getTxtPosition(), getTxtState());
+		setRelativeLocation(owner);
 	}
 	public OrganizationDialog(java.awt.Frame owner, String title, boolean modal) {
 		super(owner, title, modal);
@@ -82,6 +114,57 @@ public class OrganizationDialog extends BaseDialog  {
 		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
 	 }
 	 
+	 /**
+	  * Handle Ctrl+z and Ctrl+y to Undo/Redo text
+	  * @param textcomp
+	  */
+	 private void addUndoRedo(JTextComponent... textcomp) {
+		
+		 for(int i=0;i<textcomp.length;i++){
+			 final UndoManager undo = new UndoManager();
+				 Document doc = textcomp[i].getDocument();
+			    
+			   // Listen for undo and redo events
+			   doc.addUndoableEditListener(new UndoableEditListener() {
+			       public void undoableEditHappened(UndoableEditEvent evt) {
+			           undo.addEdit(evt.getEdit());
+			       }
+			   });
+			    
+			   // Create an undo action and add it to the text component
+			   textcomp[i].getActionMap().put("Undo",
+			       new AbstractAction("Undo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canUndo()) {
+			                       undo.undo();
+			                   }
+			               } catch (CannotUndoException e) {
+			               }
+			           }
+			      });
+			    
+			   // Bind the undo action to ctl-Z
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+			    
+			   // Create a redo action and add it to the text component
+			   textcomp[i].getActionMap().put("Redo",
+			       new AbstractAction("Redo") {
+			           public void actionPerformed(ActionEvent evt) {
+			               try {
+			                   if (undo.canRedo()) {
+			                       undo.redo();
+			                   }
+			               } catch (CannotRedoException e) {
+			               }
+			           }
+			       });
+			    
+			   // Bind the redo action to ctl-Y
+			   textcomp[i].getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
+		 }
+	 }
+	 
 	/**
 	 * Initialize the class.
 	 */
@@ -108,8 +191,15 @@ public class OrganizationDialog extends BaseDialog  {
 	 *                The exception description.
 	 */
 	private void initConnections() throws java.lang.Exception {
-		// user code begin {1}
-		// user code end
+		getTxtAddress().addActionListener(ivjEventHandler);
+		getTxtCity().addActionListener(ivjEventHandler);
+		getTxtCountry().addActionListener(ivjEventHandler);
+		getTxtKind().addActionListener(ivjEventHandler);
+		getTxtOrganization().addActionListener(ivjEventHandler);
+		getTxtPhone().addActionListener(ivjEventHandler);
+		getTxtPosition().addActionListener(ivjEventHandler);
+		getTxtState().addActionListener(ivjEventHandler);
+		
 		getBtnCancel().addActionListener(ivjEventHandler);
 		getBtnOk().addActionListener(ivjEventHandler);
 	}
@@ -343,154 +433,148 @@ public class OrganizationDialog extends BaseDialog  {
 				ivjBaseDialogContentPane.setLayout(new java.awt.GridBagLayout());
 
 				java.awt.GridBagConstraints constraintsLblOrganization = new java.awt.GridBagConstraints();
-				constraintsLblOrganization.gridx = 1;
-				constraintsLblOrganization.gridy = 1;
-				constraintsLblOrganization.ipadx = 104;
-				constraintsLblOrganization.insets = new java.awt.Insets(22, 11, 10, 6);
+				constraintsLblOrganization.gridx = 0;
+				constraintsLblOrganization.gridy = 0;
+				constraintsLblOrganization.ipadx = 50;
+				constraintsLblOrganization.insets = new java.awt.Insets(12, 19, 370, 11);
 				getBaseDialogContentPane().add(getLblOrganization(), constraintsLblOrganization);
 
 				java.awt.GridBagConstraints constraintsTxtOrganization = new java.awt.GridBagConstraints();
-				constraintsTxtOrganization.gridx = 2;
-				constraintsTxtOrganization.gridy = 1;
+				constraintsTxtOrganization.gridx = 1;
+				constraintsTxtOrganization.gridy = 0;
 				constraintsTxtOrganization.gridwidth = 2;
 				constraintsTxtOrganization.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtOrganization.weightx = 1.0;
 				constraintsTxtOrganization.ipadx = 315;
-				constraintsTxtOrganization.insets = new java.awt.Insets(19, 6, 7, 15);
+				constraintsTxtOrganization.insets = new java.awt.Insets(19, 2, 370, 11);
 				getBaseDialogContentPane().add(getTxtOrganization(), constraintsTxtOrganization);
 
 				java.awt.GridBagConstraints constraintsLblPosition = new java.awt.GridBagConstraints();
-				constraintsLblPosition.gridx = 1;
-				constraintsLblPosition.gridy = 1;
+				constraintsLblPosition.gridx = 0;
+				constraintsLblPosition.gridy = 0;
 				constraintsLblPosition.ipadx = 104;
-				constraintsLblPosition.insets = new java.awt.Insets(80, 50, 10, 6);
+				constraintsLblPosition.insets = new java.awt.Insets(80, 50, 365, 6);
 				getBaseDialogContentPane().add(getLblPosition(), constraintsLblPosition);
 
 				java.awt.GridBagConstraints constraintsTxtPosition = new java.awt.GridBagConstraints();
-				constraintsTxtPosition.gridx = 2;
-				constraintsTxtPosition.gridy = 1;
+				constraintsTxtPosition.gridx = 1;
+				constraintsTxtPosition.gridy = 0;
 				constraintsTxtPosition.gridwidth = 2;
 				constraintsTxtPosition.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtPosition.weightx = 1.0;
 				constraintsTxtPosition.ipadx = 315;
-				constraintsTxtPosition.insets = new java.awt.Insets(78, 6, 7, 15);
+				constraintsTxtPosition.insets = new java.awt.Insets(78, 6, 365, 15);
 				getBaseDialogContentPane().add(getTxtPosition(), constraintsTxtPosition);
 
 				java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
-				constraintsLblKind.gridx = 1;
-				constraintsLblKind.gridy = 1;
+				constraintsLblKind.gridx = 0;
+				constraintsLblKind.gridy = 0;
 				constraintsLblKind.ipadx = 104;
-				constraintsLblKind.insets = new java.awt.Insets(138, 50, 10, 6);
+				constraintsLblKind.insets = new java.awt.Insets(138, 50, 360, 6);
 				getBaseDialogContentPane().add(getLblKind(), constraintsLblKind);
 
 				java.awt.GridBagConstraints constraintsTxtKind = new java.awt.GridBagConstraints();
-				constraintsTxtKind.gridx = 2;
-				constraintsTxtKind.gridy = 1;
+				constraintsTxtKind.gridx = 1;
+				constraintsTxtKind.gridy = 0;
 				constraintsTxtKind.gridwidth = 2;
 				constraintsTxtKind.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtKind.weightx = 1.0;
 				constraintsTxtKind.ipadx = 315;
-				constraintsTxtKind.insets = new java.awt.Insets(137, 6, 7, 15);
+				constraintsTxtKind.insets = new java.awt.Insets(137, 6, 360, 15);
 				getBaseDialogContentPane().add(getTxtKind(), constraintsTxtKind);				
 				
 				java.awt.GridBagConstraints constraintsLblAddress = new java.awt.GridBagConstraints();
-				constraintsLblAddress.gridx = 1;
-				constraintsLblAddress.gridy = 1;
+				constraintsLblAddress.gridx = 0;
+				constraintsLblAddress.gridy = 0;
 				constraintsLblAddress.ipadx = 104;
-				constraintsLblAddress.insets = new java.awt.Insets(196, 50, 10, 6);
+				constraintsLblAddress.insets = new java.awt.Insets(196, 50, 355, 6);
 				getBaseDialogContentPane().add(getLblAddress(), constraintsLblAddress);
 
 				java.awt.GridBagConstraints constraintsTxtAddress = new java.awt.GridBagConstraints();
-				constraintsTxtAddress.gridx = 2;
-				constraintsTxtAddress.gridy = 1;
+				constraintsTxtAddress.gridx = 1;
+				constraintsTxtAddress.gridy = 0;
 				constraintsTxtAddress.gridwidth = 2;
 				constraintsTxtAddress.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtAddress.weightx = 1.0;
 				constraintsTxtAddress.ipadx = 315;
-				constraintsTxtAddress.insets = new java.awt.Insets(196, 6, 7, 15);
+				constraintsTxtAddress.insets = new java.awt.Insets(196, 6, 355, 15);
 				getBaseDialogContentPane().add(getTxtAddress(), constraintsTxtAddress);
 				
 				java.awt.GridBagConstraints constraintsLblCity = new java.awt.GridBagConstraints();
-				constraintsLblCity.gridx = 1;
-				constraintsLblCity.gridy = 1;
+				constraintsLblCity.gridx = 0;
+				constraintsLblCity.gridy = 0;
 				constraintsLblCity.ipadx = 104;
-				constraintsLblCity.insets = new java.awt.Insets(254, 50, 10, 6);
+				constraintsLblCity.insets = new java.awt.Insets(254, 50, 350, 6);
 				getBaseDialogContentPane().add(getLblCity(), constraintsLblCity);
 
 				java.awt.GridBagConstraints constraintsTxtCity = new java.awt.GridBagConstraints();
-				constraintsTxtCity.gridx = 2;
-				constraintsTxtCity.gridy = 1;
+				constraintsTxtCity.gridx = 1;
+				constraintsTxtCity.gridy = 0;
 				constraintsTxtCity.gridwidth = 2;
 				constraintsTxtCity.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtCity.weightx = 1.0;
 				constraintsTxtCity.ipadx = 315;
-				constraintsTxtCity.insets = new java.awt.Insets(255, 6, 7, 15);
+				constraintsTxtCity.insets = new java.awt.Insets(255, 6, 350, 15);
 				getBaseDialogContentPane().add(getTxtCity(), constraintsTxtCity);
 				
 				java.awt.GridBagConstraints constraintsLblState = new java.awt.GridBagConstraints();
-				constraintsLblState.gridx = 1;
-				constraintsLblState.gridy = 1;
+				constraintsLblState.gridx = 0;
+				constraintsLblState.gridy = 0;
 				constraintsLblState.ipadx = 104;
-				constraintsLblState.insets = new java.awt.Insets(312, 50, 10, 6);
+				constraintsLblState.insets = new java.awt.Insets(312, 50, 345, 6);
 				getBaseDialogContentPane().add(getLblState(), constraintsLblState);
 
 				java.awt.GridBagConstraints constraintsTxtState = new java.awt.GridBagConstraints();
-				constraintsTxtState.gridx = 2;
-				constraintsTxtState.gridy = 1;
+				constraintsTxtState.gridx = 1;
+				constraintsTxtState.gridy = 0;
 				constraintsTxtState.gridwidth = 2;
 				constraintsTxtState.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtState.weightx = 1.0;
 				constraintsTxtState.ipadx = 315;
-				constraintsTxtState.insets = new java.awt.Insets(314, 6, 7, 15);
+				constraintsTxtState.insets = new java.awt.Insets(314, 6, 345, 15);
 				getBaseDialogContentPane().add(getTxtState(), constraintsTxtState);
 				
 				java.awt.GridBagConstraints constraintsLblCountry = new java.awt.GridBagConstraints();
-				constraintsLblCountry.gridx = 1;
-				constraintsLblCountry.gridy = 1;
+				constraintsLblCountry.gridx = 0;
+				constraintsLblCountry.gridy = 0;
 				constraintsLblCountry.ipadx = 104;
-				constraintsLblCountry.insets = new java.awt.Insets(370, 50, 10, 6);
+				constraintsLblCountry.insets = new java.awt.Insets(370, 50, 340, 6);
 				getBaseDialogContentPane().add(getLblCountry(), constraintsLblCountry);
 
 				java.awt.GridBagConstraints constraintsTxtCountry = new java.awt.GridBagConstraints();
-				constraintsTxtCountry.gridx = 2;
-				constraintsTxtCountry.gridy = 1;
+				constraintsTxtCountry.gridx = 1;
+				constraintsTxtCountry.gridy = 0;
 				constraintsTxtCountry.gridwidth = 2;
 				constraintsTxtCountry.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtCountry.weightx = 1.0;
 				constraintsTxtCountry.ipadx = 315;
-				constraintsTxtCountry.insets = new java.awt.Insets(373, 6, 7, 15);
+				constraintsTxtCountry.insets = new java.awt.Insets(373, 6, 340, 15);
 				getBaseDialogContentPane().add(getTxtCountry(), constraintsTxtCountry);
 				
 				java.awt.GridBagConstraints constraintsLblPhone = new java.awt.GridBagConstraints();
-				constraintsLblPhone.gridx = 1;
-				constraintsLblPhone.gridy = 1;
+				constraintsLblPhone.gridx = 0;
+				constraintsLblPhone.gridy = 0;
 				constraintsLblPhone.ipadx = 104;
-				constraintsLblPhone.insets = new java.awt.Insets(428, 50, 10, 6);
+				constraintsLblPhone.insets = new java.awt.Insets(428, 50, 335, 6);
 				getBaseDialogContentPane().add(getLblPhone(), constraintsLblPhone);
 
 				java.awt.GridBagConstraints constraintsTxtPhone = new java.awt.GridBagConstraints();
-				constraintsTxtPhone.gridx = 2;
-				constraintsTxtPhone.gridy = 1;
+				constraintsTxtPhone.gridx = 1;
+				constraintsTxtPhone.gridy = 0;
 				constraintsTxtPhone.gridwidth = 2;
 				constraintsTxtPhone.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtPhone.weightx = 1.0;
 				constraintsTxtPhone.ipadx = 315;
-				constraintsTxtPhone.insets = new java.awt.Insets(432, 6, 7, 15);
+				constraintsTxtPhone.insets = new java.awt.Insets(432, 6, 335, 15);
 				getBaseDialogContentPane().add(getTxtPhone(), constraintsTxtPhone);
 				
 				java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
-				constraintsBtnOk.gridx = 1;
-				constraintsBtnOk.gridy = 3;
+				constraintsBtnOk.gridx = 0;
+				constraintsBtnOk.gridy = 0;
 				constraintsBtnOk.ipadx = 64;
-				constraintsBtnOk.insets = new java.awt.Insets(6, 32, 12, 10);
+				constraintsBtnOk.insets = new java.awt.Insets(430, 32, 3, 10);
 				getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
 
-				java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
-				constraintsBtnCancel.gridx = 2;
-				constraintsBtnCancel.gridy = 3;
-				constraintsBtnCancel.ipadx = 64;
-				constraintsBtnCancel.insets = new java.awt.Insets(6, 33, 12, 15);
-				getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
 
 			} catch (java.lang.Throwable ivjExc) {
 				// user code begin {2}
@@ -579,9 +663,105 @@ public class OrganizationDialog extends BaseDialog  {
 	/* WARNING: THIS METHOD WILL BE REGENERATED. */
 	private void connEtoC2(java.awt.event.ActionEvent arg1) {
 		try {
+			this.okPressed();
+			Documentation dialog = new Documentation(LauncherView.getInstance(), true);
+			//dialog.setDefaultCloseOperation(dialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+			
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM1(java.awt.event.FocusEvent arg1) {
+		try {
 			// user code begin {1}
 			// user code end
-			this.okPressed();
+			getTxtAddress().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM2(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtCity().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM3(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtCountry().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM4(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtKind().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM5(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtOrganization().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM6(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtPhone().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	private void connEtoM7(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtPosition().selectAll();
 			// user code begin {2}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -591,4 +771,21 @@ public class OrganizationDialog extends BaseDialog  {
 		}
 	}
 
+	private void connEtoM8(java.awt.event.FocusEvent arg1) {
+		try {
+			// user code begin {1}
+			// user code end
+			getTxtState().selectAll();
+			// user code begin {2}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {3}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	
+	protected void handleException(java.lang.Throwable exception) {
+		super.handleException(exception);
+	}
 }
