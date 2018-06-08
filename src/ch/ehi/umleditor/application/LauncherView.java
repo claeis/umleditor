@@ -166,7 +166,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniCut = null;
 	private JMenuItem ivjMniFindReplace = null;
 	private JMenuItem ivjMniHelp = null;
-	private JMenuItem ivjMniCheckUpdate = null;
 	private JMenuItem ivjMniOptions = null;
 	private JMenuItem ivjMniModellanguage = null;
 	private JMenuItem ivjMniRepoSetting = null;
@@ -216,8 +215,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenu ivjMnuSymbollists = null;
 	private JMenu ivjMnuReports = null;
 	private JMenu ivjMnuTools = null;
-	
-	private CheckUpdate objCheckUpdate = null;
 
 	class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListener,
 			ch.softenvironment.view.ToolBarListener, java.awt.event.ActionListener, java.awt.event.ItemListener,
@@ -233,8 +230,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				connEtoC13(e);
 			if (e.getSource() == LauncherView.this.getMniHelp())
 				connEtoC5(e);
-			if (e.getSource() == LauncherView.this.getMniCheckUpdate())
-				connEtoC20(e);
 			if (e.getSource() == LauncherView.this.getMniPrint())
 				connEtoC15(e);
 			if (e.getSource() == LauncherView.this.getMniOptions())
@@ -1553,46 +1548,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 	}
 	
-	/**
-	 * connEtoC20: (JMenuItem5.action.actionPerformed(java.awt.event.ActionEvent)
-	 * --> CheckUpdate
-	 * 
-	 * @param arg1
-	 *            java.awt.event.ActionEvent
-	 */
-	private void connEtoC20(java.awt.event.ActionEvent arg1) {
-		try {
-			// user code begin {1}
-			// user code end
-			this.mniCheckUpdate();
-			// user code begin {2}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {3}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-
-	private void mniCheckUpdate() {
-		objCheckUpdate = new CheckUpdate("https://api.github.com/repos/AgenciaImplementacion/umleditor/releases/latest");
-		if (objCheckUpdate.parseAndCheckJson()) {
-			JOptionPane.showMessageDialog(null, "Already updated!");
-		} else {
-			JOptionPane.showMessageDialog(null, new MessageWithLink("New update available "+objCheckUpdate.obj+"! <a href=\"https://github.com/AgenciaImplementacion/umleditor/releases\">Download</a>"), "New update!", JOptionPane.INFORMATION_MESSAGE );
-		}
-	}
-	
-	private void mniCheckUpdate(Boolean value) {
-		if (value) {
-			objCheckUpdate = new CheckUpdate("https://api.github.com/repos/AgenciaImplementacion/umleditor/releases/latest");
-			if (!objCheckUpdate.parseAndCheckJson()) {
-				JOptionPane.showMessageDialog(null, new MessageWithLink("New update available "+objCheckUpdate.obj+"! <a href=\"https://github.com/AgenciaImplementacion/umleditor/releases\">Download</a>"), "New update!", JOptionPane.INFORMATION_MESSAGE );
-			}
-		}
-		
-	}
-
 
 	/**
 	 * Creates and opens a ClassDiagram within an InternalFrame. Children will
@@ -2349,27 +2304,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		return ivjMniHelp;
 	}
-	
-	/**
-	 * Return the MniHelp property value.
-	 * 
-	 * @return javax.swing.JMenuItem
-	 */
-	/* WARNING: THIS METHOD WILL BE REGENERATED. */
-	private javax.swing.JMenuItem getMniCheckUpdate() {
-		if (ivjMniCheckUpdate == null) {
-			try {
-				ivjMniCheckUpdate = new javax.swing.JMenuItem();
-				ivjMniCheckUpdate.setName("MniHelp");
-				ivjMniCheckUpdate.setText("Check update...");				
-			} catch (java.lang.Throwable ivjExc) {
-				// user code begin {2}
-				// user code end
-				handleException(ivjExc);
-			}
-		}
-		return ivjMniCheckUpdate;
-	}
 
 	/**
 	 * Return the JMenuItem2 property value.
@@ -2982,7 +2916,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				ivjMnuHelp.setName("MnuHelp");
 				ivjMnuHelp.setText("?");
 				ivjMnuHelp.add(getMniHelp());
-				ivjMnuHelp.add(getMniCheckUpdate());
 				ivjMnuHelp.add(getJSeparator4());
 				ivjMnuHelp.add(getMniAbout());
 				// user code begin {1}
@@ -3628,7 +3561,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		if (mainHB != null) {
 			getMniHelp().addActionListener(new javax.help.CSH.DisplayHelpFromSource(mainHB));
 		}
-		getMniCheckUpdate().addActionListener(ivjEventHandler);
 		// user code end
 		getMniAbout().addActionListener(ivjEventHandler);
 		getTreProjects().addMouseListener(ivjEventHandler);
@@ -3684,7 +3616,6 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 			setTitle("UML/INTERLIS-Editor");
 			setContentPane(getFrcContents());
 			setIconImage(new ImageIcon(getClass().getResource(IMAGE_PATH+"umlicon.gif")).getImage());
-			mniCheckUpdate(true);
 			initConnections();
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);
