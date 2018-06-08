@@ -664,9 +664,7 @@ public class OrganizationDialog extends BaseDialog  {
 	private void connEtoC2(java.awt.event.ActionEvent arg1) {
 		try {
 			this.okPressed();
-			Documentation dialog = new Documentation(LauncherView.getInstance(), true);
 			//dialog.setDefaultCloseOperation(dialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
 			
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);

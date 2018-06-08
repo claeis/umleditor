@@ -8,6 +8,8 @@
 package ch.ehi.umleditor.objectcatalog;
 // -end- 3CD78E5B00EB package "ObjectCatalog"
 
+import ch.ehi.umleditor.application.Documentation;
+
 // -beg- preserve=no 3CD78E5B00EB autoimport "ObjectCatalog"
 
 // -end- 3CD78E5B00EB autoimport "ObjectCatalog"
@@ -176,7 +178,7 @@ public class ObjectCatalog {
 			if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 				//setting organization information
 				OrganizationDialog orgDialog = new OrganizationDialog(LauncherView.getInstance(), "Organization",true);
-				
+				Documentation docDialog = new Documentation(LauncherView.getInstance(),"Documentation", true);
 				//write file
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 				String filename = saveDialog.getSelectedFile().getAbsolutePath();
@@ -190,7 +192,7 @@ public class ObjectCatalog {
 				}
 				try {
 					HtmlISO writer = new HtmlISO();
-					writer.doObjectCatalog(apackage, out, orgDialog);
+					writer.doObjectCatalog(apackage, out, orgDialog, docDialog);
 					out.close();
 					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),
 							MessageFormat.format(rsrc, "CTobjcatDone", filename));

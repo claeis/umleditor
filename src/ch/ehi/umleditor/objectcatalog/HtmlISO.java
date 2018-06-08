@@ -100,6 +100,9 @@ public class HtmlISO {
 				newline();
 				out.write("<body link=\"#000000\"" + " vlink=\"#000000\"" + " alink=\"#000000\">");
 				newline();
+				
+				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTcontrolVersionTitle")+"</H1> </FONT>");
+				newline();
 
 				out.write("<TABLE border=\"1\" frame=void roles=rows cellspacing=\"0\" cellpadding=\"4\" height=\"1\">");
 				newline();
@@ -111,25 +114,26 @@ public class HtmlISO {
 				newline();
 				out.write("<COL>");
 				newline();
-				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TR><TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTdate") + "</font></TD>");
 				newline();
-				out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTauthor") + "</font></TD>");
 				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD widht=\"125\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTversion") + "</font></TD>");
 				newline();
-				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD width=\"175\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTChanges") + "</font></TD> </TR>");
 				newline();
 				out.write("<TR><TD>"+ docISO.getTxtDate().getText() + "</TD>");
 				newline();
-				out.write("<TR><TD>"+ docISO.getTxtAuthor().getText() + "</TD>");
+				out.write("<TD>"+ docISO.getTxtAuthor().getText() + "</TD>");
 				newline();
 				out.write("<TD>"+ docISO.getTxtVersion().getText() + "</TD>");
 				newline();
-				out.write("<TD>"+ docISO.getTxtChanges() .getText() + "</TD>");
+				out.write("<TD>"+ docISO.getTxtChanges() .getText() + "</TD> </TR>");
+				out.write("</TABLE>");
 				newline();
 				
 				
