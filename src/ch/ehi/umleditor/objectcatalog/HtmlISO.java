@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
 import ch.ehi.umleditor.application.OrganizationDialog;
 
@@ -38,6 +39,7 @@ public class HtmlISO {
 	private boolean linkElements;
 
 	private OrganizationDialog organization = null;
+	private Documentation docISO = null;
 	private ch.ehi.basics.io.IndentPrintWriter clsFile = null;
 	private java.io.Writer out = null;
 	// hashmap<object, string>
@@ -70,11 +72,12 @@ public class HtmlISO {
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
 				this.organization = foo;
+				this.docISO = app;
 				linkElements = true;
 				// java.util.ArrayList todo=new java.util.ArrayList(); // collection of
 				// packages not yet visited
@@ -98,6 +101,39 @@ public class HtmlISO {
 				out.write("<body link=\"#000000\"" + " vlink=\"#000000\"" + " alink=\"#000000\">");
 				newline();
 
+				out.write("<TABLE border=\"1\" frame=void roles=rows cellspacing=\"0\" cellpadding=\"4\" height=\"1\">");
+				newline();
+				out.write("<COL>");
+				newline();
+				out.write("<COL>");
+				newline();
+				out.write("<COL>");
+				newline();
+				out.write("<COL>");
+				newline();
+				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTdate") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTauthor") + "</font></TD>");
+				newline();
+				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTversion") + "</font></TD>");
+				newline();
+				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTChanges") + "</font></TD> </TR>");
+				newline();
+				out.write("<TR><TD>"+ docISO.getTxtDate().getText() + "</TD>");
+				newline();
+				out.write("<TR><TD>"+ docISO.getTxtAuthor().getText() + "</TD>");
+				newline();
+				out.write("<TD>"+ docISO.getTxtVersion().getText() + "</TD>");
+				newline();
+				out.write("<TD>"+ docISO.getTxtChanges() .getText() + "</TD>");
+				newline();
+				
+				
+				
 				pass = CONTENTS;
 				walkTree(apackage);
 
@@ -478,7 +514,6 @@ public class HtmlISO {
 		iddP++;
 		
 		if (pass == BODY) {
-			
 			out.write(encodeDescription(mapNlsString(adef.getDocumentation())));
 			newline();
 			if (adef.iteratorFeature().hasNext() || adef.iteratorAssociation().hasNext()
