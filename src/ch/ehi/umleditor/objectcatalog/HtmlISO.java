@@ -30,6 +30,7 @@ import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
 import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
+import ch.ehi.umleditor.application.Introduction;
 import ch.ehi.umleditor.application.OrganizationDialog;
 
 public class HtmlISO {
@@ -40,6 +41,7 @@ public class HtmlISO {
 
 	private OrganizationDialog organization = null;
 	private Documentation docISO = null;
+	private Introduction introduction;
 	private ch.ehi.basics.io.IndentPrintWriter clsFile = null;
 	private java.io.Writer out = null;
 	// hashmap<object, string>
@@ -67,17 +69,18 @@ public class HtmlISO {
 	String b = " ";
 
 	double textIdent = 0.5;
-
 	private static final int CONTENTS = 1;
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
 				this.organization = foo;
 				this.docISO = app;
+				this.introduction = intro;
+				
 				linkElements = true;
 				// java.util.ArrayList todo=new java.util.ArrayList(); // collection of
 				// packages not yet visited
@@ -136,7 +139,10 @@ public class HtmlISO {
 				out.write("</TABLE>");
 				newline();
 				
-				
+				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTIntro")+"</H1> </FONT>");
+				newline();
+				out.write(introduction.getTxtAIntro().getText());
+				newline();
 				
 				pass = CONTENTS;
 				walkTree(apackage);
