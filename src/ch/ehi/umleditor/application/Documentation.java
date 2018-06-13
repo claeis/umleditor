@@ -212,7 +212,7 @@ public class Documentation extends BaseDialog  {
 				try {
 					ivjLblChanges = new javax.swing.JLabel();
 					ivjLblChanges.setName("LblChanges");
-					ivjLblChanges.setText("Changes:");
+					ivjLblChanges.setText("Cambios:");
 					//ivjLblOrganization.setText(resClassDefDialog.getString("LblName_text"));
 				} catch (java.lang.Throwable ivjExc) {
 					handleException(ivjExc);

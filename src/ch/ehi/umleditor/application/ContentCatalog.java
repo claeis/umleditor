@@ -11,13 +11,13 @@ import javax.swing.KeyStroke;
 
 import ch.softenvironment.view.BaseDialog;
 
-public class Introduction extends BaseDialog{
+public class ContentCatalog extends BaseDialog{
 
-	private static final long serialVersionUID = 6226732736805661253L;
+	private static final long serialVersionUID = 8140042830420220193L;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	
-	private javax.swing.JLabel ivjLblIntroduction = null;
+	private javax.swing.JLabel ivjLblContent = null;
 	private javax.swing.JScrollPane ivjScpEditor = null;
 	public javax.swing.JTextArea ivjTxtAIntro = null;
 	private javax.swing.JButton ivjBtnCancel = null;
@@ -25,9 +25,9 @@ public class Introduction extends BaseDialog{
 	
 	class IvjEventHandler implements java.awt.event.ActionListener,  java.awt.event.KeyListener{
 		public void actionPerformed(java.awt.event.ActionEvent e) {
-			if (e.getSource() == Introduction.this.getBtnCancel())
+			if (e.getSource() == ContentCatalog.this.getBtnCancel())
 				connEtoC1(e);
-			if (e.getSource() == Introduction.this.getBtnOk())
+			if (e.getSource() == ContentCatalog.this.getBtnOk())
 				connEtoC2(e);
 		}
 
@@ -50,13 +50,13 @@ public class Introduction extends BaseDialog{
 		};
 	};
 	
-	protected Introduction(Component owner, boolean modal) {
+	protected ContentCatalog(Component owner, boolean modal) {
 		super(owner, modal);
 		initialize();
 		addEscapeKey();
 	}
 	
-	public Introduction(java.awt.Frame owner, String title, boolean modal) {
+	public ContentCatalog(java.awt.Frame owner, String title, boolean modal) {
 		super(owner, title, modal);
 		initialize();
 		if (title != null) {
@@ -94,9 +94,9 @@ public class Introduction extends BaseDialog{
 			try {
 				// user code begin {1}
 				// user code end
-				setName("IntroductionDialog");
+				setName("ContentDialog");
 				setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-				setTitle("Introduction");
+				setTitle("Content");
 				setSize(600, 570);
 				setContentPane(getBaseDialogContentPane());
 				initConnections();
@@ -120,18 +120,18 @@ public class Introduction extends BaseDialog{
 		}
 		
 		
-		private javax.swing.JLabel getLblIntroduction() {
-			if (ivjLblIntroduction == null) {
+		private javax.swing.JLabel getLblContent() {
+			if (ivjLblContent == null) {
 				try {
-					ivjLblIntroduction = new javax.swing.JLabel();
-					ivjLblIntroduction.setName("LblVersionControl");
-					ivjLblIntroduction.setText("Introduccion:");
+					ivjLblContent = new javax.swing.JLabel();
+					ivjLblContent.setName("LblVersionControl");
+					ivjLblContent.setText("Contenido:");
 					//ivjLblOrganization.setText(resClassDefDialog.getString("LblName_text"));
 				} catch (java.lang.Throwable ivjExc) {
 					handleException(ivjExc);
 				}
 			}
-			return ivjLblIntroduction;
+			return ivjLblContent;
 		}
 		
 		public javax.swing.JTextArea getTxtAIntro() {
@@ -178,20 +178,20 @@ public class Introduction extends BaseDialog{
 					ivjBaseDialogContentPane.setName("BaseDialogContentPane");
 					ivjBaseDialogContentPane.setLayout(new java.awt.GridBagLayout());
 
-					java.awt.GridBagConstraints constraintsLblIntroduction = new java.awt.GridBagConstraints();
-					constraintsLblIntroduction.gridx = 0;
-					constraintsLblIntroduction.gridy = 0;
-					constraintsLblIntroduction.ipadx = 104;
-					constraintsLblIntroduction.insets = new java.awt.Insets(29, 15, 15, 250);
-					getBaseDialogContentPane().add(getLblIntroduction(), constraintsLblIntroduction);
+					java.awt.GridBagConstraints constraintsLblContent = new java.awt.GridBagConstraints();
+					constraintsLblContent.gridx = 0;
+					constraintsLblContent.gridy = 0;
+					constraintsLblContent.ipadx = 104;
+					constraintsLblContent.insets = new java.awt.Insets(29, 15, 15, 250);
+					getBaseDialogContentPane().add(getLblContent(), constraintsLblContent);
 					
-					java.awt.GridBagConstraints constraintsTxTAIntroduction = new java.awt.GridBagConstraints();
-					constraintsTxTAIntroduction.gridx = 0;
-					constraintsTxTAIntroduction.gridy = 1;
-					constraintsTxTAIntroduction.ipadx = 425;
-					constraintsTxTAIntroduction.ipady = 360;
-					constraintsTxTAIntroduction.insets = new java.awt.Insets(14, 5, 42, 5);
-					ivjBaseDialogContentPane.add(getScpEditor(), constraintsTxTAIntroduction);
+					java.awt.GridBagConstraints constraintsTxtContent = new java.awt.GridBagConstraints();
+					constraintsTxtContent.gridx = 0;
+					constraintsTxtContent.gridy = 1;
+					constraintsTxtContent.ipadx = 425;
+					constraintsTxtContent.ipady = 360;
+					constraintsTxtContent.insets = new java.awt.Insets(14, 5, 42, 5);
+					ivjBaseDialogContentPane.add(getScpEditor(), constraintsTxtContent);
 					
 					java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
 					constraintsBtnOk.gridx = 0;
@@ -301,5 +301,4 @@ public class Introduction extends BaseDialog{
 				handleException(ivjExc);
 			}
 		}
-
 }

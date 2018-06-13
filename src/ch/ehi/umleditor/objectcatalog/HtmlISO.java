@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.umleditor.application.ContentCatalog;
 import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
 import ch.ehi.umleditor.application.Introduction;
@@ -42,6 +43,9 @@ public class HtmlISO {
 	private OrganizationDialog organization = null;
 	private Documentation docISO = null;
 	private Introduction introduction;
+
+	private ContentCatalog content;
+	
 	private ch.ehi.basics.io.IndentPrintWriter clsFile = null;
 	private java.io.Writer out = null;
 	// hashmap<object, string>
@@ -69,17 +73,20 @@ public class HtmlISO {
 	String b = " ";
 
 	double textIdent = 0.5;
+
 	private static final int CONTENTS = 1;
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro, ContentCatalog cont) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
 				this.organization = foo;
 				this.docISO = app;
 				this.introduction = intro;
+				
+				this.content = cont;
 				
 				linkElements = true;
 				// java.util.ArrayList todo=new java.util.ArrayList(); // collection of
@@ -123,29 +130,33 @@ public class HtmlISO {
 				out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTauthor") + "</font></TD>");
 				newline();
-				out.write("<TD widht=\"125\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD widht=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTversion") + "</font></TD>");
 				newline();
-				out.write("<TD width=\"175\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+				out.write("<TD width=\"175\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
 						+ rsrc.getString("CTChanges") + "</font></TD> </TR>");
 				newline();
-				out.write("<TR><TD>"+ docISO.getTxtDate().getText() + "</TD>");
+				out.write("<TR><TD><font face=\"Arial\">"+ docISO.getTxtDate().getText() + "</font> </TD>");
 				newline();
-				out.write("<TD>"+ docISO.getTxtAuthor().getText() + "</TD>");
+				out.write("<TD> <font face=\"Arial\">"+ docISO.getTxtAuthor().getText() + "</font> </TD>");
 				newline();
-				out.write("<TD>"+ docISO.getTxtVersion().getText() + "</TD>");
+				out.write("<TD> <font face=\"Arial\">"+ docISO.getTxtVersion().getText() + "</font> </TD>");
 				newline();
 				out.write("<TD>"+ docISO.getTxtChanges() .getText() + "</TD> </TR>");
 				out.write("</TABLE>");
 				newline();
 				
-				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTIntro")+"</H1> </FONT>");
+				pass = CONTENTS;
+				walkTree(apackage);
+				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTIntro")+"</H1>");
 				newline();
 				out.write(introduction.getTxtAIntro().getText());
 				newline();
+				out.write(" <H1>"+rsrc.getString("CTContent")+"</H1>");
+				newline();
+				out.write(content.getTxtAIntro().getText()+" </FONT>");
+				newline();
 				
-				pass = CONTENTS;
-				walkTree(apackage);
 
 				pass = BODY;
 				// clsFile=new ch.interlis.ili2c.generator.IndentPrintWriter(new
@@ -232,30 +243,30 @@ public class HtmlISO {
 				newline();
 
 				if (apackage instanceof UmlModel) {
-					UmlModel model = (UmlModel) apackage;
-					String author = encodeDescription(model.getAuthor());
-					String version = encodeString(model.getVersion());
-					out.write("<table border=\"0\">");
-					out.write("<tr>");
-					newline();
-					out.write("<td><i>" + rsrc.getString("CTauthor") + "</i></td>");
-					newline();
-					out.write(
-							"<td><font face=\"Arial\" size=\"3\">" + author + "</font></td>");
-					newline();
-					out.write("</tr>");
-					newline();
-
-					out.write("<tr>");
-					newline();
-					out.write("<td><i>" + rsrc.getString("CTversion") + "</i></td>");
-					newline();
-					out.write("<td><font face=\"Arial\" size=\"3\">" + version
-							+ "</font></td>");
-					newline();
-					out.write("</tr>");
-					newline();
-					out.write("</table>");
+//					UmlModel model = (UmlModel) apackage;
+//					String author = encodeDescription(model.getAuthor());
+//					String version = encodeString(model.getVersion());
+//					out.write("<table border=\"0\">");
+//					out.write("<tr>");
+//					newline();
+//					out.write("<td><i>" + rsrc.getString("CTauthor") + "</i></td>");
+//					newline();
+//					out.write(
+//							"<td><font face=\"Arial\" size=\"3\">" + author + "</font></td>");
+//					newline();
+//					out.write("</tr>");
+//					newline();
+//
+//					out.write("<tr>");
+//					newline();
+//					out.write("<td><i>" + rsrc.getString("CTversion") + "</i></td>");
+//					newline();
+//					out.write("<td><font face=\"Arial\" size=\"3\">" + version
+//							+ "</font></td>");
+//					newline();
+//					out.write("</tr>");
+//					newline();
+//					out.write("</table>");
 				}
 				String documentation = encodeDescription(mapNlsString(apackage.getDocumentation()));
 				out.write(documentation);
