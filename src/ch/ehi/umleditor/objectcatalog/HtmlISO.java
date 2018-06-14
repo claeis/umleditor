@@ -33,6 +33,7 @@ import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
 import ch.ehi.umleditor.application.Introduction;
 import ch.ehi.umleditor.application.OrganizationDialog;
+import ch.ehi.umleditor.application.ReferencesDialog;
 
 public class HtmlISO {
 	static java.util.ResourceBundle rsrc = ch.ehi.basics.i18n.ResourceBundle.getBundle(HtmlISO.class);
@@ -45,6 +46,7 @@ public class HtmlISO {
 	private Introduction introduction;
 
 	private ContentCatalog content;
+	private ReferencesDialog references;
 	
 	private ch.ehi.basics.io.IndentPrintWriter clsFile = null;
 	private java.io.Writer out = null;
@@ -74,11 +76,13 @@ public class HtmlISO {
 
 	double textIdent = 0.5;
 
+
+
 	private static final int CONTENTS = 1;
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro, ContentCatalog cont) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro, ContentCatalog cont, ReferencesDialog ref) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
@@ -87,6 +91,7 @@ public class HtmlISO {
 				this.introduction = intro;
 				
 				this.content = cont;
+				this.references = ref;
 				
 				linkElements = true;
 				// java.util.ArrayList todo=new java.util.ArrayList(); // collection of
@@ -168,6 +173,9 @@ public class HtmlISO {
 				pass = INDEX;
 				walkTree(apackage);
 
+				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTReference")+"</H1>");
+				newline();
+				out.write(references.getTxtAReferences().getText() + "</FONT>");
 				out.write("</BODY>");
 				newline();
 				out.write("</HTML>");

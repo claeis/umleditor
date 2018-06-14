@@ -21,6 +21,7 @@ import ch.ehi.umleditor.application.Introduction;
 // -beg- preserve=yes 3CD78E5B00EB import "ObjectCatalog"
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.umleditor.application.OrganizationDialog;
+import ch.ehi.umleditor.application.ReferencesDialog;
 
 import java.io.*;
 
@@ -184,6 +185,7 @@ public class ObjectCatalog {
 				Introduction introDialog = new Introduction(LauncherView.getInstance(), "Introduction", true);
 				
 				ContentCatalog contentDialog = new ContentCatalog(LauncherView.getInstance(), "Content catalog", true);
+				ReferencesDialog refDialog = new ReferencesDialog(LauncherView.getInstance(), "References", true);
 				//write file
 				LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
 				String filename = saveDialog.getSelectedFile().getAbsolutePath();
@@ -197,7 +199,7 @@ public class ObjectCatalog {
 				}
 				try {
 					HtmlISO writer = new HtmlISO();
-					writer.doObjectCatalog(apackage, out, orgDialog, docDialog, introDialog, contentDialog);
+					writer.doObjectCatalog(apackage, out, orgDialog, docDialog, introDialog, contentDialog, refDialog);
 					out.close();
 					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),
 							MessageFormat.format(rsrc, "CTobjcatDone", filename));
