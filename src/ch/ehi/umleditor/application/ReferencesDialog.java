@@ -78,7 +78,7 @@ public class ReferencesDialog extends BaseDialog {
 				// user code end
 				setName("DocumentationDialog");
 				setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-				setSize(627, 564);
+				setSize(630, 564);
 				setTitle("Documentation");
 				setContentPane(getBaseDialogContentPane());
 				initConnections();
@@ -163,7 +163,7 @@ public class ReferencesDialog extends BaseDialog {
 					constraintsLblReferences.gridx = 0;
 					constraintsLblReferences.gridy = 0;
 					constraintsLblReferences.ipadx = 104;
-					constraintsLblReferences.insets = new java.awt.Insets(29, 15, 25, 250);
+					constraintsLblReferences.insets = new java.awt.Insets(120, 15, 25, 250);
 					getBaseDialogContentPane().add(getLblReferences(), constraintsLblReferences);
 					
 					java.awt.GridBagConstraints constraintsTxTAIntroduction = new java.awt.GridBagConstraints();
@@ -178,14 +178,14 @@ public class ReferencesDialog extends BaseDialog {
 					constraintsBtnOk.gridx = 0;
 					constraintsBtnOk.gridy = 2;
 					constraintsBtnOk.ipadx = 64;
-					constraintsBtnOk.insets = new java.awt.Insets(17, 5, 44, 250);
+					constraintsBtnOk.insets = new java.awt.Insets(12, 5, 124, 250);
 					getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
 
 					java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
 					constraintsBtnCancel.gridx = 0;
 					constraintsBtnCancel.gridy = 2;
 					constraintsBtnCancel.ipadx = 64;
-					constraintsBtnCancel.insets = new java.awt.Insets(17, 40, 44, 50);
+					constraintsBtnCancel.insets = new java.awt.Insets(12, 40, 124, 50);
 					getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
 				} catch (java.lang.Throwable ivjExc) {
 					handleException(ivjExc);

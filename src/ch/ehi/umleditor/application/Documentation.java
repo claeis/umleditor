@@ -244,14 +244,14 @@ public class Documentation extends BaseDialog  {
 					constraintsLblVersionControl.gridx = 0;
 					constraintsLblVersionControl.gridy = 0;
 					constraintsLblVersionControl.ipadx = 104;
-					constraintsLblVersionControl.insets = new java.awt.Insets(92, 19, 370, 11);
+					constraintsLblVersionControl.insets = new java.awt.Insets(92, 59, 410, 51);
 					getBaseDialogContentPane().add(getLblVersionControl(), constraintsLblVersionControl);
 					
 					java.awt.GridBagConstraints constraintsLblDate = new java.awt.GridBagConstraints();
 					constraintsLblDate.gridx = 0;
 					constraintsLblDate.gridy = 0;
 					constraintsLblDate.ipadx = 104;
-					constraintsLblDate.insets = new java.awt.Insets(138, 50, 360, 6);
+					constraintsLblDate.insets = new java.awt.Insets(138, 95, 360, 6);
 					getBaseDialogContentPane().add(getLblDate(), constraintsLblDate);
 					
 					java.awt.GridBagConstraints constraintsTxtDate = new java.awt.GridBagConstraints();
@@ -261,14 +261,14 @@ public class Documentation extends BaseDialog  {
 					constraintsTxtDate.fill = java.awt.GridBagConstraints.HORIZONTAL;
 					constraintsTxtDate.weightx = 1.0;
 					constraintsTxtDate.ipadx = 315;
-					constraintsTxtDate.insets = new java.awt.Insets(137, 6, 360, 15);
+					constraintsTxtDate.insets = new java.awt.Insets(137, 6, 360, 95);
 					getBaseDialogContentPane().add(getTxtDate(), constraintsTxtDate);
 					
 					java.awt.GridBagConstraints constraintsLblAuthor = new java.awt.GridBagConstraints();
 					constraintsLblAuthor.gridx = 0;
 					constraintsLblAuthor.gridy = 0;
 					constraintsLblAuthor.ipadx = 104;
-					constraintsLblAuthor.insets = new java.awt.Insets(196, 50, 355, 6);
+					constraintsLblAuthor.insets = new java.awt.Insets(196, 95, 355, 6);
 					getBaseDialogContentPane().add(getLblAuthor(), constraintsLblAuthor);
 				
 					java.awt.GridBagConstraints constraintsTxtAuthor = new java.awt.GridBagConstraints();
@@ -278,14 +278,14 @@ public class Documentation extends BaseDialog  {
 					constraintsTxtAuthor.fill = java.awt.GridBagConstraints.HORIZONTAL;
 					constraintsTxtAuthor.weightx = 1.0;
 					constraintsTxtAuthor.ipadx = 315;
-					constraintsTxtAuthor.insets = new java.awt.Insets(196, 6, 355, 15);
+					constraintsTxtAuthor.insets = new java.awt.Insets(196, 6, 355, 95);
 					getBaseDialogContentPane().add(getTxtAuthor(), constraintsTxtAuthor);
 					
 					java.awt.GridBagConstraints constraintsLblVersion = new java.awt.GridBagConstraints();
 					constraintsLblVersion.gridx = 0;
 					constraintsLblVersion.gridy = 0;
 					constraintsLblVersion.ipadx = 104;
-					constraintsLblVersion.insets = new java.awt.Insets(254, 50, 350, 6);
+					constraintsLblVersion.insets = new java.awt.Insets(254, 95, 350, 6);
 					getBaseDialogContentPane().add(getLblVersion(), constraintsLblVersion);
 					
 					java.awt.GridBagConstraints constraintsTxtVersion = new java.awt.GridBagConstraints();
@@ -295,14 +295,14 @@ public class Documentation extends BaseDialog  {
 					constraintsTxtVersion.fill = java.awt.GridBagConstraints.HORIZONTAL;
 					constraintsTxtVersion.weightx = 1.0;
 					constraintsTxtVersion.ipadx = 315;
-					constraintsTxtVersion.insets = new java.awt.Insets(255, 6, 350, 15);
+					constraintsTxtVersion.insets = new java.awt.Insets(255, 6, 350, 95);
 					getBaseDialogContentPane().add(getTxtVersion(), constraintsTxtVersion);
 					
 					java.awt.GridBagConstraints constraintsLblChanges = new java.awt.GridBagConstraints();
 					constraintsLblChanges.gridx = 0;
 					constraintsLblChanges.gridy = 0;
 					constraintsLblChanges.ipadx = 104;
-					constraintsLblChanges.insets = new java.awt.Insets(312, 50, 345, 6);
+					constraintsLblChanges.insets = new java.awt.Insets(312, 95, 345, 6);
 					getBaseDialogContentPane().add(getLblChanges(), constraintsLblChanges);
 					
 					java.awt.GridBagConstraints constraintsTxtChanges = new java.awt.GridBagConstraints();
@@ -312,21 +312,21 @@ public class Documentation extends BaseDialog  {
 					constraintsTxtChanges.fill = java.awt.GridBagConstraints.HORIZONTAL;
 					constraintsTxtChanges.weightx = 1.0;
 					constraintsTxtChanges.ipadx = 315;
-					constraintsTxtChanges.insets = new java.awt.Insets(314, 6, 345, 15);
+					constraintsTxtChanges.insets = new java.awt.Insets(314, 6, 345, 95);
 					getBaseDialogContentPane().add(getTxtChanges(), constraintsTxtChanges);
 					
 					java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
 					constraintsBtnOk.gridx = 0;
 					constraintsBtnOk.gridy = 0;
 					constraintsBtnOk.ipadx = 64;
-					constraintsBtnOk.insets = new java.awt.Insets(370, 50, 340, 6);
+					constraintsBtnOk.insets = new java.awt.Insets(570, 95, 340, 6);
 					getBaseDialogContentPane().add(getBtnOk(), constraintsBtnOk);
 
 					java.awt.GridBagConstraints constraintsBtnCancel = new java.awt.GridBagConstraints();
 					constraintsBtnCancel.gridx = 1;
 					constraintsBtnCancel.gridy = 0;
 					constraintsBtnCancel.ipadx = 64;
-					constraintsBtnCancel.insets = new java.awt.Insets(373, 6, 340, 15);
+					constraintsBtnCancel.insets = new java.awt.Insets(570, 6, 340, 15);
 					getBaseDialogContentPane().add(getBtnCancel(), constraintsBtnCancel);
 					
 				} catch (java.lang.Throwable ivjExc) {

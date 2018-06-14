@@ -8,6 +8,7 @@
 package ch.ehi.umleditor.objectcatalog;
 // -end- 3CD78E5B00EB package "ObjectCatalog"
 
+import ch.ehi.umleditor.application.AbbreviationsDialog;
 import ch.ehi.umleditor.application.ContentCatalog;
 import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.Introduction;
@@ -183,7 +184,7 @@ public class ObjectCatalog {
 				OrganizationDialog orgDialog = new OrganizationDialog(LauncherView.getInstance(), "Organization",true);
 				Documentation docDialog = new Documentation(LauncherView.getInstance(),"Documentation", true);
 				Introduction introDialog = new Introduction(LauncherView.getInstance(), "Introduction", true);
-				
+				AbbreviationsDialog abbrDialog = new AbbreviationsDialog(LauncherView.getInstance(), "Abbreviation", true);
 				ContentCatalog contentDialog = new ContentCatalog(LauncherView.getInstance(), "Content catalog", true);
 				ReferencesDialog refDialog = new ReferencesDialog(LauncherView.getInstance(), "References", true);
 				//write file
@@ -199,7 +200,7 @@ public class ObjectCatalog {
 				}
 				try {
 					HtmlISO writer = new HtmlISO();
-					writer.doObjectCatalog(apackage, out, orgDialog, docDialog, introDialog, contentDialog, refDialog);
+					writer.doObjectCatalog(apackage, out, orgDialog, docDialog, introDialog, abbrDialog, contentDialog, refDialog);
 					out.close();
 					LauncherView.getInstance().log(rsrc.getString("CTobjcatLog"),
 							MessageFormat.format(rsrc, "CTobjcatDone", filename));

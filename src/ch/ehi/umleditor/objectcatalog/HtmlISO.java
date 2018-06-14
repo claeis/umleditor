@@ -28,6 +28,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.modelmanagement.Package;
+import ch.ehi.umleditor.application.AbbreviationsDialog;
 import ch.ehi.umleditor.application.ContentCatalog;
 import ch.ehi.umleditor.application.Documentation;
 import ch.ehi.umleditor.application.IliBaseTypeKind;
@@ -44,7 +45,7 @@ public class HtmlISO {
 	private OrganizationDialog organization = null;
 	private Documentation docISO = null;
 	private Introduction introduction;
-
+	private AbbreviationsDialog abbreviation;
 	private ContentCatalog content;
 	private ReferencesDialog references;
 	
@@ -76,20 +77,18 @@ public class HtmlISO {
 
 	double textIdent = 0.5;
 
-
-
 	private static final int CONTENTS = 1;
 	private static final int BODY = 3;
 	private static final int INDEX = 4;
 	
-	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro, ContentCatalog cont, ReferencesDialog ref) throws java.io.IOException {
+	public void doObjectCatalog(Namespace apackage, java.io.Writer out, OrganizationDialog foo, Documentation app, Introduction intro, AbbreviationsDialog abbr, ContentCatalog cont, ReferencesDialog ref) throws java.io.IOException {
 		// please fill in/modify the following section
 				// -beg- preserve=yes 3CEE8A0A0302 body3CEE891B03C7 "doObjectCatalog"
 				this.out = out;
 				this.organization = foo;
 				this.docISO = app;
 				this.introduction = intro;
-				
+				this.abbreviation = abbr;
 				this.content = cont;
 				this.references = ref;
 				
@@ -156,6 +155,10 @@ public class HtmlISO {
 				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTIntro")+"</H1>");
 				newline();
 				out.write(introduction.getTxtAIntro().getText());
+				newline();
+				out.write(" <FONT face=\"Arial\"><H1>"+rsrc.getString("CTAbbreviation")+"</H1>");
+				newline();
+				out.write(abbreviation.getTxtAAbbreviation().getText());
 				newline();
 				out.write(" <H1>"+rsrc.getString("CTContent")+"</H1>");
 				newline();

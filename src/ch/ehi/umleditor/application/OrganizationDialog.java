@@ -445,15 +445,15 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtOrganization.gridwidth = 2;
 				constraintsTxtOrganization.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtOrganization.weightx = 1.0;
-				constraintsTxtOrganization.ipadx = 315;
-				constraintsTxtOrganization.insets = new java.awt.Insets(19, 2, 370, 11);
+				constraintsTxtOrganization.ipadx = 55;
+				constraintsTxtOrganization.insets = new java.awt.Insets(19, 2, 370, 95);
 				getBaseDialogContentPane().add(getTxtOrganization(), constraintsTxtOrganization);
 
 				java.awt.GridBagConstraints constraintsLblPosition = new java.awt.GridBagConstraints();
 				constraintsLblPosition.gridx = 0;
 				constraintsLblPosition.gridy = 0;
 				constraintsLblPosition.ipadx = 104;
-				constraintsLblPosition.insets = new java.awt.Insets(80, 50, 365, 6);
+				constraintsLblPosition.insets = new java.awt.Insets(80, 58, 365, 9);
 				getBaseDialogContentPane().add(getLblPosition(), constraintsLblPosition);
 
 				java.awt.GridBagConstraints constraintsTxtPosition = new java.awt.GridBagConstraints();
@@ -463,14 +463,14 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtPosition.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtPosition.weightx = 1.0;
 				constraintsTxtPosition.ipadx = 315;
-				constraintsTxtPosition.insets = new java.awt.Insets(78, 6, 365, 15);
+				constraintsTxtPosition.insets = new java.awt.Insets(78, 6, 365, 95);
 				getBaseDialogContentPane().add(getTxtPosition(), constraintsTxtPosition);
 
 				java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
 				constraintsLblKind.gridx = 0;
 				constraintsLblKind.gridy = 0;
 				constraintsLblKind.ipadx = 104;
-				constraintsLblKind.insets = new java.awt.Insets(138, 50, 360, 6);
+				constraintsLblKind.insets = new java.awt.Insets(138, 50, 360, 9);
 				getBaseDialogContentPane().add(getLblKind(), constraintsLblKind);
 
 				java.awt.GridBagConstraints constraintsTxtKind = new java.awt.GridBagConstraints();
@@ -480,14 +480,14 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtKind.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtKind.weightx = 1.0;
 				constraintsTxtKind.ipadx = 315;
-				constraintsTxtKind.insets = new java.awt.Insets(137, 6, 360, 15);
+				constraintsTxtKind.insets = new java.awt.Insets(137, 6, 360, 95);
 				getBaseDialogContentPane().add(getTxtKind(), constraintsTxtKind);				
 				
 				java.awt.GridBagConstraints constraintsLblAddress = new java.awt.GridBagConstraints();
 				constraintsLblAddress.gridx = 0;
 				constraintsLblAddress.gridy = 0;
 				constraintsLblAddress.ipadx = 104;
-				constraintsLblAddress.insets = new java.awt.Insets(196, 50, 355, 6);
+				constraintsLblAddress.insets = new java.awt.Insets(196, 72, 355, 6);
 				getBaseDialogContentPane().add(getLblAddress(), constraintsLblAddress);
 
 				java.awt.GridBagConstraints constraintsTxtAddress = new java.awt.GridBagConstraints();
@@ -497,14 +497,14 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtAddress.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtAddress.weightx = 1.0;
 				constraintsTxtAddress.ipadx = 315;
-				constraintsTxtAddress.insets = new java.awt.Insets(196, 6, 355, 15);
+				constraintsTxtAddress.insets = new java.awt.Insets(196, 6, 355, 95);
 				getBaseDialogContentPane().add(getTxtAddress(), constraintsTxtAddress);
 				
 				java.awt.GridBagConstraints constraintsLblCity = new java.awt.GridBagConstraints();
 				constraintsLblCity.gridx = 0;
 				constraintsLblCity.gridy = 0;
 				constraintsLblCity.ipadx = 104;
-				constraintsLblCity.insets = new java.awt.Insets(254, 50, 350, 6);
+				constraintsLblCity.insets = new java.awt.Insets(254, 56, 350, 6);
 				getBaseDialogContentPane().add(getLblCity(), constraintsLblCity);
 
 				java.awt.GridBagConstraints constraintsTxtCity = new java.awt.GridBagConstraints();
@@ -514,14 +514,14 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtCity.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtCity.weightx = 1.0;
 				constraintsTxtCity.ipadx = 315;
-				constraintsTxtCity.insets = new java.awt.Insets(255, 6, 350, 15);
+				constraintsTxtCity.insets = new java.awt.Insets(255, 6, 350, 95);
 				getBaseDialogContentPane().add(getTxtCity(), constraintsTxtCity);
 				
 				java.awt.GridBagConstraints constraintsLblState = new java.awt.GridBagConstraints();
 				constraintsLblState.gridx = 0;
 				constraintsLblState.gridy = 0;
 				constraintsLblState.ipadx = 104;
-				constraintsLblState.insets = new java.awt.Insets(312, 50, 345, 6);
+				constraintsLblState.insets = new java.awt.Insets(312, 92, 345, 6);
 				getBaseDialogContentPane().add(getLblState(), constraintsLblState);
 
 				java.awt.GridBagConstraints constraintsTxtState = new java.awt.GridBagConstraints();
@@ -531,7 +531,7 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtState.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtState.weightx = 1.0;
 				constraintsTxtState.ipadx = 315;
-				constraintsTxtState.insets = new java.awt.Insets(314, 6, 345, 15);
+				constraintsTxtState.insets = new java.awt.Insets(314, 6, 345, 95);
 				getBaseDialogContentPane().add(getTxtState(), constraintsTxtState);
 				
 				java.awt.GridBagConstraints constraintsLblCountry = new java.awt.GridBagConstraints();
@@ -548,14 +548,14 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtCountry.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtCountry.weightx = 1.0;
 				constraintsTxtCountry.ipadx = 315;
-				constraintsTxtCountry.insets = new java.awt.Insets(373, 6, 340, 15);
+				constraintsTxtCountry.insets = new java.awt.Insets(373, 6, 340, 95);
 				getBaseDialogContentPane().add(getTxtCountry(), constraintsTxtCountry);
 				
 				java.awt.GridBagConstraints constraintsLblPhone = new java.awt.GridBagConstraints();
 				constraintsLblPhone.gridx = 0;
 				constraintsLblPhone.gridy = 0;
 				constraintsLblPhone.ipadx = 104;
-				constraintsLblPhone.insets = new java.awt.Insets(428, 50, 335, 6);
+				constraintsLblPhone.insets = new java.awt.Insets(428, 58, 335, 6);
 				getBaseDialogContentPane().add(getLblPhone(), constraintsLblPhone);
 
 				java.awt.GridBagConstraints constraintsTxtPhone = new java.awt.GridBagConstraints();
@@ -565,7 +565,7 @@ public class OrganizationDialog extends BaseDialog  {
 				constraintsTxtPhone.fill = java.awt.GridBagConstraints.HORIZONTAL;
 				constraintsTxtPhone.weightx = 1.0;
 				constraintsTxtPhone.ipadx = 315;
-				constraintsTxtPhone.insets = new java.awt.Insets(432, 6, 335, 15);
+				constraintsTxtPhone.insets = new java.awt.Insets(432, 6, 335, 95);
 				getBaseDialogContentPane().add(getTxtPhone(), constraintsTxtPhone);
 				
 				java.awt.GridBagConstraints constraintsBtnOk = new java.awt.GridBagConstraints();
