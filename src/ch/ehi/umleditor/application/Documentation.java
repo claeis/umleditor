@@ -26,14 +26,7 @@ public class Documentation extends BaseDialog  {
 	public javax.swing.JTextField ivjTxtVersion = null;
 	private javax.swing.JLabel ivjLblChanges = null;
 	public javax.swing.JTextField ivjTxtChanges = null;
-	
-	private javax.swing.JLabel ivjLblIntroduction = null;
-	
-	private javax.swing.JLabel ivjLblAbbreviations = null;
-	
-	private javax.swing.JLabel ivjLblReferences = null;
-
-			
+				
 	private javax.swing.JButton ivjBtnCancel = null;
 	private javax.swing.JButton ivjBtnOk = null;
 	
@@ -232,55 +225,7 @@ public class Documentation extends BaseDialog  {
 			}
 			return ivjTxtChanges;
 		}
-		
-		private javax.swing.JLabel getLblIntroduction() {
-			if (ivjLblIntroduction == null) {
-				try {
-					ivjLblIntroduction = new javax.swing.JLabel();
-					ivjLblIntroduction.setName("LblOrganization");
-					ivjLblIntroduction.setText("Introduccion:");
-					//ivjLblOrganization.setText(resClassDefDialog.getString("LblName_text"));
-				} catch (java.lang.Throwable ivjExc) {
-					
-					handleException(ivjExc);
-				}
-			}
-			return ivjLblIntroduction;
-		}
-		
-				
-		private javax.swing.JLabel getLblAbbreviations() {
-			if (ivjLblAbbreviations == null) {
-				try {
-					ivjLblAbbreviations = new javax.swing.JLabel();
-					ivjLblAbbreviations.setName("LblOrganization");
-					ivjLblAbbreviations.setText("Terminos, definiciones y abreviaturas:");
-					//ivjLblOrganization.setText(resClassDefDialog.getString("LblName_text"));
-				} catch (java.lang.Throwable ivjExc) {
-					
-					handleException(ivjExc);
-				}
-			}
-			return ivjLblAbbreviations;
-		}
-		
-				
-		private javax.swing.JLabel getLblReferences() {
-			if (ivjLblReferences == null) {
-				try {
-					ivjLblReferences = new javax.swing.JLabel();
-					ivjLblReferences.setName("LblReferences");
-					ivjLblReferences.setText("Referencias:");
-					//ivjLblOrganization.setText(resClassDefDialog.getString("LblName_text"));
-				} catch (java.lang.Throwable ivjExc) {
-					
-					handleException(ivjExc);
-				}
-			}
-			return ivjLblReferences;
-		}
-		
-				
+										
 		/**
 		 * Return the BaseDialogContentPane property value.
 		 * 
