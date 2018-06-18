@@ -393,7 +393,11 @@ public class Documentation extends BaseDialog  {
 		private void connEtoC1(java.awt.event.ActionEvent arg1) {
 			try {
 				// user code begin {1}
-				// user code end
+				// user code end\
+				this.ivjTxtAuthor.setText("");
+				this.ivjTxtChanges.setText("");
+				this.ivjTxtDate.setText("");
+				this.ivjTxtVersion.setText("");
 				this.cancelPressed();
 				// user code begin {2}
 				// user code end

@@ -270,6 +270,7 @@ public class AbbreviationsDialog extends BaseDialog{
 			try {
 				// user code begin {1}
 				// user code end
+				this.ivjTxtAAbreviation.setText("");
 				this.cancelPressed();
 				// user code begin {2}
 				// user code end

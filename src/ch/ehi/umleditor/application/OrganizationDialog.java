@@ -643,6 +643,14 @@ public class OrganizationDialog extends BaseDialog  {
 		try {
 			// user code begin {1}
 			// user code end
+			this.ivjTxtAddress.setText("");
+			this.ivjTxtCity.setText("");
+			this.ivjTxtCountry.setText("");
+			this.ivjTxtKind.setText("");
+			this.ivjTxtOrganization.setText("");
+			this.ivjTxtPhone.setText("");
+			this.ivjTxtPosition.setText("");
+			this.ivjTxtState.setText("");
 			this.cancelPressed();
 			// user code begin {2}
 			// user code end

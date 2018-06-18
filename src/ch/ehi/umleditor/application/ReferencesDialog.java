@@ -251,6 +251,7 @@ public class ReferencesDialog extends BaseDialog {
 			try {
 				// user code begin {1}
 				// user code end
+				this.ivjTxtAReferences.setText(" ");
 				this.cancelPressed();
 				// user code begin {2}
 				// user code end
