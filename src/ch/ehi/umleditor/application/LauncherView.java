@@ -166,6 +166,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniCut = null;
 	private JMenuItem ivjMniFindReplace = null;
 	private JMenuItem ivjMniHelp = null;
+	private JMenuItem ivjMniChangeLanguage = null;
 	private JMenuItem ivjMniOptions = null;
 	private JMenuItem ivjMniModellanguage = null;
 	private JMenuItem ivjMniRepoSetting = null;
@@ -222,6 +223,8 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			if (e.getSource() == LauncherView.this.getMniAbout())
 				connEtoC8(e);
+			if(e.getSource() == LauncherView.this.getMniChangeLanguage())
+				connEtoC44(e);
 			if (e.getSource() == LauncherView.this.getMniFileOpen())
 				connEtoC11(e);
 			if (e.getSource() == LauncherView.this.getMniNewFile())
@@ -1548,6 +1551,14 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 	}
 	
+	private void connEtoC44(java.awt.event.ActionEvent arg1) { 
+		try {
+			LanguageGUI languageGui = new LanguageGUI(getInstance(), "Language", true);
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	
 
 	/**
 	 * Creates and opens a ClassDiagram within an InternalFrame. Children will
@@ -2305,6 +2316,23 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		return ivjMniHelp;
 	}
 
+	private javax.swing.JMenuItem getMniChangeLanguage() {
+		if (ivjMniChangeLanguage == null) {
+			try {
+				ivjMniChangeLanguage = new javax.swing.JMenuItem();
+				ivjMniChangeLanguage.setName("MniChangeLanguage");
+				ivjMniChangeLanguage.setText("Language ...");
+				// user code begin {1}
+				// ivjMniChangeLanguage.setText(CommonUserAccess.getMniHelpText());
+				// user code end
+			} catch (java.lang.Throwable ivjExc) {
+				// user code begin {2}
+				// user code end
+				handleException(ivjExc);
+			}
+		}
+		return ivjMniChangeLanguage;
+	}
 	/**
 	 * Return the JMenuItem2 property value.
 	 * 
@@ -2916,6 +2944,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 				ivjMnuHelp.setName("MnuHelp");
 				ivjMnuHelp.setText("?");
 				ivjMnuHelp.add(getMniHelp());
+				ivjMnuHelp.add(getMniChangeLanguage());
 				ivjMnuHelp.add(getJSeparator4());
 				ivjMnuHelp.add(getMniAbout());
 				// user code begin {1}
@@ -3563,6 +3592,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		}
 		// user code end
 		getMniAbout().addActionListener(ivjEventHandler);
+		getMniChangeLanguage().addActionListener(ivjEventHandler);
 		getTreProjects().addMouseListener(ivjEventHandler);
 		getMniFileOpen().addActionListener(ivjEventHandler);
 		getMniNewFile().addActionListener(ivjEventHandler);
@@ -4028,7 +4058,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 		ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeGML();
 		tool().activate();
 	}
-
+	
 	/**
 	 * Shows a file dialog and opens a drawing.
 	 */
