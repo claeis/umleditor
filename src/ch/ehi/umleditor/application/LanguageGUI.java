@@ -3,6 +3,7 @@ package ch.ehi.umleditor.application;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -12,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import ch.ehi.basics.logging.EhiLogger;
 import ch.softenvironment.view.BaseDialog;
 
 public class LanguageGUI extends BaseDialog {
@@ -210,9 +212,20 @@ public class LanguageGUI extends BaseDialog {
     
     private void connEtoC1(ActionEvent e) {
 		try {
-			this.okPressed();
+			if(ivjCbxlanguage.getSelectedItem().equals(Locale.getDefault())) {
+    		System.out.println("INGLES");
+			} else {
+				Locale.setDefault(new Locale(ivjCbxlanguage.getSelectedItem().toString()));
+				ch.ehi.basics.types.NlsString.setDefaultLanguage(ivjCbxlanguage.getSelectedItem().toString());
+				EhiLogger.logState("language of User Interface set to '"
+						+ ch.ehi.basics.types.NlsString.getDefaultLanguage() + "'");
+			} 
+    		
+    	this.okPressed();
 		} catch (java.lang.Throwable ivjExc) {
 			handleException(ivjExc);
 		}
 	}
+    
+    	
 }
