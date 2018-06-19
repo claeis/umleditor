@@ -11,7 +11,7 @@ public class TranslationXmlMenu {
 	public static void doImport() {
 		EhiLogger.logState("doImport of Translation-XML");
 		LauncherView editor = LauncherView.getInstance();
-		String xmlFile = readFileset();
+		String xmlFile = doImportFileSelector();
 		if (xmlFile != null) {
 			try {
 				TransferFromXml trsf = new TransferFromXml();
@@ -26,7 +26,7 @@ public class TranslationXmlMenu {
 	public static void doExport() {
 		EhiLogger.logState("doExport of Translation-XML");
 		LauncherView editor = LauncherView.getInstance();
-		String file = fileChooser();
+		String file = doExportFileSelector();
 		if (file != null) {
 			try {
 				TransferToXml trsf = new TransferToXml();
@@ -37,10 +37,10 @@ public class TranslationXmlMenu {
 		}
 	}
 
-	private static String fileChooser() {
+	private static String doExportFileSelector() {
 		FileChooser importDialog = new FileChooser(LauncherView.getSettings().getImportDirectory());
 		importDialog.setDialogTitle("Select A File");
-		ch.ehi.basics.view.GenericFileFilter iliFilter = LauncherView.createInterlisModelFilter();
+		ch.ehi.basics.view.GenericFileFilter iliFilter = LauncherView.createXmlFilter();
 		importDialog.addChoosableFileFilter(iliFilter);
 		if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setImportDirectory(importDialog.getCurrentDirectory().getAbsolutePath());
@@ -49,10 +49,10 @@ public class TranslationXmlMenu {
 		return null;
 	}
 
-	public static String readFileset() {
+	public static String doImportFileSelector() {
 		FileChooser importDialog = new FileChooser(LauncherView.getSettings().getImportDirectory());
 		importDialog.setDialogTitle("Import File");
-		ch.ehi.basics.view.GenericFileFilter ilcFilter = LauncherView.createInterlisCompilerFilter();
+		ch.ehi.basics.view.GenericFileFilter ilcFilter = LauncherView.createXmlFilter();
 		importDialog.addChoosableFileFilter(ilcFilter);
 
 		if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
