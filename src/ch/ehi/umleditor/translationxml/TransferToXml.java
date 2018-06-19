@@ -14,7 +14,6 @@ import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
-import ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
@@ -43,20 +42,17 @@ public class TransferToXml {
 	/**
 	 * All models are read in this method
 	 * 
-	 * @param model
-	 *            Source Data
-	 * @param xmlfile
-	 *            path of the Destination file
+	 * @param model Source Data
+	 * @param xmlfile path of the Destination file
 	 * @return all collected elements are returned
-	 * @throws Exception
-	 *             Exception
+	 * @throws Exception Exception
 	 */
 	public ModelElements export(Model model, java.io.File xmlfile) throws Exception {
 		Iterator modelI = model.iteratorOwnedElement();
 		while (modelI.hasNext()) {
 			Object obj = modelI.next();
 			if (obj instanceof INTERLIS2Def) {
-				if (willItContinue((INTERLIS2Def) obj)) {
+				if (!ModelElementUtility.isInternal((INTERLIS2Def) obj)) {
 					if (obj instanceof INTERLIS2Def) {
 						String scopedNamePrefix = null;
 						boolean showAllFields = true;
@@ -77,33 +73,16 @@ public class TransferToXml {
 		Ili2TranslationXml.writeModelElementsAsXML(modelElement, xmlfile);
 		return modelElement;
 	}
-
-	/**
-	 * It is determined whether loop will continue or not.
-	 * 
-	 * @param obj
-	 * @return True : Continue, False : skip this Object
-	 */
-	private boolean willItContinue(INTERLIS2Def obj) {
-		if (obj.getDefLangName().startsWith("<")) {
-			return false;
-		}
-		return true;
-	}
+	
 
 	/**
 	 * Fills the XML structure with the entries in the Model Element.
 	 * 
-	 * @param modelDef
-	 *            given Model Element
-	 * @param scopedNamePrefix
-	 *            Scope Name
-	 * @param baselanguage
-	 *            Base Language in Model
-	 * @param languages
-	 *            Valid second languages
-	 * @param showAllFields
-	 *            it sets empty all field of Structure
+	 * @param modelDef given Model Element
+	 * @param scopedNamePrefix Scope Name
+	 * @param baselanguage Base Language in Model
+	 * @param languages Valid second languages
+	 * @param showAllFields it sets empty all field of Structure
 	 */
 	private void visitModelElement(ModelElement modelDef, String scopedNamePrefix, String baselanguage, Set languages,
 			boolean showAllFields) {
@@ -114,7 +93,7 @@ public class TransferToXml {
 		}
 
 		translationElement.setElementType(getElementType(modelDef));
-		scopedNamePrefix = setScopedName(scopedNamePrefix, modelDef, baselanguage);
+		scopedNamePrefix = getScopedName(scopedNamePrefix, modelDef, baselanguage);
 		translationElement.setScopedName(scopedNamePrefix);
 
 		Map name = modelDef.getName().getAllValues();
@@ -142,7 +121,11 @@ public class TransferToXml {
 			}
 
 			if(modelDef instanceof AssociationDef) {
-				visitAssociationDef((AssociationDef)modelDef, scopedNamePrefix, baselanguage, languages);
+				Iterator assoDefI = ((AssociationDef)modelDef).iteratorConnection();
+				while (assoDefI.hasNext()) {
+					RoleDef roleDef = (RoleDef) assoDefI.next();
+					visitModelElement(roleDef, scopedNamePrefix, baselanguage, languages, false);
+				}
 			}
 			
 			Iterator contstraintI = modelDef.iteratorConstraint();
@@ -185,28 +168,14 @@ public class TransferToXml {
 		}
 	}
 
-	private void visitAssociationDef(AssociationDef assoDef, String scopedNamePrefix, String baselanguage,
-			Set languages) {
-		Iterator assoDefI = assoDef.iteratorConnection();
-		while (assoDefI.hasNext()) {
-			RoleDef roleDef = (RoleDef) assoDefI.next();
-			visitModelElement(roleDef, scopedNamePrefix, baselanguage, languages, false);
-
-		}
-	}
-
 	/**
 	 * it gets all Enumeration and SubEnumeration data and insert into Structure
 	 * with language
 	 * 
-	 * @param ScopedNamePrefix
-	 *            Scope Name
-	 * @param baselanguage
-	 *            Base Language
-	 * @param languages
-	 *            Valid Second languages
-	 * @param enumeration
-	 *            Related Enumeration Elements
+	 * @param ScopedNamePrefix Scope Name
+	 * @param baselanguage Base Language
+	 * @param languages Valid Second languages
+	 * @param enumeration Related Enumeration Elements
 	 */
 	private void printAllEnumeration(String scopedNamePrefix, String baselanguage, Set languages,
 			Enumeration enumeration) {
@@ -215,8 +184,8 @@ public class TransferToXml {
 			EnumElement enumElement = (EnumElement) enumEle.next();
 			visitModelElement(enumElement, scopedNamePrefix, baselanguage, languages, false);
 			if (enumElement.containsChild()) {
-				String scopeName = scopedNamePrefix + "." + enumElement.getName().getValue(baselanguage);
-				printAllEnumeration(scopeName, baselanguage, languages, enumElement.getChild());
+				String scopedName = scopedNamePrefix + "." + enumElement.getName().getValue(baselanguage);
+				printAllEnumeration(scopedName, baselanguage, languages, enumElement.getChild());
 			}
 
 		}
@@ -244,12 +213,9 @@ public class TransferToXml {
 	/**
 	 * Fill document field in Structure by language
 	 * 
-	 * @param documentation
-	 *            value of the documentation field
-	 * @param translationElement
-	 *            Structure of the XML
-	 * @param language
-	 *            Expected Document language
+	 * @param documentation value of the documentation field
+	 * @param translationElement Structure of the XML
+	 * @param language Expected Document language
 	 */
 	private void setDocumentation(String documentation, TranslationElement translationElement, String language) {
 		if (language.equalsIgnoreCase(Ili2TranslationXml.DE)) {
@@ -266,12 +232,9 @@ public class TransferToXml {
 	/**
 	 * Fill Name field in Structure by language
 	 * 
-	 * @param name
-	 *            Value of the Name field
-	 * @param translationElement
-	 *            Structure of the XML
-	 * @param language
-	 *            Expected Name language
+	 * @param name Value of the Name field
+	 * @param translationElement Structure of the XML
+	 * @param language Expected Name language
 	 */
 	private void setName(String name, TranslationElement translationElement, String language) {
 		if (language.equalsIgnoreCase(Ili2TranslationXml.DE)) {
@@ -289,8 +252,7 @@ public class TransferToXml {
 	 * it finds the all used languages in the Model Element
 	 * 
 	 * @param modelDef
-	 * @param languages
-	 *            if exists, it gives back the Valid second languages
+	 * @param languages if exists, it gives back the Valid second languages
 	 * @return it returns back the base Language from Model
 	 */
 	private String findTheLanguages(INTERLIS2Def modelDef, Set languages) {
@@ -313,15 +275,12 @@ public class TransferToXml {
 	/**
 	 * it concatenates the Scope Name of the given Model Element as a parameter.
 	 * 
-	 * @param scopedNamePrefix
-	 *            Full Scope Name
-	 * @param modelElement
-	 *            parameter to be concatenated Element
-	 * @param language
-	 *            it gets Related Element Name as parameter language
+	 * @param scopedNamePrefix Full Scope Name
+	 * @param modelElement parameter to be concatenated Element
+	 * @param language it gets Related Element Name as parameter language
 	 * @return concatenated Scope Name
 	 */
-	private String setScopedName(String scopedNamePrefix, ModelElement modelElement, String language) {
+	private String getScopedName(String scopedNamePrefix, ModelElement modelElement, String language) {
 		if (scopedNamePrefix == null) {
 			scopedNamePrefix = modelElement.getName().getValue(language);
 		} else {
@@ -333,11 +292,10 @@ public class TransferToXml {
 	/**
 	 * it returns the Element name of the given object as a parameter.
 	 * 
-	 * @param obj
-	 *            Element Type
+	 * @param obj Element Type
 	 * @return Name of the Element Type
 	 */
-	private String getElementType(Object obj) {
+	public String getElementType(Object obj) {
 		if (obj instanceof MetaDataUseDef) {
 			return ElementType.META_DATA_BASKET;
 		} else if (obj instanceof ViewDef) {
@@ -380,8 +338,7 @@ public class TransferToXml {
 	/**
 	 * it gives as a return parameter the Name of the Element type
 	 * 
-	 * @param model
-	 *            related model Element
+	 * @param model related model Element
 	 * @return it returns name of the related matches Element as a String
 	 */
 	private String findElementType(Object obj) {

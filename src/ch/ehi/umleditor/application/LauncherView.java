@@ -3912,7 +3912,7 @@ private void setModellingLanguage(String lang) {
 /**
  * Set a new Model.
  * @param model UmlModel
- * @param file File where UmlModel is saved in
+ * @param umlFile File where UmlModel is saved in
  */
 private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 	// clear current model
