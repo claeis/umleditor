@@ -149,6 +149,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniNewFile = null;
 	private JMenuItem ivjMniXmlExport = null;
 	private JMenu ivjMnuInterlisTools = null;
+	private JMenu ivjMnuTranslationTools = null;
 	private JMenu ivjMnuSymbollists = null;
 	private JMenu ivjMnuReports = null;
 	private JMenu ivjMnuTools = null;
@@ -2415,6 +2416,23 @@ private javax.swing.JMenu getMnuInterlisTools() {
 	}
 	return ivjMnuInterlisTools;
 }
+private javax.swing.JMenu getMnuTranslationTools() {
+	if (ivjMnuTranslationTools == null) {
+		try {
+			ivjMnuTranslationTools = new javax.swing.JMenu();
+			ivjMnuTranslationTools.setName("MnuTranslationTools");
+			ivjMnuTranslationTools.setText("Translation");
+			// user code begin {1}
+			ivjMnuTranslationTools.setText(getResourceString("MnuTranslationTools_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMnuTranslationTools;
+}
 /**
  * Return the MnuLookAndFeel property value.
  * @return javax.swing.JMenu
@@ -2496,6 +2514,7 @@ private javax.swing.JMenu getMnuTools() {
 			ivjMnuTools.setName("MnuTools");
 			ivjMnuTools.setText("Werkzeuge");
 			ivjMnuTools.add(getMnuInterlisTools());
+			ivjMnuTools.add(getMnuTranslationTools());
 			ivjMnuTools.add(getMnuXMI_Rose());
 			// user code begin {1}
 			ivjMnuTools.setText(CommonUserAccess.getMnuToolsText());
@@ -3053,7 +3072,16 @@ getMniRedo().setEnabled(false);
 			mniGmlExport();
 		}
 	});
-
+	getMnuTranslationTools().add(new AbstractAction(CommonUserAccess.getMniFileImportText()) {
+		public void actionPerformed(ActionEvent event) {
+			mniTranslationXmlImport();
+		}
+	});
+	getMnuTranslationTools().add(new AbstractAction(CommonUserAccess.getMniFileExportText()) {
+		public void actionPerformed(ActionEvent event) {
+			mniTranslationXmlExport();
+		}
+	});
 	// restore Window Coordinates
 	java.awt.Insets insets = instance.getInsets();
 	setLocation(getSettings().getWindowX().intValue(), getSettings().getWindowY().intValue());
@@ -3382,6 +3410,16 @@ private void mniObjectCatalogWoChNr() {
 private void mniGmlExport() {
 	tool().deactivate();
 	ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeGML();
+	tool().activate();
+}
+private void mniTranslationXmlImport() {
+	tool().deactivate();
+	ch.ehi.umleditor.translationxml.TranslationXmlMenu.doImport();
+	tool().activate();
+}
+private void mniTranslationXmlExport() {
+	tool().deactivate();
+	ch.ehi.umleditor.translationxml.TranslationXmlMenu.doExport();
 	tool().activate();
 }
 /**
@@ -3874,7 +3912,7 @@ private void setModellingLanguage(String lang) {
 /**
  * Set a new Model.
  * @param model UmlModel
- * @param file File where UmlModel is saved in
+ * @param umlFile File where UmlModel is saved in
  */
 private void setModel(Model model /*, java.io.File file*/) throws Throwable {
 	// clear current model
