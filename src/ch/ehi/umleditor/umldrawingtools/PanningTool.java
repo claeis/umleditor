@@ -50,7 +50,7 @@ private final Point panPoint = new Point();
         Point      currentPoint = e.getPoint();
         Point      viewPoint    = viewport.getViewPosition();
 
-        viewPoint.translate(panPoint.x - currentPoint.x, panPoint.y - currentPoint.y);
+        viewPoint.translate(currentPoint.x - panPoint.x, currentPoint.y - panPoint.y);
         component.scrollRectToVisible(new Rectangle(viewPoint, viewport.getSize()));
         panPoint.setLocation(currentPoint);
 		
