@@ -17,7 +17,10 @@ public class PanningTool extends AbstractTool implements ActionListener{
 	 /**
      * Panning pivot point
      */
-private final Point panPoint = new Point();
+    private int deltaX = 0;
+    private int deltaY = 0;
+    private int initialX = 0;
+    private int initialY = 0;
 	
 	public PanningTool(DrawingEditor newDrawingEditor) {
 		super(newDrawingEditor);
@@ -36,23 +39,26 @@ private final Point panPoint = new Point();
 		}
 	}
 
-	public void mousePressed(MouseEvent event) {
-		panPoint.setLocation(event.getPoint());
+	public void mouseDown(MouseEvent event, int x, int y) {
+		
+		initialX = event.getX();
+		initialY = event.getY();
+		
 	}
 	
-	public void mouseDrag(MouseEvent e, int x, int y) {
-		//JViewport  viewport     = (JViewport) frame.getParent().getParent();
-		
+	public void mouseDrag(MouseEvent e, int x, int y) {	
 		ch.ehi.umleditor.umldrawingtools.ClassDiagramView test = (ClassDiagramView) e.getSource();
-		//System.out.println("TENGO ESTO "+test.getParent());
+		
 		JViewport  viewport     = (JViewport) test.getParent();
         JComponent component    = (JComponent) viewport.getView();
         Point      currentPoint = e.getPoint();
         Point      viewPoint    = viewport.getViewPosition();
 
-        viewPoint.translate(currentPoint.x - panPoint.x, currentPoint.y - panPoint.y);
+        
+        deltaX = x - initialX;
+        deltaY = y - initialY;
+        viewPoint.setLocation(viewPoint.x - deltaX, viewPoint.y - deltaY);
         component.scrollRectToVisible(new Rectangle(viewPoint, viewport.getSize()));
-        panPoint.setLocation(currentPoint);
 		
 	}
 	
