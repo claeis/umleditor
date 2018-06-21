@@ -89,6 +89,7 @@ import ch.ehi.umleditor.umldrawingtools.GeneralizationLineConnection;
 import ch.ehi.umleditor.umldrawingtools.NoteAnchorLineConnection;
 import ch.ehi.umleditor.umldrawingtools.NoteFigure;
 import ch.ehi.umleditor.umldrawingtools.PackageFigure;
+import ch.ehi.umleditor.umldrawingtools.PanningTool;
 import ch.ehi.umleditor.umldrawingtools.ZoomTool;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 import ch.ehi.umleditor.xmiuml.PersistenceService;
@@ -456,6 +457,11 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 						tool);
 				palette.add(defaultToolButton);
 				setSelectedTool(defaultToolButton);
+				
+				// PAN Tool
+				tool = new PanningTool(this);
+				tool.setUsable(true);
+				palette.add(createToolButton(UML_IMAGES + "PAN", "Panning",tool));
 
 				// Note (acc. to Rose)
 				tool = new CreationTool(this, new NoteFigure()) {
