@@ -1,4 +1,9 @@
-﻿UML-Editor 3.6.4.6 (2018-06-08)
+﻿UML-Editor 3.6.4.7 (2018-06-21)
+----------------------------------
+- Add text fields to complete ISO19110 template
+- Add panning tool
+
+UML-Editor 3.6.4.6 (2018-06-08)
 ----------------------------------
 - Delete check update with github api
 - Fix modeldep documentation
