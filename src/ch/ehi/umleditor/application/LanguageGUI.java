@@ -26,6 +26,7 @@ public class LanguageGUI extends BaseDialog {
     private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	private javax.swing.JLabel ivjLblLanguage = null;
 	private javax.swing.JButton ivjBtnOk = null;
+	private String actualLanguage = null;
     private JComboBox<Locale> ivjCbxlanguage = null;
     
     class IvjEventHandler implements java.awt.event.ActionListener,  java.awt.event.KeyListener{
@@ -110,16 +111,11 @@ public class LanguageGUI extends BaseDialog {
 		getCbxLanguage().addItem(new Locale("ES"));
 		getCbxLanguage().addItem(Locale.GERMAN);
 		getCbxLanguage().addItem(Locale.FRENCH);
+		if (actualLanguage != null) {
+			getCbxLanguage().setSelectedItem(actualLanguage);
+		}
 	}
-    
-    private void setTexts() {
-        Locale locale = ivjCbxlanguage.getItemAt(ivjCbxlanguage.getSelectedIndex());
-        resourceBundle = ResourceBundle.getBundle("Bundle", locale);
-        setTitle(resourceBundle.getString("application.title"));
-        //languageLabel.setText(resourceBundle.getString("language") + ":");
-        ivjCbxlanguage.setToolTipText(resourceBundle.getString("language.tooltip"));
-    }
-    
+       
     private javax.swing.JPanel getBaseDialogContentPane() {
 		if (ivjBaseDialogContentPane == null) {
 			try {
@@ -213,7 +209,7 @@ public class LanguageGUI extends BaseDialog {
     private void connEtoC1(ActionEvent e) {
 		try {
 			if(ivjCbxlanguage.getSelectedItem().equals(Locale.getDefault())) {
-    		System.out.println("INGLES");
+    		 // Nothing to do
 			} else {
 				Locale.setDefault(new Locale(ivjCbxlanguage.getSelectedItem().toString()));
 				ch.ehi.basics.types.NlsString.setDefaultLanguage(ivjCbxlanguage.getSelectedItem().toString());

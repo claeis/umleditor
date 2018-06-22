@@ -17,8 +17,6 @@ public class PanningTool extends AbstractTool implements ActionListener{
 	 /**
      * Panning pivot point
      */
-    private int deltaX = 0;
-    private int deltaY = 0;
     private int initialX = 0;
     private int initialY = 0;
 	
@@ -51,12 +49,10 @@ public class PanningTool extends AbstractTool implements ActionListener{
 		
 		JViewport  viewport     = (JViewport) test.getParent();
         JComponent component    = (JComponent) viewport.getView();
-        Point      currentPoint = e.getPoint();
         Point      viewPoint    = viewport.getViewPosition();
-
         
-        deltaX = x - initialX;
-        deltaY = y - initialY;
+        int deltaX = x - initialX;
+        int deltaY = y - initialY;
         viewPoint.setLocation(viewPoint.x - deltaX, viewPoint.y - deltaY);
         component.scrollRectToVisible(new Rectangle(viewPoint, viewport.getSize()));
 		
