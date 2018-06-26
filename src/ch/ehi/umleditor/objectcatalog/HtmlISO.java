@@ -66,6 +66,7 @@ public class HtmlISO {
 
 	// used in pass STRUCTURE, changed in walkTreeRecursive()
 	double level = 0.0;
+	ArrayList<String> docElement = null;
 
 	// variable for the pass
 	// compare afterwards in the doValue if pass == <one of the constants> 
@@ -109,7 +110,8 @@ public class HtmlISO {
 				// css damit man den Link nicht sieht und dass der Rahmen unten
 				// angezeigt wird
 				out.write("<STYLE TYPE='text/css'>A {text-decoration: none }"
-						+ "TD{border: solid gray; border-width: 1px}</STYLE>");
+						+ "TD{border: solid gray; border-width: 1px}"
+						+ "TH{border: solid gra}</STYLE>");
 				out.write("</HEAD>");
 				newline();
 				out.write("<body link=\"#000000\"" + " vlink=\"#000000\"" + " alink=\"#000000\">");
@@ -128,17 +130,17 @@ public class HtmlISO {
 				newline();
 				out.write("<COL>");
 				newline();
-				out.write("<TR><TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTdate") + "</font></TD>");
+				out.write("<TR><TH width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTdate") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTauthor") + "</font></TD>");
+				out.write("<TH width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTauthor") + "</font></TH>");
 				newline();
-				out.write("<TD widht=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTversion") + "</font></TD>");
+				out.write("<TH widht=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTversion") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"175\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTChanges") + "</font></TD> </TR>");
+				out.write("<TH width=\"175\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTChanges") + "</font></TH> </TR>");
 				newline();
 				out.write("<TR><TD><font face=\"Arial\">"+ docISO.getTxtDate().getText() + "</font> </TD>");
 				newline();
@@ -568,26 +570,26 @@ public class HtmlISO {
 				out.write("<COL>");
 				newline();
 				
-				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabName") + "</font></TD>");
+				out.write("<TR><TH width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabName") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCode") + "</font></TD>");
+				out.write("<TH width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCode") + "</font></TH>");
 				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabDescription") + "</font></TD>");
+				out.write("<TH widht=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabDescription") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabTypeRel") + "</font></TD>");
+				out.write("<TH width=\"81\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabTypeRel") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\" >"
-						+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
+				out.write("<TH width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\" >"
+						+ rsrc.getString("CTtabMultiplicity") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabOrder") + "</font></TD>");
+				out.write("<TH width=\"81\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabOrder") + "</font></TH>");
 				newline();
-				out.write("<TD width=\"81\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabNav") + "</font></TD></TR>");
+				out.write("<TH width=\"81\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabNav") + "</font></TH></TR>");
 				
 				newline();
 				boolean createSeperator = true;
@@ -736,32 +738,32 @@ public class HtmlISO {
 					String metaDispName = classDispName.getValue();
 						out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
 						newline();
-						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-								+  rsrc.getString("CTtabName") + "</font></TD>");
+						out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabName") + "</font></TH>");
 						newline();
 						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
-								+ classDefName + "</font></TD> </TR>");
+								+ classDefName + "</font></TH> </TD>");
 						newline();
-						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-								+  rsrc.getString("CTtabCode") + "</font></TD>");
+						out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabCode") + "</font></TH>");
 						newline();
-						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
-								+ " " + "</font></TD> </TR>");
+						out.write("<TH align=\"left\"><font face=\"Arial\" size=\"3\">"
+								+ " " + "</font></TH> </TR>");
 						newline();
-						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-								+  rsrc.getString("CTtabDescription") + "</font></TD>");
+						out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabDescription") + "</font></TH>");
 						newline();
 						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 								+ encodeDescription(mapNlsString(aclass.getDocumentation()))  + "</font></TD> </TR>");
 						newline();
-						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-								+  rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
+						out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabMetaAttrb") + "</font></TH>");
 						newline();
 						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 								+ metaDispName + "</font></TD> </TR>");
 						newline();
-						out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-								+  rsrc.getString("CTtabSubType") + "</font></TD>");
+						out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+								+  rsrc.getString("CTtabSubType") + "</font></TH>");
 						newline();
 						out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 								+ " " + "</font></TD> </TR> </TABLE> </BR>");
@@ -770,32 +772,32 @@ public class HtmlISO {
 				}else {
 					out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
 					newline();
-					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+  rsrc.getString("CTtabName") + "</font></TD>");
+					out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabName") + "</font></TH>");
 					newline();
 					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 							+ classDefName + "</font></TD> </TR>");
 					newline();
-					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+  rsrc.getString("CTtabCode") + "</font></TD>");
+					out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabCode") + "</font></TH>");
 					newline();
 					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 							+ " " + "</font></TD> </TR>");
 					newline();
-					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+  rsrc.getString("CTtabDescription") + "</font></TD>");
+					out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabDescription") + "</font></TH>");
 					newline();
 					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 							+ encodeDescription(mapNlsString(aclass.getDocumentation()))  + "</font></TD> </TR>");
 					newline();
-					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+  rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
+					out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabMetaAttrb") + "</font></TH>");
 					newline();
 					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 							+ " " + "</font></TD> </TR>");
 					newline();
-					out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+  rsrc.getString("CTtabSubType") + "</font></TD>");
+					out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+  rsrc.getString("CTtabSubType") + "</font></TH>");
 					newline();
 					out.write("<TD align=\"left\"><font face=\"Arial\" size=\"3\">"
 							+ " " + "</font></TD> </TR> </TABLE> </BR>");
@@ -808,54 +810,54 @@ public class HtmlISO {
 				String style = " STYLE=\"border-top: solid gray; border-top-width: 2px\"";
 				out.write("<TABLE border=\\\"1\\\" roles=rows cellspacing=\\\"0\\\" cellpadding=\\\"5\\\" height=\\\"1\\\">");
 				newline();
-				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabOrganization") + "</font></TD>");
+				out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabOrganization") + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtOrganization().getText() + "</font></TD>");
 				newline();
-				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCity")  + "</font></TD>");
+				out.write("<TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCity")  + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtCity().getText() + "</font></TD></TR>");
 				newline();
 				
-				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabPosition") + "</font></TD>");
+				out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabPosition") + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtPosition().getText() + "</font></TD>");
 				newline();
-				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabState")  + "</font></TD>");
+				out.write("<TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabState")  + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtState().getText() + "</font></TD></TR>");
 				newline();
 				
-				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabKindRol") + "</font></TD>");
+				out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabKindRol") + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtKind().getText() + "</font></TD>");
 				newline();
-				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCountry")  + "</font></TD>");
+				out.write("<TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabCountry")  + "</font></TH>");
 				newline();
 				out.write("<TD width=\"285\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtCountry().getText() + "</font></TD></TR>");
 				newline();
 				
 				
-				out.write("<TR><TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabAddress") + "</font></TD>");
+				out.write("<TR><TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabAddress") + "</font></TH>");
 				newline();
 				out.write("<TD width=\"185\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtAddress().getText() + "</font></TD>");
 				newline();
-				out.write("<TD width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabPhone")  + "</font></TD>");
+				out.write("<TH width=\"185\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabPhone")  + "</font></TH>");
 				newline();
 				out.write("<TD width=\"185\" align=\"left\"><font face=\"Arial\" size=\"3\">"
 						+ organization.getTxtPhone().getText() + "</font></TD></TR> </TABLE> </BR>");
@@ -877,29 +879,29 @@ public class HtmlISO {
 					out.write("<COL>");
 					newline();
 					
-					out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabName") + "</font></TD>");
+					out.write("<TR><TH width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabName") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabMetaAttrb") + "</font></TD>");
+					out.write("<TH width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabMetaAttrb") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabCode") + "</font></TD>");
+					out.write("<TH width=\"125\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabCode") + "</font></TH>");
 					newline();
-					out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabDescription") + "</font></TD>");
+					out.write("<TH widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabDescription") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabType") + "</font></TD>");
+					out.write("<TH width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabType") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabUnitMed") + "</font></TD>");
+					out.write("<TH width=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabUnitMed") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabMultiplicity") + "</font></TD>");
+					out.write("<TH width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabMultiplicity") + "</font></TH>");
 					newline();
-					out.write("<TD width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
-							+ rsrc.getString("CTtabDomain") + "</font></TD></TR>");
+					out.write("<TH width=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" size=\"3\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabDomain") + "</font></TH></TR>");
 					newline();
 					boolean createSeperator = true;
 					java.util.ArrayList elev = new java.util.ArrayList();
@@ -1729,137 +1731,59 @@ public class HtmlISO {
 			if (pass == BODY) {
 				out.write(encodeDescription(mapNlsString(domdef.getDocumentation())));
 				newline();
+				int numEtiquette = getNumEtiquette(def);
+				
 				out.write("<TABLE border=\"1\" frame=void cellspacing=\"0\" cellpadding=\"5\" height=\"1\">");
 				newline();
-				out.write("<COL>");
+				out.write("<TR><TH width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+						+ rsrc.getString("CTtabDomain") + "</font></TH>");
 				newline();
-				out.write("<COL>");
-				newline();
-				out.write("<COL>");
-				newline();
-				out.write("<COL>");
-				newline();
-				out.write("<TR><TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabDomain") + "</font></TD>");
-				newline();
-				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
-				newline();
-				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCode") + "</font></TD>");
-				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabDescription") + "</font></TD>");
-				newline();
-				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
-				newline();
-				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCode") + "</font></TD>");
-				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabDescription") + "</font></TD>");
-				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabEtiq") + "</font></TD>");
-				newline();
-				out.write("<TD width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabCode") + "</font></TD>");
-				newline();
-				out.write("<TD widht=\"80\"bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
-						+ rsrc.getString("CTtabDescription") + "</font></TD></TR>");
+				int band = numEtiquette;
+				while (band >= 1) {
+					out.write("<TH width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabEtiq") + "</font></TH>");
+					newline();
+					out.write("<TH width=\"85\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabCode") + "</font></TH>");
+					newline();
+					out.write("<TH widht=\"80\" bgcolor=\"#4954b5\" align=\"left\"><font face=\"Arial\" color=\"#ffffff\">"
+							+ rsrc.getString("CTtabDescription") + "</font></TH>");
+					newline();
+					band--;
+				}
+				out.write("</TR>");
 				newline();
 				boolean createSeperator = true;
 				Iterator elei = getEnumEleIterator(def);
 				if (clsFile != null)
 					clsFile.indent();
 				
-				out.write("<TR><TD ROWSPAN=\""+ def.sizeEnumElement() + "\"> "+ encodeString(domDefName)+"</TD>");
+				out.write("<TR>\n<TD ROWSPAN=\""+ getNumberOfElements(def) + "\"> "+ encodeString(domDefName)+"</TD>");
 				while (elei.hasNext()) {
 					ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
 							.next();
-					if (pass == BODY) {
-						String style = "";
-						/*
-						 * if(createSeperator){
-						 * style=" STYLE=\"border-top: solid black; border-top-width: 2px\""
-						 * ; }
-						 */
-					
-						String eleName = getEnumEleName(ele);
-						String[] etiqueta = eleName.split("\\.");
+					if (pass == BODY) {	
 						
-						if(etiqueta.length == 1) {
-							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
-							out.write(
-							 "<TD" + style + ">" + encodeString(ePrincipal)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ") 
-							+ "</TD><TD" + style + ">" + encodeString(" ")//eTerciaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD></TR>");
-							newline();
-						} else if(etiqueta.length == 2) {
-							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
-							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
-							out.write(
-							"<TD" + style + ">" + encodeString(ePrincipal)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getEnumeration().getParent().getDocumentation()))
-							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation())) 
-							+ "</TD><TD" + style + ">" + encodeString(" ")//eTerciaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD></TR>");
-							newline();
-						} else if(etiqueta.length == 3) {
-							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
-							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
-							String eTerciaria = (etiqueta[2] != null)?etiqueta[2]:" ";
-							out.write(
-							"<TD" + style + ">" + encodeString(ePrincipal)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getEnumeration().getParent().getEnumeration().getParent().getDocumentation()))
-							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(eTerciaria)//eTerciaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation()))
-							+ "</TD></TR>");
-							newline();
+						printEtiquettes(0,ele);
+						fillEmpty(0,0, numEtiquette);
+						for (int i = 1; i <= numEtiquette; i++) {
+							
+							
+							int size = printEtiquettes(i, ele);
+								
+							fillEmpty(i, size, numEtiquette);
+						
 						}
-							else {
-							String ePrincipal = (etiqueta[0] != null)?etiqueta[0]:" ";
-							String eSecundaria = (etiqueta[1] != null)?etiqueta[1]:" ";
-							String eTerciaria = (etiqueta[2] != null)?etiqueta[2]:" ";
-							out.write("<TR><TD" + style + ">" + encodeString(domDefName)
-							+ "</TD><TD" + style + ">" + encodeString(ePrincipal)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(domDoc)
-							+ "</TD><TD" + style + ">" + encodeString(eSecundaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeDescription(mapNlsString(ele.getDocumentation())) //Documentacion del padre	
-							+ "</TD><TD" + style + ">" + encodeString(mapNlsString(ele.getMetaAttrb()))//eTerciaria)
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD><TD" + style + ">" + encodeString(" ")
-							+ "</TD></TR>");
-							newline();
-						}
-												
-						if (clsFile != null)
-							clsFile.println(eleName);
+						out.write("</TR>");											
+						if (clsFile != null) {
+								clsFile.println(ele.getName());
+							}
 						}
 
 				}
-				if (clsFile != null)
-					clsFile.unindent();
+				if (clsFile != null) {
+						clsFile.unindent();
+					}
 				out.write("</TABLE>");
 				newline();
 			}
@@ -1867,7 +1791,82 @@ public class HtmlISO {
 
 		}
 
-		private int getNumberOfElements(Iterator elei) {
+		private void fillEmpty(int i, int size, int allitems) {
+			try {
+				String foo = "";
+				if(i==size+1) {//==1
+					int emptyPlaces = allitems - size;
+				
+					while(emptyPlaces >= 1) {
+						foo = foo+"<TD> </TD> <TD> </TD> <TD> </TD>";
+						emptyPlaces--;
+					}
+					
+					out.write(foo);
+					newline();
+				} else {
+					//out.write("<TD>hacked</TD>");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		private int printEtiquettes(int i, EnumElement ele) {
+		
+				String eleName = getEnumEleName(ele);
+				String[] etiqueta = eleName.split("\\.");
+				
+				if(i>=etiqueta.length) {
+					try {
+						out.write(" ");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					try {
+						out.write("<TD>"+etiqueta[i]+"</TD> \n <TD> </TD> \n<TD>"+mapNlsString(ele.getDocumentation())+"</TD>");
+						newline();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			
+			return etiqueta.length;
+			
+		}
+
+		private ArrayList<String> fillDocumentations(Iterator elei) {
+			ArrayList<String> docElement = new ArrayList<String>();
+			
+			while (elei.hasNext()) {
+				ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
+						.next();
+				docElement.add(mapNlsString(ele.getDocumentation()));
+			}
+			return docElement;
+		}
+
+		private int getNumEtiquette(Enumeration def) {
+			Iterator elei = getEnumEleIterator(def);
+			int numSubElements = 0;
+			while (elei.hasNext()) {
+				ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ele = (ch.ehi.interlis.domainsandconstants.basetypes.EnumElement) elei
+						.next();
+			
+					String style = "";
+					String eleName = getEnumEleName(ele);
+					String[] etiqueta = eleName.split("\\.");
+					if (etiqueta.length > numSubElements) {
+						numSubElements = etiqueta.length;
+					}
+			}
+			return numSubElements;
+		}
+
+		private int getNumberOfElements(Enumeration def) {
+			Iterator elei = getEnumEleIterator(def);
 			int i = 0;
 			while(elei.hasNext()) {
 			    i++;
