@@ -18,8 +18,15 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
+
+import java.util.Iterator;
+
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 /**
  * INTERLIS BaseType representation of <b>CoordinatType</b>.
@@ -48,6 +55,8 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
+	private javax.swing.JLabel ivjLblEpsgCode = null;
+	private static javax.swing.JTextField ivjTxtEpsgCode = null;
 
 class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -276,6 +285,49 @@ private javax.swing.JLabel getLblDimensions() {
 		}
 	}
 	return ivjLblDimensions;
+}
+/**
+ * Return the LblEpsg property value.
+ * @return javax.swing.JCheckBox
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblEpsg() {
+	if (ivjLblEpsgCode == null) {
+		try {
+			ivjLblEpsgCode = new javax.swing.JLabel();
+			ivjLblEpsgCode.setName("LblEpsg");
+			ivjLblEpsgCode.setText("EPSG Code");
+			ivjLblEpsgCode.setBounds(416, 6, 136, 20);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjLblEpsgCode;
+}
+/**
+ * Return the TxtEpsgCode property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+public static javax.swing.JTextField getTxtEpsgCode() {
+	if (ivjTxtEpsgCode == null) {
+		try {
+			ivjTxtEpsgCode = new javax.swing.JTextField();
+			ivjTxtEpsgCode.setName("TxtEpsgCode");
+			ivjTxtEpsgCode.setBounds(168, 133, 153, 22);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			//handleException(ivjExc);
+		}
+	}
+	return ivjTxtEpsgCode;
 }
 /**
  * Return the LblPiHalfAxis property value.
@@ -572,7 +624,7 @@ private void initialize() {
 		setName("IliBaseTypeTextPanel");
 		setToolTipText("INTERLIS Basistyp <COORD>");
 		setLayout(new java.awt.GridBagLayout());
-		setSize(526, 390);
+		setSize(526, 390); //526, 390
 
 		java.awt.GridBagConstraints constraintsRbt1D = new java.awt.GridBagConstraints();
 		constraintsRbt1D.gridx = 2; constraintsRbt1D.gridy = 1;
@@ -600,24 +652,42 @@ private void initialize() {
 		constraintsTbpNumericTypes.gridwidth = 5;
 		constraintsTbpNumericTypes.fill = java.awt.GridBagConstraints.BOTH;
 		constraintsTbpNumericTypes.weightx = 1.0;
-		constraintsTbpNumericTypes.weighty = 1.0;
+		constraintsTbpNumericTypes.weighty = 1.0; //1.0
 		constraintsTbpNumericTypes.ipadx = 16;
-		constraintsTbpNumericTypes.ipady = 2;
-		constraintsTbpNumericTypes.insets = new java.awt.Insets(5, 3, 4, 14);
+		constraintsTbpNumericTypes.ipady = 2; // 2
+		constraintsTbpNumericTypes.insets = new java.awt.Insets(25, 3, 4, 14); //5, 3, 4, 14
 		add(getTbpNumericTypes(), constraintsTbpNumericTypes);
 
 		java.awt.GridBagConstraints constraintsLblDimensions = new java.awt.GridBagConstraints();
 		constraintsLblDimensions.gridx = 1; constraintsLblDimensions.gridy = 1;
 		constraintsLblDimensions.ipadx = 63;
+		constraintsTbpNumericTypes.ipady = 2;
 		constraintsLblDimensions.insets = new java.awt.Insets(18, 11, 7, 3);
 		add(getLblDimensions(), constraintsLblDimensions);
-
+		
+		java.awt.GridBagConstraints constraintsLblEpsgCode = new java.awt.GridBagConstraints();
+		constraintsLblEpsgCode.gridx = 1; constraintsLblEpsgCode.gridy = 2;
+		constraintsLblEpsgCode.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		constraintsLblEpsgCode.ipadx = 10;
+		constraintsLblEpsgCode.insets = new java.awt.Insets(5, 11, 6, 15);
+		add(getLblEpsg(), constraintsLblEpsgCode);
+		
+        java.awt.GridBagConstraints constraintsTxtEpsgCode = new java.awt.GridBagConstraints();
+        constraintsTxtEpsgCode.gridx = 2; constraintsTxtEpsgCode.gridy = 2;
+        constraintsTxtEpsgCode.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        constraintsTxtEpsgCode.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        constraintsTxtEpsgCode.gridwidth = 2;
+        constraintsTxtEpsgCode.ipadx = 80; 
+        constraintsTxtEpsgCode.ipady = -2;
+        constraintsTxtEpsgCode.insets = new java.awt.Insets(5, 11, 6, 15);
+        add(getTxtEpsgCode(), constraintsTxtEpsgCode);
+		
 		java.awt.GridBagConstraints constraintsTxtZeroAxis = new java.awt.GridBagConstraints();
 		constraintsTxtZeroAxis.gridx = 5; constraintsTxtZeroAxis.gridy = 3;
 		constraintsTxtZeroAxis.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		constraintsTxtZeroAxis.weightx = 1.0;
 		constraintsTxtZeroAxis.ipadx = 104;
-		constraintsTxtZeroAxis.insets = new java.awt.Insets(4, 11, 1, 95);
+		constraintsTxtZeroAxis.insets = new java.awt.Insets(4, 11, 8, 95);
 		add(getTxtZeroAxis(), constraintsTxtZeroAxis);
 
 		java.awt.GridBagConstraints constraintsChxRotationDef = new java.awt.GridBagConstraints();
@@ -672,12 +742,34 @@ public final void setObject(java.lang.Object object) throws DeveloperException {
 /**
  * Set the Object to be displayed by panel.
  */
-public void setObject(java.lang.Object object, ModelElement modelElement) {
+public void setObject(java.lang.Object object, ModelElement modelElement, ModelElement baseElement) {
 	// initialize default for Numeric-Dimensions
+
 	getPnlNumeric1D().setObject(ElementFactory.createNumericType(), modelElement);
 	getPnlNumeric2D().setObject(ElementFactory.createNumericType(), modelElement);
 	getPnlNumeric3D().setObject(ElementFactory.createNumericType(), modelElement);
-
+	
+    TaggedValue umlTag = null;
+    int size = baseElement.sizeTaggedValue();
+    if (size > 0) {
+        Iterator defLangIt = baseElement.iteratorTaggedValue();
+        while (defLangIt.hasNext()) {
+            umlTag = (TaggedValue)defLangIt.next();
+            String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
+            if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
+                String value=umlTag.getDataValue();
+                String[] values = value.split("\\:");
+                if (values.length > 1) { 
+                    getTxtEpsgCode().setText(values[1]);
+                } else {
+                    getTxtEpsgCode().setText("");
+                }
+            }
+        }       
+    } else {
+        getTxtEpsgCode().setText("");
+    }
+	
 	if (object != null) {
 		CoordinateType type = (CoordinateType)object;
 

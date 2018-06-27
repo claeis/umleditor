@@ -19,7 +19,10 @@ package ch.ehi.umleditor.application;
  */
 import javax.swing.*;
 import ch.ehi.interlis.units.*;
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 /**
@@ -299,7 +302,6 @@ public java.lang.Object getObject() {
 			((NumericType)type).setMinDec((IliDim)getPnlMin().getObject());
 			((NumericType)type).setMaxDec((IliDim)getPnlMax().getObject());
 		}
-
 	type.setCircular(getChxCircular().isSelected());
 	if (type.containsUnitDef()) {
 		type.detachUnitDef();
@@ -639,7 +641,7 @@ private void initialize() {
 		// user code end
 		setName("IliBaseTypeTextPanel");
 		setLayout(new java.awt.GridBagLayout());
-		setSize(487, 259);
+		setSize(487, 259); 
 
 		java.awt.GridBagConstraints constraintsLblReferenceSystem = new java.awt.GridBagConstraints();
 		constraintsLblReferenceSystem.gridx = 1; constraintsLblReferenceSystem.gridy = 2;
@@ -665,7 +667,7 @@ private void initialize() {
 		constraintsPnlTop.weightx = 1.0;
 		constraintsPnlTop.weighty = 1.0;
 		constraintsPnlTop.ipadx = 481;
-		constraintsPnlTop.ipady = 184;
+		constraintsPnlTop.ipady = 250;//184
 		constraintsPnlTop.insets = new java.awt.Insets(3, 3, 2, 3);
 		add(getPnlTop(), constraintsPnlTop);
 		initConnections();
