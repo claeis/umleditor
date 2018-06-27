@@ -1,6 +1,10 @@
-﻿UML-Editor 3.6.4.7 (2018-06-21)
+﻿UML-Editor 3.6.4.8 (2018-06-27)
 ----------------------------------
-- Add text fields to complete ISO19110 template
+- Fix panning tool sensibility
+- Fix Domain tables (ISO 19110)
+UML-Editor 3.6.4.7 (2018-06-21)
+----------------------------------
+- Add text fields to complete ISO 19110 template
 - Add panning tool
 
 UML-Editor 3.6.4.6 (2018-06-08)
