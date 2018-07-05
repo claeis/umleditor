@@ -18,9 +18,12 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.util.EventObject;
+import java.util.Iterator;
 
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.ehi.interlis.domainsandconstants.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
@@ -39,10 +42,10 @@ public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMe
 	private ModelElement parent = null;
 	private javax.swing.JDialog dialog = null;
 	private ReferencableComboBox ivjCbxClassDef = null;
-	private ReferencableComboBox ivjCbxDomainDef = null;
+	private ReferencableComboBox ivjCbxDomainDef = null; //Vertices Cbx 
 	private javax.swing.JCheckBox ivjChxDirected = null;
-	private javax.swing.JLabel ivjLblControlPoints = null;
-	private javax.swing.JLabel ivjLblIntersection = null;
+	private javax.swing.JLabel ivjLblControlPoints = null;//Vertices: 
+	private javax.swing.JLabel ivjLblIntersection = null;//Overlap
 	private javax.swing.JScrollPane ivjScpLineFormTypeDef = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
 	private javax.swing.JLabel ivjLblLineAttributes = null;
@@ -54,9 +57,12 @@ public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JPopupMenu ivjMnuLineFormTypeDef = null;
 	private javax.swing.JPanel ivjPnlLineForm = null;
 	private javax.swing.JTable ivjTblLineFormTypeDef = null;
-	private IliDimPanel ivjPnlIntersection = null;
+	private IliDimPanel ivjPnlIntersection = null; //Overlap
 	private javax.swing.JCheckBox ivjChxArcs = null;
 	private javax.swing.JCheckBox ivjChxStraights = null;
+    private javax.swing.JLabel ivjLblEpsgCode = null;
+    private static javax.swing.JTextField ivjTxtEpsgCode = null;
+
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -167,6 +173,7 @@ private void connEtoC5(java.awt.event.MouseEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+
 /**
  * connEtoC6:  (MniOpenLineFormTypeDefSpecification.action.actionPerformed(java.awt.event.ActionEvent) --> IliBaseTypeLinePanel.mniOpenLineFormTypeDefSpecification()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -263,6 +270,49 @@ private ReferencableComboBox getCbxDomainDef() {
 		}
 	}
 	return ivjCbxDomainDef;
+}
+/**
+ * Return the LblEpsg property value.
+ * @return javax.swing.JCheckBox
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JLabel getLblEpsg() {
+    if (ivjLblEpsgCode == null) {
+        try {
+            ivjLblEpsgCode = new javax.swing.JLabel();
+            ivjLblEpsgCode.setName("LblEpsg");
+            ivjLblEpsgCode.setText("EPSG Code");
+            ivjLblEpsgCode.setBounds(416, 6, 136, 20);
+            // user code begin {1}
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            handleException(ivjExc);
+        }
+    }
+    return ivjLblEpsgCode;
+}
+/**
+ * Return the TxtEpsgCode property value.
+ * @return javax.swing.JTextField
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+public static javax.swing.JTextField getTxtEpsgCode() {
+    if (ivjTxtEpsgCode == null) {
+        try {
+            ivjTxtEpsgCode = new javax.swing.JTextField();
+            ivjTxtEpsgCode.setName("TxtEpsgCode");
+            ivjTxtEpsgCode.setBounds(168, 133, 153, 22);
+            // user code begin {1}
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            //handleException(ivjExc);
+        }
+    }
+    return ivjTxtEpsgCode;
 }
 /**
  * Return the ChxArcs property value.
@@ -763,8 +813,8 @@ private void initialize() {
 		constraintsPnlLineForm.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsPnlLineForm.weightx = 1.0;
 		constraintsPnlLineForm.weighty = 1.0;
-		constraintsPnlLineForm.ipadx = -13;
-		constraintsPnlLineForm.ipady = 17;
+		// constraintsPnlLineForm.ipadx = -13;
+		// constraintsPnlLineForm.ipady = 17;
 		constraintsPnlLineForm.insets = new java.awt.Insets(7, 6, 9, 7);
 		add(getPnlLineForm(), constraintsPnlLineForm);
 
@@ -779,8 +829,8 @@ private void initialize() {
 		constraintsCbxDomainDef.gridx = 2; constraintsCbxDomainDef.gridy = 1;
 		constraintsCbxDomainDef.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		constraintsCbxDomainDef.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		constraintsCbxDomainDef.weightx = 1.0;
-		constraintsCbxDomainDef.ipadx = 38;
+		//constraintsCbxDomainDef.weightx = 1.0;
+		//constraintsCbxDomainDef.ipadx = 38;
 		constraintsCbxDomainDef.insets = new java.awt.Insets(10, 6, 3, 152);
 		add(getCbxDomainDef(), constraintsCbxDomainDef);
 
@@ -792,31 +842,44 @@ private void initialize() {
 		add(getLblIntersection(), constraintsLblIntersection);
 
 		java.awt.GridBagConstraints constraintsLblLineAttributes = new java.awt.GridBagConstraints();
-		constraintsLblLineAttributes.gridx = 1; constraintsLblLineAttributes.gridy = 3;
+		constraintsLblLineAttributes.gridx = 1; constraintsLblLineAttributes.gridy = 4;
 		constraintsLblLineAttributes.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsLblLineAttributes.ipadx = 54;
 		constraintsLblLineAttributes.insets = new java.awt.Insets(6, 10, 9, 5);
 		add(getLblLineAttributes(), constraintsLblLineAttributes);
-
+		
 		java.awt.GridBagConstraints constraintsCbxClassDef = new java.awt.GridBagConstraints();
-		constraintsCbxClassDef.gridx = 2; constraintsCbxClassDef.gridy = 3;
+		constraintsCbxClassDef.gridx = 2; constraintsCbxClassDef.gridy = 4;
 		constraintsCbxClassDef.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		constraintsCbxClassDef.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsCbxClassDef.weightx = 1.0;
 		constraintsCbxClassDef.ipadx = 38;
 		constraintsCbxClassDef.insets = new java.awt.Insets(4, 6, 2, 152);
 		add(getCbxClassDef(), constraintsCbxClassDef);
-
+		
 		java.awt.GridBagConstraints constraintsPnlIntersection = new java.awt.GridBagConstraints();
 		constraintsPnlIntersection.gridx = 2; constraintsPnlIntersection.gridy = 2;
 		constraintsPnlIntersection.fill = java.awt.GridBagConstraints.BOTH;
 		constraintsPnlIntersection.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		constraintsPnlIntersection.weightx = 1.0;
-		constraintsPnlIntersection.weighty = 1.0;
-		constraintsPnlIntersection.ipadx = 163;
-		constraintsPnlIntersection.ipady = 27;
 		constraintsPnlIntersection.insets = new java.awt.Insets(4, 6, 4, 152);
 		add(getPnlIntersection(), constraintsPnlIntersection);
+
+        java.awt.GridBagConstraints constraintsLblEpsgCode = new java.awt.GridBagConstraints();
+        constraintsLblEpsgCode.gridx = 1; constraintsLblEpsgCode.gridy = 3;
+        constraintsLblEpsgCode.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        constraintsLblEpsgCode.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        constraintsLblEpsgCode.ipadx = 10;
+        constraintsLblEpsgCode.ipady = 1;
+        constraintsLblEpsgCode.insets = new java.awt.Insets(6, 11, 6, 15);
+        add(getLblEpsg(), constraintsLblEpsgCode);
+      
+        java.awt.GridBagConstraints constraintsTxtEpsgCode = new java.awt.GridBagConstraints();
+        constraintsTxtEpsgCode.gridx = 2; constraintsTxtEpsgCode.gridy = 3;
+        constraintsTxtEpsgCode.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        constraintsTxtEpsgCode.ipadx = 20;
+        constraintsTxtEpsgCode.ipady = -2;
+        constraintsTxtEpsgCode.insets = new java.awt.Insets(4, 5, 8, 152);
+        add(getTxtEpsgCode(), constraintsTxtEpsgCode);
 		initConnections();
 	} catch (java.lang.Throwable ivjExc) {
 		handleException(ivjExc);
@@ -848,13 +911,34 @@ private void mniRemoveLineFormTypeDef() {
 /**
  * Set the lineTypes general data.
  */
-private void setLinetype(LineType lineType,ModelElement modelElement) {
+private void setLinetype(LineType lineType,ModelElement modelElement, ModelElement baseModelElement) {
 	// ControlPoints
 	if ((lineType != null) && lineType.containsControlpoints()) {
 		getCbxDomainDef().setElement(DomainDef.class, modelElement, lineType.getControlpoints());
 	} else {
 		getCbxDomainDef().setElement(DomainDef.class, modelElement, null);
 	}
+	
+    
+    if (baseModelElement.sizeTaggedValue() > 0) {
+        TaggedValue umlTag = null;
+        Iterator defLangIt = baseModelElement.iteratorTaggedValue();
+        while (defLangIt.hasNext()) {
+            umlTag = (TaggedValue)defLangIt.next();
+            String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
+            if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
+                String value=umlTag.getDataValue();
+                String[] values = value.split("\\:");
+                if (values.length > 1) {
+                    getTxtEpsgCode().setText(values[1]);
+                } else {
+                    getTxtEpsgCode().setText("");
+                }
+            }
+        }
+    } else {
+        getTxtEpsgCode().setText("");
+    }
 
 	// Intersection
 	if ((lineType != null) && lineType.containsIntersectionDef()) {
@@ -882,14 +966,14 @@ public final void setObject(java.lang.Object object) throws DeveloperException {
 /**
  * Set the Object to be displayed by panel.
  */
-public final void setObject(java.lang.Object object, ModelElement modelElement) {
+public final void setObject(java.lang.Object object, ModelElement modelElement, ModelElement baseModelElement) {
 	LineType lineType = (LineType)object;
         lineTypeClass=object.getClass();
 	parent = modelElement;
 	if (lineType instanceof IliPolyline) {
-		setPolyline((IliPolyline)lineType, modelElement);
+		setPolyline((IliPolyline)lineType, modelElement, baseModelElement);
 	} else {
-		setSurfaceType((SurfaceType)lineType, modelElement);
+		setSurfaceType((SurfaceType)lineType, modelElement, baseModelElement);
 	}
 }
 protected void setOwnerDialog(javax.swing.JDialog ownerDialog) {
@@ -898,7 +982,7 @@ protected void setOwnerDialog(javax.swing.JDialog ownerDialog) {
 /**
  * Set the Object to be displayed by panel.
  */
-private void setPolyline(IliPolyline polyLine, ModelElement modelElement) {
+private void setPolyline(IliPolyline polyLine, ModelElement modelElement, ModelElement baseModelElement) {
 	getChxDirected().setVisible(true);
 	getLblLineAttributes().setVisible(false);
 	getCbxClassDef().setVisible(false);
@@ -908,12 +992,12 @@ private void setPolyline(IliPolyline polyLine, ModelElement modelElement) {
 	} else {
 		getChxDirected().setSelected(polyLine.isDirected());
 	}
-	setLinetype(polyLine,modelElement);
+	setLinetype(polyLine,modelElement, baseModelElement);
 }
 /**
  * Set SurfaceType's LineAttributes.
  */
-private void setSurfaceType(SurfaceType surfaceType, ModelElement modelElement) {
+private void setSurfaceType(SurfaceType surfaceType, ModelElement modelElement, ModelElement baseModelElement) {
 	getChxDirected().setVisible(false);
 	getLblLineAttributes().setVisible(true);
 	getCbxClassDef().setVisible(true);
@@ -924,7 +1008,7 @@ private void setSurfaceType(SurfaceType surfaceType, ModelElement modelElement) 
 		getCbxClassDef().setElement(ClassDef.class, modelElement, null);
 	}
 
-	setLinetype(surfaceType,modelElement);
+	setLinetype(surfaceType,modelElement, baseModelElement);
 }
 
 public void changeObjects(Object source) {

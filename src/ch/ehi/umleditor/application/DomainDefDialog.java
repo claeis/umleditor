@@ -20,8 +20,16 @@ package ch.ehi.umleditor.application;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.UnknownType;
+import ch.ehi.uml1_4.foundation.core.ModelElement;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
+import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 import ch.softenvironment.util.Tracer;
+
+import java.util.Iterator;
+
 import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.basics.types.NlsString;
 import ch.softenvironment.view.*;
 
 /**
@@ -125,7 +133,7 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.COORD)) {
 		newPanel = getPnlTypeCoord();
 		// initalize Numeric aggregations
-		getPnlTypeCoord().setObject(null, domainDef);
+		getPnlTypeCoord().setObject(null, domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.BASKET)) {
 		newPanel = getPnlTypeBasket();
 		// initalize aggregations
@@ -136,10 +144,10 @@ private void adaptType() {
 		getPnlTypeAlignment().setObject(new HorizAlignment());
 	} else if (item.equals(IliBaseTypeKind.POLYLINE)) {
 		newPanel = getPnlTypeLine();
-		getPnlTypeLine().setObject(new IliPolyline(), domainDef);
+		getPnlTypeLine().setObject(new IliPolyline(), domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.SURFACE)) {
 		newPanel = getPnlTypeLine();
-		getPnlTypeLine().setObject(new IndividualSurface(), domainDef);
+		getPnlTypeLine().setObject(new IndividualSurface(), domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.OID_TYPE)) {
 		newPanel = getPnlTypeOid();
 		getPnlTypeOid().setObject(new OidType(), domainDef);
@@ -156,7 +164,7 @@ private void adaptType() {
 		newPanel = getPnlTypeTime();
 	} else if (item.equals(IliBaseTypeKind.AREA)) {
 		newPanel = getPnlTypeLine();
-		getPnlTypeLine().setObject(new Tesselation(), domainDef);
+		getPnlTypeLine().setObject(new Tesselation(), domainDef, domainDef);
 	}
 
 	if (currentDataPanel != newPanel) {
@@ -295,7 +303,7 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			constraintsTbpTypes.weightx = 1.0;
 			constraintsTbpTypes.weighty = 1.0;
 			constraintsTbpTypes.ipadx = -357;
-			constraintsTbpTypes.ipady = -2;
+			constraintsTbpTypes.ipady = -2; // -2
 			constraintsTbpTypes.insets = new java.awt.Insets(2, 7, 7, 9);
 			getBaseDialogContentPane().add(getTbpTypes(), constraintsTbpTypes);
 
@@ -979,7 +987,7 @@ private void initialize() {
 		// user code end
 		setName("DomainDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(598, 557);
+		setSize(598, 657); // 598, 557
 		setTitle(getResourceString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
@@ -1041,9 +1049,34 @@ protected boolean save() {
 		domainDef.attachType(unknown);
 	} else if (currentDataPanel != null) {
 		domainDef.attachType((ch.ehi.interlis.domainsandconstants.Type)((DataPanel)currentDataPanel).getObject());
+		setEPSGCode();
 	}
 
 	return super.save();
+}
+private void setEPSGCode() {
+    ModelElement modelElement = (ModelElement) domainDef;
+    System.out.println(getCbxType().getSelectedItem());
+    TaggedValue umlTag = null;
+    Iterator defLangIt = modelElement.iteratorTaggedValue();
+    while (defLangIt.hasNext()) {
+        umlTag=(TaggedValue)defLangIt.next();
+        String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
+        if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
+            String value=umlTag.getDataValue();
+            String[] seperatedValues = value.split("\\:");
+            String item = (String)getCbxType().getSelectedItem();
+            if (item.equals(IliBaseTypeKind.POLYLINE)) {
+                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
+            } else if (item.equals(IliBaseTypeKind.COORD)) {
+                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeCoordPanel.getTxtEpsgCode().getText());
+            } else if (item.equals(IliBaseTypeKind.SURFACE)) {
+                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
+            } else if (item.equals(IliBaseTypeKind.AREA)) {
+                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
+            }
+        }
+    }
 }
 /**
  * Map model to view.
@@ -1098,7 +1131,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			}
 			if(!isIli22){
 				getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
-				getPnlTypeCoord().setObject(type, domainDef);
+				getPnlTypeCoord().setObject(type, domainDef, domainDef);
 			}else{
 				// 2.2 type; doesn't exist in 2.3
 				// convert to Syntax
@@ -1108,13 +1141,13 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			}
 		} else if (type instanceof IliPolyline) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
-			getPnlTypeLine().setObject(type, domainDef);
+			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof IndividualSurface) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.SURFACE);
-			getPnlTypeLine().setObject(type, domainDef);
+			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof Tesselation) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.AREA);
-			getPnlTypeLine().setObject(type, domainDef);
+			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof OidType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.OID_TYPE);
 			getPnlTypeOid().setObject(type, domainDef);
