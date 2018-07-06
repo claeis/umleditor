@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.Map;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Model;

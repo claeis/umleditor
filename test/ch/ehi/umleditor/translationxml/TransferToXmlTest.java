@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.xmiuml.PersistenceService;

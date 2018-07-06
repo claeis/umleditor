@@ -3,7 +3,7 @@ package ch.ehi.umleditor.translationxml;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Model;
