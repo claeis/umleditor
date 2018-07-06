@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.Map;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Model;
@@ -23,7 +23,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die MODELLEN korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void model() throws Exception {
+	public void model() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -48,7 +48,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die TOPIC korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void topic() throws Exception {
+	public void topic() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -87,7 +87,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die UNIT korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void unit() throws Exception {
+	public void unit() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -112,7 +112,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die FUNCTION korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void function() throws Exception {
+	public void function() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -137,7 +137,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ASSOCIATION korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void associationDef() throws Exception {
+	public void associationDef() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -162,7 +162,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ROLE korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void roleDef() throws Exception {
+	public void roleDef() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -198,7 +198,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die DOMAIN korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void domain() throws Exception {
+	public void domain() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -223,7 +223,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ENUM_ELEMENT von Domain korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void domainEnumElement() throws Exception {
+	public void domainEnumElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -247,7 +247,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ENUM_SUBELEMENT von Domain korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void domainEnumSubElement() throws Exception {
+	public void domainEnumSubElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -272,7 +272,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ENUM_ELEMENT von Attribute korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void attributeEnumElement() throws Exception {
+	public void attributeEnumElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -296,7 +296,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ENUM_SUBELEMENT von Attribute korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void attribiuteEnumSubElement() throws Exception {
+	public void attribiuteEnumSubElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -321,7 +321,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die CLASS korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void classTest() throws Exception {
+	public void classTest() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -346,7 +346,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die CONSTRAINT korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void constraint() throws Exception {
+	public void constraint() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -371,7 +371,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die ATTRIBUTE korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void attribute() throws Exception {
+	public void attribute() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -396,7 +396,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die VIEW korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void view() throws Exception {
+	public void view() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -421,7 +421,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die STRUCTURE korrekt aus das translation xml file geschrieben wurde.
 	 */
 	@Test
-	void structure() throws Exception {
+	public void structure() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -446,7 +446,7 @@ public class TransferFromXmlTest {
 	 * Es ueberprueft, ob die STRUCTURE korrekt aus das translation xml file nicht geschrieben wurde.
 	 */
 	@Test
-	void viewNotFound() throws Exception {
+	public void viewNotFound() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);

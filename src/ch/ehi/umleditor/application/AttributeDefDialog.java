@@ -1295,7 +1295,6 @@ protected boolean save() {
 }
 private void setEPSGCode() {
     ModelElement modelElement = (ModelElement) attributeDef;
-    System.out.println(getCbxType().getSelectedItem());
     TaggedValue umlTag = null;
     Iterator defLangIt = modelElement.iteratorTaggedValue();
     while (defLangIt.hasNext()) {
