@@ -11,7 +11,9 @@ import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
+import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
@@ -93,6 +95,18 @@ public class ModelElementUtility {
                     }
                 }
             }
+            
+            if (modelElement instanceof ClassDef) {
+                ClassDef classDef = (ClassDef)modelElement;
+                Iterator iterator = classDef.iteratorParameterDef();
+                while (iterator.hasNext()) {
+                    ParameterDef next = (ParameterDef) iterator.next();
+                    ModelElement modelEle = findIliModelElement_Helper((ModelElement) next, scopedNamePrefix, baseLanguage, scopedNameToFind);
+                    if (modelEle != null) {
+                        return modelEle;
+                    }
+                }
+            }
 
             if (modelElement instanceof AssociationDef) {
                 Iterator assoDefI = ((AssociationDef) modelElement).iteratorConnection();
@@ -149,7 +163,7 @@ public class ModelElementUtility {
             AttributeDef def = (AttributeDef) modelElement;
             if (def.containsAttrType()) {
                 DomainAttribute attrType = (DomainAttribute) def.getAttrType();
-                if (attrType.containsDirect()) { 
+                if (attrType.containsDirect()) {
                     if (attrType.getDirect() instanceof Enumeration) {
                         Enumeration enumeration = (Enumeration) attrType.getDirect();
                         ModelElement ele = findElementInEnumeration(scopedNamePrefix, baseLanguage, enumeration,
@@ -157,7 +171,7 @@ public class ModelElementUtility {
                         if (ele != null) {
                             return ele;
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -185,7 +199,10 @@ public class ModelElementUtility {
 
                 while (i.hasNext()) {
                     Object objnew = i.next();
-                    return modelElementHelper(objnew, scopedName);
+                    ModelElement modelElementHelper = modelElementHelper(objnew, scopedName);
+                    if (modelElementHelper != null) {
+                        return modelElementHelper;
+                    }
                 }
             }
         }
@@ -249,7 +266,7 @@ public class ModelElementUtility {
             } else {
                 scopedNamePrefix += "." + modelElement.getName().getValue(language);
             }
-            return scopedNamePrefix;            
+            return scopedNamePrefix;
         }
         return null;
     }

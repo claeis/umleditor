@@ -23,6 +23,7 @@ public class TransferFromXml {
      *             exception
      */
     public void merge(Model model, File xmlfile) throws Exception {
+
         ModelElements translationElements = Ili2TranslationXml.readModelElementsXml(xmlfile);
         for (TranslationElement translationElement : translationElements) {
             ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model,
@@ -135,6 +136,41 @@ public class TransferFromXml {
                         modelElement.setDocumentation(new ch.ehi.basics.types.NlsString(modelElement.getDocumentation(),
                                 Ili2TranslationXml.IT, translationElement.getDocumentation_it()));
                     }
+                }
+            }
+        } else {
+            if (translationElement.getDocumentation_de() != null) {
+                if (!translationElement.getDocumentation_de().isEmpty()
+                        && (translationElement.getDocumentation_de() != null
+                                && translationElement.getDocumentation_de() != "")) {
+                    modelElement.setDocumentation(new ch.ehi.basics.types.NlsString(Ili2TranslationXml.DE,
+                            translationElement.getDocumentation_de()));
+                }
+            }
+
+            if (translationElement.getDocumentation_en() != null) {
+                if (!translationElement.getDocumentation_en().isEmpty()
+                        && (translationElement.getDocumentation_en() != null
+                                && translationElement.getDocumentation_en() != "")) {
+                    modelElement.setDocumentation(new ch.ehi.basics.types.NlsString(Ili2TranslationXml.EN,
+                            translationElement.getDocumentation_en()));
+                }
+            }
+            if (translationElement.getDocumentation_fr() != null) {
+                if (!translationElement.getDocumentation_fr().isEmpty()
+                        && (translationElement.getDocumentation_fr() != null
+                                && translationElement.getDocumentation_fr() != "")) {
+                    modelElement.setDocumentation(new ch.ehi.basics.types.NlsString(Ili2TranslationXml.FR,
+                            translationElement.getDocumentation_fr()));
+                }
+            }
+
+            if (translationElement.getDocumentation_it() != null) {
+                if (!translationElement.getDocumentation_it().isEmpty()
+                        && (translationElement.getDocumentation_it() != null
+                                && translationElement.getDocumentation_it() != "")) {
+                    modelElement.setDocumentation(new ch.ehi.basics.types.NlsString(Ili2TranslationXml.IT,
+                            translationElement.getDocumentation_it()));
                 }
             }
         }
