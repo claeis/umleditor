@@ -20,7 +20,9 @@ import ch.ehi.interlis.tools.AbstractClassDefUtility;
 import ch.ehi.uml1_4.foundation.core.Constraint;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.uml1_4.modelmanagement.Model;
+import ch.interlis.ili2c.generator.nls.TranslationElement;
 
 public class ModelElementUtility {
 

@@ -113,7 +113,7 @@ public class TransferToXml {
         }
 
         translationElement.setElementType(getElementType(modelDef));
-        System.out.println("");
+
         scopedNamePrefix = getScopedName(scopedNamePrefix, modelDef, baselanguage);
         if (scopedNamePrefix != null) {
             translationElement.setScopedName(scopedNamePrefix);

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.xmiuml.PersistenceService;
@@ -63,7 +64,7 @@ public class TransferFromXmlTest {
 
         assertEquals("TopicA", modelElement.getName().getValue(Ili2TranslationXml.DE));
         assertEquals("Added Name FR", modelElement.getName().getValue(Ili2TranslationXml.FR));
-        assertEquals(2, allNameValues.size());
+        assertEquals(3, allNameValues.size());
 	}
 
 	//Es ueberprueft, ob die UNIT korrekt in das translation xml file geschrieben wurde.
