@@ -14,7 +14,7 @@ public class FindIliModelElementTest {
 	String umlFile = "testdata/translationxml/TestB.uml";
 
 	@Test
-	void model() throws Exception {
+	public void model() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -25,7 +25,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void topic() throws Exception {
+	public void topic() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -41,7 +41,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void unit() throws Exception {
+	public void unit() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -53,7 +53,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void function() throws Exception {
+	public void function() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -65,7 +65,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void associationDef() throws Exception {
+	public void associationDef() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -77,7 +77,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void roleDef() throws Exception {
+	public void roleDef() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -92,7 +92,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void domain() throws Exception {
+	public void domain() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -104,7 +104,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void domainEnumElement() throws Exception {
+	public void domainEnumElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -116,7 +116,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void domainEnumSubElement() throws Exception {
+	public void domainEnumSubElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -128,7 +128,7 @@ public class FindIliModelElementTest {
 	}
 	
 	@Test
-	void attributeEnumElement() throws Exception {
+	public void attributeEnumElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -140,7 +140,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void attributeEnumSubElement() throws Exception {
+	public void attributeEnumSubElement() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -152,7 +152,7 @@ public class FindIliModelElementTest {
 	}
 	
 	@Test
-	void classTest() throws Exception {
+	public void classTest() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -164,7 +164,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void constraint() throws Exception {
+	public void constraint() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -176,7 +176,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void attribute() throws Exception {
+	public void attribute() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -188,7 +188,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void view() throws Exception {
+	public void view() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -200,7 +200,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void structure() throws Exception {
+	public void structure() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);
@@ -212,7 +212,7 @@ public class FindIliModelElementTest {
 	}
 
 	@Test
-	void viewNotFound() throws Exception {
+	public void viewNotFound() throws Exception {
 		// Read UML File
 		PersistenceService originalService = new PersistenceService();
 		Model model = originalService.readFile(umlFile);

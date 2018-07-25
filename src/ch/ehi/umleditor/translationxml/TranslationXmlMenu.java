@@ -16,8 +16,9 @@ public class TranslationXmlMenu {
 			try {
 				TransferFromXml trsf = new TransferFromXml();
 				trsf.merge(editor.getModel(), new File(xmlFile));
+				EhiLogger.logState("[XML Imported] From File -> " + xmlFile);
 			} catch (Exception e) {
-				EhiLogger.logError("import of Translation-XML failed", e);
+				EhiLogger.logError("Import of Translation-XML failed", e);
 			}
 		}
 
@@ -31,19 +32,23 @@ public class TranslationXmlMenu {
 			try {
 				TransferToXml trsf = new TransferToXml();
 				trsf.export(editor.getModel(), new java.io.File(file));
+				EhiLogger.logState("[XML Exported] File Path -> " + file);
 			} catch (Exception e) {
-				EhiLogger.logError("export of Translation-XML failed", e);
+				EhiLogger.logError("Export of Translation-XML failed", e);
 			}
 		}
 	}
 
 	private static String doExportFileSelector() {
 		FileChooser importDialog = new FileChooser(LauncherView.getSettings().getImportDirectory());
-		importDialog.setDialogTitle("Select A File");
+		importDialog.setDialogTitle("Export File");
 		ch.ehi.basics.view.GenericFileFilter iliFilter = LauncherView.createXmlFilter();
 		importDialog.addChoosableFileFilter(iliFilter);
-		if (importDialog.showOpenDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
+		if (importDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setImportDirectory(importDialog.getCurrentDirectory().getAbsolutePath());
+			if (!importDialog.getSelectedFile().getAbsolutePath().toString().contains(".xml")) {
+			    importDialog.setSelectedFile(new File(importDialog.getSelectedFile().getAbsolutePath() + ".xml"));
+			}
 			return importDialog.getSelectedFile().getAbsolutePath();
 		}
 		return null;
