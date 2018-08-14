@@ -1007,8 +1007,8 @@ public class HtmlISO {
 				if(dispName != null){
 					String metaDispName = dispName.getValue();
 					
-					if(metaDispName != null) {
-						if(typeLabel.equals("String") 
+					if(metaDispName != null) { // Si existe un alias
+						if(typeLabel.equals("String")  
 								|| typeLabel.equals("Numeric")
 								|| typeLabel.equals("Boolean")
 								|| typeLabel.equals("Text orientation")
@@ -1018,7 +1018,7 @@ public class HtmlISO {
 								|| typeLabel.equals("Area tessellation")
 								|| typeLabel.equals("Polyline")
 								|| typeLabel.equals("Integer")
-								) {
+								) {  // Si el tipo de dato es ..
 							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
 							+ "</TD><TD " + style + ">" + encodeString(metaDispName)//mine
 							+ "</TD><TD " + style + ">" + encodeString(" ")//mine
@@ -1029,55 +1029,54 @@ public class HtmlISO {
 							+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
 							+ "</TD></TR>");
 							newline();
-						
 						} 
-													
+						else {
+							if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
+									|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
+									|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
+									|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
+									|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
+									|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
+									|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
+									|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
+									|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
+									|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
+									|| typeLabel.equals("Integer")
+									|| typeLabel.equals("XMLDate") 
+									|| typeLabel.equals("XMLDateTime") 
+									|| typeLabel.equals("GM_Surface2D")
+									) { // si es este tipo de dato ...
+										out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+										+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+										+ "</TD><TD " + style + ">" + encodeString(" ")//code
+										+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation())));
+										if(typeLabel.equals("XMLDate")) {
+											out.write( "</TD><TD " + style + ">" + encodeString("Date"));
+										} else if(typeLabel.equals("XMLDateTime")) {
+											out.write( "</TD><TD " + style + ">" + encodeString("Date Time"));
+										} else {
+											out.write( "</TD><TD " + style + ">" + encodeString(typeLabel));
+										}
+										out.write("</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
+										+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+										+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
+										+ "</TD></TR>");
+										newline();
+							} else { // Si no tiene ningun dato
+								out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
+								+ "</TD><TD " + style + ">" + encodeString(" ")//disp
+								+ "</TD><TD " + style + ">" + encodeString(" ")//code
+								+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
+								+ "</TD><TD " + style + ">" + encodeString("Domain")//code
+								+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
+								+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
+								+ "</TD><TD " + style + ">" + encodeString(typeLabel)
+								+ "</TD></TR>");
+								newline();
+							}
+						}								
 					}
-					else {
-						if(typeLabel.equals(rsrc.getString("CTtypeTEXT")) 
-								|| typeLabel.equals(rsrc.getString("CTtypeNUMERIC"))
-								|| typeLabel.equals(rsrc.getString("CTtypeBOOLEAN"))
-								|| typeLabel.equals(rsrc.getString("CTtypeHALIGNMENT"))
-								|| typeLabel.equals(rsrc.getString("CTtypeVALIGNMENT"))
-								|| typeLabel.equals(rsrc.getString("CTtypeENUM"))
-								|| typeLabel.equals(rsrc.getString("CTtypeCOORD"))
-								|| typeLabel.equals(rsrc.getString("CTtypeSURFACE"))
-								|| typeLabel.equals(rsrc.getString("CTtypeAREA"))
-								|| typeLabel.equals(rsrc.getString("CTtypePOLYLINE"))
-								|| typeLabel.equals("Integer")
-								|| typeLabel.equals("XMLDate") 
-								|| typeLabel.equals("XMLDateTime") 
-								|| typeLabel.equals("GM_Surface2D")
-								) {
-									out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-									+ "</TD><TD " + style + ">" + encodeString(" ")//disp
-									+ "</TD><TD " + style + ">" + encodeString(" ")//code
-									+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation())));
-									if(typeLabel.equals("XMLDate")) {
-										out.write( "</TD><TD " + style + ">" + encodeString("Date"));
-									} else if(typeLabel.equals("XMLDateTime")) {
-										out.write( "</TD><TD " + style + ">" + encodeString("Date Time"));
-									} else {
-										out.write( "</TD><TD " + style + ">" + encodeString(typeLabel));
-									}
-									out.write("</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
-									+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
-									+ "</TD><TD " + style + ">" + encodeString(" ")//domain(ISO)
-									+ "</TD></TR>");
-									newline();
-						} else {
-							out.write("<TR><TD " + style + ">" + encodeString(attr.getDefLangName())
-							+ "</TD><TD " + style + ">" + encodeString(" ")//disp
-							+ "</TD><TD " + style + ">" + encodeString(" ")//code
-							+ "</TD><TD " + style + ">" + encodeDescription(mapNlsString(attr.getDocumentation()))
-							+ "</TD><TD " + style + ">" + encodeString("Domain")//code
-							+ "</TD><TD " + style + ">" + encodeString(typeUnit)//unitMed
-							+ "</TD><TD " + style + ">" + mapMultiplicity(attr.getMultiplicity())
-							+ "</TD><TD " + style + ">" + encodeString(typeLabel)
-							+ "</TD></TR>");
-							newline();
-						}
-					}
+					
 					
 				}
 				else { //DispName null
