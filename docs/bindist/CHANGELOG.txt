@@ -1,4 +1,7 @@
-﻿UML-Editor 3.6.4.8 (2018-06-27)
+﻿UML-Editor 3.6.4.9 (2018-08-14)
+----------------------------------
+- Add missing attributes to report (ISO 19110)
+UML-Editor 3.6.4.8 (2018-06-27)
 ----------------------------------
 - Fix panning tool sensibility
 - Fix Domain tables (ISO 19110)
