@@ -35,7 +35,7 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
               // -end- 358A6CDF004B import "Ili1ControlPoints"
 
-              /** Definiert den Wertebereich für die Stützpunkte der Linie.
+              /** Definiert den Wertebereich fuer die Stuetzpunkte der Linie.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:36 $
                */

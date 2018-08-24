@@ -508,7 +508,7 @@ private javax.swing.JMenuItem getMniOpenLineFormTypeDefSpecification() {
 		try {
 			ivjMniOpenLineFormTypeDefSpecification = new javax.swing.JMenuItem();
 			ivjMniOpenLineFormTypeDefSpecification.setName("MniOpenLineFormTypeDefSpecification");
-			ivjMniOpenLineFormTypeDefSpecification.setText("Öffne Spezifikation...");
+			ivjMniOpenLineFormTypeDefSpecification.setText("Oeffne Spezifikation...");
 			ivjMniOpenLineFormTypeDefSpecification.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenLineFormTypeDefSpecification.setText(CommonUserAccess.getMniEditChangeWindowText());
@@ -531,7 +531,7 @@ private javax.swing.JMenuItem getMniRemoveLineFormTypeDef() {
 		try {
 			ivjMniRemoveLineFormTypeDef = new javax.swing.JMenuItem();
 			ivjMniRemoveLineFormTypeDef.setName("MniRemoveLineFormTypeDef");
-			ivjMniRemoveLineFormTypeDef.setText("Löschen");
+			ivjMniRemoveLineFormTypeDef.setText("Loeschen");
 			ivjMniRemoveLineFormTypeDef.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveLineFormTypeDef.setText(CommonUserAccess.getMniEditRemoveText());

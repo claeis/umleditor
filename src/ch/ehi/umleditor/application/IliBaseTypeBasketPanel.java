@@ -93,7 +93,7 @@ private javax.swing.JLabel getLblAccordingTo() {
 			ivjLblAccordingTo = new javax.swing.JLabel();
 			ivjLblAccordingTo.setName("LblAccordingTo");
 			ivjLblAccordingTo.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-			ivjLblAccordingTo.setText("Gemäss:");
+			ivjLblAccordingTo.setText("Gemaess:");
 			// user code begin {1}
 			ivjLblAccordingTo.setText(getResourceString("LblAccordingTo_text"));
 			// user code end

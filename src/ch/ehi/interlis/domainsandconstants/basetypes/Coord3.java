@@ -222,7 +222,7 @@ public class Coord3 extends BaseType implements java.io.Serializable
                 // -end- 362741A0016F var358A66D40000 "hmin"
 
                 /** get current value of hmin
-                 *  min Höhenwert
+                 *  min Hoehenwert
                  *  @see #setHmin
                  */
                 // -beg- preserve=no 362741A0016F get_head358A66D40000 "hmin"
@@ -254,7 +254,7 @@ public class Coord3 extends BaseType implements java.io.Serializable
                 // -end- 362741BC0269 var358A66D40000 "hmax"
 
                 /** get current value of hmax
-                 *  max Höhenwert
+                 *  max Hoehenwert
                  *  @see #setHmax
                  */
                 // -beg- preserve=no 362741BC0269 get_head358A66D40000 "hmax"

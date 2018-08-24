@@ -35,7 +35,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 3948DB550222 import "NumericalType"
 
-              /** Definiert Grundeigenschaften für numerische Datentypen.
+              /** Definiert Grundeigenschaften fuer numerische Datentypen.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:23 $
                */
@@ -242,7 +242,7 @@ public abstract class NumericalType extends BaseType implements java.io.Serializ
                 // -end- 3948D09F000C var3948DB550222 "circular"
 
                 /** get current value of circular
-                 *  Ist der Wereberich zirkulär.
+                 *  Ist der Wereberich zirkulaer.
                  *  @see #setCircular
                  */
                 // -beg- preserve=no 3948D09F000C get_head3948DB550222 "circular"

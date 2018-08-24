@@ -33,7 +33,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 39488D6A0105 import "EnumerationConst"
 
-              /** Definiert eine Aufzählungskonstante.
+              /** Definiert eine Aufzaehlungskonstante.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:20 $
                */
@@ -85,7 +85,7 @@ public class EnumerationConst extends Constant implements java.io.Serializable
                 // -end- 3948994A02FB var39488D6A0105 "nameList"
 
                 /** get current value of nameList
-                 *  Namesfolge der Knoten in einer Aufzählung von der Wurzel bis zum Blatt.
+                 *  Namesfolge der Knoten in einer Aufzaehlung von der Wurzel bis zum Blatt.
                  *  @see #setNameList
                  */
                 // -beg- preserve=no 3948994A02FB get_head39488D6A0105 "nameList"

@@ -60,10 +60,10 @@ public class HtmlWriter
   //SortedMap <Werte, numeration>
   private SortedMap sortedMap = new TreeMap();
 
-  // für die Nummerierung vom TopicDef, ModelDef und Interlis2Def
+  // fuer die Nummerierung vom TopicDef, ModelDef und Interlis2Def
   int numeration = 0;
 
-  //wird benötigt für Stellen nach dem Komma: Package, Class, classDef
+  //wird benoetigt fuer Stellen nach dem Komma: Package, Class, classDef
   int iddP;
 
   //used in pass STRUCTURE, changed in walkTreeRecursive()
@@ -71,12 +71,12 @@ public class HtmlWriter
 
 
 
-  //Variable für den Durchgang
+  //Variable fuer den Durchgang
   //man vergleicht nachher im doWerte ob pass==<eine der Konstanten>
   //und setzt die Reihenfolge, wie das HTML niedergeschrieben wird
   int pass;
 
-  //???Sringwert für die die Leerschläge, bzw. Abstände in der Struktur
+  //???Sringwert fuer die die Leerschlaege, bzw. Abstaende in der Struktur
   String b = " ";
 
   double textIdent = 0.5;
@@ -148,17 +148,17 @@ public class HtmlWriter
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CEE8B46037F body3CEE891B03C7 "visitPackage"
-    //wird für sectionNumber benötigt
+    //wird fuer sectionNumber benoetigt
     numeration = numeration+1;
 
     //Wert es aktuellen Objekts
     String defLangName = encodeString(apackage.getDefLangName());
 
-    //aName - wird für die Angabe vom Link innerhalb der HTML - Datei benötigt
+    //aName - wird fuer die Angabe vom Link innerhalb der HTML - Datei benoetigt
     //bsp: <a name="aName....">
     String aName = numeration+"_"+defLangName;
 
-    //??concated value für die Angabe der Werte+serialNumber, bzw. index vom Value
+    //??concated value fuer die Angabe der Werte+serialNumber, bzw. index vom Value
     String value;
     if(suppressChNr){
 		value = defLangName;
@@ -167,7 +167,7 @@ public class HtmlWriter
     }
 
 
-    //damit nur einmal die indexMap gefüllt wird!
+    //damit nur einmal die indexMap gefuellt wird!
     if(pass==CONTENTS)
     {
       int sectionNumbers [] = new int[1];
@@ -187,7 +187,7 @@ public class HtmlWriter
 		concatedValue = Integer.toString(numerationId[0])+" "+defLangName;
 	  }
 
-      //concatedValue für den Link innerhalb der HTML-Datei
+      //concatedValue fuer den Link innerhalb der HTML-Datei
       aNameStructure = Integer.toString(numerationId[0])+"_"+defLangName;
     }else{
       concatedValue = defLangName;
@@ -279,7 +279,7 @@ public class HtmlWriter
               }
               hasHeader=true;
 
-              //iddP für Package wird erhöht
+              //iddP fuer Package wird erhoeht
               iddP++;
             }
             String defLangModelElement = encodeString(((ch.ehi.uml1_4.foundation.core.ModelElement)obj).getDefLangName());
@@ -345,7 +345,7 @@ public class HtmlWriter
 
             hasHeader=true;
 
-            //der Wert für die Kommastellen wird hier erhöht
+            //der Wert fuer die Kommastellen wird hier erhoeht
             iddP++;
           }
           String defLangClass = encodeString(((Classifier)obj).getDefLangName());
@@ -403,9 +403,9 @@ public class HtmlWriter
     if(linkElements){
       int numerationId[] = (int[])indexMap.get((ModelElement)aclass);
       String numeration = Integer.toString(numerationId[0])+"."+Integer.toString(numerationId[1]);
-      //für den Link innerhalb der HTML-Datei
+      //fuer den Link innerhalb der HTML-Datei
       aName = numeration+"_"+classDefName;
-      //concatedValue, dass geschrieben wird später
+      //concatedValue, dass geschrieben wird spaeter
       if(suppressChNr){
 		value = classDefName;
       }else{
@@ -435,7 +435,7 @@ public class HtmlWriter
       }
     }
 
-    //Hier wird der Werte für die Kommastellen auch erhöht
+    //Hier wird der Werte fuer die Kommastellen auch erhoeht
     //damit kommt man in eine neue Ebene, bzw. neuer Einzug
     iddP++;
 
@@ -787,15 +787,15 @@ public class HtmlWriter
                     str.append("&quot;");
                     break;
                 }
-                case 'ä': {
+                case '\u00E4': {
                     str.append("&auml;");
                     break;
                 }
-                case 'ö': {
+                case '\u00F6': {
                     str.append("&ouml;");
                     break;
                 }
-                case 'ü': {
+                case '\u00FC': {
                     str.append("&uuml;");
                     break;
                 }
@@ -823,8 +823,8 @@ public class HtmlWriter
     return ch.ehi.basics.i18n.MessageFormat.format(rsrc,resourceName,param0);
   }
   /**
-   * Geht über die ganze Struktur.
-   * Die einzelnen Überschriften des HTML-Files werden auch hier geschrieben
+   * Geht ueber die ganze Struktur.
+   * Die einzelnen Ueberschriften des HTML-Files werden auch hier geschrieben
    * @param apackage Package <das aktuelle Objekt>, das durchgemacht werden soll
    * @throws IOException wirft ev. Exception im Writer
    */
@@ -952,7 +952,7 @@ public class HtmlWriter
       boolean check = false;
       for(int a = 0;a<sortedModelElements.size();a++)
       {
-        //value: Object, bzw. String auf der list, dass dann in HTML geschrieben wird später
+        //value: Object, bzw. String auf der list, dass dann in HTML geschrieben wird spaeter
         ModelElement modelElement = (ModelElement)sortedModelElements.get(a);
         String name=modelElement.getDefLangName();if(name==null)name="";
 
@@ -999,7 +999,7 @@ public class HtmlWriter
 
       out.write("</font>");newline();
     }
-    //Counters werden zu ihrem Ursprungswert zurückgesetzt
+    //Counters werden zu ihrem Ursprungswert zurueckgesetzt
     resetCounters();
   }
   class CompareByNameAndIdx implements java.util.Comparator
@@ -1047,8 +1047,8 @@ public class HtmlWriter
     }
   }
   /**
-   * die INT - Werte, die für die ID's der Element gebraucht werden (Nummerierung der Element), werden wieder
-   * auf ihren Ursprungswert zurückgesetzt.
+   * die INT - Werte, die fuer die ID's der Element gebraucht werden (Nummerierung der Element), werden wieder
+   * auf ihren Ursprungswert zurueckgesetzt.
    */
   private void resetCounters()
   {
@@ -1126,9 +1126,9 @@ public class HtmlWriter
     if(linkElements){
       int numerationId[] = (int[])indexMap.get((ModelElement)domdef);
       String numeration = Integer.toString(numerationId[0])+"."+Integer.toString(numerationId[1]);
-      //für den Link innerhalb der HTML-Datei
+      //fuer den Link innerhalb der HTML-Datei
       aName = numeration+"_"+domDefName;
-      //concatedValue, dass geschrieben wird später
+      //concatedValue, dass geschrieben wird spaeter
 	  if(suppressChNr){
 		value = domDefName;
 	  }else{
@@ -1158,7 +1158,7 @@ public class HtmlWriter
       }
     }
 
-    //Hier wird der Werte für die Kommastellen auch erhöht
+    //Hier wird der Werte fuer die Kommastellen auch erhoeht
     //damit kommt man in eine neue Ebene, bzw. neuer Einzug
     iddP++;
 

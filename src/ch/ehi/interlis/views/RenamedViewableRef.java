@@ -34,7 +34,7 @@ package ch.ehi.interlis.views;
 
           // -end- 39619211022E import "RenamedViewableRef"
 
-          /** Definiert einen Namen für eine Sicht.
+          /** Definiert einen Namen fuer eine Sicht.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:32 $
            */
@@ -152,7 +152,7 @@ public class RenamedViewableRef extends AbstractEditorElement implements java.io
             // -end- 39619B1A020C var39619211022E "localBase"
 
             /** get current value of localBase
-             *  Lokal gültiger Name für die referenzierte Klasse, Sicht oder Projektion.
+             *  Lokal gueltiger Name fuer die referenzierte Klasse, Sicht oder Projektion.
              *  @see #setLocalBase
              */
             // -beg- preserve=no 39619B1A020C get_head39619211022E "localBase"

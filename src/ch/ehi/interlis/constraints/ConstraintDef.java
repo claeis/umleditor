@@ -54,7 +54,7 @@ package ch.ehi.interlis.constraints;
 
           // -end- 3941018702C7 import "ConstraintDef"
 
-          /** Definiert eine Einschränkung.
+          /** Definiert eine Einschraenkung.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:33:51 $
            */

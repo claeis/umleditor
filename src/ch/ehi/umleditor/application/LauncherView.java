@@ -1664,7 +1664,7 @@ private javax.swing.JMenuItem getMniCheckModel() {
 		try {
 			ivjMniCheckModel = new javax.swing.JMenuItem();
 			ivjMniCheckModel.setName("MniCheckModel");
-			ivjMniCheckModel.setText("Modell prüfen");
+			ivjMniCheckModel.setText("Modell pruefen");
 			// user code begin {1}
 			ivjMniCheckModel.setText(getResourceString("MniCheckModel_text"));
 			// user code end
@@ -1776,7 +1776,7 @@ private javax.swing.JMenuItem getMniFileOpen() {
 		try {
 			ivjMniFileOpen = new javax.swing.JMenuItem();
 			ivjMniFileOpen.setName("MniFileOpen");
-			ivjMniFileOpen.setText("Öffnen...");
+			ivjMniFileOpen.setText("Oeffnen...");
 			// user code begin {1}
 			ivjMniFileOpen.setText(CommonUserAccess.getMniFileOpenWindowText());
 			// user code end
@@ -2034,7 +2034,7 @@ private javax.swing.JMenuItem getMniPaste() {
 		try {
 			ivjMniPaste = new javax.swing.JMenuItem();
 			ivjMniPaste.setName("MniPaste");
-			ivjMniPaste.setText("Einfügen");
+			ivjMniPaste.setText("Einfuegen");
 			ivjMniPaste.setEnabled(false);
 			// user code begin {1}
 			ivjMniPaste.setText(CommonUserAccess.getMniEditPasteText());
@@ -2216,7 +2216,7 @@ private javax.swing.JMenuItem getMniUndo() {
 		try {
 			ivjMniUndo = new javax.swing.JMenuItem();
 			ivjMniUndo.setName("MniUndo");
-			ivjMniUndo.setText("Rückgängig");
+			ivjMniUndo.setText("Rueckgaengig");
 			ivjMniUndo.setEnabled(true);
 			// user code begin {1}
 			ivjMniUndo.setText(CommonUserAccess.getMniEditUndoText());
@@ -3508,7 +3508,7 @@ protected void mniRedo() {
  */
 protected void mniRemove() {
 	tool().deactivate();
-	nyi("Löschen der aktuellen Selektion");//$NON-NLS-1$
+	nyi("Loeschen der aktuellen Selektion");//$NON-NLS-1$
 	tool().activate();
 }
 /**

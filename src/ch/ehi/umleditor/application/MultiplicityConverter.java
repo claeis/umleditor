@@ -88,7 +88,7 @@ public static Multiplicity createMultiplicity(String range) {
 			}		
 			return multiplicity;
 		} catch(NumberFormatException e) {
-			throw new DeveloperException("Gültige Formatbeispiele:\n- 0\n- 4..*\n- 1,5..9,27..*", "Eingabefehler", e);
+			throw new DeveloperException("Gueltige Formatbeispiele:\n- 0\n- 4..*\n- 1,5..9,27..*", "Eingabefehler", e);
 		}
 	}
 }

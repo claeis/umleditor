@@ -33,7 +33,7 @@ package ch.ehi.interlis.graphicdescriptions;
 
           // -end- 3961FDB101A5 import "EnumRange"
 
-          /** Definiert eine Bereich innerhalb einer Aufzählung.
+          /** Definiert eine Bereich innerhalb einer Aufzaehlung.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:51 $
            */

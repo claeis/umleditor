@@ -205,7 +205,7 @@ public class Format extends AbstractEditorElement implements java.io.Serializabl
                 // -end- 358A73A30019 var358A5FEF0337 "linesize"
 
                 /** get current value of linesize
-                 *  Zeilenlänge
+                 *  Zeilenlaenge
                  *  @see #setLinesize
                  */
                 // -beg- preserve=no 358A73A30019 get_head358A5FEF0337 "linesize"
@@ -237,7 +237,7 @@ public class Format extends AbstractEditorElement implements java.io.Serializabl
                 // -end- 358A73AA000F var358A5FEF0337 "tidsize"
 
                 /** get current value of tidsize
-                 *  Länge der Objekt-Identifikationen
+                 *  Laenge der Objekt-Identifikationen
                  *  @see #setTidsize
                  */
                 // -beg- preserve=no 358A73AA000F get_head358A5FEF0337 "tidsize"

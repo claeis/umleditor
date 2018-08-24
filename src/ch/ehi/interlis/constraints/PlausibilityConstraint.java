@@ -184,7 +184,7 @@ public class PlausibilityConstraint extends AbstractEditorElement implements jav
             // -end- 394A3074018A var394A2CF303A7 "percentage"
 
             /** get current value of percentage
-             *  Prozentanteil der Instanzen der Klasse die die Bedingung erfüllen müssen
+             *  Prozentanteil der Instanzen der Klasse die die Bedingung erfuellen muessen
              *  @see #setPercentage
              */
             // -beg- preserve=no 394A3074018A get_head394A2CF303A7 "percentage"

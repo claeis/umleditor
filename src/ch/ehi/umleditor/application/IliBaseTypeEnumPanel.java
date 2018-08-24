@@ -450,7 +450,7 @@ private javax.swing.JMenuItem getMniNewDeep() {
 		try {
 			ivjMniNewDeep = new javax.swing.JMenuItem();
 			ivjMniNewDeep.setName("MniNewDeep");
-			ivjMniNewDeep.setText("Neu (Unteraufzählung)");
+			ivjMniNewDeep.setText("Neu (Unteraufzaehlung)");
 			// user code begin {1}
 			ivjMniNewDeep.setText(getResourceString("MniNewDeep_text"));
 			// user code end
@@ -494,7 +494,7 @@ private javax.swing.JMenuItem getMniRemove() {
 		try {
 			ivjMniRemove = new javax.swing.JMenuItem();
 			ivjMniRemove.setName("MniRemove");
-			ivjMniRemove.setText("Löschen");
+			ivjMniRemove.setText("Loeschen");
 			// user code begin {1}
 			ivjMniRemove.setText(CommonUserAccess.getMniEditRemoveText());
 			// user code end
@@ -617,7 +617,7 @@ private javax.swing.JRadioButton getRbtOrderedCircular() {
 		try {
 			ivjRbtOrderedCircular = new javax.swing.JRadioButton();
 			ivjRbtOrderedCircular.setName("RbtOrderedCircular");
-			ivjRbtOrderedCircular.setToolTipText("Geordnet & Zirkulär");
+			ivjRbtOrderedCircular.setToolTipText("Geordnet & Zirkulaer");
 			ivjRbtOrderedCircular.setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
 			ivjRbtOrderedCircular.setText("CIRCULAR");
 			ivjRbtOrderedCircular.setBounds(159, 53, 140, 22);

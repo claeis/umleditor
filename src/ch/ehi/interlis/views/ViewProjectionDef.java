@@ -574,7 +574,7 @@ public class ViewProjectionDef extends AbstractModelElement implements ViewableD
             // -end- 39619EF200B3 var3940F0250373 "properties"
 
             /** get current value of properties
-             *  Definiert die Erweiterungsmöglichkeiten der Projektion.
+             *  Definiert die Erweiterungsmoeglichkeiten der Projektion.
              *  @see #setProperties
              */
             // -beg- preserve=no 39619EF200B3 get_head3940F0250373 "properties"

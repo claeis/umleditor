@@ -34,7 +34,7 @@ package ch.ehi.interlis.graphicdescriptions;
 
           // -end- 3961FCE30307 import "EnumAssignment"
 
-          /** Definiert den Werte eines Signatur-Parameters basierend auf einer Aufzählung.
+          /** Definiert den Werte eines Signatur-Parameters basierend auf einer Aufzaehlung.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:50 $
            */

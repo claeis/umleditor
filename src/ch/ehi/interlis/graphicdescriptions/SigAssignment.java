@@ -37,7 +37,7 @@ package ch.ehi.interlis.graphicdescriptions;
 
           // -end- 3961F95C036D import "SigAssignment"
 
-          /** Definiert eine Zuweisung für einen Signatur-Parameter.
+          /** Definiert eine Zuweisung fuer einen Signatur-Parameter.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:58 $
            */

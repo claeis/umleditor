@@ -32,7 +32,7 @@ package ch.ehi.interlis.domainsandconstants.linetypes;
 
               // -end- 36D5626F01E9 import "IndividualSurface"
 
-              /** Definiert ein Flächenwertebereich mit Überlappung.
+              /** Definiert ein Flaechenwertebereich mit Ueberlappung.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:36 $
                */

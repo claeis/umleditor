@@ -146,7 +146,7 @@ protected void addFormatMenu(javax.swing.JPopupMenu popupMenu) {
 	JMenu formatMenu = new JMenu(CommonUserAccess.getMnuFormatText());
 /*
 	JPopupMenu fontSizeMenu = new JPopupMenu();
-	fontSizeMenu.setName("Schriftgrösse");
+	fontSizeMenu.setName("Schriftgroesse");
 	formatMenu.add(fontSizeMenu);
 */
 	formatMenu.add(new AbstractAction(CommonUserAccess.getMniFormatFontText()) {

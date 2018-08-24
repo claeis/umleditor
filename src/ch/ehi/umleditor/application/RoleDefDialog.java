@@ -345,7 +345,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Uebernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -569,7 +569,7 @@ private javax.swing.JLabel getLblCardinality() {
 		try {
 			ivjLblCardinality = new javax.swing.JLabel();
 			ivjLblCardinality.setName("LblCardinality");
-			ivjLblCardinality.setText("Kardinalität");
+			ivjLblCardinality.setText("Kardinalitaet");
 			// user code begin {1}
 			ivjLblCardinality.setText(resRoleDefDialog.getString("LblCardinality_text"));
 			// user code end

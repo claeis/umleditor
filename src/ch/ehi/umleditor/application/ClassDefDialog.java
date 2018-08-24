@@ -407,7 +407,7 @@ private javax.swing.JButton getBtnApply() {
 		try {
 			ivjBtnApply = new javax.swing.JButton();
 			ivjBtnApply.setName("BtnApply");
-			ivjBtnApply.setText("Übernehmen");
+			ivjBtnApply.setText("Uebernehmen");
 			// user code begin {1}
 			ivjBtnApply.setText(getApplyString());
 			// user code end
@@ -625,7 +625,7 @@ private javax.swing.JMenuItem getMniOpenAttributeSpecication() {
 		try {
 			ivjMniOpenAttributeSpecication = new javax.swing.JMenuItem();
 			ivjMniOpenAttributeSpecication.setName("MniOpenAttributeSpecication");
-			ivjMniOpenAttributeSpecication.setText("Öffne Spezifikation...");
+			ivjMniOpenAttributeSpecication.setText("Oeffne Spezifikation...");
 			ivjMniOpenAttributeSpecication.setEnabled(false);
 			// user code begin {1}
 			ivjMniOpenAttributeSpecication.setText(getChangeWindowString());
@@ -648,7 +648,7 @@ private javax.swing.JMenuItem getMniRemoveAttribute() {
 		try {
 			ivjMniRemoveAttribute = new javax.swing.JMenuItem();
 			ivjMniRemoveAttribute.setName("MniRemoveAttribute");
-			ivjMniRemoveAttribute.setText("Löschen");
+			ivjMniRemoveAttribute.setText("Loeschen");
 			ivjMniRemoveAttribute.setEnabled(false);
 			// user code begin {1}
 			ivjMniRemoveAttribute.setText(getRemoveString());

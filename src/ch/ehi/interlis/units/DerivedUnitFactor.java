@@ -34,7 +34,7 @@ package ch.ehi.interlis.units;
 
           // -end- 3949E75A01EE import "DerivedUnitFactor"
 
-          /** Definiert einen Faktor für die Umrechnung der Einheit.
+          /** Definiert einen Faktor fuer die Umrechnung der Einheit.
            *  @author Claude Eisenhut
            *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:36:20 $
            */

@@ -34,7 +34,7 @@ package ch.ehi.interlis.domainsandconstants.basetypes;
 
               // -end- 358A671C0162 import "Enumeration"
 
-              /** Definiert einen Aufzählungsdatentyp.
+              /** Definiert einen Aufzaehlungsdatentyp.
                *  @author Claude Eisenhut
                *  @version $Revision: 1.1.1.1 $ $Date: 2003-12-23 10:34:19 $
                */

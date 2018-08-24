@@ -406,7 +406,7 @@ private javax.swing.JLabel getLblSoftwareBy() {
 		try {
 			ivjLblSoftwareBy = new javax.swing.JLabel();
 			ivjLblSoftwareBy.setName("LblSoftwareBy");
-			ivjLblSoftwareBy.setText("Dieses Produkt enthält Software, die entwickelt wurde durch:");
+			ivjLblSoftwareBy.setText("Dieses Produkt enthaelt Software, die entwickelt wurde durch:");
 			ivjLblSoftwareBy.setBounds(21, 505, 371, 14);
 			// user code begin {1}
 			ivjLblSoftwareBy.setText(getResourceString("LblSoftwareBy_text"));
@@ -429,7 +429,7 @@ private javax.swing.JLabel getLblSupportedBy() {
 		try {
 			ivjLblSupportedBy = new javax.swing.JLabel();
 			ivjLblSupportedBy.setName("LblSupportedBy");
-			ivjLblSupportedBy.setText("Unterstützt durch:");
+			ivjLblSupportedBy.setText("Unterstuetzt durch:");
 			ivjLblSupportedBy.setBounds(21, 403, 119, 14);
 			// user code begin {1}
 			ivjLblSupportedBy.setText(getResourceString("LblSupportedBy_text"));

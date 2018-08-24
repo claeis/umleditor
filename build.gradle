@@ -7,7 +7,7 @@ apply plugin: "maven"
 sourceCompatibility = "1.6" 
 targetCompatibility = "1.6"
 
-compileJava.options.encoding = 'ISO-8859-1'
+compileJava.options.encoding = 'US-ASCII'
 
 configurations {
     deployerJars
