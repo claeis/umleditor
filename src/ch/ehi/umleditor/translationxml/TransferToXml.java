@@ -67,6 +67,7 @@ public class TransferToXml {
                 }
             }
         }
+        modelElement.sort();
         Ili2TranslationXml.writeModelElementsAsXML(modelElement, xmlfile);
         return modelElement;
     }
