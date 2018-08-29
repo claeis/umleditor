@@ -9,32 +9,35 @@ import ch.softenvironment.view.BaseDialog;
 
 public class TranslationXmlMenu {
 	public static void doImport() {
-		EhiLogger.logState("doImport of Translation-XML");
 		LauncherView editor = LauncherView.getInstance();
 		String xmlFile = doImportFileSelector();
 		if (xmlFile != null) {
 			try {
-				TransferFromXml trsf = new TransferFromXml();
+			    TransferFromXml trsf = new TransferFromXml();
 				trsf.merge(editor.getModel(), new File(xmlFile));
-				EhiLogger.logState("[XML Imported] From File -> " + xmlFile);
+				EhiLogger.logState("[XML Imported] " + xmlFile);
+				EhiLogger.logState("[XML Imported] done" );
 			} catch (Exception e) {
-				EhiLogger.logError("Import of Translation-XML failed", e);
+			    clearGlobalVariables();
+				EhiLogger.logError("Import of Translation-XML failed");
+				EhiLogger.logError(xmlFile, e);
 			}
 		}
 
 	}
 
 	public static void doExport() {
-		EhiLogger.logState("doExport of Translation-XML");
 		LauncherView editor = LauncherView.getInstance();
 		String file = doExportFileSelector();
 		if (file != null) {
 			try {
 				TransferToXml trsf = new TransferToXml();
 				trsf.export(editor.getModel(), new java.io.File(file));
-				EhiLogger.logState("[XML Exported] File Path -> " + file);
+				EhiLogger.logState("[XML Exported] " + file + " written");
+				EhiLogger.logState("[XML Exported] done");
 			} catch (Exception e) {
-				EhiLogger.logError("Export of Translation-XML failed", e);
+				EhiLogger.logError("Export of Translation-XML failed");
+				EhiLogger.logError(file, e);
 			}
 		}
 	}
@@ -65,5 +68,10 @@ public class TranslationXmlMenu {
 			return importDialog.getSelectedFile().getAbsolutePath();
 		}
 		return null;
+	}
+	
+	private static void clearGlobalVariables() {
+        ModelElementUtility utility = new ModelElementUtility();
+        utility.clear();
 	}
 }

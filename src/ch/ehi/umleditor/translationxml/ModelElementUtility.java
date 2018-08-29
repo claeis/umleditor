@@ -51,7 +51,7 @@ public class ModelElementUtility {
     }
 
     /**
-     * It search the Model Element scope name and Scope Name of XML Element. 
+     * It search the Model Element scope name and Scope Name of XML Element
      * if find, then returns back with related Model Element
      * 
      * @param modelElement given Model Element
@@ -312,6 +312,15 @@ public class ModelElementUtility {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * If in the program occurs an error then value of the variables are cleared.
+     */
+    public void clear() {
+        scopedName2element = null;
+        baselanguage = "";
+        enumScopedName = "";
     }
 
 }
