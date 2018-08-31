@@ -236,21 +236,21 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			constraintsRbtSign.gridx = 2; constraintsRbtSign.gridy = 3;
 			constraintsRbtSign.gridwidth = 2;
 			constraintsRbtSign.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsRbtSign.ipadx = 74;
+			constraintsRbtSign.ipadx = 54;
 			constraintsRbtSign.insets = new java.awt.Insets(3, 8, 3, 3);
 			getBaseDialogContentPane().add(getRbtSign(), constraintsRbtSign);
 
 			java.awt.GridBagConstraints constraintsRbtRefSystem = new java.awt.GridBagConstraints();
 			constraintsRbtRefSystem.gridx = 4; constraintsRbtRefSystem.gridy = 3;
 			constraintsRbtRefSystem.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsRbtRefSystem.ipadx = 36;
+			constraintsRbtRefSystem.ipadx = 7;
 			constraintsRbtRefSystem.insets = new java.awt.Insets(3, 4, 3, 12);
 			getBaseDialogContentPane().add(getRbtRefSystem(), constraintsRbtRefSystem);
 
 			java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
 			constraintsLblKind.gridx = 1; constraintsLblKind.gridy = 3;
 			constraintsLblKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsLblKind.ipadx = 160;
+			constraintsLblKind.ipadx = 26;
 			constraintsLblKind.insets = new java.awt.Insets(4, 9, 10, 2);
 			getBaseDialogContentPane().add(getLblKind(), constraintsLblKind);
 
@@ -594,7 +594,7 @@ private void initialize() {
 		// user code end
 		setName("SpecificationDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(473, 269);
+		setSize(545, 269);
 		setTitle("MetaDataUseDef (Spezifikation)");
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
@@ -603,7 +603,7 @@ private void initialize() {
 	}
 	// user code begin {2}
 	setTitle(resMetaDataUseDefDialog.getString("CTDialog"));
-    setSize(560, 285);
+    setSize(580, 385);
 	javax.swing.ButtonGroup buttonGroup = new javax.swing.ButtonGroup();
 	buttonGroup.add(getRbtSign());
 	buttonGroup.add(getRbtRefSystem());

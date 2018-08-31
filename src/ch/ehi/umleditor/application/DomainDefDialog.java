@@ -987,7 +987,7 @@ private void initialize() {
 		// user code end
 		setName("DomainDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(598, 657); // 598, 557
+		setSize(598, 697); // 598, 557
 		setTitle(getResourceString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();

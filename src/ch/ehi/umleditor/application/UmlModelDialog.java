@@ -455,7 +455,7 @@ private void initialize() {
 		// user code end
 		setName("UmlModelSpecificationDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(426, 243);
+		setSize(385, 310);
 		setTitle(resUmlModelDialog.getString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();

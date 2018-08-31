@@ -242,7 +242,7 @@ private void initialize() {
 		// user code end
 		setName("PackageSelectionDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(426, 240);
+		setSize(426, 340);
 		setTitle("<PackageSelection>");
 		setContentPane(getBaseDialogContentPane());
 		initConnections();

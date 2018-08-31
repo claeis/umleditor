@@ -695,7 +695,7 @@ private javax.swing.JPanel getBaseDialogContentPane() {
 			java.awt.GridBagConstraints constraintsBtnApply = new java.awt.GridBagConstraints();
 			constraintsBtnApply.gridx = 2; constraintsBtnApply.gridy = 3;
 			constraintsBtnApply.ipadx = 8;
-			constraintsBtnApply.insets = new java.awt.Insets(4, 3, 10, 27);
+			constraintsBtnApply.insets = new java.awt.Insets(4, 3, 10, 75);
 			getBaseDialogContentPane().add(getBtnApply(), constraintsBtnApply);
 			// user code begin {1}
 			// user code end
@@ -1693,7 +1693,7 @@ private void initialize() {
 		// user code end
 		setName("ModelDefSpecificationDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(426, 357);
+		setSize(432, 467);
 		setTitle(resModelDefDialog.getString("ModelDefSpecificationDialog_title"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();

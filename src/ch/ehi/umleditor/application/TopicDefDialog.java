@@ -1038,7 +1038,7 @@ private void initialize() {
 		// user code end
 		setName("TopicDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(490, 306);
+		setSize(490, 336);
 		setTitle(resTopicDefDialog.getString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
