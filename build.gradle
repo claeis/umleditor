@@ -112,6 +112,11 @@ jar {
         }
 } 
 
+task run(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+	main = "ch.ehi.umleditor.application.LauncherView"
+}
+
 task bindist(type: Zip){
 	baseName = project.name
 	destinationDir = file('dist')
