@@ -233,7 +233,10 @@ class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListen
 			if (newEvent.getSource() == LauncherView.this.getTlbStandard())
 				connEtoC28(newEvent);
 		};
-		public void tbbFindAction_actionPerformed(java.util.EventObject newEvent) {};
+		public void tbbFindAction_actionPerformed(java.util.EventObject newEvent) {
+			if (newEvent.getSource() == LauncherView.this.getTlbStandard())
+				connEtoC40(newEvent);
+		};
 		public void tbbNewAction_actionPerformed(java.util.EventObject newEvent) {
 			if (newEvent.getSource() == LauncherView.this.getTlbStandard())
 				connEtoC26(newEvent);
@@ -1054,6 +1057,20 @@ private void connEtoC4(java.util.EventObject arg1) {
 		// user code begin {1}
 		// user code end
 		this.mniSaveFile();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+
+private void connEtoC40(java.util.EventObject arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniFindReplace();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -3618,6 +3635,7 @@ private void openInitialDiagram() {
 	getTlbStandard().setTbbNewEnabled(true);
 	getTlbStandard().setTbbOpenEnabled(true);
 	getTlbStandard().setTbbPrintEnabled(true);
+	getTlbStandard().setTbbFindEnabled(true);
 }
 /**
  * The user moved the mouse over the palette entry.
