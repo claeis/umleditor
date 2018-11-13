@@ -91,12 +91,6 @@ public class NavigationTreeNodeUtility {
   	return null; // will adapt closed/openedPackage automatically
   }
   /**
-   * Return whether TreeElement is a INTERLIS2Def or not
-   */
-   static public boolean isINTERLIS2Def(Object node) {
-		return node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
-  }
-  /**
    * Return whether Specification Dialog exists or not.
    * @see NavigationView
    */
@@ -157,16 +151,7 @@ public class NavigationTreeNodeUtility {
    * Sets the string to display for this object.
    */
   static public void setName(Object node,String newName) {
-	  if(isINTERLIS2Def(node)) {
-			ch.ehi.interlis.modeltopicclass.INTERLIS2Def obj = (ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node;
-			if(obj.getName().getValue().endsWith(".ili")) {
-				((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
-						((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).getName(), newName));
-			}else {
-				((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).setName(new ch.ehi.basics.types.NlsString(
-					((ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node).getName(), newName+".ili"));
-				}
-	} else if (isModelElement(node)) {
+	  if (isModelElement(node)) {
   		((ModelElement)node).setName(new ch.ehi.basics.types.NlsString(((ModelElement)node).getName(), newName));
   	} else if (isClassDiagram(node)) {
   		((ch.ehi.umleditor.umlpresentation.Diagram)node).setName(new ch.ehi.basics.types.NlsString(((ch.ehi.umleditor.umlpresentation.Diagram)node).getName(), newName));
