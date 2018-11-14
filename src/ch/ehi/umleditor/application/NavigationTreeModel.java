@@ -160,6 +160,12 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
         return true;
     }
 
+    /**
+     * Return whether TreeElement is a INTERLIS2Def or not
+     */
+     static public boolean isINTERLIS2Def(Object node) {
+  		return node instanceof ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+    }
 
   /**
    * This method is called as a result of the user editing a value in
@@ -170,8 +176,16 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
   public void valueForPathChanged(TreePath path, Object newValue) {
   	/* Update the name of the element, but may be a diagramm (which is not en element) */
   	Object node = path.getLastPathComponent();
-
+  	if(isINTERLIS2Def(node)) {
+		ch.ehi.interlis.modeltopicclass.INTERLIS2Def obj = (ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node;
+		if(obj.getName().getValue().endsWith(".ili")) {
+			NavigationTreeNodeUtility.setName(node,(String)newValue);
+		}else {
+			NavigationTreeNodeUtility.setName(node,(String)newValue+".ili");
+		}
+  	} else {
         NavigationTreeNodeUtility.setName(node,(String)newValue);
+  	}
   	// since we've changed how the data is to be displayed
   	// nodeChanged(node);
   }
