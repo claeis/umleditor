@@ -17,7 +17,13 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import ch.softenvironment.view.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 /**
  * User Interface for a print dialog.
  * 
@@ -47,6 +53,7 @@ class IvjEventHandler implements java.awt.event.ActionListener {
 public PrintDialog(java.awt.Frame owner) {
 	super(owner, true);
 	initialize();
+	addEscapeKey();
 	setRelativeLocation(owner);
 	show();
 }
@@ -60,6 +67,25 @@ public PrintDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
 }
+/**
+ * Handle escape key to close the dialog
+ */
+ private void addEscapeKey() {
+	 
+	 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+	 Action escapeAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = -2972481431614869047L;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			dispose();
+		}
+	 };
+	 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+	 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+ }
 /**
  * connEtoC1:  (JButton11.action.actionPerformed(java.awt.event.ActionEvent) --> PrintDialog.cancelPressed()V)
  * @param arg1 java.awt.event.ActionEvent

@@ -1,5 +1,7 @@
 package ch.ehi.umleditor.application;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +9,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.tree.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
@@ -40,6 +46,7 @@ class IvjEventHandler implements java.awt.event.ActionListener {
   public ModellanguageDialog(java.awt.Dialog owner, String title, boolean modal) {
 	super(owner, title, modal);
 	initialize();
+	addEscapeKey();
         if(title!=null){
           setTitle(title);
         }
@@ -53,6 +60,25 @@ class IvjEventHandler implements java.awt.event.ActionListener {
         }
 	show();
   }
+  /**
+   * Handle escape key to close the dialog
+   */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = -2972481431614869047L;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
 /**
  * connEtoC1:  (BtnCancel.action.actionPerformed(java.awt.event.ActionEvent) --> PackageSelectionDialog.cancelPressed()V)
  * @param arg1 java.awt.event.ActionEvent
