@@ -25,6 +25,7 @@ import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 
+import javax.swing.SwingUtilities;
 import javax.swing.tree.*;
 
 import ch.softenvironment.util.*;
@@ -689,6 +690,14 @@ private void connEtoC3(java.awt.event.ActionEvent arg1) {
 private void connEtoC30(java.awt.event.MouseEvent arg1) {
 	try {
 		// user code begin {1}
+		if(SwingUtilities.isRightMouseButton(arg1)){
+			  int selRow = ivjTreNavigation.getRowForLocation(arg1.getX(), arg1.getY());
+		         TreePath selPath = ivjTreNavigation.getPathForLocation(arg1.getX(), arg1.getY());
+		         			ivjTreNavigation.setSelectionPath(selPath); 
+		                 if (selRow>-1){
+		                	 ivjTreNavigation.setSelectionRow(selRow); 
+		                 }
+		 }
 		// user code end
 		this.genericPopupDisplay(arg1, getMnpTreeActions());
 		// user code begin {2}

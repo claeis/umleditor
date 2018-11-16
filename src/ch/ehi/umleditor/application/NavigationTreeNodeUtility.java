@@ -151,7 +151,7 @@ public class NavigationTreeNodeUtility {
    * Sets the string to display for this object.
    */
   static public void setName(Object node,String newName) {
-  	if (isModelElement(node)) {
+	  if (isModelElement(node)) {
   		((ModelElement)node).setName(new ch.ehi.basics.types.NlsString(((ModelElement)node).getName(), newName));
   	} else if (isClassDiagram(node)) {
   		((ch.ehi.umleditor.umlpresentation.Diagram)node).setName(new ch.ehi.basics.types.NlsString(((ch.ehi.umleditor.umlpresentation.Diagram)node).getName(), newName));
