@@ -19,7 +19,7 @@ class RepositoriesDialog extends JDialog {
     private JTextField portUi=null;
     public RepositoriesDialog(Frame aFrame) {
         super(aFrame, /* modal */ true);
-
+        addEscapeKey();
         setTitle("Model Repository Settings");
         JPanel pane=new JPanel();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -126,6 +126,25 @@ class RepositoriesDialog extends JDialog {
         //setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack(); // realize it
     }
+    /**
+	 * Handle escape key to close the dialog
+	 */
+	 private void addEscapeKey() {
+		 
+		 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+		 Action escapeAction = new AbstractAction() {
+			
+			private static final long serialVersionUID = -2972481431614869047L;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+			}
+		 };
+		 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+		 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+	 }
     public int showDialog(){
       show();
       return pressedButton;

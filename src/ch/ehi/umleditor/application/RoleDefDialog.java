@@ -17,6 +17,8 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import ch.ehi.interlis.modeltopicclass.*;
 import javax.swing.*;
 import ch.ehi.interlis.associations.*;
@@ -98,11 +100,31 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public RoleDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	addEscapeKey();
 	setTitle(((RoleDef)element).getAssociation().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
 }
+/**
+ * Handle escape key to close the dialog
+ */
+ private void addEscapeKey() {
+	 
+	 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+	 Action escapeAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = -2972481431614869047L;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			dispose();
+		}
+	 };
+	 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+	 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+ }
 /**
  * Comment
  */
