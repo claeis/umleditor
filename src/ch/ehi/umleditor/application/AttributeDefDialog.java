@@ -20,6 +20,8 @@ package ch.ehi.umleditor.application;
 
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -107,11 +109,31 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public AttributeDefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	addEscapeKey();
 	setTitle(((AttributeDef)element).getOwner().getDefLangName() + "->" + getTitle());
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
 }
+/**
+ * Handle escape key to close the dialog
+ */
+ private void addEscapeKey() {
+	 
+	 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+	 Action escapeAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = -2972481431614869047L;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			dispose();
+		}
+	 };
+	 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+	 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+ }
 /**
  * Adapt the chosen INTERLIS type Panel and create a new default type Instance.
  * @see DomainDefDialog#adaptType()

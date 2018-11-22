@@ -17,8 +17,14 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Set;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 /**
@@ -63,6 +69,7 @@ class IvjEventHandler implements java.awt.event.ActionListener, javax.swing.even
 public FindDialog(java.awt.Frame owner, boolean modal) {
 	super(owner, modal);
 	initialize();
+	addEscapeKey();
 	java.awt.Point parentOrigin = owner.getLocation();
 	setLocation((int)parentOrigin.getX() + 250, (int)parentOrigin.getY() + 40);
 	show();
@@ -84,6 +91,25 @@ public FindDialog(java.awt.Frame owner, boolean modal, Set results, String title
     showResults(results);
     show();
 }
+/**
+ * Handle escape key to close the dialog
+ */
+ private void addEscapeKey() {
+	 
+	 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+	 Action escapeAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = -2972481431614869047L;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			dispose();
+		}
+	 };
+	 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+	 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+ }
 /**
  * connEtoC1:  (BtnSearch.action.actionPerformed(java.awt.event.ActionEvent) --> FindDialog.search()V)
  * @param arg1 java.awt.event.ActionEvent

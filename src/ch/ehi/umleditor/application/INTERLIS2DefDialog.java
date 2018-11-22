@@ -20,6 +20,8 @@ package ch.ehi.umleditor.application;
 import ch.ehi.basics.view.*;
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.Point;
 import java.util.*;
 
@@ -106,10 +108,30 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 public INTERLIS2DefDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.Element element) {
 	super(owner, true);
 	initialize();
+	addEscapeKey();
 	setRelativeLocation(owner);
 	setElement(element);
 	show();
 }
+/**
+ * Handle escape key to close the dialog
+ */
+ private void addEscapeKey() {
+	 
+	 KeyStroke escape = KeyStroke.getKeyStroke (KeyEvent.VK_ESCAPE, 0, false);
+	 Action escapeAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = -2972481431614869047L;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			dispose();
+		}
+	 };
+	 getRootPane ().getInputMap (JComponent.WHEN_IN_FOCUSED_WINDOW).put (escape, "ESCAPE");
+	 getRootPane ().getActionMap ().put ("ESCAPE", escapeAction);
+ }
 public void adaptUserAction(EventObject event, Object control) {
 	getMniChange().setEnabled(getTblFileName().getSelectedRow() >= 0);
 }
