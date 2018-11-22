@@ -143,6 +143,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniStructure = null;
 	private JMenuItem ivjMniImportXmiRose = null;
 	private JMenu ivjMnuXMI_Rose = null;
+	private JMenuItem ivjMniExportXmi = null;
 	private JMenuItem ivjMniCheckModel = null;
 	private JMenuItem ivjMniExportInterlis = null;
 	private JMenuItem ivjMniImportInterlis = null;
@@ -206,6 +207,8 @@ class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListen
 				connEtoC38(e);
 			if (e.getSource() == LauncherView.this.getMniRedo())
 				connEtoC39(e);
+			if (e.getSource() == LauncherView.this.getMniExportXmi())
+				connEtoC42(e);
 		};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
 			if (e.getSource() == LauncherView.this.getMncToolbar())
@@ -1071,6 +1074,26 @@ private void connEtoC40(java.util.EventObject arg1) {
 		// user code begin {1}
 		// user code end
 		this.mniFindReplace();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+/**
+ * connEtoC42:
+ * 
+ * @param arg1
+ *            java.awt.event.ActionEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoC42(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniXmiExport();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -2605,6 +2628,7 @@ private javax.swing.JMenu getMnuXMI_Rose() {
 			ivjMnuXMI_Rose.setName("MnuXMI_Rose");
 			ivjMnuXMI_Rose.setText("XMI/Rose");
 			ivjMnuXMI_Rose.add(getMniImportXmiRose());
+			ivjMnuXMI_Rose.add(getMniExportXmi());
 			// user code begin {1}
 			ivjMnuXMI_Rose.setText(getResourceString("MnuXMI_Rose_text"));
 			// user code end
@@ -2615,6 +2639,31 @@ private javax.swing.JMenu getMnuXMI_Rose() {
 		}
 	}
 	return ivjMnuXMI_Rose;
+}
+/**
+ * Return the MniExportXmi property value.
+ * 
+ * @return javax.swing.JMenuItem
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JMenuItem getMniExportXmi() {
+	if (ivjMniExportXmi == null) {
+		try {
+			ivjMniExportXmi = new javax.swing.JMenuItem();
+			ivjMniExportXmi.setName("MniExportXmi");
+			ivjMniExportXmi.setToolTipText("Export xmi");
+			ivjMniExportXmi.setText("Export...");
+			// user code begin {1}
+			ivjMniExportXmi.setToolTipText(getResourceString("MniExportXmi_toolTipText"));
+			ivjMniExportXmi.setText(getResourceString("MniExportXmi_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMniExportXmi;
 }
 /**
  * Return the root Element of INTERLIS model.
@@ -3048,6 +3097,7 @@ private void initConnections() throws java.lang.Exception {
 	getTlbStandard().addToolBarListener(ivjEventHandler);
 	getMniXmlExport().addActionListener(ivjEventHandler);
 	getMniImportXmiRose().addActionListener(ivjEventHandler);
+	getMniExportXmi().addActionListener(ivjEventHandler);
 	getMniFindReplace().addActionListener(ivjEventHandler);
 	getMniUndo().addActionListener(ivjEventHandler);
 	getMniRedo().addActionListener(ivjEventHandler);
@@ -3358,6 +3408,14 @@ private void mniHelp() {
     }
     ch.ehi.basics.view.BrowserControl.displayURL(umlEditorHome + "/doc/index.html");//$NON-NLS-1$
 
+	tool().activate();
+}
+/**
+ *  XMI File export
+ */
+private void mniXmiExport() {
+	tool().deactivate();
+	ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeXmi();
 	tool().activate();
 }
 /**
