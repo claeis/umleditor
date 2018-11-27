@@ -48,7 +48,7 @@ public class ExportInterlis
   public static void writeXSD(){
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle("XML-Schema exportieren...");
-	saveDialog.addChoosableFileFilter(GenericFileFilter.createXmlSchemaFilter());
+	saveDialog.setFileFilter(GenericFileFilter.createXmlSchemaFilter());
 
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
@@ -115,7 +115,7 @@ public class ExportInterlis
   public static void writeIli1Fmt(){
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle("INTERLIS 1-Format exportieren...");
-	saveDialog.addChoosableFileFilter(new ch.ehi.basics.view.GenericFileFilter("ILI1 Format (*.fmt)","fmt"));
+	saveDialog.setFileFilter(new ch.ehi.basics.view.GenericFileFilter("ILI1 Format (*.fmt)","fmt"));
 
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
