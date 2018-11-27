@@ -19,6 +19,8 @@ package ch.ehi.umleditor.interlis.iliexport;
 import ch.ehi.umleditor.application.LauncherView;
 import ch.ehi.basics.view.FileChooser;
 import ch.ehi.basics.view.GenericFileFilter;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+
 import java.io.File;
 import javax.swing.JOptionPane;
 import ch.interlis.ili2c.config.Configuration;
@@ -44,7 +46,17 @@ public class ExportInterlis
     }
     return;
     }
-
+  
+  public static void writeIli(INTERLIS2Def ili) {
+		TransferFromUmlMetamodel writer = new TransferFromUmlMetamodel();
+		try {
+			writer.getFileList(ili.getNamespace());
+			writer.writeIliFile(ili);
+		}catch (java.io.IOException ex) {
+			ch.ehi.umleditor.application.LauncherView.getInstance().log("Export interlis file", "Fail when try write the interlis file");
+			//ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+		}
+	}
   public static void writeXSD(){
 	FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle("XML-Schema exportieren...");
