@@ -3505,7 +3505,7 @@ private void mniOpenFile() {
 	if (saveCurrentChanges()) {
 		FileChooser openDialog = new FileChooser(getSettings().getWorkingDirectory());
 		openDialog.setDialogTitle(CommonUserAccess.getTitleFileOpen());
-		openDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
+		openDialog.setFileFilter(createUmlInterlisEditorFilter());
 
 		if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			getSettings().setWorkingDirectory(openDialog.getCurrentDirectory().getAbsolutePath());
@@ -3594,7 +3594,7 @@ private boolean mniSaveAs() {
 
 	FileChooser saveDialog =  new FileChooser(getSettings().getWorkingDirectory());
 	saveDialog.setDialogTitle(CommonUserAccess.getMniFileSaveAsText());
-	saveDialog.addChoosableFileFilter(createUmlInterlisEditorFilter());
+	saveDialog.setFileFilter(createUmlInterlisEditorFilter());
 
 	if (saveDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 		try {
