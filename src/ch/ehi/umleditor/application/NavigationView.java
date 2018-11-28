@@ -25,6 +25,7 @@ import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 
+import javax.swing.DropMode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.*;
 
@@ -1695,6 +1696,10 @@ private javax.swing.JTree getTreNavigation() {
 		try {
 			ivjTreNavigation = new AutoScrollingJTree();
 			ivjTreNavigation.setName("TreNavigation");
+			ivjTreNavigation.setDragEnabled(true);
+			ivjTreNavigation.setDropMode(DropMode.ON_OR_INSERT);
+			ivjTreNavigation.setTransferHandler(new TreeTransferHandler());
+			ivjTreNavigation.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
 			ivjTreNavigation.setVisibleRowCount(50);
 			ivjTreNavigation.setBounds(0, 0, 78, 72);
 			ivjTreNavigation.setEditable(true);
