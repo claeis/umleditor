@@ -53,8 +53,7 @@ public class ExportInterlis
 			writer.getFileList(ili.getNamespace());
 			writer.writeIliFile(ili);
 		}catch (java.io.IOException ex) {
-			ch.ehi.umleditor.application.LauncherView.getInstance().log("Export interlis file", "Fail when try write the interlis file");
-			//ch.ehi.umleditor.application.LauncherView.getInstance().log(writer.getFuncDesc(), ex.getLocalizedMessage());
+			ch.ehi.umleditor.application.LauncherView.getInstance().log("Export interlis file", ex.getLocalizedMessage());
 		}
 	}
   public static void writeXSD(){

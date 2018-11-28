@@ -692,7 +692,6 @@ private void connEtoC30(java.awt.event.ActionEvent arg1) {
 	}
 }
 	private void mniIliExport(INTERLIS2Def exportili) {
-	// TODO Auto-generated method stub
 	ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeIli(exportili);
 }
 /**
