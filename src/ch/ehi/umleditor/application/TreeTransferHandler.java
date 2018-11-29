@@ -43,7 +43,7 @@ public class TreeTransferHandler extends TransferHandler {
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
         } catch(ClassNotFoundException e) {
-            System.out.println("ClassNotFound: " + e.getMessage());
+        	ch.ehi.umleditor.application.LauncherView.getInstance().log("ClassNotFound: " , e.getMessage());
         }
     }
      /**
@@ -81,7 +81,7 @@ public class TreeTransferHandler extends TransferHandler {
     }
 
      public int getSourceActions(JComponent c) {
-        return COPY_OR_MOVE;
+        return MOVE;
     }
      /*
       * Drop
@@ -89,7 +89,7 @@ public class TreeTransferHandler extends TransferHandler {
       */
      public boolean importData(TransferHandler.TransferSupport support) {
         if(!canImport(support)) {
-        	System.out.println("Can't import");
+        	ch.ehi.umleditor.application.LauncherView.getInstance().log("Can't import", "importData");
             return false;
         }
         
@@ -187,9 +187,9 @@ public class TreeTransferHandler extends TransferHandler {
                return true;
             
         } catch(UnsupportedFlavorException ufe) {
-            System.out.println("UnsupportedFlavor: " + ufe.getMessage());
+        	ch.ehi.umleditor.application.LauncherView.getInstance().log("UnsupportedFlavor: ", ufe.getMessage());
         } catch(java.io.IOException ioe) {
-            System.out.println("I/O error: " + ioe.getMessage());
+        	ch.ehi.umleditor.application.LauncherView.getInstance().log("I/O error: ", ioe.getMessage());
         }
         return false;
     }
