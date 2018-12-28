@@ -80,7 +80,7 @@ public class ExportInterlis
   }
   public static void writeXmi() {
 		FileChooser saveDialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
-		saveDialog.setDialogTitle("xmi export ...");
+		saveDialog.setDialogTitle("XMI export ...");
 		saveDialog.setFileFilter(createXmiFilter());
 		
 		if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
@@ -183,7 +183,7 @@ public class ExportInterlis
 	 * @return specific File-Filter
 	 */
 	public static GenericFileFilter createXmiFilter() {
-		return new GenericFileFilter("Xmi format (*.xmi)", "xmi");
+		return new GenericFileFilter("XMI format (*.xmi)", "xmi");
 	}
 }
 
