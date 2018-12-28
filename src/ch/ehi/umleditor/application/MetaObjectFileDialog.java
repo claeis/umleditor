@@ -97,7 +97,7 @@ public MetaObjectFileDialog(java.awt.Frame owner, ch.ehi.uml1_4.foundation.core.
 private void btnFileSearch() {
 	FileChooser openDialog = new FileChooser(LauncherView.getInstance().getSettings().getWorkingDirectory());
 	openDialog.setDialogTitle(resMetaObjectFileDialog.getString("CTAssignFilename")); //$NON-NLS-1$
-	openDialog.addChoosableFileFilter(LauncherView.createXmlFilter());
+	openDialog.setFileFilter(LauncherView.createXmlFilter());
 
 	if (openDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 		try {

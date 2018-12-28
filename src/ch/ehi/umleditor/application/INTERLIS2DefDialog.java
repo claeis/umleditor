@@ -141,7 +141,7 @@ public void adaptUserAction(EventObject event, Object control) {
 private void btnFileSearch() {
 	FileChooser dialog = new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 	dialog.setDialogTitle(resINTERLIS2DefDialog.getString("CTAssignFilename")); //$NON-NLS-1$
-	dialog.addChoosableFileFilter(LauncherView.createInterlisModelFilter());
+	dialog.setFileFilter(LauncherView.createInterlisModelFilter());
 
 	if (dialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 		try {
