@@ -1,6 +1,17 @@
 UML-Editor 3.7.0 (2018-12-28) 
 ----------------------------------
+- navigation view: enable drag and drop
+- navigation view: new function to export a single ili file
+- AttributeDef UI: enable to edit EPSG code
+- DomainDef UI: enable to edit EPSG code
+- UI: set default filter in file selection dialogs
+- UI: enable ESCAPE key in dialogs
+- UI: enable search button
+- new function to export model as XMI file
+- new function to import a translation XML
+- new function to export a translation XML
 - ili2c-4.7.10
+- replace use of 'sun' packages
 
 UML-Editor 3.6.2 (2015-12-23) 
 ----------------------------------
