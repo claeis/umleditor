@@ -25,6 +25,7 @@ import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.umlpresentation.Diagram;
 
+import javax.swing.DropMode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.*;
 
@@ -83,6 +84,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel implements
 	private javax.swing.JRadioButtonMenuItem ivjMniSortbyKindName = null;
 	private javax.swing.JRadioButtonMenuItem ivjMniSortbyName = null;
 	private javax.swing.JMenu ivjMnuSort = null;
+	private javax.swing.JMenuItem ivjMniExportIli = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener, javax.swing.event.TreeSelectionListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -140,6 +142,8 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.M
 				connEtoC26(e);
 			if (e.getSource() == NavigationView.this.getMniSortbyKindName())
 				connEtoC27(e);
+			if (e.getSource() == NavigationView.this.getMniExportIli())
+				connEtoC30(e);
 		};
 		public void mouseClicked(java.awt.event.MouseEvent e) {};
 		public void mouseEntered(java.awt.event.MouseEvent e) {};
@@ -663,6 +667,33 @@ private void connEtoC29(java.awt.event.ActionEvent arg1) {
 		// user code end
 		handleException(ivjExc);
 	}
+}
+
+/**
+ * connEtoC31: (Mni.action.actionPerformed(java.awt.event.ActionEvent)
+ * 
+ * @param arg1
+ *            java.awt.event.ActionEvent
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private void connEtoC30(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		
+			INTERLIS2Def exportili = (INTERLIS2Def)getSelectedNode();
+			this.mniIliExport(exportili);
+		
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+	private void mniIliExport(INTERLIS2Def exportili) {
+	ch.ehi.umleditor.interlis.iliexport.ExportInterlis.writeIli(exportili);
 }
 /**
  * connEtoC3:  (MniRemoveNode.action.actionPerformed(java.awt.event.ActionEvent) --> NavTree.removeNode()V)
@@ -1359,6 +1390,29 @@ private javax.swing.JRadioButtonMenuItem getMniSortbyKindName() {
 	return ivjMniSortbyKindName;
 }
 /**
+ * Return the MniExportInterlisFile property value.
+ * 
+ * @return javax.swing.JMenuItem
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JMenuItem getMniExportIli() {
+	if (ivjMniExportIli == null) {
+		try {
+			ivjMniExportIli = new javax.swing.JMenuItem();
+			ivjMniExportIli.setName("MniExportIli");
+			ivjMniExportIli.setText("Export");
+			// user code begin {1}
+			ivjMniExportIli.setText(getResourceString("MniExportIli_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMniExportIli;
+}
+/**
  * Return the MniSortbyName property value.
  * @return javax.swing.JRadioButtonMenuItem
  */
@@ -1515,6 +1569,7 @@ private javax.swing.JPopupMenu getMnpTreeActions() {
 			ivjMnpTreeActions.add(getMniRename());
 			ivjMnpTreeActions.add(getJSeparator1());
 			ivjMnpTreeActions.add(getMniAddToDiagram());
+			ivjMnpTreeActions.add(getMniExportIli());
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1641,6 +1696,10 @@ private javax.swing.JTree getTreNavigation() {
 		try {
 			ivjTreNavigation = new AutoScrollingJTree();
 			ivjTreNavigation.setName("TreNavigation");
+			ivjTreNavigation.setDragEnabled(true);
+			ivjTreNavigation.setDropMode(DropMode.ON_OR_INSERT);
+			ivjTreNavigation.setTransferHandler(new TreeTransferHandler());
+			ivjTreNavigation.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
 			ivjTreNavigation.setVisibleRowCount(50);
 			ivjTreNavigation.setBounds(0, 0, 78, 72);
 			ivjTreNavigation.setEditable(true);
@@ -1697,6 +1756,7 @@ private void initConnections() throws java.lang.Exception {
 	getMniUmlPackage().addActionListener(ivjEventHandler);
 	getMniSortbyName().addActionListener(ivjEventHandler);
 	getMniSortbyKindName().addActionListener(ivjEventHandler);
+	getMniExportIli().addActionListener(ivjEventHandler);
 	getTreNavigation().addTreeSelectionListener(ivjEventHandler);
 	getTreNavigation().addMouseListener(ivjEventHandler);
 }

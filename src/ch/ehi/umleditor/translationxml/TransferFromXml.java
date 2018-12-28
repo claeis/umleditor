@@ -18,15 +18,15 @@ public class TransferFromXml {
      *            Model to be translated
      * @param xmlfile
      *            source File
-     * @return translated Model
      * @throws Exception
      *             exception
      */
     public void merge(Model model, File xmlfile) throws Exception {
 
         ModelElements translationElements = Ili2TranslationXml.readModelElementsXml(xmlfile);
+        ModelElementUtility modelElementUtility = new ModelElementUtility();
         for (TranslationElement translationElement : translationElements) {
-            ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model,
+            ModelElement modelElement = modelElementUtility.findIliModelElementByScopedName(model,
                     translationElement.getScopedName());
             if (modelElement != null) {
                 mergeTranslationElementToModelElement(modelElement, translationElement);

@@ -2553,6 +2553,9 @@ private void addSimpleEleCond(java.util.Set children,
 	 	runIli2c=true;
 		visitNamespace(ns,config,settings);
 	 }
+   public void writeIliFile(INTERLIS2Def ili) throws java.io.IOException {
+		visitINTERLIS2Def(ili);
+	}
 	public void writeIliFiles(Namespace ns)
 	  throws java.io.IOException
 	  {
