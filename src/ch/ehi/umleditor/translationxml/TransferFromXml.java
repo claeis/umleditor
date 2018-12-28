@@ -1,8 +1,12 @@
 package ch.ehi.umleditor.translationxml;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Map;
 
+import ch.ehi.basics.logging.EhiLogger;
+import ch.ehi.interlis.modeltopicclass.ModelDef;
+import ch.ehi.interlis.modeltopicclass.Translation;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.interlis.ili2c.generator.nls.Ili2TranslationXml;
@@ -10,7 +14,7 @@ import ch.interlis.ili2c.generator.nls.ModelElements;
 import ch.interlis.ili2c.generator.nls.TranslationElement;
 
 public class TransferFromXml {
-
+    
     /**
      * It translated the Model according to XML File.
      * 
@@ -30,6 +34,8 @@ public class TransferFromXml {
                     translationElement.getScopedName());
             if (modelElement != null) {
                 mergeTranslationElementToModelElement(modelElement, translationElement);
+            }else {
+                EhiLogger.logAdaption("Model element "+translationElement.getScopedName()+" not found");
             }
         }
 
@@ -45,51 +51,64 @@ public class TransferFromXml {
      */
     private void mergeTranslationElementToModelElement(ModelElement modelElement,
             TranslationElement translationElement) {
+        java.util.Set<String> seenLanguages=new java.util.HashSet<String>();
 
         // Set Name
         if (modelElement.getName() != null) {
             Map name = modelElement.getName().getAllValues();
 
-            if (translationElement.getName_de() != null) {
-                if (!translationElement.getName_de().isEmpty()
-                        && (translationElement.getName_de() != null && translationElement.getName_de() != "")) {
-                    if (!translationElement.getName_de().equals(name.get(Ili2TranslationXml.DE))) {
-                        modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
-                                Ili2TranslationXml.DE, translationElement.getName_de()));
-                    }
+            if (translationElement.getName_de() != null && !translationElement.getName_de().isEmpty()) {
+                if (!translationElement.getName_de().equals(name.get(Ili2TranslationXml.DE))) {
+                    modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
+                            Ili2TranslationXml.DE, translationElement.getName_de()));
+                    seenLanguages.add(Ili2TranslationXml.DE);
                 }
             }
 
-            if (translationElement.getName_en() != null) {
-                if (!translationElement.getName_en().isEmpty()
-                        && (translationElement.getName_en() != null && translationElement.getName_en() != "")) {
-                    if (!translationElement.getName_en().equals(name.get(Ili2TranslationXml.EN))) {
-                        modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
-                                Ili2TranslationXml.EN, translationElement.getName_en()));
-
-                    }
+            if (translationElement.getName_en() != null && !translationElement.getName_en().isEmpty()) {
+                if (!translationElement.getName_en().equals(name.get(Ili2TranslationXml.EN))) {
+                    modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
+                            Ili2TranslationXml.EN, translationElement.getName_en()));
+                    seenLanguages.add(Ili2TranslationXml.EN);
                 }
             }
 
-            if (translationElement.getName_fr() != null) {
-                if (!translationElement.getName_fr().isEmpty()
-                        && (translationElement.getName_fr() != null && translationElement.getName_fr() != "")) {
-                    if (!translationElement.getName_fr().equals(name.get(Ili2TranslationXml.FR))) {
-                        modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
-                                Ili2TranslationXml.FR, translationElement.getName_fr()));
-                    }
+            if (translationElement.getName_fr() != null && !translationElement.getName_fr().isEmpty()) {
+                if (!translationElement.getName_fr().equals(name.get(Ili2TranslationXml.FR))) {
+                    modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
+                            Ili2TranslationXml.FR, translationElement.getName_fr()));
+                    seenLanguages.add(Ili2TranslationXml.FR);
                 }
             }
 
-            if (translationElement.getName_it() != null) {
-                if (!translationElement.getName_it().isEmpty()
-                        && (translationElement.getName_it() != null && translationElement.getName_it() != "")) {
-                    if (!translationElement.getName_it().equals(name.get(Ili2TranslationXml.IT))) {
-                        modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
-                                Ili2TranslationXml.IT, translationElement.getName_it()));
-                    }
+            if (translationElement.getName_it() != null && !translationElement.getName_it().isEmpty()) {
+                if (!translationElement.getName_it().equals(name.get(Ili2TranslationXml.IT))) {
+                    modelElement.setName(new ch.ehi.basics.types.NlsString(modelElement.getName(),
+                            Ili2TranslationXml.IT, translationElement.getName_it()));
+                    seenLanguages.add(Ili2TranslationXml.IT);
                 }
             }
+            if(modelElement instanceof ModelDef && seenLanguages.size()>0) {
+                ModelDef model=(ModelDef)modelElement;
+                String baseLang=model.getBaseLanguage();
+                
+                // remove existing defined language translations from set of new languages
+                seenLanguages.remove(baseLang);
+                Iterator<Translation> langIt=model.iteratorTranslation();
+                while(langIt.hasNext()) {
+                    Translation lang=langIt.next();
+                    seenLanguages.remove(lang.getLanguage());
+                }
+                
+                // add new seen languages as translations
+                for(String lang:seenLanguages) {
+                    Translation trans=new Translation();
+                    trans.setBaseLanguage(baseLang);
+                    trans.setLanguage(lang);
+                    model.addTranslation(trans);
+                }
+            }
+            
         }
 
         // Set Documentation
