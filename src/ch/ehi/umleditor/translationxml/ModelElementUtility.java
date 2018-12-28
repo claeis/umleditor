@@ -1,12 +1,12 @@
 package ch.ehi.umleditor.translationxml;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import ch.ehi.interlis.associations.AssociationDef;
 import ch.ehi.interlis.associations.RoleDef;
 import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.attributes.DomainAttribute;
+import ch.ehi.interlis.constraints.ConstraintDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.Type;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
@@ -17,71 +17,55 @@ import ch.ehi.interlis.modeltopicclass.ClassDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
+import ch.ehi.uml1_4.foundation.core.Association;
+import ch.ehi.uml1_4.foundation.core.Classifier;
 import ch.ehi.uml1_4.foundation.core.Constraint;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
-import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.uml1_4.modelmanagement.Model;
-import ch.interlis.ili2c.generator.nls.TranslationElement;
 
 public class ModelElementUtility {
+
+    private java.util.Map<String, ModelElement> scopedName2element = null;
 
     /**
      * it gets all Enumeration and SubEnumeration data and insert into Structure
      * with language
      * 
-     * @param ScopedNamePrefix
-     *            Scope Name
-     * @param baselanguage
-     *            Base Language
-     * @param languages
-     *            Valid Second languages
+     * @param scopedNamePrefix
+     *            scope Name
      * @param enumeration
      *            Related Enumeration Elements
      */
-    private static ModelElement findElementInEnumeration(String scopedNamePrefix, String baselanguage,
-            Enumeration enumeration, String scopedNameToFind) {
+    private void visitEnumerationElement(String scopedNamePrefix, Enumeration enumeration, String baseLanguage) {
         Iterator<EnumElement> enumEle = enumeration.iteratorEnumElement();
         while (enumEle.hasNext()) {
             EnumElement enumElement = (EnumElement) enumEle.next();
-            ModelElement ele = findIliModelElement_Helper(enumElement, scopedNamePrefix, baselanguage,
-                    scopedNameToFind);
-            if (ele != null) {
-                return ele;
-            }
-            if (enumElement.containsChild()) {
-                String scopedName = scopedNamePrefix + "." + enumElement.getName().getValue(baselanguage);
-                ModelElement modelElement = findElementInEnumeration(scopedName, baselanguage, enumElement.getChild(),
-                        scopedNameToFind);
-                if (modelElement != null) {
-                    return modelElement;
-                }
-            }
+            String scopedName = scopedNamePrefix + "." + enumElement.getName().getValue(baseLanguage);
+            scopedName2element.put(scopedName, enumElement);
 
+            if (enumElement.containsChild()) {
+                visitEnumerationElement(scopedName, enumElement.getChild(), baseLanguage);
+            }
         }
-        return null;
     }
 
     /**
-     * It search the Model Element scope name and Scope Name of XML Element. if
-     * find, then returns back with related Model Element
+     * It search the Model Element scope name and Scope Name of XML Element if find,
+     * then returns back with related Model Element
      * 
      * @param modelElement
      *            given Model Element
-     * @param scopedNamePrefix
-     *            Scope Name
-     * @param baseLanguage
-     *            Base Language in Model
-     * @param scopedNameToFind
-     *            Expected Scope Name
-     * @return Modified model Element
      */
-    private static ModelElement findIliModelElement_Helper(ModelElement modelElement, String scopedNamePrefix,
-            String baseLanguage, String scopedNameToFind) {
-        scopedNamePrefix = ModelElementUtility.getScopedName(scopedNamePrefix, modelElement, baseLanguage);
-
-        if (scopedNameToFind.equals(scopedNamePrefix)) {
-            return modelElement;
+    private void visitModelElement(ModelElement modelElement) {
+        if ((modelElement instanceof INTERLIS2Def) && isInternal((INTERLIS2Def) modelElement)) {
+            return;
+        }
+        String scopedName = null;
+        scopedName = getScopedName(modelElement);
+        if (scopedName != null) {
+            scopedName2element.put(scopedName, modelElement);
         }
 
         // visit children
@@ -90,23 +74,17 @@ public class ModelElementUtility {
             while (childi.hasNext()) {
                 Object object = childi.next();
                 if (object instanceof AttributeDef) {
-                    ModelElement modelEle = findIliModelElement_Helper((ModelElement) object, scopedNamePrefix,
-                            baseLanguage, scopedNameToFind);
-                    if (modelEle != null) {
-                        return modelEle;
-                    }
+                    AttributeDef attrDef = (AttributeDef) object;
+                    visitModelElement(attrDef);
                 }
             }
-            
+
             if (modelElement instanceof ClassDef) {
-                ClassDef classDef = (ClassDef)modelElement;
+                ClassDef classDef = (ClassDef) modelElement;
                 Iterator iterator = classDef.iteratorParameterDef();
                 while (iterator.hasNext()) {
                     ParameterDef next = (ParameterDef) iterator.next();
-                    ModelElement modelEle = findIliModelElement_Helper((ModelElement) next, scopedNamePrefix, baseLanguage, scopedNameToFind);
-                    if (modelEle != null) {
-                        return modelEle;
-                    }
+                    visitModelElement((ModelElement) next);
                 }
             }
 
@@ -114,22 +92,20 @@ public class ModelElementUtility {
                 Iterator assoDefI = ((AssociationDef) modelElement).iteratorConnection();
                 while (assoDefI.hasNext()) {
                     RoleDef roleDef = (RoleDef) assoDefI.next();
-                    ModelElement modelEle = findIliModelElement_Helper(roleDef, scopedNamePrefix, baseLanguage,
-                            scopedNameToFind);
-                    if (modelEle != null) {
-                        return modelEle;
-                    }
+                    visitModelElement(roleDef);
                 }
             }
 
             Iterator contstraintI = modelElement.iteratorConstraint();
+            int idx = 1;
             while (contstraintI.hasNext()) {
                 Constraint constraint = (Constraint) contstraintI.next();
-                ModelElement modelEle = findIliModelElement_Helper(constraint, scopedNamePrefix, baseLanguage,
-                        scopedNameToFind);
-                if (modelEle != null) {
-                    return modelEle;
+                String name = constraint.getDefLangName();
+                if (name == null) {
+                    constraint.setDefLangName("Constraint" + idx);
+                    idx++;
                 }
+                visitModelElement(constraint);
             }
 
         } else if (modelElement instanceof Namespace) {
@@ -138,11 +114,7 @@ public class ModelElementUtility {
 
             while (i.hasNext()) {
                 ModelElement modelDef = (ModelElement) i.next();
-                ModelElement modelEle = findIliModelElement_Helper(modelDef, scopedNamePrefix, baseLanguage,
-                        scopedNameToFind);
-                if (modelEle != null) {
-                    return modelEle;
-                }
+                visitModelElement(modelDef);
             }
 
             if (modelElement instanceof DomainDef) {
@@ -150,14 +122,10 @@ public class ModelElementUtility {
                 if (domain.containsType()) {
                     Type type = (Type) domain.getType();
                     if (type instanceof Enumeration) {
+                        String scopedNamePrefix = getScopedName(domain).toString();
                         Enumeration enumeration = (Enumeration) type;
-                        ModelElement ele = findElementInEnumeration(scopedNamePrefix, baseLanguage, enumeration,
-                                scopedNameToFind);
-                        if (ele != null) {
-                            return ele;
-                        }
+                        visitEnumerationElement(scopedNamePrefix, enumeration, getBaseLanguage(domain));
                     }
-
                 }
             }
 
@@ -167,17 +135,13 @@ public class ModelElementUtility {
                 DomainAttribute attrType = (DomainAttribute) def.getAttrType();
                 if (attrType.containsDirect()) {
                     if (attrType.getDirect() instanceof Enumeration) {
+                        String scopedNamePrefix = getScopedName(def).toString();
                         Enumeration enumeration = (Enumeration) attrType.getDirect();
-                        ModelElement ele = findElementInEnumeration(scopedNamePrefix, baseLanguage, enumeration,
-                                scopedNameToFind);
-                        if (ele != null) {
-                            return ele;
-                        }
+                        visitEnumerationElement(scopedNamePrefix, enumeration, getBaseLanguage(def.getOwner()));
                     }
                 }
             }
         }
-        return null;
     }
 
     /**
@@ -189,45 +153,17 @@ public class ModelElementUtility {
      *            Expected Scope Name
      * @return it returns related Model Element via scope Name
      */
-    public static ModelElement findIliModelElementByScopedName(Model model, String scopedName) {
-        Iterator modelI = model.iteratorOwnedElement();
-        while (modelI.hasNext()) {
-            Object obj = modelI.next();
-            if (obj instanceof INTERLIS2Def) {
-                return modelElementHelper(obj, scopedName);
-            } else {
-                Iterator i = ch.ehi.interlis.tools.ModelElementUtility.getChildElements((Namespace) obj, null)
-                        .iterator();
 
-                while (i.hasNext()) {
-                    Object objnew = i.next();
-                    ModelElement modelElementHelper = modelElementHelper(objnew, scopedName);
-                    if (modelElementHelper != null) {
-                        return modelElementHelper;
-                    }
-                }
-            }
+    public ModelElement findIliModelElementByScopedName(Model model, String scopedName) {
+        if (scopedName2element == null) {
+            scopedName2element = new java.util.HashMap<String, ModelElement>();
+            setupMapping(model);
         }
-        return null;
+        return scopedName2element.get(scopedName);
     }
 
-    private static ModelElement modelElementHelper(Object obj, String scopedName) {
-        if (!ModelElementUtility.isInternal((INTERLIS2Def) obj)) {
-            if (obj instanceof INTERLIS2Def) {
-                String baselanguage = ModelElementUtility.findTheBaseLanguages((INTERLIS2Def) obj);
-                Iterator i = ch.ehi.interlis.tools.ModelElementUtility.getChildElements((Namespace) obj, null)
-                        .iterator();
-
-                while (i.hasNext()) {
-                    ModelElement modelElement = (ModelElement) i.next();
-                    modelElement = findIliModelElement_Helper(modelElement, null, baselanguage, scopedName);
-                    if (modelElement != null) {
-                        return modelElement;
-                    }
-                }
-            }
-        }
-        return null;
+    private void setupMapping(Model model) {
+        visitModelElement(model);
     }
 
     /**
@@ -236,41 +172,74 @@ public class ModelElementUtility {
      * @param modelDef
      * @return it returns back the base Language from Model
      */
-    public static String findTheBaseLanguages(INTERLIS2Def modelDef) {
-        java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getChildElements(modelDef, ModelDef.class);
-        java.util.Iterator iterator = set.iterator();
+    private String getBaseLanguage(ModelElement modelElement) {
+        return getModelDef(modelElement).getBaseLanguage();
+    }
 
-        String baseLanguage = "";
-        while (iterator.hasNext()) {
-            ModelDef modelDefLangu = (ModelDef) iterator.next();
-            if (modelDefLangu.getBaseLanguage() != null) {
-                baseLanguage = modelDefLangu.getBaseLanguage();
-            }
+    private ModelDef getModelDef(ModelElement modelElement) {
+        while (!(modelElement instanceof ModelDef)) {
+            modelElement = modelElement.getNamespace();
         }
-        return baseLanguage;
+        return (ModelDef) modelElement;
     }
 
     /**
      * it concatenates the Scope Name of the given Model Element as a parameter.
      * 
-     * @param scopedNamePrefix
-     *            Full Scope Name
      * @param modelElement
      *            parameter to be concatenated Element
-     * @param language
-     *            it gets Related Element Name as parameter language
      * @return concatenated Scope Name
      */
-    private static String getScopedName(String scopedNamePrefix, ModelElement modelElement, String language) {
-        if (modelElement.getName() != null) {
-            if (scopedNamePrefix == null) {
-                scopedNamePrefix = modelElement.getName().getValue(language);
+    private String getScopedName(ModelElement modelElement) {
+
+        java.util.ArrayList<ModelElement> path = new java.util.ArrayList<ModelElement>();
+
+        String baseLanguage = null;
+        while (!(modelElement instanceof ModelDef)) {
+            path.add(0, modelElement);
+            if (modelElement instanceof RoleDef) {
+                RoleDef roleDef = (RoleDef) modelElement;
+                Association association = roleDef.getAssociation();
+                modelElement = association;
+            } else if (modelElement instanceof AttributeDef) {
+                AttributeDef attrDef = (AttributeDef) modelElement;
+                Classifier owner = attrDef.getOwner();
+                modelElement = owner;
+            } else if (modelElement instanceof ParameterDef) {
+                ClassDef classDef = ((ParameterDef) modelElement).getClassDef();
+                modelElement = classDef;
+            } else if (modelElement instanceof ConstraintDef) {
+                if (((ConstraintDef) modelElement).sizeConstrainedElement() != 1) {
+                    throw new IllegalStateException("no owner of constraint");
+                }
+                Iterator constrainedElement = ((ConstraintDef) modelElement).iteratorConstrainedElement();
+                modelElement = (ModelElement) constrainedElement.next();
             } else {
-                scopedNamePrefix += "." + modelElement.getName().getValue(language);
+                if (!modelElement.containsNamespace()) {
+                    break;
+                }
+                modelElement = modelElement.getNamespace();
             }
-            return scopedNamePrefix;
         }
-        return null;
+        if (modelElement instanceof ModelDef) {
+            baseLanguage = getBaseLanguage((ModelDef) modelElement);
+        } else {
+            return null;
+        }
+        path.add(0, modelElement);
+        // 2. aus dem Pfad der ModelElement den scopedName bestimmen
+        StringBuilder scopedName = new StringBuilder();
+        String sep = "";
+        for (ModelElement ele : path) {
+            if (ele instanceof UmlPackage) {
+                ; // skip it
+            } else {
+                scopedName.append(sep);
+                scopedName.append(ele.getName().getValue(baseLanguage));
+                sep = ".";
+            }
+        }
+        return scopedName.toString();
     }
 
     /**
@@ -285,5 +254,4 @@ public class ModelElementUtility {
         }
         return false;
     }
-
 }

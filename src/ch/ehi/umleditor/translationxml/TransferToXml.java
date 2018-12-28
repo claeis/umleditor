@@ -67,6 +67,7 @@ public class TransferToXml {
                 }
             }
         }
+        modelElement.sort();
         Ili2TranslationXml.writeModelElementsAsXML(modelElement, xmlfile);
         return modelElement;
     }
@@ -214,8 +215,6 @@ public class TransferToXml {
     }
 
     private void printMetaValues(Iterator iteratorTaggedValue, String scopedNamePrefix, Set languages) {
-
-        TranslationElement metaValue = new TranslationElement();
         TaggedValue umlTag = null;
 
         while (iteratorTaggedValue.hasNext()) {
@@ -226,7 +225,8 @@ public class TransferToXml {
             if (name.contains(":")) {
                 String[] split = name.split(":");
                 String scopedName = scopedNamePrefix + ".METAOBJECT." + split[1];
-
+                
+                TranslationElement metaValue = new TranslationElement();
                 java.util.Iterator languagei = languages.iterator();
                 while (languagei.hasNext() && name != null) {
                     String language = (String) languagei.next();
