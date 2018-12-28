@@ -10,7 +10,7 @@ UML-Editor 3.7.0 (2018-12-28)
 - new function to export model as XMI file
 - new function to import a translation XML
 - new function to export a translation XML
-- ili2c-4.7.10
+- ili2c-4.7.11
 - replace use of 'sun' packages
 
 UML-Editor 3.6.2 (2015-12-23) 
