@@ -51,7 +51,7 @@ sourceSets {
             srcDirs = ["src"]
         }
         resources {
-            srcDirs = ["src", "resources/de", "resources/fr", "resources/it"]
+            srcDirs = ["src", "resources/de", "resources/fr", "resources/it", "resources/es"]
             include "**/*.properties"
     		include "**/*.gif"
     		include "**/*.jpg"
