@@ -111,7 +111,7 @@ public class ObjectCatalog
 	GenericFileFilter emfFilter=new GenericFileFilter("Windows Meta File Format (*.wmf)","wmf");
 	saveDialog.addChoosableFileFilter(jpegFilter);
 	saveDialog.addChoosableFileFilter(svgFilter);
-	saveDialog.addChoosableFileFilter(emfFilter);
+	saveDialog.setFileFilter(emfFilter);
         saveDialog.setSelectedFile(new File(diagName));
 	if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 		LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());
@@ -160,7 +160,7 @@ public class ObjectCatalog
 			}
 		FileChooser saveDialog =  new FileChooser(LauncherView.getSettings().getWorkingDirectory());
 		saveDialog.setDialogTitle(rsrc.getString("CTobjcatFileSelector"));
-		saveDialog.addChoosableFileFilter(GenericFileFilter.createHtmlFilter());
+		saveDialog.setFileFilter(GenericFileFilter.createHtmlFilter());
 
 		if (saveDialog.showSaveDialog(LauncherView.getInstance()) == FileChooser.APPROVE_OPTION) {
 			LauncherView.getSettings().setWorkingDirectory(saveDialog.getCurrentDirectory().getAbsolutePath());

@@ -33,7 +33,8 @@ public class TransferFromXmlTest {
 		fromXml.merge(model, translationXmlFile);
 
 		String scopedName = "EnumOkA";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElementUtility elementUtility = new ModelElementUtility();
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -56,8 +57,9 @@ public class TransferFromXmlTest {
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
 
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -77,9 +79,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.m3secA";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -101,8 +104,9 @@ public class TransferFromXmlTest {
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
 
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.FunctionA";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -123,9 +127,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.LineFormA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -145,9 +150,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.BCoordSysA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -167,9 +173,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA.SymbolA.PosA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -189,9 +196,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA.ClassA.UniqueConstraintA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -211,9 +219,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA.ClassA.Constraint1";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -233,9 +242,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.TopicA.roleA1roleA2";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -256,9 +266,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA.roleA1roleA2.roleA1";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -278,9 +289,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.Coord2";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -301,9 +313,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.TopicA.ClassA.attrA.a2.a21";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -323,9 +336,10 @@ public class TransferFromXmlTest {
         // Read/Merge Translations from XML
         TransferFromXml fromXml = new TransferFromXml();
         fromXml.merge(model, translationXmlFile);
-
+        
+        ModelElementUtility elementUtility = new ModelElementUtility();
         String scopedName = "EnumOkA.GrafikA";
-        ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+        ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
         assertNotNull(modelElement);
         Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -345,9 +359,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.TopicA.Dokument";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -367,9 +382,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.Klothoide.a";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -390,9 +406,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.TopicA.ClassA_V";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();
@@ -412,9 +429,10 @@ public class TransferFromXmlTest {
 		// Read/Merge Translations from XML
 		TransferFromXml fromXml = new TransferFromXml();
 		fromXml.merge(model, translationXmlFile);
-
+		
+		ModelElementUtility elementUtility = new ModelElementUtility();
 		String scopedName = "EnumOkA.Klothoide";
-		ModelElement modelElement = ModelElementUtility.findIliModelElementByScopedName(model, scopedName);
+		ModelElement modelElement = elementUtility.findIliModelElementByScopedName(model, scopedName);
 
 		assertNotNull(modelElement);
 		Map<String, String> allNameValues = modelElement.getName().getAllValues();

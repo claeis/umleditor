@@ -1,5 +1,5 @@
 group 'ch.interlis'
-version '3.6.3'+System.getProperty('release','-SNAPSHOT')
+version '3.7.1'+System.getProperty('release','-SNAPSHOT')
 
 apply plugin: "java"
 apply plugin: "maven"
@@ -72,7 +72,7 @@ dependencies {
     implementation name:  'sebase'
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
-    implementation 'ch.interlis:ili2c-tool:4.7.9'
+    implementation 'ch.interlis:ili2c-tool:4.7.11'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
     }
@@ -115,6 +115,7 @@ jar {
 task run(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 	main = "ch.ehi.umleditor.application.LauncherView"
+	args "-debug"
 }
 
 task bindist(type: Zip){

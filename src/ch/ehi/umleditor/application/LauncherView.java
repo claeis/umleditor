@@ -2626,7 +2626,7 @@ private javax.swing.JMenu getMnuXMI_Rose() {
 		try {
 			ivjMnuXMI_Rose = new javax.swing.JMenu();
 			ivjMnuXMI_Rose.setName("MnuXMI_Rose");
-			ivjMnuXMI_Rose.setText("XMI/Rose");
+			ivjMnuXMI_Rose.setText("XMI");
 			ivjMnuXMI_Rose.add(getMniImportXmiRose());
 			ivjMnuXMI_Rose.add(getMniExportXmi());
 			// user code begin {1}
@@ -2652,7 +2652,7 @@ private javax.swing.JMenuItem getMniExportXmi() {
 			ivjMniExportXmi = new javax.swing.JMenuItem();
 			ivjMniExportXmi.setName("MniExportXmi");
 			ivjMniExportXmi.setToolTipText("Export xmi");
-			ivjMniExportXmi.setText("Export...");
+			ivjMniExportXmi.setText("Export XMI...");
 			// user code begin {1}
 			ivjMniExportXmi.setToolTipText(getResourceString("MniExportXmi_toolTipText"));
 			ivjMniExportXmi.setText(getResourceString("MniExportXmi_text"));

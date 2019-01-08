@@ -178,7 +178,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
   	Object node = path.getLastPathComponent();
   	if(isINTERLIS2Def(node)) {
 		ch.ehi.interlis.modeltopicclass.INTERLIS2Def obj = (ch.ehi.interlis.modeltopicclass.INTERLIS2Def) node;
-		if(obj.getName().getValue().endsWith(".ili")) {
+		if(((String)newValue).endsWith(".ili")) {
 			NavigationTreeNodeUtility.setName(node,(String)newValue);
 		}else {
 			NavigationTreeNodeUtility.setName(node,(String)newValue+".ili");
