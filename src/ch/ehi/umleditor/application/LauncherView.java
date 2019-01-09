@@ -3319,6 +3319,7 @@ public static void main(java.lang.String[] args) {
 		// initialize language of model-element-names to the language of the user interface
 		ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 
+		Locale.setDefault(new Locale(getSettings().getLanguage()));
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
 
 		instance = new LauncherView();
