@@ -18,17 +18,22 @@ package ch.ehi.umleditor.application;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 import java.util.EventObject;
-
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.attributes.*;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.softenvironment.view.*;
 import ch.softenvironment.util.*;
 /**
@@ -45,8 +50,13 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
         // generated
 	private javax.swing.JPanel ivjBaseDialogContentPane = null;
 	IvjEventHandler ivjEventHandler = new IvjEventHandler();
+	EditorTableMetaAttribute objTableMetaAttribute = new EditorTableMetaAttribute();
+	ForcedListSelectionModel objSelectionMetaAttribute = new ForcedListSelectionModel();
 	private javax.swing.JButton ivjBtnCancel = null;
 	private javax.swing.JButton ivjBtnOk = null;
+	private javax.swing.JButton ivjBtnAddMetaAttribute = null;
+	private javax.swing.JButton ivjBtnDeleteMetaAttribute = null;
+	private javax.swing.JButton ivjBtnSaveMetaAttribute = null;
 	private javax.swing.JTabbedPane ivjTbpGeneral = null;
 	private javax.swing.JLabel ivjLblName = null;
 	private javax.swing.JTextField ivjTxtName = null;
@@ -57,12 +67,17 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlParameters = null;
 	private javax.swing.JScrollPane ivjScpAttributes = null;
+	private javax.swing.JScrollPane ivjScpMetaAttributes = null;
 	private TableColumn ivjTbcAttributeName = null;
 	private TableColumn ivjTbcAttributeType = null;
+	private TableColumn ivjTbcMetaAttributeName = null;
+	private TableColumn ivjTbcMetaAttributeValue = null;
 	private javax.swing.JTable ivjTblAttributes = null;
+	private javax.swing.JTable ivjTblMetaAttributes = null;
 	private javax.swing.DefaultListSelectionModel ivjLocalColumnModelDefaultListSelectionModel = null;
 	private javax.swing.JPanel ivjPnlAttributes = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
+	private javax.swing.JPanel ivjPnlMetaAttributes = null;
 	private javax.swing.JMenuItem ivjMniNewAttribute = null;
 	private javax.swing.JMenuItem ivjMniRemoveAttribute = null;
 	private javax.swing.JSeparator ivjJSeparator1 = null;
@@ -73,6 +88,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JRadioButton ivjRbtClass = null;
 	private javax.swing.JRadioButton ivjRbtStructure = null;
 	private javax.swing.JPanel ivjPnlClassKind = null;
+	private TaggedValue ivjTaggedValue = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -84,6 +100,12 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 				connEtoC3(e);
 			if (e.getSource() == ClassDefDialog.this.getMniNewAttribute())
 				connEtoC5(e);
+			if (e.getSource() == ClassDefDialog.this.getMniRemoveAttribute())
+				connEtoC6(e);
+			if (e.getSource() == ClassDefDialog.this.getBtnDeleteMetaAttribuite())
+				connEtoC14(e);
+			if (e.getSource() == ClassDefDialog.this.getBtnSaveMetaAttribuite())
+				connEtoC15(e);
 			if (e.getSource() == ClassDefDialog.this.getMniRemoveAttribute())
 				connEtoC6(e);
 			if (e.getSource() == ClassDefDialog.this.getMniOpenAttributeSpecication())
@@ -110,6 +132,23 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 				connEtoC8(e);
 		};
 	};
+	
+public class ForcedListSelectionModel extends DefaultListSelectionModel {
+
+	private static final long serialVersionUID = 7845540618701507798L;
+
+	public ForcedListSelectionModel() {
+		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+
+	@Override
+	public void clearSelection() {
+	}
+
+	@Override
+	public void removeSelectionInterval(int index0, int index1) {
+	}
+}
 /**
  * Constructor
  */
@@ -281,6 +320,32 @@ private void connEtoC6(java.awt.event.ActionEvent arg1) {
 		// user code begin {1}
 		// user code end
 		this.mniRemoveAttribute();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+private void connEtoC14(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniRemoveMetaAttribute();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+private void connEtoC15(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniSaveMetaAttribute();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -864,6 +929,186 @@ private javax.swing.JPanel getPnlDetail() {
 	return ivjPnlDetail;
 }
 /**
+ * Return the JPanel MetaAttributes property value.
+ * 
+ * @return javax.swing.JPanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private javax.swing.JPanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new javax.swing.JPanel();
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+			ivjPnlMetaAttributes.setLayout(new java.awt.GridBagLayout());
+
+			java.awt.GridBagConstraints constraintsScpMetaAttributes = new java.awt.GridBagConstraints();
+			constraintsScpMetaAttributes.gridx = 1;
+			constraintsScpMetaAttributes.gridy = 1;
+			constraintsScpMetaAttributes.fill = java.awt.GridBagConstraints.BOTH;
+			constraintsScpMetaAttributes.weightx = 1.0;
+			constraintsScpMetaAttributes.weighty = 1.0;
+			constraintsScpMetaAttributes.ipadx = 356;
+			constraintsScpMetaAttributes.ipady = 95;
+			constraintsScpMetaAttributes.insets = new java.awt.Insets(7, 11, 6, 7);
+			getPnlMetaAttributes().add(getScpMetaAttributes(), constraintsScpMetaAttributes);
+
+			java.awt.GridBagConstraints constraintsBtnSave = new java.awt.GridBagConstraints();
+			constraintsBtnSave.gridx = 1;
+			constraintsBtnSave.gridy = 2;
+			constraintsBtnSave.ipadx = 21;
+			constraintsBtnSave.insets = new java.awt.Insets(6, 150, 12, 80);
+			getPnlMetaAttributes().add(getBtnSaveMetaAttribuite(), constraintsBtnSave);
+
+			java.awt.GridBagConstraints constraintsBtnAdd = new java.awt.GridBagConstraints();
+			constraintsBtnAdd.gridx = 1;
+			constraintsBtnAdd.gridy = 2;
+			constraintsBtnAdd.ipadx = 18;
+			constraintsBtnAdd.insets = new java.awt.Insets(6, 300, 12, 60);
+			getPnlMetaAttributes().add(getBtnAddMetaAttribuite(), constraintsBtnAdd);
+			java.awt.GridBagConstraints constraintsBtnDel = new java.awt.GridBagConstraints();
+			constraintsBtnDel.gridx = 1;
+			constraintsBtnDel.gridy = 2;
+			constraintsBtnDel.ipadx = 15;
+			constraintsBtnDel.insets = new java.awt.Insets(6, 450, 12, 40);
+			getPnlMetaAttributes().add(getBtnDeleteMetaAttribuite(), constraintsBtnDel);
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+private javax.swing.JScrollPane getScpMetaAttributes() {
+	if (ivjScpMetaAttributes == null) {
+		try {
+			ivjScpMetaAttributes = new javax.swing.JScrollPane();
+			ivjScpMetaAttributes.setName("ScpMetaAttributes");
+			ivjScpMetaAttributes.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			ivjScpMetaAttributes
+					.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			getScpMetaAttributes().setViewportView(getTblMetaAttributes());
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjScpMetaAttributes;
+}
+private javax.swing.table.TableColumn getTbcMetaAttributeName() {
+	if (ivjTbcMetaAttributeName == null) {
+		try {
+			ivjTbcMetaAttributeName = new javax.swing.table.TableColumn();
+			ivjTbcMetaAttributeName.setHeaderValue(resClassDefDialog.getString("LblColMetaAttrKey_text"));
+			// user code begin {1}
+			// ivjTbcMetaAttributeName.setHeaderValue(resClassDefDialog.getString("TbcMetaAttributeName_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTbcMetaAttributeName;
+}
+
+private javax.swing.JButton getBtnSaveMetaAttribuite() {
+	if (ivjBtnSaveMetaAttribute == null) {
+		try {
+			ivjBtnSaveMetaAttribute = new javax.swing.JButton();
+			ivjBtnSaveMetaAttribute.setName("BtnSavMetaAttribute");
+			ivjBtnSaveMetaAttribute.setText("Save");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjBtnSaveMetaAttribute;
+}
+private javax.swing.JButton getBtnAddMetaAttribuite() {
+	if (ivjBtnAddMetaAttribute == null) {
+		try {
+			ivjBtnAddMetaAttribute = new javax.swing.JButton();
+			ivjBtnAddMetaAttribute.setName("BtnAddMetaAttribute");
+			ivjBtnAddMetaAttribute.setText("Add");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjBtnAddMetaAttribute;
+}
+private javax.swing.JButton getBtnDeleteMetaAttribuite() {
+	if (ivjBtnDeleteMetaAttribute == null) {
+		try {
+			ivjBtnDeleteMetaAttribute = new javax.swing.JButton();
+			ivjBtnDeleteMetaAttribute.setName("BtnDelMetaAttribute");
+			ivjBtnDeleteMetaAttribute.setText("Delete");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjBtnDeleteMetaAttribute;
+}
+private javax.swing.table.TableColumn getTbcMetaAttributeValue() {
+	if (ivjTbcMetaAttributeValue == null) {
+		try {
+			ivjTbcMetaAttributeValue = new javax.swing.table.TableColumn();
+			ivjTbcMetaAttributeValue.setHeaderValue(resClassDefDialog.getString("LblColMetaAttrValue_text"));
+			// user code begin {1}
+			// ivjTbcMetaAttributeValue.setHeaderValue(resClassDefDialog.getString("TbcAttribueValue_text"));
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTbcMetaAttributeValue;
+}
+private javax.swing.JTable getTblMetaAttributes() {
+	if (ivjTblMetaAttributes == null) {
+		try {
+			javax.swing.table.DefaultTableColumnModel ivjLocalColumnModel;
+			ivjLocalColumnModel = new javax.swing.table.DefaultTableColumnModel();
+			ivjLocalColumnModel.setSelectionModel(getLocalColumnModelDefaultListSelectionModel());
+			ivjTblMetaAttributes = new javax.swing.JTable();
+			ivjTblMetaAttributes.setName("TblMetaAttributes");
+			getScpMetaAttributes().setColumnHeaderView(ivjTblMetaAttributes.getTableHeader());
+			getScpMetaAttributes().getViewport().setBackingStoreEnabled(true);
+			ivjTblMetaAttributes.setCellSelectionEnabled(false);
+			ivjTblMetaAttributes.setColumnModel(ivjLocalColumnModel);
+			ivjTblMetaAttributes.setBounds(0, 0, 200, 200);
+			ivjTblMetaAttributes.setRowSelectionAllowed(true);
+			ivjTblMetaAttributes.setEnabled(true);
+			ivjTblMetaAttributes.setModel(objTableMetaAttribute.getTableModel());
+			objTableMetaAttribute.addCol(getTbcMetaAttributeName().getHeaderValue(),
+					getTbcMetaAttributeValue().getHeaderValue());
+			ivjTblMetaAttributes.setSelectionModel(objSelectionMetaAttribute);
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjTblMetaAttributes;
+}
+/**
  * Return the PnlExtended property value.
  * @return ch.ehi.umleditor.application.ExtendedPanel
  */
@@ -1059,9 +1304,10 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getDetailString(), null, getPnlDetail(), null, 1);
-			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpAttributes_text"), null, getPnlAttributes(), null, 2);
-			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpParameter_text"), null, getPnlParameters(), null, 3);
-			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlConstraints(), null, 4);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 2);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpAttributes_text"), null, getPnlAttributes(), null, 3);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpParameter_text"), null, getPnlParameters(), null, 4);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlConstraints(), null, 5);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1163,6 +1409,13 @@ private void mniNewAttribute() {
  */
 private void mniRemoveAttribute() {
 	removeObjects(null);
+}
+private void mniRemoveMetaAttribute() {
+	removeMetaObjects();
+}
+
+private void mniSaveMetaAttribute() {
+	saveMetaAttribute();
 }
 /**
  * Move down selected Attribute in Attributes-List.
@@ -1285,10 +1538,58 @@ public void newObject(Object source) {
 		handleException(e);
 	}
 }
+public void newMetaObject() {
+	try {
+		objTableMetaAttribute.addRow("MetaAttribute", "0");
+
+	} catch (Throwable e) {
+		handleException(e);
+	}
+}
 /**
  * @see ch.softenvironment.view.ListMenuChoice#removeObjects(java.lang.Object)
  */
 public void removeObjects(Object source) {
 	((EditorTableModel)getTblAttributes().getModel()).removeRows(getTblAttributes().getSelectedRows());
+}
+
+public void removeMetaObjects() {
+	try {
+		String valorDelete = ivjTblMetaAttributes.getValueAt(ivjTblMetaAttributes.getSelectedRow(), 0).toString();
+		objTableMetaAttribute.removeRow(ivjTblMetaAttributes.getSelectedRow());
+
+		Iterator<?> it = classDef.iteratorTaggedValue();
+		while (it.hasNext()) {
+			ivjTaggedValue = (TaggedValue) it.next();
+			if (ivjTaggedValue.getName().getValue().equals("ili:" + valorDelete)) {
+				//classDef.removeTaggedValue(ivjTaggedValue);
+				it.remove();
+			}
+		}
+		
+
+	} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+		// TODO: handle exception
+		JOptionPane.showMessageDialog(null, "Select the name of the row to be deleted");
+	} catch (java.util.ConcurrentModificationException ex) {
+		// Nothing to do
+	}
+}
+public void saveMetaAttribute() {
+	for (int i = 0; i < ivjTblMetaAttributes.getRowCount(); i++) {
+		ivjTaggedValue = (ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue) ElementFactory
+				.createObject(ch.ehi.uml1_4.implementation.UmlTaggedValue.class);
+		String nameValue = ivjTblMetaAttributes.getValueAt(i, 0).toString();
+		if (nameValue.contains(":") || nameValue.contains(" ")) {
+			JOptionPane.showMessageDialog(null, "Caracter invalido : o espacio no es permitido");
+			break;
+		} else {
+			ivjTaggedValue.setName(new NlsString(TaggedValue.TAGGEDVALUE_LANG, "ili:" + nameValue));
+			String value = ivjTblMetaAttributes.getValueAt(i, 1).toString();
+			ivjTaggedValue.setDataValue(value);
+			classDef.addTaggedValue(ivjTaggedValue);
+		}
+
+	}
 }
 }
