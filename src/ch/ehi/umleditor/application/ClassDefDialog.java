@@ -33,6 +33,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.*;
 import ch.ehi.interlis.modeltopicclass.*;
+import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.softenvironment.view.*;
 import ch.softenvironment.util.*;
@@ -1520,7 +1521,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getPnlExtended().setClassifierExtension(classDef);
 	
 	// page MetaAttributes
-	getMetaValues();
+	getMetaValues(classDef.iteratorTaggedValue());
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
@@ -1618,8 +1619,8 @@ public void saveMetaAttribute() {
 
 	}
 }
-public void getMetaValues() {
-	java.util.Iterator iterator = classDef.iteratorTaggedValue();
+public void getMetaValues(java.util.Iterator iterator) {
+		iterator = classDef.iteratorTaggedValue();
 		while (iterator.hasNext()) {
 			Object eleo = iterator.next();
 			if (eleo instanceof TaggedValue) {
