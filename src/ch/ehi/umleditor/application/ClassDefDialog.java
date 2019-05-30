@@ -102,6 +102,8 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.F
 				connEtoC5(e);
 			if (e.getSource() == ClassDefDialog.this.getMniRemoveAttribute())
 				connEtoC6(e);
+			if (e.getSource() == ClassDefDialog.this.getBtnAddMetaAttribuite())
+				connEtoC13(e);
 			if (e.getSource() == ClassDefDialog.this.getBtnDeleteMetaAttribuite())
 				connEtoC14(e);
 			if (e.getSource() == ClassDefDialog.this.getBtnSaveMetaAttribuite())
@@ -320,6 +322,20 @@ private void connEtoC6(java.awt.event.ActionEvent arg1) {
 		// user code begin {1}
 		// user code end
 		this.mniRemoveAttribute();
+		// user code begin {2}
+		// user code end
+	} catch (java.lang.Throwable ivjExc) {
+		// user code begin {3}
+		// user code end
+		handleException(ivjExc);
+	}
+}
+
+private void connEtoC13(java.awt.event.ActionEvent arg1) {
+	try {
+		// user code begin {1}
+		// user code end
+		this.mniNewMetaAttribute();
 		// user code begin {2}
 		// user code end
 	} catch (java.lang.Throwable ivjExc) {
@@ -952,24 +968,25 @@ private javax.swing.JPanel getPnlMetaAttributes() {
 			constraintsScpMetaAttributes.insets = new java.awt.Insets(7, 11, 6, 7);
 			getPnlMetaAttributes().add(getScpMetaAttributes(), constraintsScpMetaAttributes);
 
-			java.awt.GridBagConstraints constraintsBtnSave = new java.awt.GridBagConstraints();
-			constraintsBtnSave.gridx = 1;
-			constraintsBtnSave.gridy = 2;
-			constraintsBtnSave.ipadx = 21;
-			constraintsBtnSave.insets = new java.awt.Insets(6, 150, 12, 80);
-			getPnlMetaAttributes().add(getBtnSaveMetaAttribuite(), constraintsBtnSave);
-
 			java.awt.GridBagConstraints constraintsBtnAdd = new java.awt.GridBagConstraints();
 			constraintsBtnAdd.gridx = 1;
 			constraintsBtnAdd.gridy = 2;
 			constraintsBtnAdd.ipadx = 18;
-			constraintsBtnAdd.insets = new java.awt.Insets(6, 300, 12, 60);
+			constraintsBtnAdd.insets = new java.awt.Insets(6, 10, 12, 205);
 			getPnlMetaAttributes().add(getBtnAddMetaAttribuite(), constraintsBtnAdd);
+			
+			java.awt.GridBagConstraints constraintsBtnSave = new java.awt.GridBagConstraints();
+			constraintsBtnSave.gridx = 1;
+			constraintsBtnSave.gridy = 2;
+			constraintsBtnSave.ipadx = 21;
+			constraintsBtnSave.insets = new java.awt.Insets(6, 5, 12, 18);
+			getPnlMetaAttributes().add(getBtnSaveMetaAttribuite(), constraintsBtnSave);
+			
 			java.awt.GridBagConstraints constraintsBtnDel = new java.awt.GridBagConstraints();
 			constraintsBtnDel.gridx = 1;
 			constraintsBtnDel.gridy = 2;
 			constraintsBtnDel.ipadx = 15;
-			constraintsBtnDel.insets = new java.awt.Insets(6, 450, 12, 40);
+			constraintsBtnDel.insets = new java.awt.Insets(6, 180, 12, 4);
 			getPnlMetaAttributes().add(getBtnDeleteMetaAttribuite(), constraintsBtnDel);
 			// user code begin {1}
 			// user code end
@@ -1359,9 +1376,12 @@ private void initConnections() throws java.lang.Exception {
 	getScpAttributes().addMouseListener(ivjEventHandler);
 	getMniNewAttribute().addActionListener(ivjEventHandler);
 	getMniRemoveAttribute().addActionListener(ivjEventHandler);
+	getBtnDeleteMetaAttribuite().addActionListener(ivjEventHandler);
+	getBtnSaveMetaAttribuite().addActionListener(ivjEventHandler);
 	getTblAttributes().addMouseListener(ivjEventHandler);
 	getMniOpenAttributeSpecication().addActionListener(ivjEventHandler);
 	getTxtName().addFocusListener(ivjEventHandler);
+	getBtnAddMetaAttribuite().addActionListener(ivjEventHandler);
 }
 /**
  * Initialize the class.
@@ -1409,6 +1429,9 @@ private void mniNewAttribute() {
  */
 private void mniRemoveAttribute() {
 	removeObjects(null);
+}
+private void mniNewMetaAttribute() {
+	newMetaObject();
 }
 private void mniRemoveMetaAttribute() {
 	removeMetaObjects();
@@ -1495,6 +1518,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(classDef.isAbstract());
 	getChxFinal().setSelected(classDef.isPropFinal());
 	getPnlExtended().setClassifierExtension(classDef);
+	
+	// page MetaAttributes
+	getMetaValues();
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
@@ -1592,4 +1618,21 @@ public void saveMetaAttribute() {
 
 	}
 }
+public void getMetaValues() {
+	java.util.Iterator iterator = classDef.iteratorTaggedValue();
+		while (iterator.hasNext()) {
+			Object eleo = iterator.next();
+			if (eleo instanceof TaggedValue) {
+				String name = ((TaggedValue) eleo).getName().getValue();
+				String[] arName = name.split(":");
+			    String element=((TaggedValue) eleo).getDataValue();
+				objTableMetaAttribute.addRow(arName[1], element);
+				
+			} else {
+
+			}
+		}
+	
+}
+
 }
