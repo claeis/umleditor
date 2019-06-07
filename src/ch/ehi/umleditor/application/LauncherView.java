@@ -149,6 +149,7 @@ public class LauncherView extends BaseFrame implements MetaModelListener, Drawin
 	private JMenuItem ivjMniImportInterlis = null;
 	private JMenuItem ivjMniNewFile = null;
 	private JMenuItem ivjMniXmlExport = null;
+	private JMenuItem ivjMniChangeLanguage = null;
 	private JMenu ivjMnuInterlisTools = null;
 	private JMenu ivjMnuTranslationTools = null;
 	private JMenu ivjMnuSymbollists = null;
@@ -209,6 +210,8 @@ class IvjEventHandler implements ch.softenvironment.view.SimpleEditorPanelListen
 				connEtoC39(e);
 			if (e.getSource() == LauncherView.this.getMniExportXmi())
 				connEtoC42(e);
+			if (e.getSource() == LauncherView.this.getMniChangeLanguage())
+				connEtoC44(e);
 		};
 		public void itemStateChanged(java.awt.event.ItemEvent e) {
 			if (e.getSource() == LauncherView.this.getMncToolbar())
@@ -1102,6 +1105,14 @@ private void connEtoC42(java.awt.event.ActionEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+
+private void connEtoC44(java.awt.event.ActionEvent arg1) {
+	try {
+		LanguageGUI languageGui = new LanguageGUI(getInstance(), "Language", true);
+	} catch (java.lang.Throwable ivjExc) {
+		handleException(ivjExc);
+	}
+}
 /**
  * connEtoC5:  (addClass3.action.actionPerformed(java.awt.event.ActionEvent) --> LauncherView.addProject()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -1895,6 +1906,24 @@ private javax.swing.JMenuItem getMniHelp() {
 	}
 	return ivjMniHelp;
 }
+
+private javax.swing.JMenuItem getMniChangeLanguage() {
+	if (ivjMniChangeLanguage == null) {
+		try {
+			ivjMniChangeLanguage = new javax.swing.JMenuItem();
+			ivjMniChangeLanguage.setName("MniChangeLanguage");
+			ivjMniChangeLanguage.setText("Language ...");
+			// user code begin {1}
+			// ivjMniChangeLanguage.setText(CommonUserAccess.getMniHelpText());
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjMniChangeLanguage;
+}
 /**
  * Return the JMenuItem2 property value.
  * @return javax.swing.JMenuItem
@@ -2415,6 +2444,7 @@ private javax.swing.JMenu getMnuHelp() {
 			ivjMnuHelp.setName("MnuHelp");
 			ivjMnuHelp.setText("?");
 			ivjMnuHelp.add(getMniHelp());
+			ivjMnuHelp.add(getMniChangeLanguage());
 			ivjMnuHelp.add(getJSeparator4());
 			ivjMnuHelp.add(getMniAbout());
 			// user code begin {1}
@@ -3073,6 +3103,7 @@ private void initConnections() throws java.lang.Exception {
 	getMniFileOpen().addActionListener(ivjEventHandler);
 	getMniNewFile().addActionListener(ivjEventHandler);
 	getMniExit().addActionListener(ivjEventHandler);
+	getMniChangeLanguage().addActionListener(ivjEventHandler);
 // removed because of added JavaHelp
 //	getMniHelp().addActionListener(ivjEventHandler);
 	getMniPrint().addActionListener(ivjEventHandler);
@@ -3288,6 +3319,7 @@ public static void main(java.lang.String[] args) {
 		// initialize language of model-element-names to the language of the user interface
 		ch.ehi.basics.types.NlsString.setDefaultLanguage(getSettings().getLanguage());
 
+		Locale.setDefault(new Locale(getSettings().getLanguage()));
 		showSplashScreen(new Dimension(450, 400), IMAGE_PATH + "splash.gif");//$NON-NLS-1$
 
 		instance = new LauncherView();
