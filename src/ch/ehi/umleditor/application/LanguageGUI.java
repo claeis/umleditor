@@ -29,7 +29,7 @@ public class LanguageGUI extends BaseDialog {
 	private javax.swing.JButton ivjBtnOk = null;
 	private String actualLanguage = null;
 	private LauncherView launcher = null;
-    private JComboBox<Locale> ivjCbxlanguage = null;
+    private JComboBox ivjCbxlanguage = null;
     
     class IvjEventHandler implements java.awt.event.ActionListener,  java.awt.event.KeyListener{
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -171,7 +171,7 @@ public class LanguageGUI extends BaseDialog {
 		return ivjLblLanguage;
 	}
     
-    private javax.swing.JComboBox<Locale> getCbxLanguage() {
+    private javax.swing.JComboBox getCbxLanguage() {
 		if (ivjCbxlanguage == null) {
 			try {
 				ivjCbxlanguage = new javax.swing.JComboBox();
