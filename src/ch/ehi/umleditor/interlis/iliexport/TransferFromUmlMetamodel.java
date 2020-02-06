@@ -389,18 +389,15 @@ public class TransferFromUmlMetamodel
 			String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
 			if(name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)){
 				String value=umlTag.getDataValue();
-				String[] values = value.split("\\:");
-				if (values.length > 1) {
-	                  out.write(getIndent());
-	                  out.write("!!@ ");
-	                  out.write(name.substring(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX.length()));
-	                  out.write("=");
-	                  if(value.indexOf(' ')!=-1 || value.indexOf('=')!=-1 || value.indexOf(';')!=-1 || value.indexOf(',')!=-1 || value.indexOf('"')!=-1 || value.indexOf('\\')!=-1){
-	                      out.write("\""+value+"\"");newline();
-	                  }else{
-	                      out.write(value);newline();
-	                  }   
-				}				
+                out.write(getIndent());
+                out.write("!!@ ");
+                out.write(name.substring(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX.length()));
+                out.write("=");
+                if(value.indexOf(' ')!=-1 || value.indexOf('=')!=-1 || value.indexOf(';')!=-1 || value.indexOf(',')!=-1 || value.indexOf('"')!=-1 || value.indexOf('\\')!=-1){
+                    out.write("\""+value+"\"");newline();
+                }else{
+                    out.write(value);newline();
+                }   
 			}
 		}
   }
