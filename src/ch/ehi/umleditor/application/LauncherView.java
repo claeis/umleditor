@@ -3026,19 +3026,16 @@ public static String getVersion() {
 	// depends on softEnvironment Base Framework Version 2.2.2
 
         if(version==null){
-	  java.util.ResourceBundle resVersion = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/Version");  //$NON-NLS-1$
-          // Major version numbers identify significant functional changes.
-          // Minor version numbers identify smaller extensions to the functionality.
-          // Micro versions are even finer grained versions.
-          StringBuffer ret=new StringBuffer(20);
-	  ret.append(resVersion.getString("versionMajor"));//$NON-NLS-1$
-          ret.append('.');
-	  ret.append(resVersion.getString("versionMinor"));//$NON-NLS-1$
-          ret.append('.');
-	  ret.append(resVersion.getString("versionMicro"));//$NON-NLS-1$
-          ret.append('-');
-	  ret.append(resVersion.getString("versionDate"));//$NON-NLS-1$
-          version=ret.toString();
+            java.util.ResourceBundle resVersion = java.util.ResourceBundle
+                    .getBundle("ch/ehi/umleditor/application/Version"); //$NON-NLS-1$
+            // Major version numbers identify significant functional changes.
+            // Minor version numbers identify smaller extensions to the functionality.
+            // Micro versions are even finer grained versions.
+            StringBuffer ret = new StringBuffer(20);
+            ret.append(resVersion.getString("version")); //$NON-NLS-1$
+            ret.append('-');
+            ret.append(resVersion.getString("versionCommit")); //$NON-NLS-1$
+            version = ret.toString();
         }
         return version;
 }
