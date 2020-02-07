@@ -3,6 +3,7 @@ LATEST
 - fix commit f6365559fc5ff7b3603e2524255a0367a0e87d08
 - GeoIV-ID wird nicht exportiert (#27)
 - fix program version in about dialog
+- ili2c-5.0.5
 
 UML-Editor 3.7.0 (2018-12-28) 
 ----------------------------------
