@@ -3,6 +3,8 @@ LATEST
 - fix commit f6365559fc5ff7b3603e2524255a0367a0e87d08
 - GeoIV-ID wird nicht exportiert (#27)
 - fix program version in about dialog
+- Write models of the IMPORTS-statement in a defined order (#26)
+- Write topics of the DEPENDS-statement in a defined order
 - ili2c-5.0.5
 
 UML-Editor 3.7.0 (2018-12-28) 

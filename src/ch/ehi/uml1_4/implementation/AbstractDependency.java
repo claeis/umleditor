@@ -295,7 +295,7 @@ public abstract class AbstractDependency extends AbstractModelElement implements
             // -end- 33FFE57B03B3 _unlink_body3E42404202F6 "Dependency::_unlinkClient"
 
             // -beg- preserve=no 335C0D7A02E4 code3E42404202F6 "supplier"
-            private java.util.Set supplier = new java.util.HashSet();
+            private java.util.List supplier = new java.util.ArrayList();
             // -end- 335C0D7A02E4 code3E42404202F6 "supplier"
 
             /** add a Supplier.
