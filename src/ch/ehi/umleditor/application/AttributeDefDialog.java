@@ -32,6 +32,7 @@ import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
+import ch.interlis.ili2c.metamodel.Ili2cMetaAttrs;
 import ch.softenvironment.view.*;
 import ch.softenvironment.util.*;
 /**
@@ -1316,26 +1317,19 @@ protected boolean save() {
 	return super.save();
 }
 private void setEPSGCode() {
-    ModelElement modelElement = (ModelElement) attributeDef;
-    TaggedValue umlTag = null;
-    Iterator defLangIt = modelElement.iteratorTaggedValue();
-    while (defLangIt.hasNext()) {
-        umlTag=(TaggedValue)defLangIt.next();
-        String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
-        if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
-            String value=umlTag.getDataValue();
-            String[] seperatedValues = value.split("\\:");
-            String item = (String)getCbxType().getSelectedItem();
-            if (item.equals(IliBaseTypeKind.POLYLINE)) {
-                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
-            } else if (item.equals(IliBaseTypeKind.COORD)) {
-                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeCoordPanel.getTxtEpsgCode().getText());
-            } else if (item.equals(IliBaseTypeKind.SURFACE)) {
-                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
-            } else if (item.equals(IliBaseTypeKind.AREA)) {
-                umlTag.setDataValue(seperatedValues[0] + ":" + ch.ehi.umleditor.application.IliBaseTypeLinePanel.getTxtEpsgCode().getText());
-            }
-        }
+    String epsgCode=null;
+    String item = (String)getCbxType().getSelectedItem();
+    if (item.equals(IliBaseTypeKind.POLYLINE)) {
+        epsgCode=getPnlTypeLine().getTxtEpsgCode().getText();
+    } else if (item.equals(IliBaseTypeKind.COORD)) {
+        epsgCode= getPnlTypeCoord().getTxtEpsgCode().getText();
+    } else if (item.equals(IliBaseTypeKind.SURFACE)) {
+        epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
+    } else if (item.equals(IliBaseTypeKind.AREA)) {
+        epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
+    }
+    if(epsgCode!=null) {
+        ElementUtils.setIliTaggedValue(attributeDef, Ili2cMetaAttrs.ILI2C_CRS, epsgCode);
     }
 }
 /**

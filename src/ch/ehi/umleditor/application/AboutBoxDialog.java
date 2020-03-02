@@ -295,7 +295,7 @@ private javax.swing.JLabel getLblInterlisCompilerVersion() {
 			ivjLblInterlisCompilerVersion = new javax.swing.JLabel();
 			ivjLblInterlisCompilerVersion.setName("LblInterlisCompilerVersion");
 			ivjLblInterlisCompilerVersion.setText("<iliCompilerVersion>");
-			ivjLblInterlisCompilerVersion.setBounds(229, 178, 189, 14);
+			ivjLblInterlisCompilerVersion.setBounds(229, 178, 389, 14);
 			// user code begin {1}
 			ivjLblInterlisCompilerVersion.setText(getResourceString("LblInterlisCompilerVersion_text"));
 			// user code end
@@ -499,7 +499,7 @@ private javax.swing.JLabel getLblVersion() {
 			ivjLblVersion = new javax.swing.JLabel();
 			ivjLblVersion.setName("LblVersion");
 			ivjLblVersion.setText("<ProgramVersion>");
-			ivjLblVersion.setBounds(229, 134, 189, 14);
+			ivjLblVersion.setBounds(229, 134, 380, 14);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -789,7 +789,7 @@ private void initialize() {
 		// user code end
 		setName("DlgAboutBox");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(554, 648);
+		setSize(754, 648);
 		setTitle("Info zum UML/INTERLIS-Editor");
 		setContentPane(getPnlContents());
 		initConnections();

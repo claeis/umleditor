@@ -24,6 +24,7 @@ import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
+import ch.interlis.ili2c.metamodel.Ili2cMetaAttrs;
 import ch.ehi.interlis.domainsandconstants.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
 import ch.ehi.interlis.domainsandconstants.linetypes.*;
@@ -61,7 +62,7 @@ public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JCheckBox ivjChxArcs = null;
 	private javax.swing.JCheckBox ivjChxStraights = null;
     private javax.swing.JLabel ivjLblEpsgCode = null;
-    private static javax.swing.JTextField ivjTxtEpsgCode = null;
+    private javax.swing.JTextField ivjTxtEpsgCode = null;
 
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener {
@@ -298,7 +299,7 @@ private javax.swing.JLabel getLblEpsg() {
  * @return javax.swing.JTextField
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-public static javax.swing.JTextField getTxtEpsgCode() {
+public javax.swing.JTextField getTxtEpsgCode() {
     if (ivjTxtEpsgCode == null) {
         try {
             ivjTxtEpsgCode = new javax.swing.JTextField();
@@ -888,6 +889,7 @@ private void initialize() {
 	setToolTipText(getResourceString("IliBaseTypeTextPanel_toolTipText"));
 	getTblLineFormTypeDef().setModel(new EditorTableModel());
 	((EditorTableModel)getTblLineFormTypeDef().getModel()).setLineFormTypeDef(null);
+    getTxtEpsgCode().setText("");
 	// user code end
 }
 /**
@@ -919,27 +921,8 @@ private void setLinetype(LineType lineType,ModelElement modelElement, ModelEleme
 		getCbxDomainDef().setElement(DomainDef.class, modelElement, null);
 	}
 	
+    getTxtEpsgCode().setText(ElementUtils.getIliTaggedValue(baseModelElement, Ili2cMetaAttrs.ILI2C_CRS));
     
-    if (baseModelElement.sizeTaggedValue() > 0) {
-        TaggedValue umlTag = null;
-        Iterator defLangIt = baseModelElement.iteratorTaggedValue();
-        while (defLangIt.hasNext()) {
-            umlTag = (TaggedValue)defLangIt.next();
-            String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
-            if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
-                String value=umlTag.getDataValue();
-                String[] values = value.split("\\:");
-                if (values.length > 1) {
-                    getTxtEpsgCode().setText(values[1]);
-                } else {
-                    getTxtEpsgCode().setText("");
-                }
-            }
-        }
-    } else {
-        getTxtEpsgCode().setText("");
-    }
-
 	// Intersection
 	if ((lineType != null) && lineType.containsIntersectionDef()) {
 		getPnlIntersection().setObject(lineType.getIntersectionDef().getMaxi());

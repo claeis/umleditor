@@ -69,6 +69,7 @@
 	<fileset dir="${build}/classes" excludes="**/Test.class" includes="**/*.class"/>
    	<fileset dir="${src}" includes="**/*.properties"/>
     	<fileset dir="resources/de" includes="**/*.properties"/>
+    	<fileset dir="resources/es" includes="**/*.properties"/>
     	<fileset dir="resources/fr" includes="**/*.properties"/>
     	<fileset dir="resources/it" includes="**/*.properties"/>
     	<fileset dir="${src}" includes="**/*.gif"/>
@@ -131,6 +132,7 @@
 -->
 	    	<patternset includes="src/**" excludes="**/CVS/*;**/bak~/*"/>
 		<patternset includes="resources/de/**/*.properties"/>
+    	<patternset includes="resources/es/**/*.properties"/>
 		<patternset includes="resources/fr/**/*.properties"/>
 		<patternset includes="resources/it/**/*.properties"/>
 	    	<patternset includes="docs/bindist/*.txt"/>

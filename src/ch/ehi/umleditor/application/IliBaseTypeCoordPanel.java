@@ -19,7 +19,9 @@ package ch.ehi.umleditor.application;
  */
 import ch.ehi.uml1_4.foundation.core.*;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.tools.ModelElementUtility;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
+import ch.interlis.ili2c.metamodel.Ili2cMetaAttrs;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
@@ -56,7 +58,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private javax.swing.JLabel ivjLblDimensions = null;
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
 	private javax.swing.JLabel ivjLblEpsgCode = null;
-	private static javax.swing.JTextField ivjTxtEpsgCode = null;
+	private javax.swing.JTextField ivjTxtEpsgCode = null;
 
 class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -313,7 +315,7 @@ private javax.swing.JLabel getLblEpsg() {
  * @return javax.swing.JTextField
  */
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
-public static javax.swing.JTextField getTxtEpsgCode() {
+public javax.swing.JTextField getTxtEpsgCode() {
 	if (ivjTxtEpsgCode == null) {
 		try {
 			ivjTxtEpsgCode = new javax.swing.JTextField();
@@ -734,6 +736,7 @@ private void initialize() {
 	getRbt1D().setSelected(true);
 	dimensionChanged(null);
 	getChxRotationDef().setSelected(false);
+	getTxtEpsgCode().setText("");
 	// user code end
 }
 public final void setObject(java.lang.Object object) throws DeveloperException {
@@ -749,26 +752,7 @@ public void setObject(java.lang.Object object, ModelElement modelElement, ModelE
 	getPnlNumeric2D().setObject(ElementFactory.createNumericType(), modelElement);
 	getPnlNumeric3D().setObject(ElementFactory.createNumericType(), modelElement);
 	
-    TaggedValue umlTag = null;
-    int size = baseElement.sizeTaggedValue();
-    if (size > 0) {
-        Iterator defLangIt = baseElement.iteratorTaggedValue();
-        while (defLangIt.hasNext()) {
-            umlTag = (TaggedValue)defLangIt.next();
-            String name=umlTag.getName().getValue(TaggedValue.TAGGEDVALUE_LANG);
-            if (name.startsWith(TransferFromIli2cMetamodel.TAGGEDVALUE_ILI_PREFIX)) {
-                String value=umlTag.getDataValue();
-                String[] values = value.split("\\:");
-                if (values.length > 1) { 
-                    getTxtEpsgCode().setText(values[1]);
-                } else {
-                    getTxtEpsgCode().setText("");
-                }
-            }
-        }       
-    } else {
-        getTxtEpsgCode().setText("");
-    }
+    getTxtEpsgCode().setText(ElementUtils.getIliTaggedValue(baseElement, Ili2cMetaAttrs.ILI2C_CRS));
 	
 	if (object != null) {
 		CoordinateType type = (CoordinateType)object;

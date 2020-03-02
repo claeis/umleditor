@@ -279,7 +279,7 @@ public static UnknownType convertType(ch.ehi.interlis.domainsandconstants.Type t
 	convertedType.setSyntax(new ch.ehi.basics.types.NlsString(ret));			
 	return convertedType;
 }
-public static String getIliTaggedValue(ModelDef def,
+public static String getIliTaggedValue(ModelElement def,
 		String tagName) {
 	TaggedValue umlTag=null;
 	Iterator defLangIt=def.iteratorTaggedValue();
@@ -294,7 +294,7 @@ public static String getIliTaggedValue(ModelDef def,
 	return null;
 }
 
-	public static void setIliTaggedValue(ModelDef def, String iliTagName,
+	public static void setIliTaggedValue(ModelElement def, String iliTagName,
 			String tagValue) {
 		tagValue = StringUtility.purge(tagValue);
 		TaggedValue umlTag = null;
