@@ -85,7 +85,7 @@ dependencies {
     implementation name:  'sebase'
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
-    implementation 'ch.interlis:ili2c-tool:5.0.5'
+    implementation 'ch.interlis:ili2c-tool:5.0.6'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
     }
