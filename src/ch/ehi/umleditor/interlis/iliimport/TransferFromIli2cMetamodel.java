@@ -186,6 +186,7 @@ public class TransferFromIli2cMetamodel
   {
     if (topic == null)
       return null;
+    EhiLogger.traceState(topic.getScopedName());
 
     ch.ehi.interlis.modeltopicclass.TopicDef topicdef=findTopicDef(topic);
     topicdef.setName(new NlsString(modelLanguage,topic.getName()));
@@ -245,6 +246,8 @@ public class TransferFromIli2cMetamodel
 
   private ch.ehi.interlis.modeltopicclass.ClassDef visitClassDef(Table tdef)
   {
+      EhiLogger.traceState(tdef.getScopedName());
+      
     ch.ehi.interlis.modeltopicclass.ClassDef classdef=findClassDef(tdef);
     classdef.setName(new NlsString(modelLanguage,tdef.getName()));
 
@@ -286,6 +289,7 @@ public class TransferFromIli2cMetamodel
 
   private ch.ehi.interlis.associations.AssociationDef visitAssociationDef(AssociationDef assoc)
   {
+      EhiLogger.traceState(assoc.getScopedName());
     ch.ehi.interlis.associations.AssociationDef assocdef=findAssociationDef(assoc);
     assocdef.setName(new NlsString(modelLanguage,assoc.getName()));
 
@@ -470,6 +474,7 @@ public class TransferFromIli2cMetamodel
   }
   private void visitAttribute(AttributeDef attrib,int attrIdx)
   {
+    EhiLogger.traceState(attrib.getScopedName());
     Type btype=attrib.getDomain();
     boolean isMultiValueAttr=false;
     if(btype instanceof CompositionType){
@@ -703,6 +708,7 @@ public class TransferFromIli2cMetamodel
 }
 private void visitRoleDef(RoleDef role)
   {
+    EhiLogger.traceState(role.getScopedName());
 
     ch.ehi.interlis.associations.RoleDef roledef=new ch.ehi.interlis.associations.RoleDef();
     roledef.setName(new NlsString(modelLanguage,role.getName()));
@@ -825,6 +831,8 @@ private void visitRoleDef(RoleDef role)
     if(mdef==ilibase && modelMap.containsKey(mdef)){
     	return null;
     }
+    EhiLogger.traceState(mdef.getScopedName());
+    
     ch.ehi.interlis.modeltopicclass.ModelDef model=findModelDef(mdef);
 
     // language
@@ -934,6 +942,8 @@ private void visitRoleDef(RoleDef role)
   }
   private ch.ehi.interlis.domainsandconstants.DomainDef visitDomainDef (Domain dd)
   {
+      EhiLogger.traceState(dd.getScopedName());
+      
     ch.ehi.interlis.domainsandconstants.DomainDef domaindef=findDomainDef(dd);
     domaindef.setName(new NlsString(modelLanguage,dd.getName()));
 

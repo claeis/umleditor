@@ -50,12 +50,6 @@ def getGitHash = { ->
     return stdout.toString().trim()
 }
 
-compileJava {
-    options.fork = true
-    options.forkOptions.executable = "javac"
-    options.compilerArgs << "-XDignore.symbol.file"
-}
-
 sourceSets {
     main {
     	output.dir(generatedResources, builtBy: 'generateMyResources')
