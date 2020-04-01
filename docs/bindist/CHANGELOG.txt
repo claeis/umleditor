@@ -1,5 +1,8 @@
 LATEST 
 ----------------------------------
+
+UML-Editor 3.7.2 (2020-03-02) 
+----------------------------------
 - iliimport: extend trace output (#28)
 - fails to import EXTENDED attr without type (#28)
 - ili2c-5.0.8
