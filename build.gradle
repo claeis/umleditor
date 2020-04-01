@@ -1,5 +1,5 @@
 group 'ch.interlis'
-version '3.7.1'+System.getProperty('release','-SNAPSHOT')
+version '3.7.2'+System.getProperty('release','-SNAPSHOT')
 
 apply plugin: "java"
 apply plugin: "maven"
@@ -50,12 +50,6 @@ def getGitHash = { ->
     return stdout.toString().trim()
 }
 
-compileJava {
-    options.fork = true
-    options.forkOptions.executable = "javac"
-    options.compilerArgs << "-XDignore.symbol.file"
-}
-
 sourceSets {
     main {
     	output.dir(generatedResources, builtBy: 'generateMyResources')
@@ -85,7 +79,7 @@ dependencies {
     implementation name:  'sebase'
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
-    implementation 'ch.interlis:ili2c-tool:5.0.6'
+    implementation 'ch.interlis:ili2c-tool:5.0.8'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
     }
