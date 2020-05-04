@@ -1,5 +1,5 @@
 group 'ch.interlis'
-version '3.7.2'+System.getProperty('release','-SNAPSHOT')
+version '3.7.3'+System.getProperty('release','-SNAPSHOT')
 
 apply plugin: "java"
 apply plugin: "maven"
@@ -11,7 +11,14 @@ compileJava.options.encoding = 'US-ASCII'
 
 configurations {
     deployerJars
+    ftpAntTask
 }
+
+// to get the latest SNAPSHOT uncomment the following lines
+//configurations.all {
+    // check for updates every build
+    // resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+//}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -38,6 +45,8 @@ if(propFile.exists()){
 def git = System.getProperty('git',properties.get('git','git'))
 def repos_pwd = System.getProperty('repos_pwd',properties.get('repos_pwd','repos_pwd'))
 def repos_usr = System.getProperty('repos_usr',properties.get('repos_usr','repos_usr'))
+def downloads_pwd = System.getProperty('downloads_pwd',properties.get('downloads_pwd','downloads_pwd'))
+def downloads_usr = System.getProperty('downloads_usr',properties.get('downloads_usr','downloads_usr'))
 
 def generatedResources = "$buildDir/generated-resources/main"
 
@@ -79,7 +88,7 @@ dependencies {
     implementation name:  'sebase'
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
-    implementation 'ch.interlis:ili2c-tool:5.0.8'
+    implementation 'ch.interlis:ili2c-tool:5.1.1'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
     }
@@ -104,7 +113,9 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     
-    deployerJars "org.apache.maven.wagon:wagon-ftp:3.0.0"
+    deployerJars "org.apache.maven.wagon:wagon-ftp:3.3.3"
+    deployerJars "org.apache.maven.wagon:wagon-ssh:3.3.3"
+    ftpAntTask "org.apache.ant:ant-commons-net:1.10.7"
 }
 
 //create a single Jar with all dependencies
@@ -174,4 +185,25 @@ uploadArchives {
             }
         }
     }
+}
+
+task uploadBin(dependsOn: bindist) {
+	doLast {
+		ant.taskdef(name: 'ftp',
+					classname: 'org.apache.tools.ant.taskdefs.optional.net.FTP',
+					classpath: configurations.ftpAntTask.asPath)
+		def programName='umleditor'
+		def archivePath= bindist.archiveFile.get().asFile.parent
+		def archiveName=bindist.archiveFile.get().asFile.name
+		def json = groovy.json.JsonOutput.toJson([filename: 'https://downloads.interlis.ch/'+programName+'/'+archiveName, version: project.version ,date: new Date().format( 'yyyy-MM-dd' )])
+		def releaseFile = new File(archivePath,programName+'-release.json')
+		releaseFile.write(json)
+		ant.ftp(server: "jql.ftp.infomaniak.com", userid: downloads_usr, password: downloads_pwd, 
+			remoteDir: '/'+programName, passive:"yes") {
+				fileset(dir: archivePath ) {
+					include(name: archiveName)
+					include(name: releaseFile.name)
+				}
+		}
+	}
 }

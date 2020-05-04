@@ -315,7 +315,7 @@ public class TransferFromUmlMetamodel
 		try{
 	      if(!createFileList){
 	        // open
-	        out = new BufferedWriter(new FileWriter(file));
+	        out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
 	        lineNumber=1;
 	        // write
 	        defineLinkToModelElement(def);

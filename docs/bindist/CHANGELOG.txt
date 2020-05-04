@@ -1,6 +1,11 @@
 LATEST 
 ----------------------------------
 
+UML-Editor 3.7.3 (2020-05-04) 
+----------------------------------
+- export ili file as UTF-8 encoded (#32)
+- ili2c-5.1.1
+
 UML-Editor 3.7.2 (2020-03-02) 
 ----------------------------------
 - iliimport: extend trace output (#28)
