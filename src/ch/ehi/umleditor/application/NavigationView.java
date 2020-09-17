@@ -2165,7 +2165,7 @@ public void selectElement(Element element) {
 	if(element instanceof ch.ehi.interlis.associations.Participant){
 		element=((ch.ehi.interlis.associations.Participant)element).getAssociation();
 	}
-	TreePath foundNode = modelAdapter.findElementDefinitionNode(element);
+	TreePath foundNode = modelAdapter.getTreePath(element);
 
 	if (foundNode == null) {
                 // ce 20030301 was soll das machen? clearSelection()?

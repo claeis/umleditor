@@ -4002,7 +4002,7 @@ private void setModellingLanguage(String lang) {
 	logModellingLanguage();
 	
 	// refresh view
-	getPnlNavigation().getModelAdapter().fireTreeNodesChanged(this.model);
+	getPnlNavigation().getModelAdapter().refresh();
 	refreshDocumentation();
 	JInternalFrame[] frames = getDtpDrawArea().getAllFrames();
 	for (int i=0; i<frames.length; i++) {
