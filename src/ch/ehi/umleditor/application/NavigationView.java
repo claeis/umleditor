@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import ch.ehi.interlis.modeltopicclass.*;
 import ch.ehi.uml1_4.foundation.core.*;
+import ch.ehi.uml1_4.implementation.AbstractModelElement;
 import ch.ehi.uml1_4.implementation.UmlOperation;
 import ch.ehi.uml1_4.modelmanagement.Model;
 import ch.ehi.umleditor.umlpresentation.Diagram;
@@ -1932,15 +1933,13 @@ private void moveElement() {
           if (moveDialog.isSaved()) {
             ch.ehi.uml1_4.foundation.core.Namespace apackage=moveDialog.getSelectedPackage();
       		Element elebase=getSelectedNode();
-      		if(elebase instanceof ModelElement){
-      			ModelElement ele=(ModelElement)elebase;
-				ele.detachNamespace();
-				ele.attachNamespace(apackage);
+      		if(elebase instanceof AbstractModelElement){
+      		  AbstractModelElement ele=(AbstractModelElement)elebase;
+				ele.changeNamespace(apackage);
       		}else{
 				ch.ehi.umleditor.umlpresentation.Diagram diag =
 					(ch.ehi.umleditor.umlpresentation.Diagram) elebase;
-				diag.detachNamespace();
-				diag.attachNamespace(apackage);
+				diag.changeNamespace(apackage);
       		}
           }
 	} catch(Throwable e) {

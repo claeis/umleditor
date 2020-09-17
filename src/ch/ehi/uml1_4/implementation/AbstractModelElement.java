@@ -2905,8 +2905,20 @@ public abstract class AbstractModelElement extends AbstractEditorElement impleme
 
           // declare/define something only in the code
           // please fill in/modify the following section
-          // -beg- preserve=no 3CE225AB0092 detail_end "AbstractModelElement"
+          // -beg- preserve=yes 3CE225AB0092 detail_end "AbstractModelElement"
 
+          public Namespace changeNamespace(Namespace newNamespace)
+          {
+            if(namespace==null) {throw new java.lang.IllegalStateException("no namespace attached yet");}
+            if(newNamespace==null) {throw new java.lang.IllegalArgumentException("null may not be attached as namespace");}
+            Namespace oldNamespace = namespace.getNamespace();
+            oldNamespace._unlinkOwnedElement(namespace);
+            namespace.setNamespace(newNamespace);
+            newNamespace._linkOwnedElement(namespace);
+            ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"changeNamespace"));
+            return oldNamespace;
+          }
+          
           // -end- 3CE225AB0092 detail_end "AbstractModelElement"
 
         }
