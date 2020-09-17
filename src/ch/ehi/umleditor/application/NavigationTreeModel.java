@@ -102,6 +102,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Adds a listener for the TreeModelEvent posted after the tree changes.
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
     	if (!treeModelListeners.contains(l)) {
     		treeModelListeners.addElement(l);
@@ -111,6 +112,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Removes a listener previously added with addTreeModelListener().
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
     	if (treeModelListeners.contains(l)) {
     		treeModelListeners.removeElement(l);
@@ -121,6 +123,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the child of parent at index index in the parent's child array.
      */
+    @Override
     public Object getChild(Object parent, int index) {
         List children=getChildren(parent);
         return children.get(index);
@@ -129,6 +132,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the number of children of parent.
      */
+    @Override
     public int getChildCount(Object parent) {
         List children=getChildren(parent);
         return children.size();
@@ -137,6 +141,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the index of child in parent.
      */
+    @Override
     public int getIndexOfChild(Object parent, Object child) {
         List children=getChildren(parent);
         return children.indexOf(child);
@@ -145,6 +150,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the root of the tree.
      */
+    @Override
     public Object getRoot() {
         return rootElement;
     }
@@ -152,6 +158,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns true if node must not have children.
      */
+    @Override
     public boolean isLeaf(Object node) {
         if(node instanceof Namespace
             && !(node instanceof ch.ehi.interlis.domainsandconstants.DomainDef)){
@@ -173,6 +180,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
    *
    * Triggered if JTree's attribute invokesStopCellEditing is set to true only.
    */
+     @Override
   public void valueForPathChanged(TreePath path, Object newValue) {
   	/* Update the name of the element, but may be a diagramm (which is not en element) */
   	Object node = path.getLastPathComponent();
@@ -298,6 +306,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
   /** adapts MetaModelChanges to TreeModelEvents.
    * @see also getChildren() for a similar structure
    */
+  @Override
   public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
     Object source=event.getSource();
     String ops=event.getOperation();
