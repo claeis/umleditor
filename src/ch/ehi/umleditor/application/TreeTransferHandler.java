@@ -38,7 +38,7 @@ public class TreeTransferHandler extends TransferHandler {
         try {
             String mimeType = DataFlavor.javaJVMLocalObjectMimeType +
                               ";class=\"" +
-                Namespace.class.getName() +
+                Element.class.getName() +
                               "\"";
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
@@ -87,99 +87,97 @@ public class TreeTransferHandler extends TransferHandler {
       * Drop
       * @see javax.swing.TransferHandler#importData(javax.swing.TransferHandler.TransferSupport)
       */
-     public boolean importData(TransferHandler.TransferSupport support) {
-        if(!canImport(support)) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("Can't import", "importData");
+    public boolean importData(TransferHandler.TransferSupport support) {
+        if (!canImport(support)) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("Can't import", "importData");
             return false;
         }
-        
+
         try {
-        	// Get drop location info.
-            JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
-            TreePath dest = dl.getPath();
-            Namespace destParent = (Namespace)dest.getLastPathComponent();
+            // Get drop location info.
+            JTree.DropLocation dl = (JTree.DropLocation) support.getDropLocation();
+            Namespace destParent = (Namespace) dl.getPath().getLastPathComponent();
             // Extract transfer data.
             Transferable t = support.getTransferable();
             Element[] node;
-        	node = (Element[]) t.getTransferData(nodesFlavor);
-           
-               if(node[0] instanceof ModelElement) {
-            	 //Just move a InterlisModel inside a umlpackage
-            	   if(node[0] instanceof INTERLIS2Def && destParent instanceof UmlPackage) {
-       				    INTERLIS2Def element = (INTERLIS2Def) node[0];
-                        element.changeNamespace(destParent);
-                   	}
-            	 //Just move a ModelDef inside a InterlisModel
-               	else if(node[0] instanceof ModelDef && destParent instanceof INTERLIS2Def) {
-               		ModelDef element = (ModelDef) node[0];
+            node = (Element[]) t.getTransferData(nodesFlavor);
+
+            if (node[0] instanceof ModelElement) {
+                if (node[0] instanceof INTERLIS2Def && destParent instanceof UmlPackage) {
+                    // Just move a InterlisModel inside a umlpackage
+                    INTERLIS2Def element = (INTERLIS2Def) node[0];
                     element.changeNamespace(destParent);
-               	} 
-               	//Just move a ClassDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof ClassDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		ClassDef element = (ClassDef) node[0];
-               		element.changeNamespace(destParent);
-               	}
-               	//Just move a UnitDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof UnitDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		UnitDef element = (UnitDef) node[0];
+                } else if (node[0] instanceof ModelDef && destParent instanceof INTERLIS2Def) {
+                    // Just move a ModelDef inside a InterlisModel
+                    ModelDef element = (ModelDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a Relationship(AssociationDef) inside a ModelDef or TopicDef
-               	else if(node[0] instanceof AssociationDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		AssociationDef element = (AssociationDef) node[0];
+                } else if (node[0] instanceof ClassDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a ClassDef inside a ModelDef or TopicDef
+                    ClassDef element = (ClassDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a DomainDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof DomainDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		DomainDef element = (DomainDef) node[0];
+                } else if (node[0] instanceof UnitDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a UnitDef inside a ModelDef or TopicDef
+                    UnitDef element = (UnitDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a FunctionDef inside a ModelDef
-               	else if(node[0] instanceof FunctionDef && (destParent instanceof ModelDef)){
-               		FunctionDef element = (FunctionDef) node[0];
+                } else if (node[0] instanceof AssociationDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a Relationship(AssociationDef) inside a ModelDef or TopicDef
+                    AssociationDef element = (AssociationDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a Run time Parameter(GraphicParameterDef) inside a ModelDef
-               	else if(node[0] instanceof GraphicParameterDef && (destParent instanceof ModelDef)){
-               		GraphicParameterDef element = (GraphicParameterDef) node[0];
+                } else if (node[0] instanceof DomainDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a DomainDef inside a ModelDef or TopicDef
+                    DomainDef element = (DomainDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a LineFormTypeDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof LineFormTypeDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		LineFormTypeDef element = (LineFormTypeDef) node[0];
+                } else if (node[0] instanceof FunctionDef && (destParent instanceof ModelDef)) {
+                    // Just move a FunctionDef inside a ModelDef
+                    FunctionDef element = (FunctionDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a MetaDataUseDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof MetaDataUseDef && (destParent instanceof ModelDef || destParent instanceof TopicDef)){
-               		MetaDataUseDef element = (MetaDataUseDef) node[0];
+                } else if (node[0] instanceof GraphicParameterDef && (destParent instanceof ModelDef)) {
+                    // Just move a Run time Parameter(GraphicParameterDef) inside a ModelDef
+                    GraphicParameterDef element = (GraphicParameterDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a TopicDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof TopicDef && destParent instanceof ModelDef){
-               		TopicDef element = (TopicDef) node[0];
+                } else if (node[0] instanceof LineFormTypeDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a LineFormTypeDef inside a ModelDef or TopicDef
+                    LineFormTypeDef element = (LineFormTypeDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	//Just move a ViewDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof ViewDef && destParent instanceof TopicDef){
-               		ViewDef element = (ViewDef) node[0];
+                } else if (node[0] instanceof MetaDataUseDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a MetaDataUseDef inside a ModelDef or TopicDef
+                    MetaDataUseDef element = (MetaDataUseDef) node[0];
                     element.changeNamespace(destParent);
-               	}
-               	else {
-               		JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"), resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
-               	}	   
-               }else {
-   				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) destParent;
+                } else if (node[0] instanceof TopicDef && destParent instanceof ModelDef) {
+                    // Just move a TopicDef inside a ModelDef or TopicDef
+                    TopicDef element = (TopicDef) node[0];
+                    element.changeNamespace(destParent);
+                } else if (node[0] instanceof ViewDef && destParent instanceof TopicDef) {
+                    // Just move a ViewDef inside a ModelDef or TopicDef
+                    ViewDef element = (ViewDef) node[0];
+                    element.changeNamespace(destParent);
+                } else {
+                    JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"),
+                            resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
+                }
+            } else if(node[0] instanceof ch.ehi.umleditor.umlpresentation.Diagram){
+                ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) node[0];
                 diag.changeNamespace(destParent);
-   			}
-               return true;
-            
-        } catch(UnsupportedFlavorException ufe) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("UnsupportedFlavor: ", ufe.getMessage());
-        } catch(java.io.IOException ioe) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("I/O error: ", ioe.getMessage());
+            }else {
+                JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"),
+                        resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
+            }
+            return true;
+
+        } catch (UnsupportedFlavorException ufe) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("UnsupportedFlavor: ", ufe.getMessage());
+        } catch (java.io.IOException ioe) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("I/O error: ", ioe.getMessage());
         }
         return false;
     }
+
      public String toString() {
         return getClass().getName();
     }
