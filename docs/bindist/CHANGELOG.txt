@@ -2,6 +2,7 @@ LATEST
 ----------------------------------
 - avoid collapse of navigation tree on element removal (#31)
 - avoid removal of class figure on move of class
+- drag and drop attributes (#29)
 
 UML-Editor 3.7.3 (2020-05-04) 
 ----------------------------------

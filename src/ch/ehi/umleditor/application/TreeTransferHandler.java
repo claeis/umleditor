@@ -11,6 +11,7 @@ import javax.swing.JTree;
 import javax.swing.TransferHandler;
 import javax.swing.tree.TreePath;
 import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
@@ -157,6 +158,9 @@ public class TreeTransferHandler extends TransferHandler {
                     // Just move a ViewDef inside a ModelDef or TopicDef
                     ViewDef element = (ViewDef) node[0];
                     element.changeNamespace(destParent);
+                } else if (node[0] instanceof AttributeDef && destParent instanceof ClassDef) {
+                    AttributeDef element = (AttributeDef) node[0];
+                    element.changeOwner((ClassDef)destParent);
                 } else {
                     JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"),
                             resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);

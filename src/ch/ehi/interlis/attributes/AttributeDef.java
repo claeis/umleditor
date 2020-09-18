@@ -1556,6 +1556,17 @@ public class AttributeDef extends AbstractModelElement implements Attribute , ja
       setMultiplicity(m);
     }
   }
+  public Classifier changeOwner(Classifier owner1)
+  {
+    if(owner==null) {throw new java.lang.IllegalStateException("no owner attached yet");}
+    if(owner1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as owner");}
+    Classifier oldOwner=owner;
+    oldOwner._unlinkFeature(this);
+    owner = owner1;
+    owner1._linkFeature(this);
+    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"changeOwner"));
+    return oldOwner;
+  }
 
   // -end- 358A5F6F01B7 detail_end "AttributeDef"
 
