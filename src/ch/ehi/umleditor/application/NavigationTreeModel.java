@@ -293,25 +293,25 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     if(source instanceof Class){
       if(source instanceof Association){
         // RoleDefs owned by source
-        if(isAttribute(ops,"Connection")){
+        if(MetaModelChange.isAttribute(ops,"Connection")){
             if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after AssocDef removal*/) {
                 fireTreeStructureChanged((ModelElement)source);
             }
         }
       }
       // attributes owned by source 
-      if(isAttribute(ops,"Feature")){
+      if(MetaModelChange.isAttribute(ops,"Feature")){
         fireTreeStructureChanged((ModelElement)source);
       }
       // associations where source is an end
-      if(isAttribute(ops,"Association")){
+      if(MetaModelChange.isAttribute(ops,"Association")){
           if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after ClassDef removal (if associated)*/) {
             fireTreeStructureChanged((ModelElement)source);
           }
       }
       // ParameterDefs
       if(source instanceof ch.ehi.interlis.modeltopicclass.ClassDef){
-        if(isAttribute(ops,"ParameterDef")){
+        if(MetaModelChange.isAttribute(ops,"ParameterDef")){
           fireTreeStructureChanged((ModelElement)source);
         }
       }
@@ -319,7 +319,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       // update display in target class; owner is handled in
       // case ModelElement.Name, case Association.Connection or case Class.Association
       // track name changes
-      if(isAttribute(ops,"Name")){
+      if(MetaModelChange.isAttribute(ops,"Name")){
           // update list of association source classes
         AssociationEnd ownRoleDef = (AssociationEnd)source;
         // RoleDef may not be attached to an Asssociation during create
@@ -339,20 +339,20 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       }
     }
     if (source instanceof ModelElement) {
-      if(isAttribute(ops,"Constraint")){
+      if(MetaModelChange.isAttribute(ops,"Constraint")){
         fireTreeStructureChanged((ModelElement)source);
       }
     }
     if(source instanceof Namespace){
-      if(isAttribute(ops,"OwnedElement")){
+      if(MetaModelChange.isAttribute(ops,"OwnedElement")){
          fireTreeStructureChanged((ModelElement)source);
       }
-      if(isAttribute(ops,"Diagram")){
+      if(MetaModelChange.isAttribute(ops,"Diagram")){
         fireTreeStructureChanged((ModelElement)source);
       }
     }
     if(source instanceof ModelElement || source instanceof Diagram){
-      if(isAttribute(ops,"Name")){
+      if(MetaModelChange.isAttribute(ops,"Name")){
         if(source instanceof UmlModel){
             fireTreeNodesChanged((UmlModel)source);
         }else{
@@ -412,15 +412,6 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     return new TreePath(path.toArray());
   }
 
-  private static boolean isAttribute(String ops,String attr){
-    if(ops==null || ops.length()==0){
-      return false;
-    }
-    for(int i=0;i<MetaModelChange.OPS.length;i++){
-      if(ops.equals(MetaModelChange.OPS[i]+attr))return true;
-    }
-    return false;
-  }
   public String getOrdering(){
     return currentOrdering;
   }

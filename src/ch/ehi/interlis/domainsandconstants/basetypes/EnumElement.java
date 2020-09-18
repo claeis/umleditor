@@ -376,7 +376,19 @@ public class EnumElement extends AbstractModelElement implements ModelElement , 
 
                 // declare/define something only in the code
                 // please fill in/modify the following section
-                // -beg- preserve=no 358A69810091 detail_end "EnumElement"
+                // -beg- preserve=yes 358A69810091 detail_end "EnumElement"
+                
+                public Enumeration changeEnumeration(Enumeration enumeration1,int index)
+                {
+                  if(enumeration==null) {throw new java.lang.IllegalStateException("no enumeration attached yet");}
+                  if(enumeration1==null) {throw new java.lang.IllegalArgumentException("null may not be attached as enumeration");}
+                  Enumeration oldEnumeration=enumeration;
+                  enumeration = enumeration1;
+                  oldEnumeration._unlinkEnumElement(this);
+                  enumeration1._linkEnumElement(index,this);
+                  ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"changeEnumeration"));
+                  return oldEnumeration;
+                }
 
                 // -end- 358A69810091 detail_end "EnumElement"
 
