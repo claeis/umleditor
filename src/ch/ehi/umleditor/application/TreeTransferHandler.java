@@ -11,7 +11,10 @@ import javax.swing.JTree;
 import javax.swing.TransferHandler;
 import javax.swing.tree.TreePath;
 import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.domainsandconstants.DomainDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
 import ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef;
 import ch.ehi.interlis.functions.FunctionDef;
 import ch.ehi.interlis.graphicdescriptions.GraphicParameterDef;
@@ -25,6 +28,7 @@ import ch.ehi.interlis.views.ViewDef;
 import ch.ehi.uml1_4.foundation.core.Element;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
 import ch.ehi.uml1_4.foundation.core.Namespace;
+import ch.ehi.uml1_4.implementation.AbstractEditorElement;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 
 public class TreeTransferHandler extends TransferHandler {
@@ -33,12 +37,12 @@ public class TreeTransferHandler extends TransferHandler {
 			.getBundle("ch/ehi/umleditor/application/resources/TreeTransferHandler");
 	DataFlavor nodesFlavor;
     DataFlavor[] flavors = new DataFlavor[1];
-    Element[] nodesToRemove;
+    AbstractEditorElement[] nodesToRemove;
      public TreeTransferHandler() {
         try {
             String mimeType = DataFlavor.javaJVMLocalObjectMimeType +
                               ";class=\"" +
-                Namespace.class.getName() +
+                AbstractEditorElement.class.getName() +
                               "\"";
             nodesFlavor = new DataFlavor(mimeType);
             flavors[0] = nodesFlavor;
@@ -66,15 +70,15 @@ public class TreeTransferHandler extends TransferHandler {
             // Make up a node array of copies for transfer and
             // another for/of the nodes that will be removed in
             // exportDone after a successful drop.
-            List<Element> copies = new ArrayList<Element>();
-            List<Element> toRemove = new ArrayList<Element>();
-            Element node = (Element)paths[0].getLastPathComponent();
-            Element copy = node;
+            List<AbstractEditorElement> copies = new ArrayList<AbstractEditorElement>();
+            List<AbstractEditorElement> toRemove = new ArrayList<AbstractEditorElement>();
+            AbstractEditorElement node = (AbstractEditorElement)paths[0].getLastPathComponent();
+            AbstractEditorElement copy = node;
             copies.add(copy);
             toRemove.add(node);
             
-            Element[] nodes = copies.toArray(new Element[copies.size()]);
-            nodesToRemove = toRemove.toArray(new Element[toRemove.size()]);
+            AbstractEditorElement[] nodes = copies.toArray(new AbstractEditorElement[copies.size()]);
+            nodesToRemove = toRemove.toArray(new AbstractEditorElement[toRemove.size()]);
             return new NodesTransferable(nodes);
         }
         return null;
@@ -87,118 +91,120 @@ public class TreeTransferHandler extends TransferHandler {
       * Drop
       * @see javax.swing.TransferHandler#importData(javax.swing.TransferHandler.TransferSupport)
       */
-     public boolean importData(TransferHandler.TransferSupport support) {
-        if(!canImport(support)) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("Can't import", "importData");
+    public boolean importData(TransferHandler.TransferSupport support) {
+        if (!canImport(support)) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("Can't import", "importData");
             return false;
         }
-        
+
         try {
-        	// Get drop location info.
-            JTree.DropLocation dl = (JTree.DropLocation)support.getDropLocation();
-            TreePath dest = dl.getPath();
-            Namespace parent = (Namespace)dest.getLastPathComponent();
+            // Get drop location info.
+            JTree.DropLocation dl = (JTree.DropLocation) support.getDropLocation();
+            AbstractEditorElement destParent = (AbstractEditorElement) dl.getPath().getLastPathComponent();
             // Extract transfer data.
             Transferable t = support.getTransferable();
-            Element[] node;
-        	node = (Element[]) t.getTransferData(nodesFlavor);
-           
-               if(node[0] instanceof ModelElement) {
-            	 //Just move a InterlisModel inside a umlpackage
-            	   if(node[0] instanceof INTERLIS2Def && parent instanceof UmlPackage) {
-       				    INTERLIS2Def element = (INTERLIS2Def) node[0];
-       			        element.detachNamespace();
-                   	    element.attachNamespace(parent);
-                   	}
-            	 //Just move a ModelDef inside a InterlisModel
-               	else if(node[0] instanceof ModelDef && parent instanceof INTERLIS2Def) {
-               		ModelDef element = (ModelDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	} 
-               	//Just move a ClassDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof ClassDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		ClassDef element = (ClassDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a UnitDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof UnitDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		UnitDef element = (UnitDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a Relationship(AssociationDef) inside a ModelDef or TopicDef
-               	else if(node[0] instanceof AssociationDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		AssociationDef element = (AssociationDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a DomainDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof DomainDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		DomainDef element = (DomainDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a FunctionDef inside a ModelDef
-               	else if(node[0] instanceof FunctionDef && (parent instanceof ModelDef)){
-               		FunctionDef element = (FunctionDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a Run time Parameter(GraphicParameterDef) inside a ModelDef
-               	else if(node[0] instanceof GraphicParameterDef && (parent instanceof ModelDef)){
-               		GraphicParameterDef element = (GraphicParameterDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a LineFormTypeDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof LineFormTypeDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		LineFormTypeDef element = (LineFormTypeDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a MetaDataUseDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof MetaDataUseDef && (parent instanceof ModelDef || parent instanceof TopicDef)){
-               		MetaDataUseDef element = (MetaDataUseDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a TopicDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof TopicDef && parent instanceof ModelDef){
-               		TopicDef element = (TopicDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	//Just move a ViewDef inside a ModelDef or TopicDef
-               	else if(node[0] instanceof ViewDef && parent instanceof TopicDef){
-               		ViewDef element = (ViewDef) node[0];
-               		element.detachNamespace();
-               		element.attachNamespace(parent);
-               	}
-               	else {
-               		JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"), resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
-               	}	   
-               }else {
-   				ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) parent;
-   				diag.detachNamespace();
-   				diag.attachNamespace(parent);
-   			}
-               return true;
-            
-        } catch(UnsupportedFlavorException ufe) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("UnsupportedFlavor: ", ufe.getMessage());
-        } catch(java.io.IOException ioe) {
-        	ch.ehi.umleditor.application.LauncherView.getInstance().log("I/O error: ", ioe.getMessage());
+            AbstractEditorElement[] node;
+            node = (AbstractEditorElement[]) t.getTransferData(nodesFlavor);
+
+            if (node[0] instanceof ModelElement) {
+                if (node[0] instanceof INTERLIS2Def && destParent instanceof UmlPackage) {
+                    // Just move a InterlisModel inside a umlpackage
+                    INTERLIS2Def element = (INTERLIS2Def) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof ModelDef && destParent instanceof INTERLIS2Def) {
+                    // Just move a ModelDef inside a InterlisModel
+                    ModelDef element = (ModelDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof ClassDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a ClassDef inside a ModelDef or TopicDef
+                    ClassDef element = (ClassDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof UnitDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a UnitDef inside a ModelDef or TopicDef
+                    UnitDef element = (UnitDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof AssociationDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a Relationship(AssociationDef) inside a ModelDef or TopicDef
+                    AssociationDef element = (AssociationDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof DomainDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a DomainDef inside a ModelDef or TopicDef
+                    DomainDef element = (DomainDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof FunctionDef && (destParent instanceof ModelDef)) {
+                    // Just move a FunctionDef inside a ModelDef
+                    FunctionDef element = (FunctionDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof GraphicParameterDef && (destParent instanceof ModelDef)) {
+                    // Just move a Run time Parameter(GraphicParameterDef) inside a ModelDef
+                    GraphicParameterDef element = (GraphicParameterDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof LineFormTypeDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a LineFormTypeDef inside a ModelDef or TopicDef
+                    LineFormTypeDef element = (LineFormTypeDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof MetaDataUseDef
+                        && (destParent instanceof ModelDef || destParent instanceof TopicDef)) {
+                    // Just move a MetaDataUseDef inside a ModelDef or TopicDef
+                    MetaDataUseDef element = (MetaDataUseDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof TopicDef && destParent instanceof ModelDef) {
+                    // Just move a TopicDef inside a ModelDef or TopicDef
+                    TopicDef element = (TopicDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof ViewDef && destParent instanceof TopicDef) {
+                    // Just move a ViewDef inside a ModelDef or TopicDef
+                    ViewDef element = (ViewDef) node[0];
+                    element.changeNamespace((Namespace)destParent);
+                } else if (node[0] instanceof AttributeDef && destParent instanceof ClassDef) {
+                    AttributeDef element = (AttributeDef) node[0];
+                    element.changeOwner((ClassDef)destParent);
+                } else if(node[0] instanceof EnumElement && (destParent instanceof Enumeration || destParent instanceof EnumElement)){
+                    EnumElement element=(EnumElement)node[0];
+                    int index=dl.getChildIndex();
+                    if(destParent instanceof EnumElement) {
+                        EnumElement parentNode=(EnumElement)destParent;
+                        if(!parentNode.containsChild()){
+                            parentNode.attachChild(new Enumeration());
+                          }
+                        destParent=parentNode.getChild();
+                    }
+                    if(index==-1) {
+                        index=0;
+                    }
+                    element.changeEnumeration((Enumeration)destParent,index);
+                } else {
+                    JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"),
+                            resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
+                }
+            } else if(node[0] instanceof ch.ehi.umleditor.umlpresentation.Diagram && destParent instanceof Namespace){
+                ch.ehi.umleditor.umlpresentation.Diagram diag = (ch.ehi.umleditor.umlpresentation.Diagram) node[0];
+                diag.changeNamespace((Namespace)destParent);
+            }else {
+                JOptionPane.showMessageDialog(null, resTreeTransferHandler.getString("JPMessage"),
+                        resTreeTransferHandler.getString("JPTittle"), JOptionPane.WARNING_MESSAGE);
+            }
+            return true;
+
+        } catch (UnsupportedFlavorException ufe) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("UnsupportedFlavor: ", ufe.getMessage());
+        } catch (java.io.IOException ioe) {
+            ch.ehi.umleditor.application.LauncherView.getInstance().log("I/O error: ", ioe.getMessage());
         }
         return false;
     }
+
      public String toString() {
         return getClass().getName();
     }
      public class NodesTransferable implements Transferable {
-        Element[] nodes;
-         public NodesTransferable(Element[] nodes2) {
+         AbstractEditorElement[] nodes;
+         public NodesTransferable(AbstractEditorElement[] nodes2) {
             this.nodes = nodes2;
          }
          public Object getTransferData(DataFlavor flavor)

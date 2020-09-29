@@ -19,6 +19,7 @@ package ch.ehi.umleditor.application;
  */
 import java.util.EventObject;
 
+import javax.swing.DropMode;
 import javax.swing.tree.*;
 
 import ch.softenvironment.util.*;
@@ -810,20 +811,6 @@ constraintsJPanel1.gridheight = 2;
  * Initialize the Tree.
  */
 private void initializeTree() {
-/*
-  java.awt.event.MouseListener ml = new java.awt.event.MouseAdapter() {
-     public void mousePressed(java.awt.event.MouseEvent e) {
-         int selRow = getTreEnumeration().getRowForLocation(e.getX(), e.getY());
-         //TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
-         if(selRow != -1) {
-             if(e.getClickCount() == 1) {
-                 getTreEnumeration().clearSelection();
-             }
-         }
-     }
- };
- getTreEnumeration().addMouseListener(ml);
- */
     EnumTreeCellRenderer renderer = new EnumTreeCellRenderer();
     getTreEnumeration().setCellRenderer(renderer);
 
@@ -845,6 +832,10 @@ private void initializeTree() {
     selectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     getTreEnumeration().setSelectionModel(selectionModel);
 
+    getTreEnumeration().setDragEnabled(true);
+    getTreEnumeration().setDropMode(DropMode.ON_OR_INSERT);
+    getTreEnumeration().setTransferHandler(new TreeTransferHandler());
+    
     // Enable tool tips for the tree
     javax.swing.ToolTipManager.sharedInstance().registerComponent(getTreEnumeration());
 

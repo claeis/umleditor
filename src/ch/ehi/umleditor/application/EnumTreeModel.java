@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
+import ch.ehi.uml1_4.changepropagation.MetaModelChange;
 
 
 /**
@@ -19,7 +20,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.Enumeration;
  * @author ce
  */
 public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.MetaModelListener {
-    private java.util.Vector treeModelListeners = new java.util.Vector();
+    private java.util.Vector<TreeModelListener> treeModelListeners = new java.util.Vector<TreeModelListener>();
     private Enumeration root=new Enumeration();
 
   public EnumTreeModel() {
@@ -28,6 +29,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Adds a listener for the TreeModelEvent posted after the tree changes.
      */
+  @Override
     public void addTreeModelListener(TreeModelListener l) {
         treeModelListeners.addElement(l);
     }
@@ -35,6 +37,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Removes a listener previously added with addTreeModelListener().
      */
+  @Override
     public void removeTreeModelListener(TreeModelListener l) {
         treeModelListeners.removeElement(l);
     }
@@ -46,6 +49,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
    *
    * Triggered if JTree's attribute invokesStopCellEditing is set to true only.
    */
+  @Override
   public void valueForPathChanged(TreePath path, Object newValue) {
   	/* Update the user object. */
   	EnumElement node = (EnumElement)path.getLastPathComponent();
@@ -56,6 +60,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Returns the child of parent at index index in the parent's child array.
      */
+  @Override
     public Object getChild(Object parent, int index) {
         if(parent==root){
           return root.getEnumElementAt(index);
@@ -66,6 +71,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Returns the number of children of parent.
      */
+  @Override
     public int getChildCount(Object parent) {
         if(parent==root){
           return root.sizeEnumElement();
@@ -79,6 +85,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Returns the index of child in parent.
      */
+  @Override
     public int getIndexOfChild(Object parent, Object child) {
         if(parent==root){
           return root.findEnumElement((EnumElement)child);
@@ -89,6 +96,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Returns the root of the tree.
      */
+  @Override
     public Object getRoot() {
         return root;
     }
@@ -96,6 +104,7 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
     /**
      * Returns true if node must not have children.
      */
+  @Override
     public boolean isLeaf(Object node) {
         // all EnumElements may have sub-elements
         return false;
@@ -103,38 +112,26 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
 
     /** Invoked after a node (or a set of siblings) has changed in some way.
      */
-    protected void fireTreeNodesChanged(EnumElement node){
-        int len = treeModelListeners.size();
-        TreeModelEvent e;
+    private void fireTreeNodesChanged(EnumElement node){
         TreePath path=getTreePathOrNull(node);
         if(path==null){
           return;
         }
-        e = new TreeModelEvent(this,path);
+        int len = treeModelListeners.size();
+        TreeModelEvent e= new TreeModelEvent(this,path);
         for (int i = 0; i < len; i++) {
             ((TreeModelListener)treeModelListeners.elementAt(i)).
                     treeNodesChanged(e);
         }
     }
-
-    /** Invoked after nodes have been inserted into the tree.
-     */
-    protected void fireTreeNodesInserted(EnumElement e){
-    }
-
-    /** Invoked after nodes have been removed from the tree.
-     */
-    protected void fireTreeNodesRemoved(EnumElement e){
-    }
-
     /** Invoked after the tree has drastically changed structure from a given node down.
      */
-    protected void fireTreeStructureChanged(Enumeration node) {
-        int len = treeModelListeners.size();
+    private void fireTreeStructureChanged(Enumeration node) {
         TreePath path=getTreePathOrNull(node);
         if(path==null){
           return;
         }
+        int len = treeModelListeners.size();
         TreeModelEvent e = new TreeModelEvent(this,path);
         for (int i = 0; i < len; i++) {
             ((TreeModelListener)treeModelListeners.elementAt(i)).
@@ -147,39 +144,25 @@ public class EnumTreeModel implements TreeModel,ch.ehi.uml1_4.changepropagation.
   /** adapts MetaModelChanges to TreeModelEvents.
    * see also getChildren() for a similar structure
    */
+    @Override
   public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
     Object source=event.getSource();
     String ops=event.getOperation();
     if(source instanceof EnumElement){
-      if(isAttribute(ops,"Name")){
+      if(MetaModelChange.isAttribute(ops,"Name")){
         fireTreeNodesChanged((EnumElement)source);
-      }
+      }else if(MetaModelChange.isAttribute(ops,"Enumeration")){
+          fireTreeNodesChanged((EnumElement)source);
+        }
     }
     if(source instanceof Enumeration){
-      if(isAttribute(ops,"EnumElement")){
+      if(MetaModelChange.isAttribute(ops,"EnumElement")){
         fireTreeStructureChanged((Enumeration)source);
       }
     }
   }
 
-  private static boolean isAttribute(String ops,String attr){
-    if(ops==null || ops.length()==0){
-      return false;
-    }
-    if(ops.equals("attach"+attr))return true;
-    if(ops.equals("detach"+attr))return true;
-    if(ops.equals("set"+attr))return true;
-    if(ops.equals("add"+attr))return true;
-    if(ops.equals("remove"+attr))return true;
-    if(ops.equals("set"+attr))return true;
-    if(ops.equals("clear"+attr))return true;
-    if(ops.equals("change"+attr))return true;
-    if(ops.equals("_link"+attr))return true;
-    if(ops.equals("_unlink"+attr))return true;
-    return false;
-  }
-
-  public TreePath getTreePath(Object node){
+  protected TreePath getTreePath(Object node){
     java.util.ArrayList path = new java.util.ArrayList();
     if(node!=root && (node instanceof Enumeration)){
       node=((Enumeration)node).getParent();

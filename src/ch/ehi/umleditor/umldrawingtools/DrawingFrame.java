@@ -44,25 +44,22 @@ public void dispose() {
  * This function gets called when a change to a metamodel object occured.
  * @see MetaModelListener
  */
-public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
-	if (getDrawingView() instanceof ClassDiagramView) {
-		ClassDiagramView diagramView = (ClassDiagramView)getDrawingView();
-		
-		if (diagramView.getParentElement().equals(event.getSource()) && event.getOperation().equals("clearDiagram")) {
-			// package of this diagram has been deleted => remove contained diagrams too
-			super.dispose(); // unregister of listener done by _unlinkAll()
-		}
-//		if ((event.getSource() == diagramView.getDiagram()) || (event.getSource() == diagramView.getParentElement())) {
-			// 1) update Diagram Title
-			setTitle(diagramView.getTitle());
-			repaint();
-//		} else {
-			// 2) update Figures within Diagram
-			diagramView.update(event);
-//		}
-	}
-}
-/**
+    public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
+        if (getDrawingView() instanceof ClassDiagramView) {
+            ClassDiagramView diagramView = (ClassDiagramView) getDrawingView();
+
+            if (diagramView.getParentElement().equals(event.getSource())
+                    && event.getOperation().equals("clearDiagram")) {
+                // package of this diagram has been deleted => remove contained diagrams too
+                super.dispose(); // unregister of listener done by _unlinkAll()
+            }
+            setTitle(diagramView.getTitle());
+            repaint();
+            diagramView.update(event);
+        }
+    }
+
+    /**
  * Register this Frame's drawing for Model changes.
  */
 protected void registerListener() {

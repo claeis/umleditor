@@ -589,6 +589,17 @@ public class Diagram extends AbstractEditorElement implements Element , java.io.
 				remover.unlinkThem();
 				//ch.ehi.uml1_4.changepropagation.MetaModel.setEventLogging(false);
 			}
+	          public Namespace changeNamespace(Namespace newNamespace)
+	          {
+	            if(namespace==null) {throw new java.lang.IllegalStateException("no namespace attached yet");}
+	            if(newNamespace==null) {throw new java.lang.IllegalArgumentException("null may not be attached as namespace");}
+	            Namespace oldNamespace = namespace;
+	            oldNamespace._unlinkDiagram(this);
+	            newNamespace._linkDiagram(this);
+	            ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"changeNamespace"));
+	            return oldNamespace;
+	          }
+			
   // -end- 3C2C4C8D0362 detail_end "Diagram"
 
 }

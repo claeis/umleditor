@@ -43,7 +43,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     public static final String SORT_BY_NAME="SORT_BY_NAME";
     private String currentOrdering=SORT_BY_KIND_NAME;
 
-    private java.util.Vector treeModelListeners = new java.util.Vector();
+    private java.util.Vector<TreeModelListener> treeModelListeners = new java.util.Vector<TreeModelListener>();
     private Namespace rootElement;
     private boolean showOnlyPackages;
 
@@ -54,54 +54,36 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
 
     /** Invoked after a node (or a set of siblings) has changed in some way.
      */
-    protected void fireTreeNodesChanged(Element node){
-        int len = treeModelListeners.size();
-        TreeModelEvent e;
-        if(node instanceof UmlModel){
-          e = new TreeModelEvent(this,getTreePath(node));
-        }else{
-          e = new TreeModelEvent(this,getTreePath(getParent(node)));
-        }
-        for (int i = 0; i < len; i++) {
-            ((TreeModelListener)treeModelListeners.elementAt(i)).
-                    treeNodesChanged(e);
-        }
-    }
-
-    /** Invoked after nodes have been inserted into the tree.
-     */
-    protected void fireTreeNodesInserted(Element e){
-    }
-
-    /** Invoked after nodes have been removed from the tree.
-     */
-    protected void fireTreeNodesRemoved(Element element){
-/*      int len = treeModelListeners.size();
-        TreeModelEvent e = new TreeModelEvent(this, getTreePath(element)); //getTreePath(utility.findParent(node)));
-        
-        for (int i = 0; i < len; i++) {
-            if (e.getPath()[0] != null) {
-                ((TreeModelListener)treeModelListeners.elementAt(i)).treeNodesRemoved(e);
+    private void fireTreeNodesChanged(Element node){
+        final TreePath path = getTreePath(node);
+        if(path!=null) {
+            int len = treeModelListeners.size();
+            TreeModelEvent e=new TreeModelEvent(this,path);
+            for (int i = 0; i < len; i++) {
+                ((TreeModelListener)treeModelListeners.elementAt(i)).
+                        treeNodesChanged(e);
             }
         }
-*/
     }
+
 
     /** Invoked after the tree has drastically changed structure from a given node down.
      */
-    protected void fireTreeStructureChanged(Element node) {
-        int len = treeModelListeners.size();
-        TreeModelEvent e = new TreeModelEvent(this,
-                                              getTreePath(node));
-        for (int i = 0; i < len; i++) {
-            ((TreeModelListener)treeModelListeners.elementAt(i)).
-                    treeStructureChanged(e);
+    private void fireTreeStructureChanged(Element node) {
+        final TreePath path = getTreePath(node);
+        if (path != null) {
+            int len = treeModelListeners.size();
+            TreeModelEvent e = new TreeModelEvent(this, path);
+            for (int i = 0; i < len; i++) {
+                ((TreeModelListener) treeModelListeners.elementAt(i)).treeStructureChanged(e);
+            }
         }
     }
 
     /**
      * Adds a listener for the TreeModelEvent posted after the tree changes.
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
     	if (!treeModelListeners.contains(l)) {
     		treeModelListeners.addElement(l);
@@ -111,6 +93,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Removes a listener previously added with addTreeModelListener().
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
     	if (treeModelListeners.contains(l)) {
     		treeModelListeners.removeElement(l);
@@ -121,6 +104,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the child of parent at index index in the parent's child array.
      */
+    @Override
     public Object getChild(Object parent, int index) {
         List children=getChildren(parent);
         return children.get(index);
@@ -129,6 +113,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the number of children of parent.
      */
+    @Override
     public int getChildCount(Object parent) {
         List children=getChildren(parent);
         return children.size();
@@ -137,6 +122,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the index of child in parent.
      */
+    @Override
     public int getIndexOfChild(Object parent, Object child) {
         List children=getChildren(parent);
         return children.indexOf(child);
@@ -145,6 +131,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns the root of the tree.
      */
+    @Override
     public Object getRoot() {
         return rootElement;
     }
@@ -152,6 +139,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     /**
      * Returns true if node must not have children.
      */
+    @Override
     public boolean isLeaf(Object node) {
         if(node instanceof Namespace
             && !(node instanceof ch.ehi.interlis.domainsandconstants.DomainDef)){
@@ -173,6 +161,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
    *
    * Triggered if JTree's attribute invokesStopCellEditing is set to true only.
    */
+     @Override
   public void valueForPathChanged(TreePath path, Object newValue) {
   	/* Update the name of the element, but may be a diagramm (which is not en element) */
   	Object node = path.getLastPathComponent();
@@ -190,7 +179,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
   	// nodeChanged(node);
   }
 
-  private List getChildren(Object parent){
+  private List<Element> getChildren(Object parent){
     List ret=new java.util.ArrayList();
     Iterator iterator;
 
@@ -296,34 +285,33 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     }
   }
   /** adapts MetaModelChanges to TreeModelEvents.
-   * @see also getChildren() for a similar structure
    */
+  @Override
   public void metaModelChanged(ch.ehi.uml1_4.changepropagation.MetaModelChange event) {
     Object source=event.getSource();
     String ops=event.getOperation();
     if(source instanceof Class){
       if(source instanceof Association){
-        // roles
-        if(isAttribute(ops,"Connection")){
+        // RoleDefs owned by source
+        if(MetaModelChange.isAttribute(ops,"Connection")){
             if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after AssocDef removal*/) {
                 fireTreeStructureChanged((ModelElement)source);
             }
         }
       }
-      // attributes
-      if(isAttribute(ops,"Feature")){
+      // attributes owned by source 
+      if(MetaModelChange.isAttribute(ops,"Feature")){
         fireTreeStructureChanged((ModelElement)source);
       }
-      // associations
-      if(isAttribute(ops,"Association")){
+      // associations where source is an end
+      if(MetaModelChange.isAttribute(ops,"Association")){
           if (!ops.startsWith(MetaModelChange.OP_CLEAR) /*PH: prevents closing tree after ClassDef removal (if associated)*/) {
             fireTreeStructureChanged((ModelElement)source);
           }
-        //   track name changes in AssociationEnd events
       }
       // ParameterDefs
       if(source instanceof ch.ehi.interlis.modeltopicclass.ClassDef){
-        if(isAttribute(ops,"ParameterDef")){
+        if(MetaModelChange.isAttribute(ops,"ParameterDef")){
           fireTreeStructureChanged((ModelElement)source);
         }
       }
@@ -331,7 +319,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       // update display in target class; owner is handled in
       // case ModelElement.Name, case Association.Connection or case Class.Association
       // track name changes
-      if(isAttribute(ops,"Name")){
+      if(MetaModelChange.isAttribute(ops,"Name")){
           // update list of association source classes
         AssociationEnd ownRoleDef = (AssociationEnd)source;
         // RoleDef may not be attached to an Asssociation during create
@@ -351,20 +339,20 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
       }
     }
     if (source instanceof ModelElement) {
-      if(isAttribute(ops,"Constraint")){
+      if(MetaModelChange.isAttribute(ops,"Constraint")){
         fireTreeStructureChanged((ModelElement)source);
       }
     }
     if(source instanceof Namespace){
-      if(isAttribute(ops,"OwnedElement")){
+      if(MetaModelChange.isAttribute(ops,"OwnedElement")){
          fireTreeStructureChanged((ModelElement)source);
       }
-      if(isAttribute(ops,"Diagram")){
+      if(MetaModelChange.isAttribute(ops,"Diagram")){
         fireTreeStructureChanged((ModelElement)source);
       }
     }
     if(source instanceof ModelElement || source instanceof Diagram){
-      if(isAttribute(ops,"Name")){
+      if(MetaModelChange.isAttribute(ops,"Name")){
         if(source instanceof UmlModel){
             fireTreeNodesChanged((UmlModel)source);
         }else{
@@ -407,12 +395,7 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
   }
 
   public TreePath getTreePath(Element node){
-    return findElementDefinitionNode(node);
-  }
-  public TreePath findElementDefinitionNode(Element node){
-    // RoleDef's are represented by multiple nodes. This function returns their
-    // definition
-    java.util.ArrayList path = new java.util.ArrayList();
+    java.util.ArrayList<Element> path = new java.util.ArrayList<Element>();
     path.add(node);
     Namespace next=getParent(node);
     if(next!=null){
@@ -422,18 +405,13 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
         path.add(0,next);
       }
     }
+    if(path.get(0)!=rootElement) {
+        // node is no longer part of this tree model
+        return null;
+    }
     return new TreePath(path.toArray());
   }
 
-  private static boolean isAttribute(String ops,String attr){
-    if(ops==null || ops.length()==0){
-      return false;
-    }
-    for(int i=0;i<MetaModelChange.OPS.length;i++){
-      if(ops.equals(MetaModelChange.OPS[i]+attr))return true;
-    }
-    return false;
-  }
   public String getOrdering(){
     return currentOrdering;
   }
@@ -447,114 +425,4 @@ public class NavigationTreeModel implements javax.swing.tree.TreeModel,ch.ehi.um
     fireTreeStructureChanged(rootElement);
   }
 
-/**
- * Update the given TreeNode to display the changedElement in NavigationTree.
- * @param node (Node in tree whose Element has changed)
- * @param changedElement (Element value of node)
- * @see EditorTreeModel#valueForPathChanged(TreePath, Object)
- */
-/*
-private synchronized void updateNode(MutableTreeNode node, Element changedElement) {
-	//	Rename should be done by UI-refresh automatically
-	if (getTreNavigation().getSelectionPath() != null) {
-Tracer.getInstance().patch(this, "updateNode(..)", "Bug fix: forces redraw after renaming");
-		getTreNavigation().expandPath(getTreNavigation().getSelectionPath());
-		getTreNavigation().repaint();
-	}
-
-	if (changedElement instanceof Namespace) {
-		// update ModelElement children as well
-		//  -> build list of all elementChildren-Types displayed as TreeNode
-		java.util.ArrayList elementChildren = getNonOwnedChildren(changedElement);
-		java.util.Iterator iterator = ((Namespace)changedElement).iteratorOwnedElement();
-		while (iterator.hasNext()) {
-			elementChildren.add(iterator.next());
-		}
-
-		updateChildren(node, elementChildren);
-	} else {
-		Tracer.getInstance().nyi(this, "updateNode(..)", "changedElements not of type Namespace are not updated yet");//$NON-NLS-2$//$NON-NLS-1$
-	}
-}
-*/
-/**
- * Check whether an elementChild was inserted (ADD) oder deleted (REMOVE) in the model and
- * refresh their displayment.
- * IMPORTANT:
- * - The list of elementChildren might contain unchanged, new or deleted siblings at once.
- *
- * @param parentNode (Node in tree whoose children might have changed)
- * @param elementChildren (list containing 0..n Element's changed or unchanged)
- */
- /*
-private void updateChildren(MutableTreeNode parentNode, java.util.ArrayList elementChildren) {
-	// build a map where nodeChild-Index points to elementChild
-	java.util.HashMap parentNodeChildren = new java.util.HashMap(parentNode.getChildCount());
-	for (int i=0; i<parentNode.getChildCount(); i++) {
-		parentNodeChildren.put(new Integer(i), null);
-	}
-
-	// try find an elementChild in each displayed TreeNode
-	java.util.Iterator iterator = elementChildren.iterator();
-	while (iterator.hasNext()) {
-		Element elementChild = (Element)iterator.next();
-		boolean found = false;
-		for (int i=0; i<parentNode.getChildCount(); i++) {
-			Element childNode = ((NavigationTreeNode)parentNode.getChildAt(i)).getElement();
-			if (childNode.equals(elementChild)) {
-				parentNodeChildren.put(new Integer(i), elementChild);
-				found = true;
-				break;				// for efficiency reasons
-			}
-		}
-		if (!found) {
-			// case NEW child -> display additional node
-			insertNode(parentNode, new NavigationTreeNode(elementChild));
-			getTreNavigation().repaint();
-			// newly inserted nodes must not be compared for deletion (s. below)
-		}
-	}
-
-	// try search deleted elements
-	for (int i=0; i<parentNodeChildren.size(); i++) {
-		if (parentNodeChildren.get(new Integer(i)) == null) {
-			// case DELETED child -> remove displaying node
-			getTreeModel().removeNodeFromParent((MutableTreeNode)parentNode.getChildAt(i));
-			getTreNavigation().repaint();
-		}
-	}
-}
-*/
-/**
- * Wrap the the given ModelElement into an ElementMapper to
- * represent as NavigationTree.
- * The ModelElement's parent-child dependency is already considered
- * in the given namespace.
- *
- * This is a recursive BuildTree Algorithm.
- * @param namespace (Model to add to parent)
- * @param parent (given parent-Node)
- */
- /*
-private void walkTree(Namespace namespace, MutableTreeNode parent) {
-	MutableTreeNode currentNode = null;
-
-	// child model-Element
-	currentNode = insertNode(parent, new NavigationTreeNode(namespace));
-	updateChildren(currentNode, getNonOwnedChildren(namespace));
-
-	// treat the ModelElement's
-	java.util.Iterator iterator = namespace.iteratorOwnedElement();
-	while (iterator.hasNext()) {
-		ModelElement modelElement = (ModelElement)iterator.next();
-		if (modelElement instanceof Namespace) {
-			// package might contain subtree
-			walkTree((Namespace)modelElement, currentNode);
-		} else {
-			// add leaf
-			insertNode(currentNode,	new NavigationTreeNode(modelElement));
-		}
-	}
-}
-*/
 }

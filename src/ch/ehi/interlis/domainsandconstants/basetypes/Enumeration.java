@@ -385,7 +385,12 @@ public class Enumeration extends BaseType implements java.io.Serializable
       {
         return (EnumElement)enumElement.get(index);
       }
-
+      public void _linkEnumElement(int index,EnumElement enumElement1)
+      {
+        enumElement.add(index,enumElement1);
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkEnumElement"));
+        return;
+      }
                 // -end- 358A671C0162 detail_end "Enumeration"
 
               }

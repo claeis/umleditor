@@ -92,6 +92,16 @@ public class MetaModelChange extends EventObject
   {
   	return "source="+getSource().toString()+", operation="+getOperation();
   }
+  public static boolean isAttribute(String ops,String attr){
+    if(ops==null || ops.length()==0){
+      return false;
+    }
+    for(int i=0;i<OPS.length;i++){
+      if(ops.equals(OPS[i]+attr))return true;
+    }
+    return false;
+  }
+
   // -end- 3C454DFD0284 detail_end "MetaModelChange"
 
 }
