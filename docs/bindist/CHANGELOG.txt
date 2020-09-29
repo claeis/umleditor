@@ -1,9 +1,13 @@
 LATEST 
 ----------------------------------
+
+UML-Editor 3.7.4 (2020-09-29) 
+----------------------------------
 - avoid collapse of navigation tree on element removal (#31)
 - avoid removal of class figure on move of class
 - support drag and drop of attributes (#29)
 - support drag and drop of enumeration elements (#30)
+- ili2c-5.1.3
 
 UML-Editor 3.7.3 (2020-05-04) 
 ----------------------------------
