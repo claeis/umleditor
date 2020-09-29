@@ -89,6 +89,8 @@ dependencies {
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
     implementation 'ch.interlis:ili2c-tool:5.1.3'
+    implementation 'ch.interlis:ili2c-core:5.1.3'
+    implementation 'ch.ehi:ehibasics:1.3.0'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
     }
