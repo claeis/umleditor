@@ -1,5 +1,6 @@
 LATEST 
 ----------------------------------
+- fixed Opening existing .uml files does not work (#43)
 
 UML-Editor 3.7.4 (2020-09-29) 
 ----------------------------------
