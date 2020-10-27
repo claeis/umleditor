@@ -1,6 +1,11 @@
 LATEST 
 ----------------------------------
 
+UML-Editor 3.7.5 (2020-10-27) 
+----------------------------------
+- fixed Opening existing .uml files does not work (#43)
+- ili2c-5.1.4
+
 UML-Editor 3.7.4 (2020-09-29) 
 ----------------------------------
 - avoid collapse of navigation tree on element removal (#31)

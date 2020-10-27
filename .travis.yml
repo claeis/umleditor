@@ -8,7 +8,9 @@ branches:
 install: true
   
 script: 
-  - gradle build 
+  - if [ $TRAVIS_BRANCH == "stable" ]; then gradle '-Drelease=' build ; fi
+  - if [ $TRAVIS_BRANCH != "stable" ]; then gradle build ; fi
+  
 deploy:
   - provider: script
     skip_cleanup: true

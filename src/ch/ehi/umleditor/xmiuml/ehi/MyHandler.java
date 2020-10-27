@@ -40,9 +40,9 @@ public class MyHandler implements org.xml.sax.ContentHandler
   private ErrorHandler eh=null;
   
   // map<String TID, Object obj>
-  private java.util.Map objMap = new java.util.HashMap();
-  private java.util.Set usedObjsTID = new java.util.HashSet();
-  private java.util.Set missingObjsTID = new java.util.HashSet();
+  private java.util.Map<String,Object> objMap = new java.util.HashMap<String,Object>();
+  private java.util.Set<String> usedObjsTID = new java.util.HashSet<String>();
+  private java.util.Set<String> missingObjsTID = new java.util.HashSet<String>();
   private Object actualObject = null;
   private UmlModel umlModel = null;
   private String currentElementTag=null;
@@ -51,16 +51,14 @@ public class MyHandler implements org.xml.sax.ContentHandler
   private String nlsStringID=null;
 
   // map<Class class,map<String attrName,Method setAddValueMethod>>
-  private java.util.HashMap setValues=new java.util.HashMap();
+  private java.util.HashMap<Class,Map<String,Method>> setValues=new java.util.HashMap<Class,Map<String,Method>>();
   // map<Class class,map<String roleName,Method setAddObjectMethod>>
-  private java.util.HashMap setObjects=new java.util.HashMap();
-  // map<Class codelist,Constructor constructor>
-  //private java.util.HashMap codelists=new java.util.HashMap();
+  private java.util.HashMap<Class,Map<String,Method>> setObjects=new java.util.HashMap<Class,Map<String,Method>>();
 
   // map<String attrName,Method setAddValueMethod>
-  private java.util.HashMap currentObjValueSets=null;
+  private java.util.Map<String,Method> currentObjValueSets=null;
   // map<String roleName,Method setAddObjectMethod>
-  private java.util.HashMap currentObjObjectAdds=null;
+  private java.util.Map<String,Method> currentObjObjectAdds=null;
 
   private StringBuffer content=null;
   private int level=0;
@@ -151,8 +149,8 @@ public class MyHandler implements org.xml.sax.ContentHandler
           nlsStringID=atts.getValue(0);
         }else{
           analyseClass(actualObject.getClass());
-          currentObjValueSets=(HashMap)setValues.get(actualObject.getClass());
-          currentObjObjectAdds=(HashMap)setObjects.get(actualObject.getClass());
+          currentObjValueSets=setValues.get(actualObject.getClass());
+          currentObjObjectAdds=setObjects.get(actualObject.getClass());
         }
       }catch(IllegalAccessException ex){
             ch.ehi.umleditor.application.LauncherView.getInstance().log("decode"
@@ -213,13 +211,13 @@ public class MyHandler implements org.xml.sax.ContentHandler
                   Object dest=objMap.get(value);
                   usedObjsTID.add(value);
                   // get addXX() method of current object
-                  Method add=(Method)currentObjObjectAdds.get(currentElementTag);
+                  Method add=currentObjObjectAdds.get(currentElementTag);
                   // invoke addXX() method on current object to add reference
                   add.invoke(actualObject,new Object[]{dest});
                 }
               }else if(currentObjValueSets.containsKey(currentElementTag)){
                 // get setXX() method of current object
-                Method set=(Method)currentObjValueSets.get(currentElementTag);
+                Method set=currentObjValueSets.get(currentElementTag);
                 Class parameterType=set.getParameterTypes()[0];
                 Object valueObject=null;
                 if(parameterType==Boolean.TYPE || parameterType==java.lang.Boolean.class){
@@ -248,15 +246,15 @@ public class MyHandler implements org.xml.sax.ContentHandler
               }
             }
 			catch(IllegalArgumentException ex){
-				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage()+"; "+currentElementTag+" on "+actualObject.getClass());
 				throw new SAXException(ex);
 			}
             catch(IllegalAccessException ex){
-				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage()+"; "+currentElementTag+" on "+actualObject.getClass());
             	throw new SAXException(ex);
             }
 			catch(InvocationTargetException ex){
-				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage());
+				EhiLogger.traceUnusualState("Parsing Error - Line: "+currentLocation.getLineNumber()+", Message: "+ex.getMessage()+"; "+currentElementTag+" on "+actualObject.getClass());
 				throw new SAXException(ex);
 			}
           }
@@ -298,14 +296,17 @@ public class MyHandler implements org.xml.sax.ContentHandler
     //if(codelists.containsKey(aclass))return;
 
     Class stringClass=new String().getClass();
-    Map values = new HashMap(); // map<String attrName,Method setAddObjectMethod>
-    Map objects = new HashMap(); // map<String roleName,Method setAddValueMethod>
+    Map<String,Method> values = new HashMap<String,Method>(); // map<String attrName,Method setAddObjectMethod>
+    Map<String,Method> objects = new HashMap<String,Method>(); // map<String roleName,Method setAddValueMethod>
 
-    java.util.HashMap methodSet=new java.util.HashMap();
+    java.util.Map<String,Method> methodSet=new java.util.HashMap<String,Method>();
     Method[] methods = aclass.getMethods();
     for(int a = 0;a<methods.length;a++)
     {
-      methodSet.put(methods[a].getName(),methods[a]);
+        Class parameterTypes[] = methods[a].getParameterTypes();
+        if(parameterTypes.length==1){
+            methodSet.put(methods[a].getName(),methods[a]);
+        }
     }
 
     for (int i = 0;i<methods.length;i++)
@@ -321,23 +322,19 @@ public class MyHandler implements org.xml.sax.ContentHandler
           attrNameWoLink=attrName.substring(0,attrName.length()-4);
         }
         Class parameterTypes[] = methods[i].getParameterTypes();
-        if(parameterTypes.length==1){
-          if(parameterTypes[0].isPrimitive()
-              || parameterTypes[0]==stringClass
-              || isBuiltinClass(parameterTypes[0])
-              ){
-            values.put(attrName,methods[i]);
-          }else{
-            if(methodSet.containsKey("_link"+attrNameWoLink)){
-              // use _linkXX()
-              objects.put(attrName,methodSet.get("_link"+attrNameWoLink));
-            }else{
-              // use addXX()
-              objects.put(attrName,methods[i]);
-            }
-          }
+        if(parameterTypes[0].isPrimitive()
+                || parameterTypes[0]==stringClass
+                || isBuiltinClass(parameterTypes[0])
+                ){
+              values.put(attrName,methods[i]);
         }else{
-          // ignore method
+              if(methodSet.containsKey("_link"+attrNameWoLink)){
+                // use _linkXX()
+                objects.put(attrName,methodSet.get("_link"+attrNameWoLink));
+              }else{
+                // use addXX()
+                objects.put(attrName,methods[i]);
+              }
         }
       }else if(methodName.startsWith("attach") && methods[i].getReturnType()==void.class){
         String attrName=methodName.substring(6);
@@ -349,39 +346,31 @@ public class MyHandler implements org.xml.sax.ContentHandler
           attrNameWoLink=attrName.substring(0,attrName.length()-4);
         }
         Class parameterTypes[] = methods[i].getParameterTypes();
-        if(parameterTypes.length==1){
-          if(parameterTypes[0].isPrimitive()
-              || isBuiltinClass(parameterTypes[0])
-              || parameterTypes[0]==stringClass
-              ){
-            values.put(attrName,methods[i]);
-          }else{
-            if(methodSet.containsKey("_link"+attrNameWoLink)){
-              // use _linkXX()
-              objects.put(attrName,methodSet.get("_link"+attrNameWoLink));
+        if(parameterTypes[0].isPrimitive()
+                || isBuiltinClass(parameterTypes[0])
+                || parameterTypes[0]==stringClass
+                ){
+              values.put(attrName,methods[i]);
             }else{
-              // use attachXX()
-              objects.put(attrName,methods[i]);
+              if(methodSet.containsKey("_link"+attrNameWoLink)){
+                // use _linkXX()
+                objects.put(attrName,methodSet.get("_link"+attrNameWoLink));
+              }else{
+                // use attachXX()
+                objects.put(attrName,methods[i]);
+              }
             }
-          }
-        }else{
-          // ignore method
-        }
       }else if(methodName.startsWith("set") && methods[i].getReturnType()==void.class){
         String attrName=methodName.substring(3);
         Class parameterTypes[] = methods[i].getParameterTypes();
-        if(parameterTypes.length==1){
-          if(parameterTypes[0].isPrimitive()
-              || parameterTypes[0]==stringClass
-              || isBuiltinClass(parameterTypes[0])
-              ){
-            values.put(attrName,methods[i]);
-          }else{
-            objects.put(attrName,methods[i]);
-          }
-        }else{
-          // ignore method
-        }
+        if(parameterTypes[0].isPrimitive()
+                || parameterTypes[0]==stringClass
+                || isBuiltinClass(parameterTypes[0])
+                ){
+              values.put(attrName,methods[i]);
+            }else{
+              objects.put(attrName,methods[i]);
+            }
       }
     }
     setValues.put(aclass,values);
@@ -393,18 +382,18 @@ public class MyHandler implements org.xml.sax.ContentHandler
     this.secondPass=secondPass;
   }
 
-  public java.util.Map getUnreferencedObjects(){
-    java.util.HashMap ret=new java.util.HashMap(objMap);
-    java.util.Iterator it=new java.util.HashSet(ret.keySet()).iterator();
+  public java.util.Map<String,Object> getUnreferencedObjects(){
+    java.util.Map<String,Object> ret=new java.util.HashMap<String,Object>(objMap);
+    java.util.Iterator<String> it=new java.util.HashSet<String>(ret.keySet()).iterator();
     while(it.hasNext()){
-      String tid=(String)it.next();
+      String tid=it.next();
       if(usedObjsTID.contains(tid)){
         ret.remove(tid);
       }
     }
     return ret;
   }
-  public java.util.Set getMissingObjects(){
+  public java.util.Set<String> getMissingObjects(){
     return missingObjsTID;
   }
       private static boolean isBuiltinClass(Class aclass){
