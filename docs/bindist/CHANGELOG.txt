@@ -1,5 +1,6 @@
 LATEST 
 ----------------------------------
+-  translationxml export: distinguish between CLASS and STRUCTURE
 
 UML-Editor 3.7.6 (2020-12-28) 
 ----------------------------------

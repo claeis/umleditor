@@ -21,6 +21,7 @@ import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
@@ -403,13 +404,14 @@ public class TransferToXml {
             return ElementType.ATTRIBUTE;
         } else if (obj instanceof RoleDef) {
             return ElementType.ROLE;
-        } else if (obj instanceof AbstractClassDef) {
-            return findElementType(obj);
         } else if (obj instanceof DomainDef) {
             return ElementType.DOMAIN;
         } else if (obj instanceof GraphicParameterDef) {
             return ElementType.GRAPHIC;
         } else if (obj instanceof ClassDef) {
+            if(((ClassDef)obj).getKind()==ClassDefKind.STRUCTURE) {
+                return ElementType.STRUCTURE;
+            }
             return ElementType.CLASS;
         } else if (obj instanceof AssociationDef) {
             return ElementType.ASSOCIATION;
@@ -423,26 +425,6 @@ public class TransferToXml {
             return ElementType.TOPIC;
         } else {
             return null;
-        }
-    }
-
-    /**
-     * it gives as a return parameter the Name of the Element type
-     * 
-     * @param model
-     *            related model Element
-     * @return it returns name of the related matches Element as a String
-     */
-    private String findElementType(Object obj) {
-        AbstractClassDef abstractClassDefiniton = (AbstractClassDef) obj;
-        if (abstractClassDefiniton instanceof AssociationDef) {
-            return ElementType.ASSOCIATION;
-        } else {
-            if (abstractClassDefiniton instanceof ClassDef) {
-                return ElementType.CLASS;
-            } else {
-                return ElementType.STRUCTURE;
-            }
         }
     }
 }
