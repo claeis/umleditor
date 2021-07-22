@@ -74,8 +74,10 @@ import ch.ehi.umleditor.application.ElementUtils;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import ch.ehi.basics.tools.TopoSort;
@@ -266,7 +268,7 @@ public class TransferFromUmlMetamodel
     }
     java.util.HashSet done=new java.util.HashSet(); // collection of visited languages
     // enumerate all languages
-	Set languages = new HashSet();
+	List<String> languages = new ArrayList<String>();
     {
     	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getChildElements(def, ModelDef.class);
     	java.util.Iterator iterator = set.iterator();
@@ -275,11 +277,17 @@ public class TransferFromUmlMetamodel
     	while (iterator.hasNext()) {
     		ModelDef modelDef = (ModelDef)iterator.next();
     		// 1) get the BaseLanguage
-    		if (modelDef.getBaseLanguage() != null) {
-    			 languages.add(modelDef.getBaseLanguage());
+    		final String baseLanguage = modelDef.getBaseLanguage();
+            if (baseLanguage != null && !languages.contains(baseLanguage)) {
+    			 languages.add(baseLanguage);
     		}
     		// 2) get the ValidSecondLanguages
-    		languages.addAll(modelDef.getValidSecondLanguages());
+    		final List<String> validSecondLanguages = modelDef.getValidSecondLanguages();
+    		for(String secondLang:validSecondLanguages) {
+                if (!languages.contains(secondLang)) {
+                    languages.add(secondLang);
+               }
+    		}
     	}
     }
     java.util.Iterator languagei=languages.iterator();
