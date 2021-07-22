@@ -1,6 +1,8 @@
 LATEST 
 ----------------------------------
--  translationxml export: distinguish between CLASS and STRUCTURE
+- translationxml export: distinguish between CLASS and STRUCTURE
+- translationxml export: sort elements according to scoped name, but ignore case (same as in MS-Excel)
+- ili2c-5.2.3+
 
 UML-Editor 3.7.6 (2020-12-28) 
 ----------------------------------
