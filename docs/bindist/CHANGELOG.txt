@@ -3,6 +3,7 @@ LATEST
 - translationxml export: distinguish between CLASS and STRUCTURE
 - translationxml export: sort elements according to scoped name, but ignore case (same as in MS-Excel)
 - ModelDef: keep ordering of translations
+- ili export: fix missing version in TRANSLATION OF
 - ili2c-5.2.3+
 
 UML-Editor 3.7.6 (2020-12-28) 

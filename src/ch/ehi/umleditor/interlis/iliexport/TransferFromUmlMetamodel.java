@@ -466,7 +466,7 @@ public class TransferFromUmlMetamodel
         if(translation.getLanguage().equals(language)){
           newline();
           String trslModelName=def.getName().getValue(translation.getBaseLanguage());
-          out.write("TRANSLATION OF "+trslModelName);
+          out.write("TRANSLATION OF "+trslModelName+" [\""+version+"\"]");
           if(runIli2c){
 			filedep.add(new IliFileCond(trslModelName,modelName));
           }
