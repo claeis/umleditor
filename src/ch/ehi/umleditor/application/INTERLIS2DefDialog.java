@@ -1098,15 +1098,21 @@ private void setLanguageTable() {
 	java.util.Iterator iterator = set.iterator();
 
 	// get the languages
-	Set languages = new HashSet();
+	List<String> languages = new ArrayList<String>();
 	while (iterator.hasNext()) {
 		ModelDef modelDef = (ModelDef)iterator.next();
 		// 1) get the BaseLanguage
-		if (modelDef.getBaseLanguage() != null) {
-			 languages.add(modelDef.getBaseLanguage());
+		final String baseLanguage = modelDef.getBaseLanguage();
+        if (baseLanguage != null && !languages.contains(baseLanguage)) {
+			 languages.add(baseLanguage);
 		}
 		// 2) get the ValidSecondLanguages
-		languages.addAll(modelDef.getValidSecondLanguages());
+		final List<String> validSecondLanguages = modelDef.getValidSecondLanguages();
+		for(String secondLang:validSecondLanguages) {
+		    if(secondLang!=null && !languages.contains(secondLang)) {
+	            languages.add(secondLang);
+		    }
+		}
 	}
 
 	// build a Vector of language and corresponding filename
