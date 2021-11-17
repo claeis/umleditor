@@ -5,6 +5,7 @@ LATEST
 - ModelDef: keep ordering of translations
 - INTERLIS2Def dialog: keep ordering of translations
 - ili export: fix missing version in TRANSLATION OF
+- ili import: fix multilingual model element references
 - fix -Duser.language=fr doesn't work; don't change default Locale, removed language selection dialog (#52)
 - ili2c-5.2.3+
 
