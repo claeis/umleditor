@@ -1488,7 +1488,7 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
       // handle unknown types in a generic way
       ch.ehi.interlis.domainsandconstants.UnknownType ukn=new ch.ehi.interlis.domainsandconstants.UnknownType();
       ret=ukn;
-      makeSyntax.printType(scope,dd);
+      makeSyntax.printType(scope,dd,false);
       ukn.setSyntax(new NlsString(modelLanguage,getSyntax()));
     }
     return ret;
