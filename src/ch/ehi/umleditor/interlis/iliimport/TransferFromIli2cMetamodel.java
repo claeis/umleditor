@@ -41,27 +41,39 @@ public class TransferFromIli2cMetamodel
     namespaceStack.remove(0);
   }
 
-  private java.util.HashMap<Model,ch.ehi.interlis.modeltopicclass.INTERLIS2Def> fileMap=new java.util.HashMap<Model,ch.ehi.interlis.modeltopicclass.INTERLIS2Def>();
+  private java.util.HashMap<String,ch.ehi.interlis.modeltopicclass.INTERLIS2Def> fileMap=new java.util.HashMap<String,ch.ehi.interlis.modeltopicclass.INTERLIS2Def>();
   private ch.ehi.interlis.modeltopicclass.INTERLIS2Def visitINTERLIS2Def(String language,String filename, Model mdef)
   {
     Model translatedMdef=(Model)getElementInRootLanguage(mdef);
-    if(fileMap.containsKey(mdef)){
-        // already seen model
-        ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(mdef);
+    if(fileMap.containsKey(mdef.getFileName())){
+        // already seen file
+        ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(mdef.getFileName());
         return ili2Def;
-    }if(translatedMdef!=null && fileMap.containsKey(translatedMdef)) {
-        // model in additional language
-        ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(translatedMdef);
-        ili2Def.setName(new NlsString(ili2Def.getName(),language,filename));
-        fileMap.put(mdef,ili2Def);
-        return ili2Def;
-        
     }
-    // new model
+    
+    // ASSERT: not yet seen model
+    
+    if(translatedMdef!=null && fileMap.containsKey(translatedMdef.getFileName())) {
+        // model in additional language
+        // translated model in same file?
+        if(mdef.getFileName().equals(translatedMdef.getFileName())) {
+            // already seen file
+            ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(translatedMdef.getFileName());
+            return ili2Def;
+        }else {
+            // different file
+            ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(translatedMdef.getFileName());
+            ili2Def.setName(new NlsString(ili2Def.getName(),language,filename));
+            fileMap.put(mdef.getFileName(),ili2Def);
+            return ili2Def;
+        }
+    }
+    
+    // new file
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=new ch.ehi.interlis.modeltopicclass.INTERLIS2Def();
     ili2Def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
     ili2Def.setName(new NlsString(language,filename));
-    fileMap.put(mdef,ili2Def);
+    fileMap.put(mdef.getFileName(),ili2Def);
     ili2modelset.addOwnedElement(ili2Def);
     return ili2Def;
   }

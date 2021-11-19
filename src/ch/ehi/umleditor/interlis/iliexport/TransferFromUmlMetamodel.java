@@ -19,6 +19,7 @@ package ch.ehi.umleditor.interlis.iliexport;
 
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.IliImport;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
@@ -2337,18 +2338,13 @@ private void addSimpleEleCond(java.util.Set children,
     }
     ModelDef modelOfSource=null;
     ModelDef modelOfRef=null;
-    try {
-        modelOfSource=ModelElementUtility.getModel(source);
-    }catch(IllegalStateException ex) {
-        EhiLogger.debug(source.toString());
-    }
-    try {
-        modelOfRef=ModelElementUtility.getModel(ref);
-    }catch(IllegalStateException ex) {
-        EhiLogger.debug(ref.toString());
-    }
+    modelOfSource=ModelElementUtility.getModel(source);
+    modelOfRef=ModelElementUtility.getModel(ref);
     if(!modelOfRef.equals(modelOfSource)) {
-        language=modelOfSource.getImport(modelOfRef).getSupplierLanguage(language);
+        final IliImport iliImp = modelOfSource.getImport(modelOfRef);
+        if(iliImp!=null) {
+            language=iliImp.getSupplierLanguage(language);
+        }
     }
     return ch.ehi.interlis.tools.ModelElementUtility.getIliQualifiedName(source,ref,language);
     }
