@@ -21,6 +21,12 @@ import ch.ehi.uml1_4.implementation.UmlModel;
 import ch.ehi.uml1_4.implementation.UmlPackage;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
+
+import java.util.Iterator;
+
+import ch.ehi.interlis.associations.AssociationDef;
+import ch.ehi.interlis.associations.RoleDef;
+import ch.ehi.interlis.attributes.AttributeDef;
 import ch.ehi.interlis.modeltopicclass.IliImport;
               // -end- 3CC66649011E import "ModelElementUtility"
 
@@ -355,6 +361,34 @@ public class ModelElementUtility
     if(i2<i1)return 1;
     return 0;
                   // -end- 3E64146D02FB body3CC66649011E "compareDefinition"
+                  }
+
+                public static ModelDef getModel(ModelElement source)
+                  {
+                        ModelElement parent = source;
+                        if (source instanceof AttributeDef) {
+                            parent = ((AttributeDef) source).getOwner();
+                        }
+                        while (!(parent instanceof ModelDef)) {
+                            parent = parent.getNamespace();
+                        }
+                        return (ModelDef) parent;
+                    }
+
+                /** get other end of a bidrectional association
+                   *
+                   */
+                  static public RoleDef getOppEnd(RoleDef athis)
+                  {
+                    AssociationDef assoc=(AssociationDef)athis.getAssociation();
+                    java.util.Iterator rolei=assoc.iteratorConnection();
+                    while(rolei.hasNext()){
+                      RoleDef obj=(RoleDef)rolei.next();
+                      if(obj!=athis){
+                        return obj;
+                      }
+                    }
+                    return null;
                   }
 
                 // declare/define something only in the code

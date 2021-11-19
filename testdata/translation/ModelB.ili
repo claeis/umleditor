@@ -1,0 +1,21 @@
+INTERLIS 2.3;
+
+MODEL ModelB_de (de)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" =
+  IMPORTS ModelA_de;
+  
+  DOMAIN
+    DomainB_de = 1..10 [ModelA_de.UnitA_de];
+    
+END ModelB_de.
+
+MODEL ModelB_fr (fr)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" 
+  TRANSLATION OF ModelB_de [ "2021-11-17"]
+  =
+  IMPORTS ModelA_fr;
+    
+  DOMAIN
+    DomainB_fr = 1..10 [ModelA_fr.UnitA_fr];
+  
+END ModelB_fr.

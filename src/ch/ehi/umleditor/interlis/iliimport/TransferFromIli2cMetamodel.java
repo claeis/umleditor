@@ -1146,7 +1146,30 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
     }
 
     // imports
-    if(translatedModel==null) {
+    if(false){
+        // pre 3.8.0
+        if(translatedModel==null) {
+            Importable[] imported = mdef.getImporting ();
+            if (imported.length > 0)
+            {
+              for (int i = 0; i < imported.length; i++)
+              {
+                Model curImport = (Model) imported[i];
+                if(curImport!=ilibase){
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
+                    iliimport.addSupplier(supplier);
+                    iliimport.addClient(model);
+                    if(curImport.getLanguage()!=null) {
+                        iliimport.setLanguage(curImport.getLanguage());
+                    }
+                }
+              }
+            }
+        }else {
+            // TODO update IliImport's with supplierLanguage+clientLanguage
+        }
+    }else{
         Importable[] imported = mdef.getImporting ();
         if (imported.length > 0)
         {
@@ -1154,18 +1177,20 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
           {
             Model curImport = (Model) imported[i];
             if(curImport!=ilibase){
-                ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
-                ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
-                iliimport.addSupplier(supplier);
-                iliimport.addClient(model);
-                if(curImport.getLanguage()!=null) {
-                    iliimport.setLanguage(curImport.getLanguage());
+                if(translatedModel==null) {
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
+                    iliimport.addSupplier(supplier);
+                    iliimport.addClient(model);
+                    iliimport.addImportLanguage(mdef.getLanguage(),curImport.getLanguage());
+                }else {
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=model.getImport(supplier);
+                    iliimport.addImportLanguage(mdef.getLanguage(),curImport.getLanguage());
                 }
             }
           }
         }
-    }else {
-        // TODO update IliImport's with supplierLanguage+clientLanguage
     }
 
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2def=null;

@@ -1836,6 +1836,20 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
       return imps.iterator();
     }
 
+    public IliImport getImport(ModelDef supplier)
+    {
+        java.util.Iterator impi=super.iteratorClientDependency();
+        while(impi.hasNext()){
+            Dependency dep=(Dependency)impi.next();
+            if(dep instanceof IliImport){
+                IliImport imp=(IliImport)dep;
+                if(imp.containsSupplier(supplier)) {
+                    return imp;
+                }
+            }
+        }
+        return null;
+    }
     // -end- 358A5DB202C5 detail_end "ModelDef"
 
   }

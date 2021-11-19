@@ -102,6 +102,7 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   clearStereotype();
                   clearReferenceTag();
                   clearImportedBy();
+                  clearLanguages();
                   // Role EditorTreeElement: EditorTreeElement object(s) may point to this
                   setName(null);
                   setDocumentation(null);
@@ -124,6 +125,7 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                   it=iteratorBehavior();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTaggedValue();while(it.hasNext())visitor.visit(it.next());
                   it=iteratorTemplateParameter();while(it.hasNext())visitor.visit(it.next());
+                  it=iteratorLanguages();while(it.hasNext())visitor.visit(it.next());
                   visitor.visit(getName());
                   visitor.visit(getDocumentation());
                   super.enumerateChildren(visitor);
@@ -328,43 +330,57 @@ public class IliImport extends AbstractDependency implements Permission , java.i
                 }
                 // -end- 335C0D7A02E4 _unlink_body3940AEA40090 "Dependency::_unlinkSupplier"
 
-                // -beg- preserve=no 3CE1360202DA var3940AEA40090 "language"
-                private String language;
-                // -end- 3CE1360202DA var3940AEA40090 "language"
-
-                /** get current value of language
-                 *  language to be used for import
-                 *  @see #setLanguage
+                /** method exists to prevent "unexpected Element" messages when reading pre 3.8.0 .uml-files 
+                 * @deprecated
                  */
-                // -beg- preserve=no 3CE1360202DA get_head3940AEA40090 "language"
-                public  String getLanguage()
-                // -end- 3CE1360202DA get_head3940AEA40090 "language"
-                {
-                  // -beg- preserve=no 3CE1360202DA get_body3940AEA40090 "language"
-                  return language;
-                  // -end- 3CE1360202DA get_body3940AEA40090 "language"
-                }
-
-                /** set current value of language
-                 *  @see #getLanguage
-                 */
-                // -beg- preserve=no 3CE1360202DA set_head3940AEA40090 "language"
                 public  void setLanguage(String value1)
-                // -end- 3CE1360202DA set_head3940AEA40090 "language"
                 {
-                  // -beg- preserve=no 3CE1360202DA set_body3940AEA40090 "language"
-                  if(language != value1){
-                    language = value1;
-                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setLanguage"));
-                  }
-                  // -end- 3CE1360202DA set_body3940AEA40090 "language"
                 }
+
 
                 // declare/define something only in the code
                 // please fill in/modify the following section
-                // -beg- preserve=no 3940AEA40090 detail_end "IliImport"
-
+                // -beg- preserve=yes 3940AEA40090 detail_end "IliImport"
+                private java.util.Map<String,StringPair> languages=null;
+                private java.util.List<StringPair> languages_raw=new java.util.ArrayList<StringPair>();
+                public java.util.Iterator<StringPair> iteratorLanguages()
+                {
+                    initLanguages();
+                    return languages.values().iterator();
+                }
+                private void clearLanguages() {
+                    languages_raw.clear();
+                    languages=null;
+                }
+                public void addLanguages(StringPair entry)
+                {
+                    languages_raw.add(entry);
+                }
+                private void initLanguages()
+                {
+                    if(languages!=null) {
+                        return;
+                    }
+                    languages=new java.util.HashMap<String,StringPair>();
+                    for(StringPair entry:languages_raw) {
+                        languages.put(entry.getKey(),entry);
+                    }
+                }
+                public void addImportLanguage(String clientLanguage, String supplierLanguage)
+                {
+                    initLanguages();
+                    languages.put(clientLanguage,new StringPair(clientLanguage, supplierLanguage));
+                }
+                public String getSupplierLanguage(String clientLanguage) {
+                    initLanguages();
+                    StringPair entry= languages.get(clientLanguage);
+                    if(entry==null) {
+                        return null;
+                    }
+                    return entry.getValue();
+                }
                 // -end- 3940AEA40090 detail_end "IliImport"
+
 
               }
 
