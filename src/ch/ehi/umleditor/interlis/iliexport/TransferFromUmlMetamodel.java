@@ -605,9 +605,12 @@ public class TransferFromUmlMetamodel
 
     inc_ind();
 
-    if(def.containsOiddomain()){
-      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+    if(def.containsBasketoid()){
+      out.write(getIndent()+"BASKET OID AS "+domainRef(def,def.getBasketoid()));out.write(";");newline();
     }
+    if(def.containsOiddomain()){
+        out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+      }
 
     int depc=0;
     String sep=getIndent()+"DEPENDS ON ";

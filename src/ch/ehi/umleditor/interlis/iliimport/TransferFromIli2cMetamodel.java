@@ -331,6 +331,9 @@ public class TransferFromIli2cMetamodel
 	    if(topic.getOid()!=null){
 	      topicdef.attachOiddomain(findDomainDef((Domain)getElementInRootLanguageOrSame(topic.getOid())));
 	    }
+        if(topic.getBasketOid()!=null){
+            topicdef.attachBasketoid(findDomainDef((Domain)getElementInRootLanguageOrSame(topic.getBasketOid())));
+        }
 
 	    Iterator it = topic.getDependentOn();
 	    while(it.hasNext())
