@@ -1518,7 +1518,11 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.ANY);
       }else if(dd instanceof TextOIDType){
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.TEXT);
-        oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,((OIDType)dd).getOIDType()));
+        Type textOidType=((OIDType)dd).getOIDType();
+        if(textOidType instanceof TypeAlias) {
+            textOidType=((TypeAlias)textOidType).resolveAliases();
+        }
+        oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,textOidType));
       }else if(dd instanceof NumericOIDType){
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.NUMERIC);
         oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,((OIDType)dd).getOIDType()));
