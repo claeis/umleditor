@@ -9,6 +9,7 @@ LATEST
 - ili export: fix missing version in TRANSLATION OF
 - ili export: export multilingual model element references in the language of the imported model
 - ili import: fix multilingual model element references
+- ili import: fix multilingual enumeration elements
 - ili import: map unknown ili2c types as syntax text without MANDATORY
 - fix -Duser.language=fr doesn't work; don't change default Locale, removed language selection dialog (#52)
 - FILE FORMAT: class IliImport (ili:IMPORTS) changed

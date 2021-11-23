@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.constraints.ConstraintDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
 import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.Translation;
@@ -223,6 +224,25 @@ public class TransferFromIli2cMetamodel
     domainMap.put(domain,domainDef);
     return domainDef;
   }
+  private java.util.HashMap<Enumeration,ch.ehi.interlis.domainsandconstants.basetypes.Enumeration> enumMap=new java.util.HashMap<Enumeration,ch.ehi.interlis.domainsandconstants.basetypes.Enumeration>();
+  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration findEnumeration(Enumeration enumIli) {
+      if(enumMap.containsKey(enumIli)){
+          return enumMap.get(enumIli);
+        }
+        ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumUml=new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
+        enumMap.put(enumIli,enumUml);
+        return enumUml;
+  }
+  private java.util.HashMap<Enumeration.Element,ch.ehi.interlis.domainsandconstants.basetypes.EnumElement> enumEleMap=new java.util.HashMap<Enumeration.Element,ch.ehi.interlis.domainsandconstants.basetypes.EnumElement>();
+  private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement findEnumEle(Enumeration.Element eeIli) {
+      if(enumEleMap.containsKey(eeIli)){
+          return enumEleMap.get(eeIli);
+        }
+        ch.ehi.interlis.domainsandconstants.basetypes.EnumElement eeUml=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
+        enumEleMap.put(eeIli,eeUml);
+        return eeUml;
+  }
+  
   private java.util.HashMap<LineForm,ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef> lineFormTypeMap=new java.util.HashMap<LineForm,ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef>();
   private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef findLineFormTypeDef(LineForm lineFormType)
   {
@@ -850,26 +870,29 @@ private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardina
         
         // meta values
         visitMetaValues(attrdef,attrib.getMetaValues());
-
-        ch.ehi.interlis.attributes.AttrType battrtype=null;
-
-        ch.ehi.uml1_4.foundation.datatypes.Multiplicity m=null;
-        if(btype instanceof CompositionType){
-            if(unwrapMultiValueStructAttrs && isMultiValueAttr){
-                // normales ili Attribut in Wrapper
-                // ASSERT isMultiValueAttributeWrapper(btype)
-                ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
-                battrtype=attrtype;
+    }
+    
+    ch.ehi.interlis.attributes.AttrType battrtype=null;
+    ch.ehi.uml1_4.foundation.datatypes.Multiplicity m=null;
+    if(btype instanceof CompositionType){
+        if(unwrapMultiValueStructAttrs && isMultiValueAttr){
+            // normales ili Attribut in Wrapper
+            // ASSERT isMultiValueAttributeWrapper(btype)
+            ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
+            battrtype=attrtype;
+            if(translatedAttrib==null) {
                 CompositionType type=(CompositionType)btype;
                 attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
                 m=visitCardinality(type.getCardinality());
                 LocalAttribute wrappedValue=(LocalAttribute) type.getComponentType().getElement(LocalAttribute.class, TransferFromUmlMetamodel.VALUE_ATTR);
                 TypeAlias wrappedValueType=(TypeAlias)wrappedValue.getDomain();  // Type vom value Attribut innerhalb der Struktur
                 attrtype.attachDomainDef(findDomainDef((Domain)getElementInRootLanguageOrSame(wrappedValueType.getAliasing())));
-            }else if(iliAttrsAsUmlAttrs){
-                CompositionType type=(CompositionType)btype;
-                ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
-                battrtype=attrtype;
+            }
+        }else if(iliAttrsAsUmlAttrs){
+            CompositionType type=(CompositionType)btype;
+            ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
+            battrtype=attrtype;
+            if(translatedAttrib==null) {
                 ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType structAttrType=new ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType();
                 attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
                 if(type.getComponentType()!=ilibase.ANYSTRUCTURE){
@@ -882,46 +905,53 @@ private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardina
                 attrtype.attachDirect(structAttrType);
                 m=visitCardinality(type.getCardinality());
             }
-        }else{
-            // normales ili Attribut
-            if (attrib instanceof LocalAttribute){
-                // DomainAttribute
-                ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
-                battrtype=attrtype;
-                // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
-                // resolve them first
-                if(btype instanceof TypeAlias){
-                  Domain predefinedBaseDomain=((TypeAlias) btype).getAliasing();
-                  if(predefinedBaseDomain==ilibase.BOOLEAN
-                      || predefinedBaseDomain==ilibase.HALIGNMENT
-                      || predefinedBaseDomain==ilibase.VALIGNMENT
-                      || predefinedBaseDomain==ilibase.NAME
-                      || predefinedBaseDomain==ilibase.URI
-                      ){
-                    attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseDomain.getType()));
-                  }else{
-                      TypeAlias type=(TypeAlias)btype;
+        }
+    }else{
+        // normales ili Attribut
+        if (attrib instanceof LocalAttribute){
+            // DomainAttribute
+            ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
+            battrtype=attrtype;
+            // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
+            // resolve them first
+            if(btype instanceof TypeAlias){
+              Domain predefinedBaseDomain=((TypeAlias) btype).getAliasing();
+              if(predefinedBaseDomain==ilibase.BOOLEAN
+                  || predefinedBaseDomain==ilibase.HALIGNMENT
+                  || predefinedBaseDomain==ilibase.VALIGNMENT
+                  || predefinedBaseDomain==ilibase.NAME
+                  || predefinedBaseDomain==ilibase.URI
+                  ){
+                final ch.ehi.interlis.domainsandconstants.Type umlType = visitType(attrib.getContainer(),predefinedBaseDomain.getType());
+                if(translatedAttrib==null) {
+                    attrtype.attachDirect(umlType);
+                }
+              }else{
+                  TypeAlias type=(TypeAlias)btype;
+                  if(translatedAttrib==null) {
                       attrtype.attachDomainDef(findDomainDef((Domain)getElementInRootLanguageOrSame(type.getAliasing())));
                   }
-                }else{
-                  if(btype!=null){
-                    attrtype.attachDirect(visitType(attrib.getContainer(),btype));
-                  }
+              }
+            }else{
+              if(btype!=null){
+                final ch.ehi.interlis.domainsandconstants.Type umlType = visitType(attrib.getContainer(),btype);
+                if(translatedAttrib==null) {
+                    attrtype.attachDirect(umlType);
                 }
+              }
             }
-            ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-            r.setLower( btype.isMandatory() ? 1 : 0);
-            r.setUpper(1);
-            m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-            m.addRange(r);
         }
-
-        
+        ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+        r.setLower( btype.isMandatory() ? 1 : 0);
+        r.setUpper(1);
+        m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+        m.addRange(r);
+    }
+    
+    if(translatedAttrib==null) {
         attrdef.setMultiplicity(m);
-
         attrdef.attachAttrType(battrtype);
         ((ch.ehi.uml1_4.foundation.core.Classifier)getNamespace()).addFeature(attrdef);
-        
     }
   }
 
@@ -1254,6 +1284,17 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
       }
       return ele;
   }
+  private Enumeration.Element getElementInRootLanguage(Enumeration.Element ele) {
+      Enumeration.Element baseLanguageElement = ele.getTranslationOf();
+      if (baseLanguageElement == null) {
+          return null;
+      }
+      while (baseLanguageElement != null) {
+          ele = baseLanguageElement;
+          baseLanguageElement = ele.getTranslationOf();
+      }
+      return ele;
+  }
 
   private void visitMetaValues(ch.ehi.uml1_4.foundation.core.ModelElement ele,ch.ehi.basics.settings.Settings values)
   {
@@ -1312,24 +1353,28 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
 	      domainextends.attachChild(domaindef);
 	    }
 
-	        // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
-	        // resolve them first
-	        Type btype=dd.getType();
-	        if(btype instanceof TypeAlias){
-	          Type predefinedBaseType=btype.resolveAliases();
-	          if(predefinedBaseType==ilibase.BOOLEAN.getType()
-	              || predefinedBaseType==ilibase.HALIGNMENT.getType()
-	              || predefinedBaseType==ilibase.VALIGNMENT.getType()
-	              || predefinedBaseType==ilibase.NAME.getType()
-	              || predefinedBaseType==ilibase.URI.getType()
-	              ){
-	            btype=predefinedBaseType;
-	          }
-	        }
-	    ch.ehi.interlis.domainsandconstants.Type type=visitType(dd.getContainer(),btype);
-	    domaindef.attachType(type);
-	    getNamespace().addOwnedElement(domaindef);
 	}
+	
+    // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
+    // resolve them first
+    Type btype=dd.getType();
+    if(btype instanceof TypeAlias){
+      Type predefinedBaseType=btype.resolveAliases();
+      if(predefinedBaseType==ilibase.BOOLEAN.getType()
+          || predefinedBaseType==ilibase.HALIGNMENT.getType()
+          || predefinedBaseType==ilibase.VALIGNMENT.getType()
+          || predefinedBaseType==ilibase.NAME.getType()
+          || predefinedBaseType==ilibase.URI.getType()
+          ){
+        btype=predefinedBaseType;
+      }
+    }
+    ch.ehi.interlis.domainsandconstants.Type type=visitType(dd.getContainer(),btype);
+    
+    if(translatedDd==null) {
+        domaindef.attachType(type);
+        getNamespace().addOwnedElement(domaindef);
+    }
     return domaindef;
   }
 
@@ -1370,7 +1415,12 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
     }else if (dd instanceof EnumerationType){
       ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration;
       EnumerationType et = (EnumerationType) dd;
-      enumeration=visitEnumeration(et.getEnumeration());
+      EnumerationType translatedEt=(EnumerationType)getElementInRootLanguage(et);
+      Enumeration translatedE=null;
+      if(translatedEt!=null) {
+          translatedE=translatedEt.getEnumeration();
+      }
+      enumeration=visitEnumeration(translatedE,et.getEnumeration());
       ret=enumeration;
       if (et.isCircular()){
     	  enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.CIRCULAR);
@@ -1573,41 +1623,67 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
     return ret;
   }
 
-  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration visitEnumeration (ch.interlis.ili2c.metamodel.Enumeration enumer)
+  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration visitEnumeration (Enumeration translatedEnumer, Enumeration enumer)
   {
-    ch.ehi.interlis.domainsandconstants.basetypes.Enumeration ret=new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
+    ch.ehi.interlis.domainsandconstants.basetypes.Enumeration ret=null;
+    
+    if(translatedEnumer!=null) {
+        ret=findEnumeration(translatedEnumer);
+    }else {
+        ret=findEnumeration(enumer);
+    }
+    
     Iterator iter = enumer.getElements();
     while (iter.hasNext()) {
-      ret.addEnumElement(visitEnumerationElement((ch.interlis.ili2c.metamodel.Enumeration.Element) iter.next()));
+      final EnumElement enumElement = visitEnumerationElement((ch.interlis.ili2c.metamodel.Enumeration.Element) iter.next());
+      if(translatedEnumer==null) {
+          ret.addEnumElement(enumElement);
+      }
     }
     return ret;
   }
 
-
-  private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement visitEnumerationElement (ch.interlis.ili2c.metamodel.Enumeration.Element ee)
+private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement visitEnumerationElement (Enumeration.Element ee)
   {
-    ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
-    ret.setName(new NlsString(modelLanguage,ee.getName()));
+    ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret=null;
+    
+    Enumeration.Element translatedEe=getElementInRootLanguage(ee);
+    if(translatedEe!=null) {
+        ret=findEnumEle(translatedEe);
+    }else {
+        ret=findEnumEle(ee);
+    }
+    
+    ret.setName(new NlsString(ret.getName(),modelLanguage,ee.getName()));
 
 	// documentation
 	String ilidoc=ee.getDocumentation();
 	if(ilidoc!=null){
-		ret.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		ret.setDocumentation(new NlsString(ret.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-	// meta values
-	visitMetaValues(ret,ee.getMetaValues());
+    if(translatedEe==null) {
+        // meta values
+        visitMetaValues(ret,ee.getMetaValues());
+    }
 
-    ch.interlis.ili2c.metamodel.Enumeration subEnum = ee.getSubEnumeration();
+    Enumeration subEnum = ee.getSubEnumeration();
+    Enumeration translatedSubEnum = null;
+    if(translatedEe!=null) {
+        translatedSubEnum = translatedEe.getSubEnumeration();
+    }
     if (subEnum != null)
     {
-      ret.attachChild(visitEnumeration(subEnum));
+        final ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration = visitEnumeration(translatedSubEnum,subEnum);
+        if(translatedEe==null) {
+            ret.attachChild(enumeration);
+        }
     }
     return ret;
   }
 
 
-  private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineFormTypeDef (LineForm lf)
+private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineFormTypeDef (LineForm lf)
   {
     ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lfdef=null;
     
