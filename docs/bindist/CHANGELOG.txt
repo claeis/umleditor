@@ -1,5 +1,8 @@
 LATEST 
 ----------------------------------
+
+UML-Editor 3.8.0 (2021-11-24) 
+----------------------------------
 - translationxml export: distinguish between CLASS and STRUCTURE
 - translationxml export: sort elements according to scoped name, but ignore case (same as in MS-Excel)
 - ModelDef: keep ordering of translations
@@ -14,7 +17,7 @@ LATEST
 - ili import: map unknown ili2c types as syntax text without MANDATORY
 - fix -Duser.language=fr doesn't work; don't change default Locale, removed language selection dialog (#52)
 - FILE FORMAT: class IliImport (ili:IMPORTS) changed
-- ili2c-5.2.4+
+- ili2c-5.2.4
 
 UML-Editor 3.7.6 (2020-12-28) 
 ----------------------------------
