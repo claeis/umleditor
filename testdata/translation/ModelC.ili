@@ -1,0 +1,65 @@
+INTERLIS 2.3;
+
+MODEL ModelC_de (de)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" =
+  IMPORTS ModelA_fr;
+  IMPORTS ModelB_de;  
+
+  DOMAIN
+    DomainC_de = 1..10 [ModelA_fr.UnitA_fr];
+  
+  TOPIC TopicC_de =
+  
+    CLASS ClassC0_de =
+    END ClassC0_de;
+    
+    STRUCTURE StructC1_de =
+      attrC1_de : REFERENCE TO ClassC0_de;
+    END StructC1_de;
+  
+    CLASS ClassC2_de =
+      attrC2a_de : ModelB_de.DomainB_de;
+      attrC2b_de : StructC1_de;
+    END ClassC2_de;
+
+    ASSOCIATION AssocC0C2_de =
+      roleC0_de -- ClassC0_de;
+      roleC2_de -- ClassC2_de;
+    END AssocC0C2_de;
+    
+  END TopicC_de;
+  
+END ModelC_de.
+
+MODEL ModelC_it (it)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" 
+  TRANSLATION OF ModelC_de [ "2021-11-17"]
+  =
+  IMPORTS ModelA_de;
+  IMPORTS ModelB_fr;  
+  
+  DOMAIN
+    DomainC_it = 1..10 [ModelA_de.UnitA_de];
+  
+  TOPIC TopicC_it =
+  
+    CLASS ClassC0_it =
+    END ClassC0_it;
+    
+    STRUCTURE StructC1_it =
+      attrC1_it : REFERENCE TO ClassC0_it;
+    END StructC1_it;
+  
+    CLASS ClassC2_it =
+      attrC2a_it : ModelB_fr.DomainB_fr;
+      attrC2b_it : StructC1_it;
+    END ClassC2_it;
+
+    ASSOCIATION AssocC0C2_it =
+      roleC0_it -- ClassC0_it;
+      roleC2_it -- ClassC2_it;
+    END AssocC0C2_it;
+    
+  END TopicC_it;
+  
+END ModelC_it.

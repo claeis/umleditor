@@ -5,9 +5,15 @@ import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.generator.Interlis2Generator;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import ch.ehi.basics.types.NlsString;
+import ch.ehi.interlis.constraints.ConstraintDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.metaobjects.ParameterDef;
+import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.Translation;
 import ch.ehi.basics.i18n.MessageFormat;
 import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
@@ -36,15 +42,39 @@ public class TransferFromIli2cMetamodel
     namespaceStack.remove(0);
   }
 
-  private java.util.HashMap fileMap=new java.util.HashMap();
-  private ch.ehi.interlis.modeltopicclass.INTERLIS2Def findINTERLIS2Def(String language,String filename)
+  private java.util.HashMap<String,ch.ehi.interlis.modeltopicclass.INTERLIS2Def> fileMap=new java.util.HashMap<String,ch.ehi.interlis.modeltopicclass.INTERLIS2Def>();
+  private ch.ehi.interlis.modeltopicclass.INTERLIS2Def visitINTERLIS2Def(String language,String filename, Model mdef)
   {
-    if(fileMap.containsKey(filename)){
-      return (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(filename);
+    Model translatedMdef=(Model)getElementInRootLanguage(mdef);
+    if(fileMap.containsKey(mdef.getFileName())){
+        // already seen file
+        ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(mdef.getFileName());
+        return ili2Def;
     }
+    
+    // ASSERT: not yet seen model
+    
+    if(translatedMdef!=null && fileMap.containsKey(translatedMdef.getFileName())) {
+        // model in additional language
+        // translated model in same file?
+        if(mdef.getFileName().equals(translatedMdef.getFileName())) {
+            // already seen file
+            ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(translatedMdef.getFileName());
+            return ili2Def;
+        }else {
+            // different file
+            ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def= (ch.ehi.interlis.modeltopicclass.INTERLIS2Def)fileMap.get(translatedMdef.getFileName());
+            ili2Def.setName(new NlsString(ili2Def.getName(),language,filename));
+            fileMap.put(mdef.getFileName(),ili2Def);
+            return ili2Def;
+        }
+    }
+    
+    // new file
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2Def=new ch.ehi.interlis.modeltopicclass.INTERLIS2Def();
+    ili2Def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
     ili2Def.setName(new NlsString(language,filename));
-    fileMap.put(filename,ili2Def);
+    fileMap.put(mdef.getFileName(),ili2Def);
     ili2modelset.addOwnedElement(ili2Def);
     return ili2Def;
   }
@@ -70,17 +100,26 @@ public class TransferFromIli2cMetamodel
     return topicDef;
   }
 
-  private java.util.HashMap gfxParamMap=new java.util.HashMap();
+  private java.util.HashMap<GraphicParameterDef,ch.ehi.interlis.graphicdescriptions.GraphicParameterDef> gfxParamMap=new java.util.HashMap<GraphicParameterDef,ch.ehi.interlis.graphicdescriptions.GraphicParameterDef>();
   private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef findGraphicParameterDef(GraphicParameterDef gfxParam)
   {
     if(gfxParamMap.containsKey(gfxParam)){
-      return (ch.ehi.interlis.graphicdescriptions.GraphicParameterDef)gfxParamMap.get(gfxParam);
+      return gfxParamMap.get(gfxParam);
     }
     ch.ehi.interlis.graphicdescriptions.GraphicParameterDef gfxParamDef=new ch.ehi.interlis.graphicdescriptions.GraphicParameterDef();
     gfxParamMap.put(gfxParam,gfxParamDef);
     return gfxParamDef;
   }
 
+  private java.util.HashMap<MetaDataUseDef,ch.ehi.interlis.metaobjects.MetaDataUseDef> metaDataUseDefMap=new java.util.HashMap<MetaDataUseDef,ch.ehi.interlis.metaobjects.MetaDataUseDef>();
+  private ch.ehi.interlis.metaobjects.MetaDataUseDef findMetaDataUseDef(MetaDataUseDef mu) {
+      if(metaDataUseDefMap.containsKey(mu)){
+          return metaDataUseDefMap.get(mu);
+        }
+      ch.ehi.interlis.metaobjects.MetaDataUseDef muDef=new ch.ehi.interlis.metaobjects.MetaDataUseDef();
+        metaDataUseDefMap.put(mu,muDef);
+        return muDef;
+  }
   private java.util.HashMap viewableMap=new java.util.HashMap();
   private ch.ehi.uml1_4.foundation.core.Classifier findViewable(Viewable table)
   {
@@ -98,6 +137,51 @@ public class TransferFromIli2cMetamodel
     ch.ehi.interlis.modeltopicclass.ClassDef classDef=new ch.ehi.interlis.modeltopicclass.ClassDef();
     viewableMap.put(table,classDef);
     return classDef;
+  }
+  private java.util.Map<AttributeDef, ch.ehi.interlis.attributes.AttributeDef> attributeMap=new HashMap<AttributeDef, ch.ehi.interlis.attributes.AttributeDef>();
+  private ch.ehi.interlis.attributes.AttributeDef findAttributeDef(AttributeDef attr) {
+      if(attributeMap.containsKey(attr)){
+          return attributeMap.get(attr);
+        }
+      ch.ehi.interlis.attributes.AttributeDef attrDef=new ch.ehi.interlis.attributes.AttributeDef();
+        attributeMap.put(attr,attrDef);
+        return attrDef;
+  }
+  private java.util.Map<RoleDef, ch.ehi.interlis.associations.RoleDef> roleMap=new HashMap<RoleDef, ch.ehi.interlis.associations.RoleDef>();
+  private ch.ehi.interlis.associations.RoleDef findRoleDef(RoleDef role) {
+      if(roleMap.containsKey(role)){
+          return roleMap.get(role);
+        }
+      ch.ehi.interlis.associations.RoleDef roleDef=new ch.ehi.interlis.associations.RoleDef();
+        roleMap.put(role,roleDef);
+        return roleDef;
+  }
+  private java.util.Map<AttributeDef, ch.ehi.interlis.associations.RoleDef> attr2destRole=new HashMap<AttributeDef, ch.ehi.interlis.associations.RoleDef>();
+  private ch.ehi.interlis.associations.RoleDef findDestRoleDef(AttributeDef attr) {
+        if (attr2destRole.containsKey(attr)) {
+            return attr2destRole.get(attr);
+        }
+        ch.ehi.interlis.associations.RoleDef roleDef = new ch.ehi.interlis.associations.RoleDef();
+        attr2destRole.put(attr, roleDef);
+        return roleDef;
+    }
+  private java.util.Map<AttributeDef, ch.ehi.interlis.associations.RoleDef> attr2srcRole=new HashMap<AttributeDef, ch.ehi.interlis.associations.RoleDef>();
+  private ch.ehi.interlis.associations.RoleDef findSrcRoleDef(AttributeDef attr) {
+        if (attr2srcRole.containsKey(attr)) {
+            return attr2srcRole.get(attr);
+        }
+        ch.ehi.interlis.associations.RoleDef roleDef = new ch.ehi.interlis.associations.RoleDef();
+        attr2srcRole.put(attr, roleDef);
+        return roleDef;
+    }
+  private java.util.Map<AttributeDef, ch.ehi.interlis.associations.AssociationDef> attr2assoc=new HashMap<AttributeDef, ch.ehi.interlis.associations.AssociationDef>();
+  private ch.ehi.interlis.associations.AssociationDef findAssociationDef(AttributeDef attr) {
+      if (attr2assoc.containsKey(attr)) {
+          return attr2assoc.get(attr);
+      }
+      ch.ehi.interlis.associations.AssociationDef assocDef = new ch.ehi.interlis.associations.AssociationDef();
+      attr2assoc.put(attr, assocDef);
+      return assocDef;
   }
 
   private ch.ehi.interlis.associations.AssociationDef findAssociationDef(AssociationDef assoc)
@@ -140,41 +224,79 @@ public class TransferFromIli2cMetamodel
     domainMap.put(domain,domainDef);
     return domainDef;
   }
-  private java.util.HashMap lineFormTypeMap=new java.util.HashMap();
+  private java.util.HashMap<Enumeration,ch.ehi.interlis.domainsandconstants.basetypes.Enumeration> enumMap=new java.util.HashMap<Enumeration,ch.ehi.interlis.domainsandconstants.basetypes.Enumeration>();
+  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration findEnumeration(Enumeration enumIli) {
+      if(enumMap.containsKey(enumIli)){
+          return enumMap.get(enumIli);
+        }
+        ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumUml=new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
+        enumMap.put(enumIli,enumUml);
+        return enumUml;
+  }
+  private java.util.HashMap<Enumeration.Element,ch.ehi.interlis.domainsandconstants.basetypes.EnumElement> enumEleMap=new java.util.HashMap<Enumeration.Element,ch.ehi.interlis.domainsandconstants.basetypes.EnumElement>();
+  private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement findEnumEle(Enumeration.Element eeIli) {
+      if(enumEleMap.containsKey(eeIli)){
+          return enumEleMap.get(eeIli);
+        }
+        ch.ehi.interlis.domainsandconstants.basetypes.EnumElement eeUml=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
+        enumEleMap.put(eeIli,eeUml);
+        return eeUml;
+  }
+  
+  private java.util.HashMap<LineForm,ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef> lineFormTypeMap=new java.util.HashMap<LineForm,ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef>();
   private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef findLineFormTypeDef(LineForm lineFormType)
   {
     if(lineFormTypeMap.containsKey(lineFormType)){
-      return (ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef)lineFormTypeMap.get(lineFormType);
+      return lineFormTypeMap.get(lineFormType);
     }
     ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lineFormTypeDef=new ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef();
     lineFormTypeMap.put(lineFormType,lineFormTypeDef);
     return lineFormTypeDef;
   }
-  private java.util.HashMap unitMap=new java.util.HashMap();
+  private java.util.HashMap<Parameter,ParameterDef> paramMap=new java.util.HashMap<Parameter,ParameterDef>();
+  private ParameterDef findParameterDef(Parameter par) {
+      if(paramMap.containsKey(par)){
+          return paramMap.get(par);
+        }
+        ParameterDef parDef=new ParameterDef();
+        paramMap.put(par,parDef);
+        return parDef;
+  }
+  
+  private java.util.HashMap<Constraint,ConstraintDef> cnstrMap=new java.util.HashMap<Constraint,ConstraintDef>();
+  private ConstraintDef findConstraintDef(Constraint constr) {
+      if(cnstrMap.containsKey(constr)){
+          return cnstrMap.get(constr);
+        }
+        ConstraintDef cDef=new ConstraintDef();
+        cnstrMap.put(constr,cDef);
+        return cDef;
+  }
+  private java.util.HashMap<Unit,ch.ehi.interlis.units.UnitDef> unitMap=new java.util.HashMap<Unit,ch.ehi.interlis.units.UnitDef>();
   private ch.ehi.interlis.units.UnitDef findUnitDef(Unit unit)
   {
     if(unitMap.containsKey(unit)){
-      return (ch.ehi.interlis.units.UnitDef)unitMap.get(unit);
+      return unitMap.get(unit);
     }
     ch.ehi.interlis.units.UnitDef unitDef=new ch.ehi.interlis.units.UnitDef();
     unitMap.put(unit,unitDef);
     return unitDef;
   }
-  private java.util.HashMap functionMap=new java.util.HashMap();
+  private java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef> functionMap=new java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef>();
   private ch.ehi.interlis.functions.FunctionDef findFunctionDef(Function f)
   {
     if(functionMap.containsKey(f)){
-      return (ch.ehi.interlis.functions.FunctionDef)functionMap.get(f);
+      return functionMap.get(f);
     }
     ch.ehi.interlis.functions.FunctionDef funcDef=new ch.ehi.interlis.functions.FunctionDef();
     functionMap.put(f,funcDef);
     return funcDef;
   }
-  private java.util.HashMap gfxMap=new java.util.HashMap();
+  private java.util.HashMap<Graphic,ch.ehi.interlis.graphicdescriptions.GraphicDef> gfxMap=new java.util.HashMap<Graphic,ch.ehi.interlis.graphicdescriptions.GraphicDef>();
   private ch.ehi.interlis.graphicdescriptions.GraphicDef findGraphicDef(Graphic g)
   {
     if(gfxMap.containsKey(g)){
-      return (ch.ehi.interlis.graphicdescriptions.GraphicDef)gfxMap.get(g);
+      return gfxMap.get(g);
     }
     ch.ehi.interlis.graphicdescriptions.GraphicDef gfxDef=new ch.ehi.interlis.graphicdescriptions.GraphicDef();
     gfxMap.put(g,gfxDef);
@@ -188,57 +310,72 @@ public class TransferFromIli2cMetamodel
       return null;
     EhiLogger.traceState(topic.getScopedName());
 
-    ch.ehi.interlis.modeltopicclass.TopicDef topicdef=findTopicDef(topic);
-    topicdef.setName(new NlsString(modelLanguage,topic.getName()));
+    ch.ehi.interlis.modeltopicclass.TopicDef topicdef=null;
+    
+    Topic translatedTopic=(Topic)getElementInRootLanguage(topic);
+    if(translatedTopic!=null) {
+        topicdef=findTopicDef(translatedTopic);
+    }else {
+        topicdef=findTopicDef(topic);
+    }
+    
+    topicdef.setName(new NlsString(topicdef.getName(),modelLanguage,topic.getName()));
 
 	// documentation
 	String ilidoc=topic.getDocumentation();
 	if(ilidoc!=null){
-		topicdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		topicdef.setDocumentation(new NlsString(topicdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 	
-	// meta values
-	visitMetaValues(topicdef,topic.getMetaValues());
+	if(translatedTopic==null) {
+	    // meta values
+	    visitMetaValues(topicdef,topic.getMetaValues());
 
-    topicdef.setAbstract(topic.isAbstract());
-    topicdef.setPropFinal(topic.isFinal());
-    if(topic.isViewTopic()){
-      topicdef.setKind(ch.ehi.interlis.modeltopicclass.TopicDefKind.VIEW);
-    }else{
-      topicdef.setKind(ch.ehi.interlis.modeltopicclass.TopicDefKind.DATA);
-    }
+	    topicdef.setAbstract(topic.isAbstract());
+	    topicdef.setPropFinal(topic.isFinal());
+	    if(topic.isViewTopic()){
+	      topicdef.setKind(ch.ehi.interlis.modeltopicclass.TopicDefKind.VIEW);
+	    }else{
+	      topicdef.setKind(ch.ehi.interlis.modeltopicclass.TopicDefKind.DATA);
+	    }
 
-    Topic extending = (Topic) topic.getExtending();
-    if (extending != null)
-    {
-      ch.ehi.interlis.modeltopicclass.TopicDef parent=findTopicDef(extending);
-      ch.ehi.interlis.modeltopicclass.TopicExtends topicextends=new ch.ehi.interlis.modeltopicclass.TopicExtends();
-      topicextends.attachParent(parent);
-      topicextends.attachChild(topicdef);
-    }
+	    Topic extending = (Topic) topic.getExtending();
+	    if (extending != null)
+	    {
+	      ch.ehi.interlis.modeltopicclass.TopicDef parent=findTopicDef((Topic)getElementInRootLanguageOrSame(extending));
+	      ch.ehi.interlis.modeltopicclass.TopicExtends topicextends=new ch.ehi.interlis.modeltopicclass.TopicExtends();
+	      topicextends.attachParent(parent);
+	      topicextends.attachChild(topicdef);
+	    }
 
-    if(topic.getOid()!=null){
-      topicdef.attachOiddomain(findDomainDef(topic.getOid()));
-    }
+	    if(topic.getOid()!=null){
+	      topicdef.attachOiddomain(findDomainDef((Domain)getElementInRootLanguageOrSame(topic.getOid())));
+	    }
+        if(topic.getBasketOid()!=null){
+            topicdef.attachBasketoid(findDomainDef((Domain)getElementInRootLanguageOrSame(topic.getBasketOid())));
+        }
 
-    Iterator it = topic.getDependentOn();
-    while(it.hasNext())
-    {
-      Topic depends=(Topic) it.next();
-      ch.ehi.interlis.modeltopicclass.TopicDef supplier=findTopicDef(depends);
-      ch.ehi.interlis.modeltopicclass.TopicDepends topicdepends=new ch.ehi.interlis.modeltopicclass.TopicDepends();
-      topicdepends.addSupplier(supplier);
-      topicdepends.addClient(topicdef);
-    }
+	    Iterator it = topic.getDependentOn();
+	    while(it.hasNext())
+	    {
+	      Topic depends=(Topic) it.next();
+	      ch.ehi.interlis.modeltopicclass.TopicDef supplier=findTopicDef((Topic)getElementInRootLanguageOrSame(depends));
+	      ch.ehi.interlis.modeltopicclass.TopicDepends topicdepends=new ch.ehi.interlis.modeltopicclass.TopicDepends();
+	      topicdepends.addSupplier(supplier);
+	      topicdepends.addClient(topicdef);
+	    }
 
 
-    getNamespace().addOwnedElement(topicdef);
+	    getNamespace().addOwnedElement(topicdef);
+	}
+
     addNamespace(topicdef);
-
     visitElements(topic);
-
-    CreateDiagramUtility.classes(topicdef);
     removeNamespace();
+
+    if(translatedTopic==null) {
+        CreateDiagramUtility.classes(topicdef);
+    }
 	return topicdef;
   }
 
@@ -248,38 +385,47 @@ public class TransferFromIli2cMetamodel
   {
       EhiLogger.traceState(tdef.getScopedName());
       
-    ch.ehi.interlis.modeltopicclass.ClassDef classdef=findClassDef(tdef);
-    classdef.setName(new NlsString(modelLanguage,tdef.getName()));
+    ch.ehi.interlis.modeltopicclass.ClassDef classdef=null;
+    Table translatedTdef=(Table)getElementInRootLanguage(tdef);
+    if(translatedTdef!=null) {
+        classdef=findClassDef(translatedTdef);
+    }else {
+        classdef=findClassDef(tdef);
+    }
+    
+    classdef.setName(new NlsString(classdef.getName(),modelLanguage,tdef.getName()));
 
 	// documentation
 	String ilidoc=tdef.getDocumentation();
 	if(ilidoc!=null){
-		classdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		classdef.setDocumentation(new NlsString(classdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 	
-	// meta values
-	visitMetaValues(classdef,tdef.getMetaValues());
+	if(translatedTdef==null) {
+	    // meta values
+	    visitMetaValues(classdef,tdef.getMetaValues());
 
-    classdef.setAbstract(tdef.isAbstract());
-    classdef.setPropFinal(tdef.isFinal());
-    if (tdef.isIdentifiable()){
-      classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
-    }else{
-      classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE);
-    }
+	    classdef.setAbstract(tdef.isAbstract());
+	    classdef.setPropFinal(tdef.isFinal());
+	    if (tdef.isIdentifiable()){
+	      classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
+	    }else{
+	      classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.STRUCTURE);
+	    }
 
-    Table extending = (Table) tdef.getExtending();
-    if (extending != null)
-    {
-      ch.ehi.interlis.modeltopicclass.ClassDef parent=findClassDef(extending);
-      ch.ehi.interlis.modeltopicclass.ClassExtends classextends=new ch.ehi.interlis.modeltopicclass.ClassExtends();
-      classextends.attachParent(parent);
-      classextends.attachChild(classdef);
-      classextends.setExtended(tdef.isExtended());
-    }
+	    Table extending = (Table) tdef.getExtending();
+	    if (extending != null)
+	    {
+	      ch.ehi.interlis.modeltopicclass.ClassDef parent=findClassDef((Table)getElementInRootLanguageOrSame(extending));
+	      ch.ehi.interlis.modeltopicclass.ClassExtends classextends=new ch.ehi.interlis.modeltopicclass.ClassExtends();
+	      classextends.attachParent(parent);
+	      classextends.attachChild(classdef);
+	      classextends.setExtended(tdef.isExtended());
+	    }
 
 
-    getNamespace().addOwnedElement(classdef);
+	    getNamespace().addOwnedElement(classdef);
+	}
     addNamespace(classdef);
     visitElements(tdef);
     removeNamespace();
@@ -290,37 +436,47 @@ public class TransferFromIli2cMetamodel
   private ch.ehi.interlis.associations.AssociationDef visitAssociationDef(AssociationDef assoc)
   {
       EhiLogger.traceState(assoc.getScopedName());
-    ch.ehi.interlis.associations.AssociationDef assocdef=findAssociationDef(assoc);
-    assocdef.setName(new NlsString(modelLanguage,assoc.getName()));
+    ch.ehi.interlis.associations.AssociationDef assocdef=null;
+    
+    AssociationDef translatedAssoc=(AssociationDef)getElementInRootLanguage(assoc);
+    if(translatedAssoc!=null) {
+        assocdef=findAssociationDef(translatedAssoc);        
+    }else {
+        assocdef=findAssociationDef(assoc);
+    }
+    
+    assocdef.setName(new NlsString(assocdef.getName(),modelLanguage,assoc.getName()));
 
 	// documentation
 	String ilidoc=assoc.getDocumentation();
 	if(ilidoc!=null){
-		assocdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		assocdef.setDocumentation(new NlsString(assocdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-	// meta values
-	visitMetaValues(assocdef,assoc.getMetaValues());
-	
-    assocdef.setAbstract(assoc.isAbstract());
-    assocdef.setPropFinal(assoc.isFinal());
-    //classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
+	if(translatedAssoc==null) {
+	    // meta values
+	    visitMetaValues(assocdef,assoc.getMetaValues());
+	    
+	    assocdef.setAbstract(assoc.isAbstract());
+	    assocdef.setPropFinal(assoc.isFinal());
+	    //classdef.setKind(ch.ehi.interlis.modeltopicclass.ClassDefKind.CLASS);
 
-    AssociationDef extending = (AssociationDef) assoc.getExtending();
-    if (extending != null)
-    {
-      ch.ehi.interlis.associations.AssociationDef parent=findAssociationDef(extending);
-      ch.ehi.interlis.modeltopicclass.ClassExtends classextends=new ch.ehi.interlis.modeltopicclass.ClassExtends();
-      classextends.attachParent(parent);
-      classextends.attachChild(assocdef);
-      classextends.setExtended(assoc.isExtended());
-    }
+	    AssociationDef extending = (AssociationDef) assoc.getExtending();
+	    if (extending != null)
+	    {
+	      ch.ehi.interlis.associations.AssociationDef parent=findAssociationDef((AssociationDef)getElementInRootLanguageOrSame(extending));
+	      ch.ehi.interlis.modeltopicclass.ClassExtends classextends=new ch.ehi.interlis.modeltopicclass.ClassExtends();
+	      classextends.attachParent(parent);
+	      classextends.attachChild(assocdef);
+	      classextends.setExtended(assoc.isExtended());
+	    }
 
-    // TODO handle DERIVED FROM in AssociationDef
-    //Viewable derived = (AssociationDef) assoc.getDerivedFrom();
+	    // TODO handle DERIVED FROM in AssociationDef
+	    //Viewable derived = (AssociationDef) assoc.getDerivedFrom();
 
 
-    getNamespace().addOwnedElement(assocdef);
+	    getNamespace().addOwnedElement(assocdef);
+	}
     addNamespace(assocdef);
     visitElements(assoc);
     removeNamespace();
@@ -330,19 +486,27 @@ public class TransferFromIli2cMetamodel
 
   private ch.ehi.interlis.views.ViewDef visitView (View view)
   {
-    ch.ehi.interlis.views.ViewDef viewdef=findViewDef(view);
-    viewdef.setName(new NlsString(modelLanguage,view.getName()));
+    ch.ehi.interlis.views.ViewDef viewdef=null;
+    View translatedView=(View)getElementInRootLanguage(view);
+    if(translatedView!=null) {
+        viewdef=findViewDef(translatedView);
+    }else {
+        viewdef=findViewDef(view);
+    }
+    
+    viewdef.setName(new NlsString(viewdef.getName(),modelLanguage,view.getName()));
     
 	// documentation
 	String ilidoc=view.getDocumentation();
 	if(ilidoc!=null){
-		viewdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		viewdef.setDocumentation(new NlsString(viewdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-
     makeSyntax.printView(view);
-    viewdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(viewdef);
+    viewdef.setSyntax(new NlsString(viewdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedView==null) {
+        getNamespace().addOwnedElement(viewdef);
+    }
     return viewdef;
   }
 
@@ -350,18 +514,28 @@ public class TransferFromIli2cMetamodel
 
   private ch.ehi.interlis.graphicdescriptions.GraphicDef visitGraphic (Graphic graph)
   {
-    ch.ehi.interlis.graphicdescriptions.GraphicDef gfxdef=findGraphicDef(graph);
-    gfxdef.setName(new NlsString(modelLanguage,graph.getName()));
+    ch.ehi.interlis.graphicdescriptions.GraphicDef gfxdef=null;
+    Graphic translatedGraph=(Graphic)getElementInRootLanguage(graph);
+    if(translatedGraph!=null) {
+        gfxdef=findGraphicDef(translatedGraph);
+    }else {
+        gfxdef=findGraphicDef(graph);
+    }
+
+    
+    gfxdef.setName(new NlsString(gfxdef.getName(),modelLanguage,graph.getName()));
     
 	// documentation
 	String ilidoc=graph.getDocumentation();
 	if(ilidoc!=null){
-		gfxdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		gfxdef.setDocumentation(new NlsString(gfxdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
     makeSyntax.printGraphic(graph);
-    gfxdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(gfxdef);
+    gfxdef.setSyntax(new NlsString(gfxdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedGraph==null) {
+        getNamespace().addOwnedElement(gfxdef);
+    }
     return gfxdef;
   }
 
@@ -371,23 +545,34 @@ public class TransferFromIli2cMetamodel
 
   private ch.ehi.interlis.units.UnitDef visitUnit (Unit u)
   {
-    ch.ehi.interlis.units.UnitDef unitdef=findUnitDef(u);
-    unitdef.setName(new NlsString(modelLanguage,u.getName()));
+    ch.ehi.interlis.units.UnitDef unitdef=null;
+    
+    Unit translatedU=(Unit)getElementInRootLanguage(u);
+    if(translatedU!=null) {
+        unitdef=findUnitDef(translatedU);
+    }else {
+        unitdef=findUnitDef(u);
+    }
+    
+    
+    unitdef.setName(new NlsString(unitdef.getName(),modelLanguage,u.getName()));
     
     if (!u.getDocName().equals(u.getName())) {
-      unitdef.setDescName(new NlsString(modelLanguage,u.getDocName()));
+      unitdef.setDescName(new NlsString(unitdef.getDescName(),modelLanguage,u.getDocName()));
     }
 
 	// documentation
 	String ilidoc=u.getDocumentation();
 	if(ilidoc!=null){
-		unitdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		unitdef.setDocumentation(new NlsString(unitdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
 
     makeSyntax.printUnit(u.getContainer(),u);
-    unitdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(unitdef);
+    unitdef.setSyntax(new NlsString(unitdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedU==null) {
+        getNamespace().addOwnedElement(unitdef);
+    }
 	return unitdef;
 
   }
@@ -395,74 +580,121 @@ public class TransferFromIli2cMetamodel
 
   private void visitParameter (Parameter par)
   {
-    ch.ehi.interlis.metaobjects.ParameterDef paramdef=new ch.ehi.interlis.metaobjects.ParameterDef();
-    paramdef.setName(new NlsString(modelLanguage,par.getName()));
+    ch.ehi.interlis.metaobjects.ParameterDef paramdef=null;
+    
+    Parameter translatedPar=(Parameter)getElementInRootLanguage(par);
+    if(translatedPar!=null) {
+        paramdef=findParameterDef(translatedPar);
+    }else {
+        paramdef=findParameterDef(par);
+    }
+    
+    paramdef.setName(new NlsString(paramdef.getName(),modelLanguage,par.getName()));
 	// documentation
 	String ilidoc=par.getDocumentation();
 	if(ilidoc!=null){
-		paramdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		paramdef.setDocumentation(new NlsString(paramdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
     makeSyntax.printParameter(par.getContainer(),par);
-    paramdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    ((ch.ehi.interlis.modeltopicclass.ClassDef)getNamespace()).addParameterDef(paramdef);
+    paramdef.setSyntax(new NlsString(paramdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedPar==null) {
+        ((ch.ehi.interlis.modeltopicclass.ClassDef)getNamespace()).addParameterDef(paramdef);
+    }
   }
 
-  private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef visitRuntimeParameterDef (GraphicParameterDef par)
+private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef visitRuntimeParameterDef (GraphicParameterDef par)
   {
-    ch.ehi.interlis.graphicdescriptions.GraphicParameterDef pdef=findGraphicParameterDef(par);
-    pdef.setName(new NlsString(modelLanguage,par.getName()));
+    ch.ehi.interlis.graphicdescriptions.GraphicParameterDef pdef=null;
+    GraphicParameterDef translatedPar=(GraphicParameterDef)getElementInRootLanguage(par);
+    if(translatedPar!=null) {
+        pdef=findGraphicParameterDef(translatedPar);
+    }else {
+        pdef=findGraphicParameterDef(par);
+    }
+
+    pdef.setName(new NlsString(pdef.getName(),modelLanguage,par.getName()));
 
 	// documentation
 	String ilidoc=par.getDocumentation();
 	if(ilidoc!=null){
-		pdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		pdef.setDocumentation(new NlsString(pdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
     makeSyntax.printGraphicParameterDef(par);
-    pdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(pdef);
+    pdef.setSyntax(new NlsString(pdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedPar==null) {
+        getNamespace().addOwnedElement(pdef);
+    }
     return pdef;
   }
   private ch.ehi.interlis.metaobjects.MetaDataUseDef visitMetaDataUseDef(MetaDataUseDef mu)
   {
-    ch.ehi.interlis.metaobjects.MetaDataUseDef mdef=new ch.ehi.interlis.metaobjects.MetaDataUseDef();
-    mdef.setName(new NlsString(modelLanguage,mu.getName()));
+    
+    MetaDataUseDef translatedMu=(MetaDataUseDef)getElementInRootLanguage(mu);
+    ch.ehi.interlis.metaobjects.MetaDataUseDef mdef=null;
+    if(translatedMu!=null) {
+        mdef=findMetaDataUseDef(translatedMu);
+    }else {
+        mdef=findMetaDataUseDef(mu);
+    }
+    
+    mdef.setName(new NlsString(mdef.getName(),modelLanguage,mu.getName()));
     
 	// documentation
 	String ilidoc=mu.getDocumentation();
 	if(ilidoc!=null){
-		mdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		mdef.setDocumentation(new NlsString(mdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-    TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
-    DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
-    if(basket!=null){
-      mdef.setBasketOid(basket.getBoid());
-    }
+	if(translatedMu==null) {
+	    TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
+	    DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
+	    if(basket!=null){
+	      mdef.setBasketOid(basket.getBoid());
+	    }
+	}
     makeSyntax.printMetaDataUseDef(mu);
-    mdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(mdef);
+    mdef.setSyntax(new NlsString(mdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedMu==null) {
+        getNamespace().addOwnedElement(mdef);
+    }
     return mdef;
   }
-  private void visitConstraint(Constraint constr)
+private void visitConstraint(Constraint constr)
   {
-    ch.ehi.interlis.constraints.ConstraintDef cdef=new ch.ehi.interlis.constraints.ConstraintDef();
-    ch.ehi.interlis.constraints.ConstraintExpression expr=new ch.ehi.interlis.constraints.ConstraintExpression();
+    ch.ehi.interlis.constraints.ConstraintDef cdef=null;
+    
+    Constraint translatedConstr=(Constraint)getElementInRootLanguage(constr);
+    if(translatedConstr!=null) {
+        cdef=findConstraintDef(translatedConstr);
+    }else {
+        cdef=findConstraintDef(constr);
+    }
+    
+    ch.ehi.interlis.constraints.ConstraintExpression expr=null;
     makeSyntax.printConstraint(constr);
-    expr.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    cdef.setBody(expr);
+    if(translatedConstr==null) {
+        expr=new ch.ehi.interlis.constraints.ConstraintExpression();
+        cdef.setBody(expr);
+    }else {
+        expr=(ch.ehi.interlis.constraints.ConstraintExpression)cdef.getBody();
+    }
+    expr.setSyntax(new NlsString(expr.getSyntax(),modelLanguage,getSyntax()));
+
 	// documentation
 	String ilidoc=constr.getDocumentation();
 	if(ilidoc!=null){
-		cdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		cdef.setDocumentation(new NlsString(cdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-    getNamespace().addConstraint(cdef);
+	if(translatedConstr==null) {
+	    getNamespace().addConstraint(cdef);
+	}
   }
 
 
-  private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardinality card)
+private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardinality card)
   {
     ch.ehi.uml1_4.implementation.UmlMultiplicityRange mr=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
     mr.setLower(card.getMinimum());
@@ -475,161 +707,207 @@ public class TransferFromIli2cMetamodel
   private void visitAttribute(AttributeDef attrib,int attrIdx)
   {
     EhiLogger.traceState(attrib.getScopedName());
+    ch.ehi.interlis.modeltopicclass.ClassDef classdef=null;
+    AttributeDef translatedAttrib=(AttributeDef)getElementInRootLanguage(attrib);
+    
     Type btype=attrib.getDomain();
     boolean isMultiValueAttr=false;
     if(btype instanceof CompositionType){
-    	if(unwrapMultiValueStructAttrs && isMultiValueAttributeWrapper(btype)){
-    		// map as a UML attribute (see further down)
-    		isMultiValueAttr=true;
-    	}else{
+        if(unwrapMultiValueStructAttrs && isMultiValueAttributeWrapper(btype)){
+            // map as a UML attribute (see further down)
+            isMultiValueAttr=true;
+        }else{
             // StructureAttribute
             CompositionType type=(CompositionType)btype;
             if(iliAttrsAsUmlAttrs){
-        		// map as a UML attribute (see further down)
+                // map as a UML attribute (see further down)
             }else{
-                ch.ehi.interlis.associations.AssociationDef assoc=new ch.ehi.interlis.associations.AssociationDef();
-                ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)type.getComponentType());
-                ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
-                assoc.setName(new NlsString(modelLanguage,thisclass.getDefLangName()+dest.getDefLangName()));
-                ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
-                destRole.setName(new NlsString(modelLanguage,attrib.getName()));
-        		// documentation
-        		String ilidoc=attrib.getDocumentation();
-        		if(ilidoc!=null){
-        			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
-        		}
-        		// meta values
-        		visitMetaValues(destRole,attrib.getMetaValues());
-                destRole.attachParticipant(dest);
-                destRole.setMultiplicity(visitCardinality(type.getCardinality()));
-                destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
-                destRole.setIliAttributeIdx(attrIdx);
-                destRole.setPropExtended(attrib.getExtending()!=null);
-                assoc.addConnection(destRole);
-                ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
-                srcRole.attachParticipant(thisclass);
-                srcRole.setName(thisclass.getName());
-                srcRole.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
-                srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.STRUCTURE);
-        		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-        		r.setLower(0);
-        		r.setUpper(1);
-        		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-        		m.addRange(r);
-        		srcRole.setMultiplicity(m);
-                assoc.addConnection(srcRole);
-                java.util.Iterator rIt=type.iteratorRestrictedTo();
-                while(rIt.hasNext()){
-                  destRole.addRestriction(findClassDef((Table)rIt.next()));
+                ch.ehi.interlis.associations.AssociationDef assoc=null;
+                if(translatedAttrib!=null) {
+                    assoc=findAssociationDef(translatedAttrib);
+                }else {
+                    assoc=findAssociationDef(attrib);
                 }
-                // TODO FunctionCall
-                // TODO AttributeValueUsage
-                thisclass.getNamespace().addOwnedElement(assoc);
+                ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)getElementInRootLanguageOrSame((Table)type.getComponentType()));
+                ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
+                assoc.setName(new NlsString(assoc.getName(),modelLanguage,thisclass.getDefLangName()+dest.getDefLangName()));
+                ch.ehi.interlis.associations.RoleDef destRole=null;
+                ch.ehi.interlis.associations.RoleDef srcRole=null;
+                if(translatedAttrib!=null) {
+                    destRole=findDestRoleDef(translatedAttrib);
+                    srcRole=findSrcRoleDef(translatedAttrib);
+                }else {
+                    destRole=findDestRoleDef(attrib);
+                    srcRole=findSrcRoleDef(attrib);
+                }
+                destRole.setName(new NlsString(destRole.getName(),modelLanguage,attrib.getName()));
+                srcRole.setName(new NlsString(srcRole.getName(),modelLanguage,attrib.getContainer().getName()));
+                // documentation
+                String ilidoc=attrib.getDocumentation();
+                if(ilidoc!=null){
+                    destRole.setDocumentation(new NlsString(destRole.getDocumentation(),modelLanguage,ilidoc));
+                }
+                if(translatedAttrib==null) {
+                    // meta values
+                    visitMetaValues(destRole,attrib.getMetaValues());
+                    destRole.attachParticipant(dest);
+                    destRole.setMultiplicity(visitCardinality(type.getCardinality()));
+                    destRole.setOrdering(type.isOrdered()?ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED:ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+                    destRole.setIliAttributeIdx(attrIdx);
+                    destRole.setPropExtended(attrib.getExtending()!=null);
+                    assoc.addConnection(destRole);
+                    srcRole.attachParticipant(thisclass);
+                    srcRole.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
+                    srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.STRUCTURE);
+                    ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+                    r.setLower(0);
+                    r.setUpper(1);
+                    ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+                    m.addRange(r);
+                    srcRole.setMultiplicity(m);
+                    assoc.addConnection(srcRole);
+                    java.util.Iterator rIt=type.iteratorRestrictedTo();
+                    while(rIt.hasNext()){
+                      destRole.addRestriction(findClassDef((Table)getElementInRootLanguageOrSame((Table)rIt.next())));
+                    }
+                    // TODO FunctionCall
+                    // TODO AttributeValueUsage
+                    thisclass.getNamespace().addOwnedElement(assoc);
+                }
                 return;
             }
-    	}
+        }
     }else if(btype instanceof ReferenceType){
         // ReferenceAttribute
-        ReferenceType type=(ReferenceType)btype;
-        ch.ehi.interlis.associations.AssociationDef assoc=new ch.ehi.interlis.associations.AssociationDef();
-        ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)type.getReferred());
-        ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
-        assoc.setName(new NlsString(modelLanguage,dest.getDefLangName()+thisclass.getDefLangName()));
-        ch.ehi.interlis.associations.RoleDef destRole=new ch.ehi.interlis.associations.RoleDef();
-        destRole.setName(new NlsString(modelLanguage,attrib.getName()));
-		// documentation
-		String ilidoc=attrib.getDocumentation();
-		if(ilidoc!=null){
-			destRole.setDocumentation(new NlsString(modelLanguage,ilidoc));
-		}
-		// meta values
-		visitMetaValues(destRole,attrib.getMetaValues());
-        destRole.attachParticipant(dest);
-		destRole.setIliAttributeIdx(attrIdx);
-		ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-		r.setLower( btype.isMandatory() ? 1 : 0);
-		r.setUpper(1);
-		ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-		m.addRange(r);
-		destRole.setMultiplicity(m);
-        destRole.setPropExtended(attrib.getExtending()!=null);
-        destRole.setPropExternal(type.isExternal());
-        assoc.addConnection(destRole);
-        ch.ehi.interlis.associations.RoleDef srcRole=new ch.ehi.interlis.associations.RoleDef();
-        srcRole.attachParticipant(thisclass);
-        srcRole.setName(thisclass.getName());
-        srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.REFERENCE);
-        assoc.addConnection(srcRole);
-        java.util.Iterator rIt=type.iteratorRestrictedTo();
-        while(rIt.hasNext()){
-          destRole.addRestriction(findClassDef((Table)rIt.next()));
+        ch.ehi.interlis.associations.AssociationDef assoc=null;
+        if(translatedAttrib!=null) {
+            assoc=findAssociationDef(translatedAttrib);
+        }else {
+            assoc=findAssociationDef(attrib);
         }
-        // TODO FunctionCall
-        // TODO AttributeValueUsage
-        thisclass.getNamespace().addOwnedElement(assoc);
+        ReferenceType type=(ReferenceType)btype;
+        ch.ehi.interlis.modeltopicclass.ClassDef dest=findClassDef((Table)getElementInRootLanguageOrSame((Table)type.getReferred()));
+        ch.ehi.uml1_4.foundation.core.Class thisclass=(ch.ehi.uml1_4.foundation.core.Class)getNamespace();
+        assoc.setName(new NlsString(assoc.getName(),modelLanguage,dest.getDefLangName()+thisclass.getDefLangName()));
+        ch.ehi.interlis.associations.RoleDef destRole=null;
+        ch.ehi.interlis.associations.RoleDef srcRole=null;
+        if(translatedAttrib!=null) {
+            destRole=findDestRoleDef(translatedAttrib);
+            srcRole=findSrcRoleDef(translatedAttrib);
+        }else {
+            destRole=findDestRoleDef(attrib);
+            srcRole=findSrcRoleDef(attrib);
+        }
+        destRole.setName(new NlsString(destRole.getName(),modelLanguage,attrib.getName()));
+        srcRole.setName(new NlsString(srcRole.getName(),modelLanguage,attrib.getContainer().getName()));
+        // documentation
+        String ilidoc=attrib.getDocumentation();
+        if(ilidoc!=null){
+            destRole.setDocumentation(new NlsString(destRole.getDocumentation(),modelLanguage,ilidoc));
+        }
+        if(translatedAttrib==null) {
+            // meta values
+            visitMetaValues(destRole,attrib.getMetaValues());
+            destRole.attachParticipant(dest);
+            destRole.setIliAttributeIdx(attrIdx);
+            ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
+            r.setLower( btype.isMandatory() ? 1 : 0);
+            r.setUpper(1);
+            ch.ehi.uml1_4.implementation.UmlMultiplicity m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
+            m.addRange(r);
+            destRole.setMultiplicity(m);
+            destRole.setPropExtended(attrib.getExtending()!=null);
+            destRole.setPropExternal(type.isExternal());
+            assoc.addConnection(destRole);
+            srcRole.attachParticipant(thisclass);
+            srcRole.setIliAttributeKind(ch.ehi.interlis.associations.AssociationAsIliAttrKind.REFERENCE);
+            assoc.addConnection(srcRole);
+            java.util.Iterator rIt=type.iteratorRestrictedTo();
+            while(rIt.hasNext()){
+              destRole.addRestriction(findClassDef((Table)getElementInRootLanguageOrSame((Table)rIt.next())));
+            }
+            // TODO FunctionCall
+            // TODO AttributeValueUsage
+            thisclass.getNamespace().addOwnedElement(assoc);
+        }
         return;
     }
 
-    ch.ehi.interlis.attributes.AttributeDef attrdef=new ch.ehi.interlis.attributes.AttributeDef();
-    attrdef.setName(new NlsString(modelLanguage,attrib.getName()));
-    attrdef.setAbstract(attrib.isAbstract());
-    attrdef.setPropFinal(attrib.isFinal());
-    attrdef.setPropExtended(attrib.getExtending()!=null);
-    attrdef.setPropTransient(attrib.isTransient());
+    ch.ehi.interlis.attributes.AttributeDef attrdef=null;
+    if(translatedAttrib!=null) {
+        attrdef=findAttributeDef(translatedAttrib);
+    }else {
+        attrdef=findAttributeDef(attrib);
+    }
+    attrdef.setName(new NlsString(attrdef.getName(),modelLanguage,attrib.getName()));
     
-	// documentation
-	String ilidoc=attrib.getDocumentation();
-	if(ilidoc!=null){
-		attrdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
-	}
-	// meta values
-	visitMetaValues(attrdef,attrib.getMetaValues());
-
+    // documentation
+    String ilidoc=attrib.getDocumentation();
+    if(ilidoc!=null){
+        attrdef.setDocumentation(new NlsString(attrdef.getDocumentation(),modelLanguage,ilidoc));
+    }
     // TODO FunctionCall
     // TODO AttributeValueUsage
     // TODO Constant
     makeSyntax.printAttributeBasePath(attrib.getContainer(),attrib);
     String ilitxt=ch.ehi.basics.tools.StringUtility.purge(getSyntax());
     if(ilitxt!=null){
-    	ch.ehi.interlis.attributes.AttributeValueUsage value=new ch.ehi.interlis.attributes.AttributeValueUsage();
-    	value.setSyntax(new NlsString(modelLanguage,ilitxt));
-    	attrdef.attachAttributeValueUsage(value);
+        ch.ehi.interlis.attributes.AttributeValueUsage value=null;
+        if(attrdef.containsAttributeValueUsage()) {
+            value=attrdef.getAttributeValueUsage();
+        }else {
+            value=new ch.ehi.interlis.attributes.AttributeValueUsage();
+            attrdef.attachAttributeValueUsage(value);
+        }
+        value.setSyntax(new NlsString(value.getSyntax(),modelLanguage,ilitxt));
     }
-	
-
+    
+    if(translatedAttrib==null) {
+        attrdef.setAbstract(attrib.isAbstract());
+        attrdef.setPropFinal(attrib.isFinal());
+        attrdef.setPropExtended(attrib.getExtending()!=null);
+        attrdef.setPropTransient(attrib.isTransient());
+        
+        // meta values
+        visitMetaValues(attrdef,attrib.getMetaValues());
+    }
+    
     ch.ehi.interlis.attributes.AttrType battrtype=null;
-
     ch.ehi.uml1_4.foundation.datatypes.Multiplicity m=null;
     if(btype instanceof CompositionType){
-    	if(unwrapMultiValueStructAttrs && isMultiValueAttr){
-        	// normales ili Attribut in Wrapper
-        	// ASSERT isMultiValueAttributeWrapper(btype)
+        if(unwrapMultiValueStructAttrs && isMultiValueAttr){
+            // normales ili Attribut in Wrapper
+            // ASSERT isMultiValueAttributeWrapper(btype)
             ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
             battrtype=attrtype;
-            CompositionType type=(CompositionType)btype;
-            attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
-            m=visitCardinality(type.getCardinality());
-            LocalAttribute wrappedValue=(LocalAttribute) type.getComponentType().getElement(LocalAttribute.class, TransferFromUmlMetamodel.VALUE_ATTR);
-            TypeAlias wrappedValueType=(TypeAlias)wrappedValue.getDomain();  // Type vom value Attribut innerhalb der Struktur
-            attrtype.attachDomainDef(findDomainDef(wrappedValueType.getAliasing()));
-    	}else if(iliAttrsAsUmlAttrs){
+            if(translatedAttrib==null) {
+                CompositionType type=(CompositionType)btype;
+                attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
+                m=visitCardinality(type.getCardinality());
+                LocalAttribute wrappedValue=(LocalAttribute) type.getComponentType().getElement(LocalAttribute.class, TransferFromUmlMetamodel.VALUE_ATTR);
+                TypeAlias wrappedValueType=(TypeAlias)wrappedValue.getDomain();  // Type vom value Attribut innerhalb der Struktur
+                attrtype.attachDomainDef(findDomainDef((Domain)getElementInRootLanguageOrSame(wrappedValueType.getAliasing())));
+            }
+        }else if(iliAttrsAsUmlAttrs){
             CompositionType type=(CompositionType)btype;
             ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
             battrtype=attrtype;
-            ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType structAttrType=new ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType();
-            attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
-            if(type.getComponentType()!=ilibase.ANYSTRUCTURE){
-                structAttrType.attachParticipant(findClassDef(type.getComponentType()));
+            if(translatedAttrib==null) {
+                ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType structAttrType=new ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType();
+                attrdef.setOrdering(type.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
+                if(type.getComponentType()!=ilibase.ANYSTRUCTURE){
+                    structAttrType.attachParticipant(findClassDef((Table)getElementInRootLanguageOrSame(type.getComponentType())));
+                }
+                java.util.Iterator rIt=type.iteratorRestrictedTo();
+                while(rIt.hasNext()){
+                    structAttrType.addRestrictedTo(findClassDef((Table)getElementInRootLanguageOrSame((Table)rIt.next())));
+                }
+                attrtype.attachDirect(structAttrType);
+                m=visitCardinality(type.getCardinality());
             }
-            java.util.Iterator rIt=type.iteratorRestrictedTo();
-            while(rIt.hasNext()){
-            	structAttrType.addRestrictedTo(findClassDef((Table)rIt.next()));
-            }
-            attrtype.attachDirect(structAttrType);
-            m=visitCardinality(type.getCardinality());
-    	}
+        }
     }else{
-    	// normales ili Attribut
+        // normales ili Attribut
         if (attrib instanceof LocalAttribute){
             // DomainAttribute
             ch.ehi.interlis.attributes.DomainAttribute attrtype=new ch.ehi.interlis.attributes.DomainAttribute();
@@ -644,14 +922,22 @@ public class TransferFromIli2cMetamodel
                   || predefinedBaseDomain==ilibase.NAME
                   || predefinedBaseDomain==ilibase.URI
                   ){
-                attrtype.attachDirect(visitType(attrib.getContainer(),predefinedBaseDomain.getType()));
+                final ch.ehi.interlis.domainsandconstants.Type umlType = visitType(attrib.getContainer(),predefinedBaseDomain.getType());
+                if(translatedAttrib==null) {
+                    attrtype.attachDirect(umlType);
+                }
               }else{
                   TypeAlias type=(TypeAlias)btype;
-                  attrtype.attachDomainDef(findDomainDef(type.getAliasing()));
+                  if(translatedAttrib==null) {
+                      attrtype.attachDomainDef(findDomainDef((Domain)getElementInRootLanguageOrSame(type.getAliasing())));
+                  }
               }
             }else{
               if(btype!=null){
-                attrtype.attachDirect(visitType(attrib.getContainer(),btype));
+                final ch.ehi.interlis.domainsandconstants.Type umlType = visitType(attrib.getContainer(),btype);
+                if(translatedAttrib==null) {
+                    attrtype.attachDirect(umlType);
+                }
               }
             }
         }
@@ -661,15 +947,15 @@ public class TransferFromIli2cMetamodel
         m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
         m.addRange(r);
     }
-
     
-    attrdef.setMultiplicity(m);
-
-    attrdef.attachAttrType(battrtype);
-    ((ch.ehi.uml1_4.foundation.core.Classifier)getNamespace()).addFeature(attrdef);
+    if(translatedAttrib==null) {
+        attrdef.setMultiplicity(m);
+        attrdef.attachAttrType(battrtype);
+        ((ch.ehi.uml1_4.foundation.core.Classifier)getNamespace()).addFeature(attrdef);
+    }
   }
 
-  private boolean isMultiValueAttributeWrapper(Type btype) {
+private boolean isMultiValueAttributeWrapper(Type btype) {
 	if(!(btype instanceof CompositionType)){
 		return false;
 	}
@@ -710,65 +996,73 @@ private void visitRoleDef(RoleDef role)
   {
     EhiLogger.traceState(role.getScopedName());
 
-    ch.ehi.interlis.associations.RoleDef roledef=new ch.ehi.interlis.associations.RoleDef();
-    roledef.setName(new NlsString(modelLanguage,role.getName()));
-    
-	// documentation
-	String ilidoc=role.getDocumentation();
-	if(ilidoc!=null){
-		roledef.setDocumentation(new NlsString(modelLanguage,ilidoc));
-	}
-	// meta values
-	visitMetaValues(roledef,role.getMetaValues());
+    RoleDef translatedRole=(RoleDef)getElementInRootLanguage(role);
+    ch.ehi.interlis.associations.RoleDef roledef=null;
+    if(translatedRole!=null) {
+        roledef=findRoleDef(translatedRole);
+    }else {
+        roledef=findRoleDef(role);
+    }
+    roledef.setName(new NlsString(roledef.getName(),modelLanguage,role.getName()));
+    // documentation
+    String ilidoc=role.getDocumentation();
+    if(ilidoc!=null){
+        roledef.setDocumentation(new NlsString(roledef.getDocumentation(),modelLanguage,ilidoc));
+    }
+    if(translatedRole==null) {
+        
+        // meta values
+        visitMetaValues(roledef,role.getMetaValues());
 
-    roledef.setAbstract(role.isAbstract());
-    roledef.setPropFinal(role.isFinal());
-    roledef.setPropExternal(role.isExternal());
-    roledef.setPropExtended(role.getExtending()!=null);
-    roledef.setOrdering(role.isOrdered()
-      ? ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED
-      : ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
-    switch(role.getKind()){
-      case RoleDef.Kind.eASSOCIATE:
-        roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.NONE);
-        break;
-      case RoleDef.Kind.eAGGREGATE:
-        roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.AGGREGATE);
-        break;
-      case RoleDef.Kind.eCOMPOSITE:
-        roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
-        break;
-    }
-    if(role.getCardinality()!=null){
-      roledef.setMultiplicity(visitCardinality(role.getCardinality()));
-    }
-    Iterator ri=role.iteratorReference();
-    if(ri.hasNext()){
-    	ReferenceType first=(ReferenceType)ri.next();
-        roledef.attachParticipant(findViewable(first.getReferred()));
-        Iterator resti=first.iteratorRestrictedTo();
-    	while(resti.hasNext()){
-    		AbstractClassDef rest=(AbstractClassDef)resti.next();
-            roledef.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(rest));
-    	}
-        while(ri.hasNext()){
-        	ReferenceType r=(ReferenceType)ri.next();
-            ch.ehi.interlis.associations.Participant p=new ch.ehi.interlis.associations.Participant();
-        	roledef.addXorParticipant(p);
-        	p.attachParticipant((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(r.getReferred()));
-            resti=r.iteratorRestrictedTo();
-        	while(resti.hasNext()){
-        		AbstractClassDef rest=(AbstractClassDef)resti.next();
-                p.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable(rest));
-        	}
+        roledef.setAbstract(role.isAbstract());
+        roledef.setPropFinal(role.isFinal());
+        roledef.setPropExternal(role.isExternal());
+        roledef.setPropExtended(role.getExtending()!=null);
+        roledef.setOrdering(role.isOrdered()
+          ? ch.ehi.uml1_4.foundation.datatypes.OrderingKind.ORDERED
+          : ch.ehi.uml1_4.foundation.datatypes.OrderingKind.UNORDERED);
+        switch(role.getKind()){
+          case RoleDef.Kind.eASSOCIATE:
+            roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.NONE);
+            break;
+          case RoleDef.Kind.eAGGREGATE:
+            roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.AGGREGATE);
+            break;
+          case RoleDef.Kind.eCOMPOSITE:
+            roledef.setAggregation(ch.ehi.uml1_4.foundation.datatypes.AggregationKind.COMPOSITE);
+            break;
         }
-    }
-    // TODO handle derived from in RoleDef
+        if(role.getCardinality()!=null){
+          roledef.setMultiplicity(visitCardinality(role.getCardinality()));
+        }
+        Iterator ri=role.iteratorReference();
+        if(ri.hasNext()){
+            ReferenceType first=(ReferenceType)ri.next();
+            roledef.attachParticipant(findViewable((Viewable)getElementInRootLanguageOrSame(first.getReferred())));
+            Iterator resti=first.iteratorRestrictedTo();
+            while(resti.hasNext()){
+                AbstractClassDef rest=(AbstractClassDef)resti.next();
+                roledef.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable((Viewable)getElementInRootLanguageOrSame(rest)));
+            }
+            while(ri.hasNext()){
+                ReferenceType r=(ReferenceType)ri.next();
+                ch.ehi.interlis.associations.Participant p=new ch.ehi.interlis.associations.Participant();
+                roledef.addXorParticipant(p);
+                p.attachParticipant((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable((Viewable)getElementInRootLanguageOrSame(r.getReferred())));
+                resti=r.iteratorRestrictedTo();
+                while(resti.hasNext()){
+                    AbstractClassDef rest=(AbstractClassDef)resti.next();
+                    p.addRestriction((ch.ehi.interlis.modeltopicclass.AbstractClassDef)findViewable((Viewable)getElementInRootLanguageOrSame(rest)));
+                }
+            }
+        }
+        // TODO handle derived from in RoleDef
 
-    ((ch.ehi.uml1_4.foundation.core.Association)getNamespace()).addConnection(roledef);
+        ((ch.ehi.uml1_4.foundation.core.Association)getNamespace()).addConnection(roledef);
+    }
   }
 
-  private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
+private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Package root){
     // does ModelDef "INTERLIS" exist in repository?
     if(!ch.ehi.uml1_4.tools.NamespaceUtility.deepContainsOwnedElement(
         root,ch.ehi.interlis.modeltopicclass.ModelDef.class,ilibase.getName())){
@@ -792,19 +1086,19 @@ private void visitRoleDef(RoleDef role)
       {
         ch.ehi.interlis.units.UnitDef unitDef=(ch.ehi.interlis.units.UnitDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
           modelDef,ch.ehi.interlis.units.UnitDef.class,elt.getName());
-        unitMap.put(elt,unitDef);
+        unitMap.put((Unit)elt,unitDef);
       }
       else if (elt instanceof Function)
       {
         ch.ehi.interlis.functions.FunctionDef funcDef=(ch.ehi.interlis.functions.FunctionDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
           modelDef,ch.ehi.interlis.functions.FunctionDef.class,elt.getName());
-        functionMap.put(elt,funcDef);
+        functionMap.put((Function)elt,funcDef);
       }
       else if (elt instanceof Domain)
       {
         ch.ehi.interlis.domainsandconstants.DomainDef domainDef=(ch.ehi.interlis.domainsandconstants.DomainDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
           modelDef,ch.ehi.interlis.domainsandconstants.DomainDef.class,elt.getName());
-        domainMap.put(elt,domainDef);
+        domainMap.put((Domain)elt,domainDef);
       }
       else if (elt instanceof Table)
       {
@@ -812,7 +1106,7 @@ private void visitRoleDef(RoleDef role)
         {
         ch.ehi.interlis.modeltopicclass.ClassDef classDef=(ch.ehi.interlis.modeltopicclass.ClassDef)ch.ehi.uml1_4.tools.NamespaceUtility.deepGetOwnedElement(
           modelDef,ch.ehi.interlis.modeltopicclass.ClassDef.class,elt.getName());
-        viewableMap.put(elt,classDef);
+        viewableMap.put((Table)elt,classDef);
         }
       }
 
@@ -833,93 +1127,173 @@ private void visitRoleDef(RoleDef role)
     }
     EhiLogger.traceState(mdef.getScopedName());
     
-    ch.ehi.interlis.modeltopicclass.ModelDef model=findModelDef(mdef);
+    Model translatedModel=(Model)getElementInRootLanguage(mdef);
+    ch.ehi.interlis.modeltopicclass.ModelDef model=null;
+    if(translatedModel!=null) {
+        model=findModelDef(translatedModel);
+    }else {
+        model=findModelDef(mdef);
+    }
 
     // language
     modelLanguage="";
     if(mdef.getLanguage()!=null){
-    	modelLanguage=mdef.getLanguage();
-		model.setBaseLanguage(mdef.getLanguage());
-    }else{
-        modelLanguage="";
-		model.setBaseLanguage(modelLanguage);
+        modelLanguage=mdef.getLanguage();
+    }
+    if(translatedModel==null) {
+        model.setBaseLanguage(modelLanguage);
+    }else {
+        Translation translation=new Translation();
+        translation.setBaseLanguage(translatedModel.getLanguage());
+        translation.setLanguage(mdef.getLanguage());
+        model.addTranslation(translation);
     }
 
-    model.setName(new NlsString(modelLanguage,mdef.getName()));
+    model.setName(new NlsString(model.getName(),modelLanguage,mdef.getName()));
 	
 	// documentation
 	String ilidoc=mdef.getDocumentation();
 	if(ilidoc!=null){
-		model.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		model.setDocumentation(new NlsString(model.getDocumentation(),modelLanguage,ilidoc));
 	}
 	
 	// meta values
-	visitMetaValues(model,mdef.getMetaValues());
+    if(translatedModel==null) {
+        visitMetaValues(model,mdef.getMetaValues());
+    }
 	
     // kind
-    if(mdef instanceof DataModel){
-      model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.DATA);
-    }else if(mdef instanceof TypeModel){
-      model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.TYPE);
-    }else if(mdef instanceof RefSystemModel){
-      model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.REFSYSTEM);
-    }else if(mdef instanceof SymbologyModel){
-      model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.SYMBOLOGY);
+    if(translatedModel==null) {
+        if(mdef instanceof DataModel){
+            model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.DATA);
+          }else if(mdef instanceof TypeModel){
+            model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.TYPE);
+          }else if(mdef instanceof RefSystemModel){
+            model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.REFSYSTEM);
+          }else if(mdef instanceof SymbologyModel){
+            model.setKind(ch.ehi.interlis.modeltopicclass.ModelDefKind.SYMBOLOGY);
+          }
     }
 
 	// version
-	model.setVersion(new NlsString(modelLanguage,mdef.getModelVersion()));
+	model.setVersion(new NlsString(model.getVersion(),modelLanguage,mdef.getModelVersion()));
 	String verCmt=mdef.getModelVersionExpl();
 	if(verCmt!=null){
-		model.setVersionComment(new NlsString(modelLanguage,verCmt));
+		model.setVersionComment(new NlsString(model.getVersionComment(),modelLanguage,verCmt));
 	}
 	
 	// issuer
-	model.setIssuerURI(new NlsString(modelLanguage,mdef.getIssuer()));
+	model.setIssuerURI(new NlsString(model.getIssuerURI(),modelLanguage,mdef.getIssuer()));
 	
     // contracts
-    model.setContracted(mdef.isContracted());
-
-    // imports
-    Importable[] imported = mdef.getImporting ();
-    if (imported.length > 0)
-    {
-      for (int i = 0; i < imported.length; i++)
-      {
-        Model curImport = (Model) imported[i];
-        if(curImport!=ilibase){
-            ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef(curImport);
-            ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
-            iliimport.addSupplier(supplier);
-            iliimport.addClient(model);
-        }
-      }
+    if(translatedModel==null) {
+        model.setContracted(mdef.isContracted());
     }
 
-    // translation
-    // TODO translatiom
+    // imports
+    if(false){
+        // pre 3.8.0
+        if(translatedModel==null) {
+            Importable[] imported = mdef.getImporting ();
+            if (imported.length > 0)
+            {
+              for (int i = 0; i < imported.length; i++)
+              {
+                Model curImport = (Model) imported[i];
+                if(curImport!=ilibase){
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
+                    iliimport.addSupplier(supplier);
+                    iliimport.addClient(model);
+                    if(curImport.getLanguage()!=null) {
+                        iliimport.setLanguage(curImport.getLanguage());
+                    }
+                }
+              }
+            }
+        }else {
+            // TODO update IliImport's with supplierLanguage+clientLanguage
+        }
+    }else{
+        Importable[] imported = mdef.getImporting ();
+        if (imported.length > 0)
+        {
+          for (int i = 0; i < imported.length; i++)
+          {
+            Model curImport = (Model) imported[i];
+            if(curImport!=ilibase){
+                if(translatedModel==null) {
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=new ch.ehi.interlis.modeltopicclass.IliImport();
+                    iliimport.addSupplier(supplier);
+                    iliimport.addClient(model);
+                    iliimport.addImportLanguage(mdef.getLanguage(),curImport.getLanguage());
+                }else {
+                    ch.ehi.interlis.modeltopicclass.ModelDef supplier=findModelDef((Model)getElementInRootLanguageOrSame(curImport));
+                    ch.ehi.interlis.modeltopicclass.IliImport iliimport=model.getImport(supplier);
+                    iliimport.addImportLanguage(mdef.getLanguage(),curImport.getLanguage());
+                }
+            }
+          }
+        }
+    }
 
     ch.ehi.interlis.modeltopicclass.INTERLIS2Def ili2def=null;
     if(mdef==ilibase){
-      ili2def=findINTERLIS2Def(modelLanguage,getPredefinedName());
-      ili2def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
+      ili2def=visitINTERLIS2Def(modelLanguage,getPredefinedName(),mdef);
     }else{
      File cache=new File(System.getProperty("user.home"),".ilicache");
      File ilifile=new File(mdef.getFileName());
      String iliFileName=ilifile.getName();
      if(ilifile.getAbsoluteFile().getParent().startsWith(cache.getAbsolutePath())){
-    	 iliFileName="<"+iliFileName+">";
+         iliFileName="<"+iliFileName+">";
      }
-      ili2def=findINTERLIS2Def(modelLanguage,iliFileName);
-      ili2def.setVersion(new Double(mdef.getIliVersion()).doubleValue());
+      ili2def=visitINTERLIS2Def(modelLanguage,iliFileName,mdef);
     }
-
-    ili2def.addOwnedElement(model);
+    
+    if(translatedModel==null) {
+        ili2def.addOwnedElement(model);
+    }
     addNamespace(model);
     visitElements (mdef);
-    CreateDiagramUtility.topicOverview(model);
+    if(translatedModel==null) {
+        CreateDiagramUtility.topicOverview(model);
+    }
     removeNamespace();
 	return model;
+  }
+  private static Element getElementInRootLanguage(Element ele) {
+      Element baseLanguageElement = ele.getTranslationOf();
+      if (baseLanguageElement == null) {
+          return null;
+      }
+      while (baseLanguageElement != null) {
+          ele = baseLanguageElement;
+          baseLanguageElement = ele.getTranslationOf();
+      }
+      return ele;
+  }
+  private static Element getElementInRootLanguageOrSame(Element ele) {
+      Element baseLanguageElement = ele.getTranslationOf();
+      if (baseLanguageElement == null) {
+          return ele;
+      }
+      while (baseLanguageElement != null) {
+          ele = baseLanguageElement;
+          baseLanguageElement = ele.getTranslationOf();
+      }
+      return ele;
+  }
+  private Enumeration.Element getElementInRootLanguage(Enumeration.Element ele) {
+      Enumeration.Element baseLanguageElement = ele.getTranslationOf();
+      if (baseLanguageElement == null) {
+          return null;
+      }
+      while (baseLanguageElement != null) {
+          ele = baseLanguageElement;
+          baseLanguageElement = ele.getTranslationOf();
+      }
+      return ele;
   }
 
   private void visitMetaValues(ch.ehi.uml1_4.foundation.core.ModelElement ele,ch.ehi.basics.settings.Settings values)
@@ -944,49 +1318,63 @@ private void visitRoleDef(RoleDef role)
   {
       EhiLogger.traceState(dd.getScopedName());
       
-    ch.ehi.interlis.domainsandconstants.DomainDef domaindef=findDomainDef(dd);
-    domaindef.setName(new NlsString(modelLanguage,dd.getName()));
+    ch.ehi.interlis.domainsandconstants.DomainDef domaindef=null;
+    Domain translatedDd=(Domain)getElementInRootLanguage(dd);
+    if(translatedDd!=null) {
+        domaindef=findDomainDef(translatedDd);
+    }else {
+        domaindef=findDomainDef(dd);
+    }
+    
+    
+    domaindef.setName(new NlsString(domaindef.getName(),modelLanguage,dd.getName()));
 
 	// documentation
 	String ilidoc=dd.getDocumentation();
 	if(ilidoc!=null){
-		domaindef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		domaindef.setDocumentation(new NlsString(domaindef.getDocumentation(),modelLanguage,ilidoc));
 	}
 	
-	// meta values
-	visitMetaValues(domaindef,dd.getMetaValues());
+	if(translatedDd==null) {
+	    // meta values
+	    visitMetaValues(domaindef,dd.getMetaValues());
+	    
+	    domaindef.setAbstract(dd.isAbstract());
+	    domaindef.setPropFinal(dd.isFinal());
+	    // TODO handle MANDATORY DomainDef
+	    //domaindef.setMandatory();
+
+	    Domain extending = dd.getExtending();
+	    if (extending != null)
+	    {
+	      ch.ehi.interlis.domainsandconstants.DomainDef parent=findDomainDef((Domain)getElementInRootLanguageOrSame(extending));
+	      ch.ehi.interlis.domainsandconstants.DomainExtends domainextends=new ch.ehi.interlis.domainsandconstants.DomainExtends();
+	      domainextends.attachParent(parent);
+	      domainextends.attachChild(domaindef);
+	    }
+
+	}
 	
-    domaindef.setAbstract(dd.isAbstract());
-    domaindef.setPropFinal(dd.isFinal());
-    // TODO handle MANDATORY DomainDef
-    //domaindef.setMandatory();
-
-    Domain extending = dd.getExtending();
-    if (extending != null)
-    {
-      ch.ehi.interlis.domainsandconstants.DomainDef parent=findDomainDef(extending);
-      ch.ehi.interlis.domainsandconstants.DomainExtends domainextends=new ch.ehi.interlis.domainsandconstants.DomainExtends();
-      domainextends.attachParent(parent);
-      domainextends.attachChild(domaindef);
+    // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
+    // resolve them first
+    Type btype=dd.getType();
+    if(btype instanceof TypeAlias){
+      Type predefinedBaseType=btype.resolveAliases();
+      if(predefinedBaseType==ilibase.BOOLEAN.getType()
+          || predefinedBaseType==ilibase.HALIGNMENT.getType()
+          || predefinedBaseType==ilibase.VALIGNMENT.getType()
+          || predefinedBaseType==ilibase.NAME.getType()
+          || predefinedBaseType==ilibase.URI.getType()
+          ){
+        btype=predefinedBaseType;
+      }
     }
-
-        // BOOLEAN, HALIGNMENT, VALIGNMENT, NAME, URI are represented as TypeAlias in ili2c
-        // resolve them first
-        Type btype=dd.getType();
-        if(btype instanceof TypeAlias){
-          Type predefinedBaseType=btype.resolveAliases();
-          if(predefinedBaseType==ilibase.BOOLEAN.getType()
-              || predefinedBaseType==ilibase.HALIGNMENT.getType()
-              || predefinedBaseType==ilibase.VALIGNMENT.getType()
-              || predefinedBaseType==ilibase.NAME.getType()
-              || predefinedBaseType==ilibase.URI.getType()
-              ){
-            btype=predefinedBaseType;
-          }
-        }
     ch.ehi.interlis.domainsandconstants.Type type=visitType(dd.getContainer(),btype);
-    domaindef.attachType(type);
-    getNamespace().addOwnedElement(domaindef);
+    
+    if(translatedDd==null) {
+        domaindef.attachType(type);
+        getNamespace().addOwnedElement(domaindef);
+    }
     return domaindef;
   }
 
@@ -1027,7 +1415,12 @@ private void visitRoleDef(RoleDef role)
     }else if (dd instanceof EnumerationType){
       ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration;
       EnumerationType et = (EnumerationType) dd;
-      enumeration=visitEnumeration(et.getEnumeration());
+      EnumerationType translatedEt=(EnumerationType)getElementInRootLanguage(et);
+      Enumeration translatedE=null;
+      if(translatedEt!=null) {
+          translatedE=translatedEt.getEnumeration();
+      }
+      enumeration=visitEnumeration(translatedE,et.getEnumeration());
       ret=enumeration;
       if (et.isCircular()){
     	  enumeration.setKind(ch.ehi.interlis.domainsandconstants.basetypes.EnumKind.CIRCULAR);
@@ -1093,7 +1486,7 @@ private void visitRoleDef(RoleDef role)
           }else if(lineForms[i]==ilibase.STRAIGHTS){
             lf.setStraights(true);
           }else{
-            lf.addLineFormTypeDef(findLineFormTypeDef(lineForms[i]));
+            lf.addLineFormTypeDef(findLineFormTypeDef((LineForm)getElementInRootLanguageOrSame(lineForms[i])));
           }
         }
       }
@@ -1101,7 +1494,7 @@ private void visitRoleDef(RoleDef role)
 
       if (controlPointDomain != null)
       {
-        line.attachControlpoints(findDomainDef(controlPointDomain));
+        line.attachControlpoints(findDomainDef((Domain)getElementInRootLanguageOrSame(controlPointDomain)));
       }
 
 
@@ -1116,7 +1509,7 @@ private void visitRoleDef(RoleDef role)
 
       if (lineAttributeStructure != null)
       {
-        ((ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType)line).attachLinAttrDef(findClassDef(lineAttributeStructure));
+        ((ch.ehi.interlis.domainsandconstants.linetypes.SurfaceType)line).attachLinAttrDef(findClassDef((Table)getElementInRootLanguageOrSame(lineAttributeStructure)));
       }
     }else if (dd instanceof OIDType){
       ch.ehi.interlis.domainsandconstants.basetypes.OidType oid=new ch.ehi.interlis.domainsandconstants.basetypes.OidType();
@@ -1125,7 +1518,11 @@ private void visitRoleDef(RoleDef role)
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.ANY);
       }else if(dd instanceof TextOIDType){
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.TEXT);
-        oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,((OIDType)dd).getOIDType()));
+        Type textOidType=((OIDType)dd).getOIDType();
+        if(textOidType instanceof TypeAlias) {
+            textOidType=((TypeAlias)textOidType).resolveAliases();
+        }
+        oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,textOidType));
       }else if(dd instanceof NumericOIDType){
         oid.setKind(ch.ehi.interlis.domainsandconstants.basetypes.OidKind.NUMERIC);
         oid.attachOiddomain((ch.ehi.interlis.domainsandconstants.basetypes.BaseType)visitType(scope,((OIDType)dd).getOIDType()));
@@ -1142,13 +1539,13 @@ private void visitRoleDef(RoleDef role)
       Iterator ri=ct.iteratorRestrictedTo();
       while(ri.hasNext()){
         Table r=(Table)ri.next();
-        classtype.addRestrictedTo(findClassDef(r));
+        classtype.addRestrictedTo(findClassDef((Table)getElementInRootLanguageOrSame(r)));
       }
     }else{
       // handle unknown types in a generic way
       ch.ehi.interlis.domainsandconstants.UnknownType ukn=new ch.ehi.interlis.domainsandconstants.UnknownType();
       ret=ukn;
-      makeSyntax.printType(scope,dd);
+      makeSyntax.printType(scope,dd,false);
       ukn.setSyntax(new NlsString(modelLanguage,getSyntax()));
     }
     return ret;
@@ -1189,7 +1586,7 @@ private void visitRoleDef(RoleDef role)
 
     if (btype.getUnit() != null)
     {
-      ret.attachUnitDef(findUnitDef(btype.getUnit()));
+      ret.attachUnitDef(findUnitDef((Unit)getElementInRootLanguageOrSame(btype.getUnit())));
     }
 
 
@@ -1230,56 +1627,94 @@ private void visitRoleDef(RoleDef role)
     return ret;
   }
 
-  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration visitEnumeration (ch.interlis.ili2c.metamodel.Enumeration enumer)
+  private ch.ehi.interlis.domainsandconstants.basetypes.Enumeration visitEnumeration (Enumeration translatedEnumer, Enumeration enumer)
   {
-    ch.ehi.interlis.domainsandconstants.basetypes.Enumeration ret=new ch.ehi.interlis.domainsandconstants.basetypes.Enumeration();
+    ch.ehi.interlis.domainsandconstants.basetypes.Enumeration ret=null;
+    
+    if(translatedEnumer!=null) {
+        ret=findEnumeration(translatedEnumer);
+    }else {
+        ret=findEnumeration(enumer);
+    }
+    
     Iterator iter = enumer.getElements();
     while (iter.hasNext()) {
-      ret.addEnumElement(visitEnumerationElement((ch.interlis.ili2c.metamodel.Enumeration.Element) iter.next()));
+      final EnumElement enumElement = visitEnumerationElement((ch.interlis.ili2c.metamodel.Enumeration.Element) iter.next());
+      if(translatedEnumer==null) {
+          ret.addEnumElement(enumElement);
+      }
     }
     return ret;
   }
 
-
-  private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement visitEnumerationElement (ch.interlis.ili2c.metamodel.Enumeration.Element ee)
+private ch.ehi.interlis.domainsandconstants.basetypes.EnumElement visitEnumerationElement (Enumeration.Element ee)
   {
-    ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret=new ch.ehi.interlis.domainsandconstants.basetypes.EnumElement();
-    ret.setName(new NlsString(modelLanguage,ee.getName()));
+    ch.ehi.interlis.domainsandconstants.basetypes.EnumElement ret=null;
+    
+    Enumeration.Element translatedEe=getElementInRootLanguage(ee);
+    if(translatedEe!=null) {
+        ret=findEnumEle(translatedEe);
+    }else {
+        ret=findEnumEle(ee);
+    }
+    
+    ret.setName(new NlsString(ret.getName(),modelLanguage,ee.getName()));
 
 	// documentation
 	String ilidoc=ee.getDocumentation();
 	if(ilidoc!=null){
-		ret.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		ret.setDocumentation(new NlsString(ret.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-	// meta values
-	visitMetaValues(ret,ee.getMetaValues());
+    if(translatedEe==null) {
+        // meta values
+        visitMetaValues(ret,ee.getMetaValues());
+    }
 
-    ch.interlis.ili2c.metamodel.Enumeration subEnum = ee.getSubEnumeration();
+    Enumeration subEnum = ee.getSubEnumeration();
+    Enumeration translatedSubEnum = null;
+    if(translatedEe!=null) {
+        translatedSubEnum = translatedEe.getSubEnumeration();
+    }
     if (subEnum != null)
     {
-      ret.attachChild(visitEnumeration(subEnum));
+        final ch.ehi.interlis.domainsandconstants.basetypes.Enumeration enumeration = visitEnumeration(translatedSubEnum,subEnum);
+        if(translatedEe==null) {
+            ret.attachChild(enumeration);
+        }
     }
     return ret;
   }
 
 
-  private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineFormTypeDef (LineForm lf)
+private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineFormTypeDef (LineForm lf)
   {
-    ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lfdef=findLineFormTypeDef(lf);
-    lfdef.setName(new NlsString(modelLanguage,lf.getName()));
+    ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef lfdef=null;
+    
+    
+    LineForm translatedLf=(LineForm)getElementInRootLanguage(lf);
+    if(translatedLf!=null) {
+        lfdef=findLineFormTypeDef(translatedLf);
+    }else {
+        lfdef=findLineFormTypeDef(lf);
+    }
+    
+    
+    lfdef.setName(new NlsString(lfdef.getName(),modelLanguage,lf.getName()));
     
 	// documentation
 	String ilidoc=lf.getDocumentation();
 	if(ilidoc!=null){
-		lfdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		lfdef.setDocumentation(new NlsString(lfdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
-    Table struct=lf.getSegmentStructure();
-    if(struct!=null){
-      lfdef.attachStructure(findClassDef(struct));
-    }
-    getNamespace().addOwnedElement(lfdef);
+	if(translatedLf==null) {
+	    Table struct=lf.getSegmentStructure();
+	    if(struct!=null){
+	      lfdef.attachStructure(findClassDef((Table)getElementInRootLanguageOrSame(struct)));
+	    }
+	    getNamespace().addOwnedElement(lfdef);
+	}
     return lfdef;
 
   }
@@ -1288,18 +1723,29 @@ private void visitRoleDef(RoleDef role)
 
   private ch.ehi.interlis.functions.FunctionDef visitFunctionDeclaration(Function f)
   {
-    ch.ehi.interlis.functions.FunctionDef funcdef=findFunctionDef(f);
-    funcdef.setName(new NlsString(modelLanguage,f.getName()));
+    ch.ehi.interlis.functions.FunctionDef funcdef=null;
+    
+    Function translatedF=(Function)getElementInRootLanguage(f);
+    if(translatedF!=null) {
+        funcdef=findFunctionDef(translatedF);
+    }else {
+        funcdef=findFunctionDef(f);
+    }
+    
+    
+    funcdef.setName(new NlsString(funcdef.getName(),modelLanguage,f.getName()));
 
 	// documentation
 	String ilidoc=f.getDocumentation();
 	if(ilidoc!=null){
-		funcdef.setDocumentation(new NlsString(modelLanguage,ilidoc));
+		funcdef.setDocumentation(new NlsString(funcdef.getDocumentation(),modelLanguage,ilidoc));
 	}
 
     makeSyntax.printFunctionDeclaration(f.getContainer(),f);
-    funcdef.setSyntax(new NlsString(modelLanguage,getSyntax()));
-    getNamespace().addOwnedElement(funcdef);
+    funcdef.setSyntax(new NlsString(funcdef.getSyntax(),modelLanguage,getSyntax()));
+    if(translatedF==null) {
+        getNamespace().addOwnedElement(funcdef);
+    }
     return funcdef;
   }
 
@@ -1336,7 +1782,7 @@ private void visitRoleDef(RoleDef role)
       }
       else if (elt instanceof Domain)
       {
-		nextUmlEle=visitDomainDef ((Domain) elt);
+		nextUmlEle=visitDomainDef ((Domain) elt); // TODO
       }
       else if (elt instanceof GraphicParameterDef)
       {
@@ -1344,12 +1790,12 @@ private void visitRoleDef(RoleDef role)
       }
       else if (elt instanceof Topic)
       {
-		nextUmlEle=visitTopicDef((Topic) elt);
+		nextUmlEle=visitTopicDef((Topic) elt); // TODO
       }
 
       else if (elt instanceof AssociationDef)
       {
-		nextUmlEle=visitAssociationDef((AssociationDef) elt);
+		nextUmlEle=visitAssociationDef((AssociationDef) elt); // TODO
       }
       else if (elt instanceof Table)
       {
@@ -1359,7 +1805,7 @@ private void visitRoleDef(RoleDef role)
         */
         if (!((Table) elt).isImplicit ())
         {
-			nextUmlEle=visitClassDef((Table) elt);
+			nextUmlEle=visitClassDef((Table) elt); // TODO
         }
       }
       else if (elt instanceof View)
@@ -1373,12 +1819,12 @@ private void visitRoleDef(RoleDef role)
 
       else if (elt instanceof AttributeDef)
       {
-        visitAttribute ((AttributeDef) elt,attrIdx);
+        visitAttribute ((AttributeDef) elt,attrIdx); // TODO
         attrIdx++;
       }
       if (elt instanceof RoleDef)
       {
-        visitRoleDef((RoleDef) elt);
+        visitRoleDef((RoleDef) elt); // TODO
       }
       else if (elt instanceof Parameter)
       {
@@ -1389,9 +1835,11 @@ private void visitRoleDef(RoleDef role)
         visitConstraint((Constraint) elt);
       }
       
-      if(nextUmlEle!=null && lastUmlEle!=null){
-      	// add dependency to keep ordering the same as in ili-file
-		ch.ehi.umleditor.application.ElementFactory.createDependency(ch.ehi.uml1_4.implementation.UmlUsage.class, nextUmlEle, lastUmlEle);
+      if(getElementInRootLanguage(elt)==null) {
+          if(nextUmlEle!=null && lastUmlEle!=null){
+              // add dependency to keep ordering the same as in ili-file
+              ch.ehi.umleditor.application.ElementFactory.createDependency(ch.ehi.uml1_4.implementation.UmlUsage.class, nextUmlEle, lastUmlEle);
+            }
       }
       if(nextUmlEle!=null){
 		lastUmlEle=nextUmlEle;

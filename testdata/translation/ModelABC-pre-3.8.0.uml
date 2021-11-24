@@ -1,0 +1,5012 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ch.ehi.umleditor xmlns="http://schemas.umleditor.org/umleditor/1.1">
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="3">
+<Namespace>0</Namespace>
+<OwnedElement>6</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="4">
+<Namespace>0</Namespace>
+<OwnedElement>7</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlPackage TID="7">
+<Abstract>false</Abstract>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<Name>8</Name>
+<DefLangName>read1</DefLangName>
+<NamespaceLink>4</NamespaceLink>
+<OwnedElementLink>9</OwnedElementLink>
+<OwnedElementLink>10</OwnedElementLink>
+<OwnedElementLink>11</OwnedElementLink>
+</ch.ehi.uml1_4.implementation.UmlPackage>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="10">
+<Namespace>7</Namespace>
+<OwnedElement>12</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.INTERLIS2Def TID="12">
+<Abstract>false</Abstract>
+<Version>2.3</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>10</NamespaceLink>
+<Name>13</Name>
+<DefLangName>ModelB.ili</DefLangName>
+<OwnedElementLink>14</OwnedElementLink>
+</ch.ehi.interlis.modeltopicclass.INTERLIS2Def>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="14">
+<Namespace>12</Namespace>
+<OwnedElement>15</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ModelDef TID="15">
+<Name>16</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Version>17</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>14</NamespaceLink>
+<Kind>1</Kind>
+<Contracted>false</Contracted>
+<IssuerURI>18</IssuerURI>
+<BaseLanguage>de</BaseLanguage>
+<DefLangName>ModelB_fr</DefLangName>
+<ClientDependency>19</ClientDependency>
+<ClientDependency>20</ClientDependency>
+<SupplierDependency>21</SupplierDependency>
+<SupplierDependency>22</SupplierDependency>
+<OwnedElementLink>23</OwnedElementLink>
+<Translation>24</Translation>
+<Diagram>25</Diagram>
+</ch.ehi.interlis.modeltopicclass.ModelDef>
+<ch.ehi.interlis.modeltopicclass.Translation TID="24">
+<Language>fr</Language>
+<ModelDef>15</ModelDef>
+<BaseLanguage>de</BaseLanguage>
+</ch.ehi.interlis.modeltopicclass.Translation>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="11">
+<Namespace>7</Namespace>
+<OwnedElement>26</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="17">
+<Entry TID="27" language="de" translation="2021-11-17"/>
+<Entry TID="28" language="fr" translation="2021-11-17"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="2">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlTaggedValue TID="5">
+<Name>29</Name>
+<Documentation>30</Documentation>
+<DataValue>it</DataValue>
+<ModelElement>0</ModelElement>
+</ch.ehi.uml1_4.implementation.UmlTaggedValue>
+<ch.ehi.interlis.modeltopicclass.IliImport TID="21">
+<Language>de</Language>
+<Supplier>15</Supplier>
+<Client>31</Client>
+</ch.ehi.interlis.modeltopicclass.IliImport>
+<ch.ehi.basics.types.NlsString TID="8">
+<Entry TID="32" language="it" translation="read1"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="9">
+<Namespace>7</Namespace>
+<OwnedElement>33</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="25">
+<Name>34</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>15</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.basics.types.NlsString TID="34">
+<Entry TID="35" language="it" translation="Topics"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.IliImport TID="19">
+<Language>de</Language>
+<Supplier>36</Supplier>
+<Client>15</Client>
+</ch.ehi.interlis.modeltopicclass.IliImport>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="23">
+<Namespace>15</Namespace>
+<OwnedElement>37</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="22">
+<Name>38</Name>
+<Documentation>39</Documentation>
+<DefLangName>UmlUsage90</DefLangName>
+<Supplier>15</Supplier>
+<Client>31</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.modeltopicclass.INTERLIS2Def TID="26">
+<Abstract>false</Abstract>
+<Version>2.3</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>11</NamespaceLink>
+<Name>40</Name>
+<DefLangName>ModelC.ili</DefLangName>
+<OwnedElementLink>41</OwnedElementLink>
+</ch.ehi.interlis.modeltopicclass.INTERLIS2Def>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="41">
+<Namespace>26</Namespace>
+<OwnedElement>31</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="16">
+<Entry TID="42" language="de" translation="ModelB_de"/>
+<Entry TID="43" language="fr" translation="ModelB_fr"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="39">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="20">
+<Name>44</Name>
+<Documentation>45</Documentation>
+<DefLangName>UmlUsage85</DefLangName>
+<Supplier>36</Supplier>
+<Client>15</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="45">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="44">
+<Entry TID="46" language="it" translation="UmlUsage85"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="40">
+<Entry TID="47" language="de" translation="ModelC.ili"/>
+<Entry TID="48" language="it" translation="ModelC.ili"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.INTERLIS2Def TID="6">
+<Abstract>false</Abstract>
+<Version>2.3</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>3</NamespaceLink>
+<Name>49</Name>
+<DefLangName>&lt;predefined&gt;</DefLangName>
+<OwnedElementLink>50</OwnedElementLink>
+</ch.ehi.interlis.modeltopicclass.INTERLIS2Def>
+<ch.ehi.basics.types.NlsString TID="49">
+<Entry TID="51" language="en" translation="&lt;predefined&gt;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="50">
+<Namespace>6</Namespace>
+<OwnedElement>52</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ModelDef TID="52">
+<Name>53</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Version>54</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>50</NamespaceLink>
+<Kind>1</Kind>
+<Contracted>true</Contracted>
+<IssuerURI>55</IssuerURI>
+<BaseLanguage>en</BaseLanguage>
+<DefLangName>INTERLIS</DefLangName>
+<OwnedElementLink>56</OwnedElementLink>
+<OwnedElementLink>57</OwnedElementLink>
+<OwnedElementLink>58</OwnedElementLink>
+<OwnedElementLink>59</OwnedElementLink>
+<OwnedElementLink>60</OwnedElementLink>
+<OwnedElementLink>61</OwnedElementLink>
+<OwnedElementLink>62</OwnedElementLink>
+<OwnedElementLink>63</OwnedElementLink>
+<OwnedElementLink>64</OwnedElementLink>
+<OwnedElementLink>65</OwnedElementLink>
+<OwnedElementLink>66</OwnedElementLink>
+<OwnedElementLink>67</OwnedElementLink>
+<OwnedElementLink>68</OwnedElementLink>
+<OwnedElementLink>69</OwnedElementLink>
+<OwnedElementLink>70</OwnedElementLink>
+<OwnedElementLink>71</OwnedElementLink>
+<OwnedElementLink>72</OwnedElementLink>
+<OwnedElementLink>73</OwnedElementLink>
+<OwnedElementLink>74</OwnedElementLink>
+<OwnedElementLink>75</OwnedElementLink>
+<OwnedElementLink>76</OwnedElementLink>
+<OwnedElementLink>77</OwnedElementLink>
+<OwnedElementLink>78</OwnedElementLink>
+<OwnedElementLink>79</OwnedElementLink>
+<OwnedElementLink>80</OwnedElementLink>
+<OwnedElementLink>81</OwnedElementLink>
+<OwnedElementLink>82</OwnedElementLink>
+<OwnedElementLink>83</OwnedElementLink>
+<OwnedElementLink>84</OwnedElementLink>
+<OwnedElementLink>85</OwnedElementLink>
+<OwnedElementLink>86</OwnedElementLink>
+<OwnedElementLink>87</OwnedElementLink>
+<OwnedElementLink>88</OwnedElementLink>
+<OwnedElementLink>89</OwnedElementLink>
+<OwnedElementLink>90</OwnedElementLink>
+<OwnedElementLink>91</OwnedElementLink>
+<OwnedElementLink>92</OwnedElementLink>
+<OwnedElementLink>93</OwnedElementLink>
+<OwnedElementLink>94</OwnedElementLink>
+<OwnedElementLink>95</OwnedElementLink>
+<OwnedElementLink>96</OwnedElementLink>
+<OwnedElementLink>97</OwnedElementLink>
+<OwnedElementLink>98</OwnedElementLink>
+<OwnedElementLink>99</OwnedElementLink>
+<OwnedElementLink>100</OwnedElementLink>
+<OwnedElementLink>101</OwnedElementLink>
+<OwnedElementLink>102</OwnedElementLink>
+<OwnedElementLink>103</OwnedElementLink>
+<OwnedElementLink>104</OwnedElementLink>
+<OwnedElementLink>105</OwnedElementLink>
+<OwnedElementLink>106</OwnedElementLink>
+<OwnedElementLink>107</OwnedElementLink>
+<OwnedElementLink>108</OwnedElementLink>
+<OwnedElementLink>109</OwnedElementLink>
+<OwnedElementLink>110</OwnedElementLink>
+<OwnedElementLink>111</OwnedElementLink>
+<OwnedElementLink>112</OwnedElementLink>
+<OwnedElementLink>113</OwnedElementLink>
+<OwnedElementLink>114</OwnedElementLink>
+<OwnedElementLink>115</OwnedElementLink>
+<OwnedElementLink>116</OwnedElementLink>
+<OwnedElementLink>117</OwnedElementLink>
+<OwnedElementLink>118</OwnedElementLink>
+<OwnedElementLink>119</OwnedElementLink>
+<OwnedElementLink>120</OwnedElementLink>
+<OwnedElementLink>121</OwnedElementLink>
+<OwnedElementLink>122</OwnedElementLink>
+<OwnedElementLink>123</OwnedElementLink>
+<OwnedElementLink>124</OwnedElementLink>
+<OwnedElementLink>125</OwnedElementLink>
+<OwnedElementLink>126</OwnedElementLink>
+<OwnedElementLink>127</OwnedElementLink>
+<OwnedElementLink>128</OwnedElementLink>
+<OwnedElementLink>129</OwnedElementLink>
+<OwnedElementLink>130</OwnedElementLink>
+<OwnedElementLink>131</OwnedElementLink>
+<OwnedElementLink>132</OwnedElementLink>
+<OwnedElementLink>133</OwnedElementLink>
+<Diagram>134</Diagram>
+</ch.ehi.interlis.modeltopicclass.ModelDef>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="79">
+<Namespace>52</Namespace>
+<OwnedElement>135</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="108">
+<Namespace>52</Namespace>
+<OwnedElement>136</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="63">
+<Namespace>52</Namespace>
+<OwnedElement>137</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="117">
+<Namespace>52</Namespace>
+<OwnedElement>138</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="102">
+<Namespace>52</Namespace>
+<OwnedElement>139</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="59">
+<Namespace>52</Namespace>
+<OwnedElement>140</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.units.UnitDef TID="140">
+<Name>141</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>59</NamespaceLink>
+<Syntax>142</Syntax>
+<DefLangName>DIMENSIONLESS</DefLangName>
+<ClientDependency>143</ClientDependency>
+<SupplierDependency>144</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="142">
+<Entry TID="145" language="en" translation="DIMENSIONLESS (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="89">
+<Namespace>52</Namespace>
+<OwnedElement>146</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="118">
+<Namespace>52</Namespace>
+<OwnedElement>147</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="97">
+<Namespace>52</Namespace>
+<OwnedElement>148</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.functions.FunctionDef TID="148">
+<Name>149</Name>
+<NamespaceLink>97</NamespaceLink>
+<Syntax>150</Syntax>
+<DefLangName>trim</DefLangName>
+<ClientDependency>151</ClientDependency>
+<SupplierDependency>152</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="60">
+<Namespace>52</Namespace>
+<OwnedElement>153</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="110">
+<Namespace>52</Namespace>
+<OwnedElement>154</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="82">
+<Namespace>52</Namespace>
+<OwnedElement>155</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="109">
+<Namespace>52</Namespace>
+<OwnedElement>156</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="134">
+<Name>157</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>52</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+<PresentationElement>158</PresentationElement>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.interlis.modeltopicclass.INTERLIS2Def TID="33">
+<Abstract>false</Abstract>
+<Version>2.3</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>9</NamespaceLink>
+<Name>159</Name>
+<DefLangName>ModelA.ili</DefLangName>
+<OwnedElementLink>160</OwnedElementLink>
+</ch.ehi.interlis.modeltopicclass.INTERLIS2Def>
+<ch.ehi.basics.types.NlsString TID="159">
+<Entry TID="161" language="de" translation="ModelA.ili"/>
+<Entry TID="162" language="fr" translation="ModelA.ili"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="124">
+<Namespace>52</Namespace>
+<OwnedElement>163</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="77">
+<Namespace>52</Namespace>
+<OwnedElement>164</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="75">
+<Namespace>52</Namespace>
+<OwnedElement>165</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="120">
+<Namespace>52</Namespace>
+<OwnedElement>166</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="71">
+<Namespace>52</Namespace>
+<OwnedElement>167</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="58">
+<Namespace>52</Namespace>
+<OwnedElement>168</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="111">
+<Namespace>52</Namespace>
+<OwnedElement>169</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="69">
+<Namespace>52</Namespace>
+<OwnedElement>170</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="123">
+<Namespace>52</Namespace>
+<OwnedElement>171</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="88">
+<Namespace>52</Namespace>
+<OwnedElement>172</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="130">
+<Namespace>52</Namespace>
+<OwnedElement>173</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="53">
+<Entry TID="174" language="en" translation="INTERLIS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="84">
+<Namespace>52</Namespace>
+<OwnedElement>175</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="175">
+<Name>176</Name>
+<Abstract>false</Abstract>
+<Type>177</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>84</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>VALIGNMENT</DefLangName>
+<ClientDependency>178</ClientDependency>
+<SupplierDependency>179</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="176">
+<Entry TID="180" language="en" translation="VALIGNMENT"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.VertAlignment TID="177">
+</ch.ehi.interlis.domainsandconstants.basetypes.VertAlignment>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="178">
+<Name>181</Name>
+<Documentation>182</Documentation>
+<DefLangName>UmlUsage34</DefLangName>
+<Supplier>183</Supplier>
+<Client>175</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="183">
+<Name>184</Name>
+<Abstract>false</Abstract>
+<Type>185</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>83</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>HALIGNMENT</DefLangName>
+<ClientDependency>186</ClientDependency>
+<SupplierDependency>178</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="13">
+<Entry TID="187" language="de" translation="ModelB.ili"/>
+<Entry TID="188" language="fr" translation="ModelB.ili"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="127">
+<Namespace>52</Namespace>
+<OwnedElement>189</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="125">
+<Namespace>52</Namespace>
+<OwnedElement>190</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="74">
+<Namespace>52</Namespace>
+<OwnedElement>191</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="38">
+<Entry TID="192" language="it" translation="UmlUsage90"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="30">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="182">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="98">
+<Namespace>52</Namespace>
+<OwnedElement>193</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="143">
+<Name>194</Name>
+<Documentation>195</Documentation>
+<DefLangName>UmlUsage9</DefLangName>
+<Supplier>168</Supplier>
+<Client>140</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="62">
+<Namespace>52</Namespace>
+<OwnedElement>196</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="80">
+<Namespace>52</Namespace>
+<OwnedElement>197</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="197">
+<Name>198</Name>
+<Abstract>false</Abstract>
+<Type>199</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>80</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>NAME</DefLangName>
+<ClientDependency>200</ClientDependency>
+<SupplierDependency>201</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="198">
+<Entry TID="202" language="en" translation="NAME"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="200">
+<Name>203</Name>
+<Documentation>204</Documentation>
+<DefLangName>UmlUsage30</DefLangName>
+<Supplier>135</Supplier>
+<Client>197</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="203">
+<Entry TID="205" language="it" translation="UmlUsage30"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="70">
+<Namespace>52</Namespace>
+<OwnedElement>206</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="171">
+<Kind>2</Kind>
+<Name>207</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>123</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>GregorianDateTime</DefLangName>
+<SupplierDependency>208</SupplierDependency>
+<Generalization>209</Generalization>
+<Feature>210</Feature>
+<Feature>211</Feature>
+<Feature>212</Feature>
+<ClientDependency>213</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="213">
+<Name>214</Name>
+<Documentation>215</Documentation>
+<DefLangName>UmlUsage74</DefLangName>
+<Supplier>216</Supplier>
+<Client>171</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.attributes.AttributeDef TID="211">
+<Name>217</Name>
+<Abstract>false</Abstract>
+<Owner>171</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>218</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>219</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Minutes</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="128">
+<Namespace>52</Namespace>
+<OwnedElement>220</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="57">
+<Namespace>52</Namespace>
+<OwnedElement>221</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef TID="221">
+<Name>222</Name>
+<NamespaceLink>57</NamespaceLink>
+<DefLangName>ARCS</DefLangName>
+<ClientDependency>223</ClientDependency>
+<SupplierDependency>224</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="224">
+<Name>225</Name>
+<Documentation>226</Documentation>
+<DefLangName>UmlUsage8</DefLangName>
+<Supplier>221</Supplier>
+<Client>168</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="225">
+<Entry TID="227" language="it" translation="UmlUsage8"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="220">
+<Kind>2</Kind>
+<Name>228</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>128</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>StartSegment</DefLangName>
+<SupplierDependency>229</SupplierDependency>
+<Generalization>230</Generalization>
+<ClientDependency>231</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="157">
+<Entry TID="232" language="it" translation="Topics"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="91">
+<Namespace>52</Namespace>
+<OwnedElement>233</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.attributes.DomainAttribute TID="219">
+<Direct>234</Direct>
+<AttributeDef>211</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="66">
+<Namespace>52</Namespace>
+<OwnedElement>235</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="189">
+<Kind>2</Kind>
+<Name>236</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>127</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>LineSegment</DefLangName>
+<StructAttrType>237</StructAttrType>
+<SupplierDependency>231</SupplierDependency>
+<Specialization>238</Specialization>
+<Specialization>230</Specialization>
+<Specialization>239</Specialization>
+<Feature>240</Feature>
+<ClientDependency>241</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="240">
+<Name>242</Name>
+<Abstract>true</Abstract>
+<Owner>189</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>243</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>244</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>SegmentEndPoint</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="236">
+<Entry TID="245" language="en" translation="LineSegment"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="244">
+<DomainDef>146</DomainDef>
+<AttributeDef>240</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="238">
+<Parent>189</Parent>
+<Child>173</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="239">
+<Parent>189</Parent>
+<Child>246</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="64">
+<Namespace>52</Namespace>
+<OwnedElement>247</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="126">
+<Namespace>52</Namespace>
+<OwnedElement>248</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="222">
+<Entry TID="249" language="en" translation="ARCS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="87">
+<Namespace>52</Namespace>
+<OwnedElement>250</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="250">
+<Name>251</Name>
+<Abstract>false</Abstract>
+<Type>252</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>87</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>STANDARDOID</DefLangName>
+<ClientDependency>253</ClientDependency>
+<SupplierDependency>254</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.OidType TID="252">
+<Kind>2</Kind>
+<Oiddomain>255</Oiddomain>
+</ch.ehi.interlis.domainsandconstants.basetypes.OidType>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="254">
+<Name>256</Name>
+<Documentation>257</Documentation>
+<DefLangName>UmlUsage38</DefLangName>
+<Supplier>250</Supplier>
+<Client>172</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.units.UnitDef TID="191">
+<Name>258</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>74</NamespaceLink>
+<Syntax>259</Syntax>
+<DescName>260</DescName>
+<DefLangName>K</DefLangName>
+<ClientDependency>261</ClientDependency>
+<SupplierDependency>262</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="261">
+<Name>263</Name>
+<Documentation>264</Documentation>
+<DefLangName>UmlUsage24</DefLangName>
+<Supplier>265</Supplier>
+<Client>191</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="258">
+<Entry TID="266" language="en" translation="K"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="264">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="260">
+<Entry TID="267" language="en" translation="DEGREE_KELVIN"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="263">
+<Entry TID="268" language="it" translation="UmlUsage24"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="93">
+<Namespace>52</Namespace>
+<OwnedElement>269</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="262">
+<Name>270</Name>
+<Documentation>271</Documentation>
+<DefLangName>UmlUsage25</DefLangName>
+<Supplier>191</Supplier>
+<Client>165</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="231">
+<Name>272</Name>
+<Documentation>273</Documentation>
+<DefLangName>UmlUsage79</DefLangName>
+<Supplier>189</Supplier>
+<Client>220</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="272">
+<Entry TID="274" language="it" translation="UmlUsage79"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="190">
+<Name>275</Name>
+<Abstract>false</Abstract>
+<Type>276</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>125</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>XMLDate</DefLangName>
+<Specialization>277</Specialization>
+<ClientDependency>278</ClientDependency>
+<SupplierDependency>279</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.UnknownType TID="276">
+<Syntax>280</Syntax>
+</ch.ehi.interlis.domainsandconstants.UnknownType>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="278">
+<Name>281</Name>
+<Documentation>282</Documentation>
+<DefLangName>UmlUsage76</DefLangName>
+<Supplier>163</Supplier>
+<Client>190</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="281">
+<Entry TID="283" language="it" translation="UmlUsage76"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="280">
+<Entry TID="284" language="en" translation="FORMAT BASED ON INTERLIS.GregorianDate (Year &quot;-&quot; Month &quot;-&quot; Day)"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainExtends TID="277">
+<Parent>190</Parent>
+<Child>248</Child>
+</ch.ehi.interlis.domainsandconstants.DomainExtends>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="186">
+<Name>285</Name>
+<Documentation>286</Documentation>
+<DefLangName>UmlUsage33</DefLangName>
+<Supplier>155</Supplier>
+<Client>183</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="116">
+<Namespace>52</Namespace>
+<OwnedElement>287</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="119">
+<Namespace>52</Namespace>
+<OwnedElement>288</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="149">
+<Entry TID="289" language="en" translation="trim"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="195">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="56">
+<Namespace>52</Namespace>
+<OwnedElement>290</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="253">
+<Name>291</Name>
+<Documentation>292</Documentation>
+<DefLangName>UmlUsage37</DefLangName>
+<Supplier>293</Supplier>
+<Client>250</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.units.UnitDef TID="168">
+<Name>294</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>58</NamespaceLink>
+<Syntax>295</Syntax>
+<DefLangName>ANYUNIT</DefLangName>
+<ClientDependency>224</ClientDependency>
+<SupplierDependency>143</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="144">
+<Name>296</Name>
+<Documentation>297</Documentation>
+<DefLangName>UmlUsage10</DefLangName>
+<Supplier>140</Supplier>
+<Client>153</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="297">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="160">
+<Namespace>33</Namespace>
+<OwnedElement>36</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ModelDef TID="31">
+<Name>298</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Version>299</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>41</NamespaceLink>
+<Kind>1</Kind>
+<Contracted>false</Contracted>
+<IssuerURI>300</IssuerURI>
+<BaseLanguage>de</BaseLanguage>
+<DefLangName>ModelC_it</DefLangName>
+<ClientDependency>301</ClientDependency>
+<ClientDependency>21</ClientDependency>
+<ClientDependency>22</ClientDependency>
+<OwnedElementLink>302</OwnedElementLink>
+<OwnedElementLink>303</OwnedElementLink>
+<Translation>304</Translation>
+<Diagram>305</Diagram>
+</ch.ehi.interlis.modeltopicclass.ModelDef>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="303">
+<Namespace>31</Namespace>
+<OwnedElement>306</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="299">
+<Entry TID="307" language="de" translation="2021-11-17"/>
+<Entry TID="308" language="it" translation="2021-11-17"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="298">
+<Entry TID="309" language="de" translation="ModelC_de"/>
+<Entry TID="310" language="it" translation="ModelC_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="246">
+<Kind>2</Kind>
+<Name>311</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>129</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>StraightSegment</DefLangName>
+<SupplierDependency>312</SupplierDependency>
+<Generalization>239</Generalization>
+<ClientDependency>229</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="311">
+<Entry TID="313" language="en" translation="StraightSegment"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="241">
+<Name>314</Name>
+<Documentation>315</Documentation>
+<DefLangName>UmlUsage78</DefLangName>
+<Supplier>248</Supplier>
+<Client>189</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="314">
+<Entry TID="316" language="it" translation="UmlUsage78"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="223">
+<Name>317</Name>
+<Documentation>318</Documentation>
+<DefLangName>UmlUsage7</DefLangName>
+<Supplier>290</Supplier>
+<Client>221</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="317">
+<Entry TID="319" language="it" translation="UmlUsage7"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="265">
+<Name>320</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>73</NamespaceLink>
+<Syntax>321</Syntax>
+<DescName>322</DescName>
+<DefLangName>A</DefLangName>
+<ClientDependency>323</ClientDependency>
+<SupplierDependency>261</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="322">
+<Entry TID="324" language="en" translation="AMPERE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="81">
+<Namespace>52</Namespace>
+<OwnedElement>325</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="146">
+<Name>326</Name>
+<Abstract>true</Abstract>
+<Type>327</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>89</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>LineCoord</DefLangName>
+<DomainAttribute>244</DomainAttribute>
+<ClientDependency>328</ClientDependency>
+<SupplierDependency>329</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="329">
+<Name>330</Name>
+<Documentation>331</Documentation>
+<DefLangName>UmlUsage40</DefLangName>
+<Supplier>146</Supplier>
+<Client>332</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.functions.FunctionDef TID="332">
+<Name>333</Name>
+<NamespaceLink>90</NamespaceLink>
+<Syntax>334</Syntax>
+<DefLangName>myClass</DefLangName>
+<ClientDependency>329</ClientDependency>
+<SupplierDependency>335</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="326">
+<Entry TID="336" language="en" translation="LineCoord"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="151">
+<Name>337</Name>
+<Documentation>338</Documentation>
+<DefLangName>UmlUsage47</DefLangName>
+<Supplier>339</Supplier>
+<Client>148</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="337">
+<Entry TID="340" language="it" translation="UmlUsage47"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="287">
+<Name>341</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>116</NamespaceLink>
+<Syntax>342</Syntax>
+<DescName>343</DescName>
+<DefLangName>M</DefLangName>
+<NumericalType>344</NumericalType>
+<ClientDependency>345</ClientDependency>
+<SupplierDependency>346</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="344">
+<MinDec>347</MinDec>
+<MaxDec>348</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>287</UnitDef>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="345">
+<Name>349</Name>
+<Documentation>350</Documentation>
+<DefLangName>UmlUsage67</DefLangName>
+<Supplier>351</Supplier>
+<Client>287</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="346">
+<Name>352</Name>
+<Documentation>353</Documentation>
+<DefLangName>UmlUsage68</DefLangName>
+<Supplier>287</Supplier>
+<Client>138</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="352">
+<Entry TID="354" language="it" translation="UmlUsage68"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="353">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="271">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="114">
+<Namespace>52</Namespace>
+<OwnedElement>355</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="226">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="339">
+<Name>356</Name>
+<NamespaceLink>96</NamespaceLink>
+<Syntax>357</Syntax>
+<DefLangName>lenM</DefLangName>
+<ClientDependency>358</ClientDependency>
+<SupplierDependency>151</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="357">
+<Entry TID="359" language="en" translation="FUNCTION lenM(TextVal: MTEXT) : NUMERIC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="218">
+<Range>360</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.interlis.attributes.AttributeDef TID="212">
+<Name>361</Name>
+<Abstract>false</Abstract>
+<Owner>171</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>362</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>363</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Seconds</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="362">
+<Range>364</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="364">
+<Multiplicity>362</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="361">
+<Entry TID="365" language="en" translation="Seconds"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="76">
+<Namespace>52</Namespace>
+<OwnedElement>366</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.units.UnitDef TID="366">
+<Name>367</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>76</NamespaceLink>
+<Syntax>368</Syntax>
+<DescName>369</DescName>
+<DefLangName>rad</DefLangName>
+<ClientDependency>370</ClientDependency>
+<SupplierDependency>371</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="369">
+<Entry TID="372" language="en" translation="RADIAN"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="370">
+<Name>373</Name>
+<Documentation>374</Documentation>
+<DefLangName>UmlUsage26</DefLangName>
+<Supplier>165</Supplier>
+<Client>366</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="368">
+<Entry TID="375" language="en" translation="RADIAN [rad] EXTENDS INTERLIS.ANGLE;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="374">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="209">
+<Parent>216</Parent>
+<Child>171</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.basics.types.NlsString TID="296">
+<Entry TID="376" language="it" translation="UmlUsage10"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="282">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="67">
+<Namespace>52</Namespace>
+<OwnedElement>377</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="343">
+<Entry TID="378" language="en" translation="Month"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="131">
+<Namespace>52</Namespace>
+<OwnedElement>379</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="379">
+<Kind>2</Kind>
+<Name>380</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>131</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>SurfaceEdge</DefLangName>
+<StructAttrType>381</StructAttrType>
+<SupplierDependency>382</SupplierDependency>
+<Feature>383</Feature>
+<Feature>384</Feature>
+<ClientDependency>385</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="384">
+<Name>386</Name>
+<Abstract>false</Abstract>
+<Owner>379</Owner>
+<Ordering>1</Ordering>
+<Multiplicity>387</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>388</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>LineAttrs</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="382">
+<Name>389</Name>
+<Documentation>390</Documentation>
+<DefLangName>UmlUsage83</DefLangName>
+<Supplier>379</Supplier>
+<Client>391</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType TID="381">
+<Participant>379</Participant>
+</ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType>
+<ch.ehi.basics.types.NlsString TID="389">
+<Entry TID="392" language="it" translation="UmlUsage83"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="387">
+<Range>393</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.interlis.functions.FunctionDef TID="193">
+<Name>394</Name>
+<NamespaceLink>98</NamespaceLink>
+<Syntax>395</Syntax>
+<DefLangName>trimM</DefLangName>
+<ClientDependency>152</ClientDependency>
+<SupplierDependency>396</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="396">
+<Name>397</Name>
+<Documentation>398</Documentation>
+<DefLangName>UmlUsage49</DefLangName>
+<Supplier>193</Supplier>
+<Client>399</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.functions.FunctionDef TID="399">
+<Name>400</Name>
+<NamespaceLink>99</NamespaceLink>
+<Syntax>401</Syntax>
+<DefLangName>isEnumSubVal</DefLangName>
+<ClientDependency>396</ClientDependency>
+<SupplierDependency>402</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="400">
+<Entry TID="403" language="en" translation="isEnumSubVal"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="397">
+<Entry TID="404" language="it" translation="UmlUsage49"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="94">
+<Namespace>52</Namespace>
+<OwnedElement>405</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="104">
+<Namespace>52</Namespace>
+<OwnedElement>406</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="406">
+<Kind>2</Kind>
+<Name>407</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>104</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ANYSTRUCTURE</DefLangName>
+<SupplierDependency>408</SupplierDependency>
+<ClientDependency>409</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="407">
+<Entry TID="410" language="en" translation="ANYSTRUCTURE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="408">
+<Name>411</Name>
+<Documentation>412</Documentation>
+<DefLangName>UmlUsage55</DefLangName>
+<Supplier>406</Supplier>
+<Client>413</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="411">
+<Entry TID="414" language="it" translation="UmlUsage55"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="106">
+<Namespace>52</Namespace>
+<OwnedElement>415</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="415">
+<Kind>1</Kind>
+<Name>416</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>106</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>METAOBJECT_TRANSLATION</DefLangName>
+<SupplierDependency>417</SupplierDependency>
+<Feature>418</Feature>
+<Feature>419</Feature>
+<ClientDependency>420</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.units.UnitDef TID="206">
+<Name>421</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>70</NamespaceLink>
+<Syntax>422</Syntax>
+<DescName>423</DescName>
+<DefLangName>m</DefLangName>
+<ClientDependency>424</ClientDependency>
+<SupplierDependency>425</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="424">
+<Name>426</Name>
+<Documentation>427</Documentation>
+<DefLangName>UmlUsage20</DefLangName>
+<Supplier>170</Supplier>
+<Client>206</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="426">
+<Entry TID="428" language="it" translation="UmlUsage20"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="390">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="251">
+<Entry TID="429" language="en" translation="STANDARDOID"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="107">
+<Namespace>52</Namespace>
+<OwnedElement>430</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef TID="290">
+<Name>431</Name>
+<NamespaceLink>56</NamespaceLink>
+<DefLangName>STRAIGHTS</DefLangName>
+<SupplierDependency>223</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef>
+<ch.ehi.interlis.modeltopicclass.IliImport TID="301">
+<Language>fr</Language>
+<Supplier>36</Supplier>
+<Client>31</Client>
+</ch.ehi.interlis.modeltopicclass.IliImport>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="248">
+<Name>432</Name>
+<Abstract>false</Abstract>
+<Type>433</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>126</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>XMLDateTime</DefLangName>
+<Generalization>277</Generalization>
+<ClientDependency>279</ClientDependency>
+<SupplierDependency>241</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.UnknownType TID="433">
+<Syntax>434</Syntax>
+</ch.ehi.interlis.domainsandconstants.UnknownType>
+<ch.ehi.basics.types.NlsString TID="432">
+<Entry TID="435" language="en" translation="XMLDateTime"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="420">
+<Name>436</Name>
+<Documentation>437</Documentation>
+<DefLangName>UmlUsage56</DefLangName>
+<Supplier>413</Supplier>
+<Client>415</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="436">
+<Entry TID="438" language="it" translation="UmlUsage56"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="214">
+<Entry TID="439" language="it" translation="UmlUsage74"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="425">
+<Name>440</Name>
+<Documentation>441</Documentation>
+<DefLangName>UmlUsage21</DefLangName>
+<Supplier>206</Supplier>
+<Client>167</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="440">
+<Entry TID="442" language="it" translation="UmlUsage21"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="139">
+<Name>443</Name>
+<NamespaceLink>102</NamespaceLink>
+<Syntax>444</Syntax>
+<DefLangName>areAreas</DefLangName>
+<ClientDependency>445</ClientDependency>
+<SupplierDependency>446</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="444">
+<Entry TID="447" language="en" translation="FUNCTION areAreas(Objects: OBJECTS OF ANYCLASSSurfaceBag: ATTRIBUTE OF @ Objects RESTRICTION ( BAG {0..*} OF ANYSTRUCTURE )SurfaceAttr: ATTRIBUTE OF @ Objects RESTRICTION ( SURFACE )) : BOOLEAN;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="446">
+<Name>448</Name>
+<Documentation>449</Documentation>
+<DefLangName>UmlUsage53</DefLangName>
+<Supplier>139</Supplier>
+<Client>450</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="448">
+<Entry TID="451" language="it" translation="UmlUsage53"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="388">
+<Direct>452</Direct>
+<AttributeDef>384</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="423">
+<Entry TID="453" language="en" translation="METER"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="421">
+<Entry TID="454" language="en" translation="m"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="401">
+<Entry TID="455" language="en" translation="FUNCTION isEnumSubVal(SubVal: ENUMTREEVALNodeVal: ENUMTREEVAL) : BOOLEAN;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="363">
+<Direct>456</Direct>
+<AttributeDef>212</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.umleditor.umlpresentation.Package TID="158">
+<ShowNamePrefix>0</ShowNamePrefix>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>134</Diagram>
+<East>221</East>
+<South>144</South>
+<Subject>457</Subject>
+</ch.ehi.umleditor.umlpresentation.Package>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="450">
+<Kind>1</Kind>
+<Name>458</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>103</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ANYCLASS</DefLangName>
+<SupplierDependency>409</SupplierDependency>
+<ClientDependency>446</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="458">
+<Entry TID="459" language="en" translation="ANYCLASS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="233">
+<Name>460</Name>
+<NamespaceLink>91</NamespaceLink>
+<Syntax>461</Syntax>
+<DefLangName>isSubClass</DefLangName>
+<ClientDependency>335</ClientDependency>
+<SupplierDependency>462</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="461">
+<Entry TID="463" language="en" translation="FUNCTION isSubClass(potSubClass: STRUCTUREpotSuperClass: STRUCTURE) : BOOLEAN;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="449">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="347">
+<Value>1.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.units.UnitDef TID="164">
+<Name>464</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>77</NamespaceLink>
+<Syntax>465</Syntax>
+<DescName>466</DescName>
+<DefLangName>sr</DefLangName>
+<ClientDependency>371</ClientDependency>
+<SupplierDependency>467</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="466">
+<Entry TID="468" language="en" translation="STERADIAN"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="467">
+<Name>469</Name>
+<Documentation>470</Documentation>
+<DefLangName>UmlUsage28</DefLangName>
+<Supplier>164</Supplier>
+<Client>471</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="465">
+<Entry TID="472" language="en" translation="STERADIAN [sr] EXTENDS INTERLIS.SOLID_ANGLE;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="427">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="323">
+<Name>473</Name>
+<Documentation>474</Documentation>
+<DefLangName>UmlUsage23</DefLangName>
+<Supplier>475</Supplier>
+<Client>265</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="473">
+<Entry TID="476" language="it" translation="UmlUsage23"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="474">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="475">
+<Name>477</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>72</NamespaceLink>
+<Syntax>478</Syntax>
+<DescName>479</DescName>
+<DefLangName>s</DefLangName>
+<NumericalType>480</NumericalType>
+<NumericalType>456</NumericalType>
+<ClientDependency>481</ClientDependency>
+<SupplierDependency>323</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="481">
+<Name>482</Name>
+<Documentation>483</Documentation>
+<DefLangName>UmlUsage22</DefLangName>
+<Supplier>167</Supplier>
+<Client>475</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="483">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="477">
+<Entry TID="484" language="en" translation="s"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="482">
+<Entry TID="485" language="it" translation="UmlUsage22"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="242">
+<Entry TID="486" language="en" translation="SegmentEndPoint"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="199">
+<Kind>3</Kind>
+<Multiline>false</Multiline>
+<MaxLength>0</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="86">
+<Namespace>52</Namespace>
+<OwnedElement>293</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="100">
+<Namespace>52</Namespace>
+<OwnedElement>487</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="413">
+<Kind>1</Kind>
+<Name>488</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>105</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>METAOBJECT</DefLangName>
+<SupplierDependency>420</SupplierDependency>
+<Specialization>489</Specialization>
+<Specialization>490</Specialization>
+<Feature>491</Feature>
+<ClientDependency>408</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="490">
+<Parent>413</Parent>
+<Child>136</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.interlis.units.UnitDef TID="355">
+<Name>492</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>114</NamespaceLink>
+<Syntax>493</Syntax>
+<DescName>494</DescName>
+<DefLangName>h</DefLangName>
+<NumericalType>495</NumericalType>
+<NumericalType>496</NumericalType>
+<ClientDependency>497</ClientDependency>
+<SupplierDependency>498</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="498">
+<Name>499</Name>
+<Documentation>500</Documentation>
+<DefLangName>UmlUsage66</DefLangName>
+<Supplier>355</Supplier>
+<Client>351</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="499">
+<Entry TID="501" language="it" translation="UmlUsage66"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="500">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="493">
+<Entry TID="502" language="en" translation="Hour [h] = 60 [INTERLIS.min];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="495">
+<MinDec>503</MinDec>
+<MaxDec>504</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>355</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="504">
+<Value>23.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="503">
+<Value>0.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="492">
+<Entry TID="505" language="en" translation="h"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="496">
+<MinDec>506</MinDec>
+<MaxDec>507</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>355</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="507">
+<Value>23.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="506">
+<Value>0.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="273">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="115">
+<Namespace>52</Namespace>
+<OwnedElement>351</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="478">
+<Entry TID="508" language="en" translation="SECOND [s] EXTENDS INTERLIS.TIME;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="430">
+<Kind>2</Kind>
+<Name>509</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>107</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>AXIS</DefLangName>
+<ParameterDef>510</ParameterDef>
+<StructAttrType>511</StructAttrType>
+<SupplierDependency>512</SupplierDependency>
+<ClientDependency>417</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType TID="511">
+<Participant>430</Participant>
+</ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType>
+<ch.ehi.interlis.metaobjects.ParameterDef TID="510">
+<Name>513</Name>
+<Properties>0</Properties>
+<ClassDef>430</ClassDef>
+<Syntax>514</Syntax>
+<DefLangName>Unit</DefLangName>
+</ch.ehi.interlis.metaobjects.ParameterDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="385">
+<Name>515</Name>
+<Documentation>516</Documentation>
+<DefLangName>UmlUsage82</DefLangName>
+<Supplier>173</Supplier>
+<Client>379</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="515">
+<Entry TID="517" language="it" translation="UmlUsage82"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="90">
+<Namespace>52</Namespace>
+<OwnedElement>332</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.units.UnitDef TID="153">
+<Name>518</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>60</NamespaceLink>
+<Syntax>519</Syntax>
+<DefLangName>LENGTH</DefLangName>
+<ClientDependency>144</ClientDependency>
+<SupplierDependency>520</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="519">
+<Entry TID="521" language="en" translation="LENGTH (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="518">
+<Entry TID="522" language="en" translation="LENGTH"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="325">
+<Name>523</Name>
+<Abstract>false</Abstract>
+<Type>524</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>81</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>INTERLIS_1_DATE</DefLangName>
+<ClientDependency>201</ClientDependency>
+<SupplierDependency>525</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="523">
+<Entry TID="526" language="en" translation="INTERLIS_1_DATE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="234">
+<MinDec>527</MinDec>
+<MaxDec>528</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>529</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="528">
+<Value>59.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="470">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="462">
+<Name>530</Name>
+<Documentation>531</Documentation>
+<DefLangName>UmlUsage42</DefLangName>
+<Supplier>233</Supplier>
+<Client>532</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="531">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="532">
+<Name>533</Name>
+<NamespaceLink>92</NamespaceLink>
+<Syntax>534</Syntax>
+<DefLangName>isOfClass</DefLangName>
+<ClientDependency>462</ClientDependency>
+<SupplierDependency>535</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="533">
+<Entry TID="536" language="en" translation="isOfClass"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="275">
+<Entry TID="537" language="en" translation="XMLDate"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="418">
+<Name>538</Name>
+<Abstract>false</Abstract>
+<Owner>415</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>539</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>540</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Name</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="538">
+<Entry TID="541" language="en" translation="Name"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="539">
+<Range>542</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="542">
+<Multiplicity>539</Multiplicity>
+<Lower>1</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="402">
+<Name>543</Name>
+<Documentation>544</Documentation>
+<DefLangName>UmlUsage50</DefLangName>
+<Supplier>399</Supplier>
+<Client>487</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="543">
+<Entry TID="545" language="it" translation="UmlUsage50"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="544">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="172">
+<Name>546</Name>
+<Abstract>false</Abstract>
+<Type>547</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>88</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>UUIDOID</DefLangName>
+<ClientDependency>254</ClientDependency>
+<SupplierDependency>328</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.OidType TID="547">
+<Kind>2</Kind>
+<Oiddomain>548</Oiddomain>
+</ch.ehi.interlis.domainsandconstants.basetypes.OidType>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="293">
+<Name>549</Name>
+<Abstract>false</Abstract>
+<Type>550</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>86</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>I32OID</DefLangName>
+<ClientDependency>551</ClientDependency>
+<SupplierDependency>253</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.OidType TID="550">
+<Kind>3</Kind>
+<Oiddomain>552</Oiddomain>
+</ch.ehi.interlis.domainsandconstants.basetypes.OidType>
+<ch.ehi.basics.types.NlsString TID="549">
+<Entry TID="553" language="en" translation="I32OID"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="551">
+<Name>554</Name>
+<Documentation>555</Documentation>
+<DefLangName>UmlUsage36</DefLangName>
+<Supplier>556</Supplier>
+<Client>293</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="556">
+<Name>557</Name>
+<Abstract>true</Abstract>
+<Type>558</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>85</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>ANYOID</DefLangName>
+<ClientDependency>179</ClientDependency>
+<SupplierDependency>551</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="557">
+<Entry TID="559" language="en" translation="ANYOID"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="555">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.OidType TID="558">
+<Kind>1</Kind>
+</ch.ehi.interlis.domainsandconstants.basetypes.OidType>
+<ch.ehi.basics.types.NlsString TID="554">
+<Entry TID="560" language="it" translation="UmlUsage36"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ModelDef TID="36">
+<Name>561</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Version>562</Version>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>160</NamespaceLink>
+<Kind>1</Kind>
+<Contracted>false</Contracted>
+<IssuerURI>563</IssuerURI>
+<BaseLanguage>de</BaseLanguage>
+<DefLangName>ModelA_fr</DefLangName>
+<SupplierDependency>20</SupplierDependency>
+<SupplierDependency>301</SupplierDependency>
+<SupplierDependency>19</SupplierDependency>
+<OwnedElementLink>564</OwnedElementLink>
+<Translation>565</Translation>
+<Diagram>566</Diagram>
+</ch.ehi.interlis.modeltopicclass.ModelDef>
+<ch.ehi.basics.types.NlsString TID="561">
+<Entry TID="567" language="de" translation="ModelA_de"/>
+<Entry TID="568" language="fr" translation="ModelA_fr"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="566">
+<Name>569</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>36</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.basics.types.NlsString TID="563">
+<Entry TID="570" language="de" translation="mailto:ceis@localhost"/>
+<Entry TID="571" language="fr" translation="mailto:ceis@localhost"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="562">
+<Entry TID="572" language="de" translation="2021-11-17"/>
+<Entry TID="573" language="fr" translation="2021-11-17"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="569">
+<Entry TID="574" language="it" translation="Topics"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="136">
+<Kind>1</Kind>
+<Name>575</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>108</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>REFSYSTEM</DefLangName>
+<SupplierDependency>576</SupplierDependency>
+<Specialization>577</Specialization>
+<Specialization>578</Specialization>
+<Generalization>490</Generalization>
+<ClientDependency>512</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="578">
+<Parent>136</Parent>
+<Child>154</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="577">
+<Parent>136</Parent>
+<Child>156</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.basics.types.NlsString TID="215">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="72">
+<Namespace>52</Namespace>
+<OwnedElement>475</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="331">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType TID="327">
+<Generic>false</Generic>
+<Dim>579</Dim>
+<Dim>580</Dim>
+</ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="579">
+<RangeDefined>false</RangeDefined>
+<Direction>1</Direction>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.basics.types.NlsString TID="1">
+<Entry TID="581" language="it" translation="UmlModel1"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="29">
+<Entry TID="582" language="en" translation="org.umleditor.config.defaultModellingLanguage"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="540">
+<Direct>583</Direct>
+<AttributeDef>418</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.units.UnitDef TID="471">
+<Name>584</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>78</NamespaceLink>
+<Syntax>585</Syntax>
+<DescName>586</DescName>
+<DefLangName>cd</DefLangName>
+<ClientDependency>467</ClientDependency>
+<SupplierDependency>587</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="587">
+<Name>588</Name>
+<Documentation>589</Documentation>
+<DefLangName>UmlUsage29</DefLangName>
+<Supplier>471</Supplier>
+<Client>135</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="589">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="588">
+<Entry TID="590" language="it" translation="UmlUsage29"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="208">
+<Name>591</Name>
+<Documentation>592</Documentation>
+<DefLangName>UmlUsage75</DefLangName>
+<Supplier>171</Supplier>
+<Client>163</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="592">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="546">
+<Entry TID="593" language="en" translation="UUIDOID"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="527">
+<Value>0.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="513">
+<Entry TID="594" language="en" translation="Unit"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="201">
+<Name>595</Name>
+<Documentation>596</Documentation>
+<DefLangName>UmlUsage31</DefLangName>
+<Supplier>197</Supplier>
+<Client>325</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="595">
+<Entry TID="597" language="it" translation="UmlUsage31"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="179">
+<Name>598</Name>
+<Documentation>599</Documentation>
+<DefLangName>UmlUsage35</DefLangName>
+<Supplier>175</Supplier>
+<Client>556</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="599">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="598">
+<Entry TID="600" language="it" translation="UmlUsage35"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="99">
+<Namespace>52</Namespace>
+<OwnedElement>399</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="133">
+<Namespace>52</Namespace>
+<OwnedElement>601</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="480">
+<MinDec>602</MinDec>
+<MaxDec>603</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>475</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="603">
+<Value>59.999</Value>
+<Accuracy>3</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="602">
+<Value>0.0</Value>
+<Accuracy>3</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="256">
+<Entry TID="604" language="it" translation="UmlUsage38"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="330">
+<Entry TID="605" language="it" translation="UmlUsage40"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="371">
+<Name>606</Name>
+<Documentation>607</Documentation>
+<DefLangName>UmlUsage27</DefLangName>
+<Supplier>366</Supplier>
+<Client>164</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="606">
+<Entry TID="608" language="it" translation="UmlUsage27"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="585">
+<Entry TID="609" language="en" translation="CANDELA [cd] EXTENDS INTERLIS.LUMINOUS_INTENSITY;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="207">
+<Entry TID="610" language="en" translation="GregorianDateTime"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="520">
+<Name>611</Name>
+<Documentation>612</Documentation>
+<DefLangName>UmlUsage11</DefLangName>
+<Supplier>153</Supplier>
+<Client>613</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="612">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="105">
+<Namespace>52</Namespace>
+<OwnedElement>413</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="431">
+<Entry TID="614" language="en" translation="STRAIGHTS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="288">
+<Kind>2</Kind>
+<Name>615</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>119</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>TimeOfDay</DefLangName>
+<SupplierDependency>616</SupplierDependency>
+<Specialization>617</Specialization>
+<Feature>618</Feature>
+<Feature>619</Feature>
+<Feature>620</Feature>
+<ClientDependency>621</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="616">
+<Name>622</Name>
+<Documentation>623</Documentation>
+<DefLangName>UmlUsage71</DefLangName>
+<Supplier>288</Supplier>
+<Client>166</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="623">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="617">
+<Parent>288</Parent>
+<Child>166</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.interlis.attributes.AttributeDef TID="619">
+<Name>624</Name>
+<Abstract>false</Abstract>
+<Owner>288</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>625</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>626</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Minutes</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.interlis.attributes.DomainAttribute TID="626">
+<Direct>627</Direct>
+<AttributeDef>619</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="625">
+<Range>628</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.basics.types.NlsString TID="624">
+<Entry TID="629" language="en" translation="Minutes"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="627">
+<MinDec>630</MinDec>
+<MaxDec>631</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>529</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="630">
+<Value>0.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="628">
+<Multiplicity>625</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="622">
+<Entry TID="632" language="it" translation="UmlUsage71"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="255">
+<Kind>2</Kind>
+<Multiline>false</Multiline>
+<MaxLength>16</MaxLength>
+<OidType>252</OidType>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.basics.types.NlsString TID="333">
+<Entry TID="633" language="en" translation="myClass"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="216">
+<Kind>2</Kind>
+<Name>634</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>122</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>GregorianDate</DefLangName>
+<SupplierDependency>213</SupplierDependency>
+<Specialization>209</Specialization>
+<Feature>635</Feature>
+<Feature>636</Feature>
+<Feature>637</Feature>
+<ClientDependency>638</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="634">
+<Entry TID="639" language="en" translation="GregorianDate"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="637">
+<Name>640</Name>
+<Abstract>false</Abstract>
+<Owner>216</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>641</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>642</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Day</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="640">
+<Entry TID="643" language="en" translation="Day"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="642">
+<Direct>644</Direct>
+<AttributeDef>637</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="641">
+<Range>645</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="638">
+<Name>646</Name>
+<Documentation>647</Documentation>
+<DefLangName>UmlUsage73</DefLangName>
+<Supplier>648</Supplier>
+<Client>216</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="647">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="648">
+<Name>649</Name>
+<Abstract>false</Abstract>
+<Type>650</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>121</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>GregorianYear</DefLangName>
+<DomainAttribute>651</DomainAttribute>
+<ClientDependency>652</ClientDependency>
+<SupplierDependency>638</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="646">
+<Entry TID="653" language="it" translation="UmlUsage73"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="644">
+<MinDec>654</MinDec>
+<MaxDec>655</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>351</UnitDef>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="655">
+<Value>31.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="654">
+<Value>1.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.attributes.AttributeDef TID="636">
+<Name>656</Name>
+<Abstract>false</Abstract>
+<Owner>216</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>657</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>658</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Month</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="656">
+<Entry TID="659" language="en" translation="Month"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="658">
+<Direct>344</Direct>
+<AttributeDef>636</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="657">
+<Range>660</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="660">
+<Multiplicity>657</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="335">
+<Name>661</Name>
+<Documentation>662</Documentation>
+<DefLangName>UmlUsage41</DefLangName>
+<Supplier>332</Supplier>
+<Client>233</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="661">
+<Entry TID="663" language="it" translation="UmlUsage41"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="662">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="576">
+<Name>664</Name>
+<Documentation>665</Documentation>
+<DefLangName>UmlUsage59</DefLangName>
+<Supplier>136</Supplier>
+<Client>156</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="664">
+<Entry TID="666" language="it" translation="UmlUsage59"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="373">
+<Entry TID="667" language="it" translation="UmlUsage26"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="184">
+<Entry TID="668" language="en" translation="HALIGNMENT"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="530">
+<Entry TID="669" language="it" translation="UmlUsage42"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="154">
+<Kind>1</Kind>
+<Name>670</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>110</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>SCALSYSTEM</DefLangName>
+<ParameterDef>671</ParameterDef>
+<SupplierDependency>672</SupplierDependency>
+<Specialization>673</Specialization>
+<Specialization>674</Specialization>
+<Generalization>578</Generalization>
+<ClientDependency>675</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="672">
+<Name>676</Name>
+<Documentation>677</Documentation>
+<DefLangName>UmlUsage61</DefLangName>
+<Supplier>154</Supplier>
+<Client>169</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="676">
+<Entry TID="678" language="it" translation="UmlUsage61"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="675">
+<Name>679</Name>
+<Documentation>680</Documentation>
+<DefLangName>UmlUsage60</DefLangName>
+<Supplier>156</Supplier>
+<Client>154</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="680">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="679">
+<Entry TID="681" language="it" translation="UmlUsage60"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="677">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="674">
+<Parent>154</Parent>
+<Child>682</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="682">
+<Kind>1</Kind>
+<Name>683</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>684</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>CALENDAR</DefLangName>
+<ParameterDef>685</ParameterDef>
+<SupplierDependency>686</SupplierDependency>
+<Generalization>674</Generalization>
+<Presentation>687</Presentation>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="686">
+<Name>688</Name>
+<Documentation>689</Documentation>
+<DefLangName>UmlUsage62</DefLangName>
+<Supplier>682</Supplier>
+<Client>690</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="689">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="684">
+<Namespace>457</Namespace>
+<OwnedElement>682</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="683">
+<Entry TID="691" language="en" translation="CALENDAR"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="673">
+<Parent>154</Parent>
+<Child>690</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.umleditor.umlpresentation.Class TID="687">
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>692</Diagram>
+<East>0</East>
+<South>0</South>
+<Subject>682</Subject>
+</ch.ehi.umleditor.umlpresentation.Class>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="692">
+<Name>693</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>457</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+<PresentationElement>694</PresentationElement>
+<PresentationElement>687</PresentationElement>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.basics.types.NlsString TID="693">
+<Entry TID="695" language="it" translation="Classes"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.Class TID="694">
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>692</Diagram>
+<East>10</East>
+<South>10</South>
+<Subject>690</Subject>
+</ch.ehi.umleditor.umlpresentation.Class>
+<ch.ehi.basics.types.NlsString TID="194">
+<Entry TID="696" language="it" translation="UmlUsage9"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="167">
+<Name>697</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>71</NamespaceLink>
+<Syntax>698</Syntax>
+<DescName>699</DescName>
+<DefLangName>kg</DefLangName>
+<ClientDependency>425</ClientDependency>
+<SupplierDependency>481</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="699">
+<Entry TID="700" language="en" translation="KILOGRAM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="698">
+<Entry TID="701" language="en" translation="KILOGRAM [kg] EXTENDS INTERLIS.MASS;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="341">
+<Entry TID="702" language="en" translation="M"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="204">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="320">
+<Entry TID="703" language="en" translation="A"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="152">
+<Name>704</Name>
+<Documentation>705</Documentation>
+<DefLangName>UmlUsage48</DefLangName>
+<Supplier>148</Supplier>
+<Client>193</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="704">
+<Entry TID="706" language="it" translation="UmlUsage48"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="534">
+<Entry TID="707" language="en" translation="FUNCTION isOfClass(Object: OBJECT OF ANYSTRUCTUREClass: STRUCTURE) : BOOLEAN;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="286">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="269">
+<Name>708</Name>
+<NamespaceLink>93</NamespaceLink>
+<Syntax>709</Syntax>
+<DefLangName>elementCount</DefLangName>
+<ClientDependency>535</ClientDependency>
+<SupplierDependency>710</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="708">
+<Entry TID="711" language="en" translation="elementCount"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="709">
+<Entry TID="712" language="en" translation="FUNCTION elementCount(bag: BAG {0..*} OF ANYSTRUCTURE) : NUMERIC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="292">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="479">
+<Entry TID="713" language="en" translation="SECOND"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="92">
+<Namespace>52</Namespace>
+<OwnedElement>532</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.attributes.AttributeDef TID="618">
+<Name>714</Name>
+<Abstract>false</Abstract>
+<Owner>288</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>715</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>716</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Hours</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="714">
+<Entry TID="717" language="en" translation="Hours"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="715">
+<Range>718</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="718">
+<Multiplicity>715</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.attributes.DomainAttribute TID="716">
+<Direct>496</Direct>
+<AttributeDef>618</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="18">
+<Entry TID="719" language="de" translation="mailto:ceis@localhost"/>
+<Entry TID="720" language="fr" translation="mailto:ceis@localhost"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="235">
+<Name>721</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>66</NamespaceLink>
+<Syntax>722</Syntax>
+<DefLangName>ANGLE</DefLangName>
+<ClientDependency>723</ClientDependency>
+<SupplierDependency>724</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="722">
+<Entry TID="725" language="en" translation="ANGLE (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="721">
+<Entry TID="726" language="en" translation="ANGLE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="724">
+<Name>727</Name>
+<Documentation>728</Documentation>
+<DefLangName>UmlUsage17</DefLangName>
+<Supplier>235</Supplier>
+<Client>377</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="728">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="295">
+<Entry TID="729" language="en" translation="ANYUNIT (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="615">
+<Entry TID="730" language="en" translation="TimeOfDay"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.TopicDef TID="457">
+<Name>731</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>112</NamespaceLink>
+<Kind>1</Kind>
+<PropFinal>false</PropFinal>
+<DefLangName>TIMESYSTEMS</DefLangName>
+<ClientDependency>732</ClientDependency>
+<SupplierDependency>733</SupplierDependency>
+<Presentation>158</Presentation>
+<OwnedElementLink>684</OwnedElementLink>
+<OwnedElementLink>734</OwnedElementLink>
+<Diagram>692</Diagram>
+</ch.ehi.interlis.modeltopicclass.TopicDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="733">
+<Name>735</Name>
+<Documentation>736</Documentation>
+<DefLangName>UmlUsage64</DefLangName>
+<Supplier>457</Supplier>
+<Client>529</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="735">
+<Entry TID="737" language="it" translation="UmlUsage64"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="736">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="731">
+<Entry TID="738" language="en" translation="TIMESYSTEMS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="349">
+<Entry TID="739" language="it" translation="UmlUsage67"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="228">
+<Entry TID="740" language="en" translation="StartSegment"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="196">
+<Name>741</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>62</NamespaceLink>
+<Syntax>742</Syntax>
+<DefLangName>TIME</DefLangName>
+<ClientDependency>743</ClientDependency>
+<SupplierDependency>744</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="742">
+<Entry TID="745" language="en" translation="TIME (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="741">
+<Entry TID="746" language="en" translation="TIME"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="744">
+<Name>747</Name>
+<Documentation>748</Documentation>
+<DefLangName>UmlUsage13</DefLangName>
+<Supplier>196</Supplier>
+<Client>137</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="748">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.HorizAlignment TID="185">
+</ch.ehi.interlis.domainsandconstants.basetypes.HorizAlignment>
+<ch.ehi.basics.types.NlsString TID="586">
+<Entry TID="749" language="en" translation="CANDELA"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="37">
+<Name>750</Name>
+<Abstract>false</Abstract>
+<Type>751</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>23</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>DomainB_fr</DefLangName>
+<DomainAttribute>752</DomainAttribute>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.attributes.DomainAttribute TID="752">
+<DomainDef>37</DomainDef>
+<AttributeDef>753</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="751">
+<MinDec>754</MinDec>
+<MaxDec>755</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>756</UnitDef>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="755">
+<Value>10.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.units.UnitDef TID="756">
+<Name>757</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>564</NamespaceLink>
+<Syntax>758</Syntax>
+<DefLangName>UnitA_fr</DefLangName>
+<NumericalType>759</NumericalType>
+<NumericalType>751</NumericalType>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="758">
+<Entry TID="760" language="de" translation="UnitA_de = (INTERLIS.m * INTERLIS.m);&#13;&#10;"/>
+<Entry TID="761" language="fr" translation="UnitA_fr = (INTERLIS.m * INTERLIS.m);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="757">
+<Entry TID="762" language="de" translation="UnitA_de"/>
+<Entry TID="763" language="fr" translation="UnitA_fr"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="564">
+<Namespace>36</Namespace>
+<OwnedElement>756</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="441">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.Translation TID="304">
+<Language>it</Language>
+<ModelDef>31</ModelDef>
+<BaseLanguage>de</BaseLanguage>
+</ch.ehi.interlis.modeltopicclass.Translation>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="65">
+<Namespace>52</Namespace>
+<OwnedElement>764</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.units.UnitDef TID="764">
+<Name>765</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>65</NamespaceLink>
+<Syntax>766</Syntax>
+<DefLangName>AMOUNT_OF_MATTER</DefLangName>
+<ClientDependency>767</ClientDependency>
+<SupplierDependency>723</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="767">
+<Name>768</Name>
+<Documentation>769</Documentation>
+<DefLangName>UmlUsage15</DefLangName>
+<Supplier>247</Supplier>
+<Client>764</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="769">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="766">
+<Entry TID="770" language="en" translation="AMOUNT_OF_MATTER (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="137">
+<Name>771</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>63</NamespaceLink>
+<Syntax>772</Syntax>
+<DefLangName>ELECTRIC_CURRENT</DefLangName>
+<ClientDependency>744</ClientDependency>
+<SupplierDependency>773</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="773">
+<Name>774</Name>
+<Documentation>775</Documentation>
+<DefLangName>UmlUsage14</DefLangName>
+<Supplier>137</Supplier>
+<Client>247</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="772">
+<Entry TID="776" language="en" translation="ELECTRIC_CURRENT (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="775">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="768">
+<Entry TID="777" language="it" translation="UmlUsage15"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="552">
+<MinDec>778</MinDec>
+<MaxDec>779</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<Circular>false</Circular>
+<OidType>550</OidType>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="779">
+<Value>2.147483647E9</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="778">
+<Value>0.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="652">
+<Name>780</Name>
+<Documentation>781</Documentation>
+<DefLangName>UmlUsage72</DefLangName>
+<Supplier>166</Supplier>
+<Client>648</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="781">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="780">
+<Entry TID="782" language="it" translation="UmlUsage72"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="607">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.TopicDef TID="306">
+<Name>783</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>303</NamespaceLink>
+<Kind>1</Kind>
+<PropFinal>false</PropFinal>
+<DefLangName>TopicC_it</DefLangName>
+<ClientDependency>784</ClientDependency>
+<Presentation>785</Presentation>
+<OwnedElementLink>786</OwnedElementLink>
+<OwnedElementLink>787</OwnedElementLink>
+<OwnedElementLink>788</OwnedElementLink>
+<OwnedElementLink>789</OwnedElementLink>
+<OwnedElementLink>790</OwnedElementLink>
+<Diagram>791</Diagram>
+</ch.ehi.interlis.modeltopicclass.TopicDef>
+<ch.ehi.umleditor.umlpresentation.Package TID="785">
+<ShowNamePrefix>0</ShowNamePrefix>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>305</Diagram>
+<East>224</East>
+<South>154</South>
+<Subject>306</Subject>
+</ch.ehi.umleditor.umlpresentation.Package>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="786">
+<Namespace>306</Namespace>
+<OwnedElement>792</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="783">
+<Entry TID="793" language="de" translation="TopicC_de"/>
+<Entry TID="794" language="it" translation="TopicC_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="784">
+<Name>795</Name>
+<Documentation>796</Documentation>
+<DefLangName>UmlUsage89</DefLangName>
+<Supplier>797</Supplier>
+<Client>306</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="797">
+<Name>798</Name>
+<Abstract>false</Abstract>
+<Type>759</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>302</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>DomainC_it</DefLangName>
+<SupplierDependency>784</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="798">
+<Entry TID="799" language="de" translation="DomainC_de"/>
+<Entry TID="800" language="it" translation="DomainC_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="792">
+<Kind>1</Kind>
+<Name>801</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>786</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ClassC0_it</DefLangName>
+<SupplierDependency>802</SupplierDependency>
+<Association>803</Association>
+<Association>804</Association>
+<Presentation>805</Presentation>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.associations.RoleDef TID="803">
+<Name>806</Name>
+<Abstract>false</Abstract>
+<Association>807</Association>
+<Participant>792</Participant>
+<Ordering>1</Ordering>
+<Multiplicity>808</Multiplicity>
+<Visibility>0</Visibility>
+<Navigable>false</Navigable>
+<Aggregation>1</Aggregation>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<PropExtended>false</PropExtended>
+<IliAttributeKind>1</IliAttributeKind>
+<PropExternal>false</PropExternal>
+<IliAttributeIdx>-1</IliAttributeIdx>
+<PropHiding>false</PropHiding>
+<DefLangName>roleC0_it</DefLangName>
+<Presentation>809</Presentation>
+</ch.ehi.interlis.associations.RoleDef>
+<ch.ehi.umleditor.umlpresentation.PresentationRole TID="809">
+<Association>810</Association>
+<NameVisible>true</NameVisible>
+<MultiplicityVisible>true</MultiplicityVisible>
+<NameAngle>0.0</NameAngle>
+<NameRadius>0.0</NameRadius>
+<MultiplicityAngle>0.0</MultiplicityAngle>
+<MultiplicityRadius>0.0</MultiplicityRadius>
+<Orthogonal>false</Orthogonal>
+<Subject>803</Subject>
+<Endpoint>811</Endpoint>
+<Endpoint>805</Endpoint>
+</ch.ehi.umleditor.umlpresentation.PresentationRole>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="808">
+<Range>812</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="812">
+<Multiplicity>808</Multiplicity>
+<Lower>0</Lower>
+<Upper>9223372036854775807</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="806">
+<Entry TID="813" language="de" translation="roleC0_de"/>
+<Entry TID="814" language="it" translation="roleC0_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.Association TID="810">
+<LinkPresentation>811</LinkPresentation>
+<ShowName>false</ShowName>
+<Diagram>791</Diagram>
+<Subject>807</Subject>
+<RolePresentation>809</RolePresentation>
+<RolePresentation>815</RolePresentation>
+</ch.ehi.umleditor.umlpresentation.Association>
+<ch.ehi.umleditor.umlpresentation.PresentationRole TID="815">
+<Association>810</Association>
+<NameVisible>true</NameVisible>
+<MultiplicityVisible>true</MultiplicityVisible>
+<NameAngle>0.0</NameAngle>
+<NameRadius>0.0</NameRadius>
+<MultiplicityAngle>0.0</MultiplicityAngle>
+<MultiplicityRadius>0.0</MultiplicityRadius>
+<Orthogonal>false</Orthogonal>
+<Subject>816</Subject>
+<Endpoint>811</Endpoint>
+<Endpoint>817</Endpoint>
+</ch.ehi.umleditor.umlpresentation.PresentationRole>
+<ch.ehi.umleditor.umlpresentation.Class TID="817">
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>791</Diagram>
+<East>20</East>
+<South>20</South>
+<Subject>818</Subject>
+<PresentationEdge>815</PresentationEdge>
+</ch.ehi.umleditor.umlpresentation.Class>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="818">
+<Kind>1</Kind>
+<Name>819</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>789</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ClassC2_it</DefLangName>
+<SupplierDependency>820</SupplierDependency>
+<Association>816</Association>
+<Presentation>817</Presentation>
+<Feature>753</Feature>
+<Feature>821</Feature>
+<ClientDependency>822</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="822">
+<Name>823</Name>
+<Documentation>824</Documentation>
+<DefLangName>UmlUsage87</DefLangName>
+<Supplier>825</Supplier>
+<Client>818</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="820">
+<Name>826</Name>
+<Documentation>827</Documentation>
+<DefLangName>UmlUsage88</DefLangName>
+<Supplier>818</Supplier>
+<Client>807</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="826">
+<Entry TID="828" language="it" translation="UmlUsage88"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="825">
+<Kind>2</Kind>
+<Name>829</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>787</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>StructC1_it</DefLangName>
+<StructAttrType>830</StructAttrType>
+<SupplierDependency>822</SupplierDependency>
+<Association>831</Association>
+<Presentation>832</Presentation>
+<ClientDependency>802</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="829">
+<Entry TID="833" language="de" translation="StructC1_de"/>
+<Entry TID="834" language="it" translation="StructC1_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="827">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType TID="830">
+<Participant>825</Participant>
+</ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType>
+<ch.ehi.interlis.associations.RoleDef TID="831">
+<Name>835</Name>
+<Abstract>false</Abstract>
+<Association>836</Association>
+<Participant>825</Participant>
+<Ordering>0</Ordering>
+<Visibility>0</Visibility>
+<Navigable>false</Navigable>
+<Aggregation>1</Aggregation>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<PropExtended>false</PropExtended>
+<IliAttributeKind>3</IliAttributeKind>
+<PropExternal>false</PropExternal>
+<IliAttributeIdx>-1</IliAttributeIdx>
+<PropHiding>false</PropHiding>
+<DefLangName>StructC1_it</DefLangName>
+<Presentation>837</Presentation>
+</ch.ehi.interlis.associations.RoleDef>
+<ch.ehi.basics.types.NlsString TID="835">
+<Entry TID="838" language="de" translation="StructC1_de"/>
+<Entry TID="839" language="it" translation="StructC1_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="824">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.PresentationRole TID="837">
+<Association>840</Association>
+<NameVisible>true</NameVisible>
+<MultiplicityVisible>true</MultiplicityVisible>
+<NameAngle>0.0</NameAngle>
+<NameRadius>0.0</NameRadius>
+<MultiplicityAngle>0.0</MultiplicityAngle>
+<MultiplicityRadius>0.0</MultiplicityRadius>
+<Orthogonal>false</Orthogonal>
+<Subject>831</Subject>
+<Endpoint>841</Endpoint>
+<Endpoint>832</Endpoint>
+</ch.ehi.umleditor.umlpresentation.PresentationRole>
+<ch.ehi.umleditor.umlpresentation.PresentationAssocClass TID="841">
+<Association>840</Association>
+<East>5</East>
+<South>5</South>
+<ClassAngle>0.0</ClassAngle>
+<ClassRadius>0.0</ClassRadius>
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Subject>836</Subject>
+<PresentationEdge>837</PresentationEdge>
+<PresentationEdge>842</PresentationEdge>
+</ch.ehi.umleditor.umlpresentation.PresentationAssocClass>
+<ch.ehi.umleditor.umlpresentation.Association TID="840">
+<LinkPresentation>841</LinkPresentation>
+<ShowName>false</ShowName>
+<Diagram>791</Diagram>
+<Subject>836</Subject>
+<RolePresentation>837</RolePresentation>
+<RolePresentation>842</RolePresentation>
+</ch.ehi.umleditor.umlpresentation.Association>
+<ch.ehi.interlis.associations.AssociationDef TID="836">
+<Abstract>false</Abstract>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>788</NamespaceLink>
+<PropOid>false</PropOid>
+<Name>843</Name>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ClassC0_itStructC1_it</DefLangName>
+<Connection>804</Connection>
+<Connection>831</Connection>
+<Presentation>840</Presentation>
+<Presentation>841</Presentation>
+</ch.ehi.interlis.associations.AssociationDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="821">
+<Name>844</Name>
+<Abstract>false</Abstract>
+<Owner>818</Owner>
+<Ordering>1</Ordering>
+<Multiplicity>845</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>846</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>attrC2b_it</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="845">
+<Range>847</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="847">
+<Multiplicity>845</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.attributes.DomainAttribute TID="846">
+<Direct>830</Direct>
+<AttributeDef>821</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="844">
+<Entry TID="848" language="de" translation="attrC2b_de"/>
+<Entry TID="849" language="it" translation="attrC2b_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.Class TID="805">
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>791</Diagram>
+<East>0</East>
+<South>0</South>
+<Subject>792</Subject>
+<PresentationEdge>809</PresentationEdge>
+<PresentationEdge>842</PresentationEdge>
+</ch.ehi.umleditor.umlpresentation.Class>
+<ch.ehi.interlis.associations.AssociationDef TID="807">
+<Abstract>false</Abstract>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>790</NamespaceLink>
+<PropOid>false</PropOid>
+<Name>850</Name>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>AssocC0C2_it</DefLangName>
+<Connection>803</Connection>
+<Connection>816</Connection>
+<ClientDependency>820</ClientDependency>
+<Presentation>811</Presentation>
+<Presentation>810</Presentation>
+</ch.ehi.interlis.associations.AssociationDef>
+<ch.ehi.basics.types.NlsString TID="850">
+<Entry TID="851" language="de" translation="AssocC0C2_de"/>
+<Entry TID="852" language="it" translation="AssocC0C2_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="801">
+<Entry TID="853" language="de" translation="ClassC0_de"/>
+<Entry TID="854" language="it" translation="ClassC0_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="68">
+<Namespace>52</Namespace>
+<OwnedElement>855</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.units.UnitDef TID="855">
+<Name>856</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>68</NamespaceLink>
+<Syntax>857</Syntax>
+<DefLangName>LUMINOUS_INTENSITY</DefLangName>
+<ClientDependency>858</ClientDependency>
+<SupplierDependency>859</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="859">
+<Name>860</Name>
+<Documentation>861</Documentation>
+<DefLangName>UmlUsage19</DefLangName>
+<Supplier>855</Supplier>
+<Client>170</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="857">
+<Entry TID="862" language="en" translation="LUMINOUS_INTENSITY (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="856">
+<Entry TID="863" language="en" translation="LUMINOUS_INTENSITY"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="858">
+<Name>864</Name>
+<Documentation>865</Documentation>
+<DefLangName>UmlUsage18</DefLangName>
+<Supplier>377</Supplier>
+<Client>855</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="865">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="864">
+<Entry TID="866" language="it" translation="UmlUsage18"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="759">
+<MinDec>867</MinDec>
+<MaxDec>868</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>756</UnitDef>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="867">
+<Value>1.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="868">
+<Value>10.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="434">
+<Entry TID="869" language="en" translation="FORMAT BASED ON INTERLIS.GregorianDateTime (INHERITANCE&quot;T&quot; Hours/2 &quot;:&quot; Minutes &quot;:&quot; Seconds)"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="843">
+<Entry TID="870" language="de" translation="ClassC0_deStructC1_de"/>
+<Entry TID="871" language="it" translation="ClassC0_itStructC1_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="754">
+<Value>1.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="412">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="356">
+<Entry TID="872" language="en" translation="lenM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="270">
+<Entry TID="873" language="it" translation="UmlUsage25"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="247">
+<Name>874</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>64</NamespaceLink>
+<Syntax>875</Syntax>
+<DefLangName>TEMPERATURE</DefLangName>
+<ClientDependency>773</ClientDependency>
+<SupplierDependency>767</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="875">
+<Entry TID="876" language="en" translation="TEMPERATURE (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="874">
+<Entry TID="877" language="en" translation="TEMPERATURE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="163">
+<Name>878</Name>
+<Abstract>false</Abstract>
+<Type>879</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>124</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>XMLTime</DefLangName>
+<ClientDependency>208</ClientDependency>
+<SupplierDependency>278</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.UnknownType TID="879">
+<Syntax>880</Syntax>
+</ch.ehi.interlis.domainsandconstants.UnknownType>
+<ch.ehi.basics.types.NlsString TID="880">
+<Entry TID="881" language="en" translation="FORMAT BASED ON INTERLIS.UTC (Hours/2 &quot;:&quot; Minutes &quot;:&quot; Seconds)"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="747">
+<Entry TID="882" language="it" translation="UmlUsage13"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="165">
+<Name>883</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>75</NamespaceLink>
+<Syntax>884</Syntax>
+<DescName>885</DescName>
+<DefLangName>mol</DefLangName>
+<ClientDependency>262</ClientDependency>
+<SupplierDependency>370</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="883">
+<Entry TID="886" language="en" translation="mol"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="884">
+<Entry TID="887" language="en" translation="MOLE [mol] EXTENDS INTERLIS.AMOUNT_OF_MATTER;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="885">
+<Entry TID="888" language="en" translation="MOLE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="61">
+<Namespace>52</Namespace>
+<OwnedElement>613</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="132">
+<Namespace>52</Namespace>
+<OwnedElement>391</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.attributes.AttributeDef TID="753">
+<Name>889</Name>
+<Abstract>false</Abstract>
+<Owner>818</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>890</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>752</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>attrC2a_it</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="889">
+<Entry TID="891" language="de" translation="attrC2a_de"/>
+<Entry TID="892" language="it" translation="attrC2a_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="437">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="395">
+<Entry TID="893" language="en" translation="FUNCTION trimM(TextVal: MTEXT) : MTEXT;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="78">
+<Namespace>52</Namespace>
+<OwnedElement>471</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="312">
+<Name>894</Name>
+<Documentation>895</Documentation>
+<DefLangName>UmlUsage81</DefLangName>
+<Supplier>246</Supplier>
+<Client>173</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="895">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="894">
+<Entry TID="896" language="it" translation="UmlUsage81"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="650">
+<MinDec>897</MinDec>
+<MaxDec>898</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.basics.types.NlsString TID="584">
+<Entry TID="899" language="en" translation="cd"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="259">
+<Entry TID="900" language="en" translation="DEGREE_KELVIN [K] EXTENDS INTERLIS.TEMPERATURE;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType TID="237">
+<Participant>189</Participant>
+</ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="85">
+<Namespace>52</Namespace>
+<OwnedElement>556</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="101">
+<Namespace>52</Namespace>
+<OwnedElement>901</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.functions.FunctionDef TID="901">
+<Name>902</Name>
+<NamespaceLink>101</NamespaceLink>
+<Syntax>903</Syntax>
+<DefLangName>convertUnit</DefLangName>
+<ClientDependency>904</ClientDependency>
+<SupplierDependency>445</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="903">
+<Entry TID="905" language="en" translation="FUNCTION convertUnit(from: NUMERIC) : NUMERIC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="902">
+<Entry TID="906" language="en" translation="convertUnit"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="904">
+<Name>907</Name>
+<Documentation>908</Documentation>
+<DefLangName>UmlUsage51</DefLangName>
+<Supplier>487</Supplier>
+<Client>901</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="908">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.Translation TID="565">
+<Language>fr</Language>
+<ModelDef>36</ModelDef>
+<BaseLanguage>de</BaseLanguage>
+</ch.ehi.interlis.modeltopicclass.Translation>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="305">
+<Name>909</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>31</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+<PresentationElement>785</PresentationElement>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.basics.types.NlsString TID="909">
+<Entry TID="910" language="it" translation="Topics"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="416">
+<Entry TID="911" language="en" translation="METAOBJECT_TRANSLATION"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="342">
+<Entry TID="912" language="en" translation="Month [M] EXTENDS INTERLIS.TIME;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="380">
+<Entry TID="913" language="en" translation="SurfaceEdge"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="514">
+<Entry TID="914" language="en" translation="Unit: NUMERIC [ANYUNIT];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType TID="452">
+</ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="112">
+<Namespace>52</Namespace>
+<OwnedElement>457</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="113">
+<Namespace>52</Namespace>
+<OwnedElement>529</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="890">
+<Range>915</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="915">
+<Multiplicity>890</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="141">
+<Entry TID="916" language="en" translation="DIMENSIONLESS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="580">
+<RangeDefined>false</RangeDefined>
+<Direction>1</Direction>
+<Circular>false</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="535">
+<Name>917</Name>
+<Documentation>918</Documentation>
+<DefLangName>UmlUsage43</DefLangName>
+<Supplier>532</Supplier>
+<Client>269</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="918">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="917">
+<Entry TID="919" language="it" translation="UmlUsage43"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="488">
+<Entry TID="920" language="en" translation="METAOBJECT"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="360">
+<Multiplicity>218</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="300">
+<Entry TID="921" language="de" translation="mailto:ceis@localhost"/>
+<Entry TID="922" language="it" translation="mailto:ceis@localhost"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="55">
+<Entry TID="923" language="en" translation="http://www.interlis.ch"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.PresentationAssocClass TID="811">
+<Association>810</Association>
+<East>10</East>
+<South>10</South>
+<ClassAngle>0.0</ClassAngle>
+<ClassRadius>0.0</ClassRadius>
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Subject>807</Subject>
+<PresentationEdge>809</PresentationEdge>
+<PresentationEdge>815</PresentationEdge>
+</ch.ehi.umleditor.umlpresentation.PresentationAssocClass>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="548">
+<Kind>2</Kind>
+<Multiline>false</Multiline>
+<MaxLength>36</MaxLength>
+<OidType>547</OidType>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.basics.types.NlsString TID="338">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="665">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="419">
+<Name>924</Name>
+<Abstract>false</Abstract>
+<Owner>415</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>925</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>926</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>NameInBaseLanguage</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="924">
+<Entry TID="927" language="en" translation="NameInBaseLanguage"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="925">
+<Range>928</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="928">
+<Multiplicity>925</Multiplicity>
+<Lower>1</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.units.UnitDef TID="351">
+<Name>929</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>115</NamespaceLink>
+<Syntax>930</Syntax>
+<DescName>931</DescName>
+<DefLangName>d</DefLangName>
+<NumericalType>644</NumericalType>
+<ClientDependency>498</ClientDependency>
+<SupplierDependency>345</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="931">
+<Entry TID="932" language="en" translation="Day"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="929">
+<Entry TID="933" language="en" translation="d"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="930">
+<Entry TID="934" language="en" translation="Day [d] = 24 [INTERLIS.h];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="96">
+<Namespace>52</Namespace>
+<OwnedElement>339</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="417">
+<Name>935</Name>
+<Documentation>936</Documentation>
+<DefLangName>UmlUsage57</DefLangName>
+<Supplier>415</Supplier>
+<Client>430</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="936">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="935">
+<Entry TID="937" language="it" translation="UmlUsage57"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="861">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="651">
+<DomainDef>648</DomainDef>
+<AttributeDef>635</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.functions.FunctionDef TID="487">
+<Name>938</Name>
+<NamespaceLink>100</NamespaceLink>
+<Syntax>939</Syntax>
+<DefLangName>inEnumRange</DefLangName>
+<ClientDependency>402</ClientDependency>
+<SupplierDependency>904</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="938">
+<Entry TID="940" language="en" translation="inEnumRange"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.functions.FunctionDef TID="405">
+<Name>941</Name>
+<NamespaceLink>94</NamespaceLink>
+<Syntax>942</Syntax>
+<DefLangName>objectCount</DefLangName>
+<ClientDependency>710</ClientDependency>
+<SupplierDependency>943</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="941">
+<Entry TID="944" language="en" translation="objectCount"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="942">
+<Entry TID="945" language="en" translation="FUNCTION objectCount(Objects: OBJECTS OF ANYCLASS) : NUMERIC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="943">
+<Name>946</Name>
+<Documentation>947</Documentation>
+<DefLangName>UmlUsage45</DefLangName>
+<Supplier>405</Supplier>
+<Client>948</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="946">
+<Entry TID="949" language="it" translation="UmlUsage45"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="947">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="367">
+<Entry TID="950" language="en" translation="rad"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="285">
+<Entry TID="951" language="it" translation="UmlUsage33"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="611">
+<Entry TID="952" language="it" translation="UmlUsage11"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="315">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="294">
+<Entry TID="953" language="en" translation="ANYUNIT"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="819">
+<Entry TID="954" language="de" translation="ClassC2_de"/>
+<Entry TID="955" language="it" translation="ClassC2_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="802">
+<Name>956</Name>
+<Documentation>957</Documentation>
+<DefLangName>UmlUsage86</DefLangName>
+<Supplier>792</Supplier>
+<Client>825</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="957">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="469">
+<Entry TID="958" language="it" translation="UmlUsage28"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="318">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="529">
+<Name>959</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>113</NamespaceLink>
+<Syntax>960</Syntax>
+<DescName>961</DescName>
+<DefLangName>min</DefLangName>
+<NumericalType>627</NumericalType>
+<NumericalType>234</NumericalType>
+<ClientDependency>733</ClientDependency>
+<SupplierDependency>497</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="960">
+<Entry TID="962" language="en" translation="Minute [min] = 60 [INTERLIS.s];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="959">
+<Entry TID="963" language="en" translation="min"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="961">
+<Entry TID="964" language="en" translation="Minute"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="257">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="129">
+<Namespace>52</Namespace>
+<OwnedElement>246</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="774">
+<Entry TID="965" language="it" translation="UmlUsage14"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="409">
+<Name>966</Name>
+<Documentation>967</Documentation>
+<DefLangName>UmlUsage54</DefLangName>
+<Supplier>450</Supplier>
+<Client>406</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="967">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="966">
+<Entry TID="968" language="it" translation="UmlUsage54"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="156">
+<Kind>1</Kind>
+<Name>969</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>109</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>COORDSYSTEM</DefLangName>
+<SupplierDependency>675</SupplierDependency>
+<Generalization>577</Generalization>
+<Feature>970</Feature>
+<ClientDependency>576</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="970">
+<Name>971</Name>
+<Abstract>false</Abstract>
+<Owner>156</Owner>
+<Ordering>2</Ordering>
+<Multiplicity>972</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>973</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Axis</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="972">
+<Range>974</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.interlis.attributes.DomainAttribute TID="973">
+<Direct>511</Direct>
+<AttributeDef>970</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="969">
+<Entry TID="975" language="en" translation="COORDSYSTEM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="974">
+<Multiplicity>972</Multiplicity>
+<Lower>1</Lower>
+<Upper>3</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="971">
+<Entry TID="976" language="en" translation="Axis"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="524">
+<Kind>2</Kind>
+<Multiline>false</Multiline>
+<MaxLength>8</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.basics.types.NlsString TID="398">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="645">
+<Multiplicity>641</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="631">
+<Value>59.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="169">
+<Kind>1</Kind>
+<Name>977</Name>
+<Abstract>true</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>111</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>SIGN</DefLangName>
+<ParameterDef>978</ParameterDef>
+<SupplierDependency>732</SupplierDependency>
+<Generalization>489</Generalization>
+<ClientDependency>672</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.metaobjects.ParameterDef TID="978">
+<Name>979</Name>
+<Properties>0</Properties>
+<ClassDef>169</ClassDef>
+<Syntax>980</Syntax>
+<DefLangName>Sign</DefLangName>
+</ch.ehi.interlis.metaobjects.ParameterDef>
+<ch.ehi.basics.types.NlsString TID="979">
+<Entry TID="981" language="en" translation="Sign"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="980">
+<Entry TID="982" language="en" translation="Sign: METAOBJECT;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="860">
+<Entry TID="983" language="it" translation="UmlUsage19"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="732">
+<Name>984</Name>
+<Documentation>985</Documentation>
+<DefLangName>UmlUsage63</DefLangName>
+<Supplier>169</Supplier>
+<Client>457</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="985">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.associations.RoleDef TID="816">
+<Name>986</Name>
+<Abstract>false</Abstract>
+<Association>807</Association>
+<Participant>818</Participant>
+<Ordering>1</Ordering>
+<Multiplicity>987</Multiplicity>
+<Visibility>0</Visibility>
+<Navigable>false</Navigable>
+<Aggregation>1</Aggregation>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<PropExtended>false</PropExtended>
+<IliAttributeKind>1</IliAttributeKind>
+<PropExternal>false</PropExternal>
+<IliAttributeIdx>-1</IliAttributeIdx>
+<PropHiding>false</PropHiding>
+<DefLangName>roleC2_it</DefLangName>
+<Presentation>815</Presentation>
+</ch.ehi.interlis.associations.RoleDef>
+<ch.ehi.basics.types.NlsString TID="986">
+<Entry TID="988" language="de" translation="roleC2_de"/>
+<Entry TID="989" language="it" translation="roleC2_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="987">
+<Range>990</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="990">
+<Multiplicity>987</Multiplicity>
+<Lower>0</Lower>
+<Upper>9223372036854775807</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.units.UnitDef TID="170">
+<Name>991</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>69</NamespaceLink>
+<Syntax>992</Syntax>
+<DefLangName>MONEY</DefLangName>
+<ClientDependency>859</ClientDependency>
+<SupplierDependency>424</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="991">
+<Entry TID="993" language="en" translation="MONEY"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="992">
+<Entry TID="994" language="en" translation="MONEY (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="445">
+<Name>995</Name>
+<Documentation>996</Documentation>
+<DefLangName>UmlUsage52</DefLangName>
+<Supplier>901</Supplier>
+<Client>139</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="996">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="995">
+<Entry TID="997" language="it" translation="UmlUsage52"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="422">
+<Entry TID="998" language="en" translation="METER [m] EXTENDS INTERLIS.LENGTH;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="649">
+<Entry TID="999" language="en" translation="GregorianYear"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="956">
+<Entry TID="1000" language="it" translation="UmlUsage86"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="823">
+<Entry TID="1001" language="it" translation="UmlUsage87"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="790">
+<Namespace>306</Namespace>
+<OwnedElement>807</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.attributes.AttributeDef TID="620">
+<Name>1002</Name>
+<Abstract>false</Abstract>
+<Owner>288</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>1003</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1004</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Seconds</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1004">
+<Direct>480</Direct>
+<AttributeDef>620</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1003">
+<Range>1005</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1005">
+<Multiplicity>1003</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="494">
+<Entry TID="1006" language="en" translation="Hour"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="393">
+<Multiplicity>387</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="291">
+<Entry TID="1007" language="it" translation="UmlUsage37"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="73">
+<Namespace>52</Namespace>
+<OwnedElement>265</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="710">
+<Name>1008</Name>
+<Documentation>1009</Documentation>
+<DefLangName>UmlUsage44</DefLangName>
+<Supplier>269</Supplier>
+<Client>405</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1009">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1008">
+<Entry TID="1010" language="it" translation="UmlUsage44"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="688">
+<Entry TID="1011" language="it" translation="UmlUsage62"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="394">
+<Entry TID="1012" language="en" translation="trimM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="383">
+<Name>1013</Name>
+<Abstract>false</Abstract>
+<Owner>379</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>1014</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1015</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Geometry</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1014">
+<Range>1016</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1016">
+<Multiplicity>1014</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="1013">
+<Entry TID="1017" language="en" translation="Geometry"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1015">
+<Direct>1018</Direct>
+<AttributeDef>383</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline TID="1018">
+<Directed>true</Directed>
+</ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="243">
+<Range>1019</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1019">
+<Multiplicity>243</Multiplicity>
+<Lower>1</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="939">
+<Entry TID="1020" language="en" translation="FUNCTION inEnumRange(Enum: ENUMVALMinVal: ENUMTREEVALMaxVal: ENUMTREEVAL) : BOOLEAN;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.umleditor.umlpresentation.Class TID="832">
+<ShowNamePrefix>0</ShowNamePrefix>
+<SuppressAttributes>false</SuppressAttributes>
+<ShowInheritedAttributes>false</ShowInheritedAttributes>
+<SuppressOperations>false</SuppressOperations>
+<ShowOperationSignatures>false</ShowOperationSignatures>
+<ShowConstraints>0</ShowConstraints>
+<Width>0</Width>
+<Height>0</Height>
+<Diagram>791</Diagram>
+<East>10</East>
+<South>10</South>
+<Subject>825</Subject>
+<PresentationEdge>837</PresentationEdge>
+</ch.ehi.umleditor.umlpresentation.Class>
+<ch.ehi.basics.types.NlsString TID="765">
+<Entry TID="1021" language="en" translation="AMOUNT_OF_MATTER"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="509">
+<Entry TID="1022" language="en" translation="AXIS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="497">
+<Name>1023</Name>
+<Documentation>1024</Documentation>
+<DefLangName>UmlUsage65</DefLangName>
+<Supplier>529</Supplier>
+<Client>355</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1024">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1023">
+<Entry TID="1025" language="it" translation="UmlUsage65"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="103">
+<Namespace>52</Namespace>
+<OwnedElement>450</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="984">
+<Entry TID="1026" language="it" translation="UmlUsage63"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="796">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.NumericType TID="456">
+<MinDec>1027</MinDec>
+<MaxDec>1028</MaxDec>
+<RangeDefined>true</RangeDefined>
+<Direction>1</Direction>
+<UnitDef>475</UnitDef>
+<Circular>true</Circular>
+</ch.ehi.interlis.domainsandconstants.basetypes.NumericType>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="1027">
+<Value>0.0</Value>
+<Accuracy>3</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="1028">
+<Value>59.999</Value>
+<Accuracy>3</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="334">
+<Entry TID="1029" language="en" translation="FUNCTION myClass(Object: OBJECT OF ANYSTRUCTURE) : STRUCTURE;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="173">
+<Kind>2</Kind>
+<Name>1030</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>130</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>ArcSegment</DefLangName>
+<SupplierDependency>385</SupplierDependency>
+<Generalization>238</Generalization>
+<ClientDependency>312</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="1030">
+<Entry TID="1031" language="en" translation="ArcSegment"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="583">
+<Kind>3</Kind>
+<Multiline>false</Multiline>
+<MaxLength>0</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="328">
+<Name>1032</Name>
+<Documentation>1033</Documentation>
+<DefLangName>UmlUsage39</DefLangName>
+<Supplier>172</Supplier>
+<Client>146</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1033">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="229">
+<Name>1034</Name>
+<Documentation>1035</Documentation>
+<DefLangName>UmlUsage80</DefLangName>
+<Supplier>220</Supplier>
+<Client>246</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1034">
+<Entry TID="1036" language="it" translation="UmlUsage80"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1035">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1002">
+<Entry TID="1037" language="en" translation="Seconds"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="743">
+<Name>1038</Name>
+<Documentation>1039</Documentation>
+<DefLangName>UmlUsage12</DefLangName>
+<Supplier>613</Supplier>
+<Client>196</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1039">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1038">
+<Entry TID="1040" language="it" translation="UmlUsage12"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="690">
+<Kind>1</Kind>
+<Name>1041</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>734</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>TIMEOFDAYSYS</DefLangName>
+<ParameterDef>1042</ParameterDef>
+<Generalization>673</Generalization>
+<Presentation>694</Presentation>
+<ClientDependency>686</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="1041">
+<Entry TID="1043" language="en" translation="TIMEOFDAYSYS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.metaobjects.ParameterDef TID="1042">
+<Name>1044</Name>
+<Properties>0</Properties>
+<ClassDef>690</ClassDef>
+<Syntax>1045</Syntax>
+<DefLangName>Unit</DefLangName>
+</ch.ehi.interlis.metaobjects.ParameterDef>
+<ch.ehi.basics.types.NlsString TID="1044">
+<Entry TID="1046" language="en" translation="Unit"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1045">
+<Entry TID="1047" language="en" translation="Unit (EXTENDED): NUMERIC [TIME];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="601">
+<Kind>2</Kind>
+<Name>1048</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>133</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>LineGeometry</DefLangName>
+<Feature>1049</Feature>
+<ClientDependency>1050</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="1049">
+<Name>1051</Name>
+<Abstract>false</Abstract>
+<Owner>601</Owner>
+<Ordering>2</Ordering>
+<Multiplicity>1052</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1053</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Segments</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="1051">
+<Entry TID="1054" language="en" translation="Segments"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1052">
+<Range>1055</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="1050">
+<Name>1056</Name>
+<Documentation>1057</Documentation>
+<DefLangName>UmlUsage84</DefLangName>
+<Supplier>391</Supplier>
+<Client>601</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1056">
+<Entry TID="1058" language="it" translation="UmlUsage84"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1048">
+<Entry TID="1059" language="en" translation="LineGeometry"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1055">
+<Multiplicity>1052</Multiplicity>
+<Lower>0</Lower>
+<Upper>9223372036854775807</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1053">
+<Direct>237</Direct>
+<AttributeDef>1049</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="1057">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="512">
+<Name>1060</Name>
+<Documentation>1061</Documentation>
+<DefLangName>UmlUsage58</DefLangName>
+<Supplier>430</Supplier>
+<Client>136</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1060">
+<Entry TID="1062" language="it" translation="UmlUsage58"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1061">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="787">
+<Namespace>306</Namespace>
+<OwnedElement>825</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="771">
+<Entry TID="1063" language="en" translation="ELECTRIC_CURRENT"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="596">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="210">
+<Name>1064</Name>
+<Abstract>false</Abstract>
+<Owner>171</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>1065</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1066</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Hours</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1066">
+<Direct>495</Direct>
+<AttributeDef>210</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1065">
+<Range>1067</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1067">
+<Multiplicity>1065</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="697">
+<Entry TID="1068" language="en" translation="kg"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="591">
+<Entry TID="1069" language="it" translation="UmlUsage75"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="83">
+<Namespace>52</Namespace>
+<OwnedElement>183</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.umleditor.umlpresentation.PresentationRole TID="842">
+<Association>840</Association>
+<NameVisible>true</NameVisible>
+<MultiplicityVisible>true</MultiplicityVisible>
+<NameAngle>0.0</NameAngle>
+<NameRadius>0.0</NameRadius>
+<MultiplicityAngle>0.0</MultiplicityAngle>
+<MultiplicityRadius>0.0</MultiplicityRadius>
+<Orthogonal>false</Orthogonal>
+<Subject>804</Subject>
+<Endpoint>841</Endpoint>
+<Endpoint>805</Endpoint>
+</ch.ehi.umleditor.umlpresentation.PresentationRole>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="789">
+<Namespace>306</Namespace>
+<OwnedElement>818</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="750">
+<Entry TID="1070" language="de" translation="DomainB_de"/>
+<Entry TID="1071" language="fr" translation="DomainB_fr"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="670">
+<Entry TID="1072" language="en" translation="SCALSYSTEM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="460">
+<Entry TID="1073" language="en" translation="isSubClass"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="279">
+<Name>1074</Name>
+<Documentation>1075</Documentation>
+<DefLangName>UmlUsage77</DefLangName>
+<Supplier>190</Supplier>
+<Client>248</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1074">
+<Entry TID="1076" language="it" translation="UmlUsage77"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1075">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="166">
+<Kind>2</Kind>
+<Name>1077</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>120</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>UTC</DefLangName>
+<SupplierDependency>652</SupplierDependency>
+<Generalization>617</Generalization>
+<ClientDependency>616</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.basics.types.NlsString TID="1077">
+<Entry TID="1078" language="en" translation="UTC"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="155">
+<Name>1079</Name>
+<Abstract>false</Abstract>
+<Type>1080</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>82</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>BOOLEAN</DefLangName>
+<ClientDependency>525</ClientDependency>
+<SupplierDependency>186</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.basics.types.NlsString TID="1079">
+<Entry TID="1081" language="en" translation="BOOLEAN"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.BooleanType TID="1080">
+</ch.ehi.interlis.domainsandconstants.basetypes.BooleanType>
+<ch.ehi.basics.types.NlsString TID="516">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="181">
+<Entry TID="1082" language="it" translation="UmlUsage34"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="138">
+<Name>1083</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>117</NamespaceLink>
+<Syntax>1084</Syntax>
+<DescName>1085</DescName>
+<DefLangName>Y</DefLangName>
+<ClientDependency>346</ClientDependency>
+<SupplierDependency>1086</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="1086">
+<Name>1087</Name>
+<Documentation>1088</Documentation>
+<DefLangName>UmlUsage69</DefLangName>
+<Supplier>138</Supplier>
+<Client>147</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1087">
+<Entry TID="1089" language="it" translation="UmlUsage69"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1084">
+<Entry TID="1090" language="en" translation="Year [Y] EXTENDS INTERLIS.TIME;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1088">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1032">
+<Entry TID="1091" language="it" translation="UmlUsage39"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="621">
+<Name>1092</Name>
+<Documentation>1093</Documentation>
+<DefLangName>UmlUsage70</DefLangName>
+<Supplier>147</Supplier>
+<Client>288</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1093">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1092">
+<Entry TID="1094" language="it" translation="UmlUsage70"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="575">
+<Entry TID="1095" language="en" translation="REFSYSTEM"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="54">
+<Entry TID="1096" language="en" translation="20060126"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="95">
+<Namespace>52</Namespace>
+<OwnedElement>948</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.metaobjects.MetaDataUseDef TID="147">
+<Name>1097</Name>
+<NamespaceLink>118</NamespaceLink>
+<Kind>0</Kind>
+<Syntax>1098</Syntax>
+<DefLangName>BaseTimeSystems</DefLangName>
+<ClientDependency>1086</ClientDependency>
+<SupplierDependency>621</SupplierDependency>
+</ch.ehi.interlis.metaobjects.MetaDataUseDef>
+<ch.ehi.basics.types.NlsString TID="1098">
+<Entry TID="1099" language="en" translation="REFSYSTEM BASKET BaseTimeSystems~INTERLIS.TIMESYSTEMS&#13;&#10;  OBJECTS OF CALENDAR:&#13;&#10;    GregorianCalendar&#13;&#10;  OBJECTS OF TIMEOFDAYSYS:&#13;&#10;    UTC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1097">
+<Entry TID="1100" language="en" translation="BaseTimeSystems"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="734">
+<Namespace>457</Namespace>
+<OwnedElement>690</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="386">
+<Entry TID="1101" language="en" translation="LineAttrs"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="302">
+<Namespace>31</Namespace>
+<OwnedElement>797</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.interlis.functions.FunctionDef TID="948">
+<Name>1102</Name>
+<NamespaceLink>95</NamespaceLink>
+<Syntax>1103</Syntax>
+<DefLangName>len</DefLangName>
+<ClientDependency>943</ClientDependency>
+<SupplierDependency>358</SupplierDependency>
+</ch.ehi.interlis.functions.FunctionDef>
+<ch.ehi.basics.types.NlsString TID="1103">
+<Entry TID="1104" language="en" translation="FUNCTION len(TextVal: TEXT) : NUMERIC;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1102">
+<Entry TID="1105" language="en" translation="len"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="122">
+<Namespace>52</Namespace>
+<OwnedElement>216</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="1064">
+<Entry TID="1106" language="en" translation="Hours"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="217">
+<Entry TID="1107" language="en" translation="Minutes"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="635">
+<Name>1108</Name>
+<Abstract>false</Abstract>
+<Owner>216</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>1109</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>651</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Year</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1109">
+<Range>1110</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1110">
+<Multiplicity>1109</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="1108">
+<Entry TID="1111" language="en" translation="Year"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassDef TID="391">
+<Kind>2</Kind>
+<Name>1112</Name>
+<Abstract>false</Abstract>
+<Proxy>false</Proxy>
+<Active>false</Active>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>132</NamespaceLink>
+<PropFinal>false</PropFinal>
+<Optional>false</Optional>
+<HasNoStableOid>false</HasNoStableOid>
+<DefLangName>SurfaceBoundary</DefLangName>
+<SupplierDependency>1050</SupplierDependency>
+<Feature>1113</Feature>
+<ClientDependency>382</ClientDependency>
+</ch.ehi.interlis.modeltopicclass.ClassDef>
+<ch.ehi.interlis.attributes.AttributeDef TID="1113">
+<Name>1114</Name>
+<Abstract>false</Abstract>
+<Owner>391</Owner>
+<Ordering>2</Ordering>
+<Multiplicity>1115</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1116</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Lines</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1115">
+<Range>1117</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1117">
+<Multiplicity>1115</Multiplicity>
+<Lower>0</Lower>
+<Upper>9223372036854775807</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.basics.types.NlsString TID="1114">
+<Entry TID="1118" language="en" translation="Lines"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1116">
+<Direct>381</Direct>
+<AttributeDef>1113</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.basics.types.NlsString TID="1112">
+<Entry TID="1119" language="en" translation="SurfaceBoundary"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="348">
+<Value>12.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="907">
+<Entry TID="1120" language="it" translation="UmlUsage51"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="321">
+<Entry TID="1121" language="en" translation="AMPERE [A] EXTENDS INTERLIS.ELECTRIC_CURRENT;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="705">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="377">
+<Name>1122</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>67</NamespaceLink>
+<Syntax>1123</Syntax>
+<DefLangName>SOLID_ANGLE</DefLangName>
+<ClientDependency>724</ClientDependency>
+<SupplierDependency>858</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="1122">
+<Entry TID="1124" language="en" translation="SOLID_ANGLE"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1123">
+<Entry TID="1125" language="en" translation="SOLID_ANGLE (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="977">
+<Entry TID="1126" language="en" translation="SIGN"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="897">
+<Value>1582.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.umleditor.umlpresentation.Diagram TID="791">
+<Name>1127</Name>
+<ShowAttributeMultiplicity>false</ShowAttributeMultiplicity>
+<ShowAttributeType>false</ShowAttributeType>
+<Namespace>306</Namespace>
+<ShowNamePrefix>0</ShowNamePrefix>
+<PresentationElement>840</PresentationElement>
+<PresentationElement>817</PresentationElement>
+<PresentationElement>832</PresentationElement>
+<PresentationElement>810</PresentationElement>
+<PresentationElement>805</PresentationElement>
+</ch.ehi.umleditor.umlpresentation.Diagram>
+<ch.ehi.basics.types.NlsString TID="1127">
+<Entry TID="1128" language="it" translation="Classes"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="525">
+<Name>1129</Name>
+<Documentation>1130</Documentation>
+<DefLangName>UmlUsage32</DefLangName>
+<Supplier>325</Supplier>
+<Client>155</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1129">
+<Entry TID="1131" language="it" translation="UmlUsage32"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1130">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.AttributeDef TID="491">
+<Name>1132</Name>
+<Abstract>false</Abstract>
+<Owner>413</Owner>
+<Ordering>0</Ordering>
+<Multiplicity>1133</Multiplicity>
+<OwnerScope>0</OwnerScope>
+<Visibility>0</Visibility>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<Mandatory>false</Mandatory>
+<AttrType>1134</AttrType>
+<PropExtended>false</PropExtended>
+<PropTransient>false</PropTransient>
+<Subdivision>0</Subdivision>
+<DefLangName>Name</DefLangName>
+</ch.ehi.interlis.attributes.AttributeDef>
+<ch.ehi.basics.types.NlsString TID="1132">
+<Entry TID="1135" language="en" translation="Name"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1133">
+<Range>1136</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1136">
+<Multiplicity>1133</Multiplicity>
+<Lower>1</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.interlis.attributes.DomainAttribute TID="1134">
+<Direct>1137</Direct>
+<AttributeDef>491</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="1137">
+<Kind>3</Kind>
+<Multiline>false</Multiline>
+<MaxLength>0</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="489">
+<Parent>413</Parent>
+<Child>169</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.basics.types.NlsString TID="1085">
+<Entry TID="1138" language="en" translation="Year"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="358">
+<Name>1139</Name>
+<Documentation>1140</Documentation>
+<DefLangName>UmlUsage46</DefLangName>
+<Supplier>948</Supplier>
+<Client>339</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1140">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1139">
+<Entry TID="1141" language="it" translation="UmlUsage46"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.associations.RoleDef TID="804">
+<Name>1142</Name>
+<Abstract>false</Abstract>
+<Association>836</Association>
+<Participant>792</Participant>
+<Ordering>0</Ordering>
+<Multiplicity>1143</Multiplicity>
+<Visibility>0</Visibility>
+<Navigable>false</Navigable>
+<Aggregation>1</Aggregation>
+<TargetScope>0</TargetScope>
+<Changeability>0</Changeability>
+<PropFinal>false</PropFinal>
+<PropExtended>false</PropExtended>
+<IliAttributeKind>1</IliAttributeKind>
+<PropExternal>false</PropExternal>
+<IliAttributeIdx>0</IliAttributeIdx>
+<PropHiding>false</PropHiding>
+<DefLangName>attrC1_it</DefLangName>
+<Presentation>842</Presentation>
+</ch.ehi.interlis.associations.RoleDef>
+<ch.ehi.uml1_4.implementation.UmlMultiplicity TID="1143">
+<Range>1144</Range>
+</ch.ehi.uml1_4.implementation.UmlMultiplicity>
+<ch.ehi.basics.types.NlsString TID="1142">
+<Entry TID="1145" language="de" translation="attrC1_de"/>
+<Entry TID="1146" language="it" translation="attrC1_it"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlMultiplicityRange TID="1144">
+<Multiplicity>1143</Multiplicity>
+<Lower>0</Lower>
+<Upper>1</Upper>
+</ch.ehi.uml1_4.implementation.UmlMultiplicityRange>
+<ch.ehi.uml1_4.implementation.UmlUsage TID="723">
+<Name>1147</Name>
+<Documentation>1148</Documentation>
+<DefLangName>UmlUsage16</DefLangName>
+<Supplier>764</Supplier>
+<Client>235</Client>
+</ch.ehi.uml1_4.implementation.UmlUsage>
+<ch.ehi.basics.types.NlsString TID="1147">
+<Entry TID="1149" language="it" translation="UmlUsage16"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1148">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="350">
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.modeltopicclass.ClassExtends TID="230">
+<Parent>189</Parent>
+<Child>220</Child>
+<Extended>false</Extended>
+</ch.ehi.interlis.modeltopicclass.ClassExtends>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="121">
+<Namespace>52</Namespace>
+<OwnedElement>648</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="1083">
+<Entry TID="1150" language="en" translation="Y"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.domainsandconstants.basetypes.IliDim TID="898">
+<Value>2999.0</Value>
+<Accuracy>0</Accuracy>
+<Base10shift>0</Base10shift>
+</ch.ehi.interlis.domainsandconstants.basetypes.IliDim>
+<ch.ehi.basics.types.NlsString TID="878">
+<Entry TID="1151" language="en" translation="XMLTime"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.units.UnitDef TID="613">
+<Name>1152</Name>
+<Abstract>false</Abstract>
+<NamespaceLink>61</NamespaceLink>
+<Syntax>1153</Syntax>
+<DefLangName>MASS</DefLangName>
+<ClientDependency>520</ClientDependency>
+<SupplierDependency>743</SupplierDependency>
+</ch.ehi.interlis.units.UnitDef>
+<ch.ehi.basics.types.NlsString TID="1152">
+<Entry TID="1154" language="en" translation="MASS"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1153">
+<Entry TID="1155" language="en" translation="MASS (ABSTRACT);&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.attributes.DomainAttribute TID="926">
+<Direct>1156</Direct>
+<AttributeDef>419</AttributeDef>
+</ch.ehi.interlis.attributes.DomainAttribute>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="1156">
+<Kind>3</Kind>
+<Multiline>false</Multiline>
+<MaxLength>0</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.interlis.domainsandconstants.DomainDef TID="135">
+<Name>1157</Name>
+<Abstract>false</Abstract>
+<Type>1158</Type>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<NamespaceLink>79</NamespaceLink>
+<PropFinal>true</PropFinal>
+<Mandatory>false</Mandatory>
+<DefLangName>URI</DefLangName>
+<ClientDependency>587</ClientDependency>
+<SupplierDependency>200</SupplierDependency>
+</ch.ehi.interlis.domainsandconstants.DomainDef>
+<ch.ehi.interlis.domainsandconstants.basetypes.Text TID="1158">
+<Kind>4</Kind>
+<Multiline>false</Multiline>
+<MaxLength>0</MaxLength>
+</ch.ehi.interlis.domainsandconstants.basetypes.Text>
+<ch.ehi.basics.types.NlsString TID="1157">
+<Entry TID="1159" language="en" translation="URI"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.foundation.core.ElementOwnership TID="788">
+<Namespace>306</Namespace>
+<OwnedElement>836</OwnedElement>
+<Visibility>0</Visibility>
+<Specification>false</Specification>
+</ch.ehi.uml1_4.foundation.core.ElementOwnership>
+<ch.ehi.basics.types.NlsString TID="727">
+<Entry TID="1160" language="it" translation="UmlUsage17"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.metaobjects.ParameterDef TID="685">
+<Name>1161</Name>
+<Properties>0</Properties>
+<ClassDef>682</ClassDef>
+<Syntax>1162</Syntax>
+<DefLangName>Unit</DefLangName>
+</ch.ehi.interlis.metaobjects.ParameterDef>
+<ch.ehi.basics.types.NlsString TID="1161">
+<Entry TID="1163" language="en" translation="Unit"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1162">
+<Entry TID="1164" language="en" translation="Unit (EXTENDED): NUMERIC [TIME];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="464">
+<Entry TID="1165" language="en" translation="sr"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="150">
+<Entry TID="1166" language="en" translation="FUNCTION trim(TextVal: TEXT) : TEXT;&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="795">
+<Entry TID="1167" language="it" translation="UmlUsage89"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.interlis.metaobjects.ParameterDef TID="671">
+<Name>1168</Name>
+<Properties>0</Properties>
+<ClassDef>154</ClassDef>
+<Syntax>1169</Syntax>
+<DefLangName>Unit</DefLangName>
+</ch.ehi.interlis.metaobjects.ParameterDef>
+<ch.ehi.basics.types.NlsString TID="1168">
+<Entry TID="1170" language="en" translation="Unit"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="1169">
+<Entry TID="1171" language="en" translation="Unit: NUMERIC [ANYUNIT];&#13;&#10;"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.basics.types.NlsString TID="443">
+<Entry TID="1172" language="en" translation="areAreas"/>
+</ch.ehi.basics.types.NlsString>
+<ch.ehi.uml1_4.implementation.UmlModel TID="0">
+<Abstract>false</Abstract>
+<Root>false</Root>
+<Leaf>false</Leaf>
+<Name>1</Name>
+<Documentation>2</Documentation>
+<DefLangName>UmlModel1</DefLangName>
+<OwnedElementLink>3</OwnedElementLink>
+<OwnedElementLink>4</OwnedElementLink>
+<TaggedValue>5</TaggedValue>
+</ch.ehi.uml1_4.implementation.UmlModel>
+</ch.ehi.umleditor>

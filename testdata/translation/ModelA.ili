@@ -1,0 +1,19 @@
+INTERLIS 2.3;
+
+MODEL ModelA_de (de)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" =
+
+  UNIT
+  	   UnitA_de = (INTERLIS.m*INTERLIS.m);
+
+END ModelA_de.
+
+MODEL ModelA_fr (fr)
+  AT "mailto:ceis@localhost" VERSION "2021-11-17" 
+  TRANSLATION OF ModelA_de [ "2021-11-17"]
+  =
+    
+  UNIT
+  	   UnitA_fr = (INTERLIS.m*INTERLIS.m);
+  
+END ModelA_fr.

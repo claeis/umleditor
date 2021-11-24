@@ -19,6 +19,7 @@ package ch.ehi.umleditor.interlis.iliexport;
 
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
+import ch.ehi.interlis.modeltopicclass.IliImport;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
 import ch.ehi.interlis.metaobjects.MetaDataUseDef;
@@ -60,6 +61,7 @@ import ch.ehi.interlis.domainsandconstants.basetypes.RotationKind;
 import ch.ehi.interlis.associations.AssociationAsIliAttrKind;
 import ch.ehi.interlis.views.ViewableDef;
 import ch.ehi.interlis.tools.AbstractClassDefUtility;
+import ch.ehi.interlis.tools.ModelElementUtility;
 import ch.ehi.interlis.tools.RoleDefUtility;
 import ch.ehi.uml1_4.foundation.core.Artifact;
 import ch.ehi.uml1_4.foundation.core.ModelElement;
@@ -74,8 +76,10 @@ import ch.ehi.umleditor.application.ElementUtils;
 import ch.ehi.umleditor.interlis.iliimport.TransferFromIli2cMetamodel;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import ch.ehi.basics.tools.TopoSort;
@@ -266,7 +270,7 @@ public class TransferFromUmlMetamodel
     }
     java.util.HashSet done=new java.util.HashSet(); // collection of visited languages
     // enumerate all languages
-	Set languages = new HashSet();
+	List<String> languages = new ArrayList<String>();
     {
     	java.util.Set set = ch.ehi.interlis.tools.ModelElementUtility.getChildElements(def, ModelDef.class);
     	java.util.Iterator iterator = set.iterator();
@@ -275,11 +279,17 @@ public class TransferFromUmlMetamodel
     	while (iterator.hasNext()) {
     		ModelDef modelDef = (ModelDef)iterator.next();
     		// 1) get the BaseLanguage
-    		if (modelDef.getBaseLanguage() != null) {
-    			 languages.add(modelDef.getBaseLanguage());
+    		final String baseLanguage = modelDef.getBaseLanguage();
+            if (baseLanguage != null && !languages.contains(baseLanguage)) {
+    			 languages.add(baseLanguage);
     		}
     		// 2) get the ValidSecondLanguages
-    		languages.addAll(modelDef.getValidSecondLanguages());
+    		final List<String> validSecondLanguages = modelDef.getValidSecondLanguages();
+    		for(String secondLang:validSecondLanguages) {
+                if (!languages.contains(secondLang)) {
+                    languages.add(secondLang);
+               }
+    		}
     	}
     }
     java.util.Iterator languagei=languages.iterator();
@@ -458,7 +468,7 @@ public class TransferFromUmlMetamodel
         if(translation.getLanguage().equals(language)){
           newline();
           String trslModelName=def.getName().getValue(translation.getBaseLanguage());
-          out.write("TRANSLATION OF "+trslModelName);
+          out.write("TRANSLATION OF "+trslModelName+" [\""+version+"\"]");
           if(runIli2c){
 			filedep.add(new IliFileCond(trslModelName,modelName));
           }
@@ -480,8 +490,9 @@ public class TransferFromUmlMetamodel
         Iterator supplieri=iliimport.iteratorSupplier();
         if(supplieri.hasNext()){
           ModelDef supplier=(ModelDef)supplieri.next();
-          String impModelName=supplier.getName().getValue(iliimport.getLanguage());
-          out.write(sep+modelElementRef(def,supplier,iliimport.getLanguage()));
+          String supplierLang=iliimport.getSupplierLanguage(language);
+          String impModelName=supplier.getName().getValue(supplierLang);
+          out.write(sep+impModelName);
           if(runIli2c){
 			filedep.add(new IliFileCond(impModelName,modelName));
           }
@@ -594,9 +605,12 @@ public class TransferFromUmlMetamodel
 
     inc_ind();
 
-    if(def.containsOiddomain()){
-      out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+    if(def.containsBasketoid()){
+      out.write(getIndent()+"BASKET OID AS "+domainRef(def,def.getBasketoid()));out.write(";");newline();
     }
+    if(def.containsOiddomain()){
+        out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+      }
 
     int depc=0;
     String sep=getIndent()+"DEPENDS ON ";
@@ -1101,7 +1115,6 @@ public class TransferFromUmlMetamodel
     ret.append(ref.getName().getValue(language));
     return ret.toString();
     }
-
   public void visitIliSyntax(IliSyntax element)
         throws java.io.IOException
     {
@@ -1226,7 +1239,7 @@ public class TransferFromUmlMetamodel
   public void visitAttributeDef(RoleDef oppend)
       throws java.io.IOException
     {
-    RoleDef def=getOppEnd(oppend);
+    RoleDef def=ModelElementUtility.getOppEnd(oppend);
     if(RoleDefUtility.isIliStructAttr(def)){
 
       defineLinkToModelElement(oppend);
@@ -2069,7 +2082,7 @@ private void addSimpleEleCond(java.util.Set children,
             	continue;
             }
             if(RoleDefUtility.isIliAttr(role)){
-              RoleDef oppend=getOppEnd(role);
+              RoleDef oppend=ModelElementUtility.getOppEnd(role);
               if(oppend.containsParticipant()){
                 ch.ehi.uml1_4.foundation.core.Classifier supplierc=oppend.getParticipant();
                 AbstractClassDef supplier=(AbstractClassDef)oppend.getParticipant();
@@ -2176,7 +2189,7 @@ private void addSimpleEleCond(java.util.Set children,
 						continue;
 					}
 					if (RoleDefUtility.isIliAttr(role)) {
-						RoleDef oppend = getOppEnd(role);
+						RoleDef oppend = ModelElementUtility.getOppEnd(role);
 						if (oppend.containsParticipant()) {
 							ch.ehi.uml1_4.foundation.core.Classifier supplierc = oppend
 									.getParticipant();
@@ -2326,6 +2339,16 @@ private void addSimpleEleCond(java.util.Set children,
     if(language==null){
       language=this.language;
     }
+    ModelDef modelOfSource=null;
+    ModelDef modelOfRef=null;
+    modelOfSource=ModelElementUtility.getModel(source);
+    modelOfRef=ModelElementUtility.getModel(ref);
+    if(!modelOfRef.equals(modelOfSource)) {
+        final IliImport iliImp = modelOfSource.getImport(modelOfRef);
+        if(iliImp!=null) {
+            language=iliImp.getSupplierLanguage(language);
+        }
+    }
     return ch.ehi.interlis.tools.ModelElementUtility.getIliQualifiedName(source,ref,language);
     }
 
@@ -2437,22 +2460,6 @@ private void addSimpleEleCond(java.util.Set children,
   private void dec_ind()
   {
 	ind=ind-1;
-  }
-
-  /** get other end of a bidrectional association
-   *
-   */
-  static private RoleDef getOppEnd(RoleDef athis)
-  {
-    AssociationDef assoc=(AssociationDef)athis.getAssociation();
-    java.util.Iterator rolei=assoc.iteratorConnection();
-    while(rolei.hasNext()){
-      RoleDef obj=(RoleDef)rolei.next();
-      if(obj!=athis){
-        return obj;
-      }
-    }
-    return null;
   }
 
   private int errc=0;

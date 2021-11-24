@@ -21,6 +21,7 @@ import ch.ehi.interlis.metaobjects.MetaDataUseDef;
 import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.AbstractClassDef;
 import ch.ehi.interlis.modeltopicclass.ClassDef;
+import ch.ehi.interlis.modeltopicclass.ClassDefKind;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.ModelDef;
 import ch.ehi.interlis.modeltopicclass.TopicDef;
@@ -39,7 +40,6 @@ import ch.interlis.ili2c.generator.nls.TranslationElement;
 
 public class TransferToXml {
 
-    private ModelElements modelElement = new ModelElements();
 
     /**
      * All models are read in this method
@@ -52,27 +52,27 @@ public class TransferToXml {
      * @throws Exception
      *             Exception
      */
-    public ModelElements export(Model model, java.io.File xmlfile) throws Exception {
+    public void export(Model model, java.io.File xmlfile) throws Exception {
+        ModelElements modelElements = new ModelElements();
         Iterator modelI = model.iteratorOwnedElement();
         while (modelI.hasNext()) {
             Object obj = modelI.next();
             if (obj instanceof INTERLIS2Def) {
-                modelElementHelper(obj);
+                modelElementHelper(modelElements,obj);
             } else {
                 Iterator i = ch.ehi.interlis.tools.ModelElementUtility.getChildElements((Namespace) obj, null)
                         .iterator();
                 while (i.hasNext()) {
                     Object objnew = i.next();
-                    modelElementHelper(objnew);
+                    modelElementHelper(modelElements,objnew);
                 }
             }
         }
-        modelElement.sort();
-        Ili2TranslationXml.writeModelElementsAsXML(modelElement, xmlfile);
-        return modelElement;
+        modelElements.sort();
+        Ili2TranslationXml.writeModelElementsAsXML(modelElements, xmlfile);
     }
 
-    private void modelElementHelper(Object obj) {
+    private void modelElementHelper(ModelElements modelElements,Object obj) {
         if (!ModelElementUtility.isInternal((INTERLIS2Def) obj)) {
             if (obj instanceof INTERLIS2Def) {
                 String scopedNamePrefix = null;
@@ -84,7 +84,7 @@ public class TransferToXml {
 
                 while (i.hasNext()) {
                     ModelElement modelElement = (ModelElement) i.next();
-                    visitModelElement(modelElement, scopedNamePrefix, baselanguage, languages, showAllFields);
+                    visitModelElement(modelElements,modelElement, scopedNamePrefix, baselanguage, languages, showAllFields);
                     showAllFields = false;
                 }
             }
@@ -105,7 +105,7 @@ public class TransferToXml {
      * @param showAllFields
      *            it sets empty all field of Structure
      */
-    private void visitModelElement(ModelElement modelDef, String scopedNamePrefix, String baselanguage, Set languages,
+    private void visitModelElement(ModelElements modelElements,ModelElement modelDef, String scopedNamePrefix, String baselanguage, Set languages,
             boolean showAllFields) {
 
         TranslationElement translationElement = new TranslationElement();
@@ -131,7 +131,7 @@ public class TransferToXml {
         }
 
         // AppendMetaValues if exist..
-        printMetaValues(modelDef.iteratorTaggedValue(), scopedNamePrefix, languages);
+        printMetaValues(modelElements,modelDef.iteratorTaggedValue(), scopedNamePrefix, languages);
 
         java.util.Iterator languagei = languages.iterator();
         while (languagei.hasNext() && name != null) {
@@ -144,7 +144,7 @@ public class TransferToXml {
         }
         
         if (scopedNamePrefix != null) {
-            modelElement.add(translationElement); 
+            modelElements.add(translationElement); 
         }
 
         // visit children
@@ -153,7 +153,7 @@ public class TransferToXml {
             while (childi.hasNext()) {
                 Object object = childi.next();
                 if (object instanceof AttributeDef) {
-                    visitModelElement((ModelElement) object, scopedNamePrefix, baselanguage, languages, false);
+                    visitModelElement(modelElements,(ModelElement) object, scopedNamePrefix, baselanguage, languages, false);
                 }
             }
             if (modelDef instanceof ClassDef) {
@@ -161,7 +161,7 @@ public class TransferToXml {
                 Iterator iterator = classDef.iteratorParameterDef();
                 while (iterator.hasNext()) {
                     ParameterDef next = (ParameterDef) iterator.next();
-                    visitModelElement((ModelElement) next, scopedNamePrefix, baselanguage, languages, false);
+                    visitModelElement(modelElements,(ModelElement) next, scopedNamePrefix, baselanguage, languages, false);
                 }
             }
             
@@ -169,14 +169,14 @@ public class TransferToXml {
                 Iterator assoDefI = ((AssociationDef) modelDef).iteratorConnection();
                 while (assoDefI.hasNext()) {
                     RoleDef roleDef = (RoleDef) assoDefI.next();
-                    visitModelElement(roleDef, scopedNamePrefix, baselanguage, languages, false);
+                    visitModelElement(modelElements,roleDef, scopedNamePrefix, baselanguage, languages, false);
                 }
             }
 
             Iterator contstraintI = modelDef.iteratorConstraint();
             while (contstraintI.hasNext()) {
                 Constraint constraint = (Constraint) contstraintI.next();
-                visitModelElement(constraint, scopedNamePrefix, baselanguage, languages, false);
+                visitModelElement(modelElements,constraint, scopedNamePrefix, baselanguage, languages, false);
             }
 
         } else if (modelDef instanceof Namespace) {
@@ -185,7 +185,7 @@ public class TransferToXml {
 
             while (i.hasNext()) {
                 ModelElement modelElement = (ModelElement) i.next();
-                visitModelElement(modelElement, scopedNamePrefix, baselanguage, languages, false);
+                visitModelElement(modelElements,modelElement, scopedNamePrefix, baselanguage, languages, false);
             }
 
             if (modelDef instanceof DomainDef) {
@@ -194,7 +194,7 @@ public class TransferToXml {
                     Type type = (Type) domain.getType();
                     if (type instanceof Enumeration) {
                         Enumeration enumeration = (Enumeration) type;
-                        printAllEnumeration(scopedNamePrefix, baselanguage, languages, enumeration);
+                        printAllEnumeration(modelElements,scopedNamePrefix, baselanguage, languages, enumeration);
                     }
 
                 }
@@ -207,14 +207,14 @@ public class TransferToXml {
                 if (attrType.containsDirect()) {
                     if (attrType.getDirect() instanceof Enumeration) {
                         Enumeration enumeration = (Enumeration) attrType.getDirect();
-                        printAllEnumeration(scopedNamePrefix, baselanguage, languages, enumeration);
+                        printAllEnumeration(modelElements,scopedNamePrefix, baselanguage, languages, enumeration);
                     }
                 }
             }
         } 
     }
 
-    private void printMetaValues(Iterator iteratorTaggedValue, String scopedNamePrefix, Set languages) {
+    private void printMetaValues(ModelElements modelElements,Iterator iteratorTaggedValue, String scopedNamePrefix, Set languages) {
         TaggedValue umlTag = null;
 
         while (iteratorTaggedValue.hasNext()) {
@@ -234,7 +234,7 @@ public class TransferToXml {
                 }
                 metaValue.setScopedName(scopedName);
                 metaValue.setElementType(ElementType.METAATTRIBUTE);
-                modelElement.add(metaValue);
+                modelElements.add(metaValue);
             }
         }
     }
@@ -252,15 +252,15 @@ public class TransferToXml {
      * @param enumeration
      *            Related Enumeration Elements
      */
-    private void printAllEnumeration(String scopedNamePrefix, String baselanguage, Set languages,
+    private void printAllEnumeration(ModelElements modelElements,String scopedNamePrefix, String baselanguage, Set languages,
             Enumeration enumeration) {
         Iterator<EnumElement> enumEle = enumeration.iteratorEnumElement();
         while (enumEle.hasNext()) {
             EnumElement enumElement = (EnumElement) enumEle.next();
-            visitModelElement(enumElement, scopedNamePrefix, baselanguage, languages, false);
+            visitModelElement(modelElements,enumElement, scopedNamePrefix, baselanguage, languages, false);
             if (enumElement.containsChild()) {
                 String scopedName = scopedNamePrefix + "." + enumElement.getName().getValue(baselanguage);
-                printAllEnumeration(scopedName, baselanguage, languages, enumElement.getChild());
+                printAllEnumeration(modelElements,scopedName, baselanguage, languages, enumElement.getChild());
             }
 
         }
@@ -403,13 +403,14 @@ public class TransferToXml {
             return ElementType.ATTRIBUTE;
         } else if (obj instanceof RoleDef) {
             return ElementType.ROLE;
-        } else if (obj instanceof AbstractClassDef) {
-            return findElementType(obj);
         } else if (obj instanceof DomainDef) {
             return ElementType.DOMAIN;
         } else if (obj instanceof GraphicParameterDef) {
             return ElementType.GRAPHIC;
         } else if (obj instanceof ClassDef) {
+            if(((ClassDef)obj).getKind()==ClassDefKind.STRUCTURE) {
+                return ElementType.STRUCTURE;
+            }
             return ElementType.CLASS;
         } else if (obj instanceof AssociationDef) {
             return ElementType.ASSOCIATION;
@@ -423,26 +424,6 @@ public class TransferToXml {
             return ElementType.TOPIC;
         } else {
             return null;
-        }
-    }
-
-    /**
-     * it gives as a return parameter the Name of the Element type
-     * 
-     * @param model
-     *            related model Element
-     * @return it returns name of the related matches Element as a String
-     */
-    private String findElementType(Object obj) {
-        AbstractClassDef abstractClassDefiniton = (AbstractClassDef) obj;
-        if (abstractClassDefiniton instanceof AssociationDef) {
-            return ElementType.ASSOCIATION;
-        } else {
-            if (abstractClassDefiniton instanceof ClassDef) {
-                return ElementType.CLASS;
-            } else {
-                return ElementType.STRUCTURE;
-            }
         }
     }
 }

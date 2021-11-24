@@ -100,8 +100,8 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
     // -end- 3CE4FBC60306 body358A5DB202C5 "getValidOwnedElements"
     }
 
-  // -beg- preserve=no 3CFE209C0280 head358A5DB202C5 "getValidSecondLanguages"
-  public java.util.Set getValidSecondLanguages()
+  // -beg- preserve=yes 3CFE209C0280 head358A5DB202C5 "getValidSecondLanguages"
+  public java.util.List<String> getValidSecondLanguages()
   // -end- 3CFE209C0280 head358A5DB202C5 "getValidSecondLanguages"
     // declare any checked exceptions
     // please fill in/modify the following section
@@ -111,11 +111,14 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
     {
     // please fill in/modify the following section
     // -beg- preserve=yes 3CFE209C0280 body358A5DB202C5 "getValidSecondLanguages"
-    java.util.HashSet ret=new java.util.HashSet();
+    java.util.List<String> ret=new java.util.ArrayList<String>();
     java.util.Iterator langi=iteratorTranslation();
     while(langi.hasNext()){
       Translation lang=(Translation)langi.next();
-      ret.add(lang.getLanguage());
+      final String language = lang.getLanguage();
+      if(!ret.contains(language)) {
+          ret.add(language);
+      }
     }
     return ret;
     // -end- 3CFE209C0280 body358A5DB202C5 "getValidSecondLanguages"
@@ -813,8 +816,8 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
   }
   // -end- 335C0D7A02A8 _unlink_body358A5DB202C5 "ModelElement::_unlinkSupplierDependency"
 
-  // -beg- preserve=no 3C1DC4150216 code358A5DB202C5 "translation"
-  private java.util.Set translation = new java.util.HashSet();
+  // -beg- preserve=yes 3C1DC4150216 code358A5DB202C5 "translation"
+  private java.util.List translation = new java.util.ArrayList();
   // -end- 3C1DC4150216 code358A5DB202C5 "translation"
 
   /** add a Translation.
@@ -829,10 +832,12 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
   public void addTranslation(Translation translation1)
   // -end- 3C1DC4150216 add_head358A5DB202C5 "ModelDef::addTranslation"
   {
-    // -beg- preserve=no 3C1DC4150216 add_body358A5DB202C5 "ModelDef::addTranslation"
-    translation.add(translation1);
-    translation1._linkModelDef(this);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addTranslation"));
+    // -beg- preserve=yes 3C1DC4150216 add_body358A5DB202C5 "ModelDef::addTranslation"
+    if(!translation.contains(translation1)) {
+        translation.add(translation1);
+        translation1._linkModelDef(this);
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"addTranslation"));
+    }
     return;
     // -end- 3C1DC4150216 add_body358A5DB202C5 "ModelDef::addTranslation"
   }
@@ -913,11 +918,13 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
 
   /** DONT USE; link management internal
    */
-  // -beg- preserve=no 3C1DC4150216 _link_body358A5DB202C5 "ModelDef::_linkTranslation"
+  // -beg- preserve=yes 3C1DC4150216 _link_body358A5DB202C5 "ModelDef::_linkTranslation"
   public void _linkTranslation(Translation translation1)
   {
-    translation.add(translation1);
-    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkTranslation"));
+    if(!translation.contains(translation1)) {
+        translation.add(translation1);
+        ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"_linkTranslation"));
+    }
     return;
   }
   // -end- 3C1DC4150216 _link_body358A5DB202C5 "ModelDef::_linkTranslation"
@@ -1829,6 +1836,20 @@ public class ModelDef extends AbstractNamespace implements Package , DefinitionP
       return imps.iterator();
     }
 
+    public IliImport getImport(ModelDef supplier)
+    {
+        java.util.Iterator impi=super.iteratorClientDependency();
+        while(impi.hasNext()){
+            Dependency dep=(Dependency)impi.next();
+            if(dep instanceof IliImport){
+                IliImport imp=(IliImport)dep;
+                if(imp.containsSupplier(supplier)) {
+                    return imp;
+                }
+            }
+        }
+        return null;
+    }
     // -end- 358A5DB202C5 detail_end "ModelDef"
 
   }
