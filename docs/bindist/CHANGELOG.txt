@@ -1,5 +1,6 @@
 LATEST 
 ----------------------------------
+- fix ilicheck: NullPointerException if MetaDataUseDef in model
 
 UML-Editor 3.8.0 (2021-11-24) 
 ----------------------------------

@@ -226,7 +226,7 @@ public class TransferFromUmlMetamodel
         finder.visit(ns);
         for(java.util.Iterator i=finder.getElements().iterator();i.hasNext();){
           ch.ehi.interlis.metaobjects.MetaDataUseDef mdUse=(ch.ehi.interlis.metaobjects.MetaDataUseDef)i.next();
-          config.addBoidEntry(new ch.interlis.ili2c.config.BoidEntry(modelElementRef(null,mdUse,null),mdUse.getBasketOid()));
+          config.addBoidEntry(new ch.interlis.ili2c.config.BoidEntry(ch.ehi.interlis.tools.ModelElementUtility.getIliQualifiedName(null,mdUse,null),mdUse.getBasketOid()));
         }
 
                 //try{
