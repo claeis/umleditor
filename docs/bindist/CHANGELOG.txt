@@ -1,6 +1,11 @@
 LATEST 
 ----------------------------------
 
+UML-Editor 3.8.1 (2021-12-28) 
+----------------------------------
+- fix ilicheck: NullPointerException if MetaDataUseDef in model
+- ili2c-5.2.5
+
 UML-Editor 3.8.0 (2021-11-24) 
 ----------------------------------
 - translationxml export: distinguish between CLASS and STRUCTURE
