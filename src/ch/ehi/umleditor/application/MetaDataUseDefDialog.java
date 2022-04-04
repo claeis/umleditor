@@ -50,6 +50,7 @@ public class MetaDataUseDefDialog extends BaseDialog {
 	private javax.swing.JLabel ivjLblKind = null;
 	private javax.swing.JLabel ivjLblBasketOID = null;
 	private javax.swing.JTextField ivjTxtBasketOID = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -480,6 +481,26 @@ private InterlisSyntaxPanel getPnlSyntax() {
 	return ivjPnlSyntax;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ * @return ch.ehi.umleditor.application.MetaAttributePanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the RbtRefSystem property value.
  * @return javax.swing.JRadioButton
  */
@@ -539,6 +560,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(resMetaDataUseDefDialog.getString("TbpDefinition_title"), null, getPnlSyntax(), null, 1);
+			ivjTbpGeneral.insertTab(resMetaDataUseDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 2);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -657,7 +679,10 @@ protected boolean save() {
 	getPnlDescription().getObject();
 	
 	metaDataUseDef.setSyntax(getPnlSyntax().getSyntax());
-	
+
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(metaDataUseDef);
+
 	return super.save();
 }
 /**
@@ -682,5 +707,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	}
 	
 	getPnlSyntax().setSyntax(metaDataUseDef);
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(metaDataUseDef);
 }
 }
