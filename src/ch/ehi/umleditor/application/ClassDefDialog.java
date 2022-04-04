@@ -62,6 +62,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JTable ivjTblAttributes = null;
 	private javax.swing.DefaultListSelectionModel ivjLocalColumnModelDefaultListSelectionModel = null;
 	private javax.swing.JPanel ivjPnlAttributes = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
 	private javax.swing.JMenuItem ivjMniNewAttribute = null;
 	private javax.swing.JMenuItem ivjMniRemoveAttribute = null;
@@ -788,6 +789,26 @@ private InterlisSyntaxPanel getPnlConstraints() {
 	return ivjPnlConstraints;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ * @return ch.ehi.umleditor.application.MetaAttributePanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the PnlDescription property value.
  * @return ch.ehi.umleditor.application.DescriptionPanel
  */
@@ -1062,6 +1083,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpAttributes_text"), null, getPnlAttributes(), null, 2);
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpParameter_text"), null, getPnlParameters(), null, 3);
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlConstraints(), null, 4);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 5);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1214,6 +1236,9 @@ protected boolean save() {
 	// page ParameterDef
 	getPnlParameters().getParameterDefs();
 
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(classDef);
+
 	return super.save();
 }
 /**
@@ -1252,6 +1277,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page ParameterDef
 	getPnlParameters().setParameterDefs(classDef);
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(classDef);
 }
 /**
  * @see ch.softenvironment.view.ListMenuChoice#changeObjects(java.lang.Object)
