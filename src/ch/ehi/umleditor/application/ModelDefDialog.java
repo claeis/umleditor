@@ -80,6 +80,7 @@ public class ModelDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JPopupMenu ivjMnuTranslation = null;
 	private javax.swing.JLabel ivjLblType = null;
 	private javax.swing.JPanel ivjPnlLanguage = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 	private javax.swing.JPanel pnlDetail = null;
 	private javax.swing.JLabel lblIssuerURI = null;
@@ -1403,6 +1404,30 @@ private javax.swing.JPanel getPnlImport() {
 	return ivjPnlImport;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ * @return ch.ehi.umleditor.application.MetaAttributePanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this, Arrays.asList(
+					ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_TECHNICAL_CONTACT,
+					ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_FURTHER_INFORMATION,
+					ch.interlis.ili2c.metamodel.Ili2cMetaAttrs.ILIMODELSXML_ID_GEO_IV));
+
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the JScrollPane1 property value.
  * @return javax.swing.JScrollPane
  */
@@ -1644,6 +1669,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpLanguage_title"), null, getPnlLanguage());
 			//ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpContract_title"), null, getPnlContract());
 			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpImport_title"), null, getPnlImport());
+			ivjTbpGeneral.addTab(resModelDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes());
 			// user code begin {1}
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -1856,7 +1882,10 @@ protected boolean save() {
 	
 	// page Language
 	modelDef.setBaseLanguage((String)getCbxLanguage().getSelectedItem());
-		
+
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(modelDef);
+
 	return super.save();
 }
 /**
@@ -1932,6 +1961,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	// page Import
 	getTblImport().setModel(new EditorTableModel());
 	((EditorTableModel)getTblImport().getModel()).setClientDependency(modelDef.iteratorIliImport(), ch.softenvironment.util.StringUtils.getPureClassName(ModelDef.class));
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(modelDef);
 }
 
 public void changeObjects(Object source) {

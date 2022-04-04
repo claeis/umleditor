@@ -10,12 +10,19 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
@@ -25,13 +32,30 @@ import java.util.regex.Pattern;
 public class MetaAttributePanel extends BasePanel {
     private static final java.util.ResourceBundle resClassDefDialog = java.util.ResourceBundle.getBundle("ch/ehi/umleditor/application/resources/MetaAttributePanel");
     private final Dialog ownerDialog;
+    private final List<String> ignoredMetaAttributes;
 
     private JTable metaAttributeTable;
     private JPopupMenu contextMenu;
     private MetaAttributeDialog metaAttributeEditDialog;
 
+    /**
+     * Creates a panel to view and edit MetaAttributes.
+     *
+     * @param owner The owner dialog of this panel
+     */
     public MetaAttributePanel(java.awt.Dialog owner) {
+        this(owner, Collections.<String>emptyList());
+    }
+
+    /**
+     * Creates a panel to view and edit MetaAttributes.
+     *
+     * @param owner The owner dialog of this panel
+     * @param ignoredMetaAttributes MetaAttribute names that are not displayed
+     */
+    public MetaAttributePanel(java.awt.Dialog owner, List<String> ignoredMetaAttributes) {
         this.ownerDialog = owner;
+        this.ignoredMetaAttributes = ignoredMetaAttributes;
         initialize();
     }
 
@@ -206,7 +230,9 @@ public class MetaAttributePanel extends BasePanel {
             String name = getMetaAttributeName(metaAttribute);
             String value = metaAttribute.getDataValue();
 
-            tableModel.addRow(new Object[] { name, value });
+            if (!ignoredMetaAttributes.contains(name)) {
+                tableModel.addRow(new Object[] { name, value });
+            }
         }
     }
 
@@ -229,7 +255,7 @@ public class MetaAttributePanel extends BasePanel {
                 }
             }
 
-            if (!found) {
+            if (!found && !ignoredMetaAttributes.contains(metaAttributeName)) {
                 it.remove();
             }
         }
