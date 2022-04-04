@@ -63,6 +63,7 @@ public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JMenuItem ivjMniRemoveTopicDepends = null;
 	private ExtendedPanel ivjPnlExtended = null;
 	private javax.swing.JLabel ivjLblType = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -808,6 +809,26 @@ private javax.swing.JPanel getPnlDepends() {
 	return ivjPnlDepends;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ * @return ch.ehi.umleditor.application.MetaAttributePanel
+ */
+/* WARNING: THIS METHOD WILL BE REGENERATED. */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+			// user code begin {1}
+			// user code end
+		} catch (java.lang.Throwable ivjExc) {
+			// user code begin {2}
+			// user code end
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the PnlDescription property value.
  * @return ch.ehi.umleditor.application.DescriptionPanel
  */
@@ -998,6 +1019,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getDetailString(), null, getPnlDetail(), null, 1);
 			ivjTbpGeneral.insertTab(resTopicDefDialog.getString("TbpDepends_title"), null, getPnlDepends(), null, 2);
+			ivjTbpGeneral.insertTab(resTopicDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 3);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1134,6 +1156,9 @@ protected boolean save() {
 		topicDef.attachOiddomain((DomainDef)getCbxOid().getElement());
 	}
 
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(topicDef);
+
 	return super.save();
 }
 /**
@@ -1169,6 +1194,10 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	// page Depends
 	getTblDepends().setModel(new EditorTableModel());
 	((EditorTableModel)getTblDepends().getModel()).setClientDependency(topicDef.iteratorClientDependency(), "TopicDef");//$NON-NLS-1$
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(topicDef);
+
 /*
 	// page Import
 	getTblUses().setModel(new EditorTableModel());
