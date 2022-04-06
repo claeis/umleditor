@@ -287,7 +287,7 @@ public class MetaAttributePanel extends BasePanel {
         }
 
         private void initialize() {
-            setTitle(resClassDefDialog.getString("CTDialog"));
+            setTitle(resClassDefDialog.getString("CTEditDialog"));
             setSize(new Dimension(426, 180));
             setLayout(new BorderLayout());
 
