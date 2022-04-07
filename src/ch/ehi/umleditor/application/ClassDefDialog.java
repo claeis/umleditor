@@ -790,19 +790,13 @@ private InterlisSyntaxPanel getPnlConstraints() {
 }
 /**
  * Return the PnlMetaAttributes property value.
- * @return ch.ehi.umleditor.application.MetaAttributePanel
  */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
 private MetaAttributePanel getPnlMetaAttributes() {
 	if (ivjPnlMetaAttributes == null) {
 		try {
 			ivjPnlMetaAttributes = new MetaAttributePanel(this);
 			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
-			// user code begin {1}
-			// user code end
 		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
 			handleException(ivjExc);
 		}
 	}
