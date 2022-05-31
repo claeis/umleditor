@@ -84,6 +84,7 @@ public class AttributeDefDialog extends BaseDialog {
 	private IliBaseTypeAlignmentPanel ivjPnlTypeAlignment = null;
 	private JComboBox ivjCbxCardinality = null;
 	private JLabel ivjLblCardinality = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -697,6 +698,20 @@ private javax.swing.JPanel getPnlConstraints() {
 	return ivjPnlConstraints;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the PnlDescription property value.
  * @return ch.ehi.umleditor.application.DescriptionPanel
  */
@@ -1099,6 +1114,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab("PnlTypeClass", null, getPnlTypeClass(), null, 16);
 			ivjTbpGeneral.insertTab("PnlTypeStructAttr", null, getPnlTypeStructAttr(), null, 17);
 			ivjTbpGeneral.insertTab("PnlTypeRefAttr", null, getPnlTypeRefAttr(), null, 18);
+			ivjTbpGeneral.insertTab(resAttributeDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 19);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1314,6 +1330,10 @@ protected boolean save() {
 			attributeDef.attachAttrType(domainAttribute);
 			setEPSGCode();
 	}
+
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(attributeDef);
+
 	return super.save();
 }
 private void setEPSGCode() {
@@ -1462,5 +1482,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 			Tracer.getInstance().developerError("should be a certain AttrType");
 		}
 	}
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(attributeDef);
 }
 }

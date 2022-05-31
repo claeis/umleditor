@@ -48,6 +48,7 @@ public class LineFormTypeDefDialog extends BaseDialog {
 	private JPanel ivjPnlDetail = null;
 	private ReferencableComboBox ivjCbxStructure = null;
 	private javax.swing.JLabel ivjLblStructure = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -417,6 +418,20 @@ private JPanel getPnlDetail() {
 	return ivjPnlDetail;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the TbpGeneral property value.
  * @return javax.swing.JTabbedPane
  */
@@ -428,6 +443,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getResourceString("TbpDetail_title"), null, getPnlDetail(), null, 1);
+			ivjTbpGeneral.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 2);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -519,6 +535,9 @@ protected boolean save() {
 		modelElement.attachStructure((ClassDef)getCbxStructure().getElement());
 	}
 
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(modelElement);
+
 	return super.save();
 }
 /**
@@ -538,5 +557,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
           getCbxStructure().setElement(ClassDef.class, modelElement, null);
         }
 
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(modelElement);
 }
 }

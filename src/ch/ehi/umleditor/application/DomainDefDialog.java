@@ -77,6 +77,7 @@ public class DomainDefDialog extends BaseDialog {
 	private javax.swing.JTabbedPane ivjTbpTypes = null;
 	private ExtendedPanel ivjPnlExtended = null;
 	private IliBaseTypeAlignmentPanel ivjPnlTypeAlignment = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -598,6 +599,20 @@ private DescriptionPanel getPnlDescription() {
 	return ivjPnlDescription;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the JPanel1 property value.
  * @return javax.swing.JPanel
  */
@@ -952,6 +967,7 @@ private javax.swing.JTabbedPane getTbpTypes() {
 			ivjTbpTypes.insertTab("PnlTypeDate", null, getPnlTypeDate(), null, 12);
 			ivjTbpTypes.insertTab("PnlTypeDateTime", null, getPnlTypeDateTime(), null, 13);
 			ivjTbpTypes.insertTab("PnlTypeTime", null, getPnlTypeTime(), null, 14);
+			ivjTbpTypes.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 15);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1078,6 +1094,9 @@ protected boolean save() {
 		setEPSGCode();
 	}
 
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(domainDef);
+
 	return super.save();
 }
 private void setEPSGCode() {
@@ -1188,6 +1207,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 //TODO NYI: Type not displayable <" + type.toString() + ">"
 		}
 	}
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(domainDef);
 }
 /**
  * Overwrites.

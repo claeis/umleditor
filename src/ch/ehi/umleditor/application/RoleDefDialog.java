@@ -62,6 +62,7 @@ public class RoleDefDialog extends BaseDialog {
 	private JRadioButton ivjRbtRelationship = null;
 	private JRadioButton ivjRbtStructure = null;
     private ParticipantsPanel ivjTabParticipants = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
         
 	private JPanel ivjPnlReferenceType = null;
 	private JCheckBox ivjChxExternal = null;
@@ -720,6 +721,20 @@ private InterlisSyntaxPanel getPnlDerivedFrom() {
 	return ivjPnlDerivedFrom;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the PnlDescription property value.
  * @return ch.ehi.umleditor.application.DescriptionPanel
  */
@@ -1040,6 +1055,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getDetailString(), null, getPnlDetail(), null, 1);
 			ivjTbpGeneral.insertTab(resRoleDefDialog.getString("TbpDerivedFrom_title"), null, getPnlDerivedFrom(), null, 2);
+			ivjTbpGeneral.insertTab(resRoleDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 3);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1263,6 +1279,9 @@ protected boolean save() {
 		}
 	}
 
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(roleDef);
+
 	return super.save();
 }
 /**
@@ -1325,5 +1344,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	} else {
 		getPnlDerivedFrom().setSyntax(null);
 	}
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(roleDef);
 }
 }

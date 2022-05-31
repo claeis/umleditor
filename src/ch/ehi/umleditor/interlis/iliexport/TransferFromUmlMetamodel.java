@@ -687,6 +687,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -706,6 +707,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     dec_ind();
     return;
@@ -718,6 +720,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -737,6 +740,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(def,def.getName().getValue(language)));
       out.write(" : ");
@@ -842,6 +846,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1069,6 +1074,7 @@ public class TransferFromUmlMetamodel
     {
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)def.getBody());
     return;
     }
@@ -1079,6 +1085,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1089,6 +1096,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1099,6 +1107,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
