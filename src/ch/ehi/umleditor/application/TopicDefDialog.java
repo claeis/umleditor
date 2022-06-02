@@ -43,8 +43,10 @@ public class TopicDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JTabbedPane ivjTbpGeneral = null;
 	private javax.swing.JLabel ivjLblName = null;
 	private javax.swing.JLabel ivjLblOid = null;
+    private javax.swing.JLabel ivjLblBasketOid = null;
 	private javax.swing.JLabel ivjLblExtends = null;
 	private ReferencableComboBox ivjCbxOid = null;
+    private ReferencableComboBox ivjCbxBasketOid = null;
 	private javax.swing.JTextField ivjTxtName = null;
 	private javax.swing.JComboBox ivjCbxType = null;
 	private javax.swing.JButton ivjBtnApply = null;
@@ -645,6 +647,23 @@ private javax.swing.JLabel getLblOid() {
 	}
 	return ivjLblOid;
 }
+private javax.swing.JLabel getLblBasketOid() {
+    if (ivjLblBasketOid == null) {
+        try {
+            ivjLblBasketOid = new javax.swing.JLabel();
+            ivjLblBasketOid.setName("LblBasketOid");
+            ivjLblBasketOid.setText("Basket OID:");
+            // user code begin {1}
+            ivjLblBasketOid.setText(resTopicDefDialog.getString("LblBasketOid_text"));
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            handleException(ivjExc);
+        }
+    }
+    return ivjLblBasketOid;
+}
 /* WARNING: THIS METHOD WILL BE REGENERATED. */
 private ReferencableComboBox getCbxOid() {
 	if (ivjCbxOid == null) {
@@ -660,6 +679,21 @@ private ReferencableComboBox getCbxOid() {
 		}
 	}
 	return ivjCbxOid;
+}
+private ReferencableComboBox getCbxBasketOid() {
+    if (ivjCbxBasketOid == null) {
+        try {
+            ivjCbxBasketOid = new ReferencableComboBox();
+            ivjCbxBasketOid.setName("CbxBasketOid");
+            // user code begin {1}
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            handleException(ivjExc);
+        }
+    }
+    return ivjCbxBasketOid;
 }
 /**
  * Return the JLabel1 property value.
@@ -873,6 +907,7 @@ private javax.swing.JPanel getPnlDetail() {
 
   		        java.awt.GridBagConstraints constraintsPnlExtended = new java.awt.GridBagConstraints();
 		        constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 2;
+                constraintsPnlExtended.gridwidth=1;
 		        constraintsPnlExtended.weightx = 1.0;
 		        constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		        constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -887,18 +922,26 @@ private javax.swing.JPanel getPnlDetail() {
 		        constraintsCbxOid.insets = new java.awt.Insets(1, 5, 3, 6);
 		        ivjPnlDetail.add(getCbxOid(), constraintsCbxOid);
 
+                java.awt.GridBagConstraints constraintsCbxBasketOid = new java.awt.GridBagConstraints();
+                constraintsCbxBasketOid.gridx = 1; constraintsCbxOid.gridy = 4;
+                constraintsCbxBasketOid.weightx = 1.0;
+                constraintsCbxBasketOid.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                constraintsCbxBasketOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+                constraintsCbxBasketOid.insets = new java.awt.Insets(1, 5, 3, 6);
+                ivjPnlDetail.add(getCbxBasketOid(), constraintsCbxBasketOid);
+
   		        java.awt.GridBagConstraints constraintsLblOid = new java.awt.GridBagConstraints();
 		        constraintsLblOid.gridx = 0; constraintsLblOid.gridy = 3;
 		        constraintsLblOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		        constraintsLblOid.insets = new java.awt.Insets(2, 2, 2, 2);
 		        ivjPnlDetail.add(getLblOid(), constraintsLblOid);
 
-/*
-			ivjPnlDetail.setLayout(null);
-			getPnlDetail().add(getChxAbstract(), getChxAbstract().getName());
-			getPnlDetail().add(getChxFinal(), getChxFinal().getName());
-			getPnlDetail().add(getPnlExtended(), getPnlExtended().getName());
-  */
+                java.awt.GridBagConstraints constraintsLblBasketOid = new java.awt.GridBagConstraints();
+                constraintsLblBasketOid.gridx = 0; constraintsLblOid.gridy = 4;
+                constraintsLblBasketOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+                constraintsLblBasketOid.insets = new java.awt.Insets(2, 2, 2, 2);
+                ivjPnlDetail.add(getLblBasketOid(), constraintsLblBasketOid);
+		        
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -919,7 +962,6 @@ private ExtendedPanel getPnlExtended() {
 		try {
 			ivjPnlExtended = new ch.ehi.umleditor.application.ExtendedPanel();
 			ivjPnlExtended.setName("PnlExtended");
-			ivjPnlExtended.setLocation(7, 79);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1079,7 +1121,7 @@ private void initialize() {
 		// user code end
 		setName("TopicDefDialog");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(490, 306);
+		setSize(490, 406);
 		setTitle(resTopicDefDialog.getString("CTDialog"));
 		setContentPane(getBaseDialogContentPane());
 		initConnections();
@@ -1149,6 +1191,12 @@ protected boolean save() {
 	if ( (getCbxOid().getElement() != null)) {
 		topicDef.attachOiddomain((DomainDef)getCbxOid().getElement());
 	}
+    if (topicDef.containsBasketoid()) {
+        topicDef.detachBasketoid();
+    }
+    if ( (getCbxBasketOid().getElement() != null)) {
+        topicDef.attachBasketoid((DomainDef)getCbxBasketOid().getElement());
+    }
 
 	// page MetaAttributes
 	getPnlMetaAttributes().saveToObject(topicDef);
@@ -1184,6 +1232,11 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
         }else{
           getCbxOid().setElement(DomainDef.class, topicDef, null);
         }
+        if(topicDef.containsBasketoid()){
+            getCbxBasketOid().setElement(DomainDef.class, topicDef, topicDef.getBasketoid());
+          }else{
+            getCbxBasketOid().setElement(DomainDef.class, topicDef, null);
+          }
 
 	// page Depends
 	getTblDepends().setModel(new EditorTableModel());
