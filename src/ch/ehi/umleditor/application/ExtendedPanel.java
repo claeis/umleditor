@@ -293,20 +293,20 @@ private void initialize() {
 		setName("ExtendedPanel");
 		setLayout(new java.awt.GridBagLayout());
 		setAlignmentY(java.awt.Component.TOP_ALIGNMENT);
-		setSize(458, 34);
-		setMaximumSize(new java.awt.Dimension(2147483647, 24));
+		//setSize(458, 34);
+		//setMaximumSize(new java.awt.Dimension(2147483647, 24));
 
 		java.awt.GridBagConstraints constraintsChxExtended = new java.awt.GridBagConstraints();
 		constraintsChxExtended.gridx = 1; constraintsChxExtended.gridy = 1;
 		constraintsChxExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		constraintsChxExtended.ipadx = 55;
+		//constraintsChxExtended.ipadx = 55;
 		constraintsChxExtended.insets = new java.awt.Insets(0, 0, 2, 5);
 		add(getChxExtended(), constraintsChxExtended);
 
 		java.awt.GridBagConstraints constraintsLblExtends = new java.awt.GridBagConstraints();
 		constraintsLblExtends.gridx = 2; constraintsLblExtends.gridy = 1;
 		constraintsLblExtends.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		constraintsLblExtends.ipadx = 84;
+		//constraintsLblExtends.ipadx = 84;
 		constraintsLblExtends.insets = new java.awt.Insets(5, 5, 5, 5);
 		add(getLblExtends(), constraintsLblExtends);
 
@@ -315,8 +315,8 @@ private void initialize() {
 		constraintsCbxExtends.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		constraintsCbxExtends.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		constraintsCbxExtends.weightx = 1.0;
-		constraintsCbxExtends.ipadx = 26;
-		constraintsCbxExtends.ipady = 0;
+		//constraintsCbxExtends.ipadx = 26;
+		//constraintsCbxExtends.ipady = 0;
 		constraintsCbxExtends.insets = new java.awt.Insets(1, 5, 3, 6);
 		add(getCbxExtends(), constraintsCbxExtends);
 		initConnections();

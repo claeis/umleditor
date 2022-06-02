@@ -1,5 +1,7 @@
 LATEST 
 ----------------------------------
+- UI: make metaattributes editable (#50)
+- OID AS cannot be modeled for classes (#53)
 
 UML-Editor 3.8.1 (2021-12-28) 
 ----------------------------------

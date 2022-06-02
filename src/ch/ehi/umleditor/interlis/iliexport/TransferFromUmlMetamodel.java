@@ -906,6 +906,10 @@ public class TransferFromUmlMetamodel
 
     out.write(" =");newline();
     inc_ind();
+    
+    if(def.containsOiddomain()){
+        out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+      }
 
     // {AttributeDef}
     java.util.Iterator childi=AbstractClassDefUtility.getIliAttributes(def).iterator();
