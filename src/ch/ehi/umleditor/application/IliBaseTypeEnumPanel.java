@@ -17,9 +17,11 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.awt.Dialog;
 import java.util.EventObject;
 
 import javax.swing.DropMode;
+import javax.swing.JTabbedPane;
 import javax.swing.tree.*;
 
 import ch.softenvironment.util.*;
@@ -33,6 +35,8 @@ import ch.ehi.uml1_4.foundation.core.Element;
  * @version $Revision: 1.10 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
+	private final Dialog ownerDialog;
+
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
@@ -49,6 +53,8 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JSeparator ivjJSeparator1 = null;
 	private javax.swing.JMenuItem ivjMniRename = null;
 	private DescriptionPanel ivjPnlDescription = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
+	private javax.swing.JTabbedPane ivjTbpEditEnumElement = null;
 	private javax.swing.JLabel ivjLblElementDescription = null;
 	private javax.swing.JLabel ivjLblElements = null;
 	private javax.swing.JPanel ivjJPanel1 = null;
@@ -88,8 +94,9 @@ class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelLi
 /**
  * IliBaseTypeTextPanel constructor comment.
  */
-public IliBaseTypeEnumPanel() {
+public IliBaseTypeEnumPanel(java.awt.Dialog owner) {
 	super();
+	this.ownerDialog = owner;
 	initialize();
 }
 public void adaptUserAction(EventObject event, Object control) {
@@ -303,7 +310,7 @@ private javax.swing.JPanel getJPanel1() {
 			constraintsPnlDescription.ipadx = 243;
 			constraintsPnlDescription.ipady = 69;
 			constraintsPnlDescription.insets = new java.awt.Insets(2, 5, 3, 5);
-			getJPanel1().add(getPnlDescription(), constraintsPnlDescription);
+			getJPanel1().add(getTbpEditEnumElement(), constraintsPnlDescription);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -313,6 +320,23 @@ private javax.swing.JPanel getJPanel1() {
 		}
 	}
 	return ivjJPanel1;
+}
+
+/**
+ * Return the TbpEditEnumElement property value.
+ */
+private JTabbedPane getTbpEditEnumElement() {
+	if (ivjTbpEditEnumElement == null) {
+		try {
+			ivjTbpEditEnumElement = new javax.swing.JTabbedPane();
+			ivjTbpEditEnumElement.setName("TbpEditEnumElement");
+			ivjTbpEditEnumElement.add(getResourceString("TbpElementDescription_text"), getPnlDescription());
+			ivjTbpEditEnumElement.add(getResourceString("TbpElementMetaAttributes_text"), getPnlMetaAttributes());
+		} catch (Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjTbpEditEnumElement;
 }
 /**
  * Return the JPopupMenu1 property value.
@@ -556,6 +580,20 @@ private DescriptionPanel getPnlDescription() {
 		}
 	}
 	return ivjPnlDescription;
+}
+/**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(ownerDialog);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
 }
 /**
  * Return the PnlKind property value.
