@@ -19,11 +19,14 @@ package ch.ehi.umleditor.application;
  */
 import java.awt.Dialog;
 import java.util.EventObject;
+import java.util.Iterator;
 
 import javax.swing.DropMode;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.*;
 
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.implementation.UmlTaggedValue;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
@@ -264,6 +267,12 @@ private Enumeration copyTree(Enumeration src) {
       subdest.setDocumentation(subsrc.getDocumentation());
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
+      Iterator taggedValueIterator = subsrc.iteratorTaggedValue();
+      while (taggedValueIterator.hasNext()) {
+          TaggedValue taggedValueSrc = (TaggedValue)taggedValueIterator.next();
+          TaggedValue taggedValueDest = copyMetaAttribute(taggedValueSrc);
+          subdest.addTaggedValue(taggedValueDest);
+      }
       if(subsrc.containsChild()){
       	Enumeration child=subsrc.getChild();
       	// are there any child elements?
@@ -273,6 +282,12 @@ private Enumeration copyTree(Enumeration src) {
       }
     }
     return ret;
+}
+private TaggedValue copyMetaAttribute(TaggedValue taggedValue) {
+	TaggedValue umlTag = (TaggedValue)ElementFactory.createObject(UmlTaggedValue.class);
+	umlTag.setName(taggedValue.getName());
+	umlTag.setDataValue(taggedValue.getDataValue());
+	return umlTag;
 }
 protected void finalize()
 {
