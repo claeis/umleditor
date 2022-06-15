@@ -572,6 +572,8 @@ private javax.swing.JMenuItem getMniRename() {
  * Return the changed object displayed.
  */
 public java.lang.Object getObject() {
+	saveMetaAttributes(getSelectedNode());
+
 	Enumeration type = copyTree(root);
 	type.setKind(getkind());
 	return type;
@@ -857,6 +859,7 @@ constraintsJPanel1.gridheight = 2;
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
+	getPnlMetaAttributes().setEnabled(false);
 	initializeTree();
 	// user code end
 }
@@ -967,18 +970,31 @@ private void saveDocumentation() {
 	getPnlDescription().getObject();
 }
 /**
+ * Save the content of the Meta Attributes Panel to the specified enumElement.
+ */
+private void saveMetaAttributes(EnumElement enumElement) {
+	if (enumElement != null) {
+		getPnlMetaAttributes().saveToObject(enumElement);
+	}
+}
+/**
  * Adapt anything when Tree-Selection changes.
  */
 private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelectionEvent) {
 	EnumElement node = getSelectedNode();
-	if (node == null) {
-		getPnlDescription().setEnabled(false);
-		getPnlDescription().setObject(null);
-	} else {
-		// EnumElement
-		getPnlDescription().setEnabled(true);
-		getPnlDescription().setObject(node);
+	boolean isElementSelected = node != null;
+
+	// save meta-attributes of previously selected node
+	TreePath oldSelectionPath = treeSelectionEvent.getOldLeadSelectionPath();
+	if (oldSelectionPath != null) {
+		EnumElement lastSelectedNode = (EnumElement)oldSelectionPath.getLastPathComponent();
+		saveMetaAttributes(lastSelectedNode);
 	}
+
+	getPnlDescription().setEnabled(isElementSelected);
+	getPnlDescription().setObject(node);
+	getPnlMetaAttributes().setEnabled(isElementSelected);
+	getPnlMetaAttributes().setCurrentObject(node);
 }
 public void selectElement(Element element) {
     TreePath foundNode = ((EnumTreeModel)getTreEnumeration().getModel()).getTreePath(element);
