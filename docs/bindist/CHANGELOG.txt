@@ -3,6 +3,7 @@ LATEST
 - UI: make metaattributes editable (#50)
 - OID AS cannot be modeled for classes (#53)
 - BASKET OID AS cannot be modeled for topics (#55)
+- ili export: pad date, time, datetime with zeros (#60)
 
 UML-Editor 3.8.1 (2021-12-28) 
 ----------------------------------
