@@ -868,7 +868,7 @@ private IliBaseTypeDomainDefPanel getPnlTypeDomainDef() {
 private IliBaseTypeEnumPanel getPnlTypeEnum() {
 	if (ivjPnlTypeEnum == null) {
 		try {
-			ivjPnlTypeEnum = new ch.ehi.umleditor.application.IliBaseTypeEnumPanel();
+			ivjPnlTypeEnum = new ch.ehi.umleditor.application.IliBaseTypeEnumPanel(this);
 			ivjPnlTypeEnum.setName("PnlTypeEnum");
 			// user code begin {1}
 			// user code end

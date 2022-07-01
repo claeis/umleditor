@@ -67,12 +67,18 @@ public class MetaAttributePanel extends BasePanel {
         tableScrollPane.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                genericPopupDisplay(e, getContextMenu());
+                handleMouseEvent(e);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                genericPopupDisplay(e, getContextMenu());
+                handleMouseEvent(e);
+            }
+
+            private void handleMouseEvent(MouseEvent e) {
+                if(isEnabled()) {
+                    genericPopupDisplay(e, getContextMenu());
+                }
             }
         });
         this.add(tableScrollPane, BorderLayout.CENTER);
@@ -103,11 +109,13 @@ public class MetaAttributePanel extends BasePanel {
                 }
 
                 private void handleMouseEvent(MouseEvent e) {
-                    if (e.getClickCount() == 2) {
-                        editMetaAttribute();
-                    }
+                    if (isEnabled()) {
+                        if (e.getClickCount() == 2) {
+                            editMetaAttribute();
+                        }
 
-                    genericPopupDisplay(e, getContextMenu());
+                        genericPopupDisplay(e, getContextMenu());
+                    }
                 }
             });
         }
@@ -225,13 +233,15 @@ public class MetaAttributePanel extends BasePanel {
         // discard existing content
         tableModel.setRowCount(0);
 
-        for (Iterator it = element.iteratorTaggedValue(); it.hasNext(); ) {
-            TaggedValue metaAttribute = (TaggedValue)it.next();
-            String name = getMetaAttributeName(metaAttribute);
-            String value = metaAttribute.getDataValue();
+        if (element != null) {
+            for (Iterator it = element.iteratorTaggedValue(); it.hasNext(); ) {
+                TaggedValue metaAttribute = (TaggedValue)it.next();
+                String name = getMetaAttributeName(metaAttribute);
+                String value = metaAttribute.getDataValue();
 
-            if (!ignoredMetaAttributes.contains(name)) {
-                tableModel.addRow(new Object[] { name, value });
+                if (!ignoredMetaAttributes.contains(name)) {
+                    tableModel.addRow(new Object[] { name, value });
+                }
             }
         }
     }
