@@ -17,11 +17,16 @@ package ch.ehi.umleditor.application;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+import java.awt.Dialog;
 import java.util.EventObject;
+import java.util.Iterator;
 
 import javax.swing.DropMode;
+import javax.swing.JTabbedPane;
 import javax.swing.tree.*;
 
+import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
+import ch.ehi.uml1_4.implementation.UmlTaggedValue;
 import ch.softenvironment.util.*;
 import ch.softenvironment.view.*;
 import ch.ehi.interlis.domainsandconstants.basetypes.*;
@@ -33,6 +38,8 @@ import ch.ehi.uml1_4.foundation.core.Element;
  * @version $Revision: 1.10 $ $Date: 2006-11-29 17:48:52 $
  */
 public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMenuChoice {
+	private final Dialog ownerDialog;
+
         private Enumeration root=new Enumeration();
         private EnumTreeModel model=null;
 	private javax.swing.JRadioButton ivjRbtOrdered = null;
@@ -49,6 +56,8 @@ public class IliBaseTypeEnumPanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JSeparator ivjJSeparator1 = null;
 	private javax.swing.JMenuItem ivjMniRename = null;
 	private DescriptionPanel ivjPnlDescription = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
+	private javax.swing.JTabbedPane ivjTbpEditEnumElement = null;
 	private javax.swing.JLabel ivjLblElementDescription = null;
 	private javax.swing.JLabel ivjLblElements = null;
 	private javax.swing.JPanel ivjJPanel1 = null;
@@ -88,8 +97,9 @@ class IvjEventHandler implements ch.ehi.umleditor.application.DescriptionPanelLi
 /**
  * IliBaseTypeTextPanel constructor comment.
  */
-public IliBaseTypeEnumPanel() {
+public IliBaseTypeEnumPanel(java.awt.Dialog owner) {
 	super();
+	this.ownerDialog = owner;
 	initialize();
 }
 public void adaptUserAction(EventObject event, Object control) {
@@ -257,6 +267,12 @@ private Enumeration copyTree(Enumeration src) {
       subdest.setDocumentation(subsrc.getDocumentation());
       subdest.setName(subsrc.getName());
       subdest.setNameList(subsrc.getNameList());
+      Iterator taggedValueIterator = subsrc.iteratorTaggedValue();
+      while (taggedValueIterator.hasNext()) {
+          TaggedValue taggedValueSrc = (TaggedValue)taggedValueIterator.next();
+          TaggedValue taggedValueDest = copyMetaAttribute(taggedValueSrc);
+          subdest.addTaggedValue(taggedValueDest);
+      }
       if(subsrc.containsChild()){
       	Enumeration child=subsrc.getChild();
       	// are there any child elements?
@@ -266,6 +282,12 @@ private Enumeration copyTree(Enumeration src) {
       }
     }
     return ret;
+}
+private TaggedValue copyMetaAttribute(TaggedValue taggedValue) {
+	TaggedValue umlTag = (TaggedValue)ElementFactory.createObject(UmlTaggedValue.class);
+	umlTag.setName(taggedValue.getName());
+	umlTag.setDataValue(taggedValue.getDataValue());
+	return umlTag;
 }
 protected void finalize()
 {
@@ -303,7 +325,7 @@ private javax.swing.JPanel getJPanel1() {
 			constraintsPnlDescription.ipadx = 243;
 			constraintsPnlDescription.ipady = 69;
 			constraintsPnlDescription.insets = new java.awt.Insets(2, 5, 3, 5);
-			getJPanel1().add(getPnlDescription(), constraintsPnlDescription);
+			getJPanel1().add(getTbpEditEnumElement(), constraintsPnlDescription);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -313,6 +335,23 @@ private javax.swing.JPanel getJPanel1() {
 		}
 	}
 	return ivjJPanel1;
+}
+
+/**
+ * Return the TbpEditEnumElement property value.
+ */
+private JTabbedPane getTbpEditEnumElement() {
+	if (ivjTbpEditEnumElement == null) {
+		try {
+			ivjTbpEditEnumElement = new javax.swing.JTabbedPane();
+			ivjTbpEditEnumElement.setName("TbpEditEnumElement");
+			ivjTbpEditEnumElement.add(getResourceString("TbpElementDescription_text"), getPnlDescription());
+			ivjTbpEditEnumElement.add(getResourceString("TbpElementMetaAttributes_text"), getPnlMetaAttributes());
+		} catch (Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjTbpEditEnumElement;
 }
 /**
  * Return the JPopupMenu1 property value.
@@ -533,6 +572,8 @@ private javax.swing.JMenuItem getMniRename() {
  * Return the changed object displayed.
  */
 public java.lang.Object getObject() {
+	saveMetaAttributes(getSelectedNode());
+
 	Enumeration type = copyTree(root);
 	type.setKind(getkind());
 	return type;
@@ -556,6 +597,20 @@ private DescriptionPanel getPnlDescription() {
 		}
 	}
 	return ivjPnlDescription;
+}
+/**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(ownerDialog);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
 }
 /**
  * Return the PnlKind property value.
@@ -804,6 +859,7 @@ constraintsJPanel1.gridheight = 2;
 	group.add(getRbtOrderedCircular());
 	getRbtUndefined().setSelected(true);
 	getPnlDescription().setEnabled(false);
+	getPnlMetaAttributes().setEnabled(false);
 	initializeTree();
 	// user code end
 }
@@ -914,18 +970,31 @@ private void saveDocumentation() {
 	getPnlDescription().getObject();
 }
 /**
+ * Save the content of the Meta Attributes Panel to the specified enumElement.
+ */
+private void saveMetaAttributes(EnumElement enumElement) {
+	if (enumElement != null) {
+		getPnlMetaAttributes().saveToObject(enumElement);
+	}
+}
+/**
  * Adapt anything when Tree-Selection changes.
  */
 private void selectionChanged(javax.swing.event.TreeSelectionEvent treeSelectionEvent) {
 	EnumElement node = getSelectedNode();
-	if (node == null) {
-		getPnlDescription().setEnabled(false);
-		getPnlDescription().setObject(null);
-	} else {
-		// EnumElement
-		getPnlDescription().setEnabled(true);
-		getPnlDescription().setObject(node);
+	boolean isElementSelected = node != null;
+
+	// save meta-attributes of previously selected node
+	TreePath oldSelectionPath = treeSelectionEvent.getOldLeadSelectionPath();
+	if (oldSelectionPath != null) {
+		EnumElement lastSelectedNode = (EnumElement)oldSelectionPath.getLastPathComponent();
+		saveMetaAttributes(lastSelectedNode);
 	}
+
+	getPnlDescription().setEnabled(isElementSelected);
+	getPnlDescription().setObject(node);
+	getPnlMetaAttributes().setEnabled(isElementSelected);
+	getPnlMetaAttributes().setCurrentObject(node);
 }
 public void selectElement(Element element) {
     TreePath foundNode = ((EnumTreeModel)getTreEnumeration().getModel()).getTreePath(element);
