@@ -4,6 +4,7 @@ LATEST
 - OID AS cannot be modeled for classes (#53)
 - BASKET OID AS cannot be modeled for topics (#55)
 - ili export: pad date, time, datetime with zeros (#60)
+- fix JRE 1.6 compatibility
 
 UML-Editor 3.8.1 (2021-12-28) 
 ----------------------------------
