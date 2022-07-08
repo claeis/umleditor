@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import ch.ehi.interlis.attributes.*;
+import ch.ehi.interlis.domainsandconstants.DomainDef;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -62,6 +64,7 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JTable ivjTblAttributes = null;
 	private javax.swing.DefaultListSelectionModel ivjLocalColumnModelDefaultListSelectionModel = null;
 	private javax.swing.JPanel ivjPnlAttributes = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
 	private javax.swing.JMenuItem ivjMniNewAttribute = null;
 	private javax.swing.JMenuItem ivjMniRemoveAttribute = null;
@@ -72,7 +75,8 @@ public class ClassDefDialog extends BaseDialog implements ListMenuChoice {
 	private javax.swing.JLabel ivjLblKind = null;
 	private javax.swing.JRadioButton ivjRbtClass = null;
 	private javax.swing.JRadioButton ivjRbtStructure = null;
-	private javax.swing.JPanel ivjPnlClassKind = null;
+    private javax.swing.JLabel ivjLblOid = null;
+    private ReferencableComboBox ivjCbxOid = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -538,6 +542,21 @@ private javax.swing.JCheckBox getChxFinal() {
 	}
 	return ivjChxFinal;
 }
+private ReferencableComboBox getCbxOid() {
+    if (ivjCbxOid == null) {
+        try {
+            ivjCbxOid = new ReferencableComboBox();
+            ivjCbxOid.setName("CbxOid");
+            // user code begin {1}
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            handleException(ivjExc);
+        }
+    }
+    return ivjCbxOid;
+}
 /**
  * Return the JSeparator1 property value.
  * @return javax.swing.JSeparator
@@ -602,6 +621,23 @@ private javax.swing.JLabel getLblName() {
 		}
 	}
 	return ivjLblName;
+}
+private javax.swing.JLabel getLblOid() {
+    if (ivjLblOid == null) {
+        try {
+            ivjLblOid = new javax.swing.JLabel();
+            ivjLblOid.setName("LblOid");
+            ivjLblOid.setText("OID:");
+            // user code begin {1}
+            ivjLblOid.setText(resClassDefDialog.getString("LblOid_text"));
+            // user code end
+        } catch (java.lang.Throwable ivjExc) {
+            // user code begin {2}
+            // user code end
+            handleException(ivjExc);
+        }
+    }
+    return ivjLblOid;
 }
 /**
  * Return the LocalColumnModelDefaultListSelectionModel property value.
@@ -744,30 +780,6 @@ private javax.swing.JPanel getPnlAttributes() {
 	return ivjPnlAttributes;
 }
 /**
- * Return the PnlClassKind property value.
- * @return javax.swing.JPanel
- */
-/* WARNING: THIS METHOD WILL BE REGENERATED. */
-private javax.swing.JPanel getPnlClassKind() {
-	if (ivjPnlClassKind == null) {
-		try {
-			ivjPnlClassKind = new javax.swing.JPanel();
-			ivjPnlClassKind.setName("PnlClassKind");
-			ivjPnlClassKind.setLayout(null);
-			getPnlClassKind().add(getLblKind(), getLblKind().getName());
-			getPnlClassKind().add(getRbtClass(), getRbtClass().getName());
-			getPnlClassKind().add(getRbtStructure(), getRbtStructure().getName());
-			// user code begin {1}
-			// user code end
-		} catch (java.lang.Throwable ivjExc) {
-			// user code begin {2}
-			// user code end
-			handleException(ivjExc);
-		}
-	}
-	return ivjPnlClassKind;
-}
-/**
  * Return the PnlConstraints property value.
  * @return ch.ehi.umleditor.application.InterlisSyntaxPanel
  */
@@ -786,6 +798,20 @@ private InterlisSyntaxPanel getPnlConstraints() {
 		}
 	}
 	return ivjPnlConstraints;
+}
+/**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
 }
 /**
  * Return the PnlDescription property value.
@@ -820,40 +846,63 @@ private javax.swing.JPanel getPnlDetail() {
 			ivjPnlDetail.setLayout(new java.awt.GridBagLayout());
 
 			java.awt.GridBagConstraints constraintsChxAbstract = new java.awt.GridBagConstraints();
-			constraintsChxAbstract.gridx = 1; constraintsChxAbstract.gridy = 1;
+			constraintsChxAbstract.gridx = 0; constraintsChxAbstract.gridy = 0;
 			constraintsChxAbstract.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsChxAbstract.ipadx = 119;
-			constraintsChxAbstract.insets = new java.awt.Insets(12, 10, 1, 343);
+			//constraintsChxAbstract.ipadx = 119;
+			constraintsChxAbstract.insets = new java.awt.Insets(2, 2, 2, 2);
 			getPnlDetail().add(getChxAbstract(), constraintsChxAbstract);
 
 			java.awt.GridBagConstraints constraintsChxFinal = new java.awt.GridBagConstraints();
-			constraintsChxFinal.gridx = 1; constraintsChxFinal.gridy = 2;
+			constraintsChxFinal.gridx = 0; constraintsChxFinal.gridy = 1;
 			constraintsChxFinal.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsChxFinal.ipadx = 119;
-			constraintsChxFinal.insets = new java.awt.Insets(1, 10, 3, 343);
+			//constraintsChxFinal.ipadx = 119;
+			constraintsChxFinal.insets = new java.awt.Insets(2, 2, 2, 2);
 			getPnlDetail().add(getChxFinal(), constraintsChxFinal);
 
 			java.awt.GridBagConstraints constraintsPnlExtended = new java.awt.GridBagConstraints();
-			constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 3;
-			constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
-			constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsPnlExtended.weightx = 1.0;
-			constraintsPnlExtended.weighty = 1.0;
-			constraintsPnlExtended.ipadx = 15;
-			constraintsPnlExtended.ipady = 7;
-			constraintsPnlExtended.insets = new java.awt.Insets(4, 10, 6, 18);
+			constraintsPnlExtended.gridx = 0; constraintsPnlExtended.gridy = 2;
+            constraintsPnlExtended.gridwidth = 2;
+            constraintsPnlExtended.weightx = 1.0;
+            constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsPnlExtended.insets = new java.awt.Insets(0, 0, 0, 0);
 			getPnlDetail().add(getPnlExtended(), constraintsPnlExtended);
-
-			java.awt.GridBagConstraints constraintsPnlClassKind = new java.awt.GridBagConstraints();
-			constraintsPnlClassKind.gridx = 1; constraintsPnlClassKind.gridy = 4;
-			constraintsPnlClassKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsPnlClassKind.weightx = 1.0;
-			constraintsPnlClassKind.weighty = 1.0;
-			constraintsPnlClassKind.ipadx = 442;
-			constraintsPnlClassKind.ipady = 83;
-			constraintsPnlClassKind.insets = new java.awt.Insets(6, 6, 58, 45);
-			getPnlDetail().add(getPnlClassKind(), constraintsPnlClassKind);
+			
+            java.awt.GridBagConstraints constraintsLblKind = new java.awt.GridBagConstraints();
+            constraintsLblKind.gridx = 0; constraintsLblKind.gridy = 4;
+            constraintsLblKind.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsLblKind.insets = new java.awt.Insets(2, 2, 2, 2);
+			getPnlDetail().add(getLblKind(), constraintsLblKind);
+            java.awt.GridBagConstraints constraintsRbtClass = new java.awt.GridBagConstraints();
+            constraintsRbtClass.gridx = 1; constraintsRbtClass.gridy = 4;
+            constraintsRbtClass.weightx = 1.0;
+            constraintsRbtClass.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsRbtClass.insets = new java.awt.Insets(1, 5, 3, 6);
+			getPnlDetail().add(getRbtClass(), constraintsRbtClass);
+            java.awt.GridBagConstraints constraintsRbtStructure = new java.awt.GridBagConstraints();
+            constraintsRbtStructure.gridx = 1; constraintsRbtStructure.gridy = 5;
+            constraintsRbtStructure.weightx = 1.0;
+            constraintsRbtStructure.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsRbtStructure.insets = new java.awt.Insets(1, 5, 3, 6);
+			getPnlDetail().add(getRbtStructure(), constraintsRbtStructure);
+			
+			
 			// user code begin {1}
+			
+            java.awt.GridBagConstraints constraintsLblOid = new java.awt.GridBagConstraints();
+            constraintsLblOid.gridx = 0; constraintsLblOid.gridy = 3;
+            constraintsLblOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsLblOid.insets = new java.awt.Insets(2, 2, 2, 2);
+            getPnlDetail().add(getLblOid(), constraintsLblOid);
+            
+            java.awt.GridBagConstraints constraintsCbxOid = new java.awt.GridBagConstraints();
+            constraintsCbxOid.gridx = 1; constraintsCbxOid.gridy = 3;
+            constraintsCbxOid.weightx = 1.0;
+            constraintsCbxOid.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            constraintsCbxOid.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            constraintsCbxOid.insets = new java.awt.Insets(1, 5, 3, 6);
+            getPnlDetail().add(getCbxOid(), constraintsCbxOid);
+			
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
 			// user code begin {2}
@@ -873,7 +922,9 @@ private ExtendedPanel getPnlExtended() {
 		try {
 			ivjPnlExtended = new ch.ehi.umleditor.application.ExtendedPanel();
 			ivjPnlExtended.setName("PnlExtended");
-			ivjPnlExtended.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+			//ivjPnlExtended.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+            //ivjPnlExtended.setLocation(7, 79);
+			
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1062,6 +1113,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpAttributes_text"), null, getPnlAttributes(), null, 2);
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpParameter_text"), null, getPnlParameters(), null, 3);
 			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpConstraints_text"), null, getPnlConstraints(), null, 4);
+			ivjTbpGeneral.insertTab(resClassDefDialog.getString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 5);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1208,11 +1260,21 @@ protected boolean save() {
 		return false;
 	}
 
+    if (classDef.containsOiddomain()) {
+        classDef.detachOiddomain();
+    }
+    if ( (getCbxOid().getElement() != null)) {
+        classDef.attachOiddomain((DomainDef)getCbxOid().getElement());
+    }
+	
 	// page Constraints
 	getPnlConstraints().getConstraints();
 
 	// page ParameterDef
 	getPnlParameters().getParameterDefs();
+
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(classDef);
 
 	return super.save();
 }
@@ -1242,6 +1304,11 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(classDef.isAbstract());
 	getChxFinal().setSelected(classDef.isPropFinal());
 	getPnlExtended().setClassifierExtension(classDef);
+    if(classDef.containsOiddomain()){
+        getCbxOid().setElement(DomainDef.class, classDef, classDef.getOiddomain());
+      }else{
+        getCbxOid().setElement(DomainDef.class, classDef, null);
+      }
 
 	// page Attributes
 	getTblAttributes().setModel(new EditorTableModel());
@@ -1252,6 +1319,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 
 	// page ParameterDef
 	getPnlParameters().setParameterDefs(classDef);
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(classDef);
 }
 /**
  * @see ch.softenvironment.view.ListMenuChoice#changeObjects(java.lang.Object)

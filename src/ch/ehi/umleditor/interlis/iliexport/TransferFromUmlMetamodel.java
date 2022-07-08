@@ -687,6 +687,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -706,6 +707,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     dec_ind();
     return;
@@ -718,6 +720,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -737,6 +740,7 @@ public class TransferFromUmlMetamodel
     }
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
       out.write(getIndent());
       out.write(visitIliName(def,def.getName().getValue(language)));
       out.write(" : ");
@@ -842,6 +846,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -901,6 +906,10 @@ public class TransferFromUmlMetamodel
 
     out.write(" =");newline();
     inc_ind();
+    
+    if(def.containsOiddomain()){
+        out.write(getIndent()+"OID AS "+domainRef(def,def.getOiddomain()));out.write(";");newline();
+      }
 
     // {AttributeDef}
     java.util.Iterator childi=AbstractClassDefUtility.getIliAttributes(def).iterator();
@@ -1069,6 +1078,7 @@ public class TransferFromUmlMetamodel
     {
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)def.getBody());
     return;
     }
@@ -1079,6 +1089,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1089,6 +1100,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1099,6 +1111,7 @@ public class TransferFromUmlMetamodel
     newline();
     defineLinkToModelElement(def);
     visitDocumentation(def.getDocumentation());
+    visitTaggedValues(def);
     visitIliSyntax(def);
     return;
     }
@@ -1716,15 +1729,18 @@ public class TransferFromUmlMetamodel
     return;
     }
 
+      private java.text.DecimalFormat format0000=new java.text.DecimalFormat("0000");
+      private java.text.DecimalFormat format00=new java.text.DecimalFormat("00");
+      private java.text.DecimalFormat formatSeconds=new java.text.DecimalFormat("00.000");
 	public String visitDate(ch.ehi.interlis.domainsandconstants.basetypes.DateValue def)
 	{
 		StringBuffer ret=new StringBuffer();
 		ret.append("\"");
-		ret.append(Integer.toString(def.getYear()));
+		ret.append(format0000.format(def.getYear()));
 		ret.append("-");
-		ret.append(Integer.toString(def.getMonth()));
+		ret.append(format00.format(def.getMonth()));
 		ret.append("-");
-		ret.append(Integer.toString(def.getDay()));
+		ret.append(format00.format(def.getDay()));
 		ret.append("\"");
 		return ret.toString();
 	}
@@ -1737,17 +1753,17 @@ public class TransferFromUmlMetamodel
 	{
 		StringBuffer ret=new StringBuffer();
 		ret.append("\"");
-		ret.append(Integer.toString(def.getYear()));
+		ret.append(format0000.format(def.getYear()));
 		ret.append("-");
-		ret.append(Integer.toString(def.getMonth()));
+		ret.append(format00.format(def.getMonth()));
 		ret.append("-");
-		ret.append(Integer.toString(def.getDay()));
+		ret.append(format00.format(def.getDay()));
 		ret.append("T");
-		ret.append(Integer.toString(def.getHours()));
+		ret.append(format00.format(def.getHours()));
 		ret.append(":");
-		ret.append(Integer.toString(def.getMinutes()));
+		ret.append(format00.format(def.getMinutes()));
 		ret.append(":");
-		ret.append(Float.toString(def.getSeconds()));
+		ret.append(formatSeconds.format(def.getSeconds()));
 		ret.append("\"");
 		return ret.toString();
 	}
@@ -1760,11 +1776,11 @@ public class TransferFromUmlMetamodel
 	{
 		StringBuffer ret=new StringBuffer();
 		ret.append("\"");
-		ret.append(Integer.toString(def.getHours()));
+		ret.append(format00.format(def.getHours()));
 		ret.append(":");
-		ret.append(Integer.toString(def.getMinutes()));
+		ret.append(format00.format(def.getMinutes()));
 		ret.append(":");
-		ret.append(Float.toString(def.getSeconds()));
+		ret.append(formatSeconds.format(def.getSeconds()));
 		ret.append("\"");
 		return ret.toString();
 	}

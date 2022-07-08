@@ -423,6 +423,9 @@ public class TransferFromIli2cMetamodel
 	      classextends.setExtended(tdef.isExtended());
 	    }
 
+        if(tdef.getDefinedOid()!=null){
+            classdef.attachOiddomain(findDomainDef((Domain)getElementInRootLanguageOrSame(tdef.getDefinedOid())));
+          }
 
 	    getNamespace().addOwnedElement(classdef);
 	}

@@ -46,6 +46,7 @@ public class CommonSpecificationDialog extends BaseDialog {
 	private javax.swing.JButton ivjBtnApply = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private InterlisSyntaxPanel ivjPnlSyntax = null;
+	private MetaAttributePanel ivjPnlMetaAttributes = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -357,6 +358,20 @@ private InterlisSyntaxPanel getPnlSyntax() {
 	return ivjPnlSyntax;
 }
 /**
+ * Return the PnlMetaAttributes property value.
+ */
+private MetaAttributePanel getPnlMetaAttributes() {
+	if (ivjPnlMetaAttributes == null) {
+		try {
+			ivjPnlMetaAttributes = new MetaAttributePanel(this);
+			ivjPnlMetaAttributes.setName("PnlMetaAttributes");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlMetaAttributes;
+}
+/**
  * Return the TbpGeneral property value.
  * @return javax.swing.JTabbedPane
  */
@@ -368,6 +383,7 @@ private javax.swing.JTabbedPane getTbpGeneral() {
 			ivjTbpGeneral.setName("TbpGeneral");
 			ivjTbpGeneral.insertTab(getDescriptionString(), null, getPnlDescription(), null, 0);
 			ivjTbpGeneral.insertTab(getResourceString("TbpSyntax_text"), null, getPnlSyntax(), null, 1);
+			ivjTbpGeneral.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 2);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -455,7 +471,10 @@ protected boolean save() {
 	} else if (modelElement instanceof IliSyntax) {
 		((IliSyntax)modelElement).setSyntax(getPnlSyntax().getSyntax());
 	}
-	
+
+	// page MetaAttributes
+	getPnlMetaAttributes().saveToObject(modelElement);
+
 	return super.save();
 }
 /**
@@ -477,5 +496,8 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		getTbpGeneral().remove(getPnlSyntax());
 //		getPnlSyntax().setVisible(false);
 	}
+
+	// page MetaAttributes
+	getPnlMetaAttributes().setCurrentObject(modelElement);
 }
 }
