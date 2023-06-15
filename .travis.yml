@@ -8,17 +8,17 @@ branches:
 install: true
   
 script: 
-  - if [ $TRAVIS_BRANCH == "stable" ]; then gradle '-Drelease=' build ; fi
-  - if [ $TRAVIS_BRANCH != "stable" ]; then gradle build ; fi
+  - if [ $TRAVIS_BRANCH == "stable" ]; then ./gradlew '-Drelease=' build ; fi
+  - if [ $TRAVIS_BRANCH != "stable" ]; then ./gradlew build ; fi
   
 deploy:
   - provider: script
     skip_cleanup: true
-    script: gradle -Drepos_pwd=${repos_pwd} -Drepos_usr=jql_jars-INTE uploadArchives
+    script: ./gradlew -Drepos_pwd=${repos_pwd} -Drepos_usr=jql_jars-INTE uploadArchives
     on:
       branch: master
   - provider: script
     skip_cleanup: true
-    script: gradle -Drepos_pwd=${repos_pwd} -Drepos_usr=jql_jars-INTE '-Drelease=' -Ddownloads_pwd=${downloads_pwd} -Ddownloads_usr=jql_downloads uploadArchives uploadBin
+    script: ./gradlew -Drepos_pwd=${repos_pwd} -Drepos_usr=jql_jars-INTE '-Drelease=' -Ddownloads_pwd=${downloads_pwd} -Ddownloads_usr=jql_downloads uploadArchives uploadBin
     on:
       branch: stable
