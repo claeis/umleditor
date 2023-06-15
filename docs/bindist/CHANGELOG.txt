@@ -1,5 +1,6 @@
 LATEST 
 ----------------------------------
+- ili import: Konsistenzbedingungen (Constraints) mit Namen (#69)
 
 UML-Editor 3.9.0 (2022-07-08) 
 ----------------------------------

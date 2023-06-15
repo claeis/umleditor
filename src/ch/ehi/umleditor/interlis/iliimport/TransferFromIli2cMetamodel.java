@@ -674,6 +674,7 @@ private void visitConstraint(Constraint constr)
     }else {
         cdef=findConstraintDef(constr);
     }
+    cdef.setName(new NlsString(cdef.getName(),modelLanguage,constr.getName()));
     
     ch.ehi.interlis.constraints.ConstraintExpression expr=null;
     makeSyntax.printConstraint(constr);
