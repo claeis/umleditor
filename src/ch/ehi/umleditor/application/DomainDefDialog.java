@@ -60,6 +60,7 @@ public class DomainDefDialog extends BaseDialog {
 	private javax.swing.JCheckBox ivjChxFinal = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private javax.swing.JCheckBox ivjChxMandatory = null;
+	private javax.swing.JCheckBox ivjChxGeneric = null;
 	private javax.swing.JLabel ivjLblType = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
 	private IliBaseTypeBasketPanel ivjPnlTypeBasket = null;
@@ -534,6 +535,20 @@ private javax.swing.JCheckBox getChxMandatory() {
 	}
 	return ivjChxMandatory;
 }
+	private javax.swing.JCheckBox getChxGeneric() {
+		if (ivjChxGeneric == null) {
+			try {
+				ivjChxGeneric = new javax.swing.JCheckBox();
+				ivjChxGeneric.setName("ChxGeneric");
+				ivjChxGeneric.setEnabled(true);
+				ivjChxGeneric.setToolTipText(getResourceString("ChxGeneric_toolTipText"));
+				ivjChxGeneric.setText(getResourceString("ChxGeneric_text"));
+			} catch (java.lang.Throwable ivjExc) {
+				handleException(ivjExc);
+			}
+		}
+		return ivjChxGeneric;
+	}
 /**
  * Return the JLabel1 property value.
  * @return javax.swing.JLabel
@@ -631,13 +646,6 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsChxAbstract.insets = new java.awt.Insets(20, 20, 2, 417);
 			getPnlDetail().add(getChxAbstract(), constraintsChxAbstract);
 
-			java.awt.GridBagConstraints constraintsChxMandatory = new java.awt.GridBagConstraints();
-			constraintsChxMandatory.gridx = 1; constraintsChxMandatory.gridy = 3;
-			constraintsChxMandatory.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsChxMandatory.ipadx = 42;
-			constraintsChxMandatory.insets = new java.awt.Insets(2, 20, 16, 417);
-			getPnlDetail().add(getChxMandatory(), constraintsChxMandatory);
-
 			java.awt.GridBagConstraints constraintsChxFinal = new java.awt.GridBagConstraints();
 			constraintsChxFinal.gridx = 1; constraintsChxFinal.gridy = 2;
 			constraintsChxFinal.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -645,8 +653,21 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsChxFinal.insets = new java.awt.Insets(3, 20, 1, 417);
 			getPnlDetail().add(getChxFinal(), constraintsChxFinal);
 
+			java.awt.GridBagConstraints constraintsChxMandatory = new java.awt.GridBagConstraints();
+			constraintsChxMandatory.gridx = 1; constraintsChxMandatory.gridy = 3;
+			constraintsChxMandatory.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsChxMandatory.ipadx = 42;
+			constraintsChxMandatory.insets = new java.awt.Insets(3, 20, 1, 417);
+			getPnlDetail().add(getChxMandatory(), constraintsChxMandatory);
+
+			java.awt.GridBagConstraints constraintsChxGeneric = new java.awt.GridBagConstraints();
+			constraintsChxGeneric.gridx = 1; constraintsChxGeneric.gridy = 4;
+			constraintsChxGeneric.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsChxGeneric.insets = new java.awt.Insets(3, 20, 16, 417);
+			getPnlDetail().add(getChxGeneric(), constraintsChxGeneric);
+
 			java.awt.GridBagConstraints constraintsPnlExtended = new java.awt.GridBagConstraints();
-			constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 4;
+			constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 5;
 			constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
 			constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsPnlExtended.weightx = 1.0;
