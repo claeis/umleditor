@@ -1345,6 +1345,13 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
 	    
 	    domaindef.setAbstract(dd.isAbstract());
 	    domaindef.setPropFinal(dd.isFinal());
+
+        Type domainType = dd.getType();
+        if (domainType instanceof AbstractCoordType) {
+            AbstractCoordType domainCoordType = (AbstractCoordType) domainType;
+            domaindef.setGeneric(domainCoordType.isGeneric());
+        }
+
 	    // TODO handle MANDATORY DomainDef
 	    //domaindef.setMandatory();
 

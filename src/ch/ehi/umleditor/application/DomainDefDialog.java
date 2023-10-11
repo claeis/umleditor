@@ -1094,6 +1094,7 @@ protected boolean save() {
 	domainDef.setAbstract(getChxAbstract().isSelected());
 	domainDef.setPropFinal(getChxFinal().isSelected());
 	domainDef.setMandatory(getChxMandatory().isSelected());
+	domainDef.setGeneric(getChxGeneric().isSelected());
 	if (!getPnlExtended().getExtension()) {
 		return false;
 	}
@@ -1151,6 +1152,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(domainDef.isAbstract());
 	getChxFinal().setSelected(domainDef.isPropFinal());
 	getChxMandatory().setSelected(domainDef.isMandatory());
+	getChxGeneric().setSelected(domainDef.isGeneric());
 	getPnlExtended().setExtension(domainDef);
 
 	// page specific type
