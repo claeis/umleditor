@@ -17,6 +17,7 @@
  */
 package ch.ehi.umleditor.interlis.iliexport;
 
+import ch.ehi.interlis.modeltopicclass.ContextDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -527,6 +528,8 @@ public class TransferFromUmlMetamodel
         visitLineFormTypeDef((LineFormTypeDef)obj);
        }else if(obj instanceof DomainDef){
         visitDomainDef((DomainDef)obj);
+       }else if(obj instanceof ContextDef){
+        visitContextDef((ContextDef)obj);
        }else if(obj instanceof GraphicParameterDef){
         visitGraphicParameterDef((GraphicParameterDef)obj);
        }else if(obj instanceof ClassDef){
@@ -711,6 +714,24 @@ public class TransferFromUmlMetamodel
     visitIliSyntax(def);
     dec_ind();
     return;
+    }
+
+    public void visitContextDef(ContextDef def) throws java.io.IOException
+    {
+        newline();
+
+        defineLinkToModelElement(def);
+        visitDocumentation(def.getDocumentation());
+        visitTaggedValues(def);
+        out.write(getIndent());
+        out.write("CONTEXT ");
+        out.write(def.getDefLangName());
+        out.write(" =");
+        newline();
+
+        inc_ind();
+        visitIliSyntax(def);
+        dec_ind();
     }
 
   public void visitFunctionDef(FunctionDef def)
