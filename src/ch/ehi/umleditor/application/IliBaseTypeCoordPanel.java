@@ -59,6 +59,7 @@ public class IliBaseTypeCoordPanel extends BasePanel implements DataPanel {
 	private javax.swing.JCheckBox ivjChxRotationDef = null;
 	private javax.swing.JLabel ivjLblEpsgCode = null;
 	private javax.swing.JTextField ivjTxtEpsgCode = null;
+	private boolean isMulti;
 
 class IvjEventHandler implements java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void focusGained(java.awt.event.FocusEvent e) {
@@ -400,7 +401,9 @@ public java.lang.Object getObject() {
 		type.addDim((NumericalType)getPnlNumeric2D().getObject());
 		type.addDim((NumericalType)getPnlNumeric3D().getObject());
 	}
-	
+
+	type.setMulti(isMulti);
+
 	return type;
 }
 /**
@@ -790,6 +793,12 @@ public void setObject(java.lang.Object object, ModelElement modelElement, ModelE
 			getTbpNumericTypes().remove(getPnlNumeric2D());
 			getTbpNumericTypes().remove(getPnlNumeric3D());
 		}
+
+		isMulti = type.isMulti();
 	}
+}
+
+public void setMulti(boolean isMulti) {
+	this.isMulti = isMulti;
 }
 }
