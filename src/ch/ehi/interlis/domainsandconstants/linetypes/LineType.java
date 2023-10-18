@@ -463,5 +463,7 @@ public abstract class LineType extends Type implements java.io.Serializable
                     this.isMulti = isMulti;
                 }
 
+                public abstract String getIliTypeName();
+
               }
 

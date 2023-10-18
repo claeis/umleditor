@@ -305,5 +305,12 @@ public class CoordinateType extends BaseType implements java.io.Serializable
                   this.isMulti = isMulti;
                 }
 
+                public String getIliTypeName() {
+                  if (isMulti()) {
+                    return "MULTICOORD";
+                  }
+                  return "COORD";
+                }
+
               }
 

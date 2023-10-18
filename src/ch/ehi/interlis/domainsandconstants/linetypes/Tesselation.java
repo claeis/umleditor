@@ -82,5 +82,12 @@ public class Tesselation extends SurfaceType implements java.io.Serializable
 
                 // -end- 36D5626603E5 detail_end "Tesselation"
 
+                  @Override
+                  public String getIliTypeName() {
+                      if (isMulti()) {
+                          return "MULTIAREA";
+                      }
+                      return "AREA";
+                  }
               }
 

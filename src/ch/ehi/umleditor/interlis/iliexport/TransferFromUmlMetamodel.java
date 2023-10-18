@@ -1580,7 +1580,7 @@ public class TransferFromUmlMetamodel
       	}
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
-      out.write("COORD");
+      out.write(type.getIliTypeName());
       java.util.Iterator dimi=type.iteratorDim();
       String sep=" ";
       while(dimi.hasNext()){
@@ -1596,18 +1596,8 @@ public class TransferFromUmlMetamodel
         out.write(Long.toString(rot.getPihalfAxis()));
       }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.LineType){
-      if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface){
-        out.write("SURFACE");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.Tesselation){
-        out.write("AREA");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline){
-        if(((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline)def).isDirected()){
-          out.write("DIRECTED POLYLINE");
-        }else{
-          out.write("POLYLINE");
-        }
-      }
       ch.ehi.interlis.domainsandconstants.linetypes.LineType type=(ch.ehi.interlis.domainsandconstants.linetypes.LineType)def;
+      out.write(type.getIliTypeName());
       if(type.containsLineForm()){
         ch.ehi.interlis.domainsandconstants.linetypes.LineForm form=type.getLineForm();
         out.write(" WITH (");
