@@ -801,7 +801,40 @@ public class TransferFromUmlMetamodel
     if(def.containsType()){
       visitType(def,def.getType());
     }
-    out.write(";");newline();
+
+    if (def.sizeConstraint() > 0) {
+        inc_ind();
+
+        newline();
+        out.write(getIndent() + "CONSTRAINTS");
+        newline();
+
+        inc_ind();
+
+        boolean first = true;
+        Iterator constraintIterator = def.iteratorConstraint();
+        while (constraintIterator.hasNext()) {
+            if (first) {
+                first = false;
+            } else {
+                out.write(getIndent() + ",");
+                newline();
+            }
+
+            ConstraintDef constraint = (ConstraintDef)constraintIterator.next();
+            visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)constraint.getBody());
+        }
+
+        dec_ind();
+        dec_ind();
+
+        out.write(getIndent() + ";");
+        newline();
+    } else {
+        out.write(";");
+        newline();
+    }
+
     // if one of this DomainDef's use has multiplicity > 1, issue also a
     // STRUCTURE with a similar name
     boolean createStruct=false;
