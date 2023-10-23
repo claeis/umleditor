@@ -798,8 +798,8 @@ public class TransferFromUmlMetamodel
       out.write((propc==0?" (":",")+"FINAL");
       propc++;
     }
-    if(def.isGeneric()){
-      out.write((propc==0?" (":",")+"GENERIC");
+    if (def.isGeneric()) {
+      out.write((propc == 0 ? " (" : ",") + "GENERIC");
       propc++;
     }
     if(propc>0){
