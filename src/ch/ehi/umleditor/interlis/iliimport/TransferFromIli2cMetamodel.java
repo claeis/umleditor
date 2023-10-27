@@ -945,11 +945,8 @@ private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardina
               }
             }
         }
-        ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-        r.setLower( btype.isMandatory() ? 1 : 0);
-        r.setUpper(1);
-        m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-        m.addRange(r);
+        m = visitCardinality(btype.getCardinality());
+        attrdef.setOrdering(btype.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
     }
     
     if(translatedAttrib==null) {
