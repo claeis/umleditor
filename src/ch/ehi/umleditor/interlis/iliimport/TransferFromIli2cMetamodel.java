@@ -17,6 +17,9 @@ import ch.ehi.interlis.domainsandconstants.basetypes.DateTimeValue;
 import ch.ehi.interlis.domainsandconstants.basetypes.DateType;
 import ch.ehi.interlis.domainsandconstants.basetypes.DateValue;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateTimeType;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateType;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisTimeType;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeType;
 import ch.ehi.interlis.domainsandconstants.basetypes.TimeValue;
 import ch.ehi.interlis.metaobjects.ParameterDef;
@@ -1574,6 +1577,19 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
             ret = timeType;
         }
     }else{
+        if (dd instanceof TypeAlias) {
+            Domain domain = ((TypeAlias) dd).getAliasing();
+            if (domain == PredefinedModel.getInstance().XmlDate) {
+                return new InterlisDateType();
+            }
+            if (domain == PredefinedModel.getInstance().XmlDateTime) {
+                return new InterlisDateTimeType();
+            }
+            if (domain == PredefinedModel.getInstance().XmlTime) {
+                return new InterlisTimeType();
+            }
+        }
+
       // handle unknown types in a generic way
       ch.ehi.interlis.domainsandconstants.UnknownType ukn=new ch.ehi.interlis.domainsandconstants.UnknownType();
       ret=ukn;

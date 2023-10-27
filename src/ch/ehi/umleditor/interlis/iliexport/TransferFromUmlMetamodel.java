@@ -1578,6 +1578,12 @@ public class TransferFromUmlMetamodel
       	}else{
       		out.write(visitTime(type.getMax()));
       	}
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateType) {
+        out.write("DATE");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateTimeType) {
+        out.write("DATETIME");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisTimeType) {
+        out.write("TIMEOFDAY");
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
       out.write("COORD");
