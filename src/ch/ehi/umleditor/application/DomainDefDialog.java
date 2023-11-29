@@ -78,6 +78,7 @@ public class DomainDefDialog extends BaseDialog {
 	private ExtendedPanel ivjPnlExtended = null;
 	private IliBaseTypeAlignmentPanel ivjPnlTypeAlignment = null;
 	private MetaAttributePanel ivjPnlMetaAttributes = null;
+	private InterlisSyntaxPanel ivjPnlConstraints = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -634,6 +635,20 @@ private MetaAttributePanel getPnlMetaAttributes() {
 	return ivjPnlMetaAttributes;
 }
 /**
+ * Return the PnlConstraints property value.
+ */
+private InterlisSyntaxPanel getPnlConstraints() {
+	if (ivjPnlConstraints == null) {
+		try {
+			ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxPanel();
+			ivjPnlConstraints.setName("PnlConstraints");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlConstraints;
+}
+/**
  * Return the JPanel1 property value.
  * @return javax.swing.JPanel
  */
@@ -988,7 +1003,8 @@ private javax.swing.JTabbedPane getTbpTypes() {
 			ivjTbpTypes.insertTab("PnlTypeDate", null, getPnlTypeDate(), null, 12);
 			ivjTbpTypes.insertTab("PnlTypeDateTime", null, getPnlTypeDateTime(), null, 13);
 			ivjTbpTypes.insertTab("PnlTypeTime", null, getPnlTypeTime(), null, 14);
-			ivjTbpTypes.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 15);
+			ivjTbpTypes.insertTab(getResourceString("TbpConstraints_text"), null, getPnlConstraints(), null, 15);
+			ivjTbpTypes.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 16);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1106,6 +1122,12 @@ protected boolean save() {
 		domainDef.attachType(new BooleanType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ALIGNMENT) {
 		domainDef.attachType((BaseType)getPnlTypeAlignment().getObject());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_TIME) {
+		domainDef.attachType(new InterlisTimeType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATE) {
+		domainDef.attachType(new InterlisDateType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATETIME) {
+		domainDef.attachType(new InterlisDateTimeType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.UNKNOWN) {
                 UnknownType unknown=new UnknownType();
                 unknown.setSyntax(getPnlTypeUnknown().getSyntax());
@@ -1114,6 +1136,9 @@ protected boolean save() {
 		domainDef.attachType((ch.ehi.interlis.domainsandconstants.Type)((DataPanel)currentDataPanel).getObject());
 		setEPSGCode();
 	}
+
+	// page Constraints
+	getPnlConstraints().getConstraints();
 
 	// page MetaAttributes
 	getPnlMetaAttributes().saveToObject(domainDef);
@@ -1237,6 +1262,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof TimeType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.TIME);
 			getPnlTypeTime().setObject(type, domainDef);
+		} else if (type instanceof InterlisTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_TIME);
+		} else if (type instanceof InterlisDateType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATE);
+		} else if (type instanceof InterlisDateTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATETIME);
 		} else if (type instanceof UnknownType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);
@@ -1244,6 +1275,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 //TODO NYI: Type not displayable <" + type.toString() + ">"
 		}
 	}
+
+	// page Constraints
+	getPnlConstraints().setConstraints(domainDef);
 
 	// page MetaAttributes
 	getPnlMetaAttributes().setCurrentObject(domainDef);
