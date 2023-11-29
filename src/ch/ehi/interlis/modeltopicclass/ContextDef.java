@@ -17,7 +17,10 @@ public class ContextDef extends AbstractModelElement implements ModelElement, Il
     }
 
     @Override
-    public void setSyntax(NlsString syntax) {
-        this.syntax = syntax;
+    public void setSyntax(NlsString value) {
+        if(syntax!=value && (syntax==null || !syntax.equals(value))){
+            syntax = value;
+            ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setSyntax"));
+        }
     }
 }
