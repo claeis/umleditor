@@ -301,8 +301,11 @@ public class CoordinateType extends BaseType implements java.io.Serializable
                   return isMulti;
                 }
 
-                public void setMulti(boolean isMulti) {
-                  this.isMulti = isMulti;
+                public void setMulti(boolean value) {
+                  if (isMulti != value) {
+                    isMulti = value;
+                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMulti"));
+                  }
                 }
 
                 public String getIliTypeName() {
