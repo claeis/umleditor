@@ -111,6 +111,12 @@ public class TransferFromUmlMetamodel
   
   private boolean useMultiValueStructAttrs=false;
   
+  /**
+  * Determines whether LIST OF or BAG OF is used for primitive types.
+  * <c>true</c> from INTERLIS 2.4 onwards.
+  */
+  private boolean useListBagOfPrimitives = false;
+
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
     {
@@ -330,11 +336,8 @@ public class TransferFromUmlMetamodel
 	        // write
 	        defineLinkToModelElement(def);
 	        out.write("INTERLIS "+def.getVersion()+";");newline();
-	        if(Double.toString(def.getVersion()).equals("2.3")){
-	        	useMultiValueStructAttrs=true;
-	        }else{
-	        	useMultiValueStructAttrs=false;
-	        }
+            useMultiValueStructAttrs = Double.toString(def.getVersion()).equals("2.3");
+            useListBagOfPrimitives = def.getVersion() >= 2.4;
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
@@ -1256,9 +1259,16 @@ public class TransferFromUmlMetamodel
           }
       }else if(attrType.containsDirect()){
     	if(!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)){
-            if(isMandatory){
+            if (isMultiValue && useListBagOfPrimitives) {
+                if (def.getOrdering() == OrderingKind.ORDERED) {
+                    out.write("LIST ");
+                } else {
+                    out.write("BAG ");
+                }
+                out.write(visitCardinality(mr) + " OF ");
+            } else if (isMandatory) {
                 out.write("MANDATORY ");
-              }
+            }
     	}
         visitType(def,attrType.getDirect());
       }
