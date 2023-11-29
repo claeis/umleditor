@@ -1379,6 +1379,12 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
         domaindef.attachType(type);
         getNamespace().addOwnedElement(domaindef);
     }
+
+    // visit the constraints defined on this domain
+    addNamespace(domaindef);
+    visitElements(dd);
+    removeNamespace();
+
     return domaindef;
   }
 
