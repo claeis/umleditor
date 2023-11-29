@@ -114,16 +114,5 @@ public class IliPolyline extends LineType implements java.io.Serializable
 
                 // -end- 3948E1A4012A detail_end "IliPolyline"
 
-                @Override
-                public String getIliTypeName() {
-                  String prefix = "";
-                  if (isDirected()) {
-                    prefix = "DIRECTED ";
-                  }
-                  if (isMulti()) {
-                    return prefix + "MULTIPOLYLINE";
-                  }
-                  return prefix + "POLYLINE";
-                }
               }
 

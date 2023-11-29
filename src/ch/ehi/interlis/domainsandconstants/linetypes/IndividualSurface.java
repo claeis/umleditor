@@ -82,12 +82,5 @@ public class IndividualSurface extends SurfaceType implements java.io.Serializab
 
                 // -end- 36D5626F01E9 detail_end "IndividualSurface"
 
-                  @Override
-                  public String getIliTypeName() {
-                      if (isMulti()) {
-                          return "MULTISURFACE";
-                      }
-                      return "SURFACE";
-                  }
               }
 
