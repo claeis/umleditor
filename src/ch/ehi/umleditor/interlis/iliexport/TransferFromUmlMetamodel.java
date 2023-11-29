@@ -723,17 +723,23 @@ public class TransferFromUmlMetamodel
     {
         newline();
 
+        if(!(lastModelElement instanceof ContextDef)) {
+            out.write(getIndent() + "CONTEXT");
+            newline();
+            newline();
+        }
+        inc_ind();
+
         defineLinkToModelElement(def);
         visitDocumentation(def.getDocumentation());
         visitTaggedValues(def);
-        out.write(getIndent());
-        out.write("CONTEXT ");
-        out.write(def.getDefLangName());
-        out.write(" =");
+        out.write(getIndent() + def.getDefLangName() + " =");
         newline();
 
         inc_ind();
         visitIliSyntax(def);
+        dec_ind();
+
         dec_ind();
     }
 
