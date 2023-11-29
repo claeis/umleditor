@@ -112,6 +112,12 @@ public class TransferFromUmlMetamodel
   
   private boolean useMultiValueStructAttrs=false;
   
+  /**
+  * Determines whether LIST OF or BAG OF is used for primitive types.
+  * <c>true</c> from INTERLIS 2.4 onwards.
+  */
+  private boolean useListBagOfPrimitives = false;
+
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
     {
@@ -331,11 +337,8 @@ public class TransferFromUmlMetamodel
 	        // write
 	        defineLinkToModelElement(def);
 	        out.write("INTERLIS "+def.getVersion()+";");newline();
-	        if(Double.toString(def.getVersion()).equals("2.3")){
-	        	useMultiValueStructAttrs=true;
-	        }else{
-	        	useMultiValueStructAttrs=false;
-	        }
+            useMultiValueStructAttrs = Double.toString(def.getVersion()).equals("2.3");
+            useListBagOfPrimitives = def.getVersion() >= 2.4;
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
@@ -826,7 +829,40 @@ public class TransferFromUmlMetamodel
     if(def.containsType()){
       visitType(def,def.getType());
     }
-    out.write(";");newline();
+
+    if (def.sizeConstraint() > 0) {
+        inc_ind();
+
+        newline();
+        out.write(getIndent() + "CONSTRAINTS");
+        newline();
+
+        inc_ind();
+
+        boolean first = true;
+        Iterator constraintIterator = def.iteratorConstraint();
+        while (constraintIterator.hasNext()) {
+            if (first) {
+                first = false;
+            } else {
+                out.write(getIndent() + ",");
+                newline();
+            }
+
+            ConstraintDef constraint = (ConstraintDef)constraintIterator.next();
+            visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)constraint.getBody());
+        }
+
+        dec_ind();
+        dec_ind();
+
+        out.write(getIndent() + ";");
+        newline();
+    } else {
+        out.write(";");
+        newline();
+    }
+
     // if one of this DomainDef's use has multiplicity > 1, issue also a
     // STRUCTURE with a similar name
     boolean createStruct=false;
@@ -1248,9 +1284,16 @@ public class TransferFromUmlMetamodel
           }
       }else if(attrType.containsDirect()){
     	if(!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)){
-            if(isMandatory){
+            if (isMultiValue && useListBagOfPrimitives) {
+                if (def.getOrdering() == OrderingKind.ORDERED) {
+                    out.write("LIST ");
+                } else {
+                    out.write("BAG ");
+                }
+                out.write(visitCardinality(mr) + " OF ");
+            } else if (isMandatory) {
                 out.write("MANDATORY ");
-              }
+            }
     	}
         visitType(def,attrType.getDirect());
       }
@@ -1603,6 +1646,12 @@ public class TransferFromUmlMetamodel
       	}else{
       		out.write(visitTime(type.getMax()));
       	}
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateType) {
+        out.write("DATE");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateTimeType) {
+        out.write("DATETIME");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisTimeType) {
+        out.write("TIMEOFDAY");
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
       out.write("COORD");
