@@ -1101,6 +1101,12 @@ protected boolean save() {
 		domainDef.attachType(new BooleanType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ALIGNMENT) {
 		domainDef.attachType((BaseType)getPnlTypeAlignment().getObject());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_TIME) {
+		domainDef.attachType(new InterlisTimeType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATE) {
+		domainDef.attachType(new InterlisDateType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATETIME) {
+		domainDef.attachType(new InterlisDateTimeType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.UNKNOWN) {
                 UnknownType unknown=new UnknownType();
                 unknown.setSyntax(getPnlTypeUnknown().getSyntax());
@@ -1219,6 +1225,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof TimeType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.TIME);
 			getPnlTypeTime().setObject(type, domainDef);
+		} else if (type instanceof InterlisTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_TIME);
+		} else if (type instanceof InterlisDateType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATE);
+		} else if (type instanceof InterlisDateTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATETIME);
 		} else if (type instanceof UnknownType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);

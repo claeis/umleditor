@@ -50,6 +50,9 @@ public abstract class IliBaseTypeKind {
 	protected final static String DATE = resIliBaseTypeKind.getString("CIDate"); //$NON-NLS-1$
 	protected final static String DATETIME = resIliBaseTypeKind.getString("CIDateTime"); //$NON-NLS-1$
 	protected final static String TIME = resIliBaseTypeKind.getString("CITime"); //$NON-NLS-1$
+	protected final static String ILI_DATE = resIliBaseTypeKind.getString("CIIliDate");
+	protected final static String ILI_DATETIME = resIliBaseTypeKind.getString("CIIliDateTime");
+	protected final static String ILI_TIME = resIliBaseTypeKind.getString("CIIliTime");
 	protected final static String REFERENCE = resIliBaseTypeKind.getString("CIReference"); //$NON-NLS-1$
 	protected final static String STRUCTURE = resIliBaseTypeKind.getString("CIStructure"); //$NON-NLS-1$
 /**
@@ -94,6 +97,9 @@ private static Vector getStandardTypes() {
 	standardTypes.add(DATE);
 	standardTypes.add(DATETIME);
 	standardTypes.add(TIME);
+	standardTypes.add(ILI_DATE);
+	standardTypes.add(ILI_DATETIME);
+	standardTypes.add(ILI_TIME);
 	standardTypes.add(COORD);
 	standardTypes.add(POLYLINE);
 	standardTypes.add(SURFACE);
@@ -130,6 +136,12 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 					return DATETIME;
 				} else if (type instanceof TimeType) {
 					return TIME;
+				} else if (type instanceof InterlisDateType) {
+					return ILI_DATE;
+				} else if (type instanceof InterlisDateTimeType) {
+					return ILI_DATETIME;
+				} else if (type instanceof InterlisTimeType) {
+					return ILI_TIME;
 				} else if (type instanceof CoordinateType) {
 					return COORD;
 				} else if (type instanceof ClassType) {
