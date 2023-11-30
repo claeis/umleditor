@@ -1,6 +1,7 @@
 LATEST 
 ----------------------------------
 - ili import: Konsistenzbedingungen (Constraints) mit Namen (#69)
+- ili import: fix removed ContextDefs (ili2c#118) 
 
 UML-Editor 3.9.0 (2022-07-08) 
 ----------------------------------

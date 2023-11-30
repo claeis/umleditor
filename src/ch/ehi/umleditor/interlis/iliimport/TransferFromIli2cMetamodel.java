@@ -296,14 +296,14 @@ public class TransferFromIli2cMetamodel
     return unitDef;
   }
 
-    private java.util.HashMap<ContextDefs, ch.ehi.interlis.modeltopicclass.ContextDef> contextMap = new java.util.HashMap<ContextDefs, ch.ehi.interlis.modeltopicclass.ContextDef>();
+    private java.util.HashMap<ContextDef, ch.ehi.interlis.modeltopicclass.ContextDef> contextMap = new java.util.HashMap<ContextDef, ch.ehi.interlis.modeltopicclass.ContextDef>();
 
-    private ch.ehi.interlis.modeltopicclass.ContextDef findContextDef(ContextDefs tdContextDefs) {
-        if (contextMap.containsKey(tdContextDefs)) {
-            return contextMap.get(tdContextDefs);
+    private ch.ehi.interlis.modeltopicclass.ContextDef findContextDef(ContextDef tdContextDef) {
+        if (contextMap.containsKey(tdContextDef)) {
+            return contextMap.get(tdContextDef);
         }
         ch.ehi.interlis.modeltopicclass.ContextDef contextDef = new ch.ehi.interlis.modeltopicclass.ContextDef();
-        contextMap.put(tdContextDefs, contextDef);
+        contextMap.put(tdContextDef, contextDef);
         return contextDef;
     }
 
@@ -605,29 +605,25 @@ public class TransferFromIli2cMetamodel
 
   }
 
-    private ch.ehi.interlis.modeltopicclass.ContextDef visitContextDefs(ContextDefs tdContextDefs) {
+    private ch.ehi.interlis.modeltopicclass.ContextDef visitContextDef(ContextDef tdContextDef) {
         ch.ehi.interlis.modeltopicclass.ContextDef context;
 
-        ContextDefs translatedContext = (ContextDefs) getElementInRootLanguage(tdContextDefs);
+        ContextDef translatedContext = (ContextDef) getElementInRootLanguage(tdContextDef);
         if (translatedContext != null) {
             context = findContextDef(translatedContext);
         } else {
-            context = findContextDef(tdContextDefs);
+            context = findContextDef(tdContextDef);
         }
 
-        context.setName(new NlsString(context.getName(), modelLanguage, tdContextDefs.getName()));
+        context.setName(new NlsString(context.getName(), modelLanguage, tdContextDef.getName()));
 
         // documentation
-        String ilidoc = tdContextDefs.getDocumentation();
+        String ilidoc = tdContextDef.getDocumentation();
         if (ilidoc != null) {
             context.setDocumentation(new NlsString(context.getDocumentation(), modelLanguage, ilidoc));
         }
 
-        Iterator<ContextDef> contextIterator = tdContextDefs.iterator();
-        while (contextIterator.hasNext()) {
-            ContextDef contextDef = contextIterator.next();
-            makeSyntax.printContextSyntax(tdContextDefs.getContainer(), contextDef);
-        }
+        makeSyntax.printContextSyntax(tdContextDef.getContainer(), tdContextDef);
         context.setSyntax(new NlsString(context.getSyntax(), modelLanguage, getSyntax()));
         if (translatedContext == null) {
             getNamespace().addOwnedElement(context);
@@ -705,10 +701,14 @@ private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef visitRuntimePara
 	}
 
 	if(translatedMu==null) {
-	    TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
-	    DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
-	    if(basket!=null){
-	      mdef.setBasketOid(basket.getBoid());
+	    if(mu.getContainer()==PredefinedModel.getInstance()) {
+	        // no container (TransferDescription) for PredefinedModel instance
+	    }else {
+	        TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
+	        DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
+	        if(basket!=null){
+	          mdef.setBasketOid(basket.getBoid());
+	        }
 	    }
 	}
     makeSyntax.printMetaDataUseDef(mu);
@@ -1934,8 +1934,8 @@ private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineF
       {
 		nextUmlEle=visitUnit((Unit) elt);
       }
-      else if (elt instanceof ContextDefs) {
-          nextUmlEle = visitContextDefs((ContextDefs) elt);
+      else if (elt instanceof ContextDef) {
+          nextUmlEle = visitContextDef((ContextDef) elt);
       }
       else if (elt instanceof Function)
       {
