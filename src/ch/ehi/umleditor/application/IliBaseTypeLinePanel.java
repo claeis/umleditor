@@ -63,9 +63,10 @@ public class IliBaseTypeLinePanel extends BasePanel implements DataPanel, ListMe
 	private javax.swing.JCheckBox ivjChxStraights = null;
     private javax.swing.JLabel ivjLblEpsgCode = null;
     private javax.swing.JTextField ivjTxtEpsgCode = null;
+	private boolean isMulti;
 
 
-class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener {
+	class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.MouseListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			if (e.getSource() == IliBaseTypeLinePanel.this.getMniOpenLineFormTypeDefSpecification()) 
 				connEtoC6(e);
@@ -629,6 +630,8 @@ public java.lang.Object getObject() {
 		lineType.detachLineForm();
 	}
 
+	lineType.setMulti(isMulti);
+
 	return lineType;
 }
 /**
@@ -939,6 +942,7 @@ private void setLinetype(LineType lineType,ModelElement modelElement, ModelEleme
 		getTblLineFormTypeDef().setModel(new EditorTableModel());
 		((EditorTableModel)getTblLineFormTypeDef().getModel()).setLineFormTypeDef(null);
 	}
+	isMulti = lineType.isMulti();
 }
 /**
  * Set the Object to be displayed by panel.
