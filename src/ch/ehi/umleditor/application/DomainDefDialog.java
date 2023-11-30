@@ -163,6 +163,12 @@ private void adaptType() {
 		newPanel = getPnlTypeCoord();
 		// initalize Numeric aggregations
 		getPnlTypeCoord().setObject(null, domainDef, domainDef);
+		getPnlTypeCoord().setMulti(false);
+	} else if (item.equals(IliBaseTypeKind.MULTI_COORD)) {
+		newPanel = getPnlTypeCoord();
+		// initalize Numeric aggregations
+		getPnlTypeCoord().setObject(null, domainDef, domainDef);
+		getPnlTypeCoord().setMulti(true);
 	} else if (item.equals(IliBaseTypeKind.BASKET)) {
 		newPanel = getPnlTypeBasket();
 		// initalize aggregations
@@ -174,9 +180,19 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.POLYLINE)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new IliPolyline(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_POLYLINE)) {
+		newPanel = getPnlTypeLine();
+		IliPolyline line = new IliPolyline();
+		line.setMulti(true);
+		getPnlTypeLine().setObject(line, domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.SURFACE)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new IndividualSurface(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_SURFACE)) {
+		newPanel = getPnlTypeLine();
+		IndividualSurface surface = new IndividualSurface();
+		surface.setMulti(true);
+		getPnlTypeLine().setObject(surface, domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.OID_TYPE)) {
 		newPanel = getPnlTypeOid();
 		getPnlTypeOid().setObject(new OidType(), domainDef);
@@ -194,6 +210,11 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.AREA)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new Tesselation(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_AREA)) {
+		newPanel = getPnlTypeLine();
+		Tesselation area = new Tesselation();
+		area.setMulti(true);
+		getPnlTypeLine().setObject(area, domainDef, domainDef);
 	}
 
 	if (currentDataPanel != newPanel) {
@@ -1149,13 +1170,13 @@ protected boolean save() {
 private void setEPSGCode() {
     String epsgCode=null;
     String item = (String)getCbxType().getSelectedItem();
-    if (item.equals(IliBaseTypeKind.POLYLINE)) {
+    if (item.equals(IliBaseTypeKind.POLYLINE) || item.equals(IliBaseTypeKind.MULTI_POLYLINE)) {
         epsgCode=getPnlTypeLine().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.COORD)) {
+    } else if (item.equals(IliBaseTypeKind.COORD) || item.equals(IliBaseTypeKind.MULTI_COORD)) {
         epsgCode= getPnlTypeCoord().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.SURFACE)) {
+    } else if (item.equals(IliBaseTypeKind.SURFACE) || item.equals(IliBaseTypeKind.MULTI_SURFACE)) {
         epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.AREA)) {
+    } else if (item.equals(IliBaseTypeKind.AREA) || item.equals(IliBaseTypeKind.MULTI_AREA)) {
         epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
     }
     if(epsgCode!=null) {
@@ -1215,7 +1236,11 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				}
 			}
 			if(!isIli22){
-				getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
+				if (ct.isMulti()) {
+					getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_COORD);
+				} else {
+					getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
+				}
 				getPnlTypeCoord().setObject(type, domainDef, domainDef);
 			}else{
 				// 2.2 type; doesn't exist in 2.3
@@ -1225,13 +1250,25 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				getPnlTypeUnknown().setSyntax(convertedType);
 			}
 		} else if (type instanceof IliPolyline) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
+			if (((IliPolyline) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_POLYLINE);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof IndividualSurface) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.SURFACE);
+			if (((IndividualSurface) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_SURFACE);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.SURFACE);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof Tesselation) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.AREA);
+			if (((Tesselation) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_AREA);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.AREA);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof OidType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.OID_TYPE);

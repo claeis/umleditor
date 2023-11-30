@@ -17,6 +17,9 @@
  */
 package ch.ehi.umleditor.interlis.iliexport;
 
+import ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline;
+import ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface;
+import ch.ehi.interlis.domainsandconstants.linetypes.Tesselation;
 import ch.ehi.interlis.modeltopicclass.ContextDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
@@ -1660,7 +1663,7 @@ public class TransferFromUmlMetamodel
         out.write("TIMEOFDAY");
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
-      out.write("COORD");
+      out.write(type.isMulti() ? "MULTICOORD" : "COORD");
       java.util.Iterator dimi=type.iteratorDim();
       String sep=" ";
       while(dimi.hasNext()){
@@ -1676,18 +1679,20 @@ public class TransferFromUmlMetamodel
         out.write(Long.toString(rot.getPihalfAxis()));
       }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.LineType){
-      if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface){
-        out.write("SURFACE");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.Tesselation){
-        out.write("AREA");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline){
-        if(((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline)def).isDirected()){
-          out.write("DIRECTED POLYLINE");
-        }else{
-          out.write("POLYLINE");
-        }
-      }
       ch.ehi.interlis.domainsandconstants.linetypes.LineType type=(ch.ehi.interlis.domainsandconstants.linetypes.LineType)def;
+
+      if (type instanceof IliPolyline) {
+          IliPolyline iliPolyline = (IliPolyline) type;
+          if (iliPolyline.isDirected()) {
+              out.write("DIRECTED ");
+          }
+          out.write(iliPolyline.isMulti() ? "MULTIPOLYLINE" : "POLYLINE");
+      } else if (type instanceof Tesselation) {
+          out.write(type.isMulti() ? "MULTIAREA" : "AREA");
+      } else if (type instanceof IndividualSurface) {
+          out.write(type.isMulti() ? "MULTISURFACE" : "SURFACE");
+      }
+
       if(type.containsLineForm()){
         ch.ehi.interlis.domainsandconstants.linetypes.LineForm form=type.getLineForm();
         out.write(" WITH (");

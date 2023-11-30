@@ -1525,11 +1525,18 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
       if (lt instanceof PolylineType){
         line=new ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline();
         ((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline)line).setDirected(((PolylineType) lt).isDirected());
-      }else if (lt instanceof SurfaceType){
-        line=new ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface();
-      }else if (lt instanceof AreaType){
-        line=new ch.ehi.interlis.domainsandconstants.linetypes.Tesselation();
+      } else if (lt instanceof MultiPolylineType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline();
+        ((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline) line).setDirected(((MultiPolylineType) lt).isDirected());
+      } else if (lt instanceof SurfaceType || lt instanceof MultiSurfaceType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface();
+      } else if (lt instanceof AreaType || lt instanceof MultiAreaType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.Tesselation();
       }
+      if (line != null) {
+        line.setMulti(lt instanceof MultiSurfaceType || lt instanceof MultiAreaType || lt instanceof MultiPolylineType);
+      }
+
       ret=line;
 
 

@@ -453,5 +453,18 @@ public abstract class LineType extends Type implements java.io.Serializable
 
                 // -end- 358A65070007 detail_end "LineType"
 
+                private boolean isMulti;
+
+                public boolean isMulti() {
+                    return isMulti;
+                }
+
+                public void setMulti(boolean value) {
+                  if (isMulti != value) {
+                    isMulti = value;
+                    ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this, "setMulti"));
+                  }
+                }
+
               }
 
