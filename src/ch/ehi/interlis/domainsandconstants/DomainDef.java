@@ -1293,6 +1293,21 @@ public class DomainDef extends AbstractNamespace implements DataType , java.io.S
     // -end- 3C1DD56C023F set_body358A5E2403D8 "propFinal"
   }
 
+  private boolean isGeneric;
+
+  public  boolean isGeneric()
+  {
+    return isGeneric;
+  }
+
+  public void setGeneric(boolean isGeneric)
+  {
+    if(this.isGeneric != isGeneric){
+      this.isGeneric = isGeneric;
+      ch.ehi.uml1_4.changepropagation.MetaModel.getInstance().notifyChange(new ch.ehi.uml1_4.changepropagation.MetaModelChange(this,"setGeneric"));
+    }
+  }
+
   /** tests if this Classifier contains a Feature with the given name
    */
   // -beg- preserve=no 3CB2C64E0374 head358A5E2403D8 "containsFeature"
