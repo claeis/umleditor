@@ -20,6 +20,7 @@ package ch.ehi.umleditor.interlis.iliexport;
 import ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline;
 import ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface;
 import ch.ehi.interlis.domainsandconstants.linetypes.Tesselation;
+import ch.ehi.interlis.modeltopicclass.ContextDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -533,6 +534,8 @@ public class TransferFromUmlMetamodel
         visitLineFormTypeDef((LineFormTypeDef)obj);
        }else if(obj instanceof DomainDef){
         visitDomainDef((DomainDef)obj);
+       }else if(obj instanceof ContextDef){
+        visitContextDef((ContextDef)obj);
        }else if(obj instanceof GraphicParameterDef){
         visitGraphicParameterDef((GraphicParameterDef)obj);
        }else if(obj instanceof ClassDef){
@@ -719,6 +722,30 @@ public class TransferFromUmlMetamodel
     return;
     }
 
+    public void visitContextDef(ContextDef def) throws java.io.IOException
+    {
+        newline();
+
+        if(!(lastModelElement instanceof ContextDef)) {
+            out.write(getIndent() + "CONTEXT");
+            newline();
+            newline();
+        }
+        inc_ind();
+
+        defineLinkToModelElement(def);
+        visitDocumentation(def.getDocumentation());
+        visitTaggedValues(def);
+        out.write(getIndent() + def.getDefLangName() + " =");
+        newline();
+
+        inc_ind();
+        visitIliSyntax(def);
+        dec_ind();
+
+        dec_ind();
+    }
+
   public void visitFunctionDef(FunctionDef def)
         throws java.io.IOException
 
@@ -781,6 +808,10 @@ public class TransferFromUmlMetamodel
     }
     if(def.isPropFinal()){
       out.write((propc==0?" (":",")+"FINAL");
+      propc++;
+    }
+    if (def.isGeneric()) {
+      out.write((propc == 0 ? " (" : ",") + "GENERIC");
       propc++;
     }
     if(propc>0){

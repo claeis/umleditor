@@ -295,6 +295,18 @@ public class TransferFromIli2cMetamodel
     unitMap.put(unit,unitDef);
     return unitDef;
   }
+
+    private java.util.HashMap<ContextDefs, ch.ehi.interlis.modeltopicclass.ContextDef> contextMap = new java.util.HashMap<ContextDefs, ch.ehi.interlis.modeltopicclass.ContextDef>();
+
+    private ch.ehi.interlis.modeltopicclass.ContextDef findContextDef(ContextDefs tdContextDefs) {
+        if (contextMap.containsKey(tdContextDefs)) {
+            return contextMap.get(tdContextDefs);
+        }
+        ch.ehi.interlis.modeltopicclass.ContextDef contextDef = new ch.ehi.interlis.modeltopicclass.ContextDef();
+        contextMap.put(tdContextDefs, contextDef);
+        return contextDef;
+    }
+
   private java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef> functionMap=new java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef>();
   private ch.ehi.interlis.functions.FunctionDef findFunctionDef(Function f)
   {
@@ -593,6 +605,35 @@ public class TransferFromIli2cMetamodel
 
   }
 
+    private ch.ehi.interlis.modeltopicclass.ContextDef visitContextDefs(ContextDefs tdContextDefs) {
+        ch.ehi.interlis.modeltopicclass.ContextDef context;
+
+        ContextDefs translatedContext = (ContextDefs) getElementInRootLanguage(tdContextDefs);
+        if (translatedContext != null) {
+            context = findContextDef(translatedContext);
+        } else {
+            context = findContextDef(tdContextDefs);
+        }
+
+        context.setName(new NlsString(context.getName(), modelLanguage, tdContextDefs.getName()));
+
+        // documentation
+        String ilidoc = tdContextDefs.getDocumentation();
+        if (ilidoc != null) {
+            context.setDocumentation(new NlsString(context.getDocumentation(), modelLanguage, ilidoc));
+        }
+
+        Iterator<ContextDef> contextIterator = tdContextDefs.iterator();
+        while (contextIterator.hasNext()) {
+            ContextDef contextDef = contextIterator.next();
+            makeSyntax.printContextSyntax(tdContextDefs.getContainer(), contextDef);
+        }
+        context.setSyntax(new NlsString(context.getSyntax(), modelLanguage, getSyntax()));
+        if (translatedContext == null) {
+            getNamespace().addOwnedElement(context);
+        }
+        return context;
+    }
 
   private void visitParameter (Parameter par)
   {
@@ -1355,6 +1396,13 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
 	    
 	    domaindef.setAbstract(dd.isAbstract());
 	    domaindef.setPropFinal(dd.isFinal());
+
+        Type domainType = dd.getType();
+        if (domainType instanceof AbstractCoordType) {
+            AbstractCoordType domainCoordType = (AbstractCoordType) domainType;
+            domaindef.setGeneric(domainCoordType.isGeneric());
+        }
+
 	    // TODO handle MANDATORY DomainDef
 	    //domaindef.setMandatory();
 
@@ -1892,6 +1940,9 @@ private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineF
       else if (elt instanceof Unit)
       {
 		nextUmlEle=visitUnit((Unit) elt);
+      }
+      else if (elt instanceof ContextDefs) {
+          nextUmlEle = visitContextDefs((ContextDefs) elt);
       }
       else if (elt instanceof Function)
       {
