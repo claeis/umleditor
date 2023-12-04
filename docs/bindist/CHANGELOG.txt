@@ -1,5 +1,13 @@
 LATEST 
 ----------------------------------
+
+UML-Editor 3.10.0 (2023-12-04) 
+----------------------------------
+- ILI2.4: Add multi geometry types (#63)
+- ILI2.4: Generic coordinate and context definitions (#71)
+- ILI2.4: Add types DATE, TIMEOFDAY and DATETIME (#64)
+- ILI2.4: Support LIST OF / BAG OF for primitive types (#65)
+- ILI2.4: Add constraints to DomainDefDialog (#70)
 - ili import: Konsistenzbedingungen (Constraints) mit Namen (#69)
 - ili import: fix removed ContextDefs (ili2c#118) 
 - ili2c-5.4.0
