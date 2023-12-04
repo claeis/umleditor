@@ -329,11 +329,11 @@ public class ModelElementUtility
       3. FunctionDef
       4. LineFormTypeDef
       5. DomainDef
-      6. RunTimeParameterDef
-      7. ClassDef
-      8. AssociationDef
-      9. ViewDef
-      10. GraphicDef
+      6. ContextDef
+      7. GraphicParameterDef
+      8. ClassDef
+      9. AssociationDef
+      10. ViewDef
       11. UmlPackage
       12. TopicDef
       13. ModelDef
@@ -346,6 +346,7 @@ public class ModelElementUtility
       ordering.add(ch.ehi.interlis.functions.FunctionDef.class);
       ordering.add(ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef.class);
       ordering.add(ch.ehi.interlis.domainsandconstants.DomainDef.class);
+      ordering.add(ch.ehi.interlis.modeltopicclass.ContextDef.class);
       ordering.add(ch.ehi.interlis.graphicdescriptions.GraphicParameterDef.class);
       ordering.add(ch.ehi.interlis.modeltopicclass.ClassDef.class);
       ordering.add(ch.ehi.interlis.associations.AssociationDef.class);

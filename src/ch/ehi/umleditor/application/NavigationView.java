@@ -68,6 +68,7 @@ public class NavigationView extends ch.softenvironment.view.BasePanel implements
 	private javax.swing.JMenuItem ivjMniLineFormTypeDef = null;
 	private javax.swing.JMenuItem ivjMniRemove = null;
 	private javax.swing.JMenuItem ivjMniUnitDef = null;
+	private javax.swing.JMenuItem ivjMniContextDef = null;
 	private javax.swing.JMenuItem ivjMniViewDef = null;
 	private javax.swing.JMenuItem ivjMniViewProjectionDef = null;
 	private javax.swing.JMenu ivjMnuNew = null;
@@ -111,6 +112,8 @@ class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.M
 				connEtoC9(e);
 			if (e.getSource() == NavigationView.this.getMniUnitDef())
 				connEtoC11(e);
+			if (e.getSource() == NavigationView.this.getMniContextDef())
+				createNewContext(e);
 			if (e.getSource() == NavigationView.this.getMniFunctionDef())
 				connEtoC12(e);
 			if (e.getSource() == NavigationView.this.getMniLineFormTypeDef())
@@ -232,6 +235,7 @@ getMnuSort().setFont(getMniOpen().getFont());
 			addMenuItem(getMniMetaDataUseDef());
 			addMenuItem(getMniTopicDef());
 			addMenuItem(getMniUnitDef());
+			addMenuItem(getMniContextDef());
 		} else if (isInsideTopicDef(treeNode)) {
 			addMenuItem(getMniAssociationDef());
 			addMenuItem(getMniClassDef());
@@ -327,6 +331,15 @@ private void connEtoC11(java.awt.event.ActionEvent arg1) {
 		handleException(ivjExc);
 	}
 }
+
+private void createNewContext(java.awt.event.ActionEvent arg) {
+	try {
+		addElement(ch.ehi.interlis.modeltopicclass.ContextDef.class);
+	} catch (java.lang.Throwable ivjExc) {
+		handleException(ivjExc);
+	}
+}
+
 /**
  * connEtoC12:  (MniFunctionDef.action.actionPerformed(java.awt.event.ActionEvent) --> NavigationView.newFunctionDef()V)
  * @param arg1 java.awt.event.ActionEvent
@@ -1503,6 +1516,19 @@ private javax.swing.JMenuItem getMniUnitDef() {
 	}
 	return ivjMniUnitDef;
 }
+	private javax.swing.JMenuItem getMniContextDef() {
+		if (ivjMniContextDef == null) {
+			try {
+				ivjMniContextDef = new javax.swing.JMenuItem();
+				ivjMniContextDef.setName("MniContextDef");
+				ivjMniContextDef.setEnabled(true);
+				ivjMniContextDef.setText(getResourceString("MniContextDef_text"));
+			} catch (java.lang.Throwable ivjExc) {
+				handleException(ivjExc);
+			}
+		}
+		return ivjMniContextDef;
+	}
 /**
  * Return the JMenuItem11 property value.
  * @return javax.swing.JMenuItem
@@ -1599,6 +1625,7 @@ private javax.swing.JMenu getMnuNew() {
 			ivjMnuNew.add(getMniModelDef());
 			ivjMnuNew.add(getMniMetaDataUseDef());
 			ivjMnuNew.add(getMniUnitDef());
+			ivjMnuNew.add(getMniContextDef());
 			ivjMnuNew.add(getMniFunctionDef());
 			ivjMnuNew.add(getMniLineFormTypeDef());
 			ivjMnuNew.add(getMniDomainDef());
@@ -1741,6 +1768,7 @@ private void initConnections() throws java.lang.Exception {
 	getMniClassDef().addActionListener(ivjEventHandler);
 	getMniDomainDef().addActionListener(ivjEventHandler);
 	getMniUnitDef().addActionListener(ivjEventHandler);
+	getMniContextDef().addActionListener(ivjEventHandler);
 	getMniFunctionDef().addActionListener(ivjEventHandler);
 	getMniLineFormTypeDef().addActionListener(ivjEventHandler);
 	getMniGraphicParameterDef().addActionListener(ivjEventHandler);

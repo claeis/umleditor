@@ -17,6 +17,10 @@
  */
 package ch.ehi.umleditor.interlis.iliexport;
 
+import ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline;
+import ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface;
+import ch.ehi.interlis.domainsandconstants.linetypes.Tesselation;
+import ch.ehi.interlis.modeltopicclass.ContextDef;
 import ch.ehi.uml1_4.foundation.core.Namespace;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.IliImport;
@@ -111,6 +115,12 @@ public class TransferFromUmlMetamodel
   
   private boolean useMultiValueStructAttrs=false;
   
+  /**
+  * Determines whether LIST OF or BAG OF is used for primitive types.
+  * <c>true</c> from INTERLIS 2.4 onwards.
+  */
+  private boolean useListBagOfPrimitives = false;
+
   class ModelElementEntry {
     public ModelElementEntry(int line,AbstractEditorElement def)
     {
@@ -330,11 +340,8 @@ public class TransferFromUmlMetamodel
 	        // write
 	        defineLinkToModelElement(def);
 	        out.write("INTERLIS "+def.getVersion()+";");newline();
-	        if(Double.toString(def.getVersion()).equals("2.3")){
-	        	useMultiValueStructAttrs=true;
-	        }else{
-	        	useMultiValueStructAttrs=false;
-	        }
+            useMultiValueStructAttrs = Double.toString(def.getVersion()).equals("2.3");
+            useListBagOfPrimitives = def.getVersion() >= 2.4;
 	        visitINTERLIS2Def(def,language);
 	      }
 	      done.add(language);
@@ -527,6 +534,8 @@ public class TransferFromUmlMetamodel
         visitLineFormTypeDef((LineFormTypeDef)obj);
        }else if(obj instanceof DomainDef){
         visitDomainDef((DomainDef)obj);
+       }else if(obj instanceof ContextDef){
+        visitContextDef((ContextDef)obj);
        }else if(obj instanceof GraphicParameterDef){
         visitGraphicParameterDef((GraphicParameterDef)obj);
        }else if(obj instanceof ClassDef){
@@ -713,6 +722,30 @@ public class TransferFromUmlMetamodel
     return;
     }
 
+    public void visitContextDef(ContextDef def) throws java.io.IOException
+    {
+        newline();
+
+        if(!(lastModelElement instanceof ContextDef)) {
+            out.write(getIndent() + "CONTEXT");
+            newline();
+            newline();
+        }
+        inc_ind();
+
+        defineLinkToModelElement(def);
+        visitDocumentation(def.getDocumentation());
+        visitTaggedValues(def);
+        out.write(getIndent() + def.getDefLangName() + " =");
+        newline();
+
+        inc_ind();
+        visitIliSyntax(def);
+        dec_ind();
+
+        dec_ind();
+    }
+
   public void visitFunctionDef(FunctionDef def)
         throws java.io.IOException
 
@@ -777,6 +810,10 @@ public class TransferFromUmlMetamodel
       out.write((propc==0?" (":",")+"FINAL");
       propc++;
     }
+    if (def.isGeneric()) {
+      out.write((propc == 0 ? " (" : ",") + "GENERIC");
+      propc++;
+    }
     if(propc>0){
       out.write(")");
     }
@@ -801,7 +838,40 @@ public class TransferFromUmlMetamodel
     if(def.containsType()){
       visitType(def,def.getType());
     }
-    out.write(";");newline();
+
+    if (def.sizeConstraint() > 0) {
+        inc_ind();
+
+        newline();
+        out.write(getIndent() + "CONSTRAINTS");
+        newline();
+
+        inc_ind();
+
+        boolean first = true;
+        Iterator constraintIterator = def.iteratorConstraint();
+        while (constraintIterator.hasNext()) {
+            if (first) {
+                first = false;
+            } else {
+                out.write(getIndent() + ",");
+                newline();
+            }
+
+            ConstraintDef constraint = (ConstraintDef)constraintIterator.next();
+            visitIliSyntax((ch.ehi.interlis.constraints.ConstraintExpression)constraint.getBody());
+        }
+
+        dec_ind();
+        dec_ind();
+
+        out.write(getIndent() + ";");
+        newline();
+    } else {
+        out.write(";");
+        newline();
+    }
+
     // if one of this DomainDef's use has multiplicity > 1, issue also a
     // STRUCTURE with a similar name
     boolean createStruct=false;
@@ -1223,9 +1293,16 @@ public class TransferFromUmlMetamodel
           }
       }else if(attrType.containsDirect()){
     	if(!(attrType.getDirect() instanceof ch.ehi.interlis.domainsandconstants.basetypes.StructAttrType)){
-            if(isMandatory){
+            if (isMultiValue && useListBagOfPrimitives) {
+                if (def.getOrdering() == OrderingKind.ORDERED) {
+                    out.write("LIST ");
+                } else {
+                    out.write("BAG ");
+                }
+                out.write(visitCardinality(mr) + " OF ");
+            } else if (isMandatory) {
                 out.write("MANDATORY ");
-              }
+            }
     	}
         visitType(def,attrType.getDirect());
       }
@@ -1578,9 +1655,15 @@ public class TransferFromUmlMetamodel
       	}else{
       		out.write(visitTime(type.getMax()));
       	}
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateType) {
+        out.write("DATE");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateTimeType) {
+        out.write("DATETIME");
+    } else if (def instanceof ch.ehi.interlis.domainsandconstants.basetypes.InterlisTimeType) {
+        out.write("TIMEOFDAY");
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType){
       ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType type=(ch.ehi.interlis.domainsandconstants.basetypes.CoordinateType)def;
-      out.write("COORD");
+      out.write(type.isMulti() ? "MULTICOORD" : "COORD");
       java.util.Iterator dimi=type.iteratorDim();
       String sep=" ";
       while(dimi.hasNext()){
@@ -1596,18 +1679,20 @@ public class TransferFromUmlMetamodel
         out.write(Long.toString(rot.getPihalfAxis()));
       }
     }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.LineType){
-      if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface){
-        out.write("SURFACE");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.Tesselation){
-        out.write("AREA");
-      }else if(def instanceof ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline){
-        if(((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline)def).isDirected()){
-          out.write("DIRECTED POLYLINE");
-        }else{
-          out.write("POLYLINE");
-        }
-      }
       ch.ehi.interlis.domainsandconstants.linetypes.LineType type=(ch.ehi.interlis.domainsandconstants.linetypes.LineType)def;
+
+      if (type instanceof IliPolyline) {
+          IliPolyline iliPolyline = (IliPolyline) type;
+          if (iliPolyline.isDirected()) {
+              out.write("DIRECTED ");
+          }
+          out.write(iliPolyline.isMulti() ? "MULTIPOLYLINE" : "POLYLINE");
+      } else if (type instanceof Tesselation) {
+          out.write(type.isMulti() ? "MULTIAREA" : "AREA");
+      } else if (type instanceof IndividualSurface) {
+          out.write(type.isMulti() ? "MULTISURFACE" : "SURFACE");
+      }
+
       if(type.containsLineForm()){
         ch.ehi.interlis.domainsandconstants.linetypes.LineForm form=type.getLineForm();
         out.write(" WITH (");

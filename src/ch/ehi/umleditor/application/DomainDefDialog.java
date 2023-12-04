@@ -60,6 +60,7 @@ public class DomainDefDialog extends BaseDialog {
 	private javax.swing.JCheckBox ivjChxFinal = null;
 	private DescriptionPanel ivjPnlDescription = null;
 	private javax.swing.JCheckBox ivjChxMandatory = null;
+	private javax.swing.JCheckBox ivjChxGeneric = null;
 	private javax.swing.JLabel ivjLblType = null;
 	private javax.swing.JPanel ivjPnlDetail = null;
 	private IliBaseTypeBasketPanel ivjPnlTypeBasket = null;
@@ -78,6 +79,7 @@ public class DomainDefDialog extends BaseDialog {
 	private ExtendedPanel ivjPnlExtended = null;
 	private IliBaseTypeAlignmentPanel ivjPnlTypeAlignment = null;
 	private MetaAttributePanel ivjPnlMetaAttributes = null;
+	private InterlisSyntaxPanel ivjPnlConstraints = null;
 
 class IvjEventHandler implements java.awt.event.ActionListener, java.awt.event.FocusListener, java.awt.event.ItemListener {
 		public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -161,6 +163,12 @@ private void adaptType() {
 		newPanel = getPnlTypeCoord();
 		// initalize Numeric aggregations
 		getPnlTypeCoord().setObject(null, domainDef, domainDef);
+		getPnlTypeCoord().setMulti(false);
+	} else if (item.equals(IliBaseTypeKind.MULTI_COORD)) {
+		newPanel = getPnlTypeCoord();
+		// initalize Numeric aggregations
+		getPnlTypeCoord().setObject(null, domainDef, domainDef);
+		getPnlTypeCoord().setMulti(true);
 	} else if (item.equals(IliBaseTypeKind.BASKET)) {
 		newPanel = getPnlTypeBasket();
 		// initalize aggregations
@@ -172,9 +180,19 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.POLYLINE)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new IliPolyline(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_POLYLINE)) {
+		newPanel = getPnlTypeLine();
+		IliPolyline line = new IliPolyline();
+		line.setMulti(true);
+		getPnlTypeLine().setObject(line, domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.SURFACE)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new IndividualSurface(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_SURFACE)) {
+		newPanel = getPnlTypeLine();
+		IndividualSurface surface = new IndividualSurface();
+		surface.setMulti(true);
+		getPnlTypeLine().setObject(surface, domainDef, domainDef);
 	} else if (item.equals(IliBaseTypeKind.OID_TYPE)) {
 		newPanel = getPnlTypeOid();
 		getPnlTypeOid().setObject(new OidType(), domainDef);
@@ -192,6 +210,11 @@ private void adaptType() {
 	} else if (item.equals(IliBaseTypeKind.AREA)) {
 		newPanel = getPnlTypeLine();
 		getPnlTypeLine().setObject(new Tesselation(), domainDef, domainDef);
+	} else if (item.equals(IliBaseTypeKind.MULTI_AREA)) {
+		newPanel = getPnlTypeLine();
+		Tesselation area = new Tesselation();
+		area.setMulti(true);
+		getPnlTypeLine().setObject(area, domainDef, domainDef);
 	}
 
 	if (currentDataPanel != newPanel) {
@@ -534,6 +557,20 @@ private javax.swing.JCheckBox getChxMandatory() {
 	}
 	return ivjChxMandatory;
 }
+	private javax.swing.JCheckBox getChxGeneric() {
+		if (ivjChxGeneric == null) {
+			try {
+				ivjChxGeneric = new javax.swing.JCheckBox();
+				ivjChxGeneric.setName("ChxGeneric");
+				ivjChxGeneric.setEnabled(true);
+				ivjChxGeneric.setToolTipText(getResourceString("ChxGeneric_toolTipText"));
+				ivjChxGeneric.setText(getResourceString("ChxGeneric_text"));
+			} catch (java.lang.Throwable ivjExc) {
+				handleException(ivjExc);
+			}
+		}
+		return ivjChxGeneric;
+	}
 /**
  * Return the JLabel1 property value.
  * @return javax.swing.JLabel
@@ -613,6 +650,20 @@ private MetaAttributePanel getPnlMetaAttributes() {
 	return ivjPnlMetaAttributes;
 }
 /**
+ * Return the PnlConstraints property value.
+ */
+private InterlisSyntaxPanel getPnlConstraints() {
+	if (ivjPnlConstraints == null) {
+		try {
+			ivjPnlConstraints = new ch.ehi.umleditor.application.InterlisSyntaxPanel();
+			ivjPnlConstraints.setName("PnlConstraints");
+		} catch (java.lang.Throwable ivjExc) {
+			handleException(ivjExc);
+		}
+	}
+	return ivjPnlConstraints;
+}
+/**
  * Return the JPanel1 property value.
  * @return javax.swing.JPanel
  */
@@ -631,13 +682,6 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsChxAbstract.insets = new java.awt.Insets(20, 20, 2, 417);
 			getPnlDetail().add(getChxAbstract(), constraintsChxAbstract);
 
-			java.awt.GridBagConstraints constraintsChxMandatory = new java.awt.GridBagConstraints();
-			constraintsChxMandatory.gridx = 1; constraintsChxMandatory.gridy = 3;
-			constraintsChxMandatory.anchor = java.awt.GridBagConstraints.NORTHWEST;
-			constraintsChxMandatory.ipadx = 42;
-			constraintsChxMandatory.insets = new java.awt.Insets(2, 20, 16, 417);
-			getPnlDetail().add(getChxMandatory(), constraintsChxMandatory);
-
 			java.awt.GridBagConstraints constraintsChxFinal = new java.awt.GridBagConstraints();
 			constraintsChxFinal.gridx = 1; constraintsChxFinal.gridy = 2;
 			constraintsChxFinal.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -645,8 +689,21 @@ private javax.swing.JPanel getPnlDetail() {
 			constraintsChxFinal.insets = new java.awt.Insets(3, 20, 1, 417);
 			getPnlDetail().add(getChxFinal(), constraintsChxFinal);
 
+			java.awt.GridBagConstraints constraintsChxMandatory = new java.awt.GridBagConstraints();
+			constraintsChxMandatory.gridx = 1; constraintsChxMandatory.gridy = 3;
+			constraintsChxMandatory.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsChxMandatory.ipadx = 42;
+			constraintsChxMandatory.insets = new java.awt.Insets(3, 20, 1, 417);
+			getPnlDetail().add(getChxMandatory(), constraintsChxMandatory);
+
+			java.awt.GridBagConstraints constraintsChxGeneric = new java.awt.GridBagConstraints();
+			constraintsChxGeneric.gridx = 1; constraintsChxGeneric.gridy = 4;
+			constraintsChxGeneric.anchor = java.awt.GridBagConstraints.NORTHWEST;
+			constraintsChxGeneric.insets = new java.awt.Insets(3, 20, 16, 417);
+			getPnlDetail().add(getChxGeneric(), constraintsChxGeneric);
+
 			java.awt.GridBagConstraints constraintsPnlExtended = new java.awt.GridBagConstraints();
-			constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 4;
+			constraintsPnlExtended.gridx = 1; constraintsPnlExtended.gridy = 5;
 			constraintsPnlExtended.fill = java.awt.GridBagConstraints.HORIZONTAL;
 			constraintsPnlExtended.anchor = java.awt.GridBagConstraints.NORTHWEST;
 			constraintsPnlExtended.weightx = 1.0;
@@ -967,7 +1024,8 @@ private javax.swing.JTabbedPane getTbpTypes() {
 			ivjTbpTypes.insertTab("PnlTypeDate", null, getPnlTypeDate(), null, 12);
 			ivjTbpTypes.insertTab("PnlTypeDateTime", null, getPnlTypeDateTime(), null, 13);
 			ivjTbpTypes.insertTab("PnlTypeTime", null, getPnlTypeTime(), null, 14);
-			ivjTbpTypes.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 15);
+			ivjTbpTypes.insertTab(getResourceString("TbpConstraints_text"), null, getPnlConstraints(), null, 15);
+			ivjTbpTypes.insertTab(getResourceString("TbpMetaAttributes_text"), null, getPnlMetaAttributes(), null, 16);
 			// user code begin {1}
 			// user code end
 		} catch (java.lang.Throwable ivjExc) {
@@ -1073,6 +1131,7 @@ protected boolean save() {
 	domainDef.setAbstract(getChxAbstract().isSelected());
 	domainDef.setPropFinal(getChxFinal().isSelected());
 	domainDef.setMandatory(getChxMandatory().isSelected());
+	domainDef.setGeneric(getChxGeneric().isSelected());
 	if (!getPnlExtended().getExtension()) {
 		return false;
 	}
@@ -1085,6 +1144,12 @@ protected boolean save() {
 		domainDef.attachType(new BooleanType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ALIGNMENT) {
 		domainDef.attachType((BaseType)getPnlTypeAlignment().getObject());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_TIME) {
+		domainDef.attachType(new InterlisTimeType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATE) {
+		domainDef.attachType(new InterlisDateType());
+	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.ILI_DATETIME) {
+		domainDef.attachType(new InterlisDateTimeType());
 	} else if (getCbxType().getSelectedItem() == IliBaseTypeKind.UNKNOWN) {
                 UnknownType unknown=new UnknownType();
                 unknown.setSyntax(getPnlTypeUnknown().getSyntax());
@@ -1094,6 +1159,9 @@ protected boolean save() {
 		setEPSGCode();
 	}
 
+	// page Constraints
+	getPnlConstraints().getConstraints();
+
 	// page MetaAttributes
 	getPnlMetaAttributes().saveToObject(domainDef);
 
@@ -1102,13 +1170,13 @@ protected boolean save() {
 private void setEPSGCode() {
     String epsgCode=null;
     String item = (String)getCbxType().getSelectedItem();
-    if (item.equals(IliBaseTypeKind.POLYLINE)) {
+    if (item.equals(IliBaseTypeKind.POLYLINE) || item.equals(IliBaseTypeKind.MULTI_POLYLINE)) {
         epsgCode=getPnlTypeLine().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.COORD)) {
+    } else if (item.equals(IliBaseTypeKind.COORD) || item.equals(IliBaseTypeKind.MULTI_COORD)) {
         epsgCode= getPnlTypeCoord().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.SURFACE)) {
+    } else if (item.equals(IliBaseTypeKind.SURFACE) || item.equals(IliBaseTypeKind.MULTI_SURFACE)) {
         epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
-    } else if (item.equals(IliBaseTypeKind.AREA)) {
+    } else if (item.equals(IliBaseTypeKind.AREA) || item.equals(IliBaseTypeKind.MULTI_AREA)) {
         epsgCode= getPnlTypeLine().getTxtEpsgCode().getText();
     }
     if(epsgCode!=null) {
@@ -1130,6 +1198,7 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 	getChxAbstract().setSelected(domainDef.isAbstract());
 	getChxFinal().setSelected(domainDef.isPropFinal());
 	getChxMandatory().setSelected(domainDef.isMandatory());
+	getChxGeneric().setSelected(domainDef.isGeneric());
 	getPnlExtended().setExtension(domainDef);
 
 	// page specific type
@@ -1167,7 +1236,11 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				}
 			}
 			if(!isIli22){
-				getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
+				if (ct.isMulti()) {
+					getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_COORD);
+				} else {
+					getCbxType().setSelectedItem(IliBaseTypeKind.COORD);
+				}
 				getPnlTypeCoord().setObject(type, domainDef, domainDef);
 			}else{
 				// 2.2 type; doesn't exist in 2.3
@@ -1177,13 +1250,25 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 				getPnlTypeUnknown().setSyntax(convertedType);
 			}
 		} else if (type instanceof IliPolyline) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
+			if (((IliPolyline) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_POLYLINE);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.POLYLINE);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof IndividualSurface) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.SURFACE);
+			if (((IndividualSurface) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_SURFACE);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.SURFACE);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof Tesselation) {
-			getCbxType().setSelectedItem(IliBaseTypeKind.AREA);
+			if (((Tesselation) type).isMulti()) {
+				getCbxType().setSelectedItem(IliBaseTypeKind.MULTI_AREA);
+			} else {
+				getCbxType().setSelectedItem(IliBaseTypeKind.AREA);
+			}
 			getPnlTypeLine().setObject(type, domainDef, domainDef);
 		} else if (type instanceof OidType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.OID_TYPE);
@@ -1200,6 +1285,12 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 		} else if (type instanceof TimeType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.TIME);
 			getPnlTypeTime().setObject(type, domainDef);
+		} else if (type instanceof InterlisTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_TIME);
+		} else if (type instanceof InterlisDateType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATE);
+		} else if (type instanceof InterlisDateTimeType) {
+			getCbxType().setSelectedItem(IliBaseTypeKind.ILI_DATETIME);
 		} else if (type instanceof UnknownType) {
 			getCbxType().setSelectedItem(IliBaseTypeKind.UNKNOWN);
 			getPnlTypeUnknown().setSyntax((UnknownType)type);
@@ -1207,6 +1298,9 @@ private void setElement(ch.ehi.uml1_4.foundation.core.Element element) {
 //TODO NYI: Type not displayable <" + type.toString() + ">"
 		}
 	}
+
+	// page Constraints
+	getPnlConstraints().setConstraints(domainDef);
 
 	// page MetaAttributes
 	getPnlMetaAttributes().setCurrentObject(domainDef);

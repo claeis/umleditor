@@ -136,6 +136,9 @@ public static String getDisplayName(java.lang.Class type) {
 	if (type.equals(ch.ehi.interlis.constraints.ConstraintDef.class)) {
 		return resElementMapper.getString("CTConstraintDef");
 	}
+	if (type.equals(ContextDef.class)) {
+		return resElementMapper.getString("CTContextDef");
+	}
 
 	// should never reach here
 	Tracer.getInstance().developerError("No NLS-Property for type <" + type.getName() + ">");

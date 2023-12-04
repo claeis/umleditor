@@ -5,12 +5,23 @@ import ch.interlis.ili2c.config.Configuration;
 import ch.interlis.ili2c.generator.Interlis2Generator;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.TimeZone;
 
 import ch.ehi.basics.types.NlsString;
 import ch.ehi.interlis.constraints.ConstraintDef;
+import ch.ehi.interlis.domainsandconstants.basetypes.DateTimeType;
+import ch.ehi.interlis.domainsandconstants.basetypes.DateTimeValue;
+import ch.ehi.interlis.domainsandconstants.basetypes.DateType;
+import ch.ehi.interlis.domainsandconstants.basetypes.DateValue;
 import ch.ehi.interlis.domainsandconstants.basetypes.EnumElement;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateTimeType;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisDateType;
+import ch.ehi.interlis.domainsandconstants.basetypes.InterlisTimeType;
+import ch.ehi.interlis.domainsandconstants.basetypes.TimeType;
+import ch.ehi.interlis.domainsandconstants.basetypes.TimeValue;
 import ch.ehi.interlis.metaobjects.ParameterDef;
 import ch.ehi.interlis.modeltopicclass.INTERLIS2Def;
 import ch.ehi.interlis.modeltopicclass.Translation;
@@ -19,6 +30,8 @@ import ch.ehi.basics.logging.EhiLogger;
 import ch.ehi.uml1_4.foundation.datatypes.OrderingKind;
 import ch.ehi.uml1_4.foundation.extensionmechanisms.TaggedValue;
 import ch.ehi.umleditor.interlis.iliexport.TransferFromUmlMetamodel;
+
+import javax.xml.bind.DatatypeConverter;
 
 public class TransferFromIli2cMetamodel
 {
@@ -282,6 +295,18 @@ public class TransferFromIli2cMetamodel
     unitMap.put(unit,unitDef);
     return unitDef;
   }
+
+    private java.util.HashMap<ContextDef, ch.ehi.interlis.modeltopicclass.ContextDef> contextMap = new java.util.HashMap<ContextDef, ch.ehi.interlis.modeltopicclass.ContextDef>();
+
+    private ch.ehi.interlis.modeltopicclass.ContextDef findContextDef(ContextDef tdContextDef) {
+        if (contextMap.containsKey(tdContextDef)) {
+            return contextMap.get(tdContextDef);
+        }
+        ch.ehi.interlis.modeltopicclass.ContextDef contextDef = new ch.ehi.interlis.modeltopicclass.ContextDef();
+        contextMap.put(tdContextDef, contextDef);
+        return contextDef;
+    }
+
   private java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef> functionMap=new java.util.HashMap<Function,ch.ehi.interlis.functions.FunctionDef>();
   private ch.ehi.interlis.functions.FunctionDef findFunctionDef(Function f)
   {
@@ -580,6 +605,31 @@ public class TransferFromIli2cMetamodel
 
   }
 
+    private ch.ehi.interlis.modeltopicclass.ContextDef visitContextDef(ContextDef tdContextDef) {
+        ch.ehi.interlis.modeltopicclass.ContextDef context;
+
+        ContextDef translatedContext = (ContextDef) getElementInRootLanguage(tdContextDef);
+        if (translatedContext != null) {
+            context = findContextDef(translatedContext);
+        } else {
+            context = findContextDef(tdContextDef);
+        }
+
+        context.setName(new NlsString(context.getName(), modelLanguage, tdContextDef.getName()));
+
+        // documentation
+        String ilidoc = tdContextDef.getDocumentation();
+        if (ilidoc != null) {
+            context.setDocumentation(new NlsString(context.getDocumentation(), modelLanguage, ilidoc));
+        }
+
+        makeSyntax.printContextSyntax(tdContextDef.getContainer(), tdContextDef);
+        context.setSyntax(new NlsString(context.getSyntax(), modelLanguage, getSyntax()));
+        if (translatedContext == null) {
+            getNamespace().addOwnedElement(context);
+        }
+        return context;
+    }
 
   private void visitParameter (Parameter par)
   {
@@ -651,10 +701,14 @@ private ch.ehi.interlis.graphicdescriptions.GraphicParameterDef visitRuntimePara
 	}
 
 	if(translatedMu==null) {
-	    TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
-	    DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
-	    if(basket!=null){
-	      mdef.setBasketOid(basket.getBoid());
+	    if(mu.getContainer()==PredefinedModel.getInstance()) {
+	        // no container (TransferDescription) for PredefinedModel instance
+	    }else {
+	        TransferDescription td=(TransferDescription)mu.getContainer(TransferDescription.class);
+	        DataContainer basket=td.getMetaDataContainer(mu.getScopedName(null));
+	        if(basket!=null){
+	          mdef.setBasketOid(basket.getBoid());
+	        }
 	    }
 	}
     makeSyntax.printMetaDataUseDef(mu);
@@ -674,6 +728,7 @@ private void visitConstraint(Constraint constr)
     }else {
         cdef=findConstraintDef(constr);
     }
+    cdef.setName(new NlsString(cdef.getName(),modelLanguage,constr.getName()));
     
     ch.ehi.interlis.constraints.ConstraintExpression expr=null;
     makeSyntax.printConstraint(constr);
@@ -944,11 +999,8 @@ private ch.ehi.uml1_4.foundation.datatypes.Multiplicity visitCardinality(Cardina
               }
             }
         }
-        ch.ehi.uml1_4.implementation.UmlMultiplicityRange r=new ch.ehi.uml1_4.implementation.UmlMultiplicityRange();
-        r.setLower( btype.isMandatory() ? 1 : 0);
-        r.setUpper(1);
-        m=new ch.ehi.uml1_4.implementation.UmlMultiplicity();
-        m.addRange(r);
+        m = visitCardinality(btype.getCardinality());
+        attrdef.setOrdering(btype.isOrdered() ?  OrderingKind.ORDERED : OrderingKind.UNORDERED);
     }
     
     if(translatedAttrib==null) {
@@ -1344,6 +1396,13 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
 	    
 	    domaindef.setAbstract(dd.isAbstract());
 	    domaindef.setPropFinal(dd.isFinal());
+
+        Type domainType = dd.getType();
+        if (domainType instanceof AbstractCoordType) {
+            AbstractCoordType domainCoordType = (AbstractCoordType) domainType;
+            domaindef.setGeneric(domainCoordType.isGeneric());
+        }
+
 	    // TODO handle MANDATORY DomainDef
 	    //domaindef.setMandatory();
 
@@ -1378,6 +1437,12 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
         domaindef.attachType(type);
         getNamespace().addOwnedElement(domaindef);
     }
+
+    // visit the constraints defined on this domain
+    addNamespace(domaindef);
+    visitElements(dd);
+    removeNamespace();
+
     return domaindef;
   }
 
@@ -1460,11 +1525,18 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
       if (lt instanceof PolylineType){
         line=new ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline();
         ((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline)line).setDirected(((PolylineType) lt).isDirected());
-      }else if (lt instanceof SurfaceType){
-        line=new ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface();
-      }else if (lt instanceof AreaType){
-        line=new ch.ehi.interlis.domainsandconstants.linetypes.Tesselation();
+      } else if (lt instanceof MultiPolylineType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline();
+        ((ch.ehi.interlis.domainsandconstants.linetypes.IliPolyline) line).setDirected(((MultiPolylineType) lt).isDirected());
+      } else if (lt instanceof SurfaceType || lt instanceof MultiSurfaceType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.IndividualSurface();
+      } else if (lt instanceof AreaType || lt instanceof MultiAreaType) {
+        line = new ch.ehi.interlis.domainsandconstants.linetypes.Tesselation();
       }
+      if (line != null) {
+        line.setMulti(lt instanceof MultiSurfaceType || lt instanceof MultiAreaType || lt instanceof MultiPolylineType);
+      }
+
       ret=line;
 
 
@@ -1544,7 +1616,38 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
         Table r=(Table)ri.next();
         classtype.addRestrictedTo(findClassDef((Table)getElementInRootLanguageOrSame(r)));
       }
+    } else if (dd instanceof FormattedType && isDateOrTime((FormattedType) dd)) {
+        FormattedType formattedType = (FormattedType) dd;
+        if (formattedType.getDefinedBaseDomain() == PredefinedModel.getInstance().XmlDate) {
+            DateType dateType = new DateType();
+            dateType.setMin(parseDateValue(formattedType.getDefinedMinimum()));
+            dateType.setMax(parseDateValue(formattedType.getDefinedMaximum()));
+            ret = dateType;
+        } else if (formattedType.getDefinedBaseDomain() == PredefinedModel.getInstance().XmlDateTime) {
+            DateTimeType dateTimeType = new DateTimeType();
+            dateTimeType.setMin(parseDateTimeValue(formattedType.getDefinedMinimum()));
+            dateTimeType.setMax(parseDateTimeValue(formattedType.getDefinedMaximum()));
+            ret = dateTimeType;
+        } else if (formattedType.getDefinedBaseDomain() == PredefinedModel.getInstance().XmlTime) {
+            TimeType timeType = new TimeType();
+            timeType.setMin(parseTimeValue(formattedType.getDefinedMinimum()));
+            timeType.setMax(parseTimeValue(formattedType.getDefinedMaximum()));
+            ret = timeType;
+        }
     }else{
+        if (dd instanceof TypeAlias) {
+            Domain domain = ((TypeAlias) dd).getAliasing();
+            if (domain == PredefinedModel.getInstance().XmlDate) {
+                return new InterlisDateType();
+            }
+            if (domain == PredefinedModel.getInstance().XmlDateTime) {
+                return new InterlisDateTimeType();
+            }
+            if (domain == PredefinedModel.getInstance().XmlTime) {
+                return new InterlisTimeType();
+            }
+        }
+
       // handle unknown types in a generic way
       ch.ehi.interlis.domainsandconstants.UnknownType ukn=new ch.ehi.interlis.domainsandconstants.UnknownType();
       ret=ukn;
@@ -1554,6 +1657,69 @@ private void updateMappingToPredefinedModel(ch.ehi.uml1_4.modelmanagement.Packag
     return ret;
   }
 
+    private static boolean isDateOrTime(FormattedType formattedType) {
+        Domain baseDomain = formattedType.getDefinedBaseDomain();
+        return baseDomain == PredefinedModel.getInstance().XmlDate
+                || baseDomain == PredefinedModel.getInstance().XmlDateTime
+                || baseDomain == PredefinedModel.getInstance().XmlTime;
+    }
+
+    private static DateValue parseDateValue(String xmlDateValue) {
+        if (xmlDateValue == null) {
+            return null;
+        }
+        Calendar parsedDate;
+        try {
+            parsedDate = DatatypeConverter.parseDate(xmlDateValue);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+
+        DateValue dateValue = new DateValue();
+        dateValue.setYear(parsedDate.get(Calendar.YEAR));
+        dateValue.setMonth(parsedDate.get(Calendar.MONTH) + 1); // Java calendar months start with January = 0
+        dateValue.setDay(parsedDate.get(Calendar.DAY_OF_MONTH));
+        return dateValue;
+    }
+
+    private static DateTimeValue parseDateTimeValue(String xmlDateTimeValue) {
+        if (xmlDateTimeValue == null) {
+            return null;
+        }
+        Calendar parsedDateTime;
+        try {
+            parsedDateTime = DatatypeConverter.parseDate(xmlDateTimeValue);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+
+        DateTimeValue dateTimeValue = new DateTimeValue();
+        dateTimeValue.setYear(parsedDateTime.get(Calendar.YEAR));
+        dateTimeValue.setMonth(parsedDateTime.get(Calendar.MONTH) + 1); // Java calendar months start with January = 0
+        dateTimeValue.setDay(parsedDateTime.get(Calendar.DAY_OF_MONTH));
+        dateTimeValue.setHours(parsedDateTime.get(Calendar.HOUR_OF_DAY));
+        dateTimeValue.setMinutes(parsedDateTime.get(Calendar.MINUTE));
+        dateTimeValue.setSeconds(parsedDateTime.get(Calendar.SECOND));
+        return dateTimeValue;
+    }
+
+    private static TimeValue parseTimeValue(String xmlTimeValue) {
+        if (xmlTimeValue == null) {
+            return null;
+        }
+        Calendar parsedTime;
+        try {
+            parsedTime = DatatypeConverter.parseTime(xmlTimeValue);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+
+        TimeValue timeValue = new TimeValue();
+        timeValue.setHours(parsedTime.get(Calendar.HOUR_OF_DAY));
+        timeValue.setMinutes(parsedTime.get(Calendar.MINUTE));
+        timeValue.setSeconds(parsedTime.get(Calendar.SECOND));
+        return timeValue;
+    }
 
   private ch.ehi.interlis.domainsandconstants.basetypes.NumericalType visitNumericalType(Container scope,NumericalType btype)
   {
@@ -1774,6 +1940,9 @@ private ch.ehi.interlis.domainsandconstants.linetypes.LineFormTypeDef visitLineF
       else if (elt instanceof Unit)
       {
 		nextUmlEle=visitUnit((Unit) elt);
+      }
+      else if (elt instanceof ContextDef) {
+          nextUmlEle = visitContextDef((ContextDef) elt);
       }
       else if (elt instanceof Function)
       {

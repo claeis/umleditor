@@ -39,10 +39,14 @@ public abstract class IliBaseTypeKind {
 	protected final static String ENUM = resIliBaseTypeKind.getString("CIEnum"); //$NON-NLS-1$
 	protected final static String NUMERIC = resIliBaseTypeKind.getString("CINumeric"); //$NON-NLS-1$
 	protected final static String COORD = resIliBaseTypeKind.getString("CICoord"); //$NON-NLS-1$
+	protected final static String MULTI_COORD = resIliBaseTypeKind.getString("CIMultiCoord"); //$NON-NLS-1$
 	protected final static String BASKET = resIliBaseTypeKind.getString("CiBasket"); //$NON-NLS-1$
 	protected final static String POLYLINE = resIliBaseTypeKind.getString("CIPolyline"); //$NON-NLS-1$
 	protected final static String SURFACE = resIliBaseTypeKind.getString("CISurface"); //$NON-NLS-1$
 	protected final static String AREA = resIliBaseTypeKind.getString("CIArea"); //$NON-NLS-1$
+	protected final static String MULTI_POLYLINE = resIliBaseTypeKind.getString("CIMultiPolyline");
+	protected final static String MULTI_SURFACE = resIliBaseTypeKind.getString("CIMultiSurface");
+	protected final static String MULTI_AREA = resIliBaseTypeKind.getString("CIMultiArea");
 	protected final static String OID_TYPE = resIliBaseTypeKind.getString("CIOidType"); //$NON-NLS-1$
 	protected final static String CLASS_TYPE = resIliBaseTypeKind.getString("CIClassType"); //$NON-NLS-1$
 	protected final static String DOMAINDEF = resIliBaseTypeKind.getString("CIDomainDef"); //$NON-NLS-1$
@@ -50,6 +54,9 @@ public abstract class IliBaseTypeKind {
 	protected final static String DATE = resIliBaseTypeKind.getString("CIDate"); //$NON-NLS-1$
 	protected final static String DATETIME = resIliBaseTypeKind.getString("CIDateTime"); //$NON-NLS-1$
 	protected final static String TIME = resIliBaseTypeKind.getString("CITime"); //$NON-NLS-1$
+	protected final static String ILI_DATE = resIliBaseTypeKind.getString("CIIliDate");
+	protected final static String ILI_DATETIME = resIliBaseTypeKind.getString("CIIliDateTime");
+	protected final static String ILI_TIME = resIliBaseTypeKind.getString("CIIliTime");
 	protected final static String REFERENCE = resIliBaseTypeKind.getString("CIReference"); //$NON-NLS-1$
 	protected final static String STRUCTURE = resIliBaseTypeKind.getString("CIStructure"); //$NON-NLS-1$
 /**
@@ -94,11 +101,18 @@ private static Vector getStandardTypes() {
 	standardTypes.add(DATE);
 	standardTypes.add(DATETIME);
 	standardTypes.add(TIME);
+	standardTypes.add(ILI_DATE);
+	standardTypes.add(ILI_DATETIME);
+	standardTypes.add(ILI_TIME);
 	standardTypes.add(COORD);
+	standardTypes.add(MULTI_COORD);
 	standardTypes.add(POLYLINE);
+	standardTypes.add(MULTI_POLYLINE);
 	standardTypes.add(SURFACE);
+	standardTypes.add(MULTI_SURFACE);
 
 	standardTypes.add(AREA);
+	standardTypes.add(MULTI_AREA);
 	standardTypes.add(OID_TYPE);
 	standardTypes.add(CLASS_TYPE);
 	standardTypes.add(UNKNOWN);
@@ -130,8 +144,14 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 					return DATETIME;
 				} else if (type instanceof TimeType) {
 					return TIME;
+				} else if (type instanceof InterlisDateType) {
+					return ILI_DATE;
+				} else if (type instanceof InterlisDateTimeType) {
+					return ILI_DATETIME;
+				} else if (type instanceof InterlisTimeType) {
+					return ILI_TIME;
 				} else if (type instanceof CoordinateType) {
-					return COORD;
+					return ((CoordinateType) type).isMulti() ? MULTI_COORD : COORD;
 				} else if (type instanceof ClassType) {
 					return CLASS_TYPE;
 				} else if (type instanceof StructAttrType) {
@@ -151,12 +171,13 @@ public static String getTypeName(Object object,boolean tagDomainDef) {
 				} else if (type instanceof ch.ehi.interlis.domainsandconstants.UnknownType) {
 					return UNKNOWN;
 				} else if (type instanceof LineType) {
+					LineType line = (LineType) type;
 					if (type instanceof IliPolyline) {
-						return POLYLINE;
+						return line.isMulti() ? MULTI_POLYLINE : POLYLINE;
 					} else if (type instanceof IndividualSurface) {
-						return SURFACE;
+						return line.isMulti() ? MULTI_SURFACE : SURFACE;
 					} else if (type instanceof Tesselation) {
-						return AREA;
+						return line.isMulti() ? MULTI_AREA : AREA;
 					} else {
 						// should not happen
 						return resIliBaseTypeKind.getString("CEUndefinedLinetype"); //$NON-NLS-1$
