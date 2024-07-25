@@ -1,5 +1,5 @@
 group 'ch.interlis'
-version '3.10.1'+System.getProperty('release','-SNAPSHOT')
+version '3.10.2'+System.getProperty('release','-SNAPSHOT')
 
 apply plugin: "java"
 apply plugin: "maven"
@@ -92,8 +92,8 @@ dependencies {
     implementation name:  'sebase'
     implementation name:  'usrdocjh'
     implementation name:  'XMIFramework'
-    implementation 'ch.interlis:ili2c-tool:5.4.1'
-    implementation 'ch.interlis:ili2c-core:5.4.1'
+    implementation 'ch.interlis:ili2c-tool:5.5.3'
+    implementation 'ch.interlis:ili2c-core:5.5.3'
     implementation 'ch.ehi:ehibasics:1.4.0'
     implementation(group:'org.freehep', name:'freehep-graphicsio', version:'2.3'){
     	exclude group:'junit', module:'junit'
